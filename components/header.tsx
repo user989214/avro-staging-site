@@ -4,7 +4,24 @@ import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useCart } from "@/lib/cart-context"
-import { Menu, X, ShoppingBag } from "lucide-react"
+import { Plus, X } from "lucide-react"
+
+function CartIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" className={className}>
+      <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/>
+      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+    </svg>
+  )
+}
+
+function CartIconFilled({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" className={className}>
+      <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
+    </svg>
+  )
+}
 
 const navDropdownItems = [
   { href: "/why-avro", label: "Why AVRO" },
@@ -77,7 +94,7 @@ export function Header() {
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileMenuOpen}
         >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Plus className="w-6 h-6" />}
         </button>
 
         {/* Desktop nav - left */}
@@ -137,11 +154,10 @@ export function Header() {
           className="md:hidden relative w-10 h-10 flex items-center justify-center text-olive-dark hover:bg-gray-100 rounded-lg transition-colors"
           aria-label={`Cart with ${itemCount} items`}
         >
-          <ShoppingBag className="w-6 h-6" />
-          {itemCount > 0 && (
-            <span className="absolute top-1 right-1 flex items-center justify-center w-4 h-4 bg-olive text-white text-[10px] font-bold rounded-full">
-              {itemCount}
-            </span>
+          {itemCount > 0 ? (
+            <CartIconFilled className="w-6 h-6" />
+          ) : (
+            <CartIcon className="w-6 h-6" />
           )}
         </button>
       </nav>
