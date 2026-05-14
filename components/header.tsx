@@ -1,0 +1,132 @@
+"use client"
+
+import Link from "next/link"
+import Image from "next/image"
+import { useEffect, useState } from "react"
+
+const navDropdownItems = [
+  { href: "/why-avro", label: "Why AVRO" },
+  { href: "/science", label: "The Science of AVRO" },
+  { href: "/learn", label: "Ingredients" },
+  { href: "/golf", label: "Golf" },
+  { href: "/work", label: "Work / Tech" },
+  { href: "/gaming", label: "Gaming / Poker" },
+  { href: "/social", label: "Social / Non Alcohol" },
+]
+
+export function Header() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  return (
+    <>
+      <div className="flex justify-center gap-15 px-8 py-3 bg-gray-100 text-gray-500 text-[13px] font-black tracking-wide uppercase">
+        <span>
+          Naturally Fermented PharmaGABA® -{" "}
+          <Link
+            href="/science"
+            className="text-gray-700 underline underline-offset-3 hover:text-ink transition-colors"
+          >
+            Learn More
+          </Link>
+        </span>
+        <span className="hidden md:inline">
+          Free Shipping Over $50 -{" "}
+          <Link
+            href="/shop"
+            className="text-gray-700 underline underline-offset-3 hover:text-ink transition-colors"
+          >
+            Shop AVRO
+          </Link>
+        </span>
+      </div>
+
+      <nav
+        className={`sticky top-0 z-50 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-0 px-4 md:px-14 py-5 bg-white transition-shadow ${
+          scrolled ? "shadow-[0_1px_16px_rgba(0,0,0,0.06)]" : ""
+        }`}
+        aria-label="Primary navigation"
+      >
+        <div className="hidden md:flex items-center gap-7">
+          <NavLink href="/shop">Shop</NavLink>
+          <NavLink href="/shop">Subscribe</NavLink>
+          <div className="relative group">
+            <NavLink href="/why-avro">Why AVRO</NavLink>
+            <div className="absolute top-full left-1/2 -translate-x-1/2 z-50 min-w-[240px] py-2.5 bg-white rounded-md shadow-[0_8px_32px_rgba(0,0,0,0.1)] opacity-0 invisible translate-y-1.5 transition-all group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0">
+              {navDropdownItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="block px-6 py-2 text-gray-500 text-[13px] font-semibold tracking-wide uppercase hover:text-ink hover:bg-gray-50 transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <Link
+          href="/"
+          className="flex items-center justify-center w-[clamp(122px,14vw,178px)] md:order-none order-first"
+          aria-label="AVRO home"
+        >
+          <Image
+            src="/brand/avro-logo.svg"
+            alt="AVRO"
+            width={178}
+            height={58}
+            className="w-full h-auto"
+            priority
+          />
+        </Link>
+
+        <div className="hidden md:flex items-center justify-end gap-7">
+          <NavLink href="/science">Science</NavLink>
+          <NavLink href="/faq">FAQ</NavLink>
+          <Link
+            href="/shop"
+            className="relative text-gray-500 text-[15px] font-black tracking-wide uppercase hover:text-ink transition-colors"
+          >
+            Cart{" "}
+            <span className="inline-flex items-center justify-center w-5 h-5 ml-1 text-gray-500 border-[1.5px] border-gray-400 rounded-full text-[11px] align-[1px]">
+              0
+            </span>
+          </Link>
+        </div>
+
+        {/* Mobile nav links */}
+        <div className="flex md:hidden flex-wrap justify-center gap-x-4.5 gap-y-3.5">
+          <NavLink href="/shop">Shop</NavLink>
+          <NavLink href="/science">Science</NavLink>
+          <NavLink href="/faq">FAQ</NavLink>
+          <NavLink href="/shop">Cart</NavLink>
+        </div>
+      </nav>
+    </>
+  )
+}
+
+function NavLink({
+  href,
+  children,
+}: {
+  href: string
+  children: React.ReactNode
+}) {
+  return (
+    <Link
+      href={href}
+      className="relative text-gray-500 text-[15px] font-black tracking-wide uppercase hover:text-ink transition-colors after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-ink after:transition-[width] hover:after:w-full"
+    >
+      {children}
+    </Link>
+  )
+}

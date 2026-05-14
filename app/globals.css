@@ -1,0 +1,204 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Gotham Font Faces */
+@font-face {
+  font-family: "Gotham";
+  src: url("/fonts/Gotham-Book.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gotham";
+  src: url("/fonts/Gotham-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gotham";
+  src: url("/fonts/Gotham-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gotham";
+  src: url("/fonts/Gotham-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* AVRO Color System */
+  --ink: #171817;
+  --muted: #60645d;
+  --line: #e6e2d8;
+  --paper: #fffdf8;
+  --soft: #f6f2ea;
+  --olive: #4d5c30;
+  --olive-dark: #263216;
+  --gold: #d79a23;
+  --calm: #4b4d9a;
+  --focus: #c21f73;
+  --energy: #f4aa10;
+  --shadow: 0 22px 70px rgba(30, 29, 24, 0.1);
+  --black: #1a1a1a;
+  --gray-700: #444444;
+  --gray-500: #777777;
+  --gray-400: #999999;
+  --gray-200: #d8d8d8;
+  --gray-100: #e8e8e8;
+  --gray-50: #f2f2f2;
+  --white: #ffffff;
+  
+  /* Shadcn Theme Tokens */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--white);
+  --card-foreground: var(--ink);
+  --popover: var(--white);
+  --popover-foreground: var(--ink);
+  --primary: var(--olive);
+  --primary-foreground: var(--white);
+  --secondary: var(--soft);
+  --secondary-foreground: var(--olive-dark);
+  --muted-color: var(--soft);
+  --muted-foreground: var(--muted);
+  --accent: var(--soft);
+  --accent-foreground: var(--olive-dark);
+  --destructive: #dc2626;
+  --destructive-foreground: var(--white);
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--olive);
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --font-sans: "Gotham", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Gotham Condensed", "Gotham", Arial, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted-color);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  /* AVRO specific colors */
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-soft: var(--soft);
+  --color-olive: var(--olive);
+  --color-olive-dark: var(--olive-dark);
+  --color-gold: var(--gold);
+  --color-calm: var(--calm);
+  --color-focus: var(--focus);
+  --color-energy: var(--energy);
+  --color-line: var(--line);
+  --color-gray-50: var(--gray-50);
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+  --color-gray-700: var(--gray-700);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-paper text-ink font-sans;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply inline-flex items-center justify-center min-h-[44px] px-5.5 border border-transparent rounded-[7px] text-white bg-olive font-extrabold text-sm cursor-pointer transition-all;
+}
+
+.btn-primary:hover {
+  @apply -translate-y-px shadow-[0_10px_24px_rgba(30,29,24,0.12)];
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center min-h-[44px] px-5.5 border border-current rounded-[7px] text-olive-dark bg-white font-extrabold text-sm cursor-pointer transition-all;
+}
+
+.btn-secondary:hover {
+  @apply -translate-y-px shadow-[0_10px_24px_rgba(30,29,24,0.12)];
+}
