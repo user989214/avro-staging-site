@@ -45,7 +45,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative overflow-hidden text-white bg-black">
+    <footer className="relative overflow-hidden text-white bg-black font-sans">
       <div className="flex flex-col lg:flex-row gap-8.5 lg:gap-20 max-w-[1400px] mx-auto px-5.5 lg:px-14 pt-12 lg:pt-16 pb-8 lg:pb-12">
         {/* Left column */}
         <div className="flex-none lg:flex-[0_0_340px] flex flex-col justify-between gap-10.5">
@@ -122,7 +122,7 @@ export function Footer() {
           alt="AVRO"
           width={820}
           height={265}
-          className="w-full max-w-[900px] h-auto invert opacity-40"
+          className="w-full max-w-[900px] h-auto invert opacity-25"
           priority
         />
       </div>
