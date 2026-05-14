@@ -45,20 +45,32 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative overflow-hidden text-ink bg-gray-100">
-      <div className="flex flex-col lg:flex-row gap-8.5 lg:gap-20 max-w-[1400px] mx-auto px-5.5 lg:px-14 pt-10 lg:pt-16 pb-8 lg:pb-12">
+    <footer className="relative overflow-hidden text-white bg-black">
+      {/* Large centered AVRO logo */}
+      <div className="flex justify-center px-5.5 lg:px-14 pt-12 lg:pt-20 pb-8 lg:pb-12">
+        <Image
+          src="/brand/avro-logo.svg"
+          alt="AVRO"
+          width={820}
+          height={265}
+          className="w-full max-w-[900px] h-auto invert brightness-0 invert opacity-100"
+          priority
+        />
+      </div>
+
+      <div className="flex flex-col lg:flex-row gap-8.5 lg:gap-20 max-w-[1400px] mx-auto px-5.5 lg:px-14 pt-8 lg:pt-12 pb-8 lg:pb-12 border-t border-white/10">
         {/* Left column */}
         <div className="flex-none lg:flex-[0_0_340px] flex flex-col justify-between gap-10.5">
           <div>
-            <h3 className="mb-2.5 text-2xl font-black tracking-[-0.3px] leading-none uppercase">
+            <h3 className="mb-2.5 text-2xl font-black tracking-[-0.3px] leading-none uppercase text-white">
               Stay in the loop
             </h3>
-            <p className="mb-6 text-ink/70 text-sm leading-snug">
+            <p className="mb-6 text-white/60 text-sm leading-snug">
               Get AVRO updates, product drops, and calm-first insights delivered
               to your inbox.
             </p>
             <form
-              className="flex items-center mb-0 pb-2 border-b-[1.5px] border-ink"
+              className="flex items-center mb-0 pb-2 border-b-[1.5px] border-white/30"
               onSubmit={handleSubmit}
             >
               <label className="sr-only" htmlFor="footer-email">
@@ -70,11 +82,11 @@ export function Footer() {
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 min-h-[38px] py-1 text-ink bg-transparent border-0 outline-none text-[15px] placeholder:text-ink/50"
+                className="flex-1 min-h-[38px] py-1 text-white bg-transparent border-0 outline-none text-[15px] placeholder:text-white/40"
               />
               <button
                 type="submit"
-                className="grid place-items-center p-1 text-ink bg-transparent border-0 cursor-pointer transition-transform hover:translate-x-[3px]"
+                className="grid place-items-center p-1 text-white bg-transparent border-0 cursor-pointer transition-transform hover:translate-x-[3px]"
                 aria-label="Subscribe"
               >
                 <ChevronRight className="w-[18px] h-[18px]" />
@@ -85,7 +97,7 @@ export function Footer() {
                 Thanks for subscribing!
               </p>
             )}
-            <small className="block mt-5 text-ink/60 text-[11px] leading-[1.45]">
+            <small className="block mt-5 text-white/40 text-[11px] leading-[1.45]">
               * These statements have not been evaluated by the Food and Drug
               Administration. This product is not intended to diagnose, treat,
               cure, or prevent any disease.
@@ -97,7 +109,7 @@ export function Footer() {
                 <Link
                   key={label}
                   href="/faq"
-                  className="text-ink/70 text-[13px] hover:text-ink transition-colors"
+                  className="text-white/60 text-[13px] hover:text-white transition-colors"
                 >
                   {label}
                 </Link>
@@ -107,7 +119,7 @@ export function Footer() {
         </div>
 
         {/* Right columns */}
-        <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-8 lg:pl-16 lg:border-l lg:border-gray-200">
+        <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-8 lg:pl-16 lg:border-l lg:border-white/10">
           <FooterColumn title="AVRO" links={footerLinks.avro} />
           <FooterColumn title="Shop" links={footerLinks.shop} />
           <FooterColumn title="Learn" links={footerLinks.learn} />
@@ -115,19 +127,8 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="flex justify-center lg:justify-end max-w-[1400px] mx-auto px-5.5 lg:px-14 pb-6">
-        <span className="text-ink/70 text-[13px]">© 2026 AVRO Life</span>
-      </div>
-
-      <div className="max-w-[1400px] mx-auto px-5.5 lg:px-14 pt-5 pb-6 overflow-hidden border-t-2 border-gray-200 text-center lg:text-left leading-[0.72]">
-        <Image
-          src="/brand/avro-logo.svg"
-          alt=""
-          width={820}
-          height={265}
-          className="w-[min(60%,820px)] h-auto opacity-10"
-          aria-hidden="true"
-        />
+      <div className="flex justify-center lg:justify-end max-w-[1400px] mx-auto px-5.5 lg:px-14 pb-8">
+        <span className="text-white/50 text-[13px]">© 2026 AVRO Life</span>
       </div>
     </footer>
   )
@@ -142,14 +143,14 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h4 className="mb-5 text-[13px] font-black tracking-wide uppercase">
+      <h4 className="mb-5 text-[13px] font-black tracking-wide uppercase text-white">
         {title}
       </h4>
       {links.map((link) => (
         <Link
           key={link.label}
           href={link.href}
-          className="block py-1.5 text-ink/70 text-sm leading-[1.35] hover:text-ink transition-colors"
+          className="block py-1.5 text-white/60 text-sm leading-[1.35] hover:text-white transition-colors"
         >
           {link.label}
         </Link>
