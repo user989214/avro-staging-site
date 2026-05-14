@@ -3,6 +3,8 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { CartProvider } from "@/lib/cart-context"
+import { CartDrawer } from "@/components/cart-drawer"
 
 export const metadata: Metadata = {
   title: "AVRO | Calm First Performance",
@@ -34,11 +36,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-paper">
+    <html lang="en" className="bg-paper" data-scroll-behavior="smooth">
       <body className="font-sans antialiased">
-        <Header />
-        <main className="min-h-[60vh]">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main className="min-h-[60vh]">{children}</main>
+          <Footer />
+          <CartDrawer />
+        </CartProvider>
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>

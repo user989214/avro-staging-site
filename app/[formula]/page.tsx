@@ -11,6 +11,7 @@ import {
   InfoCard,
 } from "@/components/sections"
 import { Icon } from "@/components/icons"
+import { BuyBox } from "@/components/buy-box"
 
 const validFormulas = ["calm", "focus", "energy"] as const
 
@@ -130,69 +131,7 @@ export default async function ProductPage({
 
         <ProductVisual keys={[key]} scene={key} className="min-h-[500px]" />
 
-        {/* Buy Box */}
-        <aside className="grid gap-3 p-6 bg-white/90 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
-          <h2 className="font-sans font-black text-[28px]">{item.name}</h2>
-          <p className="text-muted">{item.flavor}</p>
-          <div className="text-[#b66f19] font-black">
-            ★★★★★{" "}
-            <span className="text-muted font-bold">
-              4.8 ({key === "calm" ? "82" : key === "focus" ? "62" : "76"}{" "}
-              reviews)
-            </span>
-          </div>
-          <label className="flex gap-2.5 items-center p-3 border border-line rounded-[7px] cursor-pointer">
-            <input type="radio" name="purchase" className="accent-olive" />
-            One-time purchase
-          </label>
-          <label className="flex gap-2.5 items-center p-3 border border-line rounded-[7px] cursor-pointer">
-            <input
-              type="radio"
-              name="purchase"
-              defaultChecked
-              className="accent-olive"
-            />
-            Subscribe & Save 25%
-          </label>
-          <div className="flex gap-2">
-            <button className="min-h-[38px] px-3 border border-line rounded-[7px] bg-white hover:bg-gray-50">
-              10 Sticks
-            </button>
-            <button className="min-h-[38px] px-3 border border-line rounded-[7px] bg-white hover:bg-gray-50">
-              30 Sticks
-            </button>
-            <button className="min-h-[38px] px-3 border border-line rounded-[7px] bg-white hover:bg-gray-50">
-              60 Sticks
-            </button>
-          </div>
-          <strong className="text-[34px]">{item.price}</strong>
-          <div className="flex gap-2">
-            <button className="min-h-[38px] px-3 border border-line rounded-[7px] bg-white hover:bg-gray-50">
-              -
-            </button>
-            <span className="grid place-items-center min-w-[44px] border border-line rounded-[7px]">
-              1
-            </span>
-            <button className="min-h-[38px] px-3 border border-line rounded-[7px] bg-white hover:bg-gray-50">
-              +
-            </button>
-          </div>
-          <Link
-            href="/shop"
-            className={`btn-primary w-full ${
-              key === "calm"
-                ? "!bg-calm"
-                : key === "focus"
-                  ? "!bg-focus"
-                  : "!bg-energy !text-ink"
-            }`}
-          >
-            Add to Cart
-          </Link>
-          <small className="text-center text-muted">
-            Free Shipping Over $50
-          </small>
-        </aside>
+        <BuyBox formula={item} formulaKey={key} />
       </section>
 
       {/* Benefits */}
