@@ -53,7 +53,7 @@ export function Footer() {
             <h3 className="mb-2.5 text-2xl font-black tracking-[-0.3px] leading-none uppercase">
               Stay in the loop
             </h3>
-            <p className="mb-6 text-gray-500 text-sm leading-snug">
+            <p className="mb-6 text-ink/70 text-sm leading-snug">
               Get AVRO updates, product drops, and calm-first insights delivered
               to your inbox.
             </p>
@@ -70,7 +70,7 @@ export function Footer() {
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 min-h-[38px] py-1 text-ink bg-transparent border-0 outline-none text-[15px] placeholder:text-gray-400"
+                className="flex-1 min-h-[38px] py-1 text-ink bg-transparent border-0 outline-none text-[15px] placeholder:text-ink/50"
               />
               <button
                 type="submit"
@@ -85,7 +85,7 @@ export function Footer() {
                 Thanks for subscribing!
               </p>
             )}
-            <small className="block mt-5 text-gray-500 text-[11px] leading-[1.45]">
+            <small className="block mt-5 text-ink/60 text-[11px] leading-[1.45]">
               * These statements have not been evaluated by the Food and Drug
               Administration. This product is not intended to diagnose, treat,
               cure, or prevent any disease.
@@ -97,7 +97,7 @@ export function Footer() {
                 <Link
                   key={label}
                   href="/faq"
-                  className="text-gray-500 text-[13px] hover:text-ink transition-colors"
+                  className="text-ink/70 text-[13px] hover:text-ink transition-colors"
                 >
                   {label}
                 </Link>
@@ -116,7 +116,7 @@ export function Footer() {
       </div>
 
       <div className="flex justify-center lg:justify-end max-w-[1400px] mx-auto px-5.5 lg:px-14 pb-6">
-        <span className="text-gray-500 text-[13px]">© 2026 AVRO Life</span>
+        <span className="text-ink/70 text-[13px]">© 2026 AVRO Life</span>
       </div>
 
       <div className="max-w-[1400px] mx-auto px-5.5 lg:px-14 pt-5 pb-6 overflow-hidden border-t-2 border-gray-200 text-center lg:text-left leading-[0.72]">
@@ -149,7 +149,7 @@ function FooterColumn({
         <Link
           key={link.label}
           href={link.href}
-          className="block py-1.5 text-gray-500 text-sm leading-[1.35] hover:text-ink transition-colors"
+          className="block py-1.5 text-ink/70 text-sm leading-[1.35] hover:text-ink transition-colors"
         >
           {link.label}
         </Link>

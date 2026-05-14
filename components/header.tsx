@@ -43,12 +43,12 @@ export function Header() {
 
   return (
     <>
-      <div className="flex justify-center gap-15 px-8 py-3 bg-gray-100 text-gray-500 text-[13px] font-black tracking-wide uppercase">
+      <div className="flex justify-center gap-15 px-8 py-3 bg-soft text-ink/70 text-[13px] font-black tracking-wide uppercase">
         <span>
           Naturally Fermented PharmaGABA® -{" "}
           <Link
             href="/science"
-            className="text-gray-700 underline underline-offset-3 hover:text-ink transition-colors"
+            className="text-ink underline underline-offset-3 hover:text-olive transition-colors"
           >
             Learn More
           </Link>
@@ -57,7 +57,7 @@ export function Header() {
           Free Shipping Over $50 -{" "}
           <Link
             href="/shop"
-            className="text-gray-700 underline underline-offset-3 hover:text-ink transition-colors"
+            className="text-ink underline underline-offset-3 hover:text-olive transition-colors"
           >
             Shop AVRO
           </Link>
@@ -91,7 +91,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="block px-6 py-2 text-gray-500 text-[13px] font-semibold tracking-wide uppercase hover:text-ink hover:bg-gray-50 transition-colors"
+                  className="block px-6 py-2 text-ink/80 text-[13px] font-semibold tracking-wide uppercase hover:text-ink hover:bg-soft transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -122,10 +122,10 @@ export function Header() {
           <NavLink href="/faq">FAQ</NavLink>
           <button
             onClick={openCart}
-            className="relative text-gray-500 text-[15px] font-black tracking-wide uppercase hover:text-ink transition-colors"
+            className="relative text-ink/70 text-[15px] font-black tracking-wide uppercase hover:text-ink transition-colors"
           >
             Cart{" "}
-            <span className="inline-flex items-center justify-center w-5 h-5 ml-1 text-gray-500 border-[1.5px] border-gray-400 rounded-full text-[11px] align-[1px]">
+            <span className="inline-flex items-center justify-center w-5 h-5 ml-1 text-ink/70 border-[1.5px] border-ink/40 rounded-full text-[11px] align-[1px]">
               {itemCount}
             </span>
           </button>
@@ -137,7 +137,7 @@ export function Header() {
           className="md:hidden p-2 -mr-2 text-olive-dark hover:bg-gray-100 rounded-lg transition-colors"
           aria-label={`Cart with ${itemCount} items`}
         >
-          <span className="relative text-gray-500 text-[15px] font-black tracking-wide uppercase">
+          <span className="relative text-ink/70 text-[15px] font-black tracking-wide uppercase">
             Cart
             {itemCount > 0 && (
               <span className="absolute -top-1 -right-3 flex items-center justify-center w-4 h-4 bg-olive text-white text-[10px] rounded-full">
@@ -164,7 +164,7 @@ export function Header() {
               Subscribe
             </MobileNavLink>
             <div className="border-t border-gray-100 my-4" />
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider px-4 py-2">
+            <p className="text-xs font-bold text-ink/50 uppercase tracking-wider px-4 py-2">
               Discover
             </p>
             {navDropdownItems.map((item) => (
@@ -203,7 +203,7 @@ function NavLink({
   return (
     <Link
       href={href}
-      className="relative text-gray-500 text-[15px] font-black tracking-wide uppercase hover:text-ink transition-colors after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-ink after:transition-[width] hover:after:w-full"
+      className="relative text-ink/70 text-[15px] font-black tracking-wide uppercase hover:text-ink transition-colors after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-ink after:transition-[width] hover:after:w-full"
     >
       {children}
     </Link>

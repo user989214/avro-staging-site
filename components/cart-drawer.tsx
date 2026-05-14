@@ -63,9 +63,9 @@ export function CartDrawer() {
           <div className="flex-1 overflow-y-auto p-6">
             {items.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center">
-                <ShoppingBag className="w-16 h-16 text-gray-300 mb-4" />
+                <ShoppingBag className="w-16 h-16 text-ink/30 mb-4" />
                 <p className="text-olive-dark font-medium mb-2">Your cart is empty</p>
-                <p className="text-gray-500 text-sm mb-6">
+                <p className="text-ink/70 text-sm mb-6">
                   Add some formulas to get started
                 </p>
                 <Link
@@ -99,7 +99,7 @@ export function CartDrawer() {
                       <h3 className="font-display font-bold text-olive-dark truncate">
                         {item.formula.name}
                       </h3>
-                      <p className="text-sm text-gray-500 capitalize">
+                      <p className="text-sm text-ink/70 capitalize">
                         {item.variant === "bundle" ? "3-Pack Bundle" : "Single Pack"}
                       </p>
                       <p className="text-olive font-bold mt-1">
@@ -123,7 +123,7 @@ export function CartDrawer() {
                         </button>
                         <button
                           onClick={() => removeItem(item.formula.id)}
-                          className="ml-auto text-sm text-gray-400 hover:text-red-500 transition-colors"
+                          className="ml-auto text-sm text-ink/50 hover:text-red-500 transition-colors"
                         >
                           Remove
                         </button>
@@ -144,7 +144,7 @@ export function CartDrawer() {
                   ${total.toFixed(2)}
                 </span>
               </div>
-              <p className="text-sm text-gray-500 mb-4">
+              <p className="text-sm text-ink/70 mb-4">
                 Shipping and taxes calculated at checkout
               </p>
               <button className="btn-primary w-full">
