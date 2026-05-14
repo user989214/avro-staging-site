@@ -103,7 +103,7 @@ export function Header() {
         {/* Logo - center */}
         <Link
           href="/"
-          className="flex items-center justify-center w-[clamp(122px,14vw,178px)]"
+          className="flex items-center justify-center justify-self-center md:justify-self-auto w-[clamp(122px,14vw,178px)]"
           aria-label="AVRO home"
         >
           <Image
