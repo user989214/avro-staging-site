@@ -4,7 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useCart } from "@/lib/cart-context"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ShoppingBag } from "lucide-react"
 
 const navDropdownItems = [
   { href: "/why-avro", label: "Why AVRO" },
@@ -73,7 +73,7 @@ export function Header() {
         {/* Mobile menu button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 -ml-2 text-olive-dark hover:bg-gray-100 rounded-lg transition-colors"
+          className="md:hidden w-10 h-10 flex items-center justify-center text-olive-dark hover:bg-gray-100 rounded-lg transition-colors"
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileMenuOpen}
         >
@@ -134,17 +134,15 @@ export function Header() {
         {/* Mobile cart button */}
         <button
           onClick={openCart}
-          className="md:hidden p-2 -mr-2 text-olive-dark hover:bg-gray-100 rounded-lg transition-colors"
+          className="md:hidden relative w-10 h-10 flex items-center justify-center text-olive-dark hover:bg-gray-100 rounded-lg transition-colors"
           aria-label={`Cart with ${itemCount} items`}
         >
-          <span className="relative text-ink/70 text-[15px] font-black tracking-wide uppercase">
-            Cart
-            {itemCount > 0 && (
-              <span className="absolute -top-1 -right-3 flex items-center justify-center w-4 h-4 bg-olive text-white text-[10px] rounded-full">
-                {itemCount}
-              </span>
-            )}
-          </span>
+          <ShoppingBag className="w-6 h-6" />
+          {itemCount > 0 && (
+            <span className="absolute top-1 right-1 flex items-center justify-center w-4 h-4 bg-olive text-white text-[10px] font-bold rounded-full">
+              {itemCount}
+            </span>
+          )}
         </button>
       </nav>
 
