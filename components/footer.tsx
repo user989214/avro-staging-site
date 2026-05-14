@@ -46,19 +46,7 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden text-white bg-black">
-      {/* Large centered AVRO logo */}
-      <div className="flex justify-center px-5.5 lg:px-14 pt-12 lg:pt-20 pb-8 lg:pb-12">
-        <Image
-          src="/brand/avro-logo.svg"
-          alt="AVRO"
-          width={820}
-          height={265}
-          className="w-full max-w-[900px] h-auto invert brightness-0 invert opacity-100"
-          priority
-        />
-      </div>
-
-      <div className="flex flex-col lg:flex-row gap-8.5 lg:gap-20 max-w-[1400px] mx-auto px-5.5 lg:px-14 pt-8 lg:pt-12 pb-8 lg:pb-12 border-t border-white/10">
+      <div className="flex flex-col lg:flex-row gap-8.5 lg:gap-20 max-w-[1400px] mx-auto px-5.5 lg:px-14 pt-12 lg:pt-16 pb-8 lg:pb-12">
         {/* Left column */}
         <div className="flex-none lg:flex-[0_0_340px] flex flex-col justify-between gap-10.5">
           <div>
@@ -127,8 +115,20 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="flex justify-center lg:justify-end max-w-[1400px] mx-auto px-5.5 lg:px-14 pb-8">
-        <span className="text-white/50 text-[13px]">© 2026 AVRO Life</span>
+      {/* Large centered AVRO logo at bottom */}
+      <div className="flex justify-center px-5.5 lg:px-14 pt-8 lg:pt-12 pb-6 lg:pb-10 border-t border-white/10">
+        <Image
+          src="/brand/avro-logo.svg"
+          alt="AVRO"
+          width={820}
+          height={265}
+          className="w-full max-w-[900px] h-auto invert opacity-40"
+          priority
+        />
+      </div>
+
+      <div className="flex justify-center max-w-[1400px] mx-auto px-5.5 lg:px-14 pb-8">
+        <span className="text-white/40 text-[13px]">© 2026 AVRO Life</span>
       </div>
     </footer>
   )
