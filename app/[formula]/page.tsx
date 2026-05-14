@@ -108,7 +108,7 @@ export default async function ProductPage({
           <h1 className="font-serif font-black text-[clamp(42px,5vw,68px)] leading-[0.98] mb-5">
             {item.headline}
           </h1>
-          <p className="max-w-[560px] text-muted text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[560px] text-ink/80 text-[clamp(17px,2vw,20px)] leading-relaxed">
             {item.name} is a calm-first daily drink mix built with naturally
             fermented PharmaGABA® to support {supportText} before
             pressure-sensitive moments.
@@ -155,7 +155,7 @@ export default async function ProductPage({
             <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5">
               Designed for {designedFor}
             </h2>
-            <p className="text-muted leading-relaxed">
+            <p className="text-ink/75 leading-relaxed">
               {item.name} is for people who want {wantText}. Use it before
               meetings, travel, social situations, rounds, sessions, or any
               moment where your state matters.
@@ -213,7 +213,7 @@ export default async function ProductPage({
             >
               <div className="w-[84px] h-[84px] mx-auto mb-4.5 rounded-full bg-[radial-gradient(circle_at_35%_35%,#fff,transparent_25%),linear-gradient(135deg,#e2d4bf,#f7f2e9)]" />
               <h3 className="font-black text-lg mb-2.5">{title}</h3>
-              <p className="text-muted">{copy}</p>
+              <p className="text-ink/75">{copy}</p>
             </article>
           ))}
         </div>
@@ -229,7 +229,7 @@ export default async function ProductPage({
             </strong>
             <Icon name="cup" className="w-10.5 h-10.5 mb-3 text-olive" />
             <h3 className="font-black text-lg mb-2">Mix</h3>
-            <p className="text-muted">
+            <p className="text-ink/75">
               Pour one stick into 8 to 12 oz of cold water.
             </p>
           </article>
@@ -239,7 +239,7 @@ export default async function ProductPage({
             </strong>
             <Icon name="flask" className="w-10.5 h-10.5 mb-3 text-olive" />
             <h3 className="font-black text-lg mb-2">Stir or shake</h3>
-            <p className="text-muted">Mix well until fully dissolved.</p>
+            <p className="text-ink/75">Mix well until fully dissolved.</p>
           </article>
           <article className="relative p-7 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <strong className="grid place-items-center w-7.5 h-7.5 mb-4.5 text-white bg-olive rounded-full">
@@ -247,7 +247,7 @@ export default async function ProductPage({
             </strong>
             <Icon name="clock" className="w-10.5 h-10.5 mb-3 text-olive" />
             <h3 className="font-black text-lg mb-2">Time it</h3>
-            <p className="text-muted">
+            <p className="text-ink/75">
               Use about 20 to 30 minutes before the moment you want to support.
             </p>
           </article>
@@ -265,7 +265,7 @@ export default async function ProductPage({
               <h2 className="font-serif font-black text-2xl mb-3.5">
                 Subscribe & Save 25%
               </h2>
-              <p className="text-muted mb-4">
+              <p className="text-ink/75 mb-4">
                 25% off every order, free shipping, and flexible routine
                 support.
               </p>
@@ -283,7 +283,7 @@ export default async function ProductPage({
               <h2 className="font-serif font-black text-2xl mb-3.5">
                 Build Your Bundle
               </h2>
-              <p className="text-muted mb-4">
+              <p className="text-ink/75 mb-4">
                 Mix Calm, Focus, and Energy. Save 20% when you bundle.
               </p>
               <Link href="/shop" className="btn-secondary">

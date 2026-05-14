@@ -26,7 +26,7 @@ export default function ShopPage() {
           <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
             Choose your AVRO formula.
           </h1>
-          <p className="max-w-[560px] text-muted text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[560px] text-ink/80 text-[clamp(17px,2vw,20px)] leading-relaxed">
             Three formulas. One calm-first foundation. Start with the state
             that fits your moment.
           </p>

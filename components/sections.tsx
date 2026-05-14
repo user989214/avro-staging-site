@@ -49,7 +49,7 @@ export function SectionHeading({
         {title}
       </h2>
       {description && (
-        <p className="max-w-[760px] mx-auto text-muted text-base leading-relaxed">
+        <p className="max-w-[760px] mx-auto text-ink/75 text-base leading-relaxed">
           {description}
         </p>
       )}
@@ -93,7 +93,7 @@ export function SocialProof({ mode = "full" }: { mode?: "full" | "compact" }) {
             )}
           >
             <strong className="text-[32px] font-black">{item.stat}</strong>
-            <span className="text-muted">{item.label}</span>
+            <span className="text-ink/75">{item.label}</span>
           </div>
         ))}
       </div>
@@ -149,17 +149,17 @@ export function ProductCards({
                 </div>
               </div>
               <h3 className="font-black text-lg">{item.name}</h3>
-              <p className="text-muted">{item.support}</p>
+              <p className="text-ink/75">{item.support}</p>
               <dl className="grid gap-2.5 pt-3 border-t border-line">
                 <div>
                   <dt className="font-black text-ink">Best for</dt>
-                  <dd className="mt-1 text-muted leading-[1.45]">
+                  <dd className="mt-1 text-ink/75 leading-[1.45]">
                     {item.bestFor}
                   </dd>
                 </div>
                 <div>
                   <dt className="font-black text-ink">Caffeine</dt>
-                  <dd className="mt-1 text-muted leading-[1.45]">
+                  <dd className="mt-1 text-ink/75 leading-[1.45]">
                     {item.caffeine}
                   </dd>
                 </div>
@@ -265,7 +265,7 @@ export function InfoCard({
     <>
       <Icon name={icon} className="w-10.5 h-10.5 mb-5 text-olive" />
       <h3 className="font-black mb-2">{title}</h3>
-      <p className="text-muted text-base leading-relaxed">{children}</p>
+      <p className="text-ink/75 text-base leading-relaxed">{children}</p>
     </>
   )
 
@@ -306,7 +306,7 @@ export function FaqBlock({
             <summary className="flex justify-between gap-4 px-5.5 py-4.5 cursor-pointer font-extrabold select-none after:content-['+'] after:text-[22px] after:leading-none group-open:after:content-['-']">
               {q}
             </summary>
-            <p className="px-5.5 pb-5 text-muted leading-relaxed">{a}</p>
+            <p className="px-5.5 pb-5 text-ink/75 leading-relaxed">{a}</p>
           </details>
         ))}
       </div>

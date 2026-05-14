@@ -24,7 +24,7 @@ export default function HomePage() {
           <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
             Performance starts with being calm.
           </h1>
-          <p className="max-w-[560px] text-muted text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[560px] text-ink/80 text-[clamp(17px,2vw,20px)] leading-relaxed">
             AVRO is a calm-first daily drink mix made with naturally fermented
             PharmaGABA® to support composure, clarity, focus, and steady energy
             before pressure-sensitive moments.
@@ -95,7 +95,7 @@ export default function HomePage() {
                 className="w-9.5 h-9.5 mx-auto mb-3.5 text-olive"
               />
               <h3 className="font-black text-lg mb-2.5">{title}</h3>
-              <p className="text-muted">{copy}</p>
+              <p className="text-ink/75">{copy}</p>
             </article>
           ))}
         </div>
@@ -151,7 +151,7 @@ export default function HomePage() {
               />
               <h3 className="font-black mb-2">{item.title}</h3>
               <strong className="block mb-2 text-sm">{item.kicker}</strong>
-              <p className="text-muted text-base leading-relaxed">{item.copy}</p>
+              <p className="text-ink/75 text-base leading-relaxed">{item.copy}</p>
             </Link>
           ))}
         </div>

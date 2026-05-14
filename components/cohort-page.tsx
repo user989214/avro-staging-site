@@ -92,7 +92,7 @@ export function CohortPage({ data }: { data: CohortData }) {
           <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
             {data.title}
           </h1>
-          <p className="max-w-[560px] text-muted text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[560px] text-ink/80 text-[clamp(17px,2vw,20px)] leading-relaxed">
             {data.copy}
           </p>
           <CtaGroup primary={data.primary} secondary={data.secondary} />
@@ -149,7 +149,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                 <div className="min-h-[200px] flex items-end justify-center">
                   <ProductVisual keys={[key]} />
                 </div>
-                <p className="text-muted">{chooseCopy[key]}</p>
+                <p className="text-ink/75">{chooseCopy[key]}</p>
                 <Link
                   href={`/${key}`}
                   className={`btn-primary w-full ${
@@ -178,7 +178,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             </strong>
             <Icon name="cup" className="w-10.5 h-10.5 mb-3 text-olive" />
             <h3 className="font-black text-lg mb-2">Mix</h3>
-            <p className="text-muted">Mix one stick with water.</p>
+            <p className="text-ink/75">Mix one stick with water.</p>
           </article>
           <article className="relative p-7 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <strong className="grid place-items-center w-7.5 h-7.5 mb-4.5 text-white bg-olive rounded-full">
@@ -186,7 +186,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             </strong>
             <Icon name="clock" className="w-10.5 h-10.5 mb-3 text-olive" />
             <h3 className="font-black text-lg mb-2">Time it</h3>
-            <p className="text-muted">
+            <p className="text-ink/75">
               Drink about 30 minutes before your {data.stepMoment}.
             </p>
           </article>
@@ -196,7 +196,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             </strong>
             <Icon name="leaf" className="w-10.5 h-10.5 mb-3 text-olive" />
             <h3 className="font-black text-lg mb-2">Show up</h3>
-            <p className="text-muted">
+            <p className="text-ink/75">
               Step in with a calmer, clearer routine.
             </p>
           </article>

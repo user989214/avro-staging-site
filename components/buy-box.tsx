@@ -34,10 +34,10 @@ export function BuyBox({ formula, formulaKey }: BuyBoxProps) {
   return (
     <aside className="grid gap-3 p-6 bg-white/90 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
       <h2 className="font-sans font-black text-[28px]">{formula.name}</h2>
-      <p className="text-muted">{formula.flavor}</p>
+      <p className="text-ink/75">{formula.flavor}</p>
       <div className="text-[#b66f19] font-black">
         {"★★★★★ "}
-        <span className="text-muted font-bold">
+        <span className="text-ink/70 font-bold">
           4.8 ({formulaKey === "calm" ? "82" : formulaKey === "focus" ? "62" : "76"} reviews)
         </span>
       </div>
@@ -103,7 +103,7 @@ export function BuyBox({ formula, formulaKey }: BuyBoxProps) {
         Add to Cart
       </button>
 
-      <small className="text-center text-muted">Free Shipping Over $50</small>
+      <small className="text-center text-ink/70">Free Shipping Over $50</small>
     </aside>
   )
 }
