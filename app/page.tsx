@@ -24,7 +24,7 @@ export default function HomePage() {
           <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
             Performance starts with being calm.
           </h1>
-          <p className="max-w-[560px] text-ink/80 text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[560px] text-black text-[clamp(17px,2vw,20px)] leading-relaxed">
             AVRO is a calm-first daily drink mix made with naturally fermented
             PharmaGABA® to support composure, clarity, focus, and steady energy
             before pressure-sensitive moments.
