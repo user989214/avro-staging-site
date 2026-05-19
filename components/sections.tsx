@@ -140,7 +140,7 @@ export function ProductCards({
           return (
             <article
               key={key}
-              className="grid content-start gap-3.5 p-6 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
+              className="flex flex-col gap-3.5 p-6 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
             >
               <div className="min-h-[330px] p-3 pt-5 pb-6 bg-gradient-to-br from-white to-[#f7f3eb] rounded-lg flex items-end justify-center overflow-hidden">
                 <ProductCard formulaKey={key} />
@@ -163,7 +163,7 @@ export function ProductCards({
               </dl>
               <Link
                 href={`/${key}`}
-                className={cn("btn-primary w-full", {
+                className={cn("btn-primary w-full mt-auto", {
                   "!bg-calm": key === "calm",
                   "!bg-focus": key === "focus",
                   "!bg-energy !text-ink": key === "energy",

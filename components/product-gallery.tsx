@@ -218,7 +218,7 @@ export function ProductGallery({ formula, formulaKey }: ProductGalleryProps) {
           <DialogTrigger asChild>
             <button
               type="button"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md border-2 border-line bg-white text-xs font-extrabold text-ink uppercase tracking-[0.08em] hover:border-olive hover:text-olive-dark transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border-2 border-line bg-white text-xs font-extrabold text-ink uppercase tracking-[0.08em] hover:border-olive hover:text-olive-dark transition-all"
             >
               <Icon name="card" className="w-4 h-4 text-olive" />
               Supplement Facts

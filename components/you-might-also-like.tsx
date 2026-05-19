@@ -49,7 +49,7 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
                   className="!h-[250px]"
                 />
               </div>
-              <div className="flex flex-col gap-2 p-5 border-t border-line">
+              <div className="flex flex-1 flex-col gap-2 p-5 border-t border-line">
                 <div className="flex items-center justify-between gap-2">
                   <h3 className="font-black text-base">{item.name}</h3>
                   <span className="text-sm font-extrabold text-ink/80">{item.priceLabel}</span>
@@ -57,7 +57,7 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
                 <p className="text-ink/65 text-sm leading-relaxed">{item.support}</p>
                 <span
                   className={cn(
-                    "inline-flex items-center justify-center mt-2 px-4 py-2 rounded-md text-xs font-extrabold transition-colors",
+                    "inline-flex items-center justify-center mt-auto px-4 py-2.5 rounded-full text-xs font-extrabold transition-colors",
                     "bg-soft text-olive-dark group-hover:bg-olive group-hover:text-white"
                   )}
                 >
@@ -74,7 +74,7 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
           className="group flex flex-col bg-white border border-line rounded-lg overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(31,29,24,0.08)]"
         >
           <div
-            className="relative flex items-center justify-center h-[220px] overflow-hidden"
+            className="relative flex items-center justify-center h-[260px] overflow-hidden"
             style={{
               background:
                 "radial-gradient(circle at 50% 70%, rgba(143,107,71,0.12), transparent 65%), linear-gradient(180deg, #ffffff, #f7f3eb)",
@@ -92,7 +92,7 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
               Clinician Choice
             </span>
           </div>
-          <div className="flex flex-col gap-2 p-5 border-t border-line">
+          <div className="flex flex-1 flex-col gap-2 p-5 border-t border-line">
             <div className="flex items-center justify-between gap-2">
               <h3 className="font-black text-base">Variety Bundle</h3>
               <span className="text-sm font-extrabold text-ink/80">$59.85</span>
@@ -100,7 +100,7 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
             <p className="text-ink/65 text-sm leading-relaxed">
               Calm, Focus, and Energy together. Save 20% when you bundle.
             </p>
-            <span className="inline-flex items-center justify-center mt-2 px-4 py-2 rounded-md text-xs font-extrabold bg-soft text-olive-dark group-hover:bg-olive group-hover:text-white transition-colors">
+            <span className="inline-flex items-center justify-center mt-auto px-4 py-2.5 rounded-full text-xs font-extrabold bg-soft text-olive-dark group-hover:bg-olive group-hover:text-white transition-colors">
               Build Bundle
             </span>
           </div>
