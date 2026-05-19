@@ -23,7 +23,7 @@ export function BuyBox({ formula, formulaKey }: BuyBoxProps) {
   const [purchaseType, setPurchaseType] = useState<"onetime" | "subscribe">("subscribe")
   const [packSize, setPackSize] = useState<PackSize>(30)
   const [quantity, setQuantity] = useState(1)
-  const [flavorId, setFlavorId] = useState(formula.flavors[0].id)
+  const [flavorId, setFlavorId] = useState<string>(formula.flavors[0].id)
   const { addItem, openCart } = useCart()
 
   const activeFlavor = formula.flavors.find((f) => f.id === flavorId) ?? formula.flavors[0]
