@@ -23,9 +23,6 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)] items-start w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(42px,8vw,86px)] bg-gradient-to-br from-[#fffdf8] to-[#f7f4ec] border-b border-line">
         <div className="max-w-[620px]">
-          <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
-            Contact
-          </span>
           <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
             Contact AVRO.
           </h1>

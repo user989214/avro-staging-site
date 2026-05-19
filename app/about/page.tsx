@@ -56,9 +56,6 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)] items-center w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(42px,8vw,86px)] bg-gradient-to-br from-[#fffdf8] to-[#f7f4ec] border-b border-line">
         <div className="max-w-[620px]">
-          <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
-            About AVRO
-          </span>
           <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5 text-balance">
             Built around the moments that matter.
           </h1>
@@ -116,9 +113,6 @@ export default function AboutPage() {
       <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(28px,5vw,64px)]">
         <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-0 overflow-hidden border border-line rounded-lg bg-white/90 shadow-[0_18px_40px_-24px_rgba(20,18,12,0.18)]">
           <div className="flex flex-col justify-center gap-4 p-[clamp(28px,4vw,52px)]">
-            <span className="text-olive text-xs font-black tracking-[0.12em] uppercase">
-              The founders
-            </span>
             <h2 className="font-serif font-black text-[clamp(30px,3.4vw,46px)] leading-[1.04] text-balance">
               Born from science and brand instinct.
             </h2>

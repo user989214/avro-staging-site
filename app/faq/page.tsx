@@ -151,9 +151,6 @@ export default function FaqPage() {
     <>
       {/* Hero */}
       <section className="grid justify-items-center text-center w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(42px,8vw,86px)] bg-gradient-to-br from-[#fffdf8] to-[#f5f0e7] border-b border-line">
-        <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
-          FAQ + Help Center
-        </span>
         <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-2.5">
           How can we help?
         </h1>
