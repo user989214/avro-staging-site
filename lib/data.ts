@@ -1,11 +1,18 @@
 export const formulas = {
   calm: {
+    id: "calm",
     name: "AVRO Calm",
     short: "Calm",
     flavor: "Blueberry Acai",
+    flavors: [
+      { id: "blueberry-acai", name: "Blueberry Acai", tagline: "Bright berry. Clean finish." },
+      { id: "blackberry-jasmine", name: "Blackberry Jasmine", tagline: "Soft floral. Deep berry." },
+    ],
     color: "#4b4d9a",
     accent: "#7a79c8",
-    price: "$24.95",
+    price: 24.95,
+    priceLabel: "$24.95",
+    bundlePrice: 24.95,
     caffeine: "No caffeine",
     headline: "Calm first. Clear headed. Ready when pressure rises.",
     support: "Calm support without stimulation.",
@@ -16,12 +23,19 @@ export const formulas = {
       "Helps me stay composed without feeling dull. It is part of my pre-meeting routine.",
   },
   focus: {
+    id: "focus",
     name: "AVRO Focus",
     short: "Focus",
     flavor: "Pomegranate Raspberry",
+    flavors: [
+      { id: "pomegranate-raspberry", name: "Pomegranate Raspberry", tagline: "Tart. Bright. Clean." },
+      { id: "red-dragon-fruit", name: "Red Dragon Fruit", tagline: "Smooth tropical. Vibrant." },
+    ],
     color: "#c21f73",
     accent: "#ee6fa9",
-    price: "$24.95",
+    price: 24.95,
+    priceLabel: "$24.95",
+    bundlePrice: 24.95,
     caffeine: "No caffeine",
     headline: "Calm first. Clear headed. Ready to focus.",
     support: "Clarity and focus support without caffeine.",
@@ -32,12 +46,19 @@ export const formulas = {
       "Great for work blocks and long sessions. Clear without feeling frantic.",
   },
   energy: {
+    id: "energy",
     name: "AVRO Energy",
     short: "Energy",
     flavor: "Orange Tangerine",
+    flavors: [
+      { id: "orange-tangerine", name: "Orange Tangerine", tagline: "Bright citrus. Sunny lift." },
+      { id: "fuji-apple", name: "Fuji Apple", tagline: "Crisp orchard. Clean finish." },
+    ],
     color: "#f4aa10",
     accent: "#ffcf59",
-    price: "$24.95",
+    price: 24.95,
+    priceLabel: "$24.95",
+    bundlePrice: 24.95,
     caffeine: "120 mg natural caffeine",
     headline: "Calm first. Steady energy. Ready when it matters.",
     support: "Natural caffeine with AVRO's calm-first foundation.",
@@ -50,6 +71,8 @@ export const formulas = {
 } as const
 
 export type FormulaKey = keyof typeof formulas
+export type Formula = (typeof formulas)[FormulaKey]
+export type Flavor = Formula["flavors"][number]
 
 export const sharedProof = [
   { stat: "4.8/5", label: "Average customer rating" },
