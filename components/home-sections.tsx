@@ -482,9 +482,9 @@ export function HomeStoryStrip() {
           </div>
         </div>
         {/* Slanted two-image split. The diagonal slants down from upper-left
-            to lower-right (~6deg). A shared sepia/duotone tint unifies the
-            color story across both photos. */}
-        <div className="relative min-h-[260px] lg:min-h-[360px] overflow-hidden">
+            to lower-right (~6deg). Both photos share a monochrome black-and-white
+            treatment so the two halves read as one cohesive visual story. */}
+        <div className="relative min-h-[300px] lg:min-h-[420px] overflow-hidden bg-ink">
           {/* Left half (fermentation): clipped along a slight diagonal */}
           <div
             className="absolute inset-0 overflow-hidden"
@@ -495,10 +495,11 @@ export function HomeStoryStrip() {
               src="/images/science/fermentation-lab.jpg"
               alt="Stainless steel fermentation vessel cultivating naturally fermented PharmaGABA"
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ filter: "sepia(0.45) saturate(0.85) brightness(0.96) contrast(1.02)" }}
+              style={{ filter: "grayscale(1) contrast(1.05) brightness(0.98)" }}
             />
           </div>
-          {/* Right half (founders): mirrored slant */}
+          {/* Right half (founders): mirrored slant. Image is contained
+              and centered so both founders are fully visible. */}
           <div
             className="absolute inset-0 overflow-hidden"
             style={{ clipPath: "polygon(54% 0, 100% 0, 100% 100%, 46% 100%)" }}
@@ -506,9 +507,9 @@ export function HomeStoryStrip() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/team/founders-keigo-peter.jpg"
-              alt="AVRO co-founders Keigo Sugawara and Peter van Stolk back-to-back against a sunlit wall"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ filter: "sepia(0.45) saturate(0.85) brightness(0.96) contrast(1.02)" }}
+              alt="AVRO co-founders Keigo Sugawara and Peter van Stolk"
+              className="absolute inset-0 w-full h-full object-contain object-center"
+              style={{ filter: "grayscale(1) contrast(1.05) brightness(0.98)" }}
             />
           </div>
           {/* Diagonal divider line */}
@@ -516,7 +517,7 @@ export function HomeStoryStrip() {
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                "linear-gradient(105deg, transparent calc(50% - 1px), rgba(20,18,12,0.35) 50%, transparent calc(50% + 1px))",
+                "linear-gradient(105deg, transparent calc(50% - 1px), rgba(20,18,12,0.4) 50%, transparent calc(50% + 1px))",
             }}
           />
         </div>
