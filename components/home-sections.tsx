@@ -33,7 +33,7 @@ export function HomeRefHero() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/lifestyle/kitchen-trio-pink-cocktails.jpg"
-          alt="Three pink alcohol-free AVRO cocktails styled on a kitchen counter"
+          alt="AVRO Energy Fuji Apple stick packet next to a glass of mixed drink at a sunset rooftop dinner"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white/45 via-transparent to-transparent" />
