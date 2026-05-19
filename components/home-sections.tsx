@@ -481,29 +481,21 @@ export function HomeStoryStrip() {
             </Link>
           </div>
         </div>
-        {/* Slanted two-image split. The diagonal slants down from upper-left
-            to lower-right (~6deg). Both photos share a monochrome black-and-white
-            treatment so the two halves read as one cohesive visual story. */}
-        <div className="relative min-h-[300px] lg:min-h-[420px] overflow-hidden bg-ink">
-          {/* Left half (fermentation): clipped along a slight diagonal */}
-          <div
-            className="absolute inset-0 overflow-hidden"
-            style={{ clipPath: "polygon(0 0, 54% 0, 46% 100%, 0 100%)" }}
-          >
+        {/* Clean two-image split. Both photos share a monochrome black-and-white
+            treatment so the halves read as one cohesive editorial pairing. */}
+        <div className="relative grid grid-cols-2 min-h-[300px] lg:min-h-[420px] bg-ink">
+          {/* Left: fermentation, contained so the full vessel is visible */}
+          <div className="relative overflow-hidden bg-ink">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/science/fermentation-lab.jpg"
               alt="Stainless steel fermentation vessel cultivating naturally fermented PharmaGABA"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-contain object-center"
               style={{ filter: "grayscale(1) contrast(1.05) brightness(0.98)" }}
             />
           </div>
-          {/* Right half (founders): mirrored slant. Image is contained
-              and centered so both founders are fully visible. */}
-          <div
-            className="absolute inset-0 overflow-hidden"
-            style={{ clipPath: "polygon(54% 0, 100% 0, 100% 100%, 46% 100%)" }}
-          >
+          {/* Right: founders, contained so both Keigo and Peter are fully visible */}
+          <div className="relative overflow-hidden bg-ink">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/team/founders-keigo-peter.jpg"
@@ -512,14 +504,6 @@ export function HomeStoryStrip() {
               style={{ filter: "grayscale(1) contrast(1.05) brightness(0.98)" }}
             />
           </div>
-          {/* Diagonal divider line */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(105deg, transparent calc(50% - 1px), rgba(20,18,12,0.4) 50%, transparent calc(50% + 1px))",
-            }}
-          />
         </div>
       </div>
     </section>
