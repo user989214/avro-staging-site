@@ -27,7 +27,7 @@ export default function WhyPage() {
           <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
             State before stimulation.
           </h1>
-          <p className="max-w-[560px] text-muted text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[560px] text-muted-foregroundtext-[clamp(17px,2vw,20px)] leading-relaxed">
             AVRO is built on a simple idea: when the moment matters, more
             stimulation is not always the answer. Start calmer, stay clearer,
             and choose the support that fits the day.

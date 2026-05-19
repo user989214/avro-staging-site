@@ -101,14 +101,14 @@ export function ProductVisual({
 }: ProductVisualProps) {
   const stageSizeClasses = {
     small: "min-h-[240px] p-0",
-    medium: "min-h-[360px] p-3 pb-5",
-    large: "min-h-[420px] px-6 pt-10 pb-10",
+    medium: "min-h-[300px] p-4 pb-6",
+    large: "min-h-[360px] px-6 pt-10 pb-10",
   }
 
   const tubeSizeClasses = {
     small: "h-[240px] w-auto",
-    medium: "h-[clamp(300px,32vw,400px)] w-auto",
-    large: "h-[clamp(320px,40vw,500px)] w-auto",
+    medium: "h-[320px] w-auto",
+    large: "h-[clamp(300px,38vw,480px)] w-auto",
   }
 
   return (
@@ -172,7 +172,7 @@ export function ProductCard({
       src={src}
       alt={alt}
       className={cn(
-        "h-[clamp(280px,32vw,380px)] w-auto object-contain",
+        "h-[300px] w-auto object-contain",
         className,
       )}
     />

@@ -28,7 +28,7 @@ export default function SciencePage() {
           <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
             Calm first. Backed by science.
           </h1>
-          <p className="max-w-[560px] text-muted text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[560px] text-muted-foregroundtext-[clamp(17px,2vw,20px)] leading-relaxed">
             Every AVRO formula starts with naturally fermented PharmaGABA®,
             selected to support calm-first readiness, composure, and clarity
             before pressure-sensitive moments.
@@ -115,7 +115,7 @@ export default function SciencePage() {
             <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5">
               A naturally occurring part of the body&apos;s balance system.
             </h2>
-            <p className="text-muted leading-relaxed">
+            <p className="text-muted-foregroundleading-relaxed">
               GABA is a naturally occurring compound involved in the body&apos;s
               signaling and regulation processes. AVRO uses a naturally
               fermented form as part of its calm-first foundation.

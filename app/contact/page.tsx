@@ -29,7 +29,7 @@ export default function ContactPage() {
           <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
             Contact AVRO.
           </h1>
-          <p className="max-w-[560px] text-muted text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[560px] text-muted-foregroundtext-[clamp(17px,2vw,20px)] leading-relaxed">
             Have a question about your order, subscription, formula, or
             partnership inquiry? Send us a note and we will point you in the
             right direction.
@@ -117,25 +117,25 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5">
           <article className="min-h-[180px] p-7 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <h3 className="font-black mb-2">Product Questions</h3>
-            <p className="text-muted text-base leading-relaxed">
+            <p className="text-muted-foregroundtext-base leading-relaxed">
               Ask about Calm, Focus, Energy, ingredients, or how to choose.
             </p>
           </article>
           <article className="min-h-[180px] p-7 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <h3 className="font-black mb-2">Order Support</h3>
-            <p className="text-muted text-base leading-relaxed">
+            <p className="text-muted-foregroundtext-base leading-relaxed">
               Questions about shipping, delivery, damaged product, or returns.
             </p>
           </article>
           <article className="min-h-[180px] p-7 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <h3 className="font-black mb-2">Retail / Wholesale</h3>
-            <p className="text-muted text-base leading-relaxed">
+            <p className="text-muted-foregroundtext-base leading-relaxed">
               Interested in carrying AVRO.
             </p>
           </article>
           <article className="min-h-[180px] p-7 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <h3 className="font-black mb-2">Partnerships</h3>
-            <p className="text-muted text-base leading-relaxed">
+            <p className="text-muted-foregroundtext-base leading-relaxed">
               Creators, events, golf, tech, gaming, or non alcohol
               collaborations.
             </p>

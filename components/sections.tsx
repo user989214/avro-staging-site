@@ -142,7 +142,7 @@ export function ProductCards({
               key={key}
               className="grid content-start gap-3.5 p-6 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
             >
-              <div className="min-h-[380px] p-3 pt-5 pb-7 bg-gradient-to-br from-white to-[#f7f3eb] rounded-lg flex items-end justify-center overflow-hidden">
+              <div className="min-h-[330px] p-3 pt-5 pb-6 bg-gradient-to-br from-white to-[#f7f3eb] rounded-lg flex items-end justify-center overflow-hidden">
                 <ProductCard formulaKey={key} />
               </div>
               <h3 className="font-black text-lg">{item.name}</h3>

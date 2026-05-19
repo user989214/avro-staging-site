@@ -60,7 +60,7 @@ export default function LearnPage() {
           <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
             Category ownership, not content noise.
           </h1>
-          <p className="max-w-[560px] text-muted text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[560px] text-muted-foregroundtext-[clamp(17px,2vw,20px)] leading-relaxed">
             Learn how AVRO thinks about calm performance, PharmaGABA®,
             calm-first energy, state before pressure moments, and choosing the
             right formula.
@@ -74,7 +74,7 @@ export default function LearnPage() {
               className="p-5 bg-white border border-line rounded-lg"
             >
               <h3 className="font-black text-lg mb-2">{group.title}</h3>
-              <p className="text-muted">{group.articles[0]}</p>
+              <p className="text-muted-foreground">{group.articles[0]}</p>
             </article>
           ))}
         </div>
@@ -96,7 +96,7 @@ export default function LearnPage() {
                 <Link
                   key={article}
                   href="/learn"
-                  className="block py-3 border-t border-line text-muted font-bold leading-[1.35] hover:text-ink transition-colors"
+                  className="block py-3 border-t border-line text-muted-foregroundfont-bold leading-[1.35] hover:text-ink transition-colors"
                 >
                   {article}
                 </Link>
@@ -115,7 +115,7 @@ export default function LearnPage() {
             <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5">
               Built for clear answers.
             </h2>
-            <p className="text-muted leading-relaxed">
+            <p className="text-muted-foregroundleading-relaxed">
               Each article should open with a short answer, then explain why it
               matters, how AVRO thinks about it, which formula fits, FAQs,
               sources, and a clear CTA.

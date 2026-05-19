@@ -159,9 +159,9 @@ export function HomeProductStrip() {
             <Link
               key={key}
               href={`/${key}`}
-              className={`grid grid-rows-[1fr_auto] min-h-[440px] transition-all hover:bg-[#fbfaf6] ${i < 2 ? "border-r border-line" : ""}`}
+              className={`grid grid-rows-[1fr_auto] min-h-[360px] transition-all hover:bg-[#fbfaf6] ${i < 2 ? "border-r border-line" : ""}`}
             >
-              <div className="min-h-[380px] p-4 pb-6 flex items-end justify-center">
+              <div className="min-h-[310px] p-6 pb-8">
                 <ProductVisual
                   keys={[key]}
                   size="medium"
