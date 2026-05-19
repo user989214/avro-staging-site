@@ -52,6 +52,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Gotham Ultra";
+  src: url("/fonts/Gotham-Ultra.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* AVRO Color System */
   --ink: #1e1d18;
@@ -188,7 +196,10 @@
 
 /* Button styles */
 .btn-primary {
-  @apply inline-flex items-center justify-center min-h-[52px] px-8 border border-transparent rounded-full text-white bg-olive font-extrabold text-[15px] cursor-pointer transition-all;
+  @apply inline-flex items-center justify-center min-h-[52px] px-8 border border-transparent rounded-full text-white bg-olive text-[15px] cursor-pointer transition-all;
+  font-family: "Gotham Ultra", "Gotham", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.01em;
 }
 
 .btn-primary:hover {
@@ -196,9 +207,20 @@
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center min-h-[52px] px-8 border border-current rounded-full text-olive-dark bg-white font-extrabold text-[15px] cursor-pointer transition-all;
+  @apply inline-flex items-center justify-center min-h-[52px] px-8 border border-current rounded-full text-olive-dark bg-white text-[15px] cursor-pointer transition-all;
+  font-family: "Gotham Ultra", "Gotham", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.01em;
 }
 
 .btn-secondary:hover {
   @apply -translate-y-px shadow-[0_10px_24px_rgba(30,29,24,0.12)];
+}
+
+/* Apply Gotham Ultra to every <button> label and shadcn Button */
+button,
+[role="button"],
+.btn-primary,
+.btn-secondary {
+  font-family: "Gotham Ultra", "Gotham", ui-sans-serif, system-ui, sans-serif;
 }
