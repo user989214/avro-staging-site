@@ -1,4 +1,4 @@
-import { formulas, type FormulaKey } from "@/lib/data"
+import { formulas, type FormulaKey, type Flavor } from "@/lib/data"
 import { cn } from "@/lib/utils"
 
 interface ProductVisualProps {
@@ -6,6 +6,28 @@ interface ProductVisualProps {
   scene?: "stone" | "hero-stone" | "bundle" | "social" | FormulaKey
   size?: "small" | "medium" | "large"
   className?: string
+  /** Optional flavor override per formula key (id). Defaults to first flavor of that formula. */
+  flavorIds?: Partial<Record<FormulaKey, string>>
+}
+
+function flavorSlug(flavorName: string) {
+  return flavorName.toLowerCase().replace(/\s+/g, "-")
+}
+
+export function stickImageFor(key: FormulaKey, flavorIdOrName?: string) {
+  const formula = formulas[key]
+  let flavor: Flavor = formula.flavors[0]
+  if (flavorIdOrName) {
+    const match = formula.flavors.find(
+      (f) => f.id === flavorIdOrName || f.name === flavorIdOrName,
+    )
+    if (match) flavor = match
+  }
+  return {
+    src: `/images/sticks/${key}-${flavorSlug(flavor.name)}.png`,
+    alt: `AVRO ${formula.short} ${flavor.name} drink mix stick`,
+    flavor,
+  }
 }
 
 export function ProductVisual({
@@ -13,121 +35,73 @@ export function ProductVisual({
   scene = "stone",
   size = "large",
   className,
+  flavorIds,
 }: ProductVisualProps) {
-  const packSizeClasses = {
-    small: "w-[70px] h-[230px]",
-    medium: "w-[112px] h-[305px]",
-    large: "w-[clamp(86px,12vw,150px)] h-[clamp(260px,32vw,420px)]",
+  const stageSizeClasses = {
+    small: "min-h-[240px] p-0",
+    medium: "min-h-[300px] p-4 pb-6",
+    large: "min-h-[360px] px-6 pt-10 pb-10",
   }
 
-  const stageSizeClasses = {
-    small: "min-h-[245px] p-0",
-    medium: "min-h-[310px] p-6 pb-8",
-    large: "min-h-[330px] px-6 pt-14 pb-8.5",
+  const stickSizeClasses = {
+    small: "h-[210px] w-auto",
+    medium: "h-[280px] w-auto",
+    large: "h-[clamp(260px,32vw,420px)] w-auto",
   }
 
   return (
     <div
       className={cn(
-        "relative flex items-end justify-center gap-[clamp(12px,3vw,28px)] isolate",
+        "relative flex items-end justify-center gap-[clamp(10px,2.5vw,28px)] isolate",
         stageSizeClasses[size],
         scene === "hero-stone" && "min-h-[470px]",
-        className
+        className,
       )}
       aria-label="AVRO product lineup"
     >
-      {/* Stone/surface effect - hide for small/social scenes */}
-      {size !== "small" && (
-        <div className={cn(
-          "absolute inset-x-[5%] bottom-3 rounded-lg bg-gradient-to-br from-white/78 to-[rgba(204,196,179,0.35)] bg-[repeating-linear-gradient(45deg,rgba(99,88,69,0.09)_0_2px,transparent_2px_10px)] shadow-[0_18px_45px_rgba(50,46,35,0.12)] -z-10",
-          size === "medium" ? "h-[55px]" : "h-[86px]"
-        )} />
-      )}
-
       {keys.map((key, index) => {
-        const item = formulas[key]
-        const tilt = index - Math.floor(keys.length / 2)
+        const { src, alt } = stickImageFor(key, flavorIds?.[key])
+        const tilt = keys.length > 1 ? (index - (keys.length - 1) / 2) * 4 : 0
+        const z = keys.length - Math.abs(index - (keys.length - 1) / 2)
 
         return (
-          <div
-            key={key}
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            key={key + (flavorIds?.[key] ?? "")}
+            src={src}
+            alt={alt}
             className={cn(
-              "relative grid place-items-center content-center px-2.5 py-4.5 text-white rounded-t-3xl rounded-b-2xl overflow-hidden",
-              packSizeClasses[size],
-              "shadow-[0_22px_42px_rgba(30,24,20,0.2)]"
+              "object-contain drop-shadow-[0_22px_32px_rgba(30,24,20,0.22)]",
+              stickSizeClasses[size],
             )}
-            style={
-              {
-                "--pack": item.color,
-                "--pack-accent": item.accent,
-                background: size === "small" 
-                  ? `linear-gradient(90deg, rgba(0, 0, 0, 0.45), transparent 30%, rgba(255, 255, 255, 0.16) 55%, rgba(0, 0, 0, 0.3)), #10130f`
-                  : `linear-gradient(90deg, rgba(0,0,0,0.28), transparent 22%, rgba(255,255,255,0.22) 50%, transparent 78%, rgba(0,0,0,0.24)), ${item.color}`,
-                transform: `rotate(${tilt}deg)`,
-              } as React.CSSProperties
-            }
-          >
-            {/* Top crimp lines */}
-            <div className="absolute top-0 left-0 right-0 h-4 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.18)_0_3px,rgba(0,0,0,0.12)_3px_6px)]" />
-            {/* Bottom crimp lines */}
-            <div className="absolute bottom-0 left-0 right-0 h-4 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.18)_0_3px,rgba(0,0,0,0.12)_3px_6px)]" />
-
-            <span className={cn(
-              "absolute font-black tracking-[0.18em] uppercase",
-              size === "small" ? "top-6 text-xs" : "top-8.5 text-sm"
-            )}>
-              {item.short}
-            </span>
-            <strong
-              className={cn(
-                "font-serif leading-none tracking-[0.08em]",
-                size === "small" ? "text-[28px]" : size === "medium" ? "text-[42px]" : "text-[clamp(36px,6vw,58px)]"
-              )}
-              style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-            >
-              AVRO
-            </strong>
-            <em className={cn(
-              "absolute text-white/88 font-extrabold text-center uppercase not-italic",
-              size === "small" ? "bottom-7 max-w-[60px] text-[9px]" : "bottom-9.5 max-w-[90px] text-[11px]"
-            )}>
-              {item.flavor}
-            </em>
-          </div>
+            style={{
+              transform: `rotate(${tilt}deg) translateY(${Math.abs(tilt) * 0.6}px)`,
+              zIndex: z,
+            }}
+          />
         )
       })}
     </div>
   )
 }
 
-export function ProductCard({ formulaKey }: { formulaKey: FormulaKey }) {
-  const item = formulas[formulaKey]
+interface ProductCardProps {
+  formulaKey: FormulaKey
+  flavorId?: string
+  className?: string
+}
 
+export function ProductCard({ formulaKey, flavorId, className }: ProductCardProps) {
+  const { src, alt } = stickImageFor(formulaKey, flavorId)
   return (
-    <div
-      className="relative grid place-items-center content-center px-2.5 py-4.5 text-white rounded-t-3xl rounded-b-2xl overflow-hidden w-[82px] h-[230px] shadow-[0_22px_42px_rgba(30,24,20,0.2)]"
-      style={
-        {
-          "--pack": item.color,
-          background: `linear-gradient(90deg, rgba(0,0,0,0.28), transparent 22%, rgba(255,255,255,0.22) 50%, transparent 78%, rgba(0,0,0,0.24)), ${item.color}`,
-        } as React.CSSProperties
-      }
-    >
-      <div className="absolute top-0 left-0 right-0 h-4 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.18)_0_3px,rgba(0,0,0,0.12)_3px_6px)]" />
-      <div className="absolute bottom-0 left-0 right-0 h-4 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.18)_0_3px,rgba(0,0,0,0.12)_3px_6px)]" />
-
-      <span className="absolute top-7 font-black tracking-[0.18em] uppercase text-xs">
-        {item.short}
-      </span>
-      <strong
-        className="font-serif text-3xl leading-none tracking-[0.08em]"
-        style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-      >
-        AVRO
-      </strong>
-      <em className="absolute bottom-8 max-w-[70px] text-white/88 text-[9px] font-extrabold text-center uppercase not-italic">
-        {item.flavor}
-      </em>
-    </div>
+    /* eslint-disable-next-line @next/next/no-img-element */
+    <img
+      src={src}
+      alt={alt}
+      className={cn(
+        "h-[230px] w-auto object-contain drop-shadow-[0_18px_28px_rgba(30,24,20,0.2)]",
+        className,
+      )}
+    />
   )
 }

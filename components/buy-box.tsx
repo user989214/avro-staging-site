@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useCart } from "@/lib/cart-context"
 import { Icon } from "@/components/icons"
+import { stickImageFor } from "@/components/product-visual"
 import type { Formula, FormulaKey } from "@/lib/data"
 import { cn } from "@/lib/utils"
 
@@ -67,6 +68,7 @@ export function BuyBox({ formula, formulaKey }: BuyBoxProps) {
         <div className="grid grid-cols-2 gap-3">
           {formula.flavors.map((flavor) => {
             const selected = flavor.id === flavorId
+            const { src, alt } = stickImageFor(formulaKey, flavor.id)
             return (
               <button
                 key={flavor.id}
@@ -79,17 +81,17 @@ export function BuyBox({ formula, formulaKey }: BuyBoxProps) {
                 )}
               >
                 <div
-                  className="flex items-center justify-center h-[88px]"
+                  className="flex items-center justify-center h-[112px] overflow-hidden"
                   style={{
                     background: `linear-gradient(135deg, ${formula.color}10, ${formula.accent}1f)`,
                   }}
                 >
-                  <span
-                    className="font-serif font-black text-2xl tracking-wider"
-                    style={{ color: formula.color }}
-                  >
-                    AVRO
-                  </span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={src}
+                    alt={alt}
+                    className="h-[96px] w-auto object-contain drop-shadow-[0_8px_14px_rgba(30,24,20,0.18)]"
+                  />
                 </div>
                 <span
                   className={cn(

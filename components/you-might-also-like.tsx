@@ -64,28 +64,21 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
           )
         })}
 
-        {/* Clinician Choice product card placeholder */}
+        {/* Variety Bundle card */}
         <Link
           href="/shop"
           className="group flex flex-col bg-white border border-line rounded-lg overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(31,29,24,0.08)]"
         >
-          <div
-            className="relative flex items-center justify-center h-[200px]"
-            style={{
-              background: "linear-gradient(135deg, #f5efe3, #e8dcc3)",
-            }}
-          >
+          <div className="relative flex items-center justify-center h-[200px] overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/lifestyle/coupes-grapefruit-stickpack.jpg"
+              alt="AVRO stickpack styled with grapefruit coupes"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
             <span className="absolute top-3 left-3 px-2.5 py-1 bg-olive text-white rounded-full text-[10px] font-black tracking-[0.08em] uppercase">
               Clinician Choice
             </span>
-            <div className="text-center">
-              <span className="block font-serif font-black text-3xl tracking-wider text-olive-dark">
-                AVRO
-              </span>
-              <span className="block mt-1 text-[10px] font-black tracking-[0.18em] uppercase text-olive-dark/70">
-                Bundle
-              </span>
-            </div>
           </div>
           <div className="flex flex-col gap-2 p-5 border-t border-line">
             <div className="flex items-center justify-between gap-2">

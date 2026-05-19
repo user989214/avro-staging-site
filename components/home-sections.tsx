@@ -28,49 +28,15 @@ export function HomeRefHero() {
       </div>
       <div
         className="relative min-h-[520px] overflow-hidden isolate"
-        style={{
-          background: `
-            radial-gradient(circle at 76% 46%, rgba(247, 205, 107, 0.75) 0 9%, transparent 10%),
-            radial-gradient(circle at 28% 24%, rgba(87, 68, 48, 0.32) 0 9%, transparent 10%),
-            linear-gradient(135deg, rgba(251, 247, 238, 0.2), rgba(143, 112, 72, 0.2)),
-            linear-gradient(120deg, #f5eddf 0%, #fffaf0 48%, #d9bc8e 100%)
-          `,
-        }}
         aria-label="AVRO social ritual scene"
       >
-        <div
-          className="absolute inset-0 opacity-75"
-          style={{
-            background: `
-              linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent 28%),
-              repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.16) 0 2px, transparent 2px 28px)
-            `,
-          }}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/lifestyle/coupes-grapefruit-stickpack.jpg"
+          alt="AVRO stickpack with grapefruit coupes on a styled bar"
+          className="absolute inset-0 w-full h-full object-cover"
         />
-        <div
-          className="absolute inset-[8%_5%_auto_8%] h-[43%] z-[1] opacity-[0.82] blur-[2px]"
-          style={{
-            background: `
-              radial-gradient(circle at 18% 34%, #3b2b1d 0 8%, transparent 8.5%),
-              radial-gradient(circle at 22% 64%, #d8b088 0 16%, transparent 16.5%),
-              radial-gradient(circle at 78% 30%, #7d4c2d 0 7%, transparent 7.5%),
-              radial-gradient(circle at 74% 64%, #f1d5b5 0 15%, transparent 15.5%)
-            `,
-          }}
-        />
-        <div
-          className="absolute left-[36%] bottom-[18%] z-[3] w-[170px] h-[160px] border-5 border-t-0 border-white/85 rounded-b-[42px]"
-          style={{
-            background: `
-              radial-gradient(circle at 50% 24%, rgba(255, 245, 210, 0.85) 0 12%, transparent 13%),
-              linear-gradient(180deg, transparent 0 28%, rgba(74, 35, 12, 0.88) 29% 100%)
-            `,
-            boxShadow: "0 20px 55px rgba(74, 41, 16, 0.28)",
-          }}
-        />
-        <div className="absolute right-[24%] bottom-[12%] z-[4]">
-          <ProductVisual keys={["calm"]} scene="social" size="small" />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-transparent to-transparent" />
       </div>
     </section>
   )
@@ -214,8 +180,8 @@ export function HomeMomentGrid() {
       cta: "Explore Golf",
       icon: "flag",
       url: "/golf",
-      tone: "golf",
-      gradient: "linear-gradient(135deg, #edf2e7, #c8d6b4)",
+      image: "/images/lifestyle/golfers-misty-tee-box.jpg",
+      alt: "Golfers on a misty tee box at sunrise",
     },
     {
       title: "Work",
@@ -223,8 +189,8 @@ export function HomeMomentGrid() {
       cta: "Explore Work",
       icon: "monitor",
       url: "/work",
-      tone: "work",
-      gradient: "linear-gradient(135deg, #f7f7f4, #d7d8d2)",
+      image: "/images/lifestyle/journal-coffee-window.jpg",
+      alt: "Open journal and coffee cup at a window-lit desk",
     },
     {
       title: "Social",
@@ -232,8 +198,8 @@ export function HomeMomentGrid() {
       cta: "Explore Social",
       icon: "users",
       url: "/social",
-      tone: "social",
-      gradient: "linear-gradient(135deg, #f4ddbe, #9b6744)",
+      image: "/images/lifestyle/kitchen-trio-pink-cocktails.jpg",
+      alt: "Three pink alcohol-free cocktails in a styled kitchen",
     },
     {
       title: "Gaming",
@@ -241,8 +207,8 @@ export function HomeMomentGrid() {
       cta: "Explore Gaming",
       icon: "card",
       url: "/gaming",
-      tone: "gaming",
-      gradient: "linear-gradient(135deg, #dce5ff, #222b4c)",
+      image: "/images/lifestyle/focus-iced-drink-headphones.jpg",
+      alt: "Iced AVRO drink and headphones at a gaming desk",
     },
   ]
 
@@ -258,14 +224,17 @@ export function HomeMomentGrid() {
           <Link
             key={m.title}
             href={m.url}
-            className="grid gap-2.5 pb-5 overflow-hidden border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]"
+            className="group flex flex-col gap-2.5 pb-5 overflow-hidden border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(31,29,24,0.08)]"
           >
-            <div
-              className="grid place-items-end h-[118px] p-4"
-              style={{ background: m.gradient }}
-            >
-              <span className="w-11 h-11 p-2.5 rounded-full bg-white/85">
-                <Icon name={m.icon as any} className="w-full h-full" />
+            <div className="relative h-[160px] overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={m.image}
+                alt={m.alt}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <span className="absolute top-3 right-3 grid place-items-center w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm">
+                <Icon name={m.icon as any} className="w-5 h-5 text-olive-dark" />
               </span>
             </div>
             <h3 className="mx-5 font-bold">{m.title}</h3>
@@ -419,28 +388,22 @@ export function HomeStoryStrip() {
             </Link>
           </div>
         </div>
-        <div
-          className="min-h-[220px]"
-          style={{
-            background: `
-              radial-gradient(circle at 52% 44%, rgba(255,255,255,0.8) 0 9%, transparent 10%),
-              repeating-linear-gradient(90deg, rgba(255,255,255,0.46) 0 9px, transparent 9px 54px),
-              linear-gradient(135deg, #e8e7e1, #a9aaa4)
-            `,
-          }}
-        />
-        <div
-          className="min-h-[220px]"
-          style={{
-            background: `
-              radial-gradient(circle at 34% 34%, #d5d5d2 0 11%, transparent 12%),
-              radial-gradient(circle at 68% 32%, #c9c9c7 0 11%, transparent 12%),
-              radial-gradient(circle at 36% 76%, #202020 0 22%, transparent 23%),
-              radial-gradient(circle at 70% 76%, #161616 0 23%, transparent 24%),
-              linear-gradient(135deg, #f2f2ef, #cfcfca)
-            `,
-          }}
-        />
+        <div className="relative min-h-[220px] overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/lifestyle/woman-journaling-mug.jpg"
+            alt="Woman journaling with a warm mug, calm morning routine"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+        <div className="relative min-h-[220px] overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/lifestyle/focus-desk-magenta-drink.jpg"
+            alt="AVRO Focus magenta drink at a sunlit work desk"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
       </div>
     </section>
   )
