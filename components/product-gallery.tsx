@@ -64,7 +64,7 @@ export function ProductGallery({ formula, formulaKey }: ProductGalleryProps) {
           <img
             src={src}
             alt={alt}
-            className="max-h-full max-w-full w-auto h-auto object-contain drop-shadow-[0_30px_46px_rgba(30,24,20,0.22)]"
+            className="max-h-full max-w-full w-auto h-auto object-contain"
           />
           <span className="absolute bottom-4 left-4 px-3 py-1.5 bg-white/85 backdrop-blur-sm border border-line rounded-full text-[11px] font-black tracking-[0.08em] uppercase text-olive-dark">
             {sceneLabel}

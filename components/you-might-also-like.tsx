@@ -2,11 +2,17 @@
 
 import Link from "next/link"
 import { formulas, type FormulaKey } from "@/lib/data"
-import { ProductCard } from "@/components/product-visual"
+import { ProductCard, ProductVisual } from "@/components/product-visual"
 import { cn } from "@/lib/utils"
 
 interface YouMightAlsoLikeProps {
   currentKey: FormulaKey
+}
+
+const recommendedScene: Record<FormulaKey, "social" | "tech" | "golf" | "gaming"> = {
+  calm: "social",
+  focus: "tech",
+  energy: "golf",
 }
 
 export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
@@ -43,7 +49,11 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
                   background: `radial-gradient(circle at 50% 60%, ${item.accent}1f, transparent 60%), #ffffff`,
                 }}
               >
-                <ProductCard formulaKey={key} className="!h-[200px]" />
+                <ProductCard
+                  formulaKey={key}
+                  tubeScene={recommendedScene[key]}
+                  className="!h-[200px]"
+                />
               </div>
               <div className="flex flex-col gap-2 p-5 border-t border-line">
                 <div className="flex items-center justify-between gap-2">
@@ -69,12 +79,18 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
           href="/shop"
           className="group flex flex-col bg-white border border-line rounded-lg overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(31,29,24,0.08)]"
         >
-          <div className="relative flex items-center justify-center h-[200px] overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/lifestyle/coupes-grapefruit-stickpack.jpg"
-              alt="AVRO stickpack styled with grapefruit coupes"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          <div
+            className="relative flex items-end justify-center h-[220px] overflow-hidden px-4 pt-3"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 70%, rgba(143,107,71,0.12), transparent 65%), linear-gradient(180deg, #ffffff, #f7f3eb)",
+            }}
+          >
+            <ProductVisual
+              keys={["calm", "focus", "energy"]}
+              size="small"
+              tubeScene="tech"
+              className="!min-h-0 [&_img]:!h-[180px]"
             />
             <span className="absolute top-3 left-3 px-2.5 py-1 bg-olive text-white rounded-full text-[10px] font-black tracking-[0.08em] uppercase">
               Clinician Choice

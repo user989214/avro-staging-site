@@ -90,7 +90,7 @@ export function BuyBox({ formula, formulaKey }: BuyBoxProps) {
                   <img
                     src={src}
                     alt={alt}
-                    className="h-[96px] w-auto object-contain drop-shadow-[0_8px_14px_rgba(30,24,20,0.18)]"
+                    className="h-[96px] w-auto object-contain"
                   />
                 </div>
                 <span
