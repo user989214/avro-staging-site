@@ -98,9 +98,9 @@ export function ProductVisual({
   }
 
   const tubeSizeClasses = {
-    small: "h-[220px] w-auto",
-    medium: "h-[300px] w-auto",
-    large: "h-[clamp(280px,34vw,440px)] w-auto",
+    small: "h-[240px] w-auto",
+    medium: "h-[320px] w-auto",
+    large: "h-[clamp(300px,38vw,480px)] w-auto",
   }
 
   return (
@@ -118,7 +118,7 @@ export function ProductVisual({
         // Subtle stagger so multiple tubes feel like a styled lineup
         const offsetY =
           keys.length > 1
-            ? Math.abs(index - (keys.length - 1) / 2) * -6
+            ? Math.abs(index - (keys.length - 1) / 2) * -8
             : 0
         const z = keys.length - Math.abs(index - (keys.length - 1) / 2)
 
@@ -128,10 +128,7 @@ export function ProductVisual({
             key={key + (flavorIds?.[key] ?? "") + tubeScene}
             src={src}
             alt={alt}
-            className={cn(
-              "object-contain drop-shadow-[0_24px_36px_rgba(30,24,20,0.22)]",
-              tubeSizeClasses[size],
-            )}
+            className={cn("object-contain", tubeSizeClasses[size])}
             style={{
               transform: `translateY(${offsetY}px)`,
               zIndex: z,
@@ -167,7 +164,7 @@ export function ProductCard({
       src={src}
       alt={alt}
       className={cn(
-        "h-[260px] w-auto object-contain drop-shadow-[0_22px_36px_rgba(30,24,20,0.22)]",
+        "h-[260px] w-auto object-contain",
         className,
       )}
     />

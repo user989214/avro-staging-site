@@ -32,11 +32,11 @@ export function HomeRefHero() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/lifestyle/coupes-grapefruit-stickpack.jpg"
-          alt="AVRO stickpack with grapefruit coupes on a styled bar"
+          src="/images/lifestyle/kitchen-trio-pink-cocktails.jpg"
+          alt="Three pink alcohol-free AVRO cocktails styled on a kitchen counter"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/45 via-transparent to-transparent" />
       </div>
     </section>
   )
@@ -143,11 +143,24 @@ export function HomeProductStrip() {
     energy: "Natural Caffeine",
   }
 
+  // Pair each formula with the cohort scene where it shines
+  const stripScene: Record<FormulaKey, "social" | "tech" | "golf"> = {
+    calm: "social",
+    focus: "tech",
+    energy: "golf",
+  }
+
+  // Show variety across the row by rotating the second flavor of each formula
+  const stripFlavor: Partial<Record<FormulaKey, string>> = {
+    calm: "Blueberry Acai",
+    focus: "Red Dragon Fruit",
+    energy: "Orange Tangerine",
+  }
+
   return (
     <section className="w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
       <div className="grid grid-cols-3 overflow-hidden border border-line rounded-lg bg-white">
         {(Object.keys(formulas) as FormulaKey[]).map((key, i) => {
-          const item = formulas[key]
           return (
             <Link
               key={key}
@@ -155,7 +168,13 @@ export function HomeProductStrip() {
               className={`grid grid-rows-[1fr_auto] min-h-[360px] transition-all hover:bg-[#fbfaf6] ${i < 2 ? "border-r border-line" : ""}`}
             >
               <div className="min-h-[310px] p-6 pb-8">
-                <ProductVisual keys={[key]} scene={key} size="medium" />
+                <ProductVisual
+                  keys={[key]}
+                  scene={key}
+                  size="medium"
+                  tubeScene={stripScene[key]}
+                  flavorIds={{ [key]: stripFlavor[key] } as Partial<Record<FormulaKey, string>>}
+                />
               </div>
               <span className="flex items-center justify-center gap-2.5 px-4 py-3.5 border-t border-line text-[#333] text-[13px] font-extrabold">
                 <Icon
@@ -189,8 +208,8 @@ export function HomeMomentGrid() {
       cta: "Explore Work",
       icon: "monitor",
       url: "/work",
-      image: "/images/lifestyle/journal-coffee-window.jpg",
-      alt: "Open journal and coffee cup at a window-lit desk",
+      image: "/images/lifestyle/woman-journaling-mug.jpg",
+      alt: "Calm morning routine with journal and warm mug",
     },
     {
       title: "Social",
@@ -198,8 +217,8 @@ export function HomeMomentGrid() {
       cta: "Explore Social",
       icon: "users",
       url: "/social",
-      image: "/images/lifestyle/kitchen-trio-pink-cocktails.jpg",
-      alt: "Three pink alcohol-free cocktails in a styled kitchen",
+      image: "/images/lifestyle/coupes-grapefruit-stickpack.jpg",
+      alt: "AVRO stickpack styled with grapefruit coupes on a bar",
     },
     {
       title: "Gaming",
@@ -391,16 +410,16 @@ export function HomeStoryStrip() {
         <div className="relative min-h-[220px] overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/lifestyle/woman-journaling-mug.jpg"
-            alt="Woman journaling with a warm mug, calm morning routine"
+            src="/images/lifestyle/journal-coffee-window.jpg"
+            alt="Open journal and coffee at a window-lit desk"
             className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
         <div className="relative min-h-[220px] overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/lifestyle/focus-desk-magenta-drink.jpg"
-            alt="AVRO Focus magenta drink at a sunlit work desk"
+            src="/images/lifestyle/golf-cart-gloves-tee.jpg"
+            alt="Golf cart with gloves and tee laid out at the first tee"
             className="absolute inset-0 w-full h-full object-cover"
           />
         </div>

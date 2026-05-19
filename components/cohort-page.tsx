@@ -185,12 +185,12 @@ export function CohortPage({ data }: { data: CohortData }) {
                 className="grid content-start gap-3.5 p-6 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
               >
                 <h3 className="font-black text-lg">{item.name}</h3>
-                <div className="relative min-h-[220px] flex items-center justify-center bg-soft/60 border border-line rounded-md overflow-hidden">
+                <div className="relative min-h-[240px] flex items-center justify-center bg-soft/60 border border-line rounded-md overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={tube.src}
                     alt={tube.alt}
-                    className="h-[200px] w-auto object-contain drop-shadow-[0_18px_28px_rgba(30,24,20,0.2)]"
+                    className="h-[220px] w-auto object-contain"
                   />
                 </div>
                 <p className="text-ink/75">{chooseCopy[key]}</p>

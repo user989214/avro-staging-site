@@ -34,13 +34,37 @@ export default function WhyPage() {
           </p>
           <CtaGroup primary="Find Your Formula" secondary="Shop AVRO" />
         </div>
-        <div className="relative grid place-items-stretch min-h-[420px] border border-line rounded-lg overflow-hidden shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/lifestyle/woman-journaling-mug.jpg"
-            alt="Calm morning routine: woman journaling with a warm mug at a window"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+        <div className="grid grid-cols-2 grid-rows-2 gap-2 min-h-[420px] rounded-lg overflow-hidden shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
+          {[
+            {
+              src: "/images/ingredients/pharmagaba.jpg",
+              alt: "Naturally fermented PharmaGABA powder",
+            },
+            {
+              src: "/images/lifestyle/journal-coffee-window.jpg",
+              alt: "Open journal and coffee at a sunlit window",
+            },
+            {
+              src: "/images/ingredients/prebiotic-fiber.jpg",
+              alt: "Prebiotic fiber blend close-up",
+            },
+            {
+              src: "/images/ingredients/stevia.jpg",
+              alt: "Fresh stevia leaves",
+            },
+          ].map((img) => (
+            <div
+              key={img.src}
+              className="relative overflow-hidden rounded-md border border-line"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+          ))}
         </div>
       </section>
 

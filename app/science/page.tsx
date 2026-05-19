@@ -49,13 +49,40 @@ export default function SciencePage() {
             </span>
           </div>
         </div>
-        <div className="relative grid place-items-stretch min-h-[420px] border border-line rounded-lg overflow-hidden shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/ingredients/pharmagaba-2.jpg"
-            alt="Naturally fermented PharmaGABA powder, the calm-first foundation in every AVRO formula"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+        <div className="grid grid-cols-2 grid-rows-[1.4fr_1fr] gap-2 min-h-[460px] rounded-lg overflow-hidden shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
+          <div className="relative col-span-2 overflow-hidden rounded-md border border-line">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/ingredients/pharmagaba.jpg"
+              alt="Naturally fermented PharmaGABA powder, the calm-first foundation"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <span className="absolute left-3 bottom-3 px-2.5 py-1 bg-olive text-white text-[10px] font-black tracking-[0.08em] uppercase rounded-full">
+              PharmaGABA®
+            </span>
+          </div>
+          <div className="relative overflow-hidden rounded-md border border-line">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/ingredients/cognigrape.jpg"
+              alt="Cognigrape red grapes"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <span className="absolute left-3 bottom-3 px-2.5 py-1 bg-white/95 text-ink text-[10px] font-black tracking-[0.08em] uppercase rounded-full">
+              Cognigrape®
+            </span>
+          </div>
+          <div className="relative overflow-hidden rounded-md border border-line">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/ingredients/natural-caffeine.jpg"
+              alt="Roasted coffee beans, source of natural caffeine"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <span className="absolute left-3 bottom-3 px-2.5 py-1 bg-white/95 text-ink text-[10px] font-black tracking-[0.08em] uppercase rounded-full">
+              Natural Caffeine
+            </span>
+          </div>
         </div>
       </section>
 
