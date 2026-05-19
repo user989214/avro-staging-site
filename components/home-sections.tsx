@@ -481,29 +481,44 @@ export function HomeStoryStrip() {
             </Link>
           </div>
         </div>
-        <div className="relative grid grid-cols-2 min-h-[260px] lg:min-h-[360px]">
-          <div className="relative overflow-hidden border-r border-line/60">
+        {/* Slanted two-image split. The diagonal slants down from upper-left
+            to lower-right (~6deg). A shared sepia/duotone tint unifies the
+            color story across both photos. */}
+        <div className="relative min-h-[260px] lg:min-h-[360px] overflow-hidden">
+          {/* Left half (fermentation): clipped along a slight diagonal */}
+          <div
+            className="absolute inset-0 overflow-hidden"
+            style={{ clipPath: "polygon(0 0, 54% 0, 46% 100%, 0 100%)" }}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/science/fermentation-lab.jpg"
               alt="Stainless steel fermentation vessel cultivating naturally fermented PharmaGABA"
               className="absolute inset-0 w-full h-full object-cover"
+              style={{ filter: "sepia(0.45) saturate(0.85) brightness(0.96) contrast(1.02)" }}
             />
-            <span className="absolute bottom-3 left-3 px-2 py-1 bg-ink/85 text-[10px] font-black tracking-[0.12em] uppercase rounded-sm" style={{ color: "var(--avro-blue)" }}>
-              Naturally Fermented
-            </span>
           </div>
-          <div className="relative overflow-hidden">
+          {/* Right half (founders): mirrored slant */}
+          <div
+            className="absolute inset-0 overflow-hidden"
+            style={{ clipPath: "polygon(54% 0, 100% 0, 100% 100%, 46% 100%)" }}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/team/founders-keigo-peter.jpg"
               alt="AVRO co-founders Keigo Sugawara and Peter van Stolk back-to-back against a sunlit wall"
               className="absolute inset-0 w-full h-full object-cover"
+              style={{ filter: "sepia(0.45) saturate(0.85) brightness(0.96) contrast(1.02)" }}
             />
-            <span className="absolute bottom-3 left-3 px-2 py-1 bg-ink/85 text-[10px] font-black tracking-[0.12em] uppercase rounded-sm" style={{ color: "var(--avro-blue)" }}>
-              Founder Driven
-            </span>
           </div>
+          {/* Diagonal divider line */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(105deg, transparent calc(50% - 1px), rgba(20,18,12,0.35) 50%, transparent calc(50% + 1px))",
+            }}
+          />
         </div>
       </div>
     </section>
