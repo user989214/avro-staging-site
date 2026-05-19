@@ -10,26 +10,17 @@ import { cn } from "@/lib/utils"
 interface BuyBoxProps {
   formula: Formula
   formulaKey: FormulaKey
+  flavorId: string
+  onFlavorChange: (flavorId: string) => void
 }
 
-type PackSize = 10 | 30 | 60
-
-const PACKS: { size: PackSize; label: string; multiplier: number }[] = [
-  { size: 10, label: "10 Sticks", multiplier: 0.4 },
-  { size: 30, label: "30 Sticks", multiplier: 1 },
-  { size: 60, label: "60 Sticks", multiplier: 1.85 },
-]
-
-export function BuyBox({ formula, formulaKey }: BuyBoxProps) {
+export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBoxProps) {
   const [purchaseType, setPurchaseType] = useState<"onetime" | "subscribe">("subscribe")
-  const [packSize, setPackSize] = useState<PackSize>(30)
   const [quantity, setQuantity] = useState(1)
-  const [flavorId, setFlavorId] = useState<string>(formula.flavors[0].id)
   const { addItem, openCart } = useCart()
 
   const activeFlavor = formula.flavors.find((f) => f.id === flavorId) ?? formula.flavors[0]
-  const pack = PACKS.find((p) => p.size === packSize) ?? PACKS[1]
-  const baseTotal = formula.bundlePrice * pack.multiplier
+  const baseTotal = formula.bundlePrice
   const subscribeTotal = baseTotal * 0.75
   const oneTimeTotal = baseTotal
   const displayTotal = (purchaseType === "subscribe" ? subscribeTotal : oneTimeTotal) * quantity
@@ -55,9 +46,12 @@ export function BuyBox({ formula, formulaKey }: BuyBoxProps) {
           <span className="text-[#d79a23] tracking-wider text-sm">{"\u2605\u2605\u2605\u2605\u2605"}</span>
           <span className="text-ink/60 text-sm">{reviewLabel}</span>
         </div>
+        <p className="mt-1 text-xs text-ink/60">
+          10 stick packets per box &middot; Net wt 1.76 oz (50 g)
+        </p>
       </header>
 
-      {/* Flavor switcher (Grüns style) */}
+      {/* Flavor switcher */}
       <div className="flex flex-col gap-3">
         <div className="flex items-baseline justify-between">
           <h2 className="text-sm font-extrabold text-ink-dark">
@@ -73,7 +67,7 @@ export function BuyBox({ formula, formulaKey }: BuyBoxProps) {
               <button
                 key={flavor.id}
                 type="button"
-                onClick={() => setFlavorId(flavor.id)}
+                onClick={() => onFlavorChange(flavor.id)}
                 aria-pressed={selected}
                 className={cn(
                   "relative flex items-center gap-2 rounded-lg border-2 bg-white overflow-hidden text-left transition-all min-h-[64px]",
@@ -103,32 +97,6 @@ export function BuyBox({ formula, formulaKey }: BuyBoxProps) {
                 >
                   {flavor.name}
                 </span>
-              </button>
-            )
-          })}
-        </div>
-      </div>
-
-      {/* Pack size */}
-      <div className="flex flex-col gap-2.5">
-        <h2 className="text-sm font-extrabold text-ink-dark">Size</h2>
-        <div className="grid grid-cols-3 gap-2">
-          {PACKS.map((p) => {
-            const selected = p.size === packSize
-            return (
-              <button
-                key={p.size}
-                type="button"
-                onClick={() => setPackSize(p.size)}
-                aria-pressed={selected}
-                className={cn(
-                  "min-h-[46px] px-2 rounded-md border-2 text-sm font-extrabold transition-all",
-                  selected
-                    ? "border-olive bg-olive/5 text-olive-dark"
-                    : "border-line bg-white text-ink hover:border-ink/30"
-                )}
-              >
-                {p.label}
               </button>
             )
           })}
@@ -234,7 +202,10 @@ function PurchaseOption({
         <p className="text-xs text-ink/65 mt-1 leading-relaxed">{subtitle}</p>
       </div>
       {badge && (
-        <span className="absolute -top-2.5 left-4 px-2 py-0.5 bg-olive text-white text-[10px] font-black tracking-[0.1em] rounded-sm">
+        <span
+          className="absolute -top-2.5 left-4 px-2 py-0.5 bg-olive text-[10px] font-black tracking-[0.1em] rounded-sm"
+          style={{ color: "var(--avro-blue)" }}
+        >
           {badge}
         </span>
       )}

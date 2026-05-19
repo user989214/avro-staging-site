@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation"
 import { formulas, type FormulaKey } from "@/lib/data"
-import { ProductGallery } from "@/components/product-gallery"
-import { BuyBox } from "@/components/buy-box"
+import { ProductHero } from "@/components/product-hero"
 import { ReviewsBlock } from "@/components/reviews-block"
 import { YouMightAlsoLike } from "@/components/you-might-also-like"
 import { Icon, type IconName } from "@/components/icons"
@@ -95,10 +94,7 @@ export default async function ProductPage({
 
       {/* PDP Hero */}
       <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] pb-[clamp(36px,5vw,64px)] bg-white">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-14 items-start">
-          <ProductGallery formula={item} formulaKey={key} />
-          <BuyBox formula={item} formulaKey={key} />
-        </div>
+        <ProductHero formula={item} formulaKey={key} />
       </section>
 
       {/* Quick benefits strip */}
@@ -181,7 +177,7 @@ export default async function ProductPage({
                   {key === "calm" ? "Jessica M." : key === "focus" ? "Michael T." : "Sarah K."}
                 </strong>
                 <span className="block text-xs text-ink/60 mt-0.5">
-                  {item.flavor} &middot; 30 Sticks
+                  {item.flavor} &middot; 10 Sticks
                 </span>
               </div>
               <a

@@ -22,6 +22,8 @@ import { cn } from "@/lib/utils"
 interface ProductGalleryProps {
   formula: Formula
   formulaKey: FormulaKey
+  flavorId: string
+  onFlavorChange: (flavorId: string) => void
 }
 
 type ThumbKind = "studio" | "tube" | "stick" | TubeScene
@@ -44,8 +46,7 @@ const THUMBS: Thumb[] = [
   { id: "gaming", label: TUBE_SCENE_LABELS.gaming, bg: "scene" },
 ]
 
-export function ProductGallery({ formula, formulaKey }: ProductGalleryProps) {
-  const [flavorId, setFlavorId] = useState<string>(formula.flavors[0].id)
+export function ProductGallery({ formula, formulaKey, flavorId, onFlavorChange }: ProductGalleryProps) {
   const [activeId, setActiveId] = useState<ThumbKind>("studio")
 
   const studio = tubeImageFor("studio", formulaKey, flavorId)
@@ -286,7 +287,7 @@ export function ProductGallery({ formula, formulaKey }: ProductGalleryProps) {
               <button
                 key={flavor.id}
                 type="button"
-                onClick={() => setFlavorId(flavor.id)}
+                onClick={() => onFlavorChange(flavor.id)}
                 aria-pressed={selected}
                 className={cn(
                   "px-3 py-1.5 rounded-full border-2 bg-white text-xs font-extrabold transition-all",

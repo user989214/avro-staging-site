@@ -481,13 +481,29 @@ export function HomeStoryStrip() {
             </Link>
           </div>
         </div>
-        <div className="relative min-h-[260px] lg:min-h-[360px] overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/team/founders-keigo-peter.jpg"
-            alt="AVRO co-founders Keigo Sugawara and Peter van Stolk back-to-back against a sunlit wall"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+        <div className="relative grid grid-cols-2 min-h-[260px] lg:min-h-[360px]">
+          <div className="relative overflow-hidden border-r border-line/60">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/science/fermentation-lab.jpg"
+              alt="Stainless steel fermentation vessel cultivating naturally fermented PharmaGABA"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <span className="absolute bottom-3 left-3 px-2 py-1 bg-ink/85 text-[10px] font-black tracking-[0.12em] uppercase rounded-sm" style={{ color: "var(--avro-blue)" }}>
+              Naturally Fermented
+            </span>
+          </div>
+          <div className="relative overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/team/founders-keigo-peter.jpg"
+              alt="AVRO co-founders Keigo Sugawara and Peter van Stolk back-to-back against a sunlit wall"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <span className="absolute bottom-3 left-3 px-2 py-1 bg-ink/85 text-[10px] font-black tracking-[0.12em] uppercase rounded-sm" style={{ color: "var(--avro-blue)" }}>
+              Founder Driven
+            </span>
+          </div>
         </div>
       </div>
     </section>
