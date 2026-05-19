@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Section, SectionHeading, FinalCta } from "@/components/sections"
 
 export const metadata = {
-  title: "About AVRO | Our Story & Team",
+  title: "The Team | AVRO",
   description:
     "AVRO was built on a simple idea: state before stimulation. Meet the team behind the calm-first formulas.",
 }
@@ -142,7 +142,7 @@ export default function AboutPage() {
       {/* Team */}
       <Section>
         <SectionHeading
-          eyebrow="The team"
+          eyebrow="The Team"
           title="People behind the formulas."
           description="A small group of formulators, scientists, and brand builders working out of one studio with one rule: state before stimulation."
         />

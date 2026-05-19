@@ -20,7 +20,7 @@ const footerLinks = {
   ],
   learn: [
     { href: "/why-avro", label: "Our Story" },
-    { href: "/about", label: "About & Team" },
+    { href: "/about", label: "The Team" },
     { href: "/science", label: "Science of AVRO" },
     { href: "/learn", label: "Ingredients" },
     { href: "/golf", label: "Golf" },
