@@ -10,25 +10,25 @@ export const metadata = {
 
 const team = [
   {
-    name: "Keigo Tanaka",
+    name: "Lorem Ipsum",
     role: "Co-Founder & CEO",
     image: "/images/team/keigo.jpg",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
   },
   {
-    name: "Peter Lindqvist",
+    name: "Lorem Ipsum",
     role: "Co-Founder & Head of Formulation",
     image: "/images/team/peter.jpg",
     bio: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.",
   },
   {
-    name: "Holly Mercer",
+    name: "Lorem Ipsum",
     role: "Director of Brand",
     image: "/images/team/holly.jpg",
     bio: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
   },
   {
-    name: "Marianne Costa",
+    name: "Lorem Ipsum",
     role: "Head of Science & Research",
     image: "/images/team/marianne.jpg",
     bio: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.",
@@ -147,9 +147,9 @@ export default function AboutPage() {
           description="A small group of formulators, scientists, and brand builders working out of one studio with one rule: state before stimulation."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 max-w-[1200px] mx-auto">
-          {team.map((m) => (
+          {team.map((m, i) => (
             <article
-              key={m.name}
+              key={i}
               className="flex flex-col gap-4 group"
             >
               <div className="relative aspect-square w-full overflow-hidden rounded-lg border border-line bg-cream">
