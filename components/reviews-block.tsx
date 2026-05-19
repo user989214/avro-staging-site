@@ -1,4 +1,4 @@
-import { ProductVisual } from "@/components/product-visual"
+import { stickImageFor } from "@/components/product-visual"
 import type { FormulaKey, Formula } from "@/lib/data"
 
 interface ReviewsBlockProps {
@@ -109,10 +109,16 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
       <div className="flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-8 p-5 lg:p-6 mb-7 bg-soft/60 border border-line rounded-lg">
         <div className="flex items-center gap-4 shrink-0">
           <div
-            className="flex items-center justify-center w-14 h-14 rounded-md"
+            className="relative flex items-center justify-center w-14 h-14 rounded-md overflow-hidden"
             style={{ background: `linear-gradient(135deg, ${formula.color}, ${formula.accent})` }}
           >
-            <ProductVisual keys={[formulaKey]} scene={formulaKey} size="small" className="!min-h-0 scale-[0.45] origin-center" />
+            {(() => {
+              const { src, alt } = stickImageFor(formulaKey)
+              return (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img src={src} alt={alt} className="h-12 w-auto object-contain" />
+              )
+            })()}
           </div>
           <div>
             <strong className="block font-extrabold">{formula.name}</strong>

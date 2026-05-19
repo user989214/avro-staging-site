@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { formulas, type FormulaKey } from "@/lib/data"
-import { ProductVisual } from "@/components/product-visual"
+import { ProductCard } from "@/components/product-visual"
 import { cn } from "@/lib/utils"
 
 interface YouMightAlsoLikeProps {
@@ -38,12 +38,12 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
               className="group flex flex-col bg-white border border-line rounded-lg overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(31,29,24,0.08)]"
             >
               <div
-                className="flex items-center justify-center h-[200px] bg-white"
+                className="flex items-center justify-center h-[220px] overflow-hidden"
                 style={{
                   background: `radial-gradient(circle at 50% 60%, ${item.accent}1f, transparent 60%), #ffffff`,
                 }}
               >
-                <ProductVisual keys={[key]} scene={key} size="medium" />
+                <ProductCard formulaKey={key} className="!h-[200px]" />
               </div>
               <div className="flex flex-col gap-2 p-5 border-t border-line">
                 <div className="flex items-center justify-between gap-2">
