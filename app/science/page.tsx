@@ -49,13 +49,13 @@ export default function SciencePage() {
             </span>
           </div>
         </div>
-        <div className="relative grid place-items-center min-h-[420px] border border-line rounded-lg overflow-hidden bg-gradient-to-br from-[#f9f5ed] to-white shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
-          {/* Powder bowl visual */}
-          <div className="w-[min(58%,360px)] aspect-[1.55] rounded-full bg-[radial-gradient(circle_at_50%_35%,#eadfc9_0_35%,#d6c4a8_36%_45%,transparent_46%),radial-gradient(ellipse_at_50%_80%,#ffffff_0_52%,#d5d0c4_53%_58%,transparent_59%)] shadow-[0_30px_60px_rgba(36,30,20,0.12)]" />
-          {/* Water glass */}
-          <div className="absolute right-[12%] top-[15%] w-24 h-[150px] border-5 border-[rgba(140,150,140,0.36)] border-t-0 rounded-b-[22px]">
-            <div className="absolute inset-x-1.5 bottom-2 top-[54px] bg-[rgba(190,210,220,0.28)] rounded-b-2xl" />
-          </div>
+        <div className="relative grid place-items-stretch min-h-[420px] border border-line rounded-lg overflow-hidden shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/ingredients/pharmagaba-2.jpg"
+            alt="Naturally fermented PharmaGABA powder, the calm-first foundation in every AVRO formula"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
         </div>
       </section>
 

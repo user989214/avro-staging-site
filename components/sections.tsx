@@ -2,7 +2,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { formulas, sharedProof, testimonials, type FormulaKey } from "@/lib/data"
 import { Icon, type IconName } from "@/components/icons"
-import { ProductVisual } from "@/components/product-visual"
+import { ProductCard } from "@/components/product-visual"
 
 interface SectionProps {
   children: React.ReactNode
@@ -143,10 +143,7 @@ export function ProductCards({
               className="grid content-start gap-3.5 p-6 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
             >
               <div className="min-h-[280px] p-2.5 pt-4.5 pb-6.5 bg-gradient-to-br from-white to-[#f7f3eb] rounded-lg flex items-end justify-center">
-                <div className="relative">
-                  <div className="absolute inset-x-[-10%] bottom-0 h-12 rounded-lg bg-gradient-to-br from-white/78 to-[rgba(204,196,179,0.35)] -z-10" />
-                  <ProductCard formulaKey={key} />
-                </div>
+                <ProductCard formulaKey={key} />
               </div>
               <h3 className="font-black text-lg">{item.name}</h3>
               <p className="text-ink/75">{item.support}</p>
@@ -179,33 +176,6 @@ export function ProductCards({
         })}
       </div>
     </Section>
-  )
-}
-
-function ProductCard({ formulaKey }: { formulaKey: FormulaKey }) {
-  const item = formulas[formulaKey]
-  return (
-    <div
-      className="relative grid place-items-center content-center px-2.5 py-4.5 text-white rounded-t-3xl rounded-b-2xl overflow-hidden w-[82px] h-[230px] shadow-[0_22px_42px_rgba(30,24,20,0.2)]"
-      style={{
-        background: `linear-gradient(90deg, rgba(0,0,0,0.28), transparent 22%, rgba(255,255,255,0.22) 50%, transparent 78%, rgba(0,0,0,0.24)), ${item.color}`,
-      }}
-    >
-      <div className="absolute top-0 left-0 right-0 h-4 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.18)_0_3px,rgba(0,0,0,0.12)_3px_6px)]" />
-      <div className="absolute bottom-0 left-0 right-0 h-4 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.18)_0_3px,rgba(0,0,0,0.12)_3px_6px)]" />
-      <span className="absolute top-7 font-black tracking-[0.18em] uppercase text-xs">
-        {item.short}
-      </span>
-      <strong
-        className="font-serif text-3xl leading-none tracking-[0.08em]"
-        style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-      >
-        AVRO
-      </strong>
-      <em className="absolute bottom-8 max-w-[70px] text-white/88 text-[9px] font-extrabold text-center uppercase not-italic">
-        {item.flavor}
-      </em>
-    </div>
   )
 }
 

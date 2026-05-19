@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { formulas, type FormulaKey } from "@/lib/data"
-import { ProductVisual } from "@/components/product-visual"
 import {
   Section,
   SectionHeading,
@@ -52,6 +51,44 @@ export function CohortPage({ data }: { data: CohortData }) {
     gaming: "Pre-session ritual",
   }
 
+  // Cohort-specific lifestyle hero photo
+  const cohortHero: Record<string, { src: string; alt: string }> = {
+    golf: {
+      src: "/images/lifestyle/golf-cart-gloves-tee.jpg",
+      alt: "Golf cart with gloves and tee laid out at first tee",
+    },
+    social: {
+      src: "/images/lifestyle/kitchen-trio-pink-cocktails.jpg",
+      alt: "Three pink alcohol-free AVRO cocktails styled in a kitchen",
+    },
+    work: {
+      src: "/images/lifestyle/focus-desk-magenta-drink.jpg",
+      alt: "Focus magenta drink at a sunlit work desk with notebook",
+    },
+    gaming: {
+      src: "/images/lifestyle/focus-iced-drink-headphones.jpg",
+      alt: "Iced AVRO drink and headphones on a gaming desk",
+    },
+  }
+
+  // Cohort-specific tube image folder prefix mapping
+  const tubeCohort: Record<string, string> = {
+    golf: "tube-golf",
+    social: "tube-social",
+    work: "tube-tech",
+    gaming: "tube-gaming",
+  }
+
+  const tubeImageFor = (key: FormulaKey) => {
+    const prefix = tubeCohort[data.visual] ?? "tube-tech"
+    const flavor = formulas[key].flavors[0]
+    const slug = flavor.name.toLowerCase().replace(/\s+/g, "-")
+    return {
+      src: `/images/lifestyle/${prefix}-${key}-${slug}.png`,
+      alt: `AVRO ${formulas[key].short} ${flavor.name} in ${data.visual} setting`,
+    }
+  }
+
   const chooseCopy: Record<FormulaKey, string> = {
     calm:
       data.visual === "social"
@@ -97,11 +134,12 @@ export function CohortPage({ data }: { data: CohortData }) {
           </p>
           <CtaGroup primary={data.primary} secondary={data.secondary} />
         </div>
-        <div className="relative grid place-items-center min-h-[420px] border border-line rounded-lg overflow-hidden bg-cover shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.48),rgba(255,255,255,0.1)),repeating-linear-gradient(45deg,rgba(255,255,255,0.4)_0_2px,transparent_2px_20px)]" />
-          <ProductVisual
-            keys={["calm", "focus", "energy"]}
-            className="z-10"
+        <div className="relative grid place-items-stretch min-h-[420px] border border-line rounded-lg overflow-hidden bg-cover shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={cohortHero[data.visual]?.src}
+            alt={cohortHero[data.visual]?.alt ?? ""}
+            className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute left-5.5 bottom-5.5 z-20 px-3.5 py-2.5 text-white bg-[rgba(38,50,22,0.86)] rounded-[7px] font-black">
             {sceneLabels[data.visual as keyof typeof sceneLabels]}
@@ -140,14 +178,20 @@ export function CohortPage({ data }: { data: CohortData }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5.5">
           {(Object.keys(formulas) as FormulaKey[]).map((key) => {
             const item = formulas[key]
+            const tube = tubeImageFor(key)
             return (
               <article
                 key={key}
                 className="grid content-start gap-3.5 p-6 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
               >
                 <h3 className="font-black text-lg">{item.name}</h3>
-                <div className="min-h-[200px] flex items-end justify-center">
-                  <ProductVisual keys={[key]} />
+                <div className="relative min-h-[220px] flex items-center justify-center bg-soft/60 border border-line rounded-md overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={tube.src}
+                    alt={tube.alt}
+                    className="h-[200px] w-auto object-contain drop-shadow-[0_18px_28px_rgba(30,24,20,0.2)]"
+                  />
                 </div>
                 <p className="text-ink/75">{chooseCopy[key]}</p>
                 <Link

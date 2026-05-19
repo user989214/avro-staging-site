@@ -70,53 +70,79 @@ export function ProductGallery({ formula, formulaKey }: ProductGalleryProps) {
       id: "ingredients",
       label: "Inside",
       icon: "flask",
-      render: () => (
-        <div
-          className="grid grid-cols-2 gap-4 w-full h-full p-10 content-center"
-          style={{ background: `linear-gradient(135deg, #ffffff, ${tint})` }}
-        >
-          {[
-            ["leaf", "PharmaGABA"],
-            ["flask", formula.addition.split(" ")[0]],
-            ["shield", "Prebiotic"],
-            ["star", "Natural Flavor"],
-          ].map(([ic, label]) => (
-            <div
-              key={label as string}
-              className="flex flex-col items-center justify-center gap-2 p-4 bg-white border border-line rounded-lg"
-            >
-              <Icon name={ic as IconName} className="w-8 h-8 text-olive" />
-              <span className="text-xs font-extrabold text-center">{label}</span>
-            </div>
-          ))}
-        </div>
-      ),
+      render: () => {
+        const additionImage =
+          formulaKey === "focus"
+            ? "/images/ingredients/cognigrape-2.jpg"
+            : formulaKey === "energy"
+              ? "/images/ingredients/natural-caffeine-2.jpg"
+              : null
+        const cells: Array<{ src: string | null; label: string; icon: IconName }> = [
+          { src: "/images/ingredients/pharmagaba-2.jpg", label: "PharmaGABA", icon: "leaf" },
+          { src: additionImage, label: formula.addition.split(" ")[0], icon: "flask" },
+          { src: "/images/ingredients/prebiotic-fiber-2.jpg", label: "Prebiotic", icon: "shield" },
+          { src: "/images/ingredients/stevia-2.jpg", label: "Natural Flavor", icon: "star" },
+        ]
+        return (
+          <div
+            className="grid grid-cols-2 gap-4 w-full h-full p-10 content-center"
+            style={{ background: `linear-gradient(135deg, #ffffff, ${tint})` }}
+          >
+            {cells.map(({ src, label, icon }) => (
+              <div
+                key={label}
+                className="flex flex-col bg-white border border-line rounded-lg overflow-hidden"
+              >
+                {src ? (
+                  <div className="relative w-full aspect-square overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={src}
+                      alt={`${label} ingredient`}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="w-full aspect-square bg-soft/60 grid place-items-center">
+                    <Icon name={icon} className="w-10 h-10 text-olive" />
+                  </div>
+                )}
+                <span className="px-3 py-2 text-xs font-extrabold text-center bg-white">
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
+        )
+      },
     },
     {
       id: "moment",
       label: "In use",
       icon: "users",
-      render: () => (
-        <div
-          className="relative flex items-center justify-center w-full h-full"
-          style={{
-            background: `linear-gradient(135deg, ${tint}, #ffffff 60%, ${accentTint})`,
-          }}
-        >
-          <div className="text-center max-w-[300px] px-6">
-            <span
-              className="inline-flex items-center justify-center w-16 h-16 mb-5 rounded-full"
-              style={{ background: formula.color }}
-            >
-              <Icon name="target" className="w-8 h-8 text-white" />
-            </span>
-            <p className="font-serif font-black text-2xl leading-tight mb-2">
-              {formula.headline}
-            </p>
-            <p className="text-ink/70 text-sm">{formula.support}</p>
+      render: () => {
+        const momentImage = {
+          calm: "/images/lifestyle/woman-journaling-mug.jpg",
+          focus: "/images/lifestyle/focus-desk-magenta-drink.jpg",
+          energy: "/images/lifestyle/golfers-misty-tee-box.jpg",
+        }[formulaKey]
+        return (
+          <div className="relative w-full h-full overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={momentImage}
+              alt={`${formula.name} in use`}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/60 to-transparent">
+              <p className="font-serif font-black text-2xl leading-tight mb-1 text-white">
+                {formula.headline}
+              </p>
+              <p className="text-white/85 text-sm">{formula.support}</p>
+            </div>
           </div>
-        </div>
-      ),
+        )
+      },
     },
     {
       id: "facts",

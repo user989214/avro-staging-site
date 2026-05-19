@@ -34,16 +34,13 @@ export default function WhyPage() {
           </p>
           <CtaGroup primary="Find Your Formula" secondary="Shop AVRO" />
         </div>
-        <div className="grid place-items-center gap-4.5 min-h-[420px] p-11 bg-gradient-to-br from-[#f9f5ed] to-white border border-line rounded-lg shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
-          <div className="w-full max-w-[420px] p-6 text-white font-serif text-[42px] bg-calm rounded-lg shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
-            Calm
-          </div>
-          <div className="w-full max-w-[420px] p-6 text-white font-serif text-[42px] bg-focus rounded-lg shadow-[0_22px_70px_rgba(30,29,24,0.1)] translate-x-7.5">
-            Clear
-          </div>
-          <div className="w-full max-w-[420px] p-6 text-ink font-serif text-[42px] bg-energy rounded-lg shadow-[0_22px_70px_rgba(30,29,24,0.1)] -translate-x-6">
-            Lift
-          </div>
+        <div className="relative grid place-items-stretch min-h-[420px] border border-line rounded-lg overflow-hidden shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/lifestyle/woman-journaling-mug.jpg"
+            alt="Calm morning routine: woman journaling with a warm mug at a window"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
         </div>
       </section>
 
