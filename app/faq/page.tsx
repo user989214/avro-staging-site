@@ -157,7 +157,7 @@ export default function FaqPage() {
         <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-2.5">
           How can we help?
         </h1>
-        <p className="max-w-[760px] text-muted-foregroundtext-[clamp(17px,2vw,20px)] leading-relaxed mb-5">
+        <p className="max-w-[760px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed mb-5">
           Find answers about AVRO formulas, ingredients, timing, caffeine,
           subscriptions, shipping, and how to choose the right product.
         </p>
@@ -197,7 +197,7 @@ export default function FaqPage() {
                 <summary className="flex justify-between gap-4 px-5.5 py-4.5 cursor-pointer font-extrabold select-none after:content-['+'] after:text-[22px] after:leading-none group-open:after:content-['-']">
                   {q}
                 </summary>
-                <p className="px-5.5 pb-5 text-muted-foregroundleading-relaxed">{a}</p>
+                <p className="px-5.5 pb-5 text-muted-foreground leading-relaxed">{a}</p>
               </details>
             ))}
           </div>
