@@ -112,6 +112,49 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      {/* Founders */}
+      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(28px,5vw,64px)]">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-0 overflow-hidden border border-line rounded-lg bg-white/90 shadow-[0_18px_40px_-24px_rgba(20,18,12,0.18)]">
+          <div className="flex flex-col justify-center gap-4 p-[clamp(28px,4vw,52px)]">
+            <span className="text-olive text-xs font-black tracking-[0.12em] uppercase">
+              The founders
+            </span>
+            <h2 className="font-serif font-black text-[clamp(30px,3.4vw,46px)] leading-[1.04] text-balance">
+              Born from science and brand instinct.
+            </h2>
+            <p className="text-muted-foreground text-[clamp(15px,1.6vw,17px)] leading-relaxed max-w-[52ch]">
+              Founded by Keigo Sugawara and Peter van Stolk, AVRO was built
+              around a simple belief: people do not always need more
+              stimulation. They need more control. Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua.
+            </p>
+            <p className="text-muted-foreground text-[clamp(15px,1.6vw,17px)] leading-relaxed max-w-[52ch]">
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco
+              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              dolor in reprehenderit in voluptate velit esse cillum dolore.
+            </p>
+            <div className="flex flex-wrap gap-3 mt-2">
+              <Link href="/why-avro" className="btn-secondary text-sm">
+                Read our story
+              </Link>
+              <Link href="/science" className="btn-secondary text-sm">
+                The science
+              </Link>
+            </div>
+          </div>
+          <div className="relative min-h-[320px] lg:min-h-[460px] overflow-hidden">
+            <Image
+              src="/images/team/founders-keigo-peter.jpg"
+              alt="AVRO co-founders Keigo Sugawara and Peter van Stolk back-to-back against a sunlit wall"
+              fill
+              sizes="(min-width: 1024px) 55vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Team */}
       <Section>
         <SectionHeading
