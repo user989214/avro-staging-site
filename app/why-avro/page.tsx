@@ -19,49 +19,19 @@ export default function WhyPage() {
   return (
     <>
       {/* Hero */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)] items-center w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(42px,8vw,86px)] bg-gradient-to-br from-[#fffdf8] to-[#f7f4ec] border-b border-line">
-        <div className="max-w-[620px]">
-          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
+      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(56px,9vw,112px)] bg-gradient-to-br from-[#fffdf8] to-[#f7f4ec] border-b border-line">
+        <div className="flex flex-col items-center text-center max-w-[820px] mx-auto">
+          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5 text-balance">
             State before stimulation.
           </h1>
-          <p className="max-w-[560px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[640px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed text-pretty">
             AVRO is built on a simple idea: when the moment matters, more
             stimulation is not always the answer. Start calmer, stay clearer,
             and choose the support that fits the day.
           </p>
-          <CtaGroup primary="Find Your Formula" secondary="Shop AVRO" />
-        </div>
-        <div className="grid grid-cols-2 grid-rows-2 gap-2 min-h-[420px] rounded-lg overflow-hidden shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
-          {[
-            {
-              src: "/images/ingredients/pharmagaba.jpg",
-              alt: "Naturally fermented PharmaGABA powder",
-            },
-            {
-              src: "/images/lifestyle/golfers-misty-tee-box.jpg",
-              alt: "Golfers on a misty morning tee box",
-            },
-            {
-              src: "/images/ingredients/blueberry-acai.jpg",
-              alt: "Fresh blueberries and acai",
-            },
-            {
-              src: "/images/lifestyle/journal-coffee-window.jpg",
-              alt: "Open journal and coffee at a sunlit window",
-            },
-          ].map((img) => (
-            <div
-              key={img.src}
-              className="relative overflow-hidden rounded-md border border-line"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={img.src}
-                alt={img.alt}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            </div>
-          ))}
+          <div className="flex flex-wrap justify-center">
+            <CtaGroup primary="Find Your Formula" secondary="Shop AVRO" />
+          </div>
         </div>
       </section>
 

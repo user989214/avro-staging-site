@@ -54,17 +54,17 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)] items-center w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(42px,8vw,86px)] bg-gradient-to-br from-[#fffdf8] to-[#f7f4ec] border-b border-line">
-        <div className="max-w-[620px]">
+      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(56px,9vw,112px)] bg-gradient-to-br from-[#fffdf8] to-[#f7f4ec] border-b border-line">
+        <div className="flex flex-col items-center text-center max-w-[820px] mx-auto">
           <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5 text-balance">
             Built around the moments that matter.
           </h1>
-          <p className="max-w-[560px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[640px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed text-pretty">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad
             minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat.
           </p>
-          <div className="flex flex-wrap items-center gap-3 mt-7">
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-7">
             <Link href="/why-avro" className="btn-primary">
               Why AVRO
             </Link>
@@ -72,16 +72,6 @@ export default function AboutPage() {
               The Science
             </Link>
           </div>
-        </div>
-        <div className="relative aspect-[4/5] w-full max-w-[520px] justify-self-center overflow-hidden rounded-lg border border-line shadow-[0_30px_60px_-30px_rgba(20,18,12,0.35)]">
-          <Image
-            src="/images/lifestyle/journal-coffee-window.jpg"
-            alt="Open journal and coffee at a sunlit window"
-            fill
-            sizes="(min-width: 1024px) 520px, 90vw"
-            className="object-cover"
-            priority
-          />
         </div>
       </section>
 

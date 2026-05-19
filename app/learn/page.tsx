@@ -52,28 +52,19 @@ export default function LearnPage() {
   return (
     <>
       {/* Hero */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)] items-center w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(42px,8vw,86px)] bg-gradient-to-br from-[#fffdf8] to-[#f7f4ec] border-b border-line">
-        <div className="max-w-[620px]">
-          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
+      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(56px,9vw,112px)] bg-gradient-to-br from-[#fffdf8] to-[#f7f4ec] border-b border-line">
+        <div className="flex flex-col items-center text-center max-w-[820px] mx-auto">
+          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5 text-balance">
             Category ownership, not content noise.
           </h1>
-          <p className="max-w-[560px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[640px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed text-pretty">
             Learn how AVRO thinks about calm performance, PharmaGABA®,
             calm-first energy, state before pressure moments, and choosing the
             right formula.
           </p>
-          <CtaGroup primary="Read Articles" secondary="Shop AVRO" />
-        </div>
-        <div className="grid content-center gap-3.5 min-h-[420px] p-8.5 border border-line rounded-lg overflow-hidden bg-gradient-to-br from-[#f9f5ed] to-white shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
-          {articleGroups.map((group) => (
-            <article
-              key={group.title}
-              className="p-5 bg-white border border-line rounded-lg"
-            >
-              <h3 className="font-black text-lg mb-2">{group.title}</h3>
-              <p className="text-muted-foreground">{group.articles[0]}</p>
-            </article>
-          ))}
+          <div className="flex flex-wrap justify-center">
+            <CtaGroup primary="Read Articles" secondary="Shop AVRO" />
+          </div>
         </div>
       </section>
 

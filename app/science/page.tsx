@@ -20,64 +20,31 @@ export default function SciencePage() {
   return (
     <>
       {/* Hero */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)] items-center w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(42px,8vw,86px)] bg-[radial-gradient(circle_at_22%_28%,rgba(255,255,255,0.8),transparent_28%),linear-gradient(105deg,#fffdf8_0%,#f4efe5_100%)] border-b border-line">
-        <div className="max-w-[620px]">
-          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
+      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(56px,9vw,112px)] bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.85),transparent_42%),linear-gradient(180deg,#fffdf8_0%,#f4efe5_100%)] border-b border-line">
+        <div className="flex flex-col items-center text-center max-w-[820px] mx-auto">
+          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5 text-balance">
             Calm first. Backed by science.
           </h1>
-          <p className="max-w-[560px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[640px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed text-pretty">
             Every AVRO formula starts with naturally fermented PharmaGABA®,
             selected to support calm-first readiness, composure, and clarity
             before pressure-sensitive moments.
           </p>
-          <CtaGroup primary="Shop AVRO" secondary="View Research" />
-          <div className="grid grid-cols-3 gap-4 mt-9 max-w-[560px]">
-            <span className="flex flex-col gap-2 text-olive-dark text-[13px] font-extrabold">
+          <div className="flex flex-wrap justify-center">
+            <CtaGroup primary="Shop AVRO" secondary="View Research" />
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10 max-w-[640px]">
+            <span className="flex flex-col items-center gap-2 text-olive-dark text-[13px] font-extrabold">
               <Icon name="leaf" className="w-8.5 h-8.5 text-olive" />
               Naturally Fermented PharmaGABA®
             </span>
-            <span className="flex flex-col gap-2 text-olive-dark text-[13px] font-extrabold">
+            <span className="flex flex-col items-center gap-2 text-olive-dark text-[13px] font-extrabold">
               <Icon name="flask" className="w-8.5 h-8.5 text-olive" />
               Research Supported Ingredient
             </span>
-            <span className="flex flex-col gap-2 text-olive-dark text-[13px] font-extrabold">
+            <span className="flex flex-col items-center gap-2 text-olive-dark text-[13px] font-extrabold">
               <Icon name="shield" className="w-8.5 h-8.5 text-olive" />
               Transparent Standards
-            </span>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 grid-rows-[1.4fr_1fr] gap-2 min-h-[460px] rounded-lg overflow-hidden shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
-          <div className="relative col-span-2 overflow-hidden rounded-md border border-line">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/ingredients/pharmagaba.jpg"
-              alt="Naturally fermented PharmaGABA powder, the calm-first foundation"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <span className="absolute left-3 bottom-3 px-2.5 py-1 bg-olive text-white text-[10px] font-black tracking-[0.08em] uppercase rounded-full">
-              PharmaGABA®
-            </span>
-          </div>
-          <div className="relative overflow-hidden rounded-md border border-line">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/ingredients/cognigrape.jpg"
-              alt="Cognigrape red grapes"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <span className="absolute left-3 bottom-3 px-2.5 py-1 bg-white/95 text-ink text-[10px] font-black tracking-[0.08em] uppercase rounded-full">
-              Cognigrape®
-            </span>
-          </div>
-          <div className="relative overflow-hidden rounded-md border border-line">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/ingredients/natural-caffeine.jpg"
-              alt="Roasted coffee beans, source of natural caffeine"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <span className="absolute left-3 bottom-3 px-2.5 py-1 bg-white/95 text-ink text-[10px] font-black tracking-[0.08em] uppercase rounded-full">
-              Natural Caffeine
             </span>
           </div>
         </div>
