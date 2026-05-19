@@ -42,12 +42,12 @@ export default function ShopPage() {
             </Link>
           </div>
         </div>
-        <div className="relative aspect-[4/5] w-full max-w-[520px] justify-self-center overflow-hidden rounded-lg border border-line shadow-[0_30px_60px_-30px_rgba(20,18,12,0.35)]">
+        <div className="relative aspect-[3/2] w-full max-w-[620px] justify-self-center overflow-hidden rounded-lg border border-line shadow-[0_30px_60px_-30px_rgba(20,18,12,0.35)]">
           <Image
-            src="/images/lifestyle/golfers-misty-tee-box.jpg"
-            alt="Golfers stepping onto a misty morning tee box, ready before the round"
+            src="/images/lifestyle/avro-trio-stone-hero.png"
+            alt="AVRO Calm, Focus, and Energy tubes arranged on a stone slab with soft botanicals"
             fill
-            sizes="(min-width: 1024px) 520px, 90vw"
+            sizes="(min-width: 1024px) 620px, 90vw"
             className="object-cover"
             priority
           />
