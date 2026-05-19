@@ -236,7 +236,7 @@ export default async function ProductPage({
                       : null,
               alt:
                 key === "calm"
-                  ? "Magnesium bisglycinate chelated mineral powder"
+                  ? "Magnesium bisglycinate powder"
                   : key === "focus"
                     ? "Cognigrape red grape cluster"
                     : key === "energy"
