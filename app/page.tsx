@@ -1,10 +1,12 @@
 import {
   HomeRefHero,
   HomeProofBar,
+  HomeBenefitRow,
   HomeLogicRow,
   HomeProductStrip,
   HomeMomentGrid,
   HomeScienceGrid,
+  HomeQualityRow,
   HomeStoryStrip,
   HomeRitualSection,
 } from "@/components/home-sections"
@@ -19,10 +21,12 @@ export default function HomePage() {
     <>
       <HomeRefHero />
       <HomeProofBar />
+      <HomeBenefitRow />
       <HomeLogicRow />
       <HomeProductStrip />
       <HomeMomentGrid />
       <HomeScienceGrid />
+      <HomeQualityRow />
       <HomeStoryStrip />
       <HomeRitualSection />
       <ProductCards title="Choose your AVRO formula" shopLabel="Shop" />

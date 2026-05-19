@@ -63,10 +63,10 @@ export function HomeProofBar() {
 
 export function HomeLogicRow() {
   const comparisonRows = [
-    ["Push harder", "Settle first", "bolt", "leaf"],
-    ["More intensity", "More control", "bolt", "target"],
-    ["Spike and crash", "Steady state", "card", "brain"],
-    ["Noise", "Clarity", "users", "star"],
+    ["Push harder", "Settle first", "trending", "leaf"],
+    ["More intensity", "More control", "zap", "gauge"],
+    ["Spike and crash", "Steady state", "activity", "waves"],
+    ["Noise", "Clarity", "volume", "lightbulb"],
   ]
 
   return (
@@ -170,7 +170,7 @@ export function HomeProductStrip() {
               </div>
               <span className="flex items-center justify-center gap-2.5 px-4 py-3.5 border-t border-line text-[#333] text-[13px] font-extrabold">
                 <Icon
-                  name={key === "calm" ? "shield" : key === "focus" ? "brain" : "bolt"}
+                  name={key === "calm" ? "smile" : key === "focus" ? "brain" : "zap"}
                   className="w-5 h-5"
                 />
                 PharmaGABA® + {formulaAdditions[key]}
@@ -198,7 +198,7 @@ export function HomeMomentGrid() {
       title: "Work",
       copy: "Before the meeting. Before deep work.",
       cta: "Explore Work",
-      icon: "monitor",
+      icon: "briefcase",
       url: "/work",
       image: "/images/lifestyle/woman-journaling-mug.jpg",
       alt: "Calm morning routine with journal and warm mug",
@@ -207,7 +207,7 @@ export function HomeMomentGrid() {
       title: "Social",
       copy: "Show up present without alcohol.",
       cta: "Explore Social",
-      icon: "users",
+      icon: "wine",
       url: "/social",
       image: "/images/lifestyle/coupes-grapefruit-stickpack.jpg",
       alt: "AVRO stickpack styled with grapefruit coupes on a bar",
@@ -216,7 +216,7 @@ export function HomeMomentGrid() {
       title: "Gaming",
       copy: "Before the session. Before the decision.",
       cta: "Explore Gaming",
-      icon: "card",
+      icon: "gamepad",
       url: "/gaming",
       image: "/images/lifestyle/focus-iced-drink-headphones.jpg",
       alt: "Iced AVRO drink and headphones at a gaming desk",
@@ -373,6 +373,88 @@ export function HomeScienceGrid() {
           </p>
         </div>
       </article>
+    </section>
+  )
+}
+
+export function HomeBenefitRow() {
+  const benefits = [
+    {
+      icon: "smile",
+      title: "Supports composure under pressure",
+      copy: "Helps you steady first before the moment matters.",
+    },
+    {
+      icon: "target",
+      title: "Supports clear-headed readiness",
+      copy: "Helps you feel calm, clear, and in control.",
+    },
+    {
+      icon: "waves",
+      title: "Supports calm without sedation",
+      copy: "Designed to support composure without turning you off.",
+    },
+  ] as const
+
+  return (
+    <section className="w-[min(calc(100%-72px),1250px)] mx-auto pt-[clamp(20px,3vw,32px)]">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {benefits.map((b) => (
+          <article
+            key={b.title}
+            className="flex items-start gap-4 p-5 border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]"
+          >
+            <span className="grid place-items-center w-12 h-12 shrink-0 rounded-full border border-dashed border-[#bfc3bc]">
+              <Icon name={b.icon} className="w-6 h-6 text-olive-dark" />
+            </span>
+            <div>
+              <h3 className="mb-1 text-[15px] font-extrabold leading-tight">
+                {b.title}
+              </h3>
+              <p className="m-0 text-ink/70 text-sm leading-snug">{b.copy}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+export function HomeQualityRow() {
+  const badges = [
+    { icon: "leaf", label: "Naturally Fermented", sub: "PharmaGABA®" },
+    { icon: "shield-check", label: "Quality Ingredients", sub: "You can trust" },
+    { icon: "microscope", label: "Third-Party", sub: "Tested" },
+    { icon: "sprout", label: "Vegan", sub: "Plant-based" },
+    { icon: "wheat", label: "Gluten Free", sub: "Always" },
+    { icon: "flag", label: "Made in the USA", sub: "GMP Compliant" },
+  ] as const
+
+  return (
+    <section className="w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(20px,3vw,32px)]">
+      <div className="mb-4 px-1">
+        <span className="text-olive text-xs font-black tracking-[0.12em] uppercase">
+          Quality you can understand
+        </span>
+      </div>
+      <div className="grid grid-cols-3 md:grid-cols-6 gap-0 overflow-hidden border border-line rounded-lg bg-white/88">
+        {badges.map((b, i) => (
+          <div
+            key={b.label}
+            className={`flex flex-col items-center gap-2 px-3 py-5 text-center ${
+              i > 0 ? "border-l border-line" : ""
+            } ${i >= 3 ? "border-t md:border-t-0" : ""}`}
+          >
+            <span className="grid place-items-center w-12 h-12 rounded-full border border-dashed border-[#bfc3bc]">
+              <Icon name={b.icon} className="w-6 h-6 text-olive-dark" />
+            </span>
+            <strong className="text-[12px] leading-tight">{b.label}</strong>
+            <span className="text-ink/55 text-[11px] leading-tight">
+              {b.sub}
+            </span>
+          </div>
+        ))}
+      </div>
     </section>
   )
 }
