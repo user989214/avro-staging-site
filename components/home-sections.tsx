@@ -9,7 +9,7 @@ export function HomeRefHero() {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-[0.82fr_1.18fr] items-stretch w-full max-w-[1440px] min-h-[520px] mx-auto border-b border-line bg-white">
       <div className="flex flex-col justify-center p-[clamp(42px,7vw,92px)] lg:p-[clamp(42px,7vw,92px)_clamp(24px,7vw,78px)]">
-        <h1 className="max-w-[520px] mb-5 font-sans text-[clamp(58px,8vw,94px)] font-black leading-[0.96]">
+        <h1 className="max-w-[520px] mb-5 [font-family:'Gotham',ui-sans-serif,system-ui,sans-serif] text-[clamp(58px,8vw,94px)] font-black leading-[0.96] tracking-[-0.01em]">
           Calm. Clear. Ready.
         </h1>
         <p className="max-w-[520px] text-[#272727] text-[17px] leading-[1.55]">
