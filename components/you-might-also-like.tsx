@@ -1,8 +1,9 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { formulas, type FormulaKey } from "@/lib/data"
-import { ProductCard, ProductVisual } from "@/components/product-visual"
+import { ProductCard } from "@/components/product-visual"
 import { cn } from "@/lib/utils"
 
 interface YouMightAlsoLikeProps {
@@ -73,17 +74,19 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
           className="group flex flex-col bg-white border border-line rounded-lg overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(31,29,24,0.08)]"
         >
           <div
-            className="relative flex items-end justify-center h-[220px] overflow-hidden px-4 pt-3"
+            className="relative flex items-center justify-center h-[220px] overflow-hidden"
             style={{
               background:
                 "radial-gradient(circle at 50% 70%, rgba(143,107,71,0.12), transparent 65%), linear-gradient(180deg, #ffffff, #f7f3eb)",
             }}
           >
-            <ProductVisual
-              keys={["calm", "focus", "energy"]}
-              size="small"
-              tubeScene="studio"
-              className="!min-h-0 [&_img]:!h-[180px]"
+            <Image
+              src="/images/products/avro-six-flavor-fan.png"
+              alt="AVRO variety bundle showing all six flavors fanned out on a stone slab"
+              width={640}
+              height={640}
+              className="h-full w-auto object-contain"
+              sizes="(max-width: 768px) 80vw, 320px"
             />
             <span className="absolute top-3 left-3 px-2.5 py-1 bg-olive text-white rounded-full text-[10px] font-black tracking-[0.08em] uppercase">
               Clinician Choice
