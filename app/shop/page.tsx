@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ProductVisual } from "@/components/product-visual"
+import Image from "next/image"
 import {
   Section,
   SectionHeading,
@@ -42,7 +42,16 @@ export default function ShopPage() {
             </Link>
           </div>
         </div>
-        <ProductVisual keys={["calm", "focus", "energy"]} scene="hero-stone" />
+        <div className="relative aspect-[4/5] w-full max-w-[520px] justify-self-center overflow-hidden rounded-lg border border-line shadow-[0_30px_60px_-30px_rgba(20,18,12,0.35)]">
+          <Image
+            src="/images/lifestyle/golfers-misty-tee-box.jpg"
+            alt="Golfers stepping onto a misty morning tee box, ready before the round"
+            fill
+            sizes="(min-width: 1024px) 520px, 90vw"
+            className="object-cover"
+            priority
+          />
+        </div>
       </section>
 
       <ProductCards title="Three formulas. One foundation." shopLabel="Shop" />
