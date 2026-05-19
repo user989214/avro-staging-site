@@ -119,33 +119,54 @@ export function CohortPage({ data }: { data: CohortData }) {
   return (
     <>
       {/* Hero */}
-      <section
-        className={`relative grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)] items-center w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(42px,8vw,86px)] border-b border-line ${visualBg}`}
-      >
-        <div className="max-w-[620px]">
+      {data.visual === "work" ? (
+        /* Work page: centered text-only hero, no image */
+        <section
+          className={`relative w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(52px,9vw,100px)] border-b border-line text-center ${visualBg}`}
+        >
           <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
             {data.eyebrow}
           </span>
-          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
+          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5 mx-auto max-w-[820px]">
             {data.title}
           </h1>
-          <p className="max-w-[560px] text-ink/80 text-[clamp(17px,2vw,20px)] leading-relaxed">
+          <p className="max-w-[580px] mx-auto text-ink/80 text-[clamp(17px,2vw,20px)] leading-relaxed">
             {data.copy}
           </p>
-          <CtaGroup primary={data.primary} secondary={data.secondary} />
-        </div>
-        <div className="relative grid place-items-stretch min-h-[420px] border border-line rounded-lg overflow-hidden bg-cover shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={cohortHero[data.visual]?.src}
-            alt={cohortHero[data.visual]?.alt ?? ""}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="absolute left-5.5 bottom-5.5 z-20 px-3.5 py-2.5 text-white bg-[rgba(38,50,22,0.86)] rounded-[7px] font-black">
-            {sceneLabels[data.visual as keyof typeof sceneLabels]}
+          <div className="flex justify-center mt-8">
+            <CtaGroup primary={data.primary} secondary={data.secondary} />
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        /* All other cohorts: two-column layout with lifestyle hero photo */
+        <section
+          className={`relative grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)] items-center w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(42px,8vw,86px)] border-b border-line ${visualBg}`}
+        >
+          <div className="max-w-[620px]">
+            <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
+              {data.eyebrow}
+            </span>
+            <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
+              {data.title}
+            </h1>
+            <p className="max-w-[560px] text-ink/80 text-[clamp(17px,2vw,20px)] leading-relaxed">
+              {data.copy}
+            </p>
+            <CtaGroup primary={data.primary} secondary={data.secondary} />
+          </div>
+          <div className="relative grid place-items-stretch min-h-[420px] border border-line rounded-lg overflow-hidden bg-cover shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={cohortHero[data.visual]?.src}
+              alt={cohortHero[data.visual]?.alt ?? ""}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute left-5.5 bottom-5.5 z-20 px-3.5 py-2.5 text-white bg-[rgba(38,50,22,0.86)] rounded-[7px] font-black">
+              {sceneLabels[data.visual as keyof typeof sceneLabels]}
+            </div>
+          </div>
+        </section>
+      )}
 
       <Section>
         <SectionHeading
