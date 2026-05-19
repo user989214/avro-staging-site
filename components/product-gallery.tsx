@@ -51,6 +51,8 @@ export function ProductGallery({ formula, formulaKey }: ProductGalleryProps) {
   const stick = stickImageFor(formulaKey, flavorId)
   const activeFlavorName =
     formula.flavors.find((f) => f.id === flavorId)?.name ?? formula.flavor
+  const soloTubeSrc = `/images/tubes/solo/${formulaKey}-${flavorId}.jpg`
+  const soloTubeAlt = `AVRO ${formula.short} ${activeFlavorName} display tube`
 
   const isLifestyle = (id: ThumbKind): id is TubeScene =>
     id === "tech" || id === "golf" || id === "social" || id === "gaming"
