@@ -27,16 +27,16 @@ export function HomeRefHero() {
         </div>
       </div>
       <div
-        className="relative min-h-[520px] overflow-hidden isolate"
-        aria-label="AVRO social ritual scene"
+        className="relative min-h-[520px] overflow-hidden isolate bg-[linear-gradient(135deg,#f4efe5_0%,#ece6d6_100%)]"
+        aria-label="AVRO Calm, Focus, and Energy stick packs"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/lifestyle/kitchen-trio-pink-cocktails.jpg"
-          alt="Three pink alcohol-free AVRO cocktails styled on a kitchen counter"
-          className="absolute inset-0 w-full h-full object-cover"
+          src="/images/products/avro-trio-original-flavors.png"
+          alt="AVRO Focus, Calm, and Energy stick packs standing on a sandstone slab"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white/45 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-transparent" />
       </div>
     </section>
   )

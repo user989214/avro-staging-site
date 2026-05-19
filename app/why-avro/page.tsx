@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import {
   Section,
   SectionHeading,
@@ -32,6 +33,19 @@ export default function WhyPage() {
           <div className="flex flex-wrap justify-center">
             <CtaGroup primary="Find Your Formula" secondary="Shop AVRO" />
           </div>
+        </div>
+      </section>
+
+      {/* Featured product banner */}
+      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] pt-[clamp(40px,6vw,72px)]">
+        <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden rounded-lg border border-line shadow-[0_30px_60px_-30px_rgba(20,18,12,0.35)]">
+          <Image
+            src="/images/products/avro-trio-alt-flavors.png"
+            alt="AVRO Red Dragon Fruit Focus, Blackberry Jasmine Calm, and Fuji Apple Energy stick packs on stone"
+            fill
+            sizes="(min-width: 1440px) 1320px, 92vw"
+            className="object-cover object-center"
+          />
         </div>
       </section>
 

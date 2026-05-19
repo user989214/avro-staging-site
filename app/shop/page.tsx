@@ -41,8 +41,8 @@ export default function ShopPage() {
         </div>
         <div className="relative aspect-[3/2] w-full max-w-[620px] justify-self-center overflow-hidden rounded-lg border border-line shadow-[0_30px_60px_-30px_rgba(20,18,12,0.35)]">
           <Image
-            src="/images/lifestyle/avro-trio-stone-hero.png"
-            alt="AVRO Calm, Focus, and Energy tubes arranged on a stone slab with soft botanicals"
+            src="/images/products/avro-six-flavor-fan.png"
+            alt="AVRO's six flavors fanned across a sandstone slab — Pomegranate Raspberry, Red Dragon Fruit, Blackberry Jasmine, Blueberry Acai, Fuji Apple, and Orange Tangerine"
             fill
             sizes="(min-width: 1024px) 620px, 90vw"
             className="object-cover"
