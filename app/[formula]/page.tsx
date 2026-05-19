@@ -9,6 +9,15 @@ import { FinalCta } from "@/components/sections"
 
 const validFormulas = ["calm", "focus", "energy"] as const
 
+const flavorImageMap: Record<string, string> = {
+  "Blueberry Acai": "/images/ingredients/blueberry-acai-2.jpg",
+  "Blackberry Jasmine": "/images/ingredients/blackberry-jasmine-2.jpg",
+  "Pomegranate Raspberry": "/images/ingredients/pomegranate-raspberry-2.jpg",
+  "Red Dragon Fruit": "/images/ingredients/red-dragon-fruit-2.jpg",
+  "Fuji Apple": "/images/ingredients/fuji-apple-2.jpg",
+  "Orange Tangerine": "/images/ingredients/orange-tangerine.jpg",
+}
+
 const benefits: Record<FormulaKey, [string, IconName][]> = {
   calm: [
     ["Supports composure under pressure", "shield"],
@@ -203,6 +212,8 @@ export default async function ProductPage({
               dose: "200 mg",
               copy: "Naturally fermented. AVRO's calm-first foundation.",
               icon: "leaf" as IconName,
+              image: "/images/ingredients/pharmagaba-2.jpg",
+              alt: "Naturally fermented PharmaGABA powder",
             },
             {
               title: item.addition,
@@ -215,43 +226,76 @@ export default async function ProductPage({
                     ? "Selected to support clarity and focus."
                     : "Supports steady alertness with calm built in.",
               icon: "flask" as IconName,
+              image:
+                key === "focus"
+                  ? "/images/ingredients/cognigrape-2.jpg"
+                  : key === "energy"
+                    ? "/images/ingredients/natural-caffeine-2.jpg"
+                    : null,
+              alt:
+                key === "focus"
+                  ? "Cognigrape red grape cluster"
+                  : key === "energy"
+                    ? "Roasted coffee beans, source of natural caffeine"
+                    : "",
             },
             {
               title: "Prebiotic Fiber",
               dose: "PHGG + Acacia",
               copy: "Supports gut comfort. Part of AVRO's daily formula.",
               icon: "shield" as IconName,
+              image: "/images/ingredients/prebiotic-fiber-2.jpg",
+              alt: "Prebiotic fiber blend powder",
             },
             {
               title: "Stevia",
               dose: "≤ 2%",
               copy: "Used in a small amount for a clean, balanced finish.",
               icon: "star" as IconName,
+              image: "/images/ingredients/stevia-2.jpg",
+              alt: "Fresh stevia leaves",
             },
             {
               title: "Natural Flavor",
               dose: item.flavor,
               copy: "Bright, clean flavor without artificial sweeteners.",
               icon: "cup" as IconName,
+              image: flavorImageMap[item.flavor] ?? null,
+              alt: `${item.flavor} natural flavor`,
             },
           ].map((ing, i) => (
             <article
               key={ing.title}
               className={
-                "flex flex-col p-7 bg-white " +
+                "flex flex-col bg-white " +
                 (i > 0
                   ? "border-t sm:border-t-0 sm:border-l border-line"
                   : "")
               }
             >
-              <span className="grid place-items-center w-12 h-12 mb-5 rounded-full bg-soft">
-                <Icon name={ing.icon} className="w-6 h-6 text-olive" />
-              </span>
-              <h3 className="font-black text-base mb-1">{ing.title}</h3>
-              <span className="text-[11px] font-black tracking-[0.1em] uppercase text-olive mb-3">
-                {ing.dose}
-              </span>
-              <p className="text-sm text-ink/70 leading-relaxed">{ing.copy}</p>
+              {ing.image ? (
+                <div className="relative w-full aspect-square bg-soft/60 border-b border-line overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={ing.image}
+                    alt={ing.alt}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
+              ) : (
+                <div className="w-full aspect-square bg-soft/60 border-b border-line grid place-items-center">
+                  <span className="grid place-items-center w-16 h-16 rounded-full bg-white border border-line">
+                    <Icon name={ing.icon} className="w-8 h-8 text-olive" />
+                  </span>
+                </div>
+              )}
+              <div className="flex flex-col p-7">
+                <h3 className="font-black text-base mb-1">{ing.title}</h3>
+                <span className="text-[11px] font-black tracking-[0.1em] uppercase text-olive mb-3">
+                  {ing.dose}
+                </span>
+                <p className="text-sm text-ink/70 leading-relaxed">{ing.copy}</p>
+              </div>
             </article>
           ))}
         </div>
