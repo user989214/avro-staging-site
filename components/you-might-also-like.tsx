@@ -38,14 +38,14 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
               className="group flex flex-col bg-white border border-line rounded-lg overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(31,29,24,0.08)]"
             >
               <div
-                className="flex items-center justify-center h-[220px] overflow-hidden"
+                className="flex items-end justify-center h-[260px] overflow-hidden pt-3"
                 style={{
                   background: `radial-gradient(circle at 50% 60%, ${item.accent}1f, transparent 60%), #ffffff`,
                 }}
               >
                 <ProductCard
                   formulaKey={key}
-                  className="!h-[200px]"
+                  className="!h-[250px]"
                 />
               </div>
               <div className="flex flex-col gap-2 p-5 border-t border-line">
