@@ -227,17 +227,21 @@ export default async function ProductPage({
                     : "Supports steady alertness with calm built in.",
               icon: "flask" as IconName,
               image:
-                key === "focus"
-                  ? "/images/ingredients/cognigrape-2.jpg"
-                  : key === "energy"
-                    ? "/images/ingredients/natural-caffeine-2.jpg"
-                    : null,
+                key === "calm"
+                  ? "/images/ingredients/magnesium-bisglycinate-2.jpg"
+                  : key === "focus"
+                    ? "/images/ingredients/cognigrape-2.jpg"
+                    : key === "energy"
+                      ? "/images/ingredients/natural-caffeine-2.jpg"
+                      : null,
               alt:
-                key === "focus"
-                  ? "Cognigrape red grape cluster"
-                  : key === "energy"
-                    ? "Roasted coffee beans, source of natural caffeine"
-                    : "",
+                key === "calm"
+                  ? "Magnesium bisglycinate powder"
+                  : key === "focus"
+                    ? "Cognigrape red grape cluster"
+                    : key === "energy"
+                      ? "Roasted coffee beans, source of natural caffeine"
+                      : "",
             },
             {
               title: "Prebiotic Fiber",
