@@ -157,14 +157,27 @@ export function ProductGallery({ formula, formulaKey }: ProductGalleryProps) {
   }
 
   const factsRows: [string, string][] = [
-    ["PharmaGABA", "200 mg"],
+    ["Calories", "10"],
+    ["Total Carbohydrate", formulaKey === "calm" ? "2 g" : "3 g"],
+    ["Total Sugars", "0 g"],
+    ...(formulaKey === "calm"
+      ? ([["Magnesium (as magnesium bisglycinate)", "100 mg"]] as [string, string][])
+      : []),
+    ["Sodium (as sodium bicarbonate)", "80 mg"],
+    ["Potassium (as potassium bicarbonate)", "100 mg"],
+    ["PharmaGABA® (GABA)", "200 mg"],
     [
       formula.addition,
-      formulaKey === "calm" ? "550 mg" : formulaKey === "focus" ? "250 mg" : "120 mg",
+      formulaKey === "calm" ? "850 mg" : formulaKey === "focus" ? "250 mg" : "120 mg",
     ],
-    ["Prebiotic Blend", "500 mg"],
-    ["Natural Flavor", activeFlavorName],
   ]
+
+  const otherIngredients =
+    formulaKey === "calm"
+      ? "Soluble guar fiber, citric acid, modified corn starch, contains 2% or less of acacia fiber, stevia leaf extract, natural flavor, vegetable juice color, spirulina color, silica."
+      : formulaKey === "energy"
+        ? "Soluble guar fiber, citric acid, modified corn starch, natural flavor, contains 2% or less of acacia fiber, beta carotene color, stevia leaf extract, vegetable juice color, spirulina color, silica."
+        : "Soluble guar fiber, citric acid, modified corn starch, natural flavor, contains 2% or less of acacia fiber, stevia leaf extract, silica."
 
   return (
     <div className="flex flex-col gap-3 lg:gap-4">
@@ -252,9 +265,11 @@ export function ProductGallery({ formula, formulaKey }: ProductGalleryProps) {
                   ))}
                 </div>
                 <p className="mt-3 text-[10px] text-ink/55 leading-snug">
-                  10 sticks per canister. Net wt 1.76 oz (50 g). Other
-                  ingredients: prebiotic fiber blend, citric acid, natural
-                  flavors, stevia leaf extract.
+                  10 stick packets per box. Net wt 1.76 oz (50 g). Mix 1 packet into 12 fl oz of water; up to 3 times per day.
+                </p>
+                <p className="mt-2 text-[10px] text-ink/55 leading-snug">
+                  <span className="font-bold">Other ingredients: </span>
+                  {otherIngredients}
                 </p>
               </div>
             </div>

@@ -218,13 +218,13 @@ export default async function ProductPage({
             {
               title: item.addition,
               dose:
-                key === "calm" ? "550 mg" : key === "focus" ? "250 mg" : "120 mg",
+                key === "calm" ? "850 mg" : key === "focus" ? "250 mg" : "120 mg",
               copy:
                 key === "calm"
-                  ? "Supports normal muscle and nervous system function."
+                  ? "Yields 100 mg of active magnesium. Supports muscle and nervous system function."
                   : key === "focus"
-                    ? "Selected to support clarity and focus."
-                    : "Supports steady alertness with calm built in.",
+                    ? "Grape (Vitis vinifera) fruit extract selected to support clarity and focus."
+                    : "From Coffea arabica and Coffea canephora bean extract. Steady alertness with calm built in.",
               icon: "flask" as IconName,
               image:
                 key === "calm"
