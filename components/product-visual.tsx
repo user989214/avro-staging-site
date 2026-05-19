@@ -1,15 +1,16 @@
 import { formulas, type FormulaKey, type Flavor } from "@/lib/data"
 import { cn } from "@/lib/utils"
 
-export type TubeScene = "tech" | "golf" | "social" | "gaming"
+export type TubeScene = "studio" | "tech" | "golf" | "social" | "gaming"
 
-export const TUBE_SCENES: TubeScene[] = ["tech", "golf", "social", "gaming"]
+export const TUBE_SCENES: TubeScene[] = ["studio", "tech", "golf", "social", "gaming"]
 
 export const TUBE_SCENE_LABELS: Record<TubeScene, string> = {
-  tech: "Studio",
+  studio: "Studio",
+  tech: "At the desk",
   golf: "On the course",
   social: "At the bar",
-  gaming: "At the desk",
+  gaming: "Late-night setup",
 }
 
 function flavorSlug(flavorName: string) {
@@ -38,8 +39,15 @@ export function tubeImageFor(
 ) {
   const formula = formulas[key]
   const flavor = resolveFlavor(key, flavorIdOrName)
+  const slug = flavorSlug(flavor.name)
+  // The "studio" scene uses the clean white-background packshots and is
+  // available for every flavor. All other scenes are cohort lifestyle PNGs.
+  const src =
+    scene === "studio"
+      ? `/images/tubes/studio/${key}-${slug}.png`
+      : `/images/lifestyle/tube-${scene}-${key}-${slug}.png`
   return {
-    src: `/images/lifestyle/tube-${scene}-${key}-${flavorSlug(flavor.name)}.png`,
+    src,
     alt: `AVRO ${formula.short} ${flavor.name} display tube — ${TUBE_SCENE_LABELS[scene]}`,
     sceneLabel: TUBE_SCENE_LABELS[scene],
     flavor,
@@ -77,7 +85,7 @@ interface ProductVisualProps {
   scene?: "stone" | "hero-stone" | "bundle" | "social" | FormulaKey
   size?: "small" | "medium" | "large"
   className?: string
-  /** Cohort scene for the tube renders. Defaults to "tech" (studio). */
+  /** Cohort scene for the tube renders. Defaults to "studio" (white-background packshot). */
   tubeScene?: TubeScene
   /** Optional flavor override per formula key. */
   flavorIds?: Partial<Record<FormulaKey, string>>
@@ -88,7 +96,7 @@ export function ProductVisual({
   scene = "stone",
   size = "large",
   className,
-  tubeScene = "tech",
+  tubeScene = "studio",
   flavorIds,
 }: ProductVisualProps) {
   const stageSizeClasses = {
@@ -154,7 +162,7 @@ interface ProductCardProps {
 export function ProductCard({
   formulaKey,
   flavorId,
-  tubeScene = "tech",
+  tubeScene = "studio",
   className,
 }: ProductCardProps) {
   const { src, alt } = tubeImageFor(tubeScene, formulaKey, flavorId)

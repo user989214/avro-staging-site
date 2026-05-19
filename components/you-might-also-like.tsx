@@ -9,12 +9,6 @@ interface YouMightAlsoLikeProps {
   currentKey: FormulaKey
 }
 
-const recommendedScene: Record<FormulaKey, "social" | "tech" | "golf" | "gaming"> = {
-  calm: "social",
-  focus: "tech",
-  energy: "golf",
-}
-
 export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
   const others = (Object.keys(formulas) as FormulaKey[]).filter((k) => k !== currentKey)
 
@@ -51,7 +45,6 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
               >
                 <ProductCard
                   formulaKey={key}
-                  tubeScene={recommendedScene[key]}
                   className="!h-[200px]"
                 />
               </div>
@@ -89,7 +82,7 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
             <ProductVisual
               keys={["calm", "focus", "energy"]}
               size="small"
-              tubeScene="tech"
+              tubeScene="studio"
               className="!min-h-0 [&_img]:!h-[180px]"
             />
             <span className="absolute top-3 left-3 px-2.5 py-1 bg-olive text-white rounded-full text-[10px] font-black tracking-[0.08em] uppercase">

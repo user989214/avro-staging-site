@@ -143,17 +143,11 @@ export function HomeProductStrip() {
     energy: "Natural Caffeine",
   }
 
-  // Pair each formula with the cohort scene where it shines
-  const stripScene: Record<FormulaKey, "social" | "tech" | "golf"> = {
-    calm: "social",
-    focus: "tech",
-    energy: "golf",
-  }
-
-  // Show variety across the row by rotating the second flavor of each formula
+  // Front-page strip uses the clean white-background studio packshots.
+  // Variety comes from flavor rotation (one signature flavor per formula).
   const stripFlavor: Partial<Record<FormulaKey, string>> = {
     calm: "Blueberry Acai",
-    focus: "Red Dragon Fruit",
+    focus: "Pomegranate Raspberry",
     energy: "Orange Tangerine",
   }
 
@@ -170,9 +164,7 @@ export function HomeProductStrip() {
               <div className="min-h-[310px] p-6 pb-8">
                 <ProductVisual
                   keys={[key]}
-                  scene={key}
                   size="medium"
-                  tubeScene={stripScene[key]}
                   flavorIds={{ [key]: stripFlavor[key] } as Partial<Record<FormulaKey, string>>}
                 />
               </div>

@@ -28,7 +28,7 @@ interface Thumb {
 
 export function ProductGallery({ formula, formulaKey }: ProductGalleryProps) {
   const [flavorId, setFlavorId] = useState<string>(formula.flavors[0].id)
-  const [activeId, setActiveId] = useState<string>("tube-tech")
+  const [activeId, setActiveId] = useState<string>("tube-studio")
 
   const tint = `${formula.color}14`
   const accentTint = `${formula.accent}24`
