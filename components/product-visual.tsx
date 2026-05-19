@@ -100,15 +100,15 @@ export function ProductVisual({
   flavorIds,
 }: ProductVisualProps) {
   const stageSizeClasses = {
-    small: "min-h-[240px] p-0",
-    medium: "min-h-[300px] p-4 pb-6",
-    large: "min-h-[360px] px-6 pt-10 pb-10",
+    small: "min-h-[300px] p-0",
+    medium: "min-h-[380px] p-4 pb-6",
+    large: "min-h-[460px] px-6 pt-10 pb-10",
   }
 
   const tubeSizeClasses = {
-    small: "h-[240px] w-auto",
-    medium: "h-[320px] w-auto",
-    large: "h-[clamp(300px,38vw,480px)] w-auto",
+    small: "h-[300px] w-auto",
+    medium: "h-[400px] w-auto",
+    large: "h-[clamp(380px,44vw,560px)] w-auto",
   }
 
   return (
@@ -172,7 +172,7 @@ export function ProductCard({
       src={src}
       alt={alt}
       className={cn(
-        "h-[300px] w-auto object-contain",
+        "h-[380px] w-auto object-contain",
         className,
       )}
     />

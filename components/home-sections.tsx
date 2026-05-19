@@ -27,16 +27,16 @@ export function HomeRefHero() {
         </div>
       </div>
       <div
-        className="relative min-h-[520px] overflow-hidden isolate bg-[linear-gradient(135deg,#f4efe5_0%,#ece6d6_100%)]"
-        aria-label="AVRO Calm, Focus, and Energy stick packs"
+        className="relative min-h-[520px] overflow-hidden isolate"
+        aria-label="AVRO social ritual scene"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/products/avro-trio-original-flavors.png"
-          alt="AVRO Focus, Calm, and Energy stick packs standing on a sandstone slab"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          src="/images/lifestyle/kitchen-trio-pink-cocktails.jpg"
+          alt="Three pink alcohol-free AVRO cocktails styled on a kitchen counter"
+          className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/45 via-transparent to-transparent" />
       </div>
     </section>
   )
@@ -159,9 +159,9 @@ export function HomeProductStrip() {
             <Link
               key={key}
               href={`/${key}`}
-              className={`grid grid-rows-[1fr_auto] min-h-[360px] transition-all hover:bg-[#fbfaf6] ${i < 2 ? "border-r border-line" : ""}`}
+              className={`grid grid-rows-[1fr_auto] min-h-[440px] transition-all hover:bg-[#fbfaf6] ${i < 2 ? "border-r border-line" : ""}`}
             >
-              <div className="min-h-[310px] p-6 pb-8">
+              <div className="min-h-[390px] p-6 pb-8">
                 <ProductVisual
                   keys={[key]}
                   size="medium"

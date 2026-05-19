@@ -1,4 +1,3 @@
-import Image from "next/image"
 import {
   Section,
   SectionHeading,
@@ -48,19 +47,6 @@ export default function SciencePage() {
               Transparent Standards
             </span>
           </div>
-        </div>
-      </section>
-
-      {/* Featured product banner — full kit */}
-      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] pt-[clamp(40px,6vw,72px)]">
-        <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden rounded-lg border border-line shadow-[0_30px_60px_-30px_rgba(20,18,12,0.35)]">
-          <Image
-            src="/images/products/avro-canisters-trio.png"
-            alt="AVRO Calm, Focus, and Energy canisters with stick packs displayed on a sandstone slab"
-            fill
-            sizes="(min-width: 1440px) 1320px, 92vw"
-            className="object-cover object-center"
-          />
         </div>
       </section>
 
