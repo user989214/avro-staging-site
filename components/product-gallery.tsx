@@ -4,6 +4,7 @@ import { useState } from "react"
 import {
   tubeImageFor,
   stickImageFor,
+  soloTubeImageFor,
   TUBE_SCENE_LABELS,
   type TubeScene,
 } from "@/components/product-visual"
@@ -48,6 +49,7 @@ export function ProductGallery({ formula, formulaKey }: ProductGalleryProps) {
   const [activeId, setActiveId] = useState<ThumbKind>("studio")
 
   const studio = tubeImageFor("studio", formulaKey, flavorId)
+  const soloTube = soloTubeImageFor(formulaKey, flavorId)
   const stick = stickImageFor(formulaKey, flavorId)
   const activeFlavorName =
     formula.flavors.find((f) => f.id === flavorId)?.name ?? formula.flavor
@@ -72,15 +74,14 @@ export function ProductGallery({ formula, formulaKey }: ProductGalleryProps) {
     }
 
     if (activeId === "tube") {
-      // Solo display tube — same studio packshot, cropped to canister side.
+      // Solo display tube — the canister by itself, on white.
       return (
-        <div className="relative w-full h-full bg-white overflow-hidden">
+        <div className="relative flex items-center justify-center w-full h-full bg-white overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={studio.src}
-            alt={`AVRO ${formula.short} ${activeFlavorName} display tube`}
-            className="absolute top-1/2 left-1/2 max-w-none h-[150%] w-auto object-contain"
-            style={{ transform: "translate(-62%, -50%)" }}
+            src={soloTube.src}
+            alt={soloTube.alt}
+            className="w-full h-full object-contain"
           />
         </div>
       )
@@ -128,10 +129,9 @@ export function ProductGallery({ formula, formulaKey }: ProductGalleryProps) {
       return (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={studio.src}
+          src={soloTube.src}
           alt=""
-          className="absolute top-1/2 left-1/2 max-w-none h-[150%] w-auto object-contain"
-          style={{ transform: "translate(-62%, -50%)" }}
+          className="h-full w-full object-contain"
         />
       )
     }

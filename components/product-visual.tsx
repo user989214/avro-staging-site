@@ -80,6 +80,21 @@ export function stickImageFor(key: FormulaKey, flavorIdOrName?: string) {
   }
 }
 
+/**
+ * Solo display tube render — the canister by itself with sticks inside,
+ * on a clean white background. Used on the PDP gallery as the dedicated
+ * "Display Tube" view.
+ */
+export function soloTubeImageFor(key: FormulaKey, flavorIdOrName?: string) {
+  const formula = formulas[key]
+  const flavor = resolveFlavor(key, flavorIdOrName)
+  return {
+    src: `/images/tubes/solo/${key}-${flavorSlug(flavor.name)}.jpg`,
+    alt: `AVRO ${formula.short} ${flavor.name} display tube`,
+    flavor,
+  }
+}
+
 interface ProductVisualProps {
   keys?: FormulaKey[]
   scene?: "stone" | "hero-stone" | "bundle" | "social" | FormulaKey
