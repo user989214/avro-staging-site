@@ -481,26 +481,26 @@ export function HomeStoryStrip() {
             </Link>
           </div>
         </div>
-        {/* Clean two-image split. Both photos share a monochrome black-and-white
-            treatment so the halves read as one cohesive editorial pairing. */}
-        <div className="relative grid grid-cols-2 min-h-[300px] lg:min-h-[420px] bg-ink">
-          {/* Left: fermentation, contained so the full vessel is visible */}
-          <div className="relative overflow-hidden bg-ink">
+        {/* Asymmetric two-image split. Founders get the wider panel so both
+            Keigo and Peter fit naturally without cropping; fermentation takes
+            the narrower left panel. Both photos fill their panels and share a
+            unified grayscale treatment. */}
+        <div className="relative grid grid-cols-[38%_62%] min-h-[320px] lg:min-h-[460px] bg-ink">
+          <div className="relative overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/science/fermentation-lab.jpg"
               alt="Stainless steel fermentation vessel cultivating naturally fermented PharmaGABA"
-              className="absolute inset-0 w-full h-full object-contain object-center"
+              className="absolute inset-0 w-full h-full object-cover object-center"
               style={{ filter: "grayscale(1) contrast(1.05) brightness(0.98)" }}
             />
           </div>
-          {/* Right: founders, contained so both Keigo and Peter are fully visible */}
-          <div className="relative overflow-hidden bg-ink">
+          <div className="relative overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/team/founders-keigo-peter.jpg"
               alt="AVRO co-founders Keigo Sugawara and Peter van Stolk"
-              className="absolute inset-0 w-full h-full object-contain object-center"
+              className="absolute inset-0 w-full h-full object-cover object-center"
               style={{ filter: "grayscale(1) contrast(1.05) brightness(0.98)" }}
             />
           </div>
