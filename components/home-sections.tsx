@@ -380,15 +380,15 @@ export function HomeScienceGrid() {
 export function HomeStoryStrip() {
   return (
     <section className="w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
-      <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1fr_1fr] gap-0 overflow-hidden border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
-        <div className="p-8">
+      <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-0 overflow-hidden border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
+        <div className="p-8 lg:p-10 flex flex-col justify-center">
           <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08] mb-3">
             Science-backed. Founder-driven.
           </h2>
-          <p className="text-ink/75 leading-relaxed">
-            AVRO was built by people who wanted a better option before the
-            moments that matter. Every formula is backed by research and
-            designed for real routines.
+          <p className="text-ink/75 leading-relaxed max-w-[52ch]">
+            AVRO was built by Keigo Sugawara and Peter van Stolk for people who
+            wanted a better option before the moments that matter. Every
+            formula is backed by research and designed for real routines.
           </p>
           <div className="flex gap-3 mt-6">
             <Link href="/why-avro" className="btn-secondary text-sm">
@@ -399,19 +399,11 @@ export function HomeStoryStrip() {
             </Link>
           </div>
         </div>
-        <div className="relative min-h-[220px] overflow-hidden">
+        <div className="relative min-h-[260px] lg:min-h-[360px] overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/lifestyle/journal-coffee-window.jpg"
-            alt="Open journal and coffee at a window-lit desk"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        </div>
-        <div className="relative min-h-[220px] overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/lifestyle/golf-cart-gloves-tee.jpg"
-            alt="Golf cart with gloves and tee laid out at the first tee"
+            src="/images/team/founders-keigo-peter.jpg"
+            alt="AVRO co-founders Keigo Sugawara and Peter van Stolk back-to-back against a sunlit wall"
             className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
