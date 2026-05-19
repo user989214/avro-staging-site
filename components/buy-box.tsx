@@ -65,7 +65,7 @@ export function BuyBox({ formula, formulaKey }: BuyBoxProps) {
           </h2>
           <span className="text-xs text-ink/60 italic">{activeFlavor.tagline}</span>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2.5">
           {formula.flavors.map((flavor) => {
             const selected = flavor.id === flavorId
             const { src, alt } = stickImageFor(formulaKey, flavor.id)
@@ -76,12 +76,14 @@ export function BuyBox({ formula, formulaKey }: BuyBoxProps) {
                 onClick={() => setFlavorId(flavor.id)}
                 aria-pressed={selected}
                 className={cn(
-                  "relative flex flex-col items-stretch gap-0 rounded-lg border-2 bg-white overflow-hidden text-left transition-all",
-                  selected ? "border-olive" : "border-line hover:border-ink/30"
+                  "relative flex items-center gap-2 rounded-lg border-2 bg-white overflow-hidden text-left transition-all min-h-[64px]",
+                  selected
+                    ? "border-olive ring-1 ring-olive/30"
+                    : "border-line hover:border-ink/30"
                 )}
               >
-                <div
-                  className="flex items-center justify-center h-[112px] overflow-hidden"
+                <span
+                  className="flex items-center justify-center w-14 h-full self-stretch shrink-0 py-1.5"
                   style={{
                     background: `linear-gradient(135deg, ${formula.color}10, ${formula.accent}1f)`,
                   }}
@@ -90,13 +92,13 @@ export function BuyBox({ formula, formulaKey }: BuyBoxProps) {
                   <img
                     src={src}
                     alt={alt}
-                    className="h-[96px] w-auto object-contain"
+                    className="h-12 w-auto object-contain"
                   />
-                </div>
+                </span>
                 <span
                   className={cn(
-                    "px-3 py-2.5 text-xs font-extrabold text-center",
-                    selected ? "bg-olive text-white" : "bg-white text-ink"
+                    "flex-1 pr-3 py-2 text-xs font-extrabold leading-tight",
+                    selected ? "text-olive-dark" : "text-ink"
                   )}
                 >
                   {flavor.name}
