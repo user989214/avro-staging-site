@@ -462,12 +462,13 @@ export function HomeQualityRow() {
 export function HomeStoryStrip() {
   return (
     <section className="w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
-      <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-0 overflow-hidden border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
-        <div className="p-8 lg:p-10 flex flex-col justify-center">
+      <div className="overflow-hidden border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
+        {/* Top: copy block, full width */}
+        <div className="p-8 lg:p-12 flex flex-col items-start max-w-[800px]">
           <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08] mb-3">
             Science-backed. Founder-driven.
           </h2>
-          <p className="text-ink/75 leading-relaxed max-w-[52ch]">
+          <p className="text-ink/75 leading-relaxed max-w-[60ch]">
             AVRO was built by Keigo Sugawara and Peter van Stolk for people who
             wanted a better option before the moments that matter. Every
             formula is backed by research and designed for real routines.
@@ -481,12 +482,12 @@ export function HomeStoryStrip() {
             </Link>
           </div>
         </div>
-        {/* Asymmetric two-image split. Founders get the wider panel so both
-            Keigo and Peter fit naturally without cropping; fermentation takes
-            the narrower left panel. Both photos fill their panels and share a
-            unified grayscale treatment. */}
-        <div className="relative grid grid-cols-[38%_62%] min-h-[320px] lg:min-h-[460px] bg-ink">
-          <div className="relative overflow-hidden">
+        {/* Bottom: full-width two-image split.
+            On mobile the images stack (fermentation on top, founders below).
+            On md+ they sit side-by-side with founders getting the wider panel
+            so both Keigo and Peter fit naturally without cropping. */}
+        <div className="relative grid grid-cols-1 md:grid-cols-[38%_62%] min-h-[260px] md:min-h-[360px] lg:min-h-[440px] bg-ink">
+          <div className="relative overflow-hidden min-h-[220px] md:min-h-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/science/fermentation-lab.jpg"
@@ -495,7 +496,7 @@ export function HomeStoryStrip() {
               style={{ filter: "grayscale(1) contrast(1.05) brightness(0.98)" }}
             />
           </div>
-          <div className="relative overflow-hidden">
+          <div className="relative overflow-hidden min-h-[260px] md:min-h-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/team/founders-keigo-peter.jpg"
