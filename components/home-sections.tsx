@@ -51,10 +51,10 @@ export function HomeProofBar() {
       {sharedProof.map((item, i) => (
         <div
           key={item.label}
-          className={`grid gap-1 p-4 text-center ${i > 0 ? "border-l border-line" : ""}`}
+          className={`grid gap-1 px-2 py-3 sm:p-4 text-center ${i > 0 ? "border-l border-line" : ""}`}
         >
-          <strong className="text-[22px]">{item.stat}</strong>
-          <span className="text-ink/60 text-[13px]">{item.label}</span>
+          <strong className="text-[16px] sm:text-[22px] leading-tight">{item.stat}</strong>
+          <span className="text-ink/60 text-[10px] sm:text-[13px] leading-tight text-balance">{item.label}</span>
         </div>
       ))}
     </section>
@@ -232,14 +232,14 @@ export function HomeMomentGrid() {
           Built for pressure sensitive moments.
         </h2>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {moments.map((m) => (
           <Link
             key={m.title}
             href={m.url}
             className="group flex flex-col gap-2.5 pb-5 overflow-hidden border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(31,29,24,0.08)]"
           >
-            <div className="relative h-[160px] overflow-hidden">
+            <div className="relative h-[180px] sm:h-[160px] overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={m.image}
@@ -254,7 +254,7 @@ export function HomeMomentGrid() {
             <p className="mx-5 mb-0 text-[#222] text-sm leading-[1.35]">
               {m.copy}
             </p>
-            <span className="inline-flex justify-center w-fit min-w-[134px] mx-5 mt-1 px-3.5 py-2 border border-[#222] rounded-[5px] text-xs font-extrabold">
+            <span className="inline-flex justify-center w-fit mx-5 mt-1 px-4 py-2 border border-[#222] rounded-full text-xs font-extrabold whitespace-nowrap">
               {m.cta}
             </span>
           </Link>
