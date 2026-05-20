@@ -23,6 +23,29 @@ const founders = [
   },
 ]
 
+const team = [
+  {
+    name: "Keigo Sugawara",
+    role: "Co-Founder & CEO",
+    image: "/images/team/keigo.jpg",
+  },
+  {
+    name: "Peter van Stolk",
+    role: "Co-Founder & CMO",
+    image: "/images/team/peter.jpg",
+  },
+  {
+    name: "Holly",
+    role: "Team",
+    image: "/images/team/holly.jpg",
+  },
+  {
+    name: "Marianne",
+    role: "Team",
+    image: "/images/team/marianne.jpg",
+  },
+]
+
 const values = [
   {
     title: "State before stimulation",
@@ -168,6 +191,33 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* Full team portraits */}
+      <Section className="bg-cream/40">
+        <SectionHeading
+          eyebrow="The Team"
+          title="The people behind AVRO."
+        />
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-[1100px] mx-auto">
+          {team.map((member) => (
+            <div key={member.name} className="flex flex-col gap-3">
+              <div className="relative aspect-square rounded-lg overflow-hidden border border-line bg-soft">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 25vw, 50vw"
+                  className="object-cover object-top"
+                />
+              </div>
+              <div>
+                <p className="font-black text-sm leading-tight">{member.name}</p>
+                <p className="text-ink/55 text-xs mt-0.5 font-medium tracking-wide uppercase">{member.role}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
 
       <FinalCta />
     </>
