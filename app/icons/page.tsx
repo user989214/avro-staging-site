@@ -93,10 +93,28 @@ export default function IconSheetPage() {
             <code className="px-1.5 py-0.5 bg-soft rounded text-[13px]">
               {"<Icon name=\"…\" />"}
             </code>{" "}
-            component. Click <strong>Copy SVG</strong> on any icon and paste
-            directly into Figma — the markup pastes as a vector layer.
+            component. The complete sheet ships with the project at{" "}
+            <code className="px-1.5 py-0.5 bg-soft rounded text-[13px]">
+              public/avro-icon-sheet.svg
+            </code>{" "}
+            — drag it straight into Figma as editable vectors.
           </p>
-          <div className="mt-6">
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="/avro-icon-sheet.svg"
+              download
+              className="inline-flex items-center gap-2 px-5 py-3 bg-ink text-white text-sm font-black rounded-full transition-colors hover:bg-olive-dark"
+            >
+              Download icon sheet (SVG)
+            </a>
+            <a
+              href="/avro-icon-sheet.svg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-soft text-ink text-sm font-black rounded-full transition-colors hover:bg-line"
+            >
+              Open full sheet
+            </a>
             <CopyAllIcons />
           </div>
       </header>
