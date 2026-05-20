@@ -7,7 +7,7 @@ import { Icon } from "@/components/icons"
 
 export function HomeRefHero() {
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-[0.82fr_1.18fr] items-stretch w-full max-w-[1440px] min-h-[520px] mx-auto border-b border-line bg-white">
+    <section className="grid grid-cols-1 lg:grid-cols-[0.82fr_1.18fr] items-stretch w-full max-w-[1440px] mx-auto border-b border-line bg-white">
       <div className="flex flex-col justify-center px-[clamp(20px,7vw,92px)] py-[clamp(36px,7vw,92px)]">
         <h1 className="font-sans max-w-[520px] mb-5 text-[clamp(48px,8vw,94px)] font-black leading-[0.96] tracking-[-0.01em]">
           Calm. Clear. Ready.
@@ -27,14 +27,14 @@ export function HomeRefHero() {
         </div>
       </div>
       <div
-        className="relative min-h-[520px] overflow-hidden isolate"
+        className="relative h-[360px] sm:h-[460px] lg:h-auto lg:min-h-[520px] overflow-hidden isolate"
         aria-label="AVRO social ritual scene"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/lifestyle/kitchen-trio-pink-cocktails.jpg"
           alt="AVRO Energy Fuji Apple stick packet next to a glass of mixed drink at a sunset rooftop dinner"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-center lg:object-[60%_center]"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white/45 via-transparent to-transparent" />
       </div>
@@ -310,7 +310,8 @@ export function HomeScienceGrid() {
         <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08] mb-3">
           Every formula starts calm first.
         </h2>
-        <div className="grid grid-cols-[0.9fr_repeat(3,1fr)] overflow-hidden border border-line rounded-md">
+        <div className="overflow-x-auto -mx-2 sm:mx-0">
+          <div className="grid grid-cols-[0.9fr_repeat(3,1fr)] min-w-[480px] mx-2 sm:mx-0 overflow-hidden border border-line rounded-md">
           <div></div>
           <strong className="min-h-12 p-3 border-b border-l border-line text-center text-sm">
             Calm
@@ -373,6 +374,7 @@ export function HomeScienceGrid() {
           <p className="min-h-12 p-3 border-l border-line text-xs text-center">
             120 mg
           </p>
+          </div>
         </div>
       </article>
     </section>
