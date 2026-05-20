@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
-import { Icon, iconMap } from "@/components/icons"
+import { iconMap } from "@/components/icons"
+import { IconCard } from "@/components/icon-card"
 
 export const metadata: Metadata = {
   title: "Icon Sheet · AVRO",
@@ -82,18 +83,18 @@ export default function IconSheetPage() {
         <h1 className="text-[clamp(40px,6vw,72px)] font-black leading-[0.98] mb-4">
           Icon Sheet
         </h1>
-        <p className="text-ink/75 leading-relaxed">
-          Every icon used across the AVRO site. {totalCount} symbols, all from{" "}
-          <code className="px-1.5 py-0.5 bg-soft rounded text-[13px]">
-            lucide-react
-          </code>
-          , rendered through the shared{" "}
-          <code className="px-1.5 py-0.5 bg-soft rounded text-[13px]">
-            {"<Icon name=\"…\" />"}
-          </code>{" "}
-          component so stroke weight and proportions stay identical
-          everywhere.
-        </p>
+          <p className="text-ink/75 leading-relaxed">
+            Every icon used across the AVRO site. {totalCount} symbols, all from{" "}
+            <code className="px-1.5 py-0.5 bg-soft rounded text-[13px]">
+              lucide-react
+            </code>
+            , rendered through the shared{" "}
+            <code className="px-1.5 py-0.5 bg-soft rounded text-[13px]">
+              {"<Icon name=\"…\" />"}
+            </code>{" "}
+            component. Click <strong>Copy SVG</strong> on any icon and paste
+            directly into Figma — the markup pastes as a vector layer.
+          </p>
       </header>
 
       {groups.map((group) => (
@@ -109,19 +110,7 @@ export default function IconSheetPage() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {group.names.map((name) => (
-              <figure
-                key={name}
-                className="flex flex-col items-center gap-3 p-5 border border-line rounded-lg bg-white/88 transition-colors hover:bg-soft"
-              >
-                <div className="grid place-items-center w-14 h-14 rounded-full bg-soft">
-                  <Icon name={name} className="w-7 h-7 text-ink" />
-                </div>
-                <figcaption className="text-center">
-                  <code className="text-[12px] font-bold text-ink break-all">
-                    {name}
-                  </code>
-                </figcaption>
-              </figure>
+              <IconCard key={name} name={name} />
             ))}
           </div>
         </section>
@@ -129,19 +118,19 @@ export default function IconSheetPage() {
 
       <section className="mt-16 p-6 border border-line rounded-lg bg-soft">
         <h2 className="text-[clamp(20px,2.4vw,28px)] font-black mb-3">
-          Usage
+          Paste into Figma
         </h2>
+        <ol className="list-decimal pl-5 mb-4 text-ink/80 text-sm leading-relaxed space-y-1">
+          <li>Click <strong>Copy SVG</strong> on any icon above.</li>
+          <li>Switch to your Figma file and press <kbd className="px-1.5 py-0.5 bg-white border border-line rounded text-[11px] font-bold">⌘ V</kbd> (or <kbd className="px-1.5 py-0.5 bg-white border border-line rounded text-[11px] font-bold">Ctrl V</kbd>).</li>
+          <li>Figma converts the SVG to an editable vector layer at 24×24.</li>
+        </ol>
+        <h3 className="text-base font-black mb-2">Or use in code</h3>
         <pre className="overflow-x-auto p-4 bg-white border border-line rounded text-[13px] leading-relaxed">
           <code>{`import { Icon } from "@/components/icons"
 
 <Icon name="leaf" className="w-5 h-5 text-olive" />`}</code>
         </pre>
-        <p className="mt-3 text-ink/70 text-sm leading-relaxed">
-          Default size is{" "}
-          <code className="px-1 bg-white rounded">w-6 h-6</code> with a{" "}
-          <code className="px-1 bg-white rounded">strokeWidth</code> of 1.6.
-          Override either via the <code>className</code> prop.
-        </p>
       </section>
     </main>
   )
