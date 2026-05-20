@@ -9,7 +9,7 @@ export function HomeRefHero() {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-[0.82fr_1.18fr] items-stretch w-full max-w-[1440px] mx-auto border-b border-line bg-white">
       <div className="flex flex-col justify-center px-[clamp(20px,7vw,92px)] py-[clamp(36px,7vw,92px)]">
-        <h1 className="font-sans max-w-[520px] mb-5 text-[clamp(48px,8vw,94px)] font-black leading-[0.96] tracking-[-0.01em]">
+        <h1 className="font-serif max-w-[520px] mb-5 text-[clamp(48px,8vw,94px)] font-black leading-[0.96] tracking-[-0.01em]">
           Calm. Clear. Ready.
         </h1>
         <p className="font-sans max-w-[520px] text-[#272727] text-[17px] leading-[1.55]">
@@ -72,7 +72,7 @@ export function HomeLogicRow() {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.2fr_0.9fr] gap-6 w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
       <article className="p-[30px] border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
-        <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08] mb-3">
+        <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05] mb-3">
           More energy is not always the answer.
         </h2>
         <p className="text-ink/75 leading-relaxed">
@@ -103,7 +103,7 @@ export function HomeLogicRow() {
       </article>
 
       <article className="p-[30px] border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
-        <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08] mb-3">
+        <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05] mb-3">
           Performance starts with state.
         </h2>
         <div className="flex items-center gap-2 sm:gap-3.5 my-5 flex-wrap">
@@ -228,7 +228,7 @@ export function HomeMomentGrid() {
   return (
     <section className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
       <div className="mb-5 text-center">
-        <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08]">
+        <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05]">
           Built for pressure sensitive moments.
         </h2>
       </div>
@@ -250,7 +250,7 @@ export function HomeMomentGrid() {
                 <Icon name={m.icon as any} className="w-5 h-5 text-olive-dark" />
               </span>
             </div>
-            <h3 className="mx-5 font-bold">{m.title}</h3>
+            <h3 className="mx-5 font-serif font-black text-[22px] leading-tight">{m.title}</h3>
             <p className="mx-5 mb-0 text-[#222] text-sm leading-[1.35]">
               {m.copy}
             </p>
@@ -268,7 +268,7 @@ export function HomeScienceGrid() {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-6 w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
       <article className="p-7 border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
-        <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08] mb-3">
+        <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05] mb-3">
           Why GABA matters.
         </h2>
         <p className="text-ink/75 leading-relaxed mb-4">
@@ -307,7 +307,7 @@ export function HomeScienceGrid() {
       </article>
 
       <article className="p-7 border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
-        <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08] mb-3">
+        <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05] mb-3">
           Every formula starts calm first.
         </h2>
         <div className="overflow-x-auto -mx-2 sm:mx-0">
@@ -469,7 +469,7 @@ export function HomeStoryStrip() {
       <div className="overflow-hidden border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
         {/* Top: copy block, full width */}
         <div className="p-8 lg:p-12 flex flex-col items-start max-w-[800px]">
-          <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08] mb-3">
+          <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05] mb-3">
             Science-backed. Founder-driven.
           </h2>
           <p className="text-ink/75 leading-relaxed max-w-[60ch]">
@@ -543,7 +543,7 @@ export function HomeRitualSection() {
         <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
           Simple ritual
         </span>
-        <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08]">
+        <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05]">
           How to use AVRO.
         </h2>
       </div>
