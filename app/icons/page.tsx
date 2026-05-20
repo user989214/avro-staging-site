@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { iconMap } from "@/components/icons"
 import { IconCard } from "@/components/icon-card"
+import { CopyAllIcons } from "@/components/copy-all-icons"
 
 export const metadata: Metadata = {
   title: "Icon Sheet · AVRO",
@@ -95,6 +96,9 @@ export default function IconSheetPage() {
             component. Click <strong>Copy SVG</strong> on any icon and paste
             directly into Figma — the markup pastes as a vector layer.
           </p>
+          <div className="mt-6">
+            <CopyAllIcons />
+          </div>
       </header>
 
       {groups.map((group) => (
