@@ -25,9 +25,9 @@ export default function WhyPage() {
             State before stimulation.
           </h1>
           <p className="max-w-[640px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed text-pretty">
-            AVRO is built on a simple idea: when the moment matters, more
-            stimulation is not always the answer. Start calmer, stay clearer,
-            and choose the support that fits the day.
+            AVRO was built on a simple observation: in many moments that matter
+            most, people do not need more energy. They need more control. More
+            energy is not the same as more control.
           </p>
           <div className="flex flex-wrap justify-center">
             <CtaGroup primary="Find Your Formula" secondary="Shop AVRO" />

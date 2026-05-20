@@ -5,33 +5,21 @@ import { Section, SectionHeading, FinalCta } from "@/components/sections"
 export const metadata = {
   title: "The Team | AVRO",
   description:
-    "AVRO was built on a simple idea: state before stimulation. Meet the team behind the calm-first formulas.",
+    "AVRO was founded by Keigo Sugawara and Peter van Stolk on one belief: performance starts with composure.",
 }
 
-const team = [
+const founders = [
   {
-    name: "Lorem Ipsum",
+    name: "Keigo Sugawara",
     role: "Co-Founder & CEO",
     image: "/images/team/keigo.jpg",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+    bio: "Keigo earned a Master's degree in Applied Microbiology from the University of Tokyo, where his training focused on fermentation and the transformation of raw materials through controlled microbial processes. Growing up in Japan shaped his view of strength — grounded, deliberate, and controlled. That perspective made PharmaGABA the right foundation: a fermented form of GABA reflecting precision, consistency, and calm functional support.",
   },
   {
-    name: "Lorem Ipsum",
-    role: "Co-Founder & Head of Formulation",
+    name: "Peter van Stolk",
+    role: "Co-Founder & CMO",
     image: "/images/team/peter.jpg",
-    bio: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.",
-  },
-  {
-    name: "Lorem Ipsum",
-    role: "Director of Brand",
-    image: "/images/team/holly.jpg",
-    bio: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
-  },
-  {
-    name: "Lorem Ipsum",
-    role: "Head of Science & Research",
-    image: "/images/team/marianne.jpg",
-    bio: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.",
+    bio: "Peter brought the brand and market perspective. As an entrepreneur and speaker with deep experience in branding, innovation, and building consumer ventures, he understood that science must do more than be credible — it must feel real, earn trust, and connect to how people actually live.",
   },
 ]
 
@@ -42,7 +30,7 @@ const values = [
   },
   {
     title: "Ingredients with a reason",
-    body: "Every input earns its place: naturally fermented PharmaGABA, whole-fruit polyphenols, and clean adaptogens. No proprietary blends, no filler.",
+    body: "Every input earns its place: naturally fermented PharmaGABA®, whole-fruit polyphenols, prebiotic fiber, and clean support. No proprietary blends, no filler.",
   },
   {
     title: "Built for real moments",
@@ -60,9 +48,8 @@ export default function AboutPage() {
             Built around the moments that matter.
           </h1>
           <p className="max-w-[640px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed text-pretty">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad
-            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            In many moments that matter most, people do not need more energy.
+            They need more control. AVRO was built on that distinction.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 mt-7">
             <Link href="/why-avro" className="btn-primary">
@@ -75,18 +62,56 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Story */}
+      {/* Origin story */}
       <Section>
+        <div className="max-w-[780px] mx-auto flex flex-col gap-6">
+          <SectionHeading
+            eyebrow="Our story"
+            title="A different starting point."
+          />
+          <p className="text-ink/80 text-[clamp(16px,1.7vw,18px)] leading-relaxed">
+            AVRO began with a simple observation. In many moments that matter
+            most, people do not need more energy. They need more control.
+          </p>
+          <p className="text-ink/80 text-[clamp(16px,1.7vw,18px)] leading-relaxed">
+            More energy is not the same as more control. So many energy products
+            are built around the opposite idea — more stimulation, more urgency,
+            more output. But when pressure rises, more is not always better.
+            Pressure can disrupt calm, blur clarity, and make control harder to
+            hold.
+          </p>
+          <p className="text-ink/80 text-[clamp(16px,1.7vw,18px)] leading-relaxed">
+            That tension became the starting point for AVRO. Founded by Keigo
+            Sugawara and Peter van Stolk, AVRO was created from a shared belief
+            that performance does not always come from pushing harder. Sometimes
+            it comes from feeling steadier, clearer, and more in control.
+          </p>
+          <p className="text-ink/80 text-[clamp(16px,1.7vw,18px)] leading-relaxed">
+            Every formula begins with a calm-first foundation of PharmaGABA®.
+            From there, Calm, Focus, and Energy are each designed for a distinct
+            role. All three formulas also include a prebiotic fiber blend of PHGG
+            and acacia gum, reflecting the belief that balance and function are
+            connected.
+          </p>
+          <p className="text-ink/75 text-[clamp(15px,1.5vw,17px)] italic leading-relaxed border-l-2 border-olive pl-5">
+            &ldquo;Calm is not the opposite of performance. It is often what
+            makes it possible.&rdquo;
+          </p>
+        </div>
+      </Section>
+
+      {/* Values */}
+      <Section className="bg-cream/40">
         <SectionHeading
-          eyebrow="Our story"
-          title="A different starting point."
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum."
+          eyebrow="What we believe"
+          title="Built on one clear belief."
+          description="Performance starts with composure. That belief shaped every formula, every ingredient, and every decision at AVRO."
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1100px] mx-auto">
           {values.map((v) => (
             <div
               key={v.title}
-              className="flex flex-col gap-3 p-6 bg-cream/60 border border-line rounded-lg"
+              className="flex flex-col gap-3 p-6 bg-white/80 border border-line rounded-lg"
             >
               <h3 className="font-serif font-black text-xl leading-tight">
                 {v.title}
@@ -101,36 +126,41 @@ export default function AboutPage() {
 
       {/* Founders */}
       <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(28px,5vw,64px)]">
-        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-0 overflow-hidden border border-line rounded-lg bg-white/90 shadow-[0_18px_40px_-24px_rgba(20,18,12,0.18)]">
+        <SectionHeading
+          eyebrow="The Founders"
+          title="Born from science and brand instinct."
+          description="Together, Keigo and Peter built AVRO around one clear belief: performance starts with composure."
+        />
+        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-0 overflow-hidden border border-line rounded-lg bg-white/90 shadow-[0_18px_40px_-24px_rgba(20,18,12,0.18)] mb-8">
           <div className="flex flex-col justify-center gap-4 p-[clamp(28px,4vw,52px)]">
-            <h2 className="font-serif font-black text-[clamp(30px,3.4vw,46px)] leading-[1.04] text-balance">
-              Born from science and brand instinct.
-            </h2>
-            <p className="text-muted-foreground text-[clamp(15px,1.6vw,17px)] leading-relaxed max-w-[52ch]">
-              Founded by Keigo Sugawara and Peter van Stolk, AVRO was built
-              around a simple belief: people do not always need more
-              stimulation. They need more control. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua.
-            </p>
-            <p className="text-muted-foreground text-[clamp(15px,1.6vw,17px)] leading-relaxed max-w-[52ch]">
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-              dolor in reprehenderit in voluptate velit esse cillum dolore.
-            </p>
+            {founders.map((f) => (
+              <div key={f.name} className="flex flex-col gap-2 pb-6 last:pb-0 border-b border-line last:border-0">
+                <div className="flex items-baseline gap-2">
+                  <h3 className="font-serif font-black text-[clamp(20px,2vw,26px)] leading-tight">
+                    {f.name}
+                  </h3>
+                  <span className="text-olive text-[11px] font-black tracking-[0.1em] uppercase">
+                    {f.role}
+                  </span>
+                </div>
+                <p className="text-ink/75 text-[clamp(14px,1.4vw,16px)] leading-relaxed">
+                  {f.bio}
+                </p>
+              </div>
+            ))}
             <div className="flex flex-wrap gap-3 mt-2">
-              <Link href="/why-avro" className="btn-secondary text-sm">
-                Read our story
-              </Link>
               <Link href="/science" className="btn-secondary text-sm">
                 The science
               </Link>
+              <Link href="/why-avro" className="btn-secondary text-sm">
+                Why AVRO
+              </Link>
             </div>
           </div>
-          <div className="relative min-h-[320px] lg:min-h-[460px] overflow-hidden">
+          <div className="relative min-h-[320px] lg:min-h-[480px] overflow-hidden">
             <Image
               src="/images/team/founders-keigo-peter.jpg"
-              alt="AVRO co-founders Keigo Sugawara and Peter van Stolk back-to-back against a sunlit wall"
+              alt="AVRO co-founders Keigo Sugawara and Peter van Stolk"
               fill
               sizes="(min-width: 1024px) 55vw, 100vw"
               className="object-cover"
@@ -138,44 +168,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* Team */}
-      <Section>
-        <SectionHeading
-          eyebrow="The Team"
-          title="People behind the formulas."
-          description="A small group of formulators, scientists, and brand builders working out of one studio with one rule: state before stimulation."
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 max-w-[1200px] mx-auto">
-          {team.map((m, i) => (
-            <article
-              key={i}
-              className="flex flex-col gap-4 group"
-            >
-              <div className="relative aspect-square w-full overflow-hidden rounded-lg border border-line bg-cream">
-                <Image
-                  src={m.image}
-                  alt={`${m.name}, ${m.role}`}
-                  fill
-                  sizes="(min-width: 1024px) 280px, (min-width: 640px) 45vw, 90vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <h3 className="font-serif font-black text-xl leading-tight">
-                  {m.name}
-                </h3>
-                <span className="text-olive text-xs font-black tracking-[0.1em] uppercase">
-                  {m.role}
-                </span>
-                <p className="mt-1.5 text-muted-foreground text-[14.5px] leading-relaxed">
-                  {m.bio}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
 
       <FinalCta />
     </>
