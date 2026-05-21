@@ -111,6 +111,7 @@ export default function LearnPage() {
 
       {/* Article groups — pure white */}
       <section style={{ backgroundColor: "#fff" }} className="w-full py-[clamp(48px,7vw,88px)]">
+        <style>{`.learn-article-link:hover { color: #87CEEB !important; }`}</style>
         <div className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto">
           <h2
             className="text-[clamp(32px,4vw,56px)] leading-[1.02] mb-10"
@@ -135,15 +136,13 @@ export default function LearnPage() {
                   <Link
                     key={article}
                     href="/learn"
-                    className="block py-4 text-[18px] leading-[1.4] transition-colors"
+                    className="learn-article-link block py-4 text-[18px] leading-[1.4] transition-colors"
                     style={{
                       fontFamily: GC_FAMILY,
                       fontWeight: 700,
                       color: "rgba(255,255,255,0.82)",
                       borderTop: "1px solid rgba(255,255,255,0.12)",
                     }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "#87CEEB")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.82)")}
                   >
                     {article}
                   </Link>
