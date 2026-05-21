@@ -196,12 +196,12 @@ export default function LearnPage() {
         </div>
       </section>
 
-      {/* Final CTA — AVRO blue background, black text */}
-      <section
-        className="w-full py-[clamp(56px,8vw,96px)]"
-        style={{ backgroundColor: "#87CEEB" }}
-      >
-        <div className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto flex flex-col items-center text-center gap-6">
+      {/* Final CTA — AVRO blue rounded box */}
+      <section className="w-full py-[clamp(32px,5vw,56px)] bg-white">
+        <div
+          className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto flex flex-col items-center text-center gap-6 py-[clamp(48px,7vw,80px)] px-[clamp(24px,6vw,80px)]"
+          style={{ backgroundColor: "#87CEEB", borderRadius: "16px" }}
+        >
           <h2
             className="text-[clamp(36px,5vw,72px)] leading-[1.0] text-balance"
             style={{ fontFamily: GC_FAMILY, fontWeight: 950, color: "#000" }}
