@@ -65,13 +65,13 @@ export default function LearnPage() {
       <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(56px,9vw,112px)] bg-gradient-to-br from-[#fffdf8] to-[#f7f4ec] border-b border-line">
         <div className="flex flex-col items-center text-center max-w-[820px] mx-auto">
           <h1
-            className="text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5 text-balance"
+            className="text-[clamp(56px,8vw,108px)] leading-[0.96] mb-6 text-balance"
             style={{ fontFamily: '"Gotham Condensed"', fontWeight: 950 }}
           >
             Category ownership, not content noise.
           </h1>
           <p
-            className="max-w-[640px] text-muted-foreground text-[clamp(18px,2vw,22px)] leading-relaxed text-pretty"
+            className="max-w-[680px] text-muted-foreground text-[clamp(20px,2.2vw,26px)] leading-relaxed text-pretty"
             style={{ fontFamily: '"Gotham Condensed"', fontWeight: 500 }}
           >
             Learn how AVRO thinks about calm performance, PharmaGABA®,
@@ -99,7 +99,7 @@ export default function LearnPage() {
               className="p-6 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
             >
               <h3
-                className="text-lg mb-5"
+                className="text-[22px] mb-5"
                 style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800 }}
               >
                 {group.title}
@@ -108,7 +108,7 @@ export default function LearnPage() {
                 <Link
                   key={article}
                   href="/learn"
-                  className="block py-3 border-t border-line text-muted-foreground leading-[1.35] hover:text-ink transition-colors"
+                  className="block py-3.5 border-t border-line text-muted-foreground text-[17px] leading-[1.4] hover:text-ink transition-colors"
                   style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700 }}
                 >
                   {article}
@@ -123,19 +123,19 @@ export default function LearnPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)]">
           <div>
             <span
-              className="block mb-3 text-olive text-xs tracking-[0.12em] uppercase"
+              className="block mb-3 text-olive text-[13px] tracking-[0.12em] uppercase"
               style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700 }}
             >
               Article template
             </span>
             <h2
-              className="text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5"
+              className="text-[clamp(36px,4.5vw,62px)] leading-[1.02] mb-4"
               style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800 }}
             >
               Built for clear answers.
             </h2>
             <p
-              className="text-muted-foreground leading-relaxed text-[clamp(16px,1.4vw,19px)]"
+              className="text-muted-foreground leading-relaxed text-[clamp(18px,1.6vw,22px)]"
               style={{ fontFamily: '"Gotham Condensed"', fontWeight: 500 }}
             >
               Each article should open with a short answer, then explain why it
@@ -152,7 +152,7 @@ export default function LearnPage() {
             ].map(({ icon, label }) => (
               <p
                 key={label}
-                className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink text-[clamp(15px,1.3vw,18px)]"
+                className="grid grid-cols-[38px_1fr] gap-4 items-center text-ink text-[clamp(17px,1.5vw,21px)]"
                 style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700 }}
               >
                 <Icon name={icon as any} className="w-8.5 h-8.5 text-olive" />
