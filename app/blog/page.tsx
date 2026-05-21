@@ -260,21 +260,21 @@ export default function BlogPage() {
 
       {/* ── CTA ── */}
       <section className="cta-section" style={{ backgroundColor: "#fff", padding: "0 clamp(20px,5vw,64px) clamp(32px,5vw,56px)" }}>
-        <div className="cta-inner" style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#000", borderRadius: 16, padding: "clamp(28px,4vw,48px) clamp(24px,4vw,56px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
-          <div style={{ flex: "1 1 300px", minWidth: 0 }}>
-            <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(26px,3.5vw,44px)", lineHeight: 1.0, color: "#fff", marginBottom: 10 }}>
+        <div className="cta-inner" style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#000", borderRadius: 20, padding: "clamp(56px,7vw,88px) clamp(48px,6vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 48 }}>
+          <div style={{ flex: "1 1 480px", minWidth: 0 }}>
+            <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,64px)", lineHeight: 1.0, color: "#fff", marginBottom: 16 }}>
               Ready to find your formula?
             </h2>
-            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.4vw,18px)", lineHeight: 1.4, color: "rgba(255,255,255,0.82)" }}>
+            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.4, color: "rgba(255,255,255,0.82)" }}>
               Choose Calm, Focus, or Energy based on the moment you want to support.
             </p>
           </div>
-          <div className="cta-btns" style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+          <div className="cta-btns" style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
             {[["Shop Calm", "/shop/calm"], ["Shop Focus", "/shop/focus"], ["Shop Energy", "/shop/energy"]].map(([label, href]) => (
               <a
                 key={label}
                 href={href}
-                style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 17, minHeight: 50, padding: "0 28px", borderRadius: 10, textDecoration: "none", backgroundColor: "#fff", color: "#000", border: "2.5px solid #fff" }}
+                style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 10, textDecoration: "none", backgroundColor: "#fff", color: "#000", border: "2.5px solid #fff" }}
               >
                 {label}
               </a>
