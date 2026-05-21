@@ -60,12 +60,13 @@ export function Header() {
 
   return (
     <>
-      <div className="flex justify-center gap-15 px-8 py-3 bg-soft text-ink/70 text-[13px] font-black tracking-wide uppercase">
+      <div className="flex justify-center gap-15 px-8 py-3 text-[13px] font-black tracking-wide uppercase" style={{ backgroundColor: "#87CEEB", color: "#000" }}>
         <span>
           Naturally Fermented PharmaGABA® -{" "}
           <Link
             href="/science"
-            className="text-ink underline underline-offset-3 hover:text-olive transition-colors"
+            className="underline underline-offset-3 hover:opacity-70 transition-opacity"
+            style={{ color: "#000" }}
           >
             Learn More
           </Link>
@@ -74,7 +75,8 @@ export function Header() {
           Free Shipping Over $50 -{" "}
           <Link
             href="/shop"
-            className="text-ink underline underline-offset-3 hover:text-olive transition-colors"
+            className="underline underline-offset-3 hover:opacity-70 transition-opacity"
+            style={{ color: "#000" }}
           >
             Shop AVRO
           </Link>
