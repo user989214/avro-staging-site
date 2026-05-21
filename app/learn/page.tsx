@@ -1,5 +1,5 @@
+import React from "react"
 import Link from "next/link"
-import { Icon } from "@/components/icons"
 
 export const metadata = {
   title: "Learn | AVRO",
@@ -43,11 +43,23 @@ const articleGroups = [
   },
 ]
 
-const templateItems = [
-  { icon: "search", label: "Clear question headline" },
-  { icon: "card",   label: "Short answer box" },
-  { icon: "shield", label: "Compliance-safe structure-function language" },
-  { icon: "leaf",   label: "Internal links to formulas, science, cohorts, and FAQ" },
+const templateItems: { svg: React.ReactNode; label: string }[] = [
+  {
+    svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
+    label: "Clear question headline",
+  },
+  {
+    svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>,
+    label: "Short answer box",
+  },
+  {
+    svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+    label: "Compliance-safe structure-function language",
+  },
+  {
+    svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 19.12A1 1 0 0 0 4.69 20.7C7.14 20.1 11.75 18.5 14 16c2.5-2.77 2.87-6.12 3-8-.5.25-2.25.75-3 0z"/></svg>,
+    label: "Internal links to formulas, science, cohorts, and FAQ",
+  },
 ]
 
 export default function LearnPage() {
@@ -164,9 +176,9 @@ export default function LearnPage() {
             </p>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            {templateItems.map(({ icon, label }) => (
+            {templateItems.map(({ svg, label }) => (
               <div key={label} style={{ display: "flex", alignItems: "center", gap: 16, backgroundColor: "#000", borderRadius: 12, padding: "20px 24px" }}>
-                <Icon name={icon as any} className="w-7 h-7 shrink-0 text-white" />
+                <span style={{ flexShrink: 0 }}>{svg}</span>
                 <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(17px,1.5vw,21px)", color: "#fff" }}>
                   {label}
                 </span>
