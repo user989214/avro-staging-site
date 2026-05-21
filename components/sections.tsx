@@ -80,18 +80,18 @@ export function SocialProof({ mode = "full" }: { mode?: "full" | "compact" }) {
   return (
     <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(38px,5.5vw,72px)", lineHeight: 1.0, color: "#000", marginBottom: 32 }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#000", marginBottom: 32 }}>
           Trusted for calm-first routines.
         </h2>
         {mode === "full" && (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 16 }}>
             {testimonials.map((item) => (
               <article key={item.name} style={{ backgroundColor: "#000", borderRadius: 12, padding: "clamp(24px,3vw,36px)" }}>
-                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(18px,1.6vw,22px)", lineHeight: 1.5, color: "rgba(255,255,255,0.85)", marginBottom: 16 }}>
+                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(18px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(255,255,255,0.88)", marginBottom: 16 }}>
                   &ldquo;{item.quote}&rdquo;
                 </p>
-                <strong style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 18, color: "#fff", display: "block" }}>{item.name}</strong>
-                <span style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 15, color: BLUE_FINAL, display: "block", marginTop: 4 }}>{item.role}</span>
+                <strong style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "#fff", display: "block" }}>{item.name}</strong>
+                <span style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: 15, color: BLUE_FINAL, display: "block", marginTop: 4 }}>{item.role}</span>
               </article>
             ))}
           </div>
@@ -111,10 +111,10 @@ export function ProductCards({
   return (
     <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(38px,5.5vw,72px)", lineHeight: 1.0, color: "#000", marginBottom: 12 }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#000", marginBottom: 12 }}>
           {title}
         </h2>
-        <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(17px,1.5vw,21px)", lineHeight: 1.5, color: "rgba(0,0,0,0.55)", marginBottom: 32 }}>
+        <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(17px,1.5vw,21px)", lineHeight: 1.4, color: "rgba(0,0,0,0.6)", marginBottom: 32 }}>
           Every AVRO formula starts with the same calm-first base, then supports the moment in a different way.
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 16 }}>
@@ -125,19 +125,19 @@ export function ProductCards({
                 <div style={{ borderRadius: 10, border: "3px solid #fff", height: 380, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
                   <ProductCard formulaKey={key} className="h-full w-full object-cover" />
                 </div>
-                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(24px,2.2vw,30px)", color: "#fff", margin: 0 }}>{item.name}</h3>
-                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(17px,1.4vw,19px)", lineHeight: 1.5, color: "rgba(255,255,255,0.72)", margin: 0 }}>{item.support}</p>
+                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: "clamp(22px,2vw,28px)", color: "#fff", margin: 0 }}>{item.name}</h3>
+                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(17px,1.4vw,19px)", lineHeight: 1.45, color: "rgba(255,255,255,0.78)", margin: 0 }}>{item.support}</p>
                 <div style={{ borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 17, color: "#fff" }}>Best for</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.45, color: "rgba(255,255,255,0.68)", margin: "4px 0 0" }}>{item.bestFor}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "#fff" }}>Best for</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(255,255,255,0.72)", margin: "4px 0 0" }}>{item.bestFor}</p>
                   </div>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 17, color: "#fff" }}>Caffeine</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.45, color: "rgba(255,255,255,0.68)", margin: "4px 0 0" }}>{item.caffeine}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "#fff" }}>Caffeine</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(255,255,255,0.72)", margin: "4px 0 0" }}>{item.caffeine}</p>
                   </div>
                 </div>
-                <a href={`/${key}`} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC_FINAL, fontWeight: 700, fontSize: 18, minHeight: 58, borderRadius: 10, textDecoration: "none", backgroundColor: BLUE_FINAL, color: "#000", marginTop: "auto" }}>
+                <a href={`/${key}`} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC_FINAL, fontWeight: 800, fontSize: 20, minHeight: 60, borderRadius: 10, textDecoration: "none", backgroundColor: BLUE_FINAL, color: "#000", marginTop: "auto" }}>
                   {shopLabel} {item.short}
                 </a>
               </article>
@@ -274,15 +274,15 @@ export function FinalCta({
   return (
     <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
       <style>{`
-        .final-cta-btn { background-color: #000; color: #fff; border: 2.5px solid #000; transition: background-color 0.18s ease, color 0.18s ease; display: inline-flex; align-items: center; justify-content: center; font-family: ${GC_FINAL}; font-weight: 700; font-size: 18px; min-height: 58px; padding: 0 36px; border-radius: 10px; text-decoration: none; }
+        .final-cta-btn { background-color: #000; color: #fff; border: 2.5px solid #000; transition: background-color 0.18s ease, color 0.18s ease; display: inline-flex; align-items: center; justify-content: center; font-family: ${GC_FINAL}; font-weight: 800; font-size: 20px; min-height: 64px; padding: 0 40px; border-radius: 10px; text-decoration: none; }
         .final-cta-btn:hover { background-color: transparent; color: #000; }
       `}</style>
       <div style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#87CEEB", borderRadius: 20, padding: "clamp(48px,6vw,88px) clamp(36px,5vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 40 }}>
         <div style={{ flex: "1 1 400px", minWidth: 0 }}>
-          <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(38px,5.5vw,72px)", lineHeight: 1.0, color: "#000", marginBottom: 16 }}>
+          <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#000", marginBottom: 16 }}>
             {title}
           </h2>
-          <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(17px,1.6vw,22px)", lineHeight: 1.5, color: "rgba(0,0,0,0.65)" }}>
+          <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(17px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(0,0,0,0.72)" }}>
             {copy}
           </p>
         </div>
