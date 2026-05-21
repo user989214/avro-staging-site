@@ -120,7 +120,7 @@ export default function BlogPage() {
           <h1 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(56px,9vw,120px)", lineHeight: 0.95, color: "#fff", marginBottom: 20, maxWidth: 900 }}>
             Calm. Clear. Informed.
           </h1>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(18px,2vw,24px)", lineHeight: 1.4, color: "rgba(255,255,255,0.65)", maxWidth: 600 }}>
+          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(20px,2vw,26px)", lineHeight: 1.4, color: "rgba(255,255,255,0.65)", maxWidth: 600 }}>
             Science, lifestyle, and formula guidance for people who perform better when they are calm.
           </p>
 
@@ -133,7 +133,7 @@ export default function BlogPage() {
                 style={{
                   fontFamily: GC,
                   fontWeight: 800,
-                  fontSize: 16,
+                  fontSize: 18,
                   padding: "10px 24px",
                   borderRadius: 10,
                   border: "2px solid rgba(255,255,255,0.25)",
@@ -169,20 +169,20 @@ export default function BlogPage() {
             <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
               <div style={{ flex: "1 1 480px", minWidth: 280 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
-                  <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 14, color: BLUE }}>{featured.category}</span>
+                  <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: BLUE }}>{featured.category}</span>
                   <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.3)" }} />
-                  <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 14, color: "rgba(255,255,255,0.4)" }}>{featured.date}</span>
+                  <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.4)" }}>{featured.date}</span>
                   <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.3)" }} />
-                  <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 14, color: "rgba(255,255,255,0.4)" }}>{featured.readTime}</span>
+                  <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.4)" }}>{featured.readTime}</span>
                 </div>
                 <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,4vw,52px)", lineHeight: 1.0, color: "#fff", marginBottom: 20, maxWidth: 700 }}>
                   {featured.title}
                 </h2>
-                <p className="feat-excerpt" style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.45, color: "rgba(255,255,255,0.65)", maxWidth: 620 }}>
+                <p className="feat-excerpt" style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(19px,1.8vw,23px)", lineHeight: 1.45, color: "rgba(255,255,255,0.65)", maxWidth: 620 }}>
                   {featured.excerpt}
                 </p>
               </div>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 18, color: "#fff", border: "2px solid rgba(255,255,255,0.3)", borderRadius: 10, padding: "14px 28px", flexShrink: 0 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 20, color: "#fff", border: "2px solid rgba(255,255,255,0.3)", borderRadius: 10, padding: "16px 32px", flexShrink: 0 }}>
                 Read Article
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </div>
@@ -213,19 +213,19 @@ export default function BlogPage() {
               >
                 <div>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-                    <span className="blog-card-cat" style={{ fontFamily: GC, fontWeight: 800, fontSize: 13, color: "#000" }}>{post.category}</span>
+                    <span className="blog-card-cat" style={{ fontFamily: GC, fontWeight: 800, fontSize: 16, color: "#000" }}>{post.category}</span>
                     <span style={{ width: 3, height: 3, borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.25)" }} />
-                    <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 400, fontSize: 13, color: "rgba(0,0,0,0.4)" }}>{post.date}</span>
+                    <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, color: "rgba(0,0,0,0.4)" }}>{post.date}</span>
                   </div>
-                  <h3 className="blog-card-title" style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(20px,2vw,26px)", lineHeight: 1.05, color: "#000", marginBottom: 12 }}>
+                  <h3 className="blog-card-title" style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(22px,2.2vw,29px)", lineHeight: 1.05, color: "#000", marginBottom: 14 }}>
                     {post.title}
                   </h3>
-                  <p className="blog-card-excerpt" style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, lineHeight: 1.45, color: "rgba(0,0,0,0.6)" }}>
+                  <p className="blog-card-excerpt" style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, lineHeight: 1.45, color: "rgba(0,0,0,0.6)" }}>
                     {post.excerpt}
                   </p>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "rgba(0,0,0,0.4)" }}>{post.readTime}</span>
+                  <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 500, fontSize: 16, color: "rgba(0,0,0,0.4)" }}>{post.readTime}</span>
                   <span className="blog-card-arrow" style={{ color: "#000" }}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                   </span>
@@ -236,7 +236,7 @@ export default function BlogPage() {
 
           {/* Load more */}
           <div style={{ display: "flex", justifyContent: "center", marginTop: 56 }}>
-            <button style={{ fontFamily: GC, fontWeight: 800, fontSize: 18, padding: "16px 52px", borderRadius: 10, backgroundColor: "#000", color: "#fff", border: "2.5px solid #000", cursor: "pointer" }}>
+            <button style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, padding: "18px 56px", borderRadius: 10, backgroundColor: "#000", color: "#fff", border: "2.5px solid #000", cursor: "pointer" }}>
               Load More Articles
             </button>
           </div>
