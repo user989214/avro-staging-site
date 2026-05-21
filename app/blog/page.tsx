@@ -261,14 +261,11 @@ export default function BlogPage() {
       {/* ── CTA ── */}
       <section className="cta-section" style={{ backgroundColor: "#fff", padding: "0 clamp(20px,5vw,80px) clamp(48px,7vw,88px)" }}>
         <div className="cta-inner" style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#000", borderRadius: 20, padding: "clamp(56px,7vw,88px) clamp(48px,6vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 48 }}>
-          <div style={{ flex: "1 1 480px", minWidth: 280 }}>
-            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 19, color: "rgba(255,255,255,0.55)", marginBottom: 16, display: "block" }}>
-              Put it into practice.
-            </span>
+          <div style={{ flex: "1 1 480px", minWidth: 0 }}>
             <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,64px)", lineHeight: 1.0, color: "#fff", marginBottom: 16 }}>
               Ready to find your formula?
             </h2>
-            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.4, color: "rgba(255,255,255,0.82)", maxWidth: 480 }}>
+            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.4, color: "rgba(255,255,255,0.82)" }}>
               Choose Calm, Focus, or Energy based on the moment you want to support.
             </p>
           </div>
