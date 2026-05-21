@@ -122,8 +122,8 @@ export function ProductCards({
             const item = formulas[key]
             return (
               <article key={key} style={{ backgroundColor: "#000", borderRadius: 12, padding: "clamp(20px,3vw,32px)", display: "flex", flexDirection: "column", gap: 16 }}>
-                <div style={{ borderRadius: 10, border: "3px solid #fff", height: 360, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", padding: "16px 12px" }}>
-                  <ProductCard formulaKey={key} className="h-full w-auto max-w-full object-contain" />
+                <div style={{ borderRadius: 10, border: "3px solid #fff", height: 380, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+                  <ProductCard formulaKey={key} className="h-full w-full object-cover" />
                 </div>
                 <h3 style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: "clamp(22px,2vw,28px)", color: "#fff", margin: 0 }}>{item.name}</h3>
                 <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(17px,1.4vw,19px)", lineHeight: 1.45, color: "rgba(255,255,255,0.78)", margin: 0 }}>{item.support}</p>
