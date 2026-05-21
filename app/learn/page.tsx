@@ -58,9 +58,9 @@ export default function LearnPage() {
         /* White outline: hover → white fill, black text */
         .learn-btn-outline-white { background-color: transparent; color: #fff; border: 2.5px solid #fff; }
         .learn-btn-outline-white:hover { background-color: #fff; color: #000; }
-        /* Black fill: hover → white fill, black text */
+        /* Black fill: hover → transparent, black text (stroke only) */
         .learn-btn-black { background-color: #000; color: #fff; border: 2.5px solid #000; }
-        .learn-btn-black:hover { background-color: #fff; color: #000; }
+        .learn-btn-black:hover { background-color: transparent; color: #000; }
         /* Black outline: hover → black fill, white text */
         .learn-btn-outline-black { background-color: transparent; color: #000; border: 2.5px solid #000; }
         .learn-btn-outline-black:hover { background-color: #000; color: #fff; }
