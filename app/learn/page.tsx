@@ -171,9 +171,9 @@ export default function LearnPage() {
           </div>
           {/* Right: buttons */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-            <a href="/shop/calm" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 9999, textDecoration: "none", backgroundColor: "#fff", color: "#000" }}>Shop Calm</a>
-            <a href="/shop/focus" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 9999, textDecoration: "none", backgroundColor: "#87CEEB", color: "#000" }}>Shop Focus</a>
-            <a href="/shop/energy" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 9999, textDecoration: "none", backgroundColor: "#87CEEB", color: "#000" }}>Shop Energy</a>
+            <a href="/shop/calm" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 10, textDecoration: "none", backgroundColor: "#fff", color: "#000" }}>Shop Calm</a>
+            <a href="/shop/focus" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 10, textDecoration: "none", backgroundColor: "#87CEEB", color: "#000" }}>Shop Focus</a>
+            <a href="/shop/energy" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 10, textDecoration: "none", backgroundColor: "#87CEEB", color: "#000" }}>Shop Energy</a>
           </div>
         </div>
       </section>
