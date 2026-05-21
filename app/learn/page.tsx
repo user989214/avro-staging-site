@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Section, SectionHeading, FinalCta } from "@/components/sections"
 import { Icon } from "@/components/icons"
 
 export const metadata = {
@@ -184,7 +183,7 @@ export default function LearnPage() {
                 className="flex items-center gap-4 p-5 rounded-xl"
                 style={{ backgroundColor: "#000" }}
               >
-                <Icon name={icon as any} className="w-7 h-7 shrink-0" style={{ color: "#87CEEB" }} />
+                <Icon name={icon as any} className="w-7 h-7 shrink-0 text-white" />
                 <span
                   className="text-[clamp(17px,1.5vw,21px)]"
                   style={{ fontFamily: GC_FAMILY, fontWeight: 700, color: "#fff" }}
@@ -197,10 +196,65 @@ export default function LearnPage() {
         </div>
       </section>
 
-      <FinalCta
-        title="Ready to find your formula?"
-        copy="Choose Calm, Focus, or Energy based on the moment you want to support."
-      />
+      {/* Final CTA — AVRO blue background, black text */}
+      <section
+        className="w-full py-[clamp(56px,8vw,96px)]"
+        style={{ backgroundColor: "#87CEEB" }}
+      >
+        <div className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto flex flex-col items-center text-center gap-6">
+          <h2
+            className="text-[clamp(36px,5vw,72px)] leading-[1.0] text-balance"
+            style={{ fontFamily: GC_FAMILY, fontWeight: 950, color: "#000" }}
+          >
+            Ready to find your formula?
+          </h2>
+          <p
+            className="max-w-[560px] text-[clamp(18px,1.8vw,22px)] leading-[1.45]"
+            style={{ fontFamily: GC_FAMILY, fontWeight: 500, color: "#111" }}
+          >
+            Choose Calm, Focus, or Energy based on the moment you want to support.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 mt-2">
+            <Link
+              href="/shop"
+              style={{
+                fontFamily: GC_FAMILY,
+                fontWeight: 800,
+                fontSize: "21px",
+                backgroundColor: "#000",
+                color: "#fff",
+                minHeight: "66px",
+                paddingLeft: "46px",
+                paddingRight: "46px",
+                borderRadius: "9999px",
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+            >
+              Shop AVRO
+            </Link>
+            <Link
+              href="/shop"
+              style={{
+                fontFamily: GC_FAMILY,
+                fontWeight: 800,
+                fontSize: "21px",
+                backgroundColor: "transparent",
+                color: "#000",
+                border: "2.5px solid #000",
+                minHeight: "66px",
+                paddingLeft: "46px",
+                paddingRight: "46px",
+                borderRadius: "9999px",
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+            >
+              Find Your Formula
+            </Link>
+          </div>
+        </div>
+      </section>
     </>
   )
 }
