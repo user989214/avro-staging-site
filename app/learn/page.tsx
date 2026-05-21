@@ -78,18 +78,27 @@ export default function LearnPage() {
             calm-first energy, state before pressure moments, and choosing the
             right formula.
           </p>
-          <div
-            className="flex flex-wrap justify-center mt-6"
-            style={{ fontFamily: '"Gotham Condensed"' }}
-          >
-            <CtaGroup primary="Read Articles" secondary="Shop AVRO" />
+          <div className="flex flex-wrap justify-center gap-3 mt-6">
+            <Link
+              href="/learn"
+              className="btn-primary"
+              style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800, fontSize: "20px", minHeight: "60px", paddingLeft: "38px", paddingRight: "38px" }}
+            >
+              Read Articles
+            </Link>
+            <Link
+              href="/shop"
+              className="btn-secondary"
+              style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800, fontSize: "20px", minHeight: "60px", paddingLeft: "38px", paddingRight: "38px", border: "2.5px solid #1a1a1a" }}
+            >
+              Shop AVRO
+            </Link>
           </div>
         </div>
       </section>
 
       <Section>
         <SectionHeading
-          eyebrow="Recommended structure"
           title="Start with 12 strong articles."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5">
@@ -122,12 +131,6 @@ export default function LearnPage() {
       <Section>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)]">
           <div>
-            <span
-              className="block mb-3 text-olive text-[13px] tracking-[0.12em] uppercase"
-              style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700 }}
-            >
-              Article template
-            </span>
             <h2
               className="text-[clamp(36px,4.5vw,62px)] leading-[1.02] mb-4"
               style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800 }}
