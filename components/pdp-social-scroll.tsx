@@ -1,209 +1,173 @@
 "use client"
 
 import { useState } from "react"
-import { Icon } from "@/components/icons"
 import { formulas, type FormulaKey } from "@/lib/data"
+import { stickImageFor } from "@/components/product-visual"
 
-interface SocialScrollProps {
+interface PdpSocialScrollProps {
   formulaKey: FormulaKey
 }
 
-export function PdpSocialScroll({ formulaKey }: SocialScrollProps) {
+// Mock social content cards - in production these would be real videos/images
+const socialCards = [
+  { id: 1, type: "lifestyle", label: "Morning routine" },
+  { id: 2, type: "product", label: "Product showcase" },
+  { id: 3, type: "featured", label: "Customer story" },
+  { id: 4, type: "lifestyle", label: "Work focus" },
+  { id: 5, type: "community", label: "Team moment" },
+]
+
+export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
+  const [activeIndex, setActiveIndex] = useState(2) // Center card is featured
   const item = formulas[formulaKey]
-  const [selectedProduct, setSelectedProduct] = useState(0)
+  const stickImage = stickImageFor(formulaKey)
   
-  // Product options shown at bottom
-  const productOptions = [
-    { name: `${item.short} Single`, price: "$18.71", originalPrice: null },
-    { name: `${item.short} 3-Pack`, price: "$49.99", originalPrice: "$56.13" },
-    { name: `${item.short} 6-Pack`, price: "$89.99", originalPrice: "$112.26" },
-  ]
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev === 0 ? socialCards.length - 1 : prev - 1))
+  }
+  
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev === socialCards.length - 1 ? 0 : prev + 1))
+  }
+
+  // Get visible cards (5 at a time, centered on activeIndex)
+  const getVisibleCards = () => {
+    const cards = []
+    for (let i = -2; i <= 2; i++) {
+      const index = (activeIndex + i + socialCards.length) % socialCards.length
+      cards.push({ ...socialCards[index], position: i })
+    }
+    return cards
+  }
 
   return (
-    <section className="w-full bg-soft py-[clamp(48px,7vw,96px)] overflow-hidden">
+    <section className="w-full bg-avro-blue py-[clamp(48px,6vw,80px)] overflow-hidden">
       <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
-        {/* Section heading */}
+        {/* Headline */}
         <h2 className="font-serif font-black text-[clamp(36px,5vw,64px)] leading-[1.0] text-ink mb-10">
           This is what {formulaKey} feels like.
         </h2>
         
-        {/* Main content area - Social cards grid with vertical scroll animation */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 items-start">
-          
-          {/* Left side - Animated social cards */}
-          <div className="relative h-[500px] overflow-hidden">
-            {/* Two columns of scrolling cards */}
-            <div className="absolute inset-0 flex gap-4 justify-center">
-              {/* Column 1 - scrolls up */}
-              <div className="w-[180px] flex flex-col gap-4 animate-scroll-up">
-                {[...Array(10)].map((_, i) => (
-                  <SocialCard key={`col1-${i}`} index={i} formulaKey={formulaKey} />
-                ))}
-                {/* Duplicate for seamless loop */}
-                {[...Array(10)].map((_, i) => (
-                  <SocialCard key={`col1-dup-${i}`} index={i} formulaKey={formulaKey} />
-                ))}
-              </div>
+        {/* Horizontal card carousel */}
+        <div className="relative">
+          <div className="flex items-end justify-center gap-4">
+            {getVisibleCards().map((card) => {
+              const isFeatured = card.position === 0
               
-              {/* Column 2 - scrolls down */}
-              <div className="w-[180px] flex flex-col gap-4 animate-scroll-down">
-                {[...Array(10)].map((_, i) => (
-                  <SocialCard key={`col2-${i}`} index={i + 5} formulaKey={formulaKey} />
-                ))}
-                {/* Duplicate for seamless loop */}
-                {[...Array(10)].map((_, i) => (
-                  <SocialCard key={`col2-dup-${i}`} index={i + 5} formulaKey={formulaKey} />
-                ))}
-              </div>
-              
-              {/* Column 3 - scrolls up (hidden on smaller screens) */}
-              <div className="w-[180px] hidden md:flex flex-col gap-4 animate-scroll-up-slow">
-                {[...Array(10)].map((_, i) => (
-                  <SocialCard key={`col3-${i}`} index={i + 2} formulaKey={formulaKey} />
-                ))}
-                {/* Duplicate for seamless loop */}
-                {[...Array(10)].map((_, i) => (
-                  <SocialCard key={`col3-dup-${i}`} index={i + 2} formulaKey={formulaKey} />
-                ))}
-              </div>
-            </div>
-            
-            {/* Gradient overlays for fade effect */}
-            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-soft to-transparent pointer-events-none z-10" />
-            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-soft to-transparent pointer-events-none z-10" />
-          </div>
-          
-          {/* Right side - Product selection with Add to Cart */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-line">
-            {/* Product image */}
-            <div className="relative aspect-square mb-6 bg-soft rounded-xl overflow-hidden flex items-center justify-center">
-              <img 
-                src={item.packshot}
-                alt={`AVRO ${item.short}`}
-                className="w-3/4 h-3/4 object-contain"
-              />
-            </div>
-            
-            {/* Product options */}
-            <div className="space-y-3 mb-6">
-              {productOptions.map((product, i) => (
-                <button
-                  key={product.name}
-                  onClick={() => setSelectedProduct(i)}
-                  className={`w-full flex items-center justify-between p-4 rounded-xl border-2 transition-all ${
-                    selectedProduct === i 
-                      ? "border-avro-blue bg-avro-blue/5" 
-                      : "border-line hover:border-ink/20"
+              return (
+                <div
+                  key={`${card.id}-${card.position}`}
+                  className={`relative flex-shrink-0 rounded-2xl overflow-hidden transition-all duration-300 ${
+                    isFeatured 
+                      ? "w-[280px] h-[480px] z-10" 
+                      : "w-[220px] h-[400px] opacity-90"
                   }`}
                 >
-                  <span className="font-bold text-ink">{product.name}</span>
-                  <div className="flex items-center gap-2">
-                    {product.originalPrice && (
-                      <span className="text-ink/40 line-through text-sm">{product.originalPrice}</span>
+                  {/* Placeholder content area - animated gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-ink/20 via-ink/10 to-ink/30">
+                    {/* Animated shimmer effect */}
+                    <div 
+                      className="absolute inset-0"
+                      style={{
+                        background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%)",
+                        backgroundSize: "200% 100%",
+                        animation: "shimmer 2s infinite linear",
+                      }}
+                    />
+                    
+                    {/* Content type indicator */}
+                    <div className="absolute top-4 left-4 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full">
+                      <span className="text-xs font-bold text-white">{card.label}</span>
+                    </div>
+                    
+                    {/* Video controls on featured card */}
+                    {isFeatured && (
+                      <div className="absolute top-4 right-4 flex flex-col gap-2">
+                        <button className="w-8 h-8 rounded-full bg-ink/50 flex items-center justify-center">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="white" stroke="white" strokeWidth="2">
+                            <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                            <line x1="23" y1="9" x2="17" y2="15" />
+                            <line x1="17" y1="9" x2="23" y2="15" />
+                          </svg>
+                        </button>
+                        <button className="w-8 h-8 rounded-full bg-ink/50 flex items-center justify-center">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                            <rect x="6" y="4" width="4" height="16" />
+                            <rect x="14" y="4" width="4" height="16" />
+                          </svg>
+                        </button>
+                      </div>
                     )}
-                    <span className="font-black text-ink">{product.price}</span>
                   </div>
-                </button>
-              ))}
-            </div>
-            
-            {/* Add to Cart button */}
-            <button className="w-full btn-primary py-4 text-lg font-black flex items-center justify-center gap-2">
-              <Icon name="cart" className="w-5 h-5" />
-              Add to Cart
+                  
+                  {/* Product footer card */}
+                  <div className="absolute bottom-4 left-4 right-4 bg-white rounded-xl p-3 flex items-center gap-3 shadow-lg">
+                    {/* Product thumbnail */}
+                    <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-soft flex items-center justify-center">
+                      <img 
+                        src={stickImage.src}
+                        alt={stickImage.alt}
+                        className="w-10 h-10 object-contain"
+                      />
+                    </div>
+                    
+                    {/* Product info */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-ink truncate pr-1">
+                          {item.short}
+                        </span>
+                        <button className="p-1 flex-shrink-0">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-ink">
+                            <polyline points="18 15 12 9 6 15" />
+                          </svg>
+                        </button>
+                      </div>
+                      <span className="text-sm font-bold text-ink">${item.price.toFixed(2)}</span>
+                    </div>
+                    
+                    {/* Add to cart button */}
+                    <button className="w-10 h-10 rounded-full bg-[#3B5BDB] hover:bg-[#2F4BC0] flex items-center justify-center flex-shrink-0 transition-colors">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+          
+          {/* Navigation arrows */}
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <button 
+              onClick={handlePrev}
+              className="w-10 h-10 rounded-full border-2 border-ink/30 flex items-center justify-center hover:border-ink/60 transition-colors"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-ink">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
             </button>
-            
-            {/* Trust badges */}
-            <div className="flex justify-center gap-4 mt-4 text-xs text-ink/50">
-              <span className="flex items-center gap-1">
-                <Icon name="shield" className="w-4 h-4" />
-                HSA/FSA
-              </span>
-              <span className="flex items-center gap-1">
-                <Icon name="flask" className="w-4 h-4" />
-                3rd Party Tested
-              </span>
-            </div>
+            <button 
+              onClick={handleNext}
+              className="w-10 h-10 rounded-full border-2 border-ink/30 flex items-center justify-center hover:border-ink/60 transition-colors"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-ink">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
       
-      {/* CSS for scroll animations */}
+      {/* Shimmer animation */}
       <style jsx>{`
-        @keyframes scroll-up {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(-50%); }
-        }
-        @keyframes scroll-down {
-          0% { transform: translateY(-50%); }
-          100% { transform: translateY(0); }
-        }
-        .animate-scroll-up {
-          animation: scroll-up 40s linear infinite;
-        }
-        .animate-scroll-down {
-          animation: scroll-down 40s linear infinite;
-        }
-        .animate-scroll-up-slow {
-          animation: scroll-up 50s linear infinite;
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
         }
       `}</style>
     </section>
-  )
-}
-
-// Individual social card component - placeholder style
-function SocialCard({ index, formulaKey }: { index: number; formulaKey: FormulaKey }) {
-  const item = formulas[formulaKey]
-  
-  // Different card styles for variety
-  const cardStyles = [
-    "bg-white",
-    "bg-avro-blue/10",
-    "bg-white",
-    "bg-ink text-white",
-    "bg-white",
-    "bg-avro-blue/20",
-    "bg-white",
-    "bg-soft",
-    "bg-white",
-    "bg-avro-blue/5",
-  ]
-  
-  const style = cardStyles[index % cardStyles.length]
-  const isDark = style.includes("bg-ink")
-  
-  return (
-    <div className={`w-full aspect-[3/4] rounded-2xl p-4 flex flex-col justify-between ${style} border border-line/50 shadow-sm`}>
-      {/* Top - User info placeholder */}
-      <div className="flex items-center gap-2">
-        <div className={`w-8 h-8 rounded-full ${isDark ? "bg-white/20" : "bg-ink/10"}`} />
-        <div className="flex-1">
-          <div className={`h-2 w-16 rounded ${isDark ? "bg-white/30" : "bg-ink/20"}`} />
-          <div className={`h-1.5 w-10 rounded mt-1 ${isDark ? "bg-white/20" : "bg-ink/10"}`} />
-        </div>
-      </div>
-      
-      {/* Middle - Content placeholder with subtle animation */}
-      <div className="flex-1 flex items-center justify-center my-3">
-        <div className={`w-16 h-16 rounded-xl ${isDark ? "bg-white/10" : "bg-avro-blue/20"} flex items-center justify-center`}>
-          <Icon 
-            name={formulaKey === "calm" ? "brain" : formulaKey === "focus" ? "target" : "zap"} 
-            className={`w-8 h-8 ${isDark ? "text-white/60" : "text-ink/40"}`} 
-          />
-        </div>
-      </div>
-      
-      {/* Bottom - Engagement placeholder */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className={`flex items-center gap-1 ${isDark ? "text-white/50" : "text-ink/40"}`}>
-            <Icon name="heart" className="w-4 h-4" />
-            <span className="text-xs font-medium">{(index + 1) * 127}</span>
-          </div>
-        </div>
-        <div className={`h-1.5 w-8 rounded ${isDark ? "bg-white/20" : "bg-ink/10"}`} />
-      </div>
-    </div>
   )
 }
