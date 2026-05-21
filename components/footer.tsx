@@ -125,26 +125,24 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Policy links + copyright — no divider line, sit directly above logo */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-14 pt-2 pb-4 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex flex-wrap gap-6">
-          {["Privacy", "Terms", "Accessibility", "Return Policy"].map((label) => (
-            <Link
-              key={label}
-              href="/faq"
-              className="text-white/50 hover:text-white transition-colors"
-              style={{ fontFamily: GC, fontWeight: 700, fontSize: "17px", lineHeight: 1 }}
-            >
-              {label}
-            </Link>
-          ))}
-        </div>
+      {/* Policy + copyright — left-aligned, tucked up tight before logo */}
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-14 pb-1 flex flex-wrap items-center gap-x-8 gap-y-2">
         <span
           className="text-white/40"
-          style={{ fontFamily: GC, fontWeight: 400, fontSize: "17px" }}
+          style={{ fontFamily: GC, fontWeight: 400, fontSize: "17px", lineHeight: 1 }}
         >
           © 2026 AVRO Life
         </span>
+        {["Privacy", "Terms", "Accessibility", "Return Policy"].map((label) => (
+          <Link
+            key={label}
+            href="/faq"
+            className="text-white/50 hover:text-white transition-colors"
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: "17px", lineHeight: 1 }}
+          >
+            {label}
+          </Link>
+        ))}
       </div>
 
       {/* Large AVRO logo watermark */}
