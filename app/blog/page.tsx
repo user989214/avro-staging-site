@@ -174,12 +174,15 @@ export default function BlogPage() {
               display: "block",
               backgroundColor: "#000",
               borderRadius: 16,
-              padding: "clamp(40px,5vw,64px) clamp(24px,5vw,72px)",
+              padding: "clamp(32px,5vw,64px) clamp(20px,5vw,72px)",
               textDecoration: "none",
+              width: "100%",
+              boxSizing: "border-box",
+              overflow: "hidden",
             }}
           >
             <div className="featured-inner" style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
-              <div style={{ flex: "1 1 480px", minWidth: 280 }}>
+              <div style={{ flex: "1 1 300px", minWidth: 0 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
                   <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: BLUE }}>{featured.category}</span>
                   <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.3)" }} />
@@ -187,10 +190,10 @@ export default function BlogPage() {
                   <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.4)" }} />
                   <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.65)" }}>{featured.readTime}</span>
                 </div>
-                <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,4vw,52px)", lineHeight: 1.0, color: "#fff", marginBottom: 20, maxWidth: 700 }}>
+                <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,4vw,52px)", lineHeight: 1.0, color: "#fff", marginBottom: 20, maxWidth: "100%" }}>
                   {featured.title}
                 </h2>
-                <p className="feat-excerpt" style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(19px,1.8vw,23px)", lineHeight: 1.45, color: "rgba(255,255,255,0.82)", maxWidth: 620 }}>
+                <p className="feat-excerpt" style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(19px,1.8vw,23px)", lineHeight: 1.45, color: "rgba(255,255,255,0.82)", maxWidth: "100%" }}>
                   {featured.excerpt}
                 </p>
               </div>
