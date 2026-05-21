@@ -71,6 +71,11 @@ export default function LearnPage() {
         @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Bold.woff") format("woff"); font-weight: 700; font-style: normal; font-display: swap; }
         @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Medium.woff") format("woff"); font-weight: 500; font-style: normal; font-display: swap; }
         @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Book.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
+        .cta-btn { transition: background-color 0.18s ease, color 0.18s ease; }
+        .cta-btn-white { background-color: transparent; color: #fff; border: 2.5px solid #fff; }
+        .cta-btn-white:hover { background-color: #fff; color: #000; }
+        .cta-btn-blue { background-color: transparent; color: #87CEEB; border: 2.5px solid #87CEEB; }
+        .cta-btn-blue:hover { background-color: #87CEEB; color: #000; }
       `}</style>
 
       {/* ── HERO ── */}
@@ -171,9 +176,9 @@ export default function LearnPage() {
           </div>
           {/* Right: buttons */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-            <a href="/shop/calm" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 10, textDecoration: "none", backgroundColor: "#fff", color: "#000" }}>Shop Calm</a>
-            <a href="/shop/focus" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 10, textDecoration: "none", backgroundColor: "#87CEEB", color: "#000" }}>Shop Focus</a>
-            <a href="/shop/energy" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 10, textDecoration: "none", backgroundColor: "#87CEEB", color: "#000" }}>Shop Energy</a>
+            <a href="/shop/calm" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 10, textDecoration: "none" }}>Shop Calm</a>
+            <a href="/shop/focus" className="cta-btn cta-btn-blue" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 10, textDecoration: "none" }}>Shop Focus</a>
+            <a href="/shop/energy" className="cta-btn cta-btn-blue" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 10, textDecoration: "none" }}>Shop Energy</a>
           </div>
         </div>
       </section>
