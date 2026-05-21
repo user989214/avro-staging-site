@@ -55,7 +55,7 @@ export function Footer() {
         <div className="flex-none lg:flex-[0_0_340px] flex flex-col justify-between gap-8">
           <div>
             <h3
-              className="mb-2 uppercase text-white"
+              className="mb-2 text-white"
               style={{ fontFamily: GC, fontWeight: 800, fontSize: "38px", lineHeight: 1.0 }}
             >
               Stay in the loop
@@ -162,7 +162,7 @@ function FooterColumn({
   return (
     <div>
       <h4
-        className="mb-3 uppercase text-white"
+        className="mb-3 text-white"
         style={{ fontFamily: GC, fontWeight: 800, fontSize: "26px", lineHeight: 1 }}
       >
         {title}
