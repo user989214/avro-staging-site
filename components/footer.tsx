@@ -121,22 +121,21 @@ export function Footer() {
 
         {/* Right columns */}
         <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-8 lg:pl-16 lg:border-l lg:border-white/10">
-          <FooterColumn title="AVRO" links={footerLinks.avro} />
+          <FooterColumn title="Company" links={footerLinks.avro} />
           <FooterColumn title="Shop" links={footerLinks.shop} />
           <FooterColumn title="Learn" links={footerLinks.learn} />
           <FooterColumn title="Follow" links={footerLinks.follow} />
         </div>
       </div>
 
-      {/* Large centered AVRO logo — decorative, aria-hidden so it doesn't affect semantics */}
-      <div className="flex justify-center px-5.5 lg:px-14 pt-5 pb-3 border-t border-white/10" aria-hidden="true">
-        <Image
-          src="/brand/avro-logo.svg"
-          alt=""
-          width={820}
-          height={265}
-          className="w-full max-w-[640px] h-auto invert opacity-20 pointer-events-none"
-        />
+      {/* Large typographic lockup */}
+      <div className="flex justify-center px-5.5 lg:px-14 pt-5 pb-2 border-t border-white/10" aria-hidden="true">
+        <p
+          className="text-center text-white/[0.08] leading-none select-none pointer-events-none"
+          style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(72px, 16vw, 220px)", letterSpacing: "-0.02em" }}
+        >
+          Calm. Clear. Ready.
+        </p>
       </div>
 
       <div className="flex justify-center max-w-[1400px] mx-auto px-5.5 lg:px-14 pb-6">
