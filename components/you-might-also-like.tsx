@@ -8,26 +8,29 @@ import { cn } from "@/lib/utils"
 
 interface YouMightAlsoLikeProps {
   currentKey: FormulaKey
+  hideHeader?: boolean
 }
 
-export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
+export function YouMightAlsoLike({ currentKey, hideHeader = false }: YouMightAlsoLikeProps) {
   const others = (Object.keys(formulas) as FormulaKey[]).filter((k) => k !== currentKey)
 
   return (
-    <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(36px,5vw,64px)] border-b border-line bg-white">
-      <div className="flex items-end justify-between gap-4 mb-6">
-        <div>
-          <span className="block mb-2 text-olive text-[11px] font-black tracking-[0.14em] uppercase">
-            You might also like
-          </span>
-          <h2 className="font-serif font-black text-[clamp(24px,3vw,36px)] leading-[1.05]">
-            Complete your AVRO ritual.
-          </h2>
+    <div className="w-full">
+      {!hideHeader && (
+        <div className="flex items-end justify-between gap-4 mb-6">
+          <div>
+            <span className="block mb-2 text-olive text-[11px] font-black tracking-[0.14em] uppercase">
+              You might also like
+            </span>
+            <h2 className="font-serif font-black text-[clamp(24px,3vw,36px)] leading-[1.05]">
+              Complete your AVRO ritual.
+            </h2>
+          </div>
+          <Link href="/shop" className="hidden sm:inline-flex btn-secondary text-sm">
+            Shop all formulas
+          </Link>
         </div>
-        <Link href="/shop" className="hidden sm:inline-flex btn-secondary text-sm">
-          Shop all formulas
-        </Link>
-      </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {others.map((key) => {
@@ -106,6 +109,6 @@ export function YouMightAlsoLike({ currentKey }: YouMightAlsoLikeProps) {
           </div>
         </Link>
       </div>
-    </section>
+    </div>
   )
 }

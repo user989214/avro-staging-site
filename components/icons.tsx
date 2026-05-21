@@ -43,6 +43,7 @@ import {
   Atom,
   Pill,
   HeartPulse,
+  ArrowRight,
   type LucideIcon,
 } from "lucide-react"
 
@@ -108,6 +109,9 @@ export const iconMap = {
   sprout: Sprout,
   wheat: Wheat,
   "badge-check": BadgeCheck,
+  
+  // Navigation
+  arrowRight: ArrowRight,
 } satisfies Record<string, LucideIcon>
 
 export type IconName = keyof typeof iconMap
