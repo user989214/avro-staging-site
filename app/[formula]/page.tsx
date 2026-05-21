@@ -5,17 +5,11 @@ import { ReviewsBlock } from "@/components/reviews-block"
 import { YouMightAlsoLike } from "@/components/you-might-also-like"
 import { Icon, type IconName } from "@/components/icons"
 import { FinalCta } from "@/components/sections"
+import { PdpMarquee } from "@/components/pdp-marquee"
+import { MoodGraph, IngredientBar } from "@/components/pdp-graph"
+import { SocialProofSection } from "@/components/pdp-social-proof"
 
 const validFormulas = ["calm", "focus", "energy"] as const
-
-const flavorImageMap: Record<string, string> = {
-  "Blueberry Acai": "/images/ingredients/blueberry-acai-2.jpg",
-  "Blackberry Jasmine": "/images/ingredients/blackberry-jasmine-2.jpg",
-  "Pomegranate Raspberry": "/images/ingredients/pomegranate-raspberry-2.jpg",
-  "Red Dragon Fruit": "/images/ingredients/red-dragon-fruit-2.jpg",
-  "Fuji Apple": "/images/ingredients/fuji-apple-2.jpg",
-  "Orange Tangerine": "/images/ingredients/orange-tangerine.jpg",
-}
 
 const benefits: Record<FormulaKey, [string, IconName][]> = {
   calm: [
@@ -35,6 +29,24 @@ const benefits: Record<FormulaKey, [string, IconName][]> = {
     ["Supports clear-headed readiness", "brain"],
     ["Supports energy without chaos", "leaf"],
     ["Naturally fermented PharmaGABA", "flask"],
+  ],
+}
+
+const ingredientData: Record<FormulaKey, { name: string; amount: string; desc: string; highlight?: boolean }[]> = {
+  calm: [
+    { name: "PharmaGABA®", amount: "200 mg", desc: "Naturally fermented. AVRO's calm-first foundation.", highlight: true },
+    { name: "Magnesium Bisglycinate", amount: "850 mg", desc: "Yields 100 mg active magnesium. Supports muscle and nervous system." },
+    { name: "Prebiotic Fiber", amount: "PHGG + Acacia", desc: "Supports gut comfort. Part of AVRO's daily formula." },
+  ],
+  focus: [
+    { name: "PharmaGABA®", amount: "200 mg", desc: "Naturally fermented. AVRO's calm-first foundation.", highlight: true },
+    { name: "Cognigrape®", amount: "250 mg", desc: "Grape extract selected to support clarity and focus." },
+    { name: "Prebiotic Fiber", amount: "PHGG + Acacia", desc: "Supports gut comfort. Part of AVRO's daily formula." },
+  ],
+  energy: [
+    { name: "PharmaGABA®", amount: "200 mg", desc: "Naturally fermented. AVRO's calm-first foundation.", highlight: true },
+    { name: "Natural Caffeine", amount: "120 mg", desc: "From coffee bean extract. Steady alertness with calm built in." },
+    { name: "Prebiotic Fiber", amount: "PHGG + Acacia", desc: "Supports gut comfort. Part of AVRO's daily formula." },
   ],
 }
 
@@ -74,6 +86,9 @@ export default async function ProductPage({
 
   return (
     <>
+      {/* Top Marquee */}
+      <PdpMarquee text="Free shipping on orders over $50" variant="light" />
+
       {/* Breadcrumbs */}
       <nav
         className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] pt-6 pb-3 text-xs text-ink/55"
@@ -115,238 +130,152 @@ export default async function ProductPage({
         </div>
       </section>
 
-      {/* Designed for + Top Reviews row (Cure / Avro style) */}
-      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)] bg-white border-b border-line">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.9fr] gap-12 items-start">
-          <div>
-            <span className="block mb-3 text-olive text-[11px] font-black tracking-[0.14em] uppercase">
-              About this formula
-            </span>
-            <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-5 text-balance">
-              Designed for pressure-sensitive moments.
-            </h2>
-            <p className="text-ink/75 text-lg leading-relaxed mb-8 max-w-[560px]">
-              {item.name} is a calm-first daily drink mix built with naturally
-              fermented PharmaGABA® to support {item.support.toLowerCase()} Use
-              it before meetings, travel, social situations, rounds, sessions,
-              or any moment where state matters.
-            </p>
-            <dl className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-[640px]">
-              <div className="flex flex-col gap-1.5">
-                <dt className="text-[11px] font-black tracking-[0.14em] uppercase text-olive">
-                  Best for
-                </dt>
-                <dd className="text-sm text-ink/75 leading-relaxed">
-                  {item.bestFor}
-                </dd>
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <dt className="text-[11px] font-black tracking-[0.14em] uppercase text-olive">
-                  Caffeine
-                </dt>
-                <dd className="text-sm text-ink/75 leading-relaxed">
-                  {item.caffeine}
-                </dd>
-              </div>
-              <div className="flex flex-col gap-1.5">
-                <dt className="text-[11px] font-black tracking-[0.14em] uppercase text-olive">
-                  When to use
-                </dt>
-                <dd className="text-sm text-ink/75 leading-relaxed">
-                  About 20 to 30 minutes before the moment.
-                </dd>
-              </div>
-            </dl>
-          </div>
-
-          {/* Top customer review (Avro Freeform first review block) */}
-          <aside className="p-7 bg-soft/50 border border-line rounded-lg">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <span className="text-[#d79a23] tracking-wider text-base">{"\u2605\u2605\u2605\u2605\u2605"}</span>
-                <strong className="text-sm font-extrabold">4.8 / 5</strong>
-              </div>
-              <span className="text-xs text-ink/55">Verified buyer</span>
-            </div>
-            <p className="font-serif text-[22px] leading-[1.35] text-ink mb-5">
-              &ldquo;{item.review}&rdquo;
-            </p>
-            <div className="flex items-center justify-between pt-4 border-t border-line">
-              <div>
-                <strong className="block text-sm font-extrabold">
-                  {key === "calm" ? "Jessica M." : key === "focus" ? "Michael T." : "Sarah K."}
-                </strong>
-                <span className="block text-xs text-ink/60 mt-0.5">
-                  {item.flavor} &middot; 10 Sticks
-                </span>
-              </div>
-              <a
-                href="#reviews"
-                className="text-xs font-extrabold text-olive-dark hover:underline"
-              >
-                Read all reviews →
-              </a>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      {/* What's inside */}
-      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)] bg-white border-b border-line">
-        <div className="max-w-[700px] mb-9">
-          <span className="block mb-3 text-olive text-[11px] font-black tracking-[0.14em] uppercase">
-            What&apos;s inside
-          </span>
-          <h2 className="font-serif font-black text-[clamp(28px,3.5vw,46px)] leading-[1.05] text-balance">
-            Clear ingredient logic. Nothing hidden.
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 border border-line rounded-lg overflow-hidden bg-white">
-          {[
-            {
-              title: "PharmaGABA®",
-              dose: "200 mg",
-              copy: "Naturally fermented. AVRO's calm-first foundation.",
-              icon: "leaf" as IconName,
-              image: "/images/ingredients/pharmagaba-2.jpg",
-              alt: "Naturally fermented PharmaGABA powder",
-            },
-            {
-              title: item.addition,
-              dose:
-                key === "calm" ? "850 mg" : key === "focus" ? "250 mg" : "120 mg",
-              copy:
-                key === "calm"
-                  ? "Yields 100 mg of active magnesium. Supports muscle and nervous system function."
-                  : key === "focus"
-                    ? "Grape (Vitis vinifera) fruit extract selected to support clarity and focus."
-                    : "From Coffea arabica and Coffea canephora bean extract. Steady alertness with calm built in.",
-              icon: "flask" as IconName,
-              image:
-                key === "calm"
-                  ? "/images/ingredients/magnesium-bisglycinate-2.jpg"
-                  : key === "focus"
-                    ? "/images/ingredients/cognigrape-2.jpg"
-                    : key === "energy"
-                      ? "/images/ingredients/natural-caffeine-2.jpg"
-                      : null,
-              alt:
-                key === "calm"
-                  ? "Magnesium bisglycinate powder"
-                  : key === "focus"
-                    ? "Cognigrape red grape cluster"
-                    : key === "energy"
-                      ? "Roasted coffee beans, source of natural caffeine"
-                      : "",
-            },
-            {
-              title: "Prebiotic Fiber",
-              dose: "PHGG + Acacia",
-              copy: "Supports gut comfort. Part of AVRO's daily formula.",
-              icon: "shield" as IconName,
-              image: "/images/ingredients/prebiotic-fiber-2.jpg",
-              alt: "Prebiotic fiber blend powder",
-            },
-            {
-              title: "Stevia",
-              dose: "≤ 2%",
-              copy: "Used in a small amount for a clean, balanced finish.",
-              icon: "star" as IconName,
-              image: "/images/ingredients/stevia-2.jpg",
-              alt: "Fresh stevia leaves",
-            },
-            {
-              title: "Natural Flavor",
-              dose: item.flavor,
-              copy: "Bright, clean flavor without artificial sweeteners.",
-              icon: "cup" as IconName,
-              image: flavorImageMap[item.flavor] ?? null,
-              alt: `${item.flavor} natural flavor`,
-            },
-          ].map((ing, i) => (
-            <article
-              key={ing.title}
-              className={
-                "flex flex-col bg-white " +
-                (i > 0
-                  ? "border-t sm:border-t-0 sm:border-l border-line"
-                  : "")
-              }
-            >
-              {ing.image ? (
-                <div className="relative w-full aspect-square bg-soft/60 border-b border-line overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={ing.image}
-                    alt={ing.alt}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                </div>
-              ) : (
-                <div className="w-full aspect-square bg-soft/60 border-b border-line grid place-items-center">
-                  <span className="grid place-items-center w-16 h-16 rounded-full bg-white border border-line">
-                    <Icon name={ing.icon} className="w-8 h-8 text-olive" />
-                  </span>
-                </div>
-              )}
-              <div className="flex flex-col p-7">
-                <h3 className="font-black text-base mb-1">{ing.title}</h3>
-                <span className="text-[11px] font-black tracking-[0.1em] uppercase text-olive mb-3">
-                  {ing.dose}
-                </span>
-                <p className="text-sm text-ink/70 leading-relaxed">{ing.copy}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* How to use */}
-      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)] bg-white border-b border-line">
-        <div className="max-w-[700px] mb-9">
-          <span className="block mb-3 text-olive text-[11px] font-black tracking-[0.14em] uppercase">
-            How to use
-          </span>
-          <h2 className="font-serif font-black text-[clamp(28px,3.5vw,46px)] leading-[1.05] text-balance">
-            Make it a simple ritual.
-          </h2>
-        </div>
-        <ol className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {[
-            { n: 1, icon: "cup" as IconName, title: "Pour", copy: "One stick into 8–12 oz of cold water." },
-            { n: 2, icon: "flask" as IconName, title: "Stir", copy: "Mix or shake until fully dissolved." },
-            { n: 3, icon: "clock" as IconName, title: "Time it", copy: "Drink 20–30 minutes before the moment." },
-          ].map((step) => (
-            <li
-              key={step.n}
-              className="relative flex flex-col gap-3 p-7 bg-white border border-line rounded-lg"
-            >
-              <span className="absolute -top-3 left-7 grid place-items-center w-8 h-8 rounded-full bg-olive text-white text-sm font-black">
-                {step.n}
-              </span>
-              <Icon name={step.icon} className="w-9 h-9 text-olive mt-2" />
-              <h3 className="font-black text-lg">{step.title}</h3>
-              <p className="text-sm text-ink/70 leading-relaxed">{step.copy}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* You might also like (Cure Hydration) */}
+      {/* YOU MIGHT ALSO LIKE - Moved up per NeuroGum style */}
       <YouMightAlsoLike currentKey={key} />
 
-      {/* FAQ accordion (Avro Freeform style) */}
-      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)] bg-white border-b border-line">
+      {/* Angled Section: Social Proof */}
+      <section className="relative w-full bg-soft py-[clamp(48px,7vw,96px)]">
+        {/* Top angle */}
+        <div className="absolute top-0 left-0 right-0 h-[60px] bg-white" style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 0)" }} />
+        
+        <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] pt-8">
+          <SocialProofSection formulaKey={key} />
+        </div>
+        
+        {/* Bottom angle */}
+        <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-white" style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%, 0 100%)" }} />
+      </section>
+
+      {/* The Feeling of Good Energy / Calm - Graph Section */}
+      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)] bg-white">
+        <div className="text-center mb-10">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-olive/10 text-olive text-xs font-bold uppercase tracking-wider mb-4">
+            The Science
+          </span>
+          <h2 className="font-serif font-black text-[clamp(28px,4vw,48px)] leading-[1.05] text-ink mb-3">
+            The feeling of {key === "energy" ? "good energy" : key === "focus" ? "clear focus" : "true calm"}.
+          </h2>
+          <p className="text-ink/60 text-lg max-w-[600px] mx-auto">
+            {key === "energy" 
+              ? "Steady energy that lasts, without the jitters or crash."
+              : key === "focus"
+                ? "Clear, sustained focus without overstimulation."
+                : "Calm composure that doesn't make you drowsy."
+            }
+          </p>
+        </div>
+        <MoodGraph formulaKey={key} />
+      </section>
+
+      {/* Angled Section: Formulated with ingredients */}
+      <section className="relative w-full bg-ink text-white py-[clamp(48px,7vw,96px)]">
+        {/* Top angle */}
+        <div className="absolute top-0 left-0 right-0 h-[60px] bg-white" style={{ clipPath: "polygon(0 0, 100% 0, 0 100%, 0 0)" }} />
+        
+        <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] pt-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-avro-blue text-xs font-bold uppercase tracking-wider mb-4">
+                What&apos;s Inside
+              </span>
+              <h2 className="font-serif font-black text-[clamp(28px,4vw,48px)] leading-[1.05] text-white mb-5">
+                Formulated with ingredients that work with your body, not against it.
+              </h2>
+              <p className="text-white/70 text-lg leading-relaxed mb-8">
+                Every ingredient in AVRO {item.short} is selected with intention. No fillers, no artificial sweeteners, no compromises.
+              </p>
+              <ul className="space-y-3 text-white/80">
+                <li className="flex items-center gap-3">
+                  <Icon name="check" className="w-5 h-5 text-avro-blue" />
+                  <span>Vegan & Plant-based</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Icon name="check" className="w-5 h-5 text-avro-blue" />
+                  <span>Gluten Free</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Icon name="check" className="w-5 h-5 text-avro-blue" />
+                  <span>Third-Party Tested</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Icon name="check" className="w-5 h-5 text-avro-blue" />
+                  <span>Made in USA • GMP Compliant</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div className="space-y-3">
+              {ingredientData[key].map((ing) => (
+                <div 
+                  key={ing.name}
+                  className={`flex items-center gap-4 p-4 rounded-lg border ${ing.highlight ? "border-avro-blue bg-avro-blue/10" : "border-white/20 bg-white/5"}`}
+                >
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
+                    <Icon name="flask" className={`w-6 h-6 ${ing.highlight ? "text-avro-blue" : "text-white/60"}`} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <h4 className="font-bold text-white truncate">{ing.name}</h4>
+                      <span className="text-sm font-extrabold text-avro-blue shrink-0">{ing.amount}</span>
+                    </div>
+                    <p className="text-sm text-white/60 mt-0.5">{ing.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        {/* Bottom angle */}
+        <div className="absolute bottom-0 left-0 right-0 h-[60px] bg-white" style={{ clipPath: "polygon(100% 0, 100% 100%, 0 100%, 100% 0)" }} />
+      </section>
+
+      {/* How to use - Redesigned with icons */}
+      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(64px,8vw,100px)] bg-white">
+        <div className="text-center mb-10">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-olive/10 text-olive text-xs font-bold uppercase tracking-wider mb-4">
+            Simple Ritual
+          </span>
+          <h2 className="font-serif font-black text-[clamp(28px,4vw,48px)] leading-[1.05] text-ink mb-3">
+            3 easy steps. Your new daily ritual.
+          </h2>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[900px] mx-auto">
+          {[
+            { n: 1, icon: "cup" as IconName, title: "Pour", copy: "One stick into 8–12 oz of cold water." },
+            { n: 2, icon: "flask" as IconName, title: "Mix", copy: "Stir or shake until fully dissolved." },
+            { n: 3, icon: "clock" as IconName, title: "Enjoy", copy: "Drink 20–30 minutes before your moment." },
+          ].map((step) => (
+            <div key={step.n} className="text-center group">
+              <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-soft border-2 border-line mb-5 transition-all group-hover:border-olive group-hover:bg-olive/5">
+                <Icon name={step.icon} className="w-9 h-9 text-olive" />
+                <span className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-olive text-white text-sm font-black flex items-center justify-center">
+                  {step.n}
+                </span>
+              </div>
+              <h3 className="font-black text-xl mb-2">{step.title}</h3>
+              <p className="text-ink/60 leading-relaxed">{step.copy}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Marquee divider */}
+      <PdpMarquee text="HSA / FSA Eligible • Third-Party Tested • 30-Day Guarantee" variant="accent" />
+
+      {/* FAQ accordion */}
+      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)] bg-white">
         <div className="grid grid-cols-1 lg:grid-cols-[0.75fr_1.25fr] gap-10 lg:gap-16 items-start">
           <div>
-            <span className="block mb-3 text-olive text-[11px] font-black tracking-[0.14em] uppercase">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-olive/10 text-olive text-xs font-bold uppercase tracking-wider mb-4">
               Questions
             </span>
             <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-4 text-balance">
-              {item.short} FAQ
+              Frequently asked. All answered.
             </h2>
             <p className="text-ink/70 leading-relaxed">
-              Important info, kept tidy. Tap a question to expand.
+              Everything you need to know about AVRO {item.short}.
             </p>
           </div>
           <div className="flex flex-col">
@@ -387,8 +316,8 @@ export default async function ProductPage({
               >
                 <summary className="flex items-center justify-between gap-6 py-5 cursor-pointer list-none select-none text-base font-extrabold text-ink hover:text-olive transition-colors">
                   <span>{q}</span>
-                  <span className="grid place-items-center w-7 h-7 rounded-full border border-line text-lg leading-none transition-transform group-open:rotate-45 shrink-0">
-                    +
+                  <span className="grid place-items-center w-8 h-8 rounded-full bg-soft text-lg leading-none transition-all group-open:bg-olive group-open:text-white shrink-0">
+                    <span className="transition-transform group-open:rotate-45">+</span>
                   </span>
                 </summary>
                 <p className="pb-5 pr-12 text-ink/70 leading-relaxed">{a}</p>
@@ -398,7 +327,7 @@ export default async function ProductPage({
         </div>
       </section>
 
-      {/* Bottom Reviews block (second review location like Avro / Cure) */}
+      {/* Bottom Reviews block */}
       <div id="reviews">
         <ReviewsBlock formula={item} formulaKey={key} />
       </div>

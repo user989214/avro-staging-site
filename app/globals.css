@@ -324,6 +324,20 @@
   border: 0;
 }
 
+/* Marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
 /* Button styles */
 .btn-primary {
   @apply inline-flex items-center justify-center min-h-[52px] px-8 border border-transparent rounded-full bg-olive text-white text-[15px] cursor-pointer transition-all;
