@@ -29,6 +29,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-paper" data-scroll-behavior="smooth">
+      <head>
+        <link rel="preload" href="/fonts/GothamCond-Bold.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/GothamCond-Book.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/GothamCond-Medium.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/GothamCond-Ultra.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+      </head>
       <body className="font-sans antialiased">
         <CartProvider>
           <Header />
