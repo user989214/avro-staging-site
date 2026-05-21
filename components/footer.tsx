@@ -111,7 +111,7 @@ export function Footer() {
               Administration. This product is not intended to diagnose, treat,
               cure, or prevent any disease.
             </small>
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-1.5 pt-1">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-1.5 pt-4">
               <span
                 className="text-white/40"
                 style={{ fontFamily: GC, fontWeight: 400, fontSize: "15px", lineHeight: 1 }}
