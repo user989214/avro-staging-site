@@ -177,8 +177,8 @@ export function HomeProductStrip() {
   }
   const socialImages: Record<FormulaKey, string> = {
     calm: "/images/lifestyle/tube-social-calm-blueberry-acai.png",
-    focus: "/images/lifestyle/tube-social-focus-pomegranate-raspberry.png",
-    energy: "/images/lifestyle/tube-social-energy-orange-tangerine.png",
+    focus: "/images/lifestyle/tube-tech-focus-pomegranate-raspberry.png",
+    energy: "/images/lifestyle/tube-golf-energy-orange-tangerine.png",
   }
 
   return (
