@@ -10,7 +10,7 @@ const BLUE = "#87CEEB"
 // ── HERO ──────────────────────────────────────────────────────────────────────
 export function HomeRefHero() {
   return (
-    <section style={{ width: "100%", backgroundColor: "#000", color: "#fff" }}>
+    <section style={{ width: "100%", backgroundColor: "#fff", color: "#000" }}>
       <style>{`
         @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Ultra.woff") format("woff"); font-weight: 950; font-style: normal; font-display: swap; }
         @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Black.woff") format("woff"); font-weight: 800; font-style: normal; font-display: swap; }
@@ -35,15 +35,15 @@ export function HomeRefHero() {
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", maxWidth: 1440, margin: "0 auto" }}>
         {/* Left */}
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(56px,8vw,112px) clamp(20px,6vw,80px)" }}>
-          <h1 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(52px,7.5vw,108px)", lineHeight: 0.94, color: "#fff", marginBottom: 28, maxWidth: 560 }}>
+          <h1 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(52px,7.5vw,108px)", lineHeight: 0.94, color: "#000", marginBottom: 28, maxWidth: 560 }}>
             Calm. Clear. Ready.
           </h1>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(19px,1.8vw,24px)", lineHeight: 1.5, color: "rgba(255,255,255,0.82)", maxWidth: 520, marginBottom: 36 }}>
+          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(19px,1.8vw,24px)", lineHeight: 1.5, color: "rgba(0,0,0,0.65)", maxWidth: 520, marginBottom: 36 }}>
             AVRO is a calm-first daily drink mix made with naturally fermented PharmaGABA®, designed to support clarity, composure, and steady energy before the moments that matter.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-            <a href="/shop" className="hp-btn-blue" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 21, minHeight: 66, padding: "0 44px", borderRadius: 10, textDecoration: "none" }}>Shop AVRO</a>
-            <a href="/shop" className="hp-btn-outline-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 21, minHeight: 66, padding: "0 44px", borderRadius: 10, textDecoration: "none" }}>Find Your Formula</a>
+            <a href="/shop" className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 21, minHeight: 66, padding: "0 44px", borderRadius: 10, textDecoration: "none" }}>Shop AVRO</a>
+            <a href="/shop" className="hp-btn-outline-black" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 21, minHeight: 66, padding: "0 44px", borderRadius: 10, textDecoration: "none" }}>Find Your Formula</a>
           </div>
         </div>
         {/* Right: image */}
