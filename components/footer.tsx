@@ -124,10 +124,8 @@ export function Footer() {
           </small>
         </div>
 
-        {/* Right: nav columns — inside a rounded-rectangle card */}
-        <div
-          className="flex-1 rounded-[12px] border-2 border-white/25 p-6 lg:p-8"
-        >
+        {/* Right: nav columns */}
+        <div className="flex-1 lg:pl-16 lg:border-l border-white/15">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <FooterColumn title="Company" links={footerLinks.avro} />
             <FooterColumn title="Shop" links={footerLinks.shop} />
@@ -159,14 +157,15 @@ export function Footer() {
         </span>
       </div>
 
-      {/* Decorative tagline watermark */}
-      <div className="overflow-hidden pb-3" aria-hidden="true">
-        <p
-          className="text-center text-white/[0.07] leading-none select-none pointer-events-none whitespace-nowrap"
-          style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(72px, 16vw, 220px)", letterSpacing: "-0.02em" }}
-        >
-          Calm. Clear. Ready.
-        </p>
+      {/* Large AVRO logo watermark */}
+      <div className="flex justify-center overflow-hidden pb-4 pt-2 border-t border-white/10" aria-hidden="true">
+        <Image
+          src="/brand/avro-logo-footer.svg"
+          alt=""
+          width={1200}
+          height={390}
+          className="w-[min(90vw,900px)] h-auto invert opacity-[0.12] pointer-events-none select-none"
+        />
       </div>
 
     </footer>
