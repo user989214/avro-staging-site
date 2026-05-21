@@ -163,6 +163,11 @@ export default function LearnPage() {
           <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(18px,1.8vw,22px)", lineHeight: 1.45, color: "#111", maxWidth: 560 }}>
             Choose Calm, Focus, or Energy based on the moment you want to support.
           </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center", marginTop: 16 }}>
+            <a href="/shop/calm" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 62, padding: "0 36px", borderRadius: 10, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}>Calm</a>
+            <a href="/shop/focus" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 62, padding: "0 36px", borderRadius: 10, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}>Focus</a>
+            <a href="/shop/energy" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 62, padding: "0 36px", borderRadius: 10, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}>Energy</a>
+          </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "center", marginTop: 8 }}>
             <a href="/shop" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 21, minHeight: 66, padding: "0 46px", borderRadius: 10, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}>Shop AVRO</a>
             <a href="/shop" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 21, minHeight: 66, padding: "0 46px", borderRadius: 10, textDecoration: "none", backgroundColor: "transparent", color: "#000", border: "2.5px solid #000" }}>Find Your Formula</a>
