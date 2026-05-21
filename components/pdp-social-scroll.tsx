@@ -12,62 +12,13 @@ const GC = '"Gotham Condensed", sans-serif'
 const BLUE = "#87CEEB"
 
 const socialCards = [
-  { 
-    id: 1, 
-    label: "Morning routine", 
-    bg: "#2a2a2a",
-    quote: "I start every morning with AVRO. It's become my ritual.",
-    author: "Sarah K.",
-    role: "Product Designer"
-  },
-  { 
-    id: 2, 
-    label: "Work focus", 
-    bg: "#333333",
-    quote: "Helps me get into deep work mode without the jitters.",
-    author: "Mike T.",
-    role: "Software Engineer"
-  },
-  { 
-    id: 3, 
-    label: "Customer story", 
-    bg: "#3a3a3a",
-    quote: "Finally found something that actually works for me.",
-    author: "Jessica L.",
-    role: "Marketing Lead"
-  },
-  { 
-    id: 4, 
-    label: "Team moment", 
-    bg: "#2f2f2f",
-    quote: "Our whole team keeps a stash in the office now.",
-    author: "David R.",
-    role: "Startup Founder"
-  },
-  { 
-    id: 5, 
-    label: "Evening wind-down", 
-    bg: "#353535",
-    quote: "Perfect for winding down after a long day.",
-    author: "Amanda C.",
-    role: "Nurse Practitioner"
-  },
-  { 
-    id: 6, 
-    label: "Pre-workout", 
-    bg: "#2c2c2c",
-    quote: "Better than any pre-workout I've tried. Clean energy.",
-    author: "Chris B.",
-    role: "Fitness Coach"
-  },
-  { 
-    id: 7, 
-    label: "Study session", 
-    bg: "#383838",
-    quote: "Got me through finals week. Game changer.",
-    author: "Taylor M.",
-    role: "Graduate Student"
-  },
+  { id: 1, label: "Morning routine", bg: "#2a2a2a" },
+  { id: 2, label: "Work focus", bg: "#333333" },
+  { id: 3, label: "Customer story", bg: "#3a3a3a" },
+  { id: 4, label: "Team moment", bg: "#2f2f2f" },
+  { id: 5, label: "Evening wind-down", bg: "#353535" },
+  { id: 6, label: "Pre-workout", bg: "#2c2c2c" },
+  { id: 7, label: "Study session", bg: "#383838" },
 ]
 
 export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
@@ -147,10 +98,10 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
                     zIndex: isFeatured ? 10 : isAdjacent ? 5 : 1,
                   }}
                 >
-                  {/* Card background with content */}
-                  <div className="absolute inset-0 flex flex-col" style={{ backgroundColor: card.bg }}>
+                  {/* Card background - video placeholder */}
+                  <div className="absolute inset-0" style={{ backgroundColor: card.bg }}>
                     {/* Top label */}
-                    <div className="p-4">
+                    <div className="absolute top-4 left-4 right-4">
                       <div
                         className="inline-block px-3 py-1.5 rounded-full"
                         style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
@@ -161,44 +112,19 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
                       </div>
                     </div>
                     
-                    {/* Quote content - centered */}
-                    <div className="flex-1 flex flex-col justify-center px-5 pb-24">
-                      <p
-                        className="mb-4"
-                        style={{
-                          fontFamily: GC,
-                          fontWeight: 700,
-                          fontSize: isFeatured ? 22 : 18,
-                          lineHeight: 1.3,
-                          color: "#fff",
-                        }}
-                      >
-                        "{card.quote}"
-                      </p>
-                      <div>
-                        <span
-                          className="block"
-                          style={{
-                            fontFamily: GC,
-                            fontWeight: 800,
-                            fontSize: isFeatured ? 16 : 14,
-                            color: "#fff",
-                          }}
+                    {/* Play button overlay for non-featured */}
+                    {!isFeatured && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div
+                          className="w-12 h-12 rounded-full flex items-center justify-center"
+                          style={{ backgroundColor: "rgba(255,255,255,0.2)" }}
                         >
-                          {card.author}
-                        </span>
-                        <span
-                          style={{
-                            fontFamily: GC,
-                            fontWeight: 500,
-                            fontSize: isFeatured ? 14 : 12,
-                            color: "rgba(255,255,255,0.7)",
-                          }}
-                        >
-                          {card.role}
-                        </span>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                          </svg>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                   
                   {/* Quick add card at bottom */}
