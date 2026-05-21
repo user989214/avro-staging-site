@@ -53,18 +53,8 @@ export function Footer() {
       {/* Main content row */}
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 max-w-[1400px] mx-auto px-6 lg:px-14 pt-10 lg:pt-14 pb-8 lg:pb-10">
 
-        {/* Left col: logo + newsletter + legal */}
+        {/* Left col: newsletter + legal */}
         <div className="flex-none lg:w-[360px] flex flex-col gap-7">
-
-          {/* Logo */}
-          <Image
-            src="/brand/avro-logo-footer.svg"
-            alt="AVRO"
-            width={320}
-            height={104}
-            className="w-[200px] h-auto invert"
-            priority
-          />
 
           {/* Newsletter box — rounded rectangle */}
           <div
@@ -125,7 +115,7 @@ export function Footer() {
         </div>
 
         {/* Right: nav columns */}
-        <div className="flex-1 lg:pl-16 lg:border-l border-white/15">
+        <div className="flex-1 lg:pl-16">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <FooterColumn title="Company" links={footerLinks.avro} />
             <FooterColumn title="Shop" links={footerLinks.shop} />
@@ -136,7 +126,7 @@ export function Footer() {
       </div>
 
       {/* Bottom bar: policy links + copyright */}
-      <div className="border-t-2 border-white/20 max-w-[1400px] mx-auto px-6 lg:px-14 py-5 flex flex-wrap items-center justify-between gap-4">
+      <div className="border-t border-white/15 max-w-[1400px] mx-auto px-6 lg:px-14 py-5 flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap gap-6">
           {["Privacy", "Terms", "Accessibility", "Return Policy"].map((label) => (
             <Link
@@ -158,7 +148,7 @@ export function Footer() {
       </div>
 
       {/* Large AVRO logo watermark */}
-      <div className="flex justify-center overflow-hidden pb-4 pt-2 border-t border-white/10" aria-hidden="true">
+      <div className="flex justify-center overflow-hidden pb-4 pt-2" aria-hidden="true">
         <Image
           src="/brand/avro-logo-footer.svg"
           alt=""
