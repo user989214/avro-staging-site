@@ -18,7 +18,7 @@ export function ProductHero({ formula, formulaKey }: ProductHeroProps) {
   const [flavorId, setFlavorId] = useState<string>(formula.flavors[0].id)
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-14 items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-start">
       <ProductGallery
         formula={formula}
         formulaKey={formulaKey}

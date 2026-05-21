@@ -14,6 +14,7 @@ import type { Formula, FormulaKey } from "@/lib/data"
 import { cn } from "@/lib/utils"
 
 const GC = '"Gotham Condensed", sans-serif'
+const LIGHT_GRAY = "#f2f2f2"
 
 interface BuyBoxProps {
   formula: Formula
@@ -57,36 +58,48 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
   ]
 
   return (
-    <aside className="flex flex-col gap-6 p-8 bg-white rounded-xl" style={{ fontFamily: GC }}>
+    <aside
+      className="flex flex-col gap-7 bg-white"
+      style={{ fontFamily: GC }}
+    >
       {/* Header */}
-      <header className="flex flex-col gap-2">
-        <span
-          className="text-[11px] tracking-[0.14em] uppercase"
-          style={{ fontFamily: GC, fontWeight: 700, color: "rgba(0,0,0,0.55)" }}
-        >
-          {formula.name}
-        </span>
+      <header className="flex flex-col gap-3">
         <h1
           style={{
             fontFamily: GC,
             fontWeight: 950,
-            fontSize: "clamp(28px,3vw,42px)",
-            lineHeight: 1.0,
+            fontSize: "clamp(40px,4.5vw,60px)",
+            lineHeight: 0.96,
             color: "#000",
           }}
         >
           {formula.headline}
         </h1>
-        <div className="flex items-center gap-2 mt-1">
-          <span style={{ color: "#d79a23" }} className="tracking-wider text-sm">
+        <div className="flex items-center gap-3">
+          <span style={{ color: "#000" }} className="tracking-wider text-base">
             {"\u2605\u2605\u2605\u2605\u2605"}
           </span>
-          <span className="text-sm" style={{ color: "rgba(0,0,0,0.55)" }}>
+          <span
+            style={{
+              fontFamily: GC,
+              fontWeight: 500,
+              fontSize: 17,
+              color: "rgba(0,0,0,0.6)",
+            }}
+          >
             {reviewLabel}
           </span>
         </div>
-        <p className="mt-1 text-xs" style={{ color: "rgba(0,0,0,0.55)" }}>
-          10 stick packets per box · Flavor: {activeFlavor.name}
+        <p
+          style={{
+            fontFamily: GC,
+            fontWeight: 500,
+            fontSize: 18,
+            lineHeight: 1.4,
+            color: "rgba(0,0,0,0.6)",
+          }}
+        >
+          10 stick packets per box · {activeFlavor.name}
         </p>
       </header>
 
@@ -95,10 +108,10 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
         <PurchaseOption
           checked={purchaseType === "subscribe"}
           onChange={() => setPurchaseType("subscribe")}
-          title="Subscribe & Save 25%"
+          title="Subscribe & save 25%"
           subtitle="Delivered every 28 days. Pause, skip, or cancel anytime."
           price={`$${subscribeTotal.toFixed(2)}`}
-          badge="MOST POPULAR"
+          badge="Most popular"
         />
         <PurchaseOption
           checked={purchaseType === "onetime"}
@@ -111,25 +124,32 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
 
       {/* Quantity */}
       <div className="flex items-center justify-between">
-        <h2 className="text-sm uppercase tracking-[0.1em]" style={{ fontFamily: GC, fontWeight: 800 }}>
+        <h2
+          style={{
+            fontFamily: GC,
+            fontWeight: 800,
+            fontSize: 19,
+            color: "#000",
+          }}
+        >
           Quantity
         </h2>
         <div
           className="flex items-center"
-          style={{ backgroundColor: "#f2f2f2", borderRadius: 8 }}
+          style={{ backgroundColor: LIGHT_GRAY, borderRadius: 10 }}
         >
           <button
             type="button"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             aria-label="Decrease quantity"
-            className="w-10 h-10 flex items-center justify-center text-lg transition-colors hover:bg-black/5"
-            style={{ fontFamily: GC, fontWeight: 800 }}
+            className="w-12 h-12 flex items-center justify-center transition-colors hover:bg-black/5"
+            style={{ fontFamily: GC, fontWeight: 800, fontSize: 22 }}
           >
             −
           </button>
           <span
-            className="w-10 text-center"
-            style={{ fontFamily: GC, fontWeight: 800, fontSize: 16 }}
+            className="w-12 text-center"
+            style={{ fontFamily: GC, fontWeight: 800, fontSize: 19 }}
           >
             {quantity}
           </span>
@@ -137,8 +157,8 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
             type="button"
             onClick={() => setQuantity((q) => q + 1)}
             aria-label="Increase quantity"
-            className="w-10 h-10 flex items-center justify-center text-lg transition-colors hover:bg-black/5"
-            style={{ fontFamily: GC, fontWeight: 800 }}
+            className="w-12 h-12 flex items-center justify-center transition-colors hover:bg-black/5"
+            style={{ fontFamily: GC, fontWeight: 800, fontSize: 22 }}
           >
             +
           </button>
@@ -153,9 +173,9 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
         style={{
           fontFamily: GC,
           fontWeight: 800,
-          fontSize: 18,
-          minHeight: 60,
-          padding: "0 32px",
+          fontSize: 21,
+          minHeight: 66,
+          padding: "0 36px",
           borderRadius: 10,
           backgroundColor: "#000",
           color: "#fff",
@@ -171,7 +191,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
           e.currentTarget.style.color = "#fff"
         }}
       >
-        Add to Cart — ${displayTotal.toFixed(2)}
+        Add to cart — ${displayTotal.toFixed(2)}
       </button>
 
       {/* Supplement Facts button */}
@@ -182,57 +202,75 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
             className="w-full flex items-center justify-center gap-2 transition-colors"
             style={{
               fontFamily: GC,
-              fontWeight: 700,
-              fontSize: 14,
-              minHeight: 48,
-              padding: "0 24px",
+              fontWeight: 800,
+              fontSize: 17,
+              minHeight: 56,
+              padding: "0 28px",
               borderRadius: 10,
-              backgroundColor: "#f2f2f2",
+              backgroundColor: LIGHT_GRAY,
               color: "#000",
               border: "none",
-              letterSpacing: "0.05em",
-              textTransform: "uppercase",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#e8e8e8"
+              e.currentTarget.style.backgroundColor = "#e6e6e6"
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "#f2f2f2"
+              e.currentTarget.style.backgroundColor = LIGHT_GRAY
             }}
           >
-            <Icon name="card" className="w-4 h-4" />
-            Supplement Facts
+            <Icon name="card" className="w-5 h-5" />
+            Supplement facts
           </button>
         </DialogTrigger>
-        <DialogContent className="max-w-[420px] p-0 bg-white">
+        <DialogContent className="max-w-[440px] p-0 bg-white">
           <div className="p-6 pb-2">
             <DialogHeader>
-              <DialogTitle style={{ fontFamily: GC, fontWeight: 950, fontSize: 28 }}>
-                Supplement Facts
+              <DialogTitle style={{ fontFamily: GC, fontWeight: 950, fontSize: 32, color: "#000" }}>
+                Supplement facts
               </DialogTitle>
             </DialogHeader>
-            <p className="mt-1 text-xs" style={{ color: "rgba(0,0,0,0.55)" }}>
+            <p
+              className="mt-1"
+              style={{
+                fontFamily: GC,
+                fontWeight: 500,
+                fontSize: 15,
+                color: "rgba(0,0,0,0.55)",
+              }}
+            >
               {formula.name} · {activeFlavor.name} · Serving size 1 stick (5 g)
             </p>
           </div>
           <div className="px-6 pb-6">
-            <div className="rounded-md p-4" style={{ backgroundColor: "#f5f5f5" }}>
+            <div className="rounded-md p-4" style={{ backgroundColor: LIGHT_GRAY }}>
               <div style={{ borderTop: "4px solid #000", paddingTop: 8 }}>
                 {factsRows.map(([label, value], i) => (
                   <div
                     key={label}
                     className={cn(
-                      "flex justify-between text-xs py-2",
+                      "flex justify-between py-2",
                       i < factsRows.length - 1 && "border-b",
                     )}
-                    style={{ borderColor: "rgba(0,0,0,0.08)" }}
+                    style={{
+                      borderColor: "rgba(0,0,0,0.1)",
+                      fontFamily: GC,
+                      fontSize: 14,
+                    }}
                   >
-                    <span style={{ fontFamily: GC, fontWeight: 700 }}>{label}</span>
-                    <span>{value}</span>
+                    <span style={{ fontWeight: 700 }}>{label}</span>
+                    <span style={{ fontWeight: 500 }}>{value}</span>
                   </div>
                 ))}
               </div>
-              <p className="mt-3 text-[10px] leading-snug" style={{ color: "rgba(0,0,0,0.55)" }}>
+              <p
+                className="mt-3 leading-snug"
+                style={{
+                  fontFamily: GC,
+                  fontWeight: 400,
+                  fontSize: 12,
+                  color: "rgba(0,0,0,0.55)",
+                }}
+              >
                 10 stick packets per box. Mix 1 packet into 12 fl oz of water; up to 3 times per day.
               </p>
             </div>
@@ -260,11 +298,12 @@ function PurchaseOption({
 }) {
   return (
     <label
-      className="relative flex items-start gap-3 p-4 cursor-pointer transition-all"
+      className="relative flex items-start gap-3 p-5 cursor-pointer transition-all"
       style={{
         borderRadius: 10,
-        backgroundColor: checked ? "#000" : "#f5f5f5",
+        backgroundColor: checked ? "#000" : LIGHT_GRAY,
         color: checked ? "#fff" : "#000",
+        fontFamily: GC,
       }}
     >
       <input
@@ -273,12 +312,12 @@ function PurchaseOption({
         checked={checked}
         onChange={onChange}
         className="mt-1 shrink-0"
-        style={{ accentColor: "#87CEEB" }}
+        style={{ accentColor: "#fff", width: 18, height: 18 }}
       />
       <div className="flex-1">
         <div className="flex items-center justify-between gap-3">
-          <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: 15 }}>{title}</strong>
-          <strong style={{ fontFamily: GC, fontWeight: 950, fontSize: 15, whiteSpace: "nowrap" }}>
+          <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: 18 }}>{title}</strong>
+          <strong style={{ fontFamily: GC, fontWeight: 950, fontSize: 18, whiteSpace: "nowrap" }}>
             {price}
           </strong>
         </div>
@@ -287,7 +326,7 @@ function PurchaseOption({
           style={{
             fontFamily: GC,
             fontWeight: 400,
-            fontSize: 12,
+            fontSize: 14,
             color: checked ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)",
           }}
         >
@@ -296,13 +335,14 @@ function PurchaseOption({
       </div>
       {badge && (
         <span
-          className="absolute -top-2.5 left-4 px-2 py-0.5 text-[10px] tracking-[0.1em]"
+          className="absolute -top-3 left-4 px-3 py-1"
           style={{
             fontFamily: GC,
-            fontWeight: 950,
-            backgroundColor: "#87CEEB",
-            color: "#000",
-            borderRadius: 4,
+            fontWeight: 800,
+            fontSize: 12,
+            backgroundColor: "#000",
+            color: "#fff",
+            borderRadius: 6,
           }}
         >
           {badge}

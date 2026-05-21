@@ -17,22 +17,22 @@ const validFormulas = ["calm", "focus", "energy"] as const
 // "The feeling of good calm/focus/energy" section benefit cards - 4 icons like NeuroGum
 const feelingBenefits: Record<FormulaKey, { icon: IconName; title: string }[]> = {
   calm: [
-    { icon: "brain", title: "Improved Clarity & Composure" },
-    { icon: "smile", title: "Calm, Balanced Mood" },
-    { icon: "target", title: "Sharper Decision Making" },
-    { icon: "zap", title: "Steady, Sustained Calm" },
+    { icon: "brain", title: "Improved clarity & composure" },
+    { icon: "smile", title: "Calm, balanced mood" },
+    { icon: "target", title: "Sharper decision making" },
+    { icon: "zap", title: "Steady, sustained calm" },
   ],
   focus: [
-    { icon: "brain", title: "Improved Cognition & Alertness" },
-    { icon: "smile", title: "Calm, Balanced Mood" },
-    { icon: "target", title: "Sharper Focus" },
-    { icon: "zap", title: "Clean, Sustained Energy" },
+    { icon: "brain", title: "Improved cognition & alertness" },
+    { icon: "smile", title: "Calm, balanced mood" },
+    { icon: "target", title: "Sharper focus" },
+    { icon: "zap", title: "Clean, sustained energy" },
   ],
   energy: [
-    { icon: "brain", title: "Improved Cognition & Alertness" },
-    { icon: "smile", title: "Calm, Balanced Mood" },
-    { icon: "target", title: "Sharper Focus" },
-    { icon: "zap", title: "Clean, Sustained Energy" },
+    { icon: "brain", title: "Improved cognition & alertness" },
+    { icon: "smile", title: "Calm, balanced mood" },
+    { icon: "target", title: "Sharper focus" },
+    { icon: "zap", title: "Clean, sustained energy" },
   ],
 }
 
@@ -81,7 +81,7 @@ export default async function ProductPage({
       </section>
 
       {/* Tabs with Recommendations - Cure style */}
-      <section className="w-full bg-white py-[clamp(32px,5vw,64px)]">
+      <section className="w-full bg-white pt-[clamp(8px,1vw,16px)] pb-[clamp(40px,6vw,72px)]">
         <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
           <PdpTabsWithRecommendations currentKey={key} />
         </div>
@@ -108,25 +108,25 @@ export default async function ProductPage({
           </h2>
 
           {/* Benefit icons - 4 across like NeuroGum */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-16">
             {feelingBenefits[key].map((benefit) => (
               <div
                 key={benefit.title}
-                className="flex flex-col items-center text-center gap-3 p-6"
-                style={{ backgroundColor: "#f5f5f5", borderRadius: 12 }}
+                className="flex flex-col items-center text-center gap-4 p-8 bg-white"
+                style={{ borderRadius: 12, border: "1.5px solid rgba(0,0,0,0.12)" }}
               >
                 <div
-                  className="flex items-center justify-center w-14 h-14 rounded-full"
-                  style={{ backgroundColor: BLUE }}
+                  className="flex items-center justify-center w-16 h-16 rounded-full"
+                  style={{ backgroundColor: "#000" }}
                 >
-                  <Icon name={benefit.icon} className="w-7 h-7 text-black" />
+                  <Icon name={benefit.icon} className="w-8 h-8 text-white" />
                 </div>
                 <h3
                   style={{
                     fontFamily: GC,
                     fontWeight: 800,
-                    fontSize: 16,
-                    lineHeight: 1.2,
+                    fontSize: 20,
+                    lineHeight: 1.15,
                     color: "#000",
                   }}
                 >
@@ -188,14 +188,14 @@ export default async function ProductPage({
                   letterSpacing: "0.02em",
                 }}
               >
-                Learn How It Works
+                Learn how it works
                 <Icon name="arrowRight" className="w-4 h-4" />
               </a>
             </div>
 
             {/* Right side - graph */}
             <div className="relative">
-              <div className="rounded-2xl p-6 lg:p-8" style={{ backgroundColor: "#f5f5f5" }}>
+              <div className="rounded-2xl p-6 lg:p-8" style={{ backgroundColor: "#f2f2f2" }}>
                 {/* Graph */}
                 <div className="relative h-[240px] lg:h-[280px]">
                   {/* Grid lines */}
@@ -283,7 +283,7 @@ export default async function ProductPage({
       <ProductComparisonGrid currentKey={key} />
 
       {/* Your favorites. On repeat - Subscription CTA */}
-      <section className="w-full py-[clamp(48px,6vw,80px)]" style={{ backgroundColor: "#f5f5f5" }}>
+      <section className="w-full py-[clamp(48px,6vw,80px)]" style={{ backgroundColor: "#f2f2f2" }}>
         <div className="w-full max-w-[900px] mx-auto px-[clamp(18px,5vw,64px)] text-center">
           <h2
             className="mb-4"
@@ -325,8 +325,8 @@ export default async function ProductPage({
               letterSpacing: "0.02em",
             }}
           >
-            Subscribe Now
-            <Icon name="arrowRight" className="w-4 h-4" />
+                Subscribe now
+                <Icon name="arrowRight" className="w-4 h-4" />
           </a>
         </div>
       </section>
@@ -380,20 +380,20 @@ export default async function ProductPage({
                 style={{ borderTop: i > 0 ? "1px solid rgba(0,0,0,0.08)" : "none" }}
               >
                 <summary
-                  className="flex items-center justify-between gap-6 py-5 cursor-pointer list-none select-none transition-colors"
-                  style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: "#000" }}
+                  className="flex items-center justify-between gap-6 py-6 cursor-pointer list-none select-none transition-colors"
+                  style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, color: "#000" }}
                 >
                   <span>{q}</span>
                   <span
-                    className="grid place-items-center w-9 h-9 rounded-full text-lg leading-none transition-all shrink-0"
-                    style={{ backgroundColor: BLUE, color: "#000" }}
+                    className="grid place-items-center w-10 h-10 rounded-full text-xl leading-none transition-all shrink-0"
+                    style={{ backgroundColor: "#000", color: "#fff" }}
                   >
                     <span className="transition-transform group-open:rotate-45">+</span>
                   </span>
                 </summary>
                 <p
-                  className="pb-5 pr-12 leading-relaxed"
-                  style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, color: "rgba(0,0,0,0.65)" }}
+                  className="pb-6 pr-12 leading-relaxed"
+                  style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, color: "rgba(0,0,0,0.65)" }}
                 >
                   {a}
                 </p>
@@ -402,9 +402,9 @@ export default async function ProductPage({
             <a
               href="/faq"
               className="inline-flex items-center gap-2 mt-6 hover:underline"
-              style={{ fontFamily: GC, fontWeight: 800, fontSize: 14, color: "#000", letterSpacing: "0.05em", textTransform: "uppercase" }}
+              style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: "#000" }}
             >
-              See More Answers
+              See more answers
               <Icon name="arrowRight" className="w-4 h-4" />
             </a>
           </div>

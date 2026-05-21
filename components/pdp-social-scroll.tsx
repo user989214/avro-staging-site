@@ -41,10 +41,19 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
   }
 
   return (
-    <section className="w-full bg-avro-blue py-[clamp(48px,6vw,80px)] overflow-hidden">
+    <section className="w-full bg-white py-[clamp(48px,6vw,80px)] overflow-hidden" style={{ fontFamily: '"Gotham Condensed", sans-serif' }}>
       <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
         {/* Headline - Centered */}
-        <h2 className="font-serif font-black text-[clamp(36px,5vw,64px)] leading-[1.0] text-ink mb-10 text-center">
+        <h2
+          className="text-center mb-12"
+          style={{
+            fontFamily: '"Gotham Condensed", sans-serif',
+            fontWeight: 950,
+            fontSize: "clamp(36px,5.5vw,68px)",
+            lineHeight: 0.98,
+            color: "#000",
+          }}
+        >
           This is what {formulaKey} feels like.
         </h2>
         
@@ -103,7 +112,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
                   {/* Product footer card */}
                   <div className="absolute bottom-4 left-4 right-4 bg-white rounded-xl p-3 flex items-center gap-3 shadow-lg">
                     {/* Product thumbnail */}
-                    <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-soft flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 flex items-center justify-center" style={{ backgroundColor: "#f2f2f2" }}>
                       <img 
                         src={stickImage.src}
                         alt={stickImage.alt}
