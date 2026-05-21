@@ -34,16 +34,19 @@ export function HomeRefHero() {
       `}</style>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", maxWidth: 1440, margin: "0 auto" }}>
         {/* Left */}
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(56px,8vw,112px) clamp(20px,6vw,80px)" }}>
-          <h1 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(52px,7.5vw,108px)", lineHeight: 0.94, color: "#fff", marginBottom: 28, maxWidth: 560 }}>
-            Calm. Clear. Ready.
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(56px,8vw,112px) clamp(20px,6vw,80px)", gap: 0 }}>
+          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(13px,1vw,16px)", letterSpacing: "0.18em", color: BLUE, marginBottom: 20, textTransform: "uppercase" }}>
+            Calm-first performance
+          </p>
+          <h1 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(48px,6.5vw,96px)", lineHeight: 0.96, color: BLUE, marginBottom: 24, maxWidth: 560, letterSpacing: "-0.01em" }}>
+            Calm.<br />Clear.<br />Ready.
           </h1>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(19px,1.8vw,24px)", lineHeight: 1.5, color: "rgba(255,255,255,0.82)", maxWidth: 520, marginBottom: 36 }}>
+          <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(17px,1.5vw,21px)", lineHeight: 1.6, color: "rgba(255,255,255,0.70)", maxWidth: 480, marginBottom: 40, letterSpacing: "0.01em" }}>
             AVRO is a calm-first daily drink mix made with naturally fermented PharmaGABA®, designed to support clarity, composure, and steady energy before the moments that matter.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-            <a href="/shop" className="hp-btn-blue" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 21, minHeight: 66, padding: "0 44px", borderRadius: 10, textDecoration: "none" }}>Shop AVRO</a>
-            <a href="/shop" className="hp-btn-outline-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 21, minHeight: 66, padding: "0 44px", borderRadius: 10, textDecoration: "none" }}>Find Your Formula</a>
+            <a href="/shop" className="hp-btn-blue" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 60, padding: "0 40px", borderRadius: 8, textDecoration: "none", letterSpacing: "0.04em" }}>Shop AVRO</a>
+            <a href="/shop" className="hp-btn-outline-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 60, padding: "0 40px", borderRadius: 8, textDecoration: "none", letterSpacing: "0.04em" }}>Find Your Formula</a>
           </div>
         </div>
         {/* Right: image */}
