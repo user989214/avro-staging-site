@@ -5,6 +5,8 @@ import Image from "next/image"
 import { ChevronRight } from "lucide-react"
 import { useState } from "react"
 
+const GC = '"Gotham Condensed", "Gotham", Arial, sans-serif'
+
 const footerLinks = {
   avro: [
     { href: "/contact", label: "Contact Us" },
@@ -46,91 +48,115 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative overflow-hidden text-white bg-black font-sans">
-      <div className="flex flex-col lg:flex-row gap-8.5 lg:gap-20 max-w-[1400px] mx-auto px-5.5 lg:px-14 pt-12 lg:pt-16 pb-8 lg:pb-12">
-        {/* Left column */}
-        <div className="flex-none lg:flex-[0_0_340px] flex flex-col justify-between gap-10.5">
+    <footer className="relative overflow-hidden text-white bg-black" style={{ fontFamily: GC }}>
+
+      {/* Main content row */}
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 max-w-[1400px] mx-auto px-6 lg:px-14 pt-10 lg:pt-14 pb-8 lg:pb-10">
+
+        {/* Left col: newsletter + legal */}
+        <div className="flex-none lg:w-[360px] flex flex-col gap-7">
+
+          {/* Newsletter — no outer box, just the input has its own rounded rect border */}
           <div>
-            <h3 className="mb-2.5 text-2xl font-black tracking-[-0.3px] leading-none uppercase text-white">
+            <h3
+              className="mb-1 text-white"
+              style={{ fontFamily: GC, fontWeight: 800, fontSize: "28px", lineHeight: 1.0 }}
+            >
               Stay in the loop
             </h3>
-            <p className="mb-6 text-white/60 text-sm leading-snug">
-              Get AVRO updates, product drops, and calm-first insights delivered
-              to your inbox.
-            </p>
-            <form
-              className="flex items-center mb-0 pb-2 border-b-[1.5px] border-white/30"
-              onSubmit={handleSubmit}
+            <p
+              className="mb-4 text-white/55"
+              style={{ fontFamily: GC, fontWeight: 400, fontSize: "18px", lineHeight: 1.2 }}
             >
-              <label className="sr-only" htmlFor="footer-email">
-                Email address
-              </label>
-              <input
-                id="footer-email"
-                type="email"
-                placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 min-h-[38px] py-1 text-white bg-transparent border-0 outline-none text-[15px] placeholder:text-white/40"
-              />
-              <button
-                type="submit"
-                className="grid place-items-center p-1 text-white bg-transparent border-0 cursor-pointer transition-transform hover:translate-x-[3px]"
-                aria-label="Subscribe"
-              >
-                <ChevronRight className="w-[18px] h-[18px]" />
-              </button>
-            </form>
-            {submitted && (
-              <p className="mt-2 text-sm text-olive font-medium">
+              Updates, drops, and calm-first insights.
+            </p>
+            {submitted ? (
+              <p style={{ fontFamily: GC, fontSize: "17px", color: "#87CEEB", fontWeight: 600 }}>
                 Thanks for subscribing!
               </p>
+            ) : (
+              <form
+                className="flex items-stretch rounded-[8px] border-2 border-white/30 overflow-hidden"
+                onSubmit={handleSubmit}
+              >
+                <label className="sr-only" htmlFor="footer-email">Email address</label>
+                <input
+                  id="footer-email"
+                  type="email"
+                  placeholder="Email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-1 px-4 py-3 text-white bg-transparent border-0 outline-none placeholder:text-white/35"
+                  style={{ fontFamily: GC, fontWeight: 400, fontSize: "19px" }}
+                />
+                <button
+                  type="submit"
+                  className="flex items-center gap-1 px-5 py-3 text-black bg-white cursor-pointer hover:opacity-85 transition-opacity"
+                  style={{ fontFamily: GC, fontWeight: 800, fontSize: "21px", border: "none", outline: "none" }}
+                  aria-label="Subscribe"
+                >
+                  Join <ChevronRight className="w-4 h-4 shrink-0" />
+                </button>
+              </form>
             )}
-            <small className="block mt-5 text-white/40 text-[11px] leading-[1.45]">
+          </div>
+
+          {/* Disclaimer + policy/copyright stacked together */}
+          <div className="flex flex-col gap-2">
+            <small
+              className="text-white/35"
+              style={{ fontFamily: GC, fontWeight: 400, fontSize: "15px", lineHeight: 1.25 }}
+            >
               * These statements have not been evaluated by the Food and Drug
               Administration. This product is not intended to diagnose, treat,
               cure, or prevent any disease.
             </small>
-          </div>
-          <div className="flex flex-wrap gap-6">
-            {["Privacy", "Terms", "Accessibility", "Return Policy"].map(
-              (label) => (
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-1.5 pt-10">
+              <span
+                className="text-white/40"
+                style={{ fontFamily: GC, fontWeight: 400, fontSize: "15px", lineHeight: 1 }}
+              >
+                © 2026 AVRO Life
+              </span>
+              {["Privacy", "Terms", "Accessibility", "Return Policy"].map((label) => (
                 <Link
                   key={label}
                   href="/faq"
-                  className="text-white/60 text-[13px] hover:text-white transition-colors"
+                  className="text-white/50 hover:text-white transition-colors"
+                  style={{ fontFamily: GC, fontWeight: 700, fontSize: "15px", lineHeight: 1 }}
                 >
                   {label}
                 </Link>
-              )
-            )}
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Right columns */}
-        <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-8 lg:pl-16 lg:border-l lg:border-white/10">
-          <FooterColumn title="AVRO" links={footerLinks.avro} />
-          <FooterColumn title="Shop" links={footerLinks.shop} />
-          <FooterColumn title="Learn" links={footerLinks.learn} />
-          <FooterColumn title="Follow" links={footerLinks.follow} />
+        {/* Divider between left col and nav */}
+        <div className="hidden lg:block w-[2px] bg-white/30 self-stretch" aria-hidden="true" />
+
+        {/* Right: nav columns */}
+        <div className="flex-1 lg:pl-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <FooterColumn title="Company" links={footerLinks.avro} />
+            <FooterColumn title="Shop" links={footerLinks.shop} />
+            <FooterColumn title="Learn" links={footerLinks.learn} />
+            <FooterColumn title="Follow" links={footerLinks.follow} />
+          </div>
         </div>
       </div>
 
-      {/* Large centered AVRO logo at bottom */}
-      <div className="flex justify-center px-5.5 lg:px-14 pt-8 lg:pt-12 pb-6 lg:pb-10 border-t border-white/10">
+      {/* Large AVRO logo watermark */}
+      <div className="flex justify-center overflow-hidden pb-2" aria-hidden="true">
         <Image
-          src="/brand/avro-logo.svg"
-          alt="AVRO"
-          width={820}
-          height={265}
-          className="w-full max-w-[900px] h-auto invert opacity-25"
-          priority
+          src="/brand/avro-logo-footer.svg"
+          alt=""
+          width={1200}
+          height={390}
+          className="w-[min(90vw,900px)] h-auto invert opacity-[0.12] pointer-events-none select-none"
         />
       </div>
 
-      <div className="flex justify-center max-w-[1400px] mx-auto px-5.5 lg:px-14 pb-8">
-        <span className="text-white/40 text-[13px]">© 2026 AVRO Life</span>
-      </div>
     </footer>
   )
 }
@@ -144,14 +170,18 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h4 className="mb-5 text-[13px] font-black tracking-wide uppercase text-white">
+      <h4
+        className="mb-3 text-white"
+        style={{ fontFamily: GC, fontWeight: 800, fontSize: "24px", lineHeight: 1 }}
+      >
         {title}
       </h4>
       {links.map((link) => (
         <Link
           key={link.label}
           href={link.href}
-          className="block py-1.5 text-white/60 text-sm leading-[1.35] hover:text-white transition-colors"
+          className="block text-white/55 hover:text-white transition-colors"
+          style={{ fontFamily: GC, fontWeight: 500, fontSize: "19px", lineHeight: 1.1, paddingTop: "7px", paddingBottom: "7px" }}
         >
           {link.label}
         </Link>

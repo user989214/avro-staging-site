@@ -7,34 +7,48 @@ import { Icon } from "@/components/icons"
 
 export function HomeRefHero() {
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-[0.82fr_1.18fr] items-stretch w-full max-w-[1440px] min-h-[520px] mx-auto border-b border-line bg-white">
-      <div className="flex flex-col justify-center p-[clamp(42px,7vw,92px)] lg:p-[clamp(42px,7vw,92px)_clamp(24px,7vw,78px)]">
-        <h1 className="font-sans max-w-[520px] mb-5 text-[clamp(58px,8vw,94px)] font-black leading-[0.96] tracking-[-0.01em]">
+    <section className="grid grid-cols-1 lg:grid-cols-[0.82fr_1.18fr] items-stretch w-full max-w-[1440px] mx-auto border-b border-line bg-white">
+      <div className="flex flex-col justify-center px-[clamp(20px,7vw,92px)] py-[clamp(36px,7vw,92px)]">
+        <h1
+          className="max-w-[520px] mb-5 text-[clamp(48px,8vw,94px)] leading-[0.96] tracking-[-0.01em]"
+          style={{ fontFamily: '"Gotham Condensed"', fontWeight: 950 }}
+        >
           Calm. Clear. Ready.
         </h1>
-        <p className="font-sans max-w-[520px] text-[#272727] text-[17px] leading-[1.55]">
+        <p
+          className="max-w-[520px] text-[#272727] text-[clamp(18px,1.6vw,22px)] leading-[1.5]"
+          style={{ fontFamily: '"Gotham Condensed"', fontWeight: 400 }}
+        >
           AVRO is a calm-first daily drink mix made with naturally fermented
           PharmaGABA®, designed to support clarity, composure, and steady energy
           before the moments that matter.
         </p>
-        <div className="flex flex-wrap items-center gap-3 mt-6">
-          <Link href="/shop" className="btn-primary">
+        <div className="flex flex-wrap items-center gap-3 mt-7">
+          <Link
+            href="/shop"
+            className="btn-primary"
+            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800, fontSize: "21px", minHeight: "64px", paddingLeft: "42px", paddingRight: "42px" }}
+          >
             Shop AVRO
           </Link>
-          <Link href="/shop" className="btn-secondary">
+          <Link
+            href="/shop"
+            className="btn-secondary"
+            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800, fontSize: "21px", minHeight: "64px", paddingLeft: "42px", paddingRight: "42px", border: "2.5px solid #1a1a1a" }}
+          >
             Find Your Formula
           </Link>
         </div>
       </div>
       <div
-        className="relative min-h-[520px] overflow-hidden isolate"
+        className="relative h-[360px] sm:h-[460px] lg:h-auto lg:min-h-[520px] overflow-hidden isolate"
         aria-label="AVRO social ritual scene"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/lifestyle/kitchen-trio-pink-cocktails.jpg"
           alt="AVRO Energy Fuji Apple stick packet next to a glass of mixed drink at a sunset rooftop dinner"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-center lg:object-[60%_center]"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white/45 via-transparent to-transparent" />
       </div>
@@ -45,16 +59,16 @@ export function HomeRefHero() {
 export function HomeProofBar() {
   return (
     <section
-      className="grid grid-cols-3 w-[min(calc(100%-72px),1250px)] mx-auto mt-5 overflow-hidden border border-line rounded-lg bg-white"
+      className="grid grid-cols-3 w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto mt-5 overflow-hidden border border-line rounded-lg bg-white"
       aria-label="Customer testimonials + social proof"
     >
       {sharedProof.map((item, i) => (
         <div
           key={item.label}
-          className={`grid gap-1 p-4 text-center ${i > 0 ? "border-l border-line" : ""}`}
+          className={`grid gap-1 px-2 py-3 sm:p-4 text-center ${i > 0 ? "border-l border-line" : ""}`}
         >
-          <strong className="text-[22px]">{item.stat}</strong>
-          <span className="text-ink/60 text-[13px]">{item.label}</span>
+          <strong className="text-[16px] sm:text-[22px] leading-tight">{item.stat}</strong>
+          <span className="text-ink/60 text-[10px] sm:text-[13px] leading-tight text-balance">{item.label}</span>
         </div>
       ))}
     </section>
@@ -70,9 +84,9 @@ export function HomeLogicRow() {
   ]
 
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.2fr_0.9fr] gap-6 w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
+    <section className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.2fr_0.9fr] gap-6 w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
       <article className="p-[30px] border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
-        <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08] mb-3">
+        <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05] mb-3">
           More energy is not always the answer.
         </h2>
         <p className="text-ink/75 leading-relaxed">
@@ -90,12 +104,12 @@ export function HomeLogicRow() {
         </div>
         {comparisonRows.map(([left, right, leftIcon, rightIcon]) => (
           <div key={left} className="grid grid-cols-2">
-            <span className="flex items-center gap-2.5 min-h-[58px] px-4 py-3 border-t border-line text-[#222] text-sm font-bold">
-              <Icon name={leftIcon as any} className="w-5 h-5 text-olive" />
+            <span className="flex items-center gap-2 sm:gap-2.5 min-h-[58px] px-3 py-3 border-t border-line text-[#222] text-[12px] sm:text-sm font-bold">
+              <Icon name={leftIcon as any} className="w-4 h-4 sm:w-5 sm:h-5 text-olive shrink-0" />
               {left}
             </span>
-            <span className="flex items-center gap-2.5 min-h-[58px] px-4 py-3 border-t border-l border-line bg-[rgba(238,244,232,0.56)] text-[#222] text-sm font-bold">
-              <Icon name={rightIcon as any} className="w-5 h-5 text-olive" />
+            <span className="flex items-center gap-2 sm:gap-2.5 min-h-[58px] px-3 py-3 border-t border-l border-line bg-[rgba(238,244,232,0.56)] text-[#222] text-[12px] sm:text-sm font-bold">
+              <Icon name={rightIcon as any} className="w-4 h-4 sm:w-5 sm:h-5 text-olive shrink-0" />
               {right}
             </span>
           </div>
@@ -103,26 +117,26 @@ export function HomeLogicRow() {
       </article>
 
       <article className="p-[30px] border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
-        <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08] mb-3">
+        <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05] mb-3">
           Performance starts with state.
         </h2>
-        <div className="flex items-center gap-3.5 my-5">
-          <span className="grid place-items-center gap-2 text-center text-[13px] font-extrabold">
-            <span className="w-[62px] h-[62px] p-4 border border-[#bfc3bc] rounded-full">
+        <div className="flex items-center gap-2 sm:gap-3.5 my-5 flex-wrap">
+          <span className="grid place-items-center gap-2 text-center text-[12px] sm:text-[13px] font-extrabold">
+            <span className="w-[52px] h-[52px] sm:w-[62px] sm:h-[62px] p-3 sm:p-4 border border-[#bfc3bc] rounded-full">
               <Icon name="leaf" className="w-full h-full text-[#252525]" />
             </span>
             Calm
           </span>
           <b className="text-ink">→</b>
-          <span className="grid place-items-center gap-2 text-center text-[13px] font-extrabold">
-            <span className="w-[62px] h-[62px] p-4 border border-[#bfc3bc] rounded-full">
+          <span className="grid place-items-center gap-2 text-center text-[12px] sm:text-[13px] font-extrabold">
+            <span className="w-[52px] h-[52px] sm:w-[62px] sm:h-[62px] p-3 sm:p-4 border border-[#bfc3bc] rounded-full">
               <Icon name="brain" className="w-full h-full text-[#252525]" />
             </span>
             Clarity
           </span>
           <b className="text-ink">→</b>
-          <span className="grid place-items-center gap-2 text-center text-[13px] font-extrabold">
-            <span className="w-[62px] h-[62px] p-4 border border-[#bfc3bc] rounded-full">
+          <span className="grid place-items-center gap-2 text-center text-[12px] sm:text-[13px] font-extrabold">
+            <span className="w-[52px] h-[52px] sm:w-[62px] sm:h-[62px] p-3 sm:p-4 border border-[#bfc3bc] rounded-full">
               <Icon name="target" className="w-full h-full text-[#252525]" />
             </span>
             Readiness
@@ -152,26 +166,28 @@ export function HomeProductStrip() {
   }
 
   return (
-    <section className="w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
-      <div className="grid grid-cols-3 overflow-hidden border border-line rounded-lg bg-white">
+    <section className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
+      <div className="grid grid-cols-1 sm:grid-cols-3 overflow-hidden border border-line rounded-lg bg-white">
         {(Object.keys(formulas) as FormulaKey[]).map((key, i) => {
           return (
             <Link
               key={key}
               href={`/${key}`}
-              className={`grid grid-rows-[1fr_auto] min-h-[440px] transition-all hover:bg-[#fbfaf6] ${i < 2 ? "border-r border-line" : ""}`}
+              className={`grid grid-rows-[1fr_auto] min-h-[360px] sm:min-h-[440px] transition-all hover:bg-[#fbfaf6] ${
+                i < 2 ? "border-b sm:border-b-0 sm:border-r border-line" : ""
+              }`}
             >
-              <div className="min-h-[390px] p-6 pb-8">
+              <div className="min-h-[300px] sm:min-h-[390px] p-5 sm:p-6 pb-6 sm:pb-8">
                 <ProductVisual
                   keys={[key]}
                   size="medium"
                   flavorIds={{ [key]: stripFlavor[key] } as Partial<Record<FormulaKey, string>>}
                 />
               </div>
-              <span className="flex items-center justify-center gap-2.5 px-4 py-3.5 border-t border-line text-[#333] text-[13px] font-extrabold">
+              <span className="flex items-center justify-center gap-2 px-3 py-3.5 border-t border-line text-[#333] text-[11px] sm:text-[13px] font-extrabold text-center">
                 <Icon
                   name={key === "calm" ? "smile" : key === "focus" ? "brain" : "zap"}
-                  className="w-5 h-5"
+                  className="w-4 h-4 sm:w-5 sm:h-5 shrink-0"
                 />
                 PharmaGABA® + {formulaAdditions[key]}
               </span>
@@ -224,20 +240,20 @@ export function HomeMomentGrid() {
   ]
 
   return (
-    <section className="w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
+    <section className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
       <div className="mb-5 text-center">
-        <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08]">
+        <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05]">
           Built for pressure sensitive moments.
         </h2>
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {moments.map((m) => (
           <Link
             key={m.title}
             href={m.url}
             className="group flex flex-col gap-2.5 pb-5 overflow-hidden border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(31,29,24,0.08)]"
           >
-            <div className="relative h-[160px] overflow-hidden">
+            <div className="relative h-[180px] sm:h-[160px] overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={m.image}
@@ -248,11 +264,11 @@ export function HomeMomentGrid() {
                 <Icon name={m.icon as any} className="w-5 h-5 text-olive-dark" />
               </span>
             </div>
-            <h3 className="mx-5 font-bold">{m.title}</h3>
+            <h3 className="mx-5 font-serif font-black text-[22px] leading-tight">{m.title}</h3>
             <p className="mx-5 mb-0 text-[#222] text-sm leading-[1.35]">
               {m.copy}
             </p>
-            <span className="inline-flex justify-center w-fit min-w-[134px] mx-5 mt-1 px-3.5 py-2 border border-[#222] rounded-[5px] text-xs font-extrabold">
+            <span className="inline-flex justify-center w-fit mx-5 mt-1 px-4 py-2 border border-[#222] rounded-full text-xs font-extrabold whitespace-nowrap">
               {m.cta}
             </span>
           </Link>
@@ -264,9 +280,9 @@ export function HomeMomentGrid() {
 
 export function HomeScienceGrid() {
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-6 w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
+    <section className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-6 w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
       <article className="p-7 border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
-        <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08] mb-3">
+        <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05] mb-3">
           Why GABA matters.
         </h2>
         <p className="text-ink/75 leading-relaxed mb-4">
@@ -274,23 +290,23 @@ export function HomeScienceGrid() {
           balance. AVRO uses naturally fermented PharmaGABA® as the foundation
           of every formula.
         </p>
-        <div className="flex items-center gap-3.5 my-5">
-          <span className="grid place-items-center gap-2 text-center text-[13px] font-extrabold">
-            <span className="w-[62px] h-[62px] p-4 border border-[#bfc3bc] rounded-full">
+        <div className="flex items-center gap-2 sm:gap-3.5 my-5 flex-wrap">
+          <span className="grid place-items-center gap-2 text-center text-[12px] sm:text-[13px] font-extrabold">
+            <span className="w-[52px] h-[52px] sm:w-[62px] sm:h-[62px] p-3 sm:p-4 border border-[#bfc3bc] rounded-full">
               <Icon name="flask" className="w-full h-full text-[#252525]" />
             </span>
             Naturally Fermented
           </span>
           <b className="text-ink">→</b>
-          <span className="grid place-items-center gap-2 text-center text-[13px] font-extrabold">
-            <span className="w-[62px] h-[62px] p-4 border border-[#bfc3bc] rounded-full">
+          <span className="grid place-items-center gap-2 text-center text-[12px] sm:text-[13px] font-extrabold">
+            <span className="w-[52px] h-[52px] sm:w-[62px] sm:h-[62px] p-3 sm:p-4 border border-[#bfc3bc] rounded-full">
               <Icon name="leaf" className="w-full h-full text-[#252525]" />
             </span>
             Calm First
           </span>
           <b className="text-ink">→</b>
-          <span className="grid place-items-center gap-2 text-center text-[13px] font-extrabold">
-            <span className="w-[62px] h-[62px] p-4 border border-[#bfc3bc] rounded-full">
+          <span className="grid place-items-center gap-2 text-center text-[12px] sm:text-[13px] font-extrabold">
+            <span className="w-[52px] h-[52px] sm:w-[62px] sm:h-[62px] p-3 sm:p-4 border border-[#bfc3bc] rounded-full">
               <Icon name="shield" className="w-full h-full text-[#252525]" />
             </span>
             In Every Formula
@@ -305,10 +321,11 @@ export function HomeScienceGrid() {
       </article>
 
       <article className="p-7 border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
-        <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08] mb-3">
+        <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05] mb-3">
           Every formula starts calm first.
         </h2>
-        <div className="grid grid-cols-[0.9fr_repeat(3,1fr)] overflow-hidden border border-line rounded-md">
+        <div className="overflow-x-auto -mx-2 sm:mx-0">
+          <div className="grid grid-cols-[0.9fr_repeat(3,1fr)] min-w-[480px] mx-2 sm:mx-0 overflow-hidden border border-line rounded-md">
           <div></div>
           <strong className="min-h-12 p-3 border-b border-l border-line text-center text-sm">
             Calm
@@ -371,6 +388,7 @@ export function HomeScienceGrid() {
           <p className="min-h-12 p-3 border-l border-line text-xs text-center">
             120 mg
           </p>
+          </div>
         </div>
       </article>
     </section>
@@ -397,7 +415,7 @@ export function HomeBenefitRow() {
   ] as const
 
   return (
-    <section className="w-[min(calc(100%-72px),1250px)] mx-auto pt-[clamp(20px,3vw,32px)]">
+    <section className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto pt-[clamp(20px,3vw,32px)]">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {benefits.map((b) => (
           <article
@@ -431,7 +449,7 @@ export function HomeQualityRow() {
   ] as const
 
   return (
-    <section className="w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(20px,3vw,32px)]">
+    <section className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(20px,3vw,32px)]">
       <div className="mb-4 px-1">
         <span className="text-olive text-xs font-black tracking-[0.12em] uppercase">
           Quality you can understand
@@ -461,11 +479,11 @@ export function HomeQualityRow() {
 
 export function HomeStoryStrip() {
   return (
-    <section className="w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
+    <section className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(34px,5vw,54px)]">
       <div className="overflow-hidden border border-line rounded-lg bg-white/88 shadow-[0_12px_32px_rgba(31,29,24,0.04)]">
         {/* Top: copy block, full width */}
         <div className="p-8 lg:p-12 flex flex-col items-start max-w-[800px]">
-          <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08] mb-3">
+          <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05] mb-3">
             Science-backed. Founder-driven.
           </h2>
           <p className="text-ink/75 leading-relaxed max-w-[60ch]">
@@ -539,7 +557,7 @@ export function HomeRitualSection() {
         <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
           Simple ritual
         </span>
-        <h2 className="font-sans text-[clamp(26px,3vw,38px)] font-black leading-[1.08]">
+        <h2 className="font-serif text-[clamp(28px,3.4vw,42px)] font-black leading-[1.05]">
           How to use AVRO.
         </h2>
       </div>

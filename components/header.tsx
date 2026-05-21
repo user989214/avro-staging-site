@@ -60,7 +60,7 @@ export function Header() {
 
   return (
     <>
-      <div className="flex justify-center gap-15 px-8 py-3 text-[13px] font-black tracking-wide uppercase" style={{ backgroundColor: "#87CEEB", color: "#000" }}>
+      <div className="flex justify-center gap-4 md:gap-15 px-4 md:px-8 py-3 text-[11px] md:text-[13px] font-black tracking-wide uppercase text-center" style={{ backgroundColor: "#87CEEB", color: "#000" }}>
         <span>
           Naturally Fermented PharmaGABA® -{" "}
           <Link
@@ -84,7 +84,7 @@ export function Header() {
       </div>
 
       <nav
-        className={`sticky top-0 z-50 grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-0 px-4 md:px-14 py-5 bg-white transition-shadow ${
+        className={`sticky top-0 z-50 grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-0 px-4 md:px-14 py-4 md:py-5 bg-white transition-shadow ${
           scrolled ? "shadow-[0_1px_16px_rgba(0,0,0,0.06)]" : ""
         }`}
         aria-label="Primary navigation"

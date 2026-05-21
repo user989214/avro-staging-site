@@ -36,19 +36,131 @@
   font-display: swap;
 }
 
+/* Gotham Condensed — full weight spectrum */
 @font-face {
   font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-Bold.otf") format("opentype");
+  src: url("/fonts/GothamCond-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-ThinItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-XLight.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-XLightItalic.woff") format("woff");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-LightItalic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-Book.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-BookItalic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-MediumItalic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-Black.otf") format("opentype");
+  src: url("/fonts/GothamCond-BoldItalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-Black.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-BlackItalic.woff") format("woff");
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-XBlack.woff") format("woff");
   font-weight: 900;
   font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-XBlackItalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-Ultra.woff") format("woff");
+  font-weight: 950;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Gotham Condensed";
+  src: url("/fonts/GothamCond-UltraItalic.woff") format("woff");
+  font-weight: 950;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -173,6 +285,18 @@
     @apply bg-paper text-ink font-sans;
     font-weight: 400;
     letter-spacing: 0;
+  }
+
+  /* Site-wide rule: every headline uses Gotham Condensed.
+     Tailwind's font-sans/font-serif utilities still work for body copy,
+     but headings always render in the condensed display family. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Gotham Condensed", "Gotham", Arial, sans-serif;
   }
   
   a {
