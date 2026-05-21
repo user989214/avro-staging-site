@@ -9,15 +9,24 @@ export function HomeRefHero() {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-[0.82fr_1.18fr] items-stretch w-full max-w-[1440px] mx-auto border-b border-line bg-white">
       <div className="flex flex-col justify-center px-[clamp(20px,7vw,92px)] py-[clamp(36px,7vw,92px)]">
-        <h1 className="font-serif max-w-[520px] mb-5 text-[clamp(48px,8vw,94px)] font-medium leading-[0.96] tracking-[-0.01em]">
+        <h1
+          className="max-w-[520px] mb-5 text-[clamp(48px,8vw,94px)] leading-[0.96] tracking-[-0.01em]"
+          style={{ fontFamily: '"Gotham Condensed"', fontWeight: 500 }}
+        >
           Calm. Clear. Ready.
         </h1>
-        <p className="font-sans max-w-[520px] text-[#272727] text-[17px] leading-[1.55]">
+        <p
+          className="max-w-[520px] text-[#272727] text-[18px] leading-[1.45]"
+          style={{ fontFamily: '"Gotham Condensed"', fontWeight: 400 }}
+        >
           AVRO is a calm-first daily drink mix made with naturally fermented
           PharmaGABA®, designed to support clarity, composure, and steady energy
           before the moments that matter.
         </p>
-        <div className="flex flex-wrap items-center gap-3 mt-6">
+        <div
+          className="flex flex-wrap items-center gap-3 mt-6"
+          style={{ fontFamily: '"Gotham Condensed"' }}
+        >
           <Link href="/shop" className="btn-primary">
             Shop AVRO
           </Link>
