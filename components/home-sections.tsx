@@ -11,7 +11,7 @@ export function HomeRefHero() {
       <div className="flex flex-col justify-center px-[clamp(20px,7vw,92px)] py-[clamp(36px,7vw,92px)]">
         <h1
           className="max-w-[520px] mb-5 text-[clamp(48px,8vw,94px)] leading-[0.96] tracking-[-0.01em]"
-          style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700 }}
+          style={{ fontFamily: '"Gotham Condensed"', fontWeight: 950 }}
         >
           Calm. Clear. Ready.
         </h1>
@@ -27,14 +27,14 @@ export function HomeRefHero() {
           <Link
             href="/shop"
             className="btn-primary"
-            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800, fontSize: "18px", minHeight: "58px", paddingLeft: "36px", paddingRight: "36px" }}
+            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700, fontSize: "18px", minHeight: "58px", paddingLeft: "36px", paddingRight: "36px" }}
           >
             Shop AVRO
           </Link>
           <Link
             href="/shop"
             className="btn-secondary"
-            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800, fontSize: "18px", minHeight: "58px", paddingLeft: "36px", paddingRight: "36px" }}
+            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700, fontSize: "18px", minHeight: "58px", paddingLeft: "36px", paddingRight: "36px" }}
           >
             Find Your Formula
           </Link>
