@@ -115,9 +115,11 @@ export default function BlogPage() {
           .blog-grid { grid-template-columns: 1fr !important; }
           .featured-inner { flex-direction: column !important; align-items: flex-start !important; }
           .feat-read-btn { align-self: flex-start !important; margin-top: 16px !important; }
-          .cta-inner { flex-direction: column !important; padding: 40px 24px !important; gap: 24px !important; }
-          .cta-btns { width: 100% !important; flex-direction: column !important; }
-          .cta-btns a { width: 100% !important; box-sizing: border-box !important; }
+          .cta-inner { flex-direction: column !important; padding: 20px 16px !important; gap: 12px !important; border-radius: 12px !important; }
+          .cta-btns { width: 100% !important; flex-direction: column !important; gap: 8px !important; }
+          .cta-btns a { width: 100% !important; box-sizing: border-box !important; min-height: 46px !important; font-size: 16px !important; padding: 0 20px !important; }
+          .cta-inner h2 { font-size: 26px !important; margin-bottom: 4px !important; }
+          .cta-inner p { font-size: 15px !important; }
           .hero-section { padding: 48px 20px 40px !important; }
           .featured-section { padding: 24px 20px !important; }
           .grid-section { padding: 0 20px 40px !important; }
@@ -260,12 +262,12 @@ export default function BlogPage() {
 
       {/* ── CTA ── */}
       <section className="cta-section" style={{ backgroundColor: "#fff", padding: "0 clamp(20px,5vw,64px) clamp(32px,5vw,56px)" }}>
-        <div className="cta-inner" style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#000", borderRadius: 20, padding: "clamp(56px,7vw,88px) clamp(48px,6vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 48 }}>
+        <div className="cta-inner" style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#87CEEB", borderRadius: 20, padding: "clamp(56px,7vw,88px) clamp(48px,6vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 48 }}>
           <div style={{ flex: "1 1 480px", minWidth: 0 }}>
-            <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,64px)", lineHeight: 1.0, color: "#fff", marginBottom: 16 }}>
+            <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,64px)", lineHeight: 1.0, color: "#000", marginBottom: 16 }}>
               Ready to find your formula?
             </h2>
-            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.4, color: "rgba(255,255,255,0.82)" }}>
+            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.4, color: "rgba(0,0,0,0.75)" }}>
               Choose Calm, Focus, or Energy based on the moment you want to support.
             </p>
           </div>
@@ -274,7 +276,7 @@ export default function BlogPage() {
               <a
                 key={label}
                 href={href}
-                style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 10, textDecoration: "none", backgroundColor: "#fff", color: "#000", border: "2.5px solid #fff" }}
+                style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 10, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}
               >
                 {label}
               </a>
