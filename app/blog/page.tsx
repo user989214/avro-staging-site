@@ -114,9 +114,6 @@ export default function BlogPage() {
       {/* ── HERO HEADER ── */}
       <section style={{ backgroundColor: "#000", padding: "clamp(56px,8vw,104px) clamp(16px,5vw,80px) clamp(48px,6vw,80px)" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: BLUE, marginBottom: 16, letterSpacing: "0.02em" }}>
-            AVRO Journal
-          </p>
           <h1 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(56px,9vw,120px)", lineHeight: 0.95, color: "#fff", marginBottom: 20, maxWidth: 900 }}>
             Calm. Clear. Informed.
           </h1>
