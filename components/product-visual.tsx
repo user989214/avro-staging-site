@@ -187,7 +187,7 @@ export function ProductCard({
       src={src}
       alt={alt}
       className={cn(
-        "h-full w-full object-scale-down",
+        "h-full w-auto max-w-full object-contain",
         className,
       )}
     />
