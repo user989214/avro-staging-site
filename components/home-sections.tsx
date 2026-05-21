@@ -35,15 +35,15 @@ export function HomeRefHero() {
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", maxWidth: 1440, margin: "0 auto" }}>
         {/* Left */}
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(56px,8vw,112px) clamp(20px,6vw,80px)", gap: 0 }}>
-          <h1 style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(52px,7vw,104px)", lineHeight: 0.94, color: "#000", marginBottom: 28, maxWidth: 560, letterSpacing: "-0.02em" }}>
+          <h1 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(52px,7vw,104px)", lineHeight: 0.94, color: "#000", marginBottom: 28, maxWidth: 560, letterSpacing: "-0.02em" }}>
             Calm.<br />Clear.<br />Ready.
           </h1>
           <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(18px,1.6vw,23px)", lineHeight: 1.55, color: "rgba(0,0,0,0.6)", maxWidth: 480, marginBottom: 44, letterSpacing: "0.01em" }}>
             AVRO is a calm-first daily drink mix made with naturally fermented PharmaGABA®, designed to support clarity, composure, and steady energy before the moments that matter.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-            <a href="/shop" className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 600, fontSize: 17, minHeight: 58, padding: "0 36px", borderRadius: 8, textDecoration: "none", letterSpacing: "0.03em" }}>Shop AVRO</a>
-            <a href="/shop" className="hp-btn-outline-black" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 600, fontSize: 17, minHeight: 58, padding: "0 36px", borderRadius: 8, textDecoration: "none", letterSpacing: "0.03em" }}>Find Your Formula</a>
+            <a href="/shop" className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 17, minHeight: 58, padding: "0 36px", borderRadius: 8, textDecoration: "none", letterSpacing: "0.03em" }}>Shop AVRO</a>
+            <a href="/shop" className="hp-btn-outline-black" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 17, minHeight: 58, padding: "0 36px", borderRadius: 8, textDecoration: "none", letterSpacing: "0.03em" }}>Find Your Formula</a>
           </div>
         </div>
         {/* Right: image */}
@@ -92,7 +92,7 @@ export function HomeBenefitRow() {
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 16 }}>
         {benefits.map((b) => (
           <div key={b.title} style={{ backgroundColor: "#000", borderRadius: 12, padding: "clamp(24px,3vw,36px)" }}>
-            <h3 style={{ fontFamily: GC, fontWeight: 600, fontSize: "clamp(22px,2.2vw,28px)", lineHeight: 1.15, color: "#fff", marginBottom: 12 }}>{b.title}</h3>
+            <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2.2vw,28px)", lineHeight: 1.15, color: "#fff", marginBottom: 12 }}>{b.title}</h3>
             <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(17px,1.5vw,20px)", lineHeight: 1.55, color: "rgba(255,255,255,0.68)" }}>{b.copy}</p>
           </div>
         ))}
@@ -115,7 +115,7 @@ export function HomeLogicRow() {
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 20 }}>
         {/* Card 1 */}
         <div style={{ backgroundColor: "#000", borderRadius: 12, padding: "clamp(28px,3vw,44px)" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 600, fontSize: "clamp(30px,3.5vw,48px)", lineHeight: 1.08, color: "#fff", marginBottom: 16 }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(30px,3.5vw,48px)", lineHeight: 1.08, color: "#fff", marginBottom: 16 }}>
             More energy is not always the answer.
           </h2>
           <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(17px,1.5vw,21px)", lineHeight: 1.55, color: "rgba(255,255,255,0.70)" }}>
@@ -139,7 +139,7 @@ export function HomeLogicRow() {
 
         {/* Card 3 */}
         <div style={{ backgroundColor: "#000", borderRadius: 12, padding: "clamp(28px,3vw,44px)" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 600, fontSize: "clamp(30px,3.5vw,48px)", lineHeight: 1.08, color: "#fff", marginBottom: 16 }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(30px,3.5vw,48px)", lineHeight: 1.08, color: "#fff", marginBottom: 16 }}>
             Performance starts with state.
           </h2>
           <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", margin: "20px 0" }}>
@@ -184,7 +184,7 @@ export function HomeProductStrip() {
   return (
     <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(38px,5.5vw,72px)", lineHeight: 1.0, color: "#000", marginBottom: 32 }}>
+        <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(38px,5.5vw,72px)", lineHeight: 1.0, color: "#000", marginBottom: 32 }}>
           Three formulas. One foundation.
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", border: "2px solid #000", borderRadius: 16, overflow: "hidden" }}>
@@ -203,7 +203,7 @@ export function HomeProductStrip() {
                 />
               </div>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "20px 24px", borderTop: "2px solid #000", backgroundColor: "#000" }}>
-                <span style={{ fontFamily: GC, fontWeight: 600, fontSize: "clamp(16px,1.4vw,20px)", color: "#fff", textAlign: "center" }}>
+                <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(16px,1.4vw,20px)", color: "#fff", textAlign: "center" }}>
                   PharmaGABA® + {formulaAdditions[key]}
                 </span>
               </div>
@@ -227,7 +227,7 @@ export function HomeMomentGrid() {
   return (
     <section style={{ backgroundColor: "#000", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(38px,5.5vw,72px)", lineHeight: 1.0, color: "#fff", marginBottom: 32 }}>
+        <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(38px,5.5vw,72px)", lineHeight: 1.0, color: "#fff", marginBottom: 32 }}>
           Built for pressure sensitive moments.
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))", gap: 16 }}>
@@ -238,9 +238,9 @@ export function HomeMomentGrid() {
                 <img src={m.image} alt={m.alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
               <div style={{ padding: "20px 24px 24px" }}>
-                <h3 style={{ fontFamily: GC, fontWeight: 600, fontSize: "clamp(26px,2.8vw,38px)", lineHeight: 1.0, color: "#000", marginBottom: 10 }}>{m.title}</h3>
+                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,2.8vw,38px)", lineHeight: 1.0, color: "#000", marginBottom: 10 }}>{m.title}</h3>
                 <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, lineHeight: 1.5, color: "rgba(0,0,0,0.65)", marginBottom: 20 }}>{m.copy}</p>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 600, fontSize: 16, minHeight: 50, padding: "0 22px", borderRadius: 10, backgroundColor: "#000", color: "#fff" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 50, padding: "0 22px", borderRadius: 10, backgroundColor: "#000", color: "#fff" }}>
                   {m.cta}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </span>
@@ -260,7 +260,7 @@ export function HomeScienceGrid() {
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px,1fr))", gap: 20 }}>
         {/* Why GABA card */}
         <div style={{ backgroundColor: "#000", borderRadius: 12, padding: "clamp(28px,4vw,48px)" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 600, fontSize: "clamp(30px,4vw,56px)", lineHeight: 1.0, color: "#fff", marginBottom: 18 }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(30px,4vw,56px)", lineHeight: 1.0, color: "#fff", marginBottom: 18 }}>
             Why GABA matters.
           </h2>
           <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(17px,1.5vw,21px)", lineHeight: 1.55, color: "rgba(255,255,255,0.72)", marginBottom: 24 }}>
@@ -283,7 +283,7 @@ export function HomeScienceGrid() {
               </>
             ))}
           </div>
-          <a href="/science" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 600, fontSize: 17, minHeight: 56, padding: "0 30px", borderRadius: 10, textDecoration: "none", backgroundColor: BLUE, color: "#000" }}>
+          <a href="/science" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 700, fontSize: 17, minHeight: 56, padding: "0 30px", borderRadius: 10, textDecoration: "none", backgroundColor: BLUE, color: "#000" }}>
             Learn the Science of AVRO
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -291,7 +291,7 @@ export function HomeScienceGrid() {
 
         {/* Formula comparison */}
         <div style={{ backgroundColor: "#000", borderRadius: 12, overflow: "hidden", padding: "clamp(28px,4vw,48px)" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 600, fontSize: "clamp(30px,4vw,56px)", lineHeight: 1.0, color: "#fff", marginBottom: 24 }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(30px,4vw,56px)", lineHeight: 1.0, color: "#fff", marginBottom: 24 }}>
             Every formula starts calm first.
           </h2>
           <div style={{ overflowX: "auto" }}>
@@ -337,7 +337,7 @@ export function HomeQualityRow() {
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px,1fr))", border: "2px solid #000", borderRadius: 12, overflow: "hidden" }}>
         {badges.map((b, i) => (
           <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: "clamp(20px,3vw,36px) clamp(12px,2vw,20px)", textAlign: "center", borderLeft: i > 0 ? "2px solid #000" : "none" }}>
-            <strong style={{ fontFamily: GC, fontWeight: 600, fontSize: "clamp(17px,1.6vw,22px)", color: "#000", lineHeight: 1.2 }}>{b.label}</strong>
+            <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(17px,1.6vw,22px)", color: "#000", lineHeight: 1.2 }}>{b.label}</strong>
             <span style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(15px,1.3vw,18px)", color: "rgba(0,0,0,0.55)" }}>{b.sub}</span>
           </div>
         ))}
@@ -352,15 +352,15 @@ export function HomeStoryStrip() {
     <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto", backgroundColor: "#000", borderRadius: 16, overflow: "hidden" }}>
         <div style={{ padding: "clamp(36px,5vw,64px) clamp(28px,5vw,72px)" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(34px,5vw,68px)", lineHeight: 1.0, color: "#fff", marginBottom: 18 }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(34px,5vw,68px)", lineHeight: 1.0, color: "#fff", marginBottom: 18 }}>
             Science-backed. Founder-driven.
           </h2>
           <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(17px,1.5vw,22px)", lineHeight: 1.55, color: "rgba(255,255,255,0.72)", maxWidth: 680, marginBottom: 28 }}>
             AVRO was built by Keigo Sugawara and Peter van Stolk for people who wanted a better option before the moments that matter. Every formula is backed by research and designed for real routines.
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <a href="/why-avro" className="hp-btn-outline-white" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 600, fontSize: 17, minHeight: 54, padding: "0 30px", borderRadius: 10, textDecoration: "none" }}>Our Story</a>
-            <a href="/science" className="hp-btn-outline-white" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 600, fontSize: 17, minHeight: 54, padding: "0 30px", borderRadius: 10, textDecoration: "none" }}>The Science</a>
+            <a href="/why-avro" className="hp-btn-outline-white" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 700, fontSize: 17, minHeight: 54, padding: "0 30px", borderRadius: 10, textDecoration: "none" }}>Our Story</a>
+            <a href="/science" className="hp-btn-outline-white" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 700, fontSize: 17, minHeight: 54, padding: "0 30px", borderRadius: 10, textDecoration: "none" }}>The Science</a>
           </div>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "38% 62%", minHeight: 360 }}>
@@ -389,7 +389,7 @@ export function HomeRitualSection() {
   return (
     <section style={{ backgroundColor: "#000", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(38px,5.5vw,72px)", lineHeight: 1.0, color: "#fff", marginBottom: 32 }}>
+        <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(38px,5.5vw,72px)", lineHeight: 1.0, color: "#fff", marginBottom: 32 }}>
           How to use AVRO.
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))", gap: 16 }}>
