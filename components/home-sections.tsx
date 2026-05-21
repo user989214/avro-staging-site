@@ -5,7 +5,18 @@ import { formulas, type FormulaKey, sharedProof, testimonials } from "@/lib/data
 import { Icon } from "@/components/icons"
 
 const GC = '"Gotham Condensed", sans-serif'
-const BLUE = "#87CEEB"
+
+// ── AVRO BLUE PALETTE ─────────────────────────────────────────────────────────
+const BLUE = {
+  lightest: "#E8F4FC",   // near-white blue (backgrounds)
+  light: "#C5E4F5",      // soft sky (cards, accents)
+  base: "#87CEEB",       // AVRO blue (primary)
+  medium: "#5BA8D1",     // deeper sky (hover states)
+  dark: "#2D7AAD",       // ocean blue (text accents)
+  navy: "#1A4B6D",       // deep navy (headings)
+  darkest: "#0D2E44",    // midnight navy (primary text)
+  royal: "#071A2B",      // royal navy (darkest, near-black)
+}
 
 // ── HERO ──────────────────────────────────────────────────────────────────────
 export function HomeRefHero() {
@@ -215,7 +226,7 @@ export function HomeProductStrip() {
   )
 }
 
-// ── MOMENT GRID ───────────────────────────────────────────────────────────────
+// ── MOMENT GRID ���──────────────────────────────────────────────────────────────
 export function HomeMomentGrid() {
   const moments = [
     { title: "Golf", copy: "Before the first tee. Before the final putt.", cta: "Explore Golf", url: "/golf", image: "/images/lifestyle/golfers-misty-tee-box.jpg", alt: "Golfers on a misty tee box at sunrise" },
