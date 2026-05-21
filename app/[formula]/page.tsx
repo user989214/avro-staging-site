@@ -119,7 +119,7 @@ export default async function ProductPage({
                   className="flex items-center justify-center w-14 h-14 rounded-full"
                   style={{ backgroundColor: BLUE }}
                 >
-                  <Icon name={benefit.icon} className="w-7 h-7" style={{ color: "#000" }} />
+                  <Icon name={benefit.icon} className="w-7 h-7 text-black" />
                 </div>
                 <h3
                   style={{
