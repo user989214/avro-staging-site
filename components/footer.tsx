@@ -56,13 +56,13 @@ export function Footer() {
           <div>
             <h3
               className="mb-2 uppercase text-white"
-              style={{ fontFamily: GC, fontWeight: 800, fontSize: "22px", lineHeight: 1.1 }}
+              style={{ fontFamily: GC, fontWeight: 800, fontSize: "30px", lineHeight: 1.05 }}
             >
               Stay in the loop
             </h3>
             <p
               className="mb-5 text-white/60"
-              style={{ fontFamily: GC, fontWeight: 400, fontSize: "17px", lineHeight: 1.25 }}
+              style={{ fontFamily: GC, fontWeight: 400, fontSize: "20px", lineHeight: 1.2 }}
             >
               Get AVRO updates, product drops, and calm-first insights delivered
               to your inbox.
@@ -81,7 +81,7 @@ export function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="flex-1 min-h-[38px] py-1 text-white bg-transparent border-0 outline-none placeholder:text-white/40"
-                style={{ fontFamily: GC, fontWeight: 400, fontSize: "17px" }}
+                style={{ fontFamily: GC, fontWeight: 400, fontSize: "20px" }}
               />
               <button
                 type="submit"
@@ -98,7 +98,7 @@ export function Footer() {
             )}
             <small
               className="block mt-4 text-white/40"
-              style={{ fontFamily: GC, fontWeight: 400, fontSize: "13px", lineHeight: 1.3 }}
+              style={{ fontFamily: GC, fontWeight: 400, fontSize: "16px", lineHeight: 1.2 }}
             >
               * These statements have not been evaluated by the Food and Drug
               Administration. This product is not intended to diagnose, treat,
@@ -111,7 +111,7 @@ export function Footer() {
                 key={label}
                 href="/faq"
                 className="text-white/60 hover:text-white transition-colors"
-                style={{ fontFamily: GC, fontWeight: 700, fontSize: "15px", lineHeight: 1 }}
+                style={{ fontFamily: GC, fontWeight: 700, fontSize: "18px", lineHeight: 1 }}
               >
                 {label}
               </Link>
@@ -142,7 +142,7 @@ export function Footer() {
       <div className="flex justify-center max-w-[1400px] mx-auto px-5.5 lg:px-14 pb-6">
         <span
           className="text-white/40"
-          style={{ fontFamily: GC, fontWeight: 400, fontSize: "14px" }}
+          style={{ fontFamily: GC, fontWeight: 400, fontSize: "17px" }}
         >
           © 2026 AVRO Life
         </span>
@@ -163,7 +163,7 @@ function FooterColumn({
     <div>
       <h4
         className="mb-3 uppercase text-white"
-        style={{ fontFamily: GC, fontWeight: 800, fontSize: "16px", lineHeight: 1, letterSpacing: "0.08em" }}
+        style={{ fontFamily: GC, fontWeight: 800, fontSize: "20px", lineHeight: 1, letterSpacing: "0.06em" }}
       >
         {title}
       </h4>
@@ -172,7 +172,7 @@ function FooterColumn({
           key={link.label}
           href={link.href}
           className="block text-white/60 hover:text-white transition-colors"
-          style={{ fontFamily: GC, fontWeight: 500, fontSize: "16px", lineHeight: 1.15, paddingTop: "6px", paddingBottom: "6px" }}
+          style={{ fontFamily: GC, fontWeight: 500, fontSize: "19px", lineHeight: 1.1, paddingTop: "7px", paddingBottom: "7px" }}
         >
           {link.label}
         </Link>
