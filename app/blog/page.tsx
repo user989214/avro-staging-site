@@ -115,11 +115,9 @@ export default function BlogPage() {
           .blog-grid { grid-template-columns: 1fr !important; }
           .featured-inner { flex-direction: column !important; align-items: flex-start !important; }
           .feat-read-btn { align-self: flex-start !important; margin-top: 16px !important; }
-          .cta-inner { flex-direction: column !important; padding: 24px 20px !important; gap: 16px !important; border-radius: 12px !important; }
-          .cta-btns { width: 100% !important; flex-direction: column !important; gap: 10px !important; }
-          .cta-btns a { width: 100% !important; box-sizing: border-box !important; min-height: 50px !important; font-size: 17px !important; }
-          .cta-inner h2 { font-size: 30px !important; margin-bottom: 8px !important; }
-          .cta-inner p { font-size: 16px !important; }
+          .cta-inner { flex-direction: column !important; padding: 40px 24px !important; gap: 24px !important; }
+          .cta-btns { width: 100% !important; flex-direction: column !important; }
+          .cta-btns a { width: 100% !important; box-sizing: border-box !important; }
           .hero-section { padding: 48px 20px 40px !important; }
           .featured-section { padding: 24px 20px !important; }
           .grid-section { padding: 0 20px 40px !important; }
