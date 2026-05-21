@@ -274,15 +274,15 @@ export function FinalCta({
   return (
     <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
       <style>{`
-        .final-cta-btn { background-color: #fff; color: #000; border: 2.5px solid #fff; transition: background-color 0.18s ease, color 0.18s ease; display: inline-flex; align-items: center; justify-content: center; font-family: ${GC_FINAL}; font-weight: 800; font-size: 20px; min-height: 64px; padding: 0 40px; border-radius: 10px; text-decoration: none; }
-        .final-cta-btn:hover { background-color: transparent; color: #fff; }
+        .final-cta-btn { background-color: #000; color: #fff; border: 2.5px solid #000; transition: background-color 0.18s ease, color 0.18s ease; display: inline-flex; align-items: center; justify-content: center; font-family: ${GC_FINAL}; font-weight: 800; font-size: 20px; min-height: 64px; padding: 0 40px; border-radius: 10px; text-decoration: none; }
+        .final-cta-btn:hover { background-color: transparent; color: #000; }
       `}</style>
-      <div style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#000", borderRadius: 20, padding: "clamp(48px,6vw,88px) clamp(36px,5vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 40 }}>
+      <div style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#87CEEB", borderRadius: 20, padding: "clamp(48px,6vw,88px) clamp(36px,5vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 40 }}>
         <div style={{ flex: "1 1 400px", minWidth: 0 }}>
-          <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#fff", marginBottom: 16 }}>
+          <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#000", marginBottom: 16 }}>
             {title}
           </h2>
-          <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(17px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(255,255,255,0.80)" }}>
+          <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(17px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(0,0,0,0.72)" }}>
             {copy}
           </p>
         </div>

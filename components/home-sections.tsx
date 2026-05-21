@@ -239,9 +239,10 @@ export function HomeMomentGrid() {
               </div>
               <div style={{ padding: "20px 24px 24px" }}>
                 <h3 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(24px,2.5vw,34px)", lineHeight: 1.0, color: "#fff", marginBottom: 8 }}>{m.title}</h3>
-                <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, lineHeight: 1.45, color: "rgba(255,255,255,0.72)", marginBottom: 16 }}>{m.copy}</p>
-                <span style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 800, fontSize: 16, color: BLUE }}>
-                  {m.cta} →
+                <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, lineHeight: 1.45, color: "rgba(255,255,255,0.78)", marginBottom: 20 }}>{m.copy}</p>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 17, minHeight: 52, padding: "0 24px", borderRadius: 10, backgroundColor: "rgba(255,255,255,0.1)", color: "#fff", border: "2px solid rgba(255,255,255,0.25)" }}>
+                  {m.cta}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </span>
               </div>
             </a>
@@ -276,14 +277,15 @@ export function HomeScienceGrid() {
                       {i === 2 && <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>}
                     </svg>
                   </div>
-                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "rgba(255,255,255,0.75)" }}>{label}</span>
+                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "rgba(255,255,255,0.85)" }}>{label}</span>
                 </div>
                 {i < 2 && <span key={`arr-${i}`} style={{ fontFamily: GC, fontWeight: 800, fontSize: 20, color: "rgba(255,255,255,0.3)" }}>→</span>}
               </>
             ))}
           </div>
-          <a href="/science" style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: BLUE, textDecoration: "none" }}>
-            Learn the Science of AVRO →
+          <a href="/science" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 18, minHeight: 58, padding: "0 32px", borderRadius: 10, textDecoration: "none", backgroundColor: BLUE, color: "#000" }}>
+            Learn the Science of AVRO
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
         </div>
 
@@ -305,9 +307,9 @@ export function HomeScienceGrid() {
                 ["Caffeine", "0 mg", "0 mg", "120 mg"],
               ].map(([row, ...cells]) => (
                 <>
-                  <div key={row} style={{ padding: "12px 14px", fontFamily: GC, fontWeight: 800, fontSize: 13, color: "rgba(255,255,255,0.5)", borderTop: "1px solid rgba(255,255,255,0.08)", backgroundColor: "rgba(255,255,255,0.04)" }}>{row}</div>
+                  <div key={row} style={{ padding: "14px 16px", fontFamily: GC, fontWeight: 800, fontSize: 16, color: "rgba(255,255,255,0.55)", borderTop: "1px solid rgba(255,255,255,0.08)", backgroundColor: "rgba(255,255,255,0.04)" }}>{row}</div>
                   {cells.map((c, ci) => (
-                    <div key={`${row}-${ci}`} style={{ padding: "12px 14px", fontFamily: GC, fontWeight: 400, fontSize: 13, color: "rgba(255,255,255,0.78)", borderTop: "1px solid rgba(255,255,255,0.08)", borderLeft: "1px solid rgba(255,255,255,0.12)", textAlign: "center" }}>{c}</div>
+                    <div key={`${row}-${ci}`} style={{ padding: "14px 16px", fontFamily: GC, fontWeight: 400, fontSize: 16, color: "rgba(255,255,255,0.85)", borderTop: "1px solid rgba(255,255,255,0.08)", borderLeft: "1px solid rgba(255,255,255,0.12)", textAlign: "center" }}>{c}</div>
                   ))}
                 </>
               ))}
@@ -332,11 +334,11 @@ export function HomeQualityRow() {
 
   return (
     <section style={{ backgroundColor: "#fff", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(40px,6vw,64px)" }}>
-      <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(6,1fr)", border: "2px solid #000", borderRadius: 12, overflow: "hidden" }}>
+      <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px,1fr))", border: "2px solid #000", borderRadius: 12, overflow: "hidden" }}>
         {badges.map((b, i) => (
-          <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, padding: "clamp(16px,2.5vw,28px) 12px", textAlign: "center", borderLeft: i > 0 ? "2px solid #000" : "none" }}>
-            <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(13px,1.2vw,16px)", color: "#000", lineHeight: 1.2 }}>{b.label}</strong>
-            <span style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(12px,1vw,14px)", color: "rgba(0,0,0,0.55)" }}>{b.sub}</span>
+          <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: "clamp(20px,3vw,36px) clamp(12px,2vw,20px)", textAlign: "center", borderLeft: i > 0 ? "2px solid #000" : "none" }}>
+            <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(16px,1.5vw,21px)", color: "#000", lineHeight: 1.2 }}>{b.label}</strong>
+            <span style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(14px,1.2vw,17px)", color: "rgba(0,0,0,0.6)" }}>{b.sub}</span>
           </div>
         ))}
       </div>
