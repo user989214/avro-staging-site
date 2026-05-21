@@ -7,7 +7,7 @@ import { FinalCta } from "@/components/sections"
 import { PdpMarquee } from "@/components/pdp-marquee"
 import { ProductComparisonGrid } from "@/components/product-comparison-grid"
 import { PdpSocialScroll } from "@/components/pdp-social-scroll"
-import { PdpMiniRecommendations } from "@/components/pdp-mini-recommendations"
+import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommendations"
 
 const validFormulas = ["calm", "focus", "energy"] as const
 
@@ -112,10 +112,10 @@ export default async function ProductPage({
         </div>
       </section>
 
-      {/* Mini Recommendations - Small integrated section under buy box */}
-      <section className="w-full bg-white pb-[clamp(32px,4vw,48px)]">
+      {/* Tabs with Recommendations - Cure style */}
+      <section className="w-full bg-white py-[clamp(32px,5vw,64px)]">
         <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
-          <PdpMiniRecommendations currentKey={key} />
+          <PdpTabsWithRecommendations currentKey={key} />
         </div>
       </section>
 
