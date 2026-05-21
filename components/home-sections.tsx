@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { formulas, type FormulaKey, sharedProof, testimonials } from "@/lib/data"
-import { ProductVisual } from "@/components/product-visual"
 import { Icon } from "@/components/icons"
 
 const GC = '"Gotham Condensed", sans-serif'
@@ -176,10 +175,10 @@ export function HomeProductStrip() {
     focus: "Cognigrape®",
     energy: "Natural Caffeine",
   }
-  const stripFlavor: Partial<Record<FormulaKey, string>> = {
-    calm: "Blueberry Acai",
-    focus: "Pomegranate Raspberry",
-    energy: "Orange Tangerine",
+  const socialImages: Record<FormulaKey, string> = {
+    calm: "/images/lifestyle/tube-social-calm-blueberry-acai.png",
+    focus: "/images/lifestyle/tube-social-focus-pomegranate-raspberry.png",
+    energy: "/images/lifestyle/tube-social-energy-orange-tangerine.png",
   }
 
   return (
@@ -193,13 +192,14 @@ export function HomeProductStrip() {
             <a
               key={key}
               href={`/${key}`}
-              style={{ display: "grid", gridTemplateRows: "1fr auto", textDecoration: "none", borderLeft: i > 0 ? "2px solid #000" : "none", minHeight: 480 }}
+              style={{ display: "grid", gridTemplateRows: "1fr auto", textDecoration: "none", borderLeft: i > 0 ? "2px solid #000" : "none" }}
             >
-              <div style={{ padding: "clamp(24px,4vw,48px) clamp(16px,3vw,32px)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <ProductVisual
-                  keys={[key]}
-                  size="large"
-                  flavorIds={{ [key]: stripFlavor[key] } as Partial<Record<FormulaKey, string>>}
+              <div style={{ height: 320, overflow: "hidden" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={socialImages[key]}
+                  alt={`AVRO ${formulas[key].name}`}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
                 />
               </div>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "20px 24px", borderTop: "2px solid #000", backgroundColor: "#000" }}>
