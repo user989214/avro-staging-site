@@ -27,14 +27,14 @@ export function HomeRefHero() {
           <Link
             href="/shop"
             className="btn-primary"
-            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700, fontSize: "18px", minHeight: "58px", paddingLeft: "36px", paddingRight: "36px" }}
+            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700, fontSize: "20px", minHeight: "64px", paddingLeft: "42px", paddingRight: "42px" }}
           >
             Shop AVRO
           </Link>
           <Link
             href="/shop"
             className="btn-secondary"
-            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700, fontSize: "18px", minHeight: "58px", paddingLeft: "36px", paddingRight: "36px" }}
+            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700, fontSize: "20px", minHeight: "64px", paddingLeft: "42px", paddingRight: "42px", border: "2.5px solid #1a1a1a" }}
           >
             Find Your Formula
           </Link>
