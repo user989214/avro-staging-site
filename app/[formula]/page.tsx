@@ -137,15 +137,15 @@ export default async function ProductPage({
           </div>
 
           {/* Graph section - two columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             {/* Left side - text */}
             <div>
               <p
                 className="mb-6"
                 style={{
                   fontFamily: GC,
-                  fontWeight: 400,
-                  fontSize: 19,
+                  fontWeight: 500,
+                  fontSize: 22,
                   lineHeight: 1.5,
                   color: "rgba(0,0,0,0.65)",
                 }}
@@ -157,11 +157,11 @@ export default async function ProductPage({
                     : "AVRO's ingredients are formulated to work better together. Delivering steady calm in a convenient stick pack format."}
               </p>
               <p
-                className="mb-8"
+                className="mb-10"
                 style={{
                   fontFamily: GC,
-                  fontWeight: 400,
-                  fontSize: 19,
+                  fontWeight: 500,
+                  fontSize: 22,
                   lineHeight: 1.5,
                   color: "rgba(0,0,0,0.65)",
                 }}
@@ -174,22 +174,21 @@ export default async function ProductPage({
               </p>
               <a
                 href="/science"
-                className="inline-flex items-center gap-2 transition-colors"
+                className="inline-flex items-center gap-3 transition-colors hover:bg-transparent hover:text-black"
                 style={{
                   fontFamily: GC,
                   fontWeight: 800,
-                  fontSize: 16,
-                  minHeight: 56,
-                  padding: "0 32px",
-                  borderRadius: 10,
+                  fontSize: 20,
+                  minHeight: 64,
+                  padding: "0 40px",
+                  borderRadius: 12,
                   backgroundColor: "#000",
                   color: "#fff",
                   border: "2.5px solid #000",
-                  letterSpacing: "0.02em",
                 }}
               >
                 Learn how it works
-                <Icon name="arrowRight" className="w-4 h-4" />
+                <Icon name="arrowRight" className="w-5 h-5" />
               </a>
             </div>
 
@@ -240,7 +239,7 @@ export default async function ProductPage({
                   {/* Time labels */}
                   <div
                     className="absolute bottom-0 left-0 right-0 flex justify-between"
-                    style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "rgba(0,0,0,0.5)" }}
+                    style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "rgba(0,0,0,0.5)" }}
                   >
                     <span>0 min</span>
                     <span>30 min</span>

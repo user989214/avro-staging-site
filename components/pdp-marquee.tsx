@@ -7,25 +7,25 @@ interface MarqueeProps {
 export function PdpMarquee({ text }: MarqueeProps) {
   return (
     <div
-      className="w-full overflow-hidden py-5"
+      className="w-full overflow-hidden py-6"
       style={{ backgroundColor: "#87CEEB" }}
     >
       <div className="flex animate-marquee whitespace-nowrap">
         {Array.from({ length: 12 }).map((_, i) => (
           <span
             key={i}
-            className="mx-10 flex items-center gap-4"
+            className="mx-12 flex items-center gap-5"
             style={{
               fontFamily: '"Gotham Condensed", sans-serif',
-              fontWeight: 500,
-              fontSize: 22,
+              fontWeight: 700,
+              fontSize: 28,
               letterSpacing: "0.01em",
               color: "#000",
             }}
           >
             <svg
-              width="18"
-              height="18"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="currentColor"
               className="opacity-70"

@@ -6,7 +6,6 @@ import { formulas, type FormulaKey } from "@/lib/data"
 import { stickImageFor } from "@/components/product-visual"
 
 const GC = '"Gotham Condensed", sans-serif'
-const BORDER = "1.5px solid rgba(0,0,0,0.12)"
 
 interface PdpTabsWithRecommendationsProps {
   currentKey: FormulaKey
@@ -22,7 +21,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
 
   const descriptionBullets: Record<FormulaKey, string[]> = {
     calm: [
-      "Formulated with naturally fermented PharmaGABA®",
+      "Formulated with naturally fermented PharmaGABA",
       "Promotes calm without drowsiness or sedation",
       "No added sugar, artificial sweeteners, or sugar alcohols",
       "Vegan, gluten-free, non-GMO project verified",
@@ -30,7 +29,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
       "HSA/FSA eligible",
     ],
     focus: [
-      "Formulated with Cognigrape® and PharmaGABA®",
+      "Formulated with Cognigrape and PharmaGABA",
       "Supports focus and mental clarity",
       "No added sugar, artificial sweeteners, or sugar alcohols",
       "Vegan, gluten-free, non-GMO project verified",
@@ -38,7 +37,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
       "HSA/FSA eligible",
     ],
     energy: [
-      "Formulated with 120mg natural caffeine and PharmaGABA®",
+      "Formulated with 120mg natural caffeine and PharmaGABA",
       "Clean energy without the jitters or crash",
       "No added sugar, artificial sweeteners, or sugar alcohols",
       "Vegan, gluten-free, non-GMO project verified",
@@ -49,22 +48,22 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
 
   const ingredientsList: Record<FormulaKey, { name: string; amount: string }[]> = {
     calm: [
-      { name: "PharmaGABA®", amount: "200 mg" },
+      { name: "PharmaGABA", amount: "200 mg" },
       { name: "Magnesium (as bisglycinate)", amount: "100 mg" },
       { name: "L-Theanine", amount: "850 mg" },
       { name: "Sodium (as bicarbonate)", amount: "80 mg" },
       { name: "Potassium (as bicarbonate)", amount: "100 mg" },
     ],
     focus: [
-      { name: "Cognigrape®", amount: "250 mg" },
-      { name: "PharmaGABA®", amount: "200 mg" },
+      { name: "Cognigrape", amount: "250 mg" },
+      { name: "PharmaGABA", amount: "200 mg" },
       { name: "L-Theanine", amount: "200 mg" },
       { name: "Sodium (as bicarbonate)", amount: "80 mg" },
       { name: "Potassium (as bicarbonate)", amount: "100 mg" },
     ],
     energy: [
       { name: "Natural caffeine", amount: "120 mg" },
-      { name: "PharmaGABA®", amount: "200 mg" },
+      { name: "PharmaGABA", amount: "200 mg" },
       { name: "L-Theanine", amount: "200 mg" },
       { name: "Sodium (as bicarbonate)", amount: "80 mg" },
       { name: "Potassium (as bicarbonate)", amount: "100 mg" },
@@ -75,16 +74,16 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
     <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16" style={{ fontFamily: GC }}>
       {/* Left - Tabs */}
       <div>
-        <div className="flex flex-wrap gap-x-8 gap-y-2 mb-6" style={{ borderBottom: "1.5px solid rgba(0,0,0,0.12)" }}>
+        <div className="flex flex-wrap gap-x-10 gap-y-2 mb-8" style={{ borderBottom: "2px solid rgba(0,0,0,0.12)" }}>
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className="pb-3 transition-colors relative"
+              className="pb-4 transition-colors relative"
               style={{
                 fontFamily: GC,
                 fontWeight: activeTab === tab ? 800 : 500,
-                fontSize: 18,
+                fontSize: 22,
                 color: activeTab === tab ? "#000" : "rgba(0,0,0,0.45)",
               }}
             >
@@ -92,36 +91,36 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
               {activeTab === tab && (
                 <span
                   className="absolute left-0 right-0"
-                  style={{ bottom: -1.5, height: 3, backgroundColor: "#000" }}
+                  style={{ bottom: -2, height: 3, backgroundColor: "#000" }}
                 />
               )}
             </button>
           ))}
         </div>
 
-        <div className="min-h-[280px]">
+        <div className="min-h-[300px]">
           {activeTab === "Description" && (
             <div>
               <h3
                 style={{
                   fontFamily: GC,
                   fontWeight: 950,
-                  fontSize: "clamp(28px,2.5vw,36px)",
+                  fontSize: "clamp(32px,3vw,42px)",
                   lineHeight: 1.0,
                   color: "#000",
-                  marginBottom: 20,
+                  marginBottom: 24,
                 }}
               >
                 Our formula
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-4">
                 {descriptionBullets[currentKey].map((bullet) => (
                   <li
                     key={bullet}
-                    className="flex items-start gap-3"
-                    style={{ fontFamily: GC, fontWeight: 500, fontSize: 19, lineHeight: 1.4, color: "rgba(0,0,0,0.7)" }}
+                    className="flex items-start gap-4"
+                    style={{ fontFamily: GC, fontWeight: 500, fontSize: 21, lineHeight: 1.35, color: "rgba(0,0,0,0.7)" }}
                   >
-                    <span style={{ color: "#000", fontWeight: 800, fontSize: 22, lineHeight: 1 }}>+</span>
+                    <span style={{ color: "#000", fontWeight: 800, fontSize: 24, lineHeight: 1 }}>+</span>
                     <span>{bullet}</span>
                   </li>
                 ))}
@@ -135,10 +134,10 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                 style={{
                   fontFamily: GC,
                   fontWeight: 950,
-                  fontSize: "clamp(28px,2.5vw,36px)",
+                  fontSize: "clamp(32px,3vw,42px)",
                   lineHeight: 1.0,
                   color: "#000",
-                  marginBottom: 20,
+                  marginBottom: 24,
                 }}
               >
                 Active ingredients
@@ -147,19 +146,19 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                 {ingredientsList[currentKey].map((ing, i) => (
                   <div
                     key={ing.name}
-                    className="flex items-center justify-between py-3"
+                    className="flex items-center justify-between py-4"
                     style={{
                       borderBottom: i < ingredientsList[currentKey].length - 1 ? "1px solid rgba(0,0,0,0.1)" : "none",
                     }}
                   >
-                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#000" }}>{ing.name}</span>
-                    <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 18, color: "rgba(0,0,0,0.6)" }}>{ing.amount}</span>
+                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 20, color: "#000" }}>{ing.name}</span>
+                    <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 20, color: "rgba(0,0,0,0.6)" }}>{ing.amount}</span>
                   </div>
                 ))}
               </div>
               <p
                 className="mt-6"
-                style={{ fontFamily: GC, fontWeight: 400, fontSize: 15, color: "rgba(0,0,0,0.5)" }}
+                style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, color: "rgba(0,0,0,0.5)" }}
               >
                 Other ingredients: Citric acid, natural flavors, silica, stevia leaf extract.
               </p>
@@ -172,25 +171,25 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                 style={{
                   fontFamily: GC,
                   fontWeight: 950,
-                  fontSize: "clamp(28px,2.5vw,36px)",
+                  fontSize: "clamp(32px,3vw,42px)",
                   lineHeight: 1.0,
                   color: "#000",
-                  marginBottom: 20,
+                  marginBottom: 24,
                 }}
               >
                 Best times to use
               </h3>
-              <div className="space-y-5">
+              <div className="space-y-6">
                 {[
                   { title: "Morning routine", body: "Start your day with clarity and composure." },
                   { title: "Before important moments", body: "Meetings, presentations, or any high-stakes situation." },
                   { title: "Afternoon reset", body: "Combat the midday slump without caffeine." },
                 ].map((item) => (
                   <div key={item.title}>
-                    <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 19, color: "#000", display: "block", marginBottom: 4 }}>
+                    <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, color: "#000", display: "block", marginBottom: 6 }}>
                       {item.title}
                     </span>
-                    <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(0,0,0,0.6)" }}>
+                    <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 19, lineHeight: 1.4, color: "rgba(0,0,0,0.6)" }}>
                       {item.body}
                     </p>
                   </div>
@@ -205,29 +204,29 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                 style={{
                   fontFamily: GC,
                   fontWeight: 950,
-                  fontSize: "clamp(28px,2.5vw,36px)",
+                  fontSize: "clamp(32px,3vw,42px)",
                   lineHeight: 1.0,
                   color: "#000",
-                  marginBottom: 20,
+                  marginBottom: 24,
                 }}
               >
                 Simple 3-step ritual
               </h3>
-              <div className="space-y-5">
+              <div className="space-y-6">
                 {[
-                  { n: 1, title: "Pour", body: "Empty one stick into 8–12 oz of cold water." },
+                  { n: 1, title: "Pour", body: "Empty one stick into 8-12 oz of cold water." },
                   { n: 2, title: "Mix", body: "Stir or shake until fully dissolved." },
-                  { n: 3, title: "Drink", body: "Enjoy 20–30 minutes before your moment." },
+                  { n: 3, title: "Drink", body: "Enjoy 20-30 minutes before your moment." },
                 ].map((step) => (
-                  <div key={step.n} className="flex items-start gap-4">
-                    <span style={{ fontFamily: GC, fontWeight: 950, fontSize: 52, lineHeight: 1, color: "#000" }}>
+                  <div key={step.n} className="flex items-start gap-5">
+                    <span style={{ fontFamily: GC, fontWeight: 950, fontSize: 56, lineHeight: 1, color: "#000" }}>
                       {step.n}
                     </span>
                     <div>
-                      <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 19, color: "#000", display: "block", marginBottom: 4 }}>
+                      <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, color: "#000", display: "block", marginBottom: 6 }}>
                         {step.title}
                       </span>
-                      <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(0,0,0,0.6)" }}>
+                      <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 19, lineHeight: 1.4, color: "rgba(0,0,0,0.6)" }}>
                         {step.body}
                       </p>
                     </div>
@@ -242,18 +241,18 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
       {/* Right - You might also like */}
       <div>
         <h3
-          className="mb-5"
+          className="mb-6"
           style={{
             fontFamily: GC,
             fontWeight: 800,
-            fontSize: 18,
+            fontSize: 24,
             color: "#000",
           }}
         >
-          You might also like…
+          You might also like
         </h3>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-5">
           {otherKeys.map((formulaKey) => {
             const formula = formulas[formulaKey]
             const stickImg = stickImageFor(formulaKey)
@@ -264,7 +263,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
               <div
                 key={formulaKey}
                 className="flex flex-col bg-white"
-                style={{ borderRadius: 12, overflow: "hidden", border: BORDER }}
+                style={{ borderRadius: 12, overflow: "hidden", border: "2px solid rgba(0,0,0,0.12)" }}
               >
                 <div
                   className="aspect-square flex items-center justify-center overflow-hidden"
@@ -274,21 +273,21 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   <img
                     src={stickImg.src}
                     alt={stickImg.alt}
-                    className="w-32 h-auto object-contain"
+                    className="w-36 h-auto object-contain"
                   />
                 </div>
 
-                <div className="p-4 flex flex-col gap-3">
+                <div className="p-5 flex flex-col gap-4">
                   <div>
                     <span
                       style={{
                         fontFamily: GC,
                         fontWeight: 950,
-                        fontSize: 22,
+                        fontSize: 26,
                         lineHeight: 1.05,
                         color: "#000",
                         display: "block",
-                        marginBottom: 4,
+                        marginBottom: 6,
                       }}
                     >
                       {formula.name}
@@ -297,7 +296,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                       style={{
                         fontFamily: GC,
                         fontWeight: 500,
-                        fontSize: 15,
+                        fontSize: 17,
                         lineHeight: 1.3,
                         color: "rgba(0,0,0,0.55)",
                         display: "block",
@@ -310,37 +309,29 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   <div className="flex flex-col gap-2">
                     <Link
                       href={`/${formulaKey}`}
-                      className="flex items-center justify-center transition-colors"
+                      className="flex items-center justify-center transition-colors hover:bg-transparent hover:text-black"
                       style={{
                         fontFamily: GC,
                         fontWeight: 800,
-                        fontSize: 14,
-                        minHeight: 44,
-                        padding: "0 12px",
-                        borderRadius: 8,
+                        fontSize: 17,
+                        minHeight: 52,
+                        padding: "0 16px",
+                        borderRadius: 10,
                         backgroundColor: "#000",
                         color: "#fff",
                         border: "2px solid #000",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = "transparent"
-                        e.currentTarget.style.color = "#000"
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = "#000"
-                        e.currentTarget.style.color = "#fff"
                       }}
                     >
                       Add to cart — ${oneTimePrice}
                     </Link>
                     <Link
                       href={`/${formulaKey}`}
-                      className="flex items-center justify-center transition-colors"
+                      className="flex items-center justify-center transition-colors hover:text-black"
                       style={{
                         fontFamily: GC,
                         fontWeight: 700,
-                        fontSize: 13,
-                        minHeight: 36,
+                        fontSize: 15,
+                        minHeight: 40,
                         color: "rgba(0,0,0,0.6)",
                         textDecoration: "underline",
                       }}
