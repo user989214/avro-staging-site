@@ -56,10 +56,8 @@ export function Footer() {
         {/* Left col: newsletter + legal */}
         <div className="flex-none lg:w-[360px] flex flex-col gap-7">
 
-          {/* Newsletter box — rounded rectangle */}
-          <div
-            className="rounded-[12px] border-2 border-white/25 p-5"
-          >
+          {/* Newsletter — no outer box, just the input has its own rounded rect border */}
+          <div>
             <h3
               className="mb-1 text-white"
               style={{ fontFamily: GC, fontWeight: 800, fontSize: "28px", lineHeight: 1.0 }}
@@ -78,7 +76,7 @@ export function Footer() {
               </p>
             ) : (
               <form
-                className="flex items-stretch rounded-[8px] overflow-hidden"
+                className="flex items-stretch rounded-[8px] border-2 border-white/30 overflow-hidden"
                 onSubmit={handleSubmit}
               >
                 <label className="sr-only" htmlFor="footer-email">Email address</label>
@@ -134,8 +132,11 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Divider between left col and nav */}
+        <div className="hidden lg:block w-px bg-white/15 self-stretch" aria-hidden="true" />
+
         {/* Right: nav columns */}
-        <div className="flex-1 lg:pl-16">
+        <div className="flex-1 lg:pl-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             <FooterColumn title="Company" links={footerLinks.avro} />
             <FooterColumn title="Shop" links={footerLinks.shop} />
