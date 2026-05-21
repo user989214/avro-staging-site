@@ -9,13 +9,6 @@ import {
   type TubeScene,
 } from "@/components/product-visual"
 import { Icon } from "@/components/icons"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
 import type { FormulaKey, Formula } from "@/lib/data"
 import { cn } from "@/lib/utils"
 
@@ -23,7 +16,7 @@ interface ProductGalleryProps {
   formula: Formula
   formulaKey: FormulaKey
   flavorId: string
-  onFlavorChange: (flavorId: string) => void
+  onFlavorChange?: (flavorId: string) => void
 }
 
 type ThumbKind = "studio" | "tube" | "stick" | TubeScene
@@ -46,16 +39,12 @@ const THUMBS: Thumb[] = [
   { id: "gaming", label: TUBE_SCENE_LABELS.gaming, bg: "scene" },
 ]
 
-export function ProductGallery({ formula, formulaKey, flavorId, onFlavorChange }: ProductGalleryProps) {
+export function ProductGallery({ formula, formulaKey, flavorId }: ProductGalleryProps) {
   const [activeId, setActiveId] = useState<ThumbKind>("studio")
 
   const studio = tubeImageFor("studio", formulaKey, flavorId)
   const soloTube = soloTubeImageFor(formulaKey, flavorId)
   const stick = stickImageFor(formulaKey, flavorId)
-  const activeFlavorName =
-    formula.flavors.find((f) => f.id === flavorId)?.name ?? formula.flavor
-  const soloTubeSrc = `/images/tubes/solo/${formulaKey}-${flavorId}.jpg`
-  const soloTubeAlt = `AVRO ${formula.short} ${activeFlavorName} display tube`
 
   const isLifestyle = (id: ThumbKind): id is TubeScene =>
     id === "tech" || id === "golf" || id === "social" || id === "gaming"
@@ -157,43 +146,20 @@ export function ProductGallery({ formula, formulaKey, flavorId, onFlavorChange }
     )
   }
 
-  const factsRows: [string, string][] = [
-    ["Calories", "10"],
-    ["Total Carbohydrate", formulaKey === "calm" ? "2 g" : "3 g"],
-    ["Total Sugars", "0 g"],
-    ...(formulaKey === "calm"
-      ? ([["Magnesium (as magnesium bisglycinate)", "100 mg"]] as [string, string][])
-      : []),
-    ["Sodium (as sodium bicarbonate)", "80 mg"],
-    ["Potassium (as potassium bicarbonate)", "100 mg"],
-    ["PharmaGABA® (GABA)", "200 mg"],
-    [
-      formula.addition,
-      formulaKey === "calm" ? "850 mg" : formulaKey === "focus" ? "250 mg" : "120 mg",
-    ],
-  ]
-
-  const otherIngredients =
-    formulaKey === "calm"
-      ? "Soluble guar fiber, citric acid, modified corn starch, contains 2% or less of acacia fiber, stevia leaf extract, natural flavor, vegetable juice color, spirulina color, silica."
-      : formulaKey === "energy"
-        ? "Soluble guar fiber, citric acid, modified corn starch, natural flavor, contains 2% or less of acacia fiber, beta carotene color, stevia leaf extract, vegetable juice color, spirulina color, silica."
-        : "Soluble guar fiber, citric acid, modified corn starch, natural flavor, contains 2% or less of acacia fiber, stevia leaf extract, silica."
-
   return (
     <div className="flex flex-col gap-3 lg:gap-4">
       {/* Main view — square, fills the frame, image-native background */}
-      <div className="relative w-full aspect-square rounded-lg border border-line overflow-hidden bg-white">
-        <div className="absolute top-4 left-4 z-10 flex items-center gap-2 pl-2 pr-3 py-1.5 bg-white border border-line rounded-full shadow-[0_4px_14px_rgba(31,29,24,0.06)]">
-          <span className="grid place-items-center w-7 h-7 rounded-full bg-olive">
+      <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-white" style={{ backgroundColor: "#f5f5f5" }}>
+        <div className="absolute top-4 left-4 z-10 flex items-center gap-2 pl-2 pr-3 py-1.5 bg-white rounded-full">
+          <span className="grid place-items-center w-7 h-7 rounded-full" style={{ backgroundColor: "#000" }}>
             <Icon name="shield" className="w-4 h-4 text-white" />
           </span>
-          <span className="text-[11px] font-black tracking-[0.08em] uppercase text-olive-dark">
+          <span className="text-[11px] tracking-[0.08em] uppercase" style={{ fontFamily: '"Gotham Condensed", sans-serif', fontWeight: 800, color: "#000" }}>
             Clinicians&apos; Choice
           </span>
         </div>
 
-        <div className="absolute top-4 right-4 z-10 px-3 py-1.5 bg-olive text-white rounded-full text-[11px] font-black tracking-[0.08em] uppercase">
+        <div className="absolute top-4 right-4 z-10 px-3 py-1.5 rounded-full text-[11px] tracking-[0.08em] uppercase" style={{ backgroundColor: "#87CEEB", color: "#000", fontFamily: '"Gotham Condensed", sans-serif', fontWeight: 800 }}>
           {isLifestyle(activeId) ? TUBE_SCENE_LABELS[activeId] : "New"}
         </div>
 
@@ -211,12 +177,10 @@ export function ProductGallery({ formula, formulaKey, flavorId, onFlavorChange }
                 aria-label={thumb.label}
                 aria-pressed={activeId === thumb.id}
                 className={cn(
-                  "relative w-[88px] h-[88px] sm:w-[96px] sm:h-[96px] rounded-md border-2 overflow-hidden flex items-center justify-center transition-all",
-                  thumb.bg === "white" ? "bg-white" : "bg-soft",
-                  activeId === thumb.id
-                    ? "border-olive shadow-[0_4px_14px_rgba(31,29,24,0.12)]"
-                    : "border-line hover:border-ink/30",
+                  "relative w-[88px] h-[88px] sm:w-[96px] sm:h-[96px] rounded-lg overflow-hidden flex items-center justify-center transition-all",
+                  activeId === thumb.id ? "ring-2 ring-black" : "opacity-70 hover:opacity-100",
                 )}
+                style={{ backgroundColor: thumb.bg === "white" ? "#fff" : "#f5f5f5" }}
               >
                 {renderThumb(thumb)}
                 <span className="sr-only">{thumb.label}</span>
@@ -224,83 +188,6 @@ export function ProductGallery({ formula, formulaKey, flavorId, onFlavorChange }
             </li>
           ))}
         </ul>
-      </div>
-
-      {/* Supplement Facts trigger + flavor selector */}
-      <div className="flex flex-wrap items-center gap-3 pt-1">
-        <Dialog>
-          <DialogTrigger asChild>
-            <button
-              type="button"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border-2 border-line bg-white text-xs font-extrabold text-ink uppercase tracking-[0.08em] hover:border-olive hover:text-olive-dark transition-all"
-            >
-              <Icon name="card" className="w-4 h-4 text-olive" />
-              Supplement Facts
-            </button>
-          </DialogTrigger>
-          <DialogContent className="max-w-[420px] p-0 bg-white">
-            <div className="p-6 pb-2">
-              <DialogHeader>
-                <DialogTitle className="font-serif font-black text-2xl">
-                  Supplement Facts
-                </DialogTitle>
-              </DialogHeader>
-              <p className="mt-1 text-xs text-ink/65">
-                {formula.name} &middot; {activeFlavorName} &middot; Serving size 1 stick (5 g)
-              </p>
-            </div>
-            <div className="px-6 pb-6">
-              <div className="border-2 border-ink rounded-md p-4 font-sans">
-                <div className="border-t-4 border-ink pt-2">
-                  {factsRows.map(([label, value], i) => (
-                    <div
-                      key={label}
-                      className={cn(
-                        "flex justify-between text-xs py-2",
-                        i < factsRows.length - 1 && "border-b border-line",
-                      )}
-                    >
-                      <span className="font-bold">{label}</span>
-                      <span>{value}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="mt-3 text-[10px] text-ink/55 leading-snug">
-                  10 stick packets per box. Net wt 1.76 oz (50 g). Mix 1 packet into 12 fl oz of water; up to 3 times per day.
-                </p>
-                <p className="mt-2 text-[10px] text-ink/55 leading-snug">
-                  <span className="font-bold">Other ingredients: </span>
-                  {otherIngredients}
-                </p>
-              </div>
-            </div>
-          </DialogContent>
-        </Dialog>
-
-        <div className="flex items-center gap-2 flex-wrap ml-auto">
-          <span className="text-[11px] font-black tracking-[0.1em] uppercase text-ink/60">
-            Flavor
-          </span>
-          {formula.flavors.map((flavor) => {
-            const selected = flavor.id === flavorId
-            return (
-              <button
-                key={flavor.id}
-                type="button"
-                onClick={() => onFlavorChange(flavor.id)}
-                aria-pressed={selected}
-                className={cn(
-                  "px-3 py-1.5 rounded-full border-2 bg-white text-xs font-extrabold transition-all",
-                  selected
-                    ? "border-olive text-olive-dark"
-                    : "border-line text-ink/70 hover:border-ink/30",
-                )}
-              >
-                {flavor.name}
-              </button>
-            )
-          })}
-        </div>
       </div>
     </div>
   )

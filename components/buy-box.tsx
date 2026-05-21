@@ -3,9 +3,17 @@
 import { useState } from "react"
 import { useCart } from "@/lib/cart-context"
 import { Icon } from "@/components/icons"
-import { stickImageFor } from "@/components/product-visual"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import type { Formula, FormulaKey } from "@/lib/data"
 import { cn } from "@/lib/utils"
+
+const GC = '"Gotham Condensed", sans-serif'
 
 interface BuyBoxProps {
   formula: Formula
@@ -14,7 +22,7 @@ interface BuyBoxProps {
   onFlavorChange: (flavorId: string) => void
 }
 
-export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBoxProps) {
+export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
   const [purchaseType, setPurchaseType] = useState<"onetime" | "subscribe">("subscribe")
   const [quantity, setQuantity] = useState(1)
   const { addItem, openCart } = useCart()
@@ -32,79 +40,58 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
     openCart()
   }
 
+  const factsRows: [string, string][] = [
+    ["Calories", "10"],
+    ["Total Carbohydrate", formulaKey === "calm" ? "2 g" : "3 g"],
+    ["Total Sugars", "0 g"],
+    ...(formulaKey === "calm"
+      ? ([["Magnesium (as magnesium bisglycinate)", "100 mg"]] as [string, string][])
+      : []),
+    ["Sodium (as sodium bicarbonate)", "80 mg"],
+    ["Potassium (as potassium bicarbonate)", "100 mg"],
+    ["PharmaGABA® (GABA)", "200 mg"],
+    [
+      formula.addition,
+      formulaKey === "calm" ? "850 mg" : formulaKey === "focus" ? "250 mg" : "120 mg",
+    ],
+  ]
+
   return (
-    <aside className="flex flex-col gap-5 p-7 bg-white border border-line rounded-lg shadow-[0_8px_32px_rgba(31,29,24,0.05)]">
+    <aside className="flex flex-col gap-6 p-8 bg-white rounded-xl" style={{ fontFamily: GC }}>
       {/* Header */}
       <header className="flex flex-col gap-2">
-        <span className="text-olive text-[11px] font-black tracking-[0.14em] uppercase">
+        <span
+          className="text-[11px] tracking-[0.14em] uppercase"
+          style={{ fontFamily: GC, fontWeight: 700, color: "rgba(0,0,0,0.55)" }}
+        >
           {formula.name}
         </span>
-        <h1 className="font-serif font-black text-[clamp(28px,3vw,38px)] leading-[1.05] text-ink">
+        <h1
+          style={{
+            fontFamily: GC,
+            fontWeight: 950,
+            fontSize: "clamp(28px,3vw,42px)",
+            lineHeight: 1.0,
+            color: "#000",
+          }}
+        >
           {formula.headline}
         </h1>
         <div className="flex items-center gap-2 mt-1">
-          <span className="text-[#d79a23] tracking-wider text-sm">{"\u2605\u2605\u2605\u2605\u2605"}</span>
-          <span className="text-ink/60 text-sm">{reviewLabel}</span>
+          <span style={{ color: "#d79a23" }} className="tracking-wider text-sm">
+            {"\u2605\u2605\u2605\u2605\u2605"}
+          </span>
+          <span className="text-sm" style={{ color: "rgba(0,0,0,0.55)" }}>
+            {reviewLabel}
+          </span>
         </div>
-        <p className="mt-1 text-xs text-ink/60">
-          10 stick packets per box &middot; Net wt 1.76 oz (50 g)
+        <p className="mt-1 text-xs" style={{ color: "rgba(0,0,0,0.55)" }}>
+          10 stick packets per box · Flavor: {activeFlavor.name}
         </p>
       </header>
 
-      {/* Flavor switcher */}
-      <div className="flex flex-col gap-3">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-sm font-extrabold text-ink-dark">
-            Flavor: <span className="font-bold text-ink/70">{activeFlavor.name}</span>
-          </h2>
-          <span className="text-xs text-ink/60 italic">{activeFlavor.tagline}</span>
-        </div>
-        <div className="grid grid-cols-2 gap-2.5">
-          {formula.flavors.map((flavor) => {
-            const selected = flavor.id === flavorId
-            const { src, alt } = stickImageFor(formulaKey, flavor.id)
-            return (
-              <button
-                key={flavor.id}
-                type="button"
-                onClick={() => onFlavorChange(flavor.id)}
-                aria-pressed={selected}
-                className={cn(
-                  "relative flex items-center gap-2 rounded-lg border-2 bg-white overflow-hidden text-left transition-all min-h-[64px]",
-                  selected
-                    ? "border-olive ring-1 ring-olive/30"
-                    : "border-line hover:border-ink/30"
-                )}
-              >
-                <span
-                  className="flex items-center justify-center w-14 h-full self-stretch shrink-0 py-1.5"
-                  style={{
-                    background: `linear-gradient(135deg, ${formula.color}10, ${formula.accent}1f)`,
-                  }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={src}
-                    alt={alt}
-                    className="h-12 w-auto object-contain"
-                  />
-                </span>
-                <span
-                  className={cn(
-                    "flex-1 pr-3 py-2 text-xs font-extrabold leading-tight",
-                    selected ? "text-olive-dark" : "text-ink"
-                  )}
-                >
-                  {flavor.name}
-                </span>
-              </button>
-            )
-          })}
-        </div>
-      </div>
-
       {/* Purchase options */}
-      <div className="flex flex-col gap-2.5">
+      <div className="flex flex-col gap-3">
         <PurchaseOption
           checked={purchaseType === "subscribe"}
           onChange={() => setPurchaseType("subscribe")}
@@ -124,22 +111,34 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
 
       {/* Quantity */}
       <div className="flex items-center justify-between">
-        <h2 className="text-sm font-extrabold text-ink-dark">Quantity</h2>
-        <div className="flex items-center gap-1 border border-line rounded-md overflow-hidden">
+        <h2 className="text-sm uppercase tracking-[0.1em]" style={{ fontFamily: GC, fontWeight: 800 }}>
+          Quantity
+        </h2>
+        <div
+          className="flex items-center"
+          style={{ backgroundColor: "#f2f2f2", borderRadius: 8 }}
+        >
           <button
             type="button"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             aria-label="Decrease quantity"
-            className="w-10 h-10 flex items-center justify-center hover:bg-soft transition-colors text-lg font-bold"
+            className="w-10 h-10 flex items-center justify-center text-lg transition-colors hover:bg-black/5"
+            style={{ fontFamily: GC, fontWeight: 800 }}
           >
-            -
+            −
           </button>
-          <span className="w-10 text-center font-extrabold">{quantity}</span>
+          <span
+            className="w-10 text-center"
+            style={{ fontFamily: GC, fontWeight: 800, fontSize: 16 }}
+          >
+            {quantity}
+          </span>
           <button
             type="button"
             onClick={() => setQuantity((q) => q + 1)}
             aria-label="Increase quantity"
-            className="w-10 h-10 flex items-center justify-center hover:bg-soft transition-colors text-lg font-bold"
+            className="w-10 h-10 flex items-center justify-center text-lg transition-colors hover:bg-black/5"
+            style={{ fontFamily: GC, fontWeight: 800 }}
           >
             +
           </button>
@@ -150,17 +149,96 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
       <button
         type="button"
         onClick={handleAdd}
-        className="btn-primary w-full !min-h-[54px] !text-base"
+        className="w-full flex items-center justify-center transition-colors"
+        style={{
+          fontFamily: GC,
+          fontWeight: 800,
+          fontSize: 18,
+          minHeight: 60,
+          padding: "0 32px",
+          borderRadius: 10,
+          backgroundColor: "#000",
+          color: "#fff",
+          border: "2.5px solid #000",
+          letterSpacing: "0.01em",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = "transparent"
+          e.currentTarget.style.color = "#000"
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = "#000"
+          e.currentTarget.style.color = "#fff"
+        }}
       >
-        Add to Cart &mdash; ${displayTotal.toFixed(2)}
+        Add to Cart — ${displayTotal.toFixed(2)}
       </button>
 
-      {/* Trust bar */}
-      <ul className="grid grid-cols-3 gap-2 pt-2 border-t border-line">
-        <TrustItem icon="shield" label="HSA/FSA eligible" />
-        <TrustItem icon="leaf" label="Third-party tested" />
-        <TrustItem icon="star" label="30-day guarantee" />
-      </ul>
+      {/* Supplement Facts button */}
+      <Dialog>
+        <DialogTrigger asChild>
+          <button
+            type="button"
+            className="w-full flex items-center justify-center gap-2 transition-colors"
+            style={{
+              fontFamily: GC,
+              fontWeight: 700,
+              fontSize: 14,
+              minHeight: 48,
+              padding: "0 24px",
+              borderRadius: 10,
+              backgroundColor: "#f2f2f2",
+              color: "#000",
+              border: "none",
+              letterSpacing: "0.05em",
+              textTransform: "uppercase",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "#e8e8e8"
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "#f2f2f2"
+            }}
+          >
+            <Icon name="card" className="w-4 h-4" />
+            Supplement Facts
+          </button>
+        </DialogTrigger>
+        <DialogContent className="max-w-[420px] p-0 bg-white">
+          <div className="p-6 pb-2">
+            <DialogHeader>
+              <DialogTitle style={{ fontFamily: GC, fontWeight: 950, fontSize: 28 }}>
+                Supplement Facts
+              </DialogTitle>
+            </DialogHeader>
+            <p className="mt-1 text-xs" style={{ color: "rgba(0,0,0,0.55)" }}>
+              {formula.name} · {activeFlavor.name} · Serving size 1 stick (5 g)
+            </p>
+          </div>
+          <div className="px-6 pb-6">
+            <div className="rounded-md p-4" style={{ backgroundColor: "#f5f5f5" }}>
+              <div style={{ borderTop: "4px solid #000", paddingTop: 8 }}>
+                {factsRows.map(([label, value], i) => (
+                  <div
+                    key={label}
+                    className={cn(
+                      "flex justify-between text-xs py-2",
+                      i < factsRows.length - 1 && "border-b",
+                    )}
+                    style={{ borderColor: "rgba(0,0,0,0.08)" }}
+                  >
+                    <span style={{ fontFamily: GC, fontWeight: 700 }}>{label}</span>
+                    <span>{value}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-3 text-[10px] leading-snug" style={{ color: "rgba(0,0,0,0.55)" }}>
+                10 stick packets per box. Mix 1 packet into 12 fl oz of water; up to 3 times per day.
+              </p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </aside>
   )
 }
@@ -182,42 +260,54 @@ function PurchaseOption({
 }) {
   return (
     <label
-      className={cn(
-        "relative flex items-start gap-3 p-4 rounded-md border-2 cursor-pointer transition-all",
-        checked ? "border-olive bg-olive/5" : "border-line bg-white hover:border-ink/30"
-      )}
+      className="relative flex items-start gap-3 p-4 cursor-pointer transition-all"
+      style={{
+        borderRadius: 10,
+        backgroundColor: checked ? "#000" : "#f5f5f5",
+        color: checked ? "#fff" : "#000",
+      }}
     >
       <input
         type="radio"
         name="purchase"
         checked={checked}
         onChange={onChange}
-        className="mt-1 accent-olive shrink-0"
+        className="mt-1 shrink-0"
+        style={{ accentColor: "#87CEEB" }}
       />
       <div className="flex-1">
         <div className="flex items-center justify-between gap-3">
-          <strong className="text-sm font-extrabold text-ink">{title}</strong>
-          <strong className="text-sm font-black text-ink whitespace-nowrap">{price}</strong>
+          <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: 15 }}>{title}</strong>
+          <strong style={{ fontFamily: GC, fontWeight: 950, fontSize: 15, whiteSpace: "nowrap" }}>
+            {price}
+          </strong>
         </div>
-        <p className="text-xs text-ink/65 mt-1 leading-relaxed">{subtitle}</p>
+        <p
+          className="mt-1 leading-relaxed"
+          style={{
+            fontFamily: GC,
+            fontWeight: 400,
+            fontSize: 12,
+            color: checked ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)",
+          }}
+        >
+          {subtitle}
+        </p>
       </div>
       {badge && (
         <span
-          className="absolute -top-2.5 left-4 px-2 py-0.5 bg-olive text-[10px] font-black tracking-[0.1em] rounded-sm"
-          style={{ color: "var(--avro-blue)" }}
+          className="absolute -top-2.5 left-4 px-2 py-0.5 text-[10px] tracking-[0.1em]"
+          style={{
+            fontFamily: GC,
+            fontWeight: 950,
+            backgroundColor: "#87CEEB",
+            color: "#000",
+            borderRadius: 4,
+          }}
         >
           {badge}
         </span>
       )}
     </label>
-  )
-}
-
-function TrustItem({ icon, label }: { icon: "shield" | "leaf" | "star"; label: string }) {
-  return (
-    <li className="flex flex-col items-center gap-1.5 text-center">
-      <Icon name={icon} className="w-5 h-5 text-olive" />
-      <span className="text-[11px] font-bold text-ink/70 leading-tight">{label}</span>
-    </li>
   )
 }
