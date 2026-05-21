@@ -46,6 +46,23 @@ const GC_FAMILY = '"Gotham Condensed"'
 export default function LearnPage() {
   return (
     <>
+      {/* Scoped button hover states for the learn page */}
+      <style>{`
+        /* Hero: blue fill → outline on hover */
+        .learn-btn-blue:hover  { background-color: transparent !important; color: #87CEEB !important; outline: 2.5px solid #87CEEB; }
+        /* Hero: white outline → solid fill on hover */
+        .learn-btn-outline-white:hover { background-color: #fff !important; color: #000 !important; }
+        /* CTA: black fill → white on hover */
+        .learn-btn-black:hover  { background-color: #fff !important; color: #000 !important; }
+        /* CTA: black outline → solid black fill on hover */
+        .learn-btn-outline-black:hover { background-color: #000 !important; color: #fff !important; }
+        /* Transitions */
+        .learn-btn-blue, .learn-btn-outline-white,
+        .learn-btn-black, .learn-btn-outline-black {
+          transition: background-color 0.18s ease, color 0.18s ease, outline 0.18s ease;
+        }
+      `}</style>
+
       {/* Hero — pure black background */}
       <section style={{ backgroundColor: "#000", color: "#fff" }} className="w-full">
         <div className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(64px,10vw,128px)] flex flex-col items-center text-center">
@@ -67,13 +84,14 @@ export default function LearnPage() {
             {/* Primary: AVRO blue fill */}
             <Link
               href="/learn"
+              className="learn-btn-blue"
               style={{
                 fontFamily: GC_FAMILY,
                 fontWeight: 800,
                 fontSize: "22px",
                 backgroundColor: "#87CEEB",
                 color: "#000",
-                border: "none",
+                border: "2.5px solid transparent",
                 minHeight: "68px",
                 paddingLeft: "48px",
                 paddingRight: "48px",
@@ -84,9 +102,9 @@ export default function LearnPage() {
             >
               Read Articles
             </Link>
-            {/* Secondary: white outline */}
             <Link
               href="/shop"
+              className="learn-btn-outline-white"
               style={{
                 fontFamily: GC_FAMILY,
                 fontWeight: 800,
@@ -217,12 +235,14 @@ export default function LearnPage() {
           <div className="flex flex-wrap justify-center gap-4 mt-2">
             <Link
               href="/shop"
+              className="learn-btn-black"
               style={{
                 fontFamily: GC_FAMILY,
                 fontWeight: 800,
                 fontSize: "21px",
                 backgroundColor: "#000",
                 color: "#fff",
+                border: "2.5px solid #000",
                 minHeight: "66px",
                 paddingLeft: "46px",
                 paddingRight: "46px",
@@ -235,6 +255,7 @@ export default function LearnPage() {
             </Link>
             <Link
               href="/shop"
+              className="learn-btn-outline-black"
               style={{
                 fontFamily: GC_FAMILY,
                 fontWeight: 800,
