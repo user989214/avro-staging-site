@@ -77,7 +77,7 @@ export default function LearnPage() {
                 minHeight: "68px",
                 paddingLeft: "48px",
                 paddingRight: "48px",
-                borderRadius: "9999px",
+                borderRadius: "10px",
                 display: "inline-flex",
                 alignItems: "center",
               }}
@@ -97,7 +97,7 @@ export default function LearnPage() {
                 minHeight: "68px",
                 paddingLeft: "48px",
                 paddingRight: "48px",
-                borderRadius: "9999px",
+                borderRadius: "10px",
                 display: "inline-flex",
                 alignItems: "center",
               }}
@@ -226,7 +226,7 @@ export default function LearnPage() {
                 minHeight: "66px",
                 paddingLeft: "46px",
                 paddingRight: "46px",
-                borderRadius: "9999px",
+                borderRadius: "10px",
                 display: "inline-flex",
                 alignItems: "center",
               }}
@@ -245,7 +245,7 @@ export default function LearnPage() {
                 minHeight: "66px",
                 paddingLeft: "46px",
                 paddingRight: "46px",
-                borderRadius: "9999px",
+                borderRadius: "10px",
                 display: "inline-flex",
                 alignItems: "center",
               }}
