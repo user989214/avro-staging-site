@@ -68,7 +68,7 @@ export function Footer() {
               to your inbox.
             </p>
             <form
-              className="flex items-center mb-0 pb-2 border-b-[1.5px] border-white/30"
+              className="flex items-stretch rounded-[10px] border-2 border-white/40 overflow-hidden"
               onSubmit={handleSubmit}
             >
               <label className="sr-only" htmlFor="footer-email">
@@ -80,15 +80,16 @@ export function Footer() {
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 min-h-[38px] py-1 text-white bg-transparent border-0 outline-none placeholder:text-white/40"
+                className="flex-1 px-4 py-3 text-white bg-transparent border-0 outline-none placeholder:text-white/40"
                 style={{ fontFamily: GC, fontWeight: 400, fontSize: "20px" }}
               />
               <button
                 type="submit"
-                className="grid place-items-center p-1 text-white bg-transparent border-0 cursor-pointer transition-transform hover:translate-x-[3px]"
+                className="flex items-center gap-1.5 px-5 py-3 text-black font-black bg-white border-0 cursor-pointer transition-opacity hover:opacity-85"
+                style={{ fontFamily: GC, fontWeight: 800, fontSize: "17px" }}
                 aria-label="Subscribe"
               >
-                <ChevronRight className="w-[18px] h-[18px]" />
+                Subscribe <ChevronRight className="w-4 h-4" />
               </button>
             </form>
             {submitted && (
@@ -120,7 +121,7 @@ export function Footer() {
         </div>
 
         {/* Right columns */}
-        <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-8 lg:pl-16 lg:border-l lg:border-white/10">
+        <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-8 lg:pl-16 lg:border-l-2 lg:border-white/20">
           <FooterColumn title="Company" links={footerLinks.avro} />
           <FooterColumn title="Shop" links={footerLinks.shop} />
           <FooterColumn title="Learn" links={footerLinks.learn} />
@@ -129,7 +130,7 @@ export function Footer() {
       </div>
 
       {/* Large typographic lockup */}
-      <div className="flex justify-center px-5.5 lg:px-14 pt-5 pb-2 border-t border-white/10" aria-hidden="true">
+      <div className="flex justify-center px-5.5 lg:px-14 pt-5 pb-2 border-t-2 border-white/20" aria-hidden="true">
         <p
           className="text-center text-white/[0.08] leading-none select-none pointer-events-none"
           style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(72px, 16vw, 220px)", letterSpacing: "-0.02em" }}
