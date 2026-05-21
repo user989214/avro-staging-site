@@ -48,21 +48,40 @@ const articleGroups = [
   },
 ]
 
+/* Gotham Condensed hierarchy for this page:
+   Ultra (950)  → hero h1
+   Black (800)  → section h2, card h3, article links
+   Bold (700)   → eyebrow labels, icon row text
+   Medium (500) → body copy / descriptions
+   Book (400)   → meta / secondary text
+*/
+const gc = (weight: number, extra?: string) =>
+  `font-family: "Gotham Condensed"; font-weight: ${weight};${extra ? ` ${extra}` : ""}`
+
 export default function LearnPage() {
   return (
     <>
       {/* Hero */}
       <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(56px,9vw,112px)] bg-gradient-to-br from-[#fffdf8] to-[#f7f4ec] border-b border-line">
         <div className="flex flex-col items-center text-center max-w-[820px] mx-auto">
-          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5 text-balance">
+          <h1
+            className="text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5 text-balance"
+            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 950 }}
+          >
             Category ownership, not content noise.
           </h1>
-          <p className="max-w-[640px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed text-pretty">
+          <p
+            className="max-w-[640px] text-muted-foreground text-[clamp(18px,2vw,22px)] leading-relaxed text-pretty"
+            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 500 }}
+          >
             Learn how AVRO thinks about calm performance, PharmaGABA®,
             calm-first energy, state before pressure moments, and choosing the
             right formula.
           </p>
-          <div className="flex flex-wrap justify-center">
+          <div
+            className="flex flex-wrap justify-center mt-6"
+            style={{ fontFamily: '"Gotham Condensed"' }}
+          >
             <CtaGroup primary="Read Articles" secondary="Shop AVRO" />
           </div>
         </div>
@@ -79,12 +98,18 @@ export default function LearnPage() {
               key={group.title}
               className="p-6 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
             >
-              <h3 className="font-black text-lg mb-5">{group.title}</h3>
+              <h3
+                className="text-lg mb-5"
+                style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800 }}
+              >
+                {group.title}
+              </h3>
               {group.articles.map((article) => (
                 <Link
                   key={article}
                   href="/learn"
-                  className="block py-3 border-t border-line text-muted-foreground font-bold leading-[1.35] hover:text-ink transition-colors"
+                  className="block py-3 border-t border-line text-muted-foreground leading-[1.35] hover:text-ink transition-colors"
+                  style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700 }}
                 >
                   {article}
                 </Link>
@@ -97,35 +122,43 @@ export default function LearnPage() {
       <Section>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)]">
           <div>
-            <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
+            <span
+              className="block mb-3 text-olive text-xs tracking-[0.12em] uppercase"
+              style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700 }}
+            >
               Article template
             </span>
-            <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5">
+            <h2
+              className="text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5"
+              style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800 }}
+            >
               Built for clear answers.
             </h2>
-            <p className="text-muted-foreground leading-relaxed">
+            <p
+              className="text-muted-foreground leading-relaxed text-[clamp(16px,1.4vw,19px)]"
+              style={{ fontFamily: '"Gotham Condensed"', fontWeight: 500 }}
+            >
               Each article should open with a short answer, then explain why it
               matters, how AVRO thinks about it, which formula fits, FAQs,
               sources, and a clear CTA.
             </p>
           </div>
           <div className="grid gap-4">
-            <p className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink">
-              <Icon name="search" className="w-8.5 h-8.5 text-olive" />
-              Clear question headline
-            </p>
-            <p className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink">
-              <Icon name="card" className="w-8.5 h-8.5 text-olive" />
-              Short answer box
-            </p>
-            <p className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink">
-              <Icon name="shield" className="w-8.5 h-8.5 text-olive" />
-              Compliance-safe structure-function language
-            </p>
-            <p className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink">
-              <Icon name="leaf" className="w-8.5 h-8.5 text-olive" />
-              Internal links to formulas, science, cohorts, and FAQ
-            </p>
+            {[
+              { icon: "search", label: "Clear question headline" },
+              { icon: "card",   label: "Short answer box" },
+              { icon: "shield", label: "Compliance-safe structure-function language" },
+              { icon: "leaf",   label: "Internal links to formulas, science, cohorts, and FAQ" },
+            ].map(({ icon, label }) => (
+              <p
+                key={label}
+                className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink text-[clamp(15px,1.3vw,18px)]"
+                style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700 }}
+              >
+                <Icon name={icon as any} className="w-8.5 h-8.5 text-olive" />
+                {label}
+              </p>
+            ))}
           </div>
         </div>
       </Section>
