@@ -9,33 +9,19 @@ export function HomeRefHero() {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-[0.82fr_1.18fr] items-stretch w-full max-w-[1440px] mx-auto border-b border-line bg-white">
       <div className="flex flex-col justify-center px-[clamp(20px,7vw,92px)] py-[clamp(36px,7vw,92px)]">
-        <h1
-          className="max-w-[520px] mb-5 text-[clamp(48px,8vw,94px)] leading-[0.96] tracking-[-0.01em]"
-          style={{ fontFamily: '"Gotham Condensed"', fontWeight: 950 }}
-        >
+        <h1 className="font-serif max-w-[520px] mb-5 text-[clamp(48px,8vw,94px)] font-black leading-[0.96] tracking-[-0.01em]">
           Calm. Clear. Ready.
         </h1>
-        <p
-          className="max-w-[520px] text-[#272727] text-[clamp(18px,1.6vw,22px)] leading-[1.5]"
-          style={{ fontFamily: '"Gotham Condensed"', fontWeight: 400 }}
-        >
+        <p className="font-sans max-w-[520px] text-[#272727] text-[17px] leading-[1.55]">
           AVRO is a calm-first daily drink mix made with naturally fermented
           PharmaGABA®, designed to support clarity, composure, and steady energy
           before the moments that matter.
         </p>
-        <div className="flex flex-wrap items-center gap-3 mt-7">
-          <Link
-            href="/shop"
-            className="btn-primary"
-            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800, fontSize: "21px", minHeight: "64px", paddingLeft: "42px", paddingRight: "42px" }}
-          >
+        <div className="flex flex-wrap items-center gap-3 mt-6">
+          <Link href="/shop" className="btn-primary">
             Shop AVRO
           </Link>
-          <Link
-            href="/shop"
-            className="btn-secondary"
-            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800, fontSize: "21px", minHeight: "64px", paddingLeft: "42px", paddingRight: "42px", border: "2.5px solid #1a1a1a" }}
-          >
+          <Link href="/shop" className="btn-secondary">
             Find Your Formula
           </Link>
         </div>

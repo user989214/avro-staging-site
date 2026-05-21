@@ -60,13 +60,12 @@ export function Header() {
 
   return (
     <>
-      <div className="flex justify-center gap-4 md:gap-15 px-4 md:px-8 py-3 text-[11px] md:text-[13px] font-black tracking-wide uppercase text-center" style={{ backgroundColor: "#87CEEB", color: "#000" }}>
+      <div className="flex justify-center gap-4 md:gap-15 px-4 md:px-8 py-3 bg-soft text-ink/70 text-[11px] md:text-[13px] font-black tracking-wide uppercase text-center">
         <span>
           Naturally Fermented PharmaGABA® -{" "}
           <Link
             href="/science"
-            className="underline underline-offset-3 hover:opacity-70 transition-opacity"
-            style={{ color: "#000" }}
+            className="text-ink underline underline-offset-3 hover:text-olive transition-colors"
           >
             Learn More
           </Link>
@@ -75,8 +74,7 @@ export function Header() {
           Free Shipping Over $50 -{" "}
           <Link
             href="/shop"
-            className="underline underline-offset-3 hover:opacity-70 transition-opacity"
-            style={{ color: "#000" }}
+            className="text-ink underline underline-offset-3 hover:text-olive transition-colors"
           >
             Shop AVRO
           </Link>
