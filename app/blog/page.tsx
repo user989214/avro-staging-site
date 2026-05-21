@@ -149,7 +149,7 @@ export default function BlogPage() {
       {/* ── FEATURED POST ── */}
       <section style={{ backgroundColor: "#fff", padding: "clamp(40px,6vw,72px) clamp(16px,5vw,80px)" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "rgba(0,0,0,0.4)", marginBottom: 20, letterSpacing: "0.06em" }}>
+          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "rgba(0,0,0,0.4)", marginBottom: 20 }}>
             Featured
           </p>
           <a
@@ -210,9 +210,9 @@ export default function BlogPage() {
               >
                 <div>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-                    <span className="blog-card-cat" style={{ fontFamily: GC, fontWeight: 800, fontSize: 16, color: "#000" }}>{post.category}</span>
+                    <span className="blog-card-cat" style={{ fontFamily: GC, fontWeight: 800, fontSize: 18, color: "#000" }}>{post.category}</span>
                     <span style={{ width: 3, height: 3, borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.25)" }} />
-                    <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, color: "rgba(0,0,0,0.4)" }}>{post.date}</span>
+                    <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, color: "rgba(0,0,0,0.4)" }}>{post.date}</span>
                   </div>
                   <h3 className="blog-card-title" style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(22px,2.2vw,29px)", lineHeight: 1.05, color: "#000", marginBottom: 14 }}>
                     {post.title}
@@ -222,7 +222,7 @@ export default function BlogPage() {
                   </p>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 500, fontSize: 16, color: "rgba(0,0,0,0.4)" }}>{post.readTime}</span>
+                  <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 500, fontSize: 18, color: "rgba(0,0,0,0.4)" }}>{post.readTime}</span>
                   <span className="blog-card-arrow" style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: "#000", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                   </span>
@@ -244,7 +244,7 @@ export default function BlogPage() {
       <section style={{ backgroundColor: "#fff", padding: "0 clamp(16px,5vw,80px) clamp(48px,7vw,88px)" }}>
         <div style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#000", borderRadius: 20, padding: "clamp(56px,7vw,88px) clamp(48px,6vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 48 }}>
           <div style={{ flex: "1 1 480px", minWidth: 280 }}>
-            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "rgba(255,255,255,0.55)", marginBottom: 16, display: "block" }}>
+            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 19, color: "rgba(255,255,255,0.55)", marginBottom: 16, display: "block" }}>
               Put it into practice.
             </span>
             <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,64px)", lineHeight: 1.0, color: "#fff", marginBottom: 16 }}>
