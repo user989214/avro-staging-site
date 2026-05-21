@@ -1,5 +1,4 @@
 import React from "react"
-import Link from "next/link"
 
 export const metadata = {
   title: "Learn | AVRO",
@@ -67,42 +66,11 @@ export default function LearnPage() {
     <main>
       {/* Button hover states */}
       <style>{`
-        @font-face {
-          font-family: "Gotham Condensed";
-          src: url("/fonts/GothamCond-Ultra.woff") format("woff");
-          font-weight: 950; font-style: normal; font-display: swap;
-        }
-        @font-face {
-          font-family: "Gotham Condensed";
-          src: url("/fonts/GothamCond-Black.woff") format("woff");
-          font-weight: 800; font-style: normal; font-display: swap;
-        }
-        @font-face {
-          font-family: "Gotham Condensed";
-          src: url("/fonts/GothamCond-Bold.woff") format("woff");
-          font-weight: 700; font-style: normal; font-display: swap;
-        }
-        @font-face {
-          font-family: "Gotham Condensed";
-          src: url("/fonts/GothamCond-Medium.woff") format("woff");
-          font-weight: 500; font-style: normal; font-display: swap;
-        }
-        @font-face {
-          font-family: "Gotham Condensed";
-          src: url("/fonts/GothamCond-Book.woff") format("woff");
-          font-weight: 400; font-style: normal; font-display: swap;
-        }
-        .lp-btn { display: inline-flex; align-items: center; justify-content: center; font-family: "Gotham Condensed", sans-serif; font-weight: 800; font-size: 22px; min-height: 68px; padding: 0 48px; border-radius: 10px; text-decoration: none; transition: background-color 0.18s ease, color 0.18s ease; }
-        .lp-btn-sm { font-size: 21px; min-height: 66px; padding: 0 46px; }
-        .lp-btn-blue  { background-color: #87CEEB; color: #000; border: 2.5px solid #87CEEB; }
-        .lp-btn-blue:hover  { background-color: transparent; color: #87CEEB; }
-        .lp-btn-white-outline { background-color: transparent; color: #fff; border: 2.5px solid #fff; }
-        .lp-btn-white-outline:hover { background-color: #fff; color: #000; }
-        .lp-btn-black { background-color: #000; color: #fff; border: 2.5px solid #000; }
-        .lp-btn-black:hover { background-color: transparent; color: #000; }
-        .lp-btn-black-outline { background-color: transparent; color: #000; border: 2.5px solid #000; }
-        .lp-btn-black-outline:hover { background-color: #000; color: #fff; }
-        .lp-article-link:hover { color: #87CEEB !important; }
+        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Ultra.woff") format("woff"); font-weight: 950; font-style: normal; font-display: swap; }
+        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Black.woff") format("woff"); font-weight: 800; font-style: normal; font-display: swap; }
+        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Bold.woff") format("woff"); font-weight: 700; font-style: normal; font-display: swap; }
+        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Medium.woff") format("woff"); font-weight: 500; font-style: normal; font-display: swap; }
+        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Book.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
       `}</style>
 
       {/* ── HERO ── */}
@@ -117,8 +85,8 @@ export default function LearnPage() {
             right formula.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "center" }}>
-            <Link href="/learn" className="lp-btn lp-btn-blue">Read Articles</Link>
-            <Link href="/shop" className="lp-btn lp-btn-white-outline">Shop AVRO</Link>
+            <a href="/learn" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 22, minHeight: 68, padding: "0 48px", borderRadius: 10, textDecoration: "none", backgroundColor: "#87CEEB", color: "#000", border: "2.5px solid #87CEEB" }}>Read Articles</a>
+            <a href="/shop" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 22, minHeight: 68, padding: "0 48px", borderRadius: 10, textDecoration: "none", backgroundColor: "transparent", color: "#fff", border: "2.5px solid #fff" }}>Shop AVRO</a>
           </div>
         </div>
       </section>
@@ -136,10 +104,9 @@ export default function LearnPage() {
                   {group.title}
                 </h3>
                 {group.articles.map((article) => (
-                  <Link
+                  <a
                     key={article}
                     href="/learn"
-                    className="lp-article-link"
                     style={{
                       display: "block",
                       fontFamily: GC,
@@ -150,11 +117,10 @@ export default function LearnPage() {
                       borderTop: "1px solid rgba(255,255,255,0.12)",
                       padding: "16px 0",
                       textDecoration: "none",
-                      transition: "color 0.15s ease",
                     }}
                   >
                     {article}
-                  </Link>
+                  </a>
                 ))}
               </article>
             ))}
@@ -198,8 +164,8 @@ export default function LearnPage() {
             Choose Calm, Focus, or Energy based on the moment you want to support.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "center", marginTop: 8 }}>
-            <Link href="/shop" className="lp-btn lp-btn-sm lp-btn-black">Shop AVRO</Link>
-            <Link href="/shop" className="lp-btn lp-btn-sm lp-btn-black-outline">Find Your Formula</Link>
+            <a href="/shop" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 21, minHeight: 66, padding: "0 46px", borderRadius: 10, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}>Shop AVRO</a>
+            <a href="/shop" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 21, minHeight: 66, padding: "0 46px", borderRadius: 10, textDecoration: "none", backgroundColor: "transparent", color: "#000", border: "2.5px solid #000" }}>Find Your Formula</a>
           </div>
         </div>
       </section>
