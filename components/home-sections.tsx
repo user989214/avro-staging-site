@@ -16,25 +16,25 @@ export function HomeRefHero() {
           Calm. Clear. Ready.
         </h1>
         <p
-          className="max-w-[520px] text-[#272727] text-[18px] leading-[1.45]"
+          className="max-w-[520px] text-[#272727] text-[clamp(18px,1.6vw,22px)] leading-[1.5]"
           style={{ fontFamily: '"Gotham Condensed"', fontWeight: 400 }}
         >
           AVRO is a calm-first daily drink mix made with naturally fermented
           PharmaGABA®, designed to support clarity, composure, and steady energy
           before the moments that matter.
         </p>
-        <div className="flex flex-wrap items-center gap-3 mt-6">
+        <div className="flex flex-wrap items-center gap-3 mt-7">
           <Link
             href="/shop"
             className="btn-primary"
-            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700, fontSize: "20px", minHeight: "64px", paddingLeft: "42px", paddingRight: "42px" }}
+            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800, fontSize: "21px", minHeight: "64px", paddingLeft: "42px", paddingRight: "42px" }}
           >
             Shop AVRO
           </Link>
           <Link
             href="/shop"
             className="btn-secondary"
-            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700, fontSize: "20px", minHeight: "64px", paddingLeft: "42px", paddingRight: "42px", border: "2.5px solid #1a1a1a" }}
+            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800, fontSize: "21px", minHeight: "64px", paddingLeft: "42px", paddingRight: "42px", border: "2.5px solid #1a1a1a" }}
           >
             Find Your Formula
           </Link>
