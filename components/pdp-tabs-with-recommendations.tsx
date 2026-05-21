@@ -71,19 +71,19 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16" style={{ fontFamily: GC }}>
+    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-12" style={{ fontFamily: GC }}>
       {/* Left - Tabs */}
       <div>
-        <div className="flex flex-wrap gap-x-10 gap-y-2 mb-8" style={{ borderBottom: "2px solid rgba(0,0,0,0.12)" }}>
+        <div className="flex flex-wrap gap-x-8 gap-y-2 mb-6" style={{ borderBottom: "2px solid rgba(0,0,0,0.12)" }}>
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className="pb-4 transition-colors relative"
+              className="pb-3 transition-colors relative"
               style={{
                 fontFamily: GC,
                 fontWeight: activeTab === tab ? 800 : 500,
-                fontSize: 22,
+                fontSize: 20,
                 color: activeTab === tab ? "#000" : "rgba(0,0,0,0.45)",
               }}
             >
@@ -98,29 +98,29 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
           ))}
         </div>
 
-        <div className="min-h-[300px]">
+        <div className="min-h-[260px]">
           {activeTab === "Description" && (
             <div>
               <h3
                 style={{
                   fontFamily: GC,
                   fontWeight: 950,
-                  fontSize: "clamp(32px,3vw,42px)",
+                  fontSize: "clamp(28px,2.5vw,36px)",
                   lineHeight: 1.0,
                   color: "#000",
-                  marginBottom: 24,
+                  marginBottom: 20,
                 }}
               >
                 Our formula
               </h3>
-              <ul className="space-y-4">
+              <ul className="space-y-3">
                 {descriptionBullets[currentKey].map((bullet) => (
                   <li
                     key={bullet}
-                    className="flex items-start gap-4"
-                    style={{ fontFamily: GC, fontWeight: 500, fontSize: 21, lineHeight: 1.35, color: "rgba(0,0,0,0.7)" }}
+                    className="flex items-start gap-3"
+                    style={{ fontFamily: GC, fontWeight: 500, fontSize: 18, lineHeight: 1.35, color: "rgba(0,0,0,0.7)" }}
                   >
-                    <span style={{ color: "#000", fontWeight: 800, fontSize: 24, lineHeight: 1 }}>+</span>
+                    <span style={{ color: "#000", fontWeight: 800, fontSize: 20, lineHeight: 1 }}>+</span>
                     <span>{bullet}</span>
                   </li>
                 ))}

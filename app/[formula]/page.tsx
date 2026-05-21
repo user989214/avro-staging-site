@@ -81,7 +81,7 @@ export default async function ProductPage({
       </section>
 
       {/* Tabs with Recommendations - Cure style */}
-      <section className="w-full bg-white pt-[clamp(8px,1vw,16px)] pb-[clamp(40px,6vw,72px)]">
+      <section className="w-full bg-white pt-0 pb-[clamp(32px,4vw,48px)]">
         <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
           <PdpTabsWithRecommendations currentKey={key} />
         </div>
@@ -91,15 +91,15 @@ export default async function ProductPage({
       <PdpSocialScroll formulaKey={key} />
 
       {/* The feeling of good calm/focus/energy - NeuroGum style */}
-      <section className="w-full bg-white py-[clamp(48px,7vw,96px)]">
+      <section className="w-full bg-white py-[clamp(40px,5vw,64px)]">
         <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
           {/* Section header */}
           <h2
-            className="text-center mb-12"
+            className="text-center mb-8"
             style={{
               fontFamily: GC,
               fontWeight: 950,
-              fontSize: "clamp(32px,5vw,64px)",
+              fontSize: "clamp(28px,4vw,52px)",
               lineHeight: 1.0,
               color: "#000",
             }}
@@ -108,24 +108,24 @@ export default async function ProductPage({
           </h2>
 
           {/* Benefit icons - 4 across like NeuroGum */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
             {feelingBenefits[key].map((benefit) => (
               <div
                 key={benefit.title}
-                className="flex flex-col items-center text-center gap-4 p-8 bg-white"
-                style={{ borderRadius: 12, border: "1.5px solid rgba(0,0,0,0.12)" }}
+                className="flex flex-col items-center text-center gap-3 p-5 bg-white"
+                style={{ borderRadius: 10, border: "1.5px solid rgba(0,0,0,0.12)" }}
               >
                 <div
-                  className="flex items-center justify-center w-16 h-16 rounded-full"
+                  className="flex items-center justify-center w-12 h-12 rounded-full"
                   style={{ backgroundColor: "#000" }}
                 >
-                  <Icon name={benefit.icon} className="w-8 h-8 text-white" />
+                  <Icon name={benefit.icon} className="w-6 h-6 text-white" />
                 </div>
                 <h3
                   style={{
                     fontFamily: GC,
                     fontWeight: 800,
-                    fontSize: 20,
+                    fontSize: 17,
                     lineHeight: 1.15,
                     color: "#000",
                   }}
@@ -137,15 +137,15 @@ export default async function ProductPage({
           </div>
 
           {/* Graph section - two columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             {/* Left side - text */}
             <div>
               <p
-                className="mb-6"
+                className="mb-4"
                 style={{
                   fontFamily: GC,
                   fontWeight: 500,
-                  fontSize: 22,
+                  fontSize: 19,
                   lineHeight: 1.5,
                   color: "rgba(0,0,0,0.65)",
                 }}
@@ -157,11 +157,11 @@ export default async function ProductPage({
                     : "AVRO's ingredients are formulated to work better together. Delivering steady calm in a convenient stick pack format."}
               </p>
               <p
-                className="mb-10"
+                className="mb-6"
                 style={{
                   fontFamily: GC,
                   fontWeight: 500,
-                  fontSize: 22,
+                  fontSize: 19,
                   lineHeight: 1.5,
                   color: "rgba(0,0,0,0.65)",
                 }}
@@ -178,10 +178,10 @@ export default async function ProductPage({
                 style={{
                   fontFamily: GC,
                   fontWeight: 800,
-                  fontSize: 20,
-                  minHeight: 64,
-                  padding: "0 40px",
-                  borderRadius: 12,
+                  fontSize: 18,
+                  minHeight: 56,
+                  padding: "0 32px",
+                  borderRadius: 10,
                   backgroundColor: "#000",
                   color: "#fff",
                   border: "2.5px solid #000",
@@ -194,9 +194,9 @@ export default async function ProductPage({
 
             {/* Right side - graph */}
             <div className="relative">
-              <div className="rounded-2xl p-6 lg:p-8" style={{ backgroundColor: "#f2f2f2" }}>
+              <div className="rounded-xl p-5" style={{ backgroundColor: "#f2f2f2" }}>
                 {/* Graph */}
-                <div className="relative h-[240px] lg:h-[280px]">
+                <div className="relative h-[180px] lg:h-[200px]">
                   {/* Grid lines */}
                   <div className="absolute inset-x-0 top-0 bottom-8 flex flex-col justify-between">
                     {[0, 1, 2, 3, 4].map((i) => (
@@ -282,14 +282,14 @@ export default async function ProductPage({
       <ProductComparisonGrid currentKey={key} />
 
       {/* Your favorites. On repeat - Subscription CTA */}
-      <section className="w-full py-[clamp(48px,6vw,80px)]" style={{ backgroundColor: "#f2f2f2" }}>
+      <section className="w-full py-[clamp(36px,4vw,56px)]" style={{ backgroundColor: "#f2f2f2" }}>
         <div className="w-full max-w-[900px] mx-auto px-[clamp(18px,5vw,64px)] text-center">
           <h2
-            className="mb-4"
+            className="mb-3"
             style={{
               fontFamily: GC,
               fontWeight: 950,
-              fontSize: "clamp(28px,4vw,52px)",
+              fontSize: "clamp(26px,3.5vw,44px)",
               lineHeight: 1.05,
               color: "#000",
             }}
@@ -297,11 +297,11 @@ export default async function ProductPage({
             Your favorites. On repeat.
           </h2>
           <p
-            className="max-w-[500px] mx-auto mb-8"
+            className="max-w-[500px] mx-auto mb-6"
             style={{
               fontFamily: GC,
               fontWeight: 400,
-              fontSize: 19,
+              fontSize: 17,
               lineHeight: 1.5,
               color: "rgba(0,0,0,0.6)",
             }}
@@ -310,18 +310,17 @@ export default async function ProductPage({
           </p>
           <a
             href={`/${key}`}
-            className="inline-flex items-center gap-2 transition-colors"
+            className="inline-flex items-center gap-2 transition-colors hover:bg-transparent hover:text-black"
             style={{
               fontFamily: GC,
               fontWeight: 800,
-              fontSize: 18,
-              minHeight: 60,
-              padding: "0 36px",
+              fontSize: 17,
+              minHeight: 52,
+              padding: "0 28px",
               borderRadius: 10,
               backgroundColor: "#000",
               color: "#fff",
               border: "2.5px solid #000",
-              letterSpacing: "0.02em",
             }}
           >
                 Subscribe now
@@ -331,14 +330,14 @@ export default async function ProductPage({
       </section>
 
       {/* FAQ accordion */}
-      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)] bg-white">
-        <div className="grid grid-cols-1 lg:grid-cols-[0.75fr_1.25fr] gap-10 lg:gap-16 items-start">
+      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(36px,4vw,56px)] bg-white">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.7fr_1.3fr] gap-8 lg:gap-12 items-start">
           <div>
             <h2
               style={{
                 fontFamily: GC,
                 fontWeight: 950,
-                fontSize: "clamp(28px,4vw,52px)",
+                fontSize: "clamp(26px,3.5vw,44px)",
                 lineHeight: 1.05,
                 color: "#000",
               }}
@@ -354,19 +353,13 @@ export default async function ProductPage({
               ],
               [
                 `What is the best time to take ${item.name}?`,
-                "Most people use one stick about 20 to 30 minutes before the moment they want calm-first support. Morning routines, pre-meeting prep, or afternoon resets all work well.",
+                "Most people use one stick about 20 to 30 minutes before the moment they want calm-first support.",
               ],
               [
                 `Can I take ${item.name} if I'm sensitive to caffeine?`,
                 item.caffeine === "No caffeine"
-                  ? `${item.name} is caffeine free, making it perfect for those sensitive to caffeine or who want calm-first support any time of day.`
-                  : `${item.name} contains 120 mg natural caffeine. If you're sensitive to caffeine, we recommend starting with our Calm or Focus formulas.`,
-              ],
-              [
-                `Can I use ${item.name} with other caffeinated products?`,
-                key === "energy"
-                  ? "We recommend being mindful of your total daily caffeine intake. AVRO Energy contains 120mg per serving."
-                  : `${item.name} is caffeine free, so it can be used alongside your regular coffee or tea routine.`,
+                  ? `${item.name} is caffeine free, making it perfect for those sensitive to caffeine.`
+                  : `${item.name} contains 120 mg natural caffeine. If you're sensitive, we recommend our Calm or Focus formulas.`,
               ],
               [
                 `Does ${item.name} have added sugar or artificial sweeteners?`,
@@ -379,20 +372,20 @@ export default async function ProductPage({
                 style={{ borderTop: i > 0 ? "1px solid rgba(0,0,0,0.08)" : "none" }}
               >
                 <summary
-                  className="flex items-center justify-between gap-6 py-6 cursor-pointer list-none select-none transition-colors"
-                  style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, color: "#000" }}
+                  className="flex items-center justify-between gap-4 py-4 cursor-pointer list-none select-none transition-colors"
+                  style={{ fontFamily: GC, fontWeight: 800, fontSize: 18, color: "#000" }}
                 >
                   <span>{q}</span>
                   <span
-                    className="grid place-items-center w-10 h-10 rounded-full text-xl leading-none transition-all shrink-0"
+                    className="grid place-items-center w-8 h-8 rounded-full text-lg leading-none transition-all shrink-0"
                     style={{ backgroundColor: "#000", color: "#fff" }}
                   >
                     <span className="transition-transform group-open:rotate-45">+</span>
                   </span>
                 </summary>
                 <p
-                  className="pb-6 pr-12 leading-relaxed"
-                  style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, color: "rgba(0,0,0,0.65)" }}
+                  className="pb-4 pr-10 leading-relaxed"
+                  style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, color: "rgba(0,0,0,0.65)" }}
                 >
                   {a}
                 </p>
@@ -400,8 +393,8 @@ export default async function ProductPage({
             ))}
             <a
               href="/faq"
-              className="inline-flex items-center gap-2 mt-6 hover:underline"
-              style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: "#000" }}
+              className="inline-flex items-center gap-2 mt-4 hover:underline"
+              style={{ fontFamily: GC, fontWeight: 800, fontSize: 15, color: "#000" }}
             >
               See more answers
               <Icon name="arrowRight" className="w-4 h-4" />

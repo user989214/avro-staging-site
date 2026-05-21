@@ -59,16 +59,16 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
 
   return (
     <section
-      className="w-full py-[clamp(48px,6vw,80px)] overflow-hidden"
+      className="w-full py-[clamp(36px,4vw,56px)] overflow-hidden"
       style={{ fontFamily: GC, backgroundColor: BLUE }}
     >
       <div className="w-full max-w-[1600px] mx-auto px-[clamp(18px,5vw,64px)]">
         <h2
-          className="text-center mb-10"
+          className="text-center mb-8"
           style={{
             fontFamily: GC,
             fontWeight: 950,
-            fontSize: "clamp(40px,5.5vw,72px)",
+            fontSize: "clamp(32px,4.5vw,56px)",
             lineHeight: 0.95,
             color: "#000",
           }}
@@ -78,7 +78,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
         
         <div className="relative">
           <div 
-            className="flex items-end justify-center gap-5"
+            className="flex items-end justify-center gap-4"
             style={{ transition: "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)" }}
           >
             {getVisibleCards().map((card) => {
@@ -88,12 +88,12 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
               return (
                 <div
                   key={`${card.id}-${card.position}`}
-                  className="relative flex-shrink-0 rounded-2xl overflow-hidden"
+                  className="relative flex-shrink-0 rounded-xl overflow-hidden"
                   style={{
-                    width: isFeatured ? 280 : isAdjacent ? 220 : 180,
-                    height: isFeatured ? 420 : isAdjacent ? 370 : 320,
+                    width: isFeatured ? 240 : isAdjacent ? 190 : 150,
+                    height: isFeatured ? 360 : isAdjacent ? 310 : 260,
                     opacity: isFeatured ? 1 : isAdjacent ? 0.9 : 0.7,
-                    transform: `scale(${isFeatured ? 1 : 0.98}) translateY(${isFeatured ? 0 : isAdjacent ? 16 : 32}px)`,
+                    transform: `scale(${isFeatured ? 1 : 0.98}) translateY(${isFeatured ? 0 : isAdjacent ? 12 : 24}px)`,
                     transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
                     zIndex: isFeatured ? 10 : isAdjacent ? 5 : 1,
                   }}
@@ -128,22 +128,22 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
                   </div>
                   
                   {/* Quick add card at bottom */}
-                  <div className="absolute bottom-4 left-3 right-3 bg-white rounded-xl p-3 flex items-center gap-3 shadow-xl">
-                    <div className="w-14 h-14 rounded-lg flex-shrink-0 flex items-center justify-center" style={{ backgroundColor: "#e8e8e8" }}>
-                      <img src={stickImage.src} alt={stickImage.alt} className="w-10 h-10 object-contain" />
+                  <div className="absolute bottom-3 left-2.5 right-2.5 bg-white rounded-lg p-2.5 flex items-center gap-2.5 shadow-xl">
+                    <div className="w-12 h-12 rounded-lg flex-shrink-0 flex items-center justify-center" style={{ backgroundColor: "#e8e8e8" }}>
+                      <img src={stickImage.src} alt={stickImage.alt} className="w-8 h-8 object-contain" />
                     </div>
                     
                     <div className="flex-1 min-w-0">
-                      <span className="block truncate" style={{ fontFamily: GC, fontWeight: 800, fontSize: 18, color: "#000" }}>
+                      <span className="block truncate" style={{ fontFamily: GC, fontWeight: 800, fontSize: 16, color: "#000" }}>
                         {item.short}
                       </span>
-                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#000" }}>
+                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "#000" }}>
                         ${item.price.toFixed(2)}
                       </span>
                     </div>
                     
                     <button
-                      className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 transition-all"
+                      className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-all"
                       style={{ backgroundColor: BLUE, border: "2.5px solid #000" }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = "transparent"
@@ -152,7 +152,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
                         e.currentTarget.style.backgroundColor = BLUE
                       }}
                     >
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
                       </svg>
@@ -164,11 +164,11 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
           </div>
           
           {/* Navigation */}
-          <div className="flex items-center justify-center gap-5 mt-10">
+          <div className="flex items-center justify-center gap-4 mt-8">
             <button 
               onClick={handlePrev}
               disabled={isTransitioning}
-              className="w-14 h-14 rounded-full flex items-center justify-center transition-all disabled:opacity-50"
+              className="w-12 h-12 rounded-full flex items-center justify-center transition-all disabled:opacity-50"
               style={{ backgroundColor: "#000", border: "2.5px solid #000" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "transparent"
@@ -211,7 +211,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
             <button 
               onClick={handleNext}
               disabled={isTransitioning}
-              className="w-14 h-14 rounded-full flex items-center justify-center transition-all disabled:opacity-50"
+              className="w-12 h-12 rounded-full flex items-center justify-center transition-all disabled:opacity-50"
               style={{ backgroundColor: "#000", border: "2.5px solid #000" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "transparent"

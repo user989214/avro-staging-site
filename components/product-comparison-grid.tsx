@@ -36,18 +36,18 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
   const formulaKeys: FormulaKey[] = ["calm", "focus", "energy"]
 
   return (
-    <section className="w-full bg-white py-[clamp(48px,7vw,96px)]" style={{ fontFamily: GC }}>
+    <section className="w-full bg-white py-[clamp(40px,5vw,64px)]" style={{ fontFamily: GC }}>
       <div className="w-full max-w-[1200px] mx-auto px-[clamp(18px,5vw,64px)]">
         {/* Header */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-10">
           <h2
             style={{
               fontFamily: GC,
               fontWeight: 950,
-              fontSize: "clamp(36px,5vw,64px)",
+              fontSize: "clamp(28px,4vw,52px)",
               lineHeight: 1.0,
               color: "#000",
-              marginBottom: 16,
+              marginBottom: 12,
             }}
           >
             We put intention into every formula.
@@ -56,7 +56,7 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
             style={{
               fontFamily: GC,
               fontWeight: 500,
-              fontSize: "clamp(20px,1.8vw,26px)",
+              fontSize: "clamp(17px,1.5vw,22px)",
               color: "rgba(0,0,0,0.6)",
             }}
           >
@@ -65,7 +65,7 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
         </div>
 
         {/* Product grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {formulaKeys.map((key) => {
             const item = formulas[key]
             const data = comparisonData[key]
@@ -81,17 +81,17 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                 }}
               >
                 {/* Product image */}
-                <Link href={`/${key}`} className="relative h-[240px] flex items-center justify-center p-4" style={{ backgroundColor: "#f2f2f2" }}>
+                <Link href={`/${key}`} className="relative h-[200px] flex items-center justify-center p-3" style={{ backgroundColor: "#f2f2f2" }}>
                   <ProductCard formulaKey={key} className="h-full w-auto object-contain" />
                   {isActive && (
                     <span
-                      className="absolute top-4 right-4 px-4 py-2 rounded"
+                      className="absolute top-3 right-3 px-3 py-1.5 rounded"
                       style={{
                         backgroundColor: "#000",
                         color: "#fff",
                         fontFamily: GC,
                         fontWeight: 800,
-                        fontSize: 15,
+                        fontSize: 13,
                       }}
                     >
                       Current
@@ -100,16 +100,16 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                 </Link>
 
                 {/* Product info */}
-                <div className="flex-1 p-6">
-                  <h3 style={{ fontFamily: GC, fontWeight: 950, fontSize: 30, lineHeight: 1.05, color: "#000", marginBottom: 8 }}>
+                <div className="flex-1 p-4">
+                  <h3 style={{ fontFamily: GC, fontWeight: 950, fontSize: 26, lineHeight: 1.05, color: "#000", marginBottom: 6 }}>
                     {item.name}
                   </h3>
-                  <p style={{ fontFamily: GC, fontWeight: 500, fontSize: 18, color: "rgba(0,0,0,0.6)", marginBottom: 20 }}>
+                  <p style={{ fontFamily: GC, fontWeight: 500, fontSize: 16, color: "rgba(0,0,0,0.6)", marginBottom: 14 }}>
                     {item.headline}
                   </p>
 
                   {/* Specs */}
-                  <div className="space-y-3" style={{ fontFamily: GC, fontSize: 18 }}>
+                  <div className="space-y-2" style={{ fontFamily: GC, fontSize: 16 }}>
                     <Row label="Caffeine" value={data.caffeine} />
                     <Row label="Experience" value={data.experience} />
                     <Row label="Best for" value={data.bestFor} />
@@ -117,16 +117,16 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                 </div>
 
                 {/* Quick Add buttons */}
-                <div className="p-5 flex flex-col gap-3" style={{ borderTop: "1.5px solid rgba(0,0,0,0.1)" }}>
+                <div className="p-4 flex flex-col gap-2" style={{ borderTop: "1.5px solid rgba(0,0,0,0.1)" }}>
                   <button
                     className="w-full flex items-center justify-center transition-colors hover:bg-transparent hover:text-black"
                     style={{
                       fontFamily: GC,
                       fontWeight: 800,
-                      fontSize: 18,
-                      minHeight: 56,
-                      padding: "0 20px",
-                      borderRadius: 10,
+                      fontSize: 16,
+                      minHeight: 48,
+                      padding: "0 16px",
+                      borderRadius: 8,
                       backgroundColor: "#000",
                       color: "#fff",
                       border: "2px solid #000",
@@ -139,8 +139,8 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                     style={{
                       fontFamily: GC,
                       fontWeight: 700,
-                      fontSize: 16,
-                      minHeight: 44,
+                      fontSize: 14,
+                      minHeight: 36,
                       color: "rgba(0,0,0,0.6)",
                       backgroundColor: "transparent",
                       border: "none",
