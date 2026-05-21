@@ -5,6 +5,8 @@ import Image from "next/image"
 import { ChevronRight } from "lucide-react"
 import { useState } from "react"
 
+const GC = '"Gotham Condensed", "Gotham", Arial, sans-serif'
+
 const footerLinks = {
   avro: [
     { href: "/contact", label: "Contact Us" },
@@ -46,15 +48,22 @@ export function Footer() {
   }
 
   return (
-    <footer className="relative overflow-hidden text-white bg-black font-sans">
-      <div className="flex flex-col lg:flex-row gap-8.5 lg:gap-20 max-w-[1400px] mx-auto px-5.5 lg:px-14 pt-8 lg:pt-10 pb-6 lg:pb-8">
+    <footer className="relative overflow-hidden text-white bg-black" style={{ fontFamily: GC }}>
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-20 max-w-[1400px] mx-auto px-5.5 lg:px-14 pt-8 lg:pt-10 pb-6 lg:pb-8">
+
         {/* Left column */}
-        <div className="flex-none lg:flex-[0_0_340px] flex flex-col justify-between gap-10.5">
+        <div className="flex-none lg:flex-[0_0_340px] flex flex-col justify-between gap-8">
           <div>
-            <h3 className="mb-2.5 text-2xl font-black tracking-[-0.3px] leading-none uppercase text-white">
+            <h3
+              className="mb-2 uppercase text-white"
+              style={{ fontFamily: GC, fontWeight: 800, fontSize: "22px", lineHeight: 1.1 }}
+            >
               Stay in the loop
             </h3>
-            <p className="mb-6 text-white/60 text-[15px] leading-snug">
+            <p
+              className="mb-5 text-white/60"
+              style={{ fontFamily: GC, fontWeight: 400, fontSize: "17px", lineHeight: 1.25 }}
+            >
               Get AVRO updates, product drops, and calm-first insights delivered
               to your inbox.
             </p>
@@ -71,7 +80,8 @@ export function Footer() {
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 min-h-[38px] py-1 text-white bg-transparent border-0 outline-none text-[16px] placeholder:text-white/40"
+                className="flex-1 min-h-[38px] py-1 text-white bg-transparent border-0 outline-none placeholder:text-white/40"
+                style={{ fontFamily: GC, fontWeight: 400, fontSize: "17px" }}
               />
               <button
                 type="submit"
@@ -82,28 +92,30 @@ export function Footer() {
               </button>
             </form>
             {submitted && (
-              <p className="mt-2 text-sm text-olive font-medium">
+              <p className="mt-2" style={{ fontFamily: GC, fontSize: "15px", color: "#87CEEB" }}>
                 Thanks for subscribing!
               </p>
             )}
-            <small className="block mt-5 text-white/40 text-[12px] leading-[1.45]">
+            <small
+              className="block mt-4 text-white/40"
+              style={{ fontFamily: GC, fontWeight: 400, fontSize: "13px", lineHeight: 1.3 }}
+            >
               * These statements have not been evaluated by the Food and Drug
               Administration. This product is not intended to diagnose, treat,
               cure, or prevent any disease.
             </small>
           </div>
-          <div className="flex flex-wrap gap-6">
-            {["Privacy", "Terms", "Accessibility", "Return Policy"].map(
-              (label) => (
-                <Link
-                  key={label}
-                  href="/faq"
-                  className="text-white/60 text-[14px] hover:text-white transition-colors"
-                >
-                  {label}
-                </Link>
-              )
-            )}
+          <div className="flex flex-wrap gap-5">
+            {["Privacy", "Terms", "Accessibility", "Return Policy"].map((label) => (
+              <Link
+                key={label}
+                href="/faq"
+                className="text-white/60 hover:text-white transition-colors"
+                style={{ fontFamily: GC, fontWeight: 700, fontSize: "15px", lineHeight: 1 }}
+              >
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
 
@@ -116,20 +128,24 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Large centered AVRO logo at bottom */}
-      <div className="flex justify-center px-5.5 lg:px-14 pt-6 lg:pt-8 pb-4 lg:pb-6 border-t border-white/10">
+      {/* Large centered AVRO logo — decorative, aria-hidden so it doesn't affect semantics */}
+      <div className="flex justify-center px-5.5 lg:px-14 pt-5 pb-3 border-t border-white/10" aria-hidden="true">
         <Image
           src="/brand/avro-logo.svg"
-          alt="AVRO"
+          alt=""
           width={820}
           height={265}
-          className="w-full max-w-[480px] h-auto invert opacity-25"
-          priority
+          className="w-full max-w-[640px] h-auto invert opacity-20 pointer-events-none"
         />
       </div>
 
-      <div className="flex justify-center max-w-[1400px] mx-auto px-5.5 lg:px-14 pb-8">
-        <span className="text-white/40 text-[13px]">© 2026 AVRO Life</span>
+      <div className="flex justify-center max-w-[1400px] mx-auto px-5.5 lg:px-14 pb-6">
+        <span
+          className="text-white/40"
+          style={{ fontFamily: GC, fontWeight: 400, fontSize: "14px" }}
+        >
+          © 2026 AVRO Life
+        </span>
       </div>
     </footer>
   )
@@ -142,16 +158,21 @@ function FooterColumn({
   title: string
   links: { href: string; label: string }[]
 }) {
+  const GC = '"Gotham Condensed", "Gotham", Arial, sans-serif'
   return (
     <div>
-      <h4 className="mb-5 text-[14px] font-black tracking-wide uppercase text-white">
+      <h4
+        className="mb-3 uppercase text-white"
+        style={{ fontFamily: GC, fontWeight: 800, fontSize: "16px", lineHeight: 1, letterSpacing: "0.08em" }}
+      >
         {title}
       </h4>
       {links.map((link) => (
         <Link
           key={link.label}
           href={link.href}
-          className="block py-1.5 text-white/60 text-[15px] leading-[1.35] hover:text-white transition-colors"
+          className="block text-white/60 hover:text-white transition-colors"
+          style={{ fontFamily: GC, fontWeight: 500, fontSize: "16px", lineHeight: 1.15, paddingTop: "6px", paddingBottom: "6px" }}
         >
           {link.label}
         </Link>
