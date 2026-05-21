@@ -109,6 +109,16 @@ export default function BlogPage() {
         .featured-card { transition: background-color 0.18s ease; }
         .featured-card:hover { background-color: #111 !important; }
         .featured-card:hover .feat-excerpt { color: rgba(255,255,255,0.7) !important; }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+          .blog-grid { grid-template-columns: 1fr !important; }
+          .featured-inner { flex-direction: column !important; align-items: flex-start !important; }
+          .feat-read-btn { align-self: flex-start; margin-top: 8px; }
+          .cta-inner { flex-direction: column !important; padding: 40px 28px !important; }
+          .cta-btns { width: 100%; }
+          .cta-btns a { flex: 1 1 100%; justify-content: center; }
+        }
       `}</style>
 
       {/* ── HERO HEADER ── */}
@@ -163,7 +173,7 @@ export default function BlogPage() {
               textDecoration: "none",
             }}
           >
-            <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
+            <div className="featured-inner" style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
               <div style={{ flex: "1 1 480px", minWidth: 280 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
                   <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: BLUE }}>{featured.category}</span>
@@ -179,7 +189,7 @@ export default function BlogPage() {
                   {featured.excerpt}
                 </p>
               </div>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 20, color: "#000", backgroundColor: "#fff", borderRadius: 10, padding: "16px 32px", flexShrink: 0 }}>
+              <div className="feat-read-btn" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 20, color: "#000", backgroundColor: "#fff", borderRadius: 10, padding: "16px 32px", flexShrink: 0 }}>
                 Read Article
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </div>
@@ -191,7 +201,7 @@ export default function BlogPage() {
       {/* ── POST GRID ── */}
       <section style={{ backgroundColor: "#fff", padding: "0 clamp(16px,5vw,80px) clamp(64px,8vw,104px)" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))", gap: 20 }}>
+          <div className="blog-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(340px, 100%), 1fr))", gap: 20 }}>
             {posts.map((post) => (
               <a
                 key={post.title}
@@ -242,7 +252,7 @@ export default function BlogPage() {
 
       {/* ── CTA ── */}
       <section style={{ backgroundColor: "#fff", padding: "0 clamp(16px,5vw,80px) clamp(48px,7vw,88px)" }}>
-        <div style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#000", borderRadius: 20, padding: "clamp(56px,7vw,88px) clamp(48px,6vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 48 }}>
+        <div className="cta-inner" style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#000", borderRadius: 20, padding: "clamp(56px,7vw,88px) clamp(48px,6vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 48 }}>
           <div style={{ flex: "1 1 480px", minWidth: 280 }}>
             <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 19, color: "rgba(255,255,255,0.55)", marginBottom: 16, display: "block" }}>
               Put it into practice.
@@ -254,7 +264,7 @@ export default function BlogPage() {
               Choose Calm, Focus, or Energy based on the moment you want to support.
             </p>
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
+          <div className="cta-btns" style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
             {[["Shop Calm", "/shop/calm"], ["Shop Focus", "/shop/focus"], ["Shop Energy", "/shop/energy"]].map(([label, href]) => (
               <a
                 key={label}
