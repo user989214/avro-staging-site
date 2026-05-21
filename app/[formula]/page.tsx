@@ -31,21 +31,22 @@ const benefits: Record<FormulaKey, { icon: IconName; label: string }[]> = {
   ],
 }
 
-const ingredientData: Record<FormulaKey, { name: string; amount: string; desc: string; highlight?: boolean }[]> = {
+// "The feeling of good calm/focus/energy" section benefit cards
+const feelingBenefits: Record<FormulaKey, { icon: IconName; title: string; subtitle: string }[]> = {
   calm: [
-    { name: "PharmaGABA®", amount: "200 mg", desc: "Naturally fermented. AVRO's calm-first foundation.", highlight: true },
-    { name: "Magnesium Bisglycinate", amount: "850 mg", desc: "Yields 100 mg active magnesium. Supports muscle and nervous system." },
-    { name: "Prebiotic Fiber", amount: "PHGG + Acacia", desc: "Supports gut comfort. Part of AVRO's daily formula." },
+    { icon: "brain", title: "Supports Calm & Clarity", subtitle: "Without drowsiness" },
+    { icon: "shield", title: "Helps Reduce Stress", subtitle: "Natural relaxation" },
+    { icon: "flask", title: "Clinically-Studied", subtitle: "PharmaGABA® inside" },
   ],
   focus: [
-    { name: "PharmaGABA®", amount: "200 mg", desc: "Naturally fermented. AVRO's calm-first foundation.", highlight: true },
-    { name: "Cognigrape®", amount: "250 mg", desc: "Grape extract selected to support clarity and focus." },
-    { name: "Prebiotic Fiber", amount: "PHGG + Acacia", desc: "Supports gut comfort. Part of AVRO's daily formula." },
+    { icon: "target", title: "Supports Focus & Attention", subtitle: "Stay sharp longer" },
+    { icon: "brain", title: "Helps Reduce Mental Fatigue", subtitle: "Clear thinking" },
+    { icon: "flask", title: "Clinically-Studied", subtitle: "Cognigrape® inside" },
   ],
   energy: [
-    { name: "PharmaGABA®", amount: "200 mg", desc: "Naturally fermented. AVRO's calm-first foundation.", highlight: true },
-    { name: "Natural Caffeine", amount: "120 mg", desc: "From coffee bean extract. Steady alertness with calm built in." },
-    { name: "Prebiotic Fiber", amount: "PHGG + Acacia", desc: "Supports gut comfort. Part of AVRO's daily formula." },
+    { icon: "zap", title: "Supports Steady Energy", subtitle: "No jitters or crash" },
+    { icon: "brain", title: "Helps Maintain Focus", subtitle: "Stay alert longer" },
+    { icon: "flask", title: "Clinically-Studied", subtitle: "PharmaGABA® inside" },
   ],
 }
 
@@ -85,8 +86,8 @@ export default async function ProductPage({
 
   return (
     <>
-      {/* Top Marquee */}
-      <PdpMarquee text="Free shipping on orders over $50" variant="light" />
+      {/* Top Marquee - Memorial Day style */}
+      <PdpMarquee text="Subscribe & Save 25% on Every Order" variant="light" />
 
       {/* PDP Hero */}
       <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(24px,4vw,48px)] bg-white">
@@ -107,18 +108,46 @@ export default async function ProductPage({
         </div>
       </section>
 
-      {/* Marquee divider */}
-      <PdpMarquee text="Free shipping on orders over $50" variant="light" />
-
-      {/* Stay in the zone - Graph Section (NeuroGum style) */}
-      <section className="w-full bg-avro-blue/10 py-[clamp(48px,7vw,96px)]">
+      {/* You Might Also Like - Right under Add to Cart area */}
+      <section className="w-full bg-white py-[clamp(40px,5vw,64px)] border-b border-line">
         <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
+          <YouMightAlsoLike currentKey={key} />
+        </div>
+      </section>
+
+      {/* Marquee divider */}
+      <PdpMarquee text="HSA/FSA Eligible • Naturally Fermented PharmaGABA®" variant="accent" />
+
+      {/* The feeling of good calm/focus/energy - NeuroGum style */}
+      <section className="w-full bg-white py-[clamp(48px,7vw,96px)]">
+        <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
+          {/* Section header */}
+          <h2 className="font-serif font-black text-[clamp(32px,5vw,56px)] leading-[1.05] text-ink mb-10 text-center">
+            The feeling of good {key}.
+          </h2>
+          
+          {/* Benefit cards - 3 across */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            {feelingBenefits[key].map((benefit) => (
+              <div 
+                key={benefit.title}
+                className="flex items-center gap-4 p-5 bg-soft rounded-xl border border-line"
+              >
+                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-avro-blue/20">
+                  <Icon name={benefit.icon} className="w-7 h-7 text-ink" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-ink text-base">{benefit.title}</h3>
+                  <p className="text-ink/60 text-sm">{benefit.subtitle}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Graph section - two columns */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left side - text */}
             <div>
-              <h2 className="font-serif font-black text-[clamp(32px,5vw,56px)] leading-[1.05] text-ink mb-5">
-                Stay in the zone.
-              </h2>
               <p className="text-ink/70 text-lg leading-relaxed mb-6">
                 {key === "energy" 
                   ? "AVRO's ingredients are formulated to work better together. Delivering steady energy in a convenient stick pack format."
@@ -146,7 +175,7 @@ export default async function ProductPage({
             
             {/* Right side - graph */}
             <div className="relative">
-              <div className="bg-white rounded-2xl border border-line p-6 lg:p-8 shadow-sm">
+              <div className="bg-soft rounded-2xl border border-line p-6 lg:p-8">
                 {/* Y-axis label */}
                 <div className="absolute left-2 top-1/2 -translate-y-1/2 hidden lg:block">
                   <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider [writing-mode:vertical-lr] rotate-180">
@@ -159,7 +188,7 @@ export default async function ProductPage({
                   {/* Grid lines */}
                   <div className="absolute inset-x-0 top-0 bottom-8 flex flex-col justify-between">
                     {[0, 1, 2, 3, 4].map((i) => (
-                      <div key={i} className="w-full border-t border-line/60" />
+                      <div key={i} className="w-full border-t border-line" />
                     ))}
                   </div>
                   
@@ -223,6 +252,9 @@ export default async function ProductPage({
         </div>
       </section>
 
+      {/* Marquee divider */}
+      <PdpMarquee text="Calm First • Clear Thinking • Steady Energy" variant="light" />
+
       {/* Product Comparison Grid - "We put intention into every formula" */}
       <ProductComparisonGrid currentKey={key} />
 
@@ -242,16 +274,6 @@ export default async function ProductPage({
             Subscribe Now
             <Icon name="arrowRight" className="w-4 h-4" />
           </a>
-        </div>
-      </section>
-
-      {/* More ways to support your day - You Might Also Like */}
-      <section className="w-full bg-white py-[clamp(48px,6vw,80px)]">
-        <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
-          <h2 className="font-serif font-black text-[clamp(28px,4vw,48px)] leading-[1.05] text-ink mb-8 text-center">
-            More ways to support your day.
-          </h2>
-          <YouMightAlsoLike currentKey={key} hideHeader />
         </div>
       </section>
 
