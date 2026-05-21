@@ -72,10 +72,10 @@ export default function LearnPage() {
         @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Medium.woff") format("woff"); font-weight: 500; font-style: normal; font-display: swap; }
         @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Book.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
         .cta-btn { transition: background-color 0.18s ease, color 0.18s ease; }
-        .cta-btn-white { background-color: transparent; color: #fff; border: 2.5px solid #fff; }
-        .cta-btn-white:hover { background-color: #fff; color: #000; }
-        .cta-btn-blue { background-color: transparent; color: #87CEEB; border: 2.5px solid #87CEEB; }
-        .cta-btn-blue:hover { background-color: #87CEEB; color: #000; }
+        .cta-btn-white { background-color: #fff; color: #000; border: 2.5px solid #fff; }
+        .cta-btn-white:hover { background-color: transparent; color: #fff; }
+        .cta-btn-blue { background-color: #87CEEB; color: #000; border: 2.5px solid #87CEEB; }
+        .cta-btn-blue:hover { background-color: transparent; color: #87CEEB; }
       `}</style>
 
       {/* ── HERO ── */}
@@ -164,7 +164,7 @@ export default function LearnPage() {
         <div style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#000", borderRadius: 20, padding: "clamp(56px,7vw,88px) clamp(48px,6vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 48 }}>
           {/* Left: text */}
           <div style={{ flex: "1 1 480px", minWidth: 300 }}>
-            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, letterSpacing: "0.05em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)", marginBottom: 16, display: "block" }}>
+            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "rgba(255,255,255,0.6)", marginBottom: 16, display: "block" }}>
               Choose the formula that fits your moment.
             </span>
             <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(40px,5.5vw,72px)", lineHeight: 1.0, color: "#fff", marginBottom: 20 }}>
