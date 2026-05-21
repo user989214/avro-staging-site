@@ -78,45 +78,26 @@ export function CtaGroup({
 
 export function SocialProof({ mode = "full" }: { mode?: "full" | "compact" }) {
   return (
-    <Section className="bg-white">
-      <SectionHeading
-        eyebrow="Customer testimonials + social proof"
-        title="Trusted for calm-first routines."
-      />
-      <div className="grid grid-cols-1 md:grid-cols-3 overflow-hidden border border-line rounded-lg">
-        {sharedProof.map((item, i) => (
-          <div
-            key={item.label}
-            className={cn(
-              "flex flex-col gap-1.5 p-7 text-center bg-white",
-              i > 0 && "border-t md:border-t-0 md:border-l border-line"
-            )}
-          >
-            <strong className="text-[32px] font-black">{item.stat}</strong>
-            <span className="text-ink/75">{item.label}</span>
+    <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
+      <div style={{ maxWidth: 1250, margin: "0 auto" }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#000", marginBottom: 32 }}>
+          Trusted for calm-first routines.
+        </h2>
+        {mode === "full" && (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 16 }}>
+            {testimonials.map((item) => (
+              <article key={item.name} style={{ backgroundColor: "#000", borderRadius: 12, padding: "clamp(24px,3vw,36px)" }}>
+                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(18px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(255,255,255,0.88)", marginBottom: 16 }}>
+                  &ldquo;{item.quote}&rdquo;
+                </p>
+                <strong style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "#fff", display: "block" }}>{item.name}</strong>
+                <span style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: 15, color: BLUE_FINAL, display: "block", marginTop: 4 }}>{item.role}</span>
+              </article>
+            ))}
           </div>
-        ))}
+        )}
       </div>
-
-      {mode === "full" && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4.5 mt-4.5">
-          {testimonials.map((item) => (
-            <article
-              key={item.name}
-              className="p-6.5 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
-            >
-              <p className="font-serif text-[22px] leading-[1.3] text-ink mb-3">
-                &ldquo;{item.quote}&rdquo;
-              </p>
-              <strong className="block text-ink">{item.name}</strong>
-              <span className="block mt-1 text-olive text-xs font-black tracking-[0.1em] uppercase">
-                {item.role}
-              </span>
-            </article>
-          ))}
-        </div>
-      )}
-    </Section>
+    </section>
   )
 }
 
@@ -128,54 +109,43 @@ export function ProductCards({
   shopLabel?: string
 }) {
   return (
-    <Section>
-      <SectionHeading
-        eyebrow="Three formulas. One foundation."
-        title={title}
-        description="Every AVRO formula starts with the same calm-first base, then supports the moment in a different way."
-      />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5.5">
-        {(Object.keys(formulas) as FormulaKey[]).map((key) => {
-          const item = formulas[key]
-          return (
-            <article
-              key={key}
-              className="flex flex-col gap-3.5 p-6 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
-            >
-              <div className="min-h-[330px] p-3 pt-5 pb-6 bg-gradient-to-br from-white to-[#f7f3eb] rounded-lg flex items-end justify-center overflow-hidden">
-                <ProductCard formulaKey={key} />
-              </div>
-              <h3 className="font-black text-lg">{item.name}</h3>
-              <p className="text-ink/75">{item.support}</p>
-              <dl className="grid gap-2.5 pt-3 border-t border-line">
-                <div>
-                  <dt className="font-black text-ink">Best for</dt>
-                  <dd className="mt-1 text-ink/75 leading-[1.45]">
-                    {item.bestFor}
-                  </dd>
+    <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
+      <div style={{ maxWidth: 1250, margin: "0 auto" }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#000", marginBottom: 12 }}>
+          {title}
+        </h2>
+        <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(17px,1.5vw,21px)", lineHeight: 1.4, color: "rgba(0,0,0,0.6)", marginBottom: 32 }}>
+          Every AVRO formula starts with the same calm-first base, then supports the moment in a different way.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 16 }}>
+          {(Object.keys(formulas) as FormulaKey[]).map((key) => {
+            const item = formulas[key]
+            return (
+              <article key={key} style={{ backgroundColor: "#000", borderRadius: 12, padding: "clamp(20px,3vw,32px)", display: "flex", flexDirection: "column", gap: 16 }}>
+                <div style={{ backgroundColor: "#111", borderRadius: 8, padding: "24px 20px", minHeight: 300, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
+                  <ProductCard formulaKey={key} />
                 </div>
-                <div>
-                  <dt className="font-black text-ink">Caffeine</dt>
-                  <dd className="mt-1 text-ink/75 leading-[1.45]">
-                    {item.caffeine}
-                  </dd>
+                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: "clamp(20px,2vw,26px)", color: "#fff", margin: 0 }}>{item.name}</h3>
+                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.45, color: "rgba(255,255,255,0.72)", margin: 0 }}>{item.support}</p>
+                <div style={{ borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: 16, display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 15, color: "#fff" }}>Best for</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 15, lineHeight: 1.4, color: "rgba(255,255,255,0.65)", margin: "4px 0 0" }}>{item.bestFor}</p>
+                  </div>
+                  <div>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 15, color: "#fff" }}>Caffeine</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 15, lineHeight: 1.4, color: "rgba(255,255,255,0.65)", margin: "4px 0 0" }}>{item.caffeine}</p>
+                  </div>
                 </div>
-              </dl>
-              <Link
-                href={`/${key}`}
-                className={cn("btn-primary w-full mt-auto", {
-                  "!bg-calm": key === "calm",
-                  "!bg-focus": key === "focus",
-                  "!bg-energy !text-ink": key === "energy",
-                })}
-              >
-                {shopLabel} {item.short}
-              </Link>
-            </article>
-          )
-        })}
+                <a href={`/${key}`} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, minHeight: 56, borderRadius: 10, textDecoration: "none", backgroundColor: BLUE_FINAL, color: "#000", marginTop: "auto" }}>
+                  {shopLabel} {item.short}
+                </a>
+              </article>
+            )
+          })}
+        </div>
       </div>
-    </Section>
+    </section>
   )
 }
 
@@ -289,6 +259,9 @@ export function FaqBlock({
   )
 }
 
+const GC_FINAL = '"Gotham Condensed", sans-serif'
+const BLUE_FINAL = "#87CEEB"
+
 export function FinalCta({
   title,
   copy,
@@ -299,42 +272,34 @@ export function FinalCta({
   productButtons?: boolean
 }) {
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-7 items-center w-[min(calc(100%-32px),1320px)] md:w-[min(calc(100%-72px),1320px)] mx-auto my-8 p-[clamp(24px,5vw,44px)] text-white bg-[radial-gradient(circle_at_90%_12%,rgba(255,255,255,0.16),transparent_24%),linear-gradient(135deg,var(--olive),var(--olive-dark))] border border-line rounded-lg">
-      <div>
-        <span className="block mb-3 text-white text-xs font-black tracking-[0.12em] uppercase">
-          Choose the formula that fits your moment.
-        </span>
-        <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5 text-white">
-          {title}
-        </h2>
-        <p className="max-w-[620px] text-white">{copy}</p>
-      </div>
-      <div className="flex flex-wrap gap-3">
-        {productButtons ? (
-          <>
-            <Link href="/calm" className="btn-primary !bg-calm">
-              Shop Calm
-            </Link>
-            <Link href="/focus" className="btn-primary !bg-focus">
-              Shop Focus
-            </Link>
-            <Link href="/energy" className="btn-primary !bg-energy !text-ink">
-              Shop Energy
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link href="/shop" className="btn-primary">
-              Shop AVRO
-            </Link>
-            <Link
-              href="/contact"
-              className="btn-secondary !text-white !border-white/70"
-            >
-              Contact Us
-            </Link>
-          </>
-        )}
+    <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
+      <style>{`
+        .final-cta-btn { background-color: #fff; color: #000; border: 2.5px solid #fff; transition: background-color 0.18s ease, color 0.18s ease; display: inline-flex; align-items: center; justify-content: center; font-family: ${GC_FINAL}; font-weight: 800; font-size: 20px; min-height: 64px; padding: 0 40px; border-radius: 10px; text-decoration: none; }
+        .final-cta-btn:hover { background-color: transparent; color: #fff; }
+      `}</style>
+      <div style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#000", borderRadius: 20, padding: "clamp(48px,6vw,88px) clamp(36px,5vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 40 }}>
+        <div style={{ flex: "1 1 400px", minWidth: 0 }}>
+          <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#fff", marginBottom: 16 }}>
+            {title}
+          </h2>
+          <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(17px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(255,255,255,0.80)" }}>
+            {copy}
+          </p>
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+          {productButtons ? (
+            <>
+              <a href="/calm" className="final-cta-btn">Shop Calm</a>
+              <a href="/focus" className="final-cta-btn">Shop Focus</a>
+              <a href="/energy" className="final-cta-btn">Shop Energy</a>
+            </>
+          ) : (
+            <>
+              <a href="/shop" className="final-cta-btn">Shop AVRO</a>
+              <a href="/contact" className="final-cta-btn">Contact Us</a>
+            </>
+          )}
+        </div>
       </div>
     </section>
   )
