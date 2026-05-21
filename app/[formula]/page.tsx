@@ -2,12 +2,12 @@ import { notFound } from "next/navigation"
 import { formulas, type FormulaKey } from "@/lib/data"
 import { ProductHero } from "@/components/product-hero"
 import { ReviewsBlock } from "@/components/reviews-block"
-import { YouMightAlsoLike } from "@/components/you-might-also-like"
 import { Icon, type IconName } from "@/components/icons"
 import { FinalCta } from "@/components/sections"
 import { PdpMarquee } from "@/components/pdp-marquee"
 import { ProductComparisonGrid } from "@/components/product-comparison-grid"
 import { PdpSocialScroll } from "@/components/pdp-social-scroll"
+import { PdpMiniRecommendations } from "@/components/pdp-mini-recommendations"
 
 const validFormulas = ["calm", "focus", "energy"] as const
 
@@ -90,8 +90,8 @@ export default async function ProductPage({
 
   return (
     <>
-      {/* Top Marquee - Memorial Day style */}
-      <PdpMarquee text="Subscribe & Save 25% on Every Order" variant="light" />
+      {/* Top Marquee - Bigger, Blue */}
+      <PdpMarquee text="Subscribe & Save 25% on Every Order" variant="accent" size="lg" />
 
       {/* PDP Hero */}
       <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(24px,4vw,48px)] bg-white">
@@ -99,7 +99,7 @@ export default async function ProductPage({
       </section>
 
       {/* Quick benefits strip */}
-      <section className="w-full bg-soft border-y border-line">
+      <section className="w-full bg-soft">
         <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-5">
           <ul className="flex flex-wrap justify-center gap-x-10 gap-y-3">
             {benefits[key].map(({ icon, label }) => (
@@ -112,15 +112,12 @@ export default async function ProductPage({
         </div>
       </section>
 
-      {/* You Might Also Like - Right under Add to Cart area */}
-      <section className="w-full bg-white py-[clamp(40px,5vw,64px)] border-b border-line">
+      {/* Mini Recommendations - Small integrated section under buy box */}
+      <section className="w-full bg-white pb-[clamp(32px,4vw,48px)]">
         <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
-          <YouMightAlsoLike currentKey={key} />
+          <PdpMiniRecommendations currentKey={key} />
         </div>
       </section>
-
-      {/* Marquee divider */}
-      <PdpMarquee text="HSA/FSA Eligible • Naturally Fermented PharmaGABA®" variant="accent" />
 
       {/* "This is what calm feels like" - Social Scroll Section */}
       <PdpSocialScroll formulaKey={key} />
@@ -179,7 +176,7 @@ export default async function ProductPage({
             
             {/* Right side - graph */}
             <div className="relative">
-              <div className="bg-soft rounded-2xl border border-line p-6 lg:p-8">
+              <div className="bg-soft rounded-2xl p-6 lg:p-8">
                 {/* Y-axis label */}
                 <div className="absolute left-2 top-1/2 -translate-y-1/2 hidden lg:block">
                   <span className="text-[10px] font-bold text-ink/40 uppercase tracking-wider [writing-mode:vertical-lr] rotate-180">
@@ -192,7 +189,7 @@ export default async function ProductPage({
                   {/* Grid lines */}
                   <div className="absolute inset-x-0 top-0 bottom-8 flex flex-col justify-between">
                     {[0, 1, 2, 3, 4].map((i) => (
-                      <div key={i} className="w-full border-t border-line" />
+                      <div key={i} className="w-full border-t border-ink/10" />
                     ))}
                   </div>
                   
@@ -240,7 +237,7 @@ export default async function ProductPage({
                 </div>
                 
                 {/* Legend */}
-                <div className="flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-line">
+                <div className="flex flex-wrap items-center justify-center gap-6 mt-4 pt-4 border-t border-ink/10">
                   <div className="flex items-center gap-2">
                     <div className="w-6 h-1 bg-avro-blue rounded-full" />
                     <span className="text-xs font-bold text-ink">AVRO {item.short}</span>
@@ -255,9 +252,6 @@ export default async function ProductPage({
           </div>
         </div>
       </section>
-
-      {/* Marquee divider */}
-      <PdpMarquee text="Calm First • Clear Thinking • Steady Energy" variant="light" />
 
       {/* Product Comparison Grid - "We put intention into every formula" */}
       <ProductComparisonGrid currentKey={key} />
@@ -282,7 +276,7 @@ export default async function ProductPage({
       </section>
 
       {/* FAQ accordion */}
-      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)] bg-white border-t border-line">
+      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)] bg-white">
         <div className="grid grid-cols-1 lg:grid-cols-[0.75fr_1.25fr] gap-10 lg:gap-16 items-start">
           <div>
             <h2 className="font-serif font-black text-[clamp(28px,4vw,48px)] leading-[1.05] mb-4 text-balance">
@@ -320,7 +314,7 @@ export default async function ProductPage({
                 key={q}
                 className={
                   "group bg-white" +
-                  (i > 0 ? " border-t border-line" : "")
+                  (i > 0 ? " border-t border-ink/10" : "")
                 }
               >
                 <summary className="flex items-center justify-between gap-6 py-5 cursor-pointer list-none select-none text-base font-bold text-ink hover:text-olive transition-colors">
@@ -339,9 +333,6 @@ export default async function ProductPage({
           </div>
         </div>
       </section>
-
-      {/* Marquee divider */}
-      <PdpMarquee text="Good Energy On Repeat • Subscribe & Save 25%" variant="accent" />
 
       {/* Bottom Reviews block */}
       <div id="reviews">

@@ -43,8 +43,8 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
   return (
     <section className="w-full bg-avro-blue py-[clamp(48px,6vw,80px)] overflow-hidden">
       <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
-        {/* Headline */}
-        <h2 className="font-serif font-black text-[clamp(36px,5vw,64px)] leading-[1.0] text-ink mb-10">
+        {/* Headline - Centered */}
+        <h2 className="font-serif font-black text-[clamp(36px,5vw,64px)] leading-[1.0] text-ink mb-10 text-center">
           This is what {formulaKey} feels like.
         </h2>
         

@@ -3,9 +3,10 @@
 interface MarqueeProps {
   text: string
   variant?: "light" | "dark" | "accent"
+  size?: "sm" | "lg"
 }
 
-export function PdpMarquee({ text, variant = "light" }: MarqueeProps) {
+export function PdpMarquee({ text, variant = "light", size = "sm" }: MarqueeProps) {
   const bgClass =
     variant === "dark"
       ? "bg-ink text-white"
@@ -13,13 +14,16 @@ export function PdpMarquee({ text, variant = "light" }: MarqueeProps) {
         ? "bg-avro-blue text-ink"
         : "bg-soft text-ink"
 
+  const sizeClass = size === "lg" ? "py-4" : "py-3"
+  const textClass = size === "lg" ? "text-base" : "text-sm"
+
   return (
-    <div className={`w-full overflow-hidden py-3 ${bgClass}`}>
+    <div className={`w-full overflow-hidden ${sizeClass} ${bgClass}`}>
       <div className="flex animate-marquee whitespace-nowrap">
         {Array.from({ length: 12 }).map((_, i) => (
           <span
             key={i}
-            className="mx-8 text-sm font-bold tracking-wide flex items-center gap-3"
+            className={`mx-8 ${textClass} font-bold tracking-wide flex items-center gap-3`}
           >
             <svg
               width="16"
