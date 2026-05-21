@@ -73,7 +73,7 @@ export default async function ProductPage({
   return (
     <>
       {/* Top Marquee - Bigger, Blue */}
-      <PdpMarquee text="Subscribe & Save 25% on Every Order" variant="accent" size="lg" />
+      <PdpMarquee text="Subscribe and save 25% on each order" />
 
       {/* PDP Hero */}
       <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(24px,4vw,48px)] bg-white">

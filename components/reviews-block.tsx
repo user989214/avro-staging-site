@@ -1,6 +1,8 @@
 import { stickImageFor } from "@/components/product-visual"
 import type { FormulaKey, Formula } from "@/lib/data"
 
+const GC = '"Gotham Condensed", sans-serif'
+
 interface ReviewsBlockProps {
   formula: Formula
   formulaKey: FormulaKey
@@ -104,77 +106,107 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
   const reviewCount = formulaKey === "calm" ? 82 : formulaKey === "focus" ? 62 : 76
 
   return (
-    <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)] bg-white border-b border-line">
+    <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)] bg-white">
       {/* Summary bar */}
-      <div className="flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-8 p-5 lg:p-6 mb-7 bg-soft/60 border border-line rounded-lg">
-        <div className="flex items-center gap-4 shrink-0">
+      <div
+        className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-8 p-6 lg:p-7 mb-8"
+        style={{ backgroundColor: "#f2f2f2", borderRadius: 14 }}
+      >
+        <div className="flex items-center gap-5 shrink-0">
           <div
-            className="relative flex items-center justify-center w-14 h-14 rounded-md overflow-hidden"
-            style={{ background: `linear-gradient(135deg, ${formula.color}, ${formula.accent})` }}
+            className="relative flex items-center justify-center w-16 h-16 rounded-lg overflow-hidden"
+            style={{ backgroundColor: "#e8e8e8" }}
           >
             {(() => {
               const { src, alt } = stickImageFor(formulaKey)
               return (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img src={src} alt={alt} className="h-12 w-auto object-contain" />
+                <img src={src} alt={alt} className="h-14 w-auto object-contain" />
               )
             })()}
           </div>
           <div>
-            <strong className="block font-extrabold">{formula.name}</strong>
-            <span className="block text-sm text-ink/65">{formula.flavor}</span>
+            <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: 22, color: "#000", display: "block" }}>
+              {formula.name}
+            </strong>
+            <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, color: "rgba(0,0,0,0.55)", display: "block" }}>
+              {formula.flavor}
+            </span>
           </div>
         </div>
-        <div className="flex items-center gap-4 lg:ml-auto">
+        <div className="flex items-center gap-5 lg:ml-auto">
           <div className="flex flex-col items-start">
-            <strong className="text-3xl font-black leading-none">4.8</strong>
-            <span className="text-[#d79a23] text-sm tracking-wider">{"\u2605\u2605\u2605\u2605\u2605"}</span>
+            <strong style={{ fontFamily: GC, fontWeight: 950, fontSize: 40, lineHeight: 1, color: "#000" }}>4.8</strong>
+            <span style={{ fontSize: 16, letterSpacing: 2, color: "#000" }}>{"\u2605\u2605\u2605\u2605\u2605"}</span>
           </div>
-          <span className="text-sm text-ink/70 max-w-[180px] leading-snug">
+          <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, color: "rgba(0,0,0,0.6)", maxWidth: 180, lineHeight: 1.4 }}>
             Based on {reviewCount} verified reviews
           </span>
         </div>
-        <button className="lg:ml-4 inline-flex items-center justify-center min-h-[44px] px-5 rounded-full border border-line bg-white text-sm font-extrabold hover:border-olive transition-colors">
+        <button
+          className="lg:ml-4 inline-flex items-center justify-center transition-colors"
+          style={{
+            fontFamily: GC,
+            fontWeight: 800,
+            fontSize: 17,
+            minHeight: 56,
+            padding: "0 28px",
+            borderRadius: 10,
+            backgroundColor: "#000",
+            color: "#fff",
+          }}
+        >
           Write a review
         </button>
       </div>
 
       {/* Review grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
         {reviews.map((r) => (
-          <article key={r.name + r.title} className="pb-6 border-b border-line">
-            <div className="flex items-baseline justify-between gap-4 mb-1.5">
-              <strong className="font-extrabold">{r.name}</strong>
-              <time className="text-xs text-ink/50">{r.date}</time>
+          <article key={r.name + r.title} className="pb-7" style={{ borderBottom: "1px solid rgba(0,0,0,0.1)" }}>
+            <div className="flex items-baseline justify-between gap-4 mb-2">
+              <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: 18, color: "#000" }}>{r.name}</strong>
+              <time style={{ fontFamily: GC, fontWeight: 400, fontSize: 14, color: "rgba(0,0,0,0.45)" }}>{r.date}</time>
             </div>
-            <span className="text-[#d79a23] text-sm tracking-wider">{"\u2605\u2605\u2605\u2605\u2605"}</span>
-            <h3 className="mt-2 font-extrabold">{r.title}</h3>
-            <p className="mt-1.5 text-ink/75 text-[15px] leading-relaxed">{r.body}</p>
-            <p className="mt-3 text-xs">
-              <span className="text-ink/55">{formula.flavor}</span>
-              <span className="text-ink/35"> &middot; </span>
-              <span className="text-ink/55">{r.size}</span>
+            <span style={{ fontSize: 15, letterSpacing: 2, color: "#000" }}>{"\u2605\u2605\u2605\u2605\u2605"}</span>
+            <h3 style={{ fontFamily: GC, fontWeight: 800, fontSize: 19, color: "#000", marginTop: 10 }}>{r.title}</h3>
+            <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, color: "rgba(0,0,0,0.7)", lineHeight: 1.55, marginTop: 8 }}>{r.body}</p>
+            <p className="mt-4" style={{ fontFamily: GC, fontWeight: 400, fontSize: 14, color: "rgba(0,0,0,0.5)" }}>
+              {formula.flavor} &middot; {r.size}
             </p>
           </article>
         ))}
       </div>
 
       {/* Pagination dots */}
-      <nav className="flex items-center justify-center gap-2 mt-9" aria-label="Reviews pagination">
-        <span className="grid place-items-center w-8 h-8 rounded-md border border-line text-ink/50 cursor-not-allowed">‹</span>
+      <nav className="flex items-center justify-center gap-2 mt-10" aria-label="Reviews pagination">
+        <span
+          className="grid place-items-center w-10 h-10 rounded-lg cursor-not-allowed"
+          style={{ border: "1.5px solid rgba(0,0,0,0.15)", color: "rgba(0,0,0,0.35)", fontFamily: GC, fontWeight: 600, fontSize: 18 }}
+        >
+          &lsaquo;
+        </span>
         {[1, 2, 3, 4, 5].map((p) => (
           <span
             key={p}
-            className={
-              p === 1
-                ? "grid place-items-center w-8 h-8 rounded-md bg-olive text-white text-sm font-extrabold"
-                : "grid place-items-center w-8 h-8 rounded-md border border-line text-ink/65 text-sm hover:border-olive cursor-pointer"
-            }
+            className="grid place-items-center w-10 h-10 rounded-lg cursor-pointer"
+            style={{
+              fontFamily: GC,
+              fontWeight: 800,
+              fontSize: 16,
+              backgroundColor: p === 1 ? "#000" : "transparent",
+              color: p === 1 ? "#fff" : "#000",
+              border: p === 1 ? "none" : "1.5px solid rgba(0,0,0,0.15)",
+            }}
           >
             {p}
           </span>
         ))}
-        <span className="grid place-items-center w-8 h-8 rounded-md border border-line text-ink/65 cursor-pointer hover:border-olive">›</span>
+        <span
+          className="grid place-items-center w-10 h-10 rounded-lg cursor-pointer hover:border-black transition-colors"
+          style={{ border: "1.5px solid rgba(0,0,0,0.15)", color: "#000", fontFamily: GC, fontWeight: 600, fontSize: 18 }}
+        >
+          &rsaquo;
+        </span>
       </nav>
     </section>
   )

@@ -41,7 +41,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
   }
 
   return (
-    <section className="w-full bg-white py-[clamp(48px,6vw,80px)] overflow-hidden" style={{ fontFamily: '"Gotham Condensed", sans-serif' }}>
+    <section className="w-full py-[clamp(48px,6vw,80px)] overflow-hidden" style={{ fontFamily: '"Gotham Condensed", sans-serif', backgroundColor: "#f2f2f2" }}>
       <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
         {/* Headline - Centered */}
         <h2
@@ -135,9 +135,9 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
                       <span className="text-sm font-bold text-ink">${item.price.toFixed(2)}</span>
                     </div>
                     
-                    {/* Add to cart button */}
-                    <button className="w-10 h-10 rounded-full bg-[#3B5BDB] hover:bg-[#2F4BC0] flex items-center justify-center flex-shrink-0 transition-colors">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    {/* Add to cart button - AVRO blue */}
+                    <button className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-colors hover:opacity-90" style={{ backgroundColor: "#87CEEB" }}>
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
                       </svg>
