@@ -115,11 +115,11 @@ export default function BlogPage() {
           .blog-grid { grid-template-columns: 1fr !important; }
           .featured-inner { flex-direction: column !important; align-items: flex-start !important; }
           .feat-read-btn { align-self: flex-start !important; margin-top: 16px !important; }
-          .cta-inner { flex-direction: column !important; padding: 16px 14px !important; gap: 10px !important; border-radius: 10px !important; }
-          .cta-btns { width: 100% !important; flex-direction: row !important; flex-wrap: wrap !important; gap: 6px !important; }
-          .cta-btns a { flex: 1 1 auto !important; box-sizing: border-box !important; min-height: 40px !important; font-size: 14px !important; padding: 0 14px !important; }
-          .cta-inner h2 { font-size: 22px !important; margin-bottom: 2px !important; }
-          .cta-inner p { font-size: 14px !important; margin-bottom: 4px !important; }
+          .cta-inner { flex-direction: column !important; padding: 20px 16px !important; gap: 12px !important; border-radius: 10px !important; justify-content: flex-start !important; align-items: flex-start !important; height: auto !important; min-height: 0 !important; }
+          .cta-btns { width: 100% !important; flex-direction: row !important; flex-wrap: wrap !important; gap: 8px !important; }
+          .cta-btns a { flex: 1 1 auto !important; box-sizing: border-box !important; min-height: 44px !important; font-size: 15px !important; padding: 0 16px !important; }
+          .cta-inner h2 { font-size: 24px !important; margin-bottom: 4px !important; }
+          .cta-inner p { font-size: 15px !important; margin-bottom: 8px !important; }
           .hero-section { padding: 48px 20px 40px !important; }
           .featured-section { padding: 24px 20px !important; }
           .grid-section { padding: 0 20px 40px !important; }
