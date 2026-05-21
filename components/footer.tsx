@@ -125,8 +125,8 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar: policy links + copyright */}
-      <div className="border-t border-white/15 max-w-[1400px] mx-auto px-6 lg:px-14 py-5 flex flex-wrap items-center justify-between gap-4">
+      {/* Policy links + copyright — no divider line, sit directly above logo */}
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-14 pt-2 pb-4 flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap gap-6">
           {["Privacy", "Terms", "Accessibility", "Return Policy"].map((label) => (
             <Link
@@ -148,7 +148,7 @@ export function Footer() {
       </div>
 
       {/* Large AVRO logo watermark */}
-      <div className="flex justify-center overflow-hidden pb-4 pt-2" aria-hidden="true">
+      <div className="flex justify-center overflow-hidden pb-2" aria-hidden="true">
         <Image
           src="/brand/avro-logo-footer.svg"
           alt=""
