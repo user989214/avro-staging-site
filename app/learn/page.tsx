@@ -156,17 +156,24 @@ export default function LearnPage() {
 
       {/* ── FINAL CTA ── */}
       <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(32px,5vw,56px) clamp(16px,4vw,64px)" }}>
-        <div style={{ maxWidth: 1250, margin: "0 auto", backgroundColor: "#87CEEB", borderRadius: 16, padding: "clamp(48px,7vw,80px) clamp(24px,6vw,80px)", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 24 }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,72px)", lineHeight: 1.0, color: "#000", maxWidth: 700 }}>
-            Ready to find your formula?
-          </h2>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(18px,1.8vw,22px)", lineHeight: 1.45, color: "#111", maxWidth: 560 }}>
-            Choose Calm, Focus, or Energy based on the moment you want to support.
-          </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center", marginTop: 16 }}>
-            <a href="/shop/calm" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 62, padding: "0 36px", borderRadius: 10, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}>Shop Calm</a>
-            <a href="/shop/focus" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 62, padding: "0 36px", borderRadius: 10, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}>Shop Focus</a>
-            <a href="/shop/energy" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 62, padding: "0 36px", borderRadius: 10, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}>Shop Energy</a>
+        <div style={{ maxWidth: 1250, margin: "0 auto", backgroundColor: "#000", borderRadius: 16, padding: "clamp(40px,5vw,64px) clamp(32px,5vw,72px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 32 }}>
+          {/* Left: text */}
+          <div style={{ flex: "1 1 400px", minWidth: 280 }}>
+            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, letterSpacing: "0.06em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)", marginBottom: 12, display: "block" }}>
+              Choose the formula that fits your moment.
+            </span>
+            <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(32px,4.5vw,56px)", lineHeight: 1.0, color: "#fff", marginBottom: 14 }}>
+              Ready to find your formula?
+            </h2>
+            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.4, color: "rgba(255,255,255,0.75)", maxWidth: 480 }}>
+              Choose Calm, Focus, or Energy based on the moment you want to support.
+            </p>
+          </div>
+          {/* Right: buttons */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+            <a href="/shop/calm" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 9999, textDecoration: "none", backgroundColor: "#fff", color: "#000" }}>Shop Calm</a>
+            <a href="/shop/focus" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 9999, textDecoration: "none", backgroundColor: "#87CEEB", color: "#000" }}>Shop Focus</a>
+            <a href="/shop/energy" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 9999, textDecoration: "none", backgroundColor: "#87CEEB", color: "#000" }}>Shop Energy</a>
           </div>
         </div>
       </section>
