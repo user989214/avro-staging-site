@@ -133,7 +133,7 @@ export function Footer() {
         </div>
 
         {/* Divider between left col and nav */}
-        <div className="hidden lg:block w-px bg-white/15 self-stretch" aria-hidden="true" />
+        <div className="hidden lg:block w-[3px] bg-white/25 self-stretch" aria-hidden="true" />
 
         {/* Right: nav columns */}
         <div className="flex-1 lg:pl-8">
