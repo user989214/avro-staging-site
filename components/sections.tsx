@@ -86,12 +86,12 @@ export function SocialProof({ mode = "full" }: { mode?: "full" | "compact" }) {
         {mode === "full" && (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 16 }}>
             {testimonials.map((item) => (
-              <article key={item.name} style={{ backgroundColor: "#000", borderRadius: 12, padding: "clamp(24px,3vw,36px)" }}>
-                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(18px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(255,255,255,0.88)", marginBottom: 16 }}>
+              <article key={item.name} style={{ backgroundColor: "#f5f5f5", borderRadius: 12, padding: "clamp(24px,3vw,36px)" }}>
+                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(18px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(0,0,0,0.75)", marginBottom: 16 }}>
                   &ldquo;{item.quote}&rdquo;
                 </p>
-                <strong style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "#fff", display: "block" }}>{item.name}</strong>
-                <span style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: 15, color: BLUE_FINAL, display: "block", marginTop: 4 }}>{item.role}</span>
+                <strong style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "#000", display: "block" }}>{item.name}</strong>
+                <span style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: 15, color: "rgba(0,0,0,0.55)", display: "block", marginTop: 4 }}>{item.role}</span>
               </article>
             ))}
           </div>
@@ -121,23 +121,23 @@ export function ProductCards({
           {(Object.keys(formulas) as FormulaKey[]).map((key) => {
             const item = formulas[key]
             return (
-              <article key={key} style={{ backgroundColor: "#000", borderRadius: 12, padding: "clamp(20px,3vw,32px)", display: "flex", flexDirection: "column", gap: 16 }}>
-                <div style={{ borderRadius: 10, border: "3px solid #fff", height: 380, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+              <article key={key} style={{ backgroundColor: "#f5f5f5", borderRadius: 12, padding: "clamp(20px,3vw,32px)", display: "flex", flexDirection: "column", gap: 16 }}>
+                <div style={{ borderRadius: 10, border: "2px solid rgba(0,0,0,0.1)", height: 380, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: "#fff" }}>
                   <ProductCard formulaKey={key} className="h-full w-full object-cover" />
                 </div>
-                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: "clamp(22px,2vw,28px)", color: "#fff", margin: 0 }}>{item.name}</h3>
-                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(17px,1.4vw,19px)", lineHeight: 1.45, color: "rgba(255,255,255,0.78)", margin: 0 }}>{item.support}</p>
-                <div style={{ borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
+                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: "clamp(22px,2vw,28px)", color: "#000", margin: 0 }}>{item.name}</h3>
+                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(17px,1.4vw,19px)", lineHeight: 1.45, color: "rgba(0,0,0,0.6)", margin: 0 }}>{item.support}</p>
+                <div style={{ borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "#fff" }}>Best for</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(255,255,255,0.72)", margin: "4px 0 0" }}>{item.bestFor}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "#000" }}>Best for</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(0,0,0,0.6)", margin: "4px 0 0" }}>{item.bestFor}</p>
                   </div>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "#fff" }}>Caffeine</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(255,255,255,0.72)", margin: "4px 0 0" }}>{item.caffeine}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "#000" }}>Caffeine</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(0,0,0,0.6)", margin: "4px 0 0" }}>{item.caffeine}</p>
                   </div>
                 </div>
-                <a href={`/${key}`} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC_FINAL, fontWeight: 800, fontSize: 20, minHeight: 60, borderRadius: 10, textDecoration: "none", backgroundColor: BLUE_FINAL, color: "#000", marginTop: "auto" }}>
+                <a href={`/${key}`} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC_FINAL, fontWeight: 800, fontSize: 20, minHeight: 60, borderRadius: 10, textDecoration: "none", backgroundColor: "#000", color: "#fff", marginTop: "auto" }}>
                   {shopLabel} {item.short}
                 </a>
               </article>
