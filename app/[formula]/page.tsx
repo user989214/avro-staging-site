@@ -8,6 +8,7 @@ import { PdpMarquee } from "@/components/pdp-marquee"
 import { ProductComparisonGrid } from "@/components/product-comparison-grid"
 import { PdpSocialScroll } from "@/components/pdp-social-scroll"
 import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommendations"
+import { PdpIngredients } from "@/components/pdp-ingredients"
 
 const GC = '"Gotham Condensed", sans-serif'
 const BLUE = "#87CEEB"
@@ -89,6 +90,9 @@ export default async function ProductPage({
 
       {/* "This is what calm feels like" - Social Scroll Section */}
       <PdpSocialScroll formulaKey={key} />
+
+      {/* Ingredients Section */}
+      <PdpIngredients formulaKey={key} />
 
       {/* The feeling of good calm/focus/energy - NeuroGum style */}
       <section className="w-full bg-white py-[clamp(40px,5vw,64px)]">
