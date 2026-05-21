@@ -56,7 +56,7 @@ export function Footer() {
           <div>
             <h3
               className="mb-2 uppercase text-white"
-              style={{ fontFamily: GC, fontWeight: 800, fontSize: "30px", lineHeight: 1.05 }}
+              style={{ fontFamily: GC, fontWeight: 800, fontSize: "38px", lineHeight: 1.0 }}
             >
               Stay in the loop
             </h3>
@@ -163,7 +163,7 @@ function FooterColumn({
     <div>
       <h4
         className="mb-3 uppercase text-white"
-        style={{ fontFamily: GC, fontWeight: 800, fontSize: "20px", lineHeight: 1, letterSpacing: "0.06em" }}
+        style={{ fontFamily: GC, fontWeight: 800, fontSize: "26px", lineHeight: 1 }}
       >
         {title}
       </h4>
