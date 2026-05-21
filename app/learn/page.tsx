@@ -2,8 +2,6 @@ import Link from "next/link"
 import {
   Section,
   SectionHeading,
-  CtaGroup,
-  SocialProof,
   FinalCta,
 } from "@/components/sections"
 import { Icon } from "@/components/icons"
@@ -166,7 +164,6 @@ export default function LearnPage() {
         </div>
       </Section>
 
-      <SocialProof mode="compact" />
       <FinalCta
         title="Ready to find your formula?"
         copy="Choose Calm, Focus, or Energy based on the moment you want to support."
