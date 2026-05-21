@@ -101,7 +101,7 @@ export default function BlogPage() {
         .blog-card:hover .blog-card-excerpt { color: rgba(255,255,255,0.65) !important; }
         .blog-card:hover .blog-card-meta { color: rgba(255,255,255,0.45) !important; }
         .blog-card:hover .blog-card-cat { color: ${BLUE} !important; }
-        .blog-card:hover .blog-card-arrow { color: #fff !important; }
+        .blog-card:hover .blog-card-arrow { background-color: #fff !important; color: #000 !important; }
 
         .cat-btn { transition: background-color 0.15s ease, color 0.15s ease; }
         .cat-btn:hover { background-color: #000 !important; color: #fff !important; }
@@ -181,7 +181,9 @@ export default function BlogPage() {
               </div>
               <div style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 20, color: "#fff", border: "2px solid rgba(255,255,255,0.3)", borderRadius: 10, padding: "16px 32px", flexShrink: 0 }}>
                 Read Article
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <span style={{ width: 36, height: 36, borderRadius: 8, backgroundColor: "#fff", color: "#000", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
               </div>
             </div>
           </a>
@@ -223,8 +225,8 @@ export default function BlogPage() {
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 500, fontSize: 16, color: "rgba(0,0,0,0.4)" }}>{post.readTime}</span>
-                  <span className="blog-card-arrow" style={{ color: "#000" }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  <span className="blog-card-arrow" style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: "#000", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                   </span>
                 </div>
               </a>
