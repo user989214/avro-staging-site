@@ -127,7 +127,7 @@ export default function LearnPage() {
               >
                 <h3
                   className="text-[24px] mb-6"
-                  style={{ fontFamily: GC_FAMILY, fontWeight: 800, color: "#87CEEB" }}
+                  style={{ fontFamily: GC_FAMILY, fontWeight: 800, color: "#fff" }}
                 >
                   {group.title}
                 </h3>
