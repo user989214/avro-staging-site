@@ -12,11 +12,6 @@ export function HomeRefHero() {
   return (
     <section style={{ width: "100%", backgroundColor: BLUE, color: "#000" }}>
       <style>{`
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Ultra.woff") format("woff"); font-weight: 950; font-style: normal; font-display: swap; }
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Black.woff") format("woff"); font-weight: 800; font-style: normal; font-display: swap; }
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Bold.woff") format("woff"); font-weight: 700; font-style: normal; font-display: swap; }
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Medium.woff") format("woff"); font-weight: 500; font-style: normal; font-display: swap; }
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Book.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
         .hp-btn-blue { background-color: #87CEEB; color: #000; border: 2.5px solid #87CEEB; transition: background-color 0.18s ease, color 0.18s ease; }
         .hp-btn-blue:hover { background-color: transparent; color: #87CEEB; }
         .hp-btn-outline-white { background-color: transparent; color: #fff; border: 2.5px solid #fff; transition: background-color 0.18s ease, color 0.18s ease; }
