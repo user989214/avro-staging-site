@@ -10,7 +10,7 @@ const BLUE = "#87CEEB"
 // ── HERO ──────────────────────────────────────────────────────────────────────
 export function HomeRefHero() {
   return (
-    <section style={{ width: "100%", backgroundColor: "#000", color: "#fff" }}>
+    <section style={{ width: "100%", backgroundColor: BLUE, color: "#000" }}>
       <style>{`
         @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Ultra.woff") format("woff"); font-weight: 950; font-style: normal; font-display: swap; }
         @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Black.woff") format("woff"); font-weight: 800; font-style: normal; font-display: swap; }
@@ -35,18 +35,18 @@ export function HomeRefHero() {
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", maxWidth: 1440, margin: "0 auto" }}>
         {/* Left */}
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(56px,8vw,112px) clamp(20px,6vw,80px)", gap: 0 }}>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(13px,1vw,16px)", letterSpacing: "0.18em", color: BLUE, marginBottom: 20, textTransform: "uppercase" }}>
+          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(13px,1vw,16px)", letterSpacing: "0.18em", color: "#000", marginBottom: 20, textTransform: "uppercase", opacity: 0.6 }}>
             Calm-first performance
           </p>
-          <h1 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(48px,6.5vw,96px)", lineHeight: 0.96, color: BLUE, marginBottom: 24, maxWidth: 560, letterSpacing: "-0.01em" }}>
+          <h1 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(48px,6.5vw,96px)", lineHeight: 0.96, color: "#000", marginBottom: 24, maxWidth: 560, letterSpacing: "-0.01em" }}>
             Calm.<br />Clear.<br />Ready.
           </h1>
-          <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(17px,1.5vw,21px)", lineHeight: 1.6, color: "rgba(255,255,255,0.70)", maxWidth: 480, marginBottom: 40, letterSpacing: "0.01em" }}>
+          <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(17px,1.5vw,21px)", lineHeight: 1.6, color: "rgba(0,0,0,0.65)", maxWidth: 480, marginBottom: 40, letterSpacing: "0.01em" }}>
             AVRO is a calm-first daily drink mix made with naturally fermented PharmaGABA®, designed to support clarity, composure, and steady energy before the moments that matter.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-            <a href="/shop" className="hp-btn-blue" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 60, padding: "0 40px", borderRadius: 8, textDecoration: "none", letterSpacing: "0.04em" }}>Shop AVRO</a>
-            <a href="/shop" className="hp-btn-outline-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 60, padding: "0 40px", borderRadius: 8, textDecoration: "none", letterSpacing: "0.04em" }}>Find Your Formula</a>
+            <a href="/shop" className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 60, padding: "0 40px", borderRadius: 8, textDecoration: "none", letterSpacing: "0.04em" }}>Shop AVRO</a>
+            <a href="/shop" className="hp-btn-outline-black" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 60, padding: "0 40px", borderRadius: 8, textDecoration: "none", letterSpacing: "0.04em" }}>Find Your Formula</a>
           </div>
         </div>
         {/* Right: image */}
