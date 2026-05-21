@@ -194,7 +194,7 @@ export function HomeProductStrip() {
               href={`/${key}`}
               style={{ display: "grid", gridTemplateRows: "1fr auto", textDecoration: "none", borderLeft: i > 0 ? "2px solid #000" : "none" }}
             >
-              <div style={{ height: 320, overflow: "hidden" }}>
+              <div style={{ height: "clamp(320px, 30vw, 460px)", overflow: "hidden" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={socialImages[key]}
