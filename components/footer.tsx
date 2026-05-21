@@ -78,7 +78,7 @@ export function Footer() {
               </p>
             ) : (
               <form
-                className="flex items-stretch rounded-[8px] border-2 border-white/35 overflow-hidden"
+                className="flex items-stretch rounded-[8px] overflow-hidden"
                 onSubmit={handleSubmit}
               >
                 <label className="sr-only" htmlFor="footer-email">Email address</label>
@@ -103,15 +103,35 @@ export function Footer() {
             )}
           </div>
 
-          {/* Legal */}
-          <small
-            className="text-white/35"
-            style={{ fontFamily: GC, fontWeight: 400, fontSize: "15px", lineHeight: 1.25 }}
-          >
-            * These statements have not been evaluated by the Food and Drug
-            Administration. This product is not intended to diagnose, treat,
-            cure, or prevent any disease.
-          </small>
+          {/* Disclaimer + policy/copyright stacked together */}
+          <div className="flex flex-col gap-2">
+            <small
+              className="text-white/35"
+              style={{ fontFamily: GC, fontWeight: 400, fontSize: "15px", lineHeight: 1.25 }}
+            >
+              * These statements have not been evaluated by the Food and Drug
+              Administration. This product is not intended to diagnose, treat,
+              cure, or prevent any disease.
+            </small>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-1.5 pt-1">
+              <span
+                className="text-white/40"
+                style={{ fontFamily: GC, fontWeight: 400, fontSize: "15px", lineHeight: 1 }}
+              >
+                © 2026 AVRO Life
+              </span>
+              {["Privacy", "Terms", "Accessibility", "Return Policy"].map((label) => (
+                <Link
+                  key={label}
+                  href="/faq"
+                  className="text-white/50 hover:text-white transition-colors"
+                  style={{ fontFamily: GC, fontWeight: 700, fontSize: "15px", lineHeight: 1 }}
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Right: nav columns */}
@@ -123,26 +143,6 @@ export function Footer() {
             <FooterColumn title="Follow" links={footerLinks.follow} />
           </div>
         </div>
-      </div>
-
-      {/* Policy + copyright — left-aligned, tucked up tight before logo */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-14 pb-1 flex flex-wrap items-center gap-x-8 gap-y-2">
-        <span
-          className="text-white/40"
-          style={{ fontFamily: GC, fontWeight: 400, fontSize: "17px", lineHeight: 1 }}
-        >
-          © 2026 AVRO Life
-        </span>
-        {["Privacy", "Terms", "Accessibility", "Return Policy"].map((label) => (
-          <Link
-            key={label}
-            href="/faq"
-            className="text-white/50 hover:text-white transition-colors"
-            style={{ fontFamily: GC, fontWeight: 700, fontSize: "17px", lineHeight: 1 }}
-          >
-            {label}
-          </Link>
-        ))}
       </div>
 
       {/* Large AVRO logo watermark */}
