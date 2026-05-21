@@ -299,7 +299,7 @@ export function FinalCta({
   productButtons?: boolean
 }) {
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-7 items-center w-[min(calc(100%-32px),1320px)] md:w-[min(calc(100%-72px),1320px)] mx-auto my-8 p-[clamp(24px,5vw,44px)] text-white bg-[radial-gradient(circle_at_90%_12%,rgba(255,255,255,0.16),transparent_24%),linear-gradient(135deg,var(--olive),var(--olive-dark))] border border-line rounded-lg">
+    <section className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-7 items-center w-[min(calc(100%-36px),1320px)] mx-auto my-8 p-[clamp(28px,5vw,44px)] text-white bg-[radial-gradient(circle_at_90%_12%,rgba(255,255,255,0.16),transparent_24%),linear-gradient(135deg,var(--olive),var(--olive-dark))] border border-line rounded-lg">
       <div>
         <span className="block mb-3 text-white text-xs font-black tracking-[0.12em] uppercase">
           Choose the formula that fits your moment.
