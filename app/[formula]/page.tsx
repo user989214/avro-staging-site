@@ -7,6 +7,7 @@ import { Icon, type IconName } from "@/components/icons"
 import { FinalCta } from "@/components/sections"
 import { PdpMarquee } from "@/components/pdp-marquee"
 import { ProductComparisonGrid } from "@/components/product-comparison-grid"
+import { PdpSocialScroll } from "@/components/pdp-social-scroll"
 
 const validFormulas = ["calm", "focus", "energy"] as const
 
@@ -121,92 +122,8 @@ export default async function ProductPage({
       {/* Marquee divider */}
       <PdpMarquee text="HSA/FSA Eligible • Naturally Fermented PharmaGABA®" variant="accent" />
 
-      {/* "This is what calm feels like" - Social/Lifestyle Section */}
-      <section className="w-full bg-soft py-[clamp(48px,7vw,96px)] overflow-hidden">
-        <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
-          <h2 className="font-serif font-black text-[clamp(36px,5vw,64px)] leading-[1.0] text-ink mb-10">
-            This is what {key} feels like.
-          </h2>
-          
-          {/* Social image grid - NeuroGum style */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {/* Large image - left */}
-            <div className="col-span-2 row-span-2 relative rounded-2xl overflow-hidden aspect-square md:aspect-auto">
-              <img 
-                src={key === "calm" 
-                  ? "/images/lifestyle/meditation-morning.jpg"
-                  : key === "focus"
-                    ? "/images/lifestyle/work-desk-setup.jpg"
-                    : "/images/lifestyle/golf-course-morning.jpg"
-                }
-                alt={`Person experiencing ${key} with AVRO`}
-                className="w-full h-full object-cover"
-              />
-              {/* Product overlay */}
-              <div className="absolute bottom-4 left-4 bg-white rounded-xl p-3 shadow-lg flex items-center gap-3">
-                <div className="w-12 h-12 bg-avro-blue/20 rounded-lg flex items-center justify-center">
-                  <Icon name={key === "calm" ? "brain" : key === "focus" ? "target" : "zap"} className="w-6 h-6 text-ink" />
-                </div>
-                <div>
-                  <span className="block font-bold text-sm text-ink">AVRO {item.short}</span>
-                  <span className="block text-xs text-ink/60">{item.tagline}</span>
-                </div>
-              </div>
-            </div>
-            
-            {/* Top right images */}
-            <div className="relative rounded-2xl overflow-hidden aspect-square">
-              <img 
-                src={key === "calm"
-                  ? "/images/lifestyle/kitchen-trio-pink-cocktails.jpg"
-                  : key === "focus"
-                    ? "/images/lifestyle/work-meeting.jpg"
-                    : "/images/lifestyle/fitness-gym.jpg"
-                }
-                alt={`${key} lifestyle moment`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="relative rounded-2xl overflow-hidden aspect-square">
-              <img 
-                src={key === "calm"
-                  ? "/images/lifestyle/yoga-studio.jpg"
-                  : key === "focus"
-                    ? "/images/lifestyle/coffee-shop-work.jpg"
-                    : "/images/lifestyle/outdoor-run.jpg"
-                }
-                alt={`${key} lifestyle moment`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            {/* Bottom right images */}
-            <div className="relative rounded-2xl overflow-hidden aspect-square bg-avro-blue flex items-center justify-center">
-              <div className="text-center p-4">
-                <span className="block font-black text-[clamp(28px,4vw,48px)] text-ink leading-none">4.8</span>
-                <div className="flex justify-center gap-0.5 my-2">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Icon key={star} name="star" className="w-4 h-4 text-ink fill-ink" />
-                  ))}
-                </div>
-                <span className="block text-xs font-bold text-ink/70">1,200+ Reviews</span>
-              </div>
-            </div>
-            <div className="relative rounded-2xl overflow-hidden aspect-square">
-              <img 
-                src={key === "calm"
-                  ? "/images/lifestyle/reading-relaxed.jpg"
-                  : key === "focus"
-                    ? "/images/lifestyle/creative-studio.jpg"
-                    : "/images/lifestyle/hiking-trail.jpg"
-                }
-                alt={`${key} lifestyle moment`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* "This is what calm feels like" - Social Scroll Section */}
+      <PdpSocialScroll formulaKey={key} />
 
       {/* The feeling of good calm/focus/energy - NeuroGum style */}
       <section className="w-full bg-white py-[clamp(48px,7vw,96px)]">

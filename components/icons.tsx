@@ -44,6 +44,7 @@ import {
   Pill,
   HeartPulse,
   ArrowRight,
+  ShoppingCart,
   type LucideIcon,
 } from "lucide-react"
 
@@ -112,6 +113,9 @@ export const iconMap = {
   
   // Navigation
   arrowRight: ArrowRight,
+  
+  // Commerce
+  cart: ShoppingCart,
 } satisfies Record<string, LucideIcon>
 
 export type IconName = keyof typeof iconMap
