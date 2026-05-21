@@ -262,7 +262,7 @@ export default function BlogPage() {
 
       {/* ── CTA ── */}
       <section className="cta-section" style={{ backgroundColor: "#fff", padding: "0 clamp(20px,5vw,64px) clamp(32px,5vw,56px)" }}>
-        <div className="cta-inner" style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#87CEEB", borderRadius: 20, padding: "clamp(56px,7vw,88px) clamp(48px,6vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 48 }}>
+        <div className="cta-inner" style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#87CEEB", borderRadius: 20, padding: "clamp(24px,5vw,88px) clamp(20px,4vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
           <div style={{ flex: "1 1 480px", minWidth: 0 }}>
             <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,64px)", lineHeight: 1.0, color: "#000", marginBottom: 16 }}>
               Ready to find your formula?
