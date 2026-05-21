@@ -179,11 +179,9 @@ export default function BlogPage() {
                   {featured.excerpt}
                 </p>
               </div>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 20, color: "#fff", border: "2px solid rgba(255,255,255,0.3)", borderRadius: 10, padding: "16px 32px", flexShrink: 0 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 20, color: "#000", backgroundColor: "#fff", borderRadius: 10, padding: "16px 32px", flexShrink: 0 }}>
                 Read Article
-                <span style={{ width: 36, height: 36, borderRadius: 8, backgroundColor: "#fff", color: "#000", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </div>
             </div>
           </a>
