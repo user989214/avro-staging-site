@@ -48,33 +48,22 @@ export default function LearnPage() {
     <>
       {/* Scoped button hover states for the learn page */}
       <style>{`
-        /* Transitions on all four */
         .learn-btn-blue, .learn-btn-outline-white,
         .learn-btn-black, .learn-btn-outline-black {
-          transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+          transition: background-color 0.18s ease, color 0.18s ease;
         }
-        /* Hero: AVRO blue fill → transparent bg, blue border + text */
-        .learn-btn-blue:hover {
-          background-color: transparent !important;
-          color: #87CEEB !important;
-          border-color: #87CEEB !important;
-        }
-        /* Hero: white outline → white fill, black text */
-        .learn-btn-outline-white:hover {
-          background-color: #fff !important;
-          color: #000 !important;
-        }
-        /* CTA: black fill → white fill, black text (still solid) */
-        .learn-btn-black:hover {
-          background-color: #fff !important;
-          color: #000 !important;
-          border-color: #fff !important;
-        }
-        /* CTA: black outline → black fill, white text */
-        .learn-btn-outline-black:hover {
-          background-color: #000 !important;
-          color: #fff !important;
-        }
+        /* Blue fill: hover → transparent, blue text. border stays #87CEEB via inline */
+        .learn-btn-blue { background-color: #87CEEB; color: #000; border: 2.5px solid #87CEEB; }
+        .learn-btn-blue:hover { background-color: transparent; color: #87CEEB; }
+        /* White outline: hover → white fill, black text */
+        .learn-btn-outline-white { background-color: transparent; color: #fff; border: 2.5px solid #fff; }
+        .learn-btn-outline-white:hover { background-color: #fff; color: #000; }
+        /* Black fill: hover → white fill, black text */
+        .learn-btn-black { background-color: #000; color: #fff; border: 2.5px solid #000; }
+        .learn-btn-black:hover { background-color: #fff; color: #000; }
+        /* Black outline: hover → black fill, white text */
+        .learn-btn-outline-black { background-color: transparent; color: #000; border: 2.5px solid #000; }
+        .learn-btn-outline-black:hover { background-color: #000; color: #fff; }
       `}</style>
 
       {/* Hero — pure black background */}
@@ -99,40 +88,14 @@ export default function LearnPage() {
             <Link
               href="/learn"
               className="learn-btn-blue"
-              style={{
-                fontFamily: GC_FAMILY,
-                fontWeight: 800,
-                fontSize: "22px",
-                backgroundColor: "#87CEEB",
-                color: "#000",
-                border: "2.5px solid transparent",
-                minHeight: "68px",
-                paddingLeft: "48px",
-                paddingRight: "48px",
-                borderRadius: "10px",
-                display: "inline-flex",
-                alignItems: "center",
-              }}
+              style={{ fontFamily: GC_FAMILY, fontWeight: 800, fontSize: "22px", minHeight: "68px", paddingLeft: "48px", paddingRight: "48px", borderRadius: "10px", display: "inline-flex", alignItems: "center" }}
             >
               Read Articles
             </Link>
             <Link
               href="/shop"
               className="learn-btn-outline-white"
-              style={{
-                fontFamily: GC_FAMILY,
-                fontWeight: 800,
-                fontSize: "22px",
-                backgroundColor: "transparent",
-                color: "#fff",
-                border: "2.5px solid #fff",
-                minHeight: "68px",
-                paddingLeft: "48px",
-                paddingRight: "48px",
-                borderRadius: "10px",
-                display: "inline-flex",
-                alignItems: "center",
-              }}
+              style={{ fontFamily: GC_FAMILY, fontWeight: 800, fontSize: "22px", minHeight: "68px", paddingLeft: "48px", paddingRight: "48px", borderRadius: "10px", display: "inline-flex", alignItems: "center" }}
             >
               Shop AVRO
             </Link>
@@ -250,40 +213,14 @@ export default function LearnPage() {
             <Link
               href="/shop"
               className="learn-btn-black"
-              style={{
-                fontFamily: GC_FAMILY,
-                fontWeight: 800,
-                fontSize: "21px",
-                backgroundColor: "#000",
-                color: "#fff",
-                border: "2.5px solid #000",
-                minHeight: "66px",
-                paddingLeft: "46px",
-                paddingRight: "46px",
-                borderRadius: "10px",
-                display: "inline-flex",
-                alignItems: "center",
-              }}
+              style={{ fontFamily: GC_FAMILY, fontWeight: 800, fontSize: "21px", minHeight: "66px", paddingLeft: "46px", paddingRight: "46px", borderRadius: "10px", display: "inline-flex", alignItems: "center" }}
             >
               Shop AVRO
             </Link>
             <Link
               href="/shop"
               className="learn-btn-outline-black"
-              style={{
-                fontFamily: GC_FAMILY,
-                fontWeight: 800,
-                fontSize: "21px",
-                backgroundColor: "transparent",
-                color: "#000",
-                border: "2.5px solid #000",
-                minHeight: "66px",
-                paddingLeft: "46px",
-                paddingRight: "46px",
-                borderRadius: "10px",
-                display: "inline-flex",
-                alignItems: "center",
-              }}
+              style={{ fontFamily: GC_FAMILY, fontWeight: 800, fontSize: "21px", minHeight: "66px", paddingLeft: "46px", paddingRight: "46px", borderRadius: "10px", display: "inline-flex", alignItems: "center" }}
             >
               Find Your Formula
             </Link>
