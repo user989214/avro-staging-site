@@ -6,6 +6,8 @@ export const metadata = {
   description: "Learn how AVRO thinks about calm performance, PharmaGABA®, calm-first energy, and choosing the right formula.",
 }
 
+const GC = '"Gotham Condensed", sans-serif'
+
 const articleGroups = [
   {
     title: "Start Here",
@@ -41,101 +43,102 @@ const articleGroups = [
   },
 ]
 
-const GC_FAMILY = '"Gotham Condensed"'
+const templateItems = [
+  { icon: "search", label: "Clear question headline" },
+  { icon: "card",   label: "Short answer box" },
+  { icon: "shield", label: "Compliance-safe structure-function language" },
+  { icon: "leaf",   label: "Internal links to formulas, science, cohorts, and FAQ" },
+]
 
 export default function LearnPage() {
   return (
-    <>
-      {/* Scoped button hover states for the learn page */}
+    <main>
+      {/* Button hover states */}
       <style>{`
-        .learn-btn-blue, .learn-btn-outline-white,
-        .learn-btn-black, .learn-btn-outline-black {
-          transition: background-color 0.18s ease, color 0.18s ease;
+        @font-face {
+          font-family: "Gotham Condensed";
+          src: url("/fonts/GothamCond-Ultra.woff") format("woff");
+          font-weight: 950; font-style: normal; font-display: swap;
         }
-        /* Blue fill: hover → transparent, blue text. border stays #87CEEB via inline */
-        .learn-btn-blue { background-color: #87CEEB; color: #000; border: 2.5px solid #87CEEB; }
-        .learn-btn-blue:hover { background-color: transparent; color: #87CEEB; }
-        /* White outline: hover → white fill, black text */
-        .learn-btn-outline-white { background-color: transparent; color: #fff; border: 2.5px solid #fff; }
-        .learn-btn-outline-white:hover { background-color: #fff; color: #000; }
-        /* Black fill: hover → transparent, black text (stroke only) */
-        .learn-btn-black { background-color: #000; color: #fff; border: 2.5px solid #000; }
-        .learn-btn-black:hover { background-color: transparent; color: #000; }
-        /* Black outline: hover → black fill, white text */
-        .learn-btn-outline-black { background-color: transparent; color: #000; border: 2.5px solid #000; }
-        .learn-btn-outline-black:hover { background-color: #000; color: #fff; }
+        @font-face {
+          font-family: "Gotham Condensed";
+          src: url("/fonts/GothamCond-Black.woff") format("woff");
+          font-weight: 800; font-style: normal; font-display: swap;
+        }
+        @font-face {
+          font-family: "Gotham Condensed";
+          src: url("/fonts/GothamCond-Bold.woff") format("woff");
+          font-weight: 700; font-style: normal; font-display: swap;
+        }
+        @font-face {
+          font-family: "Gotham Condensed";
+          src: url("/fonts/GothamCond-Medium.woff") format("woff");
+          font-weight: 500; font-style: normal; font-display: swap;
+        }
+        @font-face {
+          font-family: "Gotham Condensed";
+          src: url("/fonts/GothamCond-Book.woff") format("woff");
+          font-weight: 400; font-style: normal; font-display: swap;
+        }
+        .lp-btn { display: inline-flex; align-items: center; justify-content: center; font-family: "Gotham Condensed", sans-serif; font-weight: 800; font-size: 22px; min-height: 68px; padding: 0 48px; border-radius: 10px; text-decoration: none; transition: background-color 0.18s ease, color 0.18s ease; }
+        .lp-btn-sm { font-size: 21px; min-height: 66px; padding: 0 46px; }
+        .lp-btn-blue  { background-color: #87CEEB; color: #000; border: 2.5px solid #87CEEB; }
+        .lp-btn-blue:hover  { background-color: transparent; color: #87CEEB; }
+        .lp-btn-white-outline { background-color: transparent; color: #fff; border: 2.5px solid #fff; }
+        .lp-btn-white-outline:hover { background-color: #fff; color: #000; }
+        .lp-btn-black { background-color: #000; color: #fff; border: 2.5px solid #000; }
+        .lp-btn-black:hover { background-color: transparent; color: #000; }
+        .lp-btn-black-outline { background-color: transparent; color: #000; border: 2.5px solid #000; }
+        .lp-btn-black-outline:hover { background-color: #000; color: #fff; }
+        .lp-article-link:hover { color: #87CEEB !important; }
       `}</style>
 
-      {/* Hero — pure black background */}
-      <section style={{ backgroundColor: "#000", color: "#fff" }} className="w-full">
-        <div className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto py-[clamp(64px,10vw,128px)] flex flex-col items-center text-center">
-          <h1
-            className="text-[clamp(56px,8.5vw,120px)] leading-[0.94] mb-7 text-balance max-w-[900px]"
-            style={{ fontFamily: GC_FAMILY, fontWeight: 950, color: "#fff" }}
-          >
+      {/* ── HERO ── */}
+      <section style={{ backgroundColor: "#000", color: "#fff", width: "100%" }}>
+        <div style={{ maxWidth: 1250, margin: "0 auto", padding: "clamp(64px,10vw,128px) clamp(16px,4vw,64px)", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+          <h1 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(56px,8.5vw,120px)", lineHeight: 0.94, color: "#fff", maxWidth: 900, marginBottom: 28 }}>
             Category ownership, not content noise.
           </h1>
-          <p
-            className="max-w-[680px] text-[clamp(20px,2.2vw,26px)] leading-[1.5] mb-10"
-            style={{ fontFamily: GC_FAMILY, fontWeight: 500, color: "rgba(255,255,255,0.78)" }}
-          >
+          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(20px,2.2vw,26px)", lineHeight: 1.5, color: "rgba(255,255,255,0.78)", maxWidth: 680, marginBottom: 40 }}>
             Learn how AVRO thinks about calm performance, PharmaGABA®,
             calm-first energy, state before pressure moments, and choosing the
             right formula.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            {/* Primary: AVRO blue fill */}
-            <Link
-              href="/learn"
-              className="learn-btn-blue"
-              style={{ fontFamily: GC_FAMILY, fontWeight: 800, fontSize: "22px", minHeight: "68px", paddingLeft: "48px", paddingRight: "48px", borderRadius: "10px", display: "inline-flex", alignItems: "center" }}
-            >
-              Read Articles
-            </Link>
-            <Link
-              href="/shop"
-              className="learn-btn-outline-white"
-              style={{ fontFamily: GC_FAMILY, fontWeight: 800, fontSize: "22px", minHeight: "68px", paddingLeft: "48px", paddingRight: "48px", borderRadius: "10px", display: "inline-flex", alignItems: "center" }}
-            >
-              Shop AVRO
-            </Link>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "center" }}>
+            <Link href="/learn" className="lp-btn lp-btn-blue">Read Articles</Link>
+            <Link href="/shop" className="lp-btn lp-btn-white-outline">Shop AVRO</Link>
           </div>
         </div>
       </section>
 
-      {/* Article groups — pure white */}
-      <section style={{ backgroundColor: "#fff" }} className="w-full py-[clamp(48px,7vw,88px)]">
-        <style>{`.learn-article-link:hover { color: #87CEEB !important; }`}</style>
-        <div className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto">
-          <h2
-            className="text-[clamp(32px,4vw,56px)] leading-[1.02] mb-10"
-            style={{ fontFamily: GC_FAMILY, fontWeight: 800, color: "#000" }}
-          >
+      {/* ── ARTICLE GROUPS ── */}
+      <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(48px,7vw,88px) clamp(16px,4vw,64px)" }}>
+        <div style={{ maxWidth: 1250, margin: "0 auto" }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(32px,4vw,56px)", lineHeight: 1.02, color: "#000", marginBottom: 40 }}>
             Start with 12 strong articles.
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
             {articleGroups.map((group) => (
-              <article
-                key={group.title}
-                style={{ backgroundColor: "#000", color: "#fff", borderRadius: "12px" }}
-                className="p-7"
-              >
-                <h3
-                  className="text-[24px] mb-6"
-                  style={{ fontFamily: GC_FAMILY, fontWeight: 800, color: "#fff" }}
-                >
+              <article key={group.title} style={{ backgroundColor: "#000", borderRadius: 12, padding: 28 }}>
+                <h3 style={{ fontFamily: GC, fontWeight: 800, fontSize: 24, color: "#fff", marginBottom: 24, lineHeight: 1.1 }}>
                   {group.title}
                 </h3>
                 {group.articles.map((article) => (
                   <Link
                     key={article}
                     href="/learn"
-                    className="learn-article-link block py-4 text-[18px] leading-[1.4] transition-colors"
+                    className="lp-article-link"
                     style={{
-                      fontFamily: GC_FAMILY,
+                      display: "block",
+                      fontFamily: GC,
                       fontWeight: 700,
+                      fontSize: 18,
+                      lineHeight: 1.4,
                       color: "rgba(255,255,255,0.82)",
                       borderTop: "1px solid rgba(255,255,255,0.12)",
+                      padding: "16px 0",
+                      textDecoration: "none",
+                      transition: "color 0.15s ease",
                     }}
                   >
                     {article}
@@ -147,42 +150,24 @@ export default function LearnPage() {
         </div>
       </section>
 
-      {/* Template section — AVRO blue accent strip */}
-      <section style={{ backgroundColor: "#fff", borderTop: "1px solid #e8e8e8" }} className="w-full py-[clamp(48px,7vw,88px)]">
-        <div className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-[clamp(32px,6vw,80px)]">
+      {/* ── TEMPLATE SECTION ── */}
+      <section style={{ backgroundColor: "#fff", borderTop: "1px solid #e8e8e8", width: "100%", padding: "clamp(48px,7vw,88px) clamp(16px,4vw,64px)" }}>
+        <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "clamp(32px,6vw,80px)" }}>
           <div>
-            <h2
-              className="text-[clamp(36px,4.5vw,64px)] leading-[1.02] mb-5"
-              style={{ fontFamily: GC_FAMILY, fontWeight: 800, color: "#000" }}
-            >
+            <h2 style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(36px,4.5vw,64px)", lineHeight: 1.02, color: "#000", marginBottom: 20 }}>
               Built for clear answers.
             </h2>
-            <p
-              className="text-[clamp(18px,1.6vw,23px)] leading-[1.55]"
-              style={{ fontFamily: GC_FAMILY, fontWeight: 500, color: "#3a3a3a" }}
-            >
+            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(18px,1.6vw,23px)", lineHeight: 1.55, color: "#3a3a3a" }}>
               Each article should open with a short answer, then explain why it
               matters, how AVRO thinks about it, which formula fits, FAQs,
               sources, and a clear CTA.
             </p>
           </div>
-          <div className="flex flex-col gap-5">
-            {[
-              { icon: "search", label: "Clear question headline" },
-              { icon: "card",   label: "Short answer box" },
-              { icon: "shield", label: "Compliance-safe structure-function language" },
-              { icon: "leaf",   label: "Internal links to formulas, science, cohorts, and FAQ" },
-            ].map(({ icon, label }) => (
-              <div
-                key={label}
-                className="flex items-center gap-4 p-5 rounded-xl"
-                style={{ backgroundColor: "#000" }}
-              >
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            {templateItems.map(({ icon, label }) => (
+              <div key={label} style={{ display: "flex", alignItems: "center", gap: 16, backgroundColor: "#000", borderRadius: 12, padding: "20px 24px" }}>
                 <Icon name={icon as any} className="w-7 h-7 shrink-0 text-white" />
-                <span
-                  className="text-[clamp(17px,1.5vw,21px)]"
-                  style={{ fontFamily: GC_FAMILY, fontWeight: 700, color: "#fff" }}
-                >
+                <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(17px,1.5vw,21px)", color: "#fff" }}>
                   {label}
                 </span>
               </div>
@@ -191,42 +176,21 @@ export default function LearnPage() {
         </div>
       </section>
 
-      {/* Final CTA — AVRO blue rounded box */}
-      <section className="w-full py-[clamp(32px,5vw,56px)] bg-white">
-        <div
-          className="w-[min(calc(100%-32px),1250px)] md:w-[min(calc(100%-72px),1250px)] mx-auto flex flex-col items-center text-center gap-6 py-[clamp(48px,7vw,80px)] px-[clamp(24px,6vw,80px)]"
-          style={{ backgroundColor: "#87CEEB", borderRadius: "16px" }}
-        >
-          <h2
-            className="text-[clamp(36px,5vw,72px)] leading-[1.0] text-balance"
-            style={{ fontFamily: GC_FAMILY, fontWeight: 950, color: "#000" }}
-          >
+      {/* ── FINAL CTA ── */}
+      <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(32px,5vw,56px) clamp(16px,4vw,64px)" }}>
+        <div style={{ maxWidth: 1250, margin: "0 auto", backgroundColor: "#87CEEB", borderRadius: 16, padding: "clamp(48px,7vw,80px) clamp(24px,6vw,80px)", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 24 }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,72px)", lineHeight: 1.0, color: "#000", maxWidth: 700 }}>
             Ready to find your formula?
           </h2>
-          <p
-            className="max-w-[560px] text-[clamp(18px,1.8vw,22px)] leading-[1.45]"
-            style={{ fontFamily: GC_FAMILY, fontWeight: 500, color: "#111" }}
-          >
+          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(18px,1.8vw,22px)", lineHeight: 1.45, color: "#111", maxWidth: 560 }}>
             Choose Calm, Focus, or Energy based on the moment you want to support.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 mt-2">
-            <Link
-              href="/shop"
-              className="learn-btn-black"
-              style={{ fontFamily: GC_FAMILY, fontWeight: 800, fontSize: "21px", minHeight: "66px", paddingLeft: "46px", paddingRight: "46px", borderRadius: "10px", display: "inline-flex", alignItems: "center" }}
-            >
-              Shop AVRO
-            </Link>
-            <Link
-              href="/shop"
-              className="learn-btn-outline-black"
-              style={{ fontFamily: GC_FAMILY, fontWeight: 800, fontSize: "21px", minHeight: "66px", paddingLeft: "46px", paddingRight: "46px", borderRadius: "10px", display: "inline-flex", alignItems: "center" }}
-            >
-              Find Your Formula
-            </Link>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "center", marginTop: 8 }}>
+            <Link href="/shop" className="lp-btn lp-btn-sm lp-btn-black">Shop AVRO</Link>
+            <Link href="/shop" className="lp-btn lp-btn-sm lp-btn-black-outline">Find Your Formula</Link>
           </div>
         </div>
       </section>
-    </>
+    </main>
   )
 }
