@@ -48,18 +48,32 @@ export default function LearnPage() {
     <>
       {/* Scoped button hover states for the learn page */}
       <style>{`
-        /* Hero: blue fill → outline on hover */
-        .learn-btn-blue:hover  { background-color: transparent !important; color: #87CEEB !important; outline: 2.5px solid #87CEEB; }
-        /* Hero: white outline → solid fill on hover */
-        .learn-btn-outline-white:hover { background-color: #fff !important; color: #000 !important; }
-        /* CTA: black fill → white on hover */
-        .learn-btn-black:hover  { background-color: #fff !important; color: #000 !important; }
-        /* CTA: black outline → solid black fill on hover */
-        .learn-btn-outline-black:hover { background-color: #000 !important; color: #fff !important; }
-        /* Transitions */
+        /* Transitions on all four */
         .learn-btn-blue, .learn-btn-outline-white,
         .learn-btn-black, .learn-btn-outline-black {
-          transition: background-color 0.18s ease, color 0.18s ease, outline 0.18s ease;
+          transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+        }
+        /* Hero: AVRO blue fill → transparent bg, blue border + text */
+        .learn-btn-blue:hover {
+          background-color: transparent !important;
+          color: #87CEEB !important;
+          border-color: #87CEEB !important;
+        }
+        /* Hero: white outline → white fill, black text */
+        .learn-btn-outline-white:hover {
+          background-color: #fff !important;
+          color: #000 !important;
+        }
+        /* CTA: black fill → white fill, black text (still solid) */
+        .learn-btn-black:hover {
+          background-color: #fff !important;
+          color: #000 !important;
+          border-color: #fff !important;
+        }
+        /* CTA: black outline → black fill, white text */
+        .learn-btn-outline-black:hover {
+          background-color: #000 !important;
+          color: #fff !important;
         }
       `}</style>
 
