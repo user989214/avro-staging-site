@@ -11,7 +11,7 @@ export function HomeRefHero() {
       <div className="flex flex-col justify-center px-[clamp(20px,7vw,92px)] py-[clamp(36px,7vw,92px)]">
         <h1
           className="max-w-[520px] mb-5 text-[clamp(48px,8vw,94px)] leading-[0.96] tracking-[-0.01em]"
-          style={{ fontFamily: '"Gotham Condensed"', fontWeight: 500 }}
+          style={{ fontFamily: '"Gotham Condensed"', fontWeight: 700 }}
         >
           Calm. Clear. Ready.
         </h1>
@@ -23,14 +23,19 @@ export function HomeRefHero() {
           PharmaGABA®, designed to support clarity, composure, and steady energy
           before the moments that matter.
         </p>
-        <div
-          className="flex flex-wrap items-center gap-3 mt-6"
-          style={{ fontFamily: '"Gotham Condensed"' }}
-        >
-          <Link href="/shop" className="btn-primary">
+        <div className="flex flex-wrap items-center gap-3 mt-6">
+          <Link
+            href="/shop"
+            className="btn-primary"
+            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800 }}
+          >
             Shop AVRO
           </Link>
-          <Link href="/shop" className="btn-secondary">
+          <Link
+            href="/shop"
+            className="btn-secondary"
+            style={{ fontFamily: '"Gotham Condensed"', fontWeight: 800 }}
+          >
             Find Your Formula
           </Link>
         </div>
