@@ -154,7 +154,7 @@ export function HomeLogicRow() {
                       {i === 2 && <><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></>}
                     </svg>
                   </div>
-                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "rgba(255,255,255,0.8)" }}>{label}</span>
+                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 17, color: "rgba(255,255,255,0.88)" }}>{label}</span>
                 </div>
                 {i < 2 && <span key={`arrow-${i}`} style={{ fontFamily: GC, fontWeight: 800, fontSize: 22, color: "rgba(255,255,255,0.35)" }}>→</span>}
               </>
@@ -193,17 +193,17 @@ export function HomeProductStrip() {
             <a
               key={key}
               href={`/${key}`}
-              style={{ display: "grid", gridTemplateRows: "1fr auto", textDecoration: "none", borderLeft: i > 0 ? "2px solid #000" : "none", minHeight: 440 }}
+              style={{ display: "grid", gridTemplateRows: "1fr auto", textDecoration: "none", borderLeft: i > 0 ? "2px solid #000" : "none", minHeight: 480 }}
             >
-              <div style={{ padding: "clamp(16px,3vw,32px)", minHeight: 360 }}>
+              <div style={{ padding: "clamp(24px,4vw,48px) clamp(16px,3vw,32px)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <ProductVisual
                   keys={[key]}
-                  size="medium"
+                  size="large"
                   flavorIds={{ [key]: stripFlavor[key] } as Partial<Record<FormulaKey, string>>}
                 />
               </div>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "16px 20px", borderTop: "2px solid #000", backgroundColor: "#000" }}>
-                <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 16, color: "#fff", textAlign: "center" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "20px 24px", borderTop: "2px solid #000", backgroundColor: "#000" }}>
+                <span style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(16px,1.4vw,20px)", color: "#fff", textAlign: "center" }}>
                   PharmaGABA® + {formulaAdditions[key]}
                 </span>
               </div>
