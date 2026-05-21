@@ -91,8 +91,8 @@ export function Footer() {
                 />
                 <button
                   type="submit"
-                  className="flex items-center gap-1 px-5 py-3 text-black bg-white border-0 cursor-pointer hover:opacity-85 transition-opacity"
-                  style={{ fontFamily: GC, fontWeight: 800, fontSize: "17px" }}
+                  className="flex items-center gap-1 px-5 py-3 text-black bg-white cursor-pointer hover:opacity-85 transition-opacity"
+                  style={{ fontFamily: GC, fontWeight: 800, fontSize: "21px", border: "none", outline: "none" }}
                   aria-label="Subscribe"
                 >
                   Join <ChevronRight className="w-4 h-4 shrink-0" />
