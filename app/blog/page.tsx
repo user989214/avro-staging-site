@@ -114,20 +114,25 @@ export default function BlogPage() {
         @media (max-width: 640px) {
           .blog-grid { grid-template-columns: 1fr !important; }
           .featured-inner { flex-direction: column !important; align-items: flex-start !important; }
-          .feat-read-btn { align-self: flex-start; margin-top: 8px; }
-          .cta-inner { flex-direction: column !important; padding: 40px 28px !important; }
-          .cta-btns { width: 100%; }
-          .cta-btns a { flex: 1 1 100%; justify-content: center; }
+          .feat-read-btn { align-self: flex-start !important; margin-top: 16px !important; }
+          .cta-inner { flex-direction: column !important; padding: 36px 24px !important; gap: 28px !important; border-radius: 14px !important; }
+          .cta-btns { width: 100% !important; flex-direction: column !important; }
+          .cta-btns a { width: 100% !important; box-sizing: border-box !important; }
+          .hero-section { padding: 48px 20px 40px !important; }
+          .featured-section { padding: 36px 20px !important; }
+          .grid-section { padding: 0 20px 56px !important; }
+          .cta-section { padding: 0 20px 48px !important; }
+          .featured-card-inner { padding: 28px 24px !important; }
         }
       `}</style>
 
       {/* ── HERO HEADER ── */}
-      <section style={{ backgroundColor: "#000", padding: "clamp(56px,8vw,104px) clamp(16px,5vw,80px) clamp(48px,6vw,80px)" }}>
+      <section className="hero-section" style={{ backgroundColor: "#000", padding: "clamp(56px,8vw,104px) clamp(20px,5vw,80px) clamp(48px,6vw,80px)" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <h1 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(56px,9vw,120px)", lineHeight: 0.95, color: "#fff", marginBottom: 20, maxWidth: 900 }}>
             Calm. Clear. Informed.
           </h1>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(20px,2vw,26px)", lineHeight: 1.4, color: "rgba(255,255,255,0.65)", maxWidth: 600 }}>
+          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(20px,2vw,26px)", lineHeight: 1.4, color: "rgba(255,255,255,0.85)", maxWidth: 600 }}>
             Science, lifestyle, and formula guidance for people who perform better when they are calm.
           </p>
 
@@ -157,7 +162,7 @@ export default function BlogPage() {
       </section>
 
       {/* ── FEATURED POST ── */}
-      <section style={{ backgroundColor: "#fff", padding: "clamp(40px,6vw,72px) clamp(16px,5vw,80px)" }}>
+      <section className="featured-section" style={{ backgroundColor: "#fff", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,80px)" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "rgba(0,0,0,0.4)", marginBottom: 20 }}>
             Featured
@@ -169,7 +174,7 @@ export default function BlogPage() {
               display: "block",
               backgroundColor: "#000",
               borderRadius: 16,
-              padding: "clamp(40px,5vw,64px) clamp(32px,5vw,72px)",
+              padding: "clamp(40px,5vw,64px) clamp(24px,5vw,72px)",
               textDecoration: "none",
             }}
           >
@@ -178,14 +183,14 @@ export default function BlogPage() {
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
                   <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: BLUE }}>{featured.category}</span>
                   <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.3)" }} />
-                  <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.4)" }}>{featured.date}</span>
-                  <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.3)" }} />
-                  <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.4)" }}>{featured.readTime}</span>
+                  <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.65)" }}>{featured.date}</span>
+                  <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.4)" }} />
+                  <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.65)" }}>{featured.readTime}</span>
                 </div>
                 <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,4vw,52px)", lineHeight: 1.0, color: "#fff", marginBottom: 20, maxWidth: 700 }}>
                   {featured.title}
                 </h2>
-                <p className="feat-excerpt" style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(19px,1.8vw,23px)", lineHeight: 1.45, color: "rgba(255,255,255,0.65)", maxWidth: 620 }}>
+                <p className="feat-excerpt" style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(19px,1.8vw,23px)", lineHeight: 1.45, color: "rgba(255,255,255,0.82)", maxWidth: 620 }}>
                   {featured.excerpt}
                 </p>
               </div>
@@ -199,7 +204,7 @@ export default function BlogPage() {
       </section>
 
       {/* ── POST GRID ── */}
-      <section style={{ backgroundColor: "#fff", padding: "0 clamp(16px,5vw,80px) clamp(64px,8vw,104px)" }}>
+      <section className="grid-section" style={{ backgroundColor: "#fff", padding: "0 clamp(20px,5vw,80px) clamp(64px,8vw,104px)" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <div className="blog-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(340px, 100%), 1fr))", gap: 20 }}>
             {posts.map((post) => (
@@ -222,17 +227,17 @@ export default function BlogPage() {
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
                     <span className="blog-card-cat" style={{ fontFamily: GC, fontWeight: 800, fontSize: 18, color: "#000" }}>{post.category}</span>
                     <span style={{ width: 3, height: 3, borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.25)" }} />
-                    <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, color: "rgba(0,0,0,0.4)" }}>{post.date}</span>
+                    <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, color: "rgba(0,0,0,0.55)" }}>{post.date}</span>
                   </div>
                   <h3 className="blog-card-title" style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(22px,2.2vw,29px)", lineHeight: 1.05, color: "#000", marginBottom: 14 }}>
                     {post.title}
                   </h3>
-                  <p className="blog-card-excerpt" style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, lineHeight: 1.45, color: "rgba(0,0,0,0.6)" }}>
+                  <p className="blog-card-excerpt" style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, lineHeight: 1.45, color: "rgba(0,0,0,0.75)" }}>
                     {post.excerpt}
                   </p>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 500, fontSize: 18, color: "rgba(0,0,0,0.4)" }}>{post.readTime}</span>
+                  <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 500, fontSize: 18, color: "rgba(0,0,0,0.55)" }}>{post.readTime}</span>
                   <span className="blog-card-arrow" style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: "#000", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                   </span>
@@ -251,7 +256,7 @@ export default function BlogPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={{ backgroundColor: "#fff", padding: "0 clamp(16px,5vw,80px) clamp(48px,7vw,88px)" }}>
+      <section className="cta-section" style={{ backgroundColor: "#fff", padding: "0 clamp(20px,5vw,80px) clamp(48px,7vw,88px)" }}>
         <div className="cta-inner" style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#000", borderRadius: 20, padding: "clamp(56px,7vw,88px) clamp(48px,6vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 48 }}>
           <div style={{ flex: "1 1 480px", minWidth: 280 }}>
             <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 19, color: "rgba(255,255,255,0.55)", marginBottom: 16, display: "block" }}>
@@ -260,7 +265,7 @@ export default function BlogPage() {
             <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,64px)", lineHeight: 1.0, color: "#fff", marginBottom: 16 }}>
               Ready to find your formula?
             </h2>
-            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.4, color: "rgba(255,255,255,0.65)", maxWidth: 480 }}>
+            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.4, color: "rgba(255,255,255,0.82)", maxWidth: 480 }}>
               Choose Calm, Focus, or Energy based on the moment you want to support.
             </p>
           </div>
