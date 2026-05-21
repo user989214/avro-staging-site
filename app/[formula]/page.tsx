@@ -31,22 +31,25 @@ const benefits: Record<FormulaKey, { icon: IconName; label: string }[]> = {
   ],
 }
 
-// "The feeling of good calm/focus/energy" section benefit cards
-const feelingBenefits: Record<FormulaKey, { icon: IconName; title: string; subtitle: string }[]> = {
+// "The feeling of good calm/focus/energy" section benefit cards - 4 icons like NeuroGum
+const feelingBenefits: Record<FormulaKey, { icon: IconName; title: string }[]> = {
   calm: [
-    { icon: "brain", title: "Supports Calm & Clarity", subtitle: "Without drowsiness" },
-    { icon: "shield", title: "Helps Reduce Stress", subtitle: "Natural relaxation" },
-    { icon: "flask", title: "Clinically-Studied", subtitle: "PharmaGABA® inside" },
+    { icon: "brain", title: "Improved Clarity & Composure" },
+    { icon: "smile", title: "Calm, Balanced Mood" },
+    { icon: "target", title: "Sharper Decision Making" },
+    { icon: "zap", title: "Steady, Sustained Calm" },
   ],
   focus: [
-    { icon: "target", title: "Supports Focus & Attention", subtitle: "Stay sharp longer" },
-    { icon: "brain", title: "Helps Reduce Mental Fatigue", subtitle: "Clear thinking" },
-    { icon: "flask", title: "Clinically-Studied", subtitle: "Cognigrape® inside" },
+    { icon: "brain", title: "Improved Cognition & Alertness" },
+    { icon: "smile", title: "Calm, Balanced Mood" },
+    { icon: "target", title: "Sharper Focus" },
+    { icon: "zap", title: "Clean, Sustained Energy" },
   ],
   energy: [
-    { icon: "zap", title: "Supports Steady Energy", subtitle: "No jitters or crash" },
-    { icon: "brain", title: "Helps Maintain Focus", subtitle: "Stay alert longer" },
-    { icon: "flask", title: "Clinically-Studied", subtitle: "PharmaGABA® inside" },
+    { icon: "brain", title: "Improved Cognition & Alertness" },
+    { icon: "smile", title: "Calm, Balanced Mood" },
+    { icon: "target", title: "Sharper Focus" },
+    { icon: "zap", title: "Clean, Sustained Energy" },
   ],
 }
 
@@ -118,6 +121,93 @@ export default async function ProductPage({
       {/* Marquee divider */}
       <PdpMarquee text="HSA/FSA Eligible • Naturally Fermented PharmaGABA®" variant="accent" />
 
+      {/* "This is what calm feels like" - Social/Lifestyle Section */}
+      <section className="w-full bg-soft py-[clamp(48px,7vw,96px)] overflow-hidden">
+        <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
+          <h2 className="font-serif font-black text-[clamp(36px,5vw,64px)] leading-[1.0] text-ink mb-10">
+            This is what {key} feels like.
+          </h2>
+          
+          {/* Social image grid - NeuroGum style */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {/* Large image - left */}
+            <div className="col-span-2 row-span-2 relative rounded-2xl overflow-hidden aspect-square md:aspect-auto">
+              <img 
+                src={key === "calm" 
+                  ? "/images/lifestyle/meditation-morning.jpg"
+                  : key === "focus"
+                    ? "/images/lifestyle/work-desk-setup.jpg"
+                    : "/images/lifestyle/golf-course-morning.jpg"
+                }
+                alt={`Person experiencing ${key} with AVRO`}
+                className="w-full h-full object-cover"
+              />
+              {/* Product overlay */}
+              <div className="absolute bottom-4 left-4 bg-white rounded-xl p-3 shadow-lg flex items-center gap-3">
+                <div className="w-12 h-12 bg-avro-blue/20 rounded-lg flex items-center justify-center">
+                  <Icon name={key === "calm" ? "brain" : key === "focus" ? "target" : "zap"} className="w-6 h-6 text-ink" />
+                </div>
+                <div>
+                  <span className="block font-bold text-sm text-ink">AVRO {item.short}</span>
+                  <span className="block text-xs text-ink/60">{item.tagline}</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Top right images */}
+            <div className="relative rounded-2xl overflow-hidden aspect-square">
+              <img 
+                src={key === "calm"
+                  ? "/images/lifestyle/kitchen-trio-pink-cocktails.jpg"
+                  : key === "focus"
+                    ? "/images/lifestyle/work-meeting.jpg"
+                    : "/images/lifestyle/fitness-gym.jpg"
+                }
+                alt={`${key} lifestyle moment`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="relative rounded-2xl overflow-hidden aspect-square">
+              <img 
+                src={key === "calm"
+                  ? "/images/lifestyle/yoga-studio.jpg"
+                  : key === "focus"
+                    ? "/images/lifestyle/coffee-shop-work.jpg"
+                    : "/images/lifestyle/outdoor-run.jpg"
+                }
+                alt={`${key} lifestyle moment`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            
+            {/* Bottom right images */}
+            <div className="relative rounded-2xl overflow-hidden aspect-square bg-avro-blue flex items-center justify-center">
+              <div className="text-center p-4">
+                <span className="block font-black text-[clamp(28px,4vw,48px)] text-ink leading-none">4.8</span>
+                <div className="flex justify-center gap-0.5 my-2">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Icon key={star} name="star" className="w-4 h-4 text-ink fill-ink" />
+                  ))}
+                </div>
+                <span className="block text-xs font-bold text-ink/70">1,200+ Reviews</span>
+              </div>
+            </div>
+            <div className="relative rounded-2xl overflow-hidden aspect-square">
+              <img 
+                src={key === "calm"
+                  ? "/images/lifestyle/reading-relaxed.jpg"
+                  : key === "focus"
+                    ? "/images/lifestyle/creative-studio.jpg"
+                    : "/images/lifestyle/hiking-trail.jpg"
+                }
+                alt={`${key} lifestyle moment`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* The feeling of good calm/focus/energy - NeuroGum style */}
       <section className="w-full bg-white py-[clamp(48px,7vw,96px)]">
         <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
@@ -126,20 +216,17 @@ export default async function ProductPage({
             The feeling of good {key}.
           </h2>
           
-          {/* Benefit cards - 3 across */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          {/* Benefit icons - 4 across like NeuroGum */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
             {feelingBenefits[key].map((benefit) => (
               <div 
                 key={benefit.title}
-                className="flex items-center gap-4 p-5 bg-soft rounded-xl border border-line"
+                className="flex flex-col items-center text-center gap-3"
               >
-                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-avro-blue/20">
-                  <Icon name={benefit.icon} className="w-7 h-7 text-ink" />
+                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-avro-blue/20">
+                  <Icon name={benefit.icon} className="w-8 h-8 text-ink" />
                 </div>
-                <div>
-                  <h3 className="font-bold text-ink text-base">{benefit.title}</h3>
-                  <p className="text-ink/60 text-sm">{benefit.subtitle}</p>
-                </div>
+                <h3 className="font-bold text-ink text-sm leading-tight">{benefit.title}</h3>
               </div>
             ))}
           </div>
