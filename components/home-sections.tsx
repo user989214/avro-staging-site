@@ -537,16 +537,16 @@ export function HomeRitualSection() {
   ]
 
   return (
-    <section style={{ backgroundColor: "#f8f8f8", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
+    <section style={{ backgroundColor: BLUE, width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32 }}>
+        <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--charcoal)", marginBottom: 32 }}>
           How to use AVRO.
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))", gap: 16 }}>
           {steps.map((step) => (
-            <div key={step.num} style={{ backgroundColor: "var(--base)", borderRadius: 24, padding: "clamp(24px,3vw,36px)", display: "flex", gap: 20, alignItems: "flex-start", border: "1px solid rgba(0,0,0,0.08)" }}>
-              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 48, lineHeight: 1.0, color: BLUE, flexShrink: 0 }}>{step.num}</span>
-              <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(18px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(0,0,0,0.7)", margin: 0, paddingTop: 6 }}>{step.text}</p>
+            <div key={step.num} style={{ backgroundColor: "var(--base)", borderRadius: 24, padding: "clamp(24px,3vw,36px)", display: "flex", gap: 20, alignItems: "flex-start", border: "1px solid rgba(28,27,20,0.08)" }}>
+              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 48, lineHeight: 1.0, color: "var(--charcoal)", flexShrink: 0 }}>{step.num}</span>
+              <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(18px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(28,27,20,0.7)", margin: 0, paddingTop: 6 }}>{step.text}</p>
             </div>
           ))}
         </div>
