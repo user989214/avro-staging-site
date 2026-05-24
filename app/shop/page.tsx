@@ -59,19 +59,19 @@ export default function ShopPage() {
             `}</style>
             <Link
               href="/calm"
-              className="btn-formula-calm inline-flex items-center justify-center min-h-[52px] min-w-[180px] px-12 rounded-full font-bold text-[15px] transition-all duration-200"
+              className="btn-formula-calm inline-flex items-center justify-center min-h-[56px] min-w-[200px] px-14 rounded-full font-bold text-[16px] transition-all duration-200"
             >
               Shop Calm
             </Link>
             <Link
               href="/focus"
-              className="btn-formula-focus inline-flex items-center justify-center min-h-[52px] min-w-[180px] px-12 rounded-full font-bold text-[15px] transition-all duration-200"
+              className="btn-formula-focus inline-flex items-center justify-center min-h-[56px] min-w-[200px] px-14 rounded-full font-bold text-[16px] transition-all duration-200"
             >
               Shop Focus
             </Link>
             <Link
               href="/energy"
-              className="btn-formula-energy inline-flex items-center justify-center min-h-[52px] min-w-[180px] px-12 rounded-full font-bold text-[15px] transition-all duration-200"
+              className="btn-formula-energy inline-flex items-center justify-center min-h-[56px] min-w-[200px] px-14 rounded-full font-bold text-[16px] transition-all duration-200"
             >
               Shop Energy
             </Link>
@@ -212,7 +212,7 @@ export default function ShopPage() {
               <div className="min-h-[80px] p-4 flex items-center justify-center" style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}>
                 <Link
                   href="/calm"
-                  className="compare-btn inline-flex items-center justify-center px-8 py-2.5 rounded-full font-bold text-[14px] transition-all duration-200"
+                  className="compare-btn inline-flex items-center justify-center min-w-[160px] px-10 py-3 rounded-full font-bold text-[15px] transition-all duration-200"
                 >
                   Shop Calm
                 </Link>
@@ -220,7 +220,7 @@ export default function ShopPage() {
               <div className="min-h-[80px] p-4 flex items-center justify-center" style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}>
                 <Link
                   href="/focus"
-                  className="compare-btn inline-flex items-center justify-center px-8 py-2.5 rounded-full font-bold text-[14px] transition-all duration-200"
+                  className="compare-btn inline-flex items-center justify-center min-w-[160px] px-10 py-3 rounded-full font-bold text-[15px] transition-all duration-200"
                 >
                   Shop Focus
                 </Link>
@@ -228,7 +228,7 @@ export default function ShopPage() {
               <div className="min-h-[80px] p-4 flex items-center justify-center" style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}>
                 <Link
                   href="/energy"
-                  className="compare-btn inline-flex items-center justify-center px-8 py-2.5 rounded-full font-bold text-[14px] transition-all duration-200"
+                  className="compare-btn inline-flex items-center justify-center min-w-[160px] px-10 py-3 rounded-full font-bold text-[15px] transition-all duration-200"
                 >
                   Shop Energy
                 </Link>
