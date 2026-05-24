@@ -139,7 +139,7 @@ export default function ShopPage() {
                 className="min-h-[72px] p-5 flex items-center justify-center"
                 style={{ backgroundColor: "var(--energy)" }}
               >
-                <span style={{ fontFamily: '"DM Sans"', fontWeight: 700, fontSize: 20, color: "var(--charcoal)" }}>
+                <span style={{ fontFamily: '"DM Sans"', fontWeight: 700, fontSize: 20, color: "var(--bone)" }}>
                   Energy
                 </span>
               </div>
