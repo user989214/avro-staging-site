@@ -50,11 +50,11 @@ export default function ShopPage() {
               .btn-formula-energy {
                 border: 2px solid var(--energy);
                 background-color: var(--energy);
-                color: var(--ink);
+                color: var(--charcoal);
               }
               .btn-formula-energy:hover {
                 background-color: transparent;
-                color: var(--ink);
+                color: var(--energy);
               }
             `}</style>
             <Link
