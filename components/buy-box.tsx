@@ -179,7 +179,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
           borderRadius: 999,
           backgroundColor: "var(--charcoal)",
           color: "var(--bone)",
-          border: "2.5px solid #000",
+          border: "2.5px solid var(--charcoal)",
           letterSpacing: "0.01em",
         }}
         onMouseEnter={(e) => {

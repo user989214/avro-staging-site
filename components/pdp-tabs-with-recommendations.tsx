@@ -319,7 +319,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                         borderRadius: 999,
                         backgroundColor: "var(--charcoal)",
                         color: "var(--bone)",
-                        border: "2px solid #000",
+                        border: "2px solid var(--charcoal)",
                       }}
                     >
                       Add to cart — ${oneTimePrice}

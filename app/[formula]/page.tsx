@@ -186,9 +186,9 @@ export default async function ProductPage({
                   minHeight: 56,
                   padding: "0 32px",
                   borderRadius: 999,
-                  backgroundColor: "#000",
-                  color: "#fff",
-                  border: "2.5px solid #000",
+                  backgroundColor: "var(--charcoal)",
+                  color: "var(--bone)",
+                  border: "2.5px solid var(--charcoal)",
                 }}
               >
                 Learn how it works

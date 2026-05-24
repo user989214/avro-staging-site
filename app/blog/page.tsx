@@ -253,7 +253,7 @@ export default function BlogPage() {
 
           {/* Load more */}
           <div style={{ display: "flex", justifyContent: "center", marginTop: 56 }}>
-            <button style={{ fontFamily: GC, fontWeight: 700, fontSize: 21, padding: "18px 56px", borderRadius: 24, backgroundColor: "#000", color: "#fff", border: "2.5px solid #000", cursor: "pointer" }}>
+            <button style={{ fontFamily: GC, fontWeight: 700, fontSize: 21, padding: "18px 56px", borderRadius: 24, backgroundColor: "var(--charcoal)", color: "var(--bone)", border: "2.5px solid var(--charcoal)", cursor: "pointer" }}>
               Load More Articles
             </button>
           </div>
@@ -276,7 +276,7 @@ export default function BlogPage() {
               <a
                 key={label}
                 href={href}
-                style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}
+                style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none", backgroundColor: "var(--charcoal)", color: "var(--bone)", border: "2.5px solid var(--charcoal)" }}
               >
                 {label}
               </a>

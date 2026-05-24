@@ -129,7 +129,7 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                       borderRadius: 999,
                       backgroundColor: "var(--charcoal)",
                       color: "var(--bone)",
-                      border: "2px solid #000",
+                      border: "2px solid var(--charcoal)",
                     }}
                   >
                     Add to cart — ${item.bundlePrice.toFixed(2)}

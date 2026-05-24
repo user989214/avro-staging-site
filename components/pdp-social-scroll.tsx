@@ -144,7 +144,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
                     
                     <button
                       className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 transition-all"
-                      style={{ backgroundColor: BLUE, border: "2.5px solid #000" }}
+                      style={{ backgroundColor: BLUE, border: `2.5px solid ${BLUE}` }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = "transparent"
                       }}
@@ -152,7 +152,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
                         e.currentTarget.style.backgroundColor = BLUE
                       }}
                     >
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--charcoal)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
                       </svg>
@@ -169,7 +169,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
               onClick={handlePrev}
               disabled={isTransitioning}
               className="w-12 h-12 rounded-full flex items-center justify-center transition-all disabled:opacity-50"
-              style={{ backgroundColor: "var(--charcoal)", border: "2.5px solid #000" }}
+                    style={{ backgroundColor: "var(--charcoal)", border: "2.5px solid var(--charcoal)" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "transparent"
                 const svg = e.currentTarget.querySelector("svg")
@@ -212,7 +212,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
               onClick={handleNext}
               disabled={isTransitioning}
               className="w-12 h-12 rounded-full flex items-center justify-center transition-all disabled:opacity-50"
-              style={{ backgroundColor: "var(--charcoal)", border: "2.5px solid #000" }}
+                    style={{ backgroundColor: "var(--charcoal)", border: "2.5px solid var(--charcoal)" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "transparent"
                 const svg = e.currentTarget.querySelector("svg")
