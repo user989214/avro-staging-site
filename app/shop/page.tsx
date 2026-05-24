@@ -59,31 +59,19 @@ export default function ShopPage() {
             `}</style>
             <Link
               href="/calm"
-              className="btn-formula-calm inline-flex items-center justify-center min-h-[52px] px-10 rounded-full font-bold text-[15px] transition-all duration-200"
+              className="btn-formula-calm inline-flex items-center justify-center min-h-[52px] min-w-[180px] px-12 rounded-full font-bold text-[15px] transition-all duration-200"
             >
               Shop Calm
             </Link>
             <Link
               href="/focus"
-              className="btn-formula-focus inline-flex items-center justify-center min-h-[52px] px-10 rounded-full font-bold text-[15px] transition-all duration-200"
+              className="btn-formula-focus inline-flex items-center justify-center min-h-[52px] min-w-[180px] px-12 rounded-full font-bold text-[15px] transition-all duration-200"
             >
               Shop Focus
             </Link>
             <Link
               href="/energy"
-              className="btn-formula-energy inline-flex items-center justify-center min-h-[52px] px-10 rounded-full font-bold text-[15px] transition-all duration-200"
-            >
-              Shop Energy
-            </Link>
-            <Link
-              href="/focus"
-              className="btn-formula-focus inline-flex items-center justify-center min-h-[52px] px-7 rounded-full font-bold text-[15px] transition-all duration-200"
-            >
-              Shop Focus
-            </Link>
-            <Link
-              href="/energy"
-              className="btn-formula-energy inline-flex items-center justify-center min-h-[52px] px-7 rounded-full font-bold text-[15px] transition-all duration-200"
+              className="btn-formula-energy inline-flex items-center justify-center min-h-[52px] min-w-[180px] px-12 rounded-full font-bold text-[15px] transition-all duration-200"
             >
               Shop Energy
             </Link>
