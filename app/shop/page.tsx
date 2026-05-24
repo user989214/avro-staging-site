@@ -59,19 +59,19 @@ export default function ShopPage() {
             `}</style>
             <Link
               href="/calm"
-              className="btn-formula-calm inline-flex items-center justify-center min-h-[60px] px-10 rounded-full font-bold text-[18px] transition-all duration-200"
+              className="btn-formula-calm inline-flex items-center justify-center min-h-[52px] px-8 rounded-full font-bold text-[16px] transition-all duration-200"
             >
               Shop Calm
             </Link>
             <Link
               href="/focus"
-              className="btn-formula-focus inline-flex items-center justify-center min-h-[60px] px-10 rounded-full font-bold text-[18px] transition-all duration-200"
+              className="btn-formula-focus inline-flex items-center justify-center min-h-[52px] px-8 rounded-full font-bold text-[16px] transition-all duration-200"
             >
               Shop Focus
             </Link>
             <Link
               href="/energy"
-              className="btn-formula-energy inline-flex items-center justify-center min-h-[60px] px-10 rounded-full font-bold text-[18px] transition-all duration-200"
+              className="btn-formula-energy inline-flex items-center justify-center min-h-[52px] px-8 rounded-full font-bold text-[16px] transition-all duration-200"
             >
               Shop Energy
             </Link>
