@@ -91,56 +91,144 @@ export default function ShopPage() {
 
       <ProductCards title="Three formulas. One foundation." shopLabel="Shop" />
 
-      {/* Compare Table */}
-      <Section>
-        <SectionHeading title="Compare at a glance" />
-        <div className="grid grid-cols-1 sm:grid-cols-4 border border-line rounded-2xl overflow-hidden bg-base">
-          <div className="min-h-[56px] p-4 border-b border-line" />
-          <strong className="min-h-[56px] p-4 text-center border-b border-l border-line">
-            Calm
-          </strong>
-          <strong className="min-h-[56px] p-4 text-center border-b border-l border-line">
-            Focus
-          </strong>
-          <strong className="min-h-[56px] p-4 text-center border-b border-l border-line">
-            Energy
-          </strong>
+      {/* Compare Table - Redesigned */}
+      <section className="w-full py-[clamp(48px,6vw,80px)]" style={{ backgroundColor: "var(--avro-blue)" }}>
+        <div className="w-full max-w-[1280px] mx-auto px-[clamp(18px,5vw,64px)]">
+          <h2
+            className="text-center mb-10"
+            style={{
+              fontFamily: '"DM Sans", system-ui, sans-serif',
+              fontWeight: 700,
+              fontSize: "clamp(32px,4.5vw,52px)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.02em",
+              color: "var(--charcoal)",
+            }}
+          >
+            Compare at a glance
+          </h2>
 
-          <span className="min-h-[56px] p-4 font-black bg-soft border-b border-line">
-            Primary state
-          </span>
-          <p className="min-h-[56px] p-4 border-b border-l border-line">Composure</p>
-          <p className="min-h-[56px] p-4 border-b border-l border-line">Clear focus</p>
-          <p className="min-h-[56px] p-4 border-b border-l border-line">Steady energy</p>
+          <div
+            className="overflow-hidden"
+            style={{
+              backgroundColor: "var(--base)",
+              borderRadius: 24,
+              boxShadow: "0 8px 40px -12px rgba(0,0,0,0.12)",
+            }}
+          >
+            {/* Header row with colored backgrounds */}
+            <div className="grid grid-cols-1 sm:grid-cols-4">
+              <div className="min-h-[72px] p-5 flex items-center" style={{ backgroundColor: "var(--base-light)" }} />
+              <div
+                className="min-h-[72px] p-5 flex items-center justify-center"
+                style={{ backgroundColor: "var(--calm)" }}
+              >
+                <span style={{ fontFamily: '"DM Sans"', fontWeight: 700, fontSize: 20, color: "var(--bone)" }}>
+                  Calm
+                </span>
+              </div>
+              <div
+                className="min-h-[72px] p-5 flex items-center justify-center"
+                style={{ backgroundColor: "var(--focus)" }}
+              >
+                <span style={{ fontFamily: '"DM Sans"', fontWeight: 700, fontSize: 20, color: "var(--bone)" }}>
+                  Focus
+                </span>
+              </div>
+              <div
+                className="min-h-[72px] p-5 flex items-center justify-center"
+                style={{ backgroundColor: "var(--energy)" }}
+              >
+                <span style={{ fontFamily: '"DM Sans"', fontWeight: 700, fontSize: 20, color: "var(--charcoal)" }}>
+                  Energy
+                </span>
+              </div>
+            </div>
 
-          <span className="min-h-[56px] p-4 font-black bg-soft border-b border-line">
-            Best for
-          </span>
-          <p className="min-h-[56px] p-4 border-b border-l border-line">
-            Travel, social calm, daily reset
-          </p>
-          <p className="min-h-[56px] p-4 border-b border-l border-line">
-            Deep work, meetings, study
-          </p>
-          <p className="min-h-[56px] p-4 border-b border-l border-line">
-            Mornings, long days, travel
-          </p>
+            {/* Data rows */}
+            {[
+              { label: "Primary state", calm: "Composure", focus: "Clear focus", energy: "Steady energy" },
+              { label: "Best for", calm: "Travel, social calm, daily reset", focus: "Deep work, meetings, study", energy: "Mornings, long days, travel" },
+              { label: "Caffeine", calm: "No", focus: "No", energy: "Yes, 120 mg natural" },
+              { label: "Key addition", calm: "Magnesium Bisglycinate", focus: "Cognigrape®", energy: "Natural caffeine" },
+            ].map((row, i, arr) => (
+              <div
+                key={row.label}
+                className="grid grid-cols-1 sm:grid-cols-4"
+                style={{ borderTop: "1px solid rgba(28,27,20,0.08)" }}
+              >
+                <div
+                  className="min-h-[64px] p-5 flex items-center"
+                  style={{ backgroundColor: "var(--base-light)" }}
+                >
+                  <span style={{ fontFamily: '"DM Sans"', fontWeight: 700, fontSize: 15, color: "var(--charcoal)" }}>
+                    {row.label}
+                  </span>
+                </div>
+                <div
+                  className="min-h-[64px] p-5 flex items-center justify-center text-center"
+                  style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}
+                >
+                  <span style={{ fontFamily: '"DM Sans"', fontWeight: 500, fontSize: 15, color: "var(--ink)" }}>
+                    {row.calm}
+                  </span>
+                </div>
+                <div
+                  className="min-h-[64px] p-5 flex items-center justify-center text-center"
+                  style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}
+                >
+                  <span style={{ fontFamily: '"DM Sans"', fontWeight: 500, fontSize: 15, color: "var(--ink)" }}>
+                    {row.focus}
+                  </span>
+                </div>
+                <div
+                  className="min-h-[64px] p-5 flex items-center justify-center text-center"
+                  style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}
+                >
+                  <span style={{ fontFamily: '"DM Sans"', fontWeight: 500, fontSize: 15, color: "var(--ink)" }}>
+                    {row.energy}
+                  </span>
+                </div>
+              </div>
+            ))}
 
-          <span className="min-h-[56px] p-4 font-black bg-soft border-b border-line">
-            Caffeine
-          </span>
-          <p className="min-h-[56px] p-4 border-b border-l border-line">No</p>
-          <p className="min-h-[56px] p-4 border-b border-l border-line">No</p>
-          <p className="min-h-[56px] p-4 border-b border-l border-line">
-            Yes, 120 mg natural caffeine
-          </p>
-
-          <span className="min-h-[56px] p-4 font-black bg-soft">Key addition</span>
-          <p className="min-h-[56px] p-4 border-l border-line">Magnesium Bisglycinate</p>
-          <p className="min-h-[56px] p-4 border-l border-line">Cognigrape®</p>
-          <p className="min-h-[56px] p-4 border-l border-line">Natural caffeine</p>
+            {/* CTA row */}
+            <div
+              className="grid grid-cols-1 sm:grid-cols-4"
+              style={{ borderTop: "1px solid rgba(28,27,20,0.08)" }}
+            >
+              <div className="min-h-[80px] p-5 flex items-center" style={{ backgroundColor: "var(--base-light)" }} />
+              <div className="min-h-[80px] p-4 flex items-center justify-center" style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}>
+                <Link
+                  href="/calm"
+                  className="inline-flex items-center justify-center px-5 py-2.5 rounded-full font-bold text-[14px] transition-all duration-200"
+                  style={{ backgroundColor: "var(--calm)", color: "var(--bone)", border: "2px solid var(--calm)" }}
+                >
+                  Shop Calm
+                </Link>
+              </div>
+              <div className="min-h-[80px] p-4 flex items-center justify-center" style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}>
+                <Link
+                  href="/focus"
+                  className="inline-flex items-center justify-center px-5 py-2.5 rounded-full font-bold text-[14px] transition-all duration-200"
+                  style={{ backgroundColor: "var(--focus)", color: "var(--bone)", border: "2px solid var(--focus)" }}
+                >
+                  Shop Focus
+                </Link>
+              </div>
+              <div className="min-h-[80px] p-4 flex items-center justify-center" style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}>
+                <Link
+                  href="/energy"
+                  className="inline-flex items-center justify-center px-5 py-2.5 rounded-full font-bold text-[14px] transition-all duration-200"
+                  style={{ backgroundColor: "var(--energy)", color: "var(--bone)", border: "2px solid var(--energy)" }}
+                >
+                  Shop Energy
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-      </Section>
+      </section>
 
       <SocialProof mode="compact" />
 
