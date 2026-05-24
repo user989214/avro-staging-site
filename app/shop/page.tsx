@@ -32,7 +32,7 @@ export default function ShopPage() {
               .btn-formula-calm {
                 border: 2px solid var(--calm);
                 background-color: var(--calm);
-                color: var(--bone);
+                color: var(--calm-deep);
               }
               .btn-formula-calm:hover {
                 background-color: transparent;
@@ -41,7 +41,7 @@ export default function ShopPage() {
               .btn-formula-focus {
                 border: 2px solid var(--focus);
                 background-color: var(--focus);
-                color: var(--bone);
+                color: var(--focus-deep);
               }
               .btn-formula-focus:hover {
                 background-color: transparent;
@@ -50,7 +50,7 @@ export default function ShopPage() {
               .btn-formula-energy {
                 border: 2px solid var(--energy);
                 background-color: var(--energy);
-                color: var(--bone);
+                color: var(--energy-deep);
               }
               .btn-formula-energy:hover {
                 background-color: transparent;
