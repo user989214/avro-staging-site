@@ -83,17 +83,17 @@ export function SocialProof({ mode = "full" }: { mode?: "full" | "compact" }) {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32 }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32 }}>
           Trusted for calm-first routines.
         </h2>
         {mode === "full" && (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 16 }}>
             {testimonials.map((item) => (
-              <article key={item.name} style={{ backgroundColor: "var(--base-light)", borderRadius: 999, padding: "clamp(24px,3vw,36px)" }}>
+              <article key={item.name} style={{ backgroundColor: "var(--base-light)", borderRadius: 24, padding: "clamp(24px,3vw,36px)" }}>
                 <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(18px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(0,0,0,0.75)", marginBottom: 16 }}>
                   &ldquo;{item.quote}&rdquo;
                 </p>
-                <strong style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "var(--ink)", display: "block" }}>{item.name}</strong>
+                <strong style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 18, color: "var(--ink)", display: "block" }}>{item.name}</strong>
                 <span style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: 15, color: "rgba(0,0,0,0.55)", display: "block", marginTop: 4 }}>{item.role}</span>
               </article>
             ))}
@@ -114,33 +114,33 @@ export function ProductCards({
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 12 }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 12 }}>
           {title}
         </h2>
-        <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(17px,1.5vw,21px)", lineHeight: 1.4, color: "rgba(0,0,0,0.6)", marginBottom: 32 }}>
+        <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(15px,1.2vw,18px)", lineHeight: 1.4, color: "rgba(0,0,0,0.6)", marginBottom: 32 }}>
           Every AVRO formula starts with the same calm-first base, then supports the moment in a different way.
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 16 }}>
           {(Object.keys(formulas) as FormulaKey[]).map((key) => {
             const item = formulas[key]
             return (
-              <article key={key} style={{ backgroundColor: "var(--base-light)", borderRadius: 999, padding: "clamp(20px,3vw,32px)", display: "flex", flexDirection: "column", gap: 16 }}>
-                <div style={{ borderRadius: 999, border: "2px solid rgba(0,0,0,0.1)", height: 380, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: "var(--base)" }}>
+              <article key={key} style={{ backgroundColor: "var(--base-light)", borderRadius: 24, padding: "clamp(20px,3vw,32px)", display: "flex", flexDirection: "column", gap: 16 }}>
+                <div style={{ borderRadius: 24, border: "2px solid rgba(0,0,0,0.1)", height: 380, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: "var(--base)" }}>
                   <ProductCard formulaKey={key} className="h-full w-full object-cover" />
                 </div>
-                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: "clamp(22px,2vw,28px)", color: "var(--ink)", margin: 0 }}>{item.name}</h3>
+                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(22px,2vw,28px)", color: "var(--ink)", margin: 0 }}>{item.name}</h3>
                 <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(17px,1.4vw,19px)", lineHeight: 1.45, color: "rgba(0,0,0,0.6)", margin: 0 }}>{item.support}</p>
                 <div style={{ borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "var(--ink)" }}>Best for</span>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 18, color: "var(--ink)" }}>Best for</span>
                     <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(0,0,0,0.6)", margin: "4px 0 0" }}>{item.bestFor}</p>
                   </div>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "var(--ink)" }}>Caffeine</span>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 18, color: "var(--ink)" }}>Caffeine</span>
                     <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(0,0,0,0.6)", margin: "4px 0 0" }}>{item.caffeine}</p>
                   </div>
                 </div>
-                <a href={`/${key}`} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC_FINAL, fontWeight: 800, fontSize: 20, minHeight: 60, borderRadius: 999, textDecoration: "none", backgroundColor: "var(--charcoal)", color: "var(--bone)", marginTop: "auto" }}>
+                <a href={`/${key}`} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC_FINAL, fontWeight: 700, fontSize: 20, minHeight: 60, borderRadius: 999, textDecoration: "none", backgroundColor: "var(--charcoal)", color: "var(--bone)", marginTop: "auto" }}>
                   {shopLabel} {item.short}
                 </a>
               </article>

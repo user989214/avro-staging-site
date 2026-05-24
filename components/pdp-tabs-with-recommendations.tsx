@@ -104,7 +104,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
               <h3
                 style={{
                   fontFamily: GC,
-                  fontWeight: 950,
+                  fontWeight: 700,
                   fontSize: "clamp(28px,2.5vw,36px)",
                   lineHeight: 1.0,
                   color: "var(--ink)",
@@ -120,7 +120,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                     className="flex items-start gap-3"
                     style={{ fontFamily: GC, fontWeight: 500, fontSize: 18, lineHeight: 1.35, color: "rgba(0,0,0,0.7)" }}
                   >
-                    <span style={{ color: "var(--ink)", fontWeight: 800, fontSize: 20, lineHeight: 1 }}>+</span>
+                    <span style={{ color: "var(--ink)", fontWeight: 700, fontSize: 20, lineHeight: 1 }}>+</span>
                     <span>{bullet}</span>
                   </li>
                 ))}
@@ -133,7 +133,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
               <h3
                 style={{
                   fontFamily: GC,
-                  fontWeight: 950,
+                  fontWeight: 700,
                   fontSize: "clamp(32px,3vw,42px)",
                   lineHeight: 1.0,
                   color: "var(--ink)",
@@ -170,7 +170,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
               <h3
                 style={{
                   fontFamily: GC,
-                  fontWeight: 950,
+                  fontWeight: 700,
                   fontSize: "clamp(32px,3vw,42px)",
                   lineHeight: 1.0,
                   color: "var(--ink)",
@@ -186,7 +186,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   { title: "Afternoon reset", body: "Combat the midday slump without caffeine." },
                 ].map((item) => (
                   <div key={item.title}>
-                    <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, color: "var(--ink)", display: "block", marginBottom: 6 }}>
+                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 21, color: "var(--ink)", display: "block", marginBottom: 6 }}>
                       {item.title}
                     </span>
                     <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 19, lineHeight: 1.4, color: "rgba(0,0,0,0.6)" }}>
@@ -203,7 +203,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
               <h3
                 style={{
                   fontFamily: GC,
-                  fontWeight: 950,
+                  fontWeight: 700,
                   fontSize: "clamp(32px,3vw,42px)",
                   lineHeight: 1.0,
                   color: "var(--ink)",
@@ -219,11 +219,11 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   { n: 3, title: "Drink", body: "Enjoy 20-30 minutes before your moment." },
                 ].map((step) => (
                   <div key={step.n} className="flex items-start gap-5">
-                    <span style={{ fontFamily: GC, fontWeight: 950, fontSize: 56, lineHeight: 1, color: "var(--ink)" }}>
+                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 56, lineHeight: 1, color: "var(--ink)" }}>
                       {step.n}
                     </span>
                     <div>
-                      <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, color: "var(--ink)", display: "block", marginBottom: 6 }}>
+                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 21, color: "var(--ink)", display: "block", marginBottom: 6 }}>
                         {step.title}
                       </span>
                       <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 19, lineHeight: 1.4, color: "rgba(0,0,0,0.6)" }}>
@@ -244,7 +244,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
           className="mb-6"
           style={{
             fontFamily: GC,
-            fontWeight: 800,
+            fontWeight: 700,
             fontSize: 24,
             color: "var(--ink)",
           }}
@@ -263,7 +263,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
               <div
                 key={formulaKey}
                 className="flex flex-col bg-white"
-                style={{ borderRadius: 999, overflow: "hidden", border: "2px solid rgba(0,0,0,0.12)" }}
+                style={{ borderRadius: 24, overflow: "hidden", border: "2px solid rgba(0,0,0,0.12)" }}
               >
                 <div
                   className="aspect-square flex items-center justify-center overflow-hidden"
@@ -282,7 +282,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                     <span
                       style={{
                         fontFamily: GC,
-                        fontWeight: 950,
+                        fontWeight: 700,
                         fontSize: 26,
                         lineHeight: 1.05,
                         color: "var(--ink)",
@@ -312,7 +312,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                       className="flex items-center justify-center transition-colors hover:bg-transparent hover:text-black"
                       style={{
                         fontFamily: GC,
-                        fontWeight: 800,
+                        fontWeight: 700,
                         fontSize: 17,
                         minHeight: 52,
                         padding: "0 16px",

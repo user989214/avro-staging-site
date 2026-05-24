@@ -67,7 +67,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
           <h2
             style={{
               fontFamily: GC,
-              fontWeight: 950,
+              fontWeight: 700,
               fontSize: "clamp(28px,4vw,52px)",
               lineHeight: 1.0,
               color: "var(--ink)",
@@ -94,7 +94,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
             <div
               key={ingredient.name}
               className="flex flex-col overflow-hidden"
-              style={{ borderRadius: 999, border: "1.5px solid rgba(0,0,0,0.1)" }}
+              style={{ borderRadius: 24, border: "1.5px solid rgba(0,0,0,0.1)" }}
             >
               {/* Image */}
               <div className="relative h-[180px] overflow-hidden" style={{ backgroundColor: "#f2f2f2" }}>
@@ -111,7 +111,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
                     backgroundColor: "var(--charcoal)",
                     color: "var(--bone)",
                     fontFamily: GC,
-                    fontWeight: 800,
+                    fontWeight: 700,
                     fontSize: 14,
                   }}
                 >
@@ -124,7 +124,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
                 <h3
                   style={{
                     fontFamily: GC,
-                    fontWeight: 950,
+                    fontWeight: 700,
                     fontSize: 22,
                     lineHeight: 1.1,
                     color: "var(--ink)",
@@ -154,7 +154,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
           <a
             href="/science"
             className="inline-flex items-center gap-2 hover:underline"
-            style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: "var(--ink)" }}
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: 17, color: "var(--ink)" }}
           >
             See full ingredient list
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

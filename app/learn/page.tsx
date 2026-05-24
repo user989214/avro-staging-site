@@ -81,7 +81,7 @@ export default function LearnPage() {
       {/* ── HERO ── */}
       <section style={{ backgroundColor: "#000", color: "#fff", width: "100%" }}>
         <div style={{ maxWidth: 1250, margin: "0 auto", padding: "clamp(64px,10vw,128px) clamp(16px,4vw,64px)", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-          <h1 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(56px,8.5vw,120px)", lineHeight: 0.94, color: "#fff", maxWidth: 900, marginBottom: 28 }}>
+          <h1 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(56px,8.5vw,120px)", lineHeight: 0.94, color: "#fff", maxWidth: 900, marginBottom: 28 }}>
             Category ownership, not content noise.
           </h1>
           <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(20px,2.2vw,26px)", lineHeight: 1.5, color: "rgba(255,255,255,0.78)", maxWidth: 680, marginBottom: 40 }}>
@@ -90,8 +90,8 @@ export default function LearnPage() {
             right formula.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "center" }}>
-            <a href="/learn" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 22, minHeight: 68, padding: "0 48px", borderRadius: 999, textDecoration: "none", backgroundColor: "#94C6D4", color: "#000", border: "2.5px solid #94C6D4" }}>Read Articles</a>
-            <a href="/shop" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 22, minHeight: 68, padding: "0 48px", borderRadius: 999, textDecoration: "none", backgroundColor: "transparent", color: "#fff", border: "2.5px solid #fff" }}>Shop AVRO</a>
+            <a href="/learn" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 22, minHeight: 68, padding: "0 48px", borderRadius: 999, textDecoration: "none", backgroundColor: "#94C6D4", color: "#000", border: "2.5px solid #94C6D4" }}>Read Articles</a>
+            <a href="/shop" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 22, minHeight: 68, padding: "0 48px", borderRadius: 999, textDecoration: "none", backgroundColor: "transparent", color: "#fff", border: "2.5px solid #fff" }}>Shop AVRO</a>
           </div>
         </div>
       </section>
@@ -99,13 +99,13 @@ export default function LearnPage() {
       {/* ── ARTICLE GROUPS ── */}
       <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(48px,7vw,88px) clamp(16px,4vw,64px)" }}>
         <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(32px,4vw,56px)", lineHeight: 1.02, color: "#000", marginBottom: 40 }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(32px,4vw,56px)", lineHeight: 1.02, color: "#000", marginBottom: 40 }}>
             Start with 12 strong articles.
           </h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
             {articleGroups.map((group) => (
-              <article key={group.title} style={{ backgroundColor: "#000", borderRadius: 999, padding: 28 }}>
-                <h3 style={{ fontFamily: GC, fontWeight: 800, fontSize: 24, color: "#fff", marginBottom: 24, lineHeight: 1.1 }}>
+              <article key={group.title} style={{ backgroundColor: "#000", borderRadius: 24, padding: 28 }}>
+                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: 24, color: "#fff", marginBottom: 24, lineHeight: 1.1 }}>
                   {group.title}
                 </h3>
                 {group.articles.map((article) => (
@@ -137,7 +137,7 @@ export default function LearnPage() {
       <section style={{ backgroundColor: "#fff", borderTop: "1px solid #e8e8e8", width: "100%", padding: "clamp(48px,7vw,88px) clamp(16px,4vw,64px)" }}>
         <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "clamp(32px,6vw,80px)" }}>
           <div>
-            <h2 style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(36px,4.5vw,64px)", lineHeight: 1.02, color: "#000", marginBottom: 20 }}>
+            <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(36px,4.5vw,64px)", lineHeight: 1.02, color: "#000", marginBottom: 20 }}>
               Built for clear answers.
             </h2>
             <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(18px,1.6vw,23px)", lineHeight: 1.55, color: "#3a3a3a" }}>
@@ -148,7 +148,7 @@ export default function LearnPage() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {templateItems.map(({ svg, label }) => (
-              <div key={label} style={{ display: "flex", alignItems: "center", gap: 16, backgroundColor: "#000", borderRadius: 999, padding: "20px 24px" }}>
+              <div key={label} style={{ display: "flex", alignItems: "center", gap: 16, backgroundColor: "#000", borderRadius: 24, padding: "20px 24px" }}>
                 <span style={{ flexShrink: 0 }}>{svg}</span>
                 <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(17px,1.5vw,21px)", color: "#fff" }}>
                   {label}
@@ -167,7 +167,7 @@ export default function LearnPage() {
             <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "rgba(255,255,255,0.6)", marginBottom: 16, display: "block" }}>
               Choose the formula that fits your moment.
             </span>
-            <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(40px,5.5vw,72px)", lineHeight: 1.0, color: "#fff", marginBottom: 20 }}>
+            <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(40px,5.5vw,72px)", lineHeight: 1.0, color: "#fff", marginBottom: 20 }}>
               Ready to find your formula?
             </h2>
             <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(19px,1.8vw,24px)", lineHeight: 1.4, color: "rgba(255,255,255,0.75)", maxWidth: 540 }}>
@@ -176,9 +176,9 @@ export default function LearnPage() {
           </div>
           {/* Right: buttons */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-            <a href="/shop/calm" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none" }}>Shop Calm</a>
-            <a href="/shop/focus" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none" }}>Shop Focus</a>
-            <a href="/shop/energy" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none" }}>Shop Energy</a>
+            <a href="/shop/calm" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none" }}>Shop Calm</a>
+            <a href="/shop/focus" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none" }}>Shop Focus</a>
+            <a href="/shop/energy" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none" }}>Shop Energy</a>
           </div>
         </div>
       </section>

@@ -131,7 +131,7 @@ export default function BlogPage() {
       {/* ── HERO HEADER ── */}
       <section className="hero-section" style={{ backgroundColor: "#000", padding: "clamp(56px,8vw,104px) clamp(20px,5vw,80px) clamp(48px,6vw,80px)" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <h1 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(56px,9vw,120px)", lineHeight: 0.95, color: "#fff", marginBottom: 20, maxWidth: 900 }}>
+          <h1 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(56px,9vw,120px)", lineHeight: 0.95, color: "#fff", marginBottom: 20, maxWidth: 900 }}>
             Calm. Clear. Informed.
           </h1>
           <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(20px,2vw,26px)", lineHeight: 1.4, color: "rgba(255,255,255,0.85)", maxWidth: 600 }}>
@@ -146,10 +146,10 @@ export default function BlogPage() {
                 className="cat-btn"
                 style={{
                   fontFamily: GC,
-                  fontWeight: 800,
+                  fontWeight: 700,
                   fontSize: 18,
                   padding: "10px 24px",
-                  borderRadius: 999,
+                  borderRadius: 24,
                   border: "2px solid rgba(255,255,255,0.25)",
                   backgroundColor: i === 0 ? "#fff" : "transparent",
                   color: i === 0 ? "#000" : "rgba(255,255,255,0.7)",
@@ -186,20 +186,20 @@ export default function BlogPage() {
             <div className="featured-inner" style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
               <div style={{ flex: "1 1 300px", minWidth: 0 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
-                  <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: BLUE }}>{featured.category}</span>
+                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 17, color: BLUE }}>{featured.category}</span>
                   <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.3)" }} />
                   <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.65)" }}>{featured.date}</span>
                   <span style={{ width: 4, height: 4, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.4)" }} />
                   <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, color: "rgba(255,255,255,0.65)" }}>{featured.readTime}</span>
                 </div>
-                <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,4vw,52px)", lineHeight: 1.0, color: "#fff", marginBottom: 20, maxWidth: "100%" }}>
+                <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,4vw,52px)", lineHeight: 1.0, color: "#fff", marginBottom: 20, maxWidth: "100%" }}>
                   {featured.title}
                 </h2>
                 <p className="feat-excerpt" style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(19px,1.8vw,23px)", lineHeight: 1.45, color: "rgba(255,255,255,0.82)", maxWidth: "100%" }}>
                   {featured.excerpt}
                 </p>
               </div>
-              <div className="feat-read-btn" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 20, color: "#000", backgroundColor: "#fff", borderRadius: 999, padding: "16px 32px", flexShrink: 0 }}>
+              <div className="feat-read-btn" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 700, fontSize: 20, color: "#000", backgroundColor: "#fff", borderRadius: 24, padding: "16px 32px", flexShrink: 0 }}>
                 Read Article
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </div>
@@ -230,11 +230,11 @@ export default function BlogPage() {
               >
                 <div>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-                    <span className="blog-card-cat" style={{ fontFamily: GC, fontWeight: 800, fontSize: 18, color: "#000" }}>{post.category}</span>
+                    <span className="blog-card-cat" style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#000" }}>{post.category}</span>
                     <span style={{ width: 3, height: 3, borderRadius: "50%", backgroundColor: "rgba(0,0,0,0.25)" }} />
                     <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, color: "rgba(0,0,0,0.55)" }}>{post.date}</span>
                   </div>
-                  <h3 className="blog-card-title" style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(22px,2.2vw,29px)", lineHeight: 1.05, color: "#000", marginBottom: 14 }}>
+                  <h3 className="blog-card-title" style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2.2vw,29px)", lineHeight: 1.05, color: "#000", marginBottom: 14 }}>
                     {post.title}
                   </h3>
                   <p className="blog-card-excerpt" style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, lineHeight: 1.45, color: "rgba(0,0,0,0.75)" }}>
@@ -243,7 +243,7 @@ export default function BlogPage() {
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 500, fontSize: 18, color: "rgba(0,0,0,0.55)" }}>{post.readTime}</span>
-                  <span className="blog-card-arrow" style={{ width: 40, height: 40, borderRadius: 999, backgroundColor: "#000", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <span className="blog-card-arrow" style={{ width: 40, height: 40, borderRadius: 24, backgroundColor: "#000", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                   </span>
                 </div>
@@ -253,7 +253,7 @@ export default function BlogPage() {
 
           {/* Load more */}
           <div style={{ display: "flex", justifyContent: "center", marginTop: 56 }}>
-            <button style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, padding: "18px 56px", borderRadius: 999, backgroundColor: "#000", color: "#fff", border: "2.5px solid #000", cursor: "pointer" }}>
+            <button style={{ fontFamily: GC, fontWeight: 700, fontSize: 21, padding: "18px 56px", borderRadius: 24, backgroundColor: "#000", color: "#fff", border: "2.5px solid #000", cursor: "pointer" }}>
               Load More Articles
             </button>
           </div>
@@ -264,7 +264,7 @@ export default function BlogPage() {
       <section className="cta-section" style={{ backgroundColor: "#fff", padding: "0 clamp(20px,5vw,64px) clamp(32px,5vw,56px)" }}>
         <div className="cta-inner" style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#94C6D4", borderRadius: 20, padding: "clamp(24px,5vw,88px) clamp(20px,4vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
           <div style={{ flex: "1 1 480px", minWidth: 0 }}>
-            <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,64px)", lineHeight: 1.0, color: "#000", marginBottom: 16 }}>
+            <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(36px,5vw,64px)", lineHeight: 1.0, color: "#000", marginBottom: 16 }}>
               Ready to find your formula?
             </h2>
             <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.4, color: "rgba(0,0,0,0.75)" }}>
@@ -276,7 +276,7 @@ export default function BlogPage() {
               <a
                 key={label}
                 href={href}
-                style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}
+                style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}
               >
                 {label}
               </a>

@@ -67,7 +67,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
         <h1
           style={{
             fontFamily: GC,
-            fontWeight: 950,
+            fontWeight: 700,
             fontSize: "clamp(40px,4.5vw,60px)",
             lineHeight: 0.96,
             color: "var(--ink)",
@@ -127,7 +127,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
         <h2
           style={{
             fontFamily: GC,
-            fontWeight: 800,
+            fontWeight: 700,
             fontSize: 19,
             color: "var(--ink)",
           }}
@@ -143,13 +143,13 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             aria-label="Decrease quantity"
             className="w-12 h-12 flex items-center justify-center transition-colors hover:bg-black/5"
-            style={{ fontFamily: GC, fontWeight: 800, fontSize: 22 }}
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: 22 }}
           >
             −
           </button>
           <span
             className="w-12 text-center"
-            style={{ fontFamily: GC, fontWeight: 800, fontSize: 19 }}
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: 19 }}
           >
             {quantity}
           </span>
@@ -158,7 +158,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
             onClick={() => setQuantity((q) => q + 1)}
             aria-label="Increase quantity"
             className="w-12 h-12 flex items-center justify-center transition-colors hover:bg-black/5"
-            style={{ fontFamily: GC, fontWeight: 800, fontSize: 22 }}
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: 22 }}
           >
             +
           </button>
@@ -172,7 +172,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
         className="w-full flex items-center justify-center transition-colors"
         style={{
           fontFamily: GC,
-          fontWeight: 800,
+          fontWeight: 700,
           fontSize: 21,
           minHeight: 66,
           padding: "0 36px",
@@ -202,7 +202,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
             className="w-full flex items-center justify-center gap-2 transition-colors"
             style={{
               fontFamily: GC,
-              fontWeight: 800,
+              fontWeight: 700,
               fontSize: 17,
               minHeight: 56,
               padding: "0 28px",
@@ -225,7 +225,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
         <DialogContent className="max-w-[440px] p-0 bg-white">
           <div className="p-6 pb-2">
             <DialogHeader>
-              <DialogTitle style={{ fontFamily: GC, fontWeight: 950, fontSize: 32, color: "var(--ink)" }}>
+              <DialogTitle style={{ fontFamily: GC, fontWeight: 700, fontSize: 32, color: "var(--ink)" }}>
                 Supplement facts
               </DialogTitle>
             </DialogHeader>
@@ -300,7 +300,7 @@ function PurchaseOption({
     <label
       className="relative flex items-start gap-3 p-5 cursor-pointer transition-all"
       style={{
-        borderRadius: 999,
+        borderRadius: 24,
         backgroundColor: checked ? "#000" : LIGHT_GRAY,
         color: checked ? "#fff" : "#000",
         fontFamily: GC,
@@ -316,8 +316,8 @@ function PurchaseOption({
       />
       <div className="flex-1">
         <div className="flex items-center justify-between gap-3">
-          <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: 18 }}>{title}</strong>
-          <strong style={{ fontFamily: GC, fontWeight: 950, fontSize: 18, whiteSpace: "nowrap" }}>
+          <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: 18 }}>{title}</strong>
+          <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, whiteSpace: "nowrap" }}>
             {price}
           </strong>
         </div>
@@ -338,7 +338,7 @@ function PurchaseOption({
           className="absolute -top-3 left-4 px-3 py-1"
           style={{
             fontFamily: GC,
-            fontWeight: 800,
+            fontWeight: 700,
             fontSize: 12,
             backgroundColor: "var(--charcoal)",
             color: "var(--bone)",

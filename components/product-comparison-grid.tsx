@@ -43,7 +43,7 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
           <h2
             style={{
               fontFamily: GC,
-              fontWeight: 950,
+              fontWeight: 700,
               fontSize: "clamp(28px,4vw,52px)",
               lineHeight: 1.0,
               color: "var(--ink)",
@@ -90,7 +90,7 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                         backgroundColor: "var(--charcoal)",
                         color: "var(--bone)",
                         fontFamily: GC,
-                        fontWeight: 800,
+                        fontWeight: 700,
                         fontSize: 13,
                       }}
                     >
@@ -101,7 +101,7 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
 
                 {/* Product info */}
                 <div className="flex-1 p-4">
-                  <h3 style={{ fontFamily: GC, fontWeight: 950, fontSize: 26, lineHeight: 1.05, color: "var(--ink)", marginBottom: 6 }}>
+                  <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: 26, lineHeight: 1.05, color: "var(--ink)", marginBottom: 6 }}>
                     {item.name}
                   </h3>
                   <p style={{ fontFamily: GC, fontWeight: 500, fontSize: 16, color: "rgba(0,0,0,0.6)", marginBottom: 14 }}>
@@ -122,7 +122,7 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                     className="w-full flex items-center justify-center transition-colors hover:bg-transparent hover:text-black"
                     style={{
                       fontFamily: GC,
-                      fontWeight: 800,
+                      fontWeight: 700,
                       fontSize: 16,
                       minHeight: 48,
                       padding: "0 16px",
@@ -163,7 +163,7 @@ function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex justify-between items-baseline gap-3">
       <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 17, color: "rgba(0,0,0,0.55)" }}>{label}</span>
-      <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: "var(--ink)", textAlign: "right", maxWidth: 180 }}>
+      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 17, color: "var(--ink)", textAlign: "right", maxWidth: 180 }}>
         {value}
       </span>
     </div>

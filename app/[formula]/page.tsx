@@ -102,7 +102,7 @@ export default async function ProductPage({
             className="text-center mb-8"
             style={{
               fontFamily: GC,
-              fontWeight: 950,
+              fontWeight: 700,
               fontSize: "clamp(28px,4vw,52px)",
               lineHeight: 1.0,
               color: "#000",
@@ -117,7 +117,7 @@ export default async function ProductPage({
               <div
                 key={benefit.title}
                 className="flex flex-col items-center text-center gap-3 p-5 bg-white"
-                style={{ borderRadius: 999, border: "1.5px solid rgba(0,0,0,0.12)" }}
+                style={{ borderRadius: 24, border: "1.5px solid rgba(0,0,0,0.12)" }}
               >
                 <div
                   className="flex items-center justify-center w-12 h-12 rounded-full"
@@ -128,7 +128,7 @@ export default async function ProductPage({
                 <h3
                   style={{
                     fontFamily: GC,
-                    fontWeight: 800,
+                    fontWeight: 700,
                     fontSize: 17,
                     lineHeight: 1.15,
                     color: "#000",
@@ -181,7 +181,7 @@ export default async function ProductPage({
                 className="inline-flex items-center gap-3 transition-colors hover:bg-transparent hover:text-black"
                 style={{
                   fontFamily: GC,
-                  fontWeight: 800,
+                  fontWeight: 700,
                   fontSize: 18,
                   minHeight: 56,
                   padding: "0 32px",
@@ -260,7 +260,7 @@ export default async function ProductPage({
                 >
                   <div className="flex items-center gap-2">
                     <div className="w-6 h-1 rounded-full" style={{ backgroundColor: BLUE }} />
-                    <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 12, color: "#000" }}>
+                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 12, color: "#000" }}>
                       AVRO {item.short}
                     </span>
                   </div>
@@ -292,7 +292,7 @@ export default async function ProductPage({
             className="mb-3"
             style={{
               fontFamily: GC,
-              fontWeight: 950,
+              fontWeight: 700,
               fontSize: "clamp(26px,3.5vw,44px)",
               lineHeight: 1.05,
               color: "#000",
@@ -317,7 +317,7 @@ export default async function ProductPage({
             className="inline-flex items-center gap-2 transition-colors hover:bg-transparent hover:text-black"
             style={{
               fontFamily: GC,
-              fontWeight: 800,
+              fontWeight: 700,
               fontSize: 17,
               minHeight: 52,
               padding: "0 28px",
@@ -340,7 +340,7 @@ export default async function ProductPage({
             <h2
               style={{
                 fontFamily: GC,
-                fontWeight: 950,
+                fontWeight: 700,
                 fontSize: "clamp(26px,3.5vw,44px)",
                 lineHeight: 1.05,
                 color: "#000",
@@ -377,7 +377,7 @@ export default async function ProductPage({
               >
                 <summary
                   className="flex items-center justify-between gap-4 py-4 cursor-pointer list-none select-none transition-colors"
-                  style={{ fontFamily: GC, fontWeight: 800, fontSize: 18, color: "#000" }}
+                  style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#000" }}
                 >
                   <span>{q}</span>
                   <span
@@ -398,7 +398,7 @@ export default async function ProductPage({
             <a
               href="/faq"
               className="inline-flex items-center gap-2 mt-4 hover:underline"
-              style={{ fontFamily: GC, fontWeight: 800, fontSize: 15, color: "#000" }}
+              style={{ fontFamily: GC, fontWeight: 700, fontSize: 15, color: "#000" }}
             >
               See more answers
               <Icon name="arrowRight" className="w-4 h-4" />
