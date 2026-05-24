@@ -342,46 +342,57 @@
   border-color: var(--charcoal);
 }
 
-/* Per-formula filled pills via !bg-* utilities — border matches fill,
-   hover collapses to stroke-only in the same color. */
+/* Per-formula filled pills — border matches fill, hover collapses to stroke. */
+.btn-primary.btn-calm,
 .btn-primary.\!bg-calm {
-  border-color: var(--calm);
-  color: var(--bone);
+  background-color: var(--calm) !important;
+  border-color: var(--calm) !important;
+  color: var(--bone) !important;
 }
+.btn-primary.btn-calm:hover,
 .btn-primary.\!bg-calm:hover {
   background-color: transparent !important;
-  color: var(--calm);
-  border-color: var(--calm);
+  color: var(--calm) !important;
+  border-color: var(--calm) !important;
 }
 
+.btn-primary.btn-focus,
 .btn-primary.\!bg-focus {
-  border-color: var(--focus);
-  color: var(--bone);
+  background-color: var(--focus) !important;
+  border-color: var(--focus) !important;
+  color: var(--bone) !important;
 }
+.btn-primary.btn-focus:hover,
 .btn-primary.\!bg-focus:hover {
   background-color: transparent !important;
-  color: var(--focus);
-  border-color: var(--focus);
+  color: var(--focus) !important;
+  border-color: var(--focus) !important;
 }
 
+.btn-primary.btn-energy,
 .btn-primary.\!bg-energy {
-  border-color: var(--energy);
-  color: var(--ink);
+  background-color: var(--energy) !important;
+  border-color: var(--energy) !important;
+  color: var(--ink) !important;
 }
+.btn-primary.btn-energy:hover,
 .btn-primary.\!bg-energy:hover {
   background-color: transparent !important;
-  color: var(--ink);
-  border-color: var(--energy);
+  color: var(--ink) !important;
+  border-color: var(--energy) !important;
 }
 
+.btn-primary.btn-blue,
 .btn-primary.\!bg-avro-blue {
-  border-color: var(--avro-blue);
-  color: var(--charcoal);
+  background-color: var(--avro-blue) !important;
+  border-color: var(--avro-blue) !important;
+  color: var(--charcoal) !important;
 }
+.btn-primary.btn-blue:hover,
 .btn-primary.\!bg-avro-blue:hover {
   background-color: transparent !important;
-  color: var(--charcoal);
-  border-color: var(--avro-blue);
+  color: var(--charcoal) !important;
+  border-color: var(--avro-blue) !important;
 }
 
 .btn-secondary {
