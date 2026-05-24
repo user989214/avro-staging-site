@@ -193,6 +193,17 @@ export default function ShopPage() {
             ))}
 
             {/* CTA row */}
+            <style>{`
+              .compare-btn {
+                background-color: var(--charcoal);
+                color: var(--bone);
+                border: 2px solid var(--charcoal);
+              }
+              .compare-btn:hover {
+                background-color: transparent;
+                color: var(--charcoal);
+              }
+            `}</style>
             <div
               className="grid grid-cols-1 sm:grid-cols-4"
               style={{ borderTop: "1px solid rgba(28,27,20,0.08)" }}
@@ -201,8 +212,7 @@ export default function ShopPage() {
               <div className="min-h-[80px] p-4 flex items-center justify-center" style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}>
                 <Link
                   href="/calm"
-                  className="inline-flex items-center justify-center px-5 py-2.5 rounded-full font-bold text-[14px] transition-all duration-200"
-                  style={{ backgroundColor: "var(--calm)", color: "var(--bone)", border: "2px solid var(--calm)" }}
+                  className="compare-btn inline-flex items-center justify-center px-5 py-2.5 rounded-full font-bold text-[14px] transition-all duration-200"
                 >
                   Shop Calm
                 </Link>
@@ -210,8 +220,7 @@ export default function ShopPage() {
               <div className="min-h-[80px] p-4 flex items-center justify-center" style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}>
                 <Link
                   href="/focus"
-                  className="inline-flex items-center justify-center px-5 py-2.5 rounded-full font-bold text-[14px] transition-all duration-200"
-                  style={{ backgroundColor: "var(--focus)", color: "var(--bone)", border: "2px solid var(--focus)" }}
+                  className="compare-btn inline-flex items-center justify-center px-5 py-2.5 rounded-full font-bold text-[14px] transition-all duration-200"
                 >
                   Shop Focus
                 </Link>
@@ -219,8 +228,7 @@ export default function ShopPage() {
               <div className="min-h-[80px] p-4 flex items-center justify-center" style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}>
                 <Link
                   href="/energy"
-                  className="inline-flex items-center justify-center px-5 py-2.5 rounded-full font-bold text-[14px] transition-all duration-200"
-                  style={{ backgroundColor: "var(--energy)", color: "var(--bone)", border: "2px solid var(--energy)" }}
+                  className="compare-btn inline-flex items-center justify-center px-5 py-2.5 rounded-full font-bold text-[14px] transition-all duration-200"
                 >
                   Shop Energy
                 </Link>
