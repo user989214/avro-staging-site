@@ -28,36 +28,50 @@ export default function ShopPage() {
             that fits your moment.
           </p>
           <div className="flex flex-wrap items-center gap-3 mt-6.5">
+            <style>{`
+              .btn-formula-calm {
+                border: 2px solid var(--calm);
+                background-color: var(--calm);
+                color: var(--bone);
+              }
+              .btn-formula-calm:hover {
+                background-color: transparent;
+                color: var(--calm);
+              }
+              .btn-formula-focus {
+                border: 2px solid var(--focus);
+                background-color: var(--focus);
+                color: var(--bone);
+              }
+              .btn-formula-focus:hover {
+                background-color: transparent;
+                color: var(--focus);
+              }
+              .btn-formula-energy {
+                border: 2px solid var(--energy);
+                background-color: var(--energy);
+                color: var(--ink);
+              }
+              .btn-formula-energy:hover {
+                background-color: transparent;
+                color: var(--ink);
+              }
+            `}</style>
             <Link
               href="/calm"
-              className="inline-flex items-center justify-center min-h-[52px] px-7 rounded-full font-bold text-[15px] transition-all"
-              style={{
-                border: "2px solid var(--calm)",
-                backgroundColor: "transparent",
-                color: "var(--calm)",
-              }}
+              className="btn-formula-calm inline-flex items-center justify-center min-h-[52px] px-7 rounded-full font-bold text-[15px] transition-all duration-200"
             >
               Shop Calm
             </Link>
             <Link
               href="/focus"
-              className="inline-flex items-center justify-center min-h-[52px] px-7 rounded-full font-bold text-[15px] transition-all"
-              style={{
-                border: "2px solid var(--focus)",
-                backgroundColor: "transparent",
-                color: "var(--focus)",
-              }}
+              className="btn-formula-focus inline-flex items-center justify-center min-h-[52px] px-7 rounded-full font-bold text-[15px] transition-all duration-200"
             >
               Shop Focus
             </Link>
             <Link
               href="/energy"
-              className="inline-flex items-center justify-center min-h-[52px] px-7 rounded-full font-bold text-[15px] transition-all"
-              style={{
-                border: "2px solid var(--energy)",
-                backgroundColor: "transparent",
-                color: "var(--ink)",
-              }}
+              className="btn-formula-energy inline-flex items-center justify-center min-h-[52px] px-7 rounded-full font-bold text-[15px] transition-all duration-200"
             >
               Shop Energy
             </Link>
