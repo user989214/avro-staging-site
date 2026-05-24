@@ -59,7 +59,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
 
   return (
     <aside
-      className="flex flex-col gap-7 bg-white"
+      className="flex flex-col gap-7 bg-base"
       style={{ fontFamily: GC }}
     >
       {/* Header */}
@@ -136,7 +136,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
         </h2>
         <div
           className="flex items-center"
-          style={{ backgroundColor: LIGHT_GRAY, borderRadius: 10 }}
+          style={{ backgroundColor: LIGHT_GRAY, borderRadius: 999 }}
         >
           <button
             type="button"
@@ -222,7 +222,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
             Supplement facts
           </button>
         </DialogTrigger>
-        <DialogContent className="max-w-[440px] p-0 bg-white">
+        <DialogContent className="max-w-[440px] p-0 bg-base">
           <div className="p-6 pb-2">
             <DialogHeader>
               <DialogTitle style={{ fontFamily: GC, fontWeight: 700, fontSize: 32, color: "var(--ink)" }}>
@@ -342,7 +342,7 @@ function PurchaseOption({
             fontSize: 12,
             backgroundColor: "var(--charcoal)",
             color: "var(--bone)",
-            borderRadius: 6,
+            borderRadius: 999,
           }}
         >
           {badge}

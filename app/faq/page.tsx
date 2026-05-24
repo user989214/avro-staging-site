@@ -158,7 +158,7 @@ export default function FaqPage() {
           Find answers about AVRO formulas, ingredients, timing, caffeine,
           subscriptions, shipping, and how to choose the right product.
         </p>
-        <label className="grid grid-cols-[28px_1fr] gap-3 items-center w-full max-w-[720px] mt-5 px-4 py-3.5 bg-white border border-line rounded-lg shadow-[0_12px_35px_rgba(30,29,24,0.06)]">
+        <label className="grid grid-cols-[28px_1fr] gap-3 items-center w-full max-w-[720px] mt-5 px-4 py-3.5 bg-base border border-line rounded-lg shadow-[0_12px_35px_rgba(30,29,24,0.06)]">
           <Icon name="search" className="w-7 h-7 text-muted" />
           <input
             type="search"
@@ -173,7 +173,7 @@ export default function FaqPage() {
             <a
               key={cat.slug}
               href={`#${cat.slug}`}
-              className="px-3 py-2.5 bg-white border border-line rounded-full text-[13px] font-extrabold hover:bg-gray-50 transition-colors"
+              className="px-3 py-2.5 bg-base border border-line rounded-full text-[13px] font-extrabold hover:bg-gray-50 transition-colors"
             >
               {cat.name}
             </a>
@@ -189,7 +189,7 @@ export default function FaqPage() {
             {category.faqs.map(([q, a]) => (
               <details
                 key={q}
-                className="bg-white border border-line rounded-[7px] group"
+                className="bg-base border border-line rounded-[7px] group"
               >
                 <summary className="flex justify-between gap-4 px-5.5 py-4.5 cursor-pointer font-extrabold select-none after:content-['+'] after:text-[22px] after:leading-none group-open:after:content-['-']">
                   {q}

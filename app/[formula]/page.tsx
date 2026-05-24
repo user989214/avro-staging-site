@@ -77,12 +77,12 @@ export default async function ProductPage({
       <PdpMarquee text="Subscribe and save 25% on each order" />
 
       {/* PDP Hero */}
-      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(24px,4vw,48px)] bg-white">
+      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(24px,4vw,48px)] bg-base">
         <ProductHero formula={item} formulaKey={key} />
       </section>
 
       {/* Tabs with Recommendations - Cure style */}
-      <section className="w-full bg-white pt-0 pb-[clamp(32px,4vw,48px)]">
+      <section className="w-full bg-base pt-0 pb-[clamp(32px,4vw,48px)]">
         <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
           <PdpTabsWithRecommendations currentKey={key} />
         </div>
@@ -95,7 +95,7 @@ export default async function ProductPage({
       <PdpIngredients formulaKey={key} />
 
       {/* The feeling of good calm/focus/energy - NeuroGum style */}
-      <section className="w-full bg-white py-[clamp(40px,5vw,64px)]">
+      <section className="w-full bg-base py-[clamp(40px,5vw,64px)]">
         <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
           {/* Section header */}
           <h2
@@ -116,7 +116,7 @@ export default async function ProductPage({
             {feelingBenefits[key].map((benefit) => (
               <div
                 key={benefit.title}
-                className="flex flex-col items-center text-center gap-3 p-5 bg-white"
+                className="flex flex-col items-center text-center gap-3 p-5 bg-base"
                 style={{ borderRadius: 24, border: "1.5px solid rgba(0,0,0,0.12)" }}
               >
                 <div
@@ -334,7 +334,7 @@ export default async function ProductPage({
       </section>
 
       {/* FAQ accordion */}
-      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(36px,4vw,56px)] bg-white">
+      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(36px,4vw,56px)] bg-base">
         <div className="grid grid-cols-1 lg:grid-cols-[0.7fr_1.3fr] gap-8 lg:gap-12 items-start">
           <div>
             <h2
@@ -372,7 +372,7 @@ export default async function ProductPage({
             ].map(([q, a], i) => (
               <details
                 key={q}
-                className="group bg-white"
+                className="group bg-base"
                 style={{ borderTop: i > 0 ? "1px solid rgba(0,0,0,0.08)" : "none" }}
               >
                 <summary

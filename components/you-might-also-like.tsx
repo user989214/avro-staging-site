@@ -39,7 +39,7 @@ export function YouMightAlsoLike({ currentKey, hideHeader = false }: YouMightAls
             <Link
               key={key}
               href={`/${key}`}
-              className="group flex flex-col bg-white border border-line rounded-lg overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(31,29,24,0.08)]"
+              className="group flex flex-col bg-base border border-line rounded-lg overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(31,29,24,0.08)]"
             >
               <div
                 className="flex items-end justify-center h-[260px] overflow-hidden pt-3"
@@ -74,7 +74,7 @@ export function YouMightAlsoLike({ currentKey, hideHeader = false }: YouMightAls
         {/* Variety Bundle card */}
         <Link
           href="/shop"
-          className="group flex flex-col bg-white border border-line rounded-lg overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(31,29,24,0.08)]"
+          className="group flex flex-col bg-base border border-line rounded-lg overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(31,29,24,0.08)]"
         >
           <div
             className="relative flex items-center justify-center h-[260px] overflow-hidden"

@@ -134,7 +134,7 @@ export default function AboutPage() {
           {values.map((v) => (
             <div
               key={v.title}
-              className="flex flex-col gap-3 p-6 bg-white/80 border border-line rounded-lg"
+              className="flex flex-col gap-3 p-6 bg-base-light/80 border border-line rounded-lg"
             >
               <h3 className="font-serif font-black text-xl leading-tight">
                 {v.title}
@@ -154,7 +154,7 @@ export default function AboutPage() {
           title="Born from science and brand instinct."
           description="Together, Keigo and Peter built AVRO around one clear belief: performance starts with composure."
         />
-        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-0 overflow-hidden border border-line rounded-lg bg-white/90 shadow-[0_18px_40px_-24px_rgba(20,18,12,0.18)] mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-0 overflow-hidden border border-line rounded-lg bg-base-light/90 shadow-[0_18px_40px_-24px_rgba(20,18,12,0.18)] mb-8">
           <div className="flex flex-col justify-center gap-4 p-[clamp(28px,4vw,52px)]">
             {founders.map((f) => (
               <div key={f.name} className="flex flex-col gap-2 pb-6 last:pb-0 border-b border-line last:border-0">

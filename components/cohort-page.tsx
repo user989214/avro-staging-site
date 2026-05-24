@@ -203,7 +203,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             return (
               <article
                 key={key}
-                className="grid content-start gap-3.5 p-6 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
+                className="grid content-start gap-3.5 p-6 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
               >
                 <h3 className="font-black text-lg">{item.name}</h3>
                 <div className="relative min-h-[240px] flex items-center justify-center bg-soft/60 border border-line rounded-md overflow-hidden">
@@ -237,7 +237,7 @@ export function CohortPage({ data }: { data: CohortData }) {
       <Section>
         <SectionHeading eyebrow="How to use" title={data.howTitle} />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <article className="relative p-7 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="relative p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <strong className="grid place-items-center w-7.5 h-7.5 mb-4.5 text-white bg-olive rounded-full">
               1
             </strong>
@@ -245,7 +245,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             <h3 className="font-black text-lg mb-2">Mix</h3>
             <p className="text-ink/75">Mix one stick with water.</p>
           </article>
-          <article className="relative p-7 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="relative p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <strong className="grid place-items-center w-7.5 h-7.5 mb-4.5 text-white bg-olive rounded-full">
               2
             </strong>
@@ -255,7 +255,7 @@ export function CohortPage({ data }: { data: CohortData }) {
               Drink about 30 minutes before your {data.stepMoment}.
             </p>
           </article>
-          <article className="relative p-7 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="relative p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <strong className="grid place-items-center w-7.5 h-7.5 mb-4.5 text-white bg-olive rounded-full">
               3
             </strong>

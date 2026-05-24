@@ -36,7 +36,7 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
   const formulaKeys: FormulaKey[] = ["calm", "focus", "energy"]
 
   return (
-    <section className="w-full bg-white py-[clamp(40px,5vw,64px)]" style={{ fontFamily: GC }}>
+    <section className="w-full bg-base py-[clamp(40px,5vw,64px)]" style={{ fontFamily: GC }}>
       <div className="w-full max-w-[1200px] mx-auto px-[clamp(18px,5vw,64px)]">
         {/* Header */}
         <div className="text-center mb-10">
@@ -75,7 +75,7 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
             return (
               <div
                 key={key}
-                className="group flex flex-col rounded-xl overflow-hidden bg-white"
+                className="group flex flex-col rounded-xl overflow-hidden bg-base"
                 style={{
                   border: isActive ? "3px solid #000" : "2px solid rgba(0,0,0,0.12)",
                 }}

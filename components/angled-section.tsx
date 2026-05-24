@@ -14,7 +14,7 @@ export function AngledSection({
   className = "",
 }: AngledSectionProps) {
   const bgClasses = {
-    white: "bg-white",
+    white: "bg-base",
     soft: "bg-soft",
     accent: "bg-avro-blue/10",
     dark: "bg-ink",

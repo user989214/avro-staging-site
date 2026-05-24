@@ -34,7 +34,7 @@ export function PdpMiniRecommendations({ currentKey }: PdpMiniRecommendationsPro
             <Link
               key={key}
               href={`/${key}`}
-              className="group flex items-center gap-3 bg-white rounded-lg p-3 hover:shadow-md transition-shadow"
+              className="group flex items-center gap-3 bg-base rounded-lg p-3 hover:shadow-md transition-shadow"
             >
               {/* Product image */}
               <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-soft rounded-lg">

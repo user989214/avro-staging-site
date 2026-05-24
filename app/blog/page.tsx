@@ -174,8 +174,8 @@ export default function BlogPage() {
             className="featured-card"
             style={{
               display: "block",
-              backgroundColor: "#000",
-              borderRadius: 16,
+              backgroundColor: "var(--charcoal)",
+              borderRadius: 24,
               padding: "clamp(32px,5vw,64px) clamp(20px,5vw,72px)",
               textDecoration: "none",
               width: "100%",
@@ -221,8 +221,8 @@ export default function BlogPage() {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  backgroundColor: "#f4f4f4",
-                  borderRadius: 14,
+                  backgroundColor: "var(--base-light)",
+                  borderRadius: 20,
                   padding: "32px 32px 28px",
                   textDecoration: "none",
                   gap: 24,

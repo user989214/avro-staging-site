@@ -67,13 +67,13 @@ export function SocialProofSection({ formulaKey }: SocialProofSectionProps) {
         {quotes.map((item, i) => (
           <div
             key={item.name}
-            className="group relative bg-white rounded-xl border border-line overflow-hidden transition-all hover:-translate-y-1 hover:shadow-lg"
+            className="group relative bg-base rounded-xl border border-line overflow-hidden transition-all hover:-translate-y-1 hover:shadow-lg"
           >
             {/* Image placeholder - using gradient for now */}
             <div 
               className="h-[200px] bg-gradient-to-br from-soft to-line flex items-center justify-center"
             >
-              <div className="w-20 h-20 rounded-full bg-white/80 flex items-center justify-center">
+              <div className="w-20 h-20 rounded-full bg-base-light/80 flex items-center justify-center">
                 <span className="text-3xl font-black text-ink/20">{item.name.charAt(0)}</span>
               </div>
             </div>

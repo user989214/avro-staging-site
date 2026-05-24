@@ -56,7 +56,7 @@ export default function ShopPage() {
       {/* Compare Table */}
       <Section>
         <SectionHeading title="Compare at a glance" />
-        <div className="grid grid-cols-1 sm:grid-cols-4 border border-line rounded-lg overflow-hidden bg-white">
+        <div className="grid grid-cols-1 sm:grid-cols-4 border border-line rounded-lg overflow-hidden bg-base">
           <div className="min-h-[56px] p-4 border-b border-line" />
           <strong className="min-h-[56px] p-4 text-center border-b border-l border-line">
             Calm

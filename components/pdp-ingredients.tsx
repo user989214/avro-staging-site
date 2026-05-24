@@ -60,7 +60,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
   const ingredients = formulaIngredients[formulaKey]
 
   return (
-    <section className="w-full bg-white py-[clamp(40px,5vw,64px)]" style={{ fontFamily: GC }}>
+    <section className="w-full bg-base py-[clamp(40px,5vw,64px)]" style={{ fontFamily: GC }}>
       <div className="w-full max-w-[1200px] mx-auto px-[clamp(18px,5vw,64px)]">
         {/* Header */}
         <div className="text-center mb-10">

@@ -144,11 +144,11 @@ export default function IconSheetPage() {
         </h2>
         <ol className="list-decimal pl-5 mb-4 text-ink/80 text-sm leading-relaxed space-y-1">
           <li>Click <strong>Copy SVG</strong> on any icon above.</li>
-          <li>Switch to your Figma file and press <kbd className="px-1.5 py-0.5 bg-white border border-line rounded text-[11px] font-bold">⌘ V</kbd> (or <kbd className="px-1.5 py-0.5 bg-white border border-line rounded text-[11px] font-bold">Ctrl V</kbd>).</li>
+          <li>Switch to your Figma file and press <kbd className="px-1.5 py-0.5 bg-base border border-line rounded text-[11px] font-bold">⌘ V</kbd> (or <kbd className="px-1.5 py-0.5 bg-base border border-line rounded text-[11px] font-bold">Ctrl V</kbd>).</li>
           <li>Figma converts the SVG to an editable vector layer at 24×24.</li>
         </ol>
         <h3 className="text-base font-black mb-2">Or use in code</h3>
-        <pre className="overflow-x-auto p-4 bg-white border border-line rounded text-[13px] leading-relaxed">
+        <pre className="overflow-x-auto p-4 bg-base border border-line rounded text-[13px] leading-relaxed">
           <code>{`import { Icon } from "@/components/icons"
 
 <Icon name="leaf" className="w-5 h-5 text-olive" />`}</code>

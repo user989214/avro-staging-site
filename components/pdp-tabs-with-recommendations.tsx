@@ -262,7 +262,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
             return (
               <div
                 key={formulaKey}
-                className="flex flex-col bg-white"
+                className="flex flex-col bg-base"
                 style={{ borderRadius: 24, overflow: "hidden", border: "2px solid rgba(0,0,0,0.12)" }}
               >
                 <div

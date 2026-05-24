@@ -50,7 +50,7 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
   const renderMain = () => {
     if (activeId === "studio") {
       return (
-        <div className="relative flex items-center justify-center w-full h-full bg-white overflow-hidden">
+        <div className="relative flex items-center justify-center w-full h-full bg-base overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={studio.src}
@@ -64,7 +64,7 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
     if (activeId === "tube") {
       // Solo display tube — the canister by itself, on white.
       return (
-        <div className="relative flex items-center justify-center w-full h-full bg-white overflow-hidden">
+        <div className="relative flex items-center justify-center w-full h-full bg-base overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={soloTube.src}
@@ -77,7 +77,7 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
 
     if (activeId === "stick") {
       return (
-        <div className="relative flex items-center justify-center w-full h-full bg-white p-8 sm:p-14">
+        <div className="relative flex items-center justify-center w-full h-full bg-base p-8 sm:p-14">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={stick.src}

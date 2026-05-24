@@ -337,7 +337,7 @@ export function HomeProductStrip() {
         <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32 }}>
           Three formulas. One foundation.
         </h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", border: "2px solid rgba(0,0,0,0.12)", borderRadius: 16, overflow: "hidden" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", border: "1.5px solid rgba(28,27,20,0.1)", borderRadius: 20, overflow: "hidden", backgroundColor: "var(--base-light)" }}>
           {(Object.keys(formulas) as FormulaKey[]).map((key, i) => (
             <a
               key={key}
@@ -500,7 +500,7 @@ export function HomeQualityRow() {
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
-      <div style={{ maxWidth: 1250, margin: "0 auto", backgroundColor: BLUE, borderRadius: 16, overflow: "hidden" }}>
+      <div style={{ maxWidth: 1250, margin: "0 auto", backgroundColor: BLUE, borderRadius: 28, overflow: "hidden" }}>
         <div style={{ padding: "clamp(36px,5vw,64px) clamp(28px,5vw,72px)" }}>
           <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.4vw,46px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 16 }}>
             Science-backed. Founder-driven.

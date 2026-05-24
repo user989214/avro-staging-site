@@ -36,14 +36,14 @@ export default function ContactPage() {
 
         <form
           onSubmit={handleSubmit}
-          className="grid gap-3.5 p-6 bg-white/90 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
+          className="grid gap-3.5 p-6 bg-base-light/90 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
         >
           <label className="grid gap-1.5 text-ink font-extrabold">
             Name
             <input
               type="text"
               placeholder="Your name"
-              className="min-h-[44px] w-full px-3 py-2.5 text-ink bg-white border border-line rounded-[7px] font-normal"
+              className="min-h-[44px] w-full px-3 py-2.5 text-ink bg-base border border-line rounded-[7px] font-normal"
             />
           </label>
           <label className="grid gap-1.5 text-ink font-extrabold">
@@ -51,7 +51,7 @@ export default function ContactPage() {
             <input
               type="email"
               placeholder="you@example.com"
-              className="min-h-[44px] w-full px-3 py-2.5 text-ink bg-white border border-line rounded-[7px] font-normal"
+              className="min-h-[44px] w-full px-3 py-2.5 text-ink bg-base border border-line rounded-[7px] font-normal"
             />
           </label>
           <label className="grid gap-1.5 text-ink font-extrabold">
@@ -59,12 +59,12 @@ export default function ContactPage() {
             <input
               type="text"
               placeholder="#AVRO"
-              className="min-h-[44px] w-full px-3 py-2.5 text-ink bg-white border border-line rounded-[7px] font-normal"
+              className="min-h-[44px] w-full px-3 py-2.5 text-ink bg-base border border-line rounded-[7px] font-normal"
             />
           </label>
           <label className="grid gap-1.5 text-ink font-extrabold">
             Inquiry type
-            <select className="min-h-[44px] w-full px-3 py-2.5 text-ink bg-white border border-line rounded-[7px] font-normal">
+            <select className="min-h-[44px] w-full px-3 py-2.5 text-ink bg-base border border-line rounded-[7px] font-normal">
               <option>Order Support</option>
               <option>Subscription Support</option>
               <option>Product Question</option>
@@ -79,7 +79,7 @@ export default function ContactPage() {
             <textarea
               rows={5}
               placeholder="How can we help?"
-              className="w-full px-3 py-2.5 text-ink bg-white border border-line rounded-[7px] font-normal resize-y"
+              className="w-full px-3 py-2.5 text-ink bg-base border border-line rounded-[7px] font-normal resize-y"
             />
           </label>
           <button type="submit" className="btn-primary">
@@ -112,25 +112,25 @@ export default function ContactPage() {
           title="What can we help with?"
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5">
-          <article className="min-h-[180px] p-7 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <h3 className="font-black mb-2">Product Questions</h3>
             <p className="text-muted-foreground text-base leading-relaxed">
               Ask about Calm, Focus, Energy, ingredients, or how to choose.
             </p>
           </article>
-          <article className="min-h-[180px] p-7 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <h3 className="font-black mb-2">Order Support</h3>
             <p className="text-muted-foreground text-base leading-relaxed">
               Questions about shipping, delivery, damaged product, or returns.
             </p>
           </article>
-          <article className="min-h-[180px] p-7 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <h3 className="font-black mb-2">Retail / Wholesale</h3>
             <p className="text-muted-foreground text-base leading-relaxed">
               Interested in carrying AVRO.
             </p>
           </article>
-          <article className="min-h-[180px] p-7 bg-white/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <h3 className="font-black mb-2">Partnerships</h3>
             <p className="text-muted-foreground text-base leading-relaxed">
               Creators, events, golf, tech, gaming, or non alcohol

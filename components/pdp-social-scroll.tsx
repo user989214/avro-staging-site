@@ -128,7 +128,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
                   </div>
                   
                   {/* Quick add card at bottom */}
-                  <div className="absolute bottom-3 left-2.5 right-2.5 bg-white rounded-lg p-2.5 flex items-center gap-2.5 shadow-xl">
+                  <div className="absolute bottom-3 left-2.5 right-2.5 bg-base rounded-lg p-2.5 flex items-center gap-2.5 shadow-xl">
                     <div className="w-12 h-12 rounded-lg flex-shrink-0 flex items-center justify-center" style={{ backgroundColor: "#e8e8e8" }}>
                       <img src={stickImage.src} alt={stickImage.alt} className="w-8 h-8 object-contain" />
                     </div>
@@ -200,7 +200,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
                   style={{
                     width: i === activeIndex ? 28 : 12,
                     height: 12,
-                    borderRadius: 6,
+                    borderRadius: 999,
                     backgroundColor: i === activeIndex ? "#000" : "rgba(0,0,0,0.3)",
                     transition: "all 0.3s ease",
                   }}

@@ -106,16 +106,16 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
   const reviewCount = formulaKey === "calm" ? 82 : formulaKey === "focus" ? 62 : 76
 
   return (
-    <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)] bg-white">
+    <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)]" style={{ backgroundColor: "var(--base)" }}>
       {/* Summary bar */}
       <div
         className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-8 p-6 lg:p-7 mb-8"
-        style={{ backgroundColor: "#f2f2f2", borderRadius: 14 }}
+        style={{ backgroundColor: "var(--base-light)", borderRadius: 20, border: "1px solid rgba(28,27,20,0.06)" }}
       >
         <div className="flex items-center gap-5 shrink-0">
           <div
-            className="relative flex items-center justify-center w-16 h-16 rounded-lg overflow-hidden"
-            style={{ backgroundColor: "#e8e8e8" }}
+            className="relative flex items-center justify-center w-16 h-16 rounded-2xl overflow-hidden"
+            style={{ backgroundColor: "var(--base-deep)" }}
           >
             {(() => {
               const { src, alt } = stickImageFor(formulaKey)
@@ -180,30 +180,30 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
       {/* Pagination dots */}
       <nav className="flex items-center justify-center gap-2 mt-10" aria-label="Reviews pagination">
         <span
-          className="grid place-items-center w-10 h-10 rounded-lg cursor-not-allowed"
-          style={{ border: "1.5px solid rgba(0,0,0,0.15)", color: "rgba(0,0,0,0.35)", fontFamily: GC, fontWeight: 600, fontSize: 18 }}
+          className="grid place-items-center w-10 h-10 rounded-full cursor-not-allowed"
+          style={{ border: "1.5px solid rgba(28,27,20,0.15)", color: "rgba(28,27,20,0.35)", fontFamily: GC, fontWeight: 600, fontSize: 18 }}
         >
           &lsaquo;
         </span>
         {[1, 2, 3, 4, 5].map((p) => (
           <span
             key={p}
-            className="grid place-items-center w-10 h-10 rounded-lg cursor-pointer"
+            className="grid place-items-center w-10 h-10 rounded-full cursor-pointer"
             style={{
               fontFamily: GC,
               fontWeight: 700,
               fontSize: 16,
-              backgroundColor: p === 1 ? "#000" : "transparent",
-              color: p === 1 ? "#fff" : "#000",
-              border: p === 1 ? "none" : "1.5px solid rgba(0,0,0,0.15)",
+              backgroundColor: p === 1 ? "var(--charcoal)" : "transparent",
+              color: p === 1 ? "var(--bone)" : "var(--ink)",
+              border: p === 1 ? "none" : "1.5px solid rgba(28,27,20,0.15)",
             }}
           >
             {p}
           </span>
         ))}
         <span
-          className="grid place-items-center w-10 h-10 rounded-lg cursor-pointer hover:border-black transition-colors"
-          style={{ border: "1.5px solid rgba(0,0,0,0.15)", color: "var(--ink)", fontFamily: GC, fontWeight: 600, fontSize: 18 }}
+          className="grid place-items-center w-10 h-10 rounded-full cursor-pointer transition-colors"
+          style={{ border: "1.5px solid rgba(28,27,20,0.15)", color: "var(--ink)", fontFamily: GC, fontWeight: 600, fontSize: 18 }}
         >
           &rsaquo;
         </span>
