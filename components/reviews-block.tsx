@@ -150,7 +150,7 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
             fontSize: 17,
             minHeight: 56,
             padding: "0 28px",
-            borderRadius: 10,
+            borderRadius: 999,
             backgroundColor: "var(--charcoal)",
             color: "var(--bone)",
           }}

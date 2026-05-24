@@ -176,7 +176,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
           fontSize: 21,
           minHeight: 66,
           padding: "0 36px",
-          borderRadius: 10,
+          borderRadius: 999,
           backgroundColor: "var(--charcoal)",
           color: "var(--bone)",
           border: "2.5px solid #000",
@@ -206,7 +206,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
               fontSize: 17,
               minHeight: 56,
               padding: "0 28px",
-              borderRadius: 10,
+              borderRadius: 999,
               backgroundColor: LIGHT_GRAY,
               color: "var(--ink)",
               border: "none",
@@ -300,7 +300,7 @@ function PurchaseOption({
     <label
       className="relative flex items-start gap-3 p-5 cursor-pointer transition-all"
       style={{
-        borderRadius: 10,
+        borderRadius: 999,
         backgroundColor: checked ? "#000" : LIGHT_GRAY,
         color: checked ? "#fff" : "#000",
         fontFamily: GC,

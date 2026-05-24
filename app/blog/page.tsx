@@ -149,7 +149,7 @@ export default function BlogPage() {
                   fontWeight: 800,
                   fontSize: 18,
                   padding: "10px 24px",
-                  borderRadius: 10,
+                  borderRadius: 999,
                   border: "2px solid rgba(255,255,255,0.25)",
                   backgroundColor: i === 0 ? "#fff" : "transparent",
                   color: i === 0 ? "#000" : "rgba(255,255,255,0.7)",
@@ -199,7 +199,7 @@ export default function BlogPage() {
                   {featured.excerpt}
                 </p>
               </div>
-              <div className="feat-read-btn" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 20, color: "#000", backgroundColor: "#fff", borderRadius: 10, padding: "16px 32px", flexShrink: 0 }}>
+              <div className="feat-read-btn" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 20, color: "#000", backgroundColor: "#fff", borderRadius: 999, padding: "16px 32px", flexShrink: 0 }}>
                 Read Article
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </div>
@@ -243,7 +243,7 @@ export default function BlogPage() {
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <span className="blog-card-meta" style={{ fontFamily: GC, fontWeight: 500, fontSize: 18, color: "rgba(0,0,0,0.55)" }}>{post.readTime}</span>
-                  <span className="blog-card-arrow" style={{ width: 40, height: 40, borderRadius: 8, backgroundColor: "#000", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <span className="blog-card-arrow" style={{ width: 40, height: 40, borderRadius: 999, backgroundColor: "#000", color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                   </span>
                 </div>
@@ -253,7 +253,7 @@ export default function BlogPage() {
 
           {/* Load more */}
           <div style={{ display: "flex", justifyContent: "center", marginTop: 56 }}>
-            <button style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, padding: "18px 56px", borderRadius: 10, backgroundColor: "#000", color: "#fff", border: "2.5px solid #000", cursor: "pointer" }}>
+            <button style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, padding: "18px 56px", borderRadius: 999, backgroundColor: "#000", color: "#fff", border: "2.5px solid #000", cursor: "pointer" }}>
               Load More Articles
             </button>
           </div>
@@ -276,7 +276,7 @@ export default function BlogPage() {
               <a
                 key={label}
                 href={href}
-                style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 10, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}
+                style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none", backgroundColor: "#000", color: "#fff", border: "2.5px solid #000" }}
               >
                 {label}
               </a>

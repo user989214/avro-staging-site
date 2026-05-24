@@ -214,7 +214,7 @@ export function HomeRefHero() {
 export function HomeProofBar() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(32px,5vw,56px) clamp(20px,5vw,64px)" }}>
-        <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", border: "2px solid rgba(0,0,0,0.12)", borderRadius: 12, overflow: "hidden" }}>
+        <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", border: "2px solid rgba(0,0,0,0.12)", borderRadius: 999, overflow: "hidden" }}>
         {sharedProof.map((item, i) => (
           <div
             key={item.label}
@@ -241,7 +241,7 @@ export function HomeBenefitRow() {
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(40px,6vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 16 }}>
         {benefits.map((b) => (
-          <div key={b.title} style={{ backgroundColor: "var(--base)", borderRadius: 12, padding: "clamp(24px,3vw,36px)", border: "1px solid rgba(0,0,0,0.08)" }}>
+          <div key={b.title} style={{ backgroundColor: "var(--base)", borderRadius: 999, padding: "clamp(24px,3vw,36px)", border: "1px solid rgba(0,0,0,0.08)" }}>
             <h3 style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(20px,2vw,26px)", lineHeight: 1.1, color: "var(--ink)", marginBottom: 10 }}>{b.title}</h3>
             <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(16px,1.4vw,19px)", lineHeight: 1.5, color: "rgba(0,0,0,0.55)" }}>{b.copy}</p>
           </div>
@@ -264,7 +264,7 @@ export function HomeLogicRow() {
     <section style={{ backgroundColor: "var(--base-light)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 20 }}>
         {/* Card 1 */}
-        <div style={{ backgroundColor: "var(--base)", borderRadius: 12, padding: "clamp(28px,3vw,44px)", border: "1px solid rgba(0,0,0,0.06)" }}>
+        <div style={{ backgroundColor: "var(--base)", borderRadius: 999, padding: "clamp(28px,3vw,44px)", border: "1px solid rgba(0,0,0,0.06)" }}>
           <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3vw,44px)", lineHeight: 1.05, color: "var(--ink)", marginBottom: 16 }}>
             More energy is not always the answer.
           </h2>
@@ -274,7 +274,7 @@ export function HomeLogicRow() {
         </div>
 
         {/* Comparison table */}
-        <div style={{ backgroundColor: "var(--base)", borderRadius: 12, overflow: "hidden", border: "1px solid rgba(0,0,0,0.06)" }}>
+        <div style={{ backgroundColor: "var(--base)", borderRadius: 999, overflow: "hidden", border: "1px solid rgba(0,0,0,0.06)" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
             <div style={{ padding: "16px 20px", fontFamily: GC, fontWeight: 800, fontSize: 18, color: "rgba(0,0,0,0.4)", borderBottom: "1px solid rgba(0,0,0,0.08)", textAlign: "center" }}>Stimulant First</div>
             <div style={{ padding: "16px 20px", fontFamily: GC, fontWeight: 800, fontSize: 18, color: "var(--ink)", borderBottom: "1px solid rgba(0,0,0,0.08)", borderLeft: "1px solid rgba(0,0,0,0.08)", textAlign: "center", backgroundColor: "rgba(135,206,235,0.15)" }}>Calm First</div>
@@ -288,7 +288,7 @@ export function HomeLogicRow() {
         </div>
 
         {/* Card 3 */}
-        <div style={{ backgroundColor: "var(--base)", borderRadius: 12, padding: "clamp(28px,3vw,44px)", border: "1px solid rgba(0,0,0,0.06)" }}>
+        <div style={{ backgroundColor: "var(--base)", borderRadius: 999, padding: "clamp(28px,3vw,44px)", border: "1px solid rgba(0,0,0,0.06)" }}>
           <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3vw,44px)", lineHeight: 1.05, color: "var(--ink)", marginBottom: 16 }}>
             Performance starts with state.
           </h2>
@@ -382,7 +382,7 @@ export function HomeMomentGrid() {
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))", gap: 16 }}>
           {moments.map((m) => (
-            <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 12, overflow: "hidden", backgroundColor: "var(--base)" }}>
+            <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 999, overflow: "hidden", backgroundColor: "var(--base)" }}>
               <div style={{ position: "relative", height: 220, overflow: "hidden" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={m.image} alt={m.alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
@@ -390,7 +390,7 @@ export function HomeMomentGrid() {
               <div style={{ padding: "20px 24px 24px" }}>
                 <h3 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(24px,2.5vw,34px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 8 }}>{m.title}</h3>
                 <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, lineHeight: 1.45, color: "rgba(0,0,0,0.6)", marginBottom: 20 }}>{m.copy}</p>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 17, minHeight: 52, padding: "0 24px", borderRadius: 10, backgroundColor: BLUE, color: "var(--ink)" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 17, minHeight: 52, padding: "0 24px", borderRadius: 999, backgroundColor: BLUE, color: "var(--ink)" }}>
                   {m.cta}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </span>
@@ -409,7 +409,7 @@ export function HomeScienceGrid() {
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px,1fr))", gap: 20 }}>
         {/* Why GABA card */}
-        <div style={{ backgroundColor: "#f8f8f8", borderRadius: 12, padding: "clamp(28px,4vw,48px)", border: "1px solid rgba(0,0,0,0.06)" }}>
+        <div style={{ backgroundColor: "#f8f8f8", borderRadius: 999, padding: "clamp(28px,4vw,48px)", border: "1px solid rgba(0,0,0,0.06)" }}>
           <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3.5vw,52px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 16 }}>
             Why GABA matters.
           </h2>
@@ -433,19 +433,19 @@ export function HomeScienceGrid() {
               </>
             ))}
           </div>
-          <a href="/science" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 18, minHeight: 58, padding: "0 32px", borderRadius: 10, textDecoration: "none", backgroundColor: BLUE, color: "var(--ink)" }}>
+          <a href="/science" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 18, minHeight: 58, padding: "0 32px", borderRadius: 999, textDecoration: "none", backgroundColor: BLUE, color: "var(--ink)" }}>
             Learn the Science of AVRO
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
         </div>
 
         {/* Formula comparison */}
-        <div style={{ backgroundColor: "#f8f8f8", borderRadius: 12, overflow: "hidden", padding: "clamp(28px,4vw,48px)", border: "1px solid rgba(0,0,0,0.06)" }}>
+        <div style={{ backgroundColor: "#f8f8f8", borderRadius: 999, overflow: "hidden", padding: "clamp(28px,4vw,48px)", border: "1px solid rgba(0,0,0,0.06)" }}>
           <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3.5vw,52px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 24 }}>
             Every formula starts calm first.
           </h2>
           <div style={{ overflowX: "auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr repeat(3,1fr)", minWidth: 420, border: "1px solid rgba(0,0,0,0.1)", borderRadius: 8, overflow: "hidden", backgroundColor: "var(--base)" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr repeat(3,1fr)", minWidth: 420, border: "1px solid rgba(0,0,0,0.1)", borderRadius: 999, overflow: "hidden", backgroundColor: "var(--base)" }}>
               <div style={{ padding: "12px 14px", borderBottom: "1px solid rgba(0,0,0,0.08)" }} />
               {["Calm", "Focus", "Energy"].map((f) => (
                 <div key={f} style={{ padding: "12px 14px", fontFamily: GC, fontWeight: 800, fontSize: 16, color: "var(--ink)", borderBottom: "1px solid rgba(0,0,0,0.08)", borderLeft: "1px solid rgba(0,0,0,0.08)", textAlign: "center", backgroundColor: "rgba(135,206,235,0.12)" }}>{f}</div>
@@ -484,7 +484,7 @@ export function HomeQualityRow() {
 
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(40px,6vw,64px)" }}>
-        <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px,1fr))", border: "2px solid rgba(0,0,0,0.12)", borderRadius: 12, overflow: "hidden" }}>
+        <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px,1fr))", border: "2px solid rgba(0,0,0,0.12)", borderRadius: 999, overflow: "hidden" }}>
           {badges.map((b, i) => (
             <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: "clamp(20px,3vw,36px) clamp(12px,2vw,20px)", textAlign: "center", borderLeft: i > 0 ? "2px solid rgba(0,0,0,0.12)" : "none" }}>
             <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(16px,1.5vw,21px)", color: "var(--ink)", lineHeight: 1.2 }}>{b.label}</strong>
@@ -509,8 +509,8 @@ export function HomeStoryStrip() {
             AVRO was built by Keigo Sugawara and Peter van Stolk for people who wanted a better option before the moments that matter. Every formula is backed by research and designed for real routines.
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <a href="/why-avro" className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 800, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 10, textDecoration: "none" }}>Our Story</a>
-            <a href="/science" className="hp-btn-outline-black" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 800, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 10, textDecoration: "none" }}>The Science</a>
+            <a href="/why-avro" className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 800, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 999, textDecoration: "none" }}>Our Story</a>
+            <a href="/science" className="hp-btn-outline-black" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 800, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 999, textDecoration: "none" }}>The Science</a>
           </div>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "38% 62%", minHeight: 360 }}>
@@ -544,7 +544,7 @@ export function HomeRitualSection() {
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))", gap: 16 }}>
           {steps.map((step) => (
-            <div key={step.num} style={{ backgroundColor: "var(--base)", borderRadius: 12, padding: "clamp(24px,3vw,36px)", display: "flex", gap: 20, alignItems: "flex-start", border: "1px solid rgba(0,0,0,0.08)" }}>
+            <div key={step.num} style={{ backgroundColor: "var(--base)", borderRadius: 999, padding: "clamp(24px,3vw,36px)", display: "flex", gap: 20, alignItems: "flex-start", border: "1px solid rgba(0,0,0,0.08)" }}>
               <span style={{ fontFamily: GC, fontWeight: 950, fontSize: 48, lineHeight: 1.0, color: BLUE, flexShrink: 0 }}>{step.num}</span>
               <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(18px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(0,0,0,0.7)", margin: 0, paddingTop: 6 }}>{step.text}</p>
             </div>

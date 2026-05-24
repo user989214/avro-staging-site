@@ -117,7 +117,7 @@ export default async function ProductPage({
               <div
                 key={benefit.title}
                 className="flex flex-col items-center text-center gap-3 p-5 bg-white"
-                style={{ borderRadius: 10, border: "1.5px solid rgba(0,0,0,0.12)" }}
+                style={{ borderRadius: 999, border: "1.5px solid rgba(0,0,0,0.12)" }}
               >
                 <div
                   className="flex items-center justify-center w-12 h-12 rounded-full"
@@ -185,7 +185,7 @@ export default async function ProductPage({
                   fontSize: 18,
                   minHeight: 56,
                   padding: "0 32px",
-                  borderRadius: 10,
+                  borderRadius: 999,
                   backgroundColor: "#000",
                   color: "#fff",
                   border: "2.5px solid #000",
@@ -321,7 +321,7 @@ export default async function ProductPage({
               fontSize: 17,
               minHeight: 52,
               padding: "0 28px",
-              borderRadius: 10,
+              borderRadius: 999,
               backgroundColor: "#000",
               color: "#fff",
               border: "2.5px solid #000",

@@ -94,7 +94,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
             <div
               key={ingredient.name}
               className="flex flex-col overflow-hidden"
-              style={{ borderRadius: 12, border: "1.5px solid rgba(0,0,0,0.1)" }}
+              style={{ borderRadius: 999, border: "1.5px solid rgba(0,0,0,0.1)" }}
             >
               {/* Image */}
               <div className="relative h-[180px] overflow-hidden" style={{ backgroundColor: "#f2f2f2" }}>

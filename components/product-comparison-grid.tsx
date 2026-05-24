@@ -126,7 +126,7 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                       fontSize: 16,
                       minHeight: 48,
                       padding: "0 16px",
-                      borderRadius: 8,
+                      borderRadius: 999,
                       backgroundColor: "var(--charcoal)",
                       color: "var(--bone)",
                       border: "2px solid #000",

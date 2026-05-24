@@ -263,7 +263,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
               <div
                 key={formulaKey}
                 className="flex flex-col bg-white"
-                style={{ borderRadius: 12, overflow: "hidden", border: "2px solid rgba(0,0,0,0.12)" }}
+                style={{ borderRadius: 999, overflow: "hidden", border: "2px solid rgba(0,0,0,0.12)" }}
               >
                 <div
                   className="aspect-square flex items-center justify-center overflow-hidden"
@@ -316,7 +316,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                         fontSize: 17,
                         minHeight: 52,
                         padding: "0 16px",
-                        borderRadius: 10,
+                        borderRadius: 999,
                         backgroundColor: "var(--charcoal)",
                         color: "var(--bone)",
                         border: "2px solid #000",
