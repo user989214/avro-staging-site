@@ -154,7 +154,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             </p>
             <CtaGroup primary={data.primary} secondary={data.secondary} />
           </div>
-          <div className="relative grid place-items-stretch min-h-[420px] border border-line rounded-lg overflow-hidden bg-cover shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
+          <div className="relative grid place-items-stretch min-h-[420px] border border-line rounded-full overflow-hidden bg-cover shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={cohortHero[data.visual]?.src}
@@ -203,10 +203,10 @@ export function CohortPage({ data }: { data: CohortData }) {
             return (
               <article
                 key={key}
-                className="grid content-start gap-3.5 p-6 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
+                className="grid content-start gap-3.5 p-6 bg-base-light/72 border border-line rounded-2xl shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
               >
                 <h3 className="font-black text-lg">{item.name}</h3>
-                <div className="relative min-h-[240px] flex items-center justify-center bg-soft/60 border border-line rounded-md overflow-hidden">
+                <div className="relative min-h-[240px] flex items-center justify-center bg-soft/60 border border-line rounded-xl overflow-hidden">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={tube.src}
@@ -237,7 +237,7 @@ export function CohortPage({ data }: { data: CohortData }) {
       <Section>
         <SectionHeading eyebrow="How to use" title={data.howTitle} />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <article className="relative p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="relative p-7 bg-base-light/72 border border-line rounded-2xl shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <strong className="grid place-items-center w-7.5 h-7.5 mb-4.5 text-white bg-olive rounded-full">
               1
             </strong>
@@ -245,7 +245,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             <h3 className="font-black text-lg mb-2">Mix</h3>
             <p className="text-ink/75">Mix one stick with water.</p>
           </article>
-          <article className="relative p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="relative p-7 bg-base-light/72 border border-line rounded-2xl shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <strong className="grid place-items-center w-7.5 h-7.5 mb-4.5 text-white bg-olive rounded-full">
               2
             </strong>
@@ -255,7 +255,7 @@ export function CohortPage({ data }: { data: CohortData }) {
               Drink about 30 minutes before your {data.stepMoment}.
             </p>
           </article>
-          <article className="relative p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="relative p-7 bg-base-light/72 border border-line rounded-2xl shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <strong className="grid place-items-center w-7.5 h-7.5 mb-4.5 text-white bg-olive rounded-full">
               3
             </strong>

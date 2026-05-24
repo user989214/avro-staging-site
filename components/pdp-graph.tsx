@@ -12,7 +12,7 @@ export function MoodGraph({ formulaKey }: MoodGraphProps) {
   
   return (
     <div className="w-full max-w-[600px] mx-auto">
-      <div className="relative h-[280px] bg-base rounded-xl border border-line p-6">
+      <div className="relative h-[280px] bg-base rounded-2xl border border-line p-6">
         {/* Y-axis label */}
         <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full pr-4">
           <span className="text-[11px] font-bold text-ink/50 uppercase tracking-wider [writing-mode:vertical-lr] rotate-180">
@@ -104,7 +104,7 @@ export function IngredientBar({
   highlight?: boolean
 }) {
   return (
-    <div className={`flex items-center gap-4 p-4 rounded-lg border ${highlight ? "border-avro-blue bg-avro-blue/5" : "border-line bg-base"}`}>
+    <div className={`flex items-center gap-4 p-4 rounded-2xl border ${highlight ? "border-avro-blue bg-avro-blue/5" : "border-line bg-base"}`}>
       <div className="flex-shrink-0 w-12 h-12 rounded-full bg-soft flex items-center justify-center">
         <Icon name="flask" className={`w-6 h-6 ${highlight ? "text-avro-blue" : "text-olive"}`} />
       </div>

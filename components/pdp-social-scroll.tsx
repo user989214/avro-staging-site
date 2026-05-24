@@ -88,7 +88,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
               return (
                 <div
                   key={`${card.id}-${card.position}`}
-                  className="relative flex-shrink-0 rounded-xl overflow-hidden"
+                  className="relative flex-shrink-0 rounded-2xl overflow-hidden"
                   style={{
                     width: isFeatured ? 240 : isAdjacent ? 190 : 150,
                     height: isFeatured ? 360 : isAdjacent ? 310 : 260,
@@ -128,8 +128,8 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
                   </div>
                   
                   {/* Quick add card at bottom */}
-                  <div className="absolute bottom-3 left-2.5 right-2.5 bg-base rounded-lg p-2.5 flex items-center gap-2.5 shadow-xl">
-                    <div className="w-12 h-12 rounded-lg flex-shrink-0 flex items-center justify-center" style={{ backgroundColor: "#e8e8e8" }}>
+                  <div className="absolute bottom-3 left-2.5 right-2.5 bg-base rounded-2xl p-2.5 flex items-center gap-2.5 shadow-xl">
+                    <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center" style={{ backgroundColor: "#e8e8e8" }}>
                       <img src={stickImage.src} alt={stickImage.alt} className="w-8 h-8 object-contain" />
                     </div>
                     

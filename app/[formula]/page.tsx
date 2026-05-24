@@ -198,7 +198,7 @@ export default async function ProductPage({
 
             {/* Right side - graph */}
             <div className="relative">
-              <div className="rounded-xl p-5" style={{ backgroundColor: "#f2f2f2" }}>
+              <div className="rounded-2xl p-5" style={{ backgroundColor: "#f2f2f2" }}>
                 {/* Graph */}
                 <div className="relative h-[180px] lg:h-[200px]">
                   {/* Grid lines */}

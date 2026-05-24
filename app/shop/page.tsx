@@ -39,7 +39,7 @@ export default function ShopPage() {
             </Link>
           </div>
         </div>
-        <div className="relative aspect-[3/2] w-full max-w-[620px] justify-self-center overflow-hidden rounded-lg border border-line shadow-[0_30px_60px_-30px_rgba(20,18,12,0.35)]">
+        <div className="relative aspect-[3/2] w-full max-w-[620px] justify-self-center overflow-hidden rounded-2xl border border-line shadow-[0_30px_60px_-30px_rgba(20,18,12,0.35)]">
           <Image
             src="/images/lifestyle/avro-trio-stone-hero.png"
             alt="AVRO Calm, Focus, and Energy tubes arranged on a stone slab with soft botanicals"
@@ -56,7 +56,7 @@ export default function ShopPage() {
       {/* Compare Table */}
       <Section>
         <SectionHeading title="Compare at a glance" />
-        <div className="grid grid-cols-1 sm:grid-cols-4 border border-line rounded-lg overflow-hidden bg-base">
+        <div className="grid grid-cols-1 sm:grid-cols-4 border border-line rounded-2xl overflow-hidden bg-base">
           <div className="min-h-[56px] p-4 border-b border-line" />
           <strong className="min-h-[56px] p-4 text-center border-b border-l border-line">
             Calm

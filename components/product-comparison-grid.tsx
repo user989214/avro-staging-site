@@ -75,7 +75,7 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
             return (
               <div
                 key={key}
-                className="group flex flex-col rounded-xl overflow-hidden bg-base"
+                className="group flex flex-col rounded-2xl overflow-hidden bg-base"
                 style={{
                   border: isActive ? "3px solid #000" : "2px solid rgba(0,0,0,0.12)",
                 }}

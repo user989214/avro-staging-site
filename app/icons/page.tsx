@@ -138,7 +138,7 @@ export default function IconSheetPage() {
         </section>
       ))}
 
-      <section className="mt-16 p-6 border border-line rounded-lg bg-soft">
+      <section className="mt-16 p-6 border border-line rounded-2xl bg-soft">
         <h2 className="text-[clamp(20px,2.4vw,28px)] font-black mb-3">
           Paste into Figma
         </h2>

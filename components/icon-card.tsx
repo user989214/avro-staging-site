@@ -43,7 +43,7 @@ export function IconCard({ name }: Props) {
     <figure
       data-icon-card
       data-icon-name={name}
-      className="group flex flex-col items-center gap-3 p-5 border border-line rounded-lg bg-base-light/88 transition-colors hover:bg-soft"
+      className="group flex flex-col items-center gap-3 p-5 border border-line rounded-2xl bg-base-light/88 transition-colors hover:bg-soft"
     >
       <div
         ref={wrapRef}

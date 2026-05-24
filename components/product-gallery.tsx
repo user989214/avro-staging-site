@@ -147,7 +147,7 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
   return (
     <div className="flex flex-col gap-3 lg:gap-4">
       {/* Main view — square, fills the frame, image-native background */}
-      <div className="relative w-full aspect-square rounded-xl overflow-hidden" style={{ backgroundColor: "#f2f2f2" }}>
+      <div className="relative w-full aspect-square rounded-2xl overflow-hidden" style={{ backgroundColor: "#f2f2f2" }}>
         <div className="absolute inset-0">{renderMain()}</div>
       </div>
 
@@ -162,7 +162,7 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
                 aria-label={thumb.label}
                 aria-pressed={activeId === thumb.id}
                 className={cn(
-                  "relative w-[78px] h-[78px] sm:w-[86px] sm:h-[86px] rounded-lg overflow-hidden flex items-center justify-center transition-all",
+                  "relative w-[78px] h-[78px] sm:w-[86px] sm:h-[86px] rounded-2xl overflow-hidden flex items-center justify-center transition-all",
                   activeId === thumb.id ? "ring-2 ring-black" : "opacity-70 hover:opacity-100",
                 )}
                 style={{ backgroundColor: "#f2f2f2" }}

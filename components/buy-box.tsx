@@ -242,7 +242,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
             </p>
           </div>
           <div className="px-6 pb-6">
-            <div className="rounded-md p-4" style={{ backgroundColor: LIGHT_GRAY }}>
+            <div className="rounded-xl p-4" style={{ backgroundColor: LIGHT_GRAY }}>
               <div style={{ borderTop: "4px solid #000", paddingTop: 8 }}>
                 {factsRows.map(([label, value], i) => (
                   <div

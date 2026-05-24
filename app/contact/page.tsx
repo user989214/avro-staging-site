@@ -36,7 +36,7 @@ export default function ContactPage() {
 
         <form
           onSubmit={handleSubmit}
-          className="grid gap-3.5 p-6 bg-base-light/90 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
+          className="grid gap-3.5 p-6 bg-base-light/90 border border-line rounded-2xl shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
         >
           <label className="grid gap-1.5 text-ink font-extrabold">
             Name
@@ -112,25 +112,25 @@ export default function ContactPage() {
           title="What can we help with?"
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5">
-          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-full shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <h3 className="font-black mb-2">Product Questions</h3>
             <p className="text-muted-foreground text-base leading-relaxed">
               Ask about Calm, Focus, Energy, ingredients, or how to choose.
             </p>
           </article>
-          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-full shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <h3 className="font-black mb-2">Order Support</h3>
             <p className="text-muted-foreground text-base leading-relaxed">
               Questions about shipping, delivery, damaged product, or returns.
             </p>
           </article>
-          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-full shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <h3 className="font-black mb-2">Retail / Wholesale</h3>
             <p className="text-muted-foreground text-base leading-relaxed">
               Interested in carrying AVRO.
             </p>
           </article>
-          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-full shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
             <h3 className="font-black mb-2">Partnerships</h3>
             <p className="text-muted-foreground text-base leading-relaxed">
               Creators, events, golf, tech, gaming, or non alcohol

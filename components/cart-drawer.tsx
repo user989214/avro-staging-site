@@ -84,7 +84,7 @@ export function CartDrawer() {
                     className="flex gap-4 pb-6 border-b border-gray-100 last:border-0"
                   >
                     <div
-                      className="w-20 h-20 rounded-lg flex items-center justify-center flex-shrink-0"
+                      className="w-20 h-20 rounded-2xl flex items-center justify-center flex-shrink-0"
                       style={{ backgroundColor: item.formula.color }}
                     >
                       <Image

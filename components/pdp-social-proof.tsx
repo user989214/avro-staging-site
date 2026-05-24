@@ -67,7 +67,7 @@ export function SocialProofSection({ formulaKey }: SocialProofSectionProps) {
         {quotes.map((item, i) => (
           <div
             key={item.name}
-            className="group relative bg-base rounded-xl border border-line overflow-hidden transition-all hover:-translate-y-1 hover:shadow-lg"
+            className="group relative bg-base rounded-2xl border border-line overflow-hidden transition-all hover:-translate-y-1 hover:shadow-lg"
           >
             {/* Image placeholder - using gradient for now */}
             <div 
@@ -112,7 +112,7 @@ export function SocialProofSection({ formulaKey }: SocialProofSectionProps) {
       </div>
 
       {/* Stats bar */}
-      <div className="grid grid-cols-3 gap-4 mt-10 p-6 bg-soft rounded-xl">
+      <div className="grid grid-cols-3 gap-4 mt-10 p-6 bg-soft rounded-2xl">
         <div className="text-center">
           <p className="font-black text-2xl text-ink">4.8/5</p>
           <p className="text-xs text-ink/60 font-medium mt-1">Average Rating</p>

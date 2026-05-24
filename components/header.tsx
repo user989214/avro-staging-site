@@ -248,7 +248,7 @@ function MobileNavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="block px-4 py-3 text-lg font-medium rounded-xl transition-colors"
+      className="block px-4 py-3 text-lg font-medium rounded-full transition-colors"
       style={{ color: "var(--ink)" }}
     >
       {children}

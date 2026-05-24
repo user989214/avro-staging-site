@@ -216,7 +216,7 @@ export function InfoCard({
     return (
       <Link
         href={href}
-        className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)] transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_70px_rgba(30,29,24,0.1)]"
+        className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-full shadow-[0_10px_30px_rgba(31,29,24,0.04)] transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_70px_rgba(30,29,24,0.1)]"
       >
         {content}
       </Link>
@@ -224,7 +224,7 @@ export function InfoCard({
   }
 
   return (
-    <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-lg shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+    <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-full shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
       {content}
     </article>
   )

@@ -13,7 +13,7 @@ export function PdpMiniRecommendations({ currentKey }: PdpMiniRecommendationsPro
   const otherKeys = (Object.keys(formulas) as FormulaKey[]).filter(k => k !== currentKey).slice(0, 2)
 
   return (
-    <div className="bg-soft rounded-xl p-5">
+    <div className="bg-soft rounded-2xl p-5">
       <div className="flex items-center justify-between mb-4">
         <span className="text-sm font-bold text-ink">You might also like</span>
         <Link 
@@ -34,10 +34,10 @@ export function PdpMiniRecommendations({ currentKey }: PdpMiniRecommendationsPro
             <Link
               key={key}
               href={`/${key}`}
-              className="group flex items-center gap-3 bg-base rounded-lg p-3 hover:shadow-md transition-shadow"
+              className="group flex items-center gap-3 bg-base rounded-2xl p-3 hover:shadow-md transition-shadow"
             >
               {/* Product image */}
-              <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-soft rounded-lg">
+              <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-soft rounded-full">
                 <img 
                   src={stickImage.src}
                   alt={stickImage.alt}

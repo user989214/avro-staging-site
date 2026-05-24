@@ -158,7 +158,7 @@ export default function FaqPage() {
           Find answers about AVRO formulas, ingredients, timing, caffeine,
           subscriptions, shipping, and how to choose the right product.
         </p>
-        <label className="grid grid-cols-[28px_1fr] gap-3 items-center w-full max-w-[720px] mt-5 px-4 py-3.5 bg-base border border-line rounded-lg shadow-[0_12px_35px_rgba(30,29,24,0.06)]">
+        <label className="grid grid-cols-[28px_1fr] gap-3 items-center w-full max-w-[720px] mt-5 px-4 py-3.5 bg-base border border-line rounded-2xl shadow-[0_12px_35px_rgba(30,29,24,0.06)]">
           <Icon name="search" className="w-7 h-7 text-muted" />
           <input
             type="search"
