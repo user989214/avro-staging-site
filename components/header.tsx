@@ -59,22 +59,22 @@ export function Header() {
 
   return (
     <>
-      {/* Announcement bar — charcoal background with cream text per design system dark sections */}
+      {/* Announcement bar — Avro Blue background with charcoal text */}
       <div
         className="flex justify-center gap-4 md:gap-12 px-4 md:px-8 py-2.5 text-[11px] md:text-[12px] font-semibold tracking-[0.08em] uppercase text-center"
-        style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
+        style={{ backgroundColor: "var(--avro-blue)", color: "var(--charcoal)" }}
       >
         <span>
           ✦ Subscribe and save 25% on every order —{" "}
           <Link
             href="/shop"
             className="underline underline-offset-4 hover:opacity-70 transition-opacity"
-            style={{ color: "var(--avro-blue)" }}
+            style={{ color: "var(--charcoal)" }}
           >
             Shop AVRO
           </Link>
         </span>
-        <span className="hidden md:inline" style={{ color: "rgba(245,240,232,0.55)" }}>
+        <span className="hidden md:inline" style={{ color: "rgba(21,21,21,0.6)" }}>
           Free shipping over $50
         </span>
       </div>
