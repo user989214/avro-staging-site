@@ -102,11 +102,11 @@
 
   /* Per-formula accent colors */
   --calm: #7A5BC5;          /* Calm purple */
-  --calm-deep: #4B2C8A;
+  --calm-deep: #2D1A52;     /* Very dark purple for text contrast */
   --focus: #EA0A8C;         /* Focus magenta */
-  --focus-deep: #B30669;
+  --focus-deep: #5C0337;    /* Very dark magenta for text contrast */
   --energy: #FED206;        /* Energy yellow */
-  --energy-deep: #D4AF00;
+  --energy-deep: #6B5000;   /* Very dark gold for text contrast */
 
   /* Other cohort accents (used on cohort pages) */
   --golf: #BDD637;          /* Fuji Apple */
