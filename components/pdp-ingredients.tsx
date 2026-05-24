@@ -2,7 +2,7 @@
 
 import type { FormulaKey } from "@/lib/data"
 
-const GC = '"Gotham Condensed", sans-serif'
+const GC = '"DM Sans", system-ui, sans-serif'
 
 type Ingredient = {
   name: string
@@ -70,7 +70,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
               fontWeight: 950,
               fontSize: "clamp(28px,4vw,52px)",
               lineHeight: 1.0,
-              color: "#000",
+              color: "var(--ink)",
               marginBottom: 12,
             }}
           >
@@ -108,8 +108,8 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
                 <span
                   className="absolute top-3 right-3 px-3 py-1.5 rounded-full"
                   style={{
-                    backgroundColor: "#000",
-                    color: "#fff",
+                    backgroundColor: "var(--charcoal)",
+                    color: "var(--bone)",
                     fontFamily: GC,
                     fontWeight: 800,
                     fontSize: 14,
@@ -127,7 +127,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
                     fontWeight: 950,
                     fontSize: 22,
                     lineHeight: 1.1,
-                    color: "#000",
+                    color: "var(--ink)",
                     marginBottom: 8,
                   }}
                 >
@@ -154,7 +154,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
           <a
             href="/science"
             className="inline-flex items-center gap-2 hover:underline"
-            style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: "#000" }}
+            style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: "var(--ink)" }}
           >
             See full ingredient list
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

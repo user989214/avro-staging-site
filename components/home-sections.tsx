@@ -4,55 +4,205 @@ import Link from "next/link"
 import { formulas, type FormulaKey, sharedProof, testimonials } from "@/lib/data"
 import { Icon } from "@/components/icons"
 
-const GC = '"Gotham Condensed", sans-serif'
-const BLUE = "#87CEEB"
+const GC = '"DM Sans", system-ui, sans-serif'
+const BLUE = "#94C6D4"
 
 // ── HERO ──────────────────────────────────────────────────────────────────────
 export function HomeRefHero() {
   return (
-    <section style={{ width: "100%", backgroundColor: "#fff", color: "#000" }}>
+    <section
+      style={{
+        width: "100%",
+        backgroundColor: "var(--base)",
+        color: "var(--ink)",
+        padding: "clamp(48px,7vw,96px) clamp(20px,5vw,64px) clamp(48px,6vw,80px)",
+      }}
+    >
       <style>{`
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Ultra.woff") format("woff"); font-weight: 950; font-style: normal; font-display: swap; }
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Black.woff") format("woff"); font-weight: 800; font-style: normal; font-display: swap; }
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Bold.woff") format("woff"); font-weight: 700; font-style: normal; font-display: swap; }
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Medium.woff") format("woff"); font-weight: 500; font-style: normal; font-display: swap; }
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Book.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
-        .hp-btn-blue { background-color: #87CEEB; color: #000; border: 2.5px solid #87CEEB; transition: background-color 0.18s ease, color 0.18s ease; }
-        .hp-btn-blue:hover { background-color: transparent; color: #87CEEB; }
-        .hp-btn-outline-white { background-color: transparent; color: #fff; border: 2.5px solid #fff; transition: background-color 0.18s ease, color 0.18s ease; }
-        .hp-btn-outline-white:hover { background-color: #fff; color: #000; }
-        .hp-btn-black { background-color: #000; color: #fff; border: 2.5px solid #000; transition: background-color 0.18s ease, color 0.18s ease; }
-        .hp-btn-black:hover { background-color: transparent; color: #000; }
-        .hp-btn-outline-black { background-color: transparent; color: #000; border: 2.5px solid #000; transition: background-color 0.18s ease, color 0.18s ease; }
-        .hp-btn-outline-black:hover { background-color: #000; color: #fff; }
-        .hp-cta-btn { background-color: #fff; color: #000; border: 2.5px solid #fff; transition: background-color 0.18s ease, color 0.18s ease; }
-        .hp-cta-btn:hover { background-color: transparent; color: #fff; }
+        .hp-pill-primary {
+          background-color: var(--charcoal);
+          color: var(--bone);
+          border: 1.5px solid var(--charcoal);
+          border-radius: 999px;
+          transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .hp-pill-primary:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 10px 30px rgba(21,21,21,0.18);
+        }
+        .hp-pill-secondary {
+          background-color: transparent;
+          color: var(--charcoal);
+          border: 1.5px solid var(--charcoal);
+          border-radius: 999px;
+          transition: background-color .2s ease, color .2s ease;
+        }
+        .hp-pill-secondary:hover {
+          background-color: var(--charcoal);
+          color: var(--bone);
+        }
         .moment-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
         .moment-card:hover { transform: translateY(-3px); }
         .moment-card img { transition: transform 0.5s ease; }
         .moment-card:hover img { transform: scale(1.04); }
       `}</style>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", maxWidth: 1440, margin: "0 auto" }}>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1.05fr 1fr",
+          gap: "clamp(32px,5vw,72px)",
+          alignItems: "center",
+          maxWidth: 1320,
+          margin: "0 auto",
+        }}
+      >
         {/* Left */}
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "clamp(56px,8vw,112px) clamp(20px,6vw,80px)" }}>
-          <h1 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(52px,7.5vw,108px)", lineHeight: 0.94, color: "#000", marginBottom: 28, maxWidth: 560 }}>
-            Calm. Clear. Ready.
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {/* Eyebrow */}
+          <span
+            style={{
+              fontFamily: GC,
+              fontWeight: 700,
+              fontSize: 11,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "var(--avro-blue-deep)",
+              marginBottom: 24,
+            }}
+          >
+            Calm · Focus · Energy
+          </span>
+
+          {/* Hero headline — Gotham display family for hero only, per design system */}
+          <h1
+            className="font-display"
+            style={{
+              fontSize: "clamp(44px,5.6vw,76px)",
+              lineHeight: 1.0,
+              letterSpacing: "-0.03em",
+              color: "var(--ink)",
+              marginBottom: 24,
+              maxWidth: 600,
+              fontWeight: 800,
+            }}
+          >
+            Calm first.
+            <br />
+            <span style={{ fontStyle: "italic", fontWeight: 700 }}>Clear headed.</span>
+            <br />
+            Ready when pressure rises.
           </h1>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(19px,1.8vw,24px)", lineHeight: 1.5, color: "rgba(0,0,0,0.65)", maxWidth: 520, marginBottom: 36 }}>
-            AVRO is a calm-first daily drink mix made with naturally fermented PharmaGABA®, designed to support clarity, composure, and steady energy before the moments that matter.
+
+          {/* Lede — DM Sans, body LG */}
+          <p
+            style={{
+              fontFamily: GC,
+              fontWeight: 400,
+              fontSize: "clamp(16px,1.4vw,18px)",
+              lineHeight: 1.55,
+              color: "var(--warm-gray)",
+              maxWidth: 520,
+              marginBottom: 36,
+            }}
+          >
+            Functional supplements formulated around naturally fermented PharmaGABA®. State control, not stimulation —
+            so you can show up calm, clear, and ready for what matters.
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-            <a href="/shop" className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 21, minHeight: 66, padding: "0 44px", borderRadius: 10, textDecoration: "none" }}>Shop AVRO</a>
-            <a href="/shop" className="hp-btn-outline-black" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 21, minHeight: 66, padding: "0 44px", borderRadius: 10, textDecoration: "none" }}>Find Your Formula</a>
+
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+            <a
+              href="/shop"
+              className="hp-pill-primary"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: GC,
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: "-0.005em",
+                minHeight: 52,
+                padding: "0 28px",
+                textDecoration: "none",
+              }}
+            >
+              Shop AVRO →
+            </a>
+            <a
+              href="/science"
+              className="hp-pill-secondary"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: GC,
+                fontWeight: 700,
+                fontSize: 14,
+                letterSpacing: "-0.005em",
+                minHeight: 52,
+                padding: "0 28px",
+                textDecoration: "none",
+              }}
+            >
+              Learn the Science
+            </a>
+          </div>
+
+          {/* Mini social proof */}
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 32 }}>
+            <div style={{ display: "flex", gap: 3 }}>
+              {[0, 1, 2, 3, 4].map((i) => (
+                <svg
+                  key={i}
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill={BLUE}
+                  aria-hidden="true"
+                >
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              ))}
+            </div>
+            <span
+              style={{
+                fontFamily: GC,
+                fontWeight: 700,
+                fontSize: 14,
+                color: "var(--ink)",
+              }}
+            >
+              4.8
+              <span style={{ fontWeight: 400, color: "var(--warm-gray)", marginLeft: 6 }}>
+                — 2,400+ Reviews
+              </span>
+            </span>
           </div>
         </div>
+
         {/* Right: image */}
-        <div style={{ position: "relative", minHeight: "clamp(360px,50vw,640px)", overflow: "hidden" }}>
+        <div
+          style={{
+            position: "relative",
+            aspectRatio: "1 / 1.05",
+            overflow: "hidden",
+            borderRadius: 28,
+            backgroundColor: "var(--base-deep)",
+          }}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/lifestyle/kitchen-trio-pink-cocktails.jpg"
-            alt="AVRO Energy Fuji Apple stick packet next to a glass of mixed drink at a sunset rooftop dinner"
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "60% center" }}
+            alt="AVRO stick packet next to a glass of mixed drink"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "60% center",
+            }}
           />
         </div>
       </div>
@@ -63,14 +213,14 @@ export function HomeRefHero() {
 // ── PROOF BAR ─────────────────────────────────────────────────────────────────
 export function HomeProofBar() {
   return (
-    <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(32px,5vw,56px) clamp(20px,5vw,64px)" }}>
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(32px,5vw,56px) clamp(20px,5vw,64px)" }}>
         <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", border: "2px solid rgba(0,0,0,0.12)", borderRadius: 12, overflow: "hidden" }}>
         {sharedProof.map((item, i) => (
           <div
             key={item.label}
             style={{ padding: "clamp(20px,3vw,36px) clamp(16px,3vw,32px)", textAlign: "center", borderLeft: i > 0 ? "2px solid rgba(0,0,0,0.12)" : "none" }}
           >
-            <strong style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3.5vw,48px)", lineHeight: 1.0, color: "#000", display: "block" }}>{item.stat}</strong>
+            <strong style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3.5vw,48px)", lineHeight: 1.0, color: "var(--ink)", display: "block" }}>{item.stat}</strong>
             <span style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.4vw,18px)", color: "rgba(0,0,0,0.6)", marginTop: 6, display: "block" }}>{item.label}</span>
           </div>
         ))}
@@ -88,11 +238,11 @@ export function HomeBenefitRow() {
   ]
 
   return (
-    <section style={{ backgroundColor: "#fff", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(40px,6vw,64px)" }}>
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(40px,6vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 16 }}>
         {benefits.map((b) => (
-          <div key={b.title} style={{ backgroundColor: "#fff", borderRadius: 12, padding: "clamp(24px,3vw,36px)", border: "1px solid rgba(0,0,0,0.08)" }}>
-            <h3 style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(20px,2vw,26px)", lineHeight: 1.1, color: "#000", marginBottom: 10 }}>{b.title}</h3>
+          <div key={b.title} style={{ backgroundColor: "var(--base)", borderRadius: 12, padding: "clamp(24px,3vw,36px)", border: "1px solid rgba(0,0,0,0.08)" }}>
+            <h3 style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(20px,2vw,26px)", lineHeight: 1.1, color: "var(--ink)", marginBottom: 10 }}>{b.title}</h3>
             <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(16px,1.4vw,19px)", lineHeight: 1.5, color: "rgba(0,0,0,0.55)" }}>{b.copy}</p>
           </div>
         ))}
@@ -111,11 +261,11 @@ export function HomeLogicRow() {
   ]
 
   return (
-    <section style={{ backgroundColor: "#f5f5f5", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
+    <section style={{ backgroundColor: "var(--base-light)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 20 }}>
         {/* Card 1 */}
-        <div style={{ backgroundColor: "#fff", borderRadius: 12, padding: "clamp(28px,3vw,44px)", border: "1px solid rgba(0,0,0,0.06)" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3vw,44px)", lineHeight: 1.05, color: "#000", marginBottom: 16 }}>
+        <div style={{ backgroundColor: "var(--base)", borderRadius: 12, padding: "clamp(28px,3vw,44px)", border: "1px solid rgba(0,0,0,0.06)" }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3vw,44px)", lineHeight: 1.05, color: "var(--ink)", marginBottom: 16 }}>
             More energy is not always the answer.
           </h2>
           <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(17px,1.5vw,20px)", lineHeight: 1.5, color: "rgba(0,0,0,0.6)" }}>
@@ -124,22 +274,22 @@ export function HomeLogicRow() {
         </div>
 
         {/* Comparison table */}
-        <div style={{ backgroundColor: "#fff", borderRadius: 12, overflow: "hidden", border: "1px solid rgba(0,0,0,0.06)" }}>
+        <div style={{ backgroundColor: "var(--base)", borderRadius: 12, overflow: "hidden", border: "1px solid rgba(0,0,0,0.06)" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
             <div style={{ padding: "16px 20px", fontFamily: GC, fontWeight: 800, fontSize: 18, color: "rgba(0,0,0,0.4)", borderBottom: "1px solid rgba(0,0,0,0.08)", textAlign: "center" }}>Stimulant First</div>
-            <div style={{ padding: "16px 20px", fontFamily: GC, fontWeight: 800, fontSize: 18, color: "#000", borderBottom: "1px solid rgba(0,0,0,0.08)", borderLeft: "1px solid rgba(0,0,0,0.08)", textAlign: "center", backgroundColor: "rgba(135,206,235,0.15)" }}>Calm First</div>
+            <div style={{ padding: "16px 20px", fontFamily: GC, fontWeight: 800, fontSize: 18, color: "var(--ink)", borderBottom: "1px solid rgba(0,0,0,0.08)", borderLeft: "1px solid rgba(0,0,0,0.08)", textAlign: "center", backgroundColor: "rgba(135,206,235,0.15)" }}>Calm First</div>
           </div>
           {comparisonRows.map(([left, right]) => (
             <div key={left} style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
               <div style={{ padding: "16px 20px", fontFamily: GC, fontWeight: 700, fontSize: 17, color: "rgba(0,0,0,0.45)", borderTop: "1px solid rgba(0,0,0,0.05)" }}>{left}</div>
-              <div style={{ padding: "16px 20px", fontFamily: GC, fontWeight: 700, fontSize: 17, color: "#000", borderTop: "1px solid rgba(0,0,0,0.05)", borderLeft: "1px solid rgba(0,0,0,0.08)", backgroundColor: "rgba(135,206,235,0.08)" }}>{right}</div>
+              <div style={{ padding: "16px 20px", fontFamily: GC, fontWeight: 700, fontSize: 17, color: "var(--ink)", borderTop: "1px solid rgba(0,0,0,0.05)", borderLeft: "1px solid rgba(0,0,0,0.08)", backgroundColor: "rgba(135,206,235,0.08)" }}>{right}</div>
             </div>
           ))}
         </div>
 
         {/* Card 3 */}
-        <div style={{ backgroundColor: "#fff", borderRadius: 12, padding: "clamp(28px,3vw,44px)", border: "1px solid rgba(0,0,0,0.06)" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3vw,44px)", lineHeight: 1.05, color: "#000", marginBottom: 16 }}>
+        <div style={{ backgroundColor: "var(--base)", borderRadius: 12, padding: "clamp(28px,3vw,44px)", border: "1px solid rgba(0,0,0,0.06)" }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3vw,44px)", lineHeight: 1.05, color: "var(--ink)", marginBottom: 16 }}>
             Performance starts with state.
           </h2>
           <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", margin: "20px 0" }}>
@@ -153,7 +303,7 @@ export function HomeLogicRow() {
                       {i === 2 && <><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></>}
                     </svg>
                   </div>
-                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 17, color: "#000" }}>{label}</span>
+                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 17, color: "var(--ink)" }}>{label}</span>
                 </div>
                 {i < 2 && <span key={`arrow-${i}`} style={{ fontFamily: GC, fontWeight: 800, fontSize: 22, color: "rgba(0,0,0,0.2)" }}>→</span>}
               </>
@@ -182,9 +332,9 @@ export function HomeProductStrip() {
   }
 
   return (
-    <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#000", marginBottom: 32 }}>
+        <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32 }}>
           Three formulas. One foundation.
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", border: "2px solid rgba(0,0,0,0.12)", borderRadius: 16, overflow: "hidden" }}>
@@ -203,7 +353,7 @@ export function HomeProductStrip() {
                 />
               </div>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "20px 24px", borderTop: "2px solid rgba(0,0,0,0.1)", backgroundColor: BLUE }}>
-                <span style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(16px,1.4vw,20px)", color: "#000", textAlign: "center" }}>
+                <span style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(16px,1.4vw,20px)", color: "var(--ink)", textAlign: "center" }}>
                   PharmaGABA® + {formulaAdditions[key]}
                 </span>
               </div>
@@ -227,20 +377,20 @@ export function HomeMomentGrid() {
   return (
     <section style={{ backgroundColor: BLUE, width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#000", marginBottom: 32 }}>
+        <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32 }}>
           Built for pressure sensitive moments.
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))", gap: 16 }}>
           {moments.map((m) => (
-            <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 12, overflow: "hidden", backgroundColor: "#fff" }}>
+            <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 12, overflow: "hidden", backgroundColor: "var(--base)" }}>
               <div style={{ position: "relative", height: 220, overflow: "hidden" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={m.image} alt={m.alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
               <div style={{ padding: "20px 24px 24px" }}>
-                <h3 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(24px,2.5vw,34px)", lineHeight: 1.0, color: "#000", marginBottom: 8 }}>{m.title}</h3>
+                <h3 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(24px,2.5vw,34px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 8 }}>{m.title}</h3>
                 <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, lineHeight: 1.45, color: "rgba(0,0,0,0.6)", marginBottom: 20 }}>{m.copy}</p>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 17, minHeight: 52, padding: "0 24px", borderRadius: 10, backgroundColor: BLUE, color: "#000" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 17, minHeight: 52, padding: "0 24px", borderRadius: 10, backgroundColor: BLUE, color: "var(--ink)" }}>
                   {m.cta}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </span>
@@ -256,11 +406,11 @@ export function HomeMomentGrid() {
 // ── SCIENCE GRID ──────────────────────────────────────────────────────────────
 export function HomeScienceGrid() {
   return (
-    <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px,1fr))", gap: 20 }}>
         {/* Why GABA card */}
         <div style={{ backgroundColor: "#f8f8f8", borderRadius: 12, padding: "clamp(28px,4vw,48px)", border: "1px solid rgba(0,0,0,0.06)" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3.5vw,52px)", lineHeight: 1.0, color: "#000", marginBottom: 16 }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3.5vw,52px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 16 }}>
             Why GABA matters.
           </h2>
           <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(17px,1.5vw,20px)", lineHeight: 1.5, color: "rgba(0,0,0,0.6)", marginBottom: 24 }}>
@@ -277,13 +427,13 @@ export function HomeScienceGrid() {
                       {i === 2 && <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>}
                     </svg>
                   </div>
-                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "#000" }}>{label}</span>
+                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "var(--ink)" }}>{label}</span>
                 </div>
                 {i < 2 && <span key={`arr-${i}`} style={{ fontFamily: GC, fontWeight: 800, fontSize: 20, color: "rgba(0,0,0,0.2)" }}>→</span>}
               </>
             ))}
           </div>
-          <a href="/science" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 18, minHeight: 58, padding: "0 32px", borderRadius: 10, textDecoration: "none", backgroundColor: BLUE, color: "#000" }}>
+          <a href="/science" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 800, fontSize: 18, minHeight: 58, padding: "0 32px", borderRadius: 10, textDecoration: "none", backgroundColor: BLUE, color: "var(--ink)" }}>
             Learn the Science of AVRO
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -291,14 +441,14 @@ export function HomeScienceGrid() {
 
         {/* Formula comparison */}
         <div style={{ backgroundColor: "#f8f8f8", borderRadius: 12, overflow: "hidden", padding: "clamp(28px,4vw,48px)", border: "1px solid rgba(0,0,0,0.06)" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3.5vw,52px)", lineHeight: 1.0, color: "#000", marginBottom: 24 }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(28px,3.5vw,52px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 24 }}>
             Every formula starts calm first.
           </h2>
           <div style={{ overflowX: "auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr repeat(3,1fr)", minWidth: 420, border: "1px solid rgba(0,0,0,0.1)", borderRadius: 8, overflow: "hidden", backgroundColor: "#fff" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr repeat(3,1fr)", minWidth: 420, border: "1px solid rgba(0,0,0,0.1)", borderRadius: 8, overflow: "hidden", backgroundColor: "var(--base)" }}>
               <div style={{ padding: "12px 14px", borderBottom: "1px solid rgba(0,0,0,0.08)" }} />
               {["Calm", "Focus", "Energy"].map((f) => (
-                <div key={f} style={{ padding: "12px 14px", fontFamily: GC, fontWeight: 800, fontSize: 16, color: "#000", borderBottom: "1px solid rgba(0,0,0,0.08)", borderLeft: "1px solid rgba(0,0,0,0.08)", textAlign: "center", backgroundColor: "rgba(135,206,235,0.12)" }}>{f}</div>
+                <div key={f} style={{ padding: "12px 14px", fontFamily: GC, fontWeight: 800, fontSize: 16, color: "var(--ink)", borderBottom: "1px solid rgba(0,0,0,0.08)", borderLeft: "1px solid rgba(0,0,0,0.08)", textAlign: "center", backgroundColor: "rgba(135,206,235,0.12)" }}>{f}</div>
               ))}
               {[
                 ["Shared Foundation", "PharmaGABA®", "Naturally fermented base", "Calm-first logic"],
@@ -309,7 +459,7 @@ export function HomeScienceGrid() {
                 <>
                   <div key={row} style={{ padding: "14px 16px", fontFamily: GC, fontWeight: 800, fontSize: 16, color: "rgba(0,0,0,0.5)", borderTop: "1px solid rgba(0,0,0,0.06)", backgroundColor: "rgba(0,0,0,0.02)" }}>{row}</div>
                   {cells.map((c, ci) => (
-                    <div key={`${row}-${ci}`} style={{ padding: "14px 16px", fontFamily: GC, fontWeight: 400, fontSize: 16, color: "#000", borderTop: "1px solid rgba(0,0,0,0.06)", borderLeft: "1px solid rgba(0,0,0,0.08)", textAlign: "center" }}>{c}</div>
+                    <div key={`${row}-${ci}`} style={{ padding: "14px 16px", fontFamily: GC, fontWeight: 400, fontSize: 16, color: "var(--ink)", borderTop: "1px solid rgba(0,0,0,0.06)", borderLeft: "1px solid rgba(0,0,0,0.08)", textAlign: "center" }}>{c}</div>
                   ))}
                 </>
               ))}
@@ -333,11 +483,11 @@ export function HomeQualityRow() {
   ]
 
   return (
-    <section style={{ backgroundColor: "#fff", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(40px,6vw,64px)" }}>
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(40px,6vw,64px)" }}>
         <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px,1fr))", border: "2px solid rgba(0,0,0,0.12)", borderRadius: 12, overflow: "hidden" }}>
           {badges.map((b, i) => (
             <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: "clamp(20px,3vw,36px) clamp(12px,2vw,20px)", textAlign: "center", borderLeft: i > 0 ? "2px solid rgba(0,0,0,0.12)" : "none" }}>
-            <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(16px,1.5vw,21px)", color: "#000", lineHeight: 1.2 }}>{b.label}</strong>
+            <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(16px,1.5vw,21px)", color: "var(--ink)", lineHeight: 1.2 }}>{b.label}</strong>
             <span style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(14px,1.2vw,17px)", color: "rgba(0,0,0,0.6)" }}>{b.sub}</span>
           </div>
         ))}
@@ -349,10 +499,10 @@ export function HomeQualityRow() {
 // ── STORY STRIP ───────────────────────────────────────────────────────────────
 export function HomeStoryStrip() {
   return (
-    <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto", backgroundColor: BLUE, borderRadius: 16, overflow: "hidden" }}>
         <div style={{ padding: "clamp(36px,5vw,64px) clamp(28px,5vw,72px)" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(32px,4.5vw,64px)", lineHeight: 1.0, color: "#000", marginBottom: 16 }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(32px,4.5vw,64px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 16 }}>
             Science-backed. Founder-driven.
           </h2>
           <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(17px,1.5vw,21px)", lineHeight: 1.5, color: "rgba(0,0,0,0.65)", maxWidth: 680, marginBottom: 28 }}>
@@ -389,12 +539,12 @@ export function HomeRitualSection() {
   return (
     <section style={{ backgroundColor: "#f8f8f8", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#000", marginBottom: 32 }}>
+        <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32 }}>
           How to use AVRO.
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))", gap: 16 }}>
           {steps.map((step) => (
-            <div key={step.num} style={{ backgroundColor: "#fff", borderRadius: 12, padding: "clamp(24px,3vw,36px)", display: "flex", gap: 20, alignItems: "flex-start", border: "1px solid rgba(0,0,0,0.08)" }}>
+            <div key={step.num} style={{ backgroundColor: "var(--base)", borderRadius: 12, padding: "clamp(24px,3vw,36px)", display: "flex", gap: 20, alignItems: "flex-start", border: "1px solid rgba(0,0,0,0.08)" }}>
               <span style={{ fontFamily: GC, fontWeight: 950, fontSize: 48, lineHeight: 1.0, color: BLUE, flexShrink: 0 }}>{step.num}</span>
               <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(18px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(0,0,0,0.7)", margin: 0, paddingTop: 6 }}>{step.text}</p>
             </div>

@@ -11,7 +11,7 @@ import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommend
 import { PdpIngredients } from "@/components/pdp-ingredients"
 
 const GC = '"Gotham Condensed", sans-serif'
-const BLUE = "#87CEEB"
+const BLUE = "#94C6D4"
 
 const validFormulas = ["calm", "focus", "energy"] as const
 

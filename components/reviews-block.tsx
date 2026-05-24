@@ -1,7 +1,7 @@
 import { stickImageFor } from "@/components/product-visual"
 import type { FormulaKey, Formula } from "@/lib/data"
 
-const GC = '"Gotham Condensed", sans-serif'
+const GC = '"DM Sans", system-ui, sans-serif'
 
 interface ReviewsBlockProps {
   formula: Formula
@@ -125,7 +125,7 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
             })()}
           </div>
           <div>
-            <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: 22, color: "#000", display: "block" }}>
+            <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: 22, color: "var(--ink)", display: "block" }}>
               {formula.name}
             </strong>
             <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, color: "rgba(0,0,0,0.55)", display: "block" }}>
@@ -135,8 +135,8 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
         </div>
         <div className="flex items-center gap-5 lg:ml-auto">
           <div className="flex flex-col items-start">
-            <strong style={{ fontFamily: GC, fontWeight: 950, fontSize: 40, lineHeight: 1, color: "#000" }}>4.8</strong>
-            <span style={{ fontSize: 16, letterSpacing: 2, color: "#000" }}>{"\u2605\u2605\u2605\u2605\u2605"}</span>
+            <strong style={{ fontFamily: GC, fontWeight: 950, fontSize: 40, lineHeight: 1, color: "var(--ink)" }}>4.8</strong>
+            <span style={{ fontSize: 16, letterSpacing: 2, color: "var(--ink)" }}>{"\u2605\u2605\u2605\u2605\u2605"}</span>
           </div>
           <span style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, color: "rgba(0,0,0,0.6)", maxWidth: 180, lineHeight: 1.4 }}>
             Based on {reviewCount} verified reviews
@@ -151,8 +151,8 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
             minHeight: 56,
             padding: "0 28px",
             borderRadius: 10,
-            backgroundColor: "#000",
-            color: "#fff",
+            backgroundColor: "var(--charcoal)",
+            color: "var(--bone)",
           }}
         >
           Write a review
@@ -164,11 +164,11 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
         {reviews.map((r) => (
           <article key={r.name + r.title} className="pb-7" style={{ borderBottom: "1px solid rgba(0,0,0,0.1)" }}>
             <div className="flex items-baseline justify-between gap-4 mb-2">
-              <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: 18, color: "#000" }}>{r.name}</strong>
+              <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: 18, color: "var(--ink)" }}>{r.name}</strong>
               <time style={{ fontFamily: GC, fontWeight: 400, fontSize: 14, color: "rgba(0,0,0,0.45)" }}>{r.date}</time>
             </div>
-            <span style={{ fontSize: 15, letterSpacing: 2, color: "#000" }}>{"\u2605\u2605\u2605\u2605\u2605"}</span>
-            <h3 style={{ fontFamily: GC, fontWeight: 800, fontSize: 19, color: "#000", marginTop: 10 }}>{r.title}</h3>
+            <span style={{ fontSize: 15, letterSpacing: 2, color: "var(--ink)" }}>{"\u2605\u2605\u2605\u2605\u2605"}</span>
+            <h3 style={{ fontFamily: GC, fontWeight: 800, fontSize: 19, color: "var(--ink)", marginTop: 10 }}>{r.title}</h3>
             <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, color: "rgba(0,0,0,0.7)", lineHeight: 1.55, marginTop: 8 }}>{r.body}</p>
             <p className="mt-4" style={{ fontFamily: GC, fontWeight: 400, fontSize: 14, color: "rgba(0,0,0,0.5)" }}>
               {formula.flavor} &middot; {r.size}
@@ -203,7 +203,7 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
         ))}
         <span
           className="grid place-items-center w-10 h-10 rounded-lg cursor-pointer hover:border-black transition-colors"
-          style={{ border: "1.5px solid rgba(0,0,0,0.15)", color: "#000", fontFamily: GC, fontWeight: 600, fontSize: 18 }}
+          style={{ border: "1.5px solid rgba(0,0,0,0.15)", color: "var(--ink)", fontFamily: GC, fontWeight: 600, fontSize: 18 }}
         >
           &rsaquo;
         </span>

@@ -6,7 +6,7 @@ export const metadata = {
 }
 
 const GC = '"Gotham Condensed", sans-serif'
-const BLUE = "#87CEEB"
+const BLUE = "#94C6D4"
 
 const categories = ["All", "Science", "Formula Guides", "Lifestyle", "Research"]
 
@@ -262,7 +262,7 @@ export default function BlogPage() {
 
       {/* ── CTA ── */}
       <section className="cta-section" style={{ backgroundColor: "#fff", padding: "0 clamp(20px,5vw,64px) clamp(32px,5vw,56px)" }}>
-        <div className="cta-inner" style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#87CEEB", borderRadius: 20, padding: "clamp(24px,5vw,88px) clamp(20px,4vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
+        <div className="cta-inner" style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#94C6D4", borderRadius: 20, padding: "clamp(24px,5vw,88px) clamp(20px,4vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
           <div style={{ flex: "1 1 480px", minWidth: 0 }}>
             <h2 style={{ fontFamily: GC, fontWeight: 950, fontSize: "clamp(36px,5vw,64px)", lineHeight: 1.0, color: "#000", marginBottom: 16 }}>
               Ready to find your formula?

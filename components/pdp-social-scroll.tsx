@@ -8,8 +8,8 @@ interface PdpSocialScrollProps {
   formulaKey: FormulaKey
 }
 
-const GC = '"Gotham Condensed", sans-serif'
-const BLUE = "#87CEEB"
+const GC = '"DM Sans", system-ui, sans-serif'
+const BLUE = "#94C6D4"
 
 const socialCards = [
   { id: 1, label: "Morning routine", bg: "#2a2a2a" },
@@ -70,7 +70,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
             fontWeight: 950,
             fontSize: "clamp(32px,4.5vw,56px)",
             lineHeight: 0.95,
-            color: "#000",
+            color: "var(--ink)",
           }}
         >
           This is what {formulaKey} feels like.
@@ -106,7 +106,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
                         className="inline-block px-3 py-1.5 rounded-full"
                         style={{ backgroundColor: "rgba(255,255,255,0.15)" }}
                       >
-                        <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "#fff" }}>
+                        <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--bone)" }}>
                           {card.label}
                         </span>
                       </div>
@@ -134,10 +134,10 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
                     </div>
                     
                     <div className="flex-1 min-w-0">
-                      <span className="block truncate" style={{ fontFamily: GC, fontWeight: 800, fontSize: 16, color: "#000" }}>
+                      <span className="block truncate" style={{ fontFamily: GC, fontWeight: 800, fontSize: 16, color: "var(--ink)" }}>
                         {item.short}
                       </span>
-                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "#000" }}>
+                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "var(--ink)" }}>
                         ${item.price.toFixed(2)}
                       </span>
                     </div>
@@ -169,7 +169,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
               onClick={handlePrev}
               disabled={isTransitioning}
               className="w-12 h-12 rounded-full flex items-center justify-center transition-all disabled:opacity-50"
-              style={{ backgroundColor: "#000", border: "2.5px solid #000" }}
+              style={{ backgroundColor: "var(--charcoal)", border: "2.5px solid #000" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "transparent"
                 const svg = e.currentTarget.querySelector("svg")
@@ -212,7 +212,7 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
               onClick={handleNext}
               disabled={isTransitioning}
               className="w-12 h-12 rounded-full flex items-center justify-center transition-all disabled:opacity-50"
-              style={{ backgroundColor: "#000", border: "2.5px solid #000" }}
+              style={{ backgroundColor: "var(--charcoal)", border: "2.5px solid #000" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "transparent"
                 const svg = e.currentTarget.querySelector("svg")

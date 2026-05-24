@@ -74,8 +74,8 @@ export default function LearnPage() {
         .cta-btn { transition: background-color 0.18s ease, color 0.18s ease; }
         .cta-btn-white { background-color: #fff; color: #000; border: 2.5px solid #fff; }
         .cta-btn-white:hover { background-color: transparent; color: #fff; }
-        .cta-btn-blue { background-color: #87CEEB; color: #000; border: 2.5px solid #87CEEB; }
-        .cta-btn-blue:hover { background-color: transparent; color: #87CEEB; }
+        .cta-btn-blue { background-color: #94C6D4; color: #000; border: 2.5px solid #94C6D4; }
+        .cta-btn-blue:hover { background-color: transparent; color: #94C6D4; }
       `}</style>
 
       {/* ── HERO ── */}
@@ -90,7 +90,7 @@ export default function LearnPage() {
             right formula.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "center" }}>
-            <a href="/learn" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 22, minHeight: 68, padding: "0 48px", borderRadius: 10, textDecoration: "none", backgroundColor: "#87CEEB", color: "#000", border: "2.5px solid #87CEEB" }}>Read Articles</a>
+            <a href="/learn" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 22, minHeight: 68, padding: "0 48px", borderRadius: 10, textDecoration: "none", backgroundColor: "#94C6D4", color: "#000", border: "2.5px solid #94C6D4" }}>Read Articles</a>
             <a href="/shop" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 800, fontSize: 22, minHeight: 68, padding: "0 48px", borderRadius: 10, textDecoration: "none", backgroundColor: "transparent", color: "#fff", border: "2.5px solid #fff" }}>Shop AVRO</a>
           </div>
         </div>

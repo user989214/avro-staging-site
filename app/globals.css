@@ -3,7 +3,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Gotham Font Faces */
+/* ============================================================
+   GOTHAM — reserved for hero headlines + key CTAs only
+   ============================================================ */
 @font-face {
   font-family: "Gotham";
   src: url("/fonts/Gotham-Book.otf") format("opentype");
@@ -11,7 +13,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Gotham";
   src: url("/fonts/Gotham-Medium.otf") format("opentype");
@@ -19,7 +20,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Gotham";
   src: url("/fonts/Gotham-Bold.otf") format("opentype");
@@ -27,7 +27,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Gotham";
   src: url("/fonts/Gotham-Black.otf") format("opentype");
@@ -35,62 +34,20 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "Gotham Ultra";
+  src: url("/fonts/Gotham-Ultra.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 
-/* Gotham Condensed — full weight spectrum */
-@font-face {
-  font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-Thin.woff") format("woff");
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-ThinItalic.woff") format("woff");
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-XLight.woff") format("woff");
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-XLightItalic.woff") format("woff");
-  font-weight: 200;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-Light.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-LightItalic.woff") format("woff");
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
+/* Gotham Condensed — kept available for legacy hero blocks */
 @font-face {
   font-family: "Gotham Condensed";
   src: url("/fonts/GothamCond-Book.woff") format("woff");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-BookItalic.woff") format("woff");
-  font-weight: 400;
-  font-style: italic;
   font-display: swap;
 }
 @font-face {
@@ -102,23 +59,9 @@
 }
 @font-face {
   font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-MediumItalic.woff") format("woff");
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gotham Condensed";
   src: url("/fonts/GothamCond-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-BoldItalic.woff") format("woff");
-  font-weight: 700;
-  font-style: italic;
   font-display: swap;
 }
 @font-face {
@@ -130,102 +73,103 @@
 }
 @font-face {
   font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-BlackItalic.woff") format("woff");
-  font-weight: 800;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-XBlack.woff") format("woff");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-XBlackItalic.woff") format("woff");
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Gotham Condensed";
   src: url("/fonts/GothamCond-Ultra.woff") format("woff");
   font-weight: 950;
   font-style: normal;
   font-display: swap;
 }
-@font-face {
-  font-family: "Gotham Condensed";
-  src: url("/fonts/GothamCond-UltraItalic.woff") format("woff");
-  font-weight: 950;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Gotham Ultra";
-  src: url("/fonts/Gotham-Ultra.woff2") format("woff2");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
 
 :root {
-  /* AVRO Color System */
-  --ink: #1e1d18;
-  --muted: #5c5a52;
-  --line: #e6e2d8;
-  --paper: #fffdf8;
-  --soft: #f6f2ea;
-  /* AVRO brand: black + AVRO Blue. Tokens kept under the
-     legacy "olive" names so component-level classes keep working. */
-  --olive: #0d0d0d;
-  --olive-dark: #0d0d0d;
-  --avro-blue: #87CEEB;
-  --avro-blue-dark: #5fb6dc;
-  --gold: #d79a23;
-  --calm: #4b4d9a;
-  --focus: #c21f73;
-  --energy: #f4aa10;
-  --shadow: 0 22px 70px rgba(30, 29, 24, 0.1);
-  --black: #1a1a1a;
-  --gray-700: #3a3a3a;
-  --gray-500: #5c5a52;
-  --gray-400: #6b6961;
-  --gray-200: #d8d8d8;
-  --gray-100: #e8e8e8;
-  --gray-50: #f2f2f2;
+  /* ============================================================
+     AVRO Design System v2 — Main Cohort (avrolife.com)
+     ============================================================ */
+
+  /* Surface — warm cream base (shared with Golf cohort) */
+  --base: #E9E7DB;          /* page background */
+  --base-light: #F2F0E8;    /* card surface, hover */
+  --base-deep: #DEDAD0;     /* alt sections, dividers */
+  --bone: #F5F0E8;          /* warm white on dark */
+
+  /* Ink — warm dark instead of pure black */
+  --charcoal: #151515;      /* dark sections, primary button, headlines */
+  --ink: #1C1B14;           /* primary text */
+  --warm-gray: #6B6857;     /* secondary copy, body */
+  --divider: #D5D2C6;       /* rules, card borders */
+
+  /* Main cohort accent */
+  --avro-blue: #94C6D4;     /* primary accent, social proof stars, links */
+  --avro-blue-deep: #5AAEBC;/* hover, active links */
+
+  /* Per-formula accent colors */
+  --calm: #7A5BC5;          /* Calm purple */
+  --calm-deep: #4B2C8A;
+  --focus: #EA0A8C;         /* Focus magenta */
+  --focus-deep: #B30669;
+  --energy: #FED206;        /* Energy yellow */
+  --energy-deep: #D4AF00;
+
+  /* Other cohort accents (used on cohort pages) */
+  --golf: #BDD637;          /* Fuji Apple */
+  --gold: #CAA84B;          /* Zero Proof */
+  --gold-light: #E8C97E;
+
+  /* Semantic shadows */
+  --shadow-sm: 0 1px 2px rgba(21, 21, 21, 0.04);
+  --shadow-md: 0 8px 24px rgba(21, 21, 21, 0.06);
+  --shadow-lg: 0 22px 60px rgba(21, 21, 21, 0.10);
+
+  /* ============================================================
+     Legacy tokens (mapped to new system for back-compat)
+     ============================================================ */
+  --paper: var(--base);
+  --soft: var(--base-light);
+  --line: var(--divider);
+  --olive: var(--charcoal);
+  --olive-dark: var(--charcoal);
+  --muted: var(--warm-gray);
+  --black: var(--charcoal);
   --white: #ffffff;
-  
-  /* Shadcn Theme Tokens */
-  --background: var(--paper);
+  --gray-50: var(--base-light);
+  --gray-100: #e8e8e8;
+  --gray-200: var(--divider);
+  --gray-400: var(--warm-gray);
+  --gray-500: var(--warm-gray);
+  --gray-700: #3a3a3a;
+
+  /* ============================================================
+     shadcn theme tokens
+     ============================================================ */
+  --background: var(--base);
   --foreground: var(--ink);
-  --card: var(--white);
+  --card: var(--base-light);
   --card-foreground: var(--ink);
-  --popover: var(--white);
+  --popover: var(--base-light);
   --popover-foreground: var(--ink);
-  --primary: var(--olive);
-  --primary-foreground: var(--white);
-  --secondary: var(--soft);
-  --secondary-foreground: var(--olive-dark);
-  --muted-color: var(--soft);
-  --muted-foreground: var(--muted);
-  --accent: var(--soft);
-  --accent-foreground: var(--olive-dark);
+  --primary: var(--charcoal);
+  --primary-foreground: var(--bone);
+  --secondary: var(--base-deep);
+  --secondary-foreground: var(--ink);
+  --muted-color: var(--base-deep);
+  --muted-foreground: var(--warm-gray);
+  --accent: var(--avro-blue);
+  --accent-foreground: var(--charcoal);
   --destructive: #dc2626;
-  --destructive-foreground: var(--white);
-  --border: var(--line);
-  --input: var(--line);
-  --ring: var(--olive);
-  --radius: 0.5rem;
+  --destructive-foreground: var(--bone);
+  --border: var(--divider);
+  --input: var(--divider);
+  --ring: var(--charcoal);
+  --radius: 999px;             /* default to pill — components override when needed */
+  --radius-card: 20px;
+  --radius-input: 12px;
 }
 
 @theme inline {
-  --font-sans: "Gotham", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: var(--font-dm-sans), "DM Sans", "Helvetica Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Gotham", "Gotham Ultra", var(--font-dm-sans), system-ui, sans-serif;
   --font-serif: "Gotham Condensed", "Gotham", Arial, sans-serif;
   --font-mono: ui-monospace, monospace;
+
+  /* shadcn color mappings */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -245,30 +189,45 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  
-  /* AVRO specific colors */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* AVRO design tokens exposed as Tailwind utilities */
+  --color-base: var(--base);
+  --color-base-light: var(--base-light);
+  --color-base-deep: var(--base-deep);
+  --color-bone: var(--bone);
+  --color-charcoal: var(--charcoal);
   --color-ink: var(--ink);
-  --color-paper: var(--paper);
-  --color-soft: var(--soft);
-  --color-olive: var(--olive);
-  --color-olive-dark: var(--olive-dark);
+  --color-warm-gray: var(--warm-gray);
+  --color-divider: var(--divider);
   --color-avro-blue: var(--avro-blue);
-  --color-avro-blue-dark: var(--avro-blue-dark);
-  --color-gold: var(--gold);
+  --color-avro-blue-deep: var(--avro-blue-deep);
   --color-calm: var(--calm);
+  --color-calm-deep: var(--calm-deep);
   --color-focus: var(--focus);
+  --color-focus-deep: var(--focus-deep);
   --color-energy: var(--energy);
-  --color-line: var(--line);
-  --color-gray-50: var(--gray-50);
-  --color-gray-100: var(--gray-100);
-  --color-gray-200: var(--gray-200);
-  --color-gray-400: var(--gray-400);
-  --color-gray-500: var(--gray-500);
-  --color-gray-700: var(--gray-700);
+  --color-energy-deep: var(--energy-deep);
+  --color-golf: var(--golf);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+
+  /* legacy aliases */
+  --color-paper: var(--base);
+  --color-soft: var(--base-light);
+  --color-olive: var(--charcoal);
+  --color-olive-dark: var(--charcoal);
+  --color-line: var(--divider);
+  --color-gray-50: var(--base-light);
+  --color-gray-100: #e8e8e8;
+  --color-gray-200: var(--divider);
+  --color-gray-400: var(--warm-gray);
+  --color-gray-500: var(--warm-gray);
+  --color-gray-700: #3a3a3a;
 }
 
 @layer base {
@@ -276,40 +235,61 @@
     @apply border-border;
     box-sizing: border-box;
   }
-  
+
   html {
     scroll-behavior: smooth;
-  }
-  
-  body {
-    @apply bg-paper text-ink font-sans;
-    font-weight: 400;
-    letter-spacing: 0;
+    background-color: var(--base);
   }
 
-  /* Site-wide rule: every headline uses Gotham Condensed.
-     Tailwind's font-sans/font-serif utilities still work for body copy,
-     but headings always render in the condensed display family. */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Gotham Condensed", "Gotham", Arial, sans-serif;
+  body {
+    background-color: var(--base);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.005em;
   }
-  
+
+  /* Headlines: DM Sans by default (display utility opts into Gotham) */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    font-weight: 700;
+  }
+
+  /* Hero-only display family */
+  .font-display,
+  [data-font="display"] {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
   }
-  
-  button,
-  input,
-  select,
-  textarea {
+
+  button, input, select, textarea {
     font: inherit;
   }
+}
+
+/* ============================================================
+   Eyebrow label — DM Sans, ALL CAPS, +0.10em tracking
+   ============================================================ */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--avro-blue-deep);
 }
 
 /* Screen reader only */
@@ -324,47 +304,87 @@
   border: 0;
 }
 
-/* Marquee animation */
+/* ============================================================
+   Marquee
+   ============================================================ */
 @keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
-
 .animate-marquee {
   animation: marquee 30s linear infinite;
 }
 
-/* Button styles */
+/* ============================================================
+   Button system — all pill, all DM Sans 700
+   ============================================================ */
 .btn-primary {
-  @apply inline-flex items-center justify-center min-h-[52px] px-8 border border-transparent rounded-full bg-olive text-white text-[15px] cursor-pointer transition-all;
-  font-family: "Gotham Ultra", "Gotham", ui-sans-serif, system-ui, sans-serif;
-  font-weight: 900;
-  letter-spacing: 0.01em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 28px;
+  border: 1.5px solid var(--charcoal);
+  border-radius: 999px;
+  background-color: var(--charcoal);
+  color: var(--bone);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-
 .btn-primary:hover {
-  @apply -translate-y-px shadow-[0_10px_24px_rgba(30,29,24,0.12)];
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center min-h-[52px] px-8 border border-current rounded-full text-olive-dark bg-white text-[15px] cursor-pointer transition-all;
-  font-family: "Gotham Ultra", "Gotham", ui-sans-serif, system-ui, sans-serif;
-  font-weight: 900;
-  letter-spacing: 0.01em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 28px;
+  border: 1.5px solid var(--charcoal);
+  border-radius: 999px;
+  background-color: transparent;
+  color: var(--charcoal);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-
 .btn-secondary:hover {
-  @apply -translate-y-px shadow-[0_10px_24px_rgba(30,29,24,0.12)];
+  background-color: var(--charcoal);
+  color: var(--bone);
 }
 
-/* Apply Gotham Ultra to every <button> label and shadcn Button */
-button,
-[role="button"],
-.btn-primary,
-.btn-secondary {
-  font-family: "Gotham Ultra", "Gotham", ui-sans-serif, system-ui, sans-serif;
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 28px;
+  border: 1.5px solid var(--avro-blue);
+  border-radius: 999px;
+  background-color: var(--avro-blue);
+  color: var(--charcoal);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-accent:hover {
+  background-color: var(--avro-blue-deep);
+  border-color: var(--avro-blue-deep);
+  color: var(--bone);
+}
+
+button[role="button"] {
+  font-family: var(--font-sans);
 }

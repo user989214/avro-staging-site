@@ -5,7 +5,7 @@ import Link from "next/link"
 import { formulas, type FormulaKey } from "@/lib/data"
 import { stickImageFor } from "@/components/product-visual"
 
-const GC = '"Gotham Condensed", sans-serif'
+const GC = '"DM Sans", system-ui, sans-serif'
 
 interface PdpTabsWithRecommendationsProps {
   currentKey: FormulaKey
@@ -91,7 +91,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
               {activeTab === tab && (
                 <span
                   className="absolute left-0 right-0"
-                  style={{ bottom: -2, height: 3, backgroundColor: "#000" }}
+                  style={{ bottom: -2, height: 3, backgroundColor: "var(--charcoal)" }}
                 />
               )}
             </button>
@@ -107,7 +107,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   fontWeight: 950,
                   fontSize: "clamp(28px,2.5vw,36px)",
                   lineHeight: 1.0,
-                  color: "#000",
+                  color: "var(--ink)",
                   marginBottom: 20,
                 }}
               >
@@ -120,7 +120,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                     className="flex items-start gap-3"
                     style={{ fontFamily: GC, fontWeight: 500, fontSize: 18, lineHeight: 1.35, color: "rgba(0,0,0,0.7)" }}
                   >
-                    <span style={{ color: "#000", fontWeight: 800, fontSize: 20, lineHeight: 1 }}>+</span>
+                    <span style={{ color: "var(--ink)", fontWeight: 800, fontSize: 20, lineHeight: 1 }}>+</span>
                     <span>{bullet}</span>
                   </li>
                 ))}
@@ -136,7 +136,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   fontWeight: 950,
                   fontSize: "clamp(32px,3vw,42px)",
                   lineHeight: 1.0,
-                  color: "#000",
+                  color: "var(--ink)",
                   marginBottom: 24,
                 }}
               >
@@ -151,7 +151,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                       borderBottom: i < ingredientsList[currentKey].length - 1 ? "1px solid rgba(0,0,0,0.1)" : "none",
                     }}
                   >
-                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 20, color: "#000" }}>{ing.name}</span>
+                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 20, color: "var(--ink)" }}>{ing.name}</span>
                     <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 20, color: "rgba(0,0,0,0.6)" }}>{ing.amount}</span>
                   </div>
                 ))}
@@ -173,7 +173,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   fontWeight: 950,
                   fontSize: "clamp(32px,3vw,42px)",
                   lineHeight: 1.0,
-                  color: "#000",
+                  color: "var(--ink)",
                   marginBottom: 24,
                 }}
               >
@@ -186,7 +186,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   { title: "Afternoon reset", body: "Combat the midday slump without caffeine." },
                 ].map((item) => (
                   <div key={item.title}>
-                    <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, color: "#000", display: "block", marginBottom: 6 }}>
+                    <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, color: "var(--ink)", display: "block", marginBottom: 6 }}>
                       {item.title}
                     </span>
                     <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 19, lineHeight: 1.4, color: "rgba(0,0,0,0.6)" }}>
@@ -206,7 +206,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   fontWeight: 950,
                   fontSize: "clamp(32px,3vw,42px)",
                   lineHeight: 1.0,
-                  color: "#000",
+                  color: "var(--ink)",
                   marginBottom: 24,
                 }}
               >
@@ -219,11 +219,11 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   { n: 3, title: "Drink", body: "Enjoy 20-30 minutes before your moment." },
                 ].map((step) => (
                   <div key={step.n} className="flex items-start gap-5">
-                    <span style={{ fontFamily: GC, fontWeight: 950, fontSize: 56, lineHeight: 1, color: "#000" }}>
+                    <span style={{ fontFamily: GC, fontWeight: 950, fontSize: 56, lineHeight: 1, color: "var(--ink)" }}>
                       {step.n}
                     </span>
                     <div>
-                      <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, color: "#000", display: "block", marginBottom: 6 }}>
+                      <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 21, color: "var(--ink)", display: "block", marginBottom: 6 }}>
                         {step.title}
                       </span>
                       <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 19, lineHeight: 1.4, color: "rgba(0,0,0,0.6)" }}>
@@ -246,7 +246,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
             fontFamily: GC,
             fontWeight: 800,
             fontSize: 24,
-            color: "#000",
+            color: "var(--ink)",
           }}
         >
           You might also like
@@ -285,7 +285,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                         fontWeight: 950,
                         fontSize: 26,
                         lineHeight: 1.05,
-                        color: "#000",
+                        color: "var(--ink)",
                         display: "block",
                         marginBottom: 6,
                       }}
@@ -317,8 +317,8 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                         minHeight: 52,
                         padding: "0 16px",
                         borderRadius: 10,
-                        backgroundColor: "#000",
-                        color: "#fff",
+                        backgroundColor: "var(--charcoal)",
+                        color: "var(--bone)",
                         border: "2px solid #000",
                       }}
                     >

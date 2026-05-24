@@ -13,7 +13,7 @@ import {
 import type { Formula, FormulaKey } from "@/lib/data"
 import { cn } from "@/lib/utils"
 
-const GC = '"Gotham Condensed", sans-serif'
+const GC = '"DM Sans", system-ui, sans-serif'
 const LIGHT_GRAY = "#f2f2f2"
 
 interface BuyBoxProps {
@@ -70,13 +70,13 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
             fontWeight: 950,
             fontSize: "clamp(40px,4.5vw,60px)",
             lineHeight: 0.96,
-            color: "#000",
+            color: "var(--ink)",
           }}
         >
           {formula.headline}
         </h1>
         <div className="flex items-center gap-3">
-          <span style={{ color: "#000" }} className="tracking-wider text-base">
+          <span style={{ color: "var(--ink)" }} className="tracking-wider text-base">
             {"\u2605\u2605\u2605\u2605\u2605"}
           </span>
           <span
@@ -129,7 +129,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
             fontFamily: GC,
             fontWeight: 800,
             fontSize: 19,
-            color: "#000",
+            color: "var(--ink)",
           }}
         >
           Quantity
@@ -177,8 +177,8 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
           minHeight: 66,
           padding: "0 36px",
           borderRadius: 10,
-          backgroundColor: "#000",
-          color: "#fff",
+          backgroundColor: "var(--charcoal)",
+          color: "var(--bone)",
           border: "2.5px solid #000",
           letterSpacing: "0.01em",
         }}
@@ -208,7 +208,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
               padding: "0 28px",
               borderRadius: 10,
               backgroundColor: LIGHT_GRAY,
-              color: "#000",
+              color: "var(--ink)",
               border: "none",
             }}
             onMouseEnter={(e) => {
@@ -225,7 +225,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
         <DialogContent className="max-w-[440px] p-0 bg-white">
           <div className="p-6 pb-2">
             <DialogHeader>
-              <DialogTitle style={{ fontFamily: GC, fontWeight: 950, fontSize: 32, color: "#000" }}>
+              <DialogTitle style={{ fontFamily: GC, fontWeight: 950, fontSize: 32, color: "var(--ink)" }}>
                 Supplement facts
               </DialogTitle>
             </DialogHeader>
@@ -340,8 +340,8 @@ function PurchaseOption({
             fontFamily: GC,
             fontWeight: 800,
             fontSize: 12,
-            backgroundColor: "#000",
-            color: "#fff",
+            backgroundColor: "var(--charcoal)",
+            color: "var(--bone)",
             borderRadius: 6,
           }}
         >

@@ -46,7 +46,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Close mobile menu on route change
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden"
@@ -60,39 +59,39 @@ export function Header() {
 
   return (
     <>
-      <div className="flex justify-center gap-4 md:gap-15 px-4 md:px-8 py-3 text-[11px] md:text-[13px] font-black tracking-wide uppercase text-center" style={{ backgroundColor: "#87CEEB", color: "#000" }}>
+      {/* Announcement bar — charcoal background with cream text per design system dark sections */}
+      <div
+        className="flex justify-center gap-4 md:gap-12 px-4 md:px-8 py-2.5 text-[11px] md:text-[12px] font-semibold tracking-[0.08em] uppercase text-center"
+        style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
+      >
         <span>
-          Naturally Fermented PharmaGABA® -{" "}
-          <Link
-            href="/science"
-            className="underline underline-offset-3 hover:opacity-70 transition-opacity"
-            style={{ color: "#000" }}
-          >
-            Learn More
-          </Link>
-        </span>
-        <span className="hidden md:inline">
-          Free Shipping Over $50 -{" "}
+          ✦ Subscribe and save 25% on every order —{" "}
           <Link
             href="/shop"
-            className="underline underline-offset-3 hover:opacity-70 transition-opacity"
-            style={{ color: "#000" }}
+            className="underline underline-offset-4 hover:opacity-70 transition-opacity"
+            style={{ color: "var(--avro-blue)" }}
           >
             Shop AVRO
           </Link>
         </span>
+        <span className="hidden md:inline" style={{ color: "rgba(245,240,232,0.55)" }}>
+          Free shipping over $50
+        </span>
       </div>
 
+      {/* Main nav — cream/base background, charcoal text, DM Sans */}
       <nav
-        className={`sticky top-0 z-50 grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-0 px-4 md:px-14 py-4 md:py-5 bg-white transition-shadow ${
-          scrolled ? "shadow-[0_1px_16px_rgba(0,0,0,0.06)]" : ""
+        className={`sticky top-0 z-50 grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-0 px-4 md:px-14 py-4 md:py-5 transition-shadow ${
+          scrolled ? "shadow-[0_1px_16px_rgba(21,21,21,0.06)]" : ""
         }`}
+        style={{ backgroundColor: "var(--base)" }}
         aria-label="Primary navigation"
       >
         {/* Mobile menu button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden w-10 h-10 flex items-center justify-center text-olive-dark hover:bg-gray-100 rounded-lg transition-colors"
+          className="md:hidden w-10 h-10 flex items-center justify-center rounded-full transition-colors"
+          style={{ color: "var(--charcoal)" }}
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileMenuOpen}
         >
@@ -105,12 +104,16 @@ export function Header() {
           <NavLink href="/shop">Subscribe</NavLink>
           <div className="relative group">
             <NavLink href="/why-avro">Why AVRO</NavLink>
-            <div className="absolute top-full left-1/2 -translate-x-1/2 z-50 min-w-[240px] py-2.5 bg-white rounded-md shadow-[0_8px_32px_rgba(0,0,0,0.1)] opacity-0 invisible translate-y-1.5 transition-all group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0">
+            <div
+              className="absolute top-full left-1/2 -translate-x-1/2 z-50 min-w-[260px] py-2.5 rounded-2xl shadow-[0_8px_32px_rgba(21,21,21,0.12)] opacity-0 invisible translate-y-1.5 transition-all group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0"
+              style={{ backgroundColor: "var(--base-light)", border: "1px solid var(--divider)" }}
+            >
               {navDropdownItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="block px-6 py-2 text-ink/80 text-[13px] font-semibold tracking-wide uppercase hover:text-ink hover:bg-soft transition-colors"
+                  className="block px-6 py-2.5 text-[13px] font-medium tracking-[0.02em] transition-colors hover:bg-base-deep"
+                  style={{ color: "var(--ink)" }}
                 >
                   {item.label}
                 </Link>
@@ -122,7 +125,7 @@ export function Header() {
         {/* Logo - center */}
         <Link
           href="/"
-          className="flex items-center justify-center justify-self-center md:justify-self-auto w-[clamp(122px,14vw,178px)]"
+          className="flex items-center justify-center justify-self-center md:justify-self-auto w-[clamp(110px,12vw,160px)]"
           aria-label="AVRO home"
         >
           <Image
@@ -141,10 +144,17 @@ export function Header() {
           <NavLink href="/faq">FAQ</NavLink>
           <button
             onClick={openCart}
-            className="relative text-ink/70 text-[15px] font-black tracking-wide uppercase hover:text-ink transition-colors"
+            className="relative text-[13px] font-semibold tracking-[0.02em] transition-colors flex items-center gap-1.5"
+            style={{ color: "var(--ink)" }}
           >
-            Cart{" "}
-            <span className="inline-flex items-center justify-center w-5 h-5 ml-1 text-ink/70 border-[1.5px] border-ink/40 rounded-full text-[11px] align-[1px]">
+            Cart
+            <span
+              className="inline-flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-bold"
+              style={{
+                backgroundColor: "var(--avro-blue)",
+                color: "var(--charcoal)",
+              }}
+            >
               {itemCount}
             </span>
           </button>
@@ -153,7 +163,8 @@ export function Header() {
         {/* Mobile cart button */}
         <button
           onClick={openCart}
-          className="md:hidden relative w-10 h-10 flex items-center justify-center text-olive-dark hover:bg-gray-100 rounded-lg transition-colors"
+          className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-full transition-colors"
+          style={{ color: "var(--charcoal)" }}
           aria-label={`Cart with ${itemCount} items`}
         >
           {itemCount > 0 ? (
@@ -161,47 +172,44 @@ export function Header() {
           ) : (
             <CartIcon className="w-6 h-6" />
           )}
+          {itemCount > 0 && (
+            <span
+              className="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold"
+              style={{ backgroundColor: "var(--avro-blue)", color: "var(--charcoal)" }}
+            >
+              {itemCount}
+            </span>
+          )}
         </button>
       </nav>
 
       {/* Mobile menu overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-white transform transition-transform duration-300 md:hidden ${
+        className={`fixed inset-0 z-40 transform transition-transform duration-300 md:hidden ${
           mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        style={{ top: "var(--header-height, 120px)" }}
+        style={{ backgroundColor: "var(--base)", top: "var(--header-height, 100px)" }}
       >
         <div className="pt-6 pb-8 px-6 h-full overflow-y-auto">
           <nav className="space-y-1">
-            <MobileNavLink href="/shop" onClick={() => setMobileMenuOpen(false)}>
-              Shop
-            </MobileNavLink>
-            <MobileNavLink href="/shop" onClick={() => setMobileMenuOpen(false)}>
-              Subscribe
-            </MobileNavLink>
-            <div className="border-t border-gray-100 my-4" />
-            <p className="text-xs font-bold text-ink/50 uppercase tracking-wider px-4 py-2">
+            <MobileNavLink href="/shop" onClick={() => setMobileMenuOpen(false)}>Shop</MobileNavLink>
+            <MobileNavLink href="/shop" onClick={() => setMobileMenuOpen(false)}>Subscribe</MobileNavLink>
+            <div className="my-4" style={{ borderTop: "1px solid var(--divider)" }} />
+            <p
+              className="text-[10px] font-bold uppercase tracking-[0.12em] px-4 py-2"
+              style={{ color: "var(--warm-gray)" }}
+            >
               Discover
             </p>
             {navDropdownItems.map((item) => (
-              <MobileNavLink
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              <MobileNavLink key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>
                 {item.label}
               </MobileNavLink>
             ))}
-            <div className="border-t border-gray-100 my-4" />
-            <MobileNavLink href="/science" onClick={() => setMobileMenuOpen(false)}>
-              Science
-            </MobileNavLink>
-            <MobileNavLink href="/faq" onClick={() => setMobileMenuOpen(false)}>
-              FAQ
-            </MobileNavLink>
-            <MobileNavLink href="/contact" onClick={() => setMobileMenuOpen(false)}>
-              Contact
-            </MobileNavLink>
+            <div className="my-4" style={{ borderTop: "1px solid var(--divider)" }} />
+            <MobileNavLink href="/science" onClick={() => setMobileMenuOpen(false)}>Science</MobileNavLink>
+            <MobileNavLink href="/faq" onClick={() => setMobileMenuOpen(false)}>FAQ</MobileNavLink>
+            <MobileNavLink href="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</MobileNavLink>
           </nav>
         </div>
       </div>
@@ -209,17 +217,12 @@ export function Header() {
   )
 }
 
-function NavLink({
-  href,
-  children,
-}: {
-  href: string
-  children: React.ReactNode
-}) {
+function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <Link
       href={href}
-      className="relative text-ink/70 text-[15px] font-black tracking-wide uppercase hover:text-ink transition-colors after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-ink after:transition-[width] hover:after:w-full"
+      className="relative text-[13px] font-semibold tracking-[0.02em] transition-colors hover:opacity-70"
+      style={{ color: "var(--ink)" }}
     >
       {children}
     </Link>
@@ -239,7 +242,8 @@ function MobileNavLink({
     <Link
       href={href}
       onClick={onClick}
-      className="block px-4 py-3 text-olive-dark text-lg font-semibold hover:bg-gray-50 rounded-lg transition-colors"
+      className="block px-4 py-3 text-lg font-medium rounded-xl transition-colors"
+      style={{ color: "var(--ink)" }}
     >
       {children}
     </Link>

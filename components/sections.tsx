@@ -78,19 +78,19 @@ export function CtaGroup({
 
 export function SocialProof({ mode = "full" }: { mode?: "full" | "compact" }) {
   return (
-    <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#000", marginBottom: 32 }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32 }}>
           Trusted for calm-first routines.
         </h2>
         {mode === "full" && (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 16 }}>
             {testimonials.map((item) => (
-              <article key={item.name} style={{ backgroundColor: "#f5f5f5", borderRadius: 12, padding: "clamp(24px,3vw,36px)" }}>
+              <article key={item.name} style={{ backgroundColor: "var(--base-light)", borderRadius: 12, padding: "clamp(24px,3vw,36px)" }}>
                 <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(18px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(0,0,0,0.75)", marginBottom: 16 }}>
                   &ldquo;{item.quote}&rdquo;
                 </p>
-                <strong style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "#000", display: "block" }}>{item.name}</strong>
+                <strong style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "var(--ink)", display: "block" }}>{item.name}</strong>
                 <span style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: 15, color: "rgba(0,0,0,0.55)", display: "block", marginTop: 4 }}>{item.role}</span>
               </article>
             ))}
@@ -109,9 +109,9 @@ export function ProductCards({
   shopLabel?: string
 }) {
   return (
-    <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#000", marginBottom: 12 }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 12 }}>
           {title}
         </h2>
         <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(17px,1.5vw,21px)", lineHeight: 1.4, color: "rgba(0,0,0,0.6)", marginBottom: 32 }}>
@@ -121,23 +121,23 @@ export function ProductCards({
           {(Object.keys(formulas) as FormulaKey[]).map((key) => {
             const item = formulas[key]
             return (
-              <article key={key} style={{ backgroundColor: "#f5f5f5", borderRadius: 12, padding: "clamp(20px,3vw,32px)", display: "flex", flexDirection: "column", gap: 16 }}>
-                <div style={{ borderRadius: 10, border: "2px solid rgba(0,0,0,0.1)", height: 380, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: "#fff" }}>
+              <article key={key} style={{ backgroundColor: "var(--base-light)", borderRadius: 12, padding: "clamp(20px,3vw,32px)", display: "flex", flexDirection: "column", gap: 16 }}>
+                <div style={{ borderRadius: 10, border: "2px solid rgba(0,0,0,0.1)", height: 380, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: "var(--base)" }}>
                   <ProductCard formulaKey={key} className="h-full w-full object-cover" />
                 </div>
-                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: "clamp(22px,2vw,28px)", color: "#000", margin: 0 }}>{item.name}</h3>
+                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: "clamp(22px,2vw,28px)", color: "var(--ink)", margin: 0 }}>{item.name}</h3>
                 <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(17px,1.4vw,19px)", lineHeight: 1.45, color: "rgba(0,0,0,0.6)", margin: 0 }}>{item.support}</p>
                 <div style={{ borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "#000" }}>Best for</span>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "var(--ink)" }}>Best for</span>
                     <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(0,0,0,0.6)", margin: "4px 0 0" }}>{item.bestFor}</p>
                   </div>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "#000" }}>Caffeine</span>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 800, fontSize: 18, color: "var(--ink)" }}>Caffeine</span>
                     <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(0,0,0,0.6)", margin: "4px 0 0" }}>{item.caffeine}</p>
                   </div>
                 </div>
-                <a href={`/${key}`} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC_FINAL, fontWeight: 800, fontSize: 20, minHeight: 60, borderRadius: 10, textDecoration: "none", backgroundColor: "#000", color: "#fff", marginTop: "auto" }}>
+                <a href={`/${key}`} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC_FINAL, fontWeight: 800, fontSize: 20, minHeight: 60, borderRadius: 10, textDecoration: "none", backgroundColor: "var(--charcoal)", color: "var(--bone)", marginTop: "auto" }}>
                   {shopLabel} {item.short}
                 </a>
               </article>
@@ -259,8 +259,8 @@ export function FaqBlock({
   )
 }
 
-const GC_FINAL = '"Gotham Condensed", sans-serif'
-const BLUE_FINAL = "#87CEEB"
+const GC_FINAL = '"DM Sans", system-ui, sans-serif'
+const BLUE_FINAL = "#94C6D4"
 
 export function FinalCta({
   title,
@@ -272,14 +272,14 @@ export function FinalCta({
   productButtons?: boolean
 }) {
   return (
-    <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
       <style>{`
         .final-cta-btn { background-color: #000; color: #fff; border: 2.5px solid #000; transition: background-color 0.18s ease, color 0.18s ease; display: inline-flex; align-items: center; justify-content: center; font-family: ${GC_FINAL}; font-weight: 800; font-size: 20px; min-height: 64px; padding: 0 40px; border-radius: 10px; text-decoration: none; }
         .final-cta-btn:hover { background-color: transparent; color: #000; }
       `}</style>
-      <div style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#87CEEB", borderRadius: 20, padding: "clamp(48px,6vw,88px) clamp(36px,5vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 40 }}>
+      <div style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#94C6D4", borderRadius: 20, padding: "clamp(48px,6vw,88px) clamp(36px,5vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 40 }}>
         <div style={{ flex: "1 1 400px", minWidth: 0 }}>
-          <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "#000", marginBottom: 16 }}>
+          <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 16 }}>
             {title}
           </h2>
           <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(17px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(0,0,0,0.72)" }}>
