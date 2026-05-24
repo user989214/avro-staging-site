@@ -32,22 +32,44 @@ const comparisonData: Record<FormulaKey, {
   },
 }
 
+const formulaColors: Record<FormulaKey, string> = {
+  calm: "var(--calm)",
+  focus: "var(--focus)",
+  energy: "var(--energy)",
+}
+
 export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps) {
   const formulaKeys: FormulaKey[] = ["calm", "focus", "energy"]
 
   return (
-    <section className="w-full bg-base py-[clamp(40px,5vw,64px)]" style={{ fontFamily: GC }}>
-      <div className="w-full max-w-[1200px] mx-auto px-[clamp(18px,5vw,64px)]">
+    <section className="w-full py-[clamp(48px,6vw,80px)]" style={{ fontFamily: GC, backgroundColor: "var(--avro-blue)" }}>
+      <div className="w-full max-w-[1280px] mx-auto px-[clamp(18px,5vw,64px)]">
         {/* Header */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-12">
+          <span
+            style={{
+              display: "inline-block",
+              fontFamily: GC,
+              fontWeight: 700,
+              fontSize: 11,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "var(--charcoal)",
+              opacity: 0.7,
+              marginBottom: 12,
+            }}
+          >
+            Compare at a glance
+          </span>
           <h2
             style={{
               fontFamily: GC,
               fontWeight: 700,
-              fontSize: "clamp(28px,4vw,52px)",
-              lineHeight: 1.0,
-              color: "var(--ink)",
-              marginBottom: 12,
+              fontSize: "clamp(32px,4.5vw,56px)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.02em",
+              color: "var(--charcoal)",
+              marginBottom: 14,
             }}
           >
             We put intention into every formula.
@@ -56,8 +78,10 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
             style={{
               fontFamily: GC,
               fontWeight: 500,
-              fontSize: "clamp(17px,1.5vw,22px)",
-              color: "rgba(0,0,0,0.6)",
+              fontSize: "clamp(16px,1.4vw,20px)",
+              color: "rgba(21,21,21,0.65)",
+              maxWidth: 480,
+              margin: "0 auto",
             }}
           >
             Find the one that was made with your day in mind.
@@ -65,90 +89,135 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
         </div>
 
         {/* Product grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {formulaKeys.map((key) => {
             const item = formulas[key]
             const data = comparisonData[key]
             const isActive = key === currentKey
             const subscribePrice = (item.bundlePrice * 0.75).toFixed(2)
+            const accentColor = formulaColors[key]
 
             return (
               <div
                 key={key}
-                className="group flex flex-col rounded-2xl overflow-hidden bg-base"
+                className="group flex flex-col overflow-hidden"
                 style={{
-                  border: isActive ? "3px solid #000" : "2px solid rgba(0,0,0,0.12)",
+                  backgroundColor: "var(--base)",
+                  borderRadius: 24,
+                  border: isActive ? `3px solid ${accentColor}` : "none",
+                  boxShadow: isActive 
+                    ? `0 8px 32px -8px rgba(0,0,0,0.15)` 
+                    : "0 4px 20px -6px rgba(0,0,0,0.08)",
+                  transform: isActive ? "scale(1.02)" : "scale(1)",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
                 }}
               >
-                {/* Product image */}
-                <Link href={`/${key}`} className="relative h-[200px] flex items-center justify-center p-3" style={{ backgroundColor: "#f2f2f2" }}>
-                  <ProductCard formulaKey={key} className="h-full w-auto object-contain" />
-                  {isActive && (
-                    <span
-                      className="absolute top-3 right-3 px-3 py-1.5 rounded"
-                      style={{
-                        backgroundColor: "var(--charcoal)",
-                        color: "var(--bone)",
-                        fontFamily: GC,
-                        fontWeight: 700,
-                        fontSize: 13,
-                      }}
-                    >
-                      Current
-                    </span>
-                  )}
-                </Link>
+                {/* Product image with colored top bar */}
+                <div style={{ backgroundColor: accentColor, padding: "3px 3px 0 3px" }}>
+                  <Link 
+                    href={`/${key}`} 
+                    className="relative flex items-center justify-center p-6" 
+                    style={{ 
+                      backgroundColor: "var(--base-light)", 
+                      borderRadius: "20px 20px 0 0",
+                      minHeight: 200,
+                    }}
+                  >
+                    <ProductCard formulaKey={key} className="h-[160px] w-auto object-contain" />
+                    {isActive && (
+                      <span
+                        className="absolute top-4 right-4 px-3 py-1.5"
+                        style={{
+                          backgroundColor: accentColor,
+                          color: key === "energy" ? "var(--charcoal)" : "var(--bone)",
+                          fontFamily: GC,
+                          fontWeight: 700,
+                          fontSize: 12,
+                          borderRadius: 999,
+                          letterSpacing: "0.02em",
+                        }}
+                      >
+                        Viewing
+                      </span>
+                    )}
+                  </Link>
+                </div>
 
                 {/* Product info */}
-                <div className="flex-1 p-4">
-                  <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: 26, lineHeight: 1.05, color: "var(--ink)", marginBottom: 6 }}>
-                    {item.name}
-                  </h3>
-                  <p style={{ fontFamily: GC, fontWeight: 500, fontSize: 16, color: "rgba(0,0,0,0.6)", marginBottom: 14 }}>
+                <div className="flex-1 p-5 pt-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span 
+                      style={{ 
+                        width: 10, 
+                        height: 10, 
+                        borderRadius: "50%", 
+                        backgroundColor: accentColor,
+                        flexShrink: 0,
+                      }} 
+                    />
+                    <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: 24, lineHeight: 1.1, color: "var(--charcoal)" }}>
+                      {item.name}
+                    </h3>
+                  </div>
+                  <p style={{ fontFamily: GC, fontWeight: 500, fontSize: 15, color: "rgba(21,21,21,0.55)", marginBottom: 18, lineHeight: 1.4 }}>
                     {item.headline}
                   </p>
 
                   {/* Specs */}
-                  <div className="space-y-2" style={{ fontFamily: GC, fontSize: 16 }}>
+                  <div 
+                    className="space-y-3 py-4 mb-4" 
+                    style={{ 
+                      borderTop: "1px solid rgba(21,21,21,0.08)", 
+                      borderBottom: "1px solid rgba(21,21,21,0.08)" 
+                    }}
+                  >
                     <Row label="Caffeine" value={data.caffeine} />
                     <Row label="Experience" value={data.experience} />
                     <Row label="Best for" value={data.bestFor} />
                   </div>
                 </div>
 
-                {/* Quick Add buttons */}
-                <div className="p-4 flex flex-col gap-2" style={{ borderTop: "1.5px solid rgba(0,0,0,0.1)" }}>
+                {/* CTA buttons */}
+                <div className="p-5 pt-0 flex flex-col gap-2">
+                  <style>{`
+                    .compare-btn-${key} {
+                      background-color: ${accentColor};
+                      border: 2px solid ${accentColor};
+                      color: ${key === "energy" ? "var(--charcoal)" : "var(--bone)"};
+                    }
+                    .compare-btn-${key}:hover {
+                      background-color: transparent;
+                      color: ${accentColor};
+                    }
+                  `}</style>
                   <button
-                    className="w-full flex items-center justify-center transition-colors hover:bg-transparent hover:text-black"
+                    className={`compare-btn-${key} w-full flex items-center justify-center transition-all duration-200`}
                     style={{
                       fontFamily: GC,
                       fontWeight: 700,
-                      fontSize: 16,
-                      minHeight: 48,
-                      padding: "0 16px",
+                      fontSize: 15,
+                      minHeight: 50,
+                      padding: "0 20px",
                       borderRadius: 999,
-                      backgroundColor: "var(--charcoal)",
-                      color: "var(--bone)",
-                      border: "2px solid var(--charcoal)",
                     }}
                   >
                     Add to cart — ${item.bundlePrice.toFixed(2)}
                   </button>
-                  <button
-                    className="w-full flex items-center justify-center transition-colors"
+                  <Link
+                    href={`/${key}`}
+                    className="w-full flex items-center justify-center transition-colors hover:opacity-80"
                     style={{
                       fontFamily: GC,
-                      fontWeight: 700,
+                      fontWeight: 600,
                       fontSize: 14,
                       minHeight: 36,
-                      color: "rgba(0,0,0,0.6)",
-                      backgroundColor: "transparent",
-                      border: "none",
+                      color: "rgba(21,21,21,0.5)",
                       textDecoration: "underline",
+                      textUnderlineOffset: 3,
                     }}
                   >
                     Subscribe & save — ${subscribePrice}
-                  </button>
+                  </Link>
                 </div>
               </div>
             )
@@ -162,8 +231,8 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex justify-between items-baseline gap-3">
-      <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 17, color: "rgba(0,0,0,0.55)" }}>{label}</span>
-      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 17, color: "var(--ink)", textAlign: "right", maxWidth: 180 }}>
+      <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 15, color: "rgba(21,21,21,0.5)" }}>{label}</span>
+      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 15, color: "var(--charcoal)", textAlign: "right", maxWidth: 180 }}>
         {value}
       </span>
     </div>
