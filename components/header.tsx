@@ -59,10 +59,10 @@ export function Header() {
 
   return (
     <>
-      {/* Announcement bar — Avro Blue background with charcoal text */}
+      {/* Announcement bar — Avro Blue background, Gotham display type */}
       <div
-        className="flex justify-center gap-4 md:gap-12 px-4 md:px-8 py-2.5 text-[11px] md:text-[12px] font-semibold tracking-[0.08em] uppercase text-center"
-        style={{ backgroundColor: "var(--avro-blue)", color: "var(--charcoal)" }}
+        className="font-display flex justify-center gap-4 md:gap-12 px-4 md:px-8 py-2.5 text-[12px] md:text-[13px] uppercase text-center"
+        style={{ backgroundColor: "var(--avro-blue)", color: "var(--charcoal)", letterSpacing: "0.06em", fontWeight: 700 }}
       >
         <span>
           ✦ Subscribe and save 25% on every order —{" "}
