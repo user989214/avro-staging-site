@@ -1,3 +1,6 @@
+"use client"
+
+import * as React from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { formulas, sharedProof, testimonials, type FormulaKey } from "@/lib/data"
@@ -266,41 +269,209 @@ export function FinalCta({
   title,
   copy,
   productButtons = true,
+  eyebrow = "Stay in the loop",
 }: {
   title: string
   copy: string
   productButtons?: boolean
+  eyebrow?: string
 }) {
   return (
-    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
-      <style>{`
-        .final-cta-btn { background-color: #000; color: #fff; border: 2.5px solid #000; transition: background-color 0.18s ease, color 0.18s ease; display: inline-flex; align-items: center; justify-content: center; font-family: ${GC_FINAL}; font-weight: 800; font-size: 20px; min-height: 64px; padding: 0 40px; border-radius: 10px; text-decoration: none; }
-        .final-cta-btn:hover { background-color: transparent; color: #000; }
-      `}</style>
-      <div style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#94C6D4", borderRadius: 20, padding: "clamp(48px,6vw,88px) clamp(36px,5vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 40 }}>
-        <div style={{ flex: "1 1 400px", minWidth: 0 }}>
-          <h2 style={{ fontFamily: GC_FINAL, fontWeight: 950, fontSize: "clamp(36px,5vw,68px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 16 }}>
+    <section
+      style={{
+        backgroundColor: "var(--base)",
+        width: "100%",
+        padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 1320,
+          margin: "0 auto",
+          backgroundColor: "var(--charcoal)",
+          color: "var(--bone)",
+          borderRadius: 28,
+          padding: "clamp(48px,6vw,88px) clamp(28px,5vw,80px)",
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 40,
+          fontFamily: GC_FINAL,
+        }}
+      >
+        {/* Left: eyebrow + heading + copy */}
+        <div style={{ flex: "1 1 420px", minWidth: 0, maxWidth: 560 }}>
+          <span
+            style={{
+              display: "inline-block",
+              marginBottom: 14,
+              fontFamily: GC_FINAL,
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: BLUE_FINAL,
+            }}
+          >
+            {eyebrow}
+          </span>
+          <h2
+            style={{
+              fontFamily: GC_FINAL,
+              fontWeight: 700,
+              fontSize: "clamp(34px,4.4vw,56px)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.02em",
+              color: "var(--bone)",
+              marginBottom: 14,
+            }}
+          >
             {title}
           </h2>
-          <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(17px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(0,0,0,0.72)" }}>
+          <p
+            style={{
+              fontFamily: GC_FINAL,
+              fontWeight: 400,
+              fontSize: "clamp(15px,1.3vw,17px)",
+              lineHeight: 1.55,
+              color: "rgba(245,240,232,0.6)",
+            }}
+          >
             {copy}
           </p>
         </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-          {productButtons ? (
-            <>
-              <a href="/calm" className="final-cta-btn">Shop Calm</a>
-              <a href="/focus" className="final-cta-btn">Shop Focus</a>
-              <a href="/energy" className="final-cta-btn">Shop Energy</a>
-            </>
-          ) : (
-            <>
-              <a href="/shop" className="final-cta-btn">Shop AVRO</a>
-              <a href="/contact" className="final-cta-btn">Contact Us</a>
-            </>
+
+        {/* Right: email pill OR pill buttons */}
+        <div style={{ flex: "1 1 360px", minWidth: 0, display: "flex", flexDirection: "column", gap: 14 }}>
+          <FinalCtaEmailForm />
+
+          {productButtons && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 }}>
+              {[
+                { href: "/calm", label: "Shop Calm" },
+                { href: "/focus", label: "Shop Focus" },
+                { href: "/energy", label: "Shop Energy" },
+              ].map((b) => (
+                <a
+                  key={b.href}
+                  href={b.href}
+                  className="final-cta-pill"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: GC_FINAL,
+                    fontWeight: 600,
+                    fontSize: 13,
+                    letterSpacing: "0.02em",
+                    minHeight: 38,
+                    padding: "0 18px",
+                    borderRadius: 999,
+                    border: "1.5px solid rgba(245,240,232,0.25)",
+                    backgroundColor: "transparent",
+                    color: "var(--bone)",
+                    textDecoration: "none",
+                    transition: "background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease",
+                  }}
+                >
+                  {b.label}
+                </a>
+              ))}
+            </div>
           )}
         </div>
       </div>
+
+      <style>{`
+        .final-cta-pill:hover {
+          background-color: var(--bone) !important;
+          color: var(--charcoal) !important;
+          border-color: var(--bone) !important;
+        }
+      `}</style>
     </section>
+  )
+}
+
+function FinalCtaEmailForm() {
+  const [email, setEmail] = React.useState("")
+  const [submitted, setSubmitted] = React.useState(false)
+
+  return submitted ? (
+    <p
+      style={{
+        fontFamily: GC_FINAL,
+        fontWeight: 500,
+        fontSize: 14,
+        color: BLUE_FINAL,
+      }}
+    >
+      Thanks for subscribing.
+    </p>
+  ) : (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault()
+        setSubmitted(true)
+      }}
+      style={{
+        display: "flex",
+        alignItems: "stretch",
+        overflow: "hidden",
+        borderRadius: 999,
+        border: "1.5px solid rgba(245,240,232,0.25)",
+        backgroundColor: "rgba(245,240,232,0.04)",
+        width: "100%",
+        maxWidth: 460,
+      }}
+    >
+      <label className="sr-only" htmlFor="finalcta-email">Email address</label>
+      <input
+        id="finalcta-email"
+        type="email"
+        required
+        placeholder="Email address"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        style={{
+          flex: 1,
+          padding: "14px 20px",
+          backgroundColor: "transparent",
+          border: 0,
+          outline: "none",
+          fontFamily: GC_FINAL,
+          fontWeight: 400,
+          fontSize: 14,
+          color: "var(--bone)",
+        }}
+      />
+      <button
+        type="submit"
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 6,
+          padding: "0 20px",
+          margin: 4,
+          border: "none",
+          borderRadius: 999,
+          backgroundColor: BLUE_FINAL,
+          color: "var(--charcoal)",
+          fontFamily: GC_FINAL,
+          fontWeight: 700,
+          fontSize: 13,
+          cursor: "pointer",
+          transition: "opacity 0.18s ease",
+        }}
+        aria-label="Subscribe"
+      >
+        Subscribe
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M5 12h14M13 5l7 7-7 7" />
+        </svg>
+      </button>
+    </form>
   )
 }
