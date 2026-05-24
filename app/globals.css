@@ -324,8 +324,7 @@
   justify-content: center;
   min-height: 52px;
   padding: 0 28px;
-  border: 1.5px solid currentColor;
-  border-color: var(--charcoal);
+  border: 1.5px solid var(--charcoal);
   border-radius: 999px;
   background-color: var(--charcoal);
   color: var(--bone);
@@ -334,18 +333,56 @@
   font-size: 15px;
   letter-spacing: -0.005em;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
+/* Default charcoal pill: hover -> stroke only */
 .btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  background-color: transparent;
+  color: var(--charcoal);
+  border-color: var(--charcoal);
 }
-/* When .btn-primary is recolored via !bg-* utility, the border follows */
-.btn-primary.\!bg-calm { border-color: var(--accent-calm); }
-.btn-primary.\!bg-focus { border-color: var(--accent-focus); }
-.btn-primary.\!bg-energy { border-color: var(--accent-energy); }
-.btn-primary[class*="!bg-avro-blue"],
-.btn-primary.\!bg-avro-blue { border-color: var(--avro-blue); }
+
+/* Per-formula filled pills via !bg-* utilities — border matches fill,
+   hover collapses to stroke-only in the same color. */
+.btn-primary.\!bg-calm {
+  border-color: var(--calm);
+  color: var(--bone);
+}
+.btn-primary.\!bg-calm:hover {
+  background-color: transparent !important;
+  color: var(--calm);
+  border-color: var(--calm);
+}
+
+.btn-primary.\!bg-focus {
+  border-color: var(--focus);
+  color: var(--bone);
+}
+.btn-primary.\!bg-focus:hover {
+  background-color: transparent !important;
+  color: var(--focus);
+  border-color: var(--focus);
+}
+
+.btn-primary.\!bg-energy {
+  border-color: var(--energy);
+  color: var(--ink);
+}
+.btn-primary.\!bg-energy:hover {
+  background-color: transparent !important;
+  color: var(--ink);
+  border-color: var(--energy);
+}
+
+.btn-primary.\!bg-avro-blue {
+  border-color: var(--avro-blue);
+  color: var(--charcoal);
+}
+.btn-primary.\!bg-avro-blue:hover {
+  background-color: transparent !important;
+  color: var(--charcoal);
+  border-color: var(--avro-blue);
+}
 
 .btn-secondary {
   display: inline-flex;
