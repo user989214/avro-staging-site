@@ -28,13 +28,37 @@ export default function ShopPage() {
             that fits your moment.
           </p>
           <div className="flex flex-wrap items-center gap-3 mt-6.5">
-            <Link href="/calm" className="btn-primary !bg-calm">
+            <Link
+              href="/calm"
+              className="inline-flex items-center justify-center min-h-[52px] px-7 rounded-full font-bold text-[15px] transition-all"
+              style={{
+                border: "2px solid var(--calm)",
+                backgroundColor: "transparent",
+                color: "var(--calm)",
+              }}
+            >
               Shop Calm
             </Link>
-            <Link href="/focus" className="btn-primary !bg-focus">
+            <Link
+              href="/focus"
+              className="inline-flex items-center justify-center min-h-[52px] px-7 rounded-full font-bold text-[15px] transition-all"
+              style={{
+                border: "2px solid var(--focus)",
+                backgroundColor: "transparent",
+                color: "var(--focus)",
+              }}
+            >
               Shop Focus
             </Link>
-            <Link href="/energy" className="btn-primary !bg-energy !text-ink">
+            <Link
+              href="/energy"
+              className="inline-flex items-center justify-center min-h-[52px] px-7 rounded-full font-bold text-[15px] transition-all"
+              style={{
+                border: "2px solid var(--energy)",
+                backgroundColor: "transparent",
+                color: "var(--ink)",
+              }}
+            >
               Shop Energy
             </Link>
           </div>
