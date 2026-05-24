@@ -61,7 +61,7 @@ export function Header() {
     <>
       {/* Announcement bar — Avro Blue background, Gotham Condensed type */}
       <div
-        className="flex justify-center gap-4 md:gap-12 px-4 md:px-8 py-4 md:py-5 text-[16px] md:text-[18px] uppercase text-center"
+        className="flex justify-center gap-4 md:gap-12 px-4 md:px-8 py-3 md:py-3.5 text-[14px] md:text-[15px] uppercase text-center"
         style={{
           backgroundColor: "var(--avro-blue)",
           color: "var(--charcoal)",
