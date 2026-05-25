@@ -59,21 +59,6 @@ export function HomeRefHero() {
       >
         {/* Left */}
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {/* Eyebrow */}
-          <span
-            style={{
-              fontFamily: GC,
-              fontWeight: 700,
-              fontSize: 11,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "var(--avro-blue-deep)",
-              marginBottom: 24,
-            }}
-          >
-            Calm · Focus · Energy
-          </span>
-
           {/* Hero headline — Gotham display family for hero only, per design system */}
           <h1
             className="font-display"
