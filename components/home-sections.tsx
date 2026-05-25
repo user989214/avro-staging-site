@@ -147,8 +147,8 @@ export function HomeRefHero() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/lifestyle/kitchen-trio-pink-cocktails.jpg"
-            alt="AVRO stick packet next to a glass of mixed drink"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4325552255-51euqtVRTaIeU2n0sGSiBvq4vuvEFe.png"
+            alt="AVRO Energy stick packet next to a glass of green juice at an outdoor brunch"
             style={{
               position: "absolute",
               inset: 0,
