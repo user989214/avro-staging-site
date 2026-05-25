@@ -89,7 +89,7 @@ export function HomeRefHero() {
           >
             Calm first.
             <br />
-            <span style={{ fontStyle: "italic", fontWeight: 700 }}>Clear headed.</span>
+            Clear headed.
             <br />
             Ready when pressure rises.
           </h1>
