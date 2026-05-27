@@ -416,14 +416,13 @@ export function HomeProductStrip() {
         <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32 }}>
           Three formulas. One foundation.
         </h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", border: "1.5px solid rgba(28,27,20,0.1)", borderRadius: 20, overflow: "hidden", backgroundColor: "var(--base-light)" }}>
-          {(Object.keys(formulas) as FormulaKey[]).map((key, i) => (
-            <a
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+          {(Object.keys(formulas) as FormulaKey[]).map((key) => (
+            <div
               key={key}
-              href={`/${key}`}
-              style={{ display: "grid", gridTemplateRows: "1fr auto", textDecoration: "none", borderLeft: i > 0 ? "2px solid rgba(0,0,0,0.12)" : "none" }}
+              style={{ display: "flex", flexDirection: "column", borderRadius: 24, overflow: "hidden", backgroundColor: "var(--base-light)" }}
             >
-              <div style={{ height: "clamp(320px, 30vw, 460px)", overflow: "hidden" }}>
+              <div style={{ position: "relative", aspectRatio: "4/5", overflow: "hidden" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={socialImages[key]}
@@ -431,15 +430,57 @@ export function HomeProductStrip() {
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
                 />
               </div>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "20px 24px", borderTop: "2px solid rgba(0,0,0,0.1)", backgroundColor: BLUE }}>
-                <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(16px,1.4vw,20px)", color: "var(--ink)", textAlign: "center" }}>
+              <div style={{ padding: "12px 20px", backgroundColor: BLUE }}>
+                <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(14px,1.2vw,17px)", color: "var(--ink)", textAlign: "center", display: "block" }}>
                   PharmaGABA® + {formulaAdditions[key]}
                 </span>
               </div>
-            </a>
+              <div style={{ padding: "20px 20px 24px", display: "flex", flexDirection: "column", gap: 12 }}>
+                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2vw,28px)", lineHeight: 1.1, color: "var(--ink)" }}>
+                  {formulas[key].name}
+                </h3>
+                <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, lineHeight: 1.45, color: "rgba(0,0,0,0.6)" }}>
+                  {formulas[key].tagline}
+                </p>
+                <a 
+                  href={`/${key}`}
+                  className="hp-btn-black"
+                  style={{ 
+                    display: "flex", 
+                    alignItems: "center", 
+                    justifyContent: "center",
+                    gap: 10, 
+                    fontFamily: GC, 
+                    fontWeight: 700, 
+                    fontSize: 16, 
+                    width: "100%",
+                    minHeight: 48, 
+                    padding: "0 20px", 
+                    borderRadius: 999, 
+                    border: "2px solid var(--charcoal)", 
+                    backgroundColor: "var(--charcoal)", 
+                    color: "var(--bone)",
+                    textDecoration: "none",
+                    marginTop: 8,
+                  }}
+                >
+                  Explore {formulas[key].name}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
           ))}
         </div>
       </div>
+      <style jsx>{`
+        @media (max-width: 900px) {
+          div[style*="grid-template-columns: repeat(3"] {
+            grid-template-columns: 1fr !important;
+            max-width: 400px !important;
+            margin: 0 auto !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }
