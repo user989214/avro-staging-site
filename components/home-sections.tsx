@@ -270,15 +270,17 @@ export function HomeRefHero() {
           }}
         />
 
-        {/* Gradient overlay — wraps the image edges, blending it into the cream background */}
+        {/* Gradient overlay — wraps all four edges so the rectangular image border dissolves into the cream */}
         <div
           aria-hidden="true"
           className="hp-hero-fade"
           style={{
             position: "absolute",
             inset: 0,
-            background:
-              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 30%, rgba(245,241,234,0.95) 38%, rgba(245,241,234,0.75) 46%, rgba(245,241,234,0.4) 54%, rgba(245,241,234,0.15) 62%, rgba(245,241,234,0) 70%)",
+            background: `
+              linear-gradient(to right, var(--base-light) 0%, var(--base-light) 44%, rgba(245,241,234,0.92) 52%, rgba(245,241,234,0.55) 60%, rgba(245,241,234,0.15) 70%, rgba(245,241,234,0) 80%, rgba(245,241,234,0) 92%, var(--base-light) 100%),
+              linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0) 12%, rgba(245,241,234,0) 88%, var(--base-light) 100%)
+            `,
             pointerEvents: "none",
           }}
         />
