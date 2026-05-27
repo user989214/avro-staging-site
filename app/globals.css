@@ -219,6 +219,8 @@
   --color-golf: var(--golf);
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
+  --color-deep-black: var(--deep-black);
+  --color-dark-surface: var(--dark-surface);
 
   /* legacy aliases */
   --color-paper: var(--base);
@@ -419,6 +421,29 @@
 .btn-secondary:hover {
   background-color: transparent;
   color: var(--charcoal);
+}
+
+/* Dark theme (Zero Proof) secondary button */
+.btn-secondary-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 32px;
+  border: 2px solid var(--gold);
+  border-radius: 999px;
+  background-color: var(--gold);
+  color: var(--charcoal);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-secondary-dark:hover {
+  background-color: var(--gold-light);
+  border-color: var(--gold-light);
 }
 
 .btn-accent {

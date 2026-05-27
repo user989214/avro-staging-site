@@ -13,7 +13,8 @@ interface SectionProps {
   id?: string
 }
 
-export function Section({ children, className, id }: SectionProps) {
+export function Section({ children, className, id, dark = false }: SectionProps & { dark?: boolean }) {
+  const bg = dark ? "var(--deep-black)" : undefined
   return (
     <section
       id={id}
@@ -21,6 +22,7 @@ export function Section({ children, className, id }: SectionProps) {
         "w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(52px,7vw,86px)]",
         className
       )}
+      style={bg ? { backgroundColor: bg } : undefined}
     >
       {children}
     </section>
@@ -67,31 +69,37 @@ export function SectionHeading({
   title,
   description,
   centered = true,
+  dark = false,
 }: {
   eyebrow?: string
   title: string
   description?: string
   centered?: boolean
+  dark?: boolean
 }) {
+  const textColor = dark ? "text-bone" : ""
+  const mutedText = dark ? "text-bone/75" : "text-ink/75"
+  const chipBg = dark ? "bg-gold text-charcoal" : "bg-charcoal text-bone"
   return (
     <div
       className={cn(
         "max-w-[900px] mb-8.5",
-        centered && "mx-auto text-center"
+        centered && "mx-auto text-center",
+        textColor
       )}
     >
       {eyebrow && (
         <span
-          className="inline-block mb-4 px-3.5 py-1.5 rounded-full bg-charcoal text-bone text-[11px] font-black tracking-[0.12em] uppercase"
+          className={cn("inline-block mb-4 px-3.5 py-1.5 rounded-full text-[11px] font-black tracking-[0.12em] uppercase", chipBg)}
         >
           {eyebrow}
         </span>
       )}
-      <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5">
+      <h2 className={cn("font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5", textColor)}>
         {title}
       </h2>
       {description && (
-        <p className="max-w-[760px] mx-auto text-ink/75 text-base leading-relaxed">
+        <p className={cn("max-w-[760px] mx-auto text-base leading-relaxed", mutedText)}>
           {description}
         </p>
       )}
@@ -118,18 +126,21 @@ export function CtaGroup({
   )
 }
 
-export function SocialProof({ mode = "full" }: { mode?: "full" | "compact" }) {
+export function SocialProof({ mode = "full", dark = false }: { mode?: "full" | "compact"; dark?: boolean }) {
+  const bg = dark
+    ? "linear-gradient(to bottom, var(--deep-black) 0%, var(--dark-surface) 100%)"
+    : "linear-gradient(to bottom, var(--base) 0%, #EAE6DC 100%)"
+  const ink = dark ? "var(--bone)" : "var(--ink)"
   return (
     <section
       style={{
         width: "100%",
         padding: "clamp(64px,8vw,112px) clamp(20px,5vw,64px) clamp(72px,9vw,120px)",
-        // Slightly matte/warmer off-white — acts as a tonal step between --base and --base-deep
-        background: "linear-gradient(to bottom, var(--base) 0%, #EAE6DC 100%)",
+        background: bg,
       }}
     >
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(34px,4.4vw,60px)", lineHeight: 1.0, letterSpacing: "-0.02em", color: "var(--ink)", marginBottom: 40, textAlign: "center" }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(34px,4.4vw,60px)", lineHeight: 1.0, letterSpacing: "-0.02em", color: ink, marginBottom: 40, textAlign: "center" }}>
           Trusted for calm-first routines.
         </h2>
         {mode === "full" && (
@@ -153,37 +164,44 @@ export function SocialProof({ mode = "full" }: { mode?: "full" | "compact" }) {
 export function ProductCards({
   title = "Choose your AVRO formula",
   shopLabel = "Shop",
+  dark = false,
 }: {
   title?: string
   shopLabel?: string
+  dark?: boolean
 }) {
+  const bg = dark ? "var(--deep-black)" : "var(--base)"
+  const cardBg = dark ? "var(--dark-surface)" : "var(--base-light)"
+  const ink = dark ? "var(--bone)" : "var(--ink)"
+  const muted = dark ? "rgba(245,240,232,0.6)" : "rgba(0,0,0,0.6)"
+  const border = dark ? "rgba(245,240,232,0.08)" : "rgba(0,0,0,0.08)"
   return (
-    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
+    <section style={{ backgroundColor: bg, width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 12 }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: ink, marginBottom: 12 }}>
           {title}
         </h2>
-        <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(15px,1.2vw,18px)", lineHeight: 1.4, color: "rgba(0,0,0,0.6)", marginBottom: 32 }}>
+        <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(15px,1.2vw,18px)", lineHeight: 1.4, color: muted, marginBottom: 32 }}>
           Every AVRO formula starts with the same calm-first base, then supports the moment in a different way.
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
           {(Object.keys(formulas) as FormulaKey[]).map((key) => {
             const item = formulas[key]
             return (
-              <article key={key} style={{ backgroundColor: "var(--base-light)", borderRadius: 24, padding: "clamp(20px,3vw,32px)", display: "flex", flexDirection: "column", gap: 16 }}>
-                <div style={{ borderRadius: 20, height: 340, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: "var(--bone)" }}>
+              <article key={key} style={{ backgroundColor: cardBg, borderRadius: 24, padding: "clamp(20px,3vw,32px)", display: "flex", flexDirection: "column", gap: 16 }}>
+                <div style={{ borderRadius: 20, height: 340, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "rgba(245,240,232,0.05)" : "var(--bone)" }}>
                   <ProductCard formulaKey={key} className="h-full w-full object-cover" />
                 </div>
-                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(22px,2vw,28px)", color: "var(--ink)", margin: 0 }}>{item.name}</h3>
-                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(16px,1.3vw,18px)", lineHeight: 1.45, color: "rgba(0,0,0,0.6)", margin: 0 }}>{item.support}</p>
-                <div style={{ borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 16, display: "flex", flexDirection: "column", gap: 10 }}>
+                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(22px,2vw,28px)", color: ink, margin: 0 }}>{item.name}</h3>
+                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(16px,1.3vw,18px)", lineHeight: 1.45, color: muted, margin: 0 }}>{item.support}</p>
+                <div style={{ borderTop: `1px solid ${border}`, paddingTop: 16, display: "flex", flexDirection: "column", gap: 10 }}>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 16, color: "var(--ink)" }}>Best for</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 15, lineHeight: 1.4, color: "rgba(0,0,0,0.6)", margin: "4px 0 0" }}>{item.bestFor}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 16, color: ink }}>Best for</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 15, lineHeight: 1.4, color: muted, margin: "4px 0 0" }}>{item.bestFor}</p>
                   </div>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 16, color: "var(--ink)" }}>Caffeine</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 15, lineHeight: 1.4, color: "rgba(0,0,0,0.6)", margin: "4px 0 0" }}>{item.caffeine}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 16, color: ink }}>Caffeine</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 15, lineHeight: 1.4, color: muted, margin: "4px 0 0" }}>{item.caffeine}</p>
                   </div>
                 </div>
                 <a 
@@ -236,7 +254,7 @@ export function ProductCards({
   )
 }
 
-export function FormulaLogic() {
+export function FormulaLogic({ dark = false }: { dark?: boolean }) {
   const cards: [string, string, IconName][] = [
     [
       "PharmaGABA®",
@@ -261,14 +279,15 @@ export function FormulaLogic() {
   ]
 
   return (
-    <Section>
+    <Section dark={dark}>
       <SectionHeading
         eyebrow="Science + formula logic"
         title="Calm first. Then support the moment."
+        dark={dark}
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5">
         {cards.map(([title, copy, iconName]) => (
-          <InfoCard key={title} icon={iconName} title={title}>
+          <InfoCard key={title} icon={iconName} title={title} dark={dark}>
             {copy}
           </InfoCard>
         ))}
@@ -282,25 +301,31 @@ export function InfoCard({
   title,
   children,
   href,
+  dark = false,
 }: {
   icon: IconName
   title: string
   children: React.ReactNode
   href?: string
+  dark?: boolean
 }) {
+  const cardBg = dark ? "bg-dark-surface" : "bg-base-light"
+  const iconColor = dark ? "text-gold" : "text-olive"
+  const titleColor = dark ? "text-bone" : ""
+  const textColor = dark ? "text-bone/75" : "text-ink/75"
   const content = (
     <>
-      <Icon name={icon} className="w-10.5 h-10.5 mb-5 text-olive" />
-      <h3 className="font-black mb-2">{title}</h3>
-      <p className="text-ink/75 text-base leading-relaxed">{children}</p>
+      <Icon name={icon} className={cn("w-10.5 h-10.5 mb-5", iconColor)} />
+      <h3 className={cn("font-black mb-2", titleColor)}>{title}</h3>
+      <p className={cn("text-base leading-relaxed", textColor)}>{children}</p>
     </>
   )
 
   if (href) {
     return (
       <Link
-      href={href}
-      className="min-h-[180px] p-7 bg-base-light rounded-[20px] transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_70px_rgba(30,29,24,0.08)]"
+        href={href}
+        className={cn("min-h-[180px] p-7 rounded-[20px] transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_70px_rgba(30,29,24,0.08)]", cardBg)}
       >
         {content}
       </Link>
@@ -308,7 +333,7 @@ export function InfoCard({
   }
 
   return (
-    <article className="min-h-[180px] p-7 bg-base-light rounded-[20px]">
+    <article className={cn("min-h-[180px] p-7 rounded-[20px]", cardBg)}>
       {content}
     </article>
   )
@@ -318,29 +343,34 @@ export function FaqBlock({
   title,
   faqs,
   centered = true,
+  dark = false,
 }: {
   title: string
   faqs: [string, string][]
   centered?: boolean
+  dark?: boolean
 }) {
+  const cardBg = dark ? "bg-dark-surface" : "bg-base-light"
+  const textColor = dark ? "text-bone" : ""
+  const mutedText = dark ? "text-bone/75" : "text-ink/75"
   return (
     <Section className="max-w-[1080px]">
-      <SectionHeading title={title} centered={centered} />
+      <SectionHeading title={title} centered={centered} dark={dark} />
       <div className="grid gap-2 w-full">
         {faqs.map(([q, a]) => (
           <details
             key={q}
-            className="bg-base-light rounded-[12px] group"
+            className={cn(cardBg, "rounded-[12px] group", textColor)}
           >
             <summary className="flex justify-between gap-4 px-5.5 py-4.5 cursor-pointer font-extrabold select-none after:content-['+'] after:text-[22px] after:leading-none group-open:after:content-['-']">
               {q}
             </summary>
-            <p className="px-5.5 pb-5 text-ink/75 leading-relaxed">{a}</p>
+            <p className={cn("px-5.5 pb-5 leading-relaxed", mutedText)}>{a}</p>
           </details>
         ))}
       </div>
       <div className={cn("mt-5.5", centered ? "text-center" : "text-left")}>
-        <Link href="/faq" className="btn-secondary">
+        <Link href="/faq" className={dark ? "btn-secondary-dark" : "btn-secondary"}>
           View All FAQs
         </Link>
       </div>
@@ -356,6 +386,7 @@ export function FinalCta({
   productButtons = true,
   eyebrow,
   bg = "var(--avro-blue)",
+  dark = false,
 }: {
   title: string
   copy: string
@@ -363,11 +394,16 @@ export function FinalCta({
   eyebrow?: string
   /** Background color for the rounded CTA card (defaults to AVRO blue). */
   bg?: string
+  dark?: boolean
 }) {
+  // Dark theme uses gold-on-dark styling with bone text
+  const textColor = dark ? "var(--bone)" : "var(--charcoal)"
+  const mutedColor = dark ? "rgba(245,240,232,0.7)" : "rgba(21,21,21,0.7)"
+  const sectionBg = dark ? "var(--deep-black)" : "transparent"
   return (
     <section
       style={{
-        backgroundColor: "transparent",
+        backgroundColor: sectionBg,
         width: "100%",
         padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)",
       }}
@@ -377,7 +413,7 @@ export function FinalCta({
           maxWidth: 1250,
           margin: "0 auto",
           backgroundColor: bg,
-          color: "var(--charcoal)",
+          color: textColor,
           borderRadius: 28,
           padding: "clamp(48px,6vw,88px) clamp(28px,5vw,80px)",
           display: "flex",
@@ -401,7 +437,7 @@ export function FinalCta({
                 fontWeight: 700,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: "var(--charcoal)",
+                color: textColor,
                 opacity: 0.7,
               }}
             >
@@ -415,7 +451,7 @@ export function FinalCta({
               fontSize: "clamp(34px,4.6vw,60px)",
               lineHeight: 1.02,
               letterSpacing: "-0.02em",
-              color: "var(--charcoal)",
+              color: textColor,
               marginBottom: 14,
             }}
           >
@@ -427,7 +463,7 @@ export function FinalCta({
               fontWeight: 400,
               fontSize: "clamp(15px,1.3vw,17px)",
               lineHeight: 1.55,
-              color: "rgba(21,21,21,0.7)",
+              color: mutedColor,
             }}
           >
             {copy}

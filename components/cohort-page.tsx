@@ -340,17 +340,18 @@ export function CohortPage({ data }: { data: CohortData }) {
         </div>
       </section>
 
-      <FormulaLogic />
+      <FormulaLogic dark={isZeroProof} />
 
       {/* Use Moments */}
-      <Section>
-        <SectionHeading eyebrow="Use moments" title={data.useTitle} />
+      <Section dark={isZeroProof}>
+        <SectionHeading eyebrow="Use moments" title={data.useTitle} dark={isZeroProof} />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {data.useMoments.map(([title, copy], index) => (
             <InfoCard
               key={title}
               icon={(["flag", "star", "target", "users"] as const)[index]}
               title={title}
+              dark={isZeroProof}
             >
               {copy}
             </InfoCard>
@@ -358,8 +359,8 @@ export function CohortPage({ data }: { data: CohortData }) {
         </div>
       </Section>
 
-      <ProductCards title={data.shopTitle} shopLabel="Shop" />
-      <SocialProof mode="compact" />
+      <ProductCards title={data.shopTitle} shopLabel="Shop" dark={isZeroProof} />
+      <SocialProof mode="compact" dark={isZeroProof} />
       {/* Tonal continuation — light cohorts deepen toward CTA; ZP keeps the dark surface */}
       <div
         style={{
@@ -368,13 +369,14 @@ export function CohortPage({ data }: { data: CohortData }) {
             : "linear-gradient(to bottom, #EAE6DC 0%, #DEDAD0 100%)",
         }}
       >
-        <FaqBlock title={data.faqTitle} faqs={data.faqs} />
+        <FaqBlock title={data.faqTitle} faqs={data.faqs} dark={isZeroProof} />
       </div>
       <FinalCta
         title={data.finalTitle}
         copy={data.finalCopy}
         productButtons
         bg={finalCtaBg}
+        dark={isZeroProof}
       />
     </div>
   )
