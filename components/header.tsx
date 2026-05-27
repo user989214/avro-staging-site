@@ -256,7 +256,7 @@ export function Header() {
         </button>
 
         {/* Desktop nav - left */}
-        <div className="hidden md:flex items-center gap-7">
+        <div className="hidden md:flex items-center gap-8">
           <NavLink href="/shop">Shop</NavLink>
           <NavLink href="/shop">Subscribe</NavLink>
           <div
@@ -264,9 +264,9 @@ export function Header() {
             onMouseEnter={openDropdown}
             onMouseLeave={scheduleClose}
           >
-            <button className="relative text-[15px] font-bold tracking-[0.08em] uppercase transition-colors hover:opacity-70 flex items-center gap-1" style={{ color: "var(--ink)" }}>
+            <button className="relative font-serif font-black text-[20px] leading-[1.1] tracking-[-0.005em] transition-colors hover:opacity-70 flex items-center gap-1.5" style={{ color: "var(--ink)" }}>
               Why AVRO
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"/></svg>
             </button>
 
             {/* Full-width dropdown panel — left half: feature cards, right half: section nav */}
@@ -382,25 +382,44 @@ export function Header() {
         </Link>
 
         {/* Desktop nav - right */}
-        <div className="hidden md:flex items-center justify-end gap-7">
+        <div className="hidden md:flex items-center justify-end gap-8">
           <NavLink href="/science">Science</NavLink>
           <NavLink href="/faq">FAQ</NavLink>
           <button
             onClick={openCart}
-            className="relative text-[15px] font-bold tracking-[0.08em] uppercase transition-colors flex items-center gap-1.5"
-            style={{ color: "var(--ink)" }}
+            className="hdr-cart-btn relative inline-flex items-center gap-2 transition-colors"
+            style={{
+              color: "var(--ink)",
+              padding: "8px 16px 8px 14px",
+              borderRadius: 999,
+              border: "2px solid var(--ink)",
+              backgroundColor: "transparent",
+            }}
+            aria-label={`Cart with ${itemCount} items`}
           >
-            Cart
+            {itemCount > 0 ? (
+              <CartIconFilled className="w-[18px] h-[18px]" />
+            ) : (
+              <CartIcon className="w-[18px] h-[18px]" />
+            )}
+            <span className="font-serif font-black text-[18px] leading-[1.1] tracking-[-0.005em]">
+              Cart
+            </span>
             <span
-              className="inline-flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-bold"
+              className="inline-flex items-center justify-center min-w-[22px] h-[22px] px-1.5 rounded-full font-serif font-black text-[12px] leading-none"
               style={{
                 backgroundColor: "var(--avro-blue)",
                 color: "var(--charcoal)",
               }}
+              aria-hidden="true"
             >
               {itemCount}
             </span>
           </button>
+          <style>{`
+            .hdr-cart-btn { transition: background-color 0.2s ease, color 0.2s ease; }
+            .hdr-cart-btn:hover { background-color: var(--ink); color: var(--bone); }
+          `}</style>
         </div>
 
         {/* Mobile cart button */}
@@ -553,7 +572,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
   return (
   <Link
   href={href}
-  className="relative text-[15px] font-bold tracking-[0.08em] uppercase transition-colors hover:opacity-70"
+  className="relative font-serif font-black text-[20px] leading-[1.1] tracking-[-0.005em] transition-colors hover:opacity-70"
   style={{ color: "var(--ink)" }}
   >
   {children}

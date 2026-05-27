@@ -1,10 +1,12 @@
 "use client"
 
 import { useCart } from "@/lib/cart-context"
-import { X, Minus, Plus, ShoppingBag } from "lucide-react"
+import { X, Minus, Plus } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect } from "react"
+
+const BLUE = "var(--avro-blue)"
 
 export function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQuantity, total, itemCount } = useCart()
@@ -25,105 +27,154 @@ export function CartDrawer() {
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/50 z-[9998] transition-opacity duration-300 ${
+        className={`fixed inset-0 z-[9998] transition-opacity duration-300 ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
+        style={{ backgroundColor: "rgba(21,21,21,0.45)" }}
         onClick={closeCart}
         aria-hidden="true"
       />
 
       {/* Drawer */}
-      <div
-        className={`fixed top-0 right-0 h-full w-full max-w-md bg-white z-[9999] shadow-2xl transform transition-transform duration-300 ease-out ${
+      <aside
+        className={`fixed top-0 right-0 h-full w-full max-w-[440px] z-[9999] shadow-[0_0_60px_rgba(21,21,21,0.18)] transform transition-transform duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
+        style={{ backgroundColor: "var(--base)", color: "var(--ink)" }}
         role="dialog"
         aria-modal="true"
         aria-label="Shopping cart"
       >
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-100">
-            <div className="flex items-center gap-3">
-              <ShoppingBag className="w-5 h-5 text-olive" />
-              <h2 className="font-display text-xl font-bold text-olive-dark">
-                Your Cart ({itemCount})
+          <div
+            className="flex items-center justify-between px-6 py-5"
+            style={{ borderBottom: "1px solid rgba(21,21,21,0.1)" }}
+          >
+            <div className="flex items-baseline gap-3">
+              <h2 className="font-serif font-black text-[26px] leading-[1.05] tracking-[-0.01em]" style={{ color: "var(--ink)" }}>
+                Your Cart
               </h2>
+              <span
+                className="inline-flex items-center justify-center min-w-[26px] h-[26px] px-2 rounded-full font-serif font-black text-[13px] leading-none"
+                style={{ backgroundColor: BLUE, color: "var(--charcoal)" }}
+                aria-label={`${itemCount} items`}
+              >
+                {itemCount}
+              </span>
             </div>
             <button
               onClick={closeCart}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              className="w-9 h-9 flex items-center justify-center rounded-full transition-colors"
+              style={{ color: "var(--ink)" }}
               aria-label="Close cart"
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(21,21,21,0.08)" }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent" }}
             >
-              <X className="w-5 h-5 text-olive-dark" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Cart Items */}
-          <div className="flex-1 overflow-y-auto p-6">
+          <div className="flex-1 overflow-y-auto px-6 py-6">
             {items.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full text-center">
-                <ShoppingBag className="w-16 h-16 text-ink/30 mb-4" />
-                <p className="text-olive-dark font-medium mb-2">Your cart is empty</p>
-                <p className="text-ink/70 text-sm mb-6">
-                  Add some formulas to get started
+              <div className="flex flex-col items-center justify-center h-full text-center px-4">
+                <div
+                  className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
+                  style={{ backgroundColor: BLUE }}
+                  aria-hidden="true"
+                >
+                  <span className="font-serif font-black text-[26px] leading-none" style={{ color: "var(--charcoal)" }}>+</span>
+                </div>
+                <h3 className="font-serif font-black text-[28px] leading-[1.05] mb-2" style={{ color: "var(--ink)" }}>
+                  Your cart is empty
+                </h3>
+                <p className="text-[14px] leading-[1.5] mb-7 max-w-[260px]" style={{ color: "rgba(21,21,21,0.6)" }}>
+                  Start with a formula built for your moment — Calm, Focus, or Energy.
                 </p>
                 <Link
                   href="/shop"
                   onClick={closeCart}
-                  className="btn-primary"
+                  className="inline-flex items-center justify-center font-serif font-black text-[15px] leading-none"
+                  style={{
+                    backgroundColor: "var(--charcoal)",
+                    color: "var(--bone)",
+                    border: "2px solid var(--charcoal)",
+                    padding: "14px 36px",
+                    borderRadius: 999,
+                    textDecoration: "none",
+                    letterSpacing: "0.01em",
+                  }}
                 >
                   Browse Formulas
                 </Link>
               </div>
             ) : (
-              <ul className="space-y-6">
+              <ul className="flex flex-col gap-5">
                 {items.map((item) => (
                   <li
                     key={`${item.formula.id}-${item.variant}`}
-                    className="flex gap-4 pb-6 border-b border-gray-100 last:border-0"
+                    className="flex gap-4 pb-5"
+                    style={{ borderBottom: "1px solid rgba(21,21,21,0.08)" }}
                   >
                     <div
-                      className="w-20 h-20 rounded-2xl flex items-center justify-center flex-shrink-0"
+                      className="w-[88px] h-[88px] rounded-[18px] flex items-center justify-center flex-shrink-0"
                       style={{ backgroundColor: item.formula.color }}
                     >
                       <Image
                         src="/brand/avro-logo.svg"
                         alt=""
-                        width={40}
-                        height={40}
-                        className="opacity-20"
+                        width={44}
+                        height={44}
+                        className="opacity-25"
                       />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-display font-bold text-olive-dark truncate">
-                        {item.formula.name}
-                      </h3>
-                      <p className="text-sm text-ink/70 capitalize">
-                        {item.variant === "bundle" ? "3-Pack Bundle" : "Single Pack"}
-                      </p>
-                      <p className="text-olive font-bold mt-1">
-                        ${item.variant === "bundle" ? item.formula.bundlePrice : item.formula.price}
-                      </p>
-                      <div className="flex items-center gap-3 mt-3">
-                        <button
-                          onClick={() => updateQuantity(item.formula.id, item.quantity - 1)}
-                          className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
-                          aria-label="Decrease quantity"
+                    <div className="flex-1 min-w-0 flex flex-col">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="min-w-0">
+                          <h3 className="font-serif font-black text-[19px] leading-[1.1] tracking-[-0.01em] truncate" style={{ color: "var(--ink)" }}>
+                            {item.formula.name}
+                          </h3>
+                          <p className="text-[12px] font-bold tracking-[0.08em] uppercase mt-1" style={{ color: "rgba(21,21,21,0.55)" }}>
+                            {item.variant === "bundle" ? "3-Pack Bundle" : "Single Pack"}
+                          </p>
+                        </div>
+                        <p className="font-serif font-black text-[18px] leading-[1.1] flex-shrink-0" style={{ color: "var(--ink)" }}>
+                          ${item.variant === "bundle" ? item.formula.bundlePrice : item.formula.price}
+                        </p>
+                      </div>
+
+                      <div className="flex items-center gap-2 mt-auto pt-3">
+                        <div
+                          className="flex items-center rounded-full"
+                          style={{ border: "1.5px solid var(--ink)" }}
                         >
-                          <Minus className="w-4 h-4" />
-                        </button>
-                        <span className="w-8 text-center font-medium">{item.quantity}</span>
-                        <button
-                          onClick={() => updateQuantity(item.formula.id, item.quantity + 1)}
-                          className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors"
-                          aria-label="Increase quantity"
-                        >
-                          <Plus className="w-4 h-4" />
-                        </button>
+                          <button
+                            onClick={() => updateQuantity(item.formula.id, item.quantity - 1)}
+                            className="w-8 h-8 flex items-center justify-center rounded-full"
+                            style={{ color: "var(--ink)" }}
+                            aria-label="Decrease quantity"
+                          >
+                            <Minus className="w-3.5 h-3.5" />
+                          </button>
+                          <span className="w-7 text-center font-serif font-black text-[15px]" style={{ color: "var(--ink)" }}>
+                            {item.quantity}
+                          </span>
+                          <button
+                            onClick={() => updateQuantity(item.formula.id, item.quantity + 1)}
+                            className="w-8 h-8 flex items-center justify-center rounded-full"
+                            style={{ color: "var(--ink)" }}
+                            aria-label="Increase quantity"
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
                         <button
                           onClick={() => removeItem(item.formula.id)}
-                          className="ml-auto text-sm text-ink/50 hover:text-red-500 transition-colors"
+                          className="ml-auto text-[12px] font-bold tracking-[0.08em] uppercase transition-colors"
+                          style={{ color: "rgba(21,21,21,0.5)" }}
+                          onMouseEnter={(e) => { e.currentTarget.style.color = "var(--ink)" }}
+                          onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(21,21,21,0.5)" }}
                         >
                           Remove
                         </button>
@@ -137,29 +188,50 @@ export function CartDrawer() {
 
           {/* Footer */}
           {items.length > 0 && (
-            <div className="border-t border-gray-100 p-6 bg-gray-50">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-olive-dark font-medium">Subtotal</span>
-                <span className="text-xl font-display font-bold text-olive-dark">
+            <div
+              className="px-6 pt-5 pb-6"
+              style={{
+                borderTop: "1px solid rgba(21,21,21,0.1)",
+                backgroundColor: "var(--base-light)",
+              }}
+            >
+              <div className="flex items-baseline justify-between mb-1">
+                <span className="text-[12px] font-bold tracking-[0.12em] uppercase" style={{ color: "rgba(21,21,21,0.6)" }}>
+                  Subtotal
+                </span>
+                <span className="font-serif font-black text-[26px] leading-[1.05] tracking-[-0.01em]" style={{ color: "var(--ink)" }}>
                   ${total.toFixed(2)}
                 </span>
               </div>
-              <p className="text-sm text-ink/70 mb-4">
-                Shipping and taxes calculated at checkout
+              <p className="text-[12px] mb-5" style={{ color: "rgba(21,21,21,0.55)" }}>
+                Shipping and taxes calculated at checkout.
               </p>
-              <button className="btn-primary w-full">
+              <button
+                className="w-full inline-flex items-center justify-center font-serif font-black text-[16px] leading-none transition-colors"
+                style={{
+                  backgroundColor: "var(--charcoal)",
+                  color: "var(--bone)",
+                  border: "2px solid var(--charcoal)",
+                  padding: "16px 28px",
+                  borderRadius: 999,
+                  letterSpacing: "0.01em",
+                }}
+              >
                 Checkout
               </button>
               <button
                 onClick={closeCart}
-                className="w-full mt-3 text-center text-sm text-olive hover:underline"
+                className="w-full mt-3 text-center text-[13px] font-bold tracking-[0.08em] uppercase transition-colors"
+                style={{ color: "rgba(21,21,21,0.55)" }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = "var(--ink)" }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(21,21,21,0.55)" }}
               >
                 Continue Shopping
               </button>
             </div>
           )}
         </div>
-      </div>
+      </aside>
     </>
   )
 }
