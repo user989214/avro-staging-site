@@ -298,11 +298,13 @@ export function Header() {
             >
               Discover
             </p>
-            {navDropdownItems.map((item) => (
-              <MobileNavLink key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>
-                {item.label}
-              </MobileNavLink>
-            ))}
+            {navDropdownSections.flatMap((section) =>
+              section.items.map((item) => (
+                <MobileNavLink key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>
+                  {item.label}
+                </MobileNavLink>
+              ))
+            )}
             <div className="my-4" style={{ borderTop: "1px solid var(--divider)" }} />
             <MobileNavLink href="/science" onClick={() => setMobileMenuOpen(false)}>Science</MobileNavLink>
             <MobileNavLink href="/faq" onClick={() => setMobileMenuOpen(false)}>FAQ</MobileNavLink>
