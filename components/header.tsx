@@ -83,6 +83,40 @@ export function Header() {
 
   return (
     <>
+      <style jsx global>{`
+        .hdr-card-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          align-self: stretch;
+          width: 100%;
+          min-height: 48px;
+          padding: 0 28px;
+          border-radius: 999px;
+          font-weight: 700;
+          font-size: 15px;
+          letter-spacing: -0.005em;
+          transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .hdr-card-btn-on-dark {
+          background-color: var(--bone);
+          color: var(--charcoal);
+          border: 2px solid var(--bone);
+        }
+        .hdr-card-btn-on-dark:hover {
+          background-color: transparent;
+          color: var(--bone);
+        }
+        .hdr-card-btn-on-blue {
+          background-color: var(--charcoal);
+          color: var(--bone);
+          border: 2px solid var(--charcoal);
+        }
+        .hdr-card-btn-on-blue:hover {
+          background-color: transparent;
+          color: var(--charcoal);
+        }
+      `}</style>
       {/* Announcement bar — Avro Blue background, Gotham Condensed type */}
       <div
         className="flex justify-center gap-4 md:gap-12 px-4 md:px-8 py-3 md:py-3.5 text-[14px] md:text-[15px] uppercase text-center"
@@ -161,7 +195,7 @@ export function Header() {
                 }}
               >
                 <div className="px-4 md:px-14 py-6">
-                  <div className="grid grid-cols-2 gap-10">
+                  <div className="grid grid-cols-[0.85fr_1.15fr] gap-10">
                     {/* Left half — section nav (Shop / Subscribe / Why AVRO side) */}
                     <div className="grid grid-cols-[1fr_1.3fr]">
                       {navDropdownSections.map((section, sIdx) => (
@@ -196,44 +230,38 @@ export function Header() {
                     </div>
 
                     {/* Right half — two feature cards (Science / FAQ / Cart side) */}
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-5">
                       <Link
                         href="/blog"
                         onClick={() => setDropdownOpen(false)}
-                        className="group flex flex-col justify-between rounded-[24px] p-6 transition-colors min-h-[220px]"
+                        className="flex flex-col justify-between rounded-[24px] p-7 min-h-[230px]"
                         style={{ backgroundColor: "var(--charcoal)" }}
                       >
                         <div>
-                          <p className="text-[11px] font-bold uppercase tracking-[0.16em]" style={{ color: "var(--bone)", opacity: 0.6 }}>Read</p>
-                          <h3 className="font-serif font-black text-[28px] leading-[1.05] mt-2" style={{ color: "var(--bone)" }}>From The Journal</h3>
-                          <p className="text-[13px] leading-[1.45] mt-2" style={{ color: "var(--bone)", opacity: 0.75 }}>Field notes on calm focus, fermentation science, and the rituals behind each formula.</p>
+                          <h3 className="font-serif font-black text-[30px] leading-[1.05]" style={{ color: "var(--bone)" }}>From the Journal</h3>
+                          <p className="text-[14px] leading-[1.5] mt-3" style={{ color: "var(--bone)", opacity: 0.78 }}>Field notes on calm focus, fermentation science, and the rituals behind each formula.</p>
                         </div>
                         <span
-                          className="inline-flex items-center justify-center gap-2 self-start rounded-full px-6 py-3 text-[13px] font-bold transition-transform duration-200 group-hover:translate-x-1"
-                          style={{ backgroundColor: "var(--bone)", color: "var(--charcoal)" }}
+                          className="hdr-card-btn hdr-card-btn-on-dark"
                         >
                           Visit the Blog
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                         </span>
                       </Link>
 
                       <Link
                         href="/newsletter"
                         onClick={() => setDropdownOpen(false)}
-                        className="group flex flex-col justify-between rounded-[24px] p-6 transition-colors min-h-[220px]"
+                        className="flex flex-col justify-between rounded-[24px] p-7 min-h-[230px]"
                         style={{ backgroundColor: "var(--avro-blue)" }}
                       >
                         <div>
-                          <p className="text-[11px] font-bold uppercase tracking-[0.16em]" style={{ color: "var(--charcoal)", opacity: 0.6 }}>Subscribe</p>
-                          <h3 className="font-serif font-black text-[28px] leading-[1.05] mt-2" style={{ color: "var(--charcoal)" }}>Stay in the Loop</h3>
-                          <p className="text-[13px] leading-[1.45] mt-2" style={{ color: "var(--charcoal)", opacity: 0.78 }}>Weekly notes on calm performance, ingredient deep dives, and first looks at new launches.</p>
+                          <h3 className="font-serif font-black text-[30px] leading-[1.05]" style={{ color: "var(--charcoal)" }}>Stay in the Loop</h3>
+                          <p className="text-[14px] leading-[1.5] mt-3" style={{ color: "var(--charcoal)", opacity: 0.78 }}>Weekly notes on calm performance, ingredient deep dives, and first looks at new launches.</p>
                         </div>
                         <span
-                          className="inline-flex items-center justify-center gap-2 self-start rounded-full px-6 py-3 text-[13px] font-bold transition-transform duration-200 group-hover:translate-x-1"
-                          style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
+                          className="hdr-card-btn hdr-card-btn-on-blue"
                         >
                           Subscribe to Newsletter
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                         </span>
                       </Link>
                     </div>
