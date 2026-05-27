@@ -22,24 +22,24 @@ export function HomeRefHero() {
         .hp-pill-primary {
           background-color: var(--charcoal);
           color: var(--bone);
-          border: 1.5px solid var(--charcoal);
+          border: 2px solid var(--charcoal);
           border-radius: 999px;
-          transition: transform .2s ease, box-shadow .2s ease;
+          transition: background-color .2s ease, color .2s ease;
         }
         .hp-pill-primary:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 10px 30px rgba(21,21,21,0.18);
-        }
-        .hp-pill-secondary {
           background-color: transparent;
           color: var(--charcoal);
-          border: 1.5px solid var(--charcoal);
+        }
+        .hp-pill-secondary {
+          background-color: var(--charcoal);
+          color: var(--bone);
+          border: 2px solid var(--charcoal);
           border-radius: 999px;
           transition: background-color .2s ease, color .2s ease;
         }
         .hp-pill-secondary:hover {
-          background-color: var(--charcoal);
-          color: var(--bone);
+          background-color: transparent;
+          color: var(--charcoal);
         }
         .moment-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
         .moment-card:hover { transform: translateY(-3px); }

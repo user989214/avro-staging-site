@@ -414,9 +414,9 @@ export function FinalCta({
                   minHeight: 60,
                   padding: "0 40px",
                   borderRadius: 999,
-                  border: "1.5px solid var(--charcoal)",
-                  backgroundColor: "transparent",
-                  color: "var(--charcoal)",
+                  border: "2px solid var(--charcoal)",
+                  backgroundColor: "var(--charcoal)",
+                  color: "var(--bone)",
                   textDecoration: "none",
                 }}
               >
@@ -433,8 +433,8 @@ export function FinalCta({
           color: var(--charcoal) !important;
         }
         .final-cta-pill-outline:hover {
-          background-color: var(--charcoal) !important;
-          color: var(--bone) !important;
+          background-color: transparent !important;
+          color: var(--charcoal) !important;
         }
       `}</style>
     </section>
