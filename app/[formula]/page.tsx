@@ -354,23 +354,6 @@ export default async function ProductPage({
       {/* Your favorites. On repeat - Subscription CTA */}
       <section style={{ width: "100%", padding: "clamp(36px,4vw,56px) 0", backgroundColor: "var(--avro-blue)" }}>
         <div style={{ width: "100%", maxWidth: 1250, margin: "0 auto", padding: "0 clamp(18px,5vw,64px)" }}>
-          <span
-            style={{
-              display: "inline-block",
-              fontFamily: GC,
-              fontWeight: 800,
-              fontSize: 11,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "var(--bone)",
-              backgroundColor: "var(--charcoal)",
-              padding: "6px 14px",
-              borderRadius: 999,
-              marginBottom: 16,
-            }}
-          >
-            Subscribe & save
-          </span>
           <h2
             className="font-serif"
             style={{

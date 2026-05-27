@@ -198,23 +198,6 @@ export default function ShopPage() {
       {/* Compare Table — charcoal + Avro Blue header */}
       <section style={{ width: "100%", padding: "clamp(48px,6vw,80px) clamp(20px,5vw,64px)", backgroundColor: "var(--charcoal)" }}>
         <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-          <span
-            style={{
-              display: "inline-block",
-              marginBottom: 16,
-              padding: "6px 14px",
-              borderRadius: 999,
-              backgroundColor: "var(--bone)",
-              color: "var(--charcoal)",
-              fontFamily: GC,
-              fontSize: 11,
-              fontWeight: 800,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-            }}
-          >
-            At a glance
-          </span>
           <h2
             className="font-serif"
             style={{

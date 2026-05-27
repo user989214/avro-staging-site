@@ -40,23 +40,6 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
       <div className="w-full max-w-[1250px] mx-auto px-[clamp(18px,5vw,64px)]">
         {/* Header */}
         <div className="mb-12">
-          <span
-            style={{
-              display: "inline-block",
-              fontFamily: GC,
-              fontWeight: 800,
-              fontSize: 11,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "var(--charcoal)",
-              backgroundColor: "var(--bone)",
-              padding: "6px 14px",
-              borderRadius: 999,
-              marginBottom: 16,
-            }}
-          >
-            Compare at a glance
-          </span>
           <h2
             className="font-serif"
             style={{
