@@ -47,13 +47,22 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [navBottom, setNavBottom] = useState(0)
+  const navRef = useRef<HTMLElement | null>(null)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const measureNav = () => {
+    if (!navRef.current) return
+    const rect = navRef.current.getBoundingClientRect()
+    setNavBottom(rect.bottom)
+  }
 
   const openDropdown = () => {
     if (closeTimer.current) {
       clearTimeout(closeTimer.current)
       closeTimer.current = null
     }
+    measureNav()
     setDropdownOpen(true)
   }
   const scheduleClose = () => {
@@ -65,9 +74,16 @@ export function Header() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10)
+      measureNav()
     }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    const handleResize = () => measureNav()
+    measureNav()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener("resize", handleResize)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", handleResize)
+    }
   }, [])
 
   useEffect(() => {
@@ -145,6 +161,7 @@ export function Header() {
 
       {/* Main nav — cream/base background, charcoal text, DM Sans */}
       <nav
+        ref={navRef}
         className={`sticky top-0 z-50 grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-0 px-4 md:px-14 py-4 md:py-5 transition-shadow ${
           scrolled ? "shadow-[0_1px_16px_rgba(21,21,21,0.06)]" : ""
         }`}
@@ -180,7 +197,7 @@ export function Header() {
             <div
               className="fixed left-0 right-0 z-50"
               style={{
-                top: scrolled ? 73 : 122,
+                top: navBottom,
                 pointerEvents: dropdownOpen ? "auto" : "none",
               }}
               aria-hidden={!dropdownOpen}
@@ -333,36 +350,123 @@ export function Header() {
         </button>
       </nav>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile menu overlay — mirrors the desktop dropdown vibe */}
       <div
-        className={`fixed inset-0 z-40 transform transition-transform duration-300 md:hidden ${
-          mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-        style={{ backgroundColor: "var(--base)", top: "var(--header-height, 100px)" }}
+        className={`fixed left-0 right-0 z-40 md:hidden ${mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+        style={{
+          top: navBottom,
+          bottom: 0,
+          backgroundColor: "var(--base)",
+          opacity: mobileMenuOpen ? 1 : 0,
+          transform: mobileMenuOpen ? "translateY(0)" : "translateY(-8px)",
+          transition: "opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
+          overflowY: "auto",
+        }}
+        aria-hidden={!mobileMenuOpen}
       >
-        <div className="pt-6 pb-8 px-6 h-full overflow-y-auto">
-          <nav className="space-y-1">
-            <MobileNavLink href="/shop" onClick={() => setMobileMenuOpen(false)}>Shop</MobileNavLink>
-            <MobileNavLink href="/shop" onClick={() => setMobileMenuOpen(false)}>Subscribe</MobileNavLink>
-            <div className="my-4" style={{ borderTop: "1px solid var(--divider)" }} />
+        <div className="px-5 pt-6 pb-10 flex flex-col gap-7">
+          {/* Top tier links */}
+          <div className="flex flex-col items-start gap-1">
+            <Link
+              href="/shop"
+              onClick={() => setMobileMenuOpen(false)}
+              className="inline-block px-4 py-1.5 font-serif font-black text-[34px] leading-[1.1] rounded-full"
+              style={{ color: "var(--ink)" }}
+            >
+              Shop
+            </Link>
+            <Link
+              href="/shop"
+              onClick={() => setMobileMenuOpen(false)}
+              className="inline-block px-4 py-1.5 font-serif font-black text-[34px] leading-[1.1] rounded-full"
+              style={{ color: "var(--ink)" }}
+            >
+              Subscribe
+            </Link>
+          </div>
+
+          {/* Section nav — same heading + pill links as desktop */}
+          {navDropdownSections.map((section) => (
+            <div key={section.heading} className="flex flex-col">
+              <p
+                className="text-[12px] font-bold tracking-[0.12em] uppercase pb-2 px-1"
+                style={{ color: "var(--warm-gray)" }}
+              >
+                {section.heading}
+              </p>
+              <div className="flex flex-col items-start gap-1">
+                {section.items.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="inline-block px-4 py-1.5 font-serif font-black text-[26px] leading-[1.15] rounded-full"
+                    style={{ color: "var(--ink)" }}
+                  >
+                    {item.cta}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          {/* Utility links */}
+          <div className="flex flex-col items-start gap-1">
             <p
-              className="text-[10px] font-bold uppercase tracking-[0.12em] px-4 py-2"
+              className="text-[12px] font-bold tracking-[0.12em] uppercase pb-2 px-1"
               style={{ color: "var(--warm-gray)" }}
             >
-              Discover
+              More
             </p>
-            {navDropdownSections.flatMap((section) =>
-              section.items.map((item) => (
-                <MobileNavLink key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>
-                  {item.cta}
-                </MobileNavLink>
-              ))
-            )}
-            <div className="my-4" style={{ borderTop: "1px solid var(--divider)" }} />
-            <MobileNavLink href="/science" onClick={() => setMobileMenuOpen(false)}>Science</MobileNavLink>
-            <MobileNavLink href="/faq" onClick={() => setMobileMenuOpen(false)}>FAQ</MobileNavLink>
-            <MobileNavLink href="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</MobileNavLink>
-          </nav>
+            {[
+              { href: "/science", label: "Science" },
+              { href: "/faq", label: "FAQ" },
+              { href: "/contact", label: "Contact" },
+            ].map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="inline-block px-4 py-1.5 font-serif font-black text-[26px] leading-[1.15] rounded-full"
+                style={{ color: "var(--ink)" }}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Feature cards — same as desktop dropdown, stacked */}
+          <div className="grid grid-cols-1 gap-4">
+            <Link
+              href="/blog"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex flex-col justify-between rounded-[24px] p-6 min-h-[200px]"
+              style={{ backgroundColor: "var(--charcoal)" }}
+            >
+              <div>
+                <h3 className="font-serif font-black text-[28px] leading-[1.05]" style={{ color: "var(--bone)" }}>From the Journal</h3>
+                <p className="text-[14px] leading-[1.5] mt-3" style={{ color: "var(--bone)", opacity: 0.78 }}>Field notes on calm focus, fermentation science, and the rituals behind each formula.</p>
+              </div>
+              <span className="hdr-card-btn hdr-card-btn-on-dark mt-5">
+                Visit the Blog
+              </span>
+            </Link>
+
+            <Link
+              href="/newsletter"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex flex-col justify-between rounded-[24px] p-6 min-h-[200px]"
+              style={{ backgroundColor: "var(--avro-blue)" }}
+            >
+              <div>
+                <h3 className="font-serif font-black text-[28px] leading-[1.05]" style={{ color: "var(--charcoal)" }}>Stay in the Loop</h3>
+                <p className="text-[14px] leading-[1.5] mt-3" style={{ color: "var(--charcoal)", opacity: 0.78 }}>Weekly notes on calm performance, ingredient deep dives, and first looks at new launches.</p>
+              </div>
+              <span className="hdr-card-btn hdr-card-btn-on-blue mt-5">
+                Subscribe to Newsletter
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
     </>
@@ -401,3 +505,5 @@ function MobileNavLink({
     </Link>
   )
 }
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const _UnusedMobileNavLink = MobileNavLink
