@@ -583,27 +583,25 @@ export function HomeScienceGrid() {
             </div>
 
             {/* Formula comparison - visual bar graph */}
-            <div style={{ backgroundColor: "var(--bone)", borderRadius: 20, overflow: "hidden", padding: "clamp(28px,4vw,44px)", display: "flex", flexDirection: "column", height: "100%" }}>
-              <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,3vw,40px)", lineHeight: 1.0, color: "var(--charcoal)", marginBottom: 32 }}>
+            <div style={{ backgroundColor: "var(--bone)", borderRadius: 20, overflow: "hidden", padding: "clamp(24px,3vw,36px)", display: "flex", flexDirection: "column", height: "100%" }}>
+              <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2.4vw,30px)", lineHeight: 1.05, color: "var(--charcoal)", marginBottom: 20 }}>
                 Every formula starts calm first.
               </h2>
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: 20 }}>
+              <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: 14 }}>
                 {[
-                  { name: "Calm", base: 100, focus: 0, energy: 0, color: BLUE },
-                  { name: "Focus", base: 100, focus: 60, energy: 0, color: "#A8D5BA" },
-                  { name: "Energy", base: 100, focus: 0, energy: 50, color: "#F5C896" },
+                  { name: "Calm", addOn: null, addOnLabel: "Magnesium" },
+                  { name: "Focus", addOn: "#A8D5BA", addOnLabel: "Cognigrape®" },
+                  { name: "Energy", addOn: "#F5C896", addOnLabel: "Caffeine" },
                 ].map((formula, idx) => (
-                  <div key={formula.name} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--charcoal)" }}>{formula.name}</span>
-                      <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "rgba(0,0,0,0.5)" }}>
-                        {formula.name === "Calm" ? "PharmaGABA® + Magnesium" : formula.name === "Focus" ? "PharmaGABA® + Cognigrape®" : "PharmaGABA® + Caffeine"}
+                  <div key={formula.name} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
+                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 15, color: "var(--charcoal)" }}>{formula.name}</span>
+                      <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 12, color: "rgba(0,0,0,0.5)" }}>
+                        PharmaGABA® + {formula.addOnLabel}
                       </span>
                     </div>
-                    <div style={{ position: "relative", height: 32, backgroundColor: "var(--base)", borderRadius: 999, overflow: "hidden" }}>
-                      {/* Base bar (PharmaGABA) */}
+                    <div style={{ position: "relative", height: 16, backgroundColor: "var(--base)", borderRadius: 999, overflow: "hidden" }}>
                       <div 
-                        className="formula-bar"
                         style={{ 
                           position: "absolute", 
                           left: 0, 
@@ -612,22 +610,22 @@ export function HomeScienceGrid() {
                           width: "60%",
                           backgroundColor: BLUE,
                           borderRadius: 999,
-                          animation: `barGrow 0.8s ease-out ${idx * 0.15}s both`,
+                          transformOrigin: "left",
+                          animation: `barGrow 0.7s cubic-bezier(0.4, 0, 0.2, 1) ${idx * 0.15}s both`,
                         }} 
                       />
-                      {/* Additional bar */}
-                      {(formula.focus > 0 || formula.energy > 0) && (
+                      {formula.addOn && (
                         <div 
-                          className="formula-bar"
                           style={{ 
                             position: "absolute", 
                             left: "60%", 
                             top: 0, 
                             height: "100%", 
-                            width: formula.focus > 0 ? "25%" : "20%",
-                            backgroundColor: formula.color,
+                            width: "25%",
+                            backgroundColor: formula.addOn,
                             borderRadius: "0 999px 999px 0",
-                            animation: `barGrow 0.6s ease-out ${idx * 0.15 + 0.4}s both`,
+                            transformOrigin: "left",
+                            animation: `barGrow 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${idx * 0.15 + 0.4}s both`,
                           }} 
                         />
                       )}
@@ -635,24 +633,22 @@ export function HomeScienceGrid() {
                   </div>
                 ))}
               </div>
-              <div style={{ display: "flex", gap: 24, marginTop: 24, flexWrap: "wrap" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: BLUE }} />
-                  <span style={{ fontFamily: GC, fontWeight: 600, fontSize: 14, color: "rgba(0,0,0,0.6)" }}>PharmaGABA® Base</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "#A8D5BA" }} />
-                  <span style={{ fontFamily: GC, fontWeight: 600, fontSize: 14, color: "rgba(0,0,0,0.6)" }}>Cognigrape®</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "#F5C896" }} />
-                  <span style={{ fontFamily: GC, fontWeight: 600, fontSize: 14, color: "rgba(0,0,0,0.6)" }}>Natural Caffeine</span>
-                </div>
+              <div style={{ display: "flex", gap: 14, marginTop: 18, flexWrap: "wrap", paddingTop: 14, borderTop: "1px solid rgba(0,0,0,0.06)" }}>
+                {[
+                  { color: BLUE, label: "PharmaGABA®" },
+                  { color: "#A8D5BA", label: "Cognigrape®" },
+                  { color: "#F5C896", label: "Caffeine" },
+                ].map((item) => (
+                  <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <div style={{ width: 10, height: 10, borderRadius: 3, backgroundColor: item.color }} />
+                    <span style={{ fontFamily: GC, fontWeight: 600, fontSize: 12, color: "rgba(0,0,0,0.6)" }}>{item.label}</span>
+                  </div>
+                ))}
               </div>
               <style jsx>{`
                 @keyframes barGrow {
-                  from { transform: scaleX(0); transform-origin: left; }
-                  to { transform: scaleX(1); transform-origin: left; }
+                  from { transform: scaleX(0); }
+                  to { transform: scaleX(1); }
                 }
               `}</style>
             </div>
