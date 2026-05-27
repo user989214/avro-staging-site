@@ -110,16 +110,21 @@ export function HomeRefHero() {
           flex: 1 1 180px;
           min-width: 180px;
         }
-        @media (max-width: 520px) {
-          .hp-pill-row { flex-direction: column; }
-          .hp-pill-primary, .hp-pill-secondary { width: 100%; }
+        @media (max-width: 640px) {
+          .hp-pill-row { flex-direction: column; align-items: stretch; max-width: 320px !important; }
+          .hp-pill-primary, .hp-pill-secondary { width: 100%; flex: 0 0 auto; }
         }
         @media (max-width: 768px) {
-          .hp-hero-grid { grid-template-columns: 1fr !important; }
-          .hp-hero-fade {
-            background: linear-gradient(to bottom, var(--base-light) 0%, var(--base-light) 45%, rgba(245,241,234,0.7) 60%, rgba(245,241,234,0) 80%) !important;
+          .hp-hero-container { min-height: 640px !important; }
+          .hp-hero-grid {
+            grid-template-columns: 1fr !important;
+            align-items: start !important;
+            padding: clamp(32px,7vw,56px) clamp(20px,5vw,28px) !important;
           }
-          .hp-hero-img { object-position: center bottom !important; }
+          .hp-hero-img { object-position: 65% 80% !important; }
+          .hp-hero-fade {
+            background: linear-gradient(180deg, var(--base-light) 0%, var(--base-light) 42%, rgba(245,241,234,0.92) 50%, rgba(245,241,234,0.55) 62%, rgba(245,241,234,0) 78%) !important;
+          }
         }
         .hp-pill-primary {
           background-color: var(--charcoal);
@@ -178,6 +183,7 @@ export function HomeRefHero() {
       `}</style>
 
       <div
+        className="hp-hero-container"
         style={{
           position: "relative",
           maxWidth: 1320,
@@ -664,7 +670,7 @@ export function HomeMomentGrid() {
   )
 }
 
-// ── SCIENCE GRID ─────────────────────�����───────────────────────────────────────
+// ── SCIENCE GRID ─────────────────────�����───────────────────────���───────────────
 export function HomeScienceGrid() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
