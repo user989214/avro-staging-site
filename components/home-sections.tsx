@@ -985,24 +985,19 @@ export function HomeProductStrip() {
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
                 />
               </div>
-              <div style={{ padding: "20px 8px 8px", display: "flex", flexDirection: "column", gap: 12 }}>
-                <span style={{ 
-                  display: "inline-block",
-                  alignSelf: "flex-start",
-                  fontFamily: GC, 
-                  fontWeight: 700, 
-                  fontSize: 13, 
-                  color: "var(--ink)", 
-                  backgroundColor: BLUE,
-                  padding: "8px 14px",
-                  borderRadius: 999,
-                }}>
-                  PharmaGABA® + {formulaAdditions[key]}
-                </span>
-                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2vw,28px)", lineHeight: 1.1, color: "var(--ink)", marginTop: 4 }}>
+              <div style={{ padding: "20px 8px 8px", display: "flex", flexDirection: "column", gap: 14 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 4, paddingBottom: 14, borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
+                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "var(--ink)", letterSpacing: "-0.005em" }}>
+                    Foundation
+                  </span>
+                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 15, lineHeight: 1.4, color: "rgba(0,0,0,0.6)" }}>
+                    PharmaGABA® + {formulaAdditions[key]}
+                  </span>
+                </div>
+                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2vw,28px)", lineHeight: 1.1, color: "var(--ink)", margin: 0 }}>
                   {formulas[key].name}
                 </h3>
-                <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, lineHeight: 1.45, color: "var(--warm-gray)" }}>
+                <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, lineHeight: 1.45, color: "rgba(0,0,0,0.6)", margin: 0 }}>
                   {formulas[key].tagline}
                 </p>
                 <a 
@@ -1098,7 +1093,7 @@ export function HomeMomentGrid() {
   )
 }
 
-// ── SCIENCE GRID ─────────────────────�����───────────────────────���───────────────
+// ── SCIENCE GRID ────────────────��────�����───────────────────────���───────────────
 export function HomeScienceGrid() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
