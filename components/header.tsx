@@ -169,10 +169,10 @@ export function Header() {
                   >
                     {msg}
                   </span>
-                  <span aria-hidden="true" style={{ fontSize: 10, opacity: 0.55, lineHeight: 1, transform: "translateY(-1px)" }}>✦</span>
+                  <span aria-hidden="true" className="ann-plus" style={{ fontSize: 13, lineHeight: 1, opacity: 0.55, fontWeight: 700, display: "inline-block" }}>+</span>
                 </span>
               ))}
-              {/* Shop AVRO pill — wide, animated */}
+              {/* Shop AVRO pill — solid, wide */}
               <Link
                 href="/shop"
                 className="ann-shop-btn font-serif"
@@ -182,12 +182,12 @@ export function Header() {
                   justifyContent: "center",
                   gap: 10,
                   margin: "0 28px",
-                  padding: "6px 36px",
-                  minHeight: 32,
+                  padding: "8px 44px",
+                  minHeight: 36,
                   borderRadius: 999,
                   border: "2px solid var(--charcoal)",
-                  backgroundColor: "transparent",
-                  color: "var(--charcoal)",
+                  backgroundColor: "var(--charcoal)",
+                  color: "var(--avro-blue)",
                   fontWeight: 900,
                   fontSize: 13,
                   letterSpacing: "0.04em",
@@ -201,7 +201,7 @@ export function Header() {
                 <span style={{ position: "relative", zIndex: 1 }}>Shop AVRO</span>
                 <span aria-hidden="true" className="ann-shop-arrow" style={{ position: "relative", zIndex: 1, fontSize: 14, lineHeight: 1, display: "inline-block" }}>→</span>
               </Link>
-              <span aria-hidden="true" style={{ fontSize: 10, opacity: 0.55, lineHeight: 1, transform: "translateY(-1px)" }}>✦</span>
+              <span aria-hidden="true" className="ann-plus" style={{ fontSize: 13, lineHeight: 1, opacity: 0.55, fontWeight: 700, display: "inline-block" }}>+</span>
             </div>
           ))}
         </div>
@@ -220,8 +220,8 @@ export function Header() {
             transition: background-color 0.25s cubic-bezier(0.22,1,0.36,1), color 0.25s cubic-bezier(0.22,1,0.36,1), transform 0.25s cubic-bezier(0.22,1,0.36,1);
           }
           .ann-shop-btn:hover {
-            background-color: var(--charcoal);
-            color: var(--avro-blue);
+            background-color: transparent;
+            color: var(--charcoal);
           }
           .ann-shop-arrow {
             transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
