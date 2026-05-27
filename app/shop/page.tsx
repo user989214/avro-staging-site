@@ -156,7 +156,7 @@ export default function ShopPage() {
                 position: "absolute",
                 inset: 0,
                 background:
-                  "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.9) 52%, rgba(245,241,234,0.55) 64%, rgba(245,241,234,0.2) 76%, rgba(245,241,234,0) 88%)",
+                  "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 28%, rgba(245,241,234,0.92) 40%, rgba(245,241,234,0.6) 52%, rgba(245,241,234,0.18) 66%, rgba(245,241,234,0) 78%)",
               }}
             />
             {/* Outer edge fade — softens any visible border on top, bottom and right */}
