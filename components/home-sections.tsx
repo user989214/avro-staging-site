@@ -59,10 +59,10 @@ export function HomeRefHero() {
       >
         {/* Left */}
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {/* Hero headline — Gotham display family for hero only, per design system */}
+          {/* Hero headline — DM Sans per design system */}
           <h1
-            className="font-display"
             style={{
+              fontFamily: GC,
               fontSize: "clamp(44px,5.6vw,76px)",
               lineHeight: 1.0,
               letterSpacing: "-0.03em",
@@ -319,7 +319,7 @@ export function HomeProductStrip() {
   )
 }
 
-// ── MOMENT GRID ───────────────────────────────────────────────────────────────
+// ── MOMENT GRID ───���───────────────────────────────────────────────────────────
 export function HomeMomentGrid() {
   const moments = [
     { title: "Golf", copy: "Before the first tee. Before the final putt.", cta: "Explore Golf", url: "/golf", image: "/images/lifestyle/golfers-misty-tee-box.jpg", alt: "Golfers on a misty tee box at sunrise" },

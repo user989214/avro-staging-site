@@ -165,8 +165,8 @@
 
 @theme inline {
   --font-sans: var(--font-dm-sans), "DM Sans", "Helvetica Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-display: "Gotham", "Gotham Ultra", var(--font-dm-sans), system-ui, sans-serif;
-  --font-serif: "Gotham Condensed", "Gotham", Arial, sans-serif;
+  --font-display: var(--font-dm-sans), "DM Sans", "Helvetica Neue", system-ui, sans-serif;
+  --font-serif: var(--font-dm-sans), "DM Sans", "Helvetica Neue", system-ui, sans-serif;
   --font-mono: ui-monospace, monospace;
 
   /* shadcn color mappings */
@@ -252,7 +252,7 @@
     letter-spacing: -0.005em;
   }
 
-  /* Headlines: DM Sans by default (display utility opts into Gotham) */
+  /* Headlines: DM Sans sitewide per design system */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sans);
     color: var(--ink);
