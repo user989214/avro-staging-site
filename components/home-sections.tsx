@@ -543,8 +543,9 @@ export function HomeBenefitRow() {
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexDirection: "column", gap: 14 }}>
         {benefits.map((b, i) => {
           const isBlue = b.tone === "blue"
-          const isNarrow = b.width === "narrow"
           const bg = isBlue ? BLUE : "var(--base-light)"
+          // Each card progressively narrower than the one above
+          const widthPct = 100 - i * 14 // 100%, 86%, 72%
           // Two colors per card — bg + var(--ink) for all text
           const cardDelay = 0.05 + i * 0.14
           const titleWords = b.title.split(" ")
@@ -553,8 +554,9 @@ export function HomeBenefitRow() {
             <div
               key={b.title}
               style={{
-                width: isNarrow ? "min(80%, 960px)" : "100%",
-                alignSelf: i % 2 === 1 ? "flex-end" : "stretch",
+                width: `${widthPct}%`,
+                maxWidth: i === 0 ? "100%" : `${widthPct}%`,
+                alignSelf: "flex-start",
                 backgroundColor: bg,
                 borderRadius: 24,
                 padding: "clamp(28px,3vw,40px) clamp(28px,3.5vw,52px)",
