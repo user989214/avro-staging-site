@@ -17,177 +17,158 @@ const GC = '"DM Sans", system-ui, sans-serif'
 export default function ShopPage() {
   return (
     <>
-      {/* Hero — rounded card with edge-fading product image and formula-colored CTAs */}
+      {/* Hero — full-width edge-fading product image with formula-colored CTAs */}
       <section
         style={{
+          position: "relative",
           width: "100%",
           backgroundColor: "var(--base)",
-          padding: "clamp(24px,5vw,64px) clamp(20px,5vw,64px) clamp(48px,6vw,80px)",
+          overflow: "hidden",
+          minHeight: "clamp(520px,68vh,720px)",
         }}
       >
+        {/* Background image */}
+        <Image
+          src="/images/lifestyle/avro-trio-stone-hero.png"
+          alt="AVRO Calm, Focus, and Energy tubes arranged on a stone slab with soft botanicals"
+          fill
+          sizes="100vw"
+          className="object-cover object-[70%_center]"
+          priority
+        />
+
+        {/* Edge-fading gradient — fades on all four edges into the page background */}
         <div
+          aria-hidden="true"
           style={{
-            position: "relative",
-            maxWidth: 1320,
-            margin: "0 auto",
-            borderRadius: 28,
-            overflow: "hidden",
-            backgroundColor: "var(--base-light)",
-            minHeight: "clamp(480px,60vh,640px)",
+            position: "absolute",
+            inset: 0,
+            background: `
+              linear-gradient(to right, var(--base) 0%, var(--base) 32%, rgba(245,241,234,0.96) 42%, rgba(245,241,234,0.7) 54%, rgba(245,241,234,0.3) 68%, rgba(245,241,234,0.08) 82%, rgba(245,241,234,0.18) 94%, var(--base) 100%),
+              linear-gradient(to bottom, var(--base) 0%, rgba(245,241,234,0.45) 8%, rgba(245,241,234,0) 18%, rgba(245,241,234,0) 78%, rgba(245,241,234,0.6) 92%, var(--base) 100%)
+            `,
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Content — aligned to the same max-width / padding as the rest of the page */}
+        <div
+          className="relative w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            minHeight: "inherit",
+            paddingTop: "clamp(72px,9vw,128px)",
+            paddingBottom: "clamp(56px,7vw,96px)",
           }}
         >
-          {/* Background image */}
-          <Image
-            src="/images/lifestyle/avro-trio-stone-hero.png"
-            alt="AVRO Calm, Focus, and Energy tubes arranged on a stone slab with soft botanicals"
-            fill
-            sizes="(min-width: 1024px) 1320px, 100vw"
-            className="object-cover object-[70%_center]"
-            priority
-          />
+          <div style={{ maxWidth: 580 }}>
+            <h1
+              className="font-serif"
+              style={{
+                fontWeight: 900,
+                fontSize: "clamp(42px,6vw,72px)",
+                lineHeight: 0.98,
+                letterSpacing: "-0.025em",
+                color: "var(--ink)",
+                marginBottom: 20,
+              }}
+            >
+              Choose your AVRO formula.
+            </h1>
+            <p
+              style={{
+                fontFamily: GC,
+                fontWeight: 400,
+                fontSize: "clamp(17px,2vw,20px)",
+                lineHeight: 1.55,
+                color: "var(--warm-gray)",
+                maxWidth: 480,
+                marginBottom: 28,
+              }}
+            >
+              Three formulas. One calm-first foundation. Start with the state that fits your moment.
+            </p>
 
-          {/* Gradient fade — left-heavy so text reads clearly, fading on all edges */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: `
-                linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.95) 48%, rgba(245,241,234,0.7) 58%, rgba(245,241,234,0.3) 70%, rgba(245,241,234,0.1) 82%, rgba(245,241,234,0.15) 94%, var(--base-light) 100%),
-                linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.2) 10%, rgba(245,241,234,0) 20%, rgba(245,241,234,0) 80%, rgba(245,241,234,0.2) 90%, var(--base-light) 100%)
-              `,
-              pointerEvents: "none",
-            }}
-          />
-
-          {/* Content */}
-          <div
-            style={{
-              position: "relative",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              alignItems: "center",
-              padding: "clamp(48px,7vw,80px) clamp(32px,5vw,64px)",
-              minHeight: "inherit",
-            }}
-          >
-            <div style={{ maxWidth: 580 }}>
-              <h1
-                className="font-serif"
+            {/* CTA buttons — formula colors */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+              <style>{`
+                .shop-btn-calm {
+                  border: 2px solid var(--calm);
+                  background-color: var(--calm);
+                  color: #2D1B4E;
+                  transition: background-color 0.2s ease, color 0.2s ease;
+                }
+                .shop-btn-calm:hover { background-color: transparent; color: var(--calm); }
+                .shop-btn-focus {
+                  border: 2px solid var(--focus);
+                  background-color: var(--focus);
+                  color: #4A0A2E;
+                  transition: background-color 0.2s ease, color 0.2s ease;
+                }
+                .shop-btn-focus:hover { background-color: transparent; color: var(--focus); }
+                .shop-btn-energy {
+                  border: 2px solid var(--energy);
+                  background-color: var(--energy);
+                  color: #4A3D00;
+                  transition: background-color 0.2s ease, color 0.2s ease;
+                }
+                .shop-btn-energy:hover { background-color: transparent; color: var(--energy); }
+              `}</style>
+              <Link
+                href="/calm"
+                className="shop-btn-calm"
                 style={{
-                  fontWeight: 900,
-                  fontSize: "clamp(42px,6vw,72px)",
-                  lineHeight: 0.98,
-                  letterSpacing: "-0.025em",
-                  color: "var(--ink)",
-                  marginBottom: 20,
-                }}
-              >
-                Choose your AVRO formula.
-              </h1>
-              <p
-                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                   fontFamily: GC,
-                  fontWeight: 400,
-                  fontSize: "clamp(17px,2vw,20px)",
-                  lineHeight: 1.55,
-                  color: "var(--warm-gray)",
-                  maxWidth: 480,
-                  marginBottom: 28,
+                  fontWeight: 700,
+                  fontSize: 16,
+                  minHeight: 48,
+                  padding: "0 32px",
+                  borderRadius: 999,
+                  textDecoration: "none",
                 }}
               >
-                Three formulas. One calm-first foundation. Start with the state that fits your moment.
-              </p>
-
-              {/* CTA buttons — formula colors */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-                <style>{`
-                  .shop-btn-calm {
-                    border: 2px solid var(--calm);
-                    background-color: var(--calm);
-                    color: #2D1B4E;
-                    transition: background-color 0.2s ease, color 0.2s ease;
-                  }
-                  .shop-btn-calm:hover {
-                    background-color: transparent;
-                    color: var(--calm);
-                  }
-                  .shop-btn-focus {
-                    border: 2px solid var(--focus);
-                    background-color: var(--focus);
-                    color: #4A0A2E;
-                    transition: background-color 0.2s ease, color 0.2s ease;
-                  }
-                  .shop-btn-focus:hover {
-                    background-color: transparent;
-                    color: var(--focus);
-                  }
-                  .shop-btn-energy {
-                    border: 2px solid var(--energy);
-                    background-color: var(--energy);
-                    color: #4A3D00;
-                    transition: background-color 0.2s ease, color 0.2s ease;
-                  }
-                  .shop-btn-energy:hover {
-                    background-color: transparent;
-                    color: var(--energy);
-                  }
-                `}</style>
-                <Link
-                  href="/calm"
-                  className="shop-btn-calm"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 16,
-                    minHeight: 48,
-                    padding: "0 32px",
-                    borderRadius: 999,
-                    textDecoration: "none",
-                  }}
-                >
-                  Shop Calm
-                </Link>
-                <Link
-                  href="/focus"
-                  className="shop-btn-focus"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 16,
-                    minHeight: 48,
-                    padding: "0 32px",
-                    borderRadius: 999,
-                    textDecoration: "none",
-                  }}
-                >
-                  Shop Focus
-                </Link>
-                <Link
-                  href="/energy"
-                  className="shop-btn-energy"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 16,
-                    minHeight: 48,
-                    padding: "0 32px",
-                    borderRadius: 999,
-                    textDecoration: "none",
-                  }}
-                >
-                  Shop Energy
-                </Link>
-              </div>
+                Shop Calm
+              </Link>
+              <Link
+                href="/focus"
+                className="shop-btn-focus"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: GC,
+                  fontWeight: 700,
+                  fontSize: 16,
+                  minHeight: 48,
+                  padding: "0 32px",
+                  borderRadius: 999,
+                  textDecoration: "none",
+                }}
+              >
+                Shop Focus
+              </Link>
+              <Link
+                href="/energy"
+                className="shop-btn-energy"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: GC,
+                  fontWeight: 700,
+                  fontSize: 16,
+                  minHeight: 48,
+                  padding: "0 32px",
+                  borderRadius: 999,
+                  textDecoration: "none",
+                }}
+              >
+                Shop Energy
+              </Link>
             </div>
           </div>
         </div>

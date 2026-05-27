@@ -292,8 +292,8 @@ export function InfoCard({
   if (href) {
     return (
       <Link
-        href={href}
-        className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-[20px] shadow-[0_10px_30px_rgba(31,29,24,0.04)] transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_70px_rgba(30,29,24,0.1)]"
+      href={href}
+      className="min-h-[180px] p-7 bg-base-light rounded-[20px] transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_70px_rgba(30,29,24,0.08)]"
       >
         {content}
       </Link>
@@ -301,7 +301,7 @@ export function InfoCard({
   }
 
   return (
-    <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-[20px] shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
+    <article className="min-h-[180px] p-7 bg-base-light rounded-[20px]">
       {content}
     </article>
   )
@@ -323,7 +323,7 @@ export function FaqBlock({
         {faqs.map(([q, a]) => (
           <details
             key={q}
-            className="bg-base border border-line rounded-[7px] group"
+            className="bg-base-light rounded-[12px] group"
           >
             <summary className="flex justify-between gap-4 px-5.5 py-4.5 cursor-pointer font-extrabold select-none after:content-['+'] after:text-[22px] after:leading-none group-open:after:content-['-']">
               {q}

@@ -243,9 +243,8 @@ function FlatHero({
         width: "100%",
         backgroundColor: "var(--base)",
         color: "var(--ink)",
-        padding: compact
-          ? "clamp(56px,9vw,112px) clamp(20px,5vw,64px) clamp(40px,6vw,72px)"
-          : "clamp(72px,11vw,144px) clamp(20px,5vw,64px) clamp(56px,7vw,96px)",
+        paddingTop: compact ? "clamp(72px,10vw,128px)" : "clamp(88px,12vw,160px)",
+        paddingBottom: compact ? "clamp(40px,6vw,72px)" : "clamp(56px,7vw,96px)",
         overflow: "hidden",
       }}
     >
@@ -256,8 +255,8 @@ function FlatHero({
           position: "absolute",
           inset: 0,
           background: `
-            radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.045) 0%, rgba(0,0,0,0) 55%),
-            linear-gradient(to bottom, rgba(0,0,0,0.025) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.04) 100%)
+            radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 55%),
+            linear-gradient(to bottom, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.045) 100%)
           `,
           pointerEvents: "none",
         }}
@@ -306,12 +305,8 @@ function FlatHero({
       `}</style>
 
       <div
-        style={{
-          position: "relative",
-          maxWidth: 980,
-          margin: "0 auto",
-          textAlign: "left",
-        }}
+        className="relative w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]"
+        style={{ textAlign: "left" }}
       >
         <h1
           style={{
