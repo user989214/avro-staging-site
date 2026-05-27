@@ -195,9 +195,9 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                     style={{
                       fontFamily: GC,
                       fontWeight: 700,
-                      fontSize: 15,
-                      minHeight: 50,
-                      padding: "0 20px",
+                      fontSize: 16,
+                      minHeight: 48,
+                      padding: "0 28px",
                       borderRadius: 999,
                     }}
                   >

@@ -404,7 +404,7 @@ export function FinalCta({
                   fontSize: 16,
                   letterSpacing: "-0.005em",
                   minHeight: 48,
-                  padding: "0 24px",
+                  padding: "0 28px",
                   borderRadius: 999,
                   border: "1.5px solid var(--charcoal)",
                   backgroundColor: "var(--charcoal)",

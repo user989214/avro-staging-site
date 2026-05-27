@@ -147,8 +147,8 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
           style={{
             fontFamily: GC,
             fontWeight: 700,
-            fontSize: 17,
-            minHeight: 56,
+            fontSize: 16,
+            minHeight: 48,
             padding: "0 28px",
             borderRadius: 999,
             backgroundColor: "var(--charcoal)",

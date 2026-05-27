@@ -313,9 +313,9 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                       style={{
                         fontFamily: GC,
                         fontWeight: 700,
-                        fontSize: 17,
-                        minHeight: 52,
-                        padding: "0 16px",
+                        fontSize: 16,
+                        minHeight: 48,
+                        padding: "0 28px",
                         borderRadius: 999,
                         backgroundColor: "var(--charcoal)",
                         color: "var(--bone)",
