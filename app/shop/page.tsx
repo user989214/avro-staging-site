@@ -58,9 +58,9 @@ export default function ShopPage() {
             font-weight: 700;
             font-size: 16px;
             letter-spacing: -0.005em;
-            min-height: 56px;
-            min-width: 200px;
-            padding: 0 40px;
+            min-height: 48px;
+            min-width: 240px;
+            padding: 0 44px;
             border-radius: 999px;
             text-decoration: none;
             transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
@@ -141,11 +141,11 @@ export default function ShopPage() {
                 className="object-contain object-right"
                 priority
                 style={{
-                  // strong radial vignette mask — hides borders, image dissolves into the card
+                  // Much stronger vignette — image dissolves well before reaching any edge
                   WebkitMaskImage:
-                    "radial-gradient(ellipse 75% 80% at 72% 50%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 75%, rgba(0,0,0,0) 95%)",
+                    "radial-gradient(ellipse 55% 65% at 75% 50%, rgba(0,0,0,1) 15%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.15) 78%, rgba(0,0,0,0) 92%)",
                   maskImage:
-                    "radial-gradient(ellipse 75% 80% at 72% 50%, rgba(0,0,0,1) 35%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.4) 75%, rgba(0,0,0,0) 95%)",
+                    "radial-gradient(ellipse 55% 65% at 75% 50%, rgba(0,0,0,1) 15%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.15) 78%, rgba(0,0,0,0) 92%)",
                 }}
               />
             </div>
@@ -156,7 +156,16 @@ export default function ShopPage() {
                 position: "absolute",
                 inset: 0,
                 background:
-                  "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 28%, rgba(245,241,234,0.85) 42%, rgba(245,241,234,0.35) 58%, rgba(245,241,234,0) 75%)",
+                  "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.9) 52%, rgba(245,241,234,0.55) 64%, rgba(245,241,234,0.2) 76%, rgba(245,241,234,0) 88%)",
+              }}
+            />
+            {/* Outer edge fade — softens any visible border on top, bottom and right */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "radial-gradient(ellipse 90% 90% at 50% 50%, rgba(245,241,234,0) 55%, rgba(245,241,234,0.55) 82%, var(--base-light) 100%)",
               }}
             />
           </div>
