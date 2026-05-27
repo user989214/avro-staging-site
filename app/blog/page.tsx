@@ -199,7 +199,7 @@ export default function BlogPage() {
                   {featured.excerpt}
                 </p>
               </div>
-              <div className="feat-read-btn" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 700, fontSize: 20, color: "#000", backgroundColor: "#fff", borderRadius: 24, padding: "16px 32px", flexShrink: 0 }}>
+              <div className="feat-read-btn" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 700, fontSize: 16, color: "#000", backgroundColor: "#fff", borderRadius: 999, padding: "0 24px", minHeight: 48, flexShrink: 0 }}>
                 Read Article
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </div>

@@ -182,9 +182,9 @@ export default async function ProductPage({
                 style={{
                   fontFamily: GC,
                   fontWeight: 700,
-                  fontSize: 18,
-                  minHeight: 56,
-                  padding: "0 32px",
+                  fontSize: 16,
+                  minHeight: 48,
+                  padding: "0 24px",
                   borderRadius: 999,
                   backgroundColor: "var(--charcoal)",
                   color: "var(--bone)",
