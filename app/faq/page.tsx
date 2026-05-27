@@ -1,15 +1,14 @@
 "use client"
 
-import Link from "next/link"
 import { useState } from "react"
 import {
-  Section,
+  CardedSection,
   SectionHeading,
-  CtaGroup,
   SocialProof,
   FinalCta,
 } from "@/components/sections"
 import { Icon } from "@/components/icons"
+import { PageHero } from "@/components/page-hero"
 
 const faqCategories = [
   {
@@ -146,59 +145,73 @@ const faqCategories = [
 
 export default function FaqPage() {
   const [search, setSearch] = useState("")
+  const q = search.trim().toLowerCase()
+
+  const filtered = q
+    ? faqCategories
+        .map((cat) => ({
+          ...cat,
+          faqs: cat.faqs.filter(
+            ([question, answer]) =>
+              question.toLowerCase().includes(q) ||
+              answer.toLowerCase().includes(q)
+          ),
+        }))
+        .filter((cat) => cat.faqs.length > 0)
+    : faqCategories
 
   return (
     <>
-      {/* Hero */}
-      <section className="grid justify-items-center text-center w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(42px,8vw,86px)] bg-gradient-to-br from-[#fffdf8] to-[#f5f0e7] border-b border-line">
-        <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-2.5">
-          How can we help?
-        </h1>
-        <p className="max-w-[760px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed mb-5">
-          Find answers about AVRO formulas, ingredients, timing, caffeine,
-          subscriptions, shipping, and how to choose the right product.
-        </p>
-        <label className="grid grid-cols-[28px_1fr] gap-3 items-center w-full max-w-[720px] mt-5 px-4 py-3.5 bg-base border border-line rounded-2xl shadow-[0_12px_35px_rgba(30,29,24,0.06)]">
-          <Icon name="search" className="w-7 h-7 text-muted" />
+      <PageHero
+        title="How can we help?"
+        lede="Find answers about AVRO formulas, ingredients, timing, caffeine, subscriptions, shipping, and how to choose the right product."
+        imageSrc="/images/lifestyle/avro-trio-stone-hero.png"
+        imageAlt="AVRO Calm, Focus, and Energy tubes arranged on a stone slab"
+        imageObjectPosition="75% center"
+        primaryCta={{ href: "/shop", label: "Shop AVRO" }}
+        secondaryCta={{ href: "/contact", label: "Contact Us" }}
+        compact
+      >
+        <label className="grid grid-cols-[24px_1fr] gap-3 items-center w-full max-w-[480px] px-4 py-3 bg-base border border-line rounded-2xl shadow-[0_8px_24px_rgba(30,29,24,0.05)]">
+          <Icon name="search" className="w-6 h-6 text-muted" />
           <input
             type="search"
             placeholder="Search AVRO answers"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border-0 outline-0 bg-transparent"
+            className="border-0 outline-0 bg-transparent text-sm"
           />
         </label>
-        <div className="flex flex-wrap justify-center gap-2 mt-5.5">
+        <div className="flex flex-wrap gap-2 mt-4 max-w-[560px]">
           {faqCategories.map((cat) => (
             <a
               key={cat.slug}
               href={`#${cat.slug}`}
-              className="px-3 py-2.5 bg-base border border-line rounded-full text-[13px] font-extrabold hover:bg-gray-50 transition-colors"
+              className="px-3 py-2 bg-base border border-line rounded-full text-[12px] font-extrabold hover:bg-gray-50 transition-colors"
             >
               {cat.name}
             </a>
           ))}
         </div>
-        <CtaGroup primary="Shop AVRO" secondary="Contact Us" />
-      </section>
+      </PageHero>
 
-      {faqCategories.map((category) => (
-        <Section key={category.slug} id={category.slug}>
-          <SectionHeading title={category.name} />
-          <div className="grid gap-2 w-full max-w-[1080px] mx-auto">
-            {category.faqs.map(([q, a]) => (
+      {filtered.map((category) => (
+        <CardedSection key={category.slug} id={category.slug}>
+          <SectionHeading title={category.name} centered={false} />
+          <div className="grid gap-2 w-full">
+            {category.faqs.map(([question, answer]) => (
               <details
-                key={q}
-                className="bg-base border border-line rounded-[7px] group"
+                key={question}
+                className="bg-base border border-line rounded-[12px] group"
               >
                 <summary className="flex justify-between gap-4 px-5.5 py-4.5 cursor-pointer font-extrabold select-none after:content-['+'] after:text-[22px] after:leading-none group-open:after:content-['-']">
-                  {q}
+                  {question}
                 </summary>
-                <p className="px-5.5 pb-5 text-muted-foreground leading-relaxed">{a}</p>
+                <p className="px-5.5 pb-5 text-muted-foreground leading-relaxed">{answer}</p>
               </details>
             ))}
           </div>
-        </Section>
+        </CardedSection>
       ))}
 
       <SocialProof mode="compact" />

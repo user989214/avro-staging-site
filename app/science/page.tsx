@@ -1,7 +1,6 @@
 import {
-  Section,
+  CardedSection,
   SectionHeading,
-  CtaGroup,
   SocialProof,
   ProductCards,
   FormulaLogic,
@@ -10,6 +9,7 @@ import {
   InfoCard,
 } from "@/components/sections"
 import { Icon } from "@/components/icons"
+import { PageHero } from "@/components/page-hero"
 
 export const metadata = {
   title: "The Science of AVRO | AVRO",
@@ -19,43 +19,38 @@ export const metadata = {
 export default function SciencePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(56px,9vw,112px)] bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.85),transparent_42%),linear-gradient(180deg,#fffdf8_0%,#f4efe5_100%)] border-b border-line">
-        <div className="flex flex-col items-center text-center max-w-[820px] mx-auto">
-          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5 text-balance">
-            Calm first. Backed by science.
-          </h1>
-          <p className="max-w-[640px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed text-pretty">
-            Every AVRO formula starts with naturally fermented PharmaGABA®,
-            selected to support calm-first readiness, composure, and clarity
-            before pressure-sensitive moments.
-          </p>
-          <div className="flex flex-wrap justify-center">
-            <CtaGroup primary="Shop AVRO" secondary="View Research" />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10 max-w-[640px]">
-            <span className="flex flex-col items-center gap-2 text-olive-dark text-[13px] font-extrabold">
-              <Icon name="leaf" className="w-8.5 h-8.5 text-olive" />
-              Naturally Fermented PharmaGABA®
-            </span>
-            <span className="flex flex-col items-center gap-2 text-olive-dark text-[13px] font-extrabold">
-              <Icon name="flask" className="w-8.5 h-8.5 text-olive" />
-              Research Supported Ingredient
-            </span>
-            <span className="flex flex-col items-center gap-2 text-olive-dark text-[13px] font-extrabold">
-              <Icon name="shield" className="w-8.5 h-8.5 text-olive" />
-              Transparent Standards
-            </span>
-          </div>
+      <PageHero
+        title="Calm first. Backed by science."
+        lede="Every AVRO formula starts with naturally fermented PharmaGABA®, selected to support calm-first readiness, composure, and clarity before pressure-sensitive moments."
+        imageSrc="/images/science/fermentation-lab.jpg"
+        imageAlt="Naturally fermented PharmaGABA® in a quiet lab setting"
+        imageObjectPosition="65% center"
+        primaryCta={{ href: "/shop", label: "Shop AVRO" }}
+        secondaryCta={{ href: "#research", label: "View Research" }}
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2 max-w-[560px]">
+          <span className="flex items-center gap-2 text-olive-dark text-[12px] font-extrabold">
+            <Icon name="leaf" className="w-6 h-6 text-olive shrink-0" />
+            Naturally Fermented PharmaGABA®
+          </span>
+          <span className="flex items-center gap-2 text-olive-dark text-[12px] font-extrabold">
+            <Icon name="flask" className="w-6 h-6 text-olive shrink-0" />
+            Research Supported Ingredient
+          </span>
+          <span className="flex items-center gap-2 text-olive-dark text-[12px] font-extrabold">
+            <Icon name="shield" className="w-6 h-6 text-olive shrink-0" />
+            Transparent Standards
+          </span>
         </div>
-      </section>
+      </PageHero>
 
-      <Section>
+      <CardedSection>
         <SectionHeading
           eyebrow="Why calm comes first"
           title="Calm is the foundation."
+          centered={false}
         />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4.5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <InfoCard icon="bolt" title="Pressure creates noise">
             When pressure rises, more stimulation is not always better.
           </InfoCard>
@@ -68,9 +63,9 @@ export default function SciencePage() {
             moments.
           </InfoCard>
         </div>
-      </Section>
+      </CardedSection>
 
-      <Section>
+      <CardedSection id="research">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)]">
           <div>
             <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
@@ -112,7 +107,7 @@ export default function SciencePage() {
             </div>
           </div>
         </div>
-      </Section>
+      </CardedSection>
 
       <FormulaLogic />
       <ProductCards title="Three formulas. One foundation." shopLabel="Shop" />
@@ -120,6 +115,7 @@ export default function SciencePage() {
 
       <FaqBlock
         title="Science FAQ"
+        centered={false}
         faqs={[
           [
             "What makes PharmaGABA different?",

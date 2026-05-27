@@ -10,17 +10,54 @@ import { ProductCard } from "@/components/product-visual"
 interface SectionProps {
   children: React.ReactNode
   className?: string
+  id?: string
 }
 
-export function Section({ children, className }: SectionProps) {
+export function Section({ children, className, id }: SectionProps) {
   return (
     <section
+      id={id}
       className={cn(
         "w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(52px,7vw,86px)] border-b border-line",
         className
       )}
     >
       {children}
+    </section>
+  )
+}
+
+/**
+ * CardedSection — a section whose content sits inside a rounded "paper" panel,
+ * matching the rounded-rectangle language used on the homepage and PDP.
+ */
+export function CardedSection({
+  children,
+  className,
+  panelClassName,
+  bg = "var(--base-light)",
+  id,
+}: {
+  children: React.ReactNode
+  className?: string
+  panelClassName?: string
+  bg?: string
+  id?: string
+}) {
+  return (
+    <section
+      id={id}
+      className={cn(
+        "w-full max-w-[1440px] mx-auto px-[clamp(16px,5vw,64px)] py-[clamp(28px,4vw,56px)]",
+        className
+      )}
+    >
+      <div
+        className={cn("rounded-[28px] p-[clamp(28px,5vw,64px)]", panelClassName)}
+        style={{ backgroundColor: bg }}
+      >
+        {children}
+      </div>
     </section>
   )
 }

@@ -1,11 +1,11 @@
 import Link from "next/link"
-import Image from "next/image"
 import {
   SocialProof,
   ProductCards,
   FaqBlock,
   FinalCta,
 } from "@/components/sections"
+import { PageHero } from "@/components/page-hero"
 
 export const metadata = {
   title: "Shop | AVRO",
@@ -17,187 +17,35 @@ const GC = '"DM Sans", system-ui, sans-serif'
 export default function ShopPage() {
   return (
     <>
-      {/* Hero — mirrors homepage faded-image style */}
+      <PageHero
+        title="Choose your AVRO formula."
+        lede="Three formulas. One calm-first foundation. Start with the state that fits your moment."
+        imageSrc="/images/lifestyle/avro-trio-stone-hero.png"
+        imageAlt="AVRO Calm, Focus, and Energy tubes arranged on a stone slab with soft botanicals"
+        imageObjectPosition="70% center"
+        primaryCta={{ href: "/calm", label: "Shop Calm" }}
+        secondaryCta={{ href: "/focus", label: "Shop Focus" }}
+      />
+
+      <ProductCards title="Three formulas. One foundation." shopLabel="Shop" />
+
+      {/* Compare Table — charcoal section, rounded card inside */}
       <section
         style={{
           width: "100%",
+          padding: "clamp(36px,5vw,72px) clamp(16px,5vw,64px)",
           backgroundColor: "var(--base)",
-          padding: "clamp(24px,5vw,64px) clamp(20px,5vw,64px) clamp(48px,6vw,80px)",
         }}
       >
         <div
           style={{
-            position: "relative",
             maxWidth: 1320,
             margin: "0 auto",
+            backgroundColor: "var(--charcoal)",
             borderRadius: 28,
-            overflow: "hidden",
-            backgroundColor: "var(--base-light)",
-            minHeight: "clamp(480px,60vh,640px)",
+            padding: "clamp(28px,5vw,64px) clamp(20px,5vw,48px)",
           }}
         >
-          {/* Background image */}
-          <Image
-            src="/images/lifestyle/avro-trio-stone-hero.png"
-            alt="AVRO Calm, Focus, and Energy tubes arranged on a stone slab with soft botanicals"
-            fill
-            sizes="(min-width: 1024px) 1320px, 100vw"
-            className="object-cover object-[70%_center]"
-            priority
-          />
-
-          {/* Gradient fade — left-heavy so text reads clearly */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: `
-                linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.95) 48%, rgba(245,241,234,0.7) 58%, rgba(245,241,234,0.3) 70%, rgba(245,241,234,0.1) 82%, rgba(245,241,234,0.15) 94%, var(--base-light) 100%),
-                linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.2) 10%, rgba(245,241,234,0) 20%, rgba(245,241,234,0) 80%, rgba(245,241,234,0.2) 90%, var(--base-light) 100%)
-              `,
-              pointerEvents: "none",
-            }}
-          />
-
-          {/* Content */}
-          <div
-            style={{
-              position: "relative",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              alignItems: "center",
-              padding: "clamp(48px,7vw,80px) clamp(32px,5vw,64px)",
-              minHeight: "inherit",
-            }}
-          >
-            <div style={{ maxWidth: 580 }}>
-              <h1
-                className="font-serif"
-                style={{
-                  fontWeight: 900,
-                  fontSize: "clamp(42px,6vw,72px)",
-                  lineHeight: 0.98,
-                  letterSpacing: "-0.025em",
-                  color: "var(--ink)",
-                  marginBottom: 20,
-                }}
-              >
-                Choose your AVRO formula.
-              </h1>
-              <p
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 400,
-                  fontSize: "clamp(17px,2vw,20px)",
-                  lineHeight: 1.55,
-                  color: "var(--warm-gray)",
-                  maxWidth: 480,
-                  marginBottom: 28,
-                }}
-              >
-                Three formulas. One calm-first foundation. Start with the state that fits your moment.
-              </p>
-
-              {/* CTA buttons — formula colors */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-                <style>{`
-                  .shop-btn-calm {
-                    border: 2px solid var(--calm);
-                    background-color: var(--calm);
-                    color: #2D1B4E;
-                    transition: background-color 0.2s ease, color 0.2s ease;
-                  }
-                  .shop-btn-calm:hover {
-                    background-color: transparent;
-                    color: var(--calm);
-                  }
-                  .shop-btn-focus {
-                    border: 2px solid var(--focus);
-                    background-color: var(--focus);
-                    color: #4A0A2E;
-                    transition: background-color 0.2s ease, color 0.2s ease;
-                  }
-                  .shop-btn-focus:hover {
-                    background-color: transparent;
-                    color: var(--focus);
-                  }
-                  .shop-btn-energy {
-                    border: 2px solid var(--energy);
-                    background-color: var(--energy);
-                    color: #4A3D00;
-                    transition: background-color 0.2s ease, color 0.2s ease;
-                  }
-                  .shop-btn-energy:hover {
-                    background-color: transparent;
-                    color: var(--energy);
-                  }
-                `}</style>
-                <Link
-                  href="/calm"
-                  className="shop-btn-calm"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 16,
-                    minHeight: 48,
-                    padding: "0 32px",
-                    borderRadius: 999,
-                    textDecoration: "none",
-                  }}
-                >
-                  Shop Calm
-                </Link>
-                <Link
-                  href="/focus"
-                  className="shop-btn-focus"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 16,
-                    minHeight: 48,
-                    padding: "0 32px",
-                    borderRadius: 999,
-                    textDecoration: "none",
-                  }}
-                >
-                  Shop Focus
-                </Link>
-                <Link
-                  href="/energy"
-                  className="shop-btn-energy"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 16,
-                    minHeight: 48,
-                    padding: "0 32px",
-                    borderRadius: 999,
-                    textDecoration: "none",
-                  }}
-                >
-                  Shop Energy
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <ProductCards title="Three formulas. One foundation." shopLabel="Shop" />
-
-      {/* Compare Table — charcoal + Avro Blue header */}
-      <section style={{ width: "100%", padding: "clamp(48px,6vw,80px) clamp(20px,5vw,64px)", backgroundColor: "var(--charcoal)" }}>
-        <div style={{ maxWidth: 1250, margin: "0 auto" }}>
           <h2
             className="font-serif"
             style={{
@@ -207,7 +55,7 @@ export default function ShopPage() {
               letterSpacing: "-0.02em",
               color: "var(--bone)",
               textAlign: "left",
-              marginBottom: 40,
+              marginBottom: 32,
             }}
           >
             Compare at a glance
@@ -216,7 +64,7 @@ export default function ShopPage() {
           <div
             style={{
               backgroundColor: "var(--base)",
-              borderRadius: 24,
+              borderRadius: 22,
               overflow: "hidden",
             }}
           >
