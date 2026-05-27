@@ -265,7 +265,7 @@ export function HomeRefHero() {
             height: "100%",
             objectFit: "cover",
             objectPosition: "100% center",
-            transform: `scale(${imgScale}) translateX(8%)`,
+            transform: `scale(${imgScale}) translateX(18%)`,
             transformOrigin: "right center",
             transition: "transform 0.2s ease-out",
           }}
@@ -279,7 +279,7 @@ export function HomeRefHero() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 44%, rgba(245,241,234,0.85) 54%, rgba(245,241,234,0.4) 62%, rgba(245,241,234,0) 72%)",
+              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 50%, rgba(245,241,234,0.9) 58%, rgba(245,241,234,0.5) 66%, rgba(245,241,234,0) 76%)",
             pointerEvents: "none",
           }}
         />
