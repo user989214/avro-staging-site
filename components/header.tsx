@@ -157,60 +157,17 @@ export function Header() {
                   backgroundColor: "var(--base)",
                   opacity: dropdownOpen ? 1 : 0,
                   transform: dropdownOpen ? "translateY(0)" : "translateY(-8px)",
-                  transition: "opacity 0.35s cubic-bezier(0.4,0,0.2,1), transform 0.35s cubic-bezier(0.4,0,0.2,1)",
+                  transition: "opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
                 }}
               >
-                <div className="px-4 md:px-14 py-5">
-                  <div className="grid grid-cols-2 gap-6">
-                    {/* Left half — two feature cards */}
-                    <div className="grid grid-cols-2 gap-4">
-                      <Link
-                        href="/blog"
-                        onClick={() => setDropdownOpen(false)}
-                        className="group flex flex-col justify-between rounded-[24px] p-6 transition-colors min-h-[220px]"
-                        style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
-                      >
-                        <div>
-                          <p className="text-[11px] font-bold uppercase tracking-[0.16em] opacity-70">Read</p>
-                          <h3 className="font-serif font-black text-[28px] leading-[1.05] mt-2">From The Journal</h3>
-                          <p className="text-[13px] leading-[1.45] mt-2 opacity-75">Field notes on calm focus, fermentation science, and the rituals behind each formula.</p>
-                        </div>
-                        <span
-                          className="inline-flex items-center gap-1.5 self-start rounded-full px-4 py-2 text-[12px] font-bold uppercase tracking-[0.08em] transition-transform duration-200 group-hover:translate-x-1"
-                          style={{ backgroundColor: "var(--avro-blue)", color: "var(--charcoal)" }}
-                        >
-                          Visit the Blog
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                        </span>
-                      </Link>
-
-                      <Link
-                        href="/newsletter"
-                        onClick={() => setDropdownOpen(false)}
-                        className="group flex flex-col justify-between rounded-[24px] p-6 transition-colors min-h-[220px]"
-                        style={{ backgroundColor: "var(--avro-blue)", color: "var(--charcoal)" }}
-                      >
-                        <div>
-                          <p className="text-[11px] font-bold uppercase tracking-[0.16em] opacity-70">Subscribe</p>
-                          <h3 className="font-serif font-black text-[28px] leading-[1.05] mt-2">The Calm Dispatch</h3>
-                          <p className="text-[13px] leading-[1.45] mt-2 opacity-80">Weekly drops on performance under pressure — plus first looks at new launches.</p>
-                        </div>
-                        <span
-                          className="inline-flex items-center gap-1.5 self-start rounded-full px-4 py-2 text-[12px] font-bold uppercase tracking-[0.08em] transition-transform duration-200 group-hover:translate-x-1"
-                          style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
-                        >
-                          Join the List
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                        </span>
-                      </Link>
-                    </div>
-
-                    {/* Right half — section nav (sits between center logo and Shop) */}
-                    <div className="grid grid-cols-[1fr_1.4fr]">
+                <div className="px-4 md:px-14 py-6">
+                  <div className="grid grid-cols-2 gap-10">
+                    {/* Left half — section nav (Shop / Subscribe / Why AVRO side) */}
+                    <div className="grid grid-cols-[1fr_1.3fr]">
                       {navDropdownSections.map((section, sIdx) => (
                         <div
                           key={section.heading}
-                          className="px-5"
+                          className={sIdx === 0 ? "pr-6" : "pl-6"}
                           style={sIdx > 0 ? { borderLeft: "1px solid var(--ink)" } : undefined}
                         >
                           <p
@@ -236,6 +193,49 @@ export function Header() {
                           </div>
                         </div>
                       ))}
+                    </div>
+
+                    {/* Right half — two feature cards (Science / FAQ / Cart side) */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <Link
+                        href="/blog"
+                        onClick={() => setDropdownOpen(false)}
+                        className="group flex flex-col justify-between rounded-[24px] p-6 transition-colors min-h-[220px]"
+                        style={{ backgroundColor: "var(--charcoal)" }}
+                      >
+                        <div>
+                          <p className="text-[11px] font-bold uppercase tracking-[0.16em]" style={{ color: "var(--bone)", opacity: 0.6 }}>Read</p>
+                          <h3 className="font-serif font-black text-[28px] leading-[1.05] mt-2" style={{ color: "var(--bone)" }}>From The Journal</h3>
+                          <p className="text-[13px] leading-[1.45] mt-2" style={{ color: "var(--bone)", opacity: 0.75 }}>Field notes on calm focus, fermentation science, and the rituals behind each formula.</p>
+                        </div>
+                        <span
+                          className="inline-flex items-center justify-center gap-2 self-start rounded-full px-6 py-3 text-[13px] font-bold transition-transform duration-200 group-hover:translate-x-1"
+                          style={{ backgroundColor: "var(--bone)", color: "var(--charcoal)" }}
+                        >
+                          Visit the Blog
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                      </Link>
+
+                      <Link
+                        href="/newsletter"
+                        onClick={() => setDropdownOpen(false)}
+                        className="group flex flex-col justify-between rounded-[24px] p-6 transition-colors min-h-[220px]"
+                        style={{ backgroundColor: "var(--avro-blue)" }}
+                      >
+                        <div>
+                          <p className="text-[11px] font-bold uppercase tracking-[0.16em]" style={{ color: "var(--charcoal)", opacity: 0.6 }}>Subscribe</p>
+                          <h3 className="font-serif font-black text-[28px] leading-[1.05] mt-2" style={{ color: "var(--charcoal)" }}>Stay in the Loop</h3>
+                          <p className="text-[13px] leading-[1.45] mt-2" style={{ color: "var(--charcoal)", opacity: 0.78 }}>Weekly notes on calm performance, ingredient deep dives, and first looks at new launches.</p>
+                        </div>
+                        <span
+                          className="inline-flex items-center justify-center gap-2 self-start rounded-full px-6 py-3 text-[13px] font-bold transition-transform duration-200 group-hover:translate-x-1"
+                          style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
+                        >
+                          Subscribe to Newsletter
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                      </Link>
                     </div>
                   </div>
                 </div>
