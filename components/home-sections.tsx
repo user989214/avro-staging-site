@@ -952,7 +952,7 @@ function _ApproachSectionEnd() {
   return null
 }
 
-// ── PRODUCT STRIP ──────────────────────────────────────────────────────────────
+// ── PRODUCT STRIP ───────────────────────────────���──────────────────────────────
 export function HomeProductStrip() {
   const formulaAdditions: Record<FormulaKey, string> = {
     calm: "Magnesium Bisglycinate",
@@ -975,9 +975,9 @@ export function HomeProductStrip() {
           {(Object.keys(formulas) as FormulaKey[]).map((key) => (
             <div
               key={key}
-              style={{ display: "flex", flexDirection: "column", borderRadius: 24, overflow: "hidden", backgroundColor: "var(--base-light)" }}
+              style={{ display: "flex", flexDirection: "column", borderRadius: 24, overflow: "hidden", backgroundColor: "var(--base-light)", padding: 16 }}
             >
-              <div style={{ position: "relative", aspectRatio: "4/5", overflow: "hidden" }}>
+              <div style={{ position: "relative", aspectRatio: "4/5", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={socialImages[key]}
@@ -985,7 +985,7 @@ export function HomeProductStrip() {
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
                 />
               </div>
-              <div style={{ padding: "20px 20px 24px", display: "flex", flexDirection: "column", gap: 12 }}>
+              <div style={{ padding: "20px 8px 8px", display: "flex", flexDirection: "column", gap: 12 }}>
                 <span style={{ 
                   display: "inline-block",
                   alignSelf: "flex-start",
@@ -1065,12 +1065,12 @@ export function HomeMomentGrid() {
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
           {moments.map((m) => (
-            <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 24, overflow: "hidden", backgroundColor: "var(--base-light)" }}>
-              <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden" }}>
+            <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 24, overflow: "hidden", backgroundColor: "var(--base-light)", padding: 16 }}>
+              <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={m.image} alt={m.alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
-              <div style={{ padding: "24px 24px 28px", flex: 1, display: "flex", flexDirection: "column" }}>
+              <div style={{ padding: "20px 8px 12px", flex: 1, display: "flex", flexDirection: "column" }}>
                 <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2vw,30px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 10 }}>{m.title}</h3>
                 <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, lineHeight: 1.45, color: "var(--warm-gray)", marginBottom: 20, flex: 1 }}>{m.copy}</p>
                 <span className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, border: "2px solid var(--charcoal)", backgroundColor: "var(--charcoal)", color: "var(--bone)" }}>
@@ -1194,14 +1194,16 @@ export function HomeStoryStrip() {
             <a href="/science" className="hp-btn-blue" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 36px", borderRadius: 999, textDecoration: "none", border: `2px solid ${BLUE}`, backgroundColor: BLUE, color: "var(--charcoal)" }}>The Science</a>
           </div>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "38% 62%", minHeight: 360 }}>
-          <div style={{ position: "relative", overflow: "hidden" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/science/fermentation-lab.jpg" alt="Stainless steel fermentation vessel cultivating naturally fermented PharmaGABA" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(1) contrast(1.05) brightness(0.98)" }} />
-          </div>
-          <div style={{ position: "relative", overflow: "hidden" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/team/founders-keigo-peter.jpg" alt="AVRO co-founders Keigo Sugawara and Peter van Stolk" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(1) contrast(1.05) brightness(0.98)" }} />
+        <div style={{ padding: "0 clamp(20px,4vw,32px) clamp(20px,4vw,32px)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "38% 62%", minHeight: 360, gap: 16 }}>
+            <div style={{ position: "relative", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/science/fermentation-lab.jpg" alt="Stainless steel fermentation vessel cultivating naturally fermented PharmaGABA" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(1) contrast(1.05) brightness(0.98)" }} />
+            </div>
+            <div style={{ position: "relative", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/team/founders-keigo-peter.jpg" alt="AVRO co-founders Keigo Sugawara and Peter van Stolk" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(1) contrast(1.05) brightness(0.98)" }} />
+            </div>
           </div>
         </div>
       </div>
