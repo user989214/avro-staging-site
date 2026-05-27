@@ -363,7 +363,7 @@ export function HomeScienceGrid() {
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px,1fr))", gap: 20 }}>
         {/* Why GABA card */}
-        <div style={{ backgroundColor: "#f8f8f8", borderRadius: 24, padding: "clamp(28px,4vw,48px)", border: "1px solid rgba(0,0,0,0.06)" }}>
+        <div style={{ backgroundColor: "var(--base-light)", borderRadius: 24, padding: "clamp(28px,4vw,48px)", border: "1px solid rgba(0,0,0,0.06)" }}>
           <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(24px,2.8vw,38px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 16 }}>
             Why GABA matters.
           </h2>
@@ -394,7 +394,7 @@ export function HomeScienceGrid() {
         </div>
 
         {/* Formula comparison */}
-        <div style={{ backgroundColor: "#f8f8f8", borderRadius: 24, overflow: "hidden", padding: "clamp(28px,4vw,48px)", border: "1px solid rgba(0,0,0,0.06)" }}>
+        <div style={{ backgroundColor: "var(--base-light)", borderRadius: 24, overflow: "hidden", padding: "clamp(28px,4vw,48px)", border: "1px solid rgba(0,0,0,0.06)" }}>
           <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(24px,2.8vw,38px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 24 }}>
             Every formula starts calm first.
           </h2>

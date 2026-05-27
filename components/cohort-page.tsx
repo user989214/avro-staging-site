@@ -154,7 +154,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             </p>
             <CtaGroup primary={data.primary} secondary={data.secondary} />
           </div>
-          <div className="relative grid place-items-stretch min-h-[420px] border border-line rounded-full overflow-hidden bg-cover shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
+          <div className="relative grid place-items-stretch min-h-[420px] border border-line rounded-[20px] overflow-hidden bg-cover shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={cohortHero[data.visual]?.src}
