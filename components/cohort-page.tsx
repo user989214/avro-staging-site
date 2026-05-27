@@ -164,26 +164,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                 }}
               />
 
-              {/* Scene label */}
-              <div
-                style={{
-                  position: "absolute",
-                  right: 24,
-                  bottom: 24,
-                  zIndex: 20,
-                  padding: "10px 18px",
-                  borderRadius: 999,
-                  fontFamily: GC,
-                  fontWeight: 700,
-                  fontSize: 12,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  backgroundColor: "var(--charcoal)",
-                  color: "var(--bone)",
-                }}
-              >
-                {sceneLabels[data.visual as keyof typeof sceneLabels]}
-              </div>
+              {/* Scene label removed for cleaner full-width hero */}
             </>
           )}
 
@@ -271,8 +252,8 @@ export function CohortPage({ data }: { data: CohortData }) {
         </div>
       </Section>
 
-      {/* Choose Formula — charcoal cards */}
-      <section style={{ width: "100%", padding: "clamp(48px,6vw,80px) clamp(20px,5vw,64px)", backgroundColor: "var(--charcoal)" }}>
+      {/* Choose Formula — charcoal section, AVRO-blue cards */}
+      <section style={{ width: "100%", padding: "clamp(64px,8vw,112px) clamp(20px,5vw,64px)", backgroundColor: "var(--charcoal)" }}>
         <div style={{ maxWidth: 1320, margin: "0 auto" }}>
           <span
             style={{
@@ -298,13 +279,13 @@ export function CohortPage({ data }: { data: CohortData }) {
               letterSpacing: "-0.02em",
               color: "var(--bone)",
               textAlign: "center",
-              marginBottom: 40,
+              marginBottom: 56,
             }}
           >
             {data.chooseTitle}
           </h2>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
             {(Object.keys(formulas) as FormulaKey[]).map((key) => {
               const item = formulas[key]
               const tube = tubeImageFor(key)
@@ -314,19 +295,36 @@ export function CohortPage({ data }: { data: CohortData }) {
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: 16,
-                    padding: 24,
-                    backgroundColor: "rgba(245,241,234,0.06)",
+                    gap: 20,
+                    padding: 32,
+                    minHeight: 560,
+                    backgroundColor: "rgba(74,144,226,0.08)",
                     borderRadius: 24,
-                    border: "1px solid rgba(245,241,234,0.1)",
+                    border: "1px solid rgba(74,144,226,0.22)",
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
                   }}
                 >
-                  <h3
+                  <span
                     style={{
                       fontFamily: GC,
                       fontWeight: 700,
-                      fontSize: 20,
+                      fontSize: 11,
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      color: "var(--avro-blue)",
+                    }}
+                  >
+                    Formula
+                  </span>
+                  <h3
+                    className="font-serif"
+                    style={{
+                      fontWeight: 900,
+                      fontSize: 28,
+                      lineHeight: 1.05,
+                      letterSpacing: "-0.015em",
                       color: "var(--bone)",
+                      marginTop: -8,
                     }}
                   >
                     {item.name}
@@ -334,12 +332,13 @@ export function CohortPage({ data }: { data: CohortData }) {
                   <div
                     style={{
                       position: "relative",
-                      minHeight: 220,
+                      minHeight: 280,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      backgroundColor: "rgba(245,241,234,0.04)",
-                      borderRadius: 16,
+                      backgroundColor: "rgba(74,144,226,0.06)",
+                      border: "1px solid rgba(74,144,226,0.14)",
+                      borderRadius: 18,
                       overflow: "hidden",
                     }}
                   >
@@ -347,7 +346,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                     <img
                       src={tube.src}
                       alt={tube.alt}
-                      style={{ height: 200, width: "auto", objectFit: "contain" }}
+                      style={{ height: 240, width: "auto", objectFit: "contain" }}
                     />
                   </div>
                   <p
@@ -355,8 +354,8 @@ export function CohortPage({ data }: { data: CohortData }) {
                       fontFamily: GC,
                       fontWeight: 400,
                       fontSize: 15,
-                      lineHeight: 1.5,
-                      color: "rgba(245,241,234,0.7)",
+                      lineHeight: 1.6,
+                      color: "rgba(245,241,234,0.78)",
                       flex: 1,
                     }}
                   >
@@ -364,10 +363,12 @@ export function CohortPage({ data }: { data: CohortData }) {
                   </p>
                   <style>{`
                     .cohort-choose-btn-${key} {
-                      transition: background-color 0.2s ease, color 0.2s ease;
+                      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
                     }
                     .cohort-choose-btn-${key}:hover {
-                      background-color: transparent !important;
+                      background-color: var(--bone) !important;
+                      color: var(--charcoal) !important;
+                      border-color: var(--bone) !important;
                     }
                   `}</style>
                   <Link
@@ -380,12 +381,12 @@ export function CohortPage({ data }: { data: CohortData }) {
                       fontFamily: GC,
                       fontWeight: 700,
                       fontSize: 15,
-                      minHeight: 48,
+                      minHeight: 52,
                       borderRadius: 999,
                       textDecoration: "none",
-                      border: `2px solid var(--${key})`,
-                      backgroundColor: `var(--${key})`,
-                      color: key === "energy" ? "#4A3D00" : key === "calm" ? "#2D1B4E" : "#4A0A2E",
+                      border: "2px solid var(--avro-blue)",
+                      backgroundColor: "var(--avro-blue)",
+                      color: "var(--charcoal)",
                     }}
                   >
                     Choose {item.short}
