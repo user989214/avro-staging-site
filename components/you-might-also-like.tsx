@@ -39,20 +39,27 @@ export function YouMightAlsoLike({ currentKey, hideHeader = false }: YouMightAls
             <Link
               key={key}
               href={`/${key}`}
-              className="group flex flex-col bg-base border border-line rounded-2xl overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(31,29,24,0.08)]"
+              className="group flex flex-col gap-4 transition-all hover:-translate-y-0.5"
+              style={{
+                backgroundColor: "var(--base-light, #f5f1e8)",
+                borderRadius: 24,
+                padding: "clamp(16px,2.4vw,24px)",
+              }}
             >
               <div
-                className="flex items-end justify-center h-[260px] overflow-hidden pt-3"
+                className="relative flex items-center justify-center overflow-hidden border border-line"
                 style={{
-                  background: `radial-gradient(circle at 50% 60%, ${item.accent}1f, transparent 60%), #ffffff`,
+                  borderRadius: 18,
+                  backgroundColor: "var(--bone)",
+                  aspectRatio: "1 / 1",
                 }}
               >
                 <ProductCard
                   formulaKey={key}
-                  className="!h-[250px]"
+                  className="h-full w-full object-cover"
                 />
               </div>
-              <div className="flex flex-1 flex-col gap-2 p-5 border-t border-line">
+              <div className="flex flex-1 flex-col gap-2">
                 <div className="flex items-center justify-between gap-2">
                   <h3 className="font-black text-base">{item.name}</h3>
                   <span className="text-sm font-extrabold text-ink/80">{item.priceLabel}</span>
@@ -61,7 +68,7 @@ export function YouMightAlsoLike({ currentKey, hideHeader = false }: YouMightAls
                 <span
                   className={cn(
                     "inline-flex items-center justify-center mt-auto px-4 py-2.5 rounded-full text-xs font-extrabold transition-colors",
-                    "bg-soft text-olive-dark group-hover:bg-olive group-hover:text-white"
+                    "bg-soft text-olive-dark group-hover:bg-charcoal group-hover:text-bone"
                   )}
                 >
                   Shop {item.short}
@@ -74,13 +81,19 @@ export function YouMightAlsoLike({ currentKey, hideHeader = false }: YouMightAls
         {/* Variety Bundle card */}
         <Link
           href="/shop"
-          className="group flex flex-col bg-base border border-line rounded-2xl overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(31,29,24,0.08)]"
+          className="group flex flex-col gap-4 transition-all hover:-translate-y-0.5"
+          style={{
+            backgroundColor: "var(--base-light, #f5f1e8)",
+            borderRadius: 24,
+            padding: "clamp(16px,2.4vw,24px)",
+          }}
         >
           <div
-            className="relative flex items-center justify-center h-[260px] overflow-hidden"
+            className="relative flex items-center justify-center overflow-hidden border border-line"
             style={{
-              background:
-                "radial-gradient(circle at 50% 70%, rgba(143,107,71,0.12), transparent 65%), linear-gradient(180deg, #ffffff, #f7f3eb)",
+              borderRadius: 18,
+              backgroundColor: "var(--bone)",
+              aspectRatio: "1 / 1",
             }}
           >
             <Image
@@ -88,14 +101,14 @@ export function YouMightAlsoLike({ currentKey, hideHeader = false }: YouMightAls
               alt="AVRO variety bundle showing all six flavors fanned out on a stone slab"
               width={640}
               height={640}
-              className="h-full w-auto object-contain"
+              className="h-full w-full object-contain p-4"
               sizes="(max-width: 768px) 80vw, 320px"
             />
-            <span className="absolute top-3 left-3 px-2.5 py-1 bg-olive text-white rounded-full text-[10px] font-black tracking-[0.08em] uppercase">
+            <span className="absolute top-3 left-3 px-2.5 py-1 bg-charcoal text-bone rounded-full text-[10px] font-black tracking-[0.08em] uppercase">
               Clinician Choice
             </span>
           </div>
-          <div className="flex flex-1 flex-col gap-2 p-5 border-t border-line">
+          <div className="flex flex-1 flex-col gap-2">
             <div className="flex items-center justify-between gap-2">
               <h3 className="font-black text-base">Variety Bundle</h3>
               <span className="text-sm font-extrabold text-ink/80">$59.85</span>
@@ -103,7 +116,7 @@ export function YouMightAlsoLike({ currentKey, hideHeader = false }: YouMightAls
             <p className="text-ink/65 text-sm leading-relaxed">
               Calm, Focus, and Energy together. Save 20% when you bundle.
             </p>
-            <span className="inline-flex items-center justify-center mt-auto px-4 py-2.5 rounded-full text-xs font-extrabold bg-soft text-olive-dark group-hover:bg-olive group-hover:text-white transition-colors">
+            <span className="inline-flex items-center justify-center mt-auto px-4 py-2.5 rounded-full text-xs font-extrabold bg-soft text-olive-dark group-hover:bg-charcoal group-hover:text-bone transition-colors">
               Build Bundle
             </span>
           </div>

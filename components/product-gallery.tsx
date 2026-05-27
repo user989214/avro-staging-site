@@ -145,10 +145,15 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
   }
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row gap-3 lg:gap-4">
-      {/* Thumbnail strip — horizontal on mobile, vertical on desktop (left side) */}
-      <div className="relative lg:w-[78px] shrink-0">
-        <ul className="flex lg:flex-col gap-2.5 overflow-x-auto lg:overflow-visible -mx-1 px-1 pb-1 lg:mx-0 lg:px-0 lg:pb-0 snap-x">
+    <div
+      className="flex flex-col-reverse lg:flex-row gap-3 lg:gap-3"
+      style={{ maxHeight: "min(72vh, 640px)" }}
+    >
+      {/* Thumbnail strip — horizontal on mobile, vertical scrollable column on desktop */}
+      <div className="relative lg:w-[64px] shrink-0 lg:h-full">
+        <ul
+          className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-y-auto lg:overflow-x-hidden -mx-1 px-1 pb-1 lg:mx-0 lg:px-0 lg:pb-0 lg:pr-1 snap-x lg:snap-y lg:h-full no-scrollbar"
+        >
           {THUMBS.map((thumb) => (
             <li key={thumb.id} className="shrink-0 snap-start">
               <button
@@ -157,10 +162,12 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
                 aria-label={thumb.label}
                 aria-pressed={activeId === thumb.id}
                 className={cn(
-                  "relative w-[68px] h-[68px] sm:w-[74px] sm:h-[74px] overflow-hidden flex items-center justify-center transition-all",
-                  activeId === thumb.id ? "ring-2 ring-black ring-offset-0" : "opacity-70 hover:opacity-100",
+                  "relative w-[58px] h-[58px] sm:w-[60px] sm:h-[60px] overflow-hidden flex items-center justify-center transition-all",
+                  activeId === thumb.id
+                    ? "ring-2 ring-black ring-offset-0"
+                    : "opacity-70 hover:opacity-100 border border-line",
                 )}
-                style={{ backgroundColor: "#f2f2f2", borderRadius: 10 }}
+                style={{ backgroundColor: "var(--bone)", borderRadius: 10 }}
               >
                 {renderThumb(thumb)}
                 <span className="sr-only">{thumb.label}</span>
@@ -170,11 +177,11 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
         </ul>
       </div>
 
-      {/* Main view — fills the frame, image-native background */}
+      {/* Main view — fills the frame, image-native background, bordered like homepage cards */}
       <div
-        className="relative w-full rounded-2xl overflow-hidden flex-1"
+        className="relative w-full rounded-2xl overflow-hidden flex-1 border border-line"
         style={{
-          backgroundColor: "#f2f2f2",
+          backgroundColor: "var(--bone)",
           aspectRatio: "1 / 1",
           maxHeight: "min(72vh, 640px)",
         }}

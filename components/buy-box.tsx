@@ -138,8 +138,16 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         </div>
       </div>
 
-      {/* Purchase options - tighter */}
-      <div className="flex flex-col gap-2">
+      {/* Purchase options - unified rounded container with internal divider */}
+      <div
+        className="flex flex-col"
+        style={{
+          borderRadius: 20,
+          backgroundColor: "var(--bone)",
+          border: "1px solid var(--line)",
+          overflow: "hidden",
+        }}
+      >
         <PurchaseOption
           checked={purchaseType === "subscribe"}
           onChange={() => setPurchaseType("subscribe")}
@@ -148,6 +156,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
           price={`$${subscribeTotal.toFixed(2)}`}
           badge="Most popular"
         />
+        <div style={{ borderTop: "1px solid var(--line)" }} />
         <PurchaseOption
           checked={purchaseType === "onetime"}
           onChange={() => setPurchaseType("onetime")}
@@ -244,25 +253,64 @@ function PurchaseOption({
 }) {
   return (
     <label
-      className="relative flex items-start gap-2.5 p-4 cursor-pointer transition-all"
+      className="relative flex items-start gap-3 px-4 py-4 cursor-pointer transition-colors"
       style={{
-        borderRadius: 18,
-        backgroundColor: checked ? "var(--charcoal)" : LIGHT_GRAY,
+        backgroundColor: checked ? "var(--charcoal)" : "transparent",
         color: checked ? "var(--bone)" : "var(--ink)",
         fontFamily: GC,
       }}
     >
+      <span
+        aria-hidden
+        className="mt-0.5 shrink-0 flex items-center justify-center"
+        style={{
+          width: 18,
+          height: 18,
+          borderRadius: 999,
+          border: checked ? "2px solid var(--bone)" : "2px solid var(--warm-gray)",
+          backgroundColor: "transparent",
+        }}
+      >
+        {checked && (
+          <span
+            style={{
+              width: 8,
+              height: 8,
+              borderRadius: 999,
+              backgroundColor: "var(--bone)",
+            }}
+          />
+        )}
+      </span>
       <input
         type="radio"
         name="purchase"
         checked={checked}
         onChange={onChange}
-        className="mt-0.5 shrink-0"
-        style={{ accentColor: "#fff", width: 16, height: 16 }}
+        className="sr-only"
       />
       <div className="flex-1">
         <div className="flex items-center justify-between gap-2">
-          <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: 16 }}>{title}</strong>
+          <div className="flex items-center gap-2 flex-wrap">
+            <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: 16 }}>{title}</strong>
+            {badge && (
+              <span
+                style={{
+                  fontFamily: GC,
+                  fontWeight: 700,
+                  fontSize: 10,
+                  letterSpacing: "0.06em",
+                  textTransform: "uppercase",
+                  padding: "3px 8px",
+                  backgroundColor: checked ? "var(--bone)" : "var(--charcoal)",
+                  color: checked ? "var(--charcoal)" : "var(--bone)",
+                  borderRadius: 999,
+                }}
+              >
+                {badge}
+              </span>
+            )}
+          </div>
           <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, whiteSpace: "nowrap" }}>
             {price}
           </strong>
@@ -279,21 +327,6 @@ function PurchaseOption({
           {subtitle}
         </p>
       </div>
-      {badge && (
-        <span
-          className="absolute -top-2.5 left-3.5 px-2.5 py-0.5"
-          style={{
-            fontFamily: GC,
-            fontWeight: 700,
-            fontSize: 11,
-            backgroundColor: "var(--charcoal)",
-            color: "var(--bone)",
-            borderRadius: 999,
-          }}
-        >
-          {badge}
-        </span>
-      )}
     </label>
   )
 }
