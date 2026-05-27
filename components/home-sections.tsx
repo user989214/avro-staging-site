@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import { formulas, type FormulaKey, sharedProof, testimonials } from "@/lib/data"
+import { formulas, type FormulaKey, testimonials } from "@/lib/data"
 import { Icon } from "@/components/icons"
 
 const GC = '"DM Sans", system-ui, sans-serif'
@@ -434,20 +434,78 @@ export function HomeRefHero() {
 
 // ── PROOF BAR ───�����──────────────────��──────────────────────────────────────────
 export function HomeProofBar() {
+  const stats: { value: number; suffix: string; decimals: number; label: string }[] = [
+    { value: 4.8, suffix: "/5", decimals: 1, label: "Average customer rating" },
+    { value: 25000, suffix: "+", decimals: 0, label: "Customer reviews" },
+    { value: 100000, suffix: "+", decimals: 0, label: "Sticks sold" },
+  ]
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(32px,5vw,56px) clamp(20px,5vw,64px)" }}>
         <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", border: "2px solid var(--charcoal)", borderRadius: 24, overflow: "hidden" }}>
-        {sharedProof.map((item, i) => (
+        {stats.map((item, i) => (
           <div
             key={item.label}
             style={{ padding: "clamp(20px,3vw,36px) clamp(16px,3vw,32px)", textAlign: "center", borderLeft: i > 0 ? "2px solid var(--charcoal)" : "none" }}
           >
-            <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.5vw,48px)", lineHeight: 1.0, color: "var(--ink)", display: "block" }}>{item.stat}</strong>
+            <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.5vw,48px)", lineHeight: 1.0, display: "block" }}>
+              <CountUpStat
+                value={item.value}
+                suffix={item.suffix}
+                decimals={item.decimals}
+                duration={1800}
+                delay={150 + i * 200}
+              />
+            </strong>
             <span style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.4vw,18px)", color: "var(--warm-gray)", marginTop: 6, display: "block" }}>{item.label}</span>
           </div>
         ))}
       </div>
     </section>
+  )
+}
+
+function CountUpStat({ value, suffix = "", decimals = 0, duration = 1800, delay = 0 }: { value: number; suffix?: string; decimals?: number; duration?: number; delay?: number }) {
+  const [display, setDisplay] = useState(0)
+  const [colorPhase, setColorPhase] = useState(true)
+
+  useEffect(() => {
+    let raf = 0
+    let startTs = 0
+    const startTimeout = setTimeout(() => {
+      const animate = (ts: number) => {
+        if (!startTs) startTs = ts
+        const t = Math.min(1, (ts - startTs) / duration)
+        const eased = 1 - Math.pow(1 - t, 3)
+        setDisplay(value * eased)
+        if (t < 1) {
+          raf = requestAnimationFrame(animate)
+        } else {
+          setTimeout(() => setColorPhase(false), 180)
+        }
+      }
+      raf = requestAnimationFrame(animate)
+    }, delay)
+    return () => {
+      clearTimeout(startTimeout)
+      cancelAnimationFrame(raf)
+    }
+  }, [value, duration, delay])
+
+  const formatted = decimals > 0
+    ? display.toFixed(decimals)
+    : Math.round(display).toLocaleString("en-US")
+
+  return (
+    <span
+      style={{
+        color: colorPhase ? "var(--avro-blue)" : "var(--ink)",
+        transition: "color 0.7s cubic-bezier(0.22,1,0.36,1)",
+        display: "inline-block",
+        fontVariantNumeric: "tabular-nums",
+      }}
+    >
+      {formatted}{suffix}
+    </span>
   )
 }
 
@@ -617,8 +675,8 @@ export function HomeLogicRow() {
             {/* Comparison table — solid two-column with clear winning side */}
             <div style={{ borderRadius: 24, overflow: "hidden", border: "2px solid var(--charcoal)", backgroundColor: "var(--bone)" }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-                <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--bone)", backgroundColor: "var(--charcoal)", textAlign: "center", letterSpacing: "0.02em" }}>Stimulant First</div>
-                <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--charcoal)", backgroundColor: BLUE, textAlign: "center", letterSpacing: "0.02em" }}>Calm First</div>
+                <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: BLUE, backgroundColor: "var(--charcoal)", textAlign: "center", letterSpacing: "0.02em" }}>Stimulant First</div>
+                <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--ink)", backgroundColor: BLUE, textAlign: "center", letterSpacing: "0.02em" }}>Calm First</div>
               </div>
               {comparisonRows.map(([left, right], idx) => (
                 <div key={left} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderTop: "2px solid var(--charcoal)" }}>
