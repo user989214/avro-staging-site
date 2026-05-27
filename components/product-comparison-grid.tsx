@@ -32,18 +32,12 @@ const comparisonData: Record<FormulaKey, {
   },
 }
 
-const formulaColors: Record<FormulaKey, string> = {
-  calm: "var(--calm)",
-  focus: "var(--focus)",
-  energy: "var(--energy)",
-}
-
 export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps) {
   const formulaKeys: FormulaKey[] = ["calm", "focus", "energy"]
 
   return (
-    <section className="w-full py-[clamp(48px,6vw,80px)]" style={{ fontFamily: GC, backgroundColor: "var(--avro-blue)" }}>
-      <div className="w-full max-w-[1280px] mx-auto px-[clamp(18px,5vw,64px)]">
+    <section className="w-full py-[clamp(48px,6vw,80px)]" style={{ fontFamily: GC, backgroundColor: "var(--charcoal)" }}>
+      <div className="w-full max-w-[1250px] mx-auto px-[clamp(18px,5vw,64px)]">
         {/* Header */}
         <div className="text-center mb-12">
           <span
@@ -54,21 +48,21 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
               fontSize: 11,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "var(--charcoal)",
-              opacity: 0.7,
+              color: "var(--bone)",
+              opacity: 0.6,
               marginBottom: 12,
             }}
           >
             Compare at a glance
           </span>
           <h2
+            className="font-serif"
             style={{
-              fontFamily: GC,
-              fontWeight: 700,
-              fontSize: "clamp(32px,4.5vw,56px)",
+              fontWeight: 900,
+              fontSize: "clamp(32px,4.5vw,52px)",
               lineHeight: 1.02,
               letterSpacing: "-0.02em",
-              color: "var(--charcoal)",
+              color: "var(--bone)",
               marginBottom: 14,
             }}
           >
@@ -79,7 +73,7 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
               fontFamily: GC,
               fontWeight: 500,
               fontSize: "clamp(16px,1.4vw,20px)",
-              color: "rgba(21,21,21,0.65)",
+              color: "rgba(245,242,234,0.65)",
               maxWidth: 480,
               margin: "0 auto",
             }}
@@ -89,77 +83,63 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
         </div>
 
         {/* Product grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {formulaKeys.map((key) => {
             const item = formulas[key]
             const data = comparisonData[key]
             const isActive = key === currentKey
             const subscribePrice = (item.bundlePrice * 0.75).toFixed(2)
-            const accentColor = formulaColors[key]
 
             return (
               <div
                 key={key}
                 className="group flex flex-col overflow-hidden"
                 style={{
-                  backgroundColor: "var(--base)",
+                  backgroundColor: "var(--base-light)",
                   borderRadius: 24,
-                  border: isActive ? `3px solid ${accentColor}` : "none",
-                  boxShadow: isActive 
-                    ? `0 8px 32px -8px rgba(0,0,0,0.15)` 
-                    : "0 4px 20px -6px rgba(0,0,0,0.08)",
-                  transform: isActive ? "scale(1.02)" : "scale(1)",
-                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                  padding: 16,
                 }}
               >
-                {/* Product image with colored top bar */}
-                <div style={{ backgroundColor: accentColor, padding: "3px 3px 0 3px" }}>
-                  <Link 
-                    href={`/${key}`} 
-                    className="relative flex items-center justify-center p-6" 
-                    style={{ 
-                      backgroundColor: "var(--base-light)", 
-                      borderRadius: "20px 20px 0 0",
-                      minHeight: 200,
-                    }}
-                  >
-                    <ProductCard formulaKey={key} className="h-[160px] w-auto object-contain" />
-                    {isActive && (
-                      <span
-                        className="absolute top-4 right-4 px-3 py-1.5"
-                        style={{
-                          backgroundColor: accentColor,
-                          color: key === "energy" ? "var(--charcoal)" : "var(--bone)",
-                          fontFamily: GC,
-                          fontWeight: 700,
-                          fontSize: 12,
-                          borderRadius: 999,
-                          letterSpacing: "0.02em",
-                        }}
-                      >
-                        Viewing
-                      </span>
-                    )}
-                  </Link>
-                </div>
+                {/* Product image */}
+                <Link 
+                  href={`/${key}`} 
+                  className="relative flex items-center justify-center" 
+                  style={{ 
+                    backgroundColor: "var(--bone)", 
+                    borderRadius: 18,
+                    minHeight: 220,
+                    padding: 24,
+                  }}
+                >
+                  <ProductCard formulaKey={key} className="h-[180px] w-auto object-contain" />
+                  {isActive && (
+                    <span
+                      className="absolute top-4 right-4 px-3 py-1.5"
+                      style={{
+                        backgroundColor: "var(--charcoal)",
+                        color: "var(--bone)",
+                        fontFamily: GC,
+                        fontWeight: 700,
+                        fontSize: 11,
+                        borderRadius: 999,
+                        letterSpacing: "0.04em",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      Viewing
+                    </span>
+                  )}
+                </Link>
 
                 {/* Product info */}
-                <div className="flex-1 p-5 pt-5">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span 
-                      style={{ 
-                        width: 10, 
-                        height: 10, 
-                        borderRadius: "50%", 
-                        backgroundColor: accentColor,
-                        flexShrink: 0,
-                      }} 
-                    />
-                    <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: 24, lineHeight: 1.1, color: "var(--charcoal)" }}>
-                      {item.name}
-                    </h3>
-                  </div>
-                  <p style={{ fontFamily: GC, fontWeight: 500, fontSize: 15, color: "rgba(21,21,21,0.55)", marginBottom: 18, lineHeight: 1.4 }}>
+                <div className="flex-1 px-2 pt-5 pb-2">
+                  <h3 
+                    className="font-serif"
+                    style={{ fontWeight: 900, fontSize: "clamp(24px,2.5vw,32px)", lineHeight: 1.05, color: "var(--ink)", marginBottom: 8 }}
+                  >
+                    {item.name}
+                  </h3>
+                  <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, color: "rgba(0,0,0,0.6)", marginBottom: 20, lineHeight: 1.45 }}>
                     {item.headline}
                   </p>
 
@@ -167,8 +147,8 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                   <div 
                     className="space-y-3 py-4 mb-4" 
                     style={{ 
-                      borderTop: "1px solid rgba(21,21,21,0.08)", 
-                      borderBottom: "1px solid rgba(21,21,21,0.08)" 
+                      borderTop: "1px solid rgba(0,0,0,0.08)", 
+                      borderBottom: "1px solid rgba(0,0,0,0.08)" 
                     }}
                   >
                     <Row label="Caffeine" value={data.caffeine} />
@@ -178,20 +158,21 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                 </div>
 
                 {/* CTA buttons */}
-                <div className="p-5 pt-0 flex flex-col gap-2">
+                <div className="px-2 pb-2 flex flex-col gap-2">
                   <style>{`
-                    .compare-btn-${key} {
-                      background-color: ${accentColor};
-                      border: 2px solid ${accentColor};
-                      color: ${key === "energy" ? "var(--charcoal)" : "var(--bone)"};
+                    .compare-btn {
+                      background-color: var(--charcoal);
+                      border: 2px solid var(--charcoal);
+                      color: var(--bone);
+                      transition: background-color 0.2s ease, color 0.2s ease;
                     }
-                    .compare-btn-${key}:hover {
+                    .compare-btn:hover {
                       background-color: transparent;
-                      color: ${accentColor};
+                      color: var(--charcoal);
                     }
                   `}</style>
                   <button
-                    className={`compare-btn-${key} w-full flex items-center justify-center transition-all duration-200`}
+                    className="compare-btn w-full flex items-center justify-center"
                     style={{
                       fontFamily: GC,
                       fontWeight: 700,
@@ -205,13 +186,13 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                   </button>
                   <Link
                     href={`/${key}`}
-                    className="w-full flex items-center justify-center transition-colors hover:opacity-80"
+                    className="w-full flex items-center justify-center transition-colors hover:opacity-70"
                     style={{
                       fontFamily: GC,
                       fontWeight: 600,
                       fontSize: 14,
                       minHeight: 36,
-                      color: "rgba(21,21,21,0.5)",
+                      color: "rgba(0,0,0,0.5)",
                       textDecoration: "underline",
                       textUnderlineOffset: 3,
                     }}
@@ -231,8 +212,8 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex justify-between items-baseline gap-3">
-      <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 15, color: "rgba(21,21,21,0.5)" }}>{label}</span>
-      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 15, color: "var(--charcoal)", textAlign: "right", maxWidth: 180 }}>
+      <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 15, color: "rgba(0,0,0,0.5)" }}>{label}</span>
+      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 15, color: "var(--ink)", textAlign: "right", maxWidth: 180 }}>
         {value}
       </span>
     </div>
