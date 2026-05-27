@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { formulas, type FormulaKey } from "@/lib/data"
 import {
   Section,
@@ -12,6 +13,8 @@ import {
   InfoCard,
 } from "@/components/sections"
 import { Icon, type IconName } from "@/components/icons"
+
+const GC = '"DM Sans", system-ui, sans-serif'
 
 interface CohortData {
   eyebrow: string
@@ -37,13 +40,6 @@ interface CohortData {
 }
 
 export function CohortPage({ data }: { data: CohortData }) {
-  const visualBg = {
-    golf: "bg-gradient-to-r from-[#fffdf8] from-[38%] to-[#eaf0df]",
-    social: "bg-gradient-to-r from-[#fffdf8] from-[38%] to-[#faecd8]",
-    work: "bg-gradient-to-r from-[#fffdf8] from-[38%] to-[#e9eff0]",
-    gaming: "bg-gradient-to-r from-[#fffdf8] from-[38%] to-[#eeeaf7]",
-  }[data.visual] || ""
-
   const sceneLabels = {
     golf: "First tee routine",
     social: "Alcohol-free ritual",
@@ -118,55 +114,137 @@ export function CohortPage({ data }: { data: CohortData }) {
 
   return (
     <>
-      {/* Hero */}
-      {data.visual === "work" ? (
-        /* Work page: centered text-only hero, no image */
-        <section
-          className={`relative w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(52px,9vw,100px)] border-b border-line text-center ${visualBg}`}
+      {/* Hero — matches homepage faded-image style */}
+      <section
+        style={{
+          width: "100%",
+          backgroundColor: "var(--base)",
+          padding: "clamp(24px,5vw,64px) clamp(20px,5vw,64px) clamp(48px,6vw,80px)",
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            maxWidth: 1320,
+            margin: "0 auto",
+            borderRadius: 28,
+            overflow: "hidden",
+            backgroundColor: "var(--base-light)",
+            minHeight: data.visual === "work" ? "clamp(380px,50vh,480px)" : "clamp(480px,60vh,640px)",
+          }}
         >
-          <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
-            {data.eyebrow}
-          </span>
-          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5 mx-auto max-w-[820px]">
-            {data.title}
-          </h1>
-          <p className="max-w-[580px] mx-auto text-ink/80 text-[clamp(17px,2vw,20px)] leading-relaxed">
-            {data.copy}
-          </p>
-          <div className="flex justify-center mt-8">
-            <CtaGroup primary={data.primary} secondary={data.secondary} />
-          </div>
-        </section>
-      ) : (
-        /* All other cohorts: two-column layout with lifestyle hero photo */
-        <section
-          className={`relative grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)] items-center w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(42px,8vw,86px)] border-b border-line ${visualBg}`}
-        >
-          <div className="max-w-[620px]">
-            <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
+          {/* Background image — only for non-work cohorts */}
+          {data.visual !== "work" && (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={cohortHero[data.visual]?.src}
+                alt={cohortHero[data.visual]?.alt ?? ""}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "70% center",
+                }}
+              />
+
+              {/* Gradient fade */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: `
+                    linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.95) 48%, rgba(245,241,234,0.7) 58%, rgba(245,241,234,0.3) 70%, rgba(245,241,234,0.1) 82%, rgba(245,241,234,0.15) 94%, var(--base-light) 100%),
+                    linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.2) 10%, rgba(245,241,234,0) 20%, rgba(245,241,234,0) 80%, rgba(245,241,234,0.2) 90%, var(--base-light) 100%)
+                  `,
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* Scene label */}
+              <div
+                style={{
+                  position: "absolute",
+                  right: 24,
+                  bottom: 24,
+                  zIndex: 20,
+                  padding: "10px 18px",
+                  borderRadius: 999,
+                  fontFamily: GC,
+                  fontWeight: 700,
+                  fontSize: 12,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  backgroundColor: "var(--charcoal)",
+                  color: "var(--bone)",
+                }}
+              >
+                {sceneLabels[data.visual as keyof typeof sceneLabels]}
+              </div>
+            </>
+          )}
+
+          {/* Content */}
+          <div
+            style={{
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              padding: "clamp(48px,7vw,80px) clamp(32px,5vw,64px)",
+              minHeight: "inherit",
+              textAlign: data.visual === "work" ? "center" : "left",
+              alignItems: data.visual === "work" ? "center" : "flex-start",
+            }}
+          >
+            <span
+              style={{
+                display: "block",
+                marginBottom: 12,
+                fontFamily: GC,
+                fontWeight: 700,
+                fontSize: 11,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "var(--warm-gray)",
+              }}
+            >
               {data.eyebrow}
             </span>
-            <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
+            <h1
+              className="font-serif"
+              style={{
+                fontWeight: 900,
+                fontSize: "clamp(42px,6vw,72px)",
+                lineHeight: 0.98,
+                letterSpacing: "-0.025em",
+                color: "var(--ink)",
+                marginBottom: 20,
+                maxWidth: data.visual === "work" ? 820 : 560,
+              }}
+            >
               {data.title}
             </h1>
-            <p className="max-w-[560px] text-ink/80 text-[clamp(17px,2vw,20px)] leading-relaxed">
+            <p
+              style={{
+                fontFamily: GC,
+                fontWeight: 400,
+                fontSize: "clamp(17px,2vw,20px)",
+                lineHeight: 1.55,
+                color: "var(--warm-gray)",
+                maxWidth: data.visual === "work" ? 580 : 480,
+                marginBottom: 28,
+              }}
+            >
               {data.copy}
             </p>
             <CtaGroup primary={data.primary} secondary={data.secondary} />
           </div>
-          <div className="relative grid place-items-stretch min-h-[420px] border border-line rounded-[20px] overflow-hidden bg-cover shadow-[0_22px_70px_rgba(30,29,24,0.1)]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={cohortHero[data.visual]?.src}
-              alt={cohortHero[data.visual]?.alt ?? ""}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute left-5.5 bottom-5.5 z-20 px-3.5 py-2.5 text-white bg-[rgba(38,50,22,0.86)] rounded-[7px] font-black">
-              {sceneLabels[data.visual as keyof typeof sceneLabels]}
-            </div>
-          </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       <Section>
         <SectionHeading
@@ -178,7 +256,7 @@ export function CohortPage({ data }: { data: CohortData }) {
 
       <Section>
         <SectionHeading title={data.whyTitle} />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4.5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {data.reasons.map(([title, copy], index) => (
             <InfoCard
               key={title}
@@ -191,89 +269,232 @@ export function CohortPage({ data }: { data: CohortData }) {
         </div>
       </Section>
 
-      <Section>
-        <SectionHeading
-          eyebrow="Choose formula"
-          title={data.chooseTitle}
-        />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5.5">
-          {(Object.keys(formulas) as FormulaKey[]).map((key) => {
-            const item = formulas[key]
-            const tube = tubeImageFor(key)
-            return (
-              <article
-                key={key}
-                className="grid content-start gap-3.5 p-6 bg-base-light/72 border border-line rounded-2xl shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
-              >
-                <h3 className="font-black text-lg">{item.name}</h3>
-                <div className="relative min-h-[240px] flex items-center justify-center bg-soft/60 border border-line rounded-xl overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={tube.src}
-                    alt={tube.alt}
-                    className="h-[220px] w-auto object-contain"
-                  />
-                </div>
-                <p className="text-ink/75">{chooseCopy[key]}</p>
-                <Link
-                  href={`/${key}`}
-                  className={`btn-primary w-full ${
-                    key === "calm"
-                      ? "!bg-calm"
-                      : key === "focus"
-                        ? "!bg-focus"
-                        : "!bg-energy !text-ink"
-                  }`}
+      {/* Choose Formula — charcoal cards */}
+      <section style={{ width: "100%", padding: "clamp(48px,6vw,80px) clamp(20px,5vw,64px)", backgroundColor: "var(--charcoal)" }}>
+        <div style={{ maxWidth: 1320, margin: "0 auto" }}>
+          <span
+            style={{
+              display: "block",
+              fontFamily: GC,
+              fontWeight: 700,
+              fontSize: 11,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "var(--avro-blue)",
+              marginBottom: 8,
+              textAlign: "center",
+            }}
+          >
+            Choose formula
+          </span>
+          <h2
+            className="font-serif"
+            style={{
+              fontWeight: 900,
+              fontSize: "clamp(32px,4.5vw,52px)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.02em",
+              color: "var(--bone)",
+              textAlign: "center",
+              marginBottom: 40,
+            }}
+          >
+            {data.chooseTitle}
+          </h2>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+            {(Object.keys(formulas) as FormulaKey[]).map((key) => {
+              const item = formulas[key]
+              const tube = tubeImageFor(key)
+              return (
+                <article
+                  key={key}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 16,
+                    padding: 24,
+                    backgroundColor: "rgba(245,241,234,0.06)",
+                    borderRadius: 24,
+                    border: "1px solid rgba(245,241,234,0.1)",
+                  }}
                 >
-                  Choose {item.short}
-                </Link>
-              </article>
-            )
-          })}
+                  <h3
+                    style={{
+                      fontFamily: GC,
+                      fontWeight: 700,
+                      fontSize: 20,
+                      color: "var(--bone)",
+                    }}
+                  >
+                    {item.name}
+                  </h3>
+                  <div
+                    style={{
+                      position: "relative",
+                      minHeight: 220,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      backgroundColor: "rgba(245,241,234,0.04)",
+                      borderRadius: 16,
+                      overflow: "hidden",
+                    }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={tube.src}
+                      alt={tube.alt}
+                      style={{ height: 200, width: "auto", objectFit: "contain" }}
+                    />
+                  </div>
+                  <p
+                    style={{
+                      fontFamily: GC,
+                      fontWeight: 400,
+                      fontSize: 15,
+                      lineHeight: 1.5,
+                      color: "rgba(245,241,234,0.7)",
+                      flex: 1,
+                    }}
+                  >
+                    {chooseCopy[key]}
+                  </p>
+                  <style>{`
+                    .cohort-choose-btn-${key} {
+                      transition: background-color 0.2s ease, color 0.2s ease;
+                    }
+                    .cohort-choose-btn-${key}:hover {
+                      background-color: transparent !important;
+                    }
+                  `}</style>
+                  <Link
+                    href={`/${key}`}
+                    className={`cohort-choose-btn-${key}`}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontFamily: GC,
+                      fontWeight: 700,
+                      fontSize: 15,
+                      minHeight: 48,
+                      borderRadius: 999,
+                      textDecoration: "none",
+                      border: `2px solid var(--${key})`,
+                      backgroundColor: `var(--${key})`,
+                      color: key === "energy" ? "#4A3D00" : key === "calm" ? "#2D1B4E" : "#4A0A2E",
+                    }}
+                  >
+                    Choose {item.short}
+                  </Link>
+                </article>
+              )
+            })}
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* How to Use Steps */}
-      <Section>
-        <SectionHeading eyebrow="How to use" title={data.howTitle} />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <article className="relative p-7 bg-base-light/72 border border-line rounded-2xl shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
-            <strong className="grid place-items-center w-7.5 h-7.5 mb-4.5 text-white bg-olive rounded-full">
-              1
-            </strong>
-            <Icon name="cup" className="w-10.5 h-10.5 mb-3 text-olive" />
-            <h3 className="font-black text-lg mb-2">Mix</h3>
-            <p className="text-ink/75">Mix one stick with water.</p>
-          </article>
-          <article className="relative p-7 bg-base-light/72 border border-line rounded-2xl shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
-            <strong className="grid place-items-center w-7.5 h-7.5 mb-4.5 text-white bg-olive rounded-full">
-              2
-            </strong>
-            <Icon name="clock" className="w-10.5 h-10.5 mb-3 text-olive" />
-            <h3 className="font-black text-lg mb-2">Time it</h3>
-            <p className="text-ink/75">
-              Drink about 30 minutes before your {data.stepMoment}.
-            </p>
-          </article>
-          <article className="relative p-7 bg-base-light/72 border border-line rounded-2xl shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
-            <strong className="grid place-items-center w-7.5 h-7.5 mb-4.5 text-white bg-olive rounded-full">
-              3
-            </strong>
-            <Icon name="leaf" className="w-10.5 h-10.5 mb-3 text-olive" />
-            <h3 className="font-black text-lg mb-2">Show up</h3>
-            <p className="text-ink/75">
-              Step in with a calmer, clearer routine.
-            </p>
-          </article>
+      <section style={{ width: "100%", padding: "clamp(48px,6vw,80px) clamp(20px,5vw,64px)", backgroundColor: "var(--base)" }}>
+        <div style={{ maxWidth: 1320, margin: "0 auto" }}>
+          <span
+            style={{
+              display: "block",
+              fontFamily: GC,
+              fontWeight: 700,
+              fontSize: 11,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "var(--warm-gray)",
+              marginBottom: 8,
+              textAlign: "center",
+            }}
+          >
+            How to use
+          </span>
+          <h2
+            className="font-serif"
+            style={{
+              fontWeight: 900,
+              fontSize: "clamp(32px,4.5vw,52px)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.02em",
+              color: "var(--ink)",
+              textAlign: "center",
+              marginBottom: 40,
+            }}
+          >
+            {data.howTitle}
+          </h2>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
+            {[
+              { num: 1, icon: "cup" as IconName, title: "Mix", copy: "Mix one stick with water." },
+              { num: 2, icon: "clock" as IconName, title: "Time it", copy: `Drink about 30 minutes before your ${data.stepMoment}.` },
+              { num: 3, icon: "leaf" as IconName, title: "Show up", copy: "Step in with a calmer, clearer routine." },
+            ].map((step) => (
+              <article
+                key={step.num}
+                style={{
+                  position: "relative",
+                  padding: 28,
+                  backgroundColor: "var(--base-light)",
+                  borderRadius: 20,
+                }}
+              >
+                <span
+                  style={{
+                    display: "grid",
+                    placeItems: "center",
+                    width: 30,
+                    height: 30,
+                    marginBottom: 18,
+                    borderRadius: 9999,
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: 14,
+                    backgroundColor: "var(--charcoal)",
+                    color: "var(--bone)",
+                  }}
+                >
+                  {step.num}
+                </span>
+                <Icon name={step.icon} className="w-10 h-10 mb-3" style={{ color: "var(--avro-blue)" }} />
+                <h3
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: 18,
+                    color: "var(--ink)",
+                    marginBottom: 8,
+                  }}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 400,
+                    fontSize: 15,
+                    lineHeight: 1.5,
+                    color: "var(--warm-gray)",
+                  }}
+                >
+                  {step.copy}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
-      </Section>
+      </section>
 
       <FormulaLogic />
 
       {/* Use Moments */}
       <Section>
         <SectionHeading eyebrow="Use moments" title={data.useTitle} />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {data.useMoments.map(([title, copy], index) => (
             <InfoCard
               key={title}
@@ -289,7 +510,7 @@ export function CohortPage({ data }: { data: CohortData }) {
       <ProductCards title={data.shopTitle} shopLabel="Shop" />
       <SocialProof mode="compact" />
       <FaqBlock title={data.faqTitle} faqs={data.faqs} />
-      <FinalCta title={data.finalTitle} copy={data.finalCopy} />
+      <FinalCta title={data.finalTitle} copy={data.finalCopy} productButtons />
     </>
   )
 }

@@ -4,18 +4,17 @@ import { ProductHero } from "@/components/product-hero"
 import { ReviewsBlock } from "@/components/reviews-block"
 import { Icon, type IconName } from "@/components/icons"
 import { FinalCta } from "@/components/sections"
-import { PdpMarquee } from "@/components/pdp-marquee"
 import { ProductComparisonGrid } from "@/components/product-comparison-grid"
 import { PdpSocialScroll } from "@/components/pdp-social-scroll"
 import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommendations"
 import { PdpIngredients } from "@/components/pdp-ingredients"
 
-const GC = '"Gotham Condensed", sans-serif'
+const GC = '"DM Sans", system-ui, sans-serif'
 const BLUE = "#94C6D4"
 
 const validFormulas = ["calm", "focus", "energy"] as const
 
-// "The feeling of good calm/focus/energy" section benefit cards - 4 icons like NeuroGum
+// "The feeling of good calm/focus/energy" section benefit cards - 4 icons
 const feelingBenefits: Record<FormulaKey, { icon: IconName; title: string }[]> = {
   calm: [
     { icon: "brain", title: "Improved clarity & composure" },
@@ -73,17 +72,14 @@ export default async function ProductPage({
 
   return (
     <>
-      {/* Top Marquee - Bigger, Blue */}
-      <PdpMarquee text="Subscribe and save 25% on each order" />
-
       {/* PDP Hero */}
-      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(24px,4vw,48px)] bg-base">
+      <section style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "clamp(24px,4vw,48px) clamp(18px,5vw,64px)", backgroundColor: "var(--base)" }}>
         <ProductHero formula={item} formulaKey={key} />
       </section>
 
-      {/* Tabs with Recommendations - Cure style */}
-      <section className="w-full bg-base pt-0 pb-[clamp(32px,4vw,48px)]">
-        <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
+      {/* Tabs with Recommendations */}
+      <section style={{ width: "100%", backgroundColor: "var(--base)", paddingBottom: "clamp(32px,4vw,48px)" }}>
+        <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "0 clamp(18px,5vw,64px)" }}>
           <PdpTabsWithRecommendations currentKey={key} />
         </div>
       </section>
@@ -94,44 +90,60 @@ export default async function ProductPage({
       {/* Ingredients Section */}
       <PdpIngredients formulaKey={key} />
 
-      {/* The feeling of good calm/focus/energy - NeuroGum style */}
-      <section className="w-full bg-base py-[clamp(40px,5vw,64px)]">
-        <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]">
+      {/* The feeling of good calm/focus/energy */}
+      <section style={{ width: "100%", backgroundColor: "var(--base)", padding: "clamp(40px,5vw,64px) 0" }}>
+        <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "0 clamp(18px,5vw,64px)" }}>
           {/* Section header */}
           <h2
-            className="text-center mb-8"
+            className="font-serif"
             style={{
-              fontFamily: GC,
-              fontWeight: 700,
+              fontWeight: 900,
               fontSize: "clamp(28px,4vw,52px)",
               lineHeight: 1.0,
-              color: "#000",
+              color: "var(--ink)",
+              textAlign: "center",
+              marginBottom: 32,
             }}
           >
             The feeling of good {key}.
           </h2>
 
-          {/* Benefit icons - 4 across like NeuroGum */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+          {/* Benefit icons - 4 across */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16, marginBottom: 40 }}>
             {feelingBenefits[key].map((benefit) => (
               <div
                 key={benefit.title}
-                className="flex flex-col items-center text-center gap-3 p-5 bg-base"
-                style={{ borderRadius: 24, border: "1.5px solid rgba(0,0,0,0.12)" }}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                  gap: 12,
+                  padding: 24,
+                  backgroundColor: "var(--base-light)",
+                  borderRadius: 20,
+                }}
               >
                 <div
-                  className="flex items-center justify-center w-12 h-12 rounded-full"
-                  style={{ backgroundColor: "#000" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: 48,
+                    height: 48,
+                    borderRadius: 9999,
+                    backgroundColor: "var(--charcoal)",
+                  }}
                 >
-                  <Icon name={benefit.icon} className="w-6 h-6 text-white" />
+                  <Icon name={benefit.icon} className="w-6 h-6 text-bone" />
                 </div>
                 <h3
                   style={{
                     fontFamily: GC,
                     fontWeight: 700,
-                    fontSize: 17,
-                    lineHeight: 1.15,
-                    color: "#000",
+                    fontSize: 16,
+                    lineHeight: 1.2,
+                    color: "var(--ink)",
                   }}
                 >
                   {benefit.title}
@@ -141,77 +153,95 @@ export default async function ProductPage({
           </div>
 
           {/* Graph section - two columns */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            {/* Left side - text */}
-            <div>
-              <p
-                className="mb-4"
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 500,
-                  fontSize: 19,
-                  lineHeight: 1.5,
-                  color: "rgba(0,0,0,0.65)",
-                }}
-              >
-                {key === "energy"
-                  ? "AVRO's ingredients are formulated to work better together. Delivering steady energy in a convenient stick pack format."
-                  : key === "focus"
-                    ? "AVRO's ingredients are formulated to work better together. Delivering steady focus in a convenient stick pack format."
-                    : "AVRO's ingredients are formulated to work better together. Delivering steady calm in a convenient stick pack format."}
-              </p>
-              <p
-                className="mb-6"
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 500,
-                  fontSize: 19,
-                  lineHeight: 1.5,
-                  color: "rgba(0,0,0,0.65)",
-                }}
-              >
-                {key === "energy"
-                  ? "Instead of energy that spikes and crashes, AVRO is designed to support a smoother, more sustained curve. No crash. No jitters. Just good energy."
-                  : key === "focus"
-                    ? "Instead of focus that fades, AVRO is designed to support a smoother, more sustained curve. No overstimulation. Just clear thinking."
-                    : "Instead of calm that makes you drowsy, AVRO is designed to support a smoother, more sustained baseline. No sedation. Just composure."}
-              </p>
-              <a
-                href="/science"
-                className="inline-flex items-center gap-3 transition-colors hover:bg-transparent hover:text-black"
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 700,
-                  fontSize: 16,
-                  minHeight: 48,
-                  padding: "0 28px",
-                  borderRadius: 999,
-                  backgroundColor: "var(--charcoal)",
-                  color: "var(--bone)",
-                  border: "2.5px solid var(--charcoal)",
-                }}
-              >
-                Learn how it works
-                <Icon name="arrowRight" className="w-5 h-5" />
-              </a>
-            </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 40, alignItems: "center" }}>
+            <style>{`
+              @media (min-width: 1024px) {
+                .pdp-graph-grid { grid-template-columns: 1fr 1fr !important; }
+              }
+            `}</style>
+            <div className="pdp-graph-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 40, alignItems: "center" }}>
+              {/* Left side - text */}
+              <div>
+                <p
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 400,
+                    fontSize: 18,
+                    lineHeight: 1.55,
+                    color: "var(--warm-gray)",
+                    marginBottom: 16,
+                  }}
+                >
+                  {key === "energy"
+                    ? "AVRO's ingredients are formulated to work better together. Delivering steady energy in a convenient stick pack format."
+                    : key === "focus"
+                      ? "AVRO's ingredients are formulated to work better together. Delivering steady focus in a convenient stick pack format."
+                      : "AVRO's ingredients are formulated to work better together. Delivering steady calm in a convenient stick pack format."}
+                </p>
+                <p
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 400,
+                    fontSize: 18,
+                    lineHeight: 1.55,
+                    color: "var(--warm-gray)",
+                    marginBottom: 24,
+                  }}
+                >
+                  {key === "energy"
+                    ? "Instead of energy that spikes and crashes, AVRO is designed to support a smoother, more sustained curve. No crash. No jitters. Just good energy."
+                    : key === "focus"
+                      ? "Instead of focus that fades, AVRO is designed to support a smoother, more sustained curve. No overstimulation. Just clear thinking."
+                      : "Instead of calm that makes you drowsy, AVRO is designed to support a smoother, more sustained baseline. No sedation. Just composure."}
+                </p>
+                <style>{`
+                  .pdp-learn-btn {
+                    transition: background-color 0.2s ease, color 0.2s ease;
+                  }
+                  .pdp-learn-btn:hover {
+                    background-color: transparent;
+                    color: var(--charcoal);
+                  }
+                `}</style>
+                <a
+                  href="/science"
+                  className="pdp-learn-btn"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 12,
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: 16,
+                    minHeight: 48,
+                    padding: "0 28px",
+                    borderRadius: 999,
+                    backgroundColor: "var(--charcoal)",
+                    color: "var(--bone)",
+                    border: "2px solid var(--charcoal)",
+                    textDecoration: "none",
+                  }}
+                >
+                  Learn how it works
+                  <Icon name="arrowRight" className="w-5 h-5" />
+                </a>
+              </div>
 
-            {/* Right side - graph */}
-            <div className="relative">
-              <div className="rounded-2xl p-5" style={{ backgroundColor: "#f2f2f2" }}>
+              {/* Right side - graph */}
+              <div style={{ padding: 24, backgroundColor: "var(--charcoal)", borderRadius: 24 }}>
                 {/* Graph */}
-                <div className="relative h-[180px] lg:h-[200px]">
+                <div style={{ position: "relative", height: 200 }}>
                   {/* Grid lines */}
-                  <div className="absolute inset-x-0 top-0 bottom-8 flex flex-col justify-between">
+                  <div style={{ position: "absolute", inset: "0 0 32px 0", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                     {[0, 1, 2, 3, 4].map((i) => (
-                      <div key={i} className="w-full" style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }} />
+                      <div key={i} style={{ width: "100%", borderTop: "1px solid rgba(245,241,234,0.1)" }} />
                     ))}
                   </div>
 
                   {/* SVG curves */}
                   <svg
                     viewBox="0 0 400 200"
-                    className="absolute inset-x-0 top-0 bottom-8 w-full h-[calc(100%-32px)]"
+                    style={{ position: "absolute", inset: "0 0 32px 0", width: "100%", height: "calc(100% - 32px)" }}
                     preserveAspectRatio="none"
                   >
                     <path
@@ -221,7 +251,7 @@ export default async function ProductPage({
                           : "M 0 100 Q 50 80 100 40 Q 150 70 200 90 Q 280 120 350 140 Q 380 150 400 160"
                       }
                       fill="none"
-                      stroke="#CCCCCC"
+                      stroke="rgba(245,241,234,0.4)"
                       strokeWidth="3"
                       strokeDasharray="8 6"
                     />
@@ -242,8 +272,18 @@ export default async function ProductPage({
 
                   {/* Time labels */}
                   <div
-                    className="absolute bottom-0 left-0 right-0 flex justify-between"
-                    style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "rgba(0,0,0,0.5)" }}
+                    style={{
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      fontFamily: GC,
+                      fontWeight: 700,
+                      fontSize: 12,
+                      color: "rgba(245,241,234,0.5)",
+                    }}
                   >
                     <span>0 min</span>
                     <span>30 min</span>
@@ -255,23 +295,33 @@ export default async function ProductPage({
 
                 {/* Legend */}
                 <div
-                  className="flex flex-wrap items-center justify-center gap-6 mt-4 pt-4"
-                  style={{ borderTop: "1px solid rgba(0,0,0,0.08)" }}
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 24,
+                    marginTop: 16,
+                    paddingTop: 16,
+                    borderTop: "1px solid rgba(245,241,234,0.15)",
+                  }}
                 >
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-1 rounded-full" style={{ backgroundColor: BLUE }} />
-                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 12, color: "#000" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <div style={{ width: 24, height: 4, borderRadius: 999, backgroundColor: BLUE }} />
+                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 12, color: "var(--bone)" }}>
                       AVRO {item.short}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <div
-                      className="w-6 h-1 rounded-full"
                       style={{
-                        backgroundImage: "repeating-linear-gradient(90deg, #CCC, #CCC 4px, transparent 4px, transparent 8px)",
+                        width: 24,
+                        height: 4,
+                        borderRadius: 999,
+                        backgroundImage: "repeating-linear-gradient(90deg, rgba(245,241,234,0.4), rgba(245,241,234,0.4) 4px, transparent 4px, transparent 8px)",
                       }}
                     />
-                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 12, color: "rgba(0,0,0,0.5)" }}>
+                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 12, color: "rgba(245,241,234,0.5)" }}>
                       {key === "energy" ? "Coffee" : "Typical Stress"}
                     </span>
                   </div>
@@ -282,74 +332,94 @@ export default async function ProductPage({
         </div>
       </section>
 
-      {/* Product Comparison Grid - "We put intention into every formula" */}
+      {/* Product Comparison Grid */}
       <ProductComparisonGrid currentKey={key} />
 
       {/* Your favorites. On repeat - Subscription CTA */}
-      <section className="w-full py-[clamp(36px,4vw,56px)]" style={{ backgroundColor: "#f2f2f2" }}>
-        <div className="w-full max-w-[900px] mx-auto px-[clamp(18px,5vw,64px)] text-center">
+      <section style={{ width: "100%", padding: "clamp(36px,4vw,56px) 0", backgroundColor: "var(--avro-blue)" }}>
+        <div style={{ width: "100%", maxWidth: 900, margin: "0 auto", padding: "0 clamp(18px,5vw,64px)", textAlign: "center" }}>
           <h2
-            className="mb-3"
+            className="font-serif"
             style={{
-              fontFamily: GC,
-              fontWeight: 700,
+              fontWeight: 900,
               fontSize: "clamp(26px,3.5vw,44px)",
               lineHeight: 1.05,
-              color: "#000",
+              color: "var(--charcoal)",
+              marginBottom: 12,
             }}
           >
             Your favorites. On repeat.
           </h2>
           <p
-            className="max-w-[500px] mx-auto mb-6"
             style={{
               fontFamily: GC,
               fontWeight: 400,
               fontSize: 17,
               lineHeight: 1.5,
-              color: "rgba(0,0,0,0.6)",
+              color: "var(--charcoal)",
+              opacity: 0.75,
+              maxWidth: 500,
+              margin: "0 auto 24px",
             }}
           >
             Save 25% when you subscribe. Pick your favorites, set your schedule. Leave the rest to us.
           </p>
+          <style>{`
+            .pdp-subscribe-btn {
+              transition: background-color 0.2s ease, color 0.2s ease;
+            }
+            .pdp-subscribe-btn:hover {
+              background-color: transparent;
+              color: var(--charcoal);
+            }
+          `}</style>
           <a
             href={`/${key}`}
-            className="inline-flex items-center gap-2 transition-colors hover:bg-transparent hover:text-black"
+            className="pdp-subscribe-btn"
             style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
               fontFamily: GC,
               fontWeight: 700,
               fontSize: 16,
               minHeight: 48,
               padding: "0 28px",
               borderRadius: 999,
-              backgroundColor: "#000",
-              color: "#fff",
-              border: "2.5px solid #000",
+              backgroundColor: "var(--charcoal)",
+              color: "var(--bone)",
+              border: "2px solid var(--charcoal)",
+              textDecoration: "none",
             }}
           >
-                Subscribe now
-                <Icon name="arrowRight" className="w-4 h-4" />
+            Subscribe now
+            <Icon name="arrowRight" className="w-4 h-4" />
           </a>
         </div>
       </section>
 
       {/* FAQ accordion */}
-      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(36px,4vw,56px)] bg-base">
-        <div className="grid grid-cols-1 lg:grid-cols-[0.7fr_1.3fr] gap-8 lg:gap-12 items-start">
+      <section style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "clamp(36px,4vw,56px) clamp(18px,5vw,64px)", backgroundColor: "var(--base)" }}>
+        <style>{`
+          @media (min-width: 1024px) {
+            .pdp-faq-grid { grid-template-columns: 0.7fr 1.3fr !important; }
+          }
+        `}</style>
+        <div className="pdp-faq-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 32, alignItems: "start" }}>
           <div>
             <h2
+              className="font-serif"
               style={{
-                fontFamily: GC,
-                fontWeight: 700,
+                fontWeight: 900,
                 fontSize: "clamp(26px,3.5vw,44px)",
                 lineHeight: 1.05,
-                color: "#000",
+                color: "var(--ink)",
               }}
             >
               Frequently asked, all answered.
             </h2>
           </div>
-          <div className="flex flex-col">
+          <div style={{ display: "flex", flexDirection: "column" }}>
             {[
               [
                 `What makes ${item.name} different from the original formula?`,
@@ -372,24 +442,52 @@ export default async function ProductPage({
             ].map(([q, a], i) => (
               <details
                 key={q}
-                className="group bg-base"
-                style={{ borderTop: i > 0 ? "1px solid rgba(0,0,0,0.08)" : "none" }}
+                className="group"
+                style={{ backgroundColor: "var(--base)", borderTop: i > 0 ? "1px solid var(--divider)" : "none" }}
               >
                 <summary
-                  className="flex items-center justify-between gap-4 py-4 cursor-pointer list-none select-none transition-colors"
-                  style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#000" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 16,
+                    padding: "16px 0",
+                    cursor: "pointer",
+                    listStyle: "none",
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: 17,
+                    color: "var(--ink)",
+                  }}
                 >
                   <span>{q}</span>
                   <span
-                    className="grid place-items-center w-8 h-8 rounded-full text-lg leading-none transition-all shrink-0"
-                    style={{ backgroundColor: "#000", color: "#fff" }}
+                    style={{
+                      display: "grid",
+                      placeItems: "center",
+                      width: 32,
+                      height: 32,
+                      borderRadius: 9999,
+                      fontSize: 18,
+                      lineHeight: 1,
+                      flexShrink: 0,
+                      backgroundColor: "var(--charcoal)",
+                      color: "var(--bone)",
+                    }}
                   >
                     <span className="transition-transform group-open:rotate-45">+</span>
                   </span>
                 </summary>
                 <p
-                  className="pb-4 pr-10 leading-relaxed"
-                  style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, color: "rgba(0,0,0,0.65)" }}
+                  style={{
+                    paddingBottom: 16,
+                    paddingRight: 40,
+                    fontFamily: GC,
+                    fontWeight: 400,
+                    fontSize: 16,
+                    lineHeight: 1.55,
+                    color: "var(--warm-gray)",
+                  }}
                 >
                   {a}
                 </p>
@@ -397,8 +495,17 @@ export default async function ProductPage({
             ))}
             <a
               href="/faq"
-              className="inline-flex items-center gap-2 mt-4 hover:underline"
-              style={{ fontFamily: GC, fontWeight: 700, fontSize: 15, color: "#000" }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                marginTop: 16,
+                fontFamily: GC,
+                fontWeight: 700,
+                fontSize: 15,
+                color: "var(--ink)",
+                textDecoration: "none",
+              }}
             >
               See more answers
               <Icon name="arrowRight" className="w-4 h-4" />
@@ -416,6 +523,7 @@ export default async function ProductPage({
       <FinalCta
         title="Good energy starts here."
         copy="Get easy lifestyle tips, wellness inspo, plus early access to AVRO launches and offers."
+        productButtons
       />
     </>
   )

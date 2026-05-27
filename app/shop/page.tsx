@@ -1,8 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import {
-  Section,
-  SectionHeading,
   SocialProof,
   ProductCards,
   FaqBlock,
@@ -14,134 +12,225 @@ export const metadata = {
   description: "Choose your AVRO formula. Three formulas. One calm-first foundation.",
 }
 
+const GC = '"DM Sans", system-ui, sans-serif'
+
 export default function ShopPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)] items-center w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(42px,8vw,86px)] bg-[radial-gradient(circle_at_22%_28%,rgba(255,255,255,0.8),transparent_28%),linear-gradient(105deg,#fffdf8_0%,#f4efe5_100%)] border-b border-line">
-        <div className="max-w-[620px]">
-          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
-            Choose your AVRO formula.
-          </h1>
-          <p className="max-w-[560px] text-ink/80 text-[clamp(17px,2vw,20px)] leading-relaxed">
-            Three formulas. One calm-first foundation. Start with the state
-            that fits your moment.
-          </p>
-          <div className="flex flex-wrap items-center gap-3 mt-6.5">
-            <style>{`
-              .btn-formula-calm {
-                border: 2px solid var(--calm);
-                background-color: var(--calm);
-                color: var(--calm-deep);
-              }
-              .btn-formula-calm:hover {
-                background-color: transparent;
-                color: var(--calm);
-              }
-              .btn-formula-focus {
-                border: 2px solid var(--focus);
-                background-color: var(--focus);
-                color: var(--focus-deep);
-              }
-              .btn-formula-focus:hover {
-                background-color: transparent;
-                color: var(--focus);
-              }
-              .btn-formula-energy {
-                border: 2px solid var(--energy);
-                background-color: var(--energy);
-                color: var(--energy-deep);
-              }
-              .btn-formula-energy:hover {
-                background-color: transparent;
-                color: var(--energy);
-              }
-            `}</style>
-            <Link
-              href="/calm"
-              className="btn-formula-calm inline-flex items-center justify-center min-h-[52px] px-8 rounded-full font-bold text-[16px] transition-all duration-200"
-            >
-              Shop Calm
-            </Link>
-            <Link
-              href="/focus"
-              className="btn-formula-focus inline-flex items-center justify-center min-h-[52px] px-8 rounded-full font-bold text-[16px] transition-all duration-200"
-            >
-              Shop Focus
-            </Link>
-            <Link
-              href="/energy"
-              className="btn-formula-energy inline-flex items-center justify-center min-h-[52px] px-8 rounded-full font-bold text-[16px] transition-all duration-200"
-            >
-              Shop Energy
-            </Link>
-          </div>
-        </div>
-        <div className="relative aspect-[3/2] w-full max-w-[620px] justify-self-center overflow-hidden rounded-2xl border border-line shadow-[0_30px_60px_-30px_rgba(20,18,12,0.35)]">
+      {/* Hero — mirrors homepage faded-image style */}
+      <section
+        style={{
+          width: "100%",
+          backgroundColor: "var(--base)",
+          padding: "clamp(24px,5vw,64px) clamp(20px,5vw,64px) clamp(48px,6vw,80px)",
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            maxWidth: 1320,
+            margin: "0 auto",
+            borderRadius: 28,
+            overflow: "hidden",
+            backgroundColor: "var(--base-light)",
+            minHeight: "clamp(480px,60vh,640px)",
+          }}
+        >
+          {/* Background image */}
           <Image
             src="/images/lifestyle/avro-trio-stone-hero.png"
             alt="AVRO Calm, Focus, and Energy tubes arranged on a stone slab with soft botanicals"
             fill
-            sizes="(min-width: 1024px) 620px, 90vw"
-            className="object-cover"
+            sizes="(min-width: 1024px) 1320px, 100vw"
+            className="object-cover object-[70%_center]"
             priority
           />
+
+          {/* Gradient fade — left-heavy so text reads clearly */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: `
+                linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.95) 48%, rgba(245,241,234,0.7) 58%, rgba(245,241,234,0.3) 70%, rgba(245,241,234,0.1) 82%, rgba(245,241,234,0.15) 94%, var(--base-light) 100%),
+                linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.2) 10%, rgba(245,241,234,0) 20%, rgba(245,241,234,0) 80%, rgba(245,241,234,0.2) 90%, var(--base-light) 100%)
+              `,
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* Content */}
+          <div
+            style={{
+              position: "relative",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              alignItems: "center",
+              padding: "clamp(48px,7vw,80px) clamp(32px,5vw,64px)",
+              minHeight: "inherit",
+            }}
+          >
+            <div style={{ maxWidth: 580 }}>
+              <h1
+                className="font-serif"
+                style={{
+                  fontWeight: 900,
+                  fontSize: "clamp(42px,6vw,72px)",
+                  lineHeight: 0.98,
+                  letterSpacing: "-0.025em",
+                  color: "var(--ink)",
+                  marginBottom: 20,
+                }}
+              >
+                Choose your AVRO formula.
+              </h1>
+              <p
+                style={{
+                  fontFamily: GC,
+                  fontWeight: 400,
+                  fontSize: "clamp(17px,2vw,20px)",
+                  lineHeight: 1.55,
+                  color: "var(--warm-gray)",
+                  maxWidth: 480,
+                  marginBottom: 28,
+                }}
+              >
+                Three formulas. One calm-first foundation. Start with the state that fits your moment.
+              </p>
+
+              {/* CTA buttons — formula colors */}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+                <style>{`
+                  .shop-btn-calm {
+                    border: 2px solid var(--calm);
+                    background-color: var(--calm);
+                    color: #2D1B4E;
+                    transition: background-color 0.2s ease, color 0.2s ease;
+                  }
+                  .shop-btn-calm:hover {
+                    background-color: transparent;
+                    color: var(--calm);
+                  }
+                  .shop-btn-focus {
+                    border: 2px solid var(--focus);
+                    background-color: var(--focus);
+                    color: #4A0A2E;
+                    transition: background-color 0.2s ease, color 0.2s ease;
+                  }
+                  .shop-btn-focus:hover {
+                    background-color: transparent;
+                    color: var(--focus);
+                  }
+                  .shop-btn-energy {
+                    border: 2px solid var(--energy);
+                    background-color: var(--energy);
+                    color: #4A3D00;
+                    transition: background-color 0.2s ease, color 0.2s ease;
+                  }
+                  .shop-btn-energy:hover {
+                    background-color: transparent;
+                    color: var(--energy);
+                  }
+                `}</style>
+                <Link
+                  href="/calm"
+                  className="shop-btn-calm"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: 16,
+                    minHeight: 48,
+                    padding: "0 32px",
+                    borderRadius: 999,
+                    textDecoration: "none",
+                  }}
+                >
+                  Shop Calm
+                </Link>
+                <Link
+                  href="/focus"
+                  className="shop-btn-focus"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: 16,
+                    minHeight: 48,
+                    padding: "0 32px",
+                    borderRadius: 999,
+                    textDecoration: "none",
+                  }}
+                >
+                  Shop Focus
+                </Link>
+                <Link
+                  href="/energy"
+                  className="shop-btn-energy"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: 16,
+                    minHeight: 48,
+                    padding: "0 32px",
+                    borderRadius: 999,
+                    textDecoration: "none",
+                  }}
+                >
+                  Shop Energy
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       <ProductCards title="Three formulas. One foundation." shopLabel="Shop" />
 
-      {/* Compare Table - Redesigned */}
-      <section className="w-full py-[clamp(48px,6vw,80px)]" style={{ backgroundColor: "var(--avro-blue)" }}>
-        <div className="w-full max-w-[1280px] mx-auto px-[clamp(18px,5vw,64px)]">
+      {/* Compare Table — charcoal + Avro Blue header */}
+      <section style={{ width: "100%", padding: "clamp(48px,6vw,80px) clamp(20px,5vw,64px)", backgroundColor: "var(--charcoal)" }}>
+        <div style={{ maxWidth: 1250, margin: "0 auto" }}>
           <h2
-            className="text-center mb-10"
+            className="font-serif"
             style={{
-              fontFamily: '"DM Sans", system-ui, sans-serif',
-              fontWeight: 700,
+              fontWeight: 900,
               fontSize: "clamp(32px,4.5vw,52px)",
               lineHeight: 1.02,
               letterSpacing: "-0.02em",
-              color: "var(--charcoal)",
+              color: "var(--bone)",
+              textAlign: "center",
+              marginBottom: 40,
             }}
           >
             Compare at a glance
           </h2>
 
           <div
-            className="overflow-hidden"
             style={{
               backgroundColor: "var(--base)",
               borderRadius: 24,
-              boxShadow: "0 8px 40px -12px rgba(0,0,0,0.12)",
+              overflow: "hidden",
             }}
           >
-            {/* Header row with colored backgrounds */}
-            <div className="grid grid-cols-1 sm:grid-cols-4">
-              <div className="min-h-[72px] p-5 flex items-center" style={{ backgroundColor: "var(--base-light)" }} />
-              <div
-                className="min-h-[72px] p-5 flex items-center justify-center"
-                style={{ backgroundColor: "var(--calm)" }}
-              >
-                <span style={{ fontFamily: '"DM Sans"', fontWeight: 700, fontSize: 20, color: "var(--calm-deep)" }}>
-                  Calm
-                </span>
+            {/* Header row */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
+              <div style={{ minHeight: 64, padding: 20, backgroundColor: "var(--base-light)" }} />
+              <div style={{ minHeight: 64, padding: 20, display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--calm)" }}>
+                <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#2D1B4E" }}>Calm</span>
               </div>
-              <div
-                className="min-h-[72px] p-5 flex items-center justify-center"
-                style={{ backgroundColor: "var(--focus)" }}
-              >
-                <span style={{ fontFamily: '"DM Sans"', fontWeight: 700, fontSize: 20, color: "var(--focus-deep)" }}>
-                  Focus
-                </span>
+              <div style={{ minHeight: 64, padding: 20, display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--focus)" }}>
+                <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#4A0A2E" }}>Focus</span>
               </div>
-              <div
-                className="min-h-[72px] p-5 flex items-center justify-center"
-                style={{ backgroundColor: "var(--energy)" }}
-              >
-                <span style={{ fontFamily: '"DM Sans"', fontWeight: 700, fontSize: 20, color: "var(--energy-deep)" }}>
-                  Energy
-                </span>
+              <div style={{ minHeight: 64, padding: 20, display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--energy)" }}>
+                <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#4A3D00" }}>Energy</span>
               </div>
             </div>
 
@@ -151,87 +240,58 @@ export default function ShopPage() {
               { label: "Best for", calm: "Travel, social calm, daily reset", focus: "Deep work, meetings, study", energy: "Mornings, long days, travel" },
               { label: "Caffeine", calm: "No", focus: "No", energy: "Yes, 120 mg natural" },
               { label: "Key addition", calm: "Magnesium Bisglycinate", focus: "Cognigrape®", energy: "Natural caffeine" },
-            ].map((row, i, arr) => (
+            ].map((row) => (
               <div
                 key={row.label}
-                className="grid grid-cols-1 sm:grid-cols-4"
-                style={{ borderTop: "1px solid rgba(28,27,20,0.08)" }}
+                style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", borderTop: "1px solid var(--divider)" }}
               >
-                <div
-                  className="min-h-[64px] p-5 flex items-center"
-                  style={{ backgroundColor: "var(--base-light)" }}
-                >
-                  <span style={{ fontFamily: '"DM Sans"', fontWeight: 700, fontSize: 15, color: "var(--charcoal)" }}>
-                    {row.label}
-                  </span>
+                <div style={{ minHeight: 56, padding: "16px 20px", display: "flex", alignItems: "center", backgroundColor: "var(--base-light)" }}>
+                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--ink)" }}>{row.label}</span>
                 </div>
-                <div
-                  className="min-h-[64px] p-5 flex items-center justify-center text-center"
-                  style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}
-                >
-                  <span style={{ fontFamily: '"DM Sans"', fontWeight: 500, fontSize: 15, color: "var(--ink)" }}>
-                    {row.calm}
-                  </span>
+                <div style={{ minHeight: 56, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", borderLeft: "1px solid var(--divider)" }}>
+                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "var(--warm-gray)" }}>{row.calm}</span>
                 </div>
-                <div
-                  className="min-h-[64px] p-5 flex items-center justify-center text-center"
-                  style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}
-                >
-                  <span style={{ fontFamily: '"DM Sans"', fontWeight: 500, fontSize: 15, color: "var(--ink)" }}>
-                    {row.focus}
-                  </span>
+                <div style={{ minHeight: 56, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", borderLeft: "1px solid var(--divider)" }}>
+                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "var(--warm-gray)" }}>{row.focus}</span>
                 </div>
-                <div
-                  className="min-h-[64px] p-5 flex items-center justify-center text-center"
-                  style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}
-                >
-                  <span style={{ fontFamily: '"DM Sans"', fontWeight: 500, fontSize: 15, color: "var(--ink)" }}>
-                    {row.energy}
-                  </span>
+                <div style={{ minHeight: 56, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", borderLeft: "1px solid var(--divider)" }}>
+                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "var(--warm-gray)" }}>{row.energy}</span>
                 </div>
               </div>
             ))}
 
             {/* CTA row */}
             <style>{`
-              .compare-btn {
+              .compare-cta {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 700;
+                font-size: 14px;
+                min-height: 44px;
+                padding: 0 28px;
+                border-radius: 999px;
+                text-decoration: none;
+                border: 2px solid var(--charcoal);
                 background-color: var(--charcoal);
                 color: var(--bone);
-                border: 2px solid var(--charcoal);
+                transition: background-color 0.2s ease, color 0.2s ease;
               }
-              .compare-btn:hover {
+              .compare-cta:hover {
                 background-color: transparent;
                 color: var(--charcoal);
               }
             `}</style>
-            <div
-              className="grid grid-cols-1 sm:grid-cols-4"
-              style={{ borderTop: "1px solid rgba(28,27,20,0.08)" }}
-            >
-              <div className="min-h-[80px] p-5 flex items-center" style={{ backgroundColor: "var(--base-light)" }} />
-              <div className="min-h-[80px] p-4 flex items-center justify-center" style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}>
-                <Link
-                  href="/calm"
-                  className="compare-btn inline-flex items-center justify-center px-10 py-4 rounded-full font-bold text-[16px] transition-all duration-200"
-                >
-                  Shop Calm
-                </Link>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", borderTop: "1px solid var(--divider)" }}>
+              <div style={{ minHeight: 72, padding: 16, backgroundColor: "var(--base-light)" }} />
+              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center", borderLeft: "1px solid var(--divider)" }}>
+                <Link href="/calm" className="compare-cta" style={{ fontFamily: GC }}>Shop Calm</Link>
               </div>
-              <div className="min-h-[80px] p-4 flex items-center justify-center" style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}>
-                <Link
-                  href="/focus"
-                  className="compare-btn inline-flex items-center justify-center px-10 py-4 rounded-full font-bold text-[16px] transition-all duration-200"
-                >
-                  Shop Focus
-                </Link>
+              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center", borderLeft: "1px solid var(--divider)" }}>
+                <Link href="/focus" className="compare-cta" style={{ fontFamily: GC }}>Shop Focus</Link>
               </div>
-              <div className="min-h-[80px] p-4 flex items-center justify-center" style={{ borderLeft: "1px solid rgba(28,27,20,0.06)" }}>
-                <Link
-                  href="/energy"
-                  className="compare-btn inline-flex items-center justify-center px-10 py-4 rounded-full font-bold text-[16px] transition-all duration-200"
-                >
-                  Shop Energy
-                </Link>
+              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center", borderLeft: "1px solid var(--divider)" }}>
+                <Link href="/energy" className="compare-cta" style={{ fontFamily: GC }}>Shop Energy</Link>
               </div>
             </div>
           </div>
@@ -261,6 +321,7 @@ export default function ShopPage() {
       <FinalCta
         title="Find your formula. Show up ready."
         copy="Choose your formula and start your calm-first routine today."
+        productButtons
       />
     </>
   )
