@@ -672,16 +672,16 @@ export function HomeLogicRow() {
               ))}
             </div>
 
-            {/* Comparison table — solid two-column with clear winning side */}
-            <div style={{ borderRadius: 24, overflow: "hidden", border: "2px solid var(--charcoal)", backgroundColor: "var(--bone)" }}>
+            {/* Comparison table — each column uses two solid contrasting colors */}
+            <div style={{ borderRadius: 24, overflow: "hidden", border: "2px solid var(--charcoal)" }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-                <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: BLUE, backgroundColor: "var(--charcoal)", textAlign: "center", letterSpacing: "0.02em" }}>Stimulant First</div>
-                <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--ink)", backgroundColor: BLUE, textAlign: "center", letterSpacing: "0.02em" }}>Calm First</div>
+                <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--warm-gray)", backgroundColor: "var(--charcoal)", textAlign: "center", letterSpacing: "0.02em" }}>Stimulant First</div>
+                <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--charcoal)", backgroundColor: BLUE, textAlign: "center", letterSpacing: "0.02em" }}>Calm First</div>
               </div>
-              {comparisonRows.map(([left, right], idx) => (
+              {comparisonRows.map(([left, right]) => (
                 <div key={left} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderTop: "2px solid var(--charcoal)" }}>
-                  <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--warm-gray)", backgroundColor: "var(--bone)", textAlign: "center" }}>{left}</div>
-                  <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--ink)", backgroundColor: "var(--base-light)", textAlign: "center", borderLeft: "2px solid var(--charcoal)" }}>{right}</div>
+                  <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--charcoal)", backgroundColor: "var(--warm-gray)", textAlign: "center" }}>{left}</div>
+                  <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: BLUE, backgroundColor: "var(--charcoal)", textAlign: "center", borderLeft: "2px solid var(--charcoal)" }}>{right}</div>
                 </div>
               ))}
             </div>
@@ -949,7 +949,7 @@ export function HomeStoryStrip() {
   )
 }
 
-// ── RITUAL SECTION ────────────────────────────────────────────────────────────
+// ── RITUAL SECTION ──────────────────────────────��─────────────────────────────
 export function HomeRitualSection() {
   const [openStep, setOpenStep] = useState<number | null>(null)
   
