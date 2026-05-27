@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import {
-  CardedSection,
+  Section,
   SectionHeading,
   SocialProof,
   FinalCta,
@@ -163,11 +163,11 @@ export default function FaqPage() {
   return (
     <>
       <PageHero
+        variant="flat"
         title="How can we help?"
         lede="Find answers about AVRO formulas, ingredients, timing, caffeine, subscriptions, shipping, and how to choose the right product."
-        imageSrc="/images/lifestyle/avro-trio-stone-hero.png"
-        imageAlt="AVRO Calm, Focus, and Energy tubes arranged on a stone slab"
-        imageObjectPosition="75% center"
+        imageSrc=""
+        imageAlt=""
         primaryCta={{ href: "/shop", label: "Shop AVRO" }}
         secondaryCta={{ href: "/contact", label: "Contact Us" }}
         compact
@@ -196,7 +196,7 @@ export default function FaqPage() {
       </PageHero>
 
       {filtered.map((category) => (
-        <CardedSection key={category.slug} id={category.slug}>
+        <Section key={category.slug} id={category.slug}>
           <SectionHeading title={category.name} centered={false} />
           <div className="grid gap-2 w-full">
             {category.faqs.map(([question, answer]) => (
@@ -211,7 +211,7 @@ export default function FaqPage() {
               </details>
             ))}
           </div>
-        </CardedSection>
+        </Section>
       ))}
 
       <SocialProof mode="compact" />

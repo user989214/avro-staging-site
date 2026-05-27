@@ -1,5 +1,5 @@
 import {
-  CardedSection,
+  Section,
   SectionHeading,
   SocialProof,
   ProductCards,
@@ -20,15 +20,15 @@ export default function SciencePage() {
   return (
     <>
       <PageHero
+        variant="flat"
         title="Calm first. Backed by science."
         lede="Every AVRO formula starts with naturally fermented PharmaGABA®, selected to support calm-first readiness, composure, and clarity before pressure-sensitive moments."
-        imageSrc="/images/science/fermentation-lab.jpg"
-        imageAlt="Naturally fermented PharmaGABA® in a quiet lab setting"
-        imageObjectPosition="65% center"
+        imageSrc=""
+        imageAlt=""
         primaryCta={{ href: "/shop", label: "Shop AVRO" }}
         secondaryCta={{ href: "#research", label: "View Research" }}
       >
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2 max-w-[560px]">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2 max-w-[640px]">
           <span className="flex items-center gap-2 text-olive-dark text-[12px] font-extrabold">
             <Icon name="leaf" className="w-6 h-6 text-olive shrink-0" />
             Naturally Fermented PharmaGABA®
@@ -44,7 +44,7 @@ export default function SciencePage() {
         </div>
       </PageHero>
 
-      <CardedSection>
+      <Section>
         <SectionHeading
           eyebrow="Why calm comes first"
           title="Calm is the foundation."
@@ -63,9 +63,9 @@ export default function SciencePage() {
             moments.
           </InfoCard>
         </div>
-      </CardedSection>
+      </Section>
 
-      <CardedSection id="research">
+      <Section id="research">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)]">
           <div>
             <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
@@ -107,7 +107,7 @@ export default function SciencePage() {
             </div>
           </div>
         </div>
-      </CardedSection>
+      </Section>
 
       <FormulaLogic />
       <ProductCards title="Three formulas. One foundation." shopLabel="Shop" />

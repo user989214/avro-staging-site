@@ -17,12 +17,23 @@ export interface PageHeroProps {
   children?: ReactNode
   /** Tighter hero (used for FAQ-style search heroes). */
   compact?: boolean
+  /**
+   * Visual variant.
+   * - `card` (default): rounded `--base-light` panel with image inside, CTAs below.
+   *   Used on Shop and other "headline + product image" hero pages.
+   * - `flat`: full-width, no rounded card, no panel fill. The page's `--base` background
+   *   shows through with a slightly darker tone-on-tone fade for definition. Used on
+   *   informational pages (Science, Ingredients, FAQ).
+   */
+  variant?: "card" | "flat"
 }
 
 /**
- * Shared "docked" page hero used across Shop, Science, and FAQ.
- * Matches the homepage HomeRefHero treatment: rounded card with edge-fading image
- * on the right side, headline + lede + CTAs on the left.
+ * Shared "docked" page hero.
+ * - `card` variant matches the homepage HomeRefHero treatment: rounded card with
+ *   edge-fading image on the right, headline + lede + CTAs on the left.
+ * - `flat` variant is a clean, simplistic full-width hero used for pages that don't
+ *   need the carded product treatment.
  */
 export function PageHero({
   title,
@@ -34,7 +45,12 @@ export function PageHero({
   secondaryCta,
   children,
   compact = false,
+  variant = "card",
 }: PageHeroProps) {
+  if (variant === "flat") {
+    return <FlatHero {...{ title, lede, primaryCta, secondaryCta, children, compact }} />
+  }
+
   const minH = compact
     ? "clamp(420px, 52vh, 540px)"
     : "clamp(520px, 62vh, 660px)"
@@ -202,6 +218,148 @@ export function PageHero({
 
           <div aria-hidden="true" />
         </div>
+      </div>
+    </section>
+  )
+}
+
+/**
+ * Flat full-width hero — used for Science / Ingredients / FAQ.
+ * No rounded card, no image. Just paper background with a tone-on-tone fade
+ * underneath and a centered headline + lede + (optional) CTAs.
+ */
+function FlatHero({
+  title,
+  lede,
+  primaryCta,
+  secondaryCta,
+  children,
+  compact,
+}: Omit<PageHeroProps, "imageSrc" | "imageAlt" | "imageObjectPosition" | "variant">) {
+  return (
+    <section
+      style={{
+        position: "relative",
+        width: "100%",
+        backgroundColor: "var(--base)",
+        color: "var(--ink)",
+        padding: compact
+          ? "clamp(56px,9vw,112px) clamp(20px,5vw,64px) clamp(40px,6vw,72px)"
+          : "clamp(72px,11vw,144px) clamp(20px,5vw,64px) clamp(56px,7vw,96px)",
+        overflow: "hidden",
+      }}
+    >
+      {/* Slightly darker tone-on-tone fade — gives the flat hero subtle depth without a card */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: `
+            radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.045) 0%, rgba(0,0,0,0) 55%),
+            linear-gradient(to bottom, rgba(0,0,0,0.025) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.04) 100%)
+          `,
+          pointerEvents: "none",
+        }}
+      />
+
+      <style>{`
+        .fh-pill-primary, .fh-pill-secondary {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-family: ${GC};
+          font-weight: 700;
+          font-size: 16px;
+          letter-spacing: -0.005em;
+          min-height: 48px;
+          padding: 0 28px;
+          border-radius: 999px;
+          text-decoration: none;
+          background-color: var(--charcoal);
+          color: var(--bone);
+          border: 2px solid var(--charcoal);
+          transition: background-color .2s ease, color .2s ease;
+        }
+        .fh-pill-secondary {
+          background-color: transparent;
+          color: var(--charcoal);
+        }
+        .fh-pill-primary:hover {
+          background-color: transparent;
+          color: var(--charcoal);
+        }
+        .fh-pill-secondary:hover {
+          background-color: var(--charcoal);
+          color: var(--bone);
+        }
+        .fh-pill-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-top: 28px;
+        }
+        @media (max-width: 640px) {
+          .fh-pill-row { flex-direction: column; align-items: stretch; max-width: 320px; }
+          .fh-pill-primary, .fh-pill-secondary { width: 100%; }
+        }
+      `}</style>
+
+      <div
+        style={{
+          position: "relative",
+          maxWidth: 980,
+          margin: "0 auto",
+          textAlign: "left",
+        }}
+      >
+        <h1
+          style={{
+            fontFamily: GC,
+            fontSize: compact
+              ? "clamp(36px,5vw,60px)"
+              : "clamp(40px,6vw,72px)",
+            lineHeight: 1.02,
+            letterSpacing: "-0.03em",
+            color: "var(--ink)",
+            marginBottom: 20,
+            fontWeight: 700,
+            maxWidth: 820,
+          }}
+        >
+          {title}
+        </h1>
+
+        <p
+          style={{
+            fontFamily: GC,
+            fontWeight: 400,
+            fontSize: "clamp(17px,1.5vw,20px)",
+            lineHeight: 1.55,
+            color: "var(--warm-gray)",
+            maxWidth: 640,
+            marginBottom: 0,
+          }}
+        >
+          {lede}
+        </p>
+
+        {children && <div style={{ marginTop: 24 }}>{children}</div>}
+
+        {(primaryCta || secondaryCta) && (
+          <div className="fh-pill-row">
+            {primaryCta && (
+              <Link href={primaryCta.href} className="fh-pill-primary">
+                {primaryCta.label}
+              </Link>
+            )}
+            {secondaryCta && (
+              <Link href={secondaryCta.href} className="fh-pill-secondary">
+                {secondaryCta.label}
+              </Link>
+            )}
+          </div>
+        )}
       </div>
     </section>
   )
