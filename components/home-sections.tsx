@@ -41,6 +41,13 @@ export function HomeRefHero() {
           background-color: transparent;
           color: var(--charcoal);
         }
+        .hp-btn-black {
+          transition: background-color .2s ease, color .2s ease;
+        }
+        .hp-btn-black:hover {
+          background-color: transparent !important;
+          color: var(--charcoal) !important;
+        }
         .moment-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
         .moment-card:hover { transform: translateY(-3px); }
         .moment-card img { transition: transform 0.5s ease; }
@@ -463,8 +470,8 @@ export function HomeStoryStrip() {
             AVRO was built by Keigo Sugawara and Peter van Stolk for people who wanted a better option before the moments that matter. Every formula is backed by research and designed for real routines.
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <a href="/why-avro" className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 999, textDecoration: "none" }}>Our Story</a>
-            <a href="/science" className="hp-btn-outline-black" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 999, textDecoration: "none" }}>The Science</a>
+            <a href="/why-avro" className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 999, textDecoration: "none", border: "2px solid var(--charcoal)", backgroundColor: "var(--charcoal)", color: "var(--bone)" }}>Our Story</a>
+            <a href="/science" className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 999, textDecoration: "none", border: "2px solid var(--charcoal)", backgroundColor: "var(--charcoal)", color: "var(--bone)" }}>The Science</a>
           </div>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "38% 62%", minHeight: 360 }}>
