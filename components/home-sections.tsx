@@ -1099,7 +1099,7 @@ export function HomeMomentGrid() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
           {moments.map((m) => (
             <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 24, overflow: "hidden", backgroundColor: "var(--base-light)", padding: 16 }}>
-              <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
+              <div style={{ position: "relative", aspectRatio: "4/5", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={m.image} alt={m.alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
               </div>
@@ -1210,7 +1210,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ──────────────��───────��─────────────────────��───���──────────������──
+// ── STORY STRIP ──────────────��───────��─────────────────────��───����──────────������──
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
