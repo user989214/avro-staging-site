@@ -96,16 +96,71 @@ function FormulaGraph() {
 
 // ── HERO ──────────────────────────────────────────────────────────────────────
 export function HomeRefHero() {
+  const [progress, setProgress] = useState(0) // 0 = full-bleed, 1 = docked
+
+  useEffect(() => {
+    let raf = 0
+    const onScroll = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        const y = window.scrollY
+        const max = 320 // px of scroll to fully dock
+        const p = Math.max(0, Math.min(1, y / max))
+        setProgress(p)
+      })
+    }
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
+
+  // Lerp helpers
+  const lerp = (a: number, b: number, t: number) => a + (b - a) * t
+
+  // Section outer padding goes from 0 → normal as you scroll
+  const sectionPadX = lerp(0, 64, progress) // px (max ~64px on desktop)
+  const sectionPadTop = lerp(0, 96, progress)
+  const sectionPadBottom = lerp(0, 80, progress)
+  // Container border radius goes from 0 → 28 as you scroll
+  const radius = lerp(0, 28, progress)
+  // Image scale (subtle zoom-out → in)
+  const imgScale = lerp(1.04, 1.0, progress)
+
   return (
     <section
       style={{
         width: "100%",
         backgroundColor: "var(--base)",
         color: "var(--ink)",
-        padding: "clamp(48px,7vw,96px) clamp(20px,5vw,64px) clamp(48px,6vw,80px)",
+        paddingLeft: `clamp(${lerp(0, 20, progress)}px, ${5 * progress}vw, ${sectionPadX}px)`,
+        paddingRight: `clamp(${lerp(0, 20, progress)}px, ${5 * progress}vw, ${sectionPadX}px)`,
+        paddingTop: `clamp(${lerp(0, 48, progress)}px, ${7 * progress}vw, ${sectionPadTop}px)`,
+        paddingBottom: `clamp(${lerp(0, 48, progress)}px, ${6 * progress}vw, ${sectionPadBottom}px)`,
+        transition: "padding 0.05s linear",
       }}
     >
       <style>{`
+        @keyframes hp-rise {
+          0% { opacity: 0; transform: translateY(28px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes hp-fade {
+          0% { opacity: 0; transform: translateY(12px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .hp-line { display: block; opacity: 0; transform: translateY(28px); animation: hp-rise 0.9s cubic-bezier(0.22,1,0.36,1) forwards; }
+        .hp-line-1 { animation-delay: 0.10s; }
+        .hp-line-2 { animation-delay: 0.40s; }
+        .hp-line-3 { animation-delay: 0.70s; }
+        .hp-fade-in { opacity: 0; animation: hp-fade 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
+        .hp-lede { animation-delay: 1.15s; }
+        .hp-cta-row { animation-delay: 1.55s; }
+        @media (prefers-reduced-motion: reduce) {
+          .hp-line, .hp-fade-in { animation: none !important; opacity: 1 !important; transform: none !important; }
+        }
         .hp-pill-primary, .hp-pill-secondary {
           flex: 1 1 180px;
           min-width: 180px;
@@ -188,10 +243,11 @@ export function HomeRefHero() {
           position: "relative",
           maxWidth: 1320,
           margin: "0 auto",
-          borderRadius: 28,
+          borderRadius: radius,
           overflow: "hidden",
           backgroundColor: "var(--base-light)",
           minHeight: "clamp(520px, 62vw, 720px)",
+          transition: "border-radius 0.05s linear",
         }}
       >
         {/* Background image — full container */}
@@ -207,6 +263,9 @@ export function HomeRefHero() {
             height: "100%",
             objectFit: "cover",
             objectPosition: "70% center",
+            transform: `scale(${imgScale})`,
+            transformOrigin: "center",
+            transition: "transform 0.05s linear",
           }}
         />
 
@@ -251,15 +310,14 @@ export function HomeRefHero() {
               fontWeight: 700,
             }}
           >
-            Calm first.
-            <br />
-            Clear headed.
-            <br />
-            Ready when pressure rises.
+            <span className="hp-line hp-line-1">Calm first.</span>
+            <span className="hp-line hp-line-2">Clear headed.</span>
+            <span className="hp-line hp-line-3">Ready when pressure rises.</span>
           </h1>
 
           {/* Lede — DM Sans, body LG */}
           <p
+            className="hp-fade-in hp-lede"
             style={{
               fontFamily: GC,
               fontWeight: 400,
@@ -274,7 +332,7 @@ export function HomeRefHero() {
             so you can show up calm, clear, and ready for what matters.
           </p>
 
-          <div className="hp-pill-row" style={{ display: "flex", flexWrap: "wrap", gap: 12, maxWidth: 520 }}>
+          <div className="hp-pill-row hp-fade-in hp-cta-row" style={{ display: "flex", flexWrap: "wrap", gap: 12, maxWidth: 520 }}>
             <a
               href="/shop"
               className="hp-pill-primary"
