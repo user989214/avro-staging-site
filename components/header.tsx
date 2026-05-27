@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useCart } from "@/lib/cart-context"
 import { Plus, X } from "lucide-react"
 
@@ -47,6 +47,19 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const openDropdown = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current)
+      closeTimer.current = null
+    }
+    setDropdownOpen(true)
+  }
+  const scheduleClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current)
+    closeTimer.current = setTimeout(() => setDropdownOpen(false), 180)
+  }
   const { openCart, itemCount } = useCart()
 
   useEffect(() => {
@@ -103,6 +116,7 @@ export function Header() {
         }`}
         style={{ backgroundColor: "var(--base)" }}
         aria-label="Primary navigation"
+        onMouseLeave={scheduleClose}
       >
         {/* Mobile menu button */}
         <button
@@ -120,8 +134,7 @@ export function Header() {
           <NavLink href="/shop">Shop</NavLink>
           <NavLink href="/shop">Subscribe</NavLink>
           <div
-            onMouseEnter={() => setDropdownOpen(true)}
-            onMouseLeave={() => setDropdownOpen(false)}
+            onMouseEnter={openDropdown}
           >
             <button className="relative text-[15px] font-bold tracking-[0.08em] uppercase transition-colors hover:opacity-70 flex items-center gap-1" style={{ color: "var(--ink)" }}>
               Why AVRO
@@ -194,8 +207,8 @@ export function Header() {
       {/* Why AVRO dropdown panel — full-width, square, simple title + button rows */}
       <div
         className="hidden md:block fixed left-0 right-0 z-40 pointer-events-none"
-        onMouseEnter={() => setDropdownOpen(true)}
-        onMouseLeave={() => setDropdownOpen(false)}
+        onMouseEnter={openDropdown}
+        onMouseLeave={scheduleClose}
         style={{
           top: scrolled ? 73 : 122,
           height: dropdownOpen ? "auto" : 0,
@@ -210,40 +223,42 @@ export function Header() {
             backgroundColor: "var(--base)",
             borderBottom: "1px solid var(--divider)",
             transform: dropdownOpen ? "translateY(0)" : "translateY(-100%)",
-            transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+            transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
-          <div className="mx-auto max-w-[1480px] px-6 lg:px-10 py-4">
-            <div className="flex flex-col gap-2.5">
+          <div className="mx-auto max-w-[1480px] px-6 lg:px-10 py-7">
+            <div className="flex flex-col gap-5">
               {navDropdownSections.map((section, sIdx) => (
                 <div
                   key={section.heading}
-                  className="flex items-center gap-3 flex-wrap"
+                  className="grid grid-cols-[120px_1fr] items-center gap-6"
                   style={{
                     opacity: dropdownOpen ? 1 : 0,
                     transform: dropdownOpen ? "translateY(0)" : "translateY(6px)",
-                    transition: `opacity 0.25s ease ${0.05 + sIdx * 0.06}s, transform 0.25s ease ${0.05 + sIdx * 0.06}s`,
+                    transition: `opacity 0.3s ease ${0.05 + sIdx * 0.07}s, transform 0.3s ease ${0.05 + sIdx * 0.07}s`,
                   }}
                 >
                   <span
-                    className="text-[10px] font-bold uppercase tracking-[0.18em] shrink-0"
-                    style={{ color: "var(--warm-gray)", minWidth: 92 }}
+                    className="text-[11px] font-bold uppercase tracking-[0.18em]"
+                    style={{ color: "var(--warm-gray)" }}
                   >
                     {section.heading}
                   </span>
-                  {section.items.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setDropdownOpen(false)}
-                      className="inline-flex items-center justify-center rounded-full px-5 py-2 text-[12px] font-bold uppercase tracking-[0.08em] transition-colors duration-200"
-                      style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
-                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "var(--avro-blue)"; e.currentTarget.style.color = "var(--charcoal)" }}
-                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "var(--charcoal)"; e.currentTarget.style.color = "var(--bone)" }}
-                    >
-                      {item.cta}
-                    </Link>
-                  ))}
+                  <div className="flex items-center gap-3 flex-wrap">
+                    {section.items.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setDropdownOpen(false)}
+                        className="inline-flex items-center justify-center rounded-full px-6 py-2.5 text-[13px] font-bold uppercase tracking-[0.08em] transition-colors duration-200"
+                        style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
+                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "var(--avro-blue)"; e.currentTarget.style.color = "var(--charcoal)" }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "var(--charcoal)"; e.currentTarget.style.color = "var(--bone)" }}
+                      >
+                        {item.cta}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
