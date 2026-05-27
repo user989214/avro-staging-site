@@ -116,7 +116,6 @@ export function Header() {
         }`}
         style={{ backgroundColor: "var(--base)" }}
         aria-label="Primary navigation"
-        onMouseLeave={scheduleClose}
       >
         {/* Mobile menu button */}
         <button
@@ -134,12 +133,65 @@ export function Header() {
           <NavLink href="/shop">Shop</NavLink>
           <NavLink href="/shop">Subscribe</NavLink>
           <div
+            className="relative"
             onMouseEnter={openDropdown}
+            onMouseLeave={scheduleClose}
           >
             <button className="relative text-[15px] font-bold tracking-[0.08em] uppercase transition-colors hover:opacity-70 flex items-center gap-1" style={{ color: "var(--ink)" }}>
               Why AVRO
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"/></svg>
             </button>
+
+            {/* Compact dropdown panel — mirrors mobile menu styling */}
+            <div
+              className="absolute left-0 top-full pt-4 z-50"
+              style={{
+                pointerEvents: dropdownOpen ? "auto" : "none",
+              }}
+              aria-hidden={!dropdownOpen}
+            >
+              <div
+                className="overflow-hidden"
+                style={{
+                  width: 280,
+                  backgroundColor: "var(--base)",
+                  border: "1px solid var(--divider)",
+                  borderRadius: 18,
+                  boxShadow: "0 16px 40px -12px rgba(21,21,21,0.18)",
+                  opacity: dropdownOpen ? 1 : 0,
+                  transform: dropdownOpen ? "translateY(0)" : "translateY(-8px)",
+                  transition: "opacity 0.35s cubic-bezier(0.4,0,0.2,1), transform 0.35s cubic-bezier(0.4,0,0.2,1)",
+                }}
+              >
+                <div className="flex flex-col p-3">
+                  {navDropdownSections.map((section, sIdx) => (
+                    <div key={section.heading} className={sIdx > 0 ? "mt-3 pt-3" : ""} style={sIdx > 0 ? { borderTop: "1px solid var(--divider)" } : undefined}>
+                      <p
+                        className="text-[10px] font-bold uppercase tracking-[0.16em] px-3 py-1.5"
+                        style={{ color: "var(--warm-gray)" }}
+                      >
+                        {section.heading}
+                      </p>
+                      <div className="flex flex-col">
+                        {section.items.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setDropdownOpen(false)}
+                            className="block px-3 py-2 text-[14px] font-bold uppercase tracking-[0.06em] rounded-full transition-colors"
+                            style={{ color: "var(--ink)" }}
+                            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "var(--avro-blue)" }}
+                            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent" }}
+                          >
+                            {item.cta}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -203,68 +255,6 @@ export function Header() {
           )}
         </button>
       </nav>
-
-      {/* Why AVRO dropdown panel — full-width, square, simple title + button rows */}
-      <div
-        className="hidden md:block fixed left-0 right-0 z-40 pointer-events-none"
-        onMouseEnter={openDropdown}
-        onMouseLeave={scheduleClose}
-        style={{
-          top: scrolled ? 73 : 122,
-          height: dropdownOpen ? "auto" : 0,
-          overflow: "hidden",
-          transition: "top 0.2s ease",
-        }}
-        aria-hidden={!dropdownOpen}
-      >
-        <div
-          className="pointer-events-auto w-full"
-          style={{
-            backgroundColor: "var(--base)",
-            borderBottom: "1px solid var(--divider)",
-            transform: dropdownOpen ? "translateY(0)" : "translateY(-100%)",
-            transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-          }}
-        >
-          <div className="mx-auto max-w-[1480px] px-6 lg:px-10 py-7">
-            <div className="flex flex-col gap-5">
-              {navDropdownSections.map((section, sIdx) => (
-                <div
-                  key={section.heading}
-                  className="grid grid-cols-[120px_1fr] items-center gap-6"
-                  style={{
-                    opacity: dropdownOpen ? 1 : 0,
-                    transform: dropdownOpen ? "translateY(0)" : "translateY(6px)",
-                    transition: `opacity 0.3s ease ${0.05 + sIdx * 0.07}s, transform 0.3s ease ${0.05 + sIdx * 0.07}s`,
-                  }}
-                >
-                  <span
-                    className="text-[11px] font-bold uppercase tracking-[0.18em]"
-                    style={{ color: "var(--warm-gray)" }}
-                  >
-                    {section.heading}
-                  </span>
-                  <div className="flex items-center gap-3 flex-wrap">
-                    {section.items.map((item) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        onClick={() => setDropdownOpen(false)}
-                        className="inline-flex items-center justify-center rounded-full px-6 py-2.5 text-[13px] font-bold uppercase tracking-[0.08em] transition-colors duration-200"
-                        style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
-                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "var(--avro-blue)"; e.currentTarget.style.color = "var(--charcoal)" }}
-                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "var(--charcoal)"; e.currentTarget.style.color = "var(--bone)" }}
-                      >
-                        {item.cta}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Mobile menu overlay */}
       <div
