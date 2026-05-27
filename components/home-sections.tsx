@@ -845,8 +845,7 @@ function ApproachChart() {
       ref={containerRef}
       style={{
         borderRadius: 24,
-        border: "2px solid var(--charcoal)",
-        backgroundColor: "var(--base-light)",
+        backgroundColor: "var(--charcoal)",
         padding: "clamp(20px,3vw,32px)",
         display: "flex",
         flexDirection: "column",
@@ -857,15 +856,15 @@ function ApproachChart() {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
         <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ display: "inline-block", width: 28, height: 3, borderRadius: 2, background: "repeating-linear-gradient(90deg, #8A8A8A, #8A8A8A 6px, transparent 6px, transparent 12px)" }} />
-            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "#8A8A8A", letterSpacing: "0.02em" }}>Stimulant First</span>
+            <span style={{ display: "inline-block", width: 28, height: 3, borderRadius: 2, background: "repeating-linear-gradient(90deg, rgba(245,242,234,0.55), rgba(245,242,234,0.55) 6px, transparent 6px, transparent 12px)" }} />
+            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "rgba(245,242,234,0.6)", letterSpacing: "0.02em" }}>Stimulant First</span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <span style={{ display: "inline-block", width: 28, height: 3, borderRadius: 2, backgroundColor: BLUE }} />
-            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--ink)", letterSpacing: "0.02em" }}>Calm First</span>
+            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--bone)", letterSpacing: "0.02em" }}>Calm First</span>
           </div>
         </div>
-        <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "#8A8A8A", letterSpacing: "0.12em", textTransform: "uppercase" }}>State Over Time</span>
+        <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "rgba(245,242,234,0.5)", letterSpacing: "0.12em", textTransform: "uppercase" }}>State Over Time</span>
       </div>
 
       {/* Chart */}
@@ -873,14 +872,14 @@ function ApproachChart() {
         <svg viewBox="0 0 800 320" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }}>
           {/* horizontal grid lines */}
           {[60, 130, 200, 270].map((y) => (
-            <line key={y} x1="0" y1={y} x2="800" y2={y} stroke="var(--charcoal)" strokeOpacity="0.12" strokeWidth="1" strokeDasharray="2 6" />
+            <line key={y} x1="0" y1={y} x2="800" y2={y} stroke="var(--bone)" strokeOpacity="0.12" strokeWidth="1" strokeDasharray="2 6" />
           ))}
 
           {/* Stimulant First — sharp spike then crash */}
           <path
             d="M 0 260 C 80 250, 120 230, 150 200 C 175 175, 195 90, 220 50 C 240 25, 260 30, 280 70 C 310 130, 340 250, 380 285 C 430 305, 480 295, 540 285 C 600 280, 680 290, 800 295"
             fill="none"
-            stroke="#8A8A8A"
+            stroke="rgba(245,242,234,0.55)"
             strokeWidth="3.5"
             strokeLinecap="round"
             strokeDasharray={`${STIM_LEN} ${STIM_LEN}`}
@@ -910,7 +909,7 @@ function ApproachChart() {
             cy="105"
             r={mounted ? 6 : 0}
             fill={BLUE}
-            stroke="var(--ink)"
+            stroke="var(--bone)"
             strokeWidth="2"
             style={{
               transition: "r 0.5s cubic-bezier(0.34,1.4,0.4,1) 2.7s",
@@ -951,7 +950,7 @@ function ApproachChart() {
             fontFamily: GC,
             fontWeight: 700,
             fontSize: 11,
-            color: "#8A8A8A",
+            color: "rgba(245,242,234,0.5)",
             letterSpacing: "0.12em",
             textTransform: "uppercase",
             whiteSpace: "nowrap",
@@ -962,16 +961,16 @@ function ApproachChart() {
       </div>
 
       {/* X-axis labels */}
-      <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 4, borderTop: "1px solid var(--charcoal)" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 4, borderTop: "1px solid rgba(245,242,234,0.18)" }}>
         {["0 min", "30 min", "1 hr", "2 hr", "3 hr+"].map((t) => (
-          <span key={t} style={{ fontFamily: GC, fontWeight: 700, fontSize: 12, color: "#8A8A8A", letterSpacing: "0.04em" }}>{t}</span>
+          <span key={t} style={{ fontFamily: GC, fontWeight: 700, fontSize: 12, color: "rgba(245,242,234,0.5)", letterSpacing: "0.04em" }}>{t}</span>
         ))}
       </div>
 
       {/* Caption strip */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginTop: 4 }}>
-        <div style={{ padding: "14px 18px", borderRadius: 14, backgroundColor: "#D9D9D6" }}>
-          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "#6E6E6E", margin: 0, letterSpacing: "0.02em" }}>
+        <div style={{ padding: "14px 18px", borderRadius: 14, backgroundColor: "rgba(245,242,234,0.08)" }}>
+          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "rgba(245,242,234,0.65)", margin: 0, letterSpacing: "0.02em" }}>
             Push, spike, crash. Noise where clarity should be.
           </p>
         </div>
