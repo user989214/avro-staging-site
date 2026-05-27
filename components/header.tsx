@@ -406,10 +406,10 @@ export function Header() {
               Cart
             </span>
             <span
-              className="inline-flex items-center justify-center min-w-[22px] h-[22px] px-1.5 rounded-full font-serif font-black text-[12px] leading-none"
+              className="hdr-cart-count inline-flex items-center justify-center min-w-[24px] h-[24px] px-1.5 rounded-full font-serif font-black text-[12px] leading-none"
               style={{
-                backgroundColor: "var(--avro-blue)",
-                color: "var(--charcoal)",
+                backgroundColor: "var(--ink)",
+                color: "var(--bone)",
               }}
               aria-hidden="true"
             >
@@ -419,6 +419,7 @@ export function Header() {
           <style>{`
             .hdr-cart-btn { transition: background-color 0.2s ease, color 0.2s ease; }
             .hdr-cart-btn:hover { background-color: var(--ink); color: var(--bone); }
+            .hdr-cart-btn:hover .hdr-cart-count { background-color: var(--bone); color: var(--ink); }
           `}</style>
         </div>
 
