@@ -569,13 +569,6 @@ export function HomeLogicRow() {
     },
   ]
 
-  const comparisonRows = [
-    ["Push harder", "Settle first"],
-    ["More intensity", "More control"],
-    ["Spike and crash", "Steady state"],
-    ["Noise", "Clarity"],
-  ]
-
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
@@ -672,19 +665,153 @@ export function HomeLogicRow() {
               ))}
             </div>
 
-            {/* Comparison table — Stimulant: charcoal bg + warm-gray text | Calm: blue bg + black text */}
-            <div style={{ borderRadius: 24, overflow: "hidden", border: "2px solid var(--charcoal)" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-                <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#8A8A8A", backgroundColor: "#D9D9D6", textAlign: "center", letterSpacing: "0.02em" }}>Stimulant First</div>
-                <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--ink)", backgroundColor: BLUE, textAlign: "center", letterSpacing: "0.02em" }}>Calm First</div>
-              </div>
-              {comparisonRows.map(([left, right]) => (
-                <div key={left} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderTop: "2px solid var(--charcoal)" }}>
-                  <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#8A8A8A", backgroundColor: "#D9D9D6", textAlign: "center" }}>{left}</div>
-                  <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--ink)", backgroundColor: BLUE, textAlign: "center", borderLeft: "2px solid var(--charcoal)" }}>{right}</div>
-                </div>
-              ))}
-            </div>
+            {/* State-over-time chart — replaces the comparison table */}
+            <ApproachChart />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ── APPROACH CHART ─────────────────────────────────────────────────────────────
+function ApproachChart() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 120)
+    return () => clearTimeout(t)
+  }, [])
+
+  // Path lengths (approximate — long enough to cover the longest stroke)
+  const STIM_LEN = 900
+  const CALM_LEN = 800
+
+  return (
+    <div
+      style={{
+        borderRadius: 24,
+        border: "2px solid var(--charcoal)",
+        backgroundColor: "var(--base-light)",
+        padding: "clamp(20px,3vw,32px)",
+        display: "flex",
+        flexDirection: "column",
+        gap: 20,
+      }}
+    >
+      {/* Legend */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
+        <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span style={{ display: "inline-block", width: 28, height: 3, borderRadius: 2, background: "repeating-linear-gradient(90deg, #8A8A8A, #8A8A8A 6px, transparent 6px, transparent 12px)" }} />
+            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "#8A8A8A", letterSpacing: "0.02em" }}>Stimulant First</span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span style={{ display: "inline-block", width: 28, height: 3, borderRadius: 2, backgroundColor: BLUE }} />
+            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--ink)", letterSpacing: "0.02em" }}>Calm First</span>
+          </div>
+        </div>
+        <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "#8A8A8A", letterSpacing: "0.12em", textTransform: "uppercase" }}>State Over Time</span>
+      </div>
+
+      {/* Chart */}
+      <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 7", minHeight: 220 }}>
+        <svg viewBox="0 0 800 320" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }}>
+          {/* horizontal grid lines */}
+          {[60, 130, 200, 270].map((y) => (
+            <line key={y} x1="0" y1={y} x2="800" y2={y} stroke="var(--charcoal)" strokeOpacity="0.12" strokeWidth="1" strokeDasharray="2 6" />
+          ))}
+
+          {/* Stimulant First — sharp spike then crash */}
+          <path
+            d="M 0 260 C 80 250, 120 230, 150 200 C 175 175, 195 90, 220 50 C 240 25, 260 30, 280 70 C 310 130, 340 250, 380 285 C 430 305, 480 295, 540 285 C 600 280, 680 290, 800 295"
+            fill="none"
+            stroke="#8A8A8A"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeDasharray={`${STIM_LEN} ${STIM_LEN}`}
+            strokeDashoffset={mounted ? 0 : STIM_LEN}
+            style={{
+              transition: "stroke-dashoffset 2.2s cubic-bezier(0.22,1,0.36,1)",
+            }}
+          />
+
+          {/* Calm First — smooth sustained ramp */}
+          <path
+            d="M 0 240 C 100 225, 180 200, 260 165 C 340 130, 420 110, 520 100 C 620 95, 700 100, 800 105"
+            fill="none"
+            stroke={BLUE}
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeDasharray={`${CALM_LEN} ${CALM_LEN}`}
+            strokeDashoffset={mounted ? 0 : CALM_LEN}
+            style={{
+              transition: "stroke-dashoffset 2.2s cubic-bezier(0.22,1,0.36,1) 0.25s",
+            }}
+          />
+
+          {/* Calm endpoint dot */}
+          <circle
+            cx="800"
+            cy="105"
+            r={mounted ? 6 : 0}
+            fill={BLUE}
+            stroke="var(--ink)"
+            strokeWidth="2"
+            style={{
+              transition: "r 0.5s cubic-bezier(0.34,1.4,0.4,1) 2.4s",
+            }}
+          />
+        </svg>
+
+        {/* Y-axis label */}
+        <span
+          style={{
+            position: "absolute",
+            left: -8,
+            top: "50%",
+            transform: "translate(-100%, -50%) rotate(-90deg)",
+            transformOrigin: "right center",
+            fontFamily: GC,
+            fontWeight: 700,
+            fontSize: 11,
+            color: "#8A8A8A",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Performance
+        </span>
+      </div>
+
+      {/* X-axis labels */}
+      <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 4, borderTop: "1px solid var(--charcoal)" }}>
+        {["0 min", "30 min", "1 hr", "2 hr", "3 hr+"].map((t) => (
+          <span key={t} style={{ fontFamily: GC, fontWeight: 700, fontSize: 12, color: "#8A8A8A", letterSpacing: "0.04em" }}>{t}</span>
+        ))}
+      </div>
+
+      {/* Caption strip */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginTop: 4 }}>
+        <div style={{ padding: "14px 18px", borderRadius: 14, backgroundColor: "#D9D9D6" }}>
+          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "#6E6E6E", margin: 0, letterSpacing: "0.02em" }}>
+            Push, spike, crash. Noise where clarity should be.
+          </p>
+        </div>
+        <div style={{ padding: "14px 18px", borderRadius: 14, backgroundColor: BLUE }}>
+          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "var(--ink)", margin: 0, letterSpacing: "0.02em" }}>
+            Settle, ramp, sustain. Steady state when it counts.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function _ApproachSectionEnd() {
+  return null
+}
+
           </div>
         </div>
       </div>
@@ -949,7 +1076,7 @@ export function HomeStoryStrip() {
   )
 }
 
-// ── RITUAL SECTION ──────────────────────────────��───────������────────────────────
+// ── RITUAL SECTION ──────────────────────────────��───────�������────────────────────
 export function HomeRitualSection() {
   const [openStep, setOpenStep] = useState<number | null>(null)
   
