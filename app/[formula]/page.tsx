@@ -72,9 +72,26 @@ export default async function ProductPage({
 
   return (
     <>
-      {/* PDP Hero - tighter padding for immediate visibility */}
-      <section style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "clamp(16px,2.5vw,32px) clamp(18px,5vw,64px)", backgroundColor: "var(--base)" }}>
-        <ProductHero formula={item} formulaKey={key} />
+      {/* PDP Hero - rounded section background, like homepage feature blocks */}
+      <section
+        style={{
+          width: "100%",
+          maxWidth: 1440,
+          margin: "0 auto",
+          padding: "clamp(16px,2.5vw,32px) clamp(18px,5vw,64px) clamp(24px,3vw,40px)",
+          backgroundColor: "var(--base)",
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "var(--base-light, #f5f1e8)",
+            border: "1px solid var(--line)",
+            borderRadius: 32,
+            padding: "clamp(20px,2.4vw,36px)",
+          }}
+        >
+          <ProductHero formula={item} formulaKey={key} />
+        </div>
       </section>
 
       {/* Tabs with Recommendations */}

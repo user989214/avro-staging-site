@@ -79,7 +79,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         </p>
       </header>
 
-      {/* Flavor switcher - charcoal styling with solo tube thumbnails */}
+      {/* Flavor switcher - fully circular pills with circular thumbnails */}
       <div className="flex flex-col gap-1.5">
         <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--ink)" }}>
           Flavor
@@ -92,16 +92,20 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
                 key={flavor.id}
                 type="button"
                 onClick={() => onFlavorChange(flavor.id)}
-                className="flex-1 flex items-center gap-2.5 px-2.5 py-2.5 rounded-xl transition-all"
+                className="flex-1 flex items-center gap-3 pl-1.5 pr-5 py-1.5 transition-all"
                 style={{
+                  borderRadius: 999,
                   backgroundColor: isSelected ? "var(--charcoal)" : LIGHT_GRAY,
                   border: isSelected ? "2px solid var(--charcoal)" : "2px solid transparent",
                 }}
               >
-                {/* Solo tube thumbnail */}
+                {/* Circular solo tube thumbnail */}
                 <div
-                  className="w-11 h-11 rounded-lg overflow-hidden flex-shrink-0"
-                  style={{ backgroundColor: isSelected ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.03)" }}
+                  className="w-11 h-11 overflow-hidden flex-shrink-0 grid place-items-center"
+                  style={{
+                    borderRadius: 999,
+                    backgroundColor: "var(--bone)",
+                  }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -110,22 +114,26 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="flex flex-col items-start text-left">
+                <div className="flex flex-col items-start text-left min-w-0">
                   <span
+                    className="truncate"
                     style={{
                       fontFamily: GC,
                       fontWeight: 700,
                       fontSize: 14,
+                      lineHeight: 1.15,
                       color: isSelected ? "var(--bone)" : "var(--ink)",
                     }}
                   >
                     {flavor.name}
                   </span>
                   <span
+                    className="truncate"
                     style={{
                       fontFamily: GC,
                       fontWeight: 500,
                       fontSize: 12,
+                      lineHeight: 1.2,
                       color: isSelected ? "rgba(255,255,255,0.65)" : "var(--warm-gray)",
                     }}
                   >
@@ -138,16 +146,8 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         </div>
       </div>
 
-      {/* Purchase options - unified rounded container with internal divider */}
-      <div
-        className="flex flex-col"
-        style={{
-          borderRadius: 20,
-          backgroundColor: "var(--bone)",
-          border: "1px solid var(--line)",
-          overflow: "hidden",
-        }}
-      >
+      {/* Purchase options - fully circular pills */}
+      <div className="flex flex-col gap-2">
         <PurchaseOption
           checked={purchaseType === "subscribe"}
           onChange={() => setPurchaseType("subscribe")}
@@ -156,7 +156,6 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
           price={`$${subscribeTotal.toFixed(2)}`}
           badge="Most popular"
         />
-        <div style={{ borderTop: "1px solid var(--line)" }} />
         <PurchaseOption
           checked={purchaseType === "onetime"}
           onChange={() => setPurchaseType("onetime")}
@@ -209,17 +208,17 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         </div>
       </div>
 
-      {/* Add to cart */}
+      {/* Add to cart - larger, prominent */}
       <button
         type="button"
         onClick={handleAdd}
         className="bb-add-btn w-full flex items-center justify-center transition-colors"
         style={{
           fontFamily: GC,
-          fontWeight: 700,
-          fontSize: 15,
-          minHeight: 44,
-          padding: "0 24px",
+          fontWeight: 800,
+          fontSize: 17,
+          minHeight: 60,
+          padding: "0 28px",
           borderRadius: 999,
           backgroundColor: "var(--charcoal)",
           color: "var(--bone)",
@@ -253,19 +252,22 @@ function PurchaseOption({
 }) {
   return (
     <label
-      className="relative flex items-start gap-3 px-4 py-4 cursor-pointer transition-colors"
+      className="relative flex items-center gap-3 cursor-pointer transition-colors"
       style={{
-        backgroundColor: checked ? "var(--charcoal)" : "transparent",
+        backgroundColor: checked ? "var(--charcoal)" : LIGHT_GRAY,
         color: checked ? "var(--bone)" : "var(--ink)",
         fontFamily: GC,
+        borderRadius: 999,
+        padding: "14px 22px 14px 18px",
+        border: checked ? "2px solid var(--charcoal)" : "2px solid transparent",
       }}
     >
       <span
         aria-hidden
-        className="mt-0.5 shrink-0 flex items-center justify-center"
+        className="shrink-0 grid place-items-center"
         style={{
-          width: 18,
-          height: 18,
+          width: 20,
+          height: 20,
           borderRadius: 999,
           border: checked ? "2px solid var(--bone)" : "2px solid var(--warm-gray)",
           backgroundColor: "transparent",
@@ -274,8 +276,8 @@ function PurchaseOption({
         {checked && (
           <span
             style={{
-              width: 8,
-              height: 8,
+              width: 9,
+              height: 9,
               borderRadius: 999,
               backgroundColor: "var(--bone)",
             }}
@@ -289,10 +291,15 @@ function PurchaseOption({
         onChange={onChange}
         className="sr-only"
       />
-      <div className="flex-1">
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 flex-wrap">
-            <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: 16 }}>{title}</strong>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2 flex-wrap min-w-0">
+            <strong
+              className="truncate"
+              style={{ fontFamily: GC, fontWeight: 700, fontSize: 15, lineHeight: 1.2 }}
+            >
+              {title}
+            </strong>
             {badge && (
               <span
                 style={{
@@ -301,27 +308,30 @@ function PurchaseOption({
                   fontSize: 10,
                   letterSpacing: "0.06em",
                   textTransform: "uppercase",
-                  padding: "3px 8px",
+                  padding: "3px 9px",
                   backgroundColor: checked ? "var(--bone)" : "var(--charcoal)",
                   color: checked ? "var(--charcoal)" : "var(--bone)",
                   borderRadius: 999,
+                  whiteSpace: "nowrap",
                 }}
               >
                 {badge}
               </span>
             )}
           </div>
-          <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, whiteSpace: "nowrap" }}>
+          <strong
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: 15, whiteSpace: "nowrap" }}
+          >
             {price}
           </strong>
         </div>
         <p
-          className="mt-0.5 leading-snug"
+          className="mt-0.5 leading-snug truncate"
           style={{
             fontFamily: GC,
             fontWeight: 400,
-            fontSize: 13,
-            color: checked ? "rgba(255,255,255,0.65)" : "var(--warm-gray)",
+            fontSize: 12.5,
+            color: checked ? "rgba(255,255,255,0.7)" : "var(--warm-gray)",
           }}
         >
           {subtitle}
