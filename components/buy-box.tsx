@@ -141,7 +141,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
       </div>
 
       {/* Quantity - compact */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-3 flex-wrap">
         <span
           style={{
             fontFamily: GC,
@@ -164,7 +164,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
             type="button"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             aria-label="Decrease quantity"
-            className="w-12 h-12 flex items-center justify-center transition-colors hover:bg-black/5 disabled:opacity-40"
+            className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center transition-colors hover:bg-black/5 disabled:opacity-40"
             style={{ fontFamily: GC, fontWeight: 700, fontSize: 22, color: "var(--charcoal)" }}
             disabled={quantity <= 1}
           >
@@ -180,7 +180,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
             type="button"
             onClick={() => setQuantity((q) => q + 1)}
             aria-label="Increase quantity"
-            className="w-12 h-12 flex items-center justify-center transition-colors hover:bg-black/5"
+            className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center transition-colors hover:bg-black/5"
             style={{ fontFamily: GC, fontWeight: 700, fontSize: 22, color: "var(--charcoal)" }}
           >
             +
@@ -196,9 +196,9 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         style={{
           fontFamily: GC,
           fontWeight: 800,
-          fontSize: 17,
-          minHeight: 60,
-          padding: "0 28px",
+          fontSize: 16,
+          minHeight: 56,
+          padding: "0 18px",
           borderRadius: 999,
           backgroundColor: "var(--charcoal)",
           color: "var(--bone)",
@@ -243,7 +243,7 @@ function PurchaseOption({
         color: checked ? "var(--bone)" : "var(--ink)",
         fontFamily: GC,
         borderRadius: 999,
-        padding: "14px 22px 14px 18px",
+        padding: "12px 18px 12px 14px",
         border: checked ? "2px solid var(--charcoal)" : "2px solid transparent",
       }}
     >
@@ -277,11 +277,10 @@ function PurchaseOption({
         className="sr-only"
       />
       <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 flex-wrap min-w-0">
             <strong
-              className="truncate"
-              style={{ fontFamily: GC, fontWeight: 700, fontSize: 15, lineHeight: 1.2 }}
+              style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, lineHeight: 1.2 }}
             >
               {title}
             </strong>
@@ -290,10 +289,10 @@ function PurchaseOption({
                 style={{
                   fontFamily: GC,
                   fontWeight: 700,
-                  fontSize: 10,
+                  fontSize: 9.5,
                   letterSpacing: "0.06em",
                   textTransform: "uppercase",
-                  padding: "3px 9px",
+                  padding: "3px 8px",
                   backgroundColor: checked ? "var(--bone)" : "var(--charcoal)",
                   color: checked ? "var(--charcoal)" : "var(--bone)",
                   borderRadius: 999,
@@ -305,17 +304,17 @@ function PurchaseOption({
             )}
           </div>
           <strong
-            style={{ fontFamily: GC, fontWeight: 700, fontSize: 15, whiteSpace: "nowrap" }}
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, whiteSpace: "nowrap" }}
           >
             {price}
           </strong>
         </div>
         <p
-          className="mt-0.5 leading-snug truncate"
+          className="mt-0.5 leading-snug"
           style={{
             fontFamily: GC,
             fontWeight: 500,
-            fontSize: 12.5,
+            fontSize: 12,
             color: checked ? "rgba(255,255,255,0.75)" : "rgba(20,20,20,0.7)",
           }}
         >

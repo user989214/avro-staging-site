@@ -78,15 +78,15 @@ export default async function ProductPage({
           width: "100%",
           maxWidth: 1440,
           margin: "0 auto",
-          padding: "clamp(16px,2.5vw,32px) clamp(18px,5vw,64px) clamp(24px,3vw,40px)",
+          padding: "clamp(12px,2.5vw,32px) clamp(10px,5vw,64px) clamp(20px,3vw,40px)",
           backgroundColor: "var(--base)",
         }}
       >
         <div
           style={{
             backgroundColor: "var(--base-light, #f5f1e8)",
-            borderRadius: 32,
-            padding: "clamp(20px,2.4vw,36px)",
+            borderRadius: 24,
+            padding: "clamp(16px,2.4vw,36px)",
           }}
         >
           <ProductHero formula={item} formulaKey={key} />
@@ -95,7 +95,7 @@ export default async function ProductPage({
 
       {/* Tabs with Recommendations */}
       <section style={{ width: "100%", backgroundColor: "var(--base)", paddingBottom: "clamp(32px,4vw,48px)" }}>
-        <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "0 clamp(18px,5vw,64px)" }}>
+        <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "0 clamp(14px,5vw,64px)" }}>
           <PdpTabsWithRecommendations currentKey={key} />
         </div>
       </section>

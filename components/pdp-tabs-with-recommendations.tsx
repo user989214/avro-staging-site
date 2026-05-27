@@ -72,21 +72,20 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
 
   return (
     <div
-      className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] gap-8 lg:gap-12"
+      className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] gap-10 lg:gap-12"
       style={{ fontFamily: GC }}
     >
       {/* Left - Tabs */}
       <div>
-        <div className="flex flex-wrap gap-x-8 gap-y-2 mb-6" style={{ borderBottom: "2px solid rgba(0,0,0,0.12)" }}>
+        <div className="flex flex-wrap gap-x-5 sm:gap-x-8 gap-y-2 mb-6" style={{ borderBottom: "2px solid rgba(0,0,0,0.12)" }}>
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className="pb-3 transition-colors relative"
+              className="pb-3 transition-colors relative text-base sm:text-lg lg:text-xl"
               style={{
                 fontFamily: GC,
                 fontWeight: activeTab === tab ? 800 : 500,
-                fontSize: 20,
                 color: activeTab === tab ? "#000" : "rgba(0,0,0,0.45)",
               }}
             >
@@ -121,7 +120,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   <li
                     key={bullet}
                     className="flex items-start gap-3"
-                    style={{ fontFamily: GC, fontWeight: 500, fontSize: 18, lineHeight: 1.35, color: "rgba(0,0,0,0.7)" }}
+                    style={{ fontFamily: GC, fontWeight: 500, fontSize: 16, lineHeight: 1.4, color: "rgba(0,0,0,0.7)" }}
                   >
                     <span style={{ color: "var(--ink)", fontWeight: 700, fontSize: 20, lineHeight: 1 }}>+</span>
                     <span>{bullet}</span>
@@ -154,8 +153,8 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                       borderBottom: i < ingredientsList[currentKey].length - 1 ? "1px solid rgba(0,0,0,0.1)" : "none",
                     }}
                   >
-                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 20, color: "var(--ink)" }}>{ing.name}</span>
-                    <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 20, color: "rgba(0,0,0,0.6)" }}>{ing.amount}</span>
+                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 17, color: "var(--ink)" }}>{ing.name}</span>
+                    <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 17, color: "rgba(0,0,0,0.6)" }}>{ing.amount}</span>
                   </div>
                 ))}
               </div>
@@ -255,7 +254,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
           You might also like
         </h3>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
           {otherKeys.map((formulaKey) => {
             const formula = formulas[formulaKey]
             const oneTimePrice = formula.bundlePrice.toFixed(2)
@@ -266,8 +265,8 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                 className="flex flex-col"
                 style={{
                   backgroundColor: "var(--base-light, #f5f1e8)",
-                  borderRadius: 22,
-                  padding: 14,
+                  borderRadius: 18,
+                  padding: 10,
                   overflow: "hidden",
                 }}
               >
@@ -276,20 +275,20 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   className="relative w-full overflow-hidden"
                   style={{
                     backgroundColor: "var(--bone)",
-                    borderRadius: 14,
+                    borderRadius: 12,
                     aspectRatio: "1 / 1",
                   }}
                 >
                   <ProductCard formulaKey={formulaKey} className="absolute inset-0 w-full h-full object-cover" />
                 </div>
 
-                <div className="pt-4 px-1 flex flex-col gap-3">
-                  <div className="flex items-baseline justify-between gap-2">
+                <div className="pt-3 px-1 flex flex-col gap-2">
+                  <div className="flex items-baseline justify-between gap-1.5 flex-wrap">
                     <span
                       style={{
                         fontFamily: GC,
                         fontWeight: 800,
-                        fontSize: 17,
+                        fontSize: 15,
                         lineHeight: 1.1,
                         color: "var(--ink)",
                       }}
@@ -300,7 +299,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                       style={{
                         fontFamily: GC,
                         fontWeight: 700,
-                        fontSize: 14,
+                        fontSize: 13,
                         color: "rgba(0,0,0,0.6)",
                       }}
                     >
@@ -314,9 +313,9 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                     style={{
                       fontFamily: GC,
                       fontWeight: 800,
-                      fontSize: 13,
-                      minHeight: 40,
-                      padding: "0 14px",
+                      fontSize: 12,
+                      minHeight: 38,
+                      padding: "0 10px",
                       borderRadius: 999,
                       backgroundColor: "var(--charcoal)",
                       color: "var(--bone)",
