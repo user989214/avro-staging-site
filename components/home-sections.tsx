@@ -278,7 +278,7 @@ export function HomeRefHero() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.7) 50%, rgba(245,241,234,0.15) 62%, rgba(245,241,234,0) 72%, rgba(245,241,234,0) 92%, var(--base-light) 100%)",
+              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 30%, rgba(245,241,234,0.95) 38%, rgba(245,241,234,0.75) 46%, rgba(245,241,234,0.4) 54%, rgba(245,241,234,0.15) 62%, rgba(245,241,234,0) 70%)",
             pointerEvents: "none",
           }}
         />
