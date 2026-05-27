@@ -51,26 +51,25 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
   const renderMain = () => {
     if (activeId === "studio") {
       return (
-        <div className="relative flex items-center justify-center w-full h-full overflow-hidden" style={{ backgroundColor: "#FBF8F1" }}>
+        <div className="relative w-full h-full overflow-hidden" style={{ backgroundColor: "#FBF8F1" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={studio.src}
             alt={studio.alt}
-            className="w-full h-full object-contain scale-[1.18] origin-center"
+            className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
       )
     }
 
     if (activeId === "tube") {
-      // Solo display tube — the canister by itself, on white.
       return (
-        <div className="relative flex items-center justify-center w-full h-full overflow-hidden" style={{ backgroundColor: "#FBF8F1" }}>
+        <div className="relative w-full h-full overflow-hidden" style={{ backgroundColor: "#FBF8F1" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={soloTube.src}
             alt={soloTube.alt}
-            className="w-full h-full object-contain"
+            className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
       )
@@ -78,12 +77,12 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
 
     if (activeId === "stick") {
       return (
-        <div className="relative flex items-center justify-center w-full h-full p-8 sm:p-14" style={{ backgroundColor: "#FBF8F1" }}>
+        <div className="relative w-full h-full overflow-hidden" style={{ backgroundColor: "#FBF8F1" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={stick.src}
             alt={stick.alt}
-            className="max-h-full w-auto object-contain"
+            className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
       )
@@ -110,7 +109,7 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
         <img
           src={studio.src}
           alt=""
-          className="h-full w-full object-contain p-1"
+          className="absolute inset-0 w-full h-full object-cover"
         />
       )
     }
@@ -120,7 +119,7 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
         <img
           src={soloTube.src}
           alt=""
-          className="h-full w-full object-contain p-1"
+          className="absolute inset-0 w-full h-full object-cover"
         />
       )
     }
@@ -130,7 +129,7 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
         <img
           src={stick.src}
           alt=""
-          className="h-full w-auto object-contain py-1"
+          className="absolute inset-0 w-full h-full object-cover"
         />
       )
     }

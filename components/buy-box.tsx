@@ -35,7 +35,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
 
   return (
     <aside
-      className="flex flex-col gap-4 bg-base"
+      className="flex flex-col gap-4"
       style={{ fontFamily: GC }}
     >
       {/* Header - tighter, no rating (rating now lives in gallery overlay) */}
