@@ -104,9 +104,11 @@ export function HomeRefHero() {
       cancelAnimationFrame(raf)
       raf = requestAnimationFrame(() => {
         const y = window.scrollY
-        const max = 320 // px of scroll to fully dock
-        const p = Math.max(0, Math.min(1, y / max))
-        setProgress(p)
+        const max = 520 // px of scroll to fully dock — longer for smoother feel
+        const raw = Math.max(0, Math.min(1, y / max))
+        // Ease in/out cubic for buttery transition
+        const eased = raw < 0.5 ? 4 * raw * raw * raw : 1 - Math.pow(-2 * raw + 2, 3) / 2
+        setProgress(eased)
       })
     }
     onScroll()
@@ -121,13 +123,13 @@ export function HomeRefHero() {
   const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 
   // Section outer padding goes from 0 → normal as you scroll
-  const sectionPadX = lerp(0, 64, progress) // px (max ~64px on desktop)
+  const sectionPadX = lerp(0, 64, progress)
   const sectionPadTop = lerp(0, 96, progress)
   const sectionPadBottom = lerp(0, 80, progress)
-  // Container border radius goes from 0 → 28 as you scroll
   const radius = lerp(0, 28, progress)
-  // Image scale (subtle zoom-out → in)
-  const imgScale = lerp(1.04, 1.0, progress)
+  const imgScale = lerp(1.06, 1.0, progress)
+  // Hero stays full viewport on initial load so all content + image are visible at once
+  const heroMinH = `clamp(620px, ${lerp(92, 62, progress)}vh, ${lerp(900, 720, progress)}px)`
 
   return (
     <section
@@ -139,7 +141,7 @@ export function HomeRefHero() {
         paddingRight: `clamp(${lerp(0, 20, progress)}px, ${5 * progress}vw, ${sectionPadX}px)`,
         paddingTop: `clamp(${lerp(0, 48, progress)}px, ${7 * progress}vw, ${sectionPadTop}px)`,
         paddingBottom: `clamp(${lerp(0, 48, progress)}px, ${6 * progress}vw, ${sectionPadBottom}px)`,
-        transition: "padding 0.05s linear",
+        transition: "padding 0.2s ease-out",
       }}
     >
       <style>{`
@@ -246,8 +248,8 @@ export function HomeRefHero() {
           borderRadius: radius,
           overflow: "hidden",
           backgroundColor: "var(--base-light)",
-          minHeight: "clamp(520px, 62vw, 720px)",
-          transition: "border-radius 0.05s linear, max-width 0.05s linear",
+          minHeight: heroMinH,
+          transition: "border-radius 0.2s ease-out, max-width 0.2s ease-out, min-height 0.2s ease-out",
         }}
       >
         {/* Background image — full container */}
@@ -262,14 +264,14 @@ export function HomeRefHero() {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "82% center",
+            objectPosition: "92% center",
             transform: `scale(${imgScale})`,
             transformOrigin: "center",
-            transition: "transform 0.05s linear",
+            transition: "transform 0.2s ease-out",
           }}
         />
 
-        {/* Gradient overlay — solid on left where text sits, fades early so the product + drink stay clear */}
+        {/* Gradient overlay — solid for text on left, fades early so the packet + drink stay clear */}
         <div
           aria-hidden="true"
           className="hp-hero-fade"
@@ -277,7 +279,7 @@ export function HomeRefHero() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 30%, rgba(245,241,234,0.7) 42%, rgba(245,241,234,0.2) 55%, rgba(245,241,234,0) 65%)",
+              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 36%, rgba(245,241,234,0.6) 46%, rgba(245,241,234,0.15) 56%, rgba(245,241,234,0) 64%)",
             pointerEvents: "none",
           }}
         />
