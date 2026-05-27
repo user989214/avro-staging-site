@@ -97,21 +97,20 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                 style={{
                   backgroundColor: "var(--base-light)",
                   borderRadius: 24,
-                  padding: 16,
+                  padding: "clamp(20px,3vw,32px)",
                 }}
               >
                 {/* Product image */}
-                <Link 
-                  href={`/${key}`} 
-                  className="relative flex items-center justify-center" 
-                  style={{ 
-                    backgroundColor: "var(--bone)", 
-                    borderRadius: 18,
-                    minHeight: 220,
-                    padding: 24,
+                <Link
+                  href={`/${key}`}
+                  className="relative flex items-center justify-center overflow-hidden"
+                  style={{
+                    backgroundColor: "var(--bone)",
+                    borderRadius: 20,
+                    aspectRatio: "1 / 1",
                   }}
                 >
-                  <ProductCard formulaKey={key} className="h-[180px] w-auto object-contain" />
+                  <ProductCard formulaKey={key} className="h-full w-full object-cover" />
                   {isActive && (
                     <span
                       className="absolute top-4 right-4 px-3 py-1.5"
@@ -167,8 +166,8 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                       transition: background-color 0.2s ease, color 0.2s ease;
                     }
                     .compare-btn:hover {
-                      background-color: transparent;
-                      color: var(--charcoal);
+                      background-color: transparent !important;
+                      color: var(--charcoal) !important;
                     }
                   `}</style>
                   <button

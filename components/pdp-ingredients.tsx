@@ -132,9 +132,9 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
                 padding: 14,
               }}
             >
-              {/* Image frame — square, bordered like homepage product cards */}
+              {/* Image frame — square, matches homepage product cards (no stroke) */}
               <div
-                className="relative aspect-square overflow-hidden border border-line mb-4"
+                className="relative aspect-square overflow-hidden mb-4"
                 style={{ borderRadius: 12, backgroundColor: "var(--bone)" }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}

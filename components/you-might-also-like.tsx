@@ -43,13 +43,13 @@ export function YouMightAlsoLike({ currentKey, hideHeader = false }: YouMightAls
               style={{
                 backgroundColor: "var(--base-light, #f5f1e8)",
                 borderRadius: 24,
-                padding: "clamp(16px,2.4vw,24px)",
+                padding: "clamp(20px,3vw,32px)",
               }}
             >
               <div
-                className="relative flex items-center justify-center overflow-hidden border border-line"
+                className="relative flex items-center justify-center overflow-hidden"
                 style={{
-                  borderRadius: 18,
+                  borderRadius: 20,
                   backgroundColor: "var(--bone)",
                   aspectRatio: "1 / 1",
                 }}
@@ -61,15 +61,16 @@ export function YouMightAlsoLike({ currentKey, hideHeader = false }: YouMightAls
               </div>
               <div className="flex flex-1 flex-col gap-2">
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-black text-base">{item.name}</h3>
+                  <h3 className="font-black text-lg">{item.name}</h3>
                   <span className="text-sm font-extrabold text-ink/80">{item.priceLabel}</span>
                 </div>
                 <p className="text-ink/65 text-sm leading-relaxed">{item.support}</p>
                 <span
                   className={cn(
-                    "inline-flex items-center justify-center mt-auto px-4 py-2.5 rounded-full text-xs font-extrabold transition-colors",
-                    "bg-soft text-olive-dark group-hover:bg-charcoal group-hover:text-bone"
+                    "inline-flex items-center justify-center mt-3 px-4 rounded-full text-sm font-extrabold transition-colors",
+                    "bg-charcoal text-bone group-hover:bg-transparent group-hover:text-charcoal",
                   )}
+                  style={{ minHeight: 48, border: "2px solid var(--charcoal)" }}
                 >
                   Shop {item.short}
                 </span>
@@ -85,13 +86,13 @@ export function YouMightAlsoLike({ currentKey, hideHeader = false }: YouMightAls
           style={{
             backgroundColor: "var(--base-light, #f5f1e8)",
             borderRadius: 24,
-            padding: "clamp(16px,2.4vw,24px)",
+            padding: "clamp(20px,3vw,32px)",
           }}
         >
           <div
-            className="relative flex items-center justify-center overflow-hidden border border-line"
+            className="relative flex items-center justify-center overflow-hidden"
             style={{
-              borderRadius: 18,
+              borderRadius: 20,
               backgroundColor: "var(--bone)",
               aspectRatio: "1 / 1",
             }}
@@ -110,13 +111,16 @@ export function YouMightAlsoLike({ currentKey, hideHeader = false }: YouMightAls
           </div>
           <div className="flex flex-1 flex-col gap-2">
             <div className="flex items-center justify-between gap-2">
-              <h3 className="font-black text-base">Variety Bundle</h3>
+              <h3 className="font-black text-lg">Variety Bundle</h3>
               <span className="text-sm font-extrabold text-ink/80">$59.85</span>
             </div>
             <p className="text-ink/65 text-sm leading-relaxed">
               Calm, Focus, and Energy together. Save 20% when you bundle.
             </p>
-            <span className="inline-flex items-center justify-center mt-auto px-4 py-2.5 rounded-full text-xs font-extrabold bg-soft text-olive-dark group-hover:bg-charcoal group-hover:text-bone transition-colors">
+            <span
+              className="inline-flex items-center justify-center mt-3 px-4 rounded-full text-sm font-extrabold bg-charcoal text-bone group-hover:bg-transparent group-hover:text-charcoal transition-colors"
+              style={{ minHeight: 48, border: "2px solid var(--charcoal)" }}
+            >
               Build Bundle
             </span>
           </div>

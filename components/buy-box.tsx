@@ -211,8 +211,8 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
       <style>{`
         .bb-add-btn { cursor: pointer; }
         .bb-add-btn:hover {
-          background-color: transparent;
-          color: var(--charcoal);
+          background-color: transparent !important;
+          color: var(--charcoal) !important;
         }
         .bb-add-btn:active { transform: scale(0.99); }
       `}</style>
