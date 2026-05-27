@@ -241,11 +241,9 @@ function FlatHero({
       style={{
         position: "relative",
         width: "100%",
-        backgroundColor: "var(--base)",
+        backgroundColor: "var(--base-light)",
         color: "var(--ink)",
-        padding: compact
-          ? "clamp(20px,3vw,40px) clamp(16px,5vw,64px) clamp(24px,3vw,40px)"
-          : "clamp(24px,3.5vw,48px) clamp(16px,5vw,64px) clamp(28px,3.5vw,48px)",
+        padding: 0,
         overflow: "hidden",
       }}
     >
@@ -294,11 +292,9 @@ function FlatHero({
       <div
         className="relative w-full max-w-[1440px] mx-auto"
         style={{
-          backgroundColor: "var(--base-light)",
-          borderRadius: 28,
           padding: compact
-            ? "clamp(48px,7vw,88px) clamp(28px,5vw,72px)"
-            : "clamp(72px,9vw,120px) clamp(28px,5vw,72px)",
+            ? "clamp(72px,9vw,128px) clamp(20px,5vw,64px) clamp(56px,7vw,96px)"
+            : "clamp(96px,11vw,160px) clamp(20px,5vw,64px) clamp(72px,9vw,120px)",
           textAlign: "left",
         }}
       >

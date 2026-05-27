@@ -19,13 +19,13 @@ export default function ShopPage() {
   return (
     <>
       {/* ---------- HERO ---------- */}
-      {/* Full-width carded hero — matches the homepage hero scale (near edge-to-edge). */}
+      {/* True full-width hero — edge-to-edge, square corners, faded look retained. */}
       <section
         style={{
           position: "relative",
           width: "100%",
           backgroundColor: "var(--base)",
-          padding: "clamp(12px,1.5vw,24px) clamp(8px,1.5vw,24px) clamp(20px,2.5vw,36px)",
+          padding: 0,
         }}
       >
         <style>{`
@@ -79,11 +79,10 @@ export default function ShopPage() {
         `}</style>
 
         <div
-          className="shop-hero-card relative w-full mx-auto overflow-hidden"
+          className="shop-hero-card relative w-full overflow-hidden"
           style={{
-            maxWidth: 2000,
             backgroundColor: "var(--base-light)",
-            borderRadius: 28,
+            borderRadius: 0,
             minHeight: "clamp(520px,72vh,760px)",
           }}
         >
