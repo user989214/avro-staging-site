@@ -60,14 +60,14 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
             color: "var(--warm-gray)",
           }}
         >
-          10 stick packets per box · {activeFlavor.name}
+          10 stick packets per box
         </p>
       </header>
 
       {/* Flavor switcher - compact circular pills */}
       <div className="flex flex-col gap-1.5">
         <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--ink)" }}>
-          Flavor: <span style={{ fontWeight: 500, color: "var(--warm-gray)" }}>{activeFlavor.name}</span>
+          Flavor
         </span>
         <div className="flex flex-wrap gap-2">
           {formula.flavors.map((flavor) => {
