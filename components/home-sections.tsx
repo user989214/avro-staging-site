@@ -456,31 +456,40 @@ export function HomeMomentGrid() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        {/* Charcoal section container */}
-        <div style={{ backgroundColor: "var(--charcoal)", borderRadius: 28, padding: "clamp(24px,4vw,48px)" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "#fff", marginBottom: 28 }}>
-            Built for pressure sensitive moments.
-          </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 16 }}>
-            {moments.map((m) => (
-              <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 20, overflow: "hidden", backgroundColor: "var(--bone)" }}>
-                <div style={{ position: "relative", height: 260, overflow: "hidden" }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={m.image} alt={m.alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-                </div>
-                <div style={{ padding: "24px 24px 28px", flex: 1, display: "flex", flexDirection: "column" }}>
-                  <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,2.8vw,36px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 10 }}>{m.title}</h3>
-                  <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, lineHeight: 1.45, color: "rgba(0,0,0,0.6)", marginBottom: 24, flex: 1 }}>{m.copy}</p>
-                  <span className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 700, fontSize: 17, minHeight: 52, padding: "0 24px", borderRadius: 999, border: "2px solid var(--charcoal)", backgroundColor: "var(--charcoal)", color: "var(--bone)" }}>
-                    {m.cta}
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
+        <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32 }}>
+          Built for pressure sensitive moments.
+        </h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+          {moments.map((m) => (
+            <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 24, overflow: "hidden", backgroundColor: "var(--base-light)" }}>
+              <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={m.image} alt={m.alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+              </div>
+              <div style={{ padding: "24px 24px 28px", flex: 1, display: "flex", flexDirection: "column" }}>
+                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2vw,30px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 10 }}>{m.title}</h3>
+                <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 17, lineHeight: 1.45, color: "rgba(0,0,0,0.6)", marginBottom: 20, flex: 1 }}>{m.copy}</p>
+                <span className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 20px", borderRadius: 999, border: "2px solid var(--charcoal)", backgroundColor: "var(--charcoal)", color: "var(--bone)" }}>
+                  {m.cta}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
+      <style jsx>{`
+        @media (max-width: 1024px) {
+          div[style*="grid-template-columns: repeat(4"] {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 640px) {
+          div[style*="grid-template-columns: repeat(4"] {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }
@@ -588,7 +597,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ────────────────────────────────────────────────���──────────������──
+// ── STORY STRIP ──────────────────────��─────────────────────────���──────────������──
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
