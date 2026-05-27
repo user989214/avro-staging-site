@@ -383,8 +383,8 @@ export function FinalCta({
           </p>
         </div>
 
-        {/* Right: pill CTA buttons */}
-        <div style={{ flex: "0 1 auto", display: "flex", flexWrap: "wrap", gap: 10 }}>
+        {/* Right: stacked full-width CTA buttons */}
+        <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 12, minWidth: 280, maxWidth: 460 }}>
           {productButtons ? (
             [
               { href: "/calm", label: "Shop Calm" },
@@ -396,15 +396,16 @@ export function FinalCta({
                 href={b.href}
                 className="final-cta-pill"
                 style={{
-                  display: "inline-flex",
+                  display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  width: "100%",
                   fontFamily: GC_FINAL,
                   fontWeight: 700,
-                  fontSize: 16,
+                  fontSize: 17,
                   letterSpacing: "-0.005em",
-                  minHeight: 48,
-                  padding: "0 28px",
+                  minHeight: 60,
+                  padding: "0 32px",
                   borderRadius: 999,
                   border: "1.5px solid var(--charcoal)",
                   backgroundColor: "var(--charcoal)",
@@ -422,14 +423,15 @@ export function FinalCta({
                 href="/shop"
                 className="final-cta-pill"
                 style={{
-                  display: "inline-flex",
+                  display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  width: "100%",
                   fontFamily: GC_FINAL,
                   fontWeight: 700,
-                  fontSize: 16,
-                  minHeight: 48,
-                  padding: "0 28px",
+                  fontSize: 17,
+                  minHeight: 60,
+                  padding: "0 32px",
                   borderRadius: 999,
                   border: "1.5px solid var(--charcoal)",
                   backgroundColor: "var(--charcoal)",
@@ -443,14 +445,15 @@ export function FinalCta({
                 href="/contact"
                 className="final-cta-pill-outline"
                 style={{
-                  display: "inline-flex",
+                  display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  width: "100%",
                   fontFamily: GC_FINAL,
                   fontWeight: 700,
-                  fontSize: 16,
-                  minHeight: 48,
-                  padding: "0 28px",
+                  fontSize: 17,
+                  minHeight: 60,
+                  padding: "0 32px",
                   borderRadius: 999,
                   border: "2px solid var(--charcoal)",
                   backgroundColor: "var(--charcoal)",
