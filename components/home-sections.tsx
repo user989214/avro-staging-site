@@ -263,15 +263,14 @@ export function HomeRefHero() {
             inset: 0,
             width: "100%",
             height: "100%",
-            objectFit: "cover",
-            objectPosition: "100% center",
-            transform: `scale(${imgScale}) translateX(18%)`,
-            transformOrigin: "right center",
+            objectFit: "contain",
+            objectPosition: "right center",
+            transform: "none",
             transition: "transform 0.2s ease-out",
           }}
         />
 
-        {/* Gradient overlay — wider fade so text breathes; product + drink stay clear on the right */}
+        {/* Gradient overlay — wraps the image edges, blending it into the cream background */}
         <div
           aria-hidden="true"
           className="hp-hero-fade"
@@ -279,7 +278,7 @@ export function HomeRefHero() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 50%, rgba(245,241,234,0.9) 58%, rgba(245,241,234,0.5) 66%, rgba(245,241,234,0) 76%)",
+              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.7) 50%, rgba(245,241,234,0.15) 62%, rgba(245,241,234,0) 72%, rgba(245,241,234,0) 92%, var(--base-light) 100%)",
             pointerEvents: "none",
           }}
         />
