@@ -1032,10 +1032,7 @@ export function HomeProductStrip() {
                   </span>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "rgba(0,0,0,0.55)", letterSpacing: "0.04em" }}>
-                    AVRO
-                  </span>
-                  <h3 className="font-serif" style={{ fontWeight: 900, fontSize: "clamp(34px,3.6vw,52px)", lineHeight: 0.95, color: "var(--ink)", margin: 0, letterSpacing: "-0.02em" }}>
+                  <h3 className="font-serif" style={{ fontWeight: 900, fontSize: "clamp(22px,2vw,28px)", lineHeight: 1.05, color: "var(--ink)", margin: 0, letterSpacing: "-0.02em" }}>
                     {formulas[key].name.replace(/^AVRO\s+/, "")}
                   </h3>
                 </div>
@@ -1214,7 +1211,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ──────────────────────��─────────────────────��───���──────────������──
+// ── STORY STRIP ──────────────��───────��─────────────────────��───���──────────������──
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
