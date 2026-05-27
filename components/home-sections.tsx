@@ -74,8 +74,6 @@ export function HomeRefHero() {
         .moment-card:hover { transform: translateY(-3px); }
         .moment-card img { transition: transform 0.5s ease, filter 0.4s ease; filter: grayscale(100%); }
         .moment-card:hover img { transform: scale(1.04); filter: grayscale(0%); }
-        .formula-card img { transition: filter 0.4s ease; filter: grayscale(100%); }
-        .formula-card:hover img { filter: grayscale(0%); }
       `}</style>
 
       <div
@@ -422,7 +420,6 @@ export function HomeProductStrip() {
           {(Object.keys(formulas) as FormulaKey[]).map((key) => (
             <div
               key={key}
-              className="formula-card"
               style={{ display: "flex", flexDirection: "column", borderRadius: 24, overflow: "hidden", backgroundColor: "var(--base-light)" }}
             >
               <div style={{ position: "relative", aspectRatio: "4/5", overflow: "hidden" }}>
