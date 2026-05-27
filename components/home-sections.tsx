@@ -128,8 +128,8 @@ export function HomeRefHero() {
   const sectionPadBottom = lerp(0, 80, progress)
   const radius = lerp(0, 28, progress)
   const imgScale = lerp(1.06, 1.0, progress)
-  // Hero stays full viewport on initial load so all content + image are visible at once
-  const heroMinH = `clamp(620px, ${lerp(92, 62, progress)}vh, ${lerp(900, 720, progress)}px)`
+  // Compact enough so headline + lede + CTAs all fit on first load above the fold
+  const heroMinH = `clamp(560px, ${lerp(78, 56, progress)}vh, ${lerp(780, 680, progress)}px)`
 
   return (
     <section
@@ -264,14 +264,14 @@ export function HomeRefHero() {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "92% center",
-            transform: `scale(${imgScale})`,
-            transformOrigin: "center",
+            objectPosition: "100% center",
+            transform: `scale(${imgScale}) translateX(8%)`,
+            transformOrigin: "right center",
             transition: "transform 0.2s ease-out",
           }}
         />
 
-        {/* Gradient overlay — solid for text on left, fades early so the packet + drink stay clear */}
+        {/* Gradient overlay — wider fade so text breathes; product + drink stay clear on the right */}
         <div
           aria-hidden="true"
           className="hp-hero-fade"
@@ -279,7 +279,7 @@ export function HomeRefHero() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 36%, rgba(245,241,234,0.6) 46%, rgba(245,241,234,0.15) 56%, rgba(245,241,234,0) 64%)",
+              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 44%, rgba(245,241,234,0.85) 54%, rgba(245,241,234,0.4) 62%, rgba(245,241,234,0) 72%)",
             pointerEvents: "none",
           }}
         />
@@ -293,7 +293,7 @@ export function HomeRefHero() {
             gridTemplateColumns: "1.05fr 1fr",
             alignItems: "center",
             gap: "clamp(32px,5vw,72px)",
-            padding: "clamp(48px,6vw,80px) clamp(28px,5vw,64px)",
+            padding: "clamp(36px,5vw,64px) clamp(28px,5vw,64px)",
             minHeight: "inherit",
           }}
         >
@@ -303,8 +303,8 @@ export function HomeRefHero() {
           <h1
             style={{
               fontFamily: GC,
-              fontSize: "clamp(44px,5.6vw,76px)",
-              lineHeight: 1.0,
+              fontSize: "clamp(40px,5vw,68px)",
+              lineHeight: 1.02,
               letterSpacing: "-0.03em",
               color: "var(--ink)",
               marginBottom: 24,
