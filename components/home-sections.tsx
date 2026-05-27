@@ -675,12 +675,12 @@ export function HomeLogicRow() {
             {/* Comparison table — Stimulant: charcoal bg + warm-gray text | Calm: blue bg + black text */}
             <div style={{ borderRadius: 24, overflow: "hidden", border: "2px solid var(--charcoal)" }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-                <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#A0A0A0", backgroundColor: "var(--charcoal)", textAlign: "center", letterSpacing: "0.02em" }}>Stimulant First</div>
+                <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#8A8A8A", backgroundColor: "#D9D9D6", textAlign: "center", letterSpacing: "0.02em" }}>Stimulant First</div>
                 <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--ink)", backgroundColor: BLUE, textAlign: "center", letterSpacing: "0.02em" }}>Calm First</div>
               </div>
               {comparisonRows.map(([left, right]) => (
                 <div key={left} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderTop: "2px solid var(--charcoal)" }}>
-                  <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#A0A0A0", backgroundColor: "var(--charcoal)", textAlign: "center" }}>{left}</div>
+                  <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#8A8A8A", backgroundColor: "#D9D9D6", textAlign: "center" }}>{left}</div>
                   <div style={{ padding: "22px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--ink)", backgroundColor: BLUE, textAlign: "center", borderLeft: "2px solid var(--charcoal)" }}>{right}</div>
                 </div>
               ))}
@@ -949,7 +949,7 @@ export function HomeStoryStrip() {
   )
 }
 
-// ── RITUAL SECTION ──────────────────────────────��────────���────────────────────
+// ── RITUAL SECTION ──────────────────────────────��───────������────────────────────
 export function HomeRitualSection() {
   const [openStep, setOpenStep] = useState<number | null>(null)
   
