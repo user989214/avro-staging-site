@@ -56,7 +56,7 @@ function FormulaGraph() {
             </div>
             <div style={{ display: "flex", gap: 4, height: 14 }}>
               {formula.segments.map((seg, segIdx) => {
-                const delay = idx * 0.18 + segIdx * 0.12
+                const delay = idx * 0.25 + segIdx * 0.2
                 return (
                   <div
                     key={segIdx}
@@ -67,7 +67,8 @@ function FormulaGraph() {
                       transformOrigin: "left",
                       transform: visible ? "scaleX(1)" : "scaleX(0)",
                       opacity: visible ? 1 : 0,
-                      transition: `transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}s, opacity 0.4s ease ${delay}s`,
+                      transition: `transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s, opacity 0.7s ease ${delay}s`,
+                      willChange: "transform, opacity",
                     }}
                   />
                 )
