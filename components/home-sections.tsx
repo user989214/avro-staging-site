@@ -278,8 +278,8 @@ export function HomeRefHero() {
             position: "absolute",
             inset: 0,
             background: `
-              linear-gradient(to right, var(--base-light) 0%, var(--base-light) 46%, rgba(245,241,234,0.98) 54%, rgba(245,241,234,0.78) 62%, rgba(245,241,234,0.4) 72%, rgba(245,241,234,0.18) 82%, rgba(245,241,234,0.35) 92%, var(--base-light) 100%),
-              linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.4) 8%, rgba(245,241,234,0) 18%, rgba(245,241,234,0) 82%, rgba(245,241,234,0.4) 92%, var(--base-light) 100%)
+              linear-gradient(to right, var(--base-light) 0%, var(--base-light) 45%, rgba(245,241,234,0.94) 53%, rgba(245,241,234,0.65) 62%, rgba(245,241,234,0.3) 72%, rgba(245,241,234,0.1) 82%, rgba(245,241,234,0.2) 94%, var(--base-light) 100%),
+              linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.25) 8%, rgba(245,241,234,0) 16%, rgba(245,241,234,0) 84%, rgba(245,241,234,0.25) 92%, var(--base-light) 100%)
             `,
             pointerEvents: "none",
           }}
@@ -383,7 +383,7 @@ export function HomeRefHero() {
   )
 }
 
-// ── PROOF BAR ──────────────────────��──────────────────────────────────────────
+// ── PROOF BAR ───���──────────────────��──────────────────────────────────────────
 export function HomeProofBar() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(32px,5vw,56px) clamp(20px,5vw,64px)" }}>
