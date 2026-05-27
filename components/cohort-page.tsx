@@ -81,12 +81,12 @@ export function CohortPage({ data }: { data: CohortData }) {
         stepIconColor: "var(--avro-blue)",
       }
 
-  // Golf gets a colored CTA closer (charcoal text on green); ZP gets a gold-on-dark closer.
+  // Golf gets a colored CTA closer (charcoal text on green); ZP gets a gold card on dark bg.
   const finalCtaBg =
     data.visual === "golf"
       ? accent
       : isZeroProof
-        ? "var(--dark-surface)"
+        ? "var(--gold)"
         : undefined
 
   // Cohort-specific lifestyle hero photo
@@ -162,7 +162,6 @@ export function CohortPage({ data }: { data: CohortData }) {
             </>
           )}
 
-          {/* Content */}
           <div
             style={{
               position: "relative",
@@ -179,14 +178,17 @@ export function CohortPage({ data }: { data: CohortData }) {
           >
             <span
               style={{
-                display: "block",
-                marginBottom: 12,
+                display: "inline-block",
+                marginBottom: 16,
+                padding: "10px 18px",
+                borderRadius: 999,
                 fontFamily: GC,
                 fontWeight: 700,
                 fontSize: 11,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: accent,
+                backgroundColor: isZeroProof ? "var(--gold)" : "var(--charcoal)",
+                color: isZeroProof ? "var(--charcoal)" : "var(--bone)",
               }}
             >
               {data.eyebrow}
@@ -218,27 +220,29 @@ export function CohortPage({ data }: { data: CohortData }) {
             >
               {data.copy}
             </p>
-            <CtaGroup primary={data.primary} secondary={data.secondary} />
+            <CtaGroup primary={data.primary} secondary={data.secondary} dark={isZeroProof} />
           </div>
         </div>
       </section>
 
-      <Section>
+      <Section dark={isZeroProof}>
         <SectionHeading
           eyebrow="The moment"
           title={data.momentTitle}
           description={data.momentCopy}
+          dark={isZeroProof}
         />
       </Section>
 
-      <Section>
-        <SectionHeading title={data.whyTitle} />
+      <Section dark={isZeroProof}>
+        <SectionHeading title={data.whyTitle} dark={isZeroProof} />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {data.reasons.map(([title, copy], index) => (
             <InfoCard
               key={title}
               icon={(["leaf", "brain", "clock"] as const)[index]}
               title={title}
+              dark={isZeroProof}
             >
               {copy}
             </InfoCard>

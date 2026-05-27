@@ -110,16 +110,18 @@ export function SectionHeading({
 export function CtaGroup({
   primary = "Shop AVRO",
   secondary = "Find Your Formula",
+  dark = false,
 }: {
   primary?: string
   secondary?: string
+  dark?: boolean
 }) {
   return (
     <div className="flex flex-wrap items-center gap-3 mt-6.5">
-      <Link href="/shop" className="btn-primary">
+      <Link href="/shop" className={dark ? "btn-primary-dark" : "btn-primary"}>
         {primary}
       </Link>
-      <Link href="/shop" className="btn-secondary">
+      <Link href="/shop" className={dark ? "btn-outline-dark" : "btn-secondary"}>
         {secondary}
       </Link>
     </div>
@@ -206,7 +208,7 @@ export function ProductCards({
                 </div>
                 <a 
                   href={`/${key}`} 
-                  className="hp-btn-black"
+                  className={dark ? "hp-btn-gold" : "hp-btn-black"}
                   style={{ 
                     display: "flex", 
                     alignItems: "center", 
@@ -219,19 +221,29 @@ export function ProductCards({
                     padding: "0 24px", 
                     borderRadius: 999, 
                     textDecoration: "none", 
-                    border: "2px solid var(--charcoal)",
-                    backgroundColor: "var(--charcoal)", 
-                    color: "var(--bone)", 
+                    border: dark ? "2px solid var(--gold)" : "2px solid var(--charcoal)",
+                    backgroundColor: dark ? "var(--gold)" : "var(--charcoal)", 
+                    color: dark ? "var(--charcoal)" : "var(--bone)", 
                     marginTop: "auto",
-                    transition: "background-color 0.2s ease, color 0.2s ease",
+                    transition: "background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'transparent'
-                    e.currentTarget.style.color = 'var(--charcoal)'
+                    if (dark) {
+                      e.currentTarget.style.backgroundColor = 'var(--gold-light)'
+                      e.currentTarget.style.borderColor = 'var(--gold-light)'
+                    } else {
+                      e.currentTarget.style.backgroundColor = 'transparent'
+                      e.currentTarget.style.color = 'var(--charcoal)'
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'var(--charcoal)'
-                    e.currentTarget.style.color = 'var(--bone)'
+                    if (dark) {
+                      e.currentTarget.style.backgroundColor = 'var(--gold)'
+                      e.currentTarget.style.borderColor = 'var(--gold)'
+                    } else {
+                      e.currentTarget.style.backgroundColor = 'var(--charcoal)'
+                      e.currentTarget.style.color = 'var(--bone)'
+                    }
                   }}
                 >
                   {shopLabel} {item.short}
@@ -396,10 +408,12 @@ export function FinalCta({
   bg?: string
   dark?: boolean
 }) {
-  // Dark theme uses gold-on-dark styling with bone text
-  const textColor = dark ? "var(--bone)" : "var(--charcoal)"
-  const mutedColor = dark ? "rgba(245,240,232,0.7)" : "rgba(21,21,21,0.7)"
+  // All CTA cards use charcoal text + charcoal buttons (works on blue, gold, and green backgrounds)
+  const textColor = "var(--charcoal)"
+  const mutedColor = "rgba(21,21,21,0.7)"
   const sectionBg = dark ? "var(--deep-black)" : "transparent"
+  const btnBg = "var(--charcoal)"
+  const btnText = "var(--bone)"
   return (
     <section
       style={{
@@ -494,11 +508,11 @@ export function FinalCta({
                   minHeight: 48,
                   padding: "0 28px",
                   borderRadius: 999,
-                  border: "2px solid var(--charcoal)",
-                  backgroundColor: "var(--charcoal)",
-                  color: "var(--bone)",
+                  border: `2px solid ${btnBg}`,
+                  backgroundColor: btnBg,
+                  color: btnText,
                   textDecoration: "none",
-                  transition: "background-color 0.18s ease, color 0.18s ease",
+                  transition: "background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease",
                 }}
               >
                 {b.label}
@@ -520,9 +534,9 @@ export function FinalCta({
                   minHeight: 48,
                   padding: "0 28px",
                   borderRadius: 999,
-                  border: "2px solid var(--charcoal)",
-                  backgroundColor: "var(--charcoal)",
-                  color: "var(--bone)",
+                  border: `2px solid ${btnBg}`,
+                  backgroundColor: btnBg,
+                  color: btnText,
                   textDecoration: "none",
                 }}
               >
@@ -542,9 +556,9 @@ export function FinalCta({
                   minHeight: 48,
                   padding: "0 28px",
                   borderRadius: 999,
-                  border: "2px solid var(--charcoal)",
-                  backgroundColor: "var(--charcoal)",
-                  color: "var(--bone)",
+                  border: `2px solid ${btnBg}`,
+                  backgroundColor: btnBg,
+                  color: btnText,
                   textDecoration: "none",
                 }}
               >
