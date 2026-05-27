@@ -30,7 +30,10 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
   void reviewCount
 
   const handleAdd = () => {
-    addItem(formula, purchaseType === "subscribe" ? "bundle" : "single")
+    const variant = purchaseType === "subscribe" ? "bundle" : "single"
+    for (let i = 0; i < quantity; i++) {
+      addItem(formula, variant)
+    }
     openCart()
   }
 
@@ -206,7 +209,12 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         Add to cart — ${displayTotal.toFixed(2)}
       </button>
       <style>{`
-        .bb-add-btn:hover { background-color: transparent; color: var(--ink); }
+        .bb-add-btn { cursor: pointer; }
+        .bb-add-btn:hover {
+          background-color: transparent;
+          color: var(--charcoal);
+        }
+        .bb-add-btn:active { transform: scale(0.99); }
       `}</style>
     </aside>
   )
