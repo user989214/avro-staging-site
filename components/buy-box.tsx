@@ -10,17 +10,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { soloTubeImageFor } from "@/components/product-visual"
 import type { Formula, FormulaKey } from "@/lib/data"
 import { cn } from "@/lib/utils"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const LIGHT_GRAY = "#f2f2f2"
-
-// Solo tube images for flavor thumbnails (the display tube by itself)
-function soloTubeImage(formulaKey: FormulaKey, flavorId: string) {
-  const flavorSlug = flavorId // already in slug form like "blueberry-acai"
-  return `/images/tubes/solo/${formulaKey}-${flavorSlug}.jpg`
-}
 
 interface BuyBoxProps {
   formula: Formula
@@ -135,7 +130,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={soloTubeImage(formulaKey, flavor.id)}
+                    src={soloTubeImageFor(formulaKey, flavor.id).src}
                     alt={flavor.name}
                     className="w-full h-full object-cover"
                   />

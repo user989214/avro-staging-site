@@ -145,15 +145,10 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
   }
 
   return (
-    <div className="flex flex-col gap-3 lg:gap-4">
-      {/* Main view — square, fills the frame, image-native background */}
-      <div className="relative w-full aspect-square rounded-2xl overflow-hidden" style={{ backgroundColor: "#f2f2f2" }}>
-        <div className="absolute inset-0">{renderMain()}</div>
-      </div>
-
-      {/* Thumbnail strip — horizontal, below the main image */}
-      <div className="relative">
-        <ul className="flex gap-3 overflow-x-auto -mx-1 px-1 pb-1 snap-x">
+    <div className="flex flex-col-reverse lg:flex-row gap-3 lg:gap-4">
+      {/* Thumbnail strip — horizontal on mobile, vertical on desktop (left side) */}
+      <div className="relative lg:w-[78px] shrink-0">
+        <ul className="flex lg:flex-col gap-2.5 overflow-x-auto lg:overflow-visible -mx-1 px-1 pb-1 lg:mx-0 lg:px-0 lg:pb-0 snap-x">
           {THUMBS.map((thumb) => (
             <li key={thumb.id} className="shrink-0 snap-start">
               <button
@@ -162,7 +157,7 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
                 aria-label={thumb.label}
                 aria-pressed={activeId === thumb.id}
                 className={cn(
-                  "relative w-[78px] h-[78px] sm:w-[86px] sm:h-[86px] rounded-2xl overflow-hidden flex items-center justify-center transition-all",
+                  "relative w-[68px] h-[68px] sm:w-[74px] sm:h-[74px] rounded-xl overflow-hidden flex items-center justify-center transition-all",
                   activeId === thumb.id ? "ring-2 ring-black" : "opacity-70 hover:opacity-100",
                 )}
                 style={{ backgroundColor: "#f2f2f2" }}
@@ -173,6 +168,11 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
             </li>
           ))}
         </ul>
+      </div>
+
+      {/* Main view — square, fills the frame, image-native background */}
+      <div className="relative w-full aspect-square rounded-2xl overflow-hidden flex-1" style={{ backgroundColor: "#f2f2f2" }}>
+        <div className="absolute inset-0">{renderMain()}</div>
       </div>
     </div>
   )
