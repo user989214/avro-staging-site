@@ -56,6 +56,13 @@ export function HomeRefHero() {
           background-color: transparent !important;
           color: var(--avro-blue) !important;
         }
+        .hp-btn-bone {
+          transition: background-color .2s ease, color .2s ease;
+        }
+        .hp-btn-bone:hover {
+          background-color: transparent !important;
+          color: var(--bone) !important;
+        }
         .moment-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
         .moment-card:hover { transform: translateY(-3px); }
         .moment-card img { transition: transform 0.5s ease; }
@@ -430,7 +437,7 @@ export function HomeProductStrip() {
   )
 }
 
-// ── MOMENT GRID ───���───────────────────────────────────────────────────────────
+// ── MOMENT GRID ───────────────────────────────────────────────────────────────
 export function HomeMomentGrid() {
   const moments = [
     { title: "Golf", copy: "Before the first tee. Before the final putt.", cta: "Explore Golf", url: "/golf", image: "/images/lifestyle/golfers-misty-tee-box.jpg", alt: "Golfers on a misty tee box at sunrise" },
@@ -440,28 +447,31 @@ export function HomeMomentGrid() {
   ]
 
   return (
-    <section style={{ backgroundColor: BLUE, width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32 }}>
-          Built for pressure sensitive moments.
-        </h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))", gap: 16 }}>
-          {moments.map((m) => (
-            <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 24, overflow: "hidden", backgroundColor: "var(--base)" }}>
-              <div style={{ position: "relative", height: 220, overflow: "hidden" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={m.image} alt={m.alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-              </div>
-              <div style={{ padding: "20px 24px 24px" }}>
-                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(24px,2.5vw,34px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 8 }}>{m.title}</h3>
-                <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, lineHeight: 1.45, color: "rgba(0,0,0,0.6)", marginBottom: 20 }}>{m.copy}</p>
-                <span className="hp-btn-blue" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 700, fontSize: 17, minHeight: 52, padding: "0 24px", borderRadius: 999, border: `2px solid ${BLUE}`, backgroundColor: BLUE, color: "var(--ink)" }}>
-                  {m.cta}
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </span>
-              </div>
-            </a>
-          ))}
+        {/* Outer container card with avro-blue background */}
+        <div style={{ backgroundColor: BLUE, borderRadius: 28, padding: "clamp(24px,4vw,48px)" }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--charcoal)", marginBottom: 28 }}>
+            Built for pressure sensitive moments.
+          </h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 16 }}>
+            {moments.map((m) => (
+              <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 20, overflow: "hidden", backgroundColor: "var(--charcoal)", border: "2px solid rgba(0,0,0,0.1)" }}>
+                <div style={{ position: "relative", height: 260, overflow: "hidden" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={m.image} alt={m.alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+                </div>
+                <div style={{ padding: "24px 24px 28px", flex: 1, display: "flex", flexDirection: "column" }}>
+                  <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,2.8vw,36px)", lineHeight: 1.0, color: "var(--bone)", marginBottom: 10 }}>{m.title}</h3>
+                  <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, lineHeight: 1.45, color: "rgba(255,255,255,0.65)", marginBottom: 24, flex: 1 }}>{m.copy}</p>
+                  <span className="hp-btn-bone" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 700, fontSize: 17, minHeight: 52, padding: "0 24px", borderRadius: 999, border: "2px solid var(--bone)", backgroundColor: "var(--bone)", color: "var(--charcoal)" }}>
+                    {m.cta}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -638,7 +648,7 @@ export function HomeRitualSection() {
               <div
                 key={step.num}
                 style={{
-                  backgroundColor: "var(--bone)",
+                  backgroundColor: "var(--charcoal)",
                   borderRadius: 16,
                   border: "2px solid rgba(0,0,0,0.08)",
                   overflow: "hidden",
@@ -664,13 +674,13 @@ export function HomeRitualSection() {
                       width: 48,
                       height: 48,
                       borderRadius: 999,
-                      border: "2px solid var(--charcoal)",
+                      border: "2px solid var(--bone)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
-                      backgroundColor: openStep === step.num ? "var(--charcoal)" : "transparent",
-                      color: openStep === step.num ? "var(--bone)" : "var(--charcoal)",
+                      backgroundColor: openStep === step.num ? "var(--bone)" : "transparent",
+                      color: openStep === step.num ? "var(--charcoal)" : "var(--bone)",
                       fontFamily: GC,
                       fontWeight: 700,
                       fontSize: 20,
@@ -679,7 +689,7 @@ export function HomeRitualSection() {
                   >
                     {step.num}
                   </div>
-                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 20, color: "var(--charcoal)", flex: 1 }}>
+                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 20, color: "var(--bone)", flex: 1 }}>
                     {step.title}
                   </span>
                   <svg
@@ -694,7 +704,7 @@ export function HomeRitualSection() {
                     style={{
                       transform: openStep === step.num ? "rotate(180deg)" : "rotate(0deg)",
                       transition: "transform 0.25s ease",
-                      color: "var(--charcoal)",
+                      color: "var(--bone)",
                     }}
                   >
                     <polyline points="6 9 12 15 18 9"/>
@@ -713,7 +723,7 @@ export function HomeRitualSection() {
                     fontWeight: 400, 
                     fontSize: 17, 
                     lineHeight: 1.55, 
-                    color: "rgba(0,0,0,0.6)",
+                    color: "rgba(255,255,255,0.65)",
                     margin: 0,
                   }}>
                     {step.detail}
