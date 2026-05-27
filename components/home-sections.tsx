@@ -512,24 +512,120 @@ function CountUpStat({ value, suffix = "", decimals = 0, duration = 1800, delay 
 // ── BENEFIT ROW ───────────────────��───────────────────────────────────────────
 export function HomeBenefitRow() {
   const benefits = [
-    { title: "Supports composure under pressure", copy: "Helps you steady first before the moment matters." },
-    { title: "Supports clear-headed readiness", copy: "Helps you feel calm, clear, and in control." },
-    { title: "Supports calm without sedation", copy: "Designed to support composure without turning you off." },
+    {
+      n: "01",
+      title: "Supports composure under pressure",
+      copy: "Helps you steady first before the moment matters — so you arrive ready, not reactive.",
+      tone: "blue" as const,
+      width: "wide" as const,
+    },
+    {
+      n: "02",
+      title: "Supports clear-headed readiness",
+      copy: "Calm, clear, and in control — without the spike or the crash.",
+      tone: "bone" as const,
+      width: "narrow" as const,
+    },
+    {
+      n: "03",
+      title: "Supports calm without sedation",
+      copy: "Designed to support composure without turning you off. Quiet focus, fully online.",
+      tone: "blue" as const,
+      width: "wide" as const,
+    },
   ]
 
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 80)
+    return () => clearTimeout(t)
+  }, [])
+
   return (
-    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(48px,6vw,72px)" }}>
-      <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 16 }}>
-        {benefits.map((b) => (
-          <div key={b.title} style={{ backgroundColor: BLUE, borderRadius: 24, padding: "clamp(28px,3vw,36px)", display: "flex", flexDirection: "column", gap: 12, minHeight: 200 }}>
-            <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(20px,1.8vw,24px)", lineHeight: 1.2, color: "var(--ink)", letterSpacing: "-0.01em" }}>
-              {b.title}
-            </h3>
-            <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(15px,1.2vw,17px)", lineHeight: 1.5, color: "var(--warm-gray)" }}>
-              {b.copy}
-            </p>
-          </div>
-        ))}
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(56px,7vw,88px)" }}>
+      <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexDirection: "column", gap: 16 }}>
+        {benefits.map((b, i) => {
+          const isBlue = b.tone === "blue"
+          const isNarrow = b.width === "narrow"
+          const bg = isBlue ? BLUE : "var(--base-light)"
+          const titleColor = "var(--ink)"
+          const copyColor = isBlue ? "var(--ink)" : "var(--warm-gray)"
+          const numColor = isBlue ? "var(--ink)" : BLUE
+
+          return (
+            <div
+              key={b.title}
+              style={{
+                width: isNarrow ? "min(82%, 980px)" : "100%",
+                alignSelf: i % 2 === 1 ? "flex-end" : "stretch",
+                backgroundColor: bg,
+                border: "2px solid var(--charcoal)",
+                borderRadius: 28,
+                padding: "clamp(28px,3vw,40px) clamp(28px,3.5vw,52px)",
+                display: "grid",
+                gridTemplateColumns: "auto 1fr",
+                columnGap: "clamp(24px,4vw,56px)",
+                alignItems: "center",
+                opacity: mounted ? 1 : 0,
+                transform: mounted ? "translateY(0)" : "translateY(18px)",
+                transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${(0.08 * i + 0.05).toFixed(2)}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${(0.08 * i + 0.05).toFixed(2)}s`,
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: GC,
+                  fontWeight: 700,
+                  fontSize: "clamp(36px,4.5vw,64px)",
+                  lineHeight: 1,
+                  color: numColor,
+                  letterSpacing: "-0.02em",
+                  fontVariantNumeric: "tabular-nums",
+                  alignSelf: "start",
+                  paddingTop: 4,
+                }}
+              >
+                {b.n}
+              </span>
+
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "minmax(0, 1.1fr) minmax(0, 1fr)",
+                  columnGap: "clamp(20px,3vw,40px)",
+                  rowGap: 10,
+                  alignItems: "start",
+                }}
+              >
+                <h3
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: "clamp(22px,2.4vw,32px)",
+                    lineHeight: 1.15,
+                    color: titleColor,
+                    letterSpacing: "-0.015em",
+                    margin: 0,
+                  }}
+                >
+                  {b.title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 400,
+                    fontSize: "clamp(15px,1.15vw,17px)",
+                    lineHeight: 1.55,
+                    color: copyColor,
+                    margin: 0,
+                    maxWidth: 460,
+                  }}
+                >
+                  {b.copy}
+                </p>
+              </div>
+            </div>
+          )
+        })}
       </div>
     </section>
   )
