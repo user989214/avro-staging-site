@@ -142,10 +142,11 @@ export function Header() {
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"/></svg>
             </button>
 
-            {/* Horizontal dropdown panel — drops flush from nav, anchored right */}
+            {/* Horizontal dropdown panel — drops flush from nav, centered on viewport */}
             <div
-              className="absolute right-0 top-full z-50"
+              className="fixed left-1/2 -translate-x-1/2 z-50"
               style={{
+                top: scrolled ? 73 : 122,
                 pointerEvents: dropdownOpen ? "auto" : "none",
               }}
               aria-hidden={!dropdownOpen}
@@ -153,7 +154,7 @@ export function Header() {
               <div
                 className="overflow-hidden"
                 style={{
-                  width: 760,
+                  width: "min(640px, 50vw)",
                   backgroundColor: "var(--base)",
                   opacity: dropdownOpen ? 1 : 0,
                   transform: dropdownOpen ? "translateY(0)" : "translateY(-8px)",
