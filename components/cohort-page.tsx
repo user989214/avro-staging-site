@@ -41,10 +41,45 @@ interface CohortData {
 
 export function CohortPage({ data }: { data: CohortData }) {
   // Per AVRO Design System v2 — the accent color is the only thing that swaps per cohort:
-  //   Main (Work, Gaming, Social on avrolife.com) → Avro Blue   #94C6D4
-  //   Golf (avrolife.com/golf)                    → Fuji Apple  #BDD637
-  //   Zero Proof (avrozeroproof.com — separate)   → Avro Gold   #CAA84B
-  const accent = data.visual === "golf" ? "var(--golf)" : "var(--avro-blue)"
+  //   Main (Work, Gaming) → Avro Blue   #94C6D4 — light theme
+  //   Golf                → Fuji Apple  #BDD637 — light theme
+  //   Social (Zero Proof) → Avro Gold   #CAA84B — DARK theme
+  const isZeroProof = data.visual === "social"
+  const accent =
+    data.visual === "golf"
+      ? "var(--golf)"
+      : isZeroProof
+        ? "var(--gold)"
+        : "var(--avro-blue)"
+
+  // Theme surfaces — light cohorts use the bone/cream system; Zero Proof flips to deep-black + bone.
+  const t = isZeroProof
+    ? {
+        pageBg: "var(--deep-black)",
+        surface: "var(--dark-surface)",
+        cardBg: "var(--dark-surface)",
+        ink: "var(--bone)",
+        muted: "rgba(245,240,232,0.7)",
+        heroBg: "var(--deep-black)",
+        heroFade:
+          "linear-gradient(to right, var(--deep-black) 0%, var(--deep-black) 38%, rgba(13,13,13,0.95) 48%, rgba(13,13,13,0.7) 58%, rgba(13,13,13,0.3) 70%, rgba(13,13,13,0.1) 82%, rgba(13,13,13,0.15) 94%, var(--deep-black) 100%), linear-gradient(to bottom, var(--deep-black) 0%, rgba(13,13,13,0.2) 10%, rgba(13,13,13,0) 20%, rgba(13,13,13,0) 80%, rgba(13,13,13,0.2) 90%, var(--deep-black) 100%)",
+        stepNumBg: "var(--gold)",
+        stepNumFg: "var(--charcoal)",
+        stepIconColor: "var(--gold)",
+      }
+    : {
+        pageBg: "var(--base)",
+        surface: "var(--base)",
+        cardBg: "var(--base-light)",
+        ink: "var(--ink)",
+        muted: "var(--warm-gray)",
+        heroBg: "var(--base-light)",
+        heroFade:
+          "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.95) 48%, rgba(245,241,234,0.7) 58%, rgba(245,241,234,0.3) 70%, rgba(245,241,234,0.1) 82%, rgba(245,241,234,0.15) 94%, var(--base-light) 100%), linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.2) 10%, rgba(245,241,234,0) 20%, rgba(245,241,234,0) 80%, rgba(245,241,234,0.2) 90%, var(--base-light) 100%)",
+        stepNumBg: "var(--charcoal)",
+        stepNumFg: "var(--bone)",
+        stepIconColor: "var(--avro-blue)",
+      }
 
   // Cohort-specific lifestyle hero photo
   const cohortHero: Record<string, { src: string; alt: string }> = {
@@ -67,12 +102,12 @@ export function CohortPage({ data }: { data: CohortData }) {
   }
 
   return (
-    <>
+    <div style={{ backgroundColor: t.pageBg, color: t.ink }}>
       {/* Hero — full-width, square corners (matches site-wide page hero language) */}
       <section
         style={{
           width: "100%",
-          backgroundColor: "var(--base-light)",
+          backgroundColor: t.heroBg,
           padding: 0,
         }}
       >
@@ -83,7 +118,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             margin: 0,
             borderRadius: 0,
             overflow: "hidden",
-            backgroundColor: "var(--base-light)",
+            backgroundColor: t.heroBg,
             minHeight: data.visual === "work" ? "clamp(380px,50vh,480px)" : "clamp(480px,60vh,640px)",
           }}
         >
@@ -110,10 +145,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                 style={{
                   position: "absolute",
                   inset: 0,
-                  background: `
-                    linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.95) 48%, rgba(245,241,234,0.7) 58%, rgba(245,241,234,0.3) 70%, rgba(245,241,234,0.1) 82%, rgba(245,241,234,0.15) 94%, var(--base-light) 100%),
-                    linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.2) 10%, rgba(245,241,234,0) 20%, rgba(245,241,234,0) 80%, rgba(245,241,234,0.2) 90%, var(--base-light) 100%)
-                  `,
+                  background: t.heroFade,
                   pointerEvents: "none",
                 }}
               />
@@ -158,7 +190,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                 fontSize: "clamp(42px,6vw,72px)",
                 lineHeight: 0.98,
                 letterSpacing: "-0.025em",
-                color: "var(--ink)",
+                color: t.ink,
                 marginBottom: 20,
                 maxWidth: data.visual === "work" ? 820 : 560,
               }}
@@ -171,7 +203,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                 fontWeight: 400,
                 fontSize: "clamp(17px,2vw,20px)",
                 lineHeight: 1.55,
-                color: "var(--warm-gray)",
+                color: t.muted,
                 maxWidth: data.visual === "work" ? 580 : 480,
                 marginBottom: 28,
               }}
@@ -207,7 +239,7 @@ export function CohortPage({ data }: { data: CohortData }) {
       </Section>
 
       {/* How to Use Steps */}
-      <section style={{ width: "100%", padding: "clamp(48px,6vw,80px) clamp(20px,5vw,64px)", backgroundColor: "var(--base)" }}>
+      <section style={{ width: "100%", padding: "clamp(48px,6vw,80px) clamp(20px,5vw,64px)", backgroundColor: t.surface }}>
         <div style={{ maxWidth: 1320, margin: "0 auto" }}>
           <span
             style={{
@@ -217,7 +249,7 @@ export function CohortPage({ data }: { data: CohortData }) {
               fontSize: 11,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "var(--warm-gray)",
+              color: t.muted,
               marginBottom: 8,
               textAlign: "center",
             }}
@@ -231,7 +263,7 @@ export function CohortPage({ data }: { data: CohortData }) {
               fontSize: "clamp(32px,4.5vw,52px)",
               lineHeight: 1.02,
               letterSpacing: "-0.02em",
-              color: "var(--ink)",
+              color: t.ink,
               textAlign: "center",
               marginBottom: 40,
             }}
@@ -250,7 +282,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                 style={{
                   position: "relative",
                   padding: 28,
-                  backgroundColor: "var(--base-light)",
+                  backgroundColor: t.cardBg,
                   borderRadius: 20,
                 }}
               >
@@ -265,19 +297,19 @@ export function CohortPage({ data }: { data: CohortData }) {
                     fontFamily: GC,
                     fontWeight: 700,
                     fontSize: 14,
-                    backgroundColor: "var(--charcoal)",
-                    color: "var(--bone)",
+                    backgroundColor: t.stepNumBg,
+                    color: t.stepNumFg,
                   }}
                 >
                   {step.num}
                 </span>
-                <Icon name={step.icon} className="w-10 h-10 mb-3" style={{ color: "var(--avro-blue)" }} />
+                <Icon name={step.icon} className="w-10 h-10 mb-3" style={{ color: t.stepIconColor }} />
                 <h3
                   style={{
                     fontFamily: GC,
                     fontWeight: 700,
                     fontSize: 18,
-                    color: "var(--ink)",
+                    color: t.ink,
                     marginBottom: 8,
                   }}
                 >
@@ -289,7 +321,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                     fontWeight: 400,
                     fontSize: 15,
                     lineHeight: 1.5,
-                    color: "var(--warm-gray)",
+                    color: t.muted,
                   }}
                 >
                   {step.copy}
@@ -320,16 +352,22 @@ export function CohortPage({ data }: { data: CohortData }) {
 
       <ProductCards title={data.shopTitle} shopLabel="Shop" />
       <SocialProof mode="compact" />
-      {/* Tonal continuation — matte off-white deepening toward the CTA, matches the Science/FAQ flow */}
-      <div style={{ background: "linear-gradient(to bottom, #EAE6DC 0%, #DEDAD0 100%)" }}>
+      {/* Tonal continuation — light cohorts deepen toward CTA; ZP keeps the dark surface */}
+      <div
+        style={{
+          background: isZeroProof
+            ? "var(--dark-surface)"
+            : "linear-gradient(to bottom, #EAE6DC 0%, #DEDAD0 100%)",
+        }}
+      >
         <FaqBlock title={data.faqTitle} faqs={data.faqs} />
       </div>
       <FinalCta
         title={data.finalTitle}
         copy={data.finalCopy}
         productButtons
-        bg={useColoredFinalCta ? accent : undefined}
+        bg={finalCtaBg}
       />
-    </>
+    </div>
   )
 }
