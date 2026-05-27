@@ -114,20 +114,20 @@ export function CohortPage({ data }: { data: CohortData }) {
 
   return (
     <>
-      {/* Hero — matches homepage faded-image style */}
+      {/* Hero — full-width, square corners (matches site-wide page hero language) */}
       <section
         style={{
           width: "100%",
-          backgroundColor: "var(--base)",
-          padding: "clamp(24px,5vw,64px) clamp(20px,5vw,64px) clamp(48px,6vw,80px)",
+          backgroundColor: "var(--base-light)",
+          padding: 0,
         }}
       >
         <div
           style={{
             position: "relative",
-            maxWidth: 1320,
-            margin: "0 auto",
-            borderRadius: 28,
+            width: "100%",
+            margin: 0,
+            borderRadius: 0,
             overflow: "hidden",
             backgroundColor: "var(--base-light)",
             minHeight: data.visual === "work" ? "clamp(380px,50vh,480px)" : "clamp(480px,60vh,640px)",
@@ -191,10 +191,12 @@ export function CohortPage({ data }: { data: CohortData }) {
           <div
             style={{
               position: "relative",
+              maxWidth: 1440,
+              margin: "0 auto",
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              padding: "clamp(48px,7vw,80px) clamp(32px,5vw,64px)",
+              padding: "clamp(72px,9vw,128px) clamp(20px,5vw,64px)",
               minHeight: "inherit",
               textAlign: data.visual === "work" ? "center" : "left",
               alignItems: data.visual === "work" ? "center" : "flex-start",
