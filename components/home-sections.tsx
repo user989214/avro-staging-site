@@ -513,21 +513,18 @@ function CountUpStat({ value, suffix = "", decimals = 0, duration = 1800, delay 
 export function HomeBenefitRow() {
   const benefits = [
     {
-      eyebrow: "Composure",
       title: "Supports composure under pressure",
       copy: "Helps you steady first before the moment matters — so you arrive ready, not reactive.",
       tone: "blue" as const,
       width: "wide" as const,
     },
     {
-      eyebrow: "Readiness",
       title: "Supports clear-headed readiness",
       copy: "Calm, clear, and in control — without the spike or the crash.",
       tone: "bone" as const,
       width: "narrow" as const,
     },
     {
-      eyebrow: "Sustain",
       title: "Supports calm without sedation",
       copy: "Designed to support composure without turning you off. Quiet focus, fully online.",
       tone: "blue" as const,
@@ -542,101 +539,76 @@ export function HomeBenefitRow() {
   }, [])
 
   return (
-    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(56px,7vw,88px)" }}>
-      <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexDirection: "column", gap: 18 }}>
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(48px,6vw,72px)" }}>
+      <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexDirection: "column", gap: 14 }}>
         {benefits.map((b, i) => {
           const isBlue = b.tone === "blue"
           const isNarrow = b.width === "narrow"
           const bg = isBlue ? BLUE : "var(--base-light)"
-          // Two colors per card — bg + ink (everything text-related uses var(--ink))
-          const cardDelay = 0.1 + i * 0.18
+          // Two colors per card — bg + var(--ink) for all text
+          const cardDelay = 0.05 + i * 0.14
           const titleWords = b.title.split(" ")
 
           return (
             <div
               key={b.title}
               style={{
-                width: isNarrow ? "min(82%, 980px)" : "100%",
+                width: isNarrow ? "min(80%, 960px)" : "100%",
                 alignSelf: i % 2 === 1 ? "flex-end" : "stretch",
                 backgroundColor: bg,
-                borderRadius: 28,
-                padding: "clamp(40px,4.5vw,64px) clamp(32px,4vw,64px)",
-                minHeight: "clamp(260px,28vw,340px)",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                gap: 28,
+                borderRadius: 24,
+                padding: "clamp(28px,3vw,40px) clamp(28px,3.5vw,52px)",
+                minHeight: "clamp(140px,14vw,180px)",
+                display: "grid",
+                gridTemplateColumns: "minmax(0, 1.4fr) minmax(0, 1fr)",
+                columnGap: "clamp(28px,4vw,64px)",
+                alignItems: "center",
                 opacity: mounted ? 1 : 0,
-                transform: mounted ? "translateY(0)" : "translateY(18px)",
-                transition: `opacity 0.8s cubic-bezier(0.22,1,0.36,1) ${(0.06 * i).toFixed(2)}s, transform 0.8s cubic-bezier(0.22,1,0.36,1) ${(0.06 * i).toFixed(2)}s`,
+                transform: mounted ? "translateY(0)" : "translateY(16px)",
+                transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${(0.05 * i).toFixed(2)}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${(0.05 * i).toFixed(2)}s`,
               }}
             >
-              {/* Eyebrow tag — small, ink color, replaces the number */}
-              <span
+              <h3
                 style={{
                   fontFamily: GC,
                   fontWeight: 700,
-                  fontSize: 12,
-                  letterSpacing: "0.16em",
-                  textTransform: "uppercase",
+                  fontSize: "clamp(28px,3.2vw,46px)",
+                  lineHeight: 1.08,
                   color: "var(--ink)",
-                  opacity: mounted ? 0.7 : 0,
-                  transition: `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s`,
+                  letterSpacing: "-0.02em",
+                  margin: 0,
+                  textWrap: "balance",
                 }}
               >
-                {b.eyebrow}
-              </span>
-
-              <div
+                {titleWords.map((w, wi) => (
+                  <span
+                    key={wi}
+                    style={{
+                      display: "inline-block",
+                      opacity: mounted ? 1 : 0,
+                      transform: mounted ? "translateY(0)" : "translateY(8px)",
+                      transition: `opacity 0.55s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + wi * 0.05).toFixed(2)}s, transform 0.55s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + wi * 0.05).toFixed(2)}s`,
+                    }}
+                  >
+                    {w}{wi < titleWords.length - 1 ? "\u00A0" : ""}
+                  </span>
+                ))}
+              </h3>
+              <p
                 style={{
-                  display: "grid",
-                  gridTemplateColumns: "minmax(0, 1.2fr) minmax(0, 1fr)",
-                  columnGap: "clamp(28px,4vw,56px)",
-                  rowGap: 16,
-                  alignItems: "end",
+                  fontFamily: GC,
+                  fontWeight: 400,
+                  fontSize: "clamp(16px,1.25vw,19px)",
+                  lineHeight: 1.5,
+                  color: "var(--ink)",
+                  opacity: mounted ? 0.78 : 0,
+                  transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + 0.3).toFixed(2)}s`,
+                  margin: 0,
+                  maxWidth: 460,
                 }}
               >
-                <h3
-                  style={{
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: "clamp(26px,3vw,42px)",
-                    lineHeight: 1.1,
-                    color: "var(--ink)",
-                    letterSpacing: "-0.02em",
-                    margin: 0,
-                  }}
-                >
-                  {titleWords.map((w, wi) => (
-                    <span
-                      key={wi}
-                      style={{
-                        display: "inline-block",
-                        opacity: mounted ? 1 : 0,
-                        transform: mounted ? "translateY(0)" : "translateY(8px)",
-                        transition: `opacity 0.55s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + 0.1 + wi * 0.06).toFixed(2)}s, transform 0.55s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + 0.1 + wi * 0.06).toFixed(2)}s`,
-                      }}
-                    >
-                      {w}{wi < titleWords.length - 1 ? "\u00A0" : ""}
-                    </span>
-                  ))}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: GC,
-                    fontWeight: 400,
-                    fontSize: "clamp(15px,1.15vw,17px)",
-                    lineHeight: 1.55,
-                    color: "var(--ink)",
-                    opacity: mounted ? 0.78 : 0,
-                    transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + 0.35).toFixed(2)}s`,
-                    margin: 0,
-                    maxWidth: 460,
-                  }}
-                >
-                  {b.copy}
-                </p>
-              </div>
+                {b.copy}
+              </p>
             </div>
           )
         })}
