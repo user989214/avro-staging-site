@@ -596,94 +596,108 @@ export function HomeBenefitRow() {
         .hp-benefit-word.twitch-drift   { animation: twitch-drift 4.4s ease-in-out infinite; }
       `}</style>
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexDirection: "column", gap: 14 }}>
-        {benefits.map((b, i) => {
-          const isBlue = b.tone === "blue"
-          const bg = isBlue ? BLUE : "var(--base-light)"
-          const widthPct = 100 - i * 14
-          const visible = visibleCards[i]
-          const cardDelay = 0.05
-          const titleWords = b.title.split(" ")
+        {[
+          { items: [0], cols: "1fr" },
+          { items: [1, 2], cols: "1fr 1fr" },
+        ].map((row, rowIdx) => (
+          <div
+            key={rowIdx}
+            style={{
+              display: "grid",
+              gridTemplateColumns: row.cols,
+              gap: 14,
+            }}
+          >
+            {row.items.map((i) => {
+              const b = benefits[i]
+              const isBlue = b.tone === "blue"
+              const bg = isBlue ? BLUE : "var(--base-light)"
+              const visible = visibleCards[i]
+              const cardDelay = 0.05
+              const titleWords = b.title.split(" ")
+              const isWide = row.items.length === 1
 
-          return (
-            <div
-              key={b.title}
-              ref={(el) => { cardRefs.current[i] = el }}
-              style={{
-                width: `${widthPct}%`,
-                maxWidth: i === 0 ? "100%" : `${widthPct}%`,
-                alignSelf: "flex-start",
-                backgroundColor: bg,
-                borderRadius: 24,
-                padding: "clamp(28px,3vw,40px) clamp(28px,3.5vw,52px)",
-                minHeight: "clamp(140px,14vw,180px)",
-                display: "grid",
-                gridTemplateColumns: "minmax(0, 1.4fr) minmax(0, 1fr)",
-                columnGap: "clamp(28px,4vw,64px)",
-                alignItems: "center",
-                opacity: visible ? 1 : 0,
-                transform: visible ? "translateY(0)" : "translateY(18px)",
-                transition: `opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)`,
-              }}
-            >
-              <h3
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 700,
-                  fontSize: "clamp(28px,3.2vw,46px)",
-                  lineHeight: 1.08,
-                  color: "var(--ink)",
-                  letterSpacing: "-0.02em",
-                  margin: 0,
-                  textWrap: "balance",
-                }}
-              >
-                {titleWords.map((w, wi) => {
-                  // Strip trailing punctuation for matching
-                  const lookup = w.toLowerCase().replace(/[.,!?:;]+$/g, "")
-                  const animClass = b.animatedWords[lookup]
-                  return (
-                    <span
-                      key={wi}
-                      style={{
-                        display: "inline-block",
-                        opacity: visible ? 1 : 0,
-                        transform: visible ? "translateY(0)" : "translateY(8px)",
-                        transition: `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + wi * 0.05).toFixed(2)}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + wi * 0.05).toFixed(2)}s`,
-                      }}
-                    >
-                      {animClass ? (
+              return (
+                <div
+                  key={b.title}
+                  ref={(el) => { cardRefs.current[i] = el }}
+                  style={{
+                    backgroundColor: bg,
+                    borderRadius: 24,
+                    padding: "clamp(28px,3vw,40px) clamp(28px,3.5vw,52px)",
+                    minHeight: "clamp(180px,18vw,240px)",
+                    display: isWide ? "grid" : "flex",
+                    flexDirection: isWide ? undefined : "column",
+                    gridTemplateColumns: isWide ? "minmax(0, 1.4fr) minmax(0, 1fr)" : undefined,
+                    columnGap: isWide ? "clamp(28px,4vw,64px)" : undefined,
+                    rowGap: isWide ? undefined : 16,
+                    alignItems: isWide ? "center" : "flex-start",
+                    justifyContent: isWide ? undefined : "space-between",
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? "translateY(0)" : "translateY(18px)",
+                    transition: `opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)`,
+                  }}
+                >
+                  <h3
+                    style={{
+                      fontFamily: GC,
+                      fontWeight: 700,
+                      fontSize: isWide ? "clamp(28px,3.2vw,46px)" : "clamp(24px,2.4vw,34px)",
+                      lineHeight: 1.08,
+                      color: "var(--ink)",
+                      letterSpacing: "-0.02em",
+                      margin: 0,
+                      textWrap: "balance",
+                    }}
+                  >
+                    {titleWords.map((w, wi) => {
+                      const lookup = w.toLowerCase().replace(/[.,!?:;]+$/g, "")
+                      const animClass = b.animatedWords[lookup]
+                      return (
                         <span
-                          className={`hp-benefit-word ${animClass}`}
-                          style={{ animationDelay: `${(0.6 + i * 0.3).toFixed(2)}s` }}
+                          key={wi}
+                          style={{
+                            display: "inline-block",
+                            opacity: visible ? 1 : 0,
+                            transform: visible ? "translateY(0)" : "translateY(8px)",
+                            transition: `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + wi * 0.05).toFixed(2)}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + wi * 0.05).toFixed(2)}s`,
+                          }}
                         >
-                          {w}
+                          {animClass ? (
+                            <span
+                              className={`hp-benefit-word ${animClass}`}
+                              style={{ animationDelay: `${(0.6 + i * 0.3).toFixed(2)}s` }}
+                            >
+                              {w}
+                            </span>
+                          ) : (
+                            w
+                          )}
+                          {wi < titleWords.length - 1 ? "\u00A0" : ""}
                         </span>
-                      ) : (
-                        w
-                      )}
-                      {wi < titleWords.length - 1 ? "\u00A0" : ""}
-                    </span>
-                  )
-                })}
-              </h3>
-              <p
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 400,
-                  fontSize: "clamp(16px,1.25vw,19px)",
-                  lineHeight: 1.5,
-                  color: "var(--ink)",
-                  opacity: visible ? 0.78 : 0,
-                  transition: `opacity 0.9s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + 0.35).toFixed(2)}s`,
-                  margin: 0,
-                  maxWidth: 460,
-                }}
-              >
-                {b.copy}
-              </p>
-            </div>
-          )
-        })}
+                      )
+                    })}
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: GC,
+                      fontWeight: 400,
+                      fontSize: isWide ? "clamp(16px,1.25vw,19px)" : "clamp(15px,1.1vw,17px)",
+                      lineHeight: 1.5,
+                      color: "var(--ink)",
+                      opacity: visible ? 0.78 : 0,
+                      transition: `opacity 0.9s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + 0.35).toFixed(2)}s`,
+                      margin: 0,
+                      maxWidth: isWide ? 460 : "100%",
+                    }}
+                  >
+                    {b.copy}
+                  </p>
+                </div>
+              )
+            })}
+          </div>
+        ))}
       </div>
     </section>
   )
