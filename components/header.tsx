@@ -142,9 +142,9 @@ export function Header() {
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"/></svg>
             </button>
 
-            {/* Horizontal dropdown panel — drops flush from nav, centered on viewport */}
+            {/* Full-width dropdown panel — left half: feature cards, right half: section nav */}
             <div
-              className="fixed left-1/2 -translate-x-1/2 z-50"
+              className="fixed left-0 right-0 z-50"
               style={{
                 top: scrolled ? 73 : 122,
                 pointerEvents: dropdownOpen ? "auto" : "none",
@@ -152,45 +152,92 @@ export function Header() {
               aria-hidden={!dropdownOpen}
             >
               <div
-                className="overflow-hidden"
+                className="w-full"
                 style={{
-                  width: "min(640px, 50vw)",
                   backgroundColor: "var(--base)",
                   opacity: dropdownOpen ? 1 : 0,
                   transform: dropdownOpen ? "translateY(0)" : "translateY(-8px)",
                   transition: "opacity 0.35s cubic-bezier(0.4,0,0.2,1), transform 0.35s cubic-bezier(0.4,0,0.2,1)",
                 }}
               >
-                <div className="grid grid-cols-[1fr_1.4fr] p-6">
-                  {navDropdownSections.map((section, sIdx) => (
-                    <div
-                      key={section.heading}
-                      className="px-5"
-                      style={sIdx > 0 ? { borderLeft: "1px solid var(--ink)" } : undefined}
-                    >
-                      <p
-                        className="text-[12px] font-bold pb-3"
-                        style={{ color: "var(--warm-gray)" }}
+                <div className="px-4 md:px-14 py-5">
+                  <div className="grid grid-cols-2 gap-6">
+                    {/* Left half — two feature cards */}
+                    <div className="grid grid-cols-2 gap-4">
+                      <Link
+                        href="/blog"
+                        onClick={() => setDropdownOpen(false)}
+                        className="group flex flex-col justify-between rounded-[24px] p-6 transition-colors min-h-[220px]"
+                        style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
                       >
-                        {section.heading}
-                      </p>
-                      <div className="flex flex-col items-start gap-1">
-                        {section.items.map((item) => (
-                          <Link
-                            key={item.href}
-                            href={item.href}
-                            onClick={() => setDropdownOpen(false)}
-                            className="inline-block px-4 py-1.5 font-serif font-black text-[26px] leading-[1.15] rounded-full transition-colors"
-                            style={{ color: "var(--ink)" }}
-                            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "var(--avro-blue)" }}
-                            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent" }}
-                          >
-                            {item.cta}
-                          </Link>
-                        ))}
-                      </div>
+                        <div>
+                          <p className="text-[11px] font-bold uppercase tracking-[0.16em] opacity-70">Read</p>
+                          <h3 className="font-serif font-black text-[28px] leading-[1.05] mt-2">From The Journal</h3>
+                          <p className="text-[13px] leading-[1.45] mt-2 opacity-75">Field notes on calm focus, fermentation science, and the rituals behind each formula.</p>
+                        </div>
+                        <span
+                          className="inline-flex items-center gap-1.5 self-start rounded-full px-4 py-2 text-[12px] font-bold uppercase tracking-[0.08em] transition-transform duration-200 group-hover:translate-x-1"
+                          style={{ backgroundColor: "var(--avro-blue)", color: "var(--charcoal)" }}
+                        >
+                          Visit the Blog
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                      </Link>
+
+                      <Link
+                        href="/newsletter"
+                        onClick={() => setDropdownOpen(false)}
+                        className="group flex flex-col justify-between rounded-[24px] p-6 transition-colors min-h-[220px]"
+                        style={{ backgroundColor: "var(--avro-blue)", color: "var(--charcoal)" }}
+                      >
+                        <div>
+                          <p className="text-[11px] font-bold uppercase tracking-[0.16em] opacity-70">Subscribe</p>
+                          <h3 className="font-serif font-black text-[28px] leading-[1.05] mt-2">The Calm Dispatch</h3>
+                          <p className="text-[13px] leading-[1.45] mt-2 opacity-80">Weekly drops on performance under pressure — plus first looks at new launches.</p>
+                        </div>
+                        <span
+                          className="inline-flex items-center gap-1.5 self-start rounded-full px-4 py-2 text-[12px] font-bold uppercase tracking-[0.08em] transition-transform duration-200 group-hover:translate-x-1"
+                          style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
+                        >
+                          Join the List
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </span>
+                      </Link>
                     </div>
-                  ))}
+
+                    {/* Right half — section nav (sits between center logo and Shop) */}
+                    <div className="grid grid-cols-[1fr_1.4fr]">
+                      {navDropdownSections.map((section, sIdx) => (
+                        <div
+                          key={section.heading}
+                          className="px-5"
+                          style={sIdx > 0 ? { borderLeft: "1px solid var(--ink)" } : undefined}
+                        >
+                          <p
+                            className="text-[12px] font-bold pb-3"
+                            style={{ color: "var(--warm-gray)" }}
+                          >
+                            {section.heading}
+                          </p>
+                          <div className="flex flex-col items-start gap-1">
+                            {section.items.map((item) => (
+                              <Link
+                                key={item.href}
+                                href={item.href}
+                                onClick={() => setDropdownOpen(false)}
+                                className="inline-block px-4 py-1.5 font-serif font-black text-[26px] leading-[1.15] rounded-full transition-colors"
+                                style={{ color: "var(--ink)" }}
+                                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "var(--avro-blue)" }}
+                                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent" }}
+                              >
+                                {item.cta}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
