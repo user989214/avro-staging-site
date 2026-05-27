@@ -120,27 +120,56 @@ export function ProductCards({
         <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(15px,1.2vw,18px)", lineHeight: 1.4, color: "rgba(0,0,0,0.6)", marginBottom: 32 }}>
           Every AVRO formula starts with the same calm-first base, then supports the moment in a different way.
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 16 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
           {(Object.keys(formulas) as FormulaKey[]).map((key) => {
             const item = formulas[key]
             return (
               <article key={key} style={{ backgroundColor: "var(--base-light)", borderRadius: 24, padding: "clamp(20px,3vw,32px)", display: "flex", flexDirection: "column", gap: 16 }}>
-                <div style={{ borderRadius: 24, border: "2px solid rgba(0,0,0,0.1)", height: 380, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: "var(--base)" }}>
+                <div style={{ borderRadius: 20, height: 340, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: "var(--bone)" }}>
                   <ProductCard formulaKey={key} className="h-full w-full object-cover" />
                 </div>
                 <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(22px,2vw,28px)", color: "var(--ink)", margin: 0 }}>{item.name}</h3>
-                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(17px,1.4vw,19px)", lineHeight: 1.45, color: "rgba(0,0,0,0.6)", margin: 0 }}>{item.support}</p>
-                <div style={{ borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
+                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(16px,1.3vw,18px)", lineHeight: 1.45, color: "rgba(0,0,0,0.6)", margin: 0 }}>{item.support}</p>
+                <div style={{ borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 16, display: "flex", flexDirection: "column", gap: 10 }}>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 18, color: "var(--ink)" }}>Best for</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(0,0,0,0.6)", margin: "4px 0 0" }}>{item.bestFor}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 16, color: "var(--ink)" }}>Best for</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 15, lineHeight: 1.4, color: "rgba(0,0,0,0.6)", margin: "4px 0 0" }}>{item.bestFor}</p>
                   </div>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 18, color: "var(--ink)" }}>Caffeine</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 17, lineHeight: 1.4, color: "rgba(0,0,0,0.6)", margin: "4px 0 0" }}>{item.caffeine}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 16, color: "var(--ink)" }}>Caffeine</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 15, lineHeight: 1.4, color: "rgba(0,0,0,0.6)", margin: "4px 0 0" }}>{item.caffeine}</p>
                   </div>
                 </div>
-                <a href={`/${key}`} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC_FINAL, fontWeight: 700, fontSize: 16, minHeight: 52, padding: "0 32px", borderRadius: 999, textDecoration: "none", backgroundColor: "var(--charcoal)", color: "var(--bone)", marginTop: "auto", alignSelf: "flex-start" }}>
+                <a 
+                  href={`/${key}`} 
+                  className="hp-btn-black"
+                  style={{ 
+                    display: "flex", 
+                    alignItems: "center", 
+                    justifyContent: "center", 
+                    fontFamily: GC_FINAL, 
+                    fontWeight: 700, 
+                    fontSize: 16, 
+                    width: "100%",
+                    minHeight: 48, 
+                    padding: "0 24px", 
+                    borderRadius: 999, 
+                    textDecoration: "none", 
+                    border: "2px solid var(--charcoal)",
+                    backgroundColor: "var(--charcoal)", 
+                    color: "var(--bone)", 
+                    marginTop: "auto",
+                    transition: "background-color 0.2s ease, color 0.2s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent'
+                    e.currentTarget.style.color = 'var(--charcoal)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--charcoal)'
+                    e.currentTarget.style.color = 'var(--bone)'
+                  }}
+                >
                   {shopLabel} {item.short}
                 </a>
               </article>
@@ -148,6 +177,15 @@ export function ProductCards({
           })}
         </div>
       </div>
+      <style jsx>{`
+        @media (max-width: 900px) {
+          div[style*="grid-template-columns: repeat(3"] {
+            grid-template-columns: 1fr !important;
+            max-width: 400px !important;
+            margin: 0 auto !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

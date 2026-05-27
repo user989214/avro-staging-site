@@ -430,13 +430,21 @@ export function HomeProductStrip() {
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
                 />
               </div>
-              <div style={{ padding: "12px 20px", backgroundColor: BLUE }}>
-                <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(14px,1.2vw,17px)", color: "var(--ink)", textAlign: "center", display: "block" }}>
+              <div style={{ padding: "20px 20px 24px", display: "flex", flexDirection: "column", gap: 12 }}>
+                <span style={{ 
+                  display: "inline-block",
+                  alignSelf: "flex-start",
+                  fontFamily: GC, 
+                  fontWeight: 700, 
+                  fontSize: 13, 
+                  color: "var(--ink)", 
+                  backgroundColor: BLUE,
+                  padding: "8px 14px",
+                  borderRadius: 999,
+                }}>
                   PharmaGABA® + {formulaAdditions[key]}
                 </span>
-              </div>
-              <div style={{ padding: "20px 20px 24px", display: "flex", flexDirection: "column", gap: 12 }}>
-                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2vw,28px)", lineHeight: 1.1, color: "var(--ink)" }}>
+                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2vw,28px)", lineHeight: 1.1, color: "var(--ink)", marginTop: 4 }}>
                   {formulas[key].name}
                 </h3>
                 <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, lineHeight: 1.45, color: "rgba(0,0,0,0.6)" }}>
@@ -608,7 +616,7 @@ export function HomeScienceGrid() {
   )
 }
 
-// ── QUALITY ROW ───────────────────────────────────────────────────────────────
+// ── QUALITY ROW ──────��────────────────────────────────────────────────────────
 export function HomeQualityRow() {
   const badges = [
     { label: "Naturally Fermented", sub: "PharmaGABA®" },
