@@ -120,9 +120,9 @@ export function CtaGroup({
 
 export function SocialProof({ mode = "full" }: { mode?: "full" | "compact" }) {
   return (
-    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
+    <section style={{ backgroundColor: "transparent", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32 }}>
+        <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32, textAlign: "center" }}>
           Trusted for calm-first routines.
         </h2>
         {mode === "full" && (
@@ -357,7 +357,7 @@ export function FinalCta({
   return (
     <section
       style={{
-        backgroundColor: "var(--base)",
+        backgroundColor: "transparent",
         width: "100%",
         padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)",
       }}

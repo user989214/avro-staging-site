@@ -358,30 +358,33 @@ export default function ShopPage() {
 
       <SocialProof mode="compact" />
 
-      <FaqBlock
-        title="Questions? We have answers."
-        centered={false}
-        faqs={[
-          [
-            "What is AVRO?",
-            "AVRO is a calm-first daily drink mix designed to support calm, clarity, focus, and steady energy before pressure-sensitive moments.",
-          ],
-          [
-            "Which formula is right for me?",
-            "Choose Calm for caffeine-free composure, Focus for caffeine-free clarity support, or Energy for steady energy with 120 mg natural caffeine.",
-          ],
-          [
-            "Can I take AVRO every day?",
-            "AVRO can fit into a daily routine. Choose your formula based on timing, caffeine preference, and your moment.",
-          ],
-        ]}
-      />
+      {/* Tone-band switch — soft shift to --base-deep to differentiate the lower-page rhythm */}
+      <div style={{ backgroundColor: "var(--base-deep)" }}>
+        <FaqBlock
+          title="Questions? We have answers."
+          centered={false}
+          faqs={[
+            [
+              "What is AVRO?",
+              "AVRO is a calm-first daily drink mix designed to support calm, clarity, focus, and steady energy before pressure-sensitive moments.",
+            ],
+            [
+              "Which formula is right for me?",
+              "Choose Calm for caffeine-free composure, Focus for caffeine-free clarity support, or Energy for steady energy with 120 mg natural caffeine.",
+            ],
+            [
+              "Can I take AVRO every day?",
+              "AVRO can fit into a daily routine. Choose your formula based on timing, caffeine preference, and your moment.",
+            ],
+          ]}
+        />
 
-      <FinalCta
-        title="Find your formula. Show up ready."
-        copy="Choose your formula and start your calm-first routine today."
-        productButtons
-      />
+        <FinalCta
+          title="Find your formula. Show up ready."
+          copy="Choose your formula and start your calm-first routine today."
+          productButtons
+        />
+      </div>
     </>
   )
 }

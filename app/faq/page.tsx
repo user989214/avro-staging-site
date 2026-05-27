@@ -215,10 +215,12 @@ export default function FaqPage() {
       ))}
 
       <SocialProof mode="compact" />
-      <FinalCta
-        title="Ready to find your formula?"
-        copy="Choose Calm, Focus, or Energy based on the moment you want to support."
-      />
+      <div style={{ backgroundColor: "var(--base-deep)" }}>
+        <FinalCta
+          title="Ready to find your formula?"
+          copy="Choose Calm, Focus, or Energy based on the moment you want to support."
+        />
+      </div>
     </>
   )
 }

@@ -106,29 +106,31 @@ export default function SciencePage() {
       <ProductCards title="Three formulas. One foundation." shopLabel="Shop" />
       <SocialProof mode="compact" />
 
-      <FaqBlock
-        title="Science FAQ"
-        centered={false}
-        faqs={[
-          [
-            "What makes PharmaGABA different?",
-            "PharmaGABA is a naturally fermented form of GABA used as part of AVRO's calm-first foundation.",
-          ],
-          [
-            "Why does AVRO start with calm?",
-            "AVRO is built around the idea that state matters before pressure-sensitive moments, and more stimulation is not always the answer.",
-          ],
-          [
-            "Does AVRO contain caffeine?",
-            "Calm and Focus are caffeine free. Energy contains 120 mg natural caffeine.",
-          ],
-        ]}
-      />
+      <div style={{ backgroundColor: "var(--base-deep)" }}>
+        <FaqBlock
+          title="Science FAQ"
+          centered={false}
+          faqs={[
+            [
+              "What makes PharmaGABA different?",
+              "PharmaGABA is a naturally fermented form of GABA used as part of AVRO's calm-first foundation.",
+            ],
+            [
+              "Why does AVRO start with calm?",
+              "AVRO is built around the idea that state matters before pressure-sensitive moments, and more stimulation is not always the answer.",
+            ],
+            [
+              "Does AVRO contain caffeine?",
+              "Calm and Focus are caffeine free. Energy contains 120 mg natural caffeine.",
+            ],
+          ]}
+        />
 
-      <FinalCta
-        title="Start with calm. Show up ready."
-        copy="Choose Calm, Focus, or Energy based on the moment you want to support."
-      />
+        <FinalCta
+          title="Start with calm. Show up ready."
+          copy="Choose Calm, Focus, or Energy based on the moment you want to support."
+        />
+      </div>
     </>
   )
 }
