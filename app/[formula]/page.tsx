@@ -8,6 +8,7 @@ import { ProductComparisonGrid } from "@/components/product-comparison-grid"
 import { PdpSocialScroll } from "@/components/pdp-social-scroll"
 import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommendations"
 import { PdpIngredients } from "@/components/pdp-ingredients"
+import { SupplementFactsDialog } from "@/components/supplement-facts-dialog"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const BLUE = "#94C6D4"
@@ -203,28 +204,31 @@ export default async function ProductPage({
                     color: var(--charcoal);
                   }
                 `}</style>
-                <a
-                  href="/science"
-                  className="pdp-learn-btn"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 12,
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 16,
-                    minHeight: 48,
-                    padding: "0 28px",
-                    borderRadius: 999,
-                    backgroundColor: "var(--charcoal)",
-                    color: "var(--bone)",
-                    border: "2px solid var(--charcoal)",
-                    textDecoration: "none",
-                  }}
-                >
-                  Learn how it works
-                  <Icon name="arrowRight" className="w-5 h-5" />
-                </a>
+                <div style={{ display: "inline-flex", flexWrap: "wrap", gap: 12 }}>
+                  <a
+                    href="/science"
+                    className="pdp-learn-btn"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 12,
+                      fontFamily: GC,
+                      fontWeight: 700,
+                      fontSize: 16,
+                      minHeight: 48,
+                      padding: "0 28px",
+                      borderRadius: 999,
+                      backgroundColor: "var(--charcoal)",
+                      color: "var(--bone)",
+                      border: "2px solid var(--charcoal)",
+                      textDecoration: "none",
+                    }}
+                  >
+                    Learn how it works
+                    <Icon name="arrowRight" className="w-5 h-5" />
+                  </a>
+                  <SupplementFactsDialog formula={item} formulaKey={key} />
+                </div>
               </div>
 
               {/* Right side - graph */}

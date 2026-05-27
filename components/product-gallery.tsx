@@ -157,10 +157,10 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
                 aria-label={thumb.label}
                 aria-pressed={activeId === thumb.id}
                 className={cn(
-                  "relative w-[68px] h-[68px] sm:w-[74px] sm:h-[74px] rounded-xl overflow-hidden flex items-center justify-center transition-all",
-                  activeId === thumb.id ? "ring-2 ring-black" : "opacity-70 hover:opacity-100",
+                  "relative w-[68px] h-[68px] sm:w-[74px] sm:h-[74px] overflow-hidden flex items-center justify-center transition-all",
+                  activeId === thumb.id ? "ring-2 ring-black ring-offset-0" : "opacity-70 hover:opacity-100",
                 )}
-                style={{ backgroundColor: "#f2f2f2" }}
+                style={{ backgroundColor: "#f2f2f2", borderRadius: 10 }}
               >
                 {renderThumb(thumb)}
                 <span className="sr-only">{thumb.label}</span>
@@ -170,8 +170,15 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
         </ul>
       </div>
 
-      {/* Main view — square, fills the frame, image-native background */}
-      <div className="relative w-full aspect-square rounded-2xl overflow-hidden flex-1" style={{ backgroundColor: "#f2f2f2" }}>
+      {/* Main view — fills the frame, image-native background */}
+      <div
+        className="relative w-full rounded-2xl overflow-hidden flex-1"
+        style={{
+          backgroundColor: "#f2f2f2",
+          aspectRatio: "1 / 1",
+          maxHeight: "min(72vh, 640px)",
+        }}
+      >
         <div className="absolute inset-0">{renderMain()}</div>
       </div>
     </div>

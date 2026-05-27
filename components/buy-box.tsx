@@ -2,17 +2,8 @@
 
 import { useState } from "react"
 import { useCart } from "@/lib/cart-context"
-import { Icon } from "@/components/icons"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
 import { soloTubeImageFor } from "@/components/product-visual"
 import type { Formula, FormulaKey } from "@/lib/data"
-import { cn } from "@/lib/utils"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const LIGHT_GRAY = "#f2f2f2"
@@ -42,35 +33,19 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
     openCart()
   }
 
-  const factsRows: [string, string][] = [
-    ["Calories", "10"],
-    ["Total Carbohydrate", formulaKey === "calm" ? "2 g" : "3 g"],
-    ["Total Sugars", "0 g"],
-    ...(formulaKey === "calm"
-      ? ([["Magnesium (as magnesium bisglycinate)", "100 mg"]] as [string, string][])
-      : []),
-    ["Sodium (as sodium bicarbonate)", "80 mg"],
-    ["Potassium (as potassium bicarbonate)", "100 mg"],
-    ["PharmaGABA® (GABA)", "200 mg"],
-    [
-      formula.addition,
-      formulaKey === "calm" ? "850 mg" : formulaKey === "focus" ? "250 mg" : "120 mg",
-    ],
-  ]
-
   return (
     <aside
-      className="flex flex-col gap-5 bg-base"
+      className="flex flex-col gap-4 bg-base"
       style={{ fontFamily: GC }}
     >
       {/* Header - tighter */}
-      <header className="flex flex-col gap-2">
+      <header className="flex flex-col gap-1.5">
         <h1
-          className="font-serif"
+          className="font-serif text-balance"
           style={{
             fontWeight: 900,
-            fontSize: "clamp(32px,3.5vw,46px)",
-            lineHeight: 0.96,
+            fontSize: "clamp(28px,2.8vw,40px)",
+            lineHeight: 0.98,
             color: "var(--ink)",
           }}
         >
@@ -248,90 +223,6 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
       <style>{`
         .bb-add-btn:hover { background-color: transparent; color: var(--ink); }
       `}</style>
-
-      {/* Supplement Facts button */}
-      <Dialog>
-        <DialogTrigger asChild>
-          <button
-            type="button"
-            className="w-full flex items-center justify-center gap-2 transition-colors"
-            style={{
-              fontFamily: GC,
-              fontWeight: 700,
-              fontSize: 15,
-              minHeight: 44,
-              padding: "0 24px",
-              borderRadius: 999,
-              backgroundColor: LIGHT_GRAY,
-              color: "var(--ink)",
-              border: "none",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "#e6e6e6"
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = LIGHT_GRAY
-            }}
-          >
-            <Icon name="card" className="w-4 h-4" />
-            Supplement facts
-          </button>
-        </DialogTrigger>
-        <DialogContent className="max-w-[440px] p-0 bg-base">
-          <div className="p-6 pb-2">
-            <DialogHeader>
-              <DialogTitle style={{ fontFamily: GC, fontWeight: 700, fontSize: 32, color: "var(--ink)" }}>
-                Supplement facts
-              </DialogTitle>
-            </DialogHeader>
-            <p
-              className="mt-1"
-              style={{
-                fontFamily: GC,
-                fontWeight: 500,
-                fontSize: 15,
-                color: "rgba(0,0,0,0.55)",
-              }}
-            >
-              {formula.name} · {activeFlavor.name} · Serving size 1 stick (5 g)
-            </p>
-          </div>
-          <div className="px-6 pb-6">
-            <div className="rounded-xl p-4" style={{ backgroundColor: LIGHT_GRAY }}>
-              <div style={{ borderTop: "4px solid #000", paddingTop: 8 }}>
-                {factsRows.map(([label, value], i) => (
-                  <div
-                    key={label}
-                    className={cn(
-                      "flex justify-between py-2",
-                      i < factsRows.length - 1 && "border-b",
-                    )}
-                    style={{
-                      borderColor: "rgba(0,0,0,0.1)",
-                      fontFamily: GC,
-                      fontSize: 14,
-                    }}
-                  >
-                    <span style={{ fontWeight: 700 }}>{label}</span>
-                    <span style={{ fontWeight: 500 }}>{value}</span>
-                  </div>
-                ))}
-              </div>
-              <p
-                className="mt-3 leading-snug"
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 400,
-                  fontSize: 12,
-                  color: "rgba(0,0,0,0.55)",
-                }}
-              >
-                10 stick packets per box. Mix 1 packet into 12 fl oz of water; up to 3 times per day.
-              </p>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
     </aside>
   )
 }
