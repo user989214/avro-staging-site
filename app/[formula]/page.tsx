@@ -5,7 +5,6 @@ import { ReviewsBlock } from "@/components/reviews-block"
 import { Icon, type IconName } from "@/components/icons"
 import { FinalCta } from "@/components/sections"
 import { ProductComparisonGrid } from "@/components/product-comparison-grid"
-import { PdpSocialScroll } from "@/components/pdp-social-scroll"
 import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommendations"
 import { PdpIngredients } from "@/components/pdp-ingredients"
 import { SupplementFactsDialog } from "@/components/supplement-facts-dialog"
@@ -84,9 +83,6 @@ export default async function ProductPage({
           <PdpTabsWithRecommendations currentKey={key} />
         </div>
       </section>
-
-      {/* "This is what calm feels like" - Social Scroll Section */}
-      <PdpSocialScroll formulaKey={key} />
 
       {/* Ingredients Section */}
       <PdpIngredients formulaKey={key} />

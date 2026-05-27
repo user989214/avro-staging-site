@@ -11,47 +11,77 @@ type Ingredient = {
   image: string
 }
 
-const sharedIngredients: Ingredient[] = [
+const sharedFront: Ingredient[] = [
   {
     name: "PharmaGABA",
-    amount: "100mg",
-    description: "Naturally fermented GABA that supports calm and composure without sedation.",
+    amount: "200 mg",
+    description: "Naturally fermented. AVRO's calm-first foundation.",
     image: "/images/ingredients/pharmagaba-2.jpg",
   },
+]
+
+const sharedBack: Ingredient[] = [
   {
-    name: "L-Theanine",
-    amount: "200mg",
-    description: "Amino acid found in green tea that promotes relaxation and focus.",
-    image: "/images/ingredients/ltheanine.jpg",
+    name: "Prebiotic Fiber",
+    amount: "PHGG + ACACIA",
+    description: "Supports gut comfort. Part of AVRO's daily formula.",
+    image: "/images/ingredients/prebiotic-fiber-2.jpg",
+  },
+  {
+    name: "Stevia",
+    amount: "< 2%",
+    description: "Used in a small amount for a clean, balanced finish.",
+    image: "/images/ingredients/stevia-2.jpg",
   },
 ]
 
 const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
   calm: [
-    ...sharedIngredients,
+    ...sharedFront,
     {
       name: "Magnesium Bisglycinate",
-      amount: "150mg",
-      description: "Highly bioavailable form of magnesium that supports relaxation and muscle function.",
+      amount: "850 mg",
+      description: "Yields 100 mg of active magnesium. Supports muscle and nervous system function.",
       image: "/images/ingredients/magnesium-bisglycinate-2.jpg",
+    },
+    ...sharedBack,
+    {
+      name: "Natural Flavor",
+      amount: "BLUEBERRY ACAI",
+      description: "Bright, clean flavor without artificial sweeteners.",
+      image: "/images/ingredients/blueberry-acai-2.jpg",
     },
   ],
   focus: [
-    ...sharedIngredients,
+    ...sharedFront,
     {
       name: "Cognigrape",
-      amount: "300mg",
-      description: "Grape extract clinically shown to support cognitive function and mental clarity.",
+      amount: "250 mg",
+      description: "Grape extract clinically shown to support cognitive function and clarity.",
       image: "/images/ingredients/cognigrape-2.jpg",
+    },
+    ...sharedBack,
+    {
+      name: "Natural Flavor",
+      amount: "POMEGRANATE",
+      description: "Bright, clean flavor without artificial sweeteners.",
+      image: "/images/ingredients/pomegranate-raspberry-2.jpg",
     },
   ],
   energy: [
-    ...sharedIngredients,
+    ...sharedFront,
     {
       name: "Natural Caffeine",
-      amount: "120mg",
+      amount: "120 mg",
       description: "Plant-derived caffeine for clean, sustained energy without the jitters.",
       image: "/images/ingredients/natural-caffeine-2.jpg",
+    },
+    ...sharedBack,
+    {
+      name: "Natural Flavor",
+      amount: "ORANGE TANGERINE",
+      description: "Bright, clean flavor without artificial sweeteners.",
+      image: "/images/ingredients/orange-tangerine.jpg",
     },
   ],
 }
@@ -61,84 +91,92 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
 
   return (
     <section className="w-full bg-base py-[clamp(48px,6vw,80px)]" style={{ fontFamily: GC }}>
-      <div className="w-full max-w-[1200px] mx-auto px-[clamp(18px,5vw,64px)]">
-        {/* Header */}
-        <div className="text-center mb-12">
+      <div className="w-full max-w-[1280px] mx-auto px-[clamp(18px,5vw,64px)]">
+        {/* Header - left aligned, like reference */}
+        <div className="mb-10">
+          <span
+            className="block uppercase tracking-[0.18em]"
+            style={{
+              fontFamily: GC,
+              fontWeight: 700,
+              fontSize: 12,
+              color: "var(--warm-gray)",
+              marginBottom: 12,
+            }}
+          >
+            What&apos;s inside
+          </span>
           <h2
             className="font-serif"
             style={{
               fontWeight: 900,
-              fontSize: "clamp(32px,4.5vw,56px)",
+              fontSize: "clamp(28px,3.6vw,44px)",
               lineHeight: 1.0,
               color: "var(--ink)",
-              marginBottom: 12,
+              maxWidth: 720,
             }}
           >
-            What&apos;s inside.
+            Clear ingredient logic. Nothing hidden.
           </h2>
-          <p
-            style={{
-              fontFamily: GC,
-              fontWeight: 500,
-              fontSize: "clamp(17px,1.5vw,22px)",
-              color: "var(--warm-gray)",
-            }}
-          >
-            Clean, functional ingredients. Nothing artificial.
-          </p>
         </div>
 
-        {/* Ingredients grid - framed thumbnail style */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {/* Ingredients row — small framed image, name, amount label, short description */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
           {ingredients.map((ingredient) => (
             <div
               key={ingredient.name}
-              className="flex flex-col overflow-hidden"
-              style={{ borderRadius: 24, backgroundColor: "var(--base-light)", padding: 16 }}
+              className="flex flex-col"
+              style={{
+                borderRadius: 18,
+                backgroundColor: "var(--base-light)",
+                padding: 14,
+              }}
             >
-              {/* Image with inner frame */}
-              <div className="relative h-[220px] overflow-hidden" style={{ borderRadius: 18, backgroundColor: "var(--bone)" }}>
+              {/* Image frame — square, bordered like homepage product cards */}
+              <div
+                className="relative aspect-square overflow-hidden border border-line mb-4"
+                style={{ borderRadius: 12, backgroundColor: "var(--bone)" }}
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={ingredient.image}
                   alt={ingredient.name}
-                  className="w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
-                {/* Amount badge */}
-                <span
-                  className="absolute top-3 right-3 px-3 py-1.5 rounded-full"
-                  style={{
-                    backgroundColor: "var(--charcoal)",
-                    color: "var(--bone)",
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 14,
-                  }}
-                >
-                  {ingredient.amount}
-                </span>
               </div>
 
               {/* Content */}
-              <div className="flex-1 p-4 pt-5">
+              <div className="px-1">
                 <h3
-                  className="font-serif"
                   style={{
-                    fontWeight: 900,
-                    fontSize: 24,
-                    lineHeight: 1.1,
+                    fontFamily: GC,
+                    fontWeight: 800,
+                    fontSize: 16,
+                    lineHeight: 1.15,
                     color: "var(--ink)",
-                    marginBottom: 8,
+                    marginBottom: 4,
                   }}
                 >
                   {ingredient.name}
                 </h3>
+                <span
+                  className="block uppercase tracking-[0.08em]"
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: 11,
+                    color: "var(--warm-gray)",
+                    marginBottom: 8,
+                  }}
+                >
+                  {ingredient.amount}
+                </span>
                 <p
                   style={{
                     fontFamily: GC,
                     fontWeight: 500,
-                    fontSize: 16,
-                    lineHeight: 1.45,
+                    fontSize: 13.5,
+                    lineHeight: 1.4,
                     color: "var(--warm-gray)",
                   }}
                 >
@@ -147,21 +185,6 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* View all link */}
-        <div className="text-center mt-10">
-          <a
-            href="/science"
-            className="inline-flex items-center gap-2 hover:underline"
-            style={{ fontFamily: GC, fontWeight: 700, fontSize: 17, color: "var(--ink)" }}
-          >
-            See full ingredient list
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </a>
         </div>
       </div>
     </section>
