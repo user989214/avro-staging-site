@@ -24,13 +24,13 @@ function CartIconFilled({ className }: { className?: string }) {
 }
 
 const navDropdownItems = [
-  { href: "/why-avro", label: "Why AVRO" },
-  { href: "/science", label: "The Science of AVRO" },
-  { href: "/learn", label: "Ingredients" },
-  { href: "/golf", label: "Golf" },
-  { href: "/work", label: "Work / Tech" },
-  { href: "/gaming", label: "Gaming / Poker" },
-  { href: "/social", label: "Social / Non Alcohol" },
+  { href: "/why-avro", label: "Why AVRO", desc: "The calm-first philosophy behind every formula." },
+  { href: "/science", label: "The Science", desc: "Naturally fermented PharmaGABA®, clinically backed." },
+  { href: "/learn", label: "Ingredients", desc: "Functional, food-grade, transparently sourced." },
+  { href: "/golf", label: "Golf", desc: "Composure under pressure, on every shot." },
+  { href: "/work", label: "Work / Tech", desc: "Sustained focus without the jitter." },
+  { href: "/gaming", label: "Gaming / Poker", desc: "Steady state for high-stakes decisions." },
+  { href: "/social", label: "Social / Non-Alcohol", desc: "Show up calm, clear, and present." },
 ]
 
 export function Header() {
@@ -109,33 +109,14 @@ export function Header() {
         <div className="hidden md:flex items-center gap-7">
           <NavLink href="/shop">Shop</NavLink>
           <NavLink href="/shop">Subscribe</NavLink>
-          <div 
-            className="relative"
+          <div
             onMouseEnter={() => setDropdownOpen(true)}
             onMouseLeave={() => setDropdownOpen(false)}
           >
             <button className="relative text-[15px] font-bold tracking-[0.08em] uppercase transition-colors hover:opacity-70 flex items-center gap-1" style={{ color: "var(--ink)" }}>
               Why AVRO
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform ${dropdownOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"/></svg>
             </button>
-            <div
-              className={`absolute top-full left-0 z-50 min-w-[280px] pt-3 transition-all duration-200 ease-out ${dropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2'}`}
-            >
-              <div style={{ backgroundColor: "var(--bone)", borderRadius: 16, padding: "12px 0", boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}>
-                {navDropdownItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="block px-6 py-3 text-[14px] font-bold tracking-[0.06em] uppercase transition-colors"
-                    style={{ color: "var(--ink)" }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--base-light)'}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
 
@@ -199,6 +180,87 @@ export function Header() {
           )}
         </button>
       </nav>
+
+      {/* Full-width Why AVRO dropdown panel — drops from the bottom of the nav */}
+      <div
+        className="hidden md:block fixed left-0 right-0 z-40 pointer-events-none"
+        onMouseEnter={() => setDropdownOpen(true)}
+        onMouseLeave={() => setDropdownOpen(false)}
+        style={{
+          top: scrolled ? 73 : 122, // nav height (without/with announcement bar)
+          height: dropdownOpen ? "auto" : 0,
+          overflow: "hidden",
+          transition: "top 0.2s ease",
+        }}
+        aria-hidden={!dropdownOpen}
+      >
+        <div
+          className={`pointer-events-auto transition-all duration-[500ms]`}
+          style={{
+            backgroundColor: "var(--base-light)",
+            borderBottomLeftRadius: 28,
+            borderBottomRightRadius: 28,
+            borderBottom: "2px solid var(--charcoal)",
+            borderLeft: "2px solid var(--charcoal)",
+            borderRight: "2px solid var(--charcoal)",
+            boxShadow: dropdownOpen ? "0 24px 48px -12px rgba(21,21,21,0.18)" : "none",
+            transform: dropdownOpen ? "translateY(0)" : "translateY(-100%)",
+            transition: "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease",
+          }}
+        >
+          <div
+            className="px-8 lg:px-14 py-8 max-h-[60vh] overflow-y-auto"
+            style={{ scrollbarWidth: "thin" }}
+          >
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {navDropdownItems.map((item, idx) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setDropdownOpen(false)}
+                  className="group flex flex-col justify-between rounded-[20px] p-5 transition-all duration-200"
+                  style={{
+                    backgroundColor: "var(--bone)",
+                    border: "2px solid var(--charcoal)",
+                    minHeight: 140,
+                    opacity: dropdownOpen ? 1 : 0,
+                    transform: dropdownOpen ? "translateY(0)" : "translateY(12px)",
+                    transition: `opacity 0.4s ease ${0.1 + idx * 0.04}s, transform 0.4s ease ${0.1 + idx * 0.04}s, background-color 0.2s ease`,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--avro-blue)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--bone)"
+                  }}
+                >
+                  <span
+                    className="text-[15px] font-bold uppercase tracking-[0.06em]"
+                    style={{ color: "var(--ink)" }}
+                  >
+                    {item.label}
+                  </span>
+                  <span
+                    className="text-[13px] leading-[1.45] mt-3"
+                    style={{ color: "var(--warm-gray)", fontWeight: 500 }}
+                  >
+                    {item.desc}
+                  </span>
+                  <span
+                    className="mt-4 inline-flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-[0.08em]"
+                    style={{ color: "var(--ink)" }}
+                  >
+                    Explore
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Mobile menu overlay */}
       <div
