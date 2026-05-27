@@ -90,8 +90,8 @@ export default function LearnPage() {
             right formula.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "center" }}>
-            <a href="/learn" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 22, minHeight: 68, padding: "0 48px", borderRadius: 999, textDecoration: "none", backgroundColor: "#94C6D4", color: "#000", border: "2.5px solid #94C6D4" }}>Read Articles</a>
-            <a href="/shop" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 22, minHeight: 68, padding: "0 48px", borderRadius: 999, textDecoration: "none", backgroundColor: "transparent", color: "#fff", border: "2.5px solid #fff" }}>Shop AVRO</a>
+            <a href="/learn" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none", backgroundColor: "#94C6D4", color: "#000", border: "2px solid #94C6D4" }}>Read Articles</a>
+            <a href="/shop" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none", backgroundColor: "transparent", color: "#fff", border: "2px solid #fff" }}>Shop AVRO</a>
           </div>
         </div>
       </section>
@@ -176,9 +176,9 @@ export default function LearnPage() {
           </div>
           {/* Right: buttons */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-            <a href="/shop/calm" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none" }}>Shop Calm</a>
-            <a href="/shop/focus" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none" }}>Shop Focus</a>
-            <a href="/shop/energy" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none" }}>Shop Energy</a>
+            <a href="/shop/calm" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none" }}>Shop Calm</a>
+            <a href="/shop/focus" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none" }}>Shop Focus</a>
+            <a href="/shop/energy" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none" }}>Shop Energy</a>
           </div>
         </div>
       </section>

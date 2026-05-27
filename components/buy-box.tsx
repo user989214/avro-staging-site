@@ -173,13 +173,13 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
         style={{
           fontFamily: GC,
           fontWeight: 700,
-          fontSize: 21,
-          minHeight: 66,
-          padding: "0 36px",
+          fontSize: 16,
+          minHeight: 52,
+          padding: "0 28px",
           borderRadius: 999,
           backgroundColor: "var(--charcoal)",
           color: "var(--bone)",
-          border: "2.5px solid var(--charcoal)",
+          border: "2px solid var(--charcoal)",
           letterSpacing: "0.01em",
         }}
         onMouseEnter={(e) => {

@@ -276,7 +276,7 @@ export default function BlogPage() {
               <a
                 key={label}
                 href={href}
-                style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 20, minHeight: 64, padding: "0 40px", borderRadius: 999, textDecoration: "none", backgroundColor: "var(--charcoal)", color: "var(--bone)", border: "2.5px solid var(--charcoal)" }}
+                style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none", backgroundColor: "var(--charcoal)", color: "var(--bone)", border: "2px solid var(--charcoal)" }}
               >
                 {label}
               </a>
