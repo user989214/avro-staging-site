@@ -812,14 +812,7 @@ function _ApproachSectionEnd() {
   return null
 }
 
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ── PRODUCT STRIP ─────────────────────────────────────────────────────────────
+// ── PRODUCT STRIP ──────────────────────────────────────────────────────────────
 export function HomeProductStrip() {
   const formulaAdditions: Record<FormulaKey, string> = {
     calm: "Magnesium Bisglycinate",
