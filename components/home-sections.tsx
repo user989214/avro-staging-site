@@ -1,12 +1,97 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { formulas, type FormulaKey, sharedProof, testimonials } from "@/lib/data"
 import { Icon } from "@/components/icons"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const BLUE = "#94C6D4"
+
+// ── FORMULA GRAPH (scroll-triggered) ──────────────────────────────────────────
+function FormulaGraph() {
+  const [visible, setVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setVisible(true)
+            obs.disconnect()
+          }
+        })
+      },
+      { threshold: 0.3 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  const formulas = [
+    { name: "Calm", segments: [{ color: BLUE, width: 70, label: "PharmaGABA®" }, { color: "#C9B8E8", width: 30, label: "Magnesium" }] },
+    { name: "Focus", segments: [{ color: BLUE, width: 60, label: "PharmaGABA®" }, { color: "#A8D5BA", width: 40, label: "Cognigrape®" }] },
+    { name: "Energy", segments: [{ color: BLUE, width: 55, label: "PharmaGABA®" }, { color: "#F5C896", width: 45, label: "Caffeine" }] },
+  ]
+
+  return (
+    <div ref={ref} style={{ backgroundColor: "var(--bone)", borderRadius: 20, overflow: "hidden", padding: "clamp(24px,3vw,36px)", display: "flex", flexDirection: "column", height: "100%" }}>
+      <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2.4vw,30px)", lineHeight: 1.05, color: "var(--charcoal)", marginBottom: 8 }}>
+        Every formula starts calm first.
+      </h2>
+      <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 13, lineHeight: 1.45, color: "rgba(0,0,0,0.55)", marginBottom: 24 }}>
+        Same calm-first base. Different active addition.
+      </p>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: 18 }}>
+        {formulas.map((formula, idx) => (
+          <div key={formula.name} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
+              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "var(--charcoal)", letterSpacing: "-0.01em" }}>{formula.name}</span>
+              <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 11, color: "rgba(0,0,0,0.45)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                {formula.segments.map((s) => s.label).join(" + ")}
+              </span>
+            </div>
+            <div style={{ display: "flex", gap: 4, height: 14 }}>
+              {formula.segments.map((seg, segIdx) => {
+                const delay = idx * 0.18 + segIdx * 0.12
+                return (
+                  <div
+                    key={segIdx}
+                    style={{
+                      flex: `${seg.width} 0 0`,
+                      backgroundColor: seg.color,
+                      borderRadius: 999,
+                      transformOrigin: "left",
+                      transform: visible ? "scaleX(1)" : "scaleX(0)",
+                      opacity: visible ? 1 : 0,
+                      transition: `transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}s, opacity 0.4s ease ${delay}s`,
+                    }}
+                  />
+                )
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style={{ display: "flex", gap: 12, marginTop: 22, flexWrap: "wrap", paddingTop: 16, borderTop: "1px solid rgba(0,0,0,0.06)" }}>
+        {[
+          { color: BLUE, label: "PharmaGABA®" },
+          { color: "#C9B8E8", label: "Magnesium" },
+          { color: "#A8D5BA", label: "Cognigrape®" },
+          { color: "#F5C896", label: "Caffeine" },
+        ].map((item) => (
+          <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <div style={{ width: 10, height: 10, borderRadius: 999, backgroundColor: item.color }} />
+            <span style={{ fontFamily: GC, fontWeight: 600, fontSize: 11, color: "rgba(0,0,0,0.6)" }}>{item.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 // ── HERO ──────────────────────────────────────────────────────────────────────
 export function HomeRefHero() {
@@ -583,63 +668,8 @@ export function HomeScienceGrid() {
             </div>
 
             {/* Formula comparison - segmented bar graph */}
-            <div style={{ backgroundColor: "var(--bone)", borderRadius: 20, overflow: "hidden", padding: "clamp(24px,3vw,36px)", display: "flex", flexDirection: "column", height: "100%" }}>
-              <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2.4vw,30px)", lineHeight: 1.05, color: "var(--charcoal)", marginBottom: 8 }}>
-                Every formula starts calm first.
-              </h2>
-              <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 13, lineHeight: 1.45, color: "rgba(0,0,0,0.55)", marginBottom: 24 }}>
-                Same calm-first base. Different active addition.
-              </p>
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: 18 }}>
-                {[
-                  { name: "Calm", segments: [{ color: BLUE, width: 70, label: "PharmaGABA®" }, { color: "#C9B8E8", width: 30, label: "Magnesium" }] },
-                  { name: "Focus", segments: [{ color: BLUE, width: 60, label: "PharmaGABA®" }, { color: "#A8D5BA", width: 40, label: "Cognigrape®" }] },
-                  { name: "Energy", segments: [{ color: BLUE, width: 55, label: "PharmaGABA®" }, { color: "#F5C896", width: 45, label: "Caffeine" }] },
-                ].map((formula, idx) => (
-                  <div key={formula.name} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
-                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "var(--charcoal)", letterSpacing: "-0.01em" }}>{formula.name}</span>
-                      <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 11, color: "rgba(0,0,0,0.45)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-                        {formula.segments.map((s) => s.label).join(" + ")}
-                      </span>
-                    </div>
-                    <div style={{ display: "flex", gap: 4, height: 14 }}>
-                      {formula.segments.map((seg, segIdx) => (
-                        <div
-                          key={segIdx}
-                          style={{
-                            flex: `${seg.width} 0 0`,
-                            backgroundColor: seg.color,
-                            borderRadius: 999,
-                            transformOrigin: "left",
-                            animation: `segGrow 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.18 + segIdx * 0.12}s both`,
-                          }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div style={{ display: "flex", gap: 12, marginTop: 22, flexWrap: "wrap", paddingTop: 16, borderTop: "1px solid rgba(0,0,0,0.06)" }}>
-                {[
-                  { color: BLUE, label: "PharmaGABA®" },
-                  { color: "#C9B8E8", label: "Magnesium" },
-                  { color: "#A8D5BA", label: "Cognigrape®" },
-                  { color: "#F5C896", label: "Caffeine" },
-                ].map((item) => (
-                  <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <div style={{ width: 10, height: 10, borderRadius: 999, backgroundColor: item.color }} />
-                    <span style={{ fontFamily: GC, fontWeight: 600, fontSize: 11, color: "rgba(0,0,0,0.6)" }}>{item.label}</span>
-                  </div>
-                ))}
-              </div>
-              <style jsx>{`
-                @keyframes segGrow {
-                  from { transform: scaleX(0); opacity: 0; }
-                  to { transform: scaleX(1); opacity: 1; }
-                }
-              `}</style>
-            </div>
+            <FormulaGraph />
+
           </div>
         </div>
       </div>
