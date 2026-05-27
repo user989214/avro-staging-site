@@ -198,6 +198,23 @@ export default function ShopPage() {
       {/* Compare Table — charcoal + Avro Blue header */}
       <section style={{ width: "100%", padding: "clamp(48px,6vw,80px) clamp(20px,5vw,64px)", backgroundColor: "var(--charcoal)" }}>
         <div style={{ maxWidth: 1250, margin: "0 auto" }}>
+          <span
+            style={{
+              display: "inline-block",
+              marginBottom: 16,
+              padding: "6px 14px",
+              borderRadius: 999,
+              backgroundColor: "rgba(255,255,255,0.1)",
+              color: "var(--bone)",
+              fontFamily: GC,
+              fontSize: 11,
+              fontWeight: 800,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+            }}
+          >
+            At a glance
+          </span>
           <h2
             className="font-serif"
             style={{
@@ -206,7 +223,7 @@ export default function ShopPage() {
               lineHeight: 1.02,
               letterSpacing: "-0.02em",
               color: "var(--bone)",
-              textAlign: "center",
+              textAlign: "left",
               marginBottom: 40,
             }}
           >
@@ -302,6 +319,7 @@ export default function ShopPage() {
 
       <FaqBlock
         title="Questions? We have answers."
+        centered={false}
         faqs={[
           [
             "What is AVRO?",

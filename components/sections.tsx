@@ -44,7 +44,9 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
+        <span
+          className="inline-block mb-4 px-3.5 py-1.5 rounded-full bg-base-light text-olive text-[11px] font-black tracking-[0.12em] uppercase"
+        >
           {eyebrow}
         </span>
       )}
@@ -271,14 +273,16 @@ export function InfoCard({
 export function FaqBlock({
   title,
   faqs,
+  centered = true,
 }: {
   title: string
   faqs: [string, string][]
+  centered?: boolean
 }) {
   return (
     <Section>
-      <SectionHeading eyebrow="Questions" title={title} />
-      <div className="grid gap-2 w-full max-w-[1080px] mx-auto">
+      <SectionHeading eyebrow="Questions" title={title} centered={centered} />
+      <div className={cn("grid gap-2 w-full max-w-[1080px]", centered && "mx-auto")}>
         {faqs.map(([q, a]) => (
           <details
             key={q}
@@ -291,7 +295,7 @@ export function FaqBlock({
           </details>
         ))}
       </div>
-      <div className="mt-5.5 text-center">
+      <div className={cn("mt-5.5", centered ? "text-center" : "text-left")}>
         <Link href="/faq" className="btn-secondary">
           View All FAQs
         </Link>
