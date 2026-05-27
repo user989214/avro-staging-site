@@ -142,7 +142,7 @@ export function Header() {
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"/></svg>
             </button>
 
-            {/* Compact dropdown panel — drops flush from nav, anchored right (extends toward Shop) */}
+            {/* Horizontal dropdown panel — drops flush from nav, anchored right */}
             <div
               className="absolute right-0 top-full z-50"
               style={{
@@ -153,29 +153,33 @@ export function Header() {
               <div
                 className="overflow-hidden"
                 style={{
-                  width: 320,
+                  width: 760,
                   backgroundColor: "var(--base)",
                   opacity: dropdownOpen ? 1 : 0,
                   transform: dropdownOpen ? "translateY(0)" : "translateY(-8px)",
                   transition: "opacity 0.35s cubic-bezier(0.4,0,0.2,1), transform 0.35s cubic-bezier(0.4,0,0.2,1)",
                 }}
               >
-                <div className="flex flex-col p-4">
+                <div className="grid grid-cols-[1fr_1.4fr] p-6">
                   {navDropdownSections.map((section, sIdx) => (
-                    <div key={section.heading} className={sIdx > 0 ? "mt-3 pt-3" : ""} style={sIdx > 0 ? { borderTop: "1px solid var(--ink)" } : undefined}>
+                    <div
+                      key={section.heading}
+                      className="px-5"
+                      style={sIdx > 0 ? { borderLeft: "1px solid var(--ink)" } : undefined}
+                    >
                       <p
-                        className="text-[12px] font-bold px-3 pb-2"
+                        className="text-[12px] font-bold pb-3"
                         style={{ color: "var(--warm-gray)" }}
                       >
                         {section.heading}
                       </p>
-                      <div className="flex flex-col items-start">
+                      <div className="flex flex-col items-start gap-1">
                         {section.items.map((item) => (
                           <Link
                             key={item.href}
                             href={item.href}
                             onClick={() => setDropdownOpen(false)}
-                            className="inline-block px-4 py-1.5 font-serif font-black text-[22px] leading-[1.2] rounded-full transition-colors"
+                            className="inline-block px-4 py-1.5 font-serif font-black text-[26px] leading-[1.15] rounded-full transition-colors"
                             style={{ color: "var(--ink)" }}
                             onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "var(--avro-blue)" }}
                             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent" }}
