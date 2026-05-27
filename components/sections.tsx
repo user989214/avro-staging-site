@@ -317,9 +317,9 @@ export function FaqBlock({
   centered?: boolean
 }) {
   return (
-    <Section>
+    <Section className="max-w-[1080px]">
       <SectionHeading eyebrow="Questions" title={title} centered={centered} />
-      <div className={cn("grid gap-2 w-full max-w-[1080px]", centered && "mx-auto")}>
+      <div className="grid gap-2 w-full">
         {faqs.map(([q, a]) => (
           <details
             key={q}
