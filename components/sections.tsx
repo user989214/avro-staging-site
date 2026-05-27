@@ -323,7 +323,7 @@ export function FinalCta({
     >
       <div
         style={{
-          maxWidth: 1320,
+          maxWidth: 1250,
           margin: "0 auto",
           backgroundColor: "var(--avro-blue)",
           color: "var(--charcoal)",
