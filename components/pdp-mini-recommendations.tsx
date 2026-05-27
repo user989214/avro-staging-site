@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { formulas, type FormulaKey } from "@/lib/data"
-import { stickImageFor } from "@/components/product-visual"
+import { ProductCard } from "@/components/product-visual"
 import { Icon } from "@/components/icons"
 
 interface PdpMiniRecommendationsProps {
@@ -10,54 +10,54 @@ interface PdpMiniRecommendationsProps {
 }
 
 export function PdpMiniRecommendations({ currentKey }: PdpMiniRecommendationsProps) {
-  const otherKeys = (Object.keys(formulas) as FormulaKey[]).filter(k => k !== currentKey).slice(0, 2)
+  const otherKeys = (Object.keys(formulas) as FormulaKey[]).filter((k) => k !== currentKey).slice(0, 2)
 
   return (
-    <div className="bg-soft rounded-2xl p-5">
-      <div className="flex items-center justify-between mb-4">
-        <span className="text-sm font-bold text-ink">You might also like</span>
-        <Link 
-          href="/shop" 
-          className="text-xs font-bold text-olive hover:underline flex items-center gap-1"
-        >
+    <div
+      style={{
+        backgroundColor: "var(--base-light, #f5f1e8)",
+        borderRadius: 24,
+        padding: "clamp(16px,2vw,20px)",
+      }}
+    >
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-sm font-extrabold text-ink">You might also like</span>
+        <Link href="/shop" className="text-xs font-bold text-ink/70 hover:text-ink flex items-center gap-1">
           Shop All
           <Icon name="arrowRight" className="w-3 h-3" />
         </Link>
       </div>
-      
+
       <div className="grid grid-cols-2 gap-3">
         {otherKeys.map((key) => {
           const product = formulas[key]
-          const stickImage = stickImageFor(key)
-          
           return (
             <Link
               key={key}
               href={`/${key}`}
-              className="group flex items-center gap-3 bg-base rounded-2xl p-3 hover:shadow-md transition-shadow"
+              className="group flex flex-col gap-3 transition-transform hover:-translate-y-0.5"
+              style={{
+                backgroundColor: "var(--bone)",
+                borderRadius: 18,
+                padding: 12,
+              }}
             >
-              {/* Product image */}
-              <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-soft rounded-full">
-                <img 
-                  src={stickImage.src}
-                  alt={stickImage.alt}
-                  className="w-10 h-10 object-contain"
-                />
+              {/* Square product image — matches homepage card style */}
+              <div
+                className="relative flex items-center justify-center overflow-hidden"
+                style={{
+                  backgroundColor: "var(--base-light, #f5f1e8)",
+                  borderRadius: 14,
+                  aspectRatio: "1 / 1",
+                }}
+              >
+                <ProductCard formulaKey={key} className="h-full w-full object-cover" />
               </div>
-              
-              {/* Product info */}
-              <div className="flex-1 min-w-0">
-                <span className="block text-sm font-bold text-ink truncate group-hover:text-olive transition-colors">
-                  {product.short}
-                </span>
-                <span className="block text-xs text-ink/60">
-                  ${product.price.toFixed(2)}
-                </span>
-              </div>
-              
-              {/* Add icon */}
-              <div className="w-7 h-7 rounded-full bg-avro-blue flex items-center justify-center flex-shrink-0">
-                <span className="text-ink font-bold text-sm">+</span>
+
+              {/* Title + price row */}
+              <div className="flex items-center justify-between gap-2 px-1">
+                <span className="text-sm font-extrabold text-ink truncate">{product.short}</span>
+                <span className="text-xs font-bold text-ink/70">${product.price.toFixed(2)}</span>
               </div>
             </Link>
           )
