@@ -243,25 +243,12 @@ function FlatHero({
         width: "100%",
         backgroundColor: "var(--base)",
         color: "var(--ink)",
-        paddingTop: compact ? "clamp(72px,10vw,128px)" : "clamp(88px,12vw,160px)",
-        paddingBottom: compact ? "clamp(40px,6vw,72px)" : "clamp(56px,7vw,96px)",
+        padding: compact
+          ? "clamp(20px,3vw,40px) clamp(16px,5vw,64px) clamp(24px,3vw,40px)"
+          : "clamp(24px,3.5vw,48px) clamp(16px,5vw,64px) clamp(28px,3.5vw,48px)",
         overflow: "hidden",
       }}
     >
-      {/* Slightly darker tone-on-tone fade — gives the flat hero subtle depth without a card */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: `
-            radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 55%),
-            linear-gradient(to bottom, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 65%, rgba(0,0,0,0.045) 100%)
-          `,
-          pointerEvents: "none",
-        }}
-      />
-
       <style>{`
         .fh-pill-primary, .fh-pill-secondary {
           display: inline-flex;
@@ -305,8 +292,15 @@ function FlatHero({
       `}</style>
 
       <div
-        className="relative w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)]"
-        style={{ textAlign: "left" }}
+        className="relative w-full max-w-[1440px] mx-auto"
+        style={{
+          backgroundColor: "var(--base-light)",
+          borderRadius: 28,
+          padding: compact
+            ? "clamp(48px,7vw,88px) clamp(28px,5vw,72px)"
+            : "clamp(72px,9vw,120px) clamp(28px,5vw,72px)",
+          textAlign: "left",
+        }}
       >
         <h1
           style={{

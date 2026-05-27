@@ -1,5 +1,5 @@
 import {
-  Section,
+  CardedSection,
   SectionHeading,
   SocialProof,
   ProductCards,
@@ -44,9 +44,8 @@ export default function SciencePage() {
         </div>
       </PageHero>
 
-      <Section>
+      <CardedSection>
         <SectionHeading
-          eyebrow="Why calm comes first"
           title="Calm is the foundation."
           centered={false}
         />
@@ -63,14 +62,11 @@ export default function SciencePage() {
             moments.
           </InfoCard>
         </div>
-      </Section>
+      </CardedSection>
 
-      <Section id="research">
+      <CardedSection id="research">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)]">
           <div>
-            <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
-              What is GABA?
-            </span>
             <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5">
               A naturally occurring part of the body&apos;s balance system.
             </h2>
@@ -81,9 +77,6 @@ export default function SciencePage() {
             </p>
           </div>
           <div>
-            <span className="block mb-3 text-olive text-xs font-black tracking-[0.12em] uppercase">
-              Why PharmaGABA®?
-            </span>
             <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5">
               Why AVRO uses PharmaGABA®.
             </h2>
@@ -107,7 +100,7 @@ export default function SciencePage() {
             </div>
           </div>
         </div>
-      </Section>
+      </CardedSection>
 
       <FormulaLogic />
       <ProductCards title="Three formulas. One foundation." shopLabel="Shop" />

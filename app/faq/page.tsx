@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import {
-  Section,
+  CardedSection,
   SectionHeading,
   SocialProof,
   FinalCta,
@@ -172,7 +172,7 @@ export default function FaqPage() {
         secondaryCta={{ href: "/contact", label: "Contact Us" }}
         compact
       >
-        <label className="grid grid-cols-[24px_1fr] gap-3 items-center w-full max-w-[480px] px-4 py-3 bg-base border border-line rounded-2xl shadow-[0_8px_24px_rgba(30,29,24,0.05)]">
+        <label className="grid grid-cols-[24px_1fr] gap-3 items-center w-full max-w-[480px] px-4 py-3 bg-base rounded-2xl">
           <Icon name="search" className="w-6 h-6 text-muted" />
           <input
             type="search"
@@ -187,7 +187,7 @@ export default function FaqPage() {
             <a
               key={cat.slug}
               href={`#${cat.slug}`}
-              className="px-3 py-2 bg-base border border-line rounded-full text-[12px] font-extrabold hover:bg-gray-50 transition-colors"
+              className="px-3 py-2 bg-base rounded-full text-[12px] font-extrabold hover:bg-charcoal hover:text-bone transition-colors"
             >
               {cat.name}
             </a>
@@ -196,13 +196,13 @@ export default function FaqPage() {
       </PageHero>
 
       {filtered.map((category) => (
-        <Section key={category.slug} id={category.slug}>
+        <CardedSection key={category.slug} id={category.slug}>
           <SectionHeading title={category.name} centered={false} />
           <div className="grid gap-2 w-full">
             {category.faqs.map(([question, answer]) => (
               <details
                 key={question}
-                className="bg-base border border-line rounded-[12px] group"
+                className="bg-base rounded-[12px] group"
               >
                 <summary className="flex justify-between gap-4 px-5.5 py-4.5 cursor-pointer font-extrabold select-none after:content-['+'] after:text-[22px] after:leading-none group-open:after:content-['-']">
                   {question}
@@ -211,7 +211,7 @@ export default function FaqPage() {
               </details>
             ))}
           </div>
-        </Section>
+        </CardedSection>
       ))}
 
       <SocialProof mode="compact" />
