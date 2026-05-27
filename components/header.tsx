@@ -155,12 +155,6 @@ export function Header() {
                 style={{
                   width: 320,
                   backgroundColor: "var(--base)",
-                  borderLeft: "1px solid var(--divider)",
-                  borderRight: "1px solid var(--divider)",
-                  borderBottom: "1px solid var(--divider)",
-                  borderBottomLeftRadius: 18,
-                  borderBottomRightRadius: 18,
-                  boxShadow: "0 16px 40px -12px rgba(21,21,21,0.18)",
                   opacity: dropdownOpen ? 1 : 0,
                   transform: dropdownOpen ? "translateY(0)" : "translateY(-8px)",
                   transition: "opacity 0.35s cubic-bezier(0.4,0,0.2,1), transform 0.35s cubic-bezier(0.4,0,0.2,1)",
@@ -168,20 +162,20 @@ export function Header() {
               >
                 <div className="flex flex-col p-4">
                   {navDropdownSections.map((section, sIdx) => (
-                    <div key={section.heading} className={sIdx > 0 ? "mt-3 pt-3" : ""} style={sIdx > 0 ? { borderTop: "1px solid var(--divider)" } : undefined}>
+                    <div key={section.heading} className={sIdx > 0 ? "mt-3 pt-3" : ""} style={sIdx > 0 ? { borderTop: "1px solid var(--ink)" } : undefined}>
                       <p
-                        className="text-[10px] font-bold uppercase tracking-[0.16em] px-3 pb-2"
+                        className="text-[12px] font-bold px-3 pb-2"
                         style={{ color: "var(--warm-gray)" }}
                       >
                         {section.heading}
                       </p>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col items-start">
                         {section.items.map((item) => (
                           <Link
                             key={item.href}
                             href={item.href}
                             onClick={() => setDropdownOpen(false)}
-                            className="block px-3 py-1.5 font-serif font-black text-[22px] leading-[1.2] rounded-[10px] transition-colors"
+                            className="inline-block px-4 py-1.5 font-serif font-black text-[22px] leading-[1.2] rounded-full transition-colors"
                             style={{ color: "var(--ink)" }}
                             onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "var(--avro-blue)" }}
                             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent" }}
