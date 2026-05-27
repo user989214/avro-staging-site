@@ -181,82 +181,76 @@ export function Header() {
         </button>
       </nav>
 
-      {/* Full-width Why AVRO dropdown panel — drops from the bottom of the nav */}
+      {/* Why AVRO dropdown panel — drops from the bottom of the nav, contained within nav width */}
       <div
         className="hidden md:block fixed left-0 right-0 z-40 pointer-events-none"
         onMouseEnter={() => setDropdownOpen(true)}
         onMouseLeave={() => setDropdownOpen(false)}
         style={{
-          top: scrolled ? 73 : 122, // nav height (without/with announcement bar)
+          top: scrolled ? 73 : 122,
           height: dropdownOpen ? "auto" : 0,
           overflow: "hidden",
           transition: "top 0.2s ease",
         }}
         aria-hidden={!dropdownOpen}
       >
-        <div
-          className={`pointer-events-auto transition-all duration-[500ms]`}
-          style={{
-            backgroundColor: "var(--base-light)",
-            borderBottomLeftRadius: 28,
-            borderBottomRightRadius: 28,
-            borderBottom: "2px solid var(--charcoal)",
-            borderLeft: "2px solid var(--charcoal)",
-            borderRight: "2px solid var(--charcoal)",
-            boxShadow: dropdownOpen ? "0 24px 48px -12px rgba(21,21,21,0.18)" : "none",
-            transform: dropdownOpen ? "translateY(0)" : "translateY(-100%)",
-            transition: "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease",
-          }}
-        >
+        <div className="mx-auto max-w-[1320px] px-6 lg:px-10">
           <div
-            className="px-8 lg:px-14 py-8 max-h-[60vh] overflow-y-auto"
-            style={{ scrollbarWidth: "thin" }}
+            className="pointer-events-auto"
+            style={{
+              backgroundColor: "var(--avro-blue)",
+              borderBottomLeftRadius: 28,
+              borderBottomRightRadius: 28,
+              boxShadow: dropdownOpen ? "0 24px 48px -12px rgba(21,21,21,0.22)" : "none",
+              transform: dropdownOpen ? "translateY(0)" : "translateY(-100%)",
+              transition: "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease",
+            }}
           >
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {navDropdownItems.map((item, idx) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setDropdownOpen(false)}
-                  className="group flex flex-col justify-between rounded-[20px] p-5 transition-all duration-200"
-                  style={{
-                    backgroundColor: "var(--bone)",
-                    border: "2px solid var(--charcoal)",
-                    minHeight: 140,
-                    opacity: dropdownOpen ? 1 : 0,
-                    transform: dropdownOpen ? "translateY(0)" : "translateY(12px)",
-                    transition: `opacity 0.4s ease ${0.1 + idx * 0.04}s, transform 0.4s ease ${0.1 + idx * 0.04}s, background-color 0.2s ease`,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--avro-blue)"
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--bone)"
-                  }}
-                >
-                  <span
-                    className="text-[15px] font-bold uppercase tracking-[0.06em]"
-                    style={{ color: "var(--ink)" }}
+            <div
+              className="px-6 lg:px-8 py-6 max-h-[60vh] overflow-y-auto"
+              style={{ scrollbarWidth: "thin" }}
+            >
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                {navDropdownItems.map((item, idx) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setDropdownOpen(false)}
+                    className="group flex flex-col justify-between rounded-[18px] p-4 transition-transform duration-200 hover:-translate-y-0.5"
+                    style={{
+                      backgroundColor: "var(--charcoal)",
+                      minHeight: 130,
+                      opacity: dropdownOpen ? 1 : 0,
+                      transform: dropdownOpen ? "translateY(0)" : "translateY(12px)",
+                      transition: `opacity 0.4s ease ${0.08 + idx * 0.035}s, transform 0.4s ease ${0.08 + idx * 0.035}s`,
+                    }}
                   >
-                    {item.label}
-                  </span>
-                  <span
-                    className="text-[13px] leading-[1.45] mt-3"
-                    style={{ color: "var(--warm-gray)", fontWeight: 500 }}
-                  >
-                    {item.desc}
-                  </span>
-                  <span
-                    className="mt-4 inline-flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-[0.08em]"
-                    style={{ color: "var(--ink)" }}
-                  >
-                    Explore
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-                    </svg>
-                  </span>
-                </Link>
-              ))}
+                    <div className="flex flex-col gap-2">
+                      <span
+                        className="text-[14px] font-bold uppercase tracking-[0.06em]"
+                        style={{ color: "var(--bone)" }}
+                      >
+                        {item.label}
+                      </span>
+                      <span
+                        className="text-[12px] leading-[1.45]"
+                        style={{ color: "var(--bone)", opacity: 0.75, fontWeight: 500 }}
+                      >
+                        {item.desc}
+                      </span>
+                    </div>
+                    <span
+                      className="mt-3 inline-flex items-center justify-center gap-1.5 self-start rounded-full px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em]"
+                      style={{ backgroundColor: "var(--avro-blue)", color: "var(--charcoal)" }}
+                    >
+                      Explore
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                      </svg>
+                    </span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
