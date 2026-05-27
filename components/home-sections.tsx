@@ -367,12 +367,12 @@ export function HomeLogicRow() {
             <div style={{ backgroundColor: "var(--bone)", borderRadius: 20, overflow: "hidden", border: "2px solid rgba(0,0,0,0.08)" }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
                 <div style={{ padding: "20px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "rgba(0,0,0,0.4)", borderBottom: "2px solid rgba(0,0,0,0.08)", textAlign: "center" }}>Stimulant First</div>
-                <div style={{ padding: "20px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--ink)", borderBottom: "2px solid rgba(0,0,0,0.08)", borderLeft: "2px solid rgba(0,0,0,0.08)", textAlign: "center", backgroundColor: "rgba(148,198,212,0.18)" }}>Calm First</div>
+                <div style={{ padding: "20px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--ink)", borderBottom: "2px solid rgba(0,0,0,0.08)", borderLeft: "2px solid rgba(0,0,0,0.08)", textAlign: "center", backgroundColor: BLUE }}>Calm First</div>
               </div>
               {comparisonRows.map(([left, right]) => (
                 <div key={left} style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
                   <div style={{ padding: "20px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "rgba(0,0,0,0.4)", borderTop: "1px solid rgba(0,0,0,0.06)" }}>{left}</div>
-                  <div style={{ padding: "20px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--ink)", borderTop: "1px solid rgba(0,0,0,0.06)", borderLeft: "2px solid rgba(0,0,0,0.08)", backgroundColor: "rgba(148,198,212,0.08)" }}>{right}</div>
+                  <div style={{ padding: "20px 24px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--ink)", borderTop: "1px solid rgba(0,0,0,0.06)", borderLeft: "2px solid rgba(0,0,0,0.08)", backgroundColor: "var(--base-light)" }}>{right}</div>
                 </div>
               ))}
             </div>
@@ -476,8 +476,8 @@ export function HomeScienceGrid() {
         {/* Outer container card with avro-blue background */}
         <div style={{ backgroundColor: BLUE, borderRadius: 28, padding: "clamp(24px,4vw,48px)", overflow: "hidden" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px,1fr))", gap: 20 }}>
-            {/* Why GABA card - lighter blue tint */}
-            <div style={{ backgroundColor: "rgba(255,255,255,0.35)", borderRadius: 20, padding: "clamp(28px,4vw,44px)", border: "2px solid rgba(0,0,0,0.06)" }}>
+            {/* Why GABA card - solid bone */}
+            <div style={{ backgroundColor: "var(--bone)", borderRadius: 20, padding: "clamp(28px,4vw,44px)", border: "2px solid rgba(0,0,0,0.06)" }}>
               <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,3vw,40px)", lineHeight: 1.0, color: "var(--charcoal)", marginBottom: 16 }}>
                 Why GABA matters.
               </h2>
@@ -488,7 +488,7 @@ export function HomeScienceGrid() {
                 {[["Naturally Fermented", "flask"], ["Calm First", "leaf"], ["In Every Formula", "shield"]].map(([label, _icon], i) => (
                   <React.Fragment key={`gaba-${i}`}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, textAlign: "center" }}>
-                      <div style={{ width: 56, height: 56, backgroundColor: "rgba(255,255,255,0.5)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid rgba(0,0,0,0.08)" }}>
+                      <div style={{ width: 56, height: 56, backgroundColor: "var(--base-light)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid rgba(0,0,0,0.08)" }}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--charcoal)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                           {i === 0 && <><path d="M9 3H5a2 2 0 0 0-2 2v4"/><path d="M9 3h6"/><path d="M15 3h4a2 2 0 0 1 2 2v4"/><path d="M3 9c0 7.18 4.03 12 9 12s9-4.82 9-12"/></>}
                           {i === 1 && <path d="M17 8C8 10 5.9 16.17 3.82 19.12A1 1 0 0 0 4.69 20.7C7.14 20.1 11.75 18.5 14 16c2.5-2.77 2.87-6.12 3-8-.5.25-2.25.75-3 0z"/>}
@@ -507,16 +507,16 @@ export function HomeScienceGrid() {
               </a>
             </div>
 
-            {/* Formula comparison - lighter blue tint */}
-            <div style={{ backgroundColor: "rgba(255,255,255,0.35)", borderRadius: 20, overflow: "hidden", padding: "clamp(28px,4vw,44px)", border: "2px solid rgba(0,0,0,0.06)" }}>
+            {/* Formula comparison - solid bone */}
+            <div style={{ backgroundColor: "var(--bone)", borderRadius: 20, overflow: "hidden", padding: "clamp(28px,4vw,44px)", border: "2px solid rgba(0,0,0,0.06)" }}>
               <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,3vw,40px)", lineHeight: 1.0, color: "var(--charcoal)", marginBottom: 28 }}>
                 Every formula starts calm first.
               </h2>
               <div style={{ overflowX: "auto" }}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr repeat(3,1fr)", minWidth: 480, border: "2px solid rgba(0,0,0,0.08)", borderRadius: 20, overflow: "hidden", backgroundColor: "rgba(255,255,255,0.4)" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr repeat(3,1fr)", minWidth: 480, border: "2px solid rgba(0,0,0,0.08)", borderRadius: 20, overflow: "hidden", backgroundColor: "var(--base-light)" }}>
                   <div style={{ padding: "16px 18px", borderBottom: "2px solid rgba(0,0,0,0.06)" }} />
                   {["Calm", "Focus", "Energy"].map((f) => (
-                    <div key={f} style={{ padding: "16px 18px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--charcoal)", borderBottom: "2px solid rgba(0,0,0,0.06)", borderLeft: "2px solid rgba(0,0,0,0.06)", textAlign: "center", backgroundColor: "rgba(255,255,255,0.3)" }}>{f}</div>
+                    <div key={f} style={{ padding: "16px 18px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--charcoal)", borderBottom: "2px solid rgba(0,0,0,0.06)", borderLeft: "2px solid rgba(0,0,0,0.06)", textAlign: "center", backgroundColor: "var(--base)" }}>{f}</div>
                   ))}
                   {[
                     ["Shared Foundation", "PharmaGABA®", "Naturally fermented base", "Calm-first logic"],
@@ -525,7 +525,7 @@ export function HomeScienceGrid() {
                     ["Caffeine", "0 mg", "0 mg", "120 mg"],
                   ].map(([row, ...cells], rowIndex) => (
                     <React.Fragment key={`row-${rowIndex}`}>
-                      <div style={{ padding: "18px 18px", fontFamily: GC, fontWeight: 700, fontSize: 17, color: "rgba(0,0,0,0.5)", borderTop: "1px solid rgba(0,0,0,0.04)", backgroundColor: "rgba(0,0,0,0.02)" }}>{row}</div>
+                      <div style={{ padding: "18px 18px", fontFamily: GC, fontWeight: 700, fontSize: 17, color: "rgba(0,0,0,0.5)", borderTop: "1px solid rgba(0,0,0,0.04)", backgroundColor: "var(--base-deep)" }}>{row}</div>
                       {cells.map((c, ci) => (
                         <div key={`${row}-${ci}`} style={{ padding: "18px 18px", fontFamily: GC, fontWeight: 400, fontSize: 17, color: "var(--charcoal)", borderTop: "1px solid rgba(0,0,0,0.04)", borderLeft: "2px solid rgba(0,0,0,0.06)", textAlign: "center" }}>{c}</div>
                       ))}
@@ -557,7 +557,7 @@ export function HomeQualityRow() {
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
         {/* Outer container card */}
         <div style={{ backgroundColor: "var(--base-light)", borderRadius: 28, padding: "clamp(20px,3vw,32px)", border: "1px solid rgba(0,0,0,0.06)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px,1fr))", gap: 2, backgroundColor: "rgba(0,0,0,0.06)", borderRadius: 20, overflow: "hidden" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px,1fr))", gap: 2, backgroundColor: "var(--base-deep)", borderRadius: 20, overflow: "hidden" }}>
             {badges.map((b) => (
               <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: "clamp(20px,3vw,32px) clamp(12px,2vw,20px)", textAlign: "center", backgroundColor: "var(--bone)" }}>
                 <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(17px,1.6vw,22px)", color: "var(--ink)", lineHeight: 1.2 }}>{b.label}</strong>
@@ -571,7 +571,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ───────────────────────────────────────────────────────────────
+// ── STORY STRIP ────────────────────────────────────────────────────────────���──
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
@@ -638,7 +638,7 @@ export function HomeRitualSection() {
               <div
                 key={step.num}
                 style={{
-                  backgroundColor: "rgba(255,255,255,0.35)",
+                  backgroundColor: "var(--bone)",
                   borderRadius: 16,
                   border: "2px solid rgba(0,0,0,0.08)",
                   overflow: "hidden",
