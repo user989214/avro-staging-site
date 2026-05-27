@@ -9,13 +9,14 @@ import {
   type TubeScene,
 } from "@/components/product-visual"
 import type { FormulaKey, Formula } from "@/lib/data"
-import { cn } from "@/lib/utils"
 
 interface ProductGalleryProps {
   formula: Formula
   formulaKey: FormulaKey
   flavorId: string
   onFlavorChange?: (flavorId: string) => void
+  reviewCount?: number
+  rating?: number
 }
 
 type ThumbKind = "studio" | "tube" | "stick" | TubeScene
@@ -38,7 +39,7 @@ const THUMBS: Thumb[] = [
   { id: "gaming", label: TUBE_SCENE_LABELS.gaming, bg: "scene" },
 ]
 
-export function ProductGallery({ formula, formulaKey, flavorId }: ProductGalleryProps) {
+export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rating = 4.8 }: ProductGalleryProps) {
   const [activeId, setActiveId] = useState<ThumbKind>("studio")
 
   const studio = tubeImageFor("studio", formulaKey, flavorId)
@@ -50,7 +51,7 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
   const renderMain = () => {
     if (activeId === "studio") {
       return (
-        <div className="relative flex items-center justify-center w-full h-full bg-base overflow-hidden">
+        <div className="relative flex items-center justify-center w-full h-full overflow-hidden" style={{ backgroundColor: "var(--bone)" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={studio.src}
@@ -64,7 +65,7 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
     if (activeId === "tube") {
       // Solo display tube — the canister by itself, on white.
       return (
-        <div className="relative flex items-center justify-center w-full h-full bg-base overflow-hidden">
+        <div className="relative flex items-center justify-center w-full h-full overflow-hidden" style={{ backgroundColor: "var(--bone)" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={soloTube.src}
@@ -77,7 +78,7 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
 
     if (activeId === "stick") {
       return (
-        <div className="relative flex items-center justify-center w-full h-full bg-base p-8 sm:p-14">
+        <div className="relative flex items-center justify-center w-full h-full p-8 sm:p-14" style={{ backgroundColor: "var(--bone)" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={stick.src}
@@ -91,7 +92,7 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
     // Lifestyle cohort scene — render edge-to-edge so its real background fills the frame.
     const scene = tubeImageFor(activeId, formulaKey, flavorId)
     return (
-      <div className="relative w-full h-full overflow-hidden" style={{ backgroundColor: "#f2f2f2" }}>
+      <div className="relative w-full h-full overflow-hidden" style={{ backgroundColor: "var(--bone)" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={scene.src}
@@ -109,7 +110,7 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
         <img
           src={studio.src}
           alt=""
-          className="h-full w-full object-contain scale-[1.18] origin-center"
+          className="h-full w-full object-contain p-1"
         />
       )
     }
@@ -119,7 +120,7 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
         <img
           src={soloTube.src}
           alt=""
-          className="h-full w-full object-contain"
+          className="h-full w-full object-contain p-1"
         />
       )
     }
@@ -129,7 +130,7 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
         <img
           src={stick.src}
           alt=""
-          className="max-h-[80%] w-auto object-contain"
+          className="h-full w-auto object-contain py-1"
         />
       )
     }
@@ -149,44 +150,85 @@ export function ProductGallery({ formula, formulaKey, flavorId }: ProductGallery
       className="flex flex-col-reverse lg:flex-row gap-3 lg:gap-3"
       style={{ maxHeight: "min(72vh, 640px)" }}
     >
-      {/* Thumbnail strip — horizontal on mobile, vertical scrollable column on desktop */}
-      <div className="relative lg:w-[64px] shrink-0 lg:h-full">
+      {/* Thumbnail strip — homepage card style: outer light frame, inner bone tile */}
+      <div className="relative lg:w-[78px] shrink-0 lg:h-full">
         <ul
-          className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-y-auto lg:overflow-x-hidden -mx-1 px-1 pb-1 lg:mx-0 lg:px-0 lg:pb-0 lg:pr-1 snap-x lg:snap-y lg:h-full no-scrollbar"
+          className="flex lg:flex-col gap-2.5 overflow-x-auto lg:overflow-y-auto lg:overflow-x-hidden -mx-1 px-1 pb-1 lg:mx-0 lg:px-0 lg:pb-0 lg:pr-1 snap-x lg:snap-y lg:h-full no-scrollbar"
         >
-          {THUMBS.map((thumb) => (
-            <li key={thumb.id} className="shrink-0 snap-start">
-              <button
-                type="button"
-                onClick={() => setActiveId(thumb.id)}
-                aria-label={thumb.label}
-                aria-pressed={activeId === thumb.id}
-                className={cn(
-                  "relative w-[58px] h-[58px] sm:w-[60px] sm:h-[60px] overflow-hidden flex items-center justify-center transition-all",
-                  activeId === thumb.id
-                    ? "ring-2 ring-black ring-offset-0"
-                    : "opacity-70 hover:opacity-100 border border-line",
-                )}
-                style={{ backgroundColor: "var(--bone)", borderRadius: 10 }}
-              >
-                {renderThumb(thumb)}
-                <span className="sr-only">{thumb.label}</span>
-              </button>
-            </li>
-          ))}
+          {THUMBS.map((thumb) => {
+            const isActive = activeId === thumb.id
+            return (
+              <li key={thumb.id} className="shrink-0 snap-start">
+                <button
+                  type="button"
+                  onClick={() => setActiveId(thumb.id)}
+                  aria-label={thumb.label}
+                  aria-pressed={isActive}
+                  className="relative w-[68px] h-[68px] sm:w-[72px] sm:h-[72px] flex items-center justify-center transition-all"
+                  style={{
+                    borderRadius: 14,
+                    padding: 5,
+                    backgroundColor: isActive ? "var(--charcoal)" : "var(--base)",
+                  }}
+                >
+                  <div
+                    className="relative w-full h-full overflow-hidden flex items-center justify-center"
+                    style={{
+                      borderRadius: 9,
+                      backgroundColor: "var(--bone)",
+                    }}
+                  >
+                    {renderThumb(thumb)}
+                  </div>
+                  <span className="sr-only">{thumb.label}</span>
+                </button>
+              </li>
+            )
+          })}
         </ul>
       </div>
 
-      {/* Main view — fills the frame, image-native background, bordered like homepage cards */}
+      {/* Main view — homepage card style: outer base wrapper + inner bone tile */}
       <div
-        className="relative w-full rounded-2xl overflow-hidden flex-1 border border-line"
+        className="relative w-full flex-1"
         style={{
-          backgroundColor: "var(--bone)",
+          backgroundColor: "var(--base)",
+          borderRadius: 24,
+          padding: "clamp(10px,1.2vw,16px)",
           aspectRatio: "1 / 1",
           maxHeight: "min(72vh, 640px)",
         }}
       >
-        <div className="absolute inset-0">{renderMain()}</div>
+        <div
+          className="relative w-full h-full overflow-hidden"
+          style={{
+            borderRadius: 18,
+            backgroundColor: "var(--bone)",
+          }}
+        >
+          {renderMain()}
+
+          {/* Rating overlay pill - top-left, like homepage badges */}
+          {reviewCount != null && (
+            <div
+              className="absolute top-3 left-3 flex items-center gap-1.5 pointer-events-none"
+              style={{
+                fontFamily: '"DM Sans", system-ui, sans-serif',
+                backgroundColor: "var(--charcoal)",
+                color: "var(--bone)",
+                borderRadius: 999,
+                padding: "6px 12px",
+                fontWeight: 700,
+                fontSize: 12,
+                letterSpacing: "0.02em",
+              }}
+            >
+              <span style={{ fontSize: 11, letterSpacing: 0.5 }}>{"\u2605"}</span>
+              <span>{rating.toFixed(1)}</span>
+              <span style={{ opacity: 0.65, fontWeight: 500 }}>({reviewCount})</span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

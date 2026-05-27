@@ -26,7 +26,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
   const oneTimeTotal = baseTotal
   const displayTotal = (purchaseType === "subscribe" ? subscribeTotal : oneTimeTotal) * quantity
   const reviewCount = formulaKey === "calm" ? 82 : formulaKey === "focus" ? 62 : 76
-  const reviewLabel = `4.8 (${reviewCount} reviews)`
+  void reviewCount
 
   const handleAdd = () => {
     addItem(formula, purchaseType === "subscribe" ? "bundle" : "single")
@@ -38,7 +38,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
       className="flex flex-col gap-4 bg-base"
       style={{ fontFamily: GC }}
     >
-      {/* Header - tighter */}
+      {/* Header - tighter, no rating (rating now lives in gallery overlay) */}
       <header className="flex flex-col gap-1.5">
         <h1
           className="font-serif text-balance"
@@ -51,21 +51,6 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         >
           {formula.headline}
         </h1>
-        <div className="flex items-center gap-2">
-          <span style={{ color: "var(--ink)" }} className="tracking-wider text-sm">
-            {"\u2605\u2605\u2605\u2605\u2605"}
-          </span>
-          <span
-            style={{
-              fontFamily: GC,
-              fontWeight: 500,
-              fontSize: 14,
-              color: "var(--warm-gray)",
-            }}
-          >
-            {reviewLabel}
-          </span>
-        </div>
         <p
           style={{
             fontFamily: GC,

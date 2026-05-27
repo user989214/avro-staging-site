@@ -16,6 +16,7 @@ interface ProductHeroProps {
  */
 export function ProductHero({ formula, formulaKey }: ProductHeroProps) {
   const [flavorId, setFlavorId] = useState<string>(formula.flavors[0].id)
+  const reviewCount = formulaKey === "calm" ? 82 : formulaKey === "focus" ? 62 : 76
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] gap-8 lg:gap-12 items-start">
@@ -24,6 +25,8 @@ export function ProductHero({ formula, formulaKey }: ProductHeroProps) {
         formulaKey={formulaKey}
         flavorId={flavorId}
         onFlavorChange={setFlavorId}
+        reviewCount={reviewCount}
+        rating={4.8}
       />
       <BuyBox
         formula={formula}
