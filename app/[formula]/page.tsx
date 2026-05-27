@@ -114,7 +114,7 @@ export default async function ProductPage({
               fontSize: "clamp(32px,4.5vw,56px)",
               lineHeight: 1.0,
               color: "var(--ink)",
-              textAlign: "center",
+              textAlign: "left",
               marginBottom: 40,
             }}
           >
