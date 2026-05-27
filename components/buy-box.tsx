@@ -23,7 +23,7 @@ interface BuyBoxProps {
   onFlavorChange: (flavorId: string) => void
 }
 
-export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
+export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBoxProps) {
   const [purchaseType, setPurchaseType] = useState<"onetime" | "subscribe">("subscribe")
   const [quantity, setQuantity] = useState(1)
   const { addItem, openCart } = useCart()
@@ -59,21 +59,21 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
 
   return (
     <aside
-      className="flex flex-col gap-7 bg-base"
+      className="flex flex-col gap-6 bg-base"
       style={{ fontFamily: GC }}
     >
       {/* Header */}
-      <header className="flex flex-col gap-3">
+      <header className="flex flex-col gap-2">
         <h1
+          className="font-serif"
           style={{
-            fontFamily: GC,
-            fontWeight: 700,
-            fontSize: "clamp(40px,4.5vw,60px)",
+            fontWeight: 900,
+            fontSize: "clamp(36px,4vw,52px)",
             lineHeight: 0.96,
             color: "var(--ink)",
           }}
         >
-          {formula.headline}
+          {formula.name}
         </h1>
         <div className="flex items-center gap-3">
           <span style={{ color: "var(--ink)" }} className="tracking-wider text-base">
@@ -83,8 +83,8 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
             style={{
               fontFamily: GC,
               fontWeight: 500,
-              fontSize: 17,
-              color: "rgba(0,0,0,0.6)",
+              fontSize: 16,
+              color: "var(--warm-gray)",
             }}
           >
             {reviewLabel}
@@ -94,14 +94,48 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
           style={{
             fontFamily: GC,
             fontWeight: 500,
-            fontSize: 18,
+            fontSize: 17,
             lineHeight: 1.4,
-            color: "rgba(0,0,0,0.6)",
+            color: "var(--warm-gray)",
           }}
         >
-          10 stick packets per box · {activeFlavor.name}
+          {formula.support}
         </p>
       </header>
+
+      {/* Flavor switcher */}
+      <div className="flex flex-col gap-2">
+        <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 15, color: "var(--ink)" }}>
+          Flavor
+        </span>
+        <div className="flex gap-2">
+          {formula.flavors.map((flavor) => (
+            <button
+              key={flavor.id}
+              type="button"
+              onClick={() => onFlavorChange(flavor.id)}
+              className="flex-1 flex flex-col items-start px-4 py-3 rounded-2xl transition-all"
+              style={{
+                backgroundColor: flavorId === flavor.id ? "var(--charcoal)" : LIGHT_GRAY,
+                color: flavorId === flavor.id ? "var(--bone)" : "var(--ink)",
+                border: flavorId === flavor.id ? "2px solid var(--charcoal)" : "2px solid transparent",
+              }}
+            >
+              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 15 }}>{flavor.name}</span>
+              <span
+                style={{
+                  fontFamily: GC,
+                  fontWeight: 500,
+                  fontSize: 13,
+                  opacity: flavorId === flavor.id ? 0.7 : 0.6,
+                }}
+              >
+                {flavor.tagline}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* Purchase options */}
       <div className="flex flex-col gap-3">
@@ -169,7 +203,7 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
       <button
         type="button"
         onClick={handleAdd}
-        className="w-full flex items-center justify-center transition-colors"
+        className="bb-add-btn w-full flex items-center justify-center transition-colors"
         style={{
           fontFamily: GC,
           fontWeight: 700,
@@ -182,17 +216,12 @@ export function BuyBox({ formula, formulaKey, flavorId }: BuyBoxProps) {
           border: "2px solid var(--charcoal)",
           letterSpacing: "0.01em",
         }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = "transparent"
-          e.currentTarget.style.color = "#000"
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = "#000"
-          e.currentTarget.style.color = "#fff"
-        }}
       >
         Add to cart — ${displayTotal.toFixed(2)}
       </button>
+      <style>{`
+        .bb-add-btn:hover { background-color: transparent; color: var(--ink); }
+      `}</style>
 
       {/* Supplement Facts button */}
       <Dialog>
