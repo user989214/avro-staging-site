@@ -81,6 +81,14 @@ export function CohortPage({ data }: { data: CohortData }) {
         stepIconColor: "var(--avro-blue)",
       }
 
+  // Golf gets a colored CTA closer (charcoal text on green); ZP gets a gold-on-dark closer.
+  const finalCtaBg =
+    data.visual === "golf"
+      ? accent
+      : isZeroProof
+        ? "var(--dark-surface)"
+        : undefined
+
   // Cohort-specific lifestyle hero photo
   const cohortHero: Record<string, { src: string; alt: string }> = {
     golf: {
