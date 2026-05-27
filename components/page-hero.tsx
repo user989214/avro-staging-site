@@ -271,8 +271,8 @@ function FlatHero({
           font-weight: 700;
           font-size: 16px;
           letter-spacing: -0.005em;
-          min-height: 48px;
-          padding: 0 28px;
+          min-height: 52px;
+          padding: 0 36px;
           border-radius: 999px;
           text-decoration: none;
           background-color: var(--charcoal);

@@ -18,7 +18,7 @@ export function Section({ children, className, id }: SectionProps) {
     <section
       id={id}
       className={cn(
-        "w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(52px,7vw,86px)] border-b border-line",
+        "w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(52px,7vw,86px)]",
         className
       )}
     >
