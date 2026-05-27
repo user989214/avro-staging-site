@@ -309,13 +309,28 @@ export function HomeBenefitRow() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(48px,6vw,72px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        {/* Outer container card */}
-        <div style={{ backgroundColor: BLUE, borderRadius: 28, padding: "clamp(24px,4vw,40px)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 12 }}>
-            {benefits.map((b) => (
-              <div key={b.title} style={{ backgroundColor: "var(--bone)", borderRadius: 16, padding: "clamp(24px,3vw,32px)" }}>
-                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(19px,1.7vw,24px)", lineHeight: 1.15, color: "var(--ink)", marginBottom: 12 }}>{b.title}</h3>
-                <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(16px,1.4vw,18px)", lineHeight: 1.5, color: "rgba(0,0,0,0.55)" }}>{b.copy}</p>
+        {/* Outer blue container */}
+        <div style={{ backgroundColor: BLUE, borderRadius: 28, padding: "clamp(32px,5vw,56px)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))", gap: "clamp(24px,3vw,40px)" }}>
+            {benefits.map((b, i) => (
+              <div key={b.title} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 16 }}>
+                <div style={{ 
+                  width: 56, 
+                  height: 56, 
+                  borderRadius: 999, 
+                  backgroundColor: "var(--ink)", 
+                  color: BLUE,
+                  display: "flex", 
+                  alignItems: "center", 
+                  justifyContent: "center", 
+                  fontFamily: GC, 
+                  fontWeight: 700, 
+                  fontSize: 22,
+                }}>
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(19px,1.7vw,24px)", lineHeight: 1.2, color: "var(--ink)" }}>{b.title}</h3>
+                <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(15px,1.3vw,17px)", lineHeight: 1.5, color: "rgba(0,0,0,0.65)" }}>{b.copy}</p>
               </div>
             ))}
           </div>
