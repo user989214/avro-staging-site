@@ -161,7 +161,7 @@ export function Header() {
                     className="font-serif"
                     style={{
                       fontWeight: 900,
-                      fontSize: 15,
+                      fontSize: 17,
                       letterSpacing: "-0.005em",
                       whiteSpace: "nowrap",
                       padding: "0 28px",
@@ -169,39 +169,37 @@ export function Header() {
                   >
                     {msg}
                   </span>
-                  <span aria-hidden="true" className="ann-plus" style={{ fontSize: 13, lineHeight: 1, opacity: 0.55, fontWeight: 700, display: "inline-block" }}>+</span>
+                  <span aria-hidden="true" className="ann-plus" style={{ fontSize: 14, lineHeight: 1, opacity: 0.55, fontWeight: 700, display: "inline-block" }}>+</span>
                 </span>
               ))}
-              {/* Shop AVRO pill — solid, wide */}
+              {/* Shop AVRO pill — matches site button styling (charcoal fill, outline-on-hover, no icon) */}
               <Link
                 href="/shop"
-                className="ann-shop-btn font-serif"
+                className="ann-shop-btn"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  gap: 10,
                   margin: "0 28px",
-                  padding: "8px 44px",
-                  minHeight: 36,
+                  padding: "0 28px",
+                  minHeight: 40,
                   borderRadius: 999,
                   border: "2px solid var(--charcoal)",
                   backgroundColor: "var(--charcoal)",
-                  color: "var(--avro-blue)",
-                  fontWeight: 900,
-                  fontSize: 13,
-                  letterSpacing: "0.04em",
+                  color: "var(--bone)",
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 800,
+                  fontSize: 14,
+                  letterSpacing: "0.01em",
                   textDecoration: "none",
                   whiteSpace: "nowrap",
                   flexShrink: 0,
-                  position: "relative",
-                  overflow: "hidden",
+                  transition: "background-color 150ms ease, color 150ms ease",
                 }}
               >
-                <span style={{ position: "relative", zIndex: 1 }}>Shop AVRO</span>
-                <span aria-hidden="true" className="ann-shop-arrow" style={{ position: "relative", zIndex: 1, fontSize: 14, lineHeight: 1, display: "inline-block" }}>→</span>
+                Shop AVRO
               </Link>
-              <span aria-hidden="true" className="ann-plus" style={{ fontSize: 13, lineHeight: 1, opacity: 0.55, fontWeight: 700, display: "inline-block" }}>+</span>
+              <span aria-hidden="true" className="ann-plus" style={{ fontSize: 14, lineHeight: 1, opacity: 0.55, fontWeight: 700, display: "inline-block" }}>+</span>
             </div>
           ))}
         </div>
@@ -216,18 +214,9 @@ export function Header() {
           .ann-bar:hover .ann-track {
             animation-play-state: paused;
           }
-          .ann-shop-btn {
-            transition: background-color 0.25s cubic-bezier(0.22,1,0.36,1), color 0.25s cubic-bezier(0.22,1,0.36,1), transform 0.25s cubic-bezier(0.22,1,0.36,1);
-          }
           .ann-shop-btn:hover {
-            background-color: transparent;
-            color: var(--charcoal);
-          }
-          .ann-shop-arrow {
-            transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
-          }
-          .ann-shop-btn:hover .ann-shop-arrow {
-            transform: translateX(4px);
+            background-color: transparent !important;
+            color: var(--charcoal) !important;
           }
           @media (prefers-reduced-motion: reduce) {
             .ann-track { animation: none; }

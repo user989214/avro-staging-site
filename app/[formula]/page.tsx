@@ -7,7 +7,6 @@ import { FinalCta } from "@/components/sections"
 import { ProductComparisonGrid } from "@/components/product-comparison-grid"
 import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommendations"
 import { PdpIngredients } from "@/components/pdp-ingredients"
-import { QuickAddBar } from "@/components/quick-add-bar"
 import { SupplementFactsDialog } from "@/components/supplement-facts-dialog"
 
 const GC = '"DM Sans", system-ui, sans-serif'
@@ -102,9 +101,7 @@ export default async function ProductPage({
       </section>
 
       {/* Ingredients Section */}
-      <div data-quick-add-trigger>
-        <PdpIngredients formulaKey={key} />
-      </div>
+      <PdpIngredients formulaKey={key} />
 
       {/* The feeling of good calm/focus/energy */}
       <section style={{ width: "100%", backgroundColor: "var(--base)", padding: "clamp(48px,6vw,80px) 0" }}>
@@ -539,16 +536,11 @@ export default async function ProductPage({
       </div>
 
       {/* Final CTA */}
-      <div data-quick-add-hide>
-        <FinalCta
-          title="Good energy starts here."
-          copy="Get easy lifestyle tips, wellness inspo, plus early access to AVRO launches and offers."
-          productButtons
-        />
-      </div>
-
-      {/* Sticky quick-add bar — appears after the ingredients section, hides at final CTA */}
-      <QuickAddBar formulaKey={key} />
+      <FinalCta
+        title="Good energy starts here."
+        copy="Get easy lifestyle tips, wellness inspo, plus early access to AVRO launches and offers."
+        productButtons
+      />
     </>
   )
 }
