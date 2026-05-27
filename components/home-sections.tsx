@@ -1084,10 +1084,10 @@ export function HomeProductStrip() {
 // ── MOMENT GRID ────────────────────────────���──────────────────────────────────
 export function HomeMomentGrid() {
   const moments = [
-    { title: "Golf", copy: "Before the first tee. Before the final putt.", cta: "Explore Golf", url: "/golf", image: "/images/lifestyle/golfers-misty-tee-box.jpg", alt: "Golfers on a misty tee box at sunrise" },
-    { title: "Work", copy: "Before the meeting. Before deep work.", cta: "Explore Work", url: "/work", image: "/images/lifestyle/woman-journaling-mug.jpg", alt: "Calm morning routine with journal and warm mug" },
-    { title: "Social", copy: "Show up present without alcohol.", cta: "Explore Social", url: "/social", image: "/images/lifestyle/coupes-grapefruit-stickpack.jpg", alt: "AVRO stickpack styled with grapefruit coupes on a bar" },
-    { title: "Gaming", copy: "Before the session. Before the decision.", cta: "Explore Gaming", url: "/gaming", image: "/images/lifestyle/focus-iced-drink-headphones.jpg", alt: "Iced AVRO drink and headphones at a gaming desk" },
+    { title: "Golf", copy: "Before the first tee. Before the final putt.", cta: "Explore Golf", url: "/golf", image: "/images/lifestyle/golfers-misty-tee-box.jpg", alt: "Golfers on a misty tee box at sunrise", position: "50% 35%" },
+    { title: "Work", copy: "Before the meeting. Before deep work.", cta: "Explore Work", url: "/work", image: "/images/lifestyle/woman-journaling-mug.jpg", alt: "Calm morning routine with journal and warm mug", position: "50% 40%" },
+    { title: "Social", copy: "Show up present without alcohol.", cta: "Explore Social", url: "/social", image: "/images/lifestyle/coupes-grapefruit-stickpack.jpg", alt: "AVRO stickpack styled with grapefruit coupes on a bar", position: "50% 50%" },
+    { title: "Gaming", copy: "Before the session. Before the decision.", cta: "Explore Gaming", url: "/gaming", image: "/images/lifestyle/focus-iced-drink-headphones.jpg", alt: "Iced AVRO drink and headphones at a gaming desk", position: "50% 50%" },
   ]
 
   return (
@@ -1101,7 +1101,7 @@ export function HomeMomentGrid() {
             <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 24, overflow: "hidden", backgroundColor: "var(--base-light)", padding: 16 }}>
               <div style={{ position: "relative", aspectRatio: "4/5", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={m.image} alt={m.alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+                <img src={m.image} alt={m.alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: m.position }} />
               </div>
               <div style={{ padding: "20px 8px 12px", flex: 1, display: "flex", flexDirection: "column" }}>
                 <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2vw,30px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 10 }}>{m.title}</h3>
