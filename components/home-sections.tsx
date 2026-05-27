@@ -309,30 +309,50 @@ export function HomeBenefitRow() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(48px,6vw,72px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        {/* Outer blue container */}
-        <div style={{ backgroundColor: BLUE, borderRadius: 28, padding: "clamp(32px,5vw,56px)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))", gap: "clamp(24px,3vw,40px)" }}>
-            {benefits.map((b, i) => (
-              <div key={b.title} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 16 }}>
-                <div style={{ 
-                  width: 56, 
-                  height: 56, 
-                  borderRadius: 999, 
-                  backgroundColor: "var(--ink)", 
-                  color: BLUE,
-                  display: "flex", 
-                  alignItems: "center", 
-                  justifyContent: "center", 
-                  fontFamily: GC, 
-                  fontWeight: 700, 
-                  fontSize: 22,
-                }}>
-                  {String(i + 1).padStart(2, "0")}
+        <div style={{ backgroundColor: BLUE, borderRadius: 28, padding: "clamp(40px,6vw,72px) clamp(28px,5vw,64px)", position: "relative", overflow: "hidden" }}>
+          {/* Decorative concentric circles */}
+          <div aria-hidden="true" style={{ position: "absolute", top: -120, right: -120, width: 380, height: 380, borderRadius: "50%", border: "1px solid rgba(0,0,0,0.08)", pointerEvents: "none" }} />
+          <div aria-hidden="true" style={{ position: "absolute", top: -60, right: -60, width: 260, height: 260, borderRadius: "50%", border: "1px solid rgba(0,0,0,0.08)", pointerEvents: "none" }} />
+          <div aria-hidden="true" style={{ position: "absolute", top: 0, right: 0, width: 140, height: 140, borderRadius: "50%", border: "1px solid rgba(0,0,0,0.08)", pointerEvents: "none" }} />
+
+          <div style={{ position: "relative", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: "clamp(24px,3vw,40px)", alignItems: "start" }}>
+            <div style={{ paddingRight: "clamp(0px,2vw,32px)" }}>
+              <span style={{ fontFamily: GC, fontWeight: 600, fontSize: 12, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(0,0,0,0.55)" }}>
+                What AVRO supports
+              </span>
+              <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.4vw,44px)", lineHeight: 1.05, color: "var(--ink)", marginTop: 12, letterSpacing: "-0.01em" }}>
+                Steady first, ready always.
+              </h2>
+            </div>
+
+            <div style={{ gridColumn: "span 2", display: "flex", flexDirection: "column" }}>
+              {benefits.map((b, i) => (
+                <div
+                  key={b.title}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "auto 1fr",
+                    gap: "clamp(20px,3vw,40px)",
+                    alignItems: "baseline",
+                    padding: "clamp(20px,2.5vw,28px) 0",
+                    borderTop: i === 0 ? "1px solid rgba(0,0,0,0.12)" : "none",
+                    borderBottom: "1px solid rgba(0,0,0,0.12)",
+                  }}
+                >
+                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                    <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(20px,1.9vw,26px)", lineHeight: 1.2, color: "var(--ink)", letterSpacing: "-0.01em" }}>
+                      {b.title}
+                    </h3>
+                    <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(15px,1.2vw,17px)", lineHeight: 1.5, color: "rgba(0,0,0,0.65)" }}>
+                      {b.copy}
+                    </p>
+                  </div>
                 </div>
-                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(19px,1.7vw,24px)", lineHeight: 1.2, color: "var(--ink)" }}>{b.title}</h3>
-                <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(15px,1.3vw,17px)", lineHeight: 1.5, color: "rgba(0,0,0,0.65)" }}>{b.copy}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
