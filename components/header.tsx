@@ -23,22 +23,22 @@ function CartIconFilled({ className }: { className?: string }) {
   )
 }
 
-const navDropdownSections: { heading: string; items: { href: string; label: string; desc: string }[] }[] = [
+const navDropdownSections: { heading: string; items: { href: string; label: string; cta: string }[] }[] = [
   {
     heading: "Discover",
     items: [
-      { href: "/why-avro", label: "Why AVRO", desc: "The calm-first philosophy behind every formula." },
-      { href: "/science", label: "The Science", desc: "Naturally fermented PharmaGABA®, clinically backed." },
-      { href: "/learn", label: "Ingredients", desc: "Functional, food-grade, transparently sourced." },
+      { href: "/why-avro", label: "Why AVRO", cta: "Why AVRO" },
+      { href: "/science", label: "The Science", cta: "The Science" },
+      { href: "/learn", label: "Ingredients", cta: "Ingredients" },
     ],
   },
   {
     heading: "By Use Case",
     items: [
-      { href: "/golf", label: "Golf", desc: "Composure under pressure, on every shot." },
-      { href: "/work", label: "Work / Tech", desc: "Sustained focus without the jitter." },
-      { href: "/gaming", label: "Gaming / Poker", desc: "Steady state for high-stakes decisions." },
-      { href: "/social", label: "Social / Non-Alcohol", desc: "Show up calm, clear, and present." },
+      { href: "/golf", label: "Golf", cta: "AVRO for Golf" },
+      { href: "/work", label: "Work / Tech", cta: "AVRO at Work" },
+      { href: "/gaming", label: "Gaming / Poker", cta: "AVRO for Gaming" },
+      { href: "/social", label: "Social / Non-Alcohol", cta: "AVRO for Social" },
     ],
   },
 ]
@@ -213,48 +213,37 @@ export function Header() {
             transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
-          <div className="mx-auto max-w-[1480px] px-6 lg:px-10 py-7">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-7">
+          <div className="mx-auto max-w-[1480px] px-6 lg:px-10 py-4">
+            <div className="flex flex-col gap-2.5">
               {navDropdownSections.map((section, sIdx) => (
-                <div key={section.heading}>
-                  <div
-                    className="mb-3 text-[11px] font-bold uppercase tracking-[0.16em]"
-                    style={{ color: "var(--warm-gray)" }}
+                <div
+                  key={section.heading}
+                  className="flex items-center gap-3 flex-wrap"
+                  style={{
+                    opacity: dropdownOpen ? 1 : 0,
+                    transform: dropdownOpen ? "translateY(0)" : "translateY(6px)",
+                    transition: `opacity 0.25s ease ${0.05 + sIdx * 0.06}s, transform 0.25s ease ${0.05 + sIdx * 0.06}s`,
+                  }}
+                >
+                  <span
+                    className="text-[10px] font-bold uppercase tracking-[0.18em] shrink-0"
+                    style={{ color: "var(--warm-gray)", minWidth: 92 }}
                   >
                     {section.heading}
-                  </div>
-                  <div className="flex flex-col">
-                    {section.items.map((item, idx) => (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        onClick={() => setDropdownOpen(false)}
-                        className="group flex items-center justify-between py-3"
-                        style={{
-                          borderTop: idx === 0 ? "none" : "1px solid var(--divider)",
-                          opacity: dropdownOpen ? 1 : 0,
-                          transform: dropdownOpen ? "translateY(0)" : "translateY(6px)",
-                          transition: `opacity 0.25s ease ${0.05 + sIdx * 0.04 + idx * 0.025}s, transform 0.25s ease ${0.05 + sIdx * 0.04 + idx * 0.025}s`,
-                        }}
-                      >
-                        <span
-                          className="text-[15px] font-bold uppercase tracking-[0.06em]"
-                          style={{ color: "var(--ink)" }}
-                        >
-                          {item.label}
-                        </span>
-                        <span
-                          className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] transition-transform duration-200 group-hover:translate-x-1"
-                          style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
-                        >
-                          Explore
-                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                          </svg>
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
+                  </span>
+                  {section.items.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setDropdownOpen(false)}
+                      className="inline-flex items-center justify-center rounded-full px-5 py-2 text-[12px] font-bold uppercase tracking-[0.08em] transition-colors duration-200"
+                      style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
+                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "var(--avro-blue)"; e.currentTarget.style.color = "var(--charcoal)" }}
+                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "var(--charcoal)"; e.currentTarget.style.color = "var(--bone)" }}
+                    >
+                      {item.cta}
+                    </Link>
+                  ))}
                 </div>
               ))}
             </div>
@@ -283,7 +272,7 @@ export function Header() {
             {navDropdownSections.flatMap((section) =>
               section.items.map((item) => (
                 <MobileNavLink key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)}>
-                  {item.label}
+                  {item.cta}
                 </MobileNavLink>
               ))
             )}
