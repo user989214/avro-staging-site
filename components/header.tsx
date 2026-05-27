@@ -191,7 +191,7 @@ export function Header() {
         </button>
       </nav>
 
-      {/* Why AVRO dropdown panel — drops from the bottom of the nav */}
+      {/* Why AVRO dropdown panel — full-width, square, simple title + button rows */}
       <div
         className="hidden md:block fixed left-0 right-0 z-40 pointer-events-none"
         onMouseEnter={() => setDropdownOpen(true)}
@@ -204,77 +204,59 @@ export function Header() {
         }}
         aria-hidden={!dropdownOpen}
       >
-        <div className="mx-auto max-w-[1480px] px-4 lg:px-8">
-          <div
-            className="pointer-events-auto"
-            style={{
-              backgroundColor: "var(--base)",
-              borderBottomLeftRadius: 32,
-              borderBottomRightRadius: 32,
-              boxShadow: dropdownOpen ? "0 24px 48px -12px rgba(21,21,21,0.22)" : "none",
-              transform: dropdownOpen ? "translateY(0)" : "translateY(-100%)",
-              transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease",
-            }}
-          >
-            <div className="px-8 lg:px-12 py-10">
-              <div className="flex flex-col gap-10">
-                {navDropdownSections.map((section, sIdx) => (
-                  <div key={section.heading}>
-                    <div
-                      className="mb-5 text-[12px] font-bold uppercase tracking-[0.14em]"
-                      style={{
-                        color: "var(--warm-gray)",
-                        opacity: dropdownOpen ? 1 : 0,
-                        transform: dropdownOpen ? "translateY(0)" : "translateY(8px)",
-                        transition: `opacity 0.3s ease ${0.05 + sIdx * 0.06}s, transform 0.3s ease ${0.05 + sIdx * 0.06}s`,
-                      }}
-                    >
-                      {section.heading}
-                    </div>
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                      {section.items.map((item, idx) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          onClick={() => setDropdownOpen(false)}
-                          className="group flex flex-col justify-between rounded-[20px] p-6"
-                          style={{
-                            backgroundColor: "var(--charcoal)",
-                            minHeight: 180,
-                            opacity: dropdownOpen ? 1 : 0,
-                            transform: dropdownOpen ? "translateY(0)" : "translateY(10px)",
-                            transition: `opacity 0.3s ease ${0.1 + sIdx * 0.06 + idx * 0.04}s, transform 0.3s ease ${0.1 + sIdx * 0.06 + idx * 0.04}s`,
-                          }}
-                        >
-                          <div className="flex flex-col gap-2.5">
-                            <span
-                              className="text-[16px] font-bold uppercase tracking-[0.06em] leading-tight"
-                              style={{ color: "var(--bone)" }}
-                            >
-                              {item.label}
-                            </span>
-                            <span
-                              className="text-[13px] leading-[1.5]"
-                              style={{ color: "var(--bone)", opacity: 0.7, fontWeight: 500 }}
-                            >
-                              {item.desc}
-                            </span>
-                          </div>
-                          <span
-                            className="mt-4 inline-flex items-center justify-center gap-1.5 self-start rounded-full px-4 py-2 text-[11px] font-bold uppercase tracking-[0.08em]"
-                            style={{ backgroundColor: "var(--avro-blue)", color: "var(--charcoal)" }}
-                          >
-                            Explore
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                              <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                            </svg>
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
+        <div
+          className="pointer-events-auto w-full"
+          style={{
+            backgroundColor: "var(--base)",
+            borderBottom: "1px solid var(--divider)",
+            transform: dropdownOpen ? "translateY(0)" : "translateY(-100%)",
+            transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
+        >
+          <div className="mx-auto max-w-[1480px] px-6 lg:px-10 py-7">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-7">
+              {navDropdownSections.map((section, sIdx) => (
+                <div key={section.heading}>
+                  <div
+                    className="mb-3 text-[11px] font-bold uppercase tracking-[0.16em]"
+                    style={{ color: "var(--warm-gray)" }}
+                  >
+                    {section.heading}
                   </div>
-                ))}
-              </div>
+                  <div className="flex flex-col">
+                    {section.items.map((item, idx) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setDropdownOpen(false)}
+                        className="group flex items-center justify-between py-3"
+                        style={{
+                          borderTop: idx === 0 ? "none" : "1px solid var(--divider)",
+                          opacity: dropdownOpen ? 1 : 0,
+                          transform: dropdownOpen ? "translateY(0)" : "translateY(6px)",
+                          transition: `opacity 0.25s ease ${0.05 + sIdx * 0.04 + idx * 0.025}s, transform 0.25s ease ${0.05 + sIdx * 0.04 + idx * 0.025}s`,
+                        }}
+                      >
+                        <span
+                          className="text-[15px] font-bold uppercase tracking-[0.06em]"
+                          style={{ color: "var(--ink)" }}
+                        >
+                          {item.label}
+                        </span>
+                        <span
+                          className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] transition-transform duration-200 group-hover:translate-x-1"
+                          style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
+                        >
+                          Explore
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                          </svg>
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
