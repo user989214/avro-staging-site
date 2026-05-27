@@ -39,18 +39,20 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
     <section className="w-full py-[clamp(48px,6vw,80px)]" style={{ fontFamily: GC, backgroundColor: "var(--charcoal)" }}>
       <div className="w-full max-w-[1250px] mx-auto px-[clamp(18px,5vw,64px)]">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="mb-12">
           <span
             style={{
               display: "inline-block",
               fontFamily: GC,
-              fontWeight: 700,
+              fontWeight: 800,
               fontSize: 11,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               color: "var(--bone)",
-              opacity: 0.6,
-              marginBottom: 12,
+              backgroundColor: "rgba(255,255,255,0.1)",
+              padding: "6px 14px",
+              borderRadius: 999,
+              marginBottom: 16,
             }}
           >
             Compare at a glance
@@ -75,7 +77,6 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
               fontSize: "clamp(16px,1.4vw,20px)",
               color: "rgba(245,242,234,0.65)",
               maxWidth: 480,
-              margin: "0 auto",
             }}
           >
             Find the one that was made with your day in mind.

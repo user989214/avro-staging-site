@@ -353,7 +353,24 @@ export default async function ProductPage({
 
       {/* Your favorites. On repeat - Subscription CTA */}
       <section style={{ width: "100%", padding: "clamp(36px,4vw,56px) 0", backgroundColor: "var(--avro-blue)" }}>
-        <div style={{ width: "100%", maxWidth: 900, margin: "0 auto", padding: "0 clamp(18px,5vw,64px)", textAlign: "center" }}>
+        <div style={{ width: "100%", maxWidth: 1250, margin: "0 auto", padding: "0 clamp(18px,5vw,64px)" }}>
+          <span
+            style={{
+              display: "inline-block",
+              fontFamily: GC,
+              fontWeight: 800,
+              fontSize: 11,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "var(--charcoal)",
+              backgroundColor: "rgba(0,0,0,0.08)",
+              padding: "6px 14px",
+              borderRadius: 999,
+              marginBottom: 16,
+            }}
+          >
+            Subscribe & save
+          </span>
           <h2
             className="font-serif"
             style={{
@@ -375,7 +392,7 @@ export default async function ProductPage({
               color: "var(--charcoal)",
               opacity: 0.75,
               maxWidth: 500,
-              margin: "0 auto 24px",
+              margin: "0 0 24px",
             }}
           >
             Save 25% when you subscribe. Pick your favorites, set your schedule. Leave the rest to us.
