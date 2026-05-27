@@ -118,7 +118,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="block px-6 py-2.5 text-[14px] font-medium tracking-[0.02em] transition-colors hover:bg-base-deep"
+                  className="block px-6 py-2.5 text-[14px] font-medium tracking-[0.06em] uppercase transition-colors hover:bg-base-deep"
                   style={{ color: "var(--ink)" }}
                 >
                   {item.label}
@@ -150,7 +150,7 @@ export function Header() {
           <NavLink href="/faq">FAQ</NavLink>
           <button
             onClick={openCart}
-            className="relative text-[15px] font-semibold tracking-[0.02em] transition-colors flex items-center gap-1.5"
+            className="relative text-[15px] font-semibold tracking-[0.08em] uppercase transition-colors flex items-center gap-1.5"
             style={{ color: "var(--ink)" }}
           >
             Cart
@@ -227,7 +227,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
   return (
   <Link
   href={href}
-  className="relative text-[15px] font-semibold tracking-[0.02em] transition-colors hover:opacity-70"
+  className="relative text-[15px] font-semibold tracking-[0.08em] uppercase transition-colors hover:opacity-70"
   style={{ color: "var(--ink)" }}
   >
   {children}
