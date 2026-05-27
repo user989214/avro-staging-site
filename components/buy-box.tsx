@@ -150,20 +150,25 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         </span>
         <div
           className="flex items-center"
-          style={{ backgroundColor: LIGHT_GRAY, borderRadius: 999 }}
+          style={{
+            backgroundColor: "var(--bone)",
+            borderRadius: 999,
+            border: "2px solid var(--charcoal)",
+          }}
         >
           <button
             type="button"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             aria-label="Decrease quantity"
-            className="w-10 h-10 flex items-center justify-center transition-colors hover:bg-black/5"
-            style={{ fontFamily: GC, fontWeight: 700, fontSize: 20 }}
+            className="w-12 h-12 flex items-center justify-center transition-colors hover:bg-black/5 disabled:opacity-40"
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: 22, color: "var(--charcoal)" }}
+            disabled={quantity <= 1}
           >
             −
           </button>
           <span
             className="w-10 text-center"
-            style={{ fontFamily: GC, fontWeight: 700, fontSize: 17 }}
+            style={{ fontFamily: GC, fontWeight: 800, fontSize: 18, color: "var(--charcoal)" }}
           >
             {quantity}
           </span>
@@ -171,8 +176,8 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
             type="button"
             onClick={() => setQuantity((q) => q + 1)}
             aria-label="Increase quantity"
-            className="w-10 h-10 flex items-center justify-center transition-colors hover:bg-black/5"
-            style={{ fontFamily: GC, fontWeight: 700, fontSize: 20 }}
+            className="w-12 h-12 flex items-center justify-center transition-colors hover:bg-black/5"
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: 22, color: "var(--charcoal)" }}
           >
             +
           </button>

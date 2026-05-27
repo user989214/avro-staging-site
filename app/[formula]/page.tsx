@@ -85,7 +85,6 @@ export default async function ProductPage({
         <div
           style={{
             backgroundColor: "var(--base-light, #f5f1e8)",
-            border: "1px solid var(--line)",
             borderRadius: 32,
             padding: "clamp(20px,2.4vw,36px)",
           }}
