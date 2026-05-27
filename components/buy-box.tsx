@@ -16,6 +16,23 @@ import { cn } from "@/lib/utils"
 const GC = '"DM Sans", system-ui, sans-serif'
 const LIGHT_GRAY = "#f2f2f2"
 
+// Color mapping for each formula
+const formulaColors: Record<FormulaKey, { bg: string; border: string }> = {
+  calm: { bg: "#4b4d9a", border: "#7a79c8" },
+  focus: { bg: "#c21f73", border: "#ee6fa9" },
+  energy: { bg: "#f4aa10", border: "#ffcf59" },
+}
+
+// Product image mapping for each flavor
+const flavorImages: Record<string, string> = {
+  "blueberry-acai": "/images/products/avro-calm-blueberry-acai.png",
+  "blackberry-jasmine": "/images/products/avro-calm-blackberry-jasmine.png",
+  "pomegranate-raspberry": "/images/products/avro-focus-pomegranate-raspberry.png",
+  "red-dragon-fruit": "/images/products/avro-focus-red-dragon-fruit.png",
+  "orange-tangerine": "/images/products/avro-energy-orange-tangerine.png",
+  "fuji-apple": "/images/products/avro-energy-fuji-apple.png",
+}
+
 interface BuyBoxProps {
   formula: Formula
   formulaKey: FormulaKey
@@ -35,6 +52,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
   const displayTotal = (purchaseType === "subscribe" ? subscribeTotal : oneTimeTotal) * quantity
   const reviewCount = formulaKey === "calm" ? 82 : formulaKey === "focus" ? 62 : 76
   const reviewLabel = `4.8 (${reviewCount} reviews)`
+  const colors = formulaColors[formulaKey]
 
   const handleAdd = () => {
     addItem(formula, purchaseType === "subscribe" ? "bundle" : "single")
@@ -63,7 +81,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
       style={{ fontFamily: GC }}
     >
       {/* Header */}
-      <header className="flex flex-col gap-2">
+      <header className="flex flex-col gap-3">
         <h1
           className="font-serif"
           style={{
@@ -73,7 +91,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
             color: "var(--ink)",
           }}
         >
-          {formula.name}
+          {formula.headline}
         </h1>
         <div className="flex items-center gap-3">
           <span style={{ color: "var(--ink)" }} className="tracking-wider text-base">
@@ -99,41 +117,66 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
             color: "var(--warm-gray)",
           }}
         >
-          {formula.support}
+          10 stick packets per box · {activeFlavor.name}
         </p>
       </header>
 
-      {/* Flavor switcher */}
+      {/* Flavor switcher with thumbnails and formula color */}
       <div className="flex flex-col gap-2">
         <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 15, color: "var(--ink)" }}>
           Flavor
         </span>
-        <div className="flex gap-2">
-          {formula.flavors.map((flavor) => (
-            <button
-              key={flavor.id}
-              type="button"
-              onClick={() => onFlavorChange(flavor.id)}
-              className="flex-1 flex flex-col items-start px-4 py-3 rounded-2xl transition-all"
-              style={{
-                backgroundColor: flavorId === flavor.id ? "var(--charcoal)" : LIGHT_GRAY,
-                color: flavorId === flavor.id ? "var(--bone)" : "var(--ink)",
-                border: flavorId === flavor.id ? "2px solid var(--charcoal)" : "2px solid transparent",
-              }}
-            >
-              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 15 }}>{flavor.name}</span>
-              <span
+        <div className="flex gap-3">
+          {formula.flavors.map((flavor) => {
+            const isSelected = flavorId === flavor.id
+            return (
+              <button
+                key={flavor.id}
+                type="button"
+                onClick={() => onFlavorChange(flavor.id)}
+                className="flex-1 flex items-center gap-3 px-3 py-3 rounded-2xl transition-all"
                 style={{
-                  fontFamily: GC,
-                  fontWeight: 500,
-                  fontSize: 13,
-                  opacity: flavorId === flavor.id ? 0.7 : 0.6,
+                  backgroundColor: isSelected ? colors.bg : LIGHT_GRAY,
+                  border: isSelected ? `2px solid ${colors.border}` : "2px solid transparent",
                 }}
               >
-                {flavor.tagline}
-              </span>
-            </button>
-          ))}
+                {/* Product thumbnail */}
+                <div
+                  className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0"
+                  style={{ backgroundColor: isSelected ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.04)" }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={flavorImages[flavor.id]}
+                    alt={flavor.name}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div className="flex flex-col items-start text-left">
+                  <span
+                    style={{
+                      fontFamily: GC,
+                      fontWeight: 700,
+                      fontSize: 15,
+                      color: isSelected ? "#fff" : "var(--ink)",
+                    }}
+                  >
+                    {flavor.name}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: GC,
+                      fontWeight: 500,
+                      fontSize: 13,
+                      color: isSelected ? "rgba(255,255,255,0.75)" : "var(--warm-gray)",
+                    }}
+                  >
+                    {flavor.tagline}
+                  </span>
+                </div>
+              </button>
+            )
+          })}
         </div>
       </div>
 
