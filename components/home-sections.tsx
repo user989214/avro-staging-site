@@ -114,6 +114,13 @@ export function HomeRefHero() {
           .hp-pill-row { flex-direction: column; }
           .hp-pill-primary, .hp-pill-secondary { width: 100%; }
         }
+        @media (max-width: 768px) {
+          .hp-hero-grid { grid-template-columns: 1fr !important; }
+          .hp-hero-fade {
+            background: linear-gradient(to bottom, var(--base-light) 0%, var(--base-light) 45%, rgba(245,241,234,0.7) 60%, rgba(245,241,234,0) 80%) !important;
+          }
+          .hp-hero-img { object-position: center bottom !important; }
+        }
         .hp-pill-primary {
           background-color: var(--charcoal);
           color: var(--bone);
@@ -172,16 +179,59 @@ export function HomeRefHero() {
 
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "1.05fr 1fr",
-          gap: "clamp(32px,5vw,72px)",
-          alignItems: "center",
+          position: "relative",
           maxWidth: 1320,
           margin: "0 auto",
+          borderRadius: 28,
+          overflow: "hidden",
+          backgroundColor: "var(--base-light)",
+          minHeight: "clamp(520px, 62vw, 720px)",
         }}
       >
-        {/* Left */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        {/* Background image — full container */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4325552255-51euqtVRTaIeU2n0sGSiBvq4vuvEFe.png"
+          alt="AVRO Energy stick packet next to a glass of green juice at an outdoor brunch"
+          className="hp-hero-img"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "70% center",
+          }}
+        />
+
+        {/* Gradient overlay — fades from solid base on left to transparent on right */}
+        <div
+          aria-hidden="true"
+          className="hp-hero-fade"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.85) 50%, rgba(245,241,234,0.35) 65%, rgba(245,241,234,0) 80%)",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Content grid sits on top */}
+        <div
+          className="hp-hero-grid"
+          style={{
+            position: "relative",
+            display: "grid",
+            gridTemplateColumns: "1.05fr 1fr",
+            alignItems: "center",
+            gap: "clamp(32px,5vw,72px)",
+            padding: "clamp(48px,6vw,80px) clamp(28px,5vw,64px)",
+            minHeight: "inherit",
+          }}
+        >
+          {/* Left */}
+          <div style={{ display: "flex", flexDirection: "column" }}>
           {/* Hero headline — DM Sans per design system */}
           <h1
             style={{
@@ -258,29 +308,8 @@ export function HomeRefHero() {
           </div>
         </div>
 
-        {/* Right: image */}
-        <div
-          style={{
-            position: "relative",
-            aspectRatio: "1 / 1.05",
-            overflow: "hidden",
-            borderRadius: 28,
-            backgroundColor: "var(--base-deep)",
-          }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4325552255-51euqtVRTaIeU2n0sGSiBvq4vuvEFe.png"
-            alt="AVRO Energy stick packet next to a glass of green juice at an outdoor brunch"
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "60% center",
-            }}
-          />
+          {/* Right column intentionally empty — image is the container background */}
+          <div aria-hidden="true" />
         </div>
       </div>
     </section>
