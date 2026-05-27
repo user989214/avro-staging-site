@@ -816,10 +816,24 @@ export function HomeLogicRow() {
 
 // ── APPROACH CHART ─────────────────────────────────────────────────────────────
 function ApproachChart() {
+  const containerRef = useRef<HTMLDivElement | null>(null)
   const [mounted, setMounted] = useState(false)
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 120)
-    return () => clearTimeout(t)
+    const el = containerRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setMounted(true)
+            obs.disconnect()
+          }
+        })
+      },
+      { threshold: 0.35 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
   }, [])
 
   // Path lengths (approximate — long enough to cover the longest stroke)
@@ -828,6 +842,7 @@ function ApproachChart() {
 
   return (
     <div
+      ref={containerRef}
       style={{
         borderRadius: 24,
         border: "2px solid var(--charcoal)",
@@ -871,7 +886,7 @@ function ApproachChart() {
             strokeDasharray={`${STIM_LEN} ${STIM_LEN}`}
             strokeDashoffset={mounted ? 0 : STIM_LEN}
             style={{
-              transition: "stroke-dashoffset 2.2s cubic-bezier(0.22,1,0.36,1)",
+              transition: "stroke-dashoffset 2.6s cubic-bezier(0.5,0,0.5,1)",
             }}
           />
 
@@ -885,11 +900,11 @@ function ApproachChart() {
             strokeDasharray={`${CALM_LEN} ${CALM_LEN}`}
             strokeDashoffset={mounted ? 0 : CALM_LEN}
             style={{
-              transition: "stroke-dashoffset 2.2s cubic-bezier(0.22,1,0.36,1) 0.25s",
+              transition: "stroke-dashoffset 2.6s cubic-bezier(0.5,0,0.5,1)",
             }}
           />
 
-          {/* Calm endpoint dot */}
+          {/* Calm endpoint dot — appears at the pause point */}
           <circle
             cx="800"
             cy="105"
@@ -898,9 +913,31 @@ function ApproachChart() {
             stroke="var(--ink)"
             strokeWidth="2"
             style={{
-              transition: "r 0.5s cubic-bezier(0.34,1.4,0.4,1) 2.4s",
+              transition: "r 0.5s cubic-bezier(0.34,1.4,0.4,1) 2.7s",
             }}
           />
+          {/* Soft pulse ring around the endpoint */}
+          {mounted && (
+            <circle
+              cx="800"
+              cy="105"
+              r="6"
+              fill="none"
+              stroke={BLUE}
+              strokeWidth="2"
+              style={{
+                transformOrigin: "800px 105px",
+                animation: "calm-pulse 2.4s ease-out 2.9s infinite",
+                opacity: 0,
+              }}
+            />
+          )}
+          <style>{`
+            @keyframes calm-pulse {
+              0% { transform: scale(1); opacity: 0.55; }
+              100% { transform: scale(2.4); opacity: 0; }
+            }
+          `}</style>
         </svg>
 
         {/* Y-axis label */}
@@ -952,7 +989,7 @@ function _ApproachSectionEnd() {
   return null
 }
 
-// ── PRODUCT STRIP ───────────────────────────────���──────────────────────────────
+// ── PRODUCT STRIP ───────────────────────────────�����──────────────────────────────
 export function HomeProductStrip() {
   const formulaAdditions: Record<FormulaKey, string> = {
     calm: "Magnesium Bisglycinate",
@@ -994,9 +1031,14 @@ export function HomeProductStrip() {
                     PharmaGABA® + {formulaAdditions[key]}
                   </span>
                 </div>
-                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2vw,28px)", lineHeight: 1.1, color: "var(--ink)", margin: 0 }}>
-                  {formulas[key].name}
-                </h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "rgba(0,0,0,0.55)", letterSpacing: "0.04em" }}>
+                    AVRO
+                  </span>
+                  <h3 className="font-serif" style={{ fontWeight: 900, fontSize: "clamp(34px,3.6vw,52px)", lineHeight: 0.95, color: "var(--ink)", margin: 0, letterSpacing: "-0.02em" }}>
+                    {formulas[key].name.replace(/^AVRO\s+/, "")}
+                  </h3>
+                </div>
                 <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 16, lineHeight: 1.45, color: "rgba(0,0,0,0.6)", margin: 0 }}>
                   {formulas[key].tagline}
                 </p>
