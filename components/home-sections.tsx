@@ -456,15 +456,15 @@ export function HomeMomentGrid() {
           </h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 16 }}>
             {moments.map((m) => (
-              <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 20, overflow: "hidden", backgroundColor: "var(--charcoal)", border: "2px solid rgba(0,0,0,0.1)" }}>
+              <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 20, overflow: "hidden", backgroundColor: "var(--base-light)", border: "2px solid rgba(0,0,0,0.06)" }}>
                 <div style={{ position: "relative", height: 260, overflow: "hidden" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={m.image} alt={m.alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
                 </div>
                 <div style={{ padding: "24px 24px 28px", flex: 1, display: "flex", flexDirection: "column" }}>
-                  <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,2.8vw,36px)", lineHeight: 1.0, color: "var(--bone)", marginBottom: 10 }}>{m.title}</h3>
-                  <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, lineHeight: 1.45, color: "rgba(255,255,255,0.65)", marginBottom: 24, flex: 1 }}>{m.copy}</p>
-                  <span className="hp-btn-bone" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 700, fontSize: 17, minHeight: 52, padding: "0 24px", borderRadius: 999, border: "2px solid var(--bone)", backgroundColor: "var(--bone)", color: "var(--charcoal)" }}>
+                  <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,2.8vw,36px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 10 }}>{m.title}</h3>
+                  <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 18, lineHeight: 1.45, color: "rgba(0,0,0,0.6)", marginBottom: 24, flex: 1 }}>{m.copy}</p>
+                  <span className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 700, fontSize: 17, minHeight: 52, padding: "0 24px", borderRadius: 999, border: "2px solid var(--charcoal)", backgroundColor: "var(--charcoal)", color: "var(--bone)" }}>
                     {m.cta}
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                   </span>
@@ -581,7 +581,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ────────────────────────────────────────────────────────────���──
+// ── STORY STRIP ────────────────────────────────────────────────��───────────���──
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
@@ -648,9 +648,9 @@ export function HomeRitualSection() {
               <div
                 key={step.num}
                 style={{
-                  backgroundColor: "var(--charcoal)",
+                  backgroundColor: "var(--base-light)",
                   borderRadius: 16,
-                  border: "2px solid rgba(0,0,0,0.08)",
+                  border: "2px solid rgba(0,0,0,0.06)",
                   overflow: "hidden",
                   transition: "all 0.25s ease",
                 }}
@@ -674,13 +674,13 @@ export function HomeRitualSection() {
                       width: 48,
                       height: 48,
                       borderRadius: 999,
-                      border: "2px solid var(--bone)",
+                      border: "2px solid var(--charcoal)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
-                      backgroundColor: openStep === step.num ? "var(--bone)" : "transparent",
-                      color: openStep === step.num ? "var(--charcoal)" : "var(--bone)",
+                      backgroundColor: openStep === step.num ? "var(--charcoal)" : "transparent",
+                      color: openStep === step.num ? "var(--bone)" : "var(--charcoal)",
                       fontFamily: GC,
                       fontWeight: 700,
                       fontSize: 20,
@@ -689,7 +689,7 @@ export function HomeRitualSection() {
                   >
                     {step.num}
                   </div>
-                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 20, color: "var(--bone)", flex: 1 }}>
+                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 20, color: "var(--charcoal)", flex: 1 }}>
                     {step.title}
                   </span>
                   <svg
@@ -704,7 +704,7 @@ export function HomeRitualSection() {
                     style={{
                       transform: openStep === step.num ? "rotate(180deg)" : "rotate(0deg)",
                       transition: "transform 0.25s ease",
-                      color: "var(--bone)",
+                      color: "var(--charcoal)",
                     }}
                   >
                     <polyline points="6 9 12 15 18 9"/>
@@ -723,7 +723,7 @@ export function HomeRitualSection() {
                     fontWeight: 400, 
                     fontSize: 17, 
                     lineHeight: 1.55, 
-                    color: "rgba(255,255,255,0.65)",
+                    color: "rgba(0,0,0,0.6)",
                     margin: 0,
                   }}>
                     {step.detail}
