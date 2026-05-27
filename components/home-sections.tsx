@@ -100,17 +100,36 @@ export function HomeRefHero() {
 
   useEffect(() => {
     let raf = 0
-    const onScroll = () => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(() => {
-        const y = window.scrollY
-        const max = 520 // px of scroll to fully dock — longer for smoother feel
-        const raw = Math.max(0, Math.min(1, y / max))
-        // Ease in/out cubic for buttery transition
-        const eased = raw < 0.5 ? 4 * raw * raw * raw : 1 - Math.pow(-2 * raw + 2, 3) / 2
-        setProgress(eased)
-      })
+    let current = 0
+    let target = 0
+    let running = false
+
+    const tick = () => {
+      // Smooth lerp toward target each frame for buttery feel (no CSS tween fighting)
+      const diff = target - current
+      if (Math.abs(diff) < 0.0005) {
+        current = target
+        setProgress(current)
+        running = false
+        return
+      }
+      current += diff * 0.18 // smoothing factor
+      setProgress(current)
+      raf = requestAnimationFrame(tick)
     }
+
+    const onScroll = () => {
+      const y = window.scrollY
+      const max = 480
+      const raw = Math.max(0, Math.min(1, y / max))
+      // Ease in/out cubic
+      target = raw < 0.5 ? 4 * raw * raw * raw : 1 - Math.pow(-2 * raw + 2, 3) / 2
+      if (!running) {
+        running = true
+        raf = requestAnimationFrame(tick)
+      }
+    }
+
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => {
@@ -141,7 +160,7 @@ export function HomeRefHero() {
         paddingRight: `clamp(${lerp(0, 20, progress)}px, ${5 * progress}vw, ${sectionPadX}px)`,
         paddingTop: `clamp(${lerp(0, 48, progress)}px, ${7 * progress}vw, ${sectionPadTop}px)`,
         paddingBottom: `clamp(${lerp(0, 48, progress)}px, ${6 * progress}vw, ${sectionPadBottom}px)`,
-        transition: "padding 0.2s ease-out",
+        willChange: "padding",
       }}
     >
       <style>{`
@@ -249,7 +268,7 @@ export function HomeRefHero() {
           overflow: "hidden",
           backgroundColor: "var(--base-light)",
           minHeight: heroMinH,
-          transition: "border-radius 0.2s ease-out, max-width 0.2s ease-out, min-height 0.2s ease-out",
+          willChange: "border-radius, max-width, min-height",
         }}
       >
         {/* Background image — full container */}
@@ -383,7 +402,7 @@ export function HomeRefHero() {
   )
 }
 
-// ── PROOF BAR ───���──────────────────��──────────────────────────────────────────
+// ── PROOF BAR ───�����──────────────────��──────────────────────────────────────────
 export function HomeProofBar() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(32px,5vw,56px) clamp(20px,5vw,64px)" }}>
