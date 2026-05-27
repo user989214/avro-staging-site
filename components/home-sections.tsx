@@ -310,10 +310,10 @@ export function HomeBenefitRow() {
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(48px,6vw,72px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
         {/* Outer container card */}
-        <div style={{ backgroundColor: "var(--base-light)", borderRadius: 28, padding: "clamp(24px,4vw,40px)", border: "1px solid rgba(0,0,0,0.06)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 16 }}>
+        <div style={{ backgroundColor: "var(--base-light)", borderRadius: 28, padding: "clamp(24px,4vw,40px)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 12 }}>
             {benefits.map((b) => (
-              <div key={b.title} style={{ backgroundColor: "var(--bone)", borderRadius: 20, padding: "clamp(24px,3vw,32px)", border: "2px solid rgba(0,0,0,0.06)" }}>
+              <div key={b.title} style={{ backgroundColor: "var(--bone)", borderRadius: 16, padding: "clamp(24px,3vw,32px)" }}>
                 <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(19px,1.7vw,24px)", lineHeight: 1.15, color: "var(--ink)", marginBottom: 12 }}>{b.title}</h3>
                 <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(16px,1.4vw,18px)", lineHeight: 1.5, color: "rgba(0,0,0,0.55)" }}>{b.copy}</p>
               </div>
@@ -370,7 +370,7 @@ export function HomeLogicRow() {
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
         {/* Outer container card */}
-        <div style={{ backgroundColor: "var(--base-light)", borderRadius: 28, padding: "clamp(24px,4vw,48px)", border: "1px solid rgba(0,0,0,0.06)" }}>
+        <div style={{ backgroundColor: "var(--base-light)", borderRadius: 28, padding: "clamp(24px,4vw,48px)" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px,1fr))", gap: 24 }}>
             {/* Accordion cards column */}
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -383,7 +383,6 @@ export function HomeLogicRow() {
                   style={{
                     backgroundColor: "var(--bone)",
                     borderRadius: 16,
-                    border: "2px solid rgba(0,0,0,0.08)",
                     overflow: "hidden",
                     transition: "all 0.25s ease",
                   }}
