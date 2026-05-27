@@ -513,21 +513,21 @@ function CountUpStat({ value, suffix = "", decimals = 0, duration = 1800, delay 
 export function HomeBenefitRow() {
   const benefits = [
     {
-      n: "01",
+      eyebrow: "Composure",
       title: "Supports composure under pressure",
       copy: "Helps you steady first before the moment matters — so you arrive ready, not reactive.",
       tone: "blue" as const,
       width: "wide" as const,
     },
     {
-      n: "02",
+      eyebrow: "Readiness",
       title: "Supports clear-headed readiness",
       copy: "Calm, clear, and in control — without the spike or the crash.",
       tone: "bone" as const,
       width: "narrow" as const,
     },
     {
-      n: "03",
+      eyebrow: "Sustain",
       title: "Supports calm without sedation",
       copy: "Designed to support composure without turning you off. Quiet focus, fully online.",
       tone: "blue" as const,
@@ -543,14 +543,14 @@ export function HomeBenefitRow() {
 
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(56px,7vw,88px)" }}>
-      <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexDirection: "column", gap: 16 }}>
+      <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexDirection: "column", gap: 18 }}>
         {benefits.map((b, i) => {
           const isBlue = b.tone === "blue"
           const isNarrow = b.width === "narrow"
           const bg = isBlue ? BLUE : "var(--base-light)"
-          const titleColor = "var(--ink)"
-          const copyColor = isBlue ? "var(--ink)" : "var(--warm-gray)"
-          const numColor = isBlue ? "var(--ink)" : BLUE
+          // Two colors per card — bg + ink (everything text-related uses var(--ink))
+          const cardDelay = 0.1 + i * 0.18
+          const titleWords = b.title.split(" ")
 
           return (
             <div
@@ -559,55 +559,67 @@ export function HomeBenefitRow() {
                 width: isNarrow ? "min(82%, 980px)" : "100%",
                 alignSelf: i % 2 === 1 ? "flex-end" : "stretch",
                 backgroundColor: bg,
-                border: "2px solid var(--charcoal)",
                 borderRadius: 28,
-                padding: "clamp(28px,3vw,40px) clamp(28px,3.5vw,52px)",
-                display: "grid",
-                gridTemplateColumns: "auto 1fr",
-                columnGap: "clamp(24px,4vw,56px)",
-                alignItems: "center",
+                padding: "clamp(40px,4.5vw,64px) clamp(32px,4vw,64px)",
+                minHeight: "clamp(260px,28vw,340px)",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                gap: 28,
                 opacity: mounted ? 1 : 0,
                 transform: mounted ? "translateY(0)" : "translateY(18px)",
-                transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${(0.08 * i + 0.05).toFixed(2)}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${(0.08 * i + 0.05).toFixed(2)}s`,
+                transition: `opacity 0.8s cubic-bezier(0.22,1,0.36,1) ${(0.06 * i).toFixed(2)}s, transform 0.8s cubic-bezier(0.22,1,0.36,1) ${(0.06 * i).toFixed(2)}s`,
               }}
             >
+              {/* Eyebrow tag — small, ink color, replaces the number */}
               <span
                 style={{
                   fontFamily: GC,
                   fontWeight: 700,
-                  fontSize: "clamp(36px,4.5vw,64px)",
-                  lineHeight: 1,
-                  color: numColor,
-                  letterSpacing: "-0.02em",
-                  fontVariantNumeric: "tabular-nums",
-                  alignSelf: "start",
-                  paddingTop: 4,
+                  fontSize: 12,
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  color: "var(--ink)",
+                  opacity: mounted ? 0.7 : 0,
+                  transition: `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s`,
                 }}
               >
-                {b.n}
+                {b.eyebrow}
               </span>
 
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "minmax(0, 1.1fr) minmax(0, 1fr)",
-                  columnGap: "clamp(20px,3vw,40px)",
-                  rowGap: 10,
-                  alignItems: "start",
+                  gridTemplateColumns: "minmax(0, 1.2fr) minmax(0, 1fr)",
+                  columnGap: "clamp(28px,4vw,56px)",
+                  rowGap: 16,
+                  alignItems: "end",
                 }}
               >
                 <h3
                   style={{
                     fontFamily: GC,
                     fontWeight: 700,
-                    fontSize: "clamp(22px,2.4vw,32px)",
-                    lineHeight: 1.15,
-                    color: titleColor,
-                    letterSpacing: "-0.015em",
+                    fontSize: "clamp(26px,3vw,42px)",
+                    lineHeight: 1.1,
+                    color: "var(--ink)",
+                    letterSpacing: "-0.02em",
                     margin: 0,
                   }}
                 >
-                  {b.title}
+                  {titleWords.map((w, wi) => (
+                    <span
+                      key={wi}
+                      style={{
+                        display: "inline-block",
+                        opacity: mounted ? 1 : 0,
+                        transform: mounted ? "translateY(0)" : "translateY(8px)",
+                        transition: `opacity 0.55s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + 0.1 + wi * 0.06).toFixed(2)}s, transform 0.55s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + 0.1 + wi * 0.06).toFixed(2)}s`,
+                      }}
+                    >
+                      {w}{wi < titleWords.length - 1 ? "\u00A0" : ""}
+                    </span>
+                  ))}
                 </h3>
                 <p
                   style={{
@@ -615,7 +627,9 @@ export function HomeBenefitRow() {
                     fontWeight: 400,
                     fontSize: "clamp(15px,1.15vw,17px)",
                     lineHeight: 1.55,
-                    color: copyColor,
+                    color: "var(--ink)",
+                    opacity: mounted ? 0.78 : 0,
+                    transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + 0.35).toFixed(2)}s`,
                     margin: 0,
                     maxWidth: 460,
                   }}
