@@ -582,32 +582,79 @@ export function HomeScienceGrid() {
               </a>
             </div>
 
-            {/* Formula comparison - flat bone */}
-            <div style={{ backgroundColor: "var(--bone)", borderRadius: 20, overflow: "hidden", padding: "clamp(28px,4vw,44px)" }}>
-              <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,3vw,40px)", lineHeight: 1.0, color: "var(--charcoal)", marginBottom: 28 }}>
+            {/* Formula comparison - visual bar graph */}
+            <div style={{ backgroundColor: "var(--bone)", borderRadius: 20, overflow: "hidden", padding: "clamp(28px,4vw,44px)", display: "flex", flexDirection: "column", height: "100%" }}>
+              <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,3vw,40px)", lineHeight: 1.0, color: "var(--charcoal)", marginBottom: 32 }}>
                 Every formula starts calm first.
               </h2>
-              <div style={{ overflowX: "auto" }}>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr repeat(3,1fr)", minWidth: 480, border: "1px solid rgba(0,0,0,0.08)", borderRadius: 20, overflow: "hidden", backgroundColor: "var(--base)" }}>
-                  <div style={{ padding: "16px 18px", borderBottom: "2px solid rgba(0,0,0,0.06)" }} />
-                  {["Calm", "Focus", "Energy"].map((f) => (
-                    <div key={f} style={{ padding: "16px 18px", fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--charcoal)", borderBottom: "2px solid rgba(0,0,0,0.06)", borderLeft: "2px solid rgba(0,0,0,0.06)", textAlign: "center", backgroundColor: "var(--base)" }}>{f}</div>
-                  ))}
-                  {[
-                    ["Shared Foundation", "PharmaGABA®", "Naturally fermented base", "Calm-first logic"],
-                    ["Primary Benefit", "Relaxation & steady clarity", "Clear thinking & attention", "Steady energy & lift"],
-                    ["Unique Addition", "Magnesium", "Cognigrape®", "Natural Caffeine"],
-                    ["Caffeine", "0 mg", "0 mg", "120 mg"],
-                  ].map(([row, ...cells], rowIndex) => (
-                    <React.Fragment key={`row-${rowIndex}`}>
-                      <div style={{ padding: "18px 18px", fontFamily: GC, fontWeight: 700, fontSize: 17, color: "rgba(0,0,0,0.5)", borderTop: "1px solid rgba(0,0,0,0.04)", backgroundColor: "var(--base-deep)" }}>{row}</div>
-                      {cells.map((c, ci) => (
-                        <div key={`${row}-${ci}`} style={{ padding: "18px 18px", fontFamily: GC, fontWeight: 400, fontSize: 17, color: "var(--charcoal)", borderTop: "1px solid rgba(0,0,0,0.04)", borderLeft: "2px solid rgba(0,0,0,0.06)", textAlign: "center" }}>{c}</div>
-                      ))}
-                    </React.Fragment>
-                  ))}
+              <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: 20 }}>
+                {[
+                  { name: "Calm", base: 100, focus: 0, energy: 0, color: BLUE },
+                  { name: "Focus", base: 100, focus: 60, energy: 0, color: "#A8D5BA" },
+                  { name: "Energy", base: 100, focus: 0, energy: 50, color: "#F5C896" },
+                ].map((formula, idx) => (
+                  <div key={formula.name} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--charcoal)" }}>{formula.name}</span>
+                      <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "rgba(0,0,0,0.5)" }}>
+                        {formula.name === "Calm" ? "PharmaGABA® + Magnesium" : formula.name === "Focus" ? "PharmaGABA® + Cognigrape®" : "PharmaGABA® + Caffeine"}
+                      </span>
+                    </div>
+                    <div style={{ position: "relative", height: 32, backgroundColor: "var(--base)", borderRadius: 999, overflow: "hidden" }}>
+                      {/* Base bar (PharmaGABA) */}
+                      <div 
+                        className="formula-bar"
+                        style={{ 
+                          position: "absolute", 
+                          left: 0, 
+                          top: 0, 
+                          height: "100%", 
+                          width: "60%",
+                          backgroundColor: BLUE,
+                          borderRadius: 999,
+                          animation: `barGrow 0.8s ease-out ${idx * 0.15}s both`,
+                        }} 
+                      />
+                      {/* Additional bar */}
+                      {(formula.focus > 0 || formula.energy > 0) && (
+                        <div 
+                          className="formula-bar"
+                          style={{ 
+                            position: "absolute", 
+                            left: "60%", 
+                            top: 0, 
+                            height: "100%", 
+                            width: formula.focus > 0 ? "25%" : "20%",
+                            backgroundColor: formula.color,
+                            borderRadius: "0 999px 999px 0",
+                            animation: `barGrow 0.6s ease-out ${idx * 0.15 + 0.4}s both`,
+                          }} 
+                        />
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ display: "flex", gap: 24, marginTop: 24, flexWrap: "wrap" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: BLUE }} />
+                  <span style={{ fontFamily: GC, fontWeight: 600, fontSize: 14, color: "rgba(0,0,0,0.6)" }}>PharmaGABA® Base</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "#A8D5BA" }} />
+                  <span style={{ fontFamily: GC, fontWeight: 600, fontSize: 14, color: "rgba(0,0,0,0.6)" }}>Cognigrape®</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ width: 16, height: 16, borderRadius: 4, backgroundColor: "#F5C896" }} />
+                  <span style={{ fontFamily: GC, fontWeight: 600, fontSize: 14, color: "rgba(0,0,0,0.6)" }}>Natural Caffeine</span>
                 </div>
               </div>
+              <style jsx>{`
+                @keyframes barGrow {
+                  from { transform: scaleX(0); transform-origin: left; }
+                  to { transform: scaleX(1); transform-origin: left; }
+                }
+              `}</style>
             </div>
           </div>
         </div>
