@@ -310,7 +310,7 @@ export function HomeBenefitRow() {
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(48px,6vw,72px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
         {/* Outer container card */}
-        <div style={{ backgroundColor: "var(--base-light)", borderRadius: 28, padding: "clamp(24px,4vw,40px)" }}>
+        <div style={{ backgroundColor: BLUE, borderRadius: 28, padding: "clamp(24px,4vw,40px)" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 12 }}>
             {benefits.map((b) => (
               <div key={b.title} style={{ backgroundColor: "var(--bone)", borderRadius: 16, padding: "clamp(24px,3vw,32px)" }}>
