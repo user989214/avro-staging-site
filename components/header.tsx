@@ -133,30 +133,106 @@ export function Header() {
           color: var(--charcoal);
         }
       `}</style>
-      {/* Announcement bar — Avro Blue background, Gotham Condensed type */}
+      {/* Announcement ticker — continuous marquee on Avro Blue */}
       <div
-        className="flex justify-center gap-4 md:gap-12 px-4 md:px-8 py-3 md:py-3.5 text-[14px] md:text-[15px] uppercase text-center"
+        className="ann-bar"
         style={{
           backgroundColor: "var(--avro-blue)",
           color: "var(--charcoal)",
-          fontFamily: 'var(--font-serif)',
-          fontWeight: 700,
-          letterSpacing: "0.05em",
+          overflow: "hidden",
+          position: "relative",
+          padding: "11px 0",
+          borderBottom: "1px solid rgba(21,21,21,0.08)",
         }}
+        aria-label="Site announcements"
       >
-        <span>
-          ✦ Subscribe and save 25% on every order —{" "}
-          <Link
-            href="/shop"
-            className="underline underline-offset-4 hover:opacity-70 transition-opacity"
-            style={{ color: "var(--charcoal)" }}
-          >
-            Shop AVRO
-          </Link>
-        </span>
-        <span className="hidden md:inline" style={{ color: "rgba(21,21,21,0.6)" }}>
-          Free shipping over $50
-        </span>
+        <div className="ann-track" style={{ display: "flex", width: "max-content", willChange: "transform" }}>
+          {Array.from({ length: 4 }).map((_, copyIdx) => (
+            <div key={copyIdx} aria-hidden={copyIdx > 0} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
+              {[
+                "Subscribe and save 25% on every order",
+                "Free shipping over $50",
+                "Naturally fermented PharmaGABA",
+                "Calm, focused energy — without the crash",
+                "New: AVRO Focus and AVRO Energy now shipping",
+              ].map((msg, i) => (
+                <span key={`${copyIdx}-${i}`} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
+                  <span
+                    className="font-serif"
+                    style={{
+                      fontWeight: 900,
+                      fontSize: 15,
+                      letterSpacing: "-0.005em",
+                      whiteSpace: "nowrap",
+                      padding: "0 28px",
+                    }}
+                  >
+                    {msg}
+                  </span>
+                  <span aria-hidden="true" style={{ fontSize: 10, opacity: 0.55, lineHeight: 1, transform: "translateY(-1px)" }}>✦</span>
+                </span>
+              ))}
+              {/* Shop AVRO pill — wide, animated */}
+              <Link
+                href="/shop"
+                className="ann-shop-btn font-serif"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 10,
+                  margin: "0 28px",
+                  padding: "6px 36px",
+                  minHeight: 32,
+                  borderRadius: 999,
+                  border: "2px solid var(--charcoal)",
+                  backgroundColor: "transparent",
+                  color: "var(--charcoal)",
+                  fontWeight: 900,
+                  fontSize: 13,
+                  letterSpacing: "0.04em",
+                  textDecoration: "none",
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+              >
+                <span style={{ position: "relative", zIndex: 1 }}>Shop AVRO</span>
+                <span aria-hidden="true" className="ann-shop-arrow" style={{ position: "relative", zIndex: 1, fontSize: 14, lineHeight: 1, display: "inline-block" }}>→</span>
+              </Link>
+              <span aria-hidden="true" style={{ fontSize: 10, opacity: 0.55, lineHeight: 1, transform: "translateY(-1px)" }}>✦</span>
+            </div>
+          ))}
+        </div>
+        <style>{`
+          @keyframes ann-marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-25%); }
+          }
+          .ann-track {
+            animation: ann-marquee 42s linear infinite;
+          }
+          .ann-bar:hover .ann-track {
+            animation-play-state: paused;
+          }
+          .ann-shop-btn {
+            transition: background-color 0.25s cubic-bezier(0.22,1,0.36,1), color 0.25s cubic-bezier(0.22,1,0.36,1), transform 0.25s cubic-bezier(0.22,1,0.36,1);
+          }
+          .ann-shop-btn:hover {
+            background-color: var(--charcoal);
+            color: var(--avro-blue);
+          }
+          .ann-shop-arrow {
+            transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+          }
+          .ann-shop-btn:hover .ann-shop-arrow {
+            transform: translateX(4px);
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .ann-track { animation: none; }
+          }
+        `}</style>
       </div>
 
       {/* Main nav — cream/base background, charcoal text, DM Sans */}
