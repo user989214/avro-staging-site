@@ -4,11 +4,11 @@ import { useState } from "react"
 import {
   Section,
   SectionHeading,
-  CtaGroup,
   SocialProof,
   FinalCta,
   InfoCard,
 } from "@/components/sections"
+import { PageHero } from "@/components/page-hero"
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
@@ -21,22 +21,22 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)] items-start w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(42px,8vw,86px)] bg-gradient-to-br from-[#fffdf8] to-[#f7f4ec] border-b border-line">
-        <div className="max-w-[620px]">
-          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5">
-            Contact AVRO.
-          </h1>
-          <p className="max-w-[560px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed">
-            Have a question about your order, subscription, formula, or
-            partnership inquiry? Send us a note and we will point you in the
-            right direction.
-          </p>
-          <CtaGroup primary="Send Message" secondary="Visit Help Center" />
-        </div>
+      <PageHero
+        variant="flat"
+        title="Contact AVRO."
+        lede="Have a question about your order, subscription, formula, or partnership inquiry? Send us a note and we will point you in the right direction."
+        imageSrc=""
+        imageAlt=""
+        primaryCta={{ href: "#message", label: "Send Message" }}
+        secondaryCta={{ href: "/faq", label: "Visit Help Center" }}
+        compact
+      />
 
+      {/* Contact form */}
+      <Section id="message">
         <form
           onSubmit={handleSubmit}
-          className="grid gap-3.5 p-6 bg-base-light/90 border border-line rounded-2xl shadow-[0_10px_30px_rgba(31,29,24,0.04)]"
+          className="grid gap-3.5 p-6 bg-base-light/90 border border-line rounded-2xl shadow-[0_10px_30px_rgba(31,29,24,0.04)] max-w-[640px] mx-auto w-full"
         >
           <label className="grid gap-1.5 text-ink font-extrabold">
             Name
@@ -86,7 +86,7 @@ export default function ContactPage() {
             {submitted ? "Sent!" : "Send Message"}
           </button>
         </form>
-      </section>
+      </Section>
 
       <Section>
         <SectionHeading eyebrow="Quick help" title="Find the fastest path." />

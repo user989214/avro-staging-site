@@ -171,23 +171,27 @@ export default function FaqPage() {
         primaryCta={{ href: "/shop", label: "Shop AVRO" }}
         secondaryCta={{ href: "/contact", label: "Contact Us" }}
         compact
+        centered
       >
-        <label className="grid grid-cols-[24px_1fr] gap-3 items-center w-full max-w-[480px] px-4 py-3 bg-base rounded-2xl">
-          <Icon name="search" className="w-6 h-6 text-muted" />
+        <label
+          className="flex items-center w-full max-w-[640px] gap-3 bg-base rounded-full shadow-[0_2px_24px_rgba(30,29,24,0.06)]"
+          style={{ padding: "18px 28px" }}
+        >
+          <Icon name="search" className="w-6 h-6 text-muted shrink-0" />
           <input
             type="search"
             placeholder="Search AVRO answers"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border-0 outline-0 bg-transparent text-sm"
+            className="border-0 outline-0 bg-transparent text-base w-full font-medium placeholder:text-muted"
           />
         </label>
-        <div className="flex flex-wrap gap-2 mt-4 max-w-[560px]">
+        <div className="flex flex-wrap gap-2 mt-5 max-w-[720px] justify-center">
           {faqCategories.map((cat) => (
             <a
               key={cat.slug}
               href={`#${cat.slug}`}
-              className="px-3 py-2 bg-base rounded-full text-[12px] font-extrabold hover:bg-charcoal hover:text-bone transition-colors"
+              className="px-3.5 py-2 bg-base rounded-full text-[12px] font-extrabold hover:bg-charcoal hover:text-bone transition-colors"
             >
               {cat.name}
             </a>

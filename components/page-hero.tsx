@@ -17,6 +17,8 @@ export interface PageHeroProps {
   children?: ReactNode
   /** Tighter hero (used for FAQ-style search heroes). */
   compact?: boolean
+  /** Center-align the title, lede, CTAs and children inside the flat hero. */
+  centered?: boolean
   /**
    * Visual variant.
    * - `card` (default): rounded `--base-light` panel with image inside, CTAs below.
@@ -45,10 +47,11 @@ export function PageHero({
   secondaryCta,
   children,
   compact = false,
+  centered = false,
   variant = "card",
 }: PageHeroProps) {
   if (variant === "flat") {
-    return <FlatHero {...{ title, lede, primaryCta, secondaryCta, children, compact }} />
+    return <FlatHero {...{ title, lede, primaryCta, secondaryCta, children, compact, centered }} />
   }
 
   const minH = compact
@@ -235,6 +238,7 @@ function FlatHero({
   secondaryCta,
   children,
   compact,
+  centered,
 }: Omit<PageHeroProps, "imageSrc" | "imageAlt" | "imageObjectPosition" | "variant">) {
   return (
     <section
@@ -311,7 +315,10 @@ function FlatHero({
           padding: compact
             ? "clamp(72px,9vw,128px) clamp(20px,5vw,64px) clamp(56px,7vw,96px)"
             : "clamp(96px,11vw,160px) clamp(20px,5vw,64px) clamp(72px,9vw,120px)",
-          textAlign: "left",
+          textAlign: centered ? "center" : "left",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: centered ? "center" : "flex-start",
         }}
       >
         <h1
@@ -345,10 +352,22 @@ function FlatHero({
           {lede}
         </p>
 
-        {children && <div style={{ marginTop: 24 }}>{children}</div>}
+        {children && (
+          <div
+            style={{
+              marginTop: 28,
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: centered ? "center" : "flex-start",
+            }}
+          >
+            {children}
+          </div>
+        )}
 
         {(primaryCta || secondaryCta) && (
-          <div className="fh-pill-row">
+          <div className="fh-pill-row" style={{ justifyContent: centered ? "center" : "flex-start" }}>
             {primaryCta && (
               <Link href={primaryCta.href} className="fh-pill-primary">
                 {primaryCta.label}

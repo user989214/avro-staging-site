@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Section, SectionHeading, FinalCta } from "@/components/sections"
+import { PageHero } from "@/components/page-hero"
 
 export const metadata = {
   title: "The Team | AVRO",
@@ -64,26 +65,15 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(56px,9vw,112px)] bg-gradient-to-br from-[#fffdf8] to-[#f7f4ec] border-b border-line">
-        <div className="flex flex-col items-center text-center max-w-[820px] mx-auto">
-          <h1 className="font-serif font-black text-[clamp(46px,7vw,86px)] leading-[0.98] mb-5 text-balance">
-            Built around the moments that matter.
-          </h1>
-          <p className="max-w-[640px] text-muted-foreground text-[clamp(17px,2vw,20px)] leading-relaxed text-pretty">
-            In many moments that matter most, people do not need more energy.
-            They need more control. AVRO was built on that distinction.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3 mt-7">
-            <Link href="/why-avro" className="btn-primary">
-              Why AVRO
-            </Link>
-            <Link href="/science" className="btn-secondary">
-              The Science
-            </Link>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        variant="flat"
+        title="Built around the moments that matter."
+        lede="In many moments that matter most, people do not need more energy. They need more control. AVRO was built on that distinction."
+        imageSrc=""
+        imageAlt=""
+        primaryCta={{ href: "/why-avro", label: "Why AVRO" }}
+        secondaryCta={{ href: "/science", label: "The Science" }}
+      />
 
       {/* Origin story */}
       <Section>
