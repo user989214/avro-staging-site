@@ -516,43 +516,98 @@ export function HomeBenefitRow() {
       title: "Supports composure under pressure",
       copy: "Helps you steady first before the moment matters — so you arrive ready, not reactive.",
       tone: "blue" as const,
-      width: "wide" as const,
+      // word -> looping animation class
+      animatedWords: { composure: "twitch-flatten" } as Record<string, string>,
     },
     {
       title: "Supports clear-headed readiness",
       copy: "Calm, clear, and in control — without the spike or the crash.",
       tone: "bone" as const,
-      width: "narrow" as const,
+      animatedWords: { "clear-headed": "twitch-wobble" } as Record<string, string>,
     },
     {
       title: "Supports calm without sedation",
       copy: "Designed to support composure without turning you off. Quiet focus, fully online.",
       tone: "blue" as const,
-      width: "wide" as const,
+      animatedWords: { calm: "twitch-breathe", sedation: "twitch-drift" } as Record<string, string>,
     },
   ]
 
-  const [mounted, setMounted] = useState(false)
+  // Scroll-triggered visibility per card
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [visibleCards, setVisibleCards] = useState<boolean[]>(() => benefits.map(() => false))
+
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 80)
-    return () => clearTimeout(t)
+    const observers: IntersectionObserver[] = []
+    cardRefs.current.forEach((el, i) => {
+      if (!el) return
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              setVisibleCards((prev) => {
+                if (prev[i]) return prev
+                const next = [...prev]
+                next[i] = true
+                return next
+              })
+              obs.disconnect()
+            }
+          })
+        },
+        { threshold: 0.25 }
+      )
+      obs.observe(el)
+      observers.push(obs)
+    })
+    return () => observers.forEach((o) => o.disconnect())
   }, [])
 
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(48px,6vw,72px)" }}>
+      <style>{`
+        @keyframes twitch-flatten {
+          0%, 100% { transform: scaleY(1) scaleX(1); }
+          45% { transform: scaleY(0.86) scaleX(1.06); }
+          55% { transform: scaleY(0.86) scaleX(1.06); }
+        }
+        @keyframes twitch-wobble {
+          0%, 100% { transform: skewX(0deg) translateY(0); }
+          25% { transform: skewX(-3deg) translateY(-1px); }
+          50% { transform: skewX(0deg) translateY(0); }
+          75% { transform: skewX(3deg) translateY(1px); }
+        }
+        @keyframes twitch-breathe {
+          0%, 100% { transform: scale(1); letter-spacing: -0.02em; }
+          50% { transform: scale(1.04); letter-spacing: 0em; }
+        }
+        @keyframes twitch-drift {
+          0%, 100% { transform: translateX(0) rotate(0deg); }
+          50% { transform: translateX(2px) rotate(-1.5deg); }
+        }
+        .hp-benefit-word {
+          display: inline-block;
+          transform-origin: center;
+          will-change: transform, letter-spacing;
+        }
+        .hp-benefit-word.twitch-flatten { animation: twitch-flatten 4.2s ease-in-out infinite; }
+        .hp-benefit-word.twitch-wobble  { animation: twitch-wobble 3.6s ease-in-out infinite; }
+        .hp-benefit-word.twitch-breathe { animation: twitch-breathe 5s ease-in-out infinite; }
+        .hp-benefit-word.twitch-drift   { animation: twitch-drift 4.4s ease-in-out infinite; }
+      `}</style>
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexDirection: "column", gap: 14 }}>
         {benefits.map((b, i) => {
           const isBlue = b.tone === "blue"
           const bg = isBlue ? BLUE : "var(--base-light)"
-          // Each card progressively narrower than the one above
-          const widthPct = 100 - i * 14 // 100%, 86%, 72%
-          // Two colors per card — bg + var(--ink) for all text
-          const cardDelay = 0.05 + i * 0.14
+          const widthPct = 100 - i * 14
+          const visible = visibleCards[i]
+          const cardDelay = 0.05
           const titleWords = b.title.split(" ")
 
           return (
             <div
               key={b.title}
+              ref={(el) => { cardRefs.current[i] = el }}
               style={{
                 width: `${widthPct}%`,
                 maxWidth: i === 0 ? "100%" : `${widthPct}%`,
@@ -565,9 +620,9 @@ export function HomeBenefitRow() {
                 gridTemplateColumns: "minmax(0, 1.4fr) minmax(0, 1fr)",
                 columnGap: "clamp(28px,4vw,64px)",
                 alignItems: "center",
-                opacity: mounted ? 1 : 0,
-                transform: mounted ? "translateY(0)" : "translateY(16px)",
-                transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${(0.05 * i).toFixed(2)}s, transform 0.7s cubic-bezier(0.22,1,0.36,1) ${(0.05 * i).toFixed(2)}s`,
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0)" : "translateY(18px)",
+                transition: `opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)`,
               }}
             >
               <h3
@@ -582,19 +637,34 @@ export function HomeBenefitRow() {
                   textWrap: "balance",
                 }}
               >
-                {titleWords.map((w, wi) => (
-                  <span
-                    key={wi}
-                    style={{
-                      display: "inline-block",
-                      opacity: mounted ? 1 : 0,
-                      transform: mounted ? "translateY(0)" : "translateY(8px)",
-                      transition: `opacity 0.55s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + wi * 0.05).toFixed(2)}s, transform 0.55s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + wi * 0.05).toFixed(2)}s`,
-                    }}
-                  >
-                    {w}{wi < titleWords.length - 1 ? "\u00A0" : ""}
-                  </span>
-                ))}
+                {titleWords.map((w, wi) => {
+                  // Strip trailing punctuation for matching
+                  const lookup = w.toLowerCase().replace(/[.,!?:;]+$/g, "")
+                  const animClass = b.animatedWords[lookup]
+                  return (
+                    <span
+                      key={wi}
+                      style={{
+                        display: "inline-block",
+                        opacity: visible ? 1 : 0,
+                        transform: visible ? "translateY(0)" : "translateY(8px)",
+                        transition: `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + wi * 0.05).toFixed(2)}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + wi * 0.05).toFixed(2)}s`,
+                      }}
+                    >
+                      {animClass ? (
+                        <span
+                          className={`hp-benefit-word ${animClass}`}
+                          style={{ animationDelay: `${(0.6 + i * 0.3).toFixed(2)}s` }}
+                        >
+                          {w}
+                        </span>
+                      ) : (
+                        w
+                      )}
+                      {wi < titleWords.length - 1 ? "\u00A0" : ""}
+                    </span>
+                  )
+                })}
               </h3>
               <p
                 style={{
@@ -603,8 +673,8 @@ export function HomeBenefitRow() {
                   fontSize: "clamp(16px,1.25vw,19px)",
                   lineHeight: 1.5,
                   color: "var(--ink)",
-                  opacity: mounted ? 0.78 : 0,
-                  transition: `opacity 0.7s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + 0.3).toFixed(2)}s`,
+                  opacity: visible ? 0.78 : 0,
+                  transition: `opacity 0.9s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + 0.35).toFixed(2)}s`,
                   margin: 0,
                   maxWidth: 460,
                 }}
