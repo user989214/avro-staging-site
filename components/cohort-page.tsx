@@ -40,20 +40,11 @@ interface CohortData {
 }
 
 export function CohortPage({ data }: { data: CohortData }) {
-  // Per-cohort accent color (per AVRO Design System v2)
-  // Golf uses the Fuji-Apple green (#BDD637); Social uses the main-site blue (#94C6D4).
-  // Work + Gaming have no dedicated accent and quietly inherit the main-site blue,
-  // which keeps them visually aligned with the rest of avrolife.com.
-  const cohortAccent: Record<string, string> = {
-    golf: "var(--golf)",
-    social: "var(--avro-blue)",
-    work: "var(--avro-blue)",
-    gaming: "var(--avro-blue)",
-  }
-  const accent = cohortAccent[data.visual] ?? "var(--avro-blue)"
-  // Golf is the only cohort whose accent is light/saturated enough to read as a
-  // background block with charcoal text — match the design system's CTA closer.
-  const useColoredFinalCta = data.visual === "golf"
+  // Per AVRO Design System v2 — the accent color is the only thing that swaps per cohort:
+  //   Main (Work, Gaming, Social on avrolife.com) → Avro Blue   #94C6D4
+  //   Golf (avrolife.com/golf)                    → Fuji Apple  #BDD637
+  //   Zero Proof (avrozeroproof.com — separate)   → Avro Gold   #CAA84B
+  const accent = data.visual === "golf" ? "var(--golf)" : "var(--avro-blue)"
 
   // Cohort-specific lifestyle hero photo
   const cohortHero: Record<string, { src: string; alt: string }> = {
@@ -329,7 +320,10 @@ export function CohortPage({ data }: { data: CohortData }) {
 
       <ProductCards title={data.shopTitle} shopLabel="Shop" />
       <SocialProof mode="compact" />
-      <FaqBlock title={data.faqTitle} faqs={data.faqs} />
+      {/* Tonal continuation — matte off-white deepening toward the CTA, matches the Science/FAQ flow */}
+      <div style={{ background: "linear-gradient(to bottom, #EAE6DC 0%, #DEDAD0 100%)" }}>
+        <FaqBlock title={data.faqTitle} faqs={data.faqs} />
+      </div>
       <FinalCta
         title={data.finalTitle}
         copy={data.finalCopy}
