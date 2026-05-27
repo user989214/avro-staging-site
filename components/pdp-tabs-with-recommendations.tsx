@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { formulas, type FormulaKey } from "@/lib/data"
-import { stickImageFor } from "@/components/product-visual"
+import { ProductCard } from "@/components/product-visual"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 
@@ -71,7 +71,10 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-12" style={{ fontFamily: GC }}>
+    <div
+      className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] gap-8 lg:gap-12"
+      style={{ fontFamily: GC }}
+    >
       {/* Left - Tabs */}
       <div>
         <div className="flex flex-wrap gap-x-8 gap-y-2 mb-6" style={{ borderBottom: "2px solid rgba(0,0,0,0.12)" }}>
@@ -238,7 +241,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
         </div>
       </div>
 
-      {/* Right - You might also like */}
+      {/* Right - You might also like — width aligns with buy box / Add-to-cart above */}
       <div>
         <h3
           className="mb-6"
@@ -252,42 +255,43 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
           You might also like
         </h3>
 
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-2 gap-4">
           {otherKeys.map((formulaKey) => {
             const formula = formulas[formulaKey]
-            const stickImg = stickImageFor(formulaKey)
-            const subscribePrice = (formula.bundlePrice * 0.75).toFixed(2)
             const oneTimePrice = formula.bundlePrice.toFixed(2)
 
             return (
               <div
                 key={formulaKey}
-                className="flex flex-col bg-base"
-                style={{ borderRadius: 24, overflow: "hidden", border: "2px solid rgba(0,0,0,0.12)" }}
+                className="flex flex-col"
+                style={{
+                  backgroundColor: "var(--base-light, #f5f1e8)",
+                  borderRadius: 22,
+                  padding: 14,
+                  overflow: "hidden",
+                }}
               >
+                {/* Square image tile — bone fill, no stroke, image fills edge-to-edge */}
                 <div
-                  className="aspect-square flex items-center justify-center overflow-hidden"
-                  style={{ backgroundColor: "#f2f2f2" }}
+                  className="relative w-full overflow-hidden"
+                  style={{
+                    backgroundColor: "var(--bone)",
+                    borderRadius: 14,
+                    aspectRatio: "1 / 1",
+                  }}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={stickImg.src}
-                    alt={stickImg.alt}
-                    className="w-36 h-auto object-contain"
-                  />
+                  <ProductCard formulaKey={formulaKey} className="absolute inset-0 w-full h-full object-cover" />
                 </div>
 
-                <div className="p-5 flex flex-col gap-4">
-                  <div>
+                <div className="pt-4 px-1 flex flex-col gap-3">
+                  <div className="flex items-baseline justify-between gap-2">
                     <span
                       style={{
                         fontFamily: GC,
-                        fontWeight: 700,
-                        fontSize: 26,
-                        lineHeight: 1.05,
+                        fontWeight: 800,
+                        fontSize: 17,
+                        lineHeight: 1.1,
                         color: "var(--ink)",
-                        display: "block",
-                        marginBottom: 6,
                       }}
                     >
                       {formula.name}
@@ -295,55 +299,44 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                     <span
                       style={{
                         fontFamily: GC,
-                        fontWeight: 500,
-                        fontSize: 17,
-                        lineHeight: 1.3,
-                        color: "rgba(0,0,0,0.55)",
-                        display: "block",
+                        fontWeight: 700,
+                        fontSize: 14,
+                        color: "rgba(0,0,0,0.6)",
                       }}
                     >
-                      {formula.headline}
+                      ${oneTimePrice}
                     </span>
                   </div>
 
-                  <div className="flex flex-col gap-2">
-                    <Link
-                      href={`/${formulaKey}`}
-                      className="flex items-center justify-center transition-colors hover:bg-transparent hover:text-black"
-                      style={{
-                        fontFamily: GC,
-                        fontWeight: 700,
-                        fontSize: 16,
-                        minHeight: 48,
-                        padding: "0 28px",
-                        borderRadius: 999,
-                        backgroundColor: "var(--charcoal)",
-                        color: "var(--bone)",
-                        border: "2px solid var(--charcoal)",
-                      }}
-                    >
-                      Add to cart — ${oneTimePrice}
-                    </Link>
-                    <Link
-                      href={`/${formulaKey}`}
-                      className="flex items-center justify-center transition-colors hover:text-black"
-                      style={{
-                        fontFamily: GC,
-                        fontWeight: 700,
-                        fontSize: 15,
-                        minHeight: 40,
-                        color: "rgba(0,0,0,0.6)",
-                        textDecoration: "underline",
-                      }}
-                    >
-                      Subscribe ${subscribePrice}
-                    </Link>
-                  </div>
+                  <Link
+                    href={`/${formulaKey}`}
+                    className="ymal-btn flex items-center justify-center w-full transition-colors"
+                    style={{
+                      fontFamily: GC,
+                      fontWeight: 800,
+                      fontSize: 13,
+                      minHeight: 40,
+                      padding: "0 14px",
+                      borderRadius: 999,
+                      backgroundColor: "var(--charcoal)",
+                      color: "var(--bone)",
+                      border: "2px solid var(--charcoal)",
+                      letterSpacing: "0.01em",
+                    }}
+                  >
+                    Shop {formula.short}
+                  </Link>
                 </div>
               </div>
             )
           })}
         </div>
+        <style>{`
+          .ymal-btn:hover {
+            background-color: transparent !important;
+            color: var(--charcoal) !important;
+          }
+        `}</style>
       </div>
     </div>
   )
