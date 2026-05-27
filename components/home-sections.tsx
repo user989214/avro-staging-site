@@ -516,26 +516,24 @@ export function HomeBenefitRow() {
       title: "Supports composure under pressure",
       copy: "Helps you steady first before the moment matters — so you arrive ready, not reactive.",
       tone: "blue" as const,
-      // word -> looping animation class
-      animatedWords: { composure: "twitch-flatten" } as Record<string, string>,
     },
     {
       title: "Supports clear-headed readiness",
       copy: "Calm, clear, and in control — without the spike or the crash.",
       tone: "bone" as const,
-      animatedWords: { "clear-headed": "twitch-wobble" } as Record<string, string>,
     },
     {
       title: "Supports calm without sedation",
       copy: "Designed to support composure without turning you off. Quiet focus, fully online.",
       tone: "blue" as const,
-      animatedWords: { calm: "twitch-breathe", sedation: "twitch-drift" } as Record<string, string>,
     },
   ]
 
   // Scroll-triggered visibility per card
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   const [visibleCards, setVisibleCards] = useState<boolean[]>(() => benefits.map(() => false))
+  // Track when each card became visible so we can cascade row-2 cards one-by-one
+  const [revealOrder, setRevealOrder] = useState<number[]>([])
 
   useEffect(() => {
     const observers: IntersectionObserver[] = []
@@ -551,6 +549,7 @@ export function HomeBenefitRow() {
                 next[i] = true
                 return next
               })
+              setRevealOrder((prev) => (prev.includes(i) ? prev : [...prev, i]))
               obs.disconnect()
             }
           })
@@ -566,34 +565,30 @@ export function HomeBenefitRow() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(48px,6vw,72px)" }}>
       <style>{`
-        @keyframes twitch-flatten {
-          0%, 100% { transform: scaleY(1) scaleX(1); }
-          45% { transform: scaleY(0.86) scaleX(1.06); }
-          55% { transform: scaleY(0.86) scaleX(1.06); }
+        @keyframes hp-pop-in {
+          0% { opacity: 0; transform: translateY(14px) scale(0.94); }
+          60% { opacity: 1; transform: translateY(-2px) scale(1.015); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
         }
-        @keyframes twitch-wobble {
-          0%, 100% { transform: skewX(0deg) translateY(0); }
-          25% { transform: skewX(-3deg) translateY(-1px); }
-          50% { transform: skewX(0deg) translateY(0); }
-          75% { transform: skewX(3deg) translateY(1px); }
+        @keyframes hp-fade-up {
+          0% { opacity: 0; transform: translateY(8px); }
+          100% { opacity: 0.78; transform: translateY(0); }
         }
-        @keyframes twitch-breathe {
-          0%, 100% { transform: scale(1); letter-spacing: -0.02em; }
-          50% { transform: scale(1.04); letter-spacing: 0em; }
+        .hp-benefit-title {
+          opacity: 0;
+          will-change: transform, opacity;
         }
-        @keyframes twitch-drift {
-          0%, 100% { transform: translateX(0) rotate(0deg); }
-          50% { transform: translateX(2px) rotate(-1.5deg); }
+        .hp-benefit-title.is-visible {
+          animation: hp-pop-in 0.7s cubic-bezier(0.34, 1.4, 0.4, 1) both;
         }
-        .hp-benefit-word {
-          display: inline-block;
-          transform-origin: center;
-          will-change: transform, letter-spacing;
+        .hp-benefit-copy {
+          opacity: 0;
+          will-change: transform, opacity;
         }
-        .hp-benefit-word.twitch-flatten { animation: twitch-flatten 4.2s ease-in-out infinite; }
-        .hp-benefit-word.twitch-wobble  { animation: twitch-wobble 3.6s ease-in-out infinite; }
-        .hp-benefit-word.twitch-breathe { animation: twitch-breathe 5s ease-in-out infinite; }
-        .hp-benefit-word.twitch-drift   { animation: twitch-drift 4.4s ease-in-out infinite; }
+        .hp-benefit-copy.is-visible {
+          animation: hp-fade-up 0.6s cubic-bezier(0.22,1,0.36,1) both;
+          animation-delay: 0.18s;
+        }
       `}</style>
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexDirection: "column", gap: 14 }}>
         {[
@@ -613,9 +608,10 @@ export function HomeBenefitRow() {
               const isBlue = b.tone === "blue"
               const bg = isBlue ? BLUE : "var(--base-light)"
               const visible = visibleCards[i]
-              const cardDelay = 0.05
-              const titleWords = b.title.split(" ")
               const isWide = row.items.length === 1
+              // Cascade order: stagger based on reveal sequence within the section
+              const order = revealOrder.indexOf(i)
+              const cardDelay = order >= 0 ? order * 0.18 : 0
 
               return (
                 <div
@@ -634,11 +630,12 @@ export function HomeBenefitRow() {
                     alignItems: isWide ? "center" : "flex-start",
                     justifyContent: isWide ? undefined : "space-between",
                     opacity: visible ? 1 : 0,
-                    transform: visible ? "translateY(0)" : "translateY(18px)",
-                    transition: `opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)`,
+                    transform: visible ? "translateY(0) scale(1)" : "translateY(28px) scale(0.985)",
+                    transition: `opacity 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s, transform 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s`,
                   }}
                 >
                   <h3
+                    className={`hp-benefit-title ${visible ? "is-visible" : ""}`}
                     style={{
                       fontFamily: GC,
                       fontWeight: 700,
@@ -648,47 +645,22 @@ export function HomeBenefitRow() {
                       letterSpacing: "-0.02em",
                       margin: 0,
                       textWrap: "balance",
+                      animationDelay: `${(cardDelay + 0.15).toFixed(2)}s`,
                     }}
                   >
-                    {titleWords.map((w, wi) => {
-                      const lookup = w.toLowerCase().replace(/[.,!?:;]+$/g, "")
-                      const animClass = b.animatedWords[lookup]
-                      return (
-                        <span
-                          key={wi}
-                          style={{
-                            display: "inline-block",
-                            opacity: visible ? 1 : 0,
-                            transform: visible ? "translateY(0)" : "translateY(8px)",
-                            transition: `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + wi * 0.05).toFixed(2)}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + wi * 0.05).toFixed(2)}s`,
-                          }}
-                        >
-                          {animClass ? (
-                            <span
-                              className={`hp-benefit-word ${animClass}`}
-                              style={{ animationDelay: `${(0.6 + i * 0.3).toFixed(2)}s` }}
-                            >
-                              {w}
-                            </span>
-                          ) : (
-                            w
-                          )}
-                          {wi < titleWords.length - 1 ? "\u00A0" : ""}
-                        </span>
-                      )
-                    })}
+                    {b.title}
                   </h3>
                   <p
+                    className={`hp-benefit-copy ${visible ? "is-visible" : ""}`}
                     style={{
                       fontFamily: GC,
                       fontWeight: 400,
                       fontSize: isWide ? "clamp(16px,1.25vw,19px)" : "clamp(15px,1.1vw,17px)",
                       lineHeight: 1.5,
                       color: "var(--ink)",
-                      opacity: visible ? 0.78 : 0,
-                      transition: `opacity 0.9s cubic-bezier(0.22,1,0.36,1) ${(cardDelay + 0.35).toFixed(2)}s`,
                       margin: 0,
                       maxWidth: isWide ? 460 : "100%",
+                      animationDelay: `${(cardDelay + 0.32).toFixed(2)}s`,
                     }}
                   >
                     {b.copy}
@@ -1205,7 +1177,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ──────────────────────��─────────────────────────���──────────������──
+// ── STORY STRIP ──────────────────────��─────────────────────��───���──────────������──
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
