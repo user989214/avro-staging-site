@@ -142,9 +142,9 @@ export function Header() {
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"/></svg>
             </button>
 
-            {/* Compact dropdown panel — mirrors mobile menu styling */}
+            {/* Compact dropdown panel — drops flush from nav, anchored right (extends toward Shop) */}
             <div
-              className="absolute left-0 top-full pt-4 z-50"
+              className="absolute right-0 top-full z-50"
               style={{
                 pointerEvents: dropdownOpen ? "auto" : "none",
               }}
@@ -153,21 +153,24 @@ export function Header() {
               <div
                 className="overflow-hidden"
                 style={{
-                  width: 280,
+                  width: 320,
                   backgroundColor: "var(--base)",
-                  border: "1px solid var(--divider)",
-                  borderRadius: 18,
+                  borderLeft: "1px solid var(--divider)",
+                  borderRight: "1px solid var(--divider)",
+                  borderBottom: "1px solid var(--divider)",
+                  borderBottomLeftRadius: 18,
+                  borderBottomRightRadius: 18,
                   boxShadow: "0 16px 40px -12px rgba(21,21,21,0.18)",
                   opacity: dropdownOpen ? 1 : 0,
                   transform: dropdownOpen ? "translateY(0)" : "translateY(-8px)",
                   transition: "opacity 0.35s cubic-bezier(0.4,0,0.2,1), transform 0.35s cubic-bezier(0.4,0,0.2,1)",
                 }}
               >
-                <div className="flex flex-col p-3">
+                <div className="flex flex-col p-4">
                   {navDropdownSections.map((section, sIdx) => (
                     <div key={section.heading} className={sIdx > 0 ? "mt-3 pt-3" : ""} style={sIdx > 0 ? { borderTop: "1px solid var(--divider)" } : undefined}>
                       <p
-                        className="text-[10px] font-bold uppercase tracking-[0.16em] px-3 py-1.5"
+                        className="text-[10px] font-bold uppercase tracking-[0.16em] px-3 pb-2"
                         style={{ color: "var(--warm-gray)" }}
                       >
                         {section.heading}
@@ -178,7 +181,7 @@ export function Header() {
                             key={item.href}
                             href={item.href}
                             onClick={() => setDropdownOpen(false)}
-                            className="block px-3 py-2 text-[14px] font-bold uppercase tracking-[0.06em] rounded-full transition-colors"
+                            className="block px-3 py-1.5 font-serif font-black text-[22px] leading-[1.2] rounded-[10px] transition-colors"
                             style={{ color: "var(--ink)" }}
                             onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "var(--avro-blue)" }}
                             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent" }}
