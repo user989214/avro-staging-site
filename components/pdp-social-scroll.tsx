@@ -59,16 +59,15 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
 
   return (
     <section
-      className="w-full py-[clamp(36px,4vw,56px)] overflow-hidden"
+      className="w-full py-[clamp(48px,6vw,80px)] overflow-hidden"
       style={{ fontFamily: GC, backgroundColor: BLUE }}
     >
       <div className="w-full max-w-[1600px] mx-auto px-[clamp(18px,5vw,64px)]">
         <h2
-          className="text-center mb-8"
+          className="font-serif text-center mb-10"
           style={{
-            fontFamily: GC,
-            fontWeight: 950,
-            fontSize: "clamp(32px,4.5vw,56px)",
+            fontWeight: 900,
+            fontSize: "clamp(36px,5vw,64px)",
             lineHeight: 0.95,
             color: "var(--ink)",
           }}
@@ -88,12 +87,12 @@ export function PdpSocialScroll({ formulaKey }: PdpSocialScrollProps) {
               return (
                 <div
                   key={`${card.id}-${card.position}`}
-                  className="relative flex-shrink-0 rounded-2xl overflow-hidden"
+                  className="relative flex-shrink-0 rounded-3xl overflow-hidden"
                   style={{
-                    width: isFeatured ? 240 : isAdjacent ? 190 : 150,
-                    height: isFeatured ? 360 : isAdjacent ? 310 : 260,
+                    width: isFeatured ? 280 : isAdjacent ? 220 : 170,
+                    height: isFeatured ? 440 : isAdjacent ? 380 : 320,
                     opacity: isFeatured ? 1 : isAdjacent ? 0.9 : 0.7,
-                    transform: `scale(${isFeatured ? 1 : 0.98}) translateY(${isFeatured ? 0 : isAdjacent ? 12 : 24}px)`,
+                    transform: `scale(${isFeatured ? 1 : 0.98}) translateY(${isFeatured ? 0 : isAdjacent ? 16 : 32}px)`,
                     transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
                     zIndex: isFeatured ? 10 : isAdjacent ? 5 : 1,
                   }}

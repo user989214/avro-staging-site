@@ -72,8 +72,8 @@ export default async function ProductPage({
 
   return (
     <>
-      {/* PDP Hero */}
-      <section style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "clamp(24px,4vw,48px) clamp(18px,5vw,64px)", backgroundColor: "var(--base)" }}>
+      {/* PDP Hero - tighter padding for immediate visibility */}
+      <section style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "clamp(16px,2.5vw,32px) clamp(18px,5vw,64px)", backgroundColor: "var(--base)" }}>
         <ProductHero formula={item} formulaKey={key} />
       </section>
 
@@ -91,18 +91,18 @@ export default async function ProductPage({
       <PdpIngredients formulaKey={key} />
 
       {/* The feeling of good calm/focus/energy */}
-      <section style={{ width: "100%", backgroundColor: "var(--base)", padding: "clamp(40px,5vw,64px) 0" }}>
+      <section style={{ width: "100%", backgroundColor: "var(--base)", padding: "clamp(48px,6vw,80px) 0" }}>
         <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "0 clamp(18px,5vw,64px)" }}>
           {/* Section header */}
           <h2
             className="font-serif"
             style={{
               fontWeight: 900,
-              fontSize: "clamp(28px,4vw,52px)",
+              fontSize: "clamp(32px,4.5vw,56px)",
               lineHeight: 1.0,
               color: "var(--ink)",
               textAlign: "center",
-              marginBottom: 32,
+              marginBottom: 40,
             }}
           >
             The feeling of good {key}.

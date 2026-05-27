@@ -16,7 +16,7 @@ const sharedIngredients: Ingredient[] = [
     name: "PharmaGABA",
     amount: "100mg",
     description: "Naturally fermented GABA that supports calm and composure without sedation.",
-    image: "/images/ingredients/pharmagaba.jpg",
+    image: "/images/ingredients/pharmagaba-2.jpg",
   },
   {
     name: "L-Theanine",
@@ -33,7 +33,7 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
       name: "Magnesium Bisglycinate",
       amount: "150mg",
       description: "Highly bioavailable form of magnesium that supports relaxation and muscle function.",
-      image: "/images/ingredients/magnesium.jpg",
+      image: "/images/ingredients/magnesium-bisglycinate-2.jpg",
     },
   ],
   focus: [
@@ -42,7 +42,7 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
       name: "Cognigrape",
       amount: "300mg",
       description: "Grape extract clinically shown to support cognitive function and mental clarity.",
-      image: "/images/ingredients/cognigrape.jpg",
+      image: "/images/ingredients/cognigrape-2.jpg",
     },
   ],
   energy: [
@@ -51,7 +51,7 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
       name: "Natural Caffeine",
       amount: "120mg",
       description: "Plant-derived caffeine for clean, sustained energy without the jitters.",
-      image: "/images/ingredients/caffeine.jpg",
+      image: "/images/ingredients/natural-caffeine-2.jpg",
     },
   ],
 }
@@ -60,15 +60,15 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
   const ingredients = formulaIngredients[formulaKey]
 
   return (
-    <section className="w-full bg-base py-[clamp(40px,5vw,64px)]" style={{ fontFamily: GC }}>
+    <section className="w-full bg-base py-[clamp(48px,6vw,80px)]" style={{ fontFamily: GC }}>
       <div className="w-full max-w-[1200px] mx-auto px-[clamp(18px,5vw,64px)]">
         {/* Header */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-12">
           <h2
+            className="font-serif"
             style={{
-              fontFamily: GC,
-              fontWeight: 700,
-              fontSize: "clamp(28px,4vw,52px)",
+              fontWeight: 900,
+              fontSize: "clamp(32px,4.5vw,56px)",
               lineHeight: 1.0,
               color: "var(--ink)",
               marginBottom: 12,
@@ -81,23 +81,23 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
               fontFamily: GC,
               fontWeight: 500,
               fontSize: "clamp(17px,1.5vw,22px)",
-              color: "rgba(0,0,0,0.6)",
+              color: "var(--warm-gray)",
             }}
           >
             Clean, functional ingredients. Nothing artificial.
           </p>
         </div>
 
-        {/* Ingredients grid */}
+        {/* Ingredients grid - framed thumbnail style */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {ingredients.map((ingredient) => (
             <div
               key={ingredient.name}
               className="flex flex-col overflow-hidden"
-              style={{ borderRadius: 24, border: "1.5px solid rgba(0,0,0,0.1)" }}
+              style={{ borderRadius: 24, backgroundColor: "var(--base-light)", padding: 16 }}
             >
-              {/* Image */}
-              <div className="relative h-[180px] overflow-hidden" style={{ backgroundColor: "#f2f2f2" }}>
+              {/* Image with inner frame */}
+              <div className="relative h-[220px] overflow-hidden" style={{ borderRadius: 18, backgroundColor: "var(--bone)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={ingredient.image}
@@ -120,12 +120,12 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
               </div>
 
               {/* Content */}
-              <div className="flex-1 p-5">
+              <div className="flex-1 p-4 pt-5">
                 <h3
+                  className="font-serif"
                   style={{
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 22,
+                    fontWeight: 900,
+                    fontSize: 24,
                     lineHeight: 1.1,
                     color: "var(--ink)",
                     marginBottom: 8,
@@ -139,7 +139,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
                     fontWeight: 500,
                     fontSize: 16,
                     lineHeight: 1.45,
-                    color: "rgba(0,0,0,0.6)",
+                    color: "var(--warm-gray)",
                   }}
                 >
                   {ingredient.description}
@@ -150,7 +150,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
         </div>
 
         {/* View all link */}
-        <div className="text-center mt-8">
+        <div className="text-center mt-10">
           <a
             href="/science"
             className="inline-flex items-center gap-2 hover:underline"
