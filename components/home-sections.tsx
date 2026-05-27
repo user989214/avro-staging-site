@@ -172,15 +172,25 @@ export function HomeRefHero() {
           0% { opacity: 0; transform: translateY(12px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-        .hp-line { display: block; opacity: 0; transform: translateY(28px); animation: hp-rise 0.9s cubic-bezier(0.22,1,0.36,1) forwards; }
-        .hp-line-1 { animation-delay: 0.10s; }
-        .hp-line-2 { animation-delay: 0.40s; }
-        .hp-line-3 { animation-delay: 0.70s; }
+        @keyframes hp-rise-color {
+          0% { opacity: 0; transform: translateY(28px); color: var(--avro-blue); }
+          55% { opacity: 1; transform: translateY(0); color: var(--avro-blue); }
+          100% { opacity: 1; transform: translateY(0); color: var(--ink); }
+        }
+        .hp-line { display: block; }
+        .hp-word {
+          display: inline-block;
+          opacity: 0;
+          transform: translateY(28px);
+          color: var(--avro-blue);
+          animation: hp-rise-color 1.1s cubic-bezier(0.22,1,0.36,1) forwards;
+          will-change: transform, opacity, color;
+        }
         .hp-fade-in { opacity: 0; animation: hp-fade 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
-        .hp-lede { animation-delay: 1.15s; }
-        .hp-cta-row { animation-delay: 1.55s; }
+        .hp-lede { animation-delay: 1.55s; }
+        .hp-cta-row { animation-delay: 1.85s; }
         @media (prefers-reduced-motion: reduce) {
-          .hp-line, .hp-fade-in { animation: none !important; opacity: 1 !important; transform: none !important; }
+          .hp-word, .hp-fade-in { animation: none !important; opacity: 1 !important; transform: none !important; color: var(--ink) !important; }
         }
         .hp-pill-primary, .hp-pill-secondary {
           flex: 1 1 180px;
@@ -332,9 +342,28 @@ export function HomeRefHero() {
               fontWeight: 700,
             }}
           >
-            <span className="hp-line hp-line-1">Calm first.</span>
-            <span className="hp-line hp-line-2">Clear headed.</span>
-            <span className="hp-line hp-line-3">Ready when pressure rises.</span>
+            {(() => {
+              const lines = ["Calm first.", "Clear headed.", "Ready when pressure rises."]
+              let wordIdx = 0
+              return lines.map((line, lineIdx) => (
+                <span key={lineIdx} className="hp-line">
+                  {line.split(" ").map((word, i, arr) => {
+                    const delay = 0.1 + wordIdx * 0.13
+                    wordIdx++
+                    return (
+                      <span
+                        key={i}
+                        className="hp-word"
+                        style={{ animationDelay: `${delay.toFixed(2)}s` }}
+                      >
+                        {word}
+                        {i < arr.length - 1 ? "\u00A0" : ""}
+                      </span>
+                    )
+                  })}
+                </span>
+              ))
+            })()}
           </h1>
 
           {/* Lede — DM Sans, body LG */}
