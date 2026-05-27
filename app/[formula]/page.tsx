@@ -539,13 +539,15 @@ export default async function ProductPage({
       </div>
 
       {/* Final CTA */}
-      <FinalCta
-        title="Good energy starts here."
-        copy="Get easy lifestyle tips, wellness inspo, plus early access to AVRO launches and offers."
-        productButtons
-      />
+      <div data-quick-add-hide>
+        <FinalCta
+          title="Good energy starts here."
+          copy="Get easy lifestyle tips, wellness inspo, plus early access to AVRO launches and offers."
+          productButtons
+        />
+      </div>
 
-      {/* Sticky quick-add bar — appears after the ingredients section */}
+      {/* Sticky quick-add bar — appears after the ingredients section, hides at final CTA */}
       <QuickAddBar formulaKey={key} />
     </>
   )
