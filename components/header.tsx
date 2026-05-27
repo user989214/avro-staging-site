@@ -36,6 +36,7 @@ const navDropdownItems = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
   const { openCart, itemCount } = useCart()
 
   useEffect(() => {
@@ -108,22 +109,32 @@ export function Header() {
         <div className="hidden md:flex items-center gap-7">
           <NavLink href="/shop">Shop</NavLink>
           <NavLink href="/shop">Subscribe</NavLink>
-          <div className="relative group">
-            <NavLink href="/why-avro">Why AVRO</NavLink>
+          <div 
+            className="relative"
+            onMouseEnter={() => setDropdownOpen(true)}
+            onMouseLeave={() => setDropdownOpen(false)}
+          >
+            <button className="relative text-[15px] font-bold tracking-[0.08em] uppercase transition-colors hover:opacity-70 flex items-center gap-1" style={{ color: "var(--ink)" }}>
+              Why AVRO
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform ${dropdownOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
             <div
-              className="absolute top-full left-1/2 -translate-x-1/2 z-50 min-w-[260px] py-2.5 rounded-2xl shadow-[0_8px_32px_rgba(21,21,21,0.12)] opacity-0 invisible translate-y-1.5 transition-all group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0"
-              style={{ backgroundColor: "var(--base-light)", border: "1px solid var(--divider)" }}
+              className={`absolute top-full left-0 z-50 min-w-[280px] pt-3 transition-all duration-200 ease-out ${dropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2'}`}
             >
-              {navDropdownItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="block px-6 py-2.5 text-[14px] font-medium tracking-[0.06em] uppercase transition-colors hover:bg-base-deep"
-                  style={{ color: "var(--ink)" }}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              <div style={{ backgroundColor: "var(--bone)", borderRadius: 16, padding: "12px 0", boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}>
+                {navDropdownItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="block px-6 py-3 text-[14px] font-bold tracking-[0.06em] uppercase transition-colors"
+                    style={{ color: "var(--ink)" }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--base-light)'}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -150,7 +161,7 @@ export function Header() {
           <NavLink href="/faq">FAQ</NavLink>
           <button
             onClick={openCart}
-            className="relative text-[15px] font-semibold tracking-[0.08em] uppercase transition-colors flex items-center gap-1.5"
+            className="relative text-[15px] font-bold tracking-[0.08em] uppercase transition-colors flex items-center gap-1.5"
             style={{ color: "var(--ink)" }}
           >
             Cart
@@ -227,7 +238,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
   return (
   <Link
   href={href}
-  className="relative text-[15px] font-semibold tracking-[0.08em] uppercase transition-colors hover:opacity-70"
+  className="relative text-[15px] font-bold tracking-[0.08em] uppercase transition-colors hover:opacity-70"
   style={{ color: "var(--ink)" }}
   >
   {children}

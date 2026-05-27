@@ -56,6 +56,13 @@ export function HomeRefHero() {
           background-color: transparent !important;
           color: var(--avro-blue) !important;
         }
+        .hp-btn-outline-light {
+          transition: background-color .2s ease, color .2s ease;
+        }
+        .hp-btn-outline-light:hover {
+          background-color: #fff !important;
+          color: var(--charcoal) !important;
+        }
         .hp-btn-bone {
           transition: background-color .2s ease, color .2s ease;
         }
@@ -205,7 +212,7 @@ export function HomeProofBar() {
   )
 }
 
-// ── BENEFIT ROW ───────────────────────────────────────────────────────────────
+// ── BENEFIT ROW ───────────────────��───────────────────────────────────────────
 export function HomeBenefitRow() {
   const benefits = [
     { title: "Supports composure under pressure", copy: "Helps you steady first before the moment matters." },
@@ -449,14 +456,14 @@ export function HomeMomentGrid() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        {/* Card section with base-light background */}
-        <div style={{ backgroundColor: "var(--base-light)", borderRadius: 28, padding: "clamp(24px,4vw,48px)" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 28 }}>
+        {/* Charcoal section container */}
+        <div style={{ backgroundColor: "var(--charcoal)", borderRadius: 28, padding: "clamp(24px,4vw,48px)" }}>
+          <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "#fff", marginBottom: 28 }}>
             Built for pressure sensitive moments.
           </h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 16 }}>
             {moments.map((m) => (
-              <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 20, overflow: "hidden", backgroundColor: "#fff", boxShadow: "0 2px 12px rgba(0,0,0,.06)" }}>
+              <a key={m.title} href={m.url} className="moment-card" style={{ display: "flex", flexDirection: "column", textDecoration: "none", borderRadius: 20, overflow: "hidden", backgroundColor: "var(--bone)" }}>
                 <div style={{ position: "relative", height: 260, overflow: "hidden" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={m.image} alt={m.alt} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
@@ -478,7 +485,7 @@ export function HomeMomentGrid() {
   )
 }
 
-// ── SCIENCE GRID ─────────────────────��────────────────────────────────────────
+// ── SCIENCE GRID ─────────────────────�����───────────────────────────────────────
 export function HomeScienceGrid() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
@@ -486,8 +493,8 @@ export function HomeScienceGrid() {
         {/* Card section with base-light background */}
         <div style={{ backgroundColor: "var(--base-light)", borderRadius: 28, padding: "clamp(24px,4vw,48px)", overflow: "hidden" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px,1fr))", gap: 20 }}>
-            {/* Why GABA card - white with shadow */}
-            <div style={{ backgroundColor: "#fff", borderRadius: 20, padding: "clamp(28px,4vw,44px)", boxShadow: "0 2px 12px rgba(0,0,0,.06)" }}>
+            {/* Why GABA card - flat bone */}
+            <div style={{ backgroundColor: "var(--bone)", borderRadius: 20, padding: "clamp(28px,4vw,44px)" }}>
               <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,3vw,40px)", lineHeight: 1.0, color: "var(--charcoal)", marginBottom: 16 }}>
                 Why GABA matters.
               </h2>
@@ -517,8 +524,8 @@ export function HomeScienceGrid() {
               </a>
             </div>
 
-            {/* Formula comparison - white with shadow */}
-            <div style={{ backgroundColor: "#fff", borderRadius: 20, overflow: "hidden", padding: "clamp(28px,4vw,44px)", boxShadow: "0 2px 12px rgba(0,0,0,.06)" }}>
+            {/* Formula comparison - flat bone */}
+            <div style={{ backgroundColor: "var(--bone)", borderRadius: 20, overflow: "hidden", padding: "clamp(28px,4vw,44px)" }}>
               <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,3vw,40px)", lineHeight: 1.0, color: "var(--charcoal)", marginBottom: 28 }}>
                 Every formula starts calm first.
               </h2>
@@ -581,7 +588,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ────────────────────────────────────────────────���───────────���──
+// ── STORY STRIP ────────────────────────────────────────────────���──────────������──
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
@@ -594,8 +601,8 @@ export function HomeStoryStrip() {
             AVRO was built by Keigo Sugawara and Peter van Stolk for people who wanted a better option before the moments that matter. Every formula is backed by research and designed for real routines.
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <a href="/why-avro" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 999, textDecoration: "none", border: "2px solid rgba(255,255,255,0.3)", backgroundColor: "transparent", color: "#fff", transition: "background-color .2s ease, color .2s ease" }}>Our Story</a>
-            <a href="/science" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 999, textDecoration: "none", border: "none", backgroundColor: BLUE, color: "var(--charcoal)", transition: "opacity .2s ease" }}>The Science</a>
+            <a href="/why-avro" className="hp-btn-outline-light" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 999, textDecoration: "none", border: "2px solid rgba(255,255,255,0.4)", backgroundColor: "transparent", color: "#fff" }}>Our Story</a>
+            <a href="/science" className="hp-btn-blue" style={{ display: "inline-flex", alignItems: "center", fontFamily: GC, fontWeight: 700, fontSize: 18, minHeight: 56, padding: "0 32px", borderRadius: 999, textDecoration: "none", border: `2px solid ${BLUE}`, backgroundColor: BLUE, color: "var(--charcoal)" }}>The Science</a>
           </div>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "38% 62%", minHeight: 360 }}>
@@ -648,9 +655,8 @@ export function HomeRitualSection() {
               <div
                 key={step.num}
                 style={{
-                  backgroundColor: "#fff",
+                  backgroundColor: "var(--bone)",
                   borderRadius: 16,
-                  boxShadow: "0 2px 12px rgba(0,0,0,.06)",
                   overflow: "hidden",
                   transition: "all 0.25s ease",
                 }}
