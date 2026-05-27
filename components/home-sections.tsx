@@ -308,22 +308,17 @@ export function HomeBenefitRow() {
 
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "0 clamp(20px,5vw,64px) clamp(48px,6vw,72px)" }}>
-      <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <div style={{ backgroundColor: BLUE, borderRadius: 28, padding: "clamp(32px,4vw,48px)", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))", gap: "clamp(24px,3vw,40px)" }}>
-          {benefits.map((b, i) => (
-            <div key={b.title} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "rgba(0,0,0,0.5)", letterSpacing: "0.06em" }}>
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(20px,1.8vw,24px)", lineHeight: 1.2, color: "var(--ink)", letterSpacing: "-0.01em" }}>
-                {b.title}
-              </h3>
-              <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(15px,1.2vw,17px)", lineHeight: 1.5, color: "rgba(0,0,0,0.65)" }}>
-                {b.copy}
-              </p>
-            </div>
-          ))}
-        </div>
+      <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 16 }}>
+        {benefits.map((b) => (
+          <div key={b.title} style={{ backgroundColor: BLUE, borderRadius: 24, padding: "clamp(28px,3vw,36px)", display: "flex", flexDirection: "column", gap: 12, minHeight: 200 }}>
+            <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(20px,1.8vw,24px)", lineHeight: 1.2, color: "var(--ink)", letterSpacing: "-0.01em" }}>
+              {b.title}
+            </h3>
+            <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(15px,1.2vw,17px)", lineHeight: 1.5, color: "rgba(0,0,0,0.65)" }}>
+              {b.copy}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   )
