@@ -355,11 +355,14 @@ export function FinalCta({
   copy,
   productButtons = true,
   eyebrow,
+  bg = "var(--avro-blue)",
 }: {
   title: string
   copy: string
   productButtons?: boolean
   eyebrow?: string
+  /** Background color for the rounded CTA card (defaults to AVRO blue). */
+  bg?: string
 }) {
   return (
     <section
@@ -373,7 +376,7 @@ export function FinalCta({
         style={{
           maxWidth: 1250,
           margin: "0 auto",
-          backgroundColor: "var(--avro-blue)",
+          backgroundColor: bg,
           color: "var(--charcoal)",
           borderRadius: 28,
           padding: "clamp(48px,6vw,88px) clamp(28px,5vw,80px)",

@@ -40,12 +40,20 @@ interface CohortData {
 }
 
 export function CohortPage({ data }: { data: CohortData }) {
-  const sceneLabels = {
-    golf: "First tee routine",
-    social: "Alcohol-free ritual",
-    work: "Deep work routine",
-    gaming: "Pre-session ritual",
+  // Per-cohort accent color (per AVRO Design System v2)
+  // Golf uses the Fuji-Apple green (#BDD637); Social uses the main-site blue (#94C6D4).
+  // Work + Gaming have no dedicated accent and quietly inherit the main-site blue,
+  // which keeps them visually aligned with the rest of avrolife.com.
+  const cohortAccent: Record<string, string> = {
+    golf: "var(--golf)",
+    social: "var(--avro-blue)",
+    work: "var(--avro-blue)",
+    gaming: "var(--avro-blue)",
   }
+  const accent = cohortAccent[data.visual] ?? "var(--avro-blue)"
+  // Golf is the only cohort whose accent is light/saturated enough to read as a
+  // background block with charcoal text — match the design system's CTA closer.
+  const useColoredFinalCta = data.visual === "golf"
 
   // Cohort-specific lifestyle hero photo
   const cohortHero: Record<string, { src: string; alt: string }> = {
@@ -147,7 +155,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                 fontSize: 11,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: "var(--warm-gray)",
+                color: accent,
               }}
             >
               {data.eyebrow}
@@ -322,7 +330,12 @@ export function CohortPage({ data }: { data: CohortData }) {
       <ProductCards title={data.shopTitle} shopLabel="Shop" />
       <SocialProof mode="compact" />
       <FaqBlock title={data.faqTitle} faqs={data.faqs} />
-      <FinalCta title={data.finalTitle} copy={data.finalCopy} productButtons />
+      <FinalCta
+        title={data.finalTitle}
+        copy={data.finalCopy}
+        productButtons
+        bg={useColoredFinalCta ? accent : undefined}
+      />
     </>
   )
 }
