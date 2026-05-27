@@ -241,13 +241,13 @@ export function HomeRefHero() {
         className="hp-hero-container"
         style={{
           position: "relative",
-          maxWidth: 1320,
+          maxWidth: lerp(2000, 1320, progress),
           margin: "0 auto",
           borderRadius: radius,
           overflow: "hidden",
           backgroundColor: "var(--base-light)",
           minHeight: "clamp(520px, 62vw, 720px)",
-          transition: "border-radius 0.05s linear",
+          transition: "border-radius 0.05s linear, max-width 0.05s linear",
         }}
       >
         {/* Background image — full container */}
@@ -262,14 +262,14 @@ export function HomeRefHero() {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "70% center",
+            objectPosition: "82% center",
             transform: `scale(${imgScale})`,
             transformOrigin: "center",
             transition: "transform 0.05s linear",
           }}
         />
 
-        {/* Gradient overlay — fades from solid base on left to transparent on right */}
+        {/* Gradient overlay — solid on left where text sits, fades early so the product + drink stay clear */}
         <div
           aria-hidden="true"
           className="hp-hero-fade"
@@ -277,7 +277,7 @@ export function HomeRefHero() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.85) 50%, rgba(245,241,234,0.35) 65%, rgba(245,241,234,0) 80%)",
+              "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 30%, rgba(245,241,234,0.7) 42%, rgba(245,241,234,0.2) 55%, rgba(245,241,234,0) 65%)",
             pointerEvents: "none",
           }}
         />
