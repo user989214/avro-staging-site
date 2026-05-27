@@ -64,12 +64,12 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         </p>
       </header>
 
-      {/* Flavor switcher - fully circular pills with circular thumbnails */}
+      {/* Flavor switcher - compact circular pills */}
       <div className="flex flex-col gap-1.5">
         <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--ink)" }}>
-          Flavor
+          Flavor: <span style={{ fontWeight: 500, color: "var(--warm-gray)" }}>{activeFlavor.name}</span>
         </span>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {formula.flavors.map((flavor) => {
             const isSelected = flavorId === flavor.id
             return (
@@ -77,7 +77,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
                 key={flavor.id}
                 type="button"
                 onClick={() => onFlavorChange(flavor.id)}
-                className="flex-1 flex items-center gap-3 pl-1.5 pr-5 py-1.5 transition-all"
+                className="inline-flex items-center gap-2 pl-1 pr-4 py-1 transition-all"
                 style={{
                   borderRadius: 999,
                   backgroundColor: isSelected ? "var(--charcoal)" : LIGHT_GRAY,
@@ -86,10 +86,10 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
               >
                 {/* Circular solo tube thumbnail */}
                 <div
-                  className="w-11 h-11 overflow-hidden flex-shrink-0 grid place-items-center"
+                  className="w-9 h-9 overflow-hidden flex-shrink-0 grid place-items-center"
                   style={{
                     borderRadius: 999,
-                    backgroundColor: "var(--bone)",
+                    backgroundColor: "#FBF8F1",
                   }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -99,32 +99,18 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="flex flex-col items-start text-left min-w-0">
-                  <span
-                    className="truncate"
-                    style={{
-                      fontFamily: GC,
-                      fontWeight: 700,
-                      fontSize: 14,
-                      lineHeight: 1.15,
-                      color: isSelected ? "var(--bone)" : "var(--ink)",
-                    }}
-                  >
-                    {flavor.name}
-                  </span>
-                  <span
-                    className="truncate"
-                    style={{
-                      fontFamily: GC,
-                      fontWeight: 500,
-                      fontSize: 12,
-                      lineHeight: 1.2,
-                      color: isSelected ? "rgba(255,255,255,0.65)" : "var(--warm-gray)",
-                    }}
-                  >
-                    {flavor.tagline}
-                  </span>
-                </div>
+                <span
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: 13,
+                    lineHeight: 1,
+                    color: isSelected ? "var(--bone)" : "var(--ink)",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {flavor.name}
+                </span>
               </button>
             )
           })}

@@ -51,7 +51,7 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
   const renderMain = () => {
     if (activeId === "studio") {
       return (
-        <div className="relative flex items-center justify-center w-full h-full overflow-hidden" style={{ backgroundColor: "var(--bone)" }}>
+        <div className="relative flex items-center justify-center w-full h-full overflow-hidden" style={{ backgroundColor: "#FBF8F1" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={studio.src}
@@ -65,7 +65,7 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
     if (activeId === "tube") {
       // Solo display tube — the canister by itself, on white.
       return (
-        <div className="relative flex items-center justify-center w-full h-full overflow-hidden" style={{ backgroundColor: "var(--bone)" }}>
+        <div className="relative flex items-center justify-center w-full h-full overflow-hidden" style={{ backgroundColor: "#FBF8F1" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={soloTube.src}
@@ -78,7 +78,7 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
 
     if (activeId === "stick") {
       return (
-        <div className="relative flex items-center justify-center w-full h-full p-8 sm:p-14" style={{ backgroundColor: "var(--bone)" }}>
+        <div className="relative flex items-center justify-center w-full h-full p-8 sm:p-14" style={{ backgroundColor: "#FBF8F1" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={stick.src}
@@ -92,7 +92,7 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
     // Lifestyle cohort scene — render edge-to-edge so its real background fills the frame.
     const scene = tubeImageFor(activeId, formulaKey, flavorId)
     return (
-      <div className="relative w-full h-full overflow-hidden" style={{ backgroundColor: "var(--bone)" }}>
+      <div className="relative w-full h-full overflow-hidden" style={{ backgroundColor: "#FBF8F1" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={scene.src}
@@ -147,13 +147,14 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
 
   return (
     <div
-      className="flex flex-col-reverse lg:flex-row gap-3 lg:gap-3"
+      className="flex flex-col-reverse lg:flex-row gap-3"
       style={{ maxHeight: "min(72vh, 640px)" }}
     >
-      {/* Thumbnail strip — homepage card style: outer light frame, inner bone tile */}
-      <div className="relative lg:w-[78px] shrink-0 lg:h-full">
+      {/* Thumbnail strip — bone tiles with thick base frame on active */}
+      <div className="relative lg:w-[76px] shrink-0">
         <ul
-          className="flex lg:flex-col gap-2.5 overflow-x-auto lg:overflow-y-auto lg:overflow-x-hidden -mx-1 px-1 pb-1 lg:mx-0 lg:px-0 lg:pb-0 lg:pr-1 snap-x lg:snap-y lg:h-full no-scrollbar"
+          className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-y-auto lg:overflow-x-hidden -mx-1 px-1 pb-1 lg:mx-0 lg:px-0 lg:pb-0 lg:max-h-full snap-x lg:snap-y no-scrollbar"
+          style={{ maxHeight: "min(72vh, 640px)" }}
         >
           {THUMBS.map((thumb) => {
             const isActive = activeId === thumb.id
@@ -164,18 +165,19 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
                   onClick={() => setActiveId(thumb.id)}
                   aria-label={thumb.label}
                   aria-pressed={isActive}
-                  className="relative w-[68px] h-[68px] sm:w-[72px] sm:h-[72px] flex items-center justify-center transition-all"
+                  className="relative w-[64px] h-[64px] sm:w-[68px] sm:h-[68px] flex items-center justify-center transition-all"
                   style={{
                     borderRadius: 14,
-                    padding: 5,
-                    backgroundColor: isActive ? "var(--charcoal)" : "var(--base)",
+                    padding: 4,
+                    backgroundColor: isActive ? "var(--charcoal)" : "transparent",
+                    border: isActive ? "none" : "1px solid var(--line)",
                   }}
                 >
                   <div
                     className="relative w-full h-full overflow-hidden flex items-center justify-center"
                     style={{
-                      borderRadius: 9,
-                      backgroundColor: "var(--bone)",
+                      borderRadius: 10,
+                      backgroundColor: "#FBF8F1",
                     }}
                   >
                     {renderThumb(thumb)}
@@ -188,47 +190,39 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
         </ul>
       </div>
 
-      {/* Main view — homepage card style: outer base wrapper + inner bone tile */}
+      {/* Main view — bright cream tile that pops on the section bg */}
       <div
-        className="relative w-full flex-1"
+        className="relative w-full flex-1 overflow-hidden"
         style={{
-          backgroundColor: "var(--base)",
-          borderRadius: 24,
-          padding: "clamp(10px,1.2vw,16px)",
+          backgroundColor: "#FBF8F1",
+          borderRadius: 20,
+          border: "1px solid var(--line)",
           aspectRatio: "1 / 1",
           maxHeight: "min(72vh, 640px)",
         }}
       >
-        <div
-          className="relative w-full h-full overflow-hidden"
-          style={{
-            borderRadius: 18,
-            backgroundColor: "var(--bone)",
-          }}
-        >
-          {renderMain()}
+        {renderMain()}
 
-          {/* Rating overlay pill - top-left, like homepage badges */}
-          {reviewCount != null && (
-            <div
-              className="absolute top-3 left-3 flex items-center gap-1.5 pointer-events-none"
-              style={{
-                fontFamily: '"DM Sans", system-ui, sans-serif',
-                backgroundColor: "var(--charcoal)",
-                color: "var(--bone)",
-                borderRadius: 999,
-                padding: "6px 12px",
-                fontWeight: 700,
-                fontSize: 12,
-                letterSpacing: "0.02em",
-              }}
-            >
-              <span style={{ fontSize: 11, letterSpacing: 0.5 }}>{"\u2605"}</span>
-              <span>{rating.toFixed(1)}</span>
-              <span style={{ opacity: 0.65, fontWeight: 500 }}>({reviewCount})</span>
-            </div>
-          )}
-        </div>
+        {/* Rating overlay pill - top-left, like homepage badges */}
+        {reviewCount != null && (
+          <div
+            className="absolute top-3 left-3 flex items-center gap-1.5 pointer-events-none"
+            style={{
+              fontFamily: '"DM Sans", system-ui, sans-serif',
+              backgroundColor: "var(--charcoal)",
+              color: "var(--bone)",
+              borderRadius: 999,
+              padding: "6px 12px",
+              fontWeight: 700,
+              fontSize: 12,
+              letterSpacing: "0.02em",
+            }}
+          >
+            <span style={{ fontSize: 11, letterSpacing: 0.5 }}>{"\u2605"}</span>
+            <span>{rating.toFixed(1)}</span>
+            <span style={{ opacity: 0.65, fontWeight: 500 }}>({reviewCount})</span>
+          </div>
+        )}
       </div>
     </div>
   )
