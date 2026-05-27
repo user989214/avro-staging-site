@@ -173,22 +173,23 @@ export function HomeRefHero() {
           100% { opacity: 1; transform: translateY(0); }
         }
         @keyframes hp-rise-color {
-          0% { opacity: 0; transform: translateY(28px); color: var(--avro-blue); }
-          55% { opacity: 1; transform: translateY(0); color: var(--avro-blue); }
+          0%   { opacity: 0; transform: translateY(34px); color: var(--avro-blue); }
+          45%  { opacity: 1; transform: translateY(-6px); color: var(--avro-blue); }
+          70%  { opacity: 1; transform: translateY(0); color: var(--avro-blue); }
           100% { opacity: 1; transform: translateY(0); color: var(--ink); }
         }
         .hp-line { display: block; }
         .hp-word {
           display: inline-block;
           opacity: 0;
-          transform: translateY(28px);
+          transform: translateY(34px);
           color: var(--avro-blue);
-          animation: hp-rise-color 1.1s cubic-bezier(0.22,1,0.36,1) forwards;
+          animation: hp-rise-color 1.5s cubic-bezier(0.34, 1.4, 0.4, 1) forwards;
           will-change: transform, opacity, color;
         }
-        .hp-fade-in { opacity: 0; animation: hp-fade 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
-        .hp-lede { animation-delay: 1.55s; }
-        .hp-cta-row { animation-delay: 1.85s; }
+        .hp-fade-in { opacity: 0; animation: hp-fade 0.9s cubic-bezier(0.22,1,0.36,1) forwards; }
+        .hp-lede { animation-delay: 2.1s; }
+        .hp-cta-row { animation-delay: 2.5s; }
         @media (prefers-reduced-motion: reduce) {
           .hp-word, .hp-fade-in { animation: none !important; opacity: 1 !important; transform: none !important; color: var(--ink) !important; }
         }
@@ -348,7 +349,7 @@ export function HomeRefHero() {
               return lines.map((line, lineIdx) => (
                 <span key={lineIdx} className="hp-line">
                   {line.split(" ").map((word, i, arr) => {
-                    const delay = 0.1 + wordIdx * 0.13
+                    const delay = 0.1 + wordIdx * 0.18
                     wordIdx++
                     return (
                       <span
