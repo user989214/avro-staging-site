@@ -19,13 +19,13 @@ export default function ShopPage() {
   return (
     <>
       {/* ---------- HERO ---------- */}
-      {/* Carded hero on the page --base background, mirroring site-wide language. */}
+      {/* Full-width carded hero — matches the homepage hero scale (near edge-to-edge). */}
       <section
         style={{
           position: "relative",
           width: "100%",
           backgroundColor: "var(--base)",
-          padding: "clamp(20px,3vw,40px) clamp(16px,5vw,64px) clamp(28px,3.5vw,48px)",
+          padding: "clamp(12px,1.5vw,24px) clamp(8px,1.5vw,24px) clamp(20px,2.5vw,36px)",
         }}
       >
         <style>{`
@@ -57,9 +57,10 @@ export default function ShopPage() {
             font-family: ${GC};
             font-weight: 700;
             font-size: 16px;
-            min-height: 54px;
-            min-width: 168px;
-            padding: 0 36px;
+            letter-spacing: -0.005em;
+            min-height: 56px;
+            min-width: 200px;
+            padding: 0 40px;
             border-radius: 999px;
             text-decoration: none;
             transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
@@ -78,8 +79,9 @@ export default function ShopPage() {
         `}</style>
 
         <div
-          className="shop-hero-card relative w-full max-w-[1440px] mx-auto overflow-hidden"
+          className="shop-hero-card relative w-full mx-auto overflow-hidden"
           style={{
+            maxWidth: 2000,
             backgroundColor: "var(--base-light)",
             borderRadius: 28,
             minHeight: "clamp(520px,72vh,760px)",
