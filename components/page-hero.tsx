@@ -247,6 +247,21 @@ function FlatHero({
         overflow: "hidden",
       }}
     >
+      {/* Subtle tone-on-tone gradient — adds depth without visual noise */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: `
+            radial-gradient(ellipse 70% 80% at 80% 50%, rgba(222,218,208,0.55) 0%, rgba(222,218,208,0) 60%),
+            radial-gradient(ellipse 80% 70% at 15% 100%, rgba(222,218,208,0.35) 0%, rgba(222,218,208,0) 65%),
+            linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.03) 100%)
+          `,
+          pointerEvents: "none",
+        }}
+      />
+
       <style>{`
         .fh-pill-primary, .fh-pill-secondary {
           display: inline-flex;
@@ -256,8 +271,9 @@ function FlatHero({
           font-weight: 700;
           font-size: 16px;
           letter-spacing: -0.005em;
-          min-height: 52px;
-          padding: 0 36px;
+          min-height: 48px;
+          min-width: 240px;
+          padding: 0 44px;
           border-radius: 999px;
           text-decoration: none;
           background-color: var(--charcoal);

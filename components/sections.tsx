@@ -120,9 +120,16 @@ export function CtaGroup({
 
 export function SocialProof({ mode = "full" }: { mode?: "full" | "compact" }) {
   return (
-    <section style={{ backgroundColor: "transparent", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
+    <section
+      style={{
+        width: "100%",
+        padding: "clamp(64px,8vw,112px) clamp(20px,5vw,64px) clamp(72px,9vw,120px)",
+        // Slightly matte/warmer off-white — acts as a tonal step between --base and --base-deep
+        background: "linear-gradient(to bottom, var(--base) 0%, #EAE6DC 100%)",
+      }}
+    >
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 32, textAlign: "center" }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(34px,4.4vw,60px)", lineHeight: 1.0, letterSpacing: "-0.02em", color: "var(--ink)", marginBottom: 40, textAlign: "center" }}>
           Trusted for calm-first routines.
         </h2>
         {mode === "full" && (
@@ -318,7 +325,7 @@ export function FaqBlock({
 }) {
   return (
     <Section className="max-w-[1080px]">
-      <SectionHeading eyebrow="Questions" title={title} centered={centered} />
+      <SectionHeading title={title} centered={centered} />
       <div className="grid gap-2 w-full">
         {faqs.map(([q, a]) => (
           <details
