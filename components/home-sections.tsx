@@ -214,9 +214,10 @@ export function HomeRefHero() {
             grid-template-columns: 1fr !important;
             align-items: start !important;
             padding: clamp(48px,10vw,80px) clamp(20px,5vw,28px) !important;
+            background: var(--base-light) !important;
           }
-          .hp-hero-img { display: none !important; }
-          .hp-hero-fade { display: none !important; }
+          .hp-hero-img { display: none !important; opacity: 0 !important; visibility: hidden !important; }
+          .hp-hero-fade { display: none !important; opacity: 0 !important; visibility: hidden !important; }
         }
         .hp-pill-primary {
           background-color: var(--charcoal);
