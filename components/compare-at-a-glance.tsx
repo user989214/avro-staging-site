@@ -20,6 +20,8 @@ const COLS = [
   { key: "energy" as const, name: "Energy", color: "var(--energy)", href: "/energy" },
 ]
 
+const GRID = "minmax(140px, 1.1fr) repeat(3, 1fr)"
+
 export function CompareAtAGlance() {
   const ref = useRef<HTMLDivElement>(null)
   const [shown, setShown] = useState(false)
@@ -51,7 +53,6 @@ export function CompareAtAGlance() {
           lineHeight: 1.02,
           letterSpacing: "-0.02em",
           color: "var(--ink)",
-          textAlign: "left",
           marginBottom: 36,
           maxWidth: 720,
         }}
@@ -59,96 +60,137 @@ export function CompareAtAGlance() {
         Compare at a glance
       </h2>
 
+      {/* ---------- HEADER ROW (colored pills) ---------- */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          columnGap: 16,
+          gridTemplateColumns: GRID,
+          columnGap: 12,
           alignItems: "stretch",
+          marginBottom: 8,
         }}
       >
+        <div />
         {COLS.map((col, i) => (
           <div
             key={col.key}
             style={{
               backgroundColor: col.color,
-              borderRadius: 24,
-              padding: "28px 22px 22px",
+              borderRadius: 14,
+              minHeight: 64,
               display: "flex",
-              flexDirection: "column",
-              gap: 22,
+              alignItems: "center",
+              justifyContent: "center",
               opacity: shown ? 1 : 0,
-              transform: shown ? "translateY(0)" : "translateY(14px)",
+              transform: shown ? "translateY(0)" : "translateY(12px)",
               transition: `opacity 600ms cubic-bezier(0.22,1,0.36,1) ${i * 120}ms, transform 600ms cubic-bezier(0.22,1,0.36,1) ${i * 120}ms`,
             }}
           >
-            {/* Formula name */}
             <span
               style={{
                 fontFamily: GC,
                 fontWeight: 800,
-                fontSize: 22,
+                fontSize: 18,
                 letterSpacing: "-0.01em",
                 color: "var(--ink)",
               }}
             >
               {col.name}
             </span>
+          </div>
+        ))}
+      </div>
 
-            {/* Each row's value as a stacked block */}
-            {ROWS.map((row, rIdx) => (
-              <div
-                key={row.label}
+      {/* ---------- DATA ROWS ---------- */}
+      {ROWS.map((row, rIdx) => (
+        <div
+          key={row.label}
+          style={{
+            display: "grid",
+            gridTemplateColumns: GRID,
+            columnGap: 12,
+            alignItems: "center",
+            minHeight: 68,
+            paddingTop: 14,
+            paddingBottom: 14,
+            opacity: shown ? 1 : 0,
+            transform: shown ? "translateY(0)" : "translateY(8px)",
+            transition: `opacity 500ms ease ${380 + rIdx * 80}ms, transform 500ms ease ${380 + rIdx * 80}ms`,
+          }}
+        >
+          <div style={{ paddingLeft: 4 }}>
+            <span
+              style={{
+                fontFamily: GC,
+                fontWeight: 700,
+                fontSize: 11,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "var(--warm-gray)",
+              }}
+            >
+              {row.label}
+            </span>
+          </div>
+
+          {COLS.map((col) => (
+            <div
+              key={col.key}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                padding: "0 12px",
+              }}
+            >
+              <span
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 4,
-                  opacity: shown ? 1 : 0,
-                  transform: shown ? "translateY(0)" : "translateY(8px)",
-                  transition: `opacity 500ms ease ${300 + i * 120 + rIdx * 70}ms, transform 500ms ease ${300 + i * 120 + rIdx * 70}ms`,
+                  fontFamily: GC,
+                  fontWeight: 600,
+                  fontSize: 15,
+                  color: "var(--ink)",
+                  lineHeight: 1.4,
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 11,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                    color: "rgba(30,29,24,0.55)",
-                  }}
-                >
-                  {row.label}
-                </span>
-                <span
-                  style={{
-                    fontFamily: GC,
-                    fontWeight: 600,
-                    fontSize: 15,
-                    color: "var(--ink)",
-                    lineHeight: 1.35,
-                  }}
-                >
-                  {row[col.key]}
-                </span>
-              </div>
-            ))}
+                {row[col.key]}
+              </span>
+            </div>
+          ))}
+        </div>
+      ))}
 
-            {/* CTA */}
+      {/* ---------- CTA ROW ---------- */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: GRID,
+          columnGap: 12,
+          alignItems: "center",
+          marginTop: 20,
+          opacity: shown ? 1 : 0,
+          transform: shown ? "translateY(0)" : "translateY(8px)",
+          transition: "opacity 600ms ease 720ms, transform 600ms ease 720ms",
+        }}
+      >
+        <div />
+        {COLS.map((col) => (
+          <div
+            key={col.key}
+            style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+          >
             <Link
               href={col.href}
               style={{
-                marginTop: 6,
                 fontFamily: GC,
                 fontWeight: 700,
                 fontSize: 13,
-                padding: "12px 20px",
+                padding: "12px 28px",
                 borderRadius: 999,
                 backgroundColor: "var(--charcoal)",
                 color: "var(--bone)",
                 textDecoration: "none",
-                textAlign: "center",
-                alignSelf: "stretch",
+                whiteSpace: "nowrap",
               }}
             >
               Shop {col.name}
