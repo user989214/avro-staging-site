@@ -2,7 +2,8 @@ import { notFound } from "next/navigation"
 import { formulas, type FormulaKey } from "@/lib/data"
 import { ProductHero } from "@/components/product-hero"
 import { ReviewsBlock } from "@/components/reviews-block"
-import { Icon, type IconName } from "@/components/icons"
+import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
+import { Icon } from "@/components/icons"
 import { FinalCta } from "@/components/sections"
 import { ProductComparisonGrid } from "@/components/product-comparison-grid"
 import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommendations"
@@ -15,24 +16,24 @@ const BLUE = "#94C6D4"
 const validFormulas = ["calm", "focus", "energy"] as const
 
 // "The feeling of good calm/focus/energy" section benefit cards - 4 icons
-const feelingBenefits: Record<FormulaKey, { icon: IconName; title: string }[]> = {
+const feelingBenefits: Record<FormulaKey, { icon: AvroIconName; title: string }[]> = {
   calm: [
-    { icon: "brain", title: "Improved clarity & composure" },
-    { icon: "smile", title: "Calm, balanced mood" },
-    { icon: "target", title: "Sharper decision making" },
-    { icon: "zap", title: "Steady, sustained calm" },
+    { icon: "supports-clear-thinking", title: "Improved clarity & composure" },
+    { icon: "social-composure", title: "Calm, balanced mood" },
+    { icon: "supports-focus-without-overload", title: "Sharper decision making" },
+    { icon: "control-under-pressure", title: "Steady, sustained calm" },
   ],
   focus: [
-    { icon: "brain", title: "Improved cognition & alertness" },
-    { icon: "smile", title: "Calm, balanced mood" },
-    { icon: "target", title: "Sharper focus" },
-    { icon: "zap", title: "Clean, sustained energy" },
+    { icon: "supports-clear-thinking", title: "Improved cognition & alertness" },
+    { icon: "social-composure", title: "Calm, balanced mood" },
+    { icon: "supports-focus-without-overload", title: "Sharper focus" },
+    { icon: "control-under-pressure", title: "Clean, sustained energy" },
   ],
   energy: [
-    { icon: "brain", title: "Improved cognition & alertness" },
-    { icon: "smile", title: "Calm, balanced mood" },
-    { icon: "target", title: "Sharper focus" },
-    { icon: "zap", title: "Clean, sustained energy" },
+    { icon: "supports-clear-thinking", title: "Improved cognition & alertness" },
+    { icon: "social-composure", title: "Calm, balanced mood" },
+    { icon: "supports-focus-without-overload", title: "Sharper focus" },
+    { icon: "control-under-pressure", title: "Clean, sustained energy" },
   ],
 }
 
@@ -142,13 +143,14 @@ export default async function ProductPage({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    width: 48,
-                    height: 48,
+                    width: 56,
+                    height: 56,
                     borderRadius: 9999,
                     backgroundColor: "var(--charcoal)",
+                    padding: 8,
                   }}
                 >
-                  <Icon name={benefit.icon} className="w-6 h-6 text-bone" />
+                  <AvroIcon name={benefit.icon} size={32} />
                 </div>
                 <h3
                   style={{

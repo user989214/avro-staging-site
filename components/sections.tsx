@@ -5,6 +5,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { formulas, sharedProof, testimonials, type FormulaKey } from "@/lib/data"
 import { Icon, type IconName } from "@/components/icons"
+import { AvroIcon, type AvroIconName, lucideToAvroMap } from "@/components/avro-icons"
 import { ProductCard } from "@/components/product-visual"
 
 interface SectionProps {
@@ -301,26 +302,26 @@ export function ProductCards({
 }
 
 export function FormulaLogic({ dark = false }: { dark?: boolean }) {
-  const cards: [string, string, IconName][] = [
+  const cards: [string, string, AvroIconName][] = [
     [
       "PharmaGABA®",
       "Naturally fermented PharmaGABA® is the calm-first foundation in every AVRO formula.",
-      "leaf",
+      "calm-first-foundation",
     ],
     [
       "Formula Logic",
       "Each formula builds from the same base, then adds targeted support for the moment.",
-      "flask",
+      "clinically-tested-ingredients",
     ],
     [
       "Quality + Transparency",
       "Clear ingredient disclosure and quality standards, with documentation where applicable.",
-      "shield",
+      "quality-standards",
     ],
     [
       "Calm First Foundation",
       "AVRO is designed to support state before stimulation.",
-      "brain",
+      "supports-clear-thinking",
     ],
   ]
 
@@ -349,7 +350,7 @@ export function InfoCard({
   href,
   dark = false,
 }: {
-  icon: IconName
+  icon: AvroIconName
   title: string
   children: React.ReactNode
   href?: string
@@ -357,12 +358,13 @@ export function InfoCard({
 }) {
   // Zero Proof / dark cards = gold card with deep-black text. Light = bone card with ink.
   const cardBg = dark ? "bg-gold" : "bg-base-light"
-  const iconColor = dark ? "text-deep-black" : "text-olive"
   const titleColor = dark ? "text-deep-black" : ""
   const textColor = dark ? "text-deep-black/70" : "text-ink/75"
   const content = (
     <>
-      <Icon name={icon} className={cn("w-10.5 h-10.5 mb-5", iconColor)} />
+      <div className="mb-5">
+        <AvroIcon name={icon} golden={dark} size={42} />
+      </div>
       <h3 className={cn("font-black mb-2", titleColor)}>{title}</h3>
       <p className={cn("text-base leading-relaxed", textColor)}>{children}</p>
     </>

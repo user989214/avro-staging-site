@@ -12,7 +12,7 @@ import {
   FinalCta,
   InfoCard,
 } from "@/components/sections"
-import { Icon, type IconName } from "@/components/icons"
+import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { CohortChart } from "@/components/cohort-chart"
 
 const GC = '"DM Sans", system-ui, sans-serif'
@@ -295,7 +295,7 @@ export function CohortPage({ data }: { data: CohortData }) {
           {data.reasons.map(([title, copy], index) => (
             <InfoCard
               key={title}
-              icon={(["leaf", "brain", "clock"] as const)[index]}
+              icon={(["calm-first-foundation", "supports-clear-thinking", "step-drink"] as const)[index]}
               title={title}
               dark={isZeroProof}
             >
@@ -325,9 +325,9 @@ export function CohortPage({ data }: { data: CohortData }) {
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 16 }}>
             {[
-              { num: 1, icon: "cup" as IconName, title: "Mix", copy: "Mix one stick with water." },
-              { num: 2, icon: "clock" as IconName, title: "Time it", copy: `Drink about 30 minutes before your ${data.stepMoment}.` },
-              { num: 3, icon: "leaf" as IconName, title: "Show up", copy: "Step in with a calmer, clearer routine." },
+              { num: 1, icon: "step-pour" as AvroIconName, title: "Mix", copy: "Mix one stick with water." },
+              { num: 2, icon: "step-stir" as AvroIconName, title: "Time it", copy: `Drink about 30 minutes before your ${data.stepMoment}.` },
+              { num: 3, icon: "step-drink" as AvroIconName, title: "Show up", copy: "Step in with a calmer, clearer routine." },
             ].map((step) => (
               <article
                 key={step.num}
@@ -355,7 +355,9 @@ export function CohortPage({ data }: { data: CohortData }) {
                 >
                   {step.num}
                 </span>
-                <Icon name={step.icon} className="w-10 h-10 mb-3" style={{ color: t.stepIconColor }} />
+                <div className="mb-3">
+                  <AvroIcon name={step.icon} golden={isZeroProof} size={40} />
+                </div>
                 <h3
                   style={{
                     fontFamily: GC,
@@ -399,7 +401,7 @@ export function CohortPage({ data }: { data: CohortData }) {
           {data.useMoments.map(([title, copy], index) => (
             <InfoCard
               key={title}
-              icon={(["flag", "star", "target", "users"] as const)[index]}
+              icon={(["cohort-golf", "quality-standards", "supports-focus-without-overload", "social-composure"] as const)[index]}
               title={title}
               dark={isZeroProof}
             >

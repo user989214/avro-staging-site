@@ -30,15 +30,15 @@ export default function WhyPage() {
       <Section>
         <SectionHeading title="AVRO is different by design." />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4.5">
-          <InfoCard icon="leaf" title="Calm comes first">
+          <InfoCard icon="calm-first-foundation" title="Calm comes first">
             Every formula starts with naturally fermented PharmaGABA® as part of
             the calm-first foundation.
           </InfoCard>
-          <InfoCard icon="target" title="Support the moment">
+          <InfoCard icon="supports-focus-without-overload" title="Support the moment">
             Calm, Focus, and Energy each support a different kind of readiness
             while staying rooted in the same system.
           </InfoCard>
-          <InfoCard icon="shield" title="No stimulant culture">
+          <InfoCard icon="quality-standards" title="No stimulant culture">
             AVRO is not built around hype language or more-is-more energy
             positioning.
           </InfoCard>

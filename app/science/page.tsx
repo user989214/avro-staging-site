@@ -8,7 +8,7 @@ import {
   FinalCta,
   InfoCard,
 } from "@/components/sections"
-import { Icon } from "@/components/icons"
+import { AvroIcon } from "@/components/avro-icons"
 import { PageHero } from "@/components/page-hero"
 
 export const metadata = {
@@ -30,15 +30,15 @@ export default function SciencePage() {
       >
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2 max-w-[640px]">
           <span className="flex items-center gap-2 text-olive-dark text-[12px] font-extrabold">
-            <Icon name="leaf" className="w-6 h-6 text-olive shrink-0" />
+            <AvroIcon name="calm-first-foundation" size={24} className="shrink-0" />
             Naturally Fermented PharmaGABA®
           </span>
           <span className="flex items-center gap-2 text-olive-dark text-[12px] font-extrabold">
-            <Icon name="flask" className="w-6 h-6 text-olive shrink-0" />
+            <AvroIcon name="clinically-tested-ingredients" size={24} className="shrink-0" />
             Research Supported Ingredient
           </span>
           <span className="flex items-center gap-2 text-olive-dark text-[12px] font-extrabold">
-            <Icon name="shield" className="w-6 h-6 text-olive shrink-0" />
+            <AvroIcon name="transparent-standards" size={24} className="shrink-0" />
             Transparent Standards
           </span>
         </div>
@@ -50,14 +50,14 @@ export default function SciencePage() {
           centered={false}
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <InfoCard icon="bolt" title="Pressure creates noise">
+          <InfoCard icon="control-under-pressure" title="Pressure creates noise">
             When pressure rises, more stimulation is not always better.
           </InfoCard>
-          <InfoCard icon="brain" title="Calm supports clarity">
+          <InfoCard icon="supports-clear-thinking" title="Calm supports clarity">
             A calmer state can help support clearer thinking and better
             composure.
           </InfoCard>
-          <InfoCard icon="leaf" title="AVRO starts with state">
+          <InfoCard icon="calm-first-foundation" title="AVRO starts with state">
             AVRO is built around state support before pressure-sensitive
             moments.
           </InfoCard>
@@ -82,19 +82,19 @@ export default function SciencePage() {
             </h2>
             <div className="grid gap-4">
               <p className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink">
-                <Icon name="leaf" className="w-8.5 h-8.5 text-olive" />
+                <AvroIcon name="calm-first-foundation" size={34} />
                 Produced through a natural fermentation process.
               </p>
               <p className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink">
-                <Icon name="shield" className="w-8.5 h-8.5 text-olive" />
+                <AvroIcon name="quality-standards" size={34} />
                 Selected for reliable composition and ingredient quality.
               </p>
               <p className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink">
-                <Icon name="flask" className="w-8.5 h-8.5 text-olive" />
+                <AvroIcon name="clinically-tested-ingredients" size={34} />
                 Supported by published studies and ingredient research.
               </p>
               <p className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink">
-                <Icon name="brain" className="w-8.5 h-8.5 text-olive" />
+                <AvroIcon name="supports-clear-thinking" size={34} />
                 Chosen because it fits AVRO&apos;s calm-first foundation.
               </p>
             </div>

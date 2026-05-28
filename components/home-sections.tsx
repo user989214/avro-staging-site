@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { formulas, type FormulaKey, testimonials } from "@/lib/data"
 import { Icon } from "@/components/icons"
+import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const BLUE = "#94C6D4"
@@ -1210,7 +1211,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ──────────────��───────��─────────────────────��───����──────────������──
+// ── STORY STRIP ─────────────����───────��─────────────────────��───����──────────������──
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
