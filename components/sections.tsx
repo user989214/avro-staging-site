@@ -210,33 +210,43 @@ export function ProductCards({
   const muted = dark ? "rgba(13,13,13,0.7)" : "rgba(0,0,0,0.6)"
   const border = dark ? "rgba(13,13,13,0.18)" : "rgba(0,0,0,0.08)"
   return (
-    <section style={{ backgroundColor: bg, width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
+    <section style={{ backgroundColor: bg, width: "100%", padding: "clamp(32px,6vw,88px) clamp(16px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: titleInk, marginBottom: 12 }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(24px,3.2vw,48px)", lineHeight: 1.0, color: titleInk, marginBottom: 10 }}>
           {title}
         </h2>
-        <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(15px,1.2vw,18px)", lineHeight: 1.4, color: titleMuted, marginBottom: 32 }}>
+        <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(13px,1.1vw,18px)", lineHeight: 1.4, color: titleMuted, marginBottom: 24 }}>
           Every AVRO formula starts with the same calm-first base, then supports the moment in a different way.
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+        <div className="product-cards-container" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+          <style jsx>{`
+            @media (min-width: 640px) {
+              .product-cards-container {
+                flex-direction: row !important;
+              }
+              .product-cards-container > article {
+                flex: 1 1 0 !important;
+              }
+            }
+          `}</style>
           {(Object.keys(formulas) as FormulaKey[]).map((key) => {
             const item = formulas[key]
             return (
-              <article key={key} style={{ backgroundColor: cardBg, borderRadius: 24, padding: "clamp(20px,3vw,32px)", display: "flex", flexDirection: "column", gap: 16 }}>
+              <article key={key} style={{ backgroundColor: cardBg, borderRadius: 20, padding: "clamp(14px,2.5vw,32px)", display: "flex", flexDirection: "column", gap: 12 }}>
                 {/* Inner product frame — solid deep-black on Zero Proof so the can pops against the gold card; bone on light. */}
-                <div style={{ borderRadius: 20, height: 340, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "var(--deep-black)" : "var(--bone)" }}>
+                <div style={{ borderRadius: 16, height: "clamp(200px,30vw,340px)", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "var(--deep-black)" : "var(--bone)" }}>
                   <ProductCard formulaKey={key} className="h-full w-full object-cover" />
                 </div>
-                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(22px,2vw,28px)", color: ink, margin: 0 }}>{item.name}</h3>
-                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(16px,1.3vw,18px)", lineHeight: 1.45, color: muted, margin: 0 }}>{item.support}</p>
-                <div style={{ borderTop: `1px solid ${border}`, paddingTop: 16, display: "flex", flexDirection: "column", gap: 10 }}>
+                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(18px,1.8vw,28px)", color: ink, margin: 0 }}>{item.name}</h3>
+                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(13px,1.1vw,18px)", lineHeight: 1.4, color: muted, margin: 0 }}>{item.support}</p>
+                <div style={{ borderTop: `1px solid ${border}`, paddingTop: 12, display: "flex", flexDirection: "column", gap: 8 }}>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 16, color: ink }}>Best for</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 15, lineHeight: 1.4, color: muted, margin: "4px 0 0" }}>{item.bestFor}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(12px,1vw,16px)", color: ink }}>Best for</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(12px,0.95vw,15px)", lineHeight: 1.4, color: muted, margin: "2px 0 0" }}>{item.bestFor}</p>
                   </div>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: 16, color: ink }}>Caffeine</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: 15, lineHeight: 1.4, color: muted, margin: "4px 0 0" }}>{item.caffeine}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(12px,1vw,16px)", color: ink }}>Caffeine</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(12px,0.95vw,15px)", lineHeight: 1.4, color: muted, margin: "2px 0 0" }}>{item.caffeine}</p>
                   </div>
                 </div>
                 <a 
@@ -248,10 +258,10 @@ export function ProductCards({
                     justifyContent: "center", 
                     fontFamily: GC_FINAL, 
                     fontWeight: 700, 
-                    fontSize: 16, 
+                    fontSize: "clamp(12px,1vw,16px)", 
                     width: "100%",
-                    minHeight: 48, 
-                    padding: "0 24px", 
+                    minHeight: "clamp(38px,4vw,48px)", 
+                    padding: "0 20px", 
                     borderRadius: 999, 
                     textDecoration: "none", 
                     // On Zero Proof the card is gold, so the CTA inverts to deep-black with gold text
@@ -288,15 +298,6 @@ export function ProductCards({
           })}
         </div>
       </div>
-      <style jsx>{`
-        @media (max-width: 900px) {
-          div[style*="grid-template-columns: repeat(3"] {
-            grid-template-columns: 1fr !important;
-            max-width: 400px !important;
-            margin: 0 auto !important;
-          }
-        }
-      `}</style>
     </section>
   )
 }
