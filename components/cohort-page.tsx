@@ -196,11 +196,11 @@ export function CohortPage({ data }: { data: CohortData }) {
                 className="cohort-hero-image"
                 style={{
                   position: "absolute",
-                  inset: data.visual === "golf" ? "-5%" : 0,
-                  width: data.visual === "golf" ? "110%" : "100%",
-                  height: data.visual === "golf" ? "110%" : "100%",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
                   objectFit: "cover",
-                  objectPosition: "70% center",
+                  objectPosition: data.visual === "golf" ? "85% center" : "70% center",
                 }}
               />
 
