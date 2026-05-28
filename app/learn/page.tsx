@@ -1,10 +1,5 @@
 import Link from "next/link"
-import {
-  CardedSection,
-  Section,
-  SectionHeading,
-  SocialProof,
-} from "@/components/sections"
+import { CardedSection, Section, SectionHeading, SocialProof } from "@/components/sections"
 import { PageHero } from "@/components/page-hero"
 import { Icon } from "@/components/icons"
 
@@ -15,153 +10,71 @@ export const metadata = {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
- * Article catalog
+ * /learn — editorial hub.
  *
- * The /learn hub is AVRO's editorial / category-ownership page. It is built
- * around 12 strong articles grouped into four pillars: Start Here, Science of
- * Calm, Formula Guides, and Use Guides. Every article gets a slug-style URL
- * under /learn so this hub stays the canonical entry point.
+ * Restored to the simpler reference layout: flat hero → four pillar cards
+ * (plain title list, no numbering, no arrow icons) → "Article Template"
+ * split section on cream → three outlined stat boxes → SocialProof rail →
+ * black "Ready to find your formula?" bar with three shop pills.
+ *
+ * Color rule: only the blue cohort accent is allowed in the theme. The Calm
+ * pill keeps Avro Blue. Focus and Energy are neutralized — Focus uses bone
+ * on ink, Energy uses an outline-only ink pill. Social / Zero Proof keeps
+ * its own gold identity on its own page and is intentionally not surfaced.
  * ────────────────────────────────────────────────────────────────────────── */
 
-type Article = {
-  title: string
-  slug: string
-  blurb: string
-}
-
-type Pillar = {
-  eyebrow: string
-  title: string
-  description: string
-  articles: Article[]
-}
-
-const pillars: Pillar[] = [
+const pillars: { title: string; articles: { title: string; slug: string }[] }[] = [
   {
-    eyebrow: "Start here",
-    title: "Foundations",
-    description:
-      "Three articles that explain calm performance and why it changes how you think about energy.",
+    title: "Start Here",
     articles: [
-      {
-        title: "What Is Calm Performance?",
-        slug: "/learn/what-is-calm-performance",
-        blurb: "The shift from stimulant-first to calm-first, and why it matters.",
-      },
-      {
-        title: "Why More Energy Is Not Always the Answer",
-        slug: "/learn/more-energy-not-always-the-answer",
-        blurb: "What stacking caffeine actually does to your nervous system.",
-      },
-      {
-        title: "Calm First vs. Stimulant First",
-        slug: "/learn/calm-first-vs-stimulant-first",
-        blurb: "Two different starting points. Two different days.",
-      },
+      { title: "What Is Calm Performance?", slug: "/learn/what-is-calm-performance" },
+      { title: "Why More Energy Is Not Always the Answer", slug: "/learn/more-energy-not-always-the-answer" },
+      { title: "Calm First vs. Stimulant First: What's the Difference?", slug: "/learn/calm-first-vs-stimulant-first" },
     ],
   },
   {
-    eyebrow: "Science of calm",
-    title: "How AVRO works",
-    description:
-      "GABA, PharmaGABA®, and the role of natural fermentation in every formula.",
+    title: "Science of Calm",
     articles: [
-      {
-        title: "What Is GABA?",
-        slug: "/learn/what-is-gaba",
-        blurb: "Your body's main calming neurotransmitter, in plain language.",
-      },
-      {
-        title: "What Is PharmaGABA®?",
-        slug: "/learn/what-is-pharmagaba",
-        blurb: "The naturally fermented form of GABA we use in every AVRO formula.",
-      },
-      {
-        title: "Why Fermentation Matters in AVRO",
-        slug: "/learn/why-fermentation-matters",
-        blurb: "Why we choose fermented over synthetic — and what changes for you.",
-      },
+      { title: "What Is GABA?", slug: "/learn/what-is-gaba" },
+      { title: "What Is PharmaGABA®?", slug: "/learn/what-is-pharmagaba" },
+      { title: "Why Fermentation Matters in AVRO", slug: "/learn/why-fermentation-matters" },
     ],
   },
   {
-    eyebrow: "Formula guides",
-    title: "Find your formula",
-    description:
-      "Side-by-side comparisons of Calm, Focus, and Energy — and what makes each one different.",
+    title: "Formula Guides",
     articles: [
-      {
-        title: "AVRO Calm vs. Focus vs. Energy",
-        slug: "/learn/calm-vs-focus-vs-energy",
-        blurb: "Same calm-first base. Three different moments of the day.",
-      },
-      {
-        title: "Why AVRO Focus Is Caffeine Free",
-        slug: "/learn/why-focus-is-caffeine-free",
-        blurb: "Sustained mental clarity without the spike — here's how.",
-      },
-      {
-        title: "What Makes AVRO Energy Different?",
-        slug: "/learn/what-makes-energy-different",
-        blurb: "Lift without the jitters. The thinking behind our caffeine pairing.",
-      },
+      { title: "AVRO Calm vs. Focus vs. Energy", slug: "/learn/calm-vs-focus-vs-energy" },
+      { title: "Why AVRO Focus Is Caffeine Free", slug: "/learn/why-focus-is-caffeine-free" },
+      { title: "What Makes AVRO Energy Different?", slug: "/learn/what-makes-energy-different" },
     ],
   },
   {
-    eyebrow: "Use guides",
-    title: "Real moments, real routines",
-    description:
-      "How AVRO fits into the moments that actually matter — golf, deep work, long sessions, evenings.",
+    title: "Use Guides",
     articles: [
-      {
-        title: "What to Drink Before Golf",
-        slug: "/learn/what-to-drink-before-golf",
-        blurb: "When you don't want more caffeine but still need to be sharp.",
-      },
-      {
-        title: "A Calm-First Routine Before Deep Work",
-        slug: "/learn/calm-first-routine-deep-work",
-        blurb: "Start steady. Stay steady. The routine takes ten minutes.",
-      },
-      {
-        title: "Why Long Gaming Sessions Don't Always Need More Stimulation",
-        slug: "/learn/long-gaming-sessions",
-        blurb: "What happens when you stop stacking energy drinks.",
-      },
+      { title: "What to Drink Before Golf When You Do Not Want More Caffeine", slug: "/learn/what-to-drink-before-golf" },
+      { title: "A Calm First Routine Before Deep Work", slug: "/learn/calm-first-routine-deep-work" },
+      { title: "Why Long Gaming Sessions Do Not Always Need More Stimulation", slug: "/learn/long-gaming-sessions" },
     ],
   },
 ]
 
-/* ──────────────────────────────────────────────────────────────────────────
- * Article template — what every AVRO article delivers
- * ────────────────────────────────────────────────────────────────────────── */
+const templatePoints: { icon: Parameters<typeof Icon>[0]["name"]; label: string }[] = [
+  { icon: "search", label: "Clear question headline" },
+  { icon: "badge-check", label: "Short answer box" },
+  { icon: "shield-check", label: "Compliance-safe structure-function language" },
+  { icon: "leaf", label: "Internal links to formulas, science, cohorts, and FAQ" },
+]
 
-const articleTemplate: { icon: Parameters<typeof Icon>[0]["name"]; title: string; copy: string }[] = [
-  {
-    icon: "shield-check",
-    title: "Clear question headline",
-    copy: "Every article opens on the actual question the reader is asking.",
-  },
-  {
-    icon: "badge-check",
-    title: "Short answer, up top",
-    copy: "Two to three sentences before any explanation. No burying the lede.",
-  },
-  {
-    icon: "leaf",
-    title: "Compliance-safe language",
-    copy: "Structure-and-function only. We never claim to treat or cure anything.",
-  },
-  {
-    icon: "target",
-    title: "Linked to the right formula",
-    copy: "Every article points to the AVRO product that fits the moment.",
-  },
+const stats = [
+  { value: "4.8 / 5", label: "Average customer rating" },
+  { value: "25,000+", label: "Customer reviews" },
+  { value: "100,000+", label: "Sticks sold" },
 ]
 
 export default function LearnPage() {
   return (
     <>
-      {/* Flat editorial hero — matches Science / FAQ */}
+      {/* Flat editorial hero — centered headline, lede, two pill CTAs. */}
       <PageHero
         variant="flat"
         centered
@@ -173,76 +86,38 @@ export default function LearnPage() {
         secondaryCta={{ href: "/shop", label: "Shop AVRO" }}
       />
 
-      {/* Anchor target + intro headline before the article grid. */}
+      {/* Twelve strong articles — four pillar cards, plain title list. The article
+          links sit inside a bone card with a thin ink hairline; the title itself
+          is the affordance, no numbering, no trailing arrow. */}
       <CardedSection id="articles" bg="var(--base-light)">
         <SectionHeading
-          eyebrow="The library"
+          eyebrow="Recommended structure"
           title="Start with 12 strong articles."
-          description="Four pillars, three articles each — every piece points back to the formula it fits and the moment it serves."
         />
 
-        <div
-          className="grid gap-6"
-          style={{
-            // Mobile: single column. Desktop: two columns of pillar cards.
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(420px, 100%), 1fr))",
-          }}
-        >
+        <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {pillars.map((pillar) => (
             <article
               key={pillar.title}
-              className="rounded-[20px] p-7"
-              style={{ backgroundColor: "var(--bone)" }}
+              className="rounded-[18px] flex flex-col"
+              style={{
+                backgroundColor: "var(--bone)",
+                border: "1px solid rgba(30,29,24,0.14)",
+                padding: "26px 24px 28px",
+                minHeight: 280,
+              }}
             >
-              <span
-                className="inline-block mb-4 px-3.5 py-1.5 rounded-full font-black uppercase"
-                style={{
-                  fontSize: 11,
-                  letterSpacing: "0.12em",
-                  backgroundColor: "var(--charcoal)",
-                  color: "var(--bone)",
-                }}
-              >
-                {pillar.eyebrow}
-              </span>
-              <h3 className="font-serif font-black text-[clamp(24px,2.4vw,32px)] leading-[1.05] mb-2 text-ink">
+              <h3 className="font-serif font-black text-[22px] leading-[1.2] tracking-[-0.01em] text-ink mb-5">
                 {pillar.title}
               </h3>
-              <p className="text-base leading-relaxed text-ink/70 mb-6">
-                {pillar.description}
-              </p>
-
-              <ul className="flex flex-col gap-3">
-                {pillar.articles.map((a, idx) => (
+              <ul className="flex flex-col gap-4">
+                {pillar.articles.map((a) => (
                   <li key={a.slug}>
                     <Link
                       href={a.slug}
-                      className="group flex items-start gap-4 rounded-[14px] p-4 transition-colors hover:bg-base-light"
-                      style={{ border: "1px solid rgba(30,29,24,0.08)" }}
+                      className="block text-[15px] leading-[1.45] font-semibold text-ink hover:text-ink/70 transition-colors"
                     >
-                      <span
-                        className="font-black shrink-0"
-                        style={{
-                          fontSize: 13,
-                          letterSpacing: "0.08em",
-                          color: "var(--warm-gray)",
-                          minWidth: 28,
-                        }}
-                      >
-                        {String(idx + 1).padStart(2, "0")}
-                      </span>
-                      <span className="flex-1">
-                        <span className="block font-extrabold text-ink leading-snug mb-1">
-                          {a.title}
-                        </span>
-                        <span className="block text-sm leading-relaxed text-ink/65">
-                          {a.blurb}
-                        </span>
-                      </span>
-                      <Icon
-                        name="arrowRight"
-                        className="w-5 h-5 shrink-0 mt-1 text-ink/40 transition-transform group-hover:translate-x-1"
-                      />
+                      {a.title}
                     </Link>
                   </li>
                 ))}
@@ -252,108 +127,140 @@ export default function LearnPage() {
         </div>
       </CardedSection>
 
-      {/* Article template — what every AVRO article delivers. */}
-      <CardedSection bg="var(--charcoal)" panelClassName="text-bone">
-        <SectionHeading
-          eyebrow="Article template"
-          title="Built for clear answers."
-          description="Each article opens with a short answer, then explains why it matters, how AVRO thinks about it, which formula fits, FAQs, sources, and a clear next step."
-          dark
-        />
-
+      {/* Article template — split layout on the page's cream `--base`. Left column =
+          eyebrow + headline + supporting paragraph. Right column = four small icon
+          rows. Hairlines top and bottom for definition without a card. */}
+      <section
+        style={{
+          backgroundColor: "var(--base)",
+          borderTop: "1px solid rgba(30,29,24,0.10)",
+          borderBottom: "1px solid rgba(30,29,24,0.10)",
+        }}
+      >
         <div
-          className="grid gap-4"
+          className="mx-auto px-[clamp(16px,5vw,64px)]"
           style={{
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            maxWidth: 1320,
+            paddingTop: "clamp(56px, 7vw, 96px)",
+            paddingBottom: "clamp(56px, 7vw, 96px)",
           }}
         >
-          {articleTemplate.map((row) => (
+          <div className="grid gap-12 md:grid-cols-2 md:items-start">
+            <div>
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-ink/55 mb-3">
+                Article Template
+              </p>
+              <h2 className="font-serif font-black text-[clamp(30px,4vw,48px)] leading-[1.04] tracking-[-0.02em] text-ink text-balance mb-5">
+                Built for clear answers.
+              </h2>
+              <p className="text-[15px] md:text-base leading-relaxed text-ink/72 max-w-[480px]">
+                Each article should open with a short answer, then explain why it
+                matters, how AVRO thinks about it, which formula fits, FAQs,
+                sources, and a clear CTA.
+              </p>
+            </div>
+
+            <ul className="flex flex-col gap-5">
+              {templatePoints.map((p) => (
+                <li key={p.label} className="flex items-center gap-4">
+                  <span
+                    className="flex items-center justify-center rounded-full shrink-0"
+                    style={{
+                      width: 38,
+                      height: 38,
+                      backgroundColor: "var(--bone)",
+                      border: "1px solid rgba(30,29,24,0.16)",
+                    }}
+                  >
+                    <Icon name={p.icon} className="w-[18px] h-[18px] text-ink" />
+                  </span>
+                  <span className="text-[15px] md:text-base font-semibold text-ink leading-snug">
+                    {p.label}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Customer testimonials + social proof — eyebrow + headline + three outlined
+          stat boxes in a tight row. */}
+      <CardedSection bg="var(--base-light)">
+        <SectionHeading
+          eyebrow="Customer testimonials + social proof"
+          title="Trusted for calm-first routines."
+        />
+
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-3">
+          {stats.map((s) => (
             <div
-              key={row.title}
-              className="rounded-[18px] p-6"
-              style={{ backgroundColor: "rgba(245,241,234,0.06)" }}
+              key={s.label}
+              className="rounded-[14px] text-center"
+              style={{
+                backgroundColor: "var(--bone)",
+                border: "1px solid rgba(30,29,24,0.14)",
+                padding: "32px 22px",
+              }}
             >
-              <Icon name={row.icon} className="w-9 h-9 mb-4 text-gold" />
-              <h4 className="font-black text-bone mb-2">{row.title}</h4>
-              <p className="text-sm leading-relaxed text-bone/70">
-                {row.copy}
+              <div className="font-serif font-black text-[clamp(32px,3.6vw,44px)] leading-none tracking-[-0.02em] text-ink mb-2.5">
+                {s.value}
+              </div>
+              <p className="text-[13px] leading-relaxed text-ink/65 font-semibold">
+                {s.label}
               </p>
             </div>
           ))}
         </div>
       </CardedSection>
 
-      {/* Social proof + the three signal stats. */}
-      <Section className="max-w-[1320px]">
-        <div
-          className="grid gap-4"
-          style={{
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))",
-          }}
-        >
-          {[
-            { stat: "4.8 / 5", label: "Average customer rating" },
-            { stat: "25,000+", label: "Customer reviews" },
-            { stat: "100,000+", label: "Sticks sold" },
-          ].map((row) => (
-            <div
-              key={row.label}
-              className="rounded-[20px] p-7 text-center"
-              style={{ backgroundColor: "var(--base-light)" }}
-            >
-              <div className="font-serif font-black text-[clamp(32px,4vw,48px)] leading-none text-ink mb-2">
-                {row.stat}
-              </div>
-              <p className="text-sm leading-relaxed text-ink/65 uppercase tracking-[0.12em] font-extrabold">
-                {row.label}
-              </p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
+      {/* Standard customer voice rail — keeps the page anchored to the rest of the site's
+          social-proof system. */}
       <SocialProof mode="full" />
 
-      {/* Bottom CTA — custom three-formula picker bar matching the previous /learn
-          layout. Only Shop Calm keeps its cohort accent (Avro Blue). Shop Focus and
-          Shop Energy use neutral ink/charcoal pills, per the rule that no cohort
-          color besides blue may appear in the theme. */}
+      {/* Bottom CTA — black bar, eyebrow + headline + supporting copy on the left,
+          three formula pills on the right. Calm = Avro Blue. Focus = bone. Energy =
+          ink outline. No pink, no yellow. */}
       <Section className="max-w-[1320px] pb-24">
         <div
-          className="rounded-[28px] p-8 md:p-12"
-          style={{ backgroundColor: "var(--deep-black)", color: "var(--bone)" }}
+          className="rounded-[24px]"
+          style={{
+            backgroundColor: "var(--deep-black)",
+            color: "var(--bone)",
+            padding: "clamp(28px, 4vw, 44px)",
+          }}
         >
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-xl">
-              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-bone/60 mb-3">
-                Choose the formula that fits your moment
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-bone/60 mb-3">
+                Choose the formula that fits your moment.
               </p>
-              <h3 className="font-serif font-black text-[clamp(28px,3.4vw,42px)] leading-[1.05] text-bone text-balance mb-3">
+              <h3 className="font-serif font-black text-[clamp(28px,3.4vw,40px)] leading-[1.05] tracking-[-0.02em] text-bone text-balance mb-3">
                 Ready to find your formula?
               </h3>
-              <p className="text-sm md:text-base leading-relaxed text-bone/75">
+              <p className="text-[14px] md:text-[15px] leading-relaxed text-bone/75">
                 Choose Calm, Focus, or Energy based on the moment you want to support.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 shrink-0">
               <Link
                 href="/calm"
-                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-extrabold transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-[14px] font-extrabold transition-transform hover:-translate-y-0.5"
                 style={{ backgroundColor: "#94C6D4", color: "var(--deep-black)" }}
               >
                 Shop Calm
               </Link>
               <Link
                 href="/focus"
-                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-extrabold transition-transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-[14px] font-extrabold transition-transform hover:-translate-y-0.5"
                 style={{ backgroundColor: "var(--bone)", color: "var(--deep-black)" }}
               >
                 Shop Focus
               </Link>
               <Link
                 href="/energy"
-                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-extrabold transition-transform hover:-translate-y-0.5 border"
+                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-[14px] font-extrabold transition-transform hover:-translate-y-0.5 border"
                 style={{
                   backgroundColor: "transparent",
                   color: "var(--bone)",
