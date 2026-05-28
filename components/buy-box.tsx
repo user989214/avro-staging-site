@@ -229,7 +229,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
           { icon: "free-sugar" as AvroIconName, label: "No Added Sugar" },
         ].map((claim) => (
           <div key={claim.label} className="flex items-center gap-1.5">
-            <AvroIcon name={claim.icon} size={20} className="opacity-70" />
+            <AvroIcon name={claim.icon} size={24} className="opacity-70" />
             <span
               style={{
                 fontFamily: GC,

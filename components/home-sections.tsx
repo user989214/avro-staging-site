@@ -552,21 +552,18 @@ function CountUpStat({ value, suffix = "", decimals = 0, duration = 1800, delay 
 
 // ── BENEFIT ROW ───────────────────��───────────────────────────────────────────
 export function HomeBenefitRow() {
-  const benefits: { icon: AvroIconName; title: string; copy: string; tone: "blue" | "bone" }[] = [
+  const benefits = [
     {
-      icon: "control-under-pressure",
       title: "Supports composure under pressure",
       copy: "Helps you steady first before the moment matters — so you arrive ready, not reactive.",
       tone: "blue" as const,
     },
     {
-      icon: "supports-clear-thinking",
       title: "Supports clear-headed readiness",
       copy: "Calm, clear, and in control — without the spike or the crash.",
-      tone: "bone" as const,
+      tone: "blue" as const,
     },
     {
-      icon: "mind",
       title: "Supports calm without sedation",
       copy: "Designed to support composure without turning you off. Quiet focus, fully online.",
       tone: "blue" as const,
@@ -661,7 +658,6 @@ export function HomeBenefitRow() {
               }
             }
           `}</style>
-          <AvroIcon name={benefits[0].icon} size={45} className="opacity-90 flex-shrink-0" />
           <h3
             className={`hp-benefit-title ${visibleCards[0] ? "is-visible" : ""}`}
             style={{
@@ -1258,7 +1254,7 @@ export function HomeQualityRow() {
     { icon: "third-party-tested", label: "Third-Party", sub: "Tested" },
     { icon: "free-vegan", label: "Vegan", sub: "Plant-based" },
     { icon: "gluten-free", label: "Gluten Free", sub: "Always" },
-    { icon: "made-in-usa", label: "Made in the USA", sub: "GMP Compliant" },
+    { icon: "gmp-certified-facility", label: "GMP Certified", sub: "Facility" },
   ]
 
   return (
@@ -1269,7 +1265,7 @@ export function HomeQualityRow() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px,1fr))", gap: 2, backgroundColor: "var(--base-deep)", borderRadius: 20, overflow: "hidden" }}>
             {badges.map((b) => (
               <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, padding: "clamp(20px,3vw,32px) clamp(12px,2vw,20px)", textAlign: "center", backgroundColor: "var(--bone)" }}>
-                <AvroIcon name={b.icon} size={36} className="opacity-80" />
+                <AvroIcon name={b.icon} size={45} className="opacity-80" />
                 <div>
                   <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(15px,1.4vw,19px)", color: "var(--ink)", lineHeight: 1.2, display: "block" }}>{b.label}</strong>
                   <span style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(12px,1vw,15px)", color: "var(--warm-gray)" }}>{b.sub}</span>

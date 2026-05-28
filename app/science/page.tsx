@@ -30,15 +30,15 @@ export default function SciencePage() {
       >
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2 max-w-[640px]">
           <span className="flex items-center gap-3 text-olive-dark text-[12px] font-extrabold">
-            <AvroIcon name="naturally-fermented-pharmagaba" size={40} className="shrink-0 md:w-12 md:h-12" />
+            <AvroIcon name="naturally-fermented-pharmagaba" size={45} className="shrink-0 md:w-14 md:h-14" />
             Naturally Fermented PharmaGABA®
           </span>
           <span className="flex items-center gap-3 text-olive-dark text-[12px] font-extrabold">
-            <AvroIcon name="science-backed" size={40} className="shrink-0 md:w-12 md:h-12" />
+            <AvroIcon name="science-backed" size={45} className="shrink-0 md:w-14 md:h-14" />
             Research Supported Ingredient
           </span>
           <span className="flex items-center gap-3 text-olive-dark text-[12px] font-extrabold">
-            <AvroIcon name="transparent-standards" size={40} className="shrink-0 md:w-12 md:h-12" />
+            <AvroIcon name="transparent-standards" size={45} className="shrink-0 md:w-14 md:h-14" />
             Transparent Standards
           </span>
         </div>
