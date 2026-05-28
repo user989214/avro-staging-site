@@ -6,7 +6,7 @@ const GC = "var(--font-sans)"
 
 type Point = { label: string; value: number }
 
-type ChartKind = "bars" | "area" | "line" | "dial"
+type ChartKind = "bars" | "area" | "line" | "dial" | "clocks"
 
 type CohortChartConfig = {
   kind: ChartKind
@@ -35,28 +35,29 @@ type CohortChartConfig = {
 
 // Each cohort gets its own chart shape — a different visualization built from
 // the same design language. The shape is chosen to fit the story:
-//   • social  – bars (snapshots through the night)
+//   • social  – clocks (the night that doesn't end early — AVRO keeps going)
 //   • work    – area (sustained block of deep work)
 //   • gaming  – line (consistency hour after hour)
 //   • golf    – dial (single tempo-consistency score)
 //   • travel  – descending area (stress falling through the day)
 const CHARTS: Record<string, CohortChartConfig> = {
   social: {
-    kind: "bars",
-    title: "Calm focus across the night",
+    kind: "clocks",
+    title: "The night that doesn't end at 10pm",
     description:
-      "Self-reported clarity through a typical evening out — and the morning after.",
+      "Other formulas tap out as the night goes on. AVRO keeps clarity going — clean energy, no crash.",
     yMax: 100,
     unit: "",
     caption: "Source: AVRO reader cohort, n=412 · self-reported clarity, 0–100",
+    // For clocks, each point.value = how many hours (out of 6) that competitor sustained
+    // before tapping out. AVRO is the only one that keeps going.
     points: [
-      { label: "Pre-game", value: 72 },
-      { label: "Round 1", value: 78 },
-      { label: "Round 2", value: 82 },
-      { label: "Late night", value: 88 },
-      { label: "Next AM", value: 92 },
+      { label: "Energy drink", value: 1.4 },
+      { label: "Coffee", value: 2.6 },
+      { label: "Pre-workout", value: 3.2 },
+      { label: "AVRO", value: 6 },
     ],
-    avroIndex: 4,
+    avroIndex: 3,
   },
   work: {
     kind: "area",
@@ -239,6 +240,18 @@ export function CohortChart({
               baseFill={baseFill}
               avroFill={avroFill}
               visible={visible}
+            />
+          )}
+
+          {data.kind === "clocks" && (
+            <ClocksChart
+              data={data}
+              ink={ink}
+              muted={muted}
+              baseStroke={baseStroke}
+              avroStroke={avroStroke}
+              visible={visible}
+              dark={dark}
             />
           )}
 
@@ -745,6 +758,259 @@ function DialChart({
           {data.yMax}
         </text>
       </svg>
+    </div>
+  )
+}
+
+/* ---------- Clocks (social) ----------
+ *
+ * Each competitor is rendered as a simple analog clock face. When the section scrolls
+ * into view, every clock's minute hand sweeps from 12 toward its "stop time" (how long
+ * that competitor sustained clarity) and then halts there — frozen.
+ *
+ * The AVRO clock keeps going. Its hand keeps spinning past the others, leaving a glowing
+ * gold trail (a partial arc that lights up the path it has traveled). After enough
+ * laps it finally settles at 12 — the night didn't end early.
+ */
+function ClocksChart({
+  data,
+  ink,
+  muted,
+  baseStroke,
+  avroStroke,
+  visible,
+  dark,
+}: {
+  data: CohortChartConfig
+  ink: string
+  muted: string
+  baseStroke: string
+  avroStroke: string
+  visible: boolean
+  dark: boolean
+}) {
+  // Sub-clock face dimensions inside the SVG.
+  const FACE_R = 70
+  const FACE_STROKE = 4
+  const HAND_LEN = 56
+  const TICK_OUTER = FACE_R - 4
+  const TICK_INNER = FACE_R - 12
+
+  // Clock body color (the rim and tick marks). On the gold card we pick a near-black
+  // so the inactive clocks read as solid graphite faces; on light we use a soft ink/charcoal.
+  const faceRim = baseStroke
+  const faceFill = dark ? "rgba(13,13,13,0.06)" : "rgba(21,21,21,0.04)"
+  const handColor = dark ? "rgba(13,13,13,0.85)" : "rgba(21,21,21,0.7)"
+  // The AVRO trail uses the bright cohort accent color (gold on Zero Proof, accent on others).
+  const trailColor = avroStroke
+
+  // Each competitor's minute hand stops at this many "hours" out of 6.
+  // We map hours [0..6] → degrees [0..360] so a 6-hour night = full revolution.
+  const hoursToDeg = (h: number) => (h / 6) * 360
+  // AVRO sweeps a longer journey — 2 full laps then settles at 12 — to clearly read
+  // as "still going" past every competitor. Total sweep ≈ 720°, animated over ~2.6s.
+  const AVRO_SWEEP_DEG = 720
+
+  return (
+    <div style={{ position: "relative", width: "100%" }}>
+      <style>{`
+        @keyframes avro-clock-spin {
+          0%   { transform: rotate(0deg); }
+          100% { transform: rotate(${AVRO_SWEEP_DEG}deg); }
+        }
+        @keyframes avro-trail-grow {
+          0%   { stroke-dashoffset: var(--trail-len); opacity: 0.85; }
+          100% { stroke-dashoffset: 0; opacity: 1; }
+        }
+        @keyframes avro-glow-pulse {
+          0%, 100% { filter: drop-shadow(0 0 6px ${trailColor}); }
+          50%      { filter: drop-shadow(0 0 14px ${trailColor}); }
+        }
+        .avro-hand {
+          transform-origin: center;
+          transform: rotate(0deg);
+        }
+        .avro-hand.run {
+          animation: avro-clock-spin 2.6s cubic-bezier(0.55, 0.05, 0.25, 1) forwards;
+        }
+        .competitor-hand {
+          transform-origin: center;
+          transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .avro-trail {
+          stroke-dasharray: var(--trail-len);
+          stroke-dashoffset: var(--trail-len);
+        }
+        .avro-trail.run {
+          animation:
+            avro-trail-grow 2.6s cubic-bezier(0.55, 0.05, 0.25, 1) forwards,
+            avro-glow-pulse 1.6s ease-in-out 2.6s infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .avro-hand.run, .avro-trail.run, .competitor-hand { animation: none !important; transition: none !important; }
+        }
+      `}</style>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${data.points.length}, 1fr)`,
+          gap: "clamp(12px,2vw,28px)",
+          padding: "8px 0 0",
+        }}
+      >
+        {data.points.map((p, i) => {
+          const isAvro = i === data.avroIndex
+          const stopDeg = hoursToDeg(p.value)
+          // Trail length for AVRO arc — it traces the full sweep path. Approximated as
+          // 2π·r · (sweep/360). Using SVG units (face is ~150x180 viewBox).
+          const trailLen = (Math.PI * 2 * (FACE_R - FACE_STROKE / 2) * AVRO_SWEEP_DEG) / 360
+          return (
+            <div
+              key={p.label}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 12,
+              }}
+            >
+              <svg
+                viewBox="0 0 160 180"
+                style={{
+                  width: "100%",
+                  maxWidth: 180,
+                  height: "auto",
+                  display: "block",
+                  overflow: "visible",
+                }}
+                role="img"
+                aria-label={`${p.label} clock — sustains ${p.value} hours`}
+              >
+                {/* Face */}
+                <circle cx={80} cy={90} r={FACE_R} fill={faceFill} stroke={faceRim} strokeWidth={FACE_STROKE} />
+
+                {/* Hour ticks */}
+                {Array.from({ length: 12 }).map((_, k) => {
+                  const angle = (k / 12) * Math.PI * 2 - Math.PI / 2
+                  const x1 = 80 + Math.cos(angle) * TICK_INNER
+                  const y1 = 90 + Math.sin(angle) * TICK_INNER
+                  const x2 = 80 + Math.cos(angle) * TICK_OUTER
+                  const y2 = 90 + Math.sin(angle) * TICK_OUTER
+                  return (
+                    <line
+                      key={k}
+                      x1={x1}
+                      y1={y1}
+                      x2={x2}
+                      y2={y2}
+                      stroke={faceRim}
+                      strokeWidth={k % 3 === 0 ? 2.5 : 1.5}
+                      strokeLinecap="round"
+                      opacity={k % 3 === 0 ? 0.9 : 0.5}
+                    />
+                  )
+                })}
+
+                {/* AVRO glowing trail — only on the AVRO clock. The arc traces the path the
+                    minute hand has swept, lit in cohort accent gold. */}
+                {isAvro && (
+                  <circle
+                    className={`avro-trail${visible ? " run" : ""}`}
+                    cx={80}
+                    cy={90}
+                    r={FACE_R - FACE_STROKE / 2}
+                    fill="none"
+                    stroke={trailColor}
+                    strokeWidth={5}
+                    strokeLinecap="round"
+                    pathLength={trailLen}
+                    style={
+                      {
+                        // Start the dash at 12 o'clock (top), tracing clockwise.
+                        transform: "rotate(-90deg)",
+                        transformOrigin: "80px 90px",
+                        ["--trail-len" as never]: `${trailLen}`,
+                      } as React.CSSProperties
+                    }
+                  />
+                )}
+
+                {/* Hour hand (short, fixed) */}
+                <line
+                  x1={80}
+                  y1={90}
+                  x2={80}
+                  y2={90 - 32}
+                  stroke={isAvro ? ink : handColor}
+                  strokeWidth={5}
+                  strokeLinecap="round"
+                  opacity={0.7}
+                />
+
+                {/* Minute hand */}
+                <g
+                  className={isAvro ? `avro-hand${visible ? " run" : ""}` : "competitor-hand"}
+                  style={
+                    isAvro
+                      ? undefined
+                      : {
+                          transform: visible ? `rotate(${stopDeg}deg)` : "rotate(0deg)",
+                          transformOrigin: "80px 90px",
+                          transitionDelay: `${0.15 + i * 0.18}s`,
+                        }
+                  }
+                >
+                  <line
+                    x1={80}
+                    y1={90}
+                    x2={80}
+                    y2={90 - HAND_LEN}
+                    stroke={isAvro ? trailColor : handColor}
+                    strokeWidth={isAvro ? 4 : 3.5}
+                    strokeLinecap="round"
+                    style={isAvro ? { filter: `drop-shadow(0 0 4px ${trailColor})` } : undefined}
+                  />
+                </g>
+
+                {/* Center cap */}
+                <circle
+                  cx={80}
+                  cy={90}
+                  r={isAvro ? 6 : 5}
+                  fill={isAvro ? trailColor : handColor}
+                />
+
+                {/* Status pill under each clock */}
+                <text
+                  x={80}
+                  y={172}
+                  textAnchor="middle"
+                  fontFamily={GC}
+                  fontWeight={700}
+                  fontSize="13"
+                  fill={isAvro ? ink : muted}
+                >
+                  {isAvro ? "Still going" : `Tapped out · ${p.value}h`}
+                </text>
+              </svg>
+
+              <div
+                style={{
+                  fontFamily: GC,
+                  fontWeight: 700,
+                  fontSize: 14,
+                  letterSpacing: "0.02em",
+                  color: isAvro ? ink : muted,
+                  textAlign: "center",
+                }}
+              >
+                {p.label}
+              </div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

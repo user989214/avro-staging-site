@@ -152,8 +152,10 @@ export function CtaGroup({
 }
 
 export function SocialProof({ mode = "full", dark = false }: { mode?: "full" | "compact"; dark?: boolean }) {
+  // Zero Proof / dark variant — solid deep-black, no gradient. The cohort reads as a high-contrast
+  // black + gold story end-to-end, so SocialProof falls in line with the rest of the page.
   const bg = dark
-    ? "linear-gradient(to bottom, var(--deep-black) 0%, var(--dark-surface) 100%)"
+    ? "var(--deep-black)"
     : "linear-gradient(to bottom, var(--base) 0%, #EAE6DC 100%)"
   const ink = dark ? "var(--gold)" : "var(--ink)"
   return (
