@@ -143,14 +143,11 @@ export default async function ProductPage({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    width: 56,
-                    height: 56,
-                    borderRadius: 9999,
-                    backgroundColor: "var(--charcoal)",
-                    padding: 8,
+                    width: 72,
+                    height: 72,
                   }}
                 >
-                  <AvroIcon name={benefit.icon} size={32} />
+                  <AvroIcon name={benefit.icon} size={56} className="md:w-[72px] md:h-[72px]" />
                 </div>
                 <h3
                   style={{

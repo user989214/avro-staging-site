@@ -29,16 +29,16 @@ export default function SciencePage() {
         secondaryCta={{ href: "#research", label: "View Research" }}
       >
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2 max-w-[640px]">
-          <span className="flex items-center gap-2 text-olive-dark text-[12px] font-extrabold">
-            <AvroIcon name="calm-first-foundation" size={24} className="shrink-0" />
+          <span className="flex items-center gap-3 text-olive-dark text-[12px] font-extrabold">
+            <AvroIcon name="calm-first-foundation" size={40} className="shrink-0 md:w-12 md:h-12" />
             Naturally Fermented PharmaGABA®
           </span>
-          <span className="flex items-center gap-2 text-olive-dark text-[12px] font-extrabold">
-            <AvroIcon name="clinically-tested-ingredients" size={24} className="shrink-0" />
+          <span className="flex items-center gap-3 text-olive-dark text-[12px] font-extrabold">
+            <AvroIcon name="clinically-tested-ingredients" size={40} className="shrink-0 md:w-12 md:h-12" />
             Research Supported Ingredient
           </span>
-          <span className="flex items-center gap-2 text-olive-dark text-[12px] font-extrabold">
-            <AvroIcon name="transparent-standards" size={24} className="shrink-0" />
+          <span className="flex items-center gap-3 text-olive-dark text-[12px] font-extrabold">
+            <AvroIcon name="transparent-standards" size={40} className="shrink-0 md:w-12 md:h-12" />
             Transparent Standards
           </span>
         </div>
@@ -80,21 +80,21 @@ export default function SciencePage() {
             <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5">
               Why AVRO uses PharmaGABA®.
             </h2>
-            <div className="grid gap-4">
-              <p className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink">
-                <AvroIcon name="calm-first-foundation" size={34} />
+            <div className="grid gap-5">
+              <p className="grid grid-cols-[48px_1fr] gap-4 items-center text-ink">
+                <AvroIcon name="calm-first-foundation" size={48} className="md:w-14 md:h-14" />
                 Produced through a natural fermentation process.
               </p>
-              <p className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink">
-                <AvroIcon name="quality-standards" size={34} />
+              <p className="grid grid-cols-[48px_1fr] gap-4 items-center text-ink">
+                <AvroIcon name="quality-standards" size={48} className="md:w-14 md:h-14" />
                 Selected for reliable composition and ingredient quality.
               </p>
-              <p className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink">
-                <AvroIcon name="clinically-tested-ingredients" size={34} />
+              <p className="grid grid-cols-[48px_1fr] gap-4 items-center text-ink">
+                <AvroIcon name="clinically-tested-ingredients" size={48} className="md:w-14 md:h-14" />
                 Supported by published studies and ingredient research.
               </p>
-              <p className="grid grid-cols-[34px_1fr] gap-3.5 items-center text-ink">
-                <AvroIcon name="supports-clear-thinking" size={34} />
+              <p className="grid grid-cols-[48px_1fr] gap-4 items-center text-ink">
+                <AvroIcon name="supports-clear-thinking" size={48} className="md:w-14 md:h-14" />
                 Chosen because it fits AVRO&apos;s calm-first foundation.
               </p>
             </div>
