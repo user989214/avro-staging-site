@@ -120,16 +120,16 @@ export default function AboutPage() {
           title="Built on one clear belief."
           description="Performance starts with composure. That belief shaped every formula, every ingredient, and every decision at AVRO."
         />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1100px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-[1100px] mx-auto">
           {values.map((v) => (
             <div
               key={v.title}
-              className="flex flex-col gap-3 p-6 bg-base-light/80 border border-line rounded-2xl"
+              className="flex flex-col gap-3 p-6 bg-base-light rounded-2xl"
             >
-              <h3 className="font-serif font-black text-xl leading-tight">
+              <h3 className="font-serif font-black text-lg md:text-xl leading-tight">
                 {v.title}
               </h3>
-              <p className="text-muted-foreground text-[15px] leading-relaxed">
+              <p className="text-muted-foreground text-[14px] md:text-[15px] leading-relaxed">
                 {v.body}
               </p>
             </div>
@@ -144,19 +144,19 @@ export default function AboutPage() {
           title="Born from science and brand instinct."
           description="Together, Keigo and Peter built AVRO around one clear belief: performance starts with composure."
         />
-        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-0 overflow-hidden border border-line rounded-2xl bg-base-light/90 shadow-[0_18px_40px_-24px_rgba(20,18,12,0.18)] mb-8">
-          <div className="flex flex-col justify-center gap-4 p-[clamp(28px,4vw,52px)]">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-0 overflow-hidden rounded-2xl bg-base-light shadow-[0_18px_40px_-24px_rgba(20,18,12,0.12)] mb-8">
+          <div className="flex flex-col justify-center gap-4 p-[clamp(24px,4vw,52px)]">
             {founders.map((f) => (
-              <div key={f.name} className="flex flex-col gap-2 pb-6 last:pb-0 border-b border-line last:border-0">
-                <div className="flex items-baseline gap-2">
-                  <h3 className="font-serif font-black text-[clamp(20px,2vw,26px)] leading-tight">
+              <div key={f.name} className="flex flex-col gap-2 pb-5 last:pb-0 border-b border-line/40 last:border-0">
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
+                  <h3 className="font-serif font-black text-[clamp(18px,2vw,26px)] leading-tight">
                     {f.name}
                   </h3>
-                  <span className="text-olive text-[11px] font-black tracking-[0.1em] uppercase">
+                  <span className="text-olive text-[10px] md:text-[11px] font-black tracking-[0.1em] uppercase">
                     {f.role}
                   </span>
                 </div>
-                <p className="text-ink/75 text-[clamp(14px,1.4vw,16px)] leading-relaxed">
+                <p className="text-ink/75 text-[clamp(13px,1.4vw,16px)] leading-relaxed">
                   {f.bio}
                 </p>
               </div>
@@ -170,7 +170,7 @@ export default function AboutPage() {
               </Link>
             </div>
           </div>
-          <div className="relative min-h-[320px] lg:min-h-[480px] overflow-hidden">
+          <div className="relative min-h-[280px] lg:min-h-[480px] overflow-hidden">
             <Image
               src="/images/team/founders-keigo-peter.jpg"
               alt="AVRO co-founders Keigo Sugawara and Peter van Stolk"
@@ -188,10 +188,10 @@ export default function AboutPage() {
           eyebrow="The Team"
           title="The people behind AVRO."
         />
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-[1100px] mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 max-w-[1100px] mx-auto">
           {team.map((member) => (
-            <div key={member.name} className="flex flex-col gap-3">
-              <div className="relative aspect-square rounded-2xl overflow-hidden border border-line bg-soft">
+            <div key={member.name} className="flex flex-col gap-2 md:gap-3">
+              <div className="relative aspect-square rounded-2xl overflow-hidden bg-soft">
                 <Image
                   src={member.image}
                   alt={member.name}
@@ -201,15 +201,18 @@ export default function AboutPage() {
                 />
               </div>
               <div>
-                <p className="font-black text-sm leading-tight">{member.name}</p>
-                <p className="text-ink/55 text-xs mt-0.5 font-medium tracking-wide uppercase">{member.role}</p>
+                <p className="font-black text-[13px] md:text-sm leading-tight">{member.name}</p>
+                <p className="text-ink/55 text-[10px] md:text-xs mt-0.5 font-medium tracking-wide uppercase">{member.role}</p>
               </div>
             </div>
           ))}
         </div>
       </Section>
 
-      <FinalCta />
+      <FinalCta
+        title="Experience calm clarity."
+        copy="Find the formula that fits your moment."
+      />
     </>
   )
 }
