@@ -143,9 +143,11 @@ export default function AboutPage() {
           eyebrow="The Founders"
           title="Born from science and brand instinct."
           description="Together, Keigo and Peter built AVRO around one clear belief: performance starts with composure."
+          align="left"
         />
-        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-0 overflow-hidden rounded-2xl bg-base-light shadow-[0_18px_40px_-24px_rgba(20,18,12,0.12)] mb-8">
-          <div className="flex flex-col justify-center gap-4 p-[clamp(24px,4vw,52px)]">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
+          {/* Text content - left aligned */}
+          <div className="flex flex-col gap-5 lg:flex-1">
             {founders.map((f) => (
               <div key={f.name} className="flex flex-col gap-2 pb-5 last:pb-0 border-b border-line/40 last:border-0">
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
@@ -170,14 +172,17 @@ export default function AboutPage() {
               </Link>
             </div>
           </div>
-          <div className="relative min-h-[280px] lg:min-h-[480px] overflow-hidden">
-            <Image
-              src="/images/team/founders-keigo-peter.jpg"
-              alt="AVRO co-founders Keigo Sugawara and Peter van Stolk"
-              fill
-              sizes="(min-width: 1024px) 55vw, 100vw"
-              className="object-cover"
-            />
+          {/* Image - contained with padding/border */}
+          <div className="w-full lg:w-[380px] flex-shrink-0">
+            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-soft p-3">
+              <Image
+                src="/images/team/founders-keigo-peter.jpg"
+                alt="AVRO co-founders Keigo Sugawara and Peter van Stolk"
+                fill
+                sizes="(min-width: 1024px) 380px, 100vw"
+                className="object-contain rounded-xl"
+              />
+            </div>
           </div>
         </div>
       </section>
