@@ -66,10 +66,10 @@ export function CohortPage({ data }: { data: CohortData }) {
         // Section headings sit on the deep-black background and stay gold.
         ink: "var(--gold)",
         muted: "rgba(202,168,75,0.7)",
-        heroBg: "var(--deep-black)",
-        // Solid hero overlay — no gradient. A subtle near-black wash sits on top of the
-        // photo so the title is legible against any image.
-        heroFade: "rgba(13,13,13,0.62)",
+  heroBg: "var(--deep-black)",
+  // Gradient hero overlay for dark theme — fades from solid dark on left to transparent on right
+  heroFade:
+    "linear-gradient(to right, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0.9) 38%, rgba(13,13,13,0.75) 48%, rgba(13,13,13,0.5) 58%, rgba(13,13,13,0.25) 70%, rgba(13,13,13,0.1) 82%, rgba(13,13,13,0.15) 94%, rgba(13,13,13,0.4) 100%), linear-gradient(to bottom, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.1) 10%, rgba(13,13,13,0) 20%, rgba(13,13,13,0) 80%, rgba(13,13,13,0.1) 90%, rgba(13,13,13,0.3) 100%)",
         // Step number chip on the dark card → gold chip with dark numeral.
         stepNumBg: "var(--gold)",
         stepNumFg: "var(--deep-black)",
