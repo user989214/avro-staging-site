@@ -104,7 +104,7 @@ export function CohortPage({ data }: { data: CohortData }) {
   const cohortHero: Record<string, { src: string; alt: string }> = {
     golf: {
       src: "/images/lifestyle/cohort-golf-hero.png",
-      alt: "Golfer holding iron club with flag in misty background",
+      alt: "Golfer selecting club from bag with friends chatting in background",
     },
     social: {
       src: "/images/lifestyle/cohort-social-hero.png",
