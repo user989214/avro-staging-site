@@ -202,13 +202,14 @@ export function HomeRefHero() {
           .hp-pill-row { flex-direction: column; align-items: stretch; max-width: 320px !important; }
           .hp-pill-primary, .hp-pill-secondary { width: 100%; flex: 0 0 auto; }
         }
-        @media (max-width: 768px) {
-          .hp-hero-container {
-            max-width: 100% !important;
-            width: 100% !important;
-            border-radius: 0 !important;
-            min-height: auto !important;
-          }
+  @media (max-width: 768px) {
+  .hp-hero-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    border-radius: 0 !important;
+    min-height: auto !important;
+    background: var(--base-light) !important;
+  }
           .hp-hero-grid {
             grid-template-columns: 1fr !important;
             align-items: start !important;
