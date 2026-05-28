@@ -175,6 +175,7 @@ export function Header() {
           color: var(--charcoal);
         }
       `}</style>
+      <header>
       {/* Announcement ticker — continuous marquee */}
       <div
         className="ann-bar"
@@ -509,7 +510,7 @@ export function Header() {
               href="/shop"
               onClick={() => setMobileMenuOpen(false)}
               className="inline-block px-4 py-1.5 font-serif font-black text-[34px] leading-[1.1] rounded-full"
-              style={{ color: "var(--ink)" }}
+              style={{ color: colors.navText }}
             >
               Shop
             </Link>
@@ -517,7 +518,7 @@ export function Header() {
               href="/shop"
               onClick={() => setMobileMenuOpen(false)}
               className="inline-block px-4 py-1.5 font-serif font-black text-[34px] leading-[1.1] rounded-full"
-              style={{ color: "var(--ink)" }}
+              style={{ color: colors.navText }}
             >
               Subscribe
             </Link>
@@ -528,7 +529,7 @@ export function Header() {
             <div key={section.heading} className="flex flex-col">
               <p
                 className="text-[12px] font-bold tracking-[0.12em] uppercase pb-2 px-1"
-                style={{ color: "var(--warm-gray)" }}
+                style={{ color: colors.navTextMuted }}
               >
                 {section.heading}
               </p>
@@ -539,7 +540,7 @@ export function Header() {
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className="inline-block px-4 py-1.5 font-serif font-black text-[26px] leading-[1.15] rounded-full"
-                    style={{ color: "var(--ink)" }}
+                    style={{ color: colors.navText }}
                   >
                     {item.cta}
                   </Link>
@@ -552,7 +553,7 @@ export function Header() {
           <div className="flex flex-col items-start gap-1">
             <p
               className="text-[12px] font-bold tracking-[0.12em] uppercase pb-2 px-1"
-              style={{ color: "var(--warm-gray)" }}
+              style={{ color: colors.navTextMuted }}
             >
               More
             </p>
@@ -566,7 +567,7 @@ export function Header() {
                 href={l.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className="inline-block px-4 py-1.5 font-serif font-black text-[26px] leading-[1.15] rounded-full"
-                style={{ color: "var(--ink)" }}
+                style={{ color: colors.navText }}
               >
                 {l.label}
               </Link>
@@ -579,13 +580,29 @@ export function Header() {
               href="/blog"
               onClick={() => setMobileMenuOpen(false)}
               className="flex flex-col justify-between rounded-[24px] p-6 min-h-[200px]"
-              style={{ backgroundColor: "var(--charcoal)" }}
+              style={{ backgroundColor: colors.cardDarkBg }}
             >
               <div>
-                <h3 className="font-serif font-black text-[28px] leading-[1.05]" style={{ color: "var(--bone)" }}>From the Journal</h3>
-                <p className="text-[14px] leading-[1.5] mt-3" style={{ color: "var(--bone)", opacity: 0.78 }}>Field notes on calm focus, fermentation science, and the rituals behind each formula.</p>
+                <h3 className="font-serif font-black text-[24px] leading-[1.1]" style={{ color: colors.cardDarkText }}>From the Journal</h3>
+                <p className="text-[14px] leading-[1.5] mt-2" style={{ color: colors.cardDarkText, opacity: 0.78 }}>Field notes on calm focus and the rituals behind each formula.</p>
               </div>
-              <span className="hdr-card-btn hdr-card-btn-on-dark mt-5">
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  alignSelf: "flex-start",
+                  marginTop: 16,
+                  padding: "0 24px",
+                  minHeight: 40,
+                  borderRadius: 999,
+                  backgroundColor: colors.cardDarkText,
+                  color: colors.cardDarkBg,
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 700,
+                  fontSize: 14,
+                }}
+              >
                 Visit the Blog
               </span>
             </Link>
@@ -594,19 +611,36 @@ export function Header() {
               href="/newsletter"
               onClick={() => setMobileMenuOpen(false)}
               className="flex flex-col justify-between rounded-[24px] p-6 min-h-[200px]"
-              style={{ backgroundColor: "var(--avro-blue)" }}
+              style={{ backgroundColor: colors.cardLightBg }}
             >
               <div>
-                <h3 className="font-serif font-black text-[28px] leading-[1.05]" style={{ color: "var(--charcoal)" }}>Stay in the Loop</h3>
-                <p className="text-[14px] leading-[1.5] mt-3" style={{ color: "var(--charcoal)", opacity: 0.78 }}>Weekly notes on calm performance, ingredient deep dives, and first looks at new launches.</p>
+                <h3 className="font-serif font-black text-[24px] leading-[1.1]" style={{ color: colors.cardLightText }}>Stay in the Loop</h3>
+                <p className="text-[14px] leading-[1.5] mt-2" style={{ color: colors.cardLightText, opacity: 0.78 }}>Weekly notes on calm performance and first looks at new launches.</p>
               </div>
-              <span className="hdr-card-btn hdr-card-btn-on-blue mt-5">
-                Subscribe to Newsletter
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  alignSelf: "flex-start",
+                  marginTop: 16,
+                  padding: "0 24px",
+                  minHeight: 40,
+                  borderRadius: 999,
+                  backgroundColor: colors.cardLightText,
+                  color: colors.cardLightBg,
+                  fontFamily: "var(--font-sans)",
+                  fontWeight: 700,
+                  fontSize: 14,
+                }}
+              >
+                Subscribe
               </span>
             </Link>
           </div>
         </div>
       </div>
+    </header>
     </>
   )
 }

@@ -408,12 +408,13 @@ export function FinalCta({
   bg?: string
   dark?: boolean
 }) {
-  // All CTA cards use charcoal text + charcoal buttons (works on blue, gold, and green backgrounds)
-  const textColor = "var(--charcoal)"
-  const mutedColor = "rgba(21,21,21,0.7)"
+  // Dark (Zero Proof): deep-black text on gold card, deep-black buttons with gold text
+  // Light: charcoal text on blue/green card, charcoal buttons with bone text
+  const textColor = dark ? "var(--deep-black)" : "var(--charcoal)"
+  const mutedColor = dark ? "rgba(13,13,13,0.7)" : "rgba(21,21,21,0.7)"
   const sectionBg = dark ? "var(--deep-black)" : "transparent"
-  const btnBg = "var(--charcoal)"
-  const btnText = "var(--bone)"
+  const btnBg = dark ? "var(--deep-black)" : "var(--charcoal)"
+  const btnText = dark ? "var(--gold)" : "var(--bone)"
   return (
     <section
       style={{
@@ -572,11 +573,11 @@ export function FinalCta({
       <style>{`
         .final-cta-pill:hover {
           background-color: transparent !important;
-          color: var(--charcoal) !important;
+          color: var(--deep-black) !important;
         }
         .final-cta-pill-outline:hover {
           background-color: transparent !important;
-          color: var(--charcoal) !important;
+          color: var(--deep-black) !important;
         }
       `}</style>
     </section>

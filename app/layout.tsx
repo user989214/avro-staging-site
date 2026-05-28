@@ -6,6 +6,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CartProvider } from "@/lib/cart-context"
 import { CartDrawer } from "@/components/cart-drawer"
+import { ThemeProvider } from "@/lib/theme-context"
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -38,12 +39,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} bg-base`} data-scroll-behavior="smooth">
       <body className="font-sans antialiased bg-base text-ink">
-        <CartProvider>
-          <Header />
-          <main className="min-h-[60vh]">{children}</main>
-          <Footer />
-          <CartDrawer />
-        </CartProvider>
+        <ThemeProvider>
+          <CartProvider>
+            <Header />
+            <main className="min-h-[60vh]">{children}</main>
+            <Footer />
+            <CartDrawer />
+          </CartProvider>
+        </ThemeProvider>
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>
