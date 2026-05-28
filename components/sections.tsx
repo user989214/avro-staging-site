@@ -397,9 +397,12 @@ export function FaqBlock({
   centered?: boolean
   dark?: boolean
 }) {
-  const cardBg = dark ? "bg-dark-surface" : "bg-base-light"
-  const textColor = dark ? "text-gold" : ""
-  const mutedText = dark ? "text-gold/70" : "text-ink/75"
+  // Zero Proof / dark variant uses gold question cards with deep-black text,
+  // matching the rest of the page's gold-on-black system. Light cohorts keep
+  // the bone card with default ink.
+  const cardBg = dark ? "bg-gold" : "bg-base-light"
+  const textColor = dark ? "text-deep-black" : ""
+  const mutedText = dark ? "text-deep-black/75" : "text-ink/75"
   return (
     <Section className="max-w-[1080px]">
       <SectionHeading title={title} centered={centered} dark={dark} />

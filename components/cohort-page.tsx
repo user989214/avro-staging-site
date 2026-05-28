@@ -408,11 +408,13 @@ export function CohortPage({ data }: { data: CohortData }) {
 
       <ProductCards title={data.shopTitle} shopLabel="Shop" dark={isZeroProof} />
       <SocialProof mode="compact" dark={isZeroProof} />
-      {/* Tonal continuation — light cohorts deepen toward CTA; ZP keeps the dark surface */}
+      {/* Tonal continuation — light cohorts deepen toward CTA; ZP keeps a single solid
+          deep-black surface (no dark-surface tint, no gradient) so the gold FAQ cards
+          read crisply against the page. */}
       <div
         style={{
           background: isZeroProof
-            ? "var(--dark-surface)"
+            ? "var(--deep-black)"
             : "linear-gradient(to bottom, #EAE6DC 0%, #DEDAD0 100%)",
         }}
       >
