@@ -83,7 +83,7 @@ export function Footer() {
       <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 max-w-[1400px] mx-auto px-6 lg:px-14 pt-14 lg:pt-20 pb-10 lg:pb-12">
         {/* Left col: newsletter + legal */}
         <div className="flex-none lg:w-[400px] flex flex-col gap-7">
-          <div>
+          <div id="footer-newsletter">
             <span
               className="inline-block mb-3 text-[10px] font-bold uppercase tracking-[0.12em]"
               style={{ color: c.accent }}

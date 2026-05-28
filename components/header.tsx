@@ -384,7 +384,7 @@ export function Header() {
                       </Link>
 
                       <Link
-                        href="/newsletter"
+                        href="/#footer-newsletter"
                         onClick={() => setDropdownOpen(false)}
                         className="flex flex-col justify-between rounded-[24px] p-7 min-h-[230px]"
                         style={{ backgroundColor: colors.cardLightBg }}
@@ -612,7 +612,7 @@ export function Header() {
             </Link>
 
             <Link
-              href="/newsletter"
+              href="/#footer-newsletter"
               onClick={() => setMobileMenuOpen(false)}
               className="flex flex-col justify-between rounded-[24px] p-6 min-h-[200px]"
               style={{ backgroundColor: colors.cardLightBg }}
