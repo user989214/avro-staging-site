@@ -124,9 +124,10 @@ export default function ShopPage() {
             }}
           />
 
-          {/* Hero product image — full image visible, softly faded into the card on all edges */}
+          {/* Hero product image — hidden on mobile, visible on tablet+ */}
           <div
             aria-hidden="true"
+            className="shop-hero-image-wrap"
             style={{
               position: "absolute",
               inset: 0,
@@ -142,7 +143,6 @@ export default function ShopPage() {
                 className="object-contain object-right"
                 priority
                 style={{
-                  // Softer, smaller vignette — much less faded white wash
                   WebkitMaskImage:
                     "radial-gradient(ellipse 65% 75% at 78% 50%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.4) 90%, rgba(0,0,0,0) 100%)",
                   maskImage:
@@ -151,7 +151,7 @@ export default function ShopPage() {
               />
             </div>
 
-            {/* Left-side wash so the headline reads cleanly over the image — softened */}
+            {/* Left-side wash — soft */}
             <div
               style={{
                 position: "absolute",
@@ -160,7 +160,7 @@ export default function ShopPage() {
                   "linear-gradient(to right, var(--base-light) 0%, rgba(245,241,234,0.85) 22%, rgba(245,241,234,0.45) 38%, rgba(245,241,234,0.1) 55%, rgba(245,241,234,0) 70%)",
               }}
             />
-            {/* Outer edge fade — softer */}
+            {/* Outer edge fade — soft */}
             <div
               style={{
                 position: "absolute",
@@ -170,6 +170,13 @@ export default function ShopPage() {
               }}
             />
           </div>
+
+          {/* Mobile-only / narrow-viewport: hide image, show no wash so the card reads clean */}
+          <style>{`
+            @media (max-width: 767px) {
+              .shop-hero-image-wrap { display: none !important; }
+            }
+          `}</style>
 
           {/* Content */}
           <div
