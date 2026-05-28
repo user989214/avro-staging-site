@@ -591,86 +591,138 @@ export function HomeBenefitRow() {
           animation-delay: 0.18s;
         }
       `}</style>
-      <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexDirection: "column", gap: 14 }}>
-        {[
-          { items: [0], cols: "1fr" },
-          { items: [1, 2], cols: "1fr 1fr" },
-        ].map((row, rowIdx) => (
-          <div
-            key={rowIdx}
+      <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexDirection: "column", gap: 12 }}>
+        {/* First card - full width, stacks on mobile */}
+        <div
+          ref={(el) => { cardRefs.current[0] = el }}
+          className="hp-benefit-card-wide"
+          style={{
+            backgroundColor: BLUE,
+            borderRadius: 20,
+            padding: "clamp(20px,3vw,40px) clamp(20px,3.5vw,52px)",
+            minHeight: "clamp(140px,15vw,240px)",
+            display: "flex",
+            flexDirection: "column",
+            gap: 12,
+            opacity: visibleCards[0] ? 1 : 0,
+            transform: visibleCards[0] ? "translateY(0) scale(1)" : "translateY(28px) scale(0.985)",
+            transition: `opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1)`,
+          }}
+        >
+          <style>{`
+            @media (min-width: 640px) {
+              .hp-benefit-card-wide {
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+              }
+            }
+          `}</style>
+          <h3
+            className={`hp-benefit-title ${visibleCards[0] ? "is-visible" : ""}`}
             style={{
-              display: "grid",
-              gridTemplateColumns: row.cols,
-              gap: 14,
+              fontFamily: GC,
+              fontWeight: 700,
+              fontSize: "clamp(22px,3vw,46px)",
+              lineHeight: 1.08,
+              color: "var(--ink)",
+              letterSpacing: "-0.02em",
+              margin: 0,
+              textWrap: "balance",
+              flex: "1 1 auto",
             }}
           >
-            {row.items.map((i) => {
-              const b = benefits[i]
-              const isBlue = b.tone === "blue"
-              const bg = isBlue ? BLUE : "var(--base-light)"
-              const visible = visibleCards[i]
-              const isWide = row.items.length === 1
-              // Cascade order: stagger based on reveal sequence within the section
-              const order = revealOrder.indexOf(i)
-              const cardDelay = order >= 0 ? order * 0.18 : 0
+            {benefits[0].title}
+          </h3>
+          <p
+            className={`hp-benefit-copy ${visibleCards[0] ? "is-visible" : ""}`}
+            style={{
+              fontFamily: GC,
+              fontWeight: 400,
+              fontSize: "clamp(13px,1.2vw,19px)",
+              lineHeight: 1.5,
+              color: "var(--ink)",
+              margin: 0,
+              maxWidth: 380,
+              flex: "0 0 auto",
+            }}
+          >
+            {benefits[0].copy}
+          </p>
+        </div>
 
-              return (
-                <div
-                  key={b.title}
-                  ref={(el) => { cardRefs.current[i] = el }}
+        {/* Second row - stacks on mobile */}
+        <div className="hp-benefit-row-2" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <style>{`
+            @media (min-width: 640px) {
+              .hp-benefit-row-2 {
+                flex-direction: row !important;
+              }
+              .hp-benefit-row-2 > div {
+                flex: 1 1 50% !important;
+              }
+            }
+          `}</style>
+          {[1, 2].map((i) => {
+            const b = benefits[i]
+            const isBlue = b.tone === "blue"
+            const bg = isBlue ? BLUE : "var(--base-light)"
+            const visible = visibleCards[i]
+            const order = revealOrder.indexOf(i)
+            const cardDelay = order >= 0 ? order * 0.18 : 0
+
+            return (
+              <div
+                key={b.title}
+                ref={(el) => { cardRefs.current[i] = el }}
+                style={{
+                  backgroundColor: bg,
+                  borderRadius: 20,
+                  padding: "clamp(20px,3vw,40px) clamp(20px,3.5vw,52px)",
+                  minHeight: "clamp(120px,14vw,200px)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 10,
+                  justifyContent: "space-between",
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? "translateY(0) scale(1)" : "translateY(28px) scale(0.985)",
+                  transition: `opacity 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s, transform 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s`,
+                }}
+              >
+                <h3
+                  className={`hp-benefit-title ${visible ? "is-visible" : ""}`}
                   style={{
-                    backgroundColor: bg,
-                    borderRadius: 24,
-                    padding: "clamp(28px,3vw,40px) clamp(28px,3.5vw,52px)",
-                    minHeight: "clamp(180px,18vw,240px)",
-                    display: isWide ? "grid" : "flex",
-                    flexDirection: isWide ? undefined : "column",
-                    gridTemplateColumns: isWide ? "minmax(0, 1.4fr) minmax(0, 1fr)" : undefined,
-                    columnGap: isWide ? "clamp(28px,4vw,64px)" : undefined,
-                    rowGap: isWide ? undefined : 16,
-                    alignItems: isWide ? "center" : "flex-start",
-                    justifyContent: isWide ? undefined : "space-between",
-                    opacity: visible ? 1 : 0,
-                    transform: visible ? "translateY(0) scale(1)" : "translateY(28px) scale(0.985)",
-                    transition: `opacity 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s, transform 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s`,
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: "clamp(20px,2.2vw,34px)",
+                    lineHeight: 1.08,
+                    color: "var(--ink)",
+                    letterSpacing: "-0.02em",
+                    margin: 0,
+                    textWrap: "balance",
+                    animationDelay: `${(cardDelay + 0.15).toFixed(2)}s`,
                   }}
                 >
-                  <h3
-                    className={`hp-benefit-title ${visible ? "is-visible" : ""}`}
-                    style={{
-                      fontFamily: GC,
-                      fontWeight: 700,
-                      fontSize: isWide ? "clamp(28px,3.2vw,46px)" : "clamp(24px,2.4vw,34px)",
-                      lineHeight: 1.08,
-                      color: "var(--ink)",
-                      letterSpacing: "-0.02em",
-                      margin: 0,
-                      textWrap: "balance",
-                      animationDelay: `${(cardDelay + 0.15).toFixed(2)}s`,
-                    }}
-                  >
-                    {b.title}
-                  </h3>
-                  <p
-                    className={`hp-benefit-copy ${visible ? "is-visible" : ""}`}
-                    style={{
-                      fontFamily: GC,
-                      fontWeight: 400,
-                      fontSize: isWide ? "clamp(16px,1.25vw,19px)" : "clamp(15px,1.1vw,17px)",
-                      lineHeight: 1.5,
-                      color: "var(--ink)",
-                      margin: 0,
-                      maxWidth: isWide ? 460 : "100%",
-                      animationDelay: `${(cardDelay + 0.32).toFixed(2)}s`,
-                    }}
-                  >
-                    {b.copy}
-                  </p>
-                </div>
-              )
-            })}
-          </div>
-        ))}
+                  {b.title}
+                </h3>
+                <p
+                  className={`hp-benefit-copy ${visible ? "is-visible" : ""}`}
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 400,
+                    fontSize: "clamp(12px,1.1vw,17px)",
+                    lineHeight: 1.5,
+                    color: "var(--ink)",
+                    margin: 0,
+                    animationDelay: `${(cardDelay + 0.32).toFixed(2)}s`,
+                  }}
+                >
+                  {b.copy}
+                </p>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </section>
   )
