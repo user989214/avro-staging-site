@@ -203,11 +203,16 @@ export function HomeRefHero() {
           .hp-pill-primary, .hp-pill-secondary { width: 100%; flex: 0 0 auto; }
         }
         @media (max-width: 768px) {
-          .hp-hero-container { min-height: 640px !important; }
+          .hp-hero-container {
+            max-width: 100% !important;
+            width: 100% !important;
+            border-radius: 0 !important;
+            min-height: auto !important;
+          }
           .hp-hero-grid {
             grid-template-columns: 1fr !important;
             align-items: start !important;
-            padding: clamp(32px,7vw,56px) clamp(20px,5vw,28px) !important;
+            padding: clamp(48px,10vw,80px) clamp(20px,5vw,28px) !important;
           }
           .hp-hero-img { display: none !important; }
           .hp-hero-fade { display: none !important; }
