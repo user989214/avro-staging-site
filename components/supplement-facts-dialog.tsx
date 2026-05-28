@@ -56,21 +56,21 @@ export function SupplementFactsDialog({
           style={{
             fontFamily: GC,
             fontWeight: 700,
-            fontSize: 16,
-            minHeight: 48,
-            padding: "0 28px",
+            fontSize: "clamp(12px,1vw,16px)",
+            minHeight: "clamp(38px,4vw,48px)",
+            padding: "0 clamp(16px,2vw,28px)",
             borderRadius: 999,
-            backgroundColor: isPrimary ? "var(--charcoal)" : LIGHT_GRAY,
-            color: isPrimary ? "var(--bone)" : "var(--ink)",
-            border: isPrimary ? "2px solid var(--charcoal)" : "2px solid transparent",
+            backgroundColor: isPrimary ? "var(--charcoal)" : "transparent",
+            color: isPrimary ? "var(--bone)" : "var(--charcoal)",
+            border: "2px solid var(--charcoal)",
           }}
         >
-          <Icon name="card" className="w-5 h-5" />
+          <Icon name="card" className="w-4 h-4" />
           Supplement facts
         </button>
       </DialogTrigger>
       <style>{`
-        .sf-trigger:hover { background-color: ${isPrimary ? "transparent" : "#e6e6e6"}; color: var(--ink); }
+        .sf-trigger:hover { background-color: ${isPrimary ? "transparent" : "var(--charcoal)"}; color: ${isPrimary ? "var(--charcoal)" : "var(--bone)"}; }
       `}</style>
       <DialogContent className="max-w-[440px] p-0 bg-base">
         <div className="p-6 pb-2">

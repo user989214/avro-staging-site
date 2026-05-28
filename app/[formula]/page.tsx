@@ -235,6 +235,24 @@ export default async function ProductPage({
                     background-color: transparent;
                     color: var(--charcoal);
                   }
+                  @keyframes pdp-graph-draw {
+                    from { stroke-dashoffset: var(--draw-len); }
+                    to { stroke-dashoffset: 0; }
+                  }
+                  @keyframes pdp-graph-fade {
+                    0%, 100% { opacity: 0.4; }
+                    50% { opacity: 0.7; }
+                  }
+                  .pdp-graph-coffee {
+                    stroke-dasharray: 8 6;
+                    animation: pdp-graph-fade 4s ease-in-out infinite;
+                  }
+                  .pdp-graph-avro {
+                    --draw-len: 900;
+                    stroke-dasharray: var(--draw-len);
+                    stroke-dashoffset: var(--draw-len);
+                    animation: pdp-graph-draw 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+                  }
                 `}</style>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   <a
@@ -281,6 +299,7 @@ export default async function ProductPage({
                     preserveAspectRatio="none"
                   >
                     <path
+                      className="pdp-graph-coffee"
                       d={
                         key === "energy"
                           ? "M 0 180 Q 40 180 70 30 Q 90 10 110 50 Q 150 130 200 160 Q 280 180 400 185"
@@ -289,9 +308,9 @@ export default async function ProductPage({
                       fill="none"
                       stroke="rgba(245,241,234,0.4)"
                       strokeWidth="3"
-                      strokeDasharray="8 6"
                     />
                     <path
+                      className="pdp-graph-avro"
                       d={
                         key === "energy"
                           ? "M 0 180 Q 60 160 100 90 Q 140 60 200 65 Q 300 70 400 85"
