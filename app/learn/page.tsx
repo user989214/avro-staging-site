@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { CardedSection, Section, SectionHeading, SocialProof } from "@/components/sections"
+import { CardedSection, Section, SectionHeading, SocialProof, FinalCta } from "@/components/sections"
 import { PageHero } from "@/components/page-hero"
 import { Icon } from "@/components/icons"
 
@@ -218,61 +218,13 @@ export default function LearnPage() {
           social-proof system. */}
       <SocialProof mode="full" />
 
-      {/* Bottom CTA — black bar, eyebrow + headline + supporting copy on the left,
-          three formula pills on the right. Calm = Avro Blue. Focus = bone. Energy =
-          ink outline. No pink, no yellow. */}
-      <Section className="max-w-[1320px] pb-24">
-        <div
-          className="rounded-[24px]"
-          style={{
-            backgroundColor: "var(--deep-black)",
-            color: "var(--bone)",
-            padding: "clamp(28px, 4vw, 44px)",
-          }}
-        >
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-xl">
-              <p className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-bone/60 mb-3">
-                Choose the formula that fits your moment.
-              </p>
-              <h3 className="font-serif font-black text-[clamp(28px,3.4vw,40px)] leading-[1.05] tracking-[-0.02em] text-bone text-balance mb-3">
-                Ready to find your formula?
-              </h3>
-              <p className="text-[14px] md:text-[15px] leading-relaxed text-bone/75">
-                Choose Calm, Focus, or Energy based on the moment you want to support.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-3 shrink-0">
-              <Link
-                href="/calm"
-                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-[14px] font-extrabold transition-transform hover:-translate-y-0.5"
-                style={{ backgroundColor: "#94C6D4", color: "var(--deep-black)" }}
-              >
-                Shop Calm
-              </Link>
-              <Link
-                href="/focus"
-                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-[14px] font-extrabold transition-transform hover:-translate-y-0.5"
-                style={{ backgroundColor: "var(--bone)", color: "var(--deep-black)" }}
-              >
-                Shop Focus
-              </Link>
-              <Link
-                href="/energy"
-                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-[14px] font-extrabold transition-transform hover:-translate-y-0.5 border"
-                style={{
-                  backgroundColor: "transparent",
-                  color: "var(--bone)",
-                  borderColor: "rgba(245,241,234,0.4)",
-                }}
-              >
-                Shop Energy
-              </Link>
-            </div>
-          </div>
-        </div>
-      </Section>
+      {/* Bottom CTA — uses the site's standard FinalCta component with product buttons. */}
+      <FinalCta
+        eyebrow="Choose the formula that fits your moment."
+        title="Ready to find your formula?"
+        copy="Choose Calm, Focus, or Energy based on the moment you want to support."
+        productButtons
+      />
     </>
   )
 }
