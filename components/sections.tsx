@@ -307,22 +307,22 @@ export function FormulaLogic({ dark = false }: { dark?: boolean }) {
     [
       "PharmaGABA®",
       "Naturally fermented PharmaGABA® is the calm-first foundation in every AVRO formula.",
-      "calm-first-foundation",
+      "naturally-fermented-pharmagaba",
     ],
     [
       "Formula Logic",
       "Each formula builds from the same base, then adds targeted support for the moment.",
-      "clinically-tested-ingredients",
+      "mind-body-diagram",
     ],
     [
       "Quality + Transparency",
       "Clear ingredient disclosure and quality standards, with documentation where applicable.",
-      "quality-standards",
+      "transparent-standards",
     ],
     [
       "Calm First Foundation",
       "AVRO is designed to support state before stimulation.",
-      "supports-clear-thinking",
+      "calm-first-foundation",
     ],
   ]
 

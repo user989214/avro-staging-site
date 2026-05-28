@@ -30,11 +30,11 @@ export default function SciencePage() {
       >
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2 max-w-[640px]">
           <span className="flex items-center gap-3 text-olive-dark text-[12px] font-extrabold">
-            <AvroIcon name="calm-first-foundation" size={40} className="shrink-0 md:w-12 md:h-12" />
+            <AvroIcon name="naturally-fermented-pharmagaba" size={40} className="shrink-0 md:w-12 md:h-12" />
             Naturally Fermented PharmaGABA®
           </span>
           <span className="flex items-center gap-3 text-olive-dark text-[12px] font-extrabold">
-            <AvroIcon name="clinically-tested-ingredients" size={40} className="shrink-0 md:w-12 md:h-12" />
+            <AvroIcon name="science-backed" size={40} className="shrink-0 md:w-12 md:h-12" />
             Research Supported Ingredient
           </span>
           <span className="flex items-center gap-3 text-olive-dark text-[12px] font-extrabold">
@@ -82,19 +82,19 @@ export default function SciencePage() {
             </h2>
             <div className="grid gap-5">
               <p className="grid grid-cols-[48px_1fr] gap-4 items-center text-ink">
-                <AvroIcon name="calm-first-foundation" size={48} className="md:w-14 md:h-14" />
+                <AvroIcon name="naturally-fermented-pharmagaba" size={48} className="md:w-14 md:h-14" />
                 Produced through a natural fermentation process.
               </p>
               <p className="grid grid-cols-[48px_1fr] gap-4 items-center text-ink">
-                <AvroIcon name="quality-standards" size={48} className="md:w-14 md:h-14" />
+                <AvroIcon name="consistency-quality" size={48} className="md:w-14 md:h-14" />
                 Selected for reliable composition and ingredient quality.
               </p>
               <p className="grid grid-cols-[48px_1fr] gap-4 items-center text-ink">
-                <AvroIcon name="clinically-tested-ingredients" size={48} className="md:w-14 md:h-14" />
+                <AvroIcon name="science-backed" size={48} className="md:w-14 md:h-14" />
                 Supported by published studies and ingredient research.
               </p>
               <p className="grid grid-cols-[48px_1fr] gap-4 items-center text-ink">
-                <AvroIcon name="supports-clear-thinking" size={48} className="md:w-14 md:h-14" />
+                <AvroIcon name="calm-first-foundation" size={48} className="md:w-14 md:h-14" />
                 Chosen because it fits AVRO&apos;s calm-first foundation.
               </p>
             </div>

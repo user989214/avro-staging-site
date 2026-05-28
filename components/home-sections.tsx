@@ -1220,7 +1220,7 @@ export function HomeScienceGrid() {
                 GABA is a naturally occurring compound associated with relaxation and balance. AVRO uses naturally fermented PharmaGABA® as the foundation of every formula.
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap", marginBottom: 18 }}>
-                {([["Naturally Fermented", "calm-first-foundation"], ["Calm First", "supports-clear-thinking"], ["In Every Formula", "quality-standards"]] as const).map(([label, iconName], i) => (
+                {([["Naturally Fermented", "naturally-fermented-pharmagaba"], ["Calm First", "calm-first-foundation"], ["In Every Formula", "ingredient-disclosure"]] as const).map(([label, iconName], i) => (
                   <React.Fragment key={`gaba-${i}`}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, textAlign: "center", minWidth: 60 }}>
                       <AvroIcon name={iconName} size={32} className="md:w-12 md:h-12" />
@@ -1249,8 +1249,8 @@ export function HomeScienceGrid() {
 // ── QUALITY ROW ──────────────────────────────────────────────────────────────
 export function HomeQualityRow() {
   const badges: { icon: AvroIconName; label: string; sub: string }[] = [
-    { icon: "calm-first-foundation", label: "Naturally Fermented", sub: "PharmaGABA®" },
-    { icon: "quality-standards", label: "Quality Ingredients", sub: "You can trust" },
+    { icon: "naturally-fermented-pharmagaba", label: "Naturally Fermented", sub: "PharmaGABA®" },
+    { icon: "calm-first-foundation", label: "Calm First", sub: "Foundation" },
     { icon: "third-party-tested", label: "Third-Party", sub: "Tested" },
     { icon: "free-vegan", label: "Vegan", sub: "Plant-based" },
     { icon: "gluten-free", label: "Gluten Free", sub: "Always" },
