@@ -112,7 +112,7 @@ export function CohortPage({ data }: { data: CohortData }) {
     },
     work: {
       src: "/images/lifestyle/cohort-work-hero.png",
-      alt: "Professional working on tablet with stylus in office meeting",
+      alt: "Professional typing on laptop in conference room meeting",
     },
     gaming: {
       src: "/images/lifestyle/cohort-gaming-hero.png",
