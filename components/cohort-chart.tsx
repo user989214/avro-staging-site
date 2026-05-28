@@ -43,21 +43,21 @@ type CohortChartConfig = {
 const CHARTS: Record<string, CohortChartConfig> = {
   social: {
     kind: "clocks",
-    title: "The night that doesn't end at 10pm",
+    title: "Still going",
     description:
-      "Other formulas tap out as the night goes on. AVRO keeps clarity going — clean energy, no crash.",
+      "Other formulas wind down. AVRO keeps going — and going.",
     yMax: 100,
     unit: "",
-    caption: "Source: AVRO reader cohort, n=412 · self-reported clarity, 0–100",
-    // For clocks, each point.value = how many hours (out of 6) that competitor sustained
-    // before tapping out. AVRO is the only one that keeps going.
+    caption: "Illustrative — AVRO reader cohort, self-reported clarity",
+    // Three clocks total. The first two are abstract "competitor" clocks that wind down
+    // and stop at different points; the AVRO clock keeps spinning past them, glowing gold.
+    // Values are how far around (in hours / 12) each clock sweeps before halting.
     points: [
-      { label: "Energy drink", value: 1.4 },
-      { label: "Coffee", value: 2.6 },
-      { label: "Pre-workout", value: 3.2 },
-      { label: "AVRO", value: 6 },
+      { label: "Theirs", value: 2.2 },
+      { label: "Theirs", value: 3.6 },
+      { label: "AVRO", value: 12 },
     ],
-    avroIndex: 3,
+    avroIndex: 2,
   },
   work: {
     kind: "area",
@@ -796,17 +796,16 @@ function ClocksChart({
   const TICK_OUTER = FACE_R - 4
   const TICK_INNER = FACE_R - 12
 
-  // Clock body color (the rim and tick marks). On the gold card we pick a near-black
-  // so the inactive clocks read as solid graphite faces; on light we use a soft ink/charcoal.
+  // Solid clock face — no gradient or faint shading. The face is a simple ring on the
+  // card surface, so the rim + ticks read as crisp, flat-graphic clocks.
   const faceRim = baseStroke
-  const faceFill = dark ? "rgba(13,13,13,0.06)" : "rgba(21,21,21,0.04)"
-  const handColor = dark ? "rgba(13,13,13,0.85)" : "rgba(21,21,21,0.7)"
+  const handColor = dark ? "rgba(13,13,13,0.9)" : "rgba(21,21,21,0.8)"
   // The AVRO trail uses the bright cohort accent color (gold on Zero Proof, accent on others).
   const trailColor = avroStroke
 
-  // Each competitor's minute hand stops at this many "hours" out of 6.
-  // We map hours [0..6] → degrees [0..360] so a 6-hour night = full revolution.
-  const hoursToDeg = (h: number) => (h / 6) * 360
+  // Each competitor's minute hand stops at this many "hours" on a 12-hour face.
+  // Mapping hours [0..12] → degrees [0..360] so the full clock face is a single revolution.
+  const hoursToDeg = (h: number) => (h / 12) * 360
   // AVRO sweeps a longer journey — 2 full laps then settles at 12 — to clearly read
   // as "still going" past every competitor. Total sweep ≈ 720°, animated over ~2.6s.
   const AVRO_SWEEP_DEG = 720
@@ -854,9 +853,13 @@ function ClocksChart({
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: `repeat(${data.points.length}, 1fr)`,
-          gap: "clamp(12px,2vw,28px)",
+          // Three clocks side-by-side on tablet/desktop, stacked on small mobile so each
+          // clock stays a comfortable size instead of squishing.
+          gridTemplateColumns: `repeat(${data.points.length}, minmax(0, 1fr))`,
+          gap: "clamp(8px,3vw,32px)",
           padding: "8px 0 0",
+          alignItems: "start",
+          justifyItems: "center",
         }}
       >
         {data.points.map((p, i) => {
@@ -887,8 +890,8 @@ function ClocksChart({
                 role="img"
                 aria-label={`${p.label} clock — sustains ${p.value} hours`}
               >
-                {/* Face */}
-                <circle cx={80} cy={90} r={FACE_R} fill={faceFill} stroke={faceRim} strokeWidth={FACE_STROKE} />
+                {/* Face — solid ring, no fill, no shading. */}
+                <circle cx={80} cy={90} r={FACE_R} fill="none" stroke={faceRim} strokeWidth={FACE_STROKE} />
 
                 {/* Hour ticks */}
                 {Array.from({ length: 12 }).map((_, k) => {
@@ -981,7 +984,7 @@ function ClocksChart({
                   fill={isAvro ? trailColor : handColor}
                 />
 
-                {/* Status pill under each clock */}
+                {/* Status pill under each clock — abstract, no medical claims. */}
                 <text
                   x={80}
                   y={172}
@@ -991,7 +994,7 @@ function ClocksChart({
                   fontSize="13"
                   fill={isAvro ? ink : muted}
                 >
-                  {isAvro ? "Still going" : `Tapped out · ${p.value}h`}
+                  {isAvro ? "Still going" : "Stopped"}
                 </text>
               </svg>
 
