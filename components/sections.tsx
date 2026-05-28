@@ -77,9 +77,9 @@ export function SectionHeading({
   centered?: boolean
   dark?: boolean
 }) {
-  const textColor = dark ? "text-bone" : ""
-  const mutedText = dark ? "text-bone/75" : "text-ink/75"
-  const chipBg = dark ? "bg-gold text-charcoal" : "bg-charcoal text-bone"
+  const textColor = dark ? "text-gold" : ""
+  const mutedText = dark ? "text-gold/70" : "text-ink/75"
+  const chipBg = dark ? "bg-dark-surface text-gold" : "bg-charcoal text-bone"
   return (
     <div
       className={cn(
@@ -132,7 +132,7 @@ export function SocialProof({ mode = "full", dark = false }: { mode?: "full" | "
   const bg = dark
     ? "linear-gradient(to bottom, var(--deep-black) 0%, var(--dark-surface) 100%)"
     : "linear-gradient(to bottom, var(--base) 0%, #EAE6DC 100%)"
-  const ink = dark ? "var(--bone)" : "var(--ink)"
+  const ink = dark ? "var(--gold)" : "var(--ink)"
   return (
     <section
       style={{
@@ -174,9 +174,9 @@ export function ProductCards({
 }) {
   const bg = dark ? "var(--deep-black)" : "var(--base)"
   const cardBg = dark ? "var(--dark-surface)" : "var(--base-light)"
-  const ink = dark ? "var(--bone)" : "var(--ink)"
-  const muted = dark ? "rgba(245,240,232,0.6)" : "rgba(0,0,0,0.6)"
-  const border = dark ? "rgba(245,240,232,0.08)" : "rgba(0,0,0,0.08)"
+  const ink = dark ? "var(--gold)" : "var(--ink)"
+  const muted = dark ? "rgba(202,168,75,0.7)" : "rgba(0,0,0,0.6)"
+  const border = dark ? "rgba(202,168,75,0.15)" : "rgba(0,0,0,0.08)"
   return (
     <section style={{ backgroundColor: bg, width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
@@ -223,7 +223,7 @@ export function ProductCards({
                     textDecoration: "none", 
                     border: dark ? "2px solid var(--gold)" : "2px solid var(--charcoal)",
                     backgroundColor: dark ? "var(--gold)" : "var(--charcoal)", 
-                    color: dark ? "var(--charcoal)" : "var(--bone)", 
+                    color: dark ? "var(--deep-black)" : "var(--bone)", 
                     marginTop: "auto",
                     transition: "background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease",
                   }}
@@ -323,8 +323,8 @@ export function InfoCard({
 }) {
   const cardBg = dark ? "bg-dark-surface" : "bg-base-light"
   const iconColor = dark ? "text-gold" : "text-olive"
-  const titleColor = dark ? "text-bone" : ""
-  const textColor = dark ? "text-bone/75" : "text-ink/75"
+  const titleColor = dark ? "text-gold" : ""
+  const textColor = dark ? "text-gold/70" : "text-ink/75"
   const content = (
     <>
       <Icon name={icon} className={cn("w-10.5 h-10.5 mb-5", iconColor)} />
@@ -363,8 +363,8 @@ export function FaqBlock({
   dark?: boolean
 }) {
   const cardBg = dark ? "bg-dark-surface" : "bg-base-light"
-  const textColor = dark ? "text-bone" : ""
-  const mutedText = dark ? "text-bone/75" : "text-ink/75"
+  const textColor = dark ? "text-gold" : ""
+  const mutedText = dark ? "text-gold/70" : "text-ink/75"
   return (
     <Section className="max-w-[1080px]">
       <SectionHeading title={title} centered={centered} dark={dark} />

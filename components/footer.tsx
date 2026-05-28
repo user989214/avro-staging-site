@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { useState } from "react"
+import { useThemeMode } from "@/lib/theme-context"
 
 const footerLinks = {
   avro: [
@@ -39,6 +40,35 @@ const footerLinks = {
 export function Footer() {
   const [email, setEmail] = useState("")
   const [submitted, setSubmitted] = useState(false)
+  const themeMode = useThemeMode()
+  const isZeroProof = themeMode === "zero-proof"
+
+  // Theme colors — Zero Proof uses deep-black + gold only (no bone)
+  const c = isZeroProof
+    ? {
+        bg: "var(--deep-black)",
+        text: "var(--gold)",
+        textMuted: "rgba(202,168,75,0.55)",
+        textFaint: "rgba(202,168,75,0.35)",
+        accent: "var(--gold)",
+        border: "rgba(202,168,75,0.12)",
+        inputBorder: "rgba(202,168,75,0.25)",
+        inputBg: "rgba(202,168,75,0.04)",
+        btnBg: "var(--gold)",
+        btnText: "var(--deep-black)",
+      }
+    : {
+        bg: "var(--charcoal)",
+        text: "var(--bone)",
+        textMuted: "rgba(245,240,232,0.55)",
+        textFaint: "rgba(245,240,232,0.35)",
+        accent: "var(--avro-blue)",
+        border: "rgba(245,240,232,0.12)",
+        inputBorder: "rgba(245,240,232,0.25)",
+        inputBg: "rgba(245,240,232,0.04)",
+        btnBg: "var(--avro-blue)",
+        btnText: "var(--charcoal)",
+      }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -48,7 +78,7 @@ export function Footer() {
   return (
     <footer
       className="relative overflow-hidden font-sans"
-      style={{ backgroundColor: "var(--charcoal)", color: "var(--bone)" }}
+      style={{ backgroundColor: c.bg, color: c.text }}
     >
       <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 max-w-[1400px] mx-auto px-6 lg:px-14 pt-14 lg:pt-20 pb-10 lg:pb-12">
         {/* Left col: newsletter + legal */}
@@ -56,7 +86,7 @@ export function Footer() {
           <div>
             <span
               className="inline-block mb-3 text-[10px] font-bold uppercase tracking-[0.12em]"
-              style={{ color: "var(--avro-blue)" }}
+              style={{ color: c.accent }}
             >
               Newsletter
             </span>
@@ -67,7 +97,7 @@ export function Footer() {
                 fontSize: "32px",
                 lineHeight: 1.05,
                 letterSpacing: "-0.02em",
-                color: "var(--bone)",
+                color: c.text,
               }}
             >
               Stay in the loop.
@@ -78,7 +108,7 @@ export function Footer() {
                 fontWeight: 400,
                 fontSize: "15px",
                 lineHeight: 1.5,
-                color: "rgba(245,240,232,0.55)",
+                color: c.textMuted,
               }}
             >
               Updates, drops, and calm-first insights — straight to your inbox.
@@ -86,7 +116,7 @@ export function Footer() {
             {submitted ? (
               <p
                 className="font-medium"
-                style={{ fontSize: "14px", color: "var(--avro-blue)" }}
+                style={{ fontSize: "14px", color: c.accent }}
               >
                 Thanks for subscribing.
               </p>
@@ -96,8 +126,8 @@ export function Footer() {
                 onSubmit={handleSubmit}
                 style={{
                   borderRadius: 999,
-                  border: "1.5px solid rgba(245,240,232,0.25)",
-                  backgroundColor: "rgba(245,240,232,0.04)",
+                  border: `1.5px solid ${c.inputBorder}`,
+                  backgroundColor: c.inputBg,
                 }}
               >
                 <label className="sr-only" htmlFor="footer-email">Email address</label>
@@ -111,7 +141,7 @@ export function Footer() {
                   style={{
                     fontWeight: 400,
                     fontSize: "14px",
-                    color: "var(--bone)",
+                    color: c.text,
                   }}
                 />
                 <button
@@ -120,8 +150,8 @@ export function Footer() {
                   style={{
                     fontWeight: 700,
                     fontSize: "13px",
-                    backgroundColor: "var(--avro-blue)",
-                    color: "var(--charcoal)",
+                    backgroundColor: c.btnBg,
+                    color: c.btnText,
                     border: "none",
                     margin: 4,
                     borderRadius: 999,
@@ -141,7 +171,7 @@ export function Footer() {
                 fontWeight: 400,
                 fontSize: "12px",
                 lineHeight: 1.5,
-                color: "rgba(245,240,232,0.35)",
+                color: c.textFaint,
               }}
             >
               * These statements have not been evaluated by the Food and Drug
@@ -149,7 +179,7 @@ export function Footer() {
               cure, or prevent any disease.
             </small>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 pt-6">
-              <span style={{ fontWeight: 400, fontSize: "12px", color: "rgba(245,240,232,0.4)" }}>
+              <span style={{ fontWeight: 400, fontSize: "12px", color: c.textFaint }}>
                 © 2026 AVRO Life
               </span>
               {["Privacy", "Terms", "Accessibility", "Returns"].map((label) => (
@@ -160,7 +190,7 @@ export function Footer() {
                   style={{
                     fontWeight: 500,
                     fontSize: "12px",
-                    color: "rgba(245,240,232,0.5)",
+                    color: c.textMuted,
                   }}
                 >
                   {label}
@@ -173,17 +203,17 @@ export function Footer() {
         {/* Divider */}
         <div
           className="hidden lg:block w-px self-stretch"
-          style={{ backgroundColor: "rgba(245,240,232,0.12)" }}
+          style={{ backgroundColor: c.border }}
           aria-hidden="true"
         />
 
         {/* Right: nav columns */}
         <div className="flex-1 lg:pl-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <FooterColumn title="Company" links={footerLinks.avro} />
-            <FooterColumn title="Shop" links={footerLinks.shop} />
-            <FooterColumn title="Learn" links={footerLinks.learn} />
-            <FooterColumn title="Follow" links={footerLinks.follow} />
+            <FooterColumn title="Company" links={footerLinks.avro} accent={c.accent} textMuted={c.textMuted} />
+            <FooterColumn title="Shop" links={footerLinks.shop} accent={c.accent} textMuted={c.textMuted} />
+            <FooterColumn title="Learn" links={footerLinks.learn} accent={c.accent} textMuted={c.textMuted} />
+            <FooterColumn title="Follow" links={footerLinks.follow} accent={c.accent} textMuted={c.textMuted} />
           </div>
         </div>
       </div>
@@ -195,7 +225,13 @@ export function Footer() {
           alt=""
           width={1200}
           height={390}
-          className="w-[min(90vw,900px)] h-auto invert opacity-[0.08] pointer-events-none select-none"
+          className="w-[min(90vw,900px)] h-auto pointer-events-none select-none"
+          style={{
+            filter: isZeroProof
+              ? "brightness(0) saturate(100%) invert(75%) sepia(50%) saturate(400%) hue-rotate(10deg) brightness(95%)"
+              : "invert(1)",
+            opacity: 0.08,
+          }}
         />
       </div>
     </footer>
@@ -205,9 +241,13 @@ export function Footer() {
 function FooterColumn({
   title,
   links,
+  accent,
+  textMuted,
 }: {
   title: string
   links: { href: string; label: string }[]
+  accent: string
+  textMuted: string
 }) {
   return (
     <div>
@@ -218,7 +258,7 @@ function FooterColumn({
           fontSize: "11px",
           letterSpacing: "0.12em",
           textTransform: "uppercase",
-          color: "var(--avro-blue)",
+          color: accent,
         }}
       >
         {title}
@@ -233,7 +273,7 @@ function FooterColumn({
                 fontWeight: 400,
                 fontSize: "14px",
                 lineHeight: 1.4,
-                color: "rgba(245,240,232,0.65)",
+                color: textMuted,
               }}
             >
               {link.label}

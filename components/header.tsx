@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { useCart } from "@/lib/cart-context"
+import { useThemeMode } from "@/lib/theme-context"
 import { Plus, X } from "lucide-react"
 
 function CartIcon({ className }: { className?: string }) {
@@ -50,6 +51,47 @@ export function Header() {
   const [navBottom, setNavBottom] = useState(0)
   const navRef = useRef<HTMLElement | null>(null)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const themeMode = useThemeMode()
+  const isZeroProof = themeMode === "zero-proof"
+
+  // Theme colors — Zero Proof uses deep-black + gold only
+  const colors = isZeroProof
+    ? {
+        annBg: "var(--gold)",
+        annText: "var(--deep-black)",
+        annBtnBg: "var(--deep-black)",
+        annBtnText: "var(--gold)",
+        navBg: "var(--deep-black)",
+        navText: "var(--gold)",
+        navTextMuted: "rgba(202,168,75,0.7)",
+        cardDarkBg: "var(--dark-surface)",
+        cardDarkText: "var(--gold)",
+        cardLightBg: "var(--gold)",
+        cardLightText: "var(--deep-black)",
+        cartBtnBorder: "var(--gold)",
+        cartBtnBg: "transparent",
+        cartBtnText: "var(--gold)",
+        cartCountBg: "var(--gold)",
+        cartCountText: "var(--deep-black)",
+      }
+    : {
+        annBg: "var(--avro-blue)",
+        annText: "var(--charcoal)",
+        annBtnBg: "var(--charcoal)",
+        annBtnText: "var(--bone)",
+        navBg: "var(--base)",
+        navText: "var(--ink)",
+        navTextMuted: "var(--warm-gray)",
+        cardDarkBg: "var(--charcoal)",
+        cardDarkText: "var(--bone)",
+        cardLightBg: "var(--avro-blue)",
+        cardLightText: "var(--charcoal)",
+        cartBtnBorder: "var(--ink)",
+        cartBtnBg: "transparent",
+        cartBtnText: "var(--ink)",
+        cartCountBg: "var(--ink)",
+        cartCountText: "var(--bone)",
+      }
 
   const measureNav = () => {
     if (!navRef.current) return
@@ -133,16 +175,16 @@ export function Header() {
           color: var(--charcoal);
         }
       `}</style>
-      {/* Announcement ticker — continuous marquee on Avro Blue */}
+      {/* Announcement ticker — continuous marquee */}
       <div
         className="ann-bar"
         style={{
-          backgroundColor: "var(--avro-blue)",
-          color: "var(--charcoal)",
+          backgroundColor: colors.annBg,
+          color: colors.annText,
           overflow: "hidden",
           position: "relative",
           padding: "11px 0",
-          borderBottom: "1px solid rgba(21,21,21,0.08)",
+          borderBottom: isZeroProof ? "1px solid rgba(202,168,75,0.15)" : "1px solid rgba(21,21,21,0.08)",
         }}
         aria-label="Site announcements"
       >
@@ -172,7 +214,7 @@ export function Header() {
                   <span aria-hidden="true" className="ann-plus" style={{ fontSize: 14, lineHeight: 1, opacity: 0.55, fontWeight: 700, display: "inline-block" }}>+</span>
                 </span>
               ))}
-              {/* Shop AVRO pill — matches site button styling (charcoal fill, outline-on-hover, no icon) */}
+              {/* Shop AVRO pill — matches site button styling */}
               <Link
                 href="/shop"
                 className="ann-shop-btn"
@@ -184,9 +226,9 @@ export function Header() {
                   padding: "0 28px",
                   minHeight: 40,
                   borderRadius: 999,
-                  border: "2px solid var(--charcoal)",
-                  backgroundColor: "var(--charcoal)",
-                  color: "var(--bone)",
+                  border: `2px solid ${colors.annBtnBg}`,
+                  backgroundColor: colors.annBtnBg,
+                  color: colors.annBtnText,
                   fontFamily: "var(--font-sans)",
                   fontWeight: 800,
                   fontSize: 14,
@@ -216,7 +258,7 @@ export function Header() {
           }
           .ann-shop-btn:hover {
             background-color: transparent !important;
-            color: var(--charcoal) !important;
+            color: ${colors.annBtnBg} !important;
           }
           @media (prefers-reduced-motion: reduce) {
             .ann-track { animation: none; }
@@ -224,20 +266,20 @@ export function Header() {
         `}</style>
       </div>
 
-      {/* Main nav — cream/base background, charcoal text, DM Sans */}
+      {/* Main nav */}
       <nav
         ref={navRef}
         className={`sticky top-0 z-50 grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-0 px-4 md:px-14 py-4 md:py-5 transition-shadow ${
           scrolled ? "shadow-[0_1px_16px_rgba(21,21,21,0.06)]" : ""
         }`}
-        style={{ backgroundColor: "var(--base)" }}
+        style={{ backgroundColor: colors.navBg }}
         aria-label="Primary navigation"
       >
         {/* Mobile menu button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="md:hidden w-10 h-10 flex items-center justify-center rounded-full transition-colors"
-          style={{ color: "var(--charcoal)" }}
+          style={{ color: colors.navText }}
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileMenuOpen}
         >
@@ -246,19 +288,19 @@ export function Header() {
 
         {/* Desktop nav - left */}
         <div className="hidden md:flex items-center gap-8">
-          <NavLink href="/shop">Shop</NavLink>
-          <NavLink href="/shop">Subscribe</NavLink>
+          <NavLink href="/shop" dark={isZeroProof}>Shop</NavLink>
+          <NavLink href="/shop" dark={isZeroProof}>Subscribe</NavLink>
           <div
             className="relative"
             onMouseEnter={openDropdown}
             onMouseLeave={scheduleClose}
           >
-            <button className="relative font-serif font-black text-[20px] leading-[1.1] tracking-[-0.005em] transition-colors hover:opacity-70 flex items-center gap-1.5" style={{ color: "var(--ink)" }}>
+            <button className="relative font-serif font-black text-[20px] leading-[1.1] tracking-[-0.005em] transition-colors hover:opacity-70 flex items-center gap-1.5" style={{ color: colors.navText }}>
               Why AVRO
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"/></svg>
             </button>
 
-            {/* Full-width dropdown panel — left half: feature cards, right half: section nav */}
+            {/* Full-width dropdown panel */}
             <div
               className="fixed left-0 right-0 z-50"
               style={{
@@ -270,7 +312,7 @@ export function Header() {
               <div
                 className="w-full"
                 style={{
-                  backgroundColor: "var(--base)",
+                  backgroundColor: colors.navBg,
                   opacity: dropdownOpen ? 1 : 0,
                   transform: dropdownOpen ? "translateY(0)" : "translateY(-8px)",
                   transition: "opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
@@ -284,11 +326,11 @@ export function Header() {
                         <div
                           key={section.heading}
                           className={sIdx === 0 ? "pr-6" : "pl-6"}
-                          style={sIdx > 0 ? { borderLeft: "1px solid var(--ink)" } : undefined}
+                          style={sIdx > 0 ? { borderLeft: `1px solid ${colors.navText}` } : undefined}
                         >
                           <p
                             className="text-[12px] font-bold pb-3"
-                            style={{ color: "var(--warm-gray)" }}
+                            style={{ color: colors.navTextMuted }}
                           >
                             {section.heading}
                           </p>
@@ -299,8 +341,8 @@ export function Header() {
                                 href={item.href}
                                 onClick={() => setDropdownOpen(false)}
                                 className="inline-block px-4 py-1.5 font-serif font-black text-[26px] leading-[1.15] rounded-full transition-colors"
-                                style={{ color: "var(--ink)" }}
-                                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "var(--avro-blue)" }}
+                                style={{ color: colors.navText }}
+                                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = isZeroProof ? "var(--dark-surface)" : "var(--avro-blue)" }}
                                 onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent" }}
                               >
                                 {item.cta}
@@ -311,20 +353,25 @@ export function Header() {
                       ))}
                     </div>
 
-                    {/* Right half — two feature cards (Science / FAQ / Cart side) */}
+                    {/* Right half — two feature cards */}
                     <div className="grid grid-cols-2 gap-5">
                       <Link
                         href="/blog"
                         onClick={() => setDropdownOpen(false)}
                         className="flex flex-col justify-between rounded-[24px] p-7 min-h-[230px]"
-                        style={{ backgroundColor: "var(--charcoal)" }}
+                        style={{ backgroundColor: colors.cardDarkBg }}
                       >
                         <div>
-                          <h3 className="font-serif font-black text-[30px] leading-[1.05]" style={{ color: "var(--bone)" }}>From the Journal</h3>
-                          <p className="text-[14px] leading-[1.5] mt-3" style={{ color: "var(--bone)", opacity: 0.78 }}>Field notes on calm focus, fermentation science, and the rituals behind each formula.</p>
+                          <h3 className="font-serif font-black text-[30px] leading-[1.05]" style={{ color: colors.cardDarkText }}>From the Journal</h3>
+                          <p className="text-[14px] leading-[1.5] mt-3" style={{ color: colors.cardDarkText, opacity: 0.78 }}>Field notes on calm focus, fermentation science, and the rituals behind each formula.</p>
                         </div>
                         <span
-                          className="hdr-card-btn hdr-card-btn-on-dark"
+                          className="hdr-card-btn"
+                          style={{
+                            backgroundColor: colors.cardDarkText,
+                            color: colors.cardDarkBg,
+                            border: `2px solid ${colors.cardDarkText}`,
+                          }}
                         >
                           Visit the Blog
                         </span>
@@ -334,14 +381,19 @@ export function Header() {
                         href="/newsletter"
                         onClick={() => setDropdownOpen(false)}
                         className="flex flex-col justify-between rounded-[24px] p-7 min-h-[230px]"
-                        style={{ backgroundColor: "var(--avro-blue)" }}
+                        style={{ backgroundColor: colors.cardLightBg }}
                       >
                         <div>
-                          <h3 className="font-serif font-black text-[30px] leading-[1.05]" style={{ color: "var(--charcoal)" }}>Stay in the Loop</h3>
-                          <p className="text-[14px] leading-[1.5] mt-3" style={{ color: "var(--charcoal)", opacity: 0.78 }}>Weekly notes on calm performance, ingredient deep dives, and first looks at new launches.</p>
+                          <h3 className="font-serif font-black text-[30px] leading-[1.05]" style={{ color: colors.cardLightText }}>Stay in the Loop</h3>
+                          <p className="text-[14px] leading-[1.5] mt-3" style={{ color: colors.cardLightText, opacity: 0.78 }}>Weekly notes on calm performance, ingredient deep dives, and first looks at new launches.</p>
                         </div>
                         <span
-                          className="hdr-card-btn hdr-card-btn-on-blue"
+                          className="hdr-card-btn"
+                          style={{
+                            backgroundColor: colors.cardLightText,
+                            color: colors.cardLightBg,
+                            border: `2px solid ${colors.cardLightText}`,
+                          }}
                         >
                           Subscribe to Newsletter
                         </span>
@@ -366,23 +418,24 @@ export function Header() {
             width={178}
             height={58}
             className="w-full h-auto"
+            style={isZeroProof ? { filter: "brightness(0) saturate(100%) invert(75%) sepia(50%) saturate(400%) hue-rotate(10deg) brightness(95%)" } : undefined}
             priority
           />
         </Link>
 
         {/* Desktop nav - right */}
         <div className="hidden md:flex items-center justify-end gap-8">
-          <NavLink href="/science">Science</NavLink>
-          <NavLink href="/faq">FAQ</NavLink>
+          <NavLink href="/science" dark={isZeroProof}>Science</NavLink>
+          <NavLink href="/faq" dark={isZeroProof}>FAQ</NavLink>
           <button
             onClick={openCart}
             className="hdr-cart-btn relative inline-flex items-center gap-2 transition-colors"
             style={{
-              color: "var(--ink)",
+              color: colors.cartBtnText,
               padding: "8px 16px 8px 14px",
               borderRadius: 999,
-              border: "2px solid var(--ink)",
-              backgroundColor: "transparent",
+              border: `2px solid ${colors.cartBtnBorder}`,
+              backgroundColor: colors.cartBtnBg,
             }}
             aria-label={`Cart with ${itemCount} items`}
           >
@@ -397,8 +450,8 @@ export function Header() {
             <span
               className="hdr-cart-count inline-flex items-center justify-center min-w-[24px] h-[24px] px-1.5 rounded-full font-serif font-black text-[12px] leading-none"
               style={{
-                backgroundColor: "var(--ink)",
-                color: "var(--bone)",
+                backgroundColor: colors.cartCountBg,
+                color: colors.cartCountText,
               }}
               aria-hidden="true"
             >
@@ -407,8 +460,8 @@ export function Header() {
           </button>
           <style>{`
             .hdr-cart-btn { transition: background-color 0.2s ease, color 0.2s ease; }
-            .hdr-cart-btn:hover { background-color: var(--ink); color: var(--bone); }
-            .hdr-cart-btn:hover .hdr-cart-count { background-color: var(--bone); color: var(--ink); }
+            .hdr-cart-btn:hover { background-color: ${colors.cartBtnBorder}; color: ${colors.navBg}; }
+            .hdr-cart-btn:hover .hdr-cart-count { background-color: ${colors.navBg}; color: ${colors.cartBtnBorder}; }
           `}</style>
         </div>
 
@@ -416,7 +469,7 @@ export function Header() {
         <button
           onClick={openCart}
           className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-full transition-colors"
-          style={{ color: "var(--charcoal)" }}
+          style={{ color: colors.navText }}
           aria-label={`Cart with ${itemCount} items`}
         >
           {itemCount > 0 ? (
@@ -427,7 +480,7 @@ export function Header() {
           {itemCount > 0 && (
             <span
               className="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold"
-              style={{ backgroundColor: "var(--avro-blue)", color: "var(--charcoal)" }}
+              style={{ backgroundColor: colors.cartCountBg, color: colors.cartCountText }}
             >
               {itemCount}
             </span>
@@ -435,13 +488,13 @@ export function Header() {
         </button>
       </nav>
 
-      {/* Mobile menu overlay — mirrors the desktop dropdown vibe */}
+      {/* Mobile menu overlay */}
       <div
         className={`fixed left-0 right-0 z-40 md:hidden ${mobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
         style={{
           top: navBottom,
           bottom: 0,
-          backgroundColor: "var(--base)",
+          backgroundColor: colors.navBg,
           opacity: mobileMenuOpen ? 1 : 0,
           transform: mobileMenuOpen ? "translateY(0)" : "translateY(-8px)",
           transition: "opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
@@ -558,17 +611,17 @@ export function Header() {
   )
 }
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+function NavLink({ href, children, dark = false }: { href: string; children: React.ReactNode; dark?: boolean }) {
   return (
-  <Link
-  href={href}
-  className="relative font-serif font-black text-[20px] leading-[1.1] tracking-[-0.005em] transition-colors hover:opacity-70"
-  style={{ color: "var(--ink)" }}
-  >
-  {children}
-  </Link>
+    <Link
+      href={href}
+      className="relative font-serif font-black text-[20px] leading-[1.1] tracking-[-0.005em] transition-colors hover:opacity-70"
+      style={{ color: dark ? "var(--gold)" : "var(--ink)" }}
+    >
+      {children}
+    </Link>
   )
-  }
+}
 
 function MobileNavLink({
   href,

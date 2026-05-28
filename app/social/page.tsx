@@ -1,5 +1,6 @@
 import { cohortData } from "@/lib/data"
 import { CohortPage } from "@/components/cohort-page"
+import { ThemeProvider } from "@/lib/theme-context"
 
 export const metadata = {
   title: "Social / Non Alcohol | AVRO",
@@ -7,5 +8,9 @@ export const metadata = {
 }
 
 export default function SocialPage() {
-  return <CohortPage data={cohortData.social} />
+  return (
+    <ThemeProvider mode="zero-proof">
+      <CohortPage data={cohortData.social} />
+    </ThemeProvider>
+  )
 }

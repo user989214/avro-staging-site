@@ -52,19 +52,19 @@ export function CohortPage({ data }: { data: CohortData }) {
         ? "var(--gold)"
         : "var(--avro-blue)"
 
-  // Theme surfaces — light cohorts use the bone/cream system; Zero Proof flips to deep-black + bone.
+  // Theme surfaces — light cohorts use the bone/cream system; Zero Proof uses deep-black + gold only (no bone).
   const t = isZeroProof
     ? {
         pageBg: "var(--deep-black)",
-        surface: "var(--dark-surface)",
+        surface: "var(--deep-black)",
         cardBg: "var(--dark-surface)",
-        ink: "var(--bone)",
-        muted: "rgba(245,240,232,0.7)",
+        ink: "var(--gold)",
+        muted: "rgba(202,168,75,0.7)",
         heroBg: "var(--deep-black)",
         heroFade:
           "linear-gradient(to right, var(--deep-black) 0%, var(--deep-black) 38%, rgba(13,13,13,0.95) 48%, rgba(13,13,13,0.7) 58%, rgba(13,13,13,0.3) 70%, rgba(13,13,13,0.1) 82%, rgba(13,13,13,0.15) 94%, var(--deep-black) 100%), linear-gradient(to bottom, var(--deep-black) 0%, rgba(13,13,13,0.2) 10%, rgba(13,13,13,0) 20%, rgba(13,13,13,0) 80%, rgba(13,13,13,0.2) 90%, var(--deep-black) 100%)",
         stepNumBg: "var(--gold)",
-        stepNumFg: "var(--charcoal)",
+        stepNumFg: "var(--deep-black)",
         stepIconColor: "var(--gold)",
       }
     : {
@@ -187,8 +187,8 @@ export function CohortPage({ data }: { data: CohortData }) {
                 fontSize: 11,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                backgroundColor: isZeroProof ? "var(--gold)" : "var(--charcoal)",
-                color: isZeroProof ? "var(--charcoal)" : "var(--bone)",
+                backgroundColor: isZeroProof ? "var(--dark-surface)" : "var(--charcoal)",
+                color: isZeroProof ? "var(--gold)" : "var(--bone)",
               }}
             >
               {data.eyebrow}
