@@ -3,43 +3,66 @@
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
-const GC = "var(--font-good-centra)"
+const GC = "var(--font-grotesk)"
 
-type Row = { label: string; calm: string; focus: string; energy: string }
-
-const ROWS: Row[] = [
-  { label: "Primary state", calm: "Composure", focus: "Clear focus", energy: "Steady energy" },
-  { label: "Best for", calm: "Travel, social calm, daily reset", focus: "Deep work, meetings, study", energy: "Mornings, long days, travel" },
-  { label: "Caffeine", calm: "No", focus: "No", energy: "Yes, 120 mg natural" },
-  { label: "Key addition", calm: "Magnesium Bisglycinate", focus: "Cognigrape", energy: "Natural caffeine" },
-]
+const CALM_COLOR = "#7B5FB0"
+const FOCUS_COLOR = "#C44A8A"
+const ENERGY_COLOR = "#E8C547"
 
 const COLS = [
-  { key: "calm" as const, name: "Calm", color: "var(--calm)", href: "/calm" },
-  { key: "focus" as const, name: "Focus", color: "var(--focus)", href: "/focus" },
-  { key: "energy" as const, name: "Energy", color: "var(--energy)", href: "/energy" },
-]
+  { key: "calm", label: "Calm", color: CALM_COLOR, href: "/calm" },
+  { key: "focus", label: "Focus", color: FOCUS_COLOR, href: "/focus" },
+  { key: "energy", label: "Energy", color: ENERGY_COLOR, href: "/energy" },
+] as const
 
-const GRID = "minmax(140px, 1.1fr) repeat(3, 1fr)"
+type ColKey = (typeof COLS)[number]["key"]
+
+const ROWS: { label: string; values: Record<ColKey, string> }[] = [
+  {
+    label: "Primary state",
+    values: { calm: "Composure", focus: "Clear focus", energy: "Steady energy" },
+  },
+  {
+    label: "Best for",
+    values: {
+      calm: "Travel, social calm, daily reset",
+      focus: "Deep work, meetings, study",
+      energy: "Mornings, long days, travel",
+    },
+  },
+  {
+    label: "Caffeine",
+    values: { calm: "No", focus: "No", energy: "Yes, 120 mg natural" },
+  },
+  {
+    label: "Key addition",
+    values: {
+      calm: "Magnesium Bisglycinate",
+      focus: "Cognigrape",
+      energy: "Natural caffeine",
+    },
+  },
+]
 
 export function CompareAtAGlance() {
   const ref = useRef<HTMLDivElement>(null)
-  const [shown, setShown] = useState(false)
+  const [inView, setInView] = useState(false)
 
   useEffect(() => {
-    if (!ref.current) return
+    const el = ref.current
+    if (!el) return
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            setShown(true)
+            setInView(true)
             obs.disconnect()
           }
         })
       },
       { threshold: 0.2 },
     )
-    obs.observe(ref.current)
+    obs.observe(el)
     return () => obs.disconnect()
   }, [])
 
@@ -53,6 +76,7 @@ export function CompareAtAGlance() {
           lineHeight: 1.02,
           letterSpacing: "-0.02em",
           color: "var(--ink)",
+          textAlign: "left",
           marginBottom: 36,
           maxWidth: 720,
         }}
@@ -60,124 +84,72 @@ export function CompareAtAGlance() {
         Compare at a glance
       </h2>
 
-      {/* ---------- HEADER ROW (colored pills) ---------- */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: GRID,
-          columnGap: 12,
+          gridTemplateColumns: "minmax(140px, 1.1fr) repeat(3, 1fr)",
+          columnGap: 24,
+          rowGap: 0,
           alignItems: "stretch",
-          marginBottom: 8,
         }}
       >
+        {/* Row 1 — header: empty cell + animated colored bar + formula name */}
         <div />
         {COLS.map((col, i) => (
-          <div
-            key={col.key}
-            style={{
-              backgroundColor: col.color,
-              borderRadius: 14,
-              minHeight: 64,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              opacity: shown ? 1 : 0,
-              transform: shown ? "translateY(0)" : "translateY(12px)",
-              transition: `opacity 600ms cubic-bezier(0.22,1,0.36,1) ${i * 120}ms, transform 600ms cubic-bezier(0.22,1,0.36,1) ${i * 120}ms`,
-            }}
-          >
-            <span
+          <div key={col.key} style={{ paddingBottom: 20 }}>
+            {/* animated colored bar */}
+            <div
+              style={{
+                height: 6,
+                borderRadius: 999,
+                backgroundColor: col.color,
+                transformOrigin: "left center",
+                transform: inView ? "scaleX(1)" : "scaleX(0)",
+                transition: `transform 700ms cubic-bezier(0.22,1,0.36,1) ${120 * i}ms`,
+                marginBottom: 16,
+              }}
+            />
+            {/* formula name */}
+            <div
               style={{
                 fontFamily: GC,
                 fontWeight: 800,
                 fontSize: 18,
                 letterSpacing: "-0.01em",
                 color: "var(--ink)",
+                opacity: inView ? 1 : 0,
+                transform: inView ? "translateY(0)" : "translateY(8px)",
+                transition: `opacity 500ms ease ${300 + 120 * i}ms, transform 500ms ease ${300 + 120 * i}ms`,
               }}
             >
-              {col.name}
-            </span>
+              {col.label}
+            </div>
           </div>
         ))}
-      </div>
 
-      {/* ---------- DATA ROWS ---------- */}
-      {ROWS.map((row, rIdx) => (
-        <div
-          key={row.label}
-          style={{
-            display: "grid",
-            gridTemplateColumns: GRID,
-            columnGap: 12,
-            alignItems: "center",
-            minHeight: 68,
-            paddingTop: 14,
-            paddingBottom: 14,
-            opacity: shown ? 1 : 0,
-            transform: shown ? "translateY(0)" : "translateY(8px)",
-            transition: `opacity 500ms ease ${380 + rIdx * 80}ms, transform 500ms ease ${380 + rIdx * 80}ms`,
-          }}
-        >
-          <div style={{ paddingLeft: 4 }}>
-            <span
-              style={{
-                fontFamily: GC,
-                fontWeight: 700,
-                fontSize: 11,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "var(--warm-gray)",
-              }}
-            >
-              {row.label}
-            </span>
-          </div>
+        {/* Data rows */}
+        {ROWS.map((row, rIdx) => (
+          <RowFragment
+            key={row.label}
+            row={row}
+            inView={inView}
+            rIdx={rIdx}
+          />
+        ))}
 
-          {COLS.map((col) => (
-            <div
-              key={col.key}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-                padding: "0 12px",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 600,
-                  fontSize: 15,
-                  color: "var(--ink)",
-                  lineHeight: 1.4,
-                }}
-              >
-                {row[col.key]}
-              </span>
-            </div>
-          ))}
-        </div>
-      ))}
-
-      {/* ---------- CTA ROW ---------- */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: GRID,
-          columnGap: 12,
-          alignItems: "center",
-          marginTop: 20,
-          opacity: shown ? 1 : 0,
-          transform: shown ? "translateY(0)" : "translateY(8px)",
-          transition: "opacity 600ms ease 720ms, transform 600ms ease 720ms",
-        }}
-      >
+        {/* CTA row */}
         <div />
-        {COLS.map((col) => (
+        {COLS.map((col, i) => (
           <div
             key={col.key}
-            style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+            style={{
+              paddingTop: 28,
+              display: "flex",
+              justifyContent: "center",
+              opacity: inView ? 1 : 0,
+              transform: inView ? "translateY(0)" : "translateY(8px)",
+              transition: `opacity 500ms ease ${800 + 120 * i}ms, transform 500ms ease ${800 + 120 * i}ms`,
+            }}
           >
             <Link
               href={col.href}
@@ -190,14 +162,86 @@ export function CompareAtAGlance() {
                 backgroundColor: "var(--charcoal)",
                 color: "var(--bone)",
                 textDecoration: "none",
-                whiteSpace: "nowrap",
+                transition: "opacity 0.2s",
               }}
             >
-              Shop {col.name}
+              Shop {col.label}
             </Link>
           </div>
         ))}
       </div>
     </div>
+  )
+}
+
+function RowFragment({
+  row,
+  inView,
+  rIdx,
+}: {
+  row: { label: string; values: Record<ColKey, string> }
+  inView: boolean
+  rIdx: number
+}) {
+  const baseDelay = 500 + rIdx * 90
+
+  return (
+    <>
+      {/* row label */}
+      <div
+        style={{
+          padding: "18px 0",
+          borderTop: "1px solid var(--divider)",
+          display: "flex",
+          alignItems: "center",
+          opacity: inView ? 1 : 0,
+          transform: inView ? "translateY(0)" : "translateY(8px)",
+          transition: `opacity 500ms ease ${baseDelay}ms, transform 500ms ease ${baseDelay}ms`,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: GC,
+            fontWeight: 700,
+            fontSize: 11,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            color: "var(--warm-gray)",
+          }}
+        >
+          {row.label}
+        </span>
+      </div>
+
+      {/* values */}
+      {COLS.map((col, i) => (
+        <div
+          key={col.key}
+          style={{
+            padding: "18px 12px",
+            borderTop: "1px solid var(--divider)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateY(0)" : "translateY(8px)",
+            transition: `opacity 500ms ease ${baseDelay + 80 + i * 60}ms, transform 500ms ease ${baseDelay + 80 + i * 60}ms`,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: GC,
+              fontWeight: 600,
+              fontSize: 14,
+              color: "var(--ink)",
+              lineHeight: 1.4,
+            }}
+          >
+            {row.values[col.key]}
+          </span>
+        </div>
+      ))}
+    </>
   )
 }
