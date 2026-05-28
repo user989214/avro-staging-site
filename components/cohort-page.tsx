@@ -200,7 +200,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  objectPosition: "center center",
+                  objectPosition: "70% center",
                 }}
               />
 
