@@ -28,12 +28,13 @@ export function CompareAtAGlance() {
           backgroundColor: "var(--base)",
           borderRadius: 24,
           overflow: "hidden",
+          border: "2px solid var(--charcoal)",
         }}
       >
         {/* Header row */}
         <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr 1fr 1fr" }}>
           <div style={{ minHeight: 64, padding: 20, display: "flex", alignItems: "center", backgroundColor: "var(--charcoal)" }}>
-            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--bone)" }}>Formula</span>
+            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--bone)" }}>Compare</span>
           </div>
           <div style={{ minHeight: 64, padding: 20, display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--calm)" }}>
             <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#2D1B4E" }}>Calm</span>
