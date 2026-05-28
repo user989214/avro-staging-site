@@ -120,6 +120,14 @@ export function CohortPage({ data }: { data: CohortData }) {
     },
   }
 
+  // Mobile (9:16) versions of the hero — shown only on small screens
+  const cohortHeroMobile: Record<string, string> = {
+    golf:   "/images/lifestyle/cohort-golf-hero-mobile.png",
+    social: "/images/lifestyle/cohort-social-hero-mobile.png",
+    work:   "/images/lifestyle/cohort-work-hero-mobile.png",
+    gaming: "/images/lifestyle/cohort-gaming-hero-mobile.png",
+  }
+
   // Per-cohort animation accent — words begin at a dimmed shade of the accent and rise into the full bright accent (Zero Proof) or the page ink (light cohorts), so the brand color feels intentional, not just transitional.
   const dimAccent =
     data.visual === "golf"
@@ -172,6 +180,10 @@ export function CohortPage({ data }: { data: CohortData }) {
           }
           @media (max-width: 768px) {
             .cohort-hero-image { display: none !important; }
+            .cohort-hero-image-mobile { display: block !important; }
+          }
+          @media (min-width: 769px) {
+            .cohort-hero-image-mobile { display: none !important; }
           }
         `}</style>
 
@@ -186,39 +198,64 @@ export function CohortPage({ data }: { data: CohortData }) {
             minHeight: "clamp(360px,50vh,560px)",
           }}
         >
-          {/* Background image — hidden on mobile */}
-          {(
-            <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={cohortHero[data.visual]?.src}
-                alt={cohortHero[data.visual]?.alt ?? ""}
-                className="cohort-hero-image"
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: data.visual === "golf" ? "85% center" : "70% center",
-                }}
-              />
+          {/* Desktop background image — hidden on mobile */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={cohortHero[data.visual]?.src}
+            alt={cohortHero[data.visual]?.alt ?? ""}
+            className="cohort-hero-image"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: data.visual === "golf" ? "85% center" : "70% center",
+            }}
+          />
 
-              {/* Gradient fade */}
-              <div
-                aria-hidden="true"
-                className="cohort-hero-image"
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: t.heroFade,
-                  pointerEvents: "none",
-                }}
-              />
+          {/* Desktop gradient fade */}
+          <div
+            aria-hidden="true"
+            className="cohort-hero-image"
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: t.heroFade,
+              pointerEvents: "none",
+            }}
+          />
 
-              {/* Scene label removed for cleaner full-width hero */}
-            </>
-          )}
+          {/* Mobile background image (9:16) — hidden on desktop */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={cohortHeroMobile[data.visual]}
+            alt={cohortHero[data.visual]?.alt ?? ""}
+            className="cohort-hero-image-mobile"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center top",
+              opacity: 0.55,
+            }}
+          />
+
+          {/* Mobile dark overlay for text legibility */}
+          <div
+            aria-hidden="true"
+            className="cohort-hero-image-mobile"
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: isZeroProof
+                ? "linear-gradient(to bottom, rgba(13,13,13,0.45) 0%, rgba(13,13,13,0.2) 50%, rgba(13,13,13,0.45) 100%)"
+                : "linear-gradient(to bottom, rgba(242,240,232,0.35) 0%, rgba(242,240,232,0.1) 50%, rgba(242,240,232,0.35) 100%)",
+              pointerEvents: "none",
+            }}
+          />
 
           <div
             style={{
