@@ -209,10 +209,8 @@ export function HomeRefHero() {
             align-items: start !important;
             padding: clamp(32px,7vw,56px) clamp(20px,5vw,28px) !important;
           }
-          .hp-hero-img { object-position: 65% 80% !important; }
-          .hp-hero-fade {
-            background: linear-gradient(180deg, var(--base-light) 0%, var(--base-light) 42%, rgba(245,241,234,0.92) 50%, rgba(245,241,234,0.55) 62%, rgba(245,241,234,0) 78%) !important;
-          }
+          .hp-hero-img { display: none !important; }
+          .hp-hero-fade { display: none !important; }
         }
         .hp-pill-primary {
           background-color: var(--charcoal);
@@ -433,7 +431,7 @@ export function HomeRefHero() {
   )
 }
 
-// ── PROOF BAR ───�����──────────────────��──────────────────────────────────────────
+// ── PROOF BAR ────────────────────────────────────────────────────────────────
 export function HomeProofBar() {
   const stats: { value: number; suffix: string; decimals: number; label: string }[] = [
     { value: 4.8, suffix: "/5", decimals: 1, label: "Average customer rating" },
@@ -442,13 +440,39 @@ export function HomeProofBar() {
   ]
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(32px,5vw,56px) clamp(16px,4vw,64px)" }}>
-        <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexWrap: "wrap", border: "2px solid var(--charcoal)", borderRadius: 24, overflow: "hidden" }}>
+      <div className="proof-bar-container" style={{ maxWidth: 1250, margin: "0 auto", border: "2px solid var(--charcoal)", borderRadius: 20, overflow: "hidden" }}>
+        <style jsx>{`
+          .proof-bar-container {
+            display: flex;
+            flex-direction: column;
+          }
+          .proof-bar-container .proof-stat {
+            border-top: 2px solid var(--charcoal);
+          }
+          .proof-bar-container .proof-stat:first-child {
+            border-top: none;
+          }
+          @media (min-width: 640px) {
+            .proof-bar-container {
+              flex-direction: row !important;
+            }
+            .proof-bar-container .proof-stat {
+              flex: 1 1 0;
+              border-top: none !important;
+              border-left: 2px solid var(--charcoal);
+            }
+            .proof-bar-container .proof-stat:first-child {
+              border-left: none;
+            }
+          }
+        `}</style>
         {stats.map((item, i) => (
           <div
             key={item.label}
-            style={{ flex: "1 1 100px", minWidth: 100, padding: "clamp(16px,2.5vw,36px) clamp(12px,2vw,32px)", textAlign: "center", borderLeft: i > 0 ? "2px solid var(--charcoal)" : "none" }}
+            className="proof-stat"
+            style={{ padding: "clamp(16px,2.5vw,36px) clamp(12px,2vw,32px)", textAlign: "center" }}
           >
-            <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,3vw,48px)", lineHeight: 1.0, display: "block" }}>
+            <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(24px,3vw,48px)", lineHeight: 1.0, display: "block" }}>
               <CountUpStat
                 value={item.value}
                 suffix={item.suffix}
@@ -457,7 +481,7 @@ export function HomeProofBar() {
                 delay={150 + i * 200}
               />
             </strong>
-            <span style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(11px,1.2vw,18px)", color: "var(--warm-gray)", marginTop: 4, display: "block" }}>{item.label}</span>
+            <span style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(12px,1.2vw,18px)", color: "var(--warm-gray)", marginTop: 4, display: "block" }}>{item.label}</span>
           </div>
         ))}
       </div>
