@@ -196,9 +196,9 @@ export function CohortPage({ data }: { data: CohortData }) {
                 className="cohort-hero-image"
                 style={{
                   position: "absolute",
-                  inset: "-10%",
-                  width: "120%",
-                  height: "120%",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
                   objectFit: "cover",
                   objectPosition: "center center",
                 }}
