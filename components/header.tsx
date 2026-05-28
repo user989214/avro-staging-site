@@ -175,8 +175,13 @@ export function Header() {
           color: var(--charcoal);
         }
       `}</style>
-      <header>
-      {/* Announcement ticker — continuous marquee */}
+      <header style={{ display: "contents" }}>
+      {/* Announcement ticker — continuous marquee. This bar scrolls with the page (it
+          is NOT sticky); only the nav below sticks to the top of the viewport. The
+          surrounding <header> uses `display: contents` so it doesn't establish a
+          containing block — that keeps the nav's `sticky top-0` working against the
+          body for the entire page scroll, instead of un-sticking once the header's
+          short box scrolls past. */}
       <div
         className="ann-bar"
         style={{
@@ -414,12 +419,11 @@ export function Header() {
           aria-label="AVRO home"
         >
           <Image
-            src="/brand/avro-logo.svg"
-            alt="AVRO"
-            width={178}
-            height={58}
+            src={isZeroProof ? "/avro-golden-social-logo.svg" : "/brand/avro-logo.svg"}
+            alt={isZeroProof ? "AVRO — social" : "AVRO"}
+            width={isZeroProof ? 632 : 178}
+            height={isZeroProof ? 204 : 58}
             className="w-full h-auto"
-            style={isZeroProof ? { filter: "brightness(0) saturate(100%) invert(75%) sepia(50%) saturate(400%) hue-rotate(10deg) brightness(95%)" } : undefined}
             priority
           />
         </Link>

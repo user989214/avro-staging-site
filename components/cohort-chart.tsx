@@ -759,13 +759,13 @@ function DialChart({
 
 /* ---------- Clocks (social) ----------
  *
- * One large AVRO clock. When the section scrolls into view, the minute hand sweeps
- * three full revolutions, painting a bold deep-black trail around the face that
- * "fills" the path again and again. After the third lap the hand parks at 12.
- *
- * Crisp, flat graphic — no shadows, no glow, no drop-shadow. Just a soft track ring,
- * tick marks, the bold trail, and a solid hand. Sized small enough to stay
- * comfortably constrained on the gold card at every breakpoint.
+ * Close-up cinematic view of the top of a large AVRO clock. Only the upper crescent
+ * of the face is visible inside the card — the rest is cropped off the bottom, as
+ * though we're zoomed in on the 9 → 12 → 3 arc. The clock also "descends" subtly
+ * from the background as the section scrolls in (small initial scale + translate),
+ * then settles. Two hand bars rotate slowly together, completing several revolutions
+ * before parking at 12. The hour labels are AVRO guide words — "CALM", "CLEAR",
+ * "PRESENT", "STILL", "GOING", "READY" — set in the headline serif.
  */
 function ClocksChart({
   data,
@@ -782,21 +782,41 @@ function ClocksChart({
   visible: boolean
   dark: boolean
 }) {
-  // One clock, generous internal viewBox so the geometry is poster-grade but the
-  // outer container caps width to keep the visual constrained.
-  const cx = 160
-  const cy = 160
-  const R = 130          // outer ring radius inside the 320×320 viewBox
-  const TRACK_W = 14     // ring stroke width
-  const TICK_OUTER = R - 2
-  const TICK_INNER = R - 16
-  const HAND_LEN = R - 28
+  // The clock geometry is large — designed at 1200×1200 — but we render it inside a
+  // viewBox that crops to just the TOP CRESCENT (1200 wide × 360 tall). The center of
+  // the clock sits below the visible area, so only the upper arc of the rim, the
+  // top-half hour labels, and the upper portion of the rotating hands appear on screen.
+  const FACE_R = 520
+  const cx = 600       // horizontal center of the full clock
+  const cy = 600       // vertical center of the full clock — pushed below viewBox bottom
+  const VIEW_W = 1200
+  const VIEW_H = 360   // crop height — we see only the top ~360px of the 1200px face
+  const TRACK_W = 18
 
-  // Three sequential laps. Using pathLength = 1080 (= 3 × 360) lets us animate the
-  // dash-offset from 1080 → 0 to visually paint the ring three times in succession.
+  // Twelve guide words placed at the twelve hour positions. Only the upper-arc ones
+  // (positions 9 through 3, going clockwise across the top) actually appear on screen
+  // because the bottom of the clock is cropped out of view.
+  const HOUR_WORDS = [
+    "STILL",     // 12
+    "GOING",     // 1
+    "ON",        // 2
+    "READY",     // 3
+    "AND",       // 4 (off-screen)
+    "ON",        // 5 (off-screen)
+    "AND",       // 6 (off-screen)
+    "ON",        // 7 (off-screen)
+    "STEADY",    // 8 (off-screen)
+    "PRESENT",   // 9
+    "CLEAR",     // 10
+    "CALM",      // 11
+  ]
+
+  // Slow, multi-rotation animation. We sweep the hand at a calm pace — 3 full laps
+  // over ~12 seconds — so it reads as "round and round, slowly" rather than a fast
+  // spin. Trail is painted in lockstep.
   const LAPS = 3
   const PATH = 360 * LAPS
-  const SPIN_DURATION = 4.2 // seconds — total time for the three-lap sweep
+  const SPIN_DURATION = 12
 
   // The AVRO point is always at index 0 in this single-clock config.
   const avro = data.points[data.avroIndex] ?? data.points[0]
@@ -812,55 +832,67 @@ function ClocksChart({
           0%   { transform: rotate(0deg); }
           100% { transform: rotate(${360 * LAPS}deg); }
         }
+        @keyframes clk-emerge {
+          0%   { opacity: 0; transform: translateY(-32px) scale(1.06); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .clk-stage {
+          opacity: 0;
+          transform: translateY(-32px) scale(1.06);
+        }
+        .clk-stage.run {
+          animation: clk-emerge 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
         .clk-trail {
           stroke-dasharray: ${PATH};
           stroke-dashoffset: ${PATH};
         }
         .clk-trail.run {
-          animation: clk-trail-fill ${SPIN_DURATION}s cubic-bezier(0.45, 0.05, 0.2, 1) forwards;
+          animation: clk-trail-fill ${SPIN_DURATION}s cubic-bezier(0.45, 0.05, 0.25, 1) 0.4s forwards;
         }
         .clk-hand {
           transform-origin: ${cx}px ${cy}px;
           transform: rotate(0deg);
         }
         .clk-hand.run {
-          animation: clk-hand-spin ${SPIN_DURATION}s cubic-bezier(0.45, 0.05, 0.2, 1) forwards;
+          animation: clk-hand-spin ${SPIN_DURATION}s cubic-bezier(0.45, 0.05, 0.25, 1) 0.4s forwards;
         }
         @media (prefers-reduced-motion: reduce) {
-          .clk-trail.run, .clk-hand.run { animation: none !important; }
+          .clk-stage.run, .clk-trail.run, .clk-hand.run { animation: none !important; }
+          .clk-stage.run { opacity: 1; transform: none; }
           .clk-trail.run { stroke-dashoffset: 0 !important; }
         }
       `}</style>
 
       <div
+        className={`clk-stage${visible ? " run" : ""}`}
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: 20,
+          gap: 24,
           width: "100%",
-          // Constrained size — keeps the clock from dominating the card on desktop
-          // and stays comfortable on mobile.
-          maxWidth: 320,
+          // Wider container — the close-up clock is a cinematic crop (3.3:1).
+          maxWidth: 720,
         }}
       >
         <svg
-          viewBox="0 0 320 320"
+          viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+          preserveAspectRatio="xMidYMin meet"
           style={{
             width: "100%",
             height: "auto",
             display: "block",
-            // No overflow shadow halo — keep the SVG clipped to its viewBox.
             overflow: "hidden",
           }}
           role="img"
-          aria-label="AVRO clock — sweeping three full revolutions before coming to rest"
+          aria-label="Close-up of an AVRO clock — hands rotating slowly across the upper face"
         >
-          {/* Background track — soft, low-contrast ring. The bold trail paints over it. */}
+          {/* Background track — the upper rim of the giant face, soft so the bold trail pops. */}
           <circle
             cx={cx}
             cy={cy}
-            r={R}
+            r={FACE_R}
             fill="none"
             stroke={ink}
             strokeOpacity={0.12}
@@ -868,13 +900,16 @@ function ClocksChart({
             strokeLinecap="round"
           />
 
-          {/* Hour ticks — twelve evenly-spaced marks just inside the rim. */}
-          {Array.from({ length: 12 }).map((_, k) => {
-            const angle = (k / 12) * Math.PI * 2 - Math.PI / 2
-            const x1 = cx + Math.cos(angle) * TICK_INNER
-            const y1 = cy + Math.sin(angle) * TICK_INNER
-            const x2 = cx + Math.cos(angle) * TICK_OUTER
-            const y2 = cy + Math.sin(angle) * TICK_OUTER
+          {/* Hour ticks — only the ones on the upper half of the face will be visible. */}
+          {Array.from({ length: 60 }).map((_, k) => {
+            const angle = (k / 60) * Math.PI * 2 - Math.PI / 2
+            const isHour = k % 5 === 0
+            const inner = FACE_R - (isHour ? 28 : 16)
+            const outer = FACE_R - 4
+            const x1 = cx + Math.cos(angle) * inner
+            const y1 = cy + Math.sin(angle) * inner
+            const x2 = cx + Math.cos(angle) * outer
+            const y2 = cy + Math.sin(angle) * outer
             return (
               <line
                 key={k}
@@ -883,22 +918,49 @@ function ClocksChart({
                 x2={x2}
                 y2={y2}
                 stroke={muted}
-                strokeWidth={k % 3 === 0 ? 3 : 1.75}
+                strokeWidth={isHour ? 5 : 2}
                 strokeLinecap="round"
-                opacity={k % 3 === 0 ? 0.9 : 0.5}
+                opacity={isHour ? 0.95 : 0.4}
               />
             )
           })}
 
-          {/* Bold trail — painted three times around the face by animating stroke-dashoffset
-              from PATH (1080) down to 0. Rotated -90° so the dash starts at 12 o'clock and
-              sweeps clockwise. No drop-shadow, no glow. */}
+          {/* Guide-word hour labels — set in the AVRO headline serif at each hour mark. */}
+          {HOUR_WORDS.map((word, k) => {
+            // 12 sits at the top (-90°), then we go clockwise.
+            const angle = ((k / 12) * Math.PI * 2) - Math.PI / 2
+            const labelR = FACE_R - 78
+            const x = cx + Math.cos(angle) * labelR
+            const y = cy + Math.sin(angle) * labelR
+            return (
+              <text
+                key={k}
+                x={x}
+                y={y}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                style={{
+                  // Headline serif — pulled from the global serif token used by AVRO display copy.
+                  fontFamily: "var(--font-serif), 'Times New Roman', serif",
+                  fontWeight: 900,
+                  fontSize: 44,
+                  letterSpacing: "-0.02em",
+                  fill: ink,
+                }}
+              >
+                {word}
+              </text>
+            )
+          })}
+
+          {/* Bold trail — painted three times around the face, but visually only the upper
+              arc shows because the rest is cropped. Rotated -90° so the dash starts at 12. */}
           <g transform={`rotate(-90 ${cx} ${cy})`}>
             <circle
               className={`clk-trail${visible ? " run" : ""}`}
               cx={cx}
               cy={cy}
-              r={R}
+              r={FACE_R}
               fill="none"
               stroke={avroStroke}
               strokeWidth={TRACK_W}
@@ -907,24 +969,33 @@ function ClocksChart({
             />
           </g>
 
-          {/* Minute hand — spins three full revolutions in lockstep with the trail. */}
+          {/* Two hand bars — minute (longer) and hour (shorter, ~70% length, slightly thicker).
+              They rotate together at the same slow pace, both anchored at the off-screen center. */}
           <g className={`clk-hand${visible ? " run" : ""}`}>
+            {/* Hour hand — shorter and chunkier */}
             <line
               x1={cx}
               y1={cy}
               x2={cx}
-              y2={cy - HAND_LEN}
+              y2={cy - (FACE_R - 180)}
               stroke={avroStroke}
-              strokeWidth={6}
+              strokeWidth={18}
+              strokeLinecap="round"
+            />
+            {/* Minute hand — longer, slimmer */}
+            <line
+              x1={cx}
+              y1={cy}
+              x2={cx}
+              y2={cy - (FACE_R - 50)}
+              stroke={avroStroke}
+              strokeWidth={12}
               strokeLinecap="round"
             />
           </g>
-
-          {/* Center cap — solid dot anchoring the hand. */}
-          <circle cx={cx} cy={cy} r={10} fill={avroStroke} />
         </svg>
 
-        {/* Label stack — same typographic rhythm as the dial chart's center number / sublabel. */}
+        {/* Label stack — sits below the cinematic clock crop. */}
         <div style={{ textAlign: "center" }}>
           <div
             className="font-serif"
