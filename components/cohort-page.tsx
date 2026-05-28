@@ -116,7 +116,7 @@ export function CohortPage({ data }: { data: CohortData }) {
     },
     gaming: {
       src: "/images/lifestyle/cohort-gaming-hero.png",
-      alt: "Hand on mechanical keyboard with headphones in background",
+      alt: "Gamer at desk with mouse keyboard and monitor with blue ambient lighting",
     },
   }
 
