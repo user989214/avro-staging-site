@@ -129,17 +129,61 @@ export default function BlogPage() {
       `}</style>
 
       {/* ── HERO HEADER ── */}
-      <section className="hero-section" style={{ backgroundColor: "#000", padding: "clamp(56px,8vw,104px) clamp(20px,5vw,80px) clamp(48px,6vw,80px)" }}>
+      {/* Golf-style hero treatment, dark variant: full-width edge-to-edge, square corners,
+          per-word rise animation on the headline, lede + filters fade up after.
+          Top padding lightened so content appears on first scroll. */}
+      <section className="hero-section" style={{ backgroundColor: "#000", padding: "clamp(48px,7vw,96px) clamp(20px,5vw,80px) clamp(40px,5vw,72px)" }}>
+        <style>{`
+          @keyframes blog-rise {
+            0%   { opacity: 0; transform: translateY(28px); }
+            55%  { opacity: 1; transform: translateY(-4px); }
+            80%  { opacity: 1; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes blog-fade-up {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          .blog-word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(28px);
+            animation: blog-rise 1.05s cubic-bezier(0.34, 1.4, 0.4, 1) forwards;
+            will-change: transform, opacity;
+          }
+          .blog-fade { opacity: 0; animation: blog-fade-up 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
+          .blog-lede { animation-delay: 0.85s; }
+          .blog-filters { animation-delay: 1.05s; }
+          @media (prefers-reduced-motion: reduce) {
+            .blog-word, .blog-fade {
+              animation: none !important;
+              opacity: 1 !important;
+              transform: none !important;
+            }
+          }
+        `}</style>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <h1 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(56px,9vw,120px)", lineHeight: 0.95, color: "#fff", marginBottom: 20, maxWidth: 900 }}>
-            Calm. Clear. Informed.
+            {"Calm. Clear. Informed.".split(" ").map((word, i, arr) => {
+              const delay = 0.1 + i * 0.13
+              return (
+                <span
+                  key={i}
+                  className="blog-word"
+                  style={{ animationDelay: `${delay.toFixed(2)}s` }}
+                >
+                  {word}
+                  {i < arr.length - 1 ? "\u00A0" : ""}
+                </span>
+              )
+            })}
           </h1>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(20px,2vw,26px)", lineHeight: 1.4, color: "rgba(255,255,255,0.85)", maxWidth: 600 }}>
+          <p className="blog-fade blog-lede" style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(20px,2vw,26px)", lineHeight: 1.4, color: "rgba(255,255,255,0.85)", maxWidth: 600 }}>
             Science, lifestyle, and formula guidance for people who perform better when they are calm.
           </p>
 
-          {/* Category filters */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 40 }}>
+          {/* Category filters — sized to match the homepage hero pills (48px / 28px / 16px). */}
+          <div className="blog-fade blog-filters" style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 32 }}>
             {categories.map((cat, i) => (
               <button
                 key={cat}
@@ -147,9 +191,10 @@ export default function BlogPage() {
                 style={{
                   fontFamily: GC,
                   fontWeight: 700,
-                  fontSize: 18,
-                  padding: "10px 24px",
-                  borderRadius: 24,
+                  fontSize: 16,
+                  minHeight: 48,
+                  padding: "0 28px",
+                  borderRadius: 999,
                   border: "2px solid rgba(255,255,255,0.25)",
                   backgroundColor: i === 0 ? "#fff" : "transparent",
                   color: i === 0 ? "#000" : "rgba(255,255,255,0.7)",
