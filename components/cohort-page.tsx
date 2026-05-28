@@ -109,6 +109,10 @@ export function CohortPage({ data }: { data: CohortData }) {
     },
   }
 
+  // Per-cohort animation accent — each word briefly flashes the cohort accent before settling into the page ink.
+  const wordAccent = accent
+  const wordRest = t.ink
+
   return (
     <div style={{ backgroundColor: t.pageBg, color: t.ink }}>
       {/* Hero — full-width, square corners (matches site-wide page hero language) */}
@@ -119,6 +123,38 @@ export function CohortPage({ data }: { data: CohortData }) {
           padding: 0,
         }}
       >
+        <style>{`
+          @keyframes cohort-rise-color {
+            0%   { opacity: 0; transform: translateY(28px); color: ${wordAccent}; }
+            55%  { opacity: 1; transform: translateY(-4px); color: ${wordAccent}; }
+            80%  { opacity: 1; transform: translateY(0); color: ${wordAccent}; }
+            100% { opacity: 1; transform: translateY(0); color: ${wordRest}; }
+          }
+          @keyframes cohort-fade-up {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          .cohort-word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(28px);
+            color: ${wordAccent};
+            animation: cohort-rise-color 1.05s cubic-bezier(0.34, 1.4, 0.4, 1) forwards;
+            will-change: transform, opacity, color;
+          }
+          .cohort-fade { opacity: 0; animation: cohort-fade-up 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
+          .cohort-lede { animation-delay: 0.9s; }
+          .cohort-cta { animation-delay: 1.15s; }
+          @media (prefers-reduced-motion: reduce) {
+            .cohort-word, .cohort-fade {
+              animation: none !important;
+              opacity: 1 !important;
+              transform: none !important;
+              color: ${wordRest} !important;
+            }
+          }
+        `}</style>
+
         <div
           style={{
             position: "relative",
@@ -172,27 +208,11 @@ export function CohortPage({ data }: { data: CohortData }) {
               justifyContent: "center",
               padding: "clamp(72px,9vw,128px) clamp(20px,5vw,64px)",
               minHeight: "inherit",
-              textAlign: data.visual === "work" ? "center" : "left",
-              alignItems: data.visual === "work" ? "center" : "flex-start",
+              textAlign: "left",
+              alignItems: "flex-start",
             }}
           >
-            <span
-              style={{
-                display: "inline-block",
-                marginBottom: 16,
-                padding: "10px 18px",
-                borderRadius: 999,
-                fontFamily: GC,
-                fontWeight: 700,
-                fontSize: 11,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                backgroundColor: isZeroProof ? "var(--dark-surface)" : "var(--charcoal)",
-                color: isZeroProof ? "var(--gold)" : "var(--bone)",
-              }}
-            >
-              {data.eyebrow}
-            </span>
+            {/* Eyebrow chip removed per design — title carries the moment via the per-cohort word animation. */}
             <h1
               className="font-serif"
               style={{
@@ -200,34 +220,51 @@ export function CohortPage({ data }: { data: CohortData }) {
                 fontSize: "clamp(42px,6vw,72px)",
                 lineHeight: 0.98,
                 letterSpacing: "-0.025em",
-                color: t.ink,
+                color: wordRest,
                 marginBottom: 20,
-                maxWidth: data.visual === "work" ? 820 : 560,
+                maxWidth: 560,
               }}
             >
-              {data.title}
+              {(() => {
+                const words = data.title.split(" ")
+                return words.map((word, i) => {
+                  const delay = 0.1 + i * 0.11
+                  return (
+                    <span
+                      key={i}
+                      className="cohort-word"
+                      style={{ animationDelay: `${delay.toFixed(2)}s` }}
+                    >
+                      {word}
+                      {i < words.length - 1 ? "\u00A0" : ""}
+                    </span>
+                  )
+                })
+              })()}
             </h1>
             <p
+              className="cohort-fade cohort-lede"
               style={{
                 fontFamily: GC,
                 fontWeight: 400,
                 fontSize: "clamp(17px,2vw,20px)",
                 lineHeight: 1.55,
                 color: t.muted,
-                maxWidth: data.visual === "work" ? 580 : 480,
+                maxWidth: 480,
                 marginBottom: 28,
               }}
             >
               {data.copy}
             </p>
-            <CtaGroup primary={data.primary} secondary={data.secondary} dark={isZeroProof} />
+            <div className="cohort-fade cohort-cta">
+              <CtaGroup primary={data.primary} secondary={data.secondary} dark={isZeroProof} />
+            </div>
           </div>
         </div>
       </section>
 
       <Section dark={isZeroProof}>
         <SectionHeading
-          eyebrow="The moment"
           title={data.momentTitle}
           description={data.momentCopy}
           dark={isZeroProof}
@@ -250,24 +287,9 @@ export function CohortPage({ data }: { data: CohortData }) {
         </div>
       </Section>
 
-      {/* How to Use Steps */}
+      {/* How to Use Steps — eyebrow removed; title carries the section. */}
       <section style={{ width: "100%", padding: "clamp(48px,6vw,80px) clamp(20px,5vw,64px)", backgroundColor: t.surface }}>
         <div style={{ maxWidth: 1320, margin: "0 auto" }}>
-          <span
-            style={{
-              display: "block",
-              fontFamily: GC,
-              fontWeight: 700,
-              fontSize: 11,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: t.muted,
-              marginBottom: 8,
-              textAlign: "center",
-            }}
-          >
-            How to use
-          </span>
           <h2
             className="font-serif"
             style={{
@@ -346,9 +368,9 @@ export function CohortPage({ data }: { data: CohortData }) {
 
       <FormulaLogic dark={isZeroProof} />
 
-      {/* Use Moments */}
+      {/* Use Moments — eyebrow removed; title carries the section. */}
       <Section dark={isZeroProof}>
-        <SectionHeading eyebrow="Use moments" title={data.useTitle} dark={isZeroProof} />
+        <SectionHeading title={data.useTitle} dark={isZeroProof} />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {data.useMoments.map(([title, copy], index) => (
             <InfoCard
