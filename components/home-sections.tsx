@@ -1246,15 +1246,15 @@ export function HomeScienceGrid() {
   )
 }
 
-// ── QUALITY ROW ──────��─────────────────────────���──────────────────────────────
+// ── QUALITY ROW ──────────────────────────────────────────────────────────────
 export function HomeQualityRow() {
-  const badges = [
-    { label: "Naturally Fermented", sub: "PharmaGABA®" },
-    { label: "Quality Ingredients", sub: "You can trust" },
-    { label: "Third-Party", sub: "Tested" },
-    { label: "Vegan", sub: "Plant-based" },
-    { label: "Gluten Free", sub: "Always" },
-    { label: "Made in the USA", sub: "GMP Compliant" },
+  const badges: { icon: AvroIconName; label: string; sub: string }[] = [
+    { icon: "calm-first-foundation", label: "Naturally Fermented", sub: "PharmaGABA®" },
+    { icon: "quality-standards", label: "Quality Ingredients", sub: "You can trust" },
+    { icon: "third-party-tested", label: "Third-Party", sub: "Tested" },
+    { icon: "free-vegan", label: "Vegan", sub: "Plant-based" },
+    { icon: "gluten-free", label: "Gluten Free", sub: "Always" },
+    { icon: "made-in-usa", label: "Made in the USA", sub: "GMP Compliant" },
   ]
 
   return (
@@ -1264,9 +1264,12 @@ export function HomeQualityRow() {
         <div style={{ backgroundColor: "var(--base-light)", borderRadius: 28, padding: "clamp(20px,3vw,32px)", border: "1px solid var(--divider)" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px,1fr))", gap: 2, backgroundColor: "var(--base-deep)", borderRadius: 20, overflow: "hidden" }}>
             {badges.map((b) => (
-              <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: "clamp(20px,3vw,32px) clamp(12px,2vw,20px)", textAlign: "center", backgroundColor: "var(--bone)" }}>
-                <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(17px,1.6vw,22px)", color: "var(--ink)", lineHeight: 1.2 }}>{b.label}</strong>
-                <span style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(14px,1.2vw,17px)", color: "var(--warm-gray)" }}>{b.sub}</span>
+              <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, padding: "clamp(20px,3vw,32px) clamp(12px,2vw,20px)", textAlign: "center", backgroundColor: "var(--bone)" }}>
+                <AvroIcon name={b.icon} size={36} className="opacity-80" />
+                <div>
+                  <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(15px,1.4vw,19px)", color: "var(--ink)", lineHeight: 1.2, display: "block" }}>{b.label}</strong>
+                  <span style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(12px,1vw,15px)", color: "var(--warm-gray)" }}>{b.sub}</span>
+                </div>
               </div>
             ))}
           </div>
@@ -1310,23 +1313,26 @@ export function HomeStoryStrip() {
   )
 }
 
-// ── RITUAL SECTION ──────────────────────────────��───────�������────────────────────
+// ── RITUAL SECTION ──────────────────────────────────────────────────────────
 export function HomeRitualSection() {
   const [openStep, setOpenStep] = useState<number | null>(null)
   
-  const steps = [
+  const steps: { num: number; icon: AvroIconName; title: string; detail: string }[] = [
     { 
       num: 1, 
+      icon: "step-pour",
       title: "Pour one stick into water",
       detail: "Add one AVRO stick to 8–12 oz of cold water. Use more water for a lighter taste, less for a stronger flavor."
     },
     { 
       num: 2, 
+      icon: "step-stir",
       title: "Mix until fully dissolved",
       detail: "Stir or shake until the powder is completely dissolved. AVRO mixes easily without clumping."
     },
     { 
       num: 3, 
+      icon: "step-drink",
       title: "Drink before your moment",
       detail: "Drink about 30 minutes before the moment that matters. Give it time to settle in so you're ready when it counts."
     },
@@ -1375,15 +1381,18 @@ export function HomeRitualSection() {
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
-                      backgroundColor: openStep === step.num ? "var(--charcoal)" : "transparent",
-                      color: openStep === step.num ? "var(--bone)" : "var(--charcoal)",
-                      fontFamily: GC,
-                      fontWeight: 700,
-                      fontSize: 20,
+                      backgroundColor: openStep === step.num ? "var(--charcoal)" : "var(--bone)",
                       transition: "all 0.2s ease",
                     }}
                   >
-                    {step.num}
+                    <AvroIcon 
+                      name={step.icon} 
+                      size={28} 
+                      style={{ 
+                        filter: openStep === step.num ? "invert(1) brightness(2)" : "none",
+                        transition: "filter 0.2s ease",
+                      }} 
+                    />
                   </div>
                   <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 20, color: "var(--charcoal)", flex: 1 }}>
                     {step.title}

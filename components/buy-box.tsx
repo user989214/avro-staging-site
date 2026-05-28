@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useCart } from "@/lib/cart-context"
 import { soloTubeImageFor } from "@/components/product-visual"
+import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import type { Formula, FormulaKey } from "@/lib/data"
 
 const GC = '"DM Sans", system-ui, sans-serif'
@@ -217,6 +218,31 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         }
         .bb-add-btn:active { transform: scale(0.99); }
       `}</style>
+
+      {/* Dietary claims with proper icons */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2 border-t border-divider">
+        {[
+          { icon: "free-dairy" as AvroIconName, label: "Dairy Free" },
+          { icon: "free-gmo" as AvroIconName, label: "Non-GMO" },
+          { icon: "free-vegan" as AvroIconName, label: "Vegan" },
+          { icon: "gluten-free" as AvroIconName, label: "Gluten Free" },
+          { icon: "free-sugar" as AvroIconName, label: "No Added Sugar" },
+        ].map((claim) => (
+          <div key={claim.label} className="flex items-center gap-1.5">
+            <AvroIcon name={claim.icon} size={20} className="opacity-70" />
+            <span
+              style={{
+                fontFamily: GC,
+                fontWeight: 600,
+                fontSize: "clamp(10px,0.9vw,12px)",
+                color: "var(--warm-gray)",
+              }}
+            >
+              {claim.label}
+            </span>
+          </div>
+        ))}
+      </div>
     </aside>
   )
 }
