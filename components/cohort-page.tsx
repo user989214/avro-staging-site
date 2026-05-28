@@ -103,20 +103,20 @@ export function CohortPage({ data }: { data: CohortData }) {
   // Cohort-specific lifestyle hero photo
   const cohortHero: Record<string, { src: string; alt: string }> = {
     golf: {
-      src: "/images/lifestyle/golf-cart-gloves-tee.jpg",
-      alt: "Golf cart with gloves and tee laid out at first tee",
+      src: "/images/lifestyle/cohort-golf-hero.png",
+      alt: "Golfer holding iron club with flag in misty background",
     },
     social: {
-      src: "/images/lifestyle/coupes-grapefruit-stickpack.jpg",
-      alt: "Elegant cocktail coupes with grapefruit garnish",
+      src: "/images/lifestyle/cohort-social-hero.png",
+      alt: "Elegant restaurant setting at dusk with mountain view",
     },
     work: {
-      src: "/images/lifestyle/woman-journaling-mug.jpg",
-      alt: "Woman journaling with coffee mug at a bright workspace",
+      src: "/images/lifestyle/cohort-work-hero.png",
+      alt: "Professional working on tablet with stylus in office meeting",
     },
     gaming: {
-      src: "/images/lifestyle/journal-coffee-window.jpg",
-      alt: "Calm focused workspace with journal and coffee by window",
+      src: "/images/lifestyle/cohort-gaming-hero.png",
+      alt: "Hand on mechanical keyboard with headphones in background",
     },
   }
 
