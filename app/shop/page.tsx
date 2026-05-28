@@ -133,7 +133,7 @@ export default function ShopPage() {
               pointerEvents: "none",
             }}
           >
-            <div className="shop-hero-image absolute inset-0">
+            <div className="absolute inset-0">
               <Image
                 src="/images/lifestyle/avro-trio-stone-hero.png"
                 alt=""
@@ -142,31 +142,31 @@ export default function ShopPage() {
                 className="object-contain object-right"
                 priority
                 style={{
-                  // Much stronger vignette — image dissolves well before reaching any edge
+                  // Softer, smaller vignette — much less faded white wash
                   WebkitMaskImage:
-                    "radial-gradient(ellipse 55% 65% at 75% 50%, rgba(0,0,0,1) 15%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.15) 78%, rgba(0,0,0,0) 92%)",
+                    "radial-gradient(ellipse 65% 75% at 78% 50%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.4) 90%, rgba(0,0,0,0) 100%)",
                   maskImage:
-                    "radial-gradient(ellipse 55% 65% at 75% 50%, rgba(0,0,0,1) 15%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.15) 78%, rgba(0,0,0,0) 92%)",
+                    "radial-gradient(ellipse 65% 75% at 78% 50%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.4) 90%, rgba(0,0,0,0) 100%)",
                 }}
               />
             </div>
 
-            {/* Left-side wash so the headline reads cleanly over the image */}
+            {/* Left-side wash so the headline reads cleanly over the image — softened */}
             <div
               style={{
                 position: "absolute",
                 inset: 0,
                 background:
-                  "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 28%, rgba(245,241,234,0.92) 40%, rgba(245,241,234,0.6) 52%, rgba(245,241,234,0.18) 66%, rgba(245,241,234,0) 78%)",
+                  "linear-gradient(to right, var(--base-light) 0%, rgba(245,241,234,0.85) 22%, rgba(245,241,234,0.45) 38%, rgba(245,241,234,0.1) 55%, rgba(245,241,234,0) 70%)",
               }}
             />
-            {/* Outer edge fade — softens any visible border on top, bottom and right */}
+            {/* Outer edge fade — softer */}
             <div
               style={{
                 position: "absolute",
                 inset: 0,
                 background:
-                  "radial-gradient(ellipse 90% 90% at 50% 50%, rgba(245,241,234,0) 55%, rgba(245,241,234,0.55) 82%, var(--base-light) 100%)",
+                  "radial-gradient(ellipse 95% 95% at 50% 50%, rgba(245,241,234,0) 70%, rgba(245,241,234,0.3) 90%, rgba(245,241,234,0.6) 100%)",
               }}
             />
           </div>
