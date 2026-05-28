@@ -79,7 +79,6 @@ export default function AboutPage() {
       <Section>
         <div className="max-w-[780px] mx-auto flex flex-col gap-6">
           <SectionHeading
-            eyebrow="Our story"
             title="A different starting point."
           />
           <p className="text-ink/80 text-[clamp(16px,1.7vw,18px)] leading-relaxed">
@@ -141,25 +140,45 @@ export default function AboutPage() {
         {/* Dark card container */}
         <div className="bg-[var(--charcoal)] rounded-[28px] overflow-hidden">
           {/* Content */}
-          <div className="p-[clamp(24px,4vw,48px)] pb-6">
-            <h2 className="font-serif font-black text-[clamp(28px,3.6vw,48px)] leading-[1.0] text-white mb-4">
-              Founder-driven.
+          <div className="p-[clamp(24px,4vw,48px)]">
+            <h2 className="font-serif font-black text-[clamp(28px,3.6vw,44px)] leading-[1.1] text-white mb-3">
+              Born from science and brand instinct.
             </h2>
-            <p className="text-white/85 text-[clamp(15px,1.2vw,18px)] leading-relaxed max-w-[680px] mb-6">
-              AVRO was built by Keigo Sugawara and Peter van Stolk for people who wanted a better option before the moments that matter. Every formula is backed by research and designed for real routines.
+            <p className="text-white/80 text-[clamp(14px,1.2vw,17px)] leading-relaxed max-w-[680px] mb-8">
+              Together, Keigo and Peter built AVRO around one clear belief: performance starts with composure.
             </p>
+            
+            {/* Founder bios */}
+            <div className="flex flex-col gap-6 mb-8">
+              {founders.map((f) => (
+                <div key={f.name} className="flex flex-col gap-2 pb-6 last:pb-0 border-b border-white/15 last:border-0">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
+                    <h3 className="font-serif font-black text-[clamp(18px,2vw,24px)] leading-tight text-white">
+                      {f.name}
+                    </h3>
+                    <span className="text-white/50 text-[10px] md:text-[11px] font-bold tracking-[0.1em] uppercase">
+                      {f.role}
+                    </span>
+                  </div>
+                  <p className="text-white/70 text-[clamp(13px,1.3vw,15px)] leading-relaxed">
+                    {f.bio}
+                  </p>
+                </div>
+              ))}
+            </div>
+
             <div className="flex flex-wrap gap-3">
-              <Link href="/why-avro" className="inline-flex items-center justify-center font-sans font-bold text-sm h-[42px] px-8 rounded-full border-2 border-white bg-transparent text-white hover:bg-white/10 transition-colors">
-                Our Story
-              </Link>
               <Link href="/science" className="inline-flex items-center justify-center font-sans font-bold text-sm h-[42px] px-8 rounded-full border-2 border-[var(--avro-blue)] bg-[var(--avro-blue)] text-[var(--charcoal)] hover:opacity-90 transition-opacity">
                 The Science
+              </Link>
+              <Link href="/why-avro" className="inline-flex items-center justify-center font-sans font-bold text-sm h-[42px] px-8 rounded-full border-2 border-white bg-transparent text-white hover:bg-white/10 transition-colors">
+                Why AVRO
               </Link>
             </div>
           </div>
           {/* Image inside card */}
           <div className="px-[clamp(16px,3vw,32px)] pb-[clamp(16px,3vw,32px)]">
-            <div className="relative aspect-[16/10] sm:aspect-[2/1] rounded-[18px] overflow-hidden bg-[var(--bone)]">
+            <div className="relative aspect-[16/10] sm:aspect-[2/1] rounded-[18px] overflow-hidden">
               <Image
                 src="/images/team/founders-keigo-peter.jpg"
                 alt="AVRO co-founders Keigo Sugawara and Peter van Stolk"
