@@ -7,6 +7,7 @@ import {
   FaqBlock,
   FinalCta,
 } from "@/components/sections"
+import { CompareAtAGlance } from "@/components/compare-at-a-glance"
 
 export const metadata = {
   title: "Shop | AVRO",
@@ -225,134 +226,7 @@ export default function ShopPage() {
 
       {/* ---------- COMPARE AT A GLANCE ---------- */}
       <CardedSection>
-        <div>
-          <h2
-            className="font-serif"
-            style={{
-              fontWeight: 900,
-              fontSize: "clamp(32px,4.5vw,52px)",
-              lineHeight: 1.02,
-              letterSpacing: "-0.02em",
-              color: "var(--ink)",
-              textAlign: "left",
-              marginBottom: 36,
-              maxWidth: 720,
-            }}
-          >
-            Compare at a glance
-          </h2>
-
-          <div
-            style={{
-              backgroundColor: "#9A9A95",
-              borderRadius: 20,
-              overflow: "hidden",
-            }}
-          >
-            {/* Header row — Avro Blue accent for each formula column */}
-            <div style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr 1fr 1fr" }}>
-              <div style={{ minHeight: 60, padding: "16px 24px" }} />
-              <div style={{ minHeight: 60, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#94C6D4" }}>
-                <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 15, letterSpacing: "-0.01em", color: "var(--charcoal)" }}>Calm</span>
-              </div>
-              <div style={{ minHeight: 60, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#94C6D4" }}>
-                <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 15, letterSpacing: "-0.01em", color: "var(--charcoal)" }}>Focus</span>
-              </div>
-              <div style={{ minHeight: 60, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#94C6D4" }}>
-                <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 15, letterSpacing: "-0.01em", color: "var(--charcoal)" }}>Energy</span>
-              </div>
-            </div>
-
-            {/* Data rows */}
-            {[
-              { label: "Primary state", calm: "Composure", focus: "Clear focus", energy: "Steady energy" },
-              { label: "Best for", calm: "Travel, social calm, daily reset", focus: "Deep work, meetings, study", energy: "Mornings, long days, travel" },
-              { label: "Caffeine", calm: "No", focus: "No", energy: "Yes, 120 mg natural" },
-              { label: "Key addition", calm: "Magnesium Bisglycinate", focus: "Cognigrape", energy: "Natural caffeine" },
-            ].map((row) => (
-              <div
-                key={row.label}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1.25fr 1fr 1fr 1fr",
-                  borderTop: "1px solid rgba(255,255,255,0.25)",
-                }}
-              >
-                <div style={{ minHeight: 56, padding: "14px 24px", display: "flex", alignItems: "center" }}>
-                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--charcoal)" }}>{row.label}</span>
-                </div>
-                <div style={{ minHeight: 56, padding: "14px 16px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", borderLeft: "1px solid rgba(255,255,255,0.25)" }}>
-                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "var(--ink)", lineHeight: 1.4 }}>{row.calm}</span>
-                </div>
-                <div style={{ minHeight: 56, padding: "14px 16px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", borderLeft: "1px solid rgba(255,255,255,0.25)" }}>
-                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "var(--ink)", lineHeight: 1.4 }}>{row.focus}</span>
-                </div>
-                <div style={{ minHeight: 56, padding: "14px 16px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", borderLeft: "1px solid rgba(255,255,255,0.25)" }}>
-                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "var(--ink)", lineHeight: 1.4 }}>{row.energy}</span>
-                </div>
-              </div>
-            ))}
-
-            {/* CTA row */}
-            <div style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr 1fr 1fr", borderTop: "1px solid rgba(255,255,255,0.25)" }}>
-              <div style={{ minHeight: 72, padding: 16 }} />
-              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center", borderLeft: "1px solid rgba(255,255,255,0.25)" }}>
-                <Link
-                  href="/calm"
-                  style={{
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 13,
-                    padding: "12px 24px",
-                    borderRadius: 999,
-                    backgroundColor: "var(--charcoal)",
-                    color: "var(--bone)",
-                    textDecoration: "none",
-                    transition: "opacity 0.2s",
-                  }}
-                >
-                  Shop Calm
-                </Link>
-              </div>
-              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center", borderLeft: "1px solid rgba(255,255,255,0.25)" }}>
-                <Link
-                  href="/focus"
-                  style={{
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 13,
-                    padding: "12px 24px",
-                    borderRadius: 999,
-                    backgroundColor: "var(--charcoal)",
-                    color: "var(--bone)",
-                    textDecoration: "none",
-                    transition: "opacity 0.2s",
-                  }}
-                >
-                  Shop Focus
-                </Link>
-              </div>
-              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center", borderLeft: "1px solid rgba(255,255,255,0.25)" }}>
-                <Link
-                  href="/energy"
-                  style={{
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 13,
-                    padding: "12px 24px",
-                    borderRadius: 999,
-                    backgroundColor: "var(--charcoal)",
-                    color: "var(--bone)",
-                    textDecoration: "none",
-                    transition: "opacity 0.2s",
-                  }}
-                >
-                  Shop Energy
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+        <CompareAtAGlance />
       </CardedSection>
 
       <SocialProof mode="compact" />
