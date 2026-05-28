@@ -314,7 +314,7 @@ export default function ShopPage() {
                   Shop Calm
                 </Link>
               </div>
-              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center", borderLeft: "1px solid rgba(245,241,234,0.1)" }}>
+              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center", borderLeft: "1px solid var(--divider)" }}>
                 <Link
                   href="/focus"
                   style={{
@@ -323,8 +323,8 @@ export default function ShopPage() {
                     fontSize: 13,
                     padding: "12px 24px",
                     borderRadius: 999,
-                    backgroundColor: "#94C6D4",
-                    color: "var(--charcoal)",
+                    backgroundColor: "var(--charcoal)",
+                    color: "var(--bone)",
                     textDecoration: "none",
                     transition: "opacity 0.2s",
                   }}
@@ -332,7 +332,7 @@ export default function ShopPage() {
                   Shop Focus
                 </Link>
               </div>
-              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center", borderLeft: "1px solid rgba(245,241,234,0.1)" }}>
+              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center", borderLeft: "1px solid var(--divider)" }}>
                 <Link
                   href="/energy"
                   style={{
@@ -341,8 +341,8 @@ export default function ShopPage() {
                     fontSize: 13,
                     padding: "12px 24px",
                     borderRadius: 999,
-                    backgroundColor: "#94C6D4",
-                    color: "var(--charcoal)",
+                    backgroundColor: "var(--charcoal)",
+                    color: "var(--bone)",
                     textDecoration: "none",
                     transition: "opacity 0.2s",
                   }}
