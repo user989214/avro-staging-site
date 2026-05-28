@@ -5,121 +5,139 @@ import { cn } from "@/lib/utils"
  * AVRO Custom Icon System
  * 
  * Maps semantic icon names to the custom PNG icons uploaded for the brand.
- * Golden variants (for /social page) are in /icons/golden/
- * Standard icons are in /icons/
+ * Golden variants (for /social page) are in /images/icons/gold/
+ * Standard (white) icons are in /images/icons/
+ * 
+ * Icon naming conventions:
+ * - cohort-* = Page-specific cohort icons (tech→work, golf→golf, games→gaming, zero-proof→social)
+ * - free-* = "Free from" dietary icons (dairy, gmo, sugar, vegan)
+ * - gluten-free = Gluten free dietary icon
+ * - supports-* = Benefit/cognitive support icons
+ * - step-* = How to use step icons (pour, stir, drink, pro-tip)
+ * - zp-* = Zero Proof specific icons
+ * - Others = Quality, science, and foundational icons
  */
 
-// Standard icons (cream/light colored for general use)
+// Standard icons (white/cream colored for light backgrounds)
 export const avroIconMap = {
-  // Calm First Foundation
-  "calm-first-foundation": "/icons/calm-first-foundation.png",
+  // Calm First Foundation & Core
+  "calm-first-foundation": "/images/icons/calm-first-foundation.png",
+  "mind": "/images/icons/mind.png",
+  "mind-body-diagram": "/images/icons/mind-body-diagram.png",
+  "mental-clarity": "/images/icons/mental-clarity.png",
   
-  // Clinically Tested Ingredients
-  "clinically-tested-ingredients": "/icons/clinically-tested-ingredients.png",
+  // Clinically Tested / Science
+  "clinically-tested-ingredients": "/images/icons/clinically-tested-ingredients.png",
+  "naturally-fermented-pharmagaba": "/images/icons/naturally-fermented-pharmagaba.png",
+  "science-backed": "/images/icons/science-backed.png",
   
-  // Cohort Icons
-  "cohort-games": "/icons/cohort-games.png",
-  "cohort-golf": "/icons/cohort-golf.png",
-  "cohort-tech": "/icons/cohort-tech.png",
-  "cohort-zero-proof": "/icons/cohort-zero-proof.png",
+  // Cohort Icons (page-specific)
+  "cohort-games": "/images/icons/cohort-games.png",       // Gaming page
+  "cohort-golf": "/images/icons/cohort-golf.png",         // Golf page
+  "cohort-tech": "/images/icons/cohort-tech.png",         // Work page
+  "cohort-zero-proof": "/images/icons/cohort-zero-proof.png", // Social page
   
-  // Free From Icons
-  "free-dairy": "/icons/free-dairy.png",
-  "free-gmo": "/icons/free-gmo.png",
-  "free-sugar": "/icons/free-sugar.png",
-  "free-vegan": "/icons/free-vegan.png",
-  "gluten-free": "/icons/gluten-free.png",
+  // Free From Icons (dietary - for PDP, product pages)
+  "free-dairy": "/images/icons/free-dairy.png",
+  "free-gmo": "/images/icons/free-gmo.png",
+  "free-sugar": "/images/icons/free-sugar.png",
+  "free-vegan": "/images/icons/free-vegan.png",
+  "gluten-free": "/images/icons/gluten-free.png",
   
   // Quality & Standards
-  "clear-labeling": "/icons/clear-labeling.png",
-  "consistency-and-quality": "/icons/consistency-and-quality.png",
-  "control-under-pressure": "/icons/control-under-pressure.png",
-  "gmp-certified-facility": "/icons/gmp-certified-facility.png",
-  "quality-standards": "/icons/quality-standards.png",
-  "science-backed": "/icons/science-backed.png",
-  "testing-and-documentation": "/icons/testing-and-documentation.png",
-  "third-party-tested": "/icons/third-party-tested.png",
-  "transparent-standards": "/icons/transparent-standards.png",
+  "clear-labeling": "/images/icons/clear-labeling.png",
+  "consistency-quality": "/images/icons/consistency-quality.png",
+  "gmp-certified-facility": "/images/icons/gmp-certified-facility.png",
+  "ingredient-disclosure": "/images/icons/ingredient-disclosure.png",
+  "quality-standards": "/images/icons/quality-standards.png",
+  "testing-documentation": "/images/icons/testing-documentation.png",
+  "third-party-tested": "/images/icons/third-party-tested.png",
+  "transparent-standards": "/images/icons/transparent-standards.png",
   
-  // Supports/Benefits
-  "supports-clear-thinking": "/icons/supports-clear-thinking.png",
-  "supports-focus-without-overload": "/icons/supports-focus-without-overload.png",
-  "supports-steady-attention": "/icons/supports-steady-attention.png",
-  "recovery-sleep-support": "/icons/recovery-sleep-support.png",
-  "relaxation-reduced-tension": "/icons/relaxation-reduced-tension.png",
-  "social-composure": "/icons/social-composure.png",
+  // Supports/Benefits (cognitive & state)
+  "control-under-pressure": "/images/icons/control-under-pressure.png",
+  "supports-clear-thinking": "/images/icons/supports-clear-thinking.png",
+  "supports-focus-without-overload": "/images/icons/supports-focus-without-overload.png",
+  "supports-steady-attention": "/images/icons/supports-steady-attention.png",
+  "recovery-sleep-support": "/images/icons/recovery-sleep-support.png",
+  "relaxation-reduced-tension": "/images/icons/relaxation-reduced-tension.png",
+  "social-composure": "/images/icons/social-composure.png",
   
   // Steps (How to Use)
-  "step-pour": "/icons/step-pour.png",
-  "step-stir": "/icons/step-stir.png",
-  "step-drink": "/icons/step-drink.png",
-  "step-pro-tip": "/icons/step-pro-tip.png",
+  "step-pour": "/images/icons/step-pour.png",
+  "step-stir": "/images/icons/step-stir.png",
+  "step-drink": "/images/icons/step-drink.png",
+  "step-pro-tip": "/images/icons/step-pro-tip.png",
   
-  // Zero Proof specific
-  "zp-nacocktails-with-intention": "/icons/zp-nacocktails-with-intention.png",
-  "zp-zero-percent-alcohol": "/icons/zp-zero-percent-alcohol.png",
-  "zp-margin-wins": "/icons/zp-margin-wins.png",
-  "zp-calm-first-cocktails": "/icons/zp-calm-first-cocktails.png",
-  "zp-social-lift": "/icons/zp-social-lift.png",
-  "zp-built-for-the-bar": "/icons/zp-built-for-the-bar.png",
-  "zp-function-forward": "/icons/zp-function-forward.png",
+  // Zero Proof specific (dark/charcoal versions for light backgrounds)
+  "zp-built-for-bar": "/images/icons/zp-built-for-bar.png",
+  "zp-calm-first-cocktails": "/images/icons/zp-calm-first-cocktails.png",
+  "zp-function-forward": "/images/icons/zp-function-forward.png",
+  "zp-margin-wins": "/images/icons/zp-margin-wins.png",
+  "zp-na-cocktails-intention": "/images/icons/zp-na-cocktails-intention.png",
+  "zp-social-lift": "/images/icons/zp-social-lift.png",
+  "zp-zero-percent-alcohol": "/images/icons/zp-zero-percent-alcohol.png",
 } as const
 
-// Golden icons (for /social cohort page only)
+// Golden icons (for /social cohort page - dark backgrounds)
 export const goldenIconMap = {
-  // Calm First Foundation
-  "calm-first-foundation": "/icons/golden/calm-first-foundation.png",
+  // Calm First Foundation & Core
+  "calm-first-foundation": "/images/icons/gold/calm-first-foundation.png",
+  "mind": "/images/icons/gold/mind.png",
+  "mind-body-diagram": "/images/icons/gold/mind-body-diagram.png",
+  "mental-clarity": "/images/icons/gold/mental-clarity.png",
   
-  // Clinically Tested Ingredients
-  "clinically-tested-ingredients": "/icons/golden/clinically-tested-ingredients.png",
+  // Clinically Tested / Science
+  "clinically-tested-ingredients": "/images/icons/gold/clinically-tested-ingredients.png",
+  "naturally-fermented-pharmagaba": "/images/icons/gold/naturally-fermented-pharmagaba.png",
+  "science-backed": "/images/icons/gold/science-backed.png",
   
   // Cohort Icons
-  "cohort-games": "/icons/golden/cohort-games.png",
-  "cohort-golf": "/icons/golden/cohort-golf.png",
-  "cohort-tech": "/icons/golden/cohort-tech.png",
-  "cohort-zero-proof": "/icons/golden/cohort-zero-proof.png",
+  "cohort-games": "/images/icons/gold/cohort-games.png",
+  "cohort-golf": "/images/icons/gold/cohort-golf.png",
+  "cohort-tech": "/images/icons/gold/cohort-tech.png",
+  "cohort-zero-proof": "/images/icons/gold/cohort-zero-proof.png",
   
   // Free From Icons
-  "free-dairy": "/icons/golden/free-dairy.png",
-  "free-gmo": "/icons/golden/free-gmo.png",
-  "free-sugar": "/icons/golden/free-sugar.png",
-  "free-vegan": "/icons/golden/free-vegan.png",
-  "gluten-free": "/icons/golden/gluten-free.png",
+  "free-dairy": "/images/icons/gold/free-dairy.png",
+  "free-gmo": "/images/icons/gold/free-gmo.png",
+  "free-sugar": "/images/icons/gold/free-sugar.png",
+  "free-vegan": "/images/icons/gold/free-vegan.png",
+  "gluten-free": "/images/icons/gold/gluten-free.png",
   
   // Quality & Standards
-  "clear-labeling": "/icons/golden/clear-labeling.png",
-  "consistency-and-quality": "/icons/golden/consistency-and-quality.png",
-  "control-under-pressure": "/icons/golden/control-under-pressure.png",
-  "gmp-certified-facility": "/icons/golden/gmp-certified-facility.png",
-  "quality-standards": "/icons/golden/quality-standards.png",
-  "science-backed": "/icons/golden/science-backed.png",
-  "ingredient-disclosure": "/icons/golden/ingredient-disclosure.png",
+  "clear-labeling": "/images/icons/gold/clear-labeling.png",
+  "consistency-quality": "/images/icons/gold/consistency-quality.png",
+  "gmp-certified-facility": "/images/icons/gold/gmp-certified-facility.png",
+  "ingredient-disclosure": "/images/icons/gold/ingredient-disclosure.png",
+  "quality-standards": "/images/icons/gold/quality-standards.png",
+  "testing-documentation": "/images/icons/gold/testing-documentation.png",
+  "third-party-tested": "/images/icons/gold/third-party-tested.png",
+  "transparent-standards": "/images/icons/gold/transparent-standards.png",
   
-  // Supports/Benefits (use standard icons since golden equivalents may not exist for all)
-  "supports-clear-thinking": "/icons/golden/supports-clear-thinking.png",
-  "supports-focus-without-overload": "/icons/supports-focus-without-overload.png", // fallback to standard
-  "mind": "/icons/golden/mind.png",
-  "mind-body-diagram": "/icons/golden/mind-body-diagram.png",
-  "mental-clarity": "/icons/golden/mental-clarity.png",
-  "naturally-fermented-pharmagaba": "/icons/golden/naturally-fermented-pharmagaba.png",
-  "recovery-sleep-support": "/icons/golden/recovery-sleep-support.png",
-  "relaxation-reduced-tension": "/icons/golden/relaxation-reduced-tension.png",
-  "social-composure": "/icons/golden/social-composure.png",
+  // Supports/Benefits
+  "control-under-pressure": "/images/icons/gold/control-under-pressure.png",
+  "supports-clear-thinking": "/images/icons/gold/supports-clear-thinking.png",
+  "supports-focus-without-overload": "/images/icons/gold/supports-focus-without-overload.png",
+  "supports-steady-attention": "/images/icons/gold/supports-steady-attention.png",
+  "recovery-sleep-support": "/images/icons/gold/recovery-sleep-support.png",
+  "relaxation-reduced-tension": "/images/icons/gold/relaxation-reduced-tension.png",
+  "social-composure": "/images/icons/gold/social-composure.png",
   
   // Steps (How to Use)
-  "step-pour": "/icons/golden/step-pour.png",
-  "step-stir": "/icons/golden/step-stir.png",
-  "step-drink": "/icons/golden/step-drink.png",
-  "step-pro-tip": "/icons/golden/step-pro-tip.png",
+  "step-pour": "/images/icons/gold/step-pour.png",
+  "step-stir": "/images/icons/gold/step-stir.png",
+  "step-drink": "/images/icons/gold/step-drink.png",
+  "step-pro-tip": "/images/icons/gold/step-pro-tip.png",
   
-  // Zero Proof specific (no golden versions, use standard)
-  "zp-nacocktails-with-intention": "/icons/zp-nacocktails-with-intention.png",
-  "zp-zero-percent-alcohol": "/icons/zp-zero-percent-alcohol.png",
-  "zp-margin-wins": "/icons/zp-margin-wins.png",
-  "zp-calm-first-cocktails": "/icons/zp-calm-first-cocktails.png",
-  "zp-social-lift": "/icons/zp-social-lift.png",
-  "zp-built-for-the-bar": "/icons/zp-built-for-the-bar.png",
-  "zp-function-forward": "/icons/zp-function-forward.png",
+  // Zero Proof specific (golden versions for dark backgrounds)
+  "zp-built-for-bar": "/images/icons/gold/zp-built-for-bar.png",
+  "zp-calm-first-cocktails": "/images/icons/gold/zp-calm-first-cocktails.png",
+  "zp-function-forward": "/images/icons/gold/zp-function-forward.png",
+  "zp-margin-wins": "/images/icons/gold/zp-margin-wins.png",
+  "zp-na-cocktails-intention": "/images/icons/gold/zp-na-cocktails-intention.png",
+  "zp-social-lift": "/images/icons/gold/zp-social-lift.png",
+  "zp-zero-percent-alcohol": "/images/icons/gold/zp-zero-percent-alcohol.png",
 } as const
 
 export type AvroIconName = keyof typeof avroIconMap
@@ -138,7 +156,7 @@ interface AvroIconProps {
  * 
  * @param name - Icon name from the icon map
  * @param className - Additional CSS classes
- * @param golden - Use golden variant (for /social page)
+ * @param golden - Use golden variant (for /social page dark backgrounds)
  * @param size - Icon size in pixels (default 40)
  */
 export function AvroIcon({ name, className, golden = false, size = 40 }: AvroIconProps) {
@@ -186,7 +204,7 @@ export const lucideToAvroMap: Record<string, AvroIconName> = {
   // Foundational
   "leaf": "calm-first-foundation",
   "flask": "clinically-tested-ingredients",
-  "beaker": "consistency-and-quality",
+  "beaker": "consistency-quality",
   "shield": "quality-standards",
   "shield-check": "third-party-tested",
   

@@ -335,11 +335,12 @@ export function CohortPage({ data }: { data: CohortData }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {data.reasons.map(([title, copy], index) => {
             // Page-specific icons for "Why AVRO fits" reasons
+            // Icons match the cohort theme and the specific reason titles
             const reasonIcons: Record<string, readonly [AvroIconName, AvroIconName, AvroIconName]> = {
-              golf: ["cohort-golf", "supports-clear-thinking", "control-under-pressure"],
+              golf: ["control-under-pressure", "supports-clear-thinking", "cohort-golf"],
               social: ["zp-zero-percent-alcohol", "zp-social-lift", "zp-function-forward"],
-              work: ["cohort-tech", "supports-focus-without-overload", "supports-steady-attention"],
-              gaming: ["cohort-games", "supports-clear-thinking", "control-under-pressure"],
+              work: ["calm-first-foundation", "supports-clear-thinking", "cohort-tech"],
+              gaming: ["control-under-pressure", "supports-clear-thinking", "supports-steady-attention"],
             }
             const icons = reasonIcons[data.visual] || reasonIcons.golf
             return (
@@ -451,8 +452,9 @@ export function CohortPage({ data }: { data: CohortData }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {data.useMoments.map(([title, copy], index) => {
             // Page-specific icons for use moments
+            // Icons should match the specific moment being described
             const useMomentIcons: Record<string, readonly [AvroIconName, AvroIconName, AvroIconName, AvroIconName]> = {
-              golf: ["cohort-golf", "control-under-pressure", "supports-steady-attention", "social-composure"],
+              golf: ["cohort-golf", "control-under-pressure", "supports-focus-without-overload", "social-composure"],
               social: ["zp-calm-first-cocktails", "zp-zero-percent-alcohol", "zp-social-lift", "relaxation-reduced-tension"],
               work: ["supports-focus-without-overload", "control-under-pressure", "cohort-tech", "supports-steady-attention"],
               gaming: ["cohort-games", "control-under-pressure", "supports-steady-attention", "supports-clear-thinking"],
