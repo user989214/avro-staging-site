@@ -32,7 +32,9 @@ export function CompareAtAGlance() {
       >
         {/* Header row */}
         <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr 1fr 1fr" }}>
-          <div style={{ minHeight: 64, padding: 20, backgroundColor: "var(--base-light)" }} />
+          <div style={{ minHeight: 64, padding: 20, display: "flex", alignItems: "center", backgroundColor: "var(--charcoal)" }}>
+            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--bone)" }}>Formula</span>
+          </div>
           <div style={{ minHeight: 64, padding: 20, display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--calm)" }}>
             <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "#2D1B4E" }}>Calm</span>
           </div>
@@ -74,7 +76,7 @@ export function CompareAtAGlance() {
           </div>
         ))}
 
-        {/* CTA row — charcoal section caps the rounded rectangle */}
+        {/* CTA row */}
         <style>{`
           .compare-cta {
             display: inline-flex;
@@ -87,18 +89,18 @@ export function CompareAtAGlance() {
             padding: 0 28px;
             border-radius: 999px;
             text-decoration: none;
-            border: 2px solid var(--bone);
-            background-color: var(--bone);
-            color: var(--charcoal);
+            border: 2px solid var(--charcoal);
+            background-color: var(--charcoal);
+            color: var(--bone);
             transition: background-color 0.2s ease, color 0.2s ease;
           }
           .compare-cta:hover {
             background-color: transparent;
-            color: var(--bone);
+            color: var(--charcoal);
           }
         `}</style>
-        <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr 1fr 1fr", backgroundColor: "var(--charcoal)" }}>
-          <div style={{ minHeight: 88, padding: 16 }} />
+        <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr 1fr 1fr" }}>
+          <div style={{ minHeight: 88, padding: 16, backgroundColor: "var(--base-light)" }} />
           <div style={{ minHeight: 88, padding: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Link href="/calm" className="compare-cta" style={{ fontFamily: GC }}>Shop Calm</Link>
           </div>
