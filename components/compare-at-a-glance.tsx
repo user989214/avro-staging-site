@@ -62,81 +62,93 @@ export function CompareAtAGlance() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "minmax(140px, 1.1fr) repeat(3, 1fr)",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          columnGap: 16,
+          alignItems: "stretch",
         }}
       >
-        {/* Header row: empty cell + animated color bar + name */}
-        <div />
         {COLS.map((col, i) => (
           <div
             key={col.key}
             style={{
-              padding: "0 18px 20px 18px",
+              backgroundColor: col.color,
+              borderRadius: 24,
+              padding: "28px 22px 22px",
               display: "flex",
               flexDirection: "column",
-              gap: 14,
+              gap: 22,
+              opacity: shown ? 1 : 0,
+              transform: shown ? "translateY(0)" : "translateY(14px)",
+              transition: `opacity 600ms cubic-bezier(0.22,1,0.36,1) ${i * 120}ms, transform 600ms cubic-bezier(0.22,1,0.36,1) ${i * 120}ms`,
             }}
           >
-            <div
-              style={{
-                width: shown ? "100%" : 0,
-                height: 6,
-                borderRadius: 999,
-                backgroundColor: col.color,
-                transition: `width 700ms cubic-bezier(0.22,1,0.36,1) ${i * 120}ms`,
-              }}
-            />
+            {/* Formula name */}
             <span
               style={{
                 fontFamily: GC,
                 fontWeight: 800,
-                fontSize: 18,
+                fontSize: 22,
                 letterSpacing: "-0.01em",
                 color: "var(--ink)",
-                opacity: shown ? 1 : 0,
-                transform: shown ? "translateY(0)" : "translateY(6px)",
-                transition: `opacity 500ms ease ${250 + i * 120}ms, transform 500ms ease ${250 + i * 120}ms`,
               }}
             >
               {col.name}
             </span>
-          </div>
-        ))}
 
-        {/* Data rows */}
-        {ROWS.map((row, rIdx) => {
-          const baseDelay = 400 + rIdx * 90
-          return (
-            <RowFragment key={row.label} row={row} baseDelay={baseDelay} shown={shown} />
-          )
-        })}
+            {/* Each row's value as a stacked block */}
+            {ROWS.map((row, rIdx) => (
+              <div
+                key={row.label}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 4,
+                  opacity: shown ? 1 : 0,
+                  transform: shown ? "translateY(0)" : "translateY(8px)",
+                  transition: `opacity 500ms ease ${300 + i * 120 + rIdx * 70}ms, transform 500ms ease ${300 + i * 120 + rIdx * 70}ms`,
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: 11,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "rgba(30,29,24,0.55)",
+                  }}
+                >
+                  {row.label}
+                </span>
+                <span
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 600,
+                    fontSize: 15,
+                    color: "var(--ink)",
+                    lineHeight: 1.35,
+                  }}
+                >
+                  {row[col.key]}
+                </span>
+              </div>
+            ))}
 
-        {/* CTA row */}
-        <div style={{ borderTop: "1px solid var(--divider)", padding: "22px 0" }} />
-        {COLS.map((col, i) => (
-          <div
-            key={`cta-${col.key}`}
-            style={{
-              borderTop: "1px solid var(--divider)",
-              padding: "22px 18px",
-              display: "flex",
-              alignItems: "center",
-              opacity: shown ? 1 : 0,
-              transform: shown ? "translateY(0)" : "translateY(6px)",
-              transition: `opacity 500ms ease ${800 + i * 80}ms, transform 500ms ease ${800 + i * 80}ms`,
-            }}
-          >
+            {/* CTA */}
             <Link
               href={col.href}
               style={{
+                marginTop: 6,
                 fontFamily: GC,
                 fontWeight: 700,
                 fontSize: 13,
-                padding: "10px 22px",
+                padding: "12px 20px",
                 borderRadius: 999,
                 backgroundColor: "var(--charcoal)",
                 color: "var(--bone)",
                 textDecoration: "none",
+                textAlign: "center",
+                alignSelf: "stretch",
               }}
             >
               Shop {col.name}
@@ -145,70 +157,5 @@ export function CompareAtAGlance() {
         ))}
       </div>
     </div>
-  )
-}
-
-function RowFragment({
-  row,
-  baseDelay,
-  shown,
-}: {
-  row: Row
-  baseDelay: number
-  shown: boolean
-}) {
-  return (
-    <>
-      <div
-        style={{
-          borderTop: "1px solid var(--divider)",
-          padding: "20px 0",
-          display: "flex",
-          alignItems: "center",
-          opacity: shown ? 1 : 0,
-          transform: shown ? "translateY(0)" : "translateY(6px)",
-          transition: `opacity 500ms ease ${baseDelay}ms, transform 500ms ease ${baseDelay}ms`,
-        }}
-      >
-        <span
-          style={{
-            fontFamily: GC,
-            fontWeight: 700,
-            fontSize: 12,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            color: "var(--warm-gray)",
-          }}
-        >
-          {row.label}
-        </span>
-      </div>
-      {(["calm", "focus", "energy"] as const).map((k, i) => (
-        <div
-          key={k}
-          style={{
-            borderTop: "1px solid var(--divider)",
-            padding: "20px 18px",
-            display: "flex",
-            alignItems: "center",
-            opacity: shown ? 1 : 0,
-            transform: shown ? "translateY(0)" : "translateY(6px)",
-            transition: `opacity 500ms ease ${baseDelay + (i + 1) * 70}ms, transform 500ms ease ${baseDelay + (i + 1) * 70}ms`,
-          }}
-        >
-          <span
-            style={{
-              fontFamily: GC,
-              fontWeight: 600,
-              fontSize: 15,
-              color: "var(--ink)",
-              lineHeight: 1.4,
-            }}
-          >
-            {row[k]}
-          </span>
-        </div>
-      ))}
-    </>
   )
 }
