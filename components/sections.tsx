@@ -365,7 +365,7 @@ export function InfoCard({
   const content = (
     <>
       <div className="mb-5">
-        <AvroIcon name={icon} golden={dark} size={56} className="md:w-[72px] md:h-[72px]" />
+              <AvroIcon name={icon} golden={dark} size={72} className="md:w-[96px] md:h-[96px]" />
       </div>
       <h3 className={cn("font-black mb-2", titleColor)}>{title}</h3>
       <p className={cn("text-base leading-relaxed", textColor)}>{children}</p>

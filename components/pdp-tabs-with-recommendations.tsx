@@ -4,8 +4,17 @@ import { useState } from "react"
 import Link from "next/link"
 import { formulas, type FormulaKey } from "@/lib/data"
 import { ProductCard } from "@/components/product-visual"
+import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 
 const GC = '"DM Sans", system-ui, sans-serif'
+
+const dietaryClaims: { icon: AvroIconName; label: string }[] = [
+  { icon: "free-dairy", label: "Dairy Free" },
+  { icon: "free-gmo", label: "Non-GMO" },
+  { icon: "free-vegan", label: "Vegan" },
+  { icon: "gluten-free", label: "Gluten Free" },
+  { icon: "free-sugar", label: "No Added Sugar" },
+]
 
 interface PdpTabsWithRecommendationsProps {
   currentKey: FormulaKey
@@ -128,6 +137,36 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   </li>
                 ))}
               </ul>
+
+              {/* Dietary claims — full-width single row beneath HSA/FSA bullet */}
+              <div
+                className="mt-6 lg:mt-8 pt-5 lg:pt-6 w-full flex items-center justify-between gap-2 sm:gap-4"
+                style={{ borderTop: "1px solid rgba(0,0,0,0.12)" }}
+              >
+                {dietaryClaims.map((claim) => (
+                  <div
+                    key={claim.label}
+                    className="flex flex-col items-center text-center gap-2 flex-1 min-w-0"
+                  >
+                    <AvroIcon
+                      name={claim.icon}
+                      size={48}
+                      className="md:w-16 md:h-16 lg:w-20 lg:h-20 opacity-85"
+                    />
+                    <span
+                      style={{
+                        fontFamily: GC,
+                        fontWeight: 700,
+                        fontSize: "clamp(10px,0.95vw,13px)",
+                        lineHeight: 1.2,
+                        color: "var(--ink)",
+                      }}
+                    >
+                      {claim.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 

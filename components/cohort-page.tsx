@@ -408,7 +408,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                   {step.num}
                 </span>
                 <div className="mb-3">
-                  <AvroIcon name={step.icon} golden={isZeroProof} size={56} className="md:w-[72px] md:h-[72px]" />
+                  <AvroIcon name={step.icon} golden={isZeroProof} size={72} className="md:w-[96px] md:h-[96px]" />
                 </div>
                 <h3
                   style={{

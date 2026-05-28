@@ -1223,7 +1223,7 @@ export function HomeScienceGrid() {
                 {([["Naturally Fermented", "naturally-fermented-pharmagaba"], ["Calm First", "calm-first-foundation"], ["In Every Formula", "ingredient-disclosure"]] as const).map(([label, iconName], i) => (
                   <React.Fragment key={`gaba-${i}`}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, textAlign: "center", minWidth: 60 }}>
-                      <AvroIcon name={iconName} size={32} className="md:w-12 md:h-12" />
+                      <AvroIcon name={iconName} size={48} className="md:w-16 md:h-16" />
                       <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(9px,0.8vw,13px)", color: "var(--charcoal)" }}>{label}</span>
                     </div>
                     {i < 2 && <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--avro-blue)" }}>→</span>}
@@ -1265,7 +1265,7 @@ export function HomeQualityRow() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px,1fr))", gap: 2, backgroundColor: "var(--base-deep)", borderRadius: 20, overflow: "hidden" }}>
             {badges.map((b) => (
               <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, padding: "clamp(20px,3vw,32px) clamp(12px,2vw,20px)", textAlign: "center", backgroundColor: "var(--bone)" }}>
-                <AvroIcon name={b.icon} size={45} className="opacity-80" />
+                <AvroIcon name={b.icon} size={64} className="md:w-20 md:h-20 opacity-80" />
                 <div>
                   <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(15px,1.4vw,19px)", color: "var(--ink)", lineHeight: 1.2, display: "block" }}>{b.label}</strong>
                   <span style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(12px,1vw,15px)", color: "var(--warm-gray)" }}>{b.sub}</span>

@@ -105,8 +105,8 @@ export function IngredientBar({
 }) {
   return (
     <div className={`flex items-center gap-4 p-4 rounded-2xl border ${highlight ? "border-avro-blue bg-avro-blue/5" : "border-line bg-base"}`}>
-      <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center">
-        <AvroIcon name="clinically-tested-ingredients" size={48} />
+          <div className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
+              <AvroIcon name="clinically-tested-ingredients" size={64} className="md:w-20 md:h-20" />
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline justify-between gap-2">

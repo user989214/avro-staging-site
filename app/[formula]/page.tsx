@@ -168,7 +168,7 @@ export default async function ProductPage({
                     height: "clamp(40px,6vw,72px)",
                   }}
                 >
-                  <AvroIcon name={benefit.icon} size={40} className="md:w-[56px] md:h-[56px] lg:w-[72px] lg:h-[72px]" />
+                  <AvroIcon name={benefit.icon} size={56} className="md:w-[72px] md:h-[72px] lg:w-[96px] lg:h-[96px]" />
                 </div>
                 <h3
                   style={{
