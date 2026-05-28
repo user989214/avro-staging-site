@@ -9,8 +9,8 @@ import { useThemeMode } from "@/lib/theme-context"
 const footerLinks = {
   avro: [
     { href: "/contact", label: "Contact Us" },
-    { href: "/shop", label: "My Account" },
-    { href: "/shop", label: "Manage Subscription" },
+    { href: "/account", label: "My Account" },
+    { href: "/account/subscription", label: "Manage Subscription" },
   ],
   shop: [
     { href: "/shop", label: "Shop All" },

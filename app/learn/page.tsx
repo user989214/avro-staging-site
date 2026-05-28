@@ -1,187 +1,314 @@
-import React from "react"
+import Link from "next/link"
+import {
+  CardedSection,
+  Section,
+  SectionHeading,
+  SocialProof,
+  FinalCta,
+  FaqBlock,
+  InfoCard,
+} from "@/components/sections"
+import { PageHero } from "@/components/page-hero"
 
 export const metadata = {
-  title: "Learn | AVRO",
-  description: "Learn how AVRO thinks about calm performance, PharmaGABA®, calm-first energy, and choosing the right formula.",
+  title: "Ingredients | AVRO",
+  description:
+    "Clear ingredient logic. Every AVRO formula starts with naturally fermented PharmaGABA® and a small set of supporting ingredients chosen for their role.",
 }
 
-const GC = '"Gotham Condensed", sans-serif'
+/* ──────────────────────────────────────────────────────────────────────────
+ * Ingredient catalog
+ * Each ingredient lists which formulas it appears in, so the page reads as
+ * one transparent ingredient story across the whole line.
+ * ────────────────────────────────────────────────────────────────────────── */
 
-const articleGroups = [
+type Ingredient = {
+  name: string
+  amount: string
+  description: string
+  image: string
+  formulas: ("Calm" | "Focus" | "Energy")[]
+  group: "foundation" | "active" | "supporting" | "flavor"
+}
+
+const ingredients: Ingredient[] = [
   {
-    title: "Start Here",
-    articles: [
-      "What Is Calm Performance?",
-      "Why More Energy Is Not Always the Answer",
-      "Calm First vs. Stimulant First: What's the Difference?",
-    ],
+    name: "PharmaGABA®",
+    amount: "200 mg",
+    description:
+      "Naturally fermented form of GABA. AVRO's calm-first foundation, used in every formula.",
+    image: "/images/ingredients/pharmagaba-2.jpg",
+    formulas: ["Calm", "Focus", "Energy"],
+    group: "foundation",
   },
   {
-    title: "Science of Calm",
-    articles: [
-      "What Is GABA?",
-      "What Is PharmaGABA®?",
-      "Why Fermentation Matters in AVRO",
-    ],
+    name: "Magnesium Bisglycinate",
+    amount: "850 mg",
+    description:
+      "Yields 100 mg of active magnesium. Supports muscle and nervous system function.",
+    image: "/images/ingredients/magnesium-bisglycinate-2.jpg",
+    formulas: ["Calm"],
+    group: "active",
   },
   {
-    title: "Formula Guides",
-    articles: [
-      "AVRO Calm vs. Focus vs. Energy",
-      "Why AVRO Focus Is Caffeine Free",
-      "What Makes AVRO Energy Different?",
-    ],
+    name: "Cognigrape®",
+    amount: "250 mg",
+    description:
+      "Grape extract studied for cognitive function and clarity support.",
+    image: "/images/ingredients/cognigrape-2.jpg",
+    formulas: ["Focus"],
+    group: "active",
   },
   {
-    title: "Use Guides",
-    articles: [
-      "What to Drink Before Golf When You Do Not Want More Caffeine",
-      "A Calm First Routine Before Deep Work",
-      "Why Long Gaming Sessions Do Not Always Need More Stimulation",
-    ],
+    name: "Natural Caffeine",
+    amount: "120 mg",
+    description:
+      "Plant-derived caffeine for clean, sustained energy without the jitters.",
+    image: "/images/ingredients/natural-caffeine-2.jpg",
+    formulas: ["Energy"],
+    group: "active",
+  },
+  {
+    name: "Prebiotic Fiber",
+    amount: "PHGG + Acacia",
+    description:
+      "Supports gut comfort. Part of AVRO's daily formula across the line.",
+    image: "/images/ingredients/prebiotic-fiber-2.jpg",
+    formulas: ["Calm", "Focus", "Energy"],
+    group: "supporting",
+  },
+  {
+    name: "Stevia",
+    amount: "< 2%",
+    description:
+      "A small amount for a clean, balanced finish. No added sugar, no artificial sweeteners.",
+    image: "/images/ingredients/stevia-2.jpg",
+    formulas: ["Calm", "Focus", "Energy"],
+    group: "supporting",
+  },
+  {
+    name: "Blueberry Acai",
+    amount: "Natural Flavor",
+    description: "Bright, clean flavor for AVRO Calm.",
+    image: "/images/ingredients/blueberry-acai-2.jpg",
+    formulas: ["Calm"],
+    group: "flavor",
+  },
+  {
+    name: "Pomegranate Raspberry",
+    amount: "Natural Flavor",
+    description: "Bright, clean flavor for AVRO Focus.",
+    image: "/images/ingredients/pomegranate-raspberry-2.jpg",
+    formulas: ["Focus"],
+    group: "flavor",
+  },
+  {
+    name: "Orange Tangerine",
+    amount: "Natural Flavor",
+    description: "Bright, clean flavor for AVRO Energy.",
+    image: "/images/ingredients/orange-tangerine.jpg",
+    formulas: ["Energy"],
+    group: "flavor",
   },
 ]
 
-const templateItems: { svg: React.ReactNode; label: string }[] = [
+const groups: { key: Ingredient["group"]; title: string; eyebrow: string; copy: string }[] = [
   {
-    svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
-    label: "Clear question headline",
+    key: "foundation",
+    eyebrow: "The foundation",
+    title: "Calm-first, in every formula.",
+    copy: "Every AVRO stick pack starts with PharmaGABA®, the naturally fermented ingredient at the heart of our calm-first foundation.",
   },
   {
-    svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>,
-    label: "Short answer box",
+    key: "active",
+    eyebrow: "Formula-specific actives",
+    title: "What changes between formulas.",
+    copy: "Calm, Focus, and Energy share the same foundation — what changes is the active that fits the moment.",
   },
   {
-    svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
-    label: "Compliance-safe structure-function language",
+    key: "supporting",
+    eyebrow: "Supporting ingredients",
+    title: "The daily basics.",
+    copy: "A small set of supporting ingredients used across the line for gut comfort and a clean finish.",
   },
   {
-    svg: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 19.12A1 1 0 0 0 4.69 20.7C7.14 20.1 11.75 18.5 14 16c2.5-2.77 2.87-6.12 3-8-.5.25-2.25.75-3 0z"/></svg>,
-    label: "Internal links to formulas, science, cohorts, and FAQ",
+    key: "flavor",
+    eyebrow: "Natural flavors",
+    title: "Bright. Clean. No artificial sweeteners.",
+    copy: "Each formula has its own natural flavor profile, paired to the moment it was built for.",
   },
 ]
 
-export default function LearnPage() {
+export default function IngredientsPage() {
   return (
-    <main>
-      {/* Button hover states */}
-      <style>{`
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Ultra.woff") format("woff"); font-weight: 950; font-style: normal; font-display: swap; }
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Black.woff") format("woff"); font-weight: 800; font-style: normal; font-display: swap; }
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Bold.woff") format("woff"); font-weight: 700; font-style: normal; font-display: swap; }
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Medium.woff") format("woff"); font-weight: 500; font-style: normal; font-display: swap; }
-        @font-face { font-family: "Gotham Condensed"; src: url("/fonts/GothamCond-Book.woff") format("woff"); font-weight: 400; font-style: normal; font-display: swap; }
-        .cta-btn { transition: background-color 0.18s ease, color 0.18s ease; }
-        .cta-btn-white { background-color: #fff; color: #000; border: 2.5px solid #fff; }
-        .cta-btn-white:hover { background-color: transparent; color: #fff; }
-        .cta-btn-blue { background-color: #94C6D4; color: #000; border: 2.5px solid #94C6D4; }
-        .cta-btn-blue:hover { background-color: transparent; color: #94C6D4; }
-      `}</style>
+    <>
+      <PageHero
+        variant="flat"
+        title="Clear ingredient logic. Nothing hidden."
+        lede="Every AVRO formula starts with naturally fermented PharmaGABA®, then adds a small set of supporting ingredients chosen for their role. No filler. No mystery blends."
+        imageSrc=""
+        imageAlt=""
+        primaryCta={{ href: "/shop", label: "Shop AVRO" }}
+        secondaryCta={{ href: "/science", label: "View the Science" }}
+      />
 
-      {/* ── HERO ── */}
-      <section style={{ backgroundColor: "#000", color: "#fff", width: "100%" }}>
-        <div style={{ maxWidth: 1250, margin: "0 auto", padding: "clamp(64px,10vw,128px) clamp(16px,4vw,64px)", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-          <h1 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(56px,8.5vw,120px)", lineHeight: 0.94, color: "#fff", maxWidth: 900, marginBottom: 28 }}>
-            Category ownership, not content noise.
-          </h1>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(20px,2.2vw,26px)", lineHeight: 1.5, color: "rgba(255,255,255,0.78)", maxWidth: 680, marginBottom: 40 }}>
-            Learn how AVRO thinks about calm performance, PharmaGABA®,
-            calm-first energy, state before pressure moments, and choosing the
-            right formula.
-          </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "center" }}>
-            <a href="/learn" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none", backgroundColor: "#94C6D4", color: "#000", border: "2px solid #94C6D4" }}>Read Articles</a>
-            <a href="/shop" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none", backgroundColor: "transparent", color: "#fff", border: "2px solid #fff" }}>Shop AVRO</a>
-          </div>
+      {/* What's inside, at a glance */}
+      <Section>
+        <SectionHeading
+          eyebrow="What's inside"
+          title="A short, transparent list."
+          centered={false}
+        />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <InfoCard icon="leaf" title="Naturally fermented">
+            PharmaGABA® is produced through a natural fermentation process.
+          </InfoCard>
+          <InfoCard icon="shield" title="No added sugar">
+            Sweetened with stevia at 2% or less for a clean, balanced finish.
+          </InfoCard>
+          <InfoCard icon="flask" title="Backed by research">
+            Each ingredient is selected for its role and supported by published studies.
+          </InfoCard>
         </div>
-      </section>
+      </Section>
 
-      {/* ── ARTICLE GROUPS ── */}
-      <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(48px,7vw,88px) clamp(16px,4vw,64px)" }}>
-        <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-          <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(32px,4vw,56px)", lineHeight: 1.02, color: "#000", marginBottom: 40 }}>
-            Start with 12 strong articles.
-          </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
-            {articleGroups.map((group) => (
-              <article key={group.title} style={{ backgroundColor: "#000", borderRadius: 24, padding: 28 }}>
-                <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: 24, color: "#fff", marginBottom: 24, lineHeight: 1.1 }}>
-                  {group.title}
-                </h3>
-                {group.articles.map((article) => (
-                  <a
-                    key={article}
-                    href="/learn"
-                    style={{
-                      display: "block",
-                      fontFamily: GC,
-                      fontWeight: 700,
-                      fontSize: 18,
-                      lineHeight: 1.4,
-                      color: "rgba(255,255,255,0.82)",
-                      borderTop: "1px solid rgba(255,255,255,0.12)",
-                      padding: "16px 0",
-                      textDecoration: "none",
-                    }}
-                  >
-                    {article}
-                  </a>
-                ))}
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* One section per ingredient group */}
+      {groups.map((group) => {
+        const items = ingredients.filter((i) => i.group === group.key)
+        if (items.length === 0) return null
+        return (
+          <CardedSection key={group.key}>
+            <SectionHeading
+              eyebrow={group.eyebrow}
+              title={group.title}
+              description={group.copy}
+              centered={false}
+            />
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
+              {items.map((ingredient) => (
+                <IngredientCard key={ingredient.name} ingredient={ingredient} />
+              ))}
+            </div>
+          </CardedSection>
+        )
+      })}
 
-      {/* ── TEMPLATE SECTION ── */}
-      <section style={{ backgroundColor: "#fff", borderTop: "1px solid #e8e8e8", width: "100%", padding: "clamp(48px,7vw,88px) clamp(16px,4vw,64px)" }}>
-        <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "clamp(32px,6vw,80px)" }}>
-          <div>
-            <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(36px,4.5vw,64px)", lineHeight: 1.02, color: "#000", marginBottom: 20 }}>
-              Built for clear answers.
-            </h2>
-            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(18px,1.6vw,23px)", lineHeight: 1.55, color: "#3a3a3a" }}>
-              Each article should open with a short answer, then explain why it
-              matters, how AVRO thinks about it, which formula fits, FAQs,
-              sources, and a clear CTA.
-            </p>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            {templateItems.map(({ svg, label }) => (
-              <div key={label} style={{ display: "flex", alignItems: "center", gap: 16, backgroundColor: "#000", borderRadius: 24, padding: "20px 24px" }}>
-                <span style={{ flexShrink: 0 }}>{svg}</span>
-                <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(17px,1.5vw,21px)", color: "#fff" }}>
-                  {label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqBlock
+        title="Ingredient questions, answered."
+        centered={false}
+        faqs={[
+          [
+            "Does AVRO contain sugar?",
+            "AVRO is sugar free and uses stevia at 2% or less for a clean, balanced finish.",
+          ],
+          [
+            "Are AVRO ingredients natural?",
+            "AVRO uses naturally fermented PharmaGABA® and natural flavors. There are no artificial sweeteners.",
+          ],
+          [
+            "Which formulas contain caffeine?",
+            "Energy contains 120 mg natural caffeine. Calm and Focus are caffeine free.",
+          ],
+          [
+            "Why prebiotic fiber?",
+            "PHGG and acacia gum are part of AVRO's daily formula base across the line.",
+          ],
+        ]}
+      />
 
-      {/* ── FINAL CTA ── */}
-      <section style={{ backgroundColor: "#fff", width: "100%", padding: "clamp(40px,6vw,72px) clamp(16px,4vw,64px)" }}>
-        <div style={{ maxWidth: 1440, margin: "0 auto", backgroundColor: "#000", borderRadius: 20, padding: "clamp(56px,7vw,88px) clamp(48px,6vw,96px)", display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 48 }}>
-          {/* Left: text */}
-          <div style={{ flex: "1 1 480px", minWidth: 300 }}>
-            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "rgba(255,255,255,0.6)", marginBottom: 16, display: "block" }}>
-              Choose the formula that fits your moment.
-            </span>
-            <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(40px,5.5vw,72px)", lineHeight: 1.0, color: "#fff", marginBottom: 20 }}>
-              Ready to find your formula?
-            </h2>
-            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(19px,1.8vw,24px)", lineHeight: 1.4, color: "rgba(255,255,255,0.75)", maxWidth: 540 }}>
-              Choose Calm, Focus, or Energy based on the moment you want to support.
-            </p>
-          </div>
-          {/* Right: buttons */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-            <a href="/shop/calm" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none" }}>Shop Calm</a>
-            <a href="/shop/focus" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none" }}>Shop Focus</a>
-            <a href="/shop/energy" className="cta-btn cta-btn-white" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none" }}>Shop Energy</a>
-          </div>
+      <SocialProof mode="compact" />
+
+      <div style={{ backgroundColor: "var(--base-deep)" }}>
+        <FinalCta
+          title="Ready to find your formula?"
+          copy="Choose Calm, Focus, or Energy based on the moment you want to support."
+        />
+      </div>
+    </>
+  )
+}
+
+function IngredientCard({ ingredient }: { ingredient: Ingredient }) {
+  return (
+    <div
+      className="flex flex-col"
+      style={{
+        borderRadius: 18,
+        backgroundColor: "var(--base)",
+        border: "1px solid var(--divider)",
+        padding: 14,
+      }}
+    >
+      <div
+        className="relative aspect-square overflow-hidden mb-4"
+        style={{ borderRadius: 12, backgroundColor: "var(--bone)" }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={ingredient.image}
+          alt={ingredient.name}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </div>
+
+      <div className="px-1">
+        <h3
+          className="font-serif"
+          style={{
+            fontWeight: 900,
+            fontSize: 17,
+            lineHeight: 1.15,
+            color: "var(--ink)",
+            marginBottom: 4,
+          }}
+        >
+          {ingredient.name}
+        </h3>
+        <span
+          className="block uppercase tracking-[0.08em]"
+          style={{
+            fontWeight: 700,
+            fontSize: 11,
+            color: "var(--warm-gray)",
+            marginBottom: 8,
+          }}
+        >
+          {ingredient.amount}
+        </span>
+        <p
+          style={{
+            fontWeight: 500,
+            fontSize: 13.5,
+            lineHeight: 1.45,
+            color: "var(--warm-gray)",
+            marginBottom: 10,
+          }}
+        >
+          {ingredient.description}
+        </p>
+
+        {/* Tiny formula-tag row — tells you instantly which products use this ingredient. */}
+        <div className="flex flex-wrap gap-1.5">
+          {ingredient.formulas.map((f) => (
+            <Link
+              key={f}
+              href={`/${f.toLowerCase()}`}
+              className="inline-flex items-center px-2 py-0.5 rounded-full transition-colors hover:bg-charcoal hover:text-bone"
+              style={{
+                fontSize: 10,
+                fontWeight: 800,
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                backgroundColor: "var(--base-light)",
+                color: "var(--ink)",
+                border: "1px solid var(--divider)",
+              }}
+            >
+              {f}
+            </Link>
+          ))}
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   )
 }

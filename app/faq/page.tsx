@@ -173,17 +173,26 @@ export default function FaqPage() {
         compact
         centered
       >
+        {/* Search bar — wider and higher-contrast so it reads clearly against the
+            cream hero. Filled with the lighter "bone" surface, ringed by a charcoal
+            border, and given a visible focus state. */}
         <label
-          className="flex items-center w-full max-w-[640px] gap-3 bg-base rounded-full shadow-[0_2px_24px_rgba(30,29,24,0.06)]"
-          style={{ padding: "18px 28px" }}
+          className="flex items-center w-full max-w-[860px] gap-3 rounded-full transition-colors"
+          style={{
+            padding: "18px 28px",
+            backgroundColor: "var(--bone)",
+            border: "1.5px solid var(--charcoal)",
+            boxShadow: "0 4px 24px rgba(30,29,24,0.08)",
+          }}
         >
-          <Icon name="search" className="w-6 h-6 text-muted shrink-0" />
+          <Icon name="search" className="w-6 h-6 text-charcoal shrink-0" />
           <input
             type="search"
             placeholder="Search AVRO answers"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border-0 outline-0 bg-transparent text-base w-full font-medium placeholder:text-muted"
+            className="border-0 outline-0 bg-transparent w-full font-medium text-ink placeholder:text-warm-gray"
+            style={{ fontSize: 16 }}
           />
         </label>
         <div className="flex flex-wrap gap-2 mt-5 max-w-[720px] justify-center">

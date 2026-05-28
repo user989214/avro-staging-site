@@ -1,15 +1,17 @@
 "use client"
 
 import { useState } from "react"
-import {
-  Section,
-  SectionHeading,
-  SocialProof,
-  FinalCta,
-  InfoCard,
-} from "@/components/sections"
+import { Section, SocialProof, FinalCta } from "@/components/sections"
 import { PageHero } from "@/components/page-hero"
 
+/**
+ * Contact — simplified.
+ *
+ * Single, well-paced flat hero followed by one constrained form card. No
+ * "common contact reasons" rail, no quad of duplicate "InfoCard" tiles, no
+ * eyelid sections — just the hero, the form, and the standard social-proof +
+ * final-CTA closing rhythm used everywhere else on the site.
+ */
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
 
@@ -20,51 +22,58 @@ export default function ContactPage() {
 
   return (
     <>
-      {/* Hero */}
       <PageHero
         variant="flat"
         title="Contact AVRO."
-        lede="Have a question about your order, subscription, formula, or partnership inquiry? Send us a note and we will point you in the right direction."
+        lede="Have a question about your order, subscription, formula, or partnership? Send us a note and we will point you in the right direction."
         imageSrc=""
         imageAlt=""
         primaryCta={{ href: "#message", label: "Send Message" }}
         secondaryCta={{ href: "/faq", label: "Visit Help Center" }}
         compact
+        centered
       />
 
-      {/* Contact form */}
-      <Section id="message">
+      <Section id="message" className="!py-[clamp(40px,5vw,72px)]">
         <form
           onSubmit={handleSubmit}
-          className="grid gap-3.5 p-6 bg-base-light/90 border border-line rounded-2xl shadow-[0_10px_30px_rgba(31,29,24,0.04)] max-w-[640px] mx-auto w-full"
+          className="grid gap-4 mx-auto w-full max-w-[640px]"
+          style={{
+            padding: "clamp(28px,4vw,40px)",
+            backgroundColor: "var(--base-light)",
+            border: "1px solid var(--divider)",
+            borderRadius: 24,
+            boxShadow: "0 10px 30px rgba(31,29,24,0.04)",
+          }}
         >
-          <label className="grid gap-1.5 text-ink font-extrabold">
-            Name
+          <Field label="Name">
             <input
               type="text"
+              required
               placeholder="Your name"
-              className="min-h-[44px] w-full px-3 py-2.5 text-ink bg-base border border-line rounded-[7px] font-normal"
+              className="contact-input"
             />
-          </label>
-          <label className="grid gap-1.5 text-ink font-extrabold">
-            Email
+          </Field>
+
+          <Field label="Email">
             <input
               type="email"
+              required
               placeholder="you@example.com"
-              className="min-h-[44px] w-full px-3 py-2.5 text-ink bg-base border border-line rounded-[7px] font-normal"
+              className="contact-input"
             />
-          </label>
-          <label className="grid gap-1.5 text-ink font-extrabold">
-            Order number, optional
+          </Field>
+
+          <Field label="Order number (optional)">
             <input
               type="text"
               placeholder="#AVRO"
-              className="min-h-[44px] w-full px-3 py-2.5 text-ink bg-base border border-line rounded-[7px] font-normal"
+              className="contact-input"
             />
-          </label>
-          <label className="grid gap-1.5 text-ink font-extrabold">
-            Inquiry type
-            <select className="min-h-[44px] w-full px-3 py-2.5 text-ink bg-base border border-line rounded-[7px] font-normal">
+          </Field>
+
+          <Field label="Inquiry type">
+            <select className="contact-input" defaultValue="Order Support">
               <option>Order Support</option>
               <option>Subscription Support</option>
               <option>Product Question</option>
@@ -73,71 +82,63 @@ export default function ContactPage() {
               <option>Press</option>
               <option>Other</option>
             </select>
-          </label>
-          <label className="grid gap-1.5 text-ink font-extrabold">
-            Message
+          </Field>
+
+          <Field label="Message">
             <textarea
               rows={5}
+              required
               placeholder="How can we help?"
-              className="w-full px-3 py-2.5 text-ink bg-base border border-line rounded-[7px] font-normal resize-y"
+              className="contact-input resize-y"
             />
-          </label>
-          <button type="submit" className="btn-primary">
+          </Field>
+
+          <button type="submit" className="btn-primary mt-2 self-start">
             {submitted ? "Sent!" : "Send Message"}
           </button>
         </form>
-      </Section>
 
-      <Section>
-        <SectionHeading eyebrow="Quick help" title="Find the fastest path." />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5">
-          <InfoCard icon="card" title="Track an Order">
-            Find current order status and delivery updates.
-          </InfoCard>
-          <InfoCard icon="clock" title="Manage Subscription">
-            Update your routine, timing, or formula.
-          </InfoCard>
-          <InfoCard icon="search" title="Visit Help Center">
-            Get answers about products, usage, and policies.
-          </InfoCard>
-          <InfoCard icon="flask" title="Compare Formulas">
-            Choose Calm, Focus, or Energy for your moment.
-          </InfoCard>
-        </div>
-      </Section>
+        {/* Tiny "how to reach us" line — tone-on-tone so it doesn't compete with the form. */}
+        <p
+          className="mx-auto w-full max-w-[640px] mt-5 text-center"
+          style={{
+            fontSize: 13,
+            color: "var(--warm-gray)",
+            lineHeight: 1.5,
+          }}
+        >
+          Prefer email? Write us at{" "}
+          <a
+            href="mailto:hello@avro.com"
+            style={{ color: "var(--ink)", fontWeight: 700 }}
+          >
+            hello@avro.com
+          </a>
+          .
+        </p>
 
-      <Section>
-        <SectionHeading
-          eyebrow="Common contact reasons"
-          title="What can we help with?"
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5">
-          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-full shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
-            <h3 className="font-black mb-2">Product Questions</h3>
-            <p className="text-muted-foreground text-base leading-relaxed">
-              Ask about Calm, Focus, Energy, ingredients, or how to choose.
-            </p>
-          </article>
-          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-full shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
-            <h3 className="font-black mb-2">Order Support</h3>
-            <p className="text-muted-foreground text-base leading-relaxed">
-              Questions about shipping, delivery, damaged product, or returns.
-            </p>
-          </article>
-          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-full shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
-            <h3 className="font-black mb-2">Retail / Wholesale</h3>
-            <p className="text-muted-foreground text-base leading-relaxed">
-              Interested in carrying AVRO.
-            </p>
-          </article>
-          <article className="min-h-[180px] p-7 bg-base-light/72 border border-line rounded-full shadow-[0_10px_30px_rgba(31,29,24,0.04)]">
-            <h3 className="font-black mb-2">Partnerships</h3>
-            <p className="text-muted-foreground text-base leading-relaxed">
-              Creators, events, golf, tech, gaming, or non alcohol
-              collaborations.
-            </p>
-          </article>
-        </div>
+        {/* Inline styles for the form inputs — keeps the form file self-contained
+            and matches the rounded, bone-filled language used elsewhere. */}
+        <style>{`
+          .contact-input {
+            width: 100%;
+            min-height: 48px;
+            padding: 12px 16px;
+            background-color: var(--base);
+            color: var(--ink);
+            border: 1.5px solid var(--divider);
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.18s ease, background-color 0.18s ease;
+          }
+          .contact-input:focus {
+            border-color: var(--charcoal);
+            background-color: var(--bone);
+          }
+          .contact-input::placeholder { color: var(--warm-gray); opacity: 0.7; }
+        `}</style>
       </Section>
 
       <SocialProof mode="compact" />
@@ -147,5 +148,14 @@ export default function ContactPage() {
         productButtons={false}
       />
     </>
+  )
+}
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label className="grid gap-2 text-ink" style={{ fontWeight: 700, fontSize: 14 }}>
+      {label}
+      {children}
+    </label>
   )
 }
