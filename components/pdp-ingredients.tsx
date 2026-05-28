@@ -90,18 +90,18 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
   const ingredients = formulaIngredients[formulaKey]
 
   return (
-    <section className="w-full bg-base py-[clamp(48px,6vw,80px)]" style={{ fontFamily: GC }}>
-      <div className="w-full max-w-[1280px] mx-auto px-[clamp(18px,5vw,64px)]">
+    <section className="w-full bg-base py-[clamp(32px,6vw,80px)]" style={{ fontFamily: GC }}>
+      <div className="w-full max-w-[1280px] mx-auto px-[clamp(16px,5vw,64px)]">
         {/* Header - left aligned, like reference */}
-        <div className="mb-10">
+        <div className="mb-6 lg:mb-10">
           <span
             className="block uppercase tracking-[0.18em]"
             style={{
               fontFamily: GC,
               fontWeight: 700,
-              fontSize: 12,
+              fontSize: "clamp(10px,0.9vw,12px)",
               color: "var(--warm-gray)",
-              marginBottom: 12,
+              marginBottom: 8,
             }}
           >
             What&apos;s inside
@@ -110,7 +110,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
             className="font-serif"
             style={{
               fontWeight: 900,
-              fontSize: "clamp(28px,3.6vw,44px)",
+              fontSize: "clamp(22px,3.6vw,44px)",
               lineHeight: 1.0,
               color: "var(--ink)",
               maxWidth: 720,
@@ -121,21 +121,21 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
         </div>
 
         {/* Ingredients row — small framed image, name, amount label, short description */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-5">
           {ingredients.map((ingredient) => (
             <div
               key={ingredient.name}
               className="flex flex-col"
               style={{
-                borderRadius: 18,
+                borderRadius: 14,
                 backgroundColor: "var(--base-light)",
-                padding: 14,
+                padding: "clamp(10px,1.5vw,14px)",
               }}
             >
               {/* Image frame — square, matches homepage product cards (no stroke) */}
               <div
-                className="relative aspect-square overflow-hidden mb-4"
-                style={{ borderRadius: 12, backgroundColor: "var(--bone)" }}
+                className="relative aspect-square overflow-hidden mb-3"
+                style={{ borderRadius: 10, backgroundColor: "var(--bone)" }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -146,15 +146,15 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
               </div>
 
               {/* Content */}
-              <div className="px-1">
+              <div className="px-0.5">
                 <h3
                   style={{
                     fontFamily: GC,
                     fontWeight: 800,
-                    fontSize: 16,
+                    fontSize: "clamp(12px,1.2vw,16px)",
                     lineHeight: 1.15,
                     color: "var(--ink)",
-                    marginBottom: 4,
+                    marginBottom: 2,
                   }}
                 >
                   {ingredient.name}
@@ -164,9 +164,9 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
                   style={{
                     fontFamily: GC,
                     fontWeight: 700,
-                    fontSize: 11,
+                    fontSize: "clamp(9px,0.8vw,11px)",
                     color: "var(--warm-gray)",
-                    marginBottom: 8,
+                    marginBottom: 6,
                   }}
                 >
                   {ingredient.amount}
@@ -175,7 +175,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
                   style={{
                     fontFamily: GC,
                     fontWeight: 500,
-                    fontSize: 13.5,
+                    fontSize: "clamp(11px,1vw,13.5px)",
                     lineHeight: 1.4,
                     color: "var(--warm-gray)",
                   }}

@@ -73,17 +73,30 @@ export default async function ProductPage({
 
   return (
     <>
-      {/* PDP Hero - rounded section background, like homepage feature blocks */}
+      {/* PDP Hero - full width on mobile, rounded on desktop */}
       <section
+        className="pdp-hero-section"
         style={{
           width: "100%",
           maxWidth: 1440,
           margin: "0 auto",
-          padding: "clamp(12px,2.5vw,32px) clamp(10px,5vw,64px) clamp(20px,3vw,40px)",
+          padding: "clamp(0px,2.5vw,32px) clamp(0px,5vw,64px) clamp(16px,3vw,40px)",
           backgroundColor: "var(--base)",
         }}
       >
+        <style>{`
+          @media (max-width: 768px) {
+            .pdp-hero-section {
+              padding: 0 0 16px 0 !important;
+            }
+            .pdp-hero-card {
+              border-radius: 0 !important;
+              padding: 16px !important;
+            }
+          }
+        `}</style>
         <div
+          className="pdp-hero-card"
           style={{
             backgroundColor: "var(--base-light, #f5f1e8)",
             borderRadius: 24,
@@ -95,8 +108,8 @@ export default async function ProductPage({
       </section>
 
       {/* Tabs with Recommendations */}
-      <section style={{ width: "100%", backgroundColor: "var(--base)", paddingBottom: "clamp(32px,4vw,48px)" }}>
-        <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "0 clamp(14px,5vw,64px)" }}>
+      <section style={{ width: "100%", backgroundColor: "var(--base)", paddingBottom: "clamp(24px,4vw,48px)" }}>
+        <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "0 clamp(16px,5vw,64px)" }}>
           <PdpTabsWithRecommendations currentKey={key} />
         </div>
       </section>
@@ -105,25 +118,33 @@ export default async function ProductPage({
       <PdpIngredients formulaKey={key} />
 
       {/* The feeling of good calm/focus/energy */}
-      <section style={{ width: "100%", backgroundColor: "var(--base)", padding: "clamp(48px,6vw,80px) 0" }}>
-        <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "0 clamp(18px,5vw,64px)" }}>
+      <section style={{ width: "100%", backgroundColor: "var(--base)", padding: "clamp(32px,6vw,80px) 0" }}>
+        <div style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "0 clamp(16px,5vw,64px)" }}>
           {/* Section header */}
           <h2
             className="font-serif"
             style={{
               fontWeight: 900,
-              fontSize: "clamp(32px,4.5vw,56px)",
+              fontSize: "clamp(24px,4.5vw,56px)",
               lineHeight: 1.0,
               color: "var(--ink)",
               textAlign: "left",
-              marginBottom: 40,
+              marginBottom: "clamp(20px,3vw,40px)",
             }}
           >
             The feeling of good {key}.
           </h2>
 
-          {/* Benefit icons - 4 across */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16, marginBottom: 40 }}>
+          {/* Benefit icons - 2x2 on mobile, 4 across on desktop */}
+          <div className="pdp-benefits-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10, marginBottom: "clamp(24px,3vw,40px)" }}>
+            <style>{`
+              @media (min-width: 768px) {
+                .pdp-benefits-grid {
+                  grid-template-columns: repeat(4, 1fr) !important;
+                  gap: 16px !important;
+                }
+              }
+            `}</style>
             {feelingBenefits[key].map((benefit) => (
               <div
                 key={benefit.title}
@@ -132,10 +153,10 @@ export default async function ProductPage({
                   flexDirection: "column",
                   alignItems: "center",
                   textAlign: "center",
-                  gap: 12,
-                  padding: 24,
+                  gap: 8,
+                  padding: "clamp(14px,2vw,24px)",
                   backgroundColor: "var(--base-light)",
-                  borderRadius: 20,
+                  borderRadius: 16,
                 }}
               >
                 <div
@@ -143,17 +164,17 @@ export default async function ProductPage({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    width: 72,
-                    height: 72,
+                    width: "clamp(40px,6vw,72px)",
+                    height: "clamp(40px,6vw,72px)",
                   }}
                 >
-                  <AvroIcon name={benefit.icon} size={56} className="md:w-[72px] md:h-[72px]" />
+                  <AvroIcon name={benefit.icon} size={40} className="md:w-[56px] md:h-[56px] lg:w-[72px] lg:h-[72px]" />
                 </div>
                 <h3
                   style={{
                     fontFamily: GC,
                     fontWeight: 700,
-                    fontSize: 16,
+                    fontSize: "clamp(11px,1.2vw,16px)",
                     lineHeight: 1.2,
                     color: "var(--ink)",
                   }}
@@ -165,23 +186,23 @@ export default async function ProductPage({
           </div>
 
           {/* Graph section - two columns */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 40, alignItems: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 24, alignItems: "center" }}>
             <style>{`
               @media (min-width: 1024px) {
-                .pdp-graph-grid { grid-template-columns: 1fr 1fr !important; }
+                .pdp-graph-grid { grid-template-columns: 1fr 1fr !important; gap: 40px !important; }
               }
             `}</style>
-            <div className="pdp-graph-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 40, alignItems: "center" }}>
+            <div className="pdp-graph-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 24, alignItems: "center" }}>
               {/* Left side - text */}
               <div>
                 <p
                   style={{
                     fontFamily: GC,
                     fontWeight: 400,
-                    fontSize: 18,
+                    fontSize: "clamp(14px,1.3vw,18px)",
                     lineHeight: 1.55,
                     color: "var(--warm-gray)",
-                    marginBottom: 16,
+                    marginBottom: 12,
                   }}
                 >
                   {key === "energy"
@@ -194,10 +215,10 @@ export default async function ProductPage({
                   style={{
                     fontFamily: GC,
                     fontWeight: 400,
-                    fontSize: 18,
+                    fontSize: "clamp(14px,1.3vw,18px)",
                     lineHeight: 1.55,
                     color: "var(--warm-gray)",
-                    marginBottom: 24,
+                    marginBottom: 20,
                   }}
                 >
                   {key === "energy"
@@ -215,19 +236,19 @@ export default async function ProductPage({
                     color: var(--charcoal);
                   }
                 `}</style>
-                <div style={{ display: "inline-flex", flexWrap: "wrap", gap: 12 }}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   <a
                     href="/science"
                     className="pdp-learn-btn"
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
-                      gap: 12,
+                      gap: 8,
                       fontFamily: GC,
                       fontWeight: 700,
-                      fontSize: 16,
-                      minHeight: 48,
-                      padding: "0 28px",
+                      fontSize: "clamp(12px,1vw,16px)",
+                      minHeight: "clamp(38px,4vw,48px)",
+                      padding: "0 clamp(16px,2vw,28px)",
                       borderRadius: 999,
                       backgroundColor: "var(--charcoal)",
                       color: "var(--bone)",
@@ -236,18 +257,18 @@ export default async function ProductPage({
                     }}
                   >
                     Learn how it works
-                    <Icon name="arrowRight" className="w-5 h-5" />
+                    <Icon name="arrowRight" className="w-4 h-4" />
                   </a>
                   <SupplementFactsDialog formula={item} formulaKey={key} />
                 </div>
               </div>
 
               {/* Right side - graph */}
-              <div style={{ padding: 24, backgroundColor: "var(--charcoal)", borderRadius: 24 }}>
+              <div style={{ padding: "clamp(14px,2vw,24px)", backgroundColor: "var(--charcoal)", borderRadius: 20 }}>
                 {/* Graph */}
-                <div style={{ position: "relative", height: 200 }}>
+                <div style={{ position: "relative", height: "clamp(140px,18vw,200px)" }}>
                   {/* Grid lines */}
-                  <div style={{ position: "absolute", inset: "0 0 32px 0", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                  <div style={{ position: "absolute", inset: "0 0 28px 0", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                     {[0, 1, 2, 3, 4].map((i) => (
                       <div key={i} style={{ width: "100%", borderTop: "1px solid rgba(245,241,234,0.1)" }} />
                     ))}
@@ -256,7 +277,7 @@ export default async function ProductPage({
                   {/* SVG curves */}
                   <svg
                     viewBox="0 0 400 200"
-                    style={{ position: "absolute", inset: "0 0 32px 0", width: "100%", height: "calc(100% - 32px)" }}
+                    style={{ position: "absolute", inset: "0 0 28px 0", width: "100%", height: "calc(100% - 28px)" }}
                     preserveAspectRatio="none"
                   >
                     <path
@@ -296,7 +317,7 @@ export default async function ProductPage({
                       justifyContent: "space-between",
                       fontFamily: GC,
                       fontWeight: 700,
-                      fontSize: 12,
+                      fontSize: "clamp(9px,1vw,12px)",
                       color: "rgba(245,241,234,0.5)",
                     }}
                   >
@@ -315,28 +336,28 @@ export default async function ProductPage({
                     flexWrap: "wrap",
                     alignItems: "center",
                     justifyContent: "center",
-                    gap: 24,
-                    marginTop: 16,
-                    paddingTop: 16,
+                    gap: "clamp(12px,2vw,24px)",
+                    marginTop: 12,
+                    paddingTop: 12,
                     borderTop: "1px solid rgba(245,241,234,0.15)",
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ width: 24, height: 4, borderRadius: 999, backgroundColor: BLUE }} />
-                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 12, color: "var(--bone)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <div style={{ width: 20, height: 3, borderRadius: 999, backgroundColor: BLUE }} />
+                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(10px,0.9vw,12px)", color: "var(--bone)" }}>
                       AVRO {item.short}
                     </span>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                     <div
                       style={{
-                        width: 24,
-                        height: 4,
+                        width: 20,
+                        height: 3,
                         borderRadius: 999,
                         backgroundImage: "repeating-linear-gradient(90deg, rgba(245,241,234,0.4), rgba(245,241,234,0.4) 4px, transparent 4px, transparent 8px)",
                       }}
                     />
-                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 12, color: "rgba(245,241,234,0.5)" }}>
+                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(10px,0.9vw,12px)", color: "rgba(245,241,234,0.5)" }}>
                       {key === "energy" ? "Coffee" : "Typical Stress"}
                     </span>
                   </div>
@@ -351,16 +372,16 @@ export default async function ProductPage({
       <ProductComparisonGrid currentKey={key} />
 
       {/* Your favorites. On repeat - Subscription CTA */}
-      <section style={{ width: "100%", padding: "clamp(36px,4vw,56px) 0", backgroundColor: "var(--avro-blue)" }}>
-        <div style={{ width: "100%", maxWidth: 1250, margin: "0 auto", padding: "0 clamp(18px,5vw,64px)" }}>
+      <section style={{ width: "100%", padding: "clamp(28px,4vw,56px) 0", backgroundColor: "var(--avro-blue)" }}>
+        <div style={{ width: "100%", maxWidth: 1250, margin: "0 auto", padding: "0 clamp(16px,5vw,64px)" }}>
           <h2
             className="font-serif"
             style={{
               fontWeight: 900,
-              fontSize: "clamp(26px,3.5vw,44px)",
+              fontSize: "clamp(22px,3.5vw,44px)",
               lineHeight: 1.05,
               color: "var(--charcoal)",
-              marginBottom: 12,
+              marginBottom: 10,
             }}
           >
             Your favorites. On repeat.
@@ -369,12 +390,12 @@ export default async function ProductPage({
             style={{
               fontFamily: GC,
               fontWeight: 400,
-              fontSize: 17,
+              fontSize: "clamp(13px,1.2vw,17px)",
               lineHeight: 1.5,
               color: "var(--charcoal)",
               opacity: 0.75,
               maxWidth: 500,
-              margin: "0 0 24px",
+              margin: "0 0 20px",
             }}
           >
             Save 25% when you subscribe. Pick your favorites, set your schedule. Leave the rest to us.
@@ -394,12 +415,12 @@ export default async function ProductPage({
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: 8,
+              gap: 6,
               fontFamily: GC,
               fontWeight: 700,
-              fontSize: 16,
-              minHeight: 48,
-              padding: "0 28px",
+              fontSize: "clamp(12px,1vw,16px)",
+              minHeight: "clamp(38px,4vw,48px)",
+              padding: "0 clamp(18px,2vw,28px)",
               borderRadius: 999,
               backgroundColor: "var(--charcoal)",
               color: "var(--bone)",
@@ -414,19 +435,19 @@ export default async function ProductPage({
       </section>
 
       {/* FAQ accordion */}
-      <section style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "clamp(36px,4vw,56px) clamp(18px,5vw,64px)", backgroundColor: "var(--base)" }}>
+      <section style={{ width: "100%", maxWidth: 1440, margin: "0 auto", padding: "clamp(28px,4vw,56px) clamp(16px,5vw,64px)", backgroundColor: "var(--base)" }}>
         <style>{`
           @media (min-width: 1024px) {
             .pdp-faq-grid { grid-template-columns: 0.7fr 1.3fr !important; }
           }
         `}</style>
-        <div className="pdp-faq-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 32, alignItems: "start" }}>
+        <div className="pdp-faq-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 24, alignItems: "start" }}>
           <div>
             <h2
               className="font-serif"
               style={{
                 fontWeight: 900,
-                fontSize: "clamp(26px,3.5vw,44px)",
+                fontSize: "clamp(22px,3.5vw,44px)",
                 lineHeight: 1.05,
                 color: "var(--ink)",
               }}
@@ -465,13 +486,13 @@ export default async function ProductPage({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    gap: 16,
-                    padding: "16px 0",
+                    gap: 12,
+                    padding: "14px 0",
                     cursor: "pointer",
                     listStyle: "none",
                     fontFamily: GC,
                     fontWeight: 700,
-                    fontSize: 17,
+                    fontSize: "clamp(13px,1.2vw,17px)",
                     color: "var(--ink)",
                   }}
                 >
@@ -480,10 +501,10 @@ export default async function ProductPage({
                     style={{
                       display: "grid",
                       placeItems: "center",
-                      width: 32,
-                      height: 32,
+                      width: 28,
+                      height: 28,
                       borderRadius: 9999,
-                      fontSize: 18,
+                      fontSize: 16,
                       lineHeight: 1,
                       flexShrink: 0,
                       backgroundColor: "var(--charcoal)",
@@ -495,11 +516,11 @@ export default async function ProductPage({
                 </summary>
                 <p
                   style={{
-                    paddingBottom: 16,
+                    paddingBottom: 14,
                     paddingRight: 40,
                     fontFamily: GC,
                     fontWeight: 400,
-                    fontSize: 16,
+                    fontSize: "clamp(13px,1.1vw,16px)",
                     lineHeight: 1.55,
                     color: "var(--warm-gray)",
                   }}
