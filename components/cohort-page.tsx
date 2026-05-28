@@ -111,12 +111,12 @@ export function CohortPage({ data }: { data: CohortData }) {
       alt: "Elegant cocktail coupes with grapefruit garnish",
     },
     work: {
-      src: "/images/lifestyle/journal-coffee-window.jpg",
-      alt: "Journal and coffee by a sunlit window",
+      src: "/images/lifestyle/tube-tech-focus-pomegranate-raspberry.png",
+      alt: "AVRO Focus tube at a modern office desk",
     },
     gaming: {
-      src: "/images/lifestyle/journal-coffee-window.jpg",
-      alt: "Journal and coffee by a sunlit window for focused gaming sessions",
+      src: "/images/lifestyle/focus-iced-drink-headphones.jpg",
+      alt: "Iced AVRO drink and headphones on a gaming desk",
     },
   }
 
@@ -200,7 +200,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  objectPosition: "70% center",
+                  objectPosition: data.visual === "gaming" ? "60% center" : data.visual === "work" ? "center center" : "70% center",
                 }}
               />
 
