@@ -3,118 +3,46 @@
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
-const GC = '"DM Sans", system-ui, sans-serif'
+const GC = "var(--font-good-centra)"
 
-type Formula = {
-  name: "Calm" | "Focus" | "Energy"
-  href: string
-  accent: string
-  ink: string
-  primaryState: string
-  bestFor: string
-  caffeine: string
-  keyAddition: string
-}
+type Row = { label: string; calm: string; focus: string; energy: string }
 
-const FORMULAS: Formula[] = [
-  {
-    name: "Calm",
-    href: "/calm",
-    accent: "#94C6D4",
-    ink: "var(--charcoal)",
-    primaryState: "Composure",
-    bestFor: "Travel, social calm, daily reset",
-    caffeine: "No",
-    keyAddition: "Magnesium Bisglycinate",
-  },
-  {
-    name: "Focus",
-    href: "/focus",
-    accent: "#94C6D4",
-    ink: "var(--charcoal)",
-    primaryState: "Clear focus",
-    bestFor: "Deep work, meetings, study",
-    caffeine: "No",
-    keyAddition: "Cognigrape",
-  },
-  {
-    name: "Energy",
-    href: "/energy",
-    accent: "#94C6D4",
-    ink: "var(--charcoal)",
-    primaryState: "Steady energy",
-    bestFor: "Mornings, long days, travel",
-    caffeine: "Yes, 120 mg natural",
-    keyAddition: "Natural caffeine",
-  },
+const ROWS: Row[] = [
+  { label: "Primary state", calm: "Composure", focus: "Clear focus", energy: "Steady energy" },
+  { label: "Best for", calm: "Travel, social calm, daily reset", focus: "Deep work, meetings, study", energy: "Mornings, long days, travel" },
+  { label: "Caffeine", calm: "No", focus: "No", energy: "Yes, 120 mg natural" },
+  { label: "Key addition", calm: "Magnesium Bisglycinate", focus: "Cognigrape", energy: "Natural caffeine" },
 ]
 
-const ATTRIBUTES: { key: keyof Pick<Formula, "primaryState" | "bestFor" | "caffeine" | "keyAddition">; label: string }[] = [
-  { key: "primaryState", label: "Primary state" },
-  { key: "bestFor", label: "Best for" },
-  { key: "caffeine", label: "Caffeine" },
-  { key: "keyAddition", label: "Key addition" },
+const COLS = [
+  { key: "calm" as const, name: "Calm", color: "var(--calm)", href: "/calm" },
+  { key: "focus" as const, name: "Focus", color: "var(--focus)", href: "/focus" },
+  { key: "energy" as const, name: "Energy", color: "var(--energy)", href: "/energy" },
 ]
 
 export function CompareAtAGlance() {
   const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
+  const [shown, setShown] = useState(false)
 
   useEffect(() => {
-    const node = ref.current
-    if (!node) return
+    if (!ref.current) return
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            setVisible(true)
+            setShown(true)
             obs.disconnect()
           }
         })
       },
-      { threshold: 0.18 }
+      { threshold: 0.2 },
     )
-    obs.observe(node)
+    obs.observe(ref.current)
     return () => obs.disconnect()
   }, [])
 
   return (
     <div ref={ref}>
-      <style>{`
-        @keyframes cag-fade-up {
-          from { opacity: 0; transform: translateY(24px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes cag-row-in {
-          from { opacity: 0; transform: translateX(-12px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-        .cag-card {
-          opacity: 0;
-        }
-        .cag-card.in {
-          animation: cag-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-        .cag-row {
-          opacity: 0;
-        }
-        .cag-row.in {
-          animation: cag-row-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-        .cag-card-inner {
-          transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
-        }
-        .cag-card-inner:hover {
-          transform: translateY(-4px);
-        }
-        .cag-cta {
-          transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
-        }
-        .cag-cta:hover {
-          transform: translateY(-1px);
-        }
-      `}</style>
-
       <h2
         className="font-serif"
         style={{
@@ -134,138 +62,153 @@ export function CompareAtAGlance() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-          gap: 16,
+          gridTemplateColumns: "minmax(140px, 1.1fr) repeat(3, 1fr)",
         }}
       >
-        {FORMULAS.map((f, i) => (
+        {/* Header row: empty cell + animated color bar + name */}
+        <div />
+        {COLS.map((col, i) => (
           <div
-            key={f.name}
-            className={`cag-card ${visible ? "in" : ""}`}
+            key={col.key}
             style={{
-              animationDelay: `${i * 120}ms`,
+              padding: "0 18px 20px 18px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 14,
             }}
           >
             <div
-              className="cag-card-inner"
               style={{
-                backgroundColor: "var(--bone)",
-                borderRadius: 20,
-                overflow: "hidden",
-                border: "1px solid rgba(30,29,24,0.08)",
-                display: "flex",
-                flexDirection: "column",
-                height: "100%",
+                width: shown ? "100%" : 0,
+                height: 6,
+                borderRadius: 999,
+                backgroundColor: col.color,
+                transition: `width 700ms cubic-bezier(0.22,1,0.36,1) ${i * 120}ms`,
+              }}
+            />
+            <span
+              style={{
+                fontFamily: GC,
+                fontWeight: 800,
+                fontSize: 18,
+                letterSpacing: "-0.01em",
+                color: "var(--ink)",
+                opacity: shown ? 1 : 0,
+                transform: shown ? "translateY(0)" : "translateY(6px)",
+                transition: `opacity 500ms ease ${250 + i * 120}ms, transform 500ms ease ${250 + i * 120}ms`,
               }}
             >
-              {/* Accent header */}
-              <div
-                style={{
-                  backgroundColor: f.accent,
-                  padding: "20px 24px",
-                  display: "flex",
-                  alignItems: "baseline",
-                  justifyContent: "space-between",
-                  gap: 12,
-                }}
-              >
-                <span
-                  className="font-serif"
-                  style={{
-                    fontWeight: 900,
-                    fontSize: 26,
-                    letterSpacing: "-0.02em",
-                    color: f.ink,
-                    lineHeight: 1,
-                  }}
-                >
-                  {f.name}
-                </span>
-                <span
-                  style={{
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 11,
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
-                    color: f.ink,
-                    opacity: 0.7,
-                  }}
-                >
-                  0{i + 1}
-                </span>
-              </div>
+              {col.name}
+            </span>
+          </div>
+        ))}
 
-              {/* Attribute rows */}
-              <div style={{ padding: "8px 24px", flex: 1 }}>
-                {ATTRIBUTES.map((attr, ri) => (
-                  <div
-                    key={attr.key}
-                    className={`cag-row ${visible ? "in" : ""}`}
-                    style={{
-                      animationDelay: `${i * 120 + 200 + ri * 80}ms`,
-                      padding: "16px 0",
-                      borderBottom:
-                        ri < ATTRIBUTES.length - 1
-                          ? "1px solid rgba(30,29,24,0.08)"
-                          : "none",
-                    }}
-                  >
-                    <div
-                      style={{
-                        fontFamily: GC,
-                        fontWeight: 700,
-                        fontSize: 11,
-                        letterSpacing: "0.16em",
-                        textTransform: "uppercase",
-                        color: "var(--warm-gray)",
-                        marginBottom: 6,
-                      }}
-                    >
-                      {attr.label}
-                    </div>
-                    <div
-                      style={{
-                        fontFamily: GC,
-                        fontWeight: 600,
-                        fontSize: 15,
-                        color: "var(--ink)",
-                        lineHeight: 1.4,
-                      }}
-                    >
-                      {f[attr.key]}
-                    </div>
-                  </div>
-                ))}
-              </div>
+        {/* Data rows */}
+        {ROWS.map((row, rIdx) => {
+          const baseDelay = 400 + rIdx * 90
+          return (
+            <RowFragment key={row.label} row={row} baseDelay={baseDelay} shown={shown} />
+          )
+        })}
 
-              {/* CTA */}
-              <div style={{ padding: "16px 24px 24px" }}>
-                <Link
-                  href={f.href}
-                  className="cag-cta"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: 14,
-                    padding: "14px 20px",
-                    borderRadius: 999,
-                    backgroundColor: "var(--charcoal)",
-                    color: "var(--bone)",
-                    textDecoration: "none",
-                    width: "100%",
-                  }}
-                >
-                  Shop {f.name}
-                </Link>
-              </div>
-            </div>
+        {/* CTA row */}
+        <div style={{ borderTop: "1px solid var(--divider)", padding: "22px 0" }} />
+        {COLS.map((col, i) => (
+          <div
+            key={`cta-${col.key}`}
+            style={{
+              borderTop: "1px solid var(--divider)",
+              padding: "22px 18px",
+              display: "flex",
+              alignItems: "center",
+              opacity: shown ? 1 : 0,
+              transform: shown ? "translateY(0)" : "translateY(6px)",
+              transition: `opacity 500ms ease ${800 + i * 80}ms, transform 500ms ease ${800 + i * 80}ms`,
+            }}
+          >
+            <Link
+              href={col.href}
+              style={{
+                fontFamily: GC,
+                fontWeight: 700,
+                fontSize: 13,
+                padding: "10px 22px",
+                borderRadius: 999,
+                backgroundColor: "var(--charcoal)",
+                color: "var(--bone)",
+                textDecoration: "none",
+              }}
+            >
+              Shop {col.name}
+            </Link>
           </div>
         ))}
       </div>
     </div>
+  )
+}
+
+function RowFragment({
+  row,
+  baseDelay,
+  shown,
+}: {
+  row: Row
+  baseDelay: number
+  shown: boolean
+}) {
+  return (
+    <>
+      <div
+        style={{
+          borderTop: "1px solid var(--divider)",
+          padding: "20px 0",
+          display: "flex",
+          alignItems: "center",
+          opacity: shown ? 1 : 0,
+          transform: shown ? "translateY(0)" : "translateY(6px)",
+          transition: `opacity 500ms ease ${baseDelay}ms, transform 500ms ease ${baseDelay}ms`,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: GC,
+            fontWeight: 700,
+            fontSize: 12,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            color: "var(--warm-gray)",
+          }}
+        >
+          {row.label}
+        </span>
+      </div>
+      {(["calm", "focus", "energy"] as const).map((k, i) => (
+        <div
+          key={k}
+          style={{
+            borderTop: "1px solid var(--divider)",
+            padding: "20px 18px",
+            display: "flex",
+            alignItems: "center",
+            opacity: shown ? 1 : 0,
+            transform: shown ? "translateY(0)" : "translateY(6px)",
+            transition: `opacity 500ms ease ${baseDelay + (i + 1) * 70}ms, transform 500ms ease ${baseDelay + (i + 1) * 70}ms`,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: GC,
+              fontWeight: 600,
+              fontSize: 15,
+              color: "var(--ink)",
+              lineHeight: 1.4,
+            }}
+          >
+            {row[k]}
+          </span>
+        </div>
+      ))}
+    </>
   )
 }
