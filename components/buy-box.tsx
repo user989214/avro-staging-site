@@ -69,11 +69,11 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
       </header>
 
       {/* Flavor switcher - compact circular pills */}
-      <div className="flex flex-col gap-1.5">
-        <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--ink)" }}>
+      <div className="flex flex-col gap-1">
+        <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "var(--ink)" }}>
           Flavor
         </span>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5">
           {formula.flavors.map((flavor) => {
             const isSelected = flavorId === flavor.id
             return (
@@ -81,7 +81,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
                 key={flavor.id}
                 type="button"
                 onClick={() => onFlavorChange(flavor.id)}
-                className="inline-flex items-center gap-2 pl-1 pr-4 py-1 transition-all"
+                className="inline-flex items-center gap-1.5 pl-0.5 pr-3 py-0.5 transition-all"
                 style={{
                   borderRadius: 999,
                   backgroundColor: isSelected ? "var(--charcoal)" : LIGHT_GRAY,
@@ -90,7 +90,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
               >
                 {/* Circular solo tube thumbnail */}
                 <div
-                  className="w-9 h-9 overflow-hidden flex-shrink-0 grid place-items-center"
+                  className="w-7 h-7 overflow-hidden flex-shrink-0 grid place-items-center"
                   style={{
                     borderRadius: 999,
                     backgroundColor: "#FBF8F1",
@@ -107,7 +107,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
                   style={{
                     fontFamily: GC,
                     fontWeight: 700,
-                    fontSize: 13,
+                    fontSize: 12,
                     lineHeight: 1,
                     color: isSelected ? "var(--bone)" : "var(--ink)",
                     whiteSpace: "nowrap",
@@ -122,7 +122,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
       </div>
 
       {/* Purchase options - fully circular pills */}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-1.5">
         <PurchaseOption
           checked={purchaseType === "subscribe"}
           onChange={() => setPurchaseType("subscribe")}
@@ -141,12 +141,12 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
       </div>
 
       {/* Quantity - compact */}
-      <div className="flex items-center justify-between gap-3 flex-wrap">
+      <div className="flex items-center justify-between gap-2 flex-wrap">
         <span
           style={{
             fontFamily: GC,
             fontWeight: 700,
-            fontSize: 16,
+            fontSize: 14,
             color: "var(--ink)",
           }}
         >
@@ -164,15 +164,15 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
             type="button"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             aria-label="Decrease quantity"
-            className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center transition-colors hover:bg-black/5 disabled:opacity-40"
-            style={{ fontFamily: GC, fontWeight: 700, fontSize: 22, color: "var(--charcoal)" }}
+            className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center transition-colors hover:bg-black/5 disabled:opacity-40"
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--charcoal)" }}
             disabled={quantity <= 1}
           >
             −
           </button>
           <span
-            className="w-10 text-center"
-            style={{ fontFamily: GC, fontWeight: 800, fontSize: 18, color: "var(--charcoal)" }}
+            className="w-8 text-center"
+            style={{ fontFamily: GC, fontWeight: 800, fontSize: 16, color: "var(--charcoal)" }}
           >
             {quantity}
           </span>
@@ -180,15 +180,15 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
             type="button"
             onClick={() => setQuantity((q) => q + 1)}
             aria-label="Increase quantity"
-            className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center transition-colors hover:bg-black/5"
-            style={{ fontFamily: GC, fontWeight: 700, fontSize: 22, color: "var(--charcoal)" }}
+            className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center transition-colors hover:bg-black/5"
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--charcoal)" }}
           >
             +
           </button>
         </div>
       </div>
 
-      {/* Add to cart - larger, prominent */}
+      {/* Add to cart */}
       <button
         type="button"
         onClick={handleAdd}
@@ -196,9 +196,9 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         style={{
           fontFamily: GC,
           fontWeight: 800,
-          fontSize: 16,
-          minHeight: 56,
-          padding: "0 18px",
+          fontSize: 14,
+          minHeight: 48,
+          padding: "0 16px",
           borderRadius: 999,
           backgroundColor: "var(--charcoal)",
           color: "var(--bone)",
@@ -237,13 +237,13 @@ function PurchaseOption({
 }) {
   return (
     <label
-      className="relative flex items-center gap-3 cursor-pointer transition-colors"
+      className="relative flex items-center gap-2.5 cursor-pointer transition-colors"
       style={{
         backgroundColor: checked ? "var(--charcoal)" : LIGHT_GRAY,
         color: checked ? "var(--bone)" : "var(--ink)",
         fontFamily: GC,
         borderRadius: 999,
-        padding: "12px 18px 12px 14px",
+        padding: "10px 14px 10px 12px",
         border: checked ? "2px solid var(--charcoal)" : "2px solid transparent",
       }}
     >
@@ -251,8 +251,8 @@ function PurchaseOption({
         aria-hidden
         className="shrink-0 grid place-items-center"
         style={{
-          width: 20,
-          height: 20,
+          width: 18,
+          height: 18,
           borderRadius: 999,
           border: checked ? "2px solid var(--bone)" : "2px solid var(--warm-gray)",
           backgroundColor: "transparent",
@@ -261,8 +261,8 @@ function PurchaseOption({
         {checked && (
           <span
             style={{
-              width: 9,
-              height: 9,
+              width: 8,
+              height: 8,
               borderRadius: 999,
               backgroundColor: "var(--bone)",
             }}
@@ -278,9 +278,9 @@ function PurchaseOption({
       />
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 flex-wrap min-w-0">
+          <div className="flex items-center gap-1.5 flex-wrap min-w-0">
             <strong
-              style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, lineHeight: 1.2 }}
+              style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, lineHeight: 1.2 }}
             >
               {title}
             </strong>
@@ -289,10 +289,10 @@ function PurchaseOption({
                 style={{
                   fontFamily: GC,
                   fontWeight: 700,
-                  fontSize: 9.5,
+                  fontSize: 8,
                   letterSpacing: "0.06em",
                   textTransform: "uppercase",
-                  padding: "3px 8px",
+                  padding: "2px 6px",
                   backgroundColor: checked ? "var(--bone)" : "var(--charcoal)",
                   color: checked ? "var(--charcoal)" : "var(--bone)",
                   borderRadius: 999,
@@ -304,7 +304,7 @@ function PurchaseOption({
             )}
           </div>
           <strong
-            style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, whiteSpace: "nowrap" }}
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, whiteSpace: "nowrap" }}
           >
             {price}
           </strong>
@@ -314,7 +314,7 @@ function PurchaseOption({
           style={{
             fontFamily: GC,
             fontWeight: 500,
-            fontSize: 12,
+            fontSize: 11,
             color: checked ? "rgba(255,255,255,0.75)" : "rgba(20,20,20,0.7)",
           }}
         >

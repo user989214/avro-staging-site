@@ -170,6 +170,9 @@ export function CohortPage({ data }: { data: CohortData }) {
               color: ${wordEnd} !important;
             }
           }
+          @media (max-width: 768px) {
+            .cohort-hero-image { display: none !important; }
+          }
         `}</style>
 
         <div
@@ -180,16 +183,17 @@ export function CohortPage({ data }: { data: CohortData }) {
             borderRadius: 0,
             overflow: "hidden",
             backgroundColor: t.heroBg,
-            minHeight: data.visual === "work" ? "clamp(380px,50vh,480px)" : "clamp(480px,60vh,640px)",
+            minHeight: data.visual === "work" ? "clamp(320px,45vh,480px)" : "clamp(360px,50vh,560px)",
           }}
         >
-          {/* Background image — only for non-work cohorts */}
+          {/* Background image — only for non-work cohorts, hidden on mobile */}
           {data.visual !== "work" && (
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={cohortHero[data.visual]?.src}
                 alt={cohortHero[data.visual]?.alt ?? ""}
+                className="cohort-hero-image"
                 style={{
                   position: "absolute",
                   inset: 0,
@@ -203,6 +207,7 @@ export function CohortPage({ data }: { data: CohortData }) {
               {/* Gradient fade */}
               <div
                 aria-hidden="true"
+                className="cohort-hero-image"
                 style={{
                   position: "absolute",
                   inset: 0,
@@ -223,7 +228,7 @@ export function CohortPage({ data }: { data: CohortData }) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              padding: "clamp(72px,9vw,128px) clamp(20px,5vw,64px)",
+              padding: "clamp(48px,7vw,128px) clamp(20px,5vw,64px)",
               minHeight: "inherit",
               textAlign: "left",
               alignItems: "flex-start",
@@ -234,11 +239,11 @@ export function CohortPage({ data }: { data: CohortData }) {
               className="font-serif"
               style={{
                 fontWeight: 900,
-                fontSize: "clamp(42px,6vw,72px)",
+                fontSize: "clamp(36px,5.5vw,72px)",
                 lineHeight: 0.98,
                 letterSpacing: "-0.025em",
                 color: wordEnd,
-                marginBottom: 20,
+                marginBottom: 16,
                 maxWidth: 560,
               }}
             >

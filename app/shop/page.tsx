@@ -57,11 +57,11 @@ export default function ShopPage() {
             justify-content: center;
             font-family: ${GC};
             font-weight: 700;
-            font-size: 16px;
+            font-size: 14px;
             letter-spacing: -0.005em;
-            min-height: 48px;
-            min-width: 240px;
-            padding: 0 44px;
+            min-height: 44px;
+            min-width: 200px;
+            padding: 0 32px;
             border-radius: 999px;
             text-decoration: none;
             transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
@@ -74,8 +74,12 @@ export default function ShopPage() {
           .shop-btn-energy:hover{ background-color: transparent; color: var(--energy); }
 
           @media (max-width: 640px) {
-            .shop-hero-ctas { flex-direction: column; align-items: stretch; }
-            .shop-btn-calm, .shop-btn-focus, .shop-btn-energy { width: 100%; }
+            .shop-hero-ctas { flex-direction: column; align-items: stretch; gap: 8px; }
+            .shop-btn-calm, .shop-btn-focus, .shop-btn-energy { 
+              width: 100%; 
+              min-height: 42px;
+              font-size: 13px;
+            }
           }
         `}</style>
 
@@ -84,7 +88,7 @@ export default function ShopPage() {
           style={{
             backgroundColor: "var(--base-light)",
             borderRadius: 0,
-            minHeight: "clamp(520px,72vh,760px)",
+            minHeight: "clamp(420px,60vh,760px)",
           }}
         >
           {/* Animated ambient orbs — calm, focus, energy tones */}
