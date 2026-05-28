@@ -552,18 +552,21 @@ function CountUpStat({ value, suffix = "", decimals = 0, duration = 1800, delay 
 
 // ── BENEFIT ROW ───────────────────��───────────────────────────────────────────
 export function HomeBenefitRow() {
-  const benefits = [
+  const benefits: { icon: AvroIconName; title: string; copy: string; tone: "blue" | "bone" }[] = [
     {
+      icon: "control-under-pressure",
       title: "Supports composure under pressure",
       copy: "Helps you steady first before the moment matters — so you arrive ready, not reactive.",
       tone: "blue" as const,
     },
     {
+      icon: "supports-clear-thinking",
       title: "Supports clear-headed readiness",
       copy: "Calm, clear, and in control — without the spike or the crash.",
       tone: "bone" as const,
     },
     {
+      icon: "mind",
       title: "Supports calm without sedation",
       copy: "Designed to support composure without turning you off. Quiet focus, fully online.",
       tone: "blue" as const,
@@ -658,6 +661,7 @@ export function HomeBenefitRow() {
               }
             }
           `}</style>
+          <AvroIcon name={benefits[0].icon} size={45} className="opacity-90 flex-shrink-0" />
           <h3
             className={`hp-benefit-title ${visibleCards[0] ? "is-visible" : ""}`}
             style={{
