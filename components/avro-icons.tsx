@@ -137,9 +137,11 @@ export function AvroIcon({ name, className, golden = false, size = 40 }: AvroIco
   const src = iconMap[name as keyof typeof iconMap]
   
   if (!src) {
-    console.warn(`[AvroIcon] Unknown icon name: ${name}`)
+    console.error(`[AvroIcon] Unknown icon name: ${name}`)
     return null
   }
+  
+  console.log(`[v0] AvroIcon: name=${name}, golden=${golden}, src=${src}`)
   
   return (
     <Image
