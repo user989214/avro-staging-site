@@ -107,16 +107,16 @@ export function CohortPage({ data }: { data: CohortData }) {
       alt: "Golf cart with gloves and tee laid out at first tee",
     },
     social: {
-      src: "/images/lifestyle/kitchen-trio-pink-cocktails.jpg",
-      alt: "Three pink alcohol-free AVRO cocktails styled in a kitchen",
+      src: "/images/lifestyle/coupes-grapefruit-stickpack.jpg",
+      alt: "Elegant cocktail coupes with grapefruit garnish",
     },
     work: {
-      src: "/images/lifestyle/focus-desk-magenta-drink.jpg",
-      alt: "Focus magenta drink at a sunlit work desk with notebook",
+      src: "/images/lifestyle/journal-coffee-window.jpg",
+      alt: "Journal and coffee by a sunlit window",
     },
     gaming: {
-      src: "/images/lifestyle/focus-iced-drink-headphones.jpg",
-      alt: "Iced AVRO drink and headphones on a gaming desk",
+      src: "/images/lifestyle/journal-coffee-window.jpg",
+      alt: "Journal and coffee by a sunlit window for focused gaming sessions",
     },
   }
 
@@ -183,11 +183,11 @@ export function CohortPage({ data }: { data: CohortData }) {
             borderRadius: 0,
             overflow: "hidden",
             backgroundColor: t.heroBg,
-            minHeight: data.visual === "work" ? "clamp(320px,45vh,480px)" : "clamp(360px,50vh,560px)",
+            minHeight: "clamp(360px,50vh,560px)",
           }}
         >
-          {/* Background image — only for non-work cohorts, hidden on mobile */}
-          {data.visual !== "work" && (
+          {/* Background image — hidden on mobile */}
+          {(
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
