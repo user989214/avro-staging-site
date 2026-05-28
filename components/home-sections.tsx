@@ -1135,13 +1135,11 @@ export function HomeScienceGrid() {
               <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(16px,1.3vw,18px)", lineHeight: 1.55, color: "var(--warm-gray)", marginBottom: 28 }}>
                 GABA is a naturally occurring compound associated with relaxation and balance. AVRO uses naturally fermented PharmaGABA® as the foundation of every formula.
               </p>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", marginBottom: 32 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap", marginBottom: 32 }}>
                 {([["Naturally Fermented", "calm-first-foundation"], ["Calm First", "supports-clear-thinking"], ["In Every Formula", "quality-standards"]] as const).map(([label, iconName], i) => (
                   <React.Fragment key={`gaba-${i}`}>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, textAlign: "center" }}>
-                      <div style={{ width: 56, height: 56, backgroundColor: "var(--base)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <AvroIcon name={iconName} size={28} />
-                      </div>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, textAlign: "center" }}>
+                      <AvroIcon name={iconName} size={64} className="md:w-20 md:h-20" />
                       <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "var(--charcoal)" }}>{label}</span>
                     </div>
                     {i < 2 && <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 22, color: "var(--avro-blue)" }}>→</span>}
