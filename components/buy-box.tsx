@@ -127,6 +127,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
           checked={purchaseType === "subscribe"}
           onChange={() => setPurchaseType("subscribe")}
           title="Subscribe & save 25%"
+          mobileTitle="Subscribe & save"
           subtitle="Delivered every 28 days. Pause, skip, or cancel anytime."
           price={`$${subscribeTotal.toFixed(2)}`}
           badge="Most popular"
@@ -196,7 +197,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         style={{
           fontFamily: GC,
           fontWeight: 800,
-          fontSize: "clamp(13px,1.1vw,16px)",
+          fontSize: "clamp(15px,1.3vw,18px)",
           minHeight: "clamp(44px,4.5vw,56px)",
           padding: "0 20px",
           borderRadius: 999,
@@ -206,7 +207,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
           letterSpacing: "0.01em",
         }}
       >
-        Add to cart — ${displayTotal.toFixed(2)}
+        Add to cart
       </button>
       <style>{`
         .bb-add-btn { cursor: pointer; }
@@ -224,6 +225,7 @@ function PurchaseOption({
   checked,
   onChange,
   title,
+  mobileTitle,
   subtitle,
   price,
   badge,
@@ -231,6 +233,7 @@ function PurchaseOption({
   checked: boolean
   onChange: () => void
   title: string
+  mobileTitle?: string
   subtitle: string
   price: string
   badge?: string
@@ -282,9 +285,11 @@ function PurchaseOption({
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
           <strong
-            style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(12px,1.1vw,15px)", lineHeight: 1.2 }}
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(11px,1.1vw,15px)", lineHeight: 1.2 }}
           >
-            {title}
+            {/* Show shorter title on mobile if provided */}
+            <span className="sm:hidden">{mobileTitle || title}</span>
+            <span className="hidden sm:inline">{title}</span>
           </strong>
           {badge && (
             <span
@@ -310,7 +315,7 @@ function PurchaseOption({
           style={{
             fontFamily: GC,
             fontWeight: 500,
-            fontSize: "clamp(10px,0.85vw,12px)",
+            fontSize: "clamp(9px,0.85vw,12px)",
             color: checked ? "rgba(255,255,255,0.75)" : "rgba(20,20,20,0.7)",
           }}
         >
@@ -318,13 +323,13 @@ function PurchaseOption({
         </p>
       </div>
       
-      {/* Right side - price, larger and centered */}
+      {/* Right side - price, centered */}
       <div className="flex items-center justify-center shrink-0">
         <strong
           style={{ 
             fontFamily: GC, 
             fontWeight: 800, 
-            fontSize: "clamp(16px,1.5vw,22px)", 
+            fontSize: "clamp(14px,1.3vw,18px)", 
             whiteSpace: "nowrap",
             letterSpacing: "-0.01em",
           }}
