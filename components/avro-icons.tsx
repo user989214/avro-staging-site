@@ -95,8 +95,9 @@ export const goldenIconMap = {
   "science-backed": "/icons/golden/science-backed.png",
   "ingredient-disclosure": "/icons/golden/ingredient-disclosure.png",
   
-  // Supports/Benefits
+  // Supports/Benefits (use standard icons since golden equivalents may not exist for all)
   "supports-clear-thinking": "/icons/golden/supports-clear-thinking.png",
+  "supports-focus-without-overload": "/icons/supports-focus-without-overload.png", // fallback to standard
   "mind": "/icons/golden/mind.png",
   "mind-body-diagram": "/icons/golden/mind-body-diagram.png",
   "mental-clarity": "/icons/golden/mental-clarity.png",

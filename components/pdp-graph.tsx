@@ -1,6 +1,6 @@
 "use client"
 
-import { Icon } from "@/components/icons"
+import { AvroIcon } from "@/components/avro-icons"
 import type { FormulaKey } from "@/lib/data"
 
 interface MoodGraphProps {
@@ -106,7 +106,7 @@ export function IngredientBar({
   return (
     <div className={`flex items-center gap-4 p-4 rounded-2xl border ${highlight ? "border-avro-blue bg-avro-blue/5" : "border-line bg-base"}`}>
       <div className="flex-shrink-0 w-12 h-12 rounded-full bg-soft flex items-center justify-center">
-        <Icon name="flask" className={`w-6 h-6 ${highlight ? "text-avro-blue" : "text-olive"}`} />
+        <AvroIcon name="clinically-tested-ingredients" size={24} />
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-baseline justify-between gap-2">

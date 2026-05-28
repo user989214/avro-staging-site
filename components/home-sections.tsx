@@ -680,32 +680,20 @@ export function HomeBenefitRow() {
 export function HomeLogicRow() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   
-  const cards = [
+  const cards: { title: string; icon: AvroIconName; content: string }[] = [
     {
       title: "More energy is not always the answer.",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-        </svg>
-      ),
+      icon: "control-under-pressure",
       content: "Most products push stimulation. AVRO starts with calm, because calm helps create the conditions for clarity, composure, and readiness."
     },
     {
       title: "Performance starts with state.",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
-        </svg>
-      ),
+      icon: "supports-focus-without-overload",
       content: "AVRO is built to support the state before the moment. Calm creates the foundation for clarity and readiness when it counts."
     },
     {
       title: "Calm first, then clarity.",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M17 8C8 10 5.9 16.17 3.82 19.12A1 1 0 0 0 4.69 20.7C7.14 20.1 11.75 18.5 14 16c2.5-2.77 2.87-6.12 3-8-.5.25-2.25.75-3 0z"/>
-        </svg>
-      ),
+      icon: "calm-first-foundation",
       content: "Every AVRO formula starts with naturally fermented PharmaGABA®. It's the calm-first foundation that makes everything else work better."
     },
   ]
@@ -756,11 +744,10 @@ export function HomeLogicRow() {
                         justifyContent: "center",
                         flexShrink: 0,
                         backgroundColor: openIndex === i ? "var(--charcoal)" : "transparent",
-                        color: openIndex === i ? "var(--bone)" : "var(--charcoal)",
                         transition: "all 0.2s ease",
                       }}
                     >
-                      {card.icon}
+                      <AvroIcon name={card.icon} size={24} />
                     </div>
                     <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--ink)", flex: 1 }}>
                       {card.title}
@@ -1149,15 +1136,11 @@ export function HomeScienceGrid() {
                 GABA is a naturally occurring compound associated with relaxation and balance. AVRO uses naturally fermented PharmaGABA® as the foundation of every formula.
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", marginBottom: 32 }}>
-                {[["Naturally Fermented", "flask"], ["Calm First", "leaf"], ["In Every Formula", "shield"]].map(([label, _icon], i) => (
+                {([["Naturally Fermented", "calm-first-foundation"], ["Calm First", "supports-clear-thinking"], ["In Every Formula", "quality-standards"]] as const).map(([label, iconName], i) => (
                   <React.Fragment key={`gaba-${i}`}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, textAlign: "center" }}>
                       <div style={{ width: 56, height: 56, backgroundColor: "var(--base)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--charcoal)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                          {i === 0 && <><path d="M9 3H5a2 2 0 0 0-2 2v4"/><path d="M9 3h6"/><path d="M15 3h4a2 2 0 0 1 2 2v4"/><path d="M3 9c0 7.18 4.03 12 9 12s9-4.82 9-12"/></>}
-                          {i === 1 && <path d="M17 8C8 10 5.9 16.17 3.82 19.12A1 1 0 0 0 4.69 20.7C7.14 20.1 11.75 18.5 14 16c2.5-2.77 2.87-6.12 3-8-.5.25-2.25.75-3 0z"/>}
-                          {i === 2 && <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>}
-                        </svg>
+                        <AvroIcon name={iconName} size={28} />
                       </div>
                       <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "var(--charcoal)" }}>{label}</span>
                     </div>
