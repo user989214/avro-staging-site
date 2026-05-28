@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { CardedSection, Section, SectionHeading, SocialProof, FinalCta } from "@/components/sections"
+import { CardedSection, Section, SectionHeading, FinalCta } from "@/components/sections"
 import { PageHero } from "@/components/page-hero"
 import { Icon } from "@/components/icons"
 
@@ -160,21 +160,21 @@ export default function LearnPage() {
               </p>
             </div>
 
-            <ul className="flex flex-col gap-5">
+            <ul className="flex flex-col gap-5 md:mt-0 mt-6">
               {templatePoints.map((p) => (
                 <li key={p.label} className="flex items-center gap-4">
                   <span
                     className="flex items-center justify-center rounded-full shrink-0"
                     style={{
-                      width: 38,
-                      height: 38,
+                      width: 44,
+                      height: 44,
                       backgroundColor: "var(--bone)",
                       border: "1px solid rgba(30,29,24,0.16)",
                     }}
                   >
-                    <Icon name={p.icon} className="w-[18px] h-[18px] text-ink" />
+                    <Icon name={p.icon} className="w-5 h-5 text-ink" />
                   </span>
-                  <span className="text-[15px] md:text-base font-semibold text-ink leading-snug">
+                  <span className="text-[15px] font-semibold text-ink">
                     {p.label}
                   </span>
                 </li>
@@ -213,10 +213,6 @@ export default function LearnPage() {
           ))}
         </div>
       </CardedSection>
-
-      {/* Standard customer voice rail — keeps the page anchored to the rest of the site's
-          social-proof system. */}
-      <SocialProof mode="full" />
 
       {/* Bottom CTA — uses the site's standard FinalCta component with product buttons. */}
       <FinalCta
