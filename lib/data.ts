@@ -31,8 +31,11 @@ export const formulas = {
       { id: "pomegranate-raspberry", name: "Pomegranate Raspberry", tagline: "Tart. Bright. Clean." },
       { id: "red-dragon-fruit", name: "Red Dragon Fruit", tagline: "Smooth tropical. Vibrant." },
     ],
-    color: "#c21f73",
-    accent: "#ee6fa9",
+    // Per request: only the blue cohort accent (Calm) is permitted in the
+    // theme. Focus is neutralized to ink/charcoal so it inherits the system
+    // grayscale instead of tinting cards, charts, badges, and CTAs pink.
+    color: "#1E1D18",
+    accent: "#3A3A38",
     price: 24.95,
     priceLabel: "$24.95",
     bundlePrice: 24.95,
@@ -54,8 +57,10 @@ export const formulas = {
       { id: "orange-tangerine", name: "Orange Tangerine", tagline: "Bright citrus. Sunny lift." },
       { id: "fuji-apple", name: "Fuji Apple", tagline: "Crisp orchard. Clean finish." },
     ],
-    color: "#f4aa10",
-    accent: "#ffcf59",
+    // Per request: only the blue cohort accent (Calm) is permitted. Energy is
+    // neutralized to ink/charcoal so it stops painting the site yellow.
+    color: "#1E1D18",
+    accent: "#3A3A38",
     price: 24.95,
     priceLabel: "$24.95",
     bundlePrice: 24.95,
