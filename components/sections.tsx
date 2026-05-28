@@ -119,20 +119,19 @@ export function CtaGroup({
   dark?: boolean
   hero?: boolean
 }) {
-  // Hero buttons are wider — visually echo the homepage hero CTAs (≥220px, generous horizontal padding,
-  // and they stretch to fill the row so labels never wrap awkwardly).
+  // Hero buttons mirror the homepage hero CTA sizing exactly:
+  // 48px min-height, 28px horizontal padding, 16px font, gap 12.
   const heroStyle = hero
     ? {
-        minWidth: 220,
-        padding: "0 44px",
-        flex: "1 1 220px" as const,
+        minHeight: 48,
+        padding: "0 28px",
+        fontSize: 16,
         whiteSpace: "nowrap" as const,
       }
     : undefined
   return (
     <div
-      className="flex flex-wrap items-center gap-3 mt-6.5"
-      style={hero ? { maxWidth: 560 } : undefined}
+      className={hero ? "flex flex-wrap items-center gap-3 mt-0" : "flex flex-wrap items-center gap-3 mt-6.5"}
     >
       <Link
         href="/shop"

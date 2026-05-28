@@ -20,51 +20,55 @@ export default function ShopPage() {
   return (
     <>
       {/* ---------- HERO ---------- */}
-      {/* True full-width hero — edge-to-edge, square corners, faded look retained. */}
+      {/* Golf-style hero: full-width, square corners, image with cream fade overlay,
+          serif headline with per-word rise animation, lede + CTAs that fade up.
+          CTAs keep their per-formula colors but are sized to match the homepage hero pills. */}
       <section
         style={{
           position: "relative",
           width: "100%",
-          backgroundColor: "var(--base)",
+          backgroundColor: "var(--base-light)",
           padding: 0,
+          overflow: "hidden",
         }}
       >
         <style>{`
           @keyframes shop-rise {
-            0% { opacity: 0; transform: translate3d(0, 14px, 0); }
-            100% { opacity: 1; transform: translate3d(0, 0, 0); }
+            0%   { opacity: 0; transform: translateY(28px); }
+            55%  { opacity: 1; transform: translateY(-4px); }
+            80%  { opacity: 1; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(0); }
           }
-          @keyframes shop-float {
-            0%, 100% { transform: translate3d(0, 0, 0); }
-            50% { transform: translate3d(0, -10px, 0); }
+          @keyframes shop-fade-up {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
           }
-          @keyframes shop-orb {
-            0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.55; }
-            50% { transform: translate3d(0, -16px, 0) scale(1.04); opacity: 0.75; }
-          }
-          .shop-hero-card {
+          .shop-word {
+            display: inline-block;
             opacity: 0;
-            animation: shop-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+            transform: translateY(28px);
+            animation: shop-rise 1.05s cubic-bezier(0.34, 1.4, 0.4, 1) forwards;
+            will-change: transform, opacity;
           }
-          .shop-hero-h1 { opacity: 0; animation: shop-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards; }
-          .shop-hero-lede { opacity: 0; animation: shop-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards; }
-          .shop-hero-ctas { opacity: 0; animation: shop-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.55s forwards; }
-          .shop-hero-image { animation: shop-float 8s ease-in-out infinite; }
+          .shop-fade { opacity: 0; animation: shop-fade-up 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
+          .shop-lede { animation-delay: 0.85s; }
+          .shop-cta-row { animation-delay: 1.15s; }
 
+          /* Per-formula colored pills — sized to match the homepage hero pills:
+             48px min-height, 28px horizontal padding, 16px font. */
           .shop-btn-calm, .shop-btn-focus, .shop-btn-energy {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             font-family: ${GC};
             font-weight: 700;
-            font-size: 14px;
+            font-size: 16px;
             letter-spacing: -0.005em;
-            min-height: 44px;
-            min-width: 200px;
-            padding: 0 32px;
+            min-height: 48px;
+            padding: 0 28px;
             border-radius: 999px;
             text-decoration: none;
-            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+            transition: background-color 0.2s ease, color 0.2s ease;
           }
           .shop-btn-calm  { border: 2px solid var(--calm);   background-color: var(--calm);   color: #2D1B4E; }
           .shop-btn-focus { border: 2px solid var(--focus);  background-color: var(--focus);  color: #4A0A2E; }
@@ -74,159 +78,112 @@ export default function ShopPage() {
           .shop-btn-energy:hover{ background-color: transparent; color: var(--energy); }
 
           @media (max-width: 640px) {
-            .shop-hero-ctas { flex-direction: column; align-items: stretch; gap: 8px; }
-            .shop-btn-calm, .shop-btn-focus, .shop-btn-energy { 
-              width: 100%; 
-              min-height: 42px;
-              font-size: 13px;
+            .shop-hero-ctas { flex-direction: column; align-items: stretch; max-width: 320px; }
+            .shop-btn-calm, .shop-btn-focus, .shop-btn-energy { width: 100%; }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .shop-word, .shop-fade {
+              animation: none !important;
+              opacity: 1 !important;
+              transform: none !important;
             }
           }
         `}</style>
 
         <div
-          className="shop-hero-card relative w-full overflow-hidden"
           style={{
-            backgroundColor: "var(--base-light)",
-            borderRadius: 0,
-            minHeight: "clamp(420px,60vh,760px)",
+            position: "relative",
+            width: "100%",
+            minHeight: "clamp(380px, 52vh, 580px)",
           }}
         >
-          {/* Animated ambient orbs — calm, focus, energy tones */}
-          <div
-            aria-hidden="true"
-            className="shop-hero-image"
-            style={{
-              position: "absolute",
-              right: "-8%",
-              top: "12%",
-              width: "42%",
-              height: "70%",
-              borderRadius: "50%",
-              background:
-                "radial-gradient(circle at 50% 50%, var(--calm) 0%, rgba(0,0,0,0) 65%)",
-              opacity: 0.35,
-              filter: "blur(40px)",
-              pointerEvents: "none",
-              animation: "shop-orb 9s ease-in-out infinite",
-            }}
-          />
-          <div
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              right: "8%",
-              bottom: "-6%",
-              width: "30%",
-              height: "55%",
-              borderRadius: "50%",
-              background:
-                "radial-gradient(circle at 50% 50%, var(--energy) 0%, rgba(0,0,0,0) 65%)",
-              opacity: 0.28,
-              filter: "blur(50px)",
-              pointerEvents: "none",
-              animation: "shop-orb 11s ease-in-out infinite 1.2s",
-            }}
-          />
-
-          {/* Hero product image — hidden on mobile, visible on tablet+ */}
-          <div
-            aria-hidden="true"
-            className="shop-hero-image-wrap"
-            style={{
-              position: "absolute",
-              inset: 0,
-              pointerEvents: "none",
-            }}
-          >
-            <div className="absolute inset-0">
-              <Image
-                src="/images/lifestyle/avro-trio-stone-hero.png"
-                alt=""
-                fill
-                sizes="100vw"
-                className="object-contain object-right"
-                priority
-                style={{
-                  WebkitMaskImage:
-                    "radial-gradient(ellipse 65% 75% at 78% 50%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.4) 90%, rgba(0,0,0,0) 100%)",
-                  maskImage:
-                    "radial-gradient(ellipse 65% 75% at 78% 50%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.4) 90%, rgba(0,0,0,0) 100%)",
-                }}
-              />
-            </div>
-
-            {/* Left-side wash — soft */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(to right, var(--base-light) 0%, rgba(245,241,234,0.85) 22%, rgba(245,241,234,0.45) 38%, rgba(245,241,234,0.1) 55%, rgba(245,241,234,0) 70%)",
-              }}
-            />
-            {/* Outer edge fade — soft */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "radial-gradient(ellipse 95% 95% at 50% 50%, rgba(245,241,234,0) 70%, rgba(245,241,234,0.3) 90%, rgba(245,241,234,0.6) 100%)",
-              }}
+          {/* Background product image */}
+          <div className="absolute inset-0">
+            <Image
+              src="/images/lifestyle/avro-trio-stone-hero.png"
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-contain object-right"
+              priority
             />
           </div>
 
-          {/* Mobile-only / narrow-viewport: hide image, show no wash so the card reads clean */}
-          <style>{`
-            @media (max-width: 767px) {
-              .shop-hero-image-wrap { display: none !important; }
-            }
-          `}</style>
+          {/* Cream fade overlay — matches golf hero treatment */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.95) 48%, rgba(245,241,234,0.7) 58%, rgba(245,241,234,0.3) 70%, rgba(245,241,234,0.1) 82%, rgba(245,241,234,0.15) 94%, var(--base-light) 100%), linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.2) 10%, rgba(245,241,234,0) 20%, rgba(245,241,234,0) 80%, rgba(245,241,234,0.2) 90%, var(--base-light) 100%)",
+              pointerEvents: "none",
+            }}
+          />
 
           {/* Content */}
           <div
-            className="relative flex items-center"
             style={{
+              position: "relative",
+              maxWidth: 1440,
+              margin: "0 auto",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              padding: "clamp(48px,7vw,120px) clamp(20px,5vw,64px)",
               minHeight: "inherit",
-              padding: "clamp(56px,7vw,96px) clamp(28px,5vw,72px)",
+              textAlign: "left",
+              alignItems: "flex-start",
             }}
           >
-            <div style={{ maxWidth: 580 }}>
-              <h1
-                className="font-serif shop-hero-h1"
-                style={{
-                  fontWeight: 900,
-                  fontSize: "clamp(42px,6vw,72px)",
-                  lineHeight: 0.98,
-                  letterSpacing: "-0.025em",
-                  color: "var(--ink)",
-                  marginBottom: 20,
-                }}
-              >
-                Choose your AVRO formula.
-              </h1>
-              <p
-                className="shop-hero-lede"
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 400,
-                  fontSize: "clamp(17px,2vw,20px)",
-                  lineHeight: 1.55,
-                  color: "var(--warm-gray)",
-                  maxWidth: 480,
-                  marginBottom: 28,
-                }}
-              >
-                Three formulas. One calm-first foundation. Start with the state that fits your moment.
-              </p>
+            <h1
+              className="font-serif"
+              style={{
+                fontWeight: 900,
+                fontSize: "clamp(36px,5.5vw,72px)",
+                lineHeight: 0.98,
+                letterSpacing: "-0.025em",
+                color: "var(--ink)",
+                marginBottom: 16,
+                maxWidth: 720,
+              }}
+            >
+              {"Choose your AVRO formula.".split(" ").map((word, i, arr) => {
+                const delay = 0.1 + i * 0.11
+                return (
+                  <span
+                    key={i}
+                    className="shop-word"
+                    style={{ animationDelay: `${delay.toFixed(2)}s` }}
+                  >
+                    {word}
+                    {i < arr.length - 1 ? "\u00A0" : ""}
+                  </span>
+                )
+              })}
+            </h1>
+            <p
+              className="shop-fade shop-lede"
+              style={{
+                fontFamily: GC,
+                fontWeight: 400,
+                fontSize: "clamp(17px,2vw,20px)",
+                lineHeight: 1.55,
+                color: "var(--warm-gray)",
+                maxWidth: 560,
+                marginBottom: 28,
+              }}
+            >
+              Three formulas. One calm-first foundation. Start with the state that fits your moment.
+            </p>
 
-              <div
-                className="shop-hero-ctas"
-                style={{ display: "flex", flexWrap: "wrap", gap: 12 }}
-              >
-                <Link href="/calm" className="shop-btn-calm">Shop Calm</Link>
-                <Link href="/focus" className="shop-btn-focus">Shop Focus</Link>
-                <Link href="/energy" className="shop-btn-energy">Shop Energy</Link>
-              </div>
+            <div
+              className="shop-hero-ctas shop-fade shop-cta-row"
+              style={{ display: "flex", flexWrap: "wrap", gap: 12 }}
+            >
+              <Link href="/calm" className="shop-btn-calm">Shop Calm</Link>
+              <Link href="/focus" className="shop-btn-focus">Shop Focus</Link>
+              <Link href="/energy" className="shop-btn-energy">Shop Energy</Link>
             </div>
           </div>
         </div>
