@@ -23,40 +23,6 @@ export function CompareAtAGlance() {
         Compare at a glance
       </h2>
 
-      {/* Decorative animated SVG accent — subtle, sits on the right of the heading on large screens */}
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 220 80"
-        className="hidden lg:block absolute"
-        style={{ right: 0, top: 8, width: 220, height: 80, opacity: 0.55 }}
-      >
-        <defs>
-          <linearGradient id="shopCompareGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="var(--calm)" />
-            <stop offset="50%" stopColor="var(--focus)" />
-            <stop offset="100%" stopColor="var(--energy)" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M0 40 Q 55 0, 110 40 T 220 40"
-          fill="none"
-          stroke="url(#shopCompareGrad)"
-          strokeWidth="3"
-          strokeLinecap="round"
-        >
-          <animate
-            attributeName="d"
-            dur="6s"
-            repeatCount="indefinite"
-            values="
-              M0 40 Q 55 0, 110 40 T 220 40;
-              M0 40 Q 55 80, 110 40 T 220 40;
-              M0 40 Q 55 0, 110 40 T 220 40
-            "
-          />
-        </path>
-      </svg>
-
       <div
         style={{
           backgroundColor: "var(--base)",
@@ -108,7 +74,7 @@ export function CompareAtAGlance() {
           </div>
         ))}
 
-        {/* CTA row */}
+        {/* CTA row — charcoal section caps the rounded rectangle */}
         <style>{`
           .compare-cta {
             display: inline-flex;
@@ -121,25 +87,25 @@ export function CompareAtAGlance() {
             padding: 0 28px;
             border-radius: 999px;
             text-decoration: none;
-            border: 2px solid var(--charcoal);
-            background-color: var(--charcoal);
-            color: var(--bone);
+            border: 2px solid var(--bone);
+            background-color: var(--bone);
+            color: var(--charcoal);
             transition: background-color 0.2s ease, color 0.2s ease;
           }
           .compare-cta:hover {
             background-color: transparent;
-            color: var(--charcoal);
+            color: var(--bone);
           }
         `}</style>
-        <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr 1fr 1fr" }}>
-          <div style={{ minHeight: 76, padding: 16, backgroundColor: "var(--base-light)" }} />
-          <div style={{ minHeight: 76, padding: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr 1fr 1fr", backgroundColor: "var(--charcoal)" }}>
+          <div style={{ minHeight: 88, padding: 16 }} />
+          <div style={{ minHeight: 88, padding: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Link href="/calm" className="compare-cta" style={{ fontFamily: GC }}>Shop Calm</Link>
           </div>
-          <div style={{ minHeight: 76, padding: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ minHeight: 88, padding: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Link href="/focus" className="compare-cta" style={{ fontFamily: GC }}>Shop Focus</Link>
           </div>
-          <div style={{ minHeight: 76, padding: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ minHeight: 88, padding: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Link href="/energy" className="compare-cta" style={{ fontFamily: GC }}>Shop Energy</Link>
           </div>
         </div>
