@@ -441,14 +441,14 @@ export function HomeProofBar() {
     { value: 100000, suffix: "+", decimals: 0, label: "Sticks sold" },
   ]
   return (
-    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(32px,5vw,56px) clamp(20px,5vw,64px)" }}>
-        <div style={{ maxWidth: 1250, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", border: "2px solid var(--charcoal)", borderRadius: 24, overflow: "hidden" }}>
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(32px,5vw,56px) clamp(16px,4vw,64px)" }}>
+        <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexWrap: "wrap", border: "2px solid var(--charcoal)", borderRadius: 24, overflow: "hidden" }}>
         {stats.map((item, i) => (
           <div
             key={item.label}
-            style={{ padding: "clamp(20px,3vw,36px) clamp(16px,3vw,32px)", textAlign: "center", borderLeft: i > 0 ? "2px solid var(--charcoal)" : "none" }}
+            style={{ flex: "1 1 100px", minWidth: 100, padding: "clamp(16px,2.5vw,36px) clamp(12px,2vw,32px)", textAlign: "center", borderLeft: i > 0 ? "2px solid var(--charcoal)" : "none" }}
           >
-            <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(28px,3.5vw,48px)", lineHeight: 1.0, display: "block" }}>
+            <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,3vw,48px)", lineHeight: 1.0, display: "block" }}>
               <CountUpStat
                 value={item.value}
                 suffix={item.suffix}
@@ -457,7 +457,7 @@ export function HomeProofBar() {
                 delay={150 + i * 200}
               />
             </strong>
-            <span style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.4vw,18px)", color: "var(--warm-gray)", marginTop: 6, display: "block" }}>{item.label}</span>
+            <span style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(11px,1.2vw,18px)", color: "var(--warm-gray)", marginTop: 4, display: "block" }}>{item.label}</span>
           </div>
         ))}
       </div>
@@ -705,8 +705,8 @@ export function HomeLogicRow() {
         <div style={{ backgroundColor: "var(--base-light)", borderRadius: 28, padding: "clamp(24px,4vw,48px)" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px,1fr))", gap: 24 }}>
             {/* Accordion cards column */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,3vw,40px)", lineHeight: 1.05, color: "var(--ink)", marginBottom: 12 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2.8vw,40px)", lineHeight: 1.05, color: "var(--ink)", marginBottom: 8 }}>
                 The calm-first approach.
               </h2>
               {cards.map((card, i) => (
@@ -714,7 +714,7 @@ export function HomeLogicRow() {
                   key={card.title}
                   style={{
                     backgroundColor: "var(--bone)",
-                    borderRadius: 16,
+                    borderRadius: 14,
                     overflow: "hidden",
                     transition: "all 0.25s ease",
                   }}
@@ -725,8 +725,8 @@ export function HomeLogicRow() {
                       width: "100%",
                       display: "flex",
                       alignItems: "center",
-                      gap: 16,
-                      padding: "20px 24px",
+                      gap: 12,
+                      padding: "14px 16px",
                       backgroundColor: "transparent",
                       border: "none",
                       cursor: "pointer",
@@ -735,22 +735,22 @@ export function HomeLogicRow() {
                   >
                     <div
                       style={{
-                        width: 56,
-                        height: 56,
+                        width: 40,
+                        height: 40,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         flexShrink: 0,
                       }}
                     >
-                      <AvroIcon name={card.icon} size={48} className="md:w-14 md:h-14" />
+                      <AvroIcon name={card.icon} size={36} className="md:w-12 md:h-12" />
                     </div>
-                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--ink)", flex: 1 }}>
+                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(14px,1.3vw,18px)", color: "var(--ink)", flex: 1 }}>
                       {card.title}
                     </span>
                     <svg
-                      width="20"
-                      height="20"
+                      width="18"
+                      height="18"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -952,14 +952,14 @@ function ApproachChart() {
       </div>
 
       {/* Caption strip */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginTop: 4 }}>
-        <div style={{ padding: "14px 18px", borderRadius: 14, backgroundColor: "rgba(245,242,234,0.08)" }}>
-          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "rgba(245,242,234,0.65)", margin: 0, letterSpacing: "0.02em" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 4 }}>
+        <div style={{ padding: "10px 12px", borderRadius: 12, backgroundColor: "rgba(245,242,234,0.08)" }}>
+          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "rgba(245,242,234,0.65)", margin: 0, letterSpacing: "0.02em" }}>
             Push, spike, crash. Noise where clarity should be.
           </p>
         </div>
-        <div style={{ padding: "14px 18px", borderRadius: 14, backgroundColor: BLUE }}>
-          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "var(--ink)", margin: 0, letterSpacing: "0.02em" }}>
+        <div style={{ padding: "10px 12px", borderRadius: 12, backgroundColor: BLUE }}>
+          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "var(--ink)", margin: 0, letterSpacing: "0.02em" }}>
             Settle, ramp, sustain. Steady state when it counts.
           </p>
         </div>
@@ -1124,27 +1124,27 @@ export function HomeScienceGrid() {
         <div style={{ backgroundColor: "var(--base-light)", borderRadius: 28, padding: "clamp(24px,4vw,48px)", overflow: "hidden" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px,1fr))", gap: 20 }}>
             {/* Why GABA card - flat bone */}
-            <div style={{ backgroundColor: "var(--bone)", borderRadius: 20, padding: "clamp(28px,4vw,44px)" }}>
-              <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(26px,3vw,40px)", lineHeight: 1.0, color: "var(--charcoal)", marginBottom: 16 }}>
+            <div style={{ backgroundColor: "var(--bone)", borderRadius: 20, padding: "clamp(20px,3vw,44px)" }}>
+              <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,2.8vw,40px)", lineHeight: 1.0, color: "var(--charcoal)", marginBottom: 12 }}>
                 Why GABA matters.
               </h2>
-              <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(16px,1.3vw,18px)", lineHeight: 1.55, color: "var(--warm-gray)", marginBottom: 28 }}>
+              <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(14px,1.2vw,18px)", lineHeight: 1.5, color: "var(--warm-gray)", marginBottom: 20 }}>
                 GABA is a naturally occurring compound associated with relaxation and balance. AVRO uses naturally fermented PharmaGABA® as the foundation of every formula.
               </p>
-              <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap", marginBottom: 32 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 24 }}>
                 {([["Naturally Fermented", "calm-first-foundation"], ["Calm First", "supports-clear-thinking"], ["In Every Formula", "quality-standards"]] as const).map(([label, iconName], i) => (
                   <React.Fragment key={`gaba-${i}`}>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, textAlign: "center" }}>
-                      <AvroIcon name={iconName} size={64} className="md:w-20 md:h-20" />
-                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "var(--charcoal)" }}>{label}</span>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, textAlign: "center", minWidth: 80 }}>
+                      <AvroIcon name={iconName} size={40} className="md:w-16 md:h-16" />
+                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(11px,1vw,16px)", color: "var(--charcoal)" }}>{label}</span>
                     </div>
-                    {i < 2 && <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 22, color: "var(--avro-blue)" }}>→</span>}
+                    {i < 2 && <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 18, color: "var(--avro-blue)" }}>→</span>}
                   </React.Fragment>
                 ))}
               </div>
-              <a href="/science" className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none", border: "2px solid var(--charcoal)", backgroundColor: "var(--charcoal)", color: "var(--bone)" }}>
+              <a href="/science" className="hp-btn-black" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: GC, fontWeight: 700, fontSize: 13, minHeight: 42, padding: "0 20px", borderRadius: 999, textDecoration: "none", border: "2px solid var(--charcoal)", backgroundColor: "var(--charcoal)", color: "var(--bone)" }}>
                 Learn the Science of AVRO
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
             </div>
 
@@ -1200,13 +1200,13 @@ export function HomeStoryStrip() {
           <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(15px,1.2vw,18px)", lineHeight: 1.5, color: "rgba(255,255,255,0.85)", maxWidth: 680, marginBottom: 28 }}>
             AVRO was built by Keigo Sugawara and Peter van Stolk for people who wanted a better option before the moments that matter. Every formula is backed by research and designed for real routines.
           </p>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <a href="/why-avro" className="hp-btn-outline-light" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 64px", borderRadius: 999, textDecoration: "none", border: "2px solid #fff", backgroundColor: "transparent", color: "#fff" }}>Our Story</a>
-            <a href="/science" className="hp-btn-blue" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 64px", borderRadius: 999, textDecoration: "none", border: `2px solid ${BLUE}`, backgroundColor: BLUE, color: "var(--charcoal)" }}>The Science</a>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <a href="/why-avro" className="hp-btn-outline-light" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 14, minHeight: 42, padding: "0 32px", borderRadius: 999, textDecoration: "none", border: "2px solid #fff", backgroundColor: "transparent", color: "#fff" }}>Our Story</a>
+            <a href="/science" className="hp-btn-blue" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 14, minHeight: 42, padding: "0 32px", borderRadius: 999, textDecoration: "none", border: `2px solid ${BLUE}`, backgroundColor: BLUE, color: "var(--charcoal)" }}>The Science</a>
           </div>
         </div>
-        <div style={{ padding: "0 clamp(20px,4vw,32px) clamp(20px,4vw,32px)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "38% 62%", minHeight: 360, gap: 16 }}>
+        <div className="hidden sm:block" style={{ padding: "0 clamp(20px,4vw,32px) clamp(20px,4vw,32px)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "38% 62%", minHeight: 300, gap: 12 }}>
             <div style={{ position: "relative", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/science/fermentation-lab.jpg" alt="Stainless steel fermentation vessel cultivating naturally fermented PharmaGABA" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(1) contrast(1.05) brightness(0.98)" }} />

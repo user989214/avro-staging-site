@@ -460,7 +460,7 @@ export function FinalCta({
       style={{
         backgroundColor: sectionBg,
         width: "100%",
-        padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)",
+        padding: "clamp(32px,5vw,72px) clamp(16px,4vw,64px)",
       }}
     >
       <div
@@ -469,26 +469,26 @@ export function FinalCta({
           margin: "0 auto",
           backgroundColor: bg,
           color: textColor,
-          borderRadius: 28,
-          padding: "clamp(48px,6vw,88px) clamp(28px,5vw,80px)",
+          borderRadius: 24,
+          padding: "clamp(32px,5vw,88px) clamp(20px,4vw,80px)",
           display: "flex",
           flexDirection: "row",
           flexWrap: "wrap",
           alignItems: "center",
           justifyContent: "space-between",
-          gap: 40,
+          gap: 28,
           fontFamily: GC_FINAL,
         }}
       >
         {/* Left: eyebrow + heading + copy */}
-        <div style={{ flex: "1 1 420px", minWidth: 0, maxWidth: 580 }}>
+        <div style={{ flex: "1 1 320px", minWidth: 0, maxWidth: 520 }}>
           {eyebrow && (
             <span
               style={{
                 display: "inline-block",
-                marginBottom: 14,
+                marginBottom: 10,
                 fontFamily: GC_FINAL,
-                fontSize: 11,
+                fontSize: 10,
                 fontWeight: 700,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
@@ -503,11 +503,11 @@ export function FinalCta({
             style={{
               fontFamily: GC_FINAL,
               fontWeight: 700,
-              fontSize: "clamp(34px,4.6vw,60px)",
+              fontSize: "clamp(26px,4vw,60px)",
               lineHeight: 1.02,
               letterSpacing: "-0.02em",
               color: textColor,
-              marginBottom: 14,
+              marginBottom: 10,
             }}
           >
             {title}
@@ -516,8 +516,8 @@ export function FinalCta({
             style={{
               fontFamily: GC_FINAL,
               fontWeight: 400,
-              fontSize: "clamp(15px,1.3vw,17px)",
-              lineHeight: 1.55,
+              fontSize: "clamp(13px,1.2vw,17px)",
+              lineHeight: 1.5,
               color: mutedColor,
             }}
           >
@@ -526,7 +526,7 @@ export function FinalCta({
         </div>
 
         {/* Right: stacked full-width CTA buttons */}
-        <div style={{ flex: "1 1 320px", display: "flex", flexDirection: "column", gap: 12, minWidth: 280, maxWidth: 460 }}>
+        <div style={{ flex: "1 1 280px", display: "flex", flexDirection: "column", gap: 8, minWidth: 240, maxWidth: 400 }}>
           {productButtons ? (
             [
               { href: "/calm", label: "Shop Calm" },
@@ -544,10 +544,10 @@ export function FinalCta({
                   width: "100%",
                   fontFamily: GC_FINAL,
                   fontWeight: 700,
-                  fontSize: 16,
+                  fontSize: 14,
                   letterSpacing: "-0.005em",
-                  minHeight: 48,
-                  padding: "0 28px",
+                  minHeight: 42,
+                  padding: "0 24px",
                   borderRadius: 999,
                   border: `2px solid ${btnBg}`,
                   backgroundColor: btnBg,
@@ -571,9 +571,9 @@ export function FinalCta({
                   width: "100%",
                   fontFamily: GC_FINAL,
                   fontWeight: 700,
-                  fontSize: 16,
-                  minHeight: 48,
-                  padding: "0 28px",
+                  fontSize: 14,
+                  minHeight: 42,
+                  padding: "0 24px",
                   borderRadius: 999,
                   border: `2px solid ${btnBg}`,
                   backgroundColor: btnBg,
@@ -593,9 +593,9 @@ export function FinalCta({
                   width: "100%",
                   fontFamily: GC_FINAL,
                   fontWeight: 700,
-                  fontSize: 16,
-                  minHeight: 48,
-                  padding: "0 28px",
+                  fontSize: 14,
+                  minHeight: 42,
+                  padding: "0 24px",
                   borderRadius: 999,
                   border: `2px solid ${btnBg}`,
                   backgroundColor: btnBg,
