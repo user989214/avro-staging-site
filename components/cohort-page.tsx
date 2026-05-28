@@ -386,8 +386,11 @@ export function CohortPage({ data }: { data: CohortData }) {
 
       <FormulaLogic dark={isZeroProof} />
 
-      {/* Per-cohort animated chart — same slot on every cohort page, color-coded by accent. */}
-      <CohortChart visualKey={data.visual} accent={accent} dark={isZeroProof} />
+      {/* Per-cohort animated chart — shown on every cohort EXCEPT social/Zero Proof,
+          which intentionally skips the chart slot. */}
+      {!isZeroProof && (
+        <CohortChart visualKey={data.visual} accent={accent} dark={isZeroProof} />
+      )}
 
       {/* Use Moments — eyebrow removed; title carries the section. */}
       <Section dark={isZeroProof}>
