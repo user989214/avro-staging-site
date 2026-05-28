@@ -116,7 +116,7 @@ export default function ShopPage() {
               position: "absolute",
               inset: 0,
               background:
-                "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 42%, rgba(245,241,234,0.95) 50%, rgba(245,241,234,0.7) 60%, rgba(245,241,234,0.35) 72%, rgba(245,241,234,0.15) 84%, rgba(245,241,234,0.25) 94%, var(--base-light) 100%), linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.3) 10%, rgba(245,241,234,0) 22%, rgba(245,241,234,0) 78%, rgba(245,241,234,0.3) 90%, var(--base-light) 100%)",
+                "linear-gradient(to right, var(--base-light) 0%, rgba(245,241,234,0.85) 18%, rgba(245,241,234,0.45) 32%, rgba(245,241,234,0.15) 46%, rgba(245,241,234,0) 58%, rgba(245,241,234,0) 100%), linear-gradient(to bottom, rgba(245,241,234,0.5) 0%, rgba(245,241,234,0) 14%, rgba(245,241,234,0) 86%, rgba(245,241,234,0.5) 100%)",
               pointerEvents: "none",
             }}
           />
