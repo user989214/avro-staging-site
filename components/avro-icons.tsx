@@ -133,15 +133,29 @@ interface AvroIconProps {
  * @param size - Icon size in pixels (default 40)
  */
 export function AvroIcon({ name, className, golden = false, size = 40 }: AvroIconProps) {
-  const iconMap = golden ? goldenIconMap : avroIconMap
-  const src = iconMap[name as keyof typeof iconMap]
+  // Get the source path - try golden first if requested, then fall back to standard
+  const goldenSrc = goldenIconMap[name as keyof typeof goldenIconMap]
+  const standardSrc = avroIconMap[name as keyof typeof avroIconMap]
+  
+  const src = (golden && goldenSrc) ? goldenSrc : standardSrc
   
   if (!src) {
-    console.error(`[AvroIcon] Unknown icon name: ${name}`)
     return null
   }
   
-  console.log(`[v0] AvroIcon: name=${name}, golden=${golden}, src=${src}`)
+  // Use regular img for golden icons to avoid Next.js Image optimization issues
+  if (golden && goldenSrc) {
+    return (
+      <img
+        src={src}
+        alt=""
+        width={size}
+        height={size}
+        className={cn("object-contain", className)}
+        aria-hidden="true"
+      />
+    )
+  }
   
   return (
     <Image

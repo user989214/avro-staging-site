@@ -356,10 +356,11 @@ export function InfoCard({
   href?: string
   dark?: boolean
 }) {
-  // Zero Proof / dark cards = gold card with deep-black text. Light = bone card with ink.
-  const cardBg = dark ? "bg-gold" : "bg-base-light"
-  const titleColor = dark ? "text-deep-black" : ""
-  const textColor = dark ? "text-deep-black/70" : "text-ink/75"
+  // Zero Proof / dark cards = dark surface card with bone text and golden icons.
+  // Light cohorts = bone card with ink text and standard icons.
+  const cardBg = dark ? "bg-[#111110]" : "bg-base-light"
+  const titleColor = dark ? "text-bone" : ""
+  const textColor = dark ? "text-bone/60" : "text-ink/75"
   const content = (
     <>
       <div className="mb-5">
@@ -399,12 +400,11 @@ export function FaqBlock({
   centered?: boolean
   dark?: boolean
 }) {
-  // Zero Proof / dark variant uses gold question cards with deep-black text,
-  // matching the rest of the page's gold-on-black system. Light cohorts keep
-  // the bone card with default ink.
-  const cardBg = dark ? "bg-gold" : "bg-base-light"
-  const textColor = dark ? "text-deep-black" : ""
-  const mutedText = dark ? "text-deep-black/75" : "text-ink/75"
+  // Zero Proof / dark variant uses dark surface cards with bone text,
+  // matching the design system v2. Light cohorts keep the bone card with default ink.
+  const cardBg = dark ? "bg-[#111110]" : "bg-base-light"
+  const textColor = dark ? "text-bone" : ""
+  const mutedText = dark ? "text-bone/60" : "text-ink/75"
   return (
     <Section className="max-w-[1080px]">
       <SectionHeading title={title} centered={centered} dark={dark} />

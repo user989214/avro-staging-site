@@ -54,16 +54,15 @@ export function CohortPage({ data }: { data: CohortData }) {
         : "var(--avro-blue)"
 
   // Theme surfaces — light cohorts use the bone/cream system; Zero Proof uses solid
-  // deep-black sections with gold cards and deep-black ink on those cards. No gradients
-  // anywhere on Zero Proof — the cohort reads as a high-contrast, solid black + gold story.
+  // deep-black sections with dark cards and gold accents/icons.
   const t = isZeroProof
     ? {
         pageBg: "var(--deep-black)",
-        surface: "var(--deep-black)",
-        // Gold card with deep-black text. Used by step cards, info cards, etc.
-        cardBg: "var(--gold)",
-        cardInk: "var(--deep-black)",
-        cardMuted: "rgba(13,13,13,0.7)",
+        surface: "var(--zp-surface)", // #1A1A17
+        // Dark card with bone text and gold icons. Per design system v2.
+        cardBg: "#111110",
+        cardInk: "var(--bone)",
+        cardMuted: "rgba(245,240,232,0.6)",
         // Section headings sit on the deep-black background and stay gold.
         ink: "var(--gold)",
         muted: "rgba(202,168,75,0.7)",
@@ -71,10 +70,10 @@ export function CohortPage({ data }: { data: CohortData }) {
         // Solid hero overlay — no gradient. A subtle near-black wash sits on top of the
         // photo so the title is legible against any image.
         heroFade: "rgba(13,13,13,0.62)",
-        // Step number chip on the gold card → invert: deep-black chip with gold numeral.
-        stepNumBg: "var(--deep-black)",
-        stepNumFg: "var(--gold)",
-        stepIconColor: "var(--deep-black)",
+        // Step number chip on the dark card → gold chip with dark numeral.
+        stepNumBg: "var(--gold)",
+        stepNumFg: "var(--deep-black)",
+        stepIconColor: "var(--gold)",
       }
     : {
         pageBg: "var(--base)",
