@@ -198,7 +198,7 @@ export function ProductCards({
   shopLabel?: string
   dark?: boolean
 }) {
-  const bg = dark ? "var(--deep-black)" : "#E5E4DC"
+  const bg = dark ? "var(--deep-black)" : "var(--base-light)"
   // Zero Proof / dark variant uses gold cards with deep-black text for high-contrast
   // product display. The product visual sits inside a deep-black inner panel so the
   // can/sachet pops against the gold card.
