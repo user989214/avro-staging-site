@@ -120,6 +120,15 @@ export function HomeRefHero() {
     }
 
     const onScroll = () => {
+      // Disable shrinking effect on mobile
+      if (window.innerWidth <= 768) {
+        target = 0
+        if (!running) {
+          running = true
+          raf = requestAnimationFrame(tick)
+        }
+        return
+      }
       const y = window.scrollY
       const max = 480
       const raw = Math.max(0, Math.min(1, y / max))
