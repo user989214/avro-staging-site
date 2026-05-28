@@ -244,23 +244,22 @@ export default function ShopPage() {
 
           <div
             style={{
-              backgroundColor: "var(--bone)",
+              backgroundColor: "var(--charcoal)",
               borderRadius: 20,
               overflow: "hidden",
-              border: "1px solid rgba(30,29,24,0.08)",
             }}
           >
-            {/* Header row — color-coded formula names */}
+            {/* Header row — Avro Blue accent for each formula column */}
             <div style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr 1fr 1fr" }}>
-              <div style={{ minHeight: 60, padding: "16px 24px", backgroundColor: "var(--base-light)" }} />
+              <div style={{ minHeight: 60, padding: "16px 24px" }} />
               <div style={{ minHeight: 60, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#94C6D4" }}>
-                <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 15, letterSpacing: "-0.01em", color: "var(--deep-black)" }}>Calm</span>
+                <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 15, letterSpacing: "-0.01em", color: "var(--charcoal)" }}>Calm</span>
               </div>
               <div style={{ minHeight: 60, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#94C6D4" }}>
-                <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 15, letterSpacing: "-0.01em", color: "var(--deep-black)" }}>Focus</span>
+                <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 15, letterSpacing: "-0.01em", color: "var(--charcoal)" }}>Focus</span>
               </div>
               <div style={{ minHeight: 60, padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#94C6D4" }}>
-                <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 15, letterSpacing: "-0.01em", color: "var(--deep-black)" }}>Energy</span>
+                <span style={{ fontFamily: GC, fontWeight: 800, fontSize: 15, letterSpacing: "-0.01em", color: "var(--charcoal)" }}>Energy</span>
               </div>
             </div>
 
@@ -270,34 +269,34 @@ export default function ShopPage() {
               { label: "Best for", calm: "Travel, social calm, daily reset", focus: "Deep work, meetings, study", energy: "Mornings, long days, travel" },
               { label: "Caffeine", calm: "No", focus: "No", energy: "Yes, 120 mg natural" },
               { label: "Key addition", calm: "Magnesium Bisglycinate", focus: "Cognigrape", energy: "Natural caffeine" },
-            ].map((row, idx) => (
+            ].map((row) => (
               <div
                 key={row.label}
                 style={{
                   display: "grid",
                   gridTemplateColumns: "1.25fr 1fr 1fr 1fr",
-                  borderTop: "1px solid rgba(30,29,24,0.06)",
+                  borderTop: "1px solid rgba(245,241,234,0.1)",
                 }}
               >
-                <div style={{ minHeight: 56, padding: "14px 24px", display: "flex", alignItems: "center", backgroundColor: "var(--base-light)" }}>
-                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--ink)" }}>{row.label}</span>
+                <div style={{ minHeight: 56, padding: "14px 24px", display: "flex", alignItems: "center" }}>
+                  <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--bone)" }}>{row.label}</span>
                 </div>
-                <div style={{ minHeight: 56, padding: "14px 16px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", backgroundColor: idx % 2 === 0 ? "var(--bone)" : "rgba(245,241,234,0.5)" }}>
-                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "var(--warm-gray)", lineHeight: 1.4 }}>{row.calm}</span>
+                <div style={{ minHeight: 56, padding: "14px 16px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", borderLeft: "1px solid rgba(245,241,234,0.1)" }}>
+                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "rgba(245,241,234,0.7)", lineHeight: 1.4 }}>{row.calm}</span>
                 </div>
-                <div style={{ minHeight: 56, padding: "14px 16px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", backgroundColor: idx % 2 === 0 ? "var(--bone)" : "rgba(245,241,234,0.5)" }}>
-                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "var(--warm-gray)", lineHeight: 1.4 }}>{row.focus}</span>
+                <div style={{ minHeight: 56, padding: "14px 16px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", borderLeft: "1px solid rgba(245,241,234,0.1)" }}>
+                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "rgba(245,241,234,0.7)", lineHeight: 1.4 }}>{row.focus}</span>
                 </div>
-                <div style={{ minHeight: 56, padding: "14px 16px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", backgroundColor: idx % 2 === 0 ? "var(--bone)" : "rgba(245,241,234,0.5)" }}>
-                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "var(--warm-gray)", lineHeight: 1.4 }}>{row.energy}</span>
+                <div style={{ minHeight: 56, padding: "14px 16px", display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center", borderLeft: "1px solid rgba(245,241,234,0.1)" }}>
+                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "rgba(245,241,234,0.7)", lineHeight: 1.4 }}>{row.energy}</span>
                 </div>
               </div>
             ))}
 
             {/* CTA row */}
-            <div style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr 1fr 1fr", borderTop: "1px solid rgba(30,29,24,0.06)" }}>
-              <div style={{ minHeight: 72, padding: 16, backgroundColor: "var(--base-light)" }} />
-              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1.25fr 1fr 1fr 1fr", borderTop: "1px solid rgba(245,241,234,0.1)" }}>
+              <div style={{ minHeight: 72, padding: 16 }} />
+              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center", borderLeft: "1px solid rgba(245,241,234,0.1)" }}>
                 <Link
                   href="/calm"
                   style={{
@@ -306,8 +305,8 @@ export default function ShopPage() {
                     fontSize: 13,
                     padding: "12px 24px",
                     borderRadius: 999,
-                    backgroundColor: "var(--charcoal)",
-                    color: "var(--bone)",
+                    backgroundColor: "#94C6D4",
+                    color: "var(--charcoal)",
                     textDecoration: "none",
                     transition: "opacity 0.2s",
                   }}
@@ -315,7 +314,7 @@ export default function ShopPage() {
                   Shop Calm
                 </Link>
               </div>
-              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center", borderLeft: "1px solid rgba(245,241,234,0.1)" }}>
                 <Link
                   href="/focus"
                   style={{
@@ -324,8 +323,8 @@ export default function ShopPage() {
                     fontSize: 13,
                     padding: "12px 24px",
                     borderRadius: 999,
-                    backgroundColor: "var(--charcoal)",
-                    color: "var(--bone)",
+                    backgroundColor: "#94C6D4",
+                    color: "var(--charcoal)",
                     textDecoration: "none",
                     transition: "opacity 0.2s",
                   }}
@@ -333,7 +332,7 @@ export default function ShopPage() {
                   Shop Focus
                 </Link>
               </div>
-              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ minHeight: 72, padding: 16, display: "flex", alignItems: "center", justifyContent: "center", borderLeft: "1px solid rgba(245,241,234,0.1)" }}>
                 <Link
                   href="/energy"
                   style={{
@@ -342,8 +341,8 @@ export default function ShopPage() {
                     fontSize: 13,
                     padding: "12px 24px",
                     borderRadius: 999,
-                    backgroundColor: "var(--charcoal)",
-                    color: "var(--bone)",
+                    backgroundColor: "#94C6D4",
+                    color: "var(--charcoal)",
                     textDecoration: "none",
                     transition: "opacity 0.2s",
                   }}
