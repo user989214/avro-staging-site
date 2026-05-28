@@ -827,15 +827,15 @@ export function HomeLogicRow() {
                   >
                     <div
                       style={{
-                        width: 32,
-                        height: 32,
+                        width: 56,
+                        height: 56,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
                         flexShrink: 0,
                       }}
                     >
-                      <AvroIcon name={card.icon} size={28} className="md:w-10 md:h-10" />
+                      <AvroIcon name={card.icon} size={52} className="md:w-16 md:h-16" />
                     </div>
                     <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(12px,1.1vw,16px)", color: "var(--ink)", flex: 1 }}>
                       {card.title}
