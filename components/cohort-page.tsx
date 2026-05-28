@@ -53,25 +53,36 @@ export function CohortPage({ data }: { data: CohortData }) {
         ? "var(--gold)"
         : "var(--avro-blue)"
 
-  // Theme surfaces — light cohorts use the bone/cream system; Zero Proof uses deep-black + gold only (no bone).
+  // Theme surfaces — light cohorts use the bone/cream system; Zero Proof uses solid
+  // deep-black sections with gold cards and deep-black ink on those cards. No gradients
+  // anywhere on Zero Proof — the cohort reads as a high-contrast, solid black + gold story.
   const t = isZeroProof
     ? {
         pageBg: "var(--deep-black)",
         surface: "var(--deep-black)",
-        cardBg: "var(--dark-surface)",
+        // Gold card with deep-black text. Used by step cards, info cards, etc.
+        cardBg: "var(--gold)",
+        cardInk: "var(--deep-black)",
+        cardMuted: "rgba(13,13,13,0.7)",
+        // Section headings sit on the deep-black background and stay gold.
         ink: "var(--gold)",
         muted: "rgba(202,168,75,0.7)",
         heroBg: "var(--deep-black)",
-        heroFade:
-          "linear-gradient(to right, var(--deep-black) 0%, var(--deep-black) 38%, rgba(13,13,13,0.95) 48%, rgba(13,13,13,0.7) 58%, rgba(13,13,13,0.3) 70%, rgba(13,13,13,0.1) 82%, rgba(13,13,13,0.15) 94%, var(--deep-black) 100%), linear-gradient(to bottom, var(--deep-black) 0%, rgba(13,13,13,0.2) 10%, rgba(13,13,13,0) 20%, rgba(13,13,13,0) 80%, rgba(13,13,13,0.2) 90%, var(--deep-black) 100%)",
-        stepNumBg: "var(--gold)",
-        stepNumFg: "var(--deep-black)",
-        stepIconColor: "var(--gold)",
+        // Solid hero overlay — no gradient. A subtle near-black wash sits on top of the
+        // photo so the title is legible against any image.
+        heroFade: "rgba(13,13,13,0.62)",
+        // Step number chip on the gold card → invert: deep-black chip with gold numeral.
+        stepNumBg: "var(--deep-black)",
+        stepNumFg: "var(--gold)",
+        stepIconColor: "var(--deep-black)",
       }
     : {
         pageBg: "var(--base)",
         surface: "var(--base)",
         cardBg: "var(--base-light)",
+        // Light-theme cards use the same ink/muted as the page — no special inversion needed.
+        cardInk: "var(--ink)",
+        cardMuted: "var(--warm-gray)",
         ink: "var(--ink)",
         muted: "var(--warm-gray)",
         heroBg: "var(--base-light)",
@@ -350,7 +361,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                     fontFamily: GC,
                     fontWeight: 700,
                     fontSize: 18,
-                    color: t.ink,
+                    color: t.cardInk,
                     marginBottom: 8,
                   }}
                 >
@@ -362,7 +373,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                     fontWeight: 400,
                     fontSize: 15,
                     lineHeight: 1.5,
-                    color: t.muted,
+                    color: t.cardMuted,
                   }}
                 >
                   {step.copy}

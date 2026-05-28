@@ -196,17 +196,23 @@ export function ProductCards({
   dark?: boolean
 }) {
   const bg = dark ? "var(--deep-black)" : "var(--base)"
-  const cardBg = dark ? "var(--dark-surface)" : "var(--base-light)"
-  const ink = dark ? "var(--gold)" : "var(--ink)"
-  const muted = dark ? "rgba(202,168,75,0.7)" : "rgba(0,0,0,0.6)"
-  const border = dark ? "rgba(202,168,75,0.15)" : "rgba(0,0,0,0.08)"
+  // Zero Proof / dark variant uses gold cards with deep-black text for high-contrast
+  // product display. The product visual sits inside a deep-black inner panel so the
+  // can/sachet pops against the gold card.
+  const cardBg = dark ? "var(--gold)" : "var(--base-light)"
+  const ink = dark ? "var(--deep-black)" : "var(--ink)"
+  // Section title sits on the deep-black page background, so it stays gold there.
+  const titleInk = dark ? "var(--gold)" : "var(--ink)"
+  const titleMuted = dark ? "rgba(202,168,75,0.7)" : "rgba(0,0,0,0.6)"
+  const muted = dark ? "rgba(13,13,13,0.7)" : "rgba(0,0,0,0.6)"
+  const border = dark ? "rgba(13,13,13,0.18)" : "rgba(0,0,0,0.08)"
   return (
     <section style={{ backgroundColor: bg, width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: ink, marginBottom: 12 }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(28px,3.6vw,48px)", lineHeight: 1.0, color: titleInk, marginBottom: 12 }}>
           {title}
         </h2>
-        <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(15px,1.2vw,18px)", lineHeight: 1.4, color: muted, marginBottom: 32 }}>
+        <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(15px,1.2vw,18px)", lineHeight: 1.4, color: titleMuted, marginBottom: 32 }}>
           Every AVRO formula starts with the same calm-first base, then supports the moment in a different way.
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
@@ -214,7 +220,8 @@ export function ProductCards({
             const item = formulas[key]
             return (
               <article key={key} style={{ backgroundColor: cardBg, borderRadius: 24, padding: "clamp(20px,3vw,32px)", display: "flex", flexDirection: "column", gap: 16 }}>
-                <div style={{ borderRadius: 20, height: 340, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "rgba(245,240,232,0.05)" : "var(--bone)" }}>
+                {/* Inner product frame — solid deep-black on Zero Proof so the can pops against the gold card; bone on light. */}
+                <div style={{ borderRadius: 20, height: 340, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "var(--deep-black)" : "var(--bone)" }}>
                   <ProductCard formulaKey={key} className="h-full w-full object-cover" />
                 </div>
                 <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(22px,2vw,28px)", color: ink, margin: 0 }}>{item.name}</h3>
@@ -244,16 +251,18 @@ export function ProductCards({
                     padding: "0 24px", 
                     borderRadius: 999, 
                     textDecoration: "none", 
-                    border: dark ? "2px solid var(--gold)" : "2px solid var(--charcoal)",
-                    backgroundColor: dark ? "var(--gold)" : "var(--charcoal)", 
-                    color: dark ? "var(--deep-black)" : "var(--bone)", 
+                    // On Zero Proof the card is gold, so the CTA inverts to deep-black with gold text
+                    // (and on hover collapses to outline mode — gold stroke + deep-black text on the gold card).
+                    border: dark ? "2px solid var(--deep-black)" : "2px solid var(--charcoal)",
+                    backgroundColor: dark ? "var(--deep-black)" : "var(--charcoal)", 
+                    color: dark ? "var(--gold)" : "var(--bone)", 
                     marginTop: "auto",
                     transition: "background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease",
                   }}
                   onMouseEnter={(e) => {
                     if (dark) {
-                      e.currentTarget.style.backgroundColor = 'var(--gold-light)'
-                      e.currentTarget.style.borderColor = 'var(--gold-light)'
+                      e.currentTarget.style.backgroundColor = 'transparent'
+                      e.currentTarget.style.color = 'var(--deep-black)'
                     } else {
                       e.currentTarget.style.backgroundColor = 'transparent'
                       e.currentTarget.style.color = 'var(--charcoal)'
@@ -261,8 +270,8 @@ export function ProductCards({
                   }}
                   onMouseLeave={(e) => {
                     if (dark) {
-                      e.currentTarget.style.backgroundColor = 'var(--gold)'
-                      e.currentTarget.style.borderColor = 'var(--gold)'
+                      e.currentTarget.style.backgroundColor = 'var(--deep-black)'
+                      e.currentTarget.style.color = 'var(--gold)'
                     } else {
                       e.currentTarget.style.backgroundColor = 'var(--charcoal)'
                       e.currentTarget.style.color = 'var(--bone)'
@@ -344,10 +353,11 @@ export function InfoCard({
   href?: string
   dark?: boolean
 }) {
-  const cardBg = dark ? "bg-dark-surface" : "bg-base-light"
-  const iconColor = dark ? "text-gold" : "text-olive"
-  const titleColor = dark ? "text-gold" : ""
-  const textColor = dark ? "text-gold/70" : "text-ink/75"
+  // Zero Proof / dark cards = gold card with deep-black text. Light = bone card with ink.
+  const cardBg = dark ? "bg-gold" : "bg-base-light"
+  const iconColor = dark ? "text-deep-black" : "text-olive"
+  const titleColor = dark ? "text-deep-black" : ""
+  const textColor = dark ? "text-deep-black/70" : "text-ink/75"
   const content = (
     <>
       <Icon name={icon} className={cn("w-10.5 h-10.5 mb-5", iconColor)} />
