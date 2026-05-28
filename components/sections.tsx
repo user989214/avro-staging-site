@@ -111,17 +111,40 @@ export function CtaGroup({
   primary = "Shop AVRO",
   secondary = "Find Your Formula",
   dark = false,
+  hero = false,
 }: {
   primary?: string
   secondary?: string
   dark?: boolean
+  hero?: boolean
 }) {
+  // Hero buttons are wider — visually echo the homepage hero CTAs (≥220px, generous horizontal padding,
+  // and they stretch to fill the row so labels never wrap awkwardly).
+  const heroStyle = hero
+    ? {
+        minWidth: 220,
+        padding: "0 44px",
+        flex: "1 1 220px" as const,
+        whiteSpace: "nowrap" as const,
+      }
+    : undefined
   return (
-    <div className="flex flex-wrap items-center gap-3 mt-6.5">
-      <Link href="/shop" className={dark ? "btn-primary-dark" : "btn-primary"}>
+    <div
+      className="flex flex-wrap items-center gap-3 mt-6.5"
+      style={hero ? { maxWidth: 560 } : undefined}
+    >
+      <Link
+        href="/shop"
+        className={dark ? "btn-primary-dark" : "btn-primary"}
+        style={heroStyle}
+      >
         {primary}
       </Link>
-      <Link href="/shop" className={dark ? "btn-outline-dark" : "btn-secondary"}>
+      <Link
+        href="/shop"
+        className={dark ? "btn-outline-dark" : "btn-secondary"}
+        style={heroStyle}
+      >
         {secondary}
       </Link>
     </div>

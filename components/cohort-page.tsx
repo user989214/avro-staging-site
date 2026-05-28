@@ -13,6 +13,7 @@ import {
   InfoCard,
 } from "@/components/sections"
 import { Icon, type IconName } from "@/components/icons"
+import { CohortChart } from "@/components/cohort-chart"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 
@@ -109,9 +110,15 @@ export function CohortPage({ data }: { data: CohortData }) {
     },
   }
 
-  // Per-cohort animation accent — each word briefly flashes the cohort accent before settling into the page ink.
-  const wordAccent = accent
-  const wordRest = t.ink
+  // Per-cohort animation accent — words begin at a dimmed shade of the accent and rise into the full bright accent (Zero Proof) or the page ink (light cohorts), so the brand color feels intentional, not just transitional.
+  const dimAccent =
+    data.visual === "golf"
+      ? "rgba(189,214,55,0.55)"
+      : isZeroProof
+        ? "var(--gold-dim)"
+        : "rgba(140,194,231,0.6)" // dim avro-blue
+  const wordStart = dimAccent
+  const wordEnd = isZeroProof ? "var(--gold)" : t.ink
 
   return (
     <div style={{ backgroundColor: t.pageBg, color: t.ink }}>
@@ -125,10 +132,10 @@ export function CohortPage({ data }: { data: CohortData }) {
       >
         <style>{`
           @keyframes cohort-rise-color {
-            0%   { opacity: 0; transform: translateY(28px); color: ${wordAccent}; }
-            55%  { opacity: 1; transform: translateY(-4px); color: ${wordAccent}; }
-            80%  { opacity: 1; transform: translateY(0); color: ${wordAccent}; }
-            100% { opacity: 1; transform: translateY(0); color: ${wordRest}; }
+            0%   { opacity: 0; transform: translateY(28px); color: ${wordStart}; }
+            55%  { opacity: 1; transform: translateY(-4px); color: ${wordStart}; }
+            80%  { opacity: 1; transform: translateY(0); color: ${wordStart}; }
+            100% { opacity: 1; transform: translateY(0); color: ${wordEnd}; }
           }
           @keyframes cohort-fade-up {
             0% { opacity: 0; transform: translateY(10px); }
@@ -138,7 +145,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             display: inline-block;
             opacity: 0;
             transform: translateY(28px);
-            color: ${wordAccent};
+            color: ${wordStart};
             animation: cohort-rise-color 1.05s cubic-bezier(0.34, 1.4, 0.4, 1) forwards;
             will-change: transform, opacity, color;
           }
@@ -150,7 +157,7 @@ export function CohortPage({ data }: { data: CohortData }) {
               animation: none !important;
               opacity: 1 !important;
               transform: none !important;
-              color: ${wordRest} !important;
+              color: ${wordEnd} !important;
             }
           }
         `}</style>
@@ -220,7 +227,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                 fontSize: "clamp(42px,6vw,72px)",
                 lineHeight: 0.98,
                 letterSpacing: "-0.025em",
-                color: wordRest,
+                color: wordEnd,
                 marginBottom: 20,
                 maxWidth: 560,
               }}
@@ -257,7 +264,7 @@ export function CohortPage({ data }: { data: CohortData }) {
               {data.copy}
             </p>
             <div className="cohort-fade cohort-cta">
-              <CtaGroup primary={data.primary} secondary={data.secondary} dark={isZeroProof} />
+              <CtaGroup primary={data.primary} secondary={data.secondary} dark={isZeroProof} hero />
             </div>
           </div>
         </div>
@@ -367,6 +374,9 @@ export function CohortPage({ data }: { data: CohortData }) {
       </section>
 
       <FormulaLogic dark={isZeroProof} />
+
+      {/* Per-cohort animated chart — same slot on every cohort page, color-coded by accent. */}
+      <CohortChart visualKey={data.visual} accent={accent} dark={isZeroProof} />
 
       {/* Use Moments — eyebrow removed; title carries the section. */}
       <Section dark={isZeroProof}>

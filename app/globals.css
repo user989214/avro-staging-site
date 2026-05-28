@@ -112,6 +112,7 @@
   --golf: #BDD637;          /* Fuji Apple */
   --gold: #CAA84B;          /* Zero Proof */
   --gold-light: #E8C97E;
+  --gold-dim: #8E743A;      /* Dimmed gold — used as the starting tint for word-rise animation */
 
   /* Zero Proof dark surfaces (avrozeroproof.com / Social cohort) */
   --deep-black: #0D0D0D;
@@ -419,10 +420,11 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.btn-primary-dark:hover {
-  background-color: var(--gold-light);
-  border-color: var(--gold-light);
-}
+  .btn-primary-dark:hover {
+  background-color: transparent;
+  color: var(--gold);
+  border-color: var(--gold);
+  }
 
 /* Zero Proof (dark theme) outline button — gold border, gold text */
 .btn-outline-dark {
@@ -487,10 +489,11 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.btn-secondary-dark:hover {
-  background-color: var(--gold-light);
-  border-color: var(--gold-light);
-}
+  .btn-secondary-dark:hover {
+  background-color: transparent;
+  color: var(--gold);
+  border-color: var(--gold);
+  }
 
 .btn-accent {
   display: inline-flex;
