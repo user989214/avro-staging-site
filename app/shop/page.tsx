@@ -116,7 +116,7 @@ export default function ShopPage() {
               position: "absolute",
               inset: 0,
               background:
-                "linear-gradient(to right, var(--base-light) 0%, rgba(245,241,234,0.85) 18%, rgba(245,241,234,0.45) 32%, rgba(245,241,234,0.15) 46%, rgba(245,241,234,0) 58%, rgba(245,241,234,0) 100%), linear-gradient(to bottom, rgba(245,241,234,0.5) 0%, rgba(245,241,234,0) 14%, rgba(245,241,234,0) 86%, rgba(245,241,234,0.5) 100%)",
+                "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 44%, rgba(245,241,234,0.55) 52%, rgba(245,241,234,0.15) 60%, rgba(245,241,234,0) 68%, rgba(245,241,234,0) 100%)",
               pointerEvents: "none",
             }}
           />
@@ -140,12 +140,12 @@ export default function ShopPage() {
               className="font-serif"
               style={{
                 fontWeight: 900,
-                fontSize: "clamp(36px,5.5vw,72px)",
-                lineHeight: 0.98,
+                fontSize: "clamp(32px,4.2vw,52px)",
+                lineHeight: 1.02,
                 letterSpacing: "-0.025em",
                 color: "var(--ink)",
                 marginBottom: 16,
-                maxWidth: 720,
+                maxWidth: 520,
               }}
             >
               {"Choose your AVRO formula.".split(" ").map((word, i, arr) => {
@@ -167,11 +167,11 @@ export default function ShopPage() {
               style={{
                 fontFamily: GC,
                 fontWeight: 400,
-                fontSize: "clamp(17px,2vw,20px)",
+                fontSize: "clamp(15px,1.4vw,18px)",
                 lineHeight: 1.55,
                 color: "var(--warm-gray)",
-                maxWidth: 560,
-                marginBottom: 28,
+                maxWidth: 460,
+                marginBottom: 24,
               }}
             >
               Three formulas. One calm-first foundation. Start with the state that fits your moment.
