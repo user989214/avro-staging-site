@@ -39,16 +39,16 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
 
   return (
     <aside
-      className="flex flex-col gap-3"
+      className="flex flex-col gap-3 sm:gap-4"
       style={{ fontFamily: GC }}
     >
       {/* Header - tighter, no rating (rating now lives in gallery overlay) */}
-      <header className="flex flex-col gap-1">
+      <header className="flex flex-col gap-1 sm:gap-1.5">
         <h1
           className="font-serif text-balance"
           style={{
             fontWeight: 900,
-            fontSize: "clamp(24px,2.8vw,40px)",
+            fontSize: "clamp(26px,3.2vw,40px)",
             lineHeight: 0.98,
             color: "var(--ink)",
           }}
@@ -59,7 +59,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
           style={{
             fontFamily: GC,
             fontWeight: 500,
-            fontSize: "clamp(12px,1vw,15px)",
+            fontSize: "clamp(13px,1.1vw,15px)",
             lineHeight: 1.4,
             color: "var(--warm-gray)",
           }}
@@ -70,10 +70,10 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
 
       {/* Flavor switcher - compact circular pills */}
       <div className="flex flex-col gap-1">
-        <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(11px,0.9vw,13px)", color: "var(--ink)" }}>
+        <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(12px,1vw,13px)", color: "var(--ink)" }}>
           Flavor
         </span>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-2">
           {formula.flavors.map((flavor) => {
             const isSelected = flavorId === flavor.id
             return (
@@ -81,7 +81,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
                 key={flavor.id}
                 type="button"
                 onClick={() => onFlavorChange(flavor.id)}
-                className="inline-flex items-center gap-1 pl-0.5 pr-2.5 py-0.5 transition-all"
+                className="inline-flex items-center gap-1.5 sm:gap-2 pl-0.5 sm:pl-1 pr-3 sm:pr-4 py-0.5 sm:py-1 transition-all"
                 style={{
                   borderRadius: 999,
                   backgroundColor: isSelected ? "var(--charcoal)" : LIGHT_GRAY,
@@ -90,7 +90,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
               >
                 {/* Circular solo tube thumbnail */}
                 <div
-                  className="w-6 h-6 overflow-hidden flex-shrink-0 grid place-items-center"
+                  className="w-6 h-6 sm:w-8 sm:h-8 overflow-hidden flex-shrink-0 grid place-items-center"
                   style={{
                     borderRadius: 999,
                     backgroundColor: "#FBF8F1",
@@ -107,7 +107,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
                   style={{
                     fontFamily: GC,
                     fontWeight: 700,
-                    fontSize: "clamp(10px,0.85vw,12px)",
+                    fontSize: "clamp(11px,1vw,14px)",
                     lineHeight: 1,
                     color: isSelected ? "var(--bone)" : "var(--ink)",
                     whiteSpace: "nowrap",
@@ -121,8 +121,8 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         </div>
       </div>
 
-      {/* Purchase options - fully circular pills */}
-      <div className="flex flex-col gap-1">
+      {/* Purchase options - more gap, redesigned layout */}
+      <div className="flex flex-col gap-2 sm:gap-3">
         <PurchaseOption
           checked={purchaseType === "subscribe"}
           onChange={() => setPurchaseType("subscribe")}
@@ -146,7 +146,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
           style={{
             fontFamily: GC,
             fontWeight: 700,
-            fontSize: "clamp(12px,1vw,14px)",
+            fontSize: "clamp(13px,1.1vw,16px)",
             color: "var(--ink)",
           }}
         >
@@ -164,15 +164,15 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
             type="button"
             onClick={() => setQuantity((q) => Math.max(1, q - 1))}
             aria-label="Decrease quantity"
-            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center transition-colors hover:bg-black/5 disabled:opacity-40"
-            style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "var(--charcoal)" }}
+            className="w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center transition-colors hover:bg-black/5 disabled:opacity-40"
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(16px,1.2vw,20px)", color: "var(--charcoal)" }}
             disabled={quantity <= 1}
           >
             −
           </button>
           <span
-            className="w-7 text-center"
-            style={{ fontFamily: GC, fontWeight: 800, fontSize: 14, color: "var(--charcoal)" }}
+            className="w-8 sm:w-10 text-center"
+            style={{ fontFamily: GC, fontWeight: 800, fontSize: "clamp(14px,1.1vw,18px)", color: "var(--charcoal)" }}
           >
             {quantity}
           </span>
@@ -180,8 +180,8 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
             type="button"
             onClick={() => setQuantity((q) => q + 1)}
             aria-label="Increase quantity"
-            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center transition-colors hover:bg-black/5"
-            style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "var(--charcoal)" }}
+            className="w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center transition-colors hover:bg-black/5"
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(16px,1.2vw,20px)", color: "var(--charcoal)" }}
           >
             +
           </button>
@@ -196,9 +196,9 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         style={{
           fontFamily: GC,
           fontWeight: 800,
-          fontSize: "clamp(12px,1vw,14px)",
-          minHeight: "clamp(40px,4vw,48px)",
-          padding: "0 16px",
+          fontSize: "clamp(13px,1.1vw,16px)",
+          minHeight: "clamp(44px,4.5vw,56px)",
+          padding: "0 20px",
           borderRadius: 999,
           backgroundColor: "var(--charcoal)",
           color: "var(--bone)",
@@ -237,22 +237,23 @@ function PurchaseOption({
 }) {
   return (
     <label
-      className="relative flex items-center gap-2 cursor-pointer transition-colors"
+      className="relative flex items-center gap-2 sm:gap-3 cursor-pointer transition-colors"
       style={{
         backgroundColor: checked ? "var(--charcoal)" : LIGHT_GRAY,
         color: checked ? "var(--bone)" : "var(--ink)",
         fontFamily: GC,
         borderRadius: 999,
-        padding: "8px 12px 8px 10px",
+        padding: "10px 14px 10px 12px",
         border: checked ? "2px solid var(--charcoal)" : "2px solid transparent",
       }}
     >
+      {/* Radio indicator */}
       <span
         aria-hidden
         className="shrink-0 grid place-items-center"
         style={{
-          width: 16,
-          height: 16,
+          width: "clamp(16px,1.4vw,20px)",
+          height: "clamp(16px,1.4vw,20px)",
           borderRadius: 999,
           border: checked ? "2px solid var(--bone)" : "2px solid var(--warm-gray)",
           backgroundColor: "transparent",
@@ -261,8 +262,8 @@ function PurchaseOption({
         {checked && (
           <span
             style={{
-              width: 6,
-              height: 6,
+              width: "clamp(6px,0.5vw,8px)",
+              height: "clamp(6px,0.5vw,8px)",
               borderRadius: 999,
               backgroundColor: "var(--bone)",
             }}
@@ -276,50 +277,60 @@ function PurchaseOption({
         onChange={onChange}
         className="sr-only"
       />
+      
+      {/* Left side - title, badge, subtitle */}
       <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-1 flex-wrap min-w-0">
-            <strong
-              style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(11px,0.9vw,13px)", lineHeight: 1.2 }}
-            >
-              {title}
-            </strong>
-            {badge && (
-              <span
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 700,
-                  fontSize: "clamp(7px,0.6vw,8px)",
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                  padding: "2px 5px",
-                  backgroundColor: checked ? "var(--bone)" : "var(--charcoal)",
-                  color: checked ? "var(--charcoal)" : "var(--bone)",
-                  borderRadius: 999,
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {badge}
-              </span>
-            )}
-          </div>
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
           <strong
-            style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(11px,0.9vw,13px)", whiteSpace: "nowrap" }}
+            style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(12px,1.1vw,15px)", lineHeight: 1.2 }}
           >
-            {price}
+            {title}
           </strong>
+          {badge && (
+            <span
+              style={{
+                fontFamily: GC,
+                fontWeight: 700,
+                fontSize: "clamp(7px,0.6vw,9px)",
+                letterSpacing: "0.06em",
+                textTransform: "uppercase",
+                padding: "2px 6px",
+                backgroundColor: checked ? "var(--bone)" : "var(--charcoal)",
+                color: checked ? "var(--charcoal)" : "var(--bone)",
+                borderRadius: 999,
+                whiteSpace: "nowrap",
+              }}
+            >
+              {badge}
+            </span>
+          )}
         </div>
         <p
           className="mt-0.5 leading-snug"
           style={{
             fontFamily: GC,
             fontWeight: 500,
-            fontSize: "clamp(9px,0.75vw,11px)",
+            fontSize: "clamp(10px,0.85vw,12px)",
             color: checked ? "rgba(255,255,255,0.75)" : "rgba(20,20,20,0.7)",
           }}
         >
           {subtitle}
         </p>
+      </div>
+      
+      {/* Right side - price, larger and centered */}
+      <div className="flex items-center justify-center shrink-0">
+        <strong
+          style={{ 
+            fontFamily: GC, 
+            fontWeight: 800, 
+            fontSize: "clamp(16px,1.5vw,22px)", 
+            whiteSpace: "nowrap",
+            letterSpacing: "-0.01em",
+          }}
+        >
+          {price}
+        </strong>
       </div>
     </label>
   )
