@@ -4,7 +4,6 @@ import {
   Section,
   SectionHeading,
   SocialProof,
-  FinalCta,
 } from "@/components/sections"
 import { PageHero } from "@/components/page-hero"
 import { Icon } from "@/components/icons"
@@ -315,11 +314,58 @@ export default function LearnPage() {
 
       <SocialProof mode="full" />
 
-      <FinalCta
-        eyebrow="Choose the formula that fits your moment"
-        title="Ready to find your formula?"
-        copy="Choose Calm, Focus, or Energy based on the moment you want to support."
-      />
+      {/* Bottom CTA — custom three-formula picker bar matching the previous /learn
+          layout. Only Shop Calm keeps its cohort accent (Avro Blue). Shop Focus and
+          Shop Energy use neutral ink/charcoal pills, per the rule that no cohort
+          color besides blue may appear in the theme. */}
+      <Section className="max-w-[1320px] pb-24">
+        <div
+          className="rounded-[28px] p-8 md:p-12"
+          style={{ backgroundColor: "var(--deep-black)", color: "var(--bone)" }}
+        >
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+            <div className="max-w-xl">
+              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-bone/60 mb-3">
+                Choose the formula that fits your moment
+              </p>
+              <h3 className="font-serif font-black text-[clamp(28px,3.4vw,42px)] leading-[1.05] text-bone text-balance mb-3">
+                Ready to find your formula?
+              </h3>
+              <p className="text-sm md:text-base leading-relaxed text-bone/75">
+                Choose Calm, Focus, or Energy based on the moment you want to support.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/calm"
+                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-extrabold transition-transform hover:-translate-y-0.5"
+                style={{ backgroundColor: "#94C6D4", color: "var(--deep-black)" }}
+              >
+                Shop Calm
+              </Link>
+              <Link
+                href="/focus"
+                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-extrabold transition-transform hover:-translate-y-0.5"
+                style={{ backgroundColor: "var(--bone)", color: "var(--deep-black)" }}
+              >
+                Shop Focus
+              </Link>
+              <Link
+                href="/energy"
+                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-extrabold transition-transform hover:-translate-y-0.5 border"
+                style={{
+                  backgroundColor: "transparent",
+                  color: "var(--bone)",
+                  borderColor: "rgba(245,241,234,0.4)",
+                }}
+              >
+                Shop Energy
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Section>
     </>
   )
 }
