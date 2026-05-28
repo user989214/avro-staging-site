@@ -116,7 +116,6 @@ export default function AboutPage() {
       {/* Values */}
       <Section className="bg-cream/40">
         <SectionHeading
-          eyebrow="What we believe"
           title="Built on one clear belief."
           description="Performance starts with composure. That belief shaped every formula, every ingredient, and every decision at AVRO."
         />
@@ -139,48 +138,34 @@ export default function AboutPage() {
 
       {/* Founders */}
       <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(28px,5vw,64px)]">
-        <SectionHeading
-          eyebrow="The Founders"
-          title="Born from science and brand instinct."
-          description="Together, Keigo and Peter built AVRO around one clear belief: performance starts with composure."
-          align="left"
-        />
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
-          {/* Text content - left aligned */}
-          <div className="flex flex-col gap-5 lg:flex-1">
-            {founders.map((f) => (
-              <div key={f.name} className="flex flex-col gap-2 pb-5 last:pb-0 border-b border-line/40 last:border-0">
-                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
-                  <h3 className="font-serif font-black text-[clamp(18px,2vw,26px)] leading-tight">
-                    {f.name}
-                  </h3>
-                  <span className="text-olive text-[10px] md:text-[11px] font-black tracking-[0.1em] uppercase">
-                    {f.role}
-                  </span>
-                </div>
-                <p className="text-ink/75 text-[clamp(13px,1.4vw,16px)] leading-relaxed">
-                  {f.bio}
-                </p>
-              </div>
-            ))}
-            <div className="flex flex-wrap gap-3 mt-2">
-              <Link href="/science" className="btn-secondary text-sm">
-                The science
+        {/* Dark card container */}
+        <div className="bg-[var(--charcoal)] rounded-[28px] overflow-hidden">
+          {/* Content */}
+          <div className="p-[clamp(24px,4vw,48px)] pb-6">
+            <h2 className="font-serif font-black text-[clamp(28px,3.6vw,48px)] leading-[1.0] text-white mb-4">
+              Founder-driven.
+            </h2>
+            <p className="text-white/85 text-[clamp(15px,1.2vw,18px)] leading-relaxed max-w-[680px] mb-6">
+              AVRO was built by Keigo Sugawara and Peter van Stolk for people who wanted a better option before the moments that matter. Every formula is backed by research and designed for real routines.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/why-avro" className="inline-flex items-center justify-center font-sans font-bold text-sm h-[42px] px-8 rounded-full border-2 border-white bg-transparent text-white hover:bg-white/10 transition-colors">
+                Our Story
               </Link>
-              <Link href="/why-avro" className="btn-secondary text-sm">
-                Why AVRO
+              <Link href="/science" className="inline-flex items-center justify-center font-sans font-bold text-sm h-[42px] px-8 rounded-full border-2 border-[var(--avro-blue)] bg-[var(--avro-blue)] text-[var(--charcoal)] hover:opacity-90 transition-opacity">
+                The Science
               </Link>
             </div>
           </div>
-          {/* Image - contained with padding/border */}
-          <div className="w-full lg:w-[380px] flex-shrink-0">
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-soft p-3">
+          {/* Image inside card */}
+          <div className="px-[clamp(16px,3vw,32px)] pb-[clamp(16px,3vw,32px)]">
+            <div className="relative aspect-[16/10] sm:aspect-[2/1] rounded-[18px] overflow-hidden bg-[var(--bone)]">
               <Image
                 src="/images/team/founders-keigo-peter.jpg"
                 alt="AVRO co-founders Keigo Sugawara and Peter van Stolk"
                 fill
-                sizes="(min-width: 1024px) 380px, 100vw"
-                className="object-contain rounded-xl"
+                sizes="(min-width: 1024px) 1200px, 100vw"
+                className="object-cover grayscale contrast-[1.05] brightness-[0.98]"
               />
             </div>
           </div>
@@ -190,7 +175,6 @@ export default function AboutPage() {
       {/* Full team portraits */}
       <Section className="bg-cream/40">
         <SectionHeading
-          eyebrow="The Team"
           title="The people behind AVRO."
         />
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 max-w-[1100px] mx-auto">
