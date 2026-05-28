@@ -94,7 +94,7 @@ export default function ShopPage() {
           style={{
             position: "relative",
             width: "100%",
-            minHeight: "clamp(380px, 52vh, 580px)",
+            minHeight: "clamp(560px, 68vh, 720px)",
           }}
         >
           {/* Background product image */}
@@ -116,7 +116,7 @@ export default function ShopPage() {
               position: "absolute",
               inset: 0,
               background:
-                "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.95) 48%, rgba(245,241,234,0.7) 58%, rgba(245,241,234,0.3) 70%, rgba(245,241,234,0.1) 82%, rgba(245,241,234,0.15) 94%, var(--base-light) 100%), linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.2) 10%, rgba(245,241,234,0) 20%, rgba(245,241,234,0) 80%, rgba(245,241,234,0.2) 90%, var(--base-light) 100%)",
+                "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 42%, rgba(245,241,234,0.95) 50%, rgba(245,241,234,0.7) 60%, rgba(245,241,234,0.35) 72%, rgba(245,241,234,0.15) 84%, rgba(245,241,234,0.25) 94%, var(--base-light) 100%), linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.3) 10%, rgba(245,241,234,0) 22%, rgba(245,241,234,0) 78%, rgba(245,241,234,0.3) 90%, var(--base-light) 100%)",
               pointerEvents: "none",
             }}
           />
@@ -130,7 +130,7 @@ export default function ShopPage() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              padding: "clamp(48px,7vw,120px) clamp(20px,5vw,64px)",
+              padding: "clamp(112px,13vw,180px) clamp(20px,5vw,64px) clamp(80px,10vw,140px)",
               minHeight: "inherit",
               textAlign: "left",
               alignItems: "flex-start",

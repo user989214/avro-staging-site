@@ -132,7 +132,7 @@ export default function BlogPage() {
       {/* Golf-style hero treatment, dark variant: full-width edge-to-edge, square corners,
           per-word rise animation on the headline, lede + filters fade up after.
           Top padding lightened so content appears on first scroll. */}
-      <section className="hero-section" style={{ backgroundColor: "#000", padding: "clamp(48px,7vw,96px) clamp(20px,5vw,80px) clamp(40px,5vw,72px)" }}>
+      <section className="hero-section" style={{ backgroundColor: "#000", padding: "clamp(112px,13vw,180px) clamp(20px,5vw,80px) clamp(80px,10vw,140px)", minHeight: "clamp(560px, 68vh, 720px)", display: "flex", alignItems: "center" }}>
         <style>{`
           @keyframes blog-rise {
             0%   { opacity: 0; transform: translateY(28px); }
