@@ -167,10 +167,11 @@ export function PageHero({
     return <FlatHero {...{ title, lede, primaryCta, secondaryCta, children, compact, centered }} />
   }
 
-  // Bumped up so the hero is fully visible on first scroll.
+  // Tuned so the entire hero (headline + lede + extras + CTAs) lands above
+  // the fold on a typical 800px-tall desktop viewport after the sticky header.
   const minH = compact
-    ? "clamp(460px, 58vh, 580px)"
-    : "clamp(560px, 68vh, 720px)"
+    ? "clamp(420px, 52vh, 540px)"
+    : "clamp(480px, 60vh, 620px)"
 
   return (
     <section
@@ -252,26 +253,26 @@ export function PageHero({
             gridTemplateColumns: imageSrc ? "1.05fr 1fr" : "1fr",
             alignItems: "center",
             gap: "clamp(32px,5vw,72px)",
-            padding: "clamp(64px,9vw,140px) clamp(20px,5vw,64px)",
-            minHeight: "inherit",
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <AnimatedHeadline
-              text={title}
-              className="font-serif"
-              style={{
-                fontWeight: 900,
-                fontSize: compact
-                  ? "clamp(34px,5vw,60px)"
-                  : "clamp(36px,5.5vw,72px)",
-                lineHeight: 0.98,
-                letterSpacing: "-0.025em",
-                color: "var(--ink)",
-                marginBottom: 18,
-                maxWidth: 600,
-              }}
-            />
+          padding: "clamp(56px,7vw,100px) clamp(20px,5vw,64px)",
+          minHeight: "inherit",
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <AnimatedHeadline
+            text={title}
+            className="font-serif"
+            style={{
+              fontWeight: 900,
+              fontSize: compact
+                ? "clamp(32px,4.5vw,52px)"
+                : "clamp(36px,5vw,64px)",
+              lineHeight: 1,
+              letterSpacing: "-0.025em",
+              color: "var(--ink)",
+              marginBottom: 16,
+              maxWidth: 600,
+            }}
+          />
 
             <p
               className="ph-fade ph-lede"
@@ -343,8 +344,8 @@ function FlatHero({
         padding: 0,
         overflow: "hidden",
         minHeight: compact
-          ? "clamp(460px, 58vh, 580px)"
-          : "clamp(560px, 68vh, 720px)",
+          ? "clamp(420px, 52vh, 540px)"
+          : "clamp(480px, 60vh, 620px)",
       }}
     >
       {/* Subtle tone-on-tone gradient — adds depth without visual noise */}
@@ -368,8 +369,8 @@ function FlatHero({
         className="relative w-full max-w-[1440px] mx-auto"
         style={{
           padding: compact
-            ? "clamp(96px,11vw,160px) clamp(20px,5vw,64px) clamp(72px,9vw,120px)"
-            : "clamp(112px,13vw,180px) clamp(20px,5vw,64px) clamp(80px,10vw,140px)",
+            ? "clamp(80px,9vw,120px) clamp(20px,5vw,64px) clamp(56px,7vw,88px)"
+            : "clamp(88px,10vw,140px) clamp(20px,5vw,64px) clamp(64px,8vw,104px)",
           textAlign: centered ? "center" : "left",
           display: "flex",
           flexDirection: "column",
@@ -384,12 +385,12 @@ function FlatHero({
           style={{
             fontWeight: 900,
             fontSize: compact
-              ? "clamp(34px,5vw,60px)"
-              : "clamp(36px,5.5vw,72px)",
-            lineHeight: 0.98,
+              ? "clamp(32px,4.5vw,52px)"
+              : "clamp(36px,5vw,64px)",
+            lineHeight: 1,
             letterSpacing: "-0.025em",
             color: "var(--ink)",
-            marginBottom: 18,
+            marginBottom: 16,
             maxWidth: 820,
           }}
         />
@@ -413,7 +414,7 @@ function FlatHero({
           <div
             className="ph-fade ph-extra"
             style={{
-              marginTop: 28,
+              marginTop: 22,
               width: "100%",
               display: "flex",
               flexDirection: "column",
@@ -428,7 +429,7 @@ function FlatHero({
           <div
             className="ph-fade ph-cta ph-pill-row"
             style={{
-              marginTop: 28,
+              marginTop: 22,
               justifyContent: centered ? "center" : "flex-start",
             }}
           >

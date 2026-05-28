@@ -94,7 +94,7 @@ export default function ShopPage() {
           style={{
             position: "relative",
             width: "100%",
-            minHeight: "clamp(560px, 68vh, 720px)",
+            minHeight: "clamp(480px, 60vh, 620px)",
           }}
         >
           {/* Background product image */}
@@ -130,7 +130,7 @@ export default function ShopPage() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              padding: "clamp(112px,13vw,180px) clamp(20px,5vw,64px) clamp(80px,10vw,140px)",
+              padding: "clamp(88px,10vw,140px) clamp(20px,5vw,64px) clamp(64px,8vw,104px)",
               minHeight: "inherit",
               textAlign: "left",
               alignItems: "flex-start",
