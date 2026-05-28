@@ -291,16 +291,26 @@ export function CohortPage({ data }: { data: CohortData }) {
       <Section dark={isZeroProof}>
         <SectionHeading title={data.whyTitle} dark={isZeroProof} />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {data.reasons.map(([title, copy], index) => (
-            <InfoCard
-              key={title}
-              icon={(["calm-first-foundation", "supports-clear-thinking", "step-drink"] as const)[index]}
-              title={title}
-              dark={isZeroProof}
-            >
-              {copy}
-            </InfoCard>
-          ))}
+          {data.reasons.map(([title, copy], index) => {
+            // Page-specific icons for "Why AVRO fits" reasons
+            const reasonIcons: Record<string, readonly [AvroIconName, AvroIconName, AvroIconName]> = {
+              golf: ["cohort-golf", "supports-clear-thinking", "control-under-pressure"],
+              social: ["zp-zero-percent-alcohol", "zp-social-lift", "zp-function-forward"],
+              work: ["cohort-tech", "supports-focus-without-overload", "supports-steady-attention"],
+              gaming: ["cohort-games", "supports-clear-thinking", "control-under-pressure"],
+            }
+            const icons = reasonIcons[data.visual] || reasonIcons.golf
+            return (
+              <InfoCard
+                key={title}
+                icon={icons[index]}
+                title={title}
+                dark={isZeroProof}
+              >
+                {copy}
+              </InfoCard>
+            )
+          })}
         </div>
       </Section>
 
@@ -397,16 +407,26 @@ export function CohortPage({ data }: { data: CohortData }) {
       <Section dark={isZeroProof}>
         <SectionHeading title={data.useTitle} dark={isZeroProof} />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {data.useMoments.map(([title, copy], index) => (
-            <InfoCard
-              key={title}
-              icon={(["cohort-golf", "quality-standards", "supports-focus-without-overload", "social-composure"] as const)[index]}
-              title={title}
-              dark={isZeroProof}
-            >
-              {copy}
-            </InfoCard>
-          ))}
+          {data.useMoments.map(([title, copy], index) => {
+            // Page-specific icons for use moments
+            const useMomentIcons: Record<string, readonly [AvroIconName, AvroIconName, AvroIconName, AvroIconName]> = {
+              golf: ["cohort-golf", "control-under-pressure", "supports-steady-attention", "social-composure"],
+              social: ["zp-calm-first-cocktails", "zp-zero-percent-alcohol", "zp-social-lift", "relaxation-reduced-tension"],
+              work: ["supports-focus-without-overload", "control-under-pressure", "cohort-tech", "supports-steady-attention"],
+              gaming: ["cohort-games", "control-under-pressure", "supports-steady-attention", "supports-clear-thinking"],
+            }
+            const icons = useMomentIcons[data.visual] || useMomentIcons.golf
+            return (
+              <InfoCard
+                key={title}
+                icon={icons[index]}
+                title={title}
+                dark={isZeroProof}
+              >
+                {copy}
+              </InfoCard>
+            )
+          })}
         </div>
       </Section>
 

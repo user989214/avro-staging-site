@@ -111,6 +111,15 @@ export const goldenIconMap = {
   "step-stir": "/icons/golden/step-stir.png",
   "step-drink": "/icons/golden/step-drink.png",
   "step-pro-tip": "/icons/golden/step-pro-tip.png",
+  
+  // Zero Proof specific (no golden versions, use standard)
+  "zp-nacocktails-with-intention": "/icons/zp-nacocktails-with-intention.png",
+  "zp-zero-percent-alcohol": "/icons/zp-zero-percent-alcohol.png",
+  "zp-margin-wins": "/icons/zp-margin-wins.png",
+  "zp-calm-first-cocktails": "/icons/zp-calm-first-cocktails.png",
+  "zp-social-lift": "/icons/zp-social-lift.png",
+  "zp-built-for-the-bar": "/icons/zp-built-for-the-bar.png",
+  "zp-function-forward": "/icons/zp-function-forward.png",
 } as const
 
 export type AvroIconName = keyof typeof avroIconMap
