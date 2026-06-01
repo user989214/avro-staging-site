@@ -1079,18 +1079,15 @@ export function HomeProductStrip() {
 
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(32px,6vw,72px) clamp(16px,5vw,64px)" }}>
-      <div style={{ maxWidth: 1250, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1080, margin: "0 auto" }}>
         <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(24px,3.2vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 24 }}>
           Three formulas. One foundation.
         </h2>
-        <div className="product-cards-grid" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        <div className="product-cards-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
           <style jsx>{`
-            @media (min-width: 640px) {
+            @media (max-width: 768px) {
               .product-cards-grid {
-                flex-direction: row !important;
-              }
-              .product-cards-grid > div {
-                flex: 1 1 0 !important;
+                grid-template-columns: 1fr !important;
               }
             }
           `}</style>
@@ -1099,12 +1096,12 @@ export function HomeProductStrip() {
               key={key}
               style={{ display: "flex", flexDirection: "column", borderRadius: 20, overflow: "hidden", backgroundColor: "var(--base-light)", padding: 14 }}
             >
-              <div style={{ position: "relative", aspectRatio: "4/5", overflow: "hidden", borderRadius: 16, backgroundColor: "var(--bone)" }}>
+              <div style={{ position: "relative", height: "clamp(140px,12vw,180px)", overflow: "hidden", borderRadius: 16, backgroundColor: "var(--bone)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={socialImages[key]}
                   alt={`AVRO ${formulas[key].name}`}
-                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
+                  style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block" }}
                 />
               </div>
               <div style={{ padding: "16px 6px 6px", display: "flex", flexDirection: "column", gap: 10 }}>
