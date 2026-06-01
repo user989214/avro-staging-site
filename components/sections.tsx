@@ -231,12 +231,12 @@ export function ProductCards({
           {(Object.keys(formulas) as FormulaKey[]).map((key) => {
             const item = formulas[key]
             return (
-              <article key={key} style={{ backgroundColor: cardBg, borderRadius: 20, padding: "clamp(14px,2.5vw,32px)", display: "flex", flexDirection: "column", gap: 12 }}>
+              <article key={key} style={{ backgroundColor: cardBg, borderRadius: 20, padding: "clamp(14px,1.8vw,24px)", display: "flex", flexDirection: "column", gap: 10 }}>
                 {/* Inner product frame — solid deep-black on Zero Proof so the can pops against the gold card; bone on light. */}
-                <div style={{ borderRadius: 16, height: "clamp(200px,30vw,340px)", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "var(--deep-black)" : "var(--bone)" }}>
+                <div style={{ borderRadius: 16, height: "clamp(170px,17vw,230px)", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "var(--deep-black)" : "var(--bone)" }}>
                   <ProductCard formulaKey={key} className="h-full w-full object-cover" />
                 </div>
-                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(18px,1.8vw,28px)", color: ink, margin: 0 }}>{item.name}</h3>
+                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(18px,1.5vw,23px)", color: ink, margin: 0 }}>{item.name}</h3>
                 <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(15px,1.2vw,19px)", lineHeight: 1.45, color: muted, margin: 0 }}>{item.support}</p>
                 <div style={{ borderTop: `1px solid ${border}`, paddingTop: 12, display: "flex", flexDirection: "column", gap: 8 }}>
                   <div>
