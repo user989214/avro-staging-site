@@ -210,7 +210,7 @@ export function ProductCards({
   const border = dark ? "rgba(13,13,13,0.18)" : "rgba(0,0,0,0.08)"
   return (
     <section style={{ backgroundColor: bg, width: "100%", padding: "clamp(32px,6vw,88px) clamp(16px,5vw,64px)" }}>
-      <div style={{ maxWidth: 1250, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1080, margin: "0 auto" }}>
         <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(24px,3.2vw,48px)", lineHeight: 1.0, color: titleInk, marginBottom: 10 }}>
           {title}
         </h2>
@@ -233,8 +233,8 @@ export function ProductCards({
             return (
               <article key={key} style={{ backgroundColor: cardBg, borderRadius: 20, padding: "clamp(14px,1.8vw,24px)", display: "flex", flexDirection: "column", gap: 10 }}>
                 {/* Inner product frame — solid deep-black on Zero Proof so the can pops against the gold card; bone on light. */}
-                <div style={{ borderRadius: 16, height: "clamp(170px,17vw,230px)", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "var(--deep-black)" : "var(--bone)" }}>
-                  <ProductCard formulaKey={key} className="h-full w-full object-cover" />
+                <div style={{ borderRadius: 16, height: "clamp(150px,13vw,190px)", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "var(--deep-black)" : "var(--bone)" }}>
+                  <ProductCard formulaKey={key} className="h-full w-full object-contain" />
                 </div>
                 <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(18px,1.5vw,23px)", color: ink, margin: 0 }}>{item.name}</h3>
                 <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(15px,1.2vw,19px)", lineHeight: 1.45, color: muted, margin: 0 }}>{item.support}</p>

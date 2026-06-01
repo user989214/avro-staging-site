@@ -320,8 +320,12 @@ export function Header() {
                 style={{
                   backgroundColor: colors.navBg,
                   opacity: dropdownOpen ? 1 : 0,
-                  transform: dropdownOpen ? "translateY(0)" : "translateY(-8px)",
-                  transition: "opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
+                  transform: dropdownOpen ? "translateY(0)" : "translateY(-12px)",
+                  clipPath: dropdownOpen ? "inset(0 0 0 0)" : "inset(0 0 100% 0)",
+                  transition: dropdownOpen
+                    ? "opacity 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), clip-path 0.4s cubic-bezier(0.22, 1, 0.36, 1)"
+                    : "opacity 0.2s ease, transform 0.25s ease, clip-path 0.25s ease",
+                  willChange: "clip-path, transform, opacity",
                 }}
               >
                 <div className="px-4 md:px-14 py-6">
