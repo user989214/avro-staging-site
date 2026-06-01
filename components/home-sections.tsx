@@ -1094,31 +1094,31 @@ export function HomeProductStrip() {
           {(Object.keys(formulas) as FormulaKey[]).map((key) => (
             <div
               key={key}
-              style={{ display: "flex", flexDirection: "column", borderRadius: 20, overflow: "hidden", backgroundColor: "var(--base-light)", padding: 14 }}
+              style={{ display: "flex", flexDirection: "column", borderRadius: 24, overflow: "hidden", backgroundColor: "var(--base-light)", padding: "clamp(16px,2vw,28px)" }}
             >
-              <div style={{ position: "relative", height: "clamp(140px,12vw,180px)", overflow: "hidden", borderRadius: 16, backgroundColor: "var(--bone)" }}>
+              <div style={{ position: "relative", aspectRatio: "1 / 1", overflow: "hidden", borderRadius: 20, backgroundColor: "var(--bone)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={socialImages[key]}
                   alt={`AVRO ${formulas[key].name}`}
-                  style={{ width: "100%", height: "100%", objectFit: "contain", objectPosition: "center", display: "block" }}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
                 />
               </div>
-              <div style={{ padding: "16px 6px 6px", display: "flex", flexDirection: "column", gap: 10 }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 2, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
+              <div style={{ padding: "16px 4px 4px", display: "flex", flexDirection: "column", gap: 10 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 3, paddingBottom: 10, borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
                   <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "var(--ink)", letterSpacing: "-0.005em" }}>
                     Foundation
                   </span>
-                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 12, lineHeight: 1.4, color: "rgba(0,0,0,0.6)" }}>
+                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 13, lineHeight: 1.4, color: "rgba(0,0,0,0.6)" }}>
                     PharmaGABA® + {formulaAdditions[key]}
                   </span>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                  <h3 className="font-serif" style={{ fontWeight: 900, fontSize: "clamp(20px,1.8vw,28px)", lineHeight: 1.05, color: "var(--ink)", margin: 0, letterSpacing: "-0.02em" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                  <h3 className="font-serif" style={{ fontWeight: 900, fontSize: "clamp(22px,2vw,32px)", lineHeight: 1.05, color: "var(--ink)", margin: 0, letterSpacing: "-0.02em" }}>
                     {formulas[key].name.replace(/^AVRO\s+/, "")}
                   </h3>
                 </div>
-                <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 13, lineHeight: 1.4, color: "rgba(0,0,0,0.6)", margin: 0 }}>
+                <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 14, lineHeight: 1.45, color: "rgba(0,0,0,0.6)", margin: 0 }}>
                   {formulas[key].tagline}
                 </p>
                 <a 
