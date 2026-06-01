@@ -91,16 +91,16 @@ export function SectionHeading({
     >
       {eyebrow && (
         <span
-          className={cn("inline-block mb-4 px-3.5 py-1.5 rounded-full text-[11px] font-black tracking-[0.12em] uppercase", chipBg)}
+          className={cn("inline-block mb-4 px-4 py-2 rounded-full text-[13px] font-black tracking-[0.1em] uppercase", chipBg)}
         >
           {eyebrow}
         </span>
       )}
-      <h2 className={cn("font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5", textColor)}>
+      <h2 className={cn("font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-4", textColor)}>
         {title}
       </h2>
       {description && (
-        <p className={cn("max-w-[760px] mx-auto text-base leading-relaxed", mutedText)}>
+        <p className={cn("max-w-[760px] mx-auto text-lg md:text-xl leading-relaxed font-medium", mutedText)}>
           {description}
         </p>
       )}
@@ -214,7 +214,7 @@ export function ProductCards({
         <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(24px,3.2vw,48px)", lineHeight: 1.0, color: titleInk, marginBottom: 10 }}>
           {title}
         </h2>
-        <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(13px,1.1vw,18px)", lineHeight: 1.4, color: titleMuted, marginBottom: 24 }}>
+        <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.45, color: titleMuted, marginBottom: 28 }}>
           Every AVRO formula starts with the same calm-first base, then supports the moment in a different way.
         </p>
         <div className="product-cards-container" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -237,15 +237,15 @@ export function ProductCards({
                   <ProductCard formulaKey={key} className="h-full w-full object-cover" />
                 </div>
                 <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(18px,1.8vw,28px)", color: ink, margin: 0 }}>{item.name}</h3>
-                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(13px,1.1vw,18px)", lineHeight: 1.4, color: muted, margin: 0 }}>{item.support}</p>
+                <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(15px,1.2vw,19px)", lineHeight: 1.45, color: muted, margin: 0 }}>{item.support}</p>
                 <div style={{ borderTop: `1px solid ${border}`, paddingTop: 12, display: "flex", flexDirection: "column", gap: 8 }}>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(12px,1vw,16px)", color: ink }}>Best for</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(12px,0.95vw,15px)", lineHeight: 1.4, color: muted, margin: "2px 0 0" }}>{item.bestFor}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(13px,1.05vw,17px)", color: ink }}>Best for</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(13px,1vw,16px)", lineHeight: 1.4, color: muted, margin: "2px 0 0" }}>{item.bestFor}</p>
                   </div>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(12px,1vw,16px)", color: ink }}>Caffeine</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(12px,0.95vw,15px)", lineHeight: 1.4, color: muted, margin: "2px 0 0" }}>{item.caffeine}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(13px,1.05vw,17px)", color: ink }}>Caffeine</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(13px,1vw,16px)", lineHeight: 1.4, color: muted, margin: "2px 0 0" }}>{item.caffeine}</p>
                   </div>
                 </div>
                 <a 
@@ -486,14 +486,14 @@ export function FinalCta({
             <span
               style={{
                 display: "inline-block",
-                marginBottom: 10,
+                marginBottom: 12,
                 fontFamily: GC_FINAL,
-                fontSize: 10,
-                fontWeight: 700,
-                letterSpacing: "0.12em",
+                fontSize: 12,
+                fontWeight: 800,
+                letterSpacing: "0.1em",
                 textTransform: "uppercase",
                 color: textColor,
-                opacity: 0.7,
+                opacity: 0.85,
               }}
             >
               {eyebrow}
@@ -515,8 +515,8 @@ export function FinalCta({
           <p
             style={{
               fontFamily: GC_FINAL,
-              fontWeight: 400,
-              fontSize: "clamp(13px,1.2vw,17px)",
+              fontWeight: 500,
+              fontSize: "clamp(15px,1.3vw,19px)",
               lineHeight: 1.5,
               color: mutedColor,
             }}

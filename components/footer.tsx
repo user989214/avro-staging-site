@@ -168,10 +168,11 @@ export function Footer() {
           <div className="flex flex-col gap-4">
             <small
               style={{
-                fontWeight: 400,
-                fontSize: "12px",
-                lineHeight: 1.5,
-                color: c.textFaint,
+                fontWeight: 600,
+                fontSize: "clamp(15px,1.2vw,16px)",
+                lineHeight: 1.55,
+                color: c.text,
+                maxWidth: 760,
               }}
             >
               * These statements have not been evaluated by the Food and Drug

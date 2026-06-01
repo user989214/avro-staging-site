@@ -278,11 +278,11 @@ export function PageHero({
               className="ph-fade ph-lede"
               style={{
                 fontFamily: GC,
-                fontWeight: 400,
-                fontSize: "clamp(17px,2vw,20px)",
-                lineHeight: 1.55,
-                color: "var(--warm-gray)",
-                maxWidth: 520,
+                fontWeight: 500,
+                fontSize: "clamp(18px,1.7vw,21px)",
+                lineHeight: 1.5,
+                color: "rgba(0,0,0,0.72)",
+                maxWidth: 540,
                 marginBottom: children || primaryCta || secondaryCta ? 28 : 0,
               }}
             >
@@ -399,11 +399,11 @@ function FlatHero({
           className="ph-fade ph-lede"
           style={{
             fontFamily: GC,
-            fontWeight: 400,
-            fontSize: "clamp(17px,2vw,20px)",
-            lineHeight: 1.55,
-            color: "var(--warm-gray)",
-            maxWidth: 640,
+            fontWeight: 500,
+            fontSize: "clamp(18px,1.7vw,21px)",
+            lineHeight: 1.5,
+            color: "rgba(0,0,0,0.72)",
+            maxWidth: 660,
             marginBottom: 0,
           }}
         >

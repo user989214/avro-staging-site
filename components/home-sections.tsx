@@ -85,9 +85,9 @@ function FormulaGraph() {
           { color: "#A8D5BA", label: "Cognigrape®" },
           { color: "#F5C896", label: "Caffeine" },
         ].map((item) => (
-          <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <div style={{ width: 10, height: 10, borderRadius: 999, backgroundColor: item.color }} />
-            <span style={{ fontFamily: GC, fontWeight: 600, fontSize: 11, color: "var(--warm-gray)" }}>{item.label}</span>
+          <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <div style={{ width: 12, height: 12, borderRadius: 999, backgroundColor: item.color }} />
+            <span style={{ fontFamily: GC, fontWeight: 600, fontSize: 14, color: "var(--warm-gray)" }}>{item.label}</span>
           </div>
         ))}
       </div>
@@ -837,7 +837,7 @@ export function HomeLogicRow() {
                     >
                       <AvroIcon name={card.icon} size={52} className="md:w-16 md:h-16" />
                     </div>
-                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(12px,1.1vw,16px)", color: "var(--ink)", flex: 1 }}>
+                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(15px,1.3vw,19px)", lineHeight: 1.25, color: "var(--ink)", flex: 1 }}>
                       {card.title}
                     </span>
                     <svg
@@ -860,16 +860,16 @@ export function HomeLogicRow() {
                   </button>
                   <div
                     style={{
-                      maxHeight: openIndex === i ? 180 : 0,
+                      maxHeight: openIndex === i ? 240 : 0,
                       overflow: "hidden",
                       transition: "max-height 0.3s ease",
                     }}
                   >
                     <p style={{ 
-                      padding: "0 16px 16px 56px", 
+                      padding: "0 16px 18px 64px", 
                       fontFamily: GC, 
-                      fontWeight: 400, 
-                      fontSize: 13, 
+                      fontWeight: 500, 
+                      fontSize: "clamp(14px,1.1vw,17px)", 
                       lineHeight: 1.5, 
                       color: "var(--warm-gray)",
                       margin: 0,
@@ -1216,15 +1216,15 @@ export function HomeScienceGrid() {
               <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(18px,2.4vw,36px)", lineHeight: 1.0, color: "var(--charcoal)", marginBottom: 10 }}>
                 Why GABA matters.
               </h2>
-              <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(12px,1vw,16px)", lineHeight: 1.45, color: "var(--warm-gray)", marginBottom: 16 }}>
+              <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(14px,1.1vw,18px)", lineHeight: 1.5, color: "var(--warm-gray)", marginBottom: 18 }}>
                 GABA is a naturally occurring compound associated with relaxation and balance. AVRO uses naturally fermented PharmaGABA® as the foundation of every formula.
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap", marginBottom: 18 }}>
                 {([["Naturally Fermented", "naturally-fermented-pharmagaba"], ["Calm First", "calm-first-foundation"], ["In Every Formula", "ingredient-disclosure"]] as const).map(([label, iconName], i) => (
                   <React.Fragment key={`gaba-${i}`}>
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, textAlign: "center", minWidth: 60 }}>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, textAlign: "center", minWidth: 72 }}>
                       <AvroIcon name={iconName} size={48} className="md:w-16 md:h-16" />
-                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(9px,0.8vw,13px)", color: "var(--charcoal)" }}>{label}</span>
+                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(11px,0.95vw,14px)", color: "var(--charcoal)", lineHeight: 1.2 }}>{label}</span>
                     </div>
                     {i < 2 && <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--avro-blue)" }}>→</span>}
                   </React.Fragment>
@@ -1268,7 +1268,7 @@ export function HomeQualityRow() {
                 <AvroIcon name={b.icon} size={64} className="md:w-20 md:h-20 opacity-80" />
                 <div>
                   <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(15px,1.4vw,19px)", color: "var(--ink)", lineHeight: 1.2, display: "block" }}>{b.label}</strong>
-                  <span style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(12px,1vw,15px)", color: "var(--warm-gray)" }}>{b.sub}</span>
+                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(13px,1.05vw,16px)", color: "var(--warm-gray)" }}>{b.sub}</span>
                 </div>
               </div>
             ))}
