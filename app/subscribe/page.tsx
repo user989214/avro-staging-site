@@ -2,8 +2,6 @@
 
 import { useState } from "react"
 import { PageHero } from "@/components/page-hero"
-import { Footer } from "@/components/footer"
-import { Header } from "@/components/header"
 import { ArrowRight, Check } from "lucide-react"
 
 const GC = '"DM Sans", system-ui, sans-serif'
@@ -28,9 +26,7 @@ export default function SubscribePage() {
 
   return (
     <>
-      <Header />
-      <main>
-        <PageHero
+      <PageHero
           variant="flat"
           headline="Subscribe + Save"
           lede="Join the AVRO subscription and save 25% on every order. Free shipping, flexible scheduling, and the calm-first support you need — delivered on your terms."
@@ -191,8 +187,6 @@ export default function SubscribePage() {
             )}
           </div>
         </section>
-      </main>
-      <Footer />
     </>
   )
 }
