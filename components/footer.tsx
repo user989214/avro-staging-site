@@ -11,6 +11,7 @@ const footerLinks = {
     { href: "/contact", label: "Contact Us" },
     { href: "/account", label: "My Account" },
     { href: "/account/subscription", label: "Manage Subscription" },
+    { href: "/subscribe", label: "Subscribe" },
   ],
   shop: [
     { href: "/shop", label: "Shop All" },
@@ -31,9 +32,10 @@ const footerLinks = {
     { href: "/faq", label: "FAQ" },
   ],
   follow: [
-    { href: "/social", label: "Instagram" },
-    { href: "/social", label: "TikTok" },
-    { href: "/social", label: "Facebook" },
+    { href: "https://instagram.com/avrolife", label: "Instagram" },
+    { href: "https://tiktok.com/@avrolife", label: "TikTok" },
+    { href: "https://facebook.com/avrolife", label: "Facebook" },
+    { href: "https://linkedin.com/company/avrolife", label: "LinkedIn" },
   ],
 }
 

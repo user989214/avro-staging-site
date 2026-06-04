@@ -69,7 +69,7 @@ export function SectionHeading({
   eyebrow,
   title,
   description,
-  centered = true,
+  centered = false,
   dark = false,
 }: {
   eyebrow?: string
@@ -167,13 +167,21 @@ export function SocialProof({ mode = "full", dark = false }: { mode?: "full" | "
       }}
     >
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
-        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(34px,4.4vw,60px)", lineHeight: 1.0, letterSpacing: "-0.02em", color: ink, marginBottom: 40, textAlign: "center" }}>
+        <h2 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(34px,4.4vw,60px)", lineHeight: 1.0, letterSpacing: "-0.02em", color: ink, marginBottom: 40, textAlign: "left" }}>
           Trusted for calm-first routines.
         </h2>
         {mode === "full" && (
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))", gap: 16 }}>
             {testimonials.map((item) => (
               <article key={item.name} style={{ backgroundColor: "var(--base-light)", borderRadius: 24, padding: "clamp(24px,3vw,36px)" }}>
+                {/* 5-star rating */}
+                <div style={{ display: "flex", gap: 2, marginBottom: 12 }}>
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} width="18" height="18" viewBox="0 0 24 24" fill="var(--gold)" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                    </svg>
+                  ))}
+                </div>
                 <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(18px,1.6vw,22px)", lineHeight: 1.4, color: "rgba(0,0,0,0.75)", marginBottom: 16 }}>
                   &ldquo;{item.quote}&rdquo;
                 </p>
@@ -392,7 +400,7 @@ export function InfoCard({
 export function FaqBlock({
   title,
   faqs,
-  centered = true,
+  centered = false,
   dark = false,
 }: {
   title: string

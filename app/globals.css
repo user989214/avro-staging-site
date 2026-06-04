@@ -324,6 +324,7 @@
 
 /* ============================================================
    Button system — all pill, all DM Sans 700
+   Outline by default, filled on hover
    ============================================================ */
 .btn-primary {
   display: inline-flex;
@@ -333,8 +334,8 @@
   padding: 0 32px;
   border: 2px solid var(--charcoal);
   border-radius: 999px;
-  background-color: var(--charcoal);
-  color: var(--bone);
+  background-color: transparent;
+  color: var(--charcoal);
   font-family: var(--font-sans);
   font-weight: 700;
   font-size: 16px;
@@ -342,67 +343,67 @@
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
-/* Default charcoal pill: hover -> stroke only */
+/* Default charcoal outline: hover -> filled */
 .btn-primary:hover {
-  background-color: transparent;
-  color: var(--charcoal);
+  background-color: var(--charcoal);
+  color: var(--bone);
   border-color: var(--charcoal);
 }
 
-/* Per-formula filled pills — border matches fill, hover collapses to stroke. */
+/* Per-formula outline pills — stroke matches brand, hover fills. */
 .btn-primary.btn-calm,
 .btn-primary.\!bg-calm {
-  background-color: var(--calm) !important;
+  background-color: transparent !important;
   border-color: var(--calm) !important;
-  color: var(--bone) !important;
+  color: var(--calm) !important;
 }
 .btn-primary.btn-calm:hover,
 .btn-primary.\!bg-calm:hover {
-  background-color: transparent !important;
-  color: var(--calm) !important;
+  background-color: var(--calm) !important;
+  color: var(--bone) !important;
   border-color: var(--calm) !important;
 }
 
 .btn-primary.btn-focus,
 .btn-primary.\!bg-focus {
-  background-color: var(--focus) !important;
+  background-color: transparent !important;
   border-color: var(--focus) !important;
-  color: var(--bone) !important;
+  color: var(--focus) !important;
 }
 .btn-primary.btn-focus:hover,
 .btn-primary.\!bg-focus:hover {
-  background-color: transparent !important;
-  color: var(--focus) !important;
+  background-color: var(--focus) !important;
+  color: var(--bone) !important;
   border-color: var(--focus) !important;
 }
 
 .btn-primary.btn-energy,
 .btn-primary.\!bg-energy {
-  background-color: var(--energy) !important;
+  background-color: transparent !important;
   border-color: var(--energy) !important;
   color: var(--ink) !important;
 }
 .btn-primary.btn-energy:hover,
 .btn-primary.\!bg-energy:hover {
-  background-color: transparent !important;
+  background-color: var(--energy) !important;
   color: var(--ink) !important;
   border-color: var(--energy) !important;
 }
 
 .btn-primary.btn-blue,
 .btn-primary.\!bg-avro-blue {
-  background-color: var(--avro-blue) !important;
+  background-color: transparent !important;
   border-color: var(--avro-blue) !important;
   color: var(--charcoal) !important;
 }
 .btn-primary.btn-blue:hover,
 .btn-primary.\!bg-avro-blue:hover {
-  background-color: transparent !important;
+  background-color: var(--avro-blue) !important;
   color: var(--charcoal) !important;
   border-color: var(--avro-blue) !important;
 }
 
-/* Zero Proof (dark theme) primary button — gold bg, deep black text */
+/* Zero Proof (dark theme) primary button — outline gold, fill on hover */
 .btn-primary-dark {
   display: inline-flex;
   align-items: center;
@@ -411,8 +412,8 @@
   padding: 0 32px;
   border: 2px solid var(--gold);
   border-radius: 999px;
-  background-color: var(--gold);
-  color: var(--deep-black);
+  background-color: transparent;
+  color: var(--gold);
   font-family: var(--font-sans);
   font-weight: 700;
   font-size: 16px;
@@ -420,8 +421,10 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
-  .btn-primary-dark:hover {
-  background-color: transparent;
+.btn-primary-dark:hover {
+  background-color: var(--gold);
+  color: var(--deep-black);
+}
   color: var(--gold);
   border-color: var(--gold);
   }
@@ -457,8 +460,8 @@
   padding: 0 32px;
   border: 2px solid var(--charcoal);
   border-radius: 999px;
-  background-color: var(--charcoal);
-  color: var(--bone);
+  background-color: transparent;
+  color: var(--charcoal);
   font-family: var(--font-sans);
   font-weight: 700;
   font-size: 16px;
@@ -467,11 +470,11 @@
   transition: all 0.2s ease;
 }
 .btn-secondary:hover {
-  background-color: transparent;
-  color: var(--charcoal);
+  background-color: var(--charcoal);
+  color: var(--bone);
 }
 
-/* Dark theme (Zero Proof) secondary button — gold bg, deep black text */
+/* Dark theme (Zero Proof) secondary button — outline gold, fill on hover */
 .btn-secondary-dark {
   display: inline-flex;
   align-items: center;
@@ -480,8 +483,8 @@
   padding: 0 32px;
   border: 2px solid var(--gold);
   border-radius: 999px;
-  background-color: var(--gold);
-  color: var(--deep-black);
+  background-color: transparent;
+  color: var(--gold);
   font-family: var(--font-sans);
   font-weight: 700;
   font-size: 16px;

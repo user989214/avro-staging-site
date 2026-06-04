@@ -667,6 +667,95 @@ export function HomeBenefitRow() {
           animation: hp-fade-up 0.6s cubic-bezier(0.22,1,0.36,1) both;
           animation-delay: 0.18s;
         }
+        @media (min-width: 768px) {
+          .hp-benefit-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+        }
+      `}</style>
+      <div style={{ maxWidth: 1250, margin: "0 auto" }}>
+        {/* Three boxes in one row on desktop, stack on mobile */}
+        <div className="hp-benefit-grid" style={{ display: "grid", gridTemplateColumns: "1fr", gap: 12 }}>
+          {benefits.map((b, i) => {
+            const visible = visibleCards[i]
+            const order = revealOrder.indexOf(i)
+            const cardDelay = order >= 0 ? order * 0.12 : 0
+
+            return (
+              <div
+                key={b.title}
+                ref={(el) => { cardRefs.current[i] = el }}
+                style={{
+                  backgroundColor: BLUE,
+                  borderRadius: 20,
+                  padding: "clamp(24px,3vw,40px) clamp(24px,3vw,44px)",
+                  minHeight: "clamp(160px,18vw,240px)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 12,
+                  justifyContent: "space-between",
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? "translateY(0) scale(1)" : "translateY(28px) scale(0.985)",
+                  transition: `opacity 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s, transform 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s`,
+                }}
+              >
+                <h3
+                  className={`hp-benefit-title ${visible ? "is-visible" : ""}`}
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: "clamp(20px,2vw,28px)",
+                    lineHeight: 1.12,
+                    color: "var(--ink)",
+                    letterSpacing: "-0.02em",
+                    margin: 0,
+                    textWrap: "balance",
+                    animationDelay: `${(cardDelay + 0.1).toFixed(2)}s`,
+                  }}
+                >
+                  {b.title}
+                </h3>
+                <p
+                  className={`hp-benefit-copy ${visible ? "is-visible" : ""}`}
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 400,
+                    fontSize: "clamp(13px,1.1vw,16px)",
+                    lineHeight: 1.5,
+                    color: "var(--ink)",
+                    margin: 0,
+                    animationDelay: `${(cardDelay + 0.25).toFixed(2)}s`,
+                  }}
+                >
+                  {b.copy}
+                </p>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}
+        @keyframes hp-fade-up {
+          0% { opacity: 0; transform: translateY(8px); }
+          100% { opacity: 0.78; transform: translateY(0); }
+        }
+        .hp-benefit-title {
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+        .hp-benefit-title.is-visible {
+          animation: hp-pop-in 0.7s cubic-bezier(0.34, 1.4, 0.4, 1) both;
+        }
+        .hp-benefit-copy {
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+        .hp-benefit-copy.is-visible {
+          animation: hp-fade-up 0.6s cubic-bezier(0.22,1,0.36,1) both;
+          animation-delay: 0.18s;
+        }
       `}</style>
       <div style={{ maxWidth: 1250, margin: "0 auto", display: "flex", flexDirection: "column", gap: 12 }}>
         {/* First card - full width, stacks on mobile */}
