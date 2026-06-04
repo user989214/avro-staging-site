@@ -330,8 +330,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
-  padding: 0 32px;
+  min-height: 48px;
+  padding: 0 28px;
   border: 2px solid var(--charcoal);
   border-radius: 999px;
   background-color: transparent;
@@ -408,8 +408,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
-  padding: 0 32px;
+  min-height: 48px;
+  padding: 0 28px;
   border: 2px solid var(--gold);
   border-radius: 999px;
   background-color: transparent;
@@ -431,8 +431,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
-  padding: 0 32px;
+  min-height: 48px;
+  padding: 0 28px;
   border: 2px solid var(--gold);
   border-radius: 999px;
   background-color: transparent;
@@ -453,8 +453,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
-  padding: 0 32px;
+  min-height: 48px;
+  padding: 0 28px;
   border: 2px solid var(--charcoal);
   border-radius: 999px;
   background-color: transparent;
@@ -476,8 +476,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
-  padding: 0 32px;
+  min-height: 48px;
+  padding: 0 28px;
   border: 2px solid var(--gold);
   border-radius: 999px;
   background-color: transparent;
@@ -499,8 +499,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
-  padding: 0 32px;
+  min-height: 48px;
+  padding: 0 28px;
   border: 2px solid var(--avro-blue);
   border-radius: 999px;
   background-color: transparent;

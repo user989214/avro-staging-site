@@ -70,12 +70,12 @@ export default function ShopPage() {
             text-decoration: none;
             transition: background-color 0.2s ease, color 0.2s ease;
           }
-          .shop-btn-calm  { border: 2px solid var(--calm);   background-color: var(--calm);   color: #2D1B4E; }
-          .shop-btn-focus { border: 2px solid var(--focus);  background-color: var(--focus);  color: #4A0A2E; }
-          .shop-btn-energy{ border: 2px solid var(--energy); background-color: var(--energy); color: #4A3D00; }
-          .shop-btn-calm:hover  { background-color: transparent; color: var(--calm); }
-          .shop-btn-focus:hover { background-color: transparent; color: var(--focus); }
-          .shop-btn-energy:hover{ background-color: transparent; color: var(--energy); }
+          .shop-btn-calm  { border: 2px solid var(--calm);   background-color: transparent; color: var(--calm); }
+          .shop-btn-focus { border: 2px solid var(--focus);  background-color: transparent; color: var(--focus); }
+          .shop-btn-energy{ border: 2px solid var(--energy); background-color: transparent; color: var(--energy); }
+          .shop-btn-calm:hover  { background-color: var(--calm);   color: #2D1B4E; }
+          .shop-btn-focus:hover { background-color: var(--focus);  color: #4A0A2E; }
+          .shop-btn-energy:hover{ background-color: var(--energy); color: #4A3D00; }
 
           @media (max-width: 640px) {
             .shop-hero-ctas { flex-direction: column; align-items: stretch; max-width: 320px; }

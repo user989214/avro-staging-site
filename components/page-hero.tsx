@@ -117,16 +117,16 @@ const SHARED_HERO_STYLES = `
     transition: background-color .2s ease, color .2s ease;
   }
   .ph-pill-primary {
-    background-color: var(--charcoal);
-    color: var(--bone);
+    background-color: transparent;
+    color: var(--charcoal);
   }
   .ph-pill-secondary {
     background-color: transparent;
     color: var(--charcoal);
   }
   .ph-pill-primary:hover {
-    background-color: transparent;
-    color: var(--charcoal);
+    background-color: var(--charcoal);
+    color: var(--bone);
   }
   .ph-pill-secondary:hover {
     background-color: var(--charcoal);
