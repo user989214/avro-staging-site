@@ -225,11 +225,12 @@ export function ProductCards({
         <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.45, color: titleMuted, marginBottom: 28 }}>
           Every AVRO formula starts with the same calm-first base, then supports the moment in a different way.
         </p>
-        <div className="product-cards-container" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        <div className="product-cards-container" style={{ display: "flex", flexDirection: "column", gap: 32 }}>
           <style jsx>{`
             @media (min-width: 640px) {
               .product-cards-container {
                 flex-direction: row !important;
+                gap: 24px !important;
               }
               .product-cards-container > article {
                 flex: 1 1 0 !important;
@@ -239,21 +240,21 @@ export function ProductCards({
           {(Object.keys(formulas) as FormulaKey[]).map((key) => {
             const item = formulas[key]
             return (
-              <article key={key} style={{ backgroundColor: cardBg, borderRadius: 24, padding: "clamp(14px,1.8vw,20px)", display: "flex", flexDirection: "column", gap: 10 }}>
-                {/* Inner product frame — prominent rounded corners with gray background like reference */}
-                <div style={{ borderRadius: 24, height: "clamp(180px,22vw,280px)", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "var(--deep-black)" : "#E5E5E5" }}>
-                  <ProductCard formulaKey={key} className="h-full w-auto object-contain" />
+              <article key={key} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                {/* Rounded thumbnail with gray background - matches reference exactly */}
+                <div style={{ borderRadius: 20, aspectRatio: "1 / 1", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "var(--deep-black)" : "#E5E5E5" }}>
+                  <ProductCard formulaKey={key} className="w-full h-full object-cover" />
                 </div>
-                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(18px,1.5vw,23px)", color: ink, margin: 0 }}>{item.name}</h3>
-                <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(15px,1.2vw,19px)", lineHeight: 1.45, color: muted, margin: 0 }}>{item.support}</p>
-                <div style={{ borderTop: `1px solid ${border}`, paddingTop: 12, display: "flex", flexDirection: "column", gap: 8 }}>
+                <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(22px,2vw,32px)", color: ink, margin: 0 }}>{item.name}</h3>
+                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.45, color: muted, margin: 0 }}>{item.support}</p>
+                <div style={{ borderTop: `1px solid ${border}`, paddingTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(13px,1.05vw,17px)", color: ink }}>Best for</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(13px,1vw,16px)", lineHeight: 1.4, color: muted, margin: "2px 0 0" }}>{item.bestFor}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(14px,1.1vw,17px)", color: ink }}>Best for</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(14px,1.05vw,16px)", lineHeight: 1.5, color: muted, margin: "4px 0 0" }}>{item.bestFor}</p>
                   </div>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(13px,1.05vw,17px)", color: ink }}>Caffeine</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 500, fontSize: "clamp(13px,1vw,16px)", lineHeight: 1.4, color: muted, margin: "2px 0 0" }}>{item.caffeine}</p>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(14px,1.1vw,17px)", color: ink }}>Caffeine</span>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(14px,1.05vw,16px)", lineHeight: 1.5, color: muted, margin: "4px 0 0" }}>{item.caffeine}</p>
                   </div>
                 </div>
                 <a 
@@ -265,14 +266,12 @@ export function ProductCards({
                     justifyContent: "center", 
                     fontFamily: GC_FINAL, 
                     fontWeight: 700, 
-                    fontSize: "clamp(12px,1vw,16px)", 
+                    fontSize: "clamp(14px,1.1vw,17px)", 
                     width: "100%",
-                    minHeight: "clamp(38px,4vw,48px)", 
-                    padding: "0 20px", 
+                    minHeight: 56, 
+                    padding: "0 24px", 
                     borderRadius: 999, 
                     textDecoration: "none", 
-                    // On Zero Proof the card is gold, so the CTA inverts to deep-black with gold text
-                    // (and on hover collapses to outline mode — gold stroke + deep-black text on the gold card).
                     border: dark ? "2px solid var(--deep-black)" : "2px solid var(--charcoal)",
                     backgroundColor: dark ? "var(--deep-black)" : "var(--charcoal)", 
                     color: dark ? "var(--gold)" : "var(--bone)", 
