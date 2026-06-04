@@ -258,16 +258,13 @@ export default async function ProductPage({
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   <a
                     href="/science"
-                    className="pdp-learn-btn"
+                    className="pdp-learn-btn btn-lg"
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
                       gap: 8,
                       fontFamily: GC,
                       fontWeight: 700,
-                      fontSize: "clamp(12px,1vw,16px)",
-                      minHeight: "clamp(38px,4vw,48px)",
-                      padding: "0 clamp(16px,2vw,28px)",
                       borderRadius: 999,
                       backgroundColor: "var(--charcoal)",
                       color: "var(--bone)",
@@ -427,16 +424,13 @@ export default async function ProductPage({
           `}</style>
           <a
             href={`/${key}`}
-            className="pdp-subscribe-btn"
+            className="pdp-subscribe-btn btn-lg"
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: 6,
               fontFamily: GC,
               fontWeight: 700,
-              fontSize: "clamp(12px,1vw,16px)",
-              minHeight: "clamp(38px,4vw,48px)",
-              padding: "0 clamp(18px,2vw,28px)",
               borderRadius: 999,
               backgroundColor: "var(--charcoal)",
               color: "var(--bone)",

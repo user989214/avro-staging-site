@@ -595,20 +595,18 @@ export function Header() {
                 <p className="text-[14px] leading-[1.5] mt-2" style={{ color: colors.cardDarkText, opacity: 0.78 }}>Articles about calm performance, fermentation science and the rituals behind each formula.</p>
               </div>
               <span
+                className="btn-md"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
                   alignSelf: "flex-start",
                   marginTop: 16,
-                  padding: "0 24px",
-                  minHeight: 40,
                   borderRadius: 999,
                   backgroundColor: colors.cardDarkText,
                   color: colors.cardDarkBg,
                   fontFamily: "var(--font-sans)",
                   fontWeight: 700,
-                  fontSize: 14,
                 }}
               >
                 Learn More
@@ -626,20 +624,18 @@ export function Header() {
                 <p className="text-[14px] leading-[1.5] mt-2" style={{ color: colors.cardLightText, opacity: 0.78 }}>Updates, perks, and calm-first insights — straight to your inbox.</p>
               </div>
               <span
+                className="btn-md"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
                   justifyContent: "center",
                   alignSelf: "flex-start",
                   marginTop: 16,
-                  padding: "0 24px",
-                  minHeight: 40,
                   borderRadius: 999,
                   backgroundColor: colors.cardLightText,
                   color: colors.cardLightBg,
                   fontFamily: "var(--font-sans)",
                   fontWeight: 700,
-                  fontSize: 14,
                 }}
               >
                 Subscribe

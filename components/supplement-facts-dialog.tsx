@@ -52,13 +52,10 @@ export function SupplementFactsDialog({
       <DialogTrigger asChild>
         <button
           type="button"
-          className={cn("sf-trigger inline-flex items-center justify-center gap-2 transition-colors", className)}
+          className={cn("sf-trigger btn-lg inline-flex items-center justify-center gap-2 transition-colors", className)}
           style={{
             fontFamily: GC,
             fontWeight: 700,
-            fontSize: "clamp(12px,1vw,16px)",
-            minHeight: "clamp(38px,4vw,48px)",
-            padding: "0 clamp(16px,2vw,28px)",
             borderRadius: 999,
             backgroundColor: isPrimary ? "var(--charcoal)" : "transparent",
             color: isPrimary ? "var(--bone)" : "var(--charcoal)",

@@ -204,13 +204,10 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
       <button
         type="button"
         onClick={handleAdd}
-        className="bb-add-btn w-full flex items-center justify-center transition-colors"
+        className="bb-add-btn btn-lg w-full flex items-center justify-center transition-colors"
         style={{
           fontFamily: GC,
           fontWeight: 800,
-          fontSize: "clamp(15px,1.3vw,18px)",
-          minHeight: "clamp(44px,4.5vw,56px)",
-          padding: "0 20px",
           borderRadius: 999,
           backgroundColor: "var(--charcoal)",
           color: "var(--bone)",

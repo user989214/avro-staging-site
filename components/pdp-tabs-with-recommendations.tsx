@@ -349,13 +349,10 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
 
                   <Link
                     href={`/${formulaKey}`}
-                    className="ymal-btn flex items-center justify-center w-full transition-colors"
+                    className="ymal-btn btn-sm flex items-center justify-center w-full transition-colors"
                     style={{
                       fontFamily: GC,
                       fontWeight: 800,
-                      fontSize: "clamp(10px,0.9vw,12px)",
-                      minHeight: "clamp(32px,3vw,38px)",
-                      padding: "0 8px",
                       borderRadius: 999,
                       backgroundColor: "var(--charcoal)",
                       color: "var(--bone)",
