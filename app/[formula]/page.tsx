@@ -9,6 +9,7 @@ import { ProductComparisonGrid } from "@/components/product-comparison-grid"
 import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommendations"
 import { PdpIngredients } from "@/components/pdp-ingredients"
 import { SupplementFactsDialog } from "@/components/supplement-facts-dialog"
+import { CalmStudyChart, FocusBenefitsTable } from "@/components/study-charts"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const BLUE = "#94C6D4"
@@ -281,107 +282,103 @@ export default async function ProductPage({
                 </div>
               </div>
 
-              {/* Right side - graph */}
-              <div style={{ padding: "clamp(14px,2vw,24px)", backgroundColor: "var(--charcoal)", borderRadius: 20 }}>
-                {/* Graph */}
-                <div style={{ position: "relative", height: "clamp(140px,18vw,200px)" }}>
-                  {/* Grid lines */}
-                  <div style={{ position: "absolute", inset: "0 0 28px 0", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                    {[0, 1, 2, 3, 4].map((i) => (
-                      <div key={i} style={{ width: "100%", borderTop: "1px solid rgba(245,241,234,0.1)" }} />
-                    ))}
-                  </div>
+              {/* Right side - chart (study-based for Calm & Focus, curve for Energy) */}
+              {key === "calm" ? (
+                <CalmStudyChart />
+              ) : key === "focus" ? (
+                <FocusBenefitsTable />
+              ) : (
+                <div style={{ padding: "clamp(14px,2vw,24px)", backgroundColor: "var(--charcoal)", borderRadius: 20 }}>
+                  {/* Graph */}
+                  <div style={{ position: "relative", height: "clamp(140px,18vw,200px)" }}>
+                    {/* Grid lines */}
+                    <div style={{ position: "absolute", inset: "0 0 28px 0", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                      {[0, 1, 2, 3, 4].map((i) => (
+                        <div key={i} style={{ width: "100%", borderTop: "1px solid rgba(245,241,234,0.1)" }} />
+                      ))}
+                    </div>
 
-                  {/* SVG curves */}
-                  <svg
-                    viewBox="0 0 400 200"
-                    style={{ position: "absolute", inset: "0 0 28px 0", width: "100%", height: "calc(100% - 28px)" }}
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      className="pdp-graph-coffee"
-                      d={
-                        key === "energy"
-                          ? "M 0 180 Q 40 180 70 30 Q 90 10 110 50 Q 150 130 200 160 Q 280 180 400 185"
-                          : "M 0 100 Q 50 80 100 40 Q 150 70 200 90 Q 280 120 350 140 Q 380 150 400 160"
-                      }
-                      fill="none"
-                      stroke="rgba(245,241,234,0.4)"
-                      strokeWidth="3"
-                    />
-                    <path
-                      className="pdp-graph-avro"
-                      d={
-                        key === "energy"
-                          ? "M 0 180 Q 60 160 100 90 Q 140 60 200 65 Q 300 70 400 85"
-                          : key === "focus"
-                            ? "M 0 150 Q 60 130 100 80 Q 140 55 200 60 Q 300 65 400 75"
-                            : "M 0 140 Q 60 120 100 70 Q 140 50 200 55 Q 300 60 400 70"
-                      }
-                      fill="none"
-                      stroke={BLUE}
-                      strokeWidth="4"
-                      strokeLinecap="round"
-                    />
-                  </svg>
+                    {/* SVG curves */}
+                    <svg
+                      viewBox="0 0 400 200"
+                      style={{ position: "absolute", inset: "0 0 28px 0", width: "100%", height: "calc(100% - 28px)" }}
+                      preserveAspectRatio="none"
+                    >
+                      <path
+                        className="pdp-graph-coffee"
+                        d="M 0 180 Q 40 180 70 30 Q 90 10 110 50 Q 150 130 200 160 Q 280 180 400 185"
+                        fill="none"
+                        stroke="rgba(245,241,234,0.4)"
+                        strokeWidth="3"
+                      />
+                      <path
+                        className="pdp-graph-avro"
+                        d="M 0 180 Q 60 160 100 90 Q 140 60 200 65 Q 300 70 400 85"
+                        fill="none"
+                        stroke={BLUE}
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                      />
+                    </svg>
 
-                  {/* Time labels */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      display: "flex",
-                      justifyContent: "space-between",
-                      fontFamily: GC,
-                      fontWeight: 700,
-                      fontSize: "clamp(9px,1vw,12px)",
-                      color: "rgba(245,241,234,0.5)",
-                    }}
-                  >
-                    <span>0 min</span>
-                    <span>30 min</span>
-                    <span>1 hr</span>
-                    <span>2 hr</span>
-                    <span>3 hr</span>
-                  </div>
-                </div>
-
-                {/* Legend */}
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "clamp(12px,2vw,24px)",
-                    marginTop: 12,
-                    paddingTop: 12,
-                    borderTop: "1px solid rgba(245,241,234,0.15)",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <div style={{ width: 20, height: 3, borderRadius: 999, backgroundColor: BLUE }} />
-                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(10px,0.9vw,12px)", color: "var(--bone)" }}>
-                      AVRO {item.short}
-                    </span>
-                  </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    {/* Time labels */}
                     <div
                       style={{
-                        width: 20,
-                        height: 3,
-                        borderRadius: 999,
-                        backgroundImage: "repeating-linear-gradient(90deg, rgba(245,241,234,0.4), rgba(245,241,234,0.4) 4px, transparent 4px, transparent 8px)",
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        display: "flex",
+                        justifyContent: "space-between",
+                        fontFamily: GC,
+                        fontWeight: 700,
+                        fontSize: "clamp(9px,1vw,12px)",
+                        color: "rgba(245,241,234,0.5)",
                       }}
-                    />
-                    <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(10px,0.9vw,12px)", color: "rgba(245,241,234,0.5)" }}>
-                      {key === "energy" ? "Coffee" : "Typical Stress"}
-                    </span>
+                    >
+                      <span>0 min</span>
+                      <span>30 min</span>
+                      <span>1 hr</span>
+                      <span>2 hr</span>
+                      <span>3 hr</span>
+                    </div>
+                  </div>
+
+                  {/* Legend */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "clamp(12px,2vw,24px)",
+                      marginTop: 12,
+                      paddingTop: 12,
+                      borderTop: "1px solid rgba(245,241,234,0.15)",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                      <div style={{ width: 20, height: 3, borderRadius: 999, backgroundColor: BLUE }} />
+                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(10px,0.9vw,12px)", color: "var(--bone)" }}>
+                        AVRO {item.short}
+                      </span>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                      <div
+                        style={{
+                          width: 20,
+                          height: 3,
+                          borderRadius: 999,
+                          backgroundImage: "repeating-linear-gradient(90deg, rgba(245,241,234,0.4), rgba(245,241,234,0.4) 4px, transparent 4px, transparent 8px)",
+                        }}
+                      />
+                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(10px,0.9vw,12px)", color: "rgba(245,241,234,0.5)" }}>
+                        Coffee
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

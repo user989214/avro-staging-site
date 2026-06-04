@@ -899,28 +899,20 @@ function ApproachChart() {
       }}
     >
       {/* Legend */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-        <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ display: "inline-block", width: 22, height: 2, borderRadius: 2, background: "repeating-linear-gradient(90deg, rgba(245,242,234,0.55), rgba(245,242,234,0.55) 5px, transparent 5px, transparent 10px)" }} />
-            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "rgba(245,242,234,0.6)", letterSpacing: "0.02em" }}>Stimulant First</span>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ display: "inline-block", width: 22, height: 2, borderRadius: 2, backgroundColor: BLUE }} />
-            <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "var(--bone)", letterSpacing: "0.02em" }}>Calm First</span>
-          </div>
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span style={{ display: "inline-block", width: 22, height: 3, borderRadius: 2, backgroundColor: "rgba(245,242,234,0.55)" }} />
+          <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "rgba(245,242,234,0.6)", letterSpacing: "0.02em" }}>Stimulant First</span>
         </div>
-        <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 9, color: "rgba(245,242,234,0.5)", letterSpacing: "0.1em", textTransform: "uppercase" }}>State Over Time</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span style={{ display: "inline-block", width: 22, height: 3, borderRadius: 2, backgroundColor: BLUE }} />
+          <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "var(--bone)", letterSpacing: "0.02em" }}>Calm First</span>
+        </div>
       </div>
 
       {/* Chart */}
       <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 7", minHeight: 160 }}>
         <svg viewBox="0 0 800 320" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }}>
-          {/* horizontal grid lines */}
-          {[60, 130, 200, 270].map((y) => (
-            <line key={y} x1="0" y1={y} x2="800" y2={y} stroke="var(--bone)" strokeOpacity="0.12" strokeWidth="1" strokeDasharray="2 6" />
-          ))}
-
           {/* Stimulant First — sharp spike then crash */}
           <path
             d="M 0 260 C 80 250, 120 230, 150 200 C 175 175, 195 90, 220 50 C 240 25, 260 30, 280 70 C 310 130, 340 250, 380 285 C 430 305, 480 295, 540 285 C 600 280, 680 290, 800 295"
@@ -984,45 +976,24 @@ function ApproachChart() {
             }
           `}</style>
         </svg>
-
-        {/* Y-axis label */}
-        <span
-          style={{
-            position: "absolute",
-            left: -6,
-            top: "50%",
-            transform: "translate(-100%, -50%) rotate(-90deg)",
-            transformOrigin: "right center",
-            fontFamily: GC,
-            fontWeight: 700,
-            fontSize: 9,
-            color: "rgba(245,242,234,0.5)",
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            whiteSpace: "nowrap",
-          }}
-        >
-          Performance
-        </span>
-      </div>
-
-      {/* X-axis labels */}
-      <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 3, borderTop: "1px solid rgba(245,242,234,0.18)" }}>
-        {["0 min", "30 min", "1 hr", "2 hr", "3 hr+"].map((t) => (
-          <span key={t} style={{ fontFamily: GC, fontWeight: 700, fontSize: 10, color: "rgba(245,242,234,0.5)", letterSpacing: "0.04em" }}>{t}</span>
-        ))}
       </div>
 
       {/* Caption strip */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 4 }}>
-        <div style={{ padding: "10px 12px", borderRadius: 12, backgroundColor: "rgba(245,242,234,0.08)" }}>
-          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "rgba(245,242,234,0.65)", margin: 0, letterSpacing: "0.02em" }}>
-            Push, spike, crash. Noise where clarity should be.
+        <div style={{ padding: "12px 14px", borderRadius: 12, backgroundColor: "#8A8A82" }}>
+          <span style={{ display: "block", fontFamily: GC, fontWeight: 700, fontSize: 11, color: "rgba(255,255,255,0.75)", margin: "0 0 2px", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            Stimulant-First
+          </span>
+          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "var(--bone)", margin: 0, letterSpacing: "0.02em" }}>
+            Push. Spike. Crash.
           </p>
         </div>
-        <div style={{ padding: "10px 12px", borderRadius: 12, backgroundColor: BLUE }}>
-          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "var(--ink)", margin: 0, letterSpacing: "0.02em" }}>
-            Settle, ramp, sustain. Steady state when it counts.
+        <div style={{ padding: "12px 14px", borderRadius: 12, backgroundColor: BLUE }}>
+          <span style={{ display: "block", fontFamily: GC, fontWeight: 700, fontSize: 11, color: "rgba(20,20,30,0.6)", margin: "0 0 2px", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            Calm-First
+          </span>
+          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "var(--ink)", margin: 0, letterSpacing: "0.02em" }}>
+            Settle. Focus. Sustain.
           </p>
         </div>
       </div>
@@ -1246,7 +1217,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ─────────────����───────��────────────��────────��───����──────────������──
+// ── STORY STRIP ─────────────����───────��─────���──────��────────��───����──────────������──
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>

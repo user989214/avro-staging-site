@@ -14,6 +14,7 @@ import {
 } from "@/components/sections"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { CohortChart } from "@/components/cohort-chart"
+import { WorkBenefitsSection } from "@/components/study-charts"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 
@@ -441,10 +442,14 @@ export function CohortPage({ data }: { data: CohortData }) {
       <FormulaLogic dark={isZeroProof} />
 
       {/* Per-cohort animated chart — shown on every cohort EXCEPT social/Zero Proof,
-          which intentionally skips the chart slot. */}
-      {!isZeroProof && (
-        <CohortChart visualKey={data.visual} accent={accent} dark={isZeroProof} />
-      )}
+          which intentionally skips the chart slot. Work reuses the Focus page's
+          cognitive benefits chart. */}
+      {!isZeroProof &&
+        (data.visual === "work" ? (
+          <WorkBenefitsSection />
+        ) : (
+          <CohortChart visualKey={data.visual} accent={accent} dark={isZeroProof} />
+        ))}
 
       {/* Use Moments — eyebrow removed; title carries the section. */}
       <Section dark={isZeroProof}>
