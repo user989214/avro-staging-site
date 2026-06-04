@@ -39,25 +39,25 @@ export function CompareAtAGlance() {
           {/* Header row */}
           <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr 1fr 1fr" }}>
             <div style={{ minHeight: 52, padding: "12px 14px", display: "flex", alignItems: "center", backgroundColor: "var(--charcoal)" }}>
-              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "var(--bone)" }}>Compare</span>
+              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, letterSpacing: "0.06em", color: "var(--bone)" }}>COMPARE</span>
             </div>
             <div style={{ minHeight: 52, padding: "12px 14px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--calm)" }}>
-              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "#2D1B4E" }}>Calm</span>
+              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, letterSpacing: "0.06em", color: "#2D1B4E" }}>CALM</span>
             </div>
             <div style={{ minHeight: 52, padding: "12px 14px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--focus)" }}>
-              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "#4A0A2E" }}>Focus</span>
+              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, letterSpacing: "0.06em", color: "#4A0A2E" }}>FOCUS</span>
             </div>
             <div style={{ minHeight: 52, padding: "12px 14px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "var(--energy)" }}>
-              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, color: "#4A3D00" }}>Energy</span>
+              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 14, letterSpacing: "0.06em", color: "#4A3D00" }}>ENERGY</span>
             </div>
           </div>
 
           {/* Data rows */}
           {[
-            { label: "Primary state", calm: "Composure", focus: "Clear focus", energy: "Steady energy" },
-            { label: "Best for", calm: "Travel, social calm, daily reset", focus: "Deep work, meetings, study", energy: "Mornings, long days, travel" },
-            { label: "Caffeine", calm: "No", focus: "No", energy: "Yes, 120 mg natural" },
-            { label: "Key addition", calm: "Magnesium Bisglycinate", focus: "Cognigrape", energy: "Natural caffeine" },
+            { label: "Primary State", calm: "Composure", focus: "Clear Focus", energy: "Steady Energy" },
+            { label: "Best For", calm: "Travel, Social Calm, Daily Reset", focus: "Deep Work, Meetings, Study", energy: "Mornings, Long Days, Travel" },
+            { label: "Caffeine", calm: "No", focus: "No", energy: "Yes, 120 mg" },
+            { label: "Key Addition", calm: "Magnesium Bisglycinate", focus: "Cognigrape", energy: "Natural Caffeine" },
           ].map((row, idx) => (
             <div
               key={row.label}

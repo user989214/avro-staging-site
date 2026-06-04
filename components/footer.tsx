@@ -27,8 +27,8 @@ const footerLinks = {
     { href: "/learn", label: "Ingredients" },
     { href: "/golf", label: "Golf" },
     { href: "/work", label: "Work / Tech" },
-    { href: "/gaming", label: "Gaming / Poker" },
-    { href: "/social", label: "Social / Non Alcohol" },
+    { href: "/gaming", label: "Esports" },
+    { href: "/social", label: "Social / Zero Proof" },
     { href: "/faq", label: "FAQ" },
   ],
   follow: [

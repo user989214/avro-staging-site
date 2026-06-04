@@ -244,7 +244,7 @@ export const cohortData = {
     momentTitle: "Modern work creates noise.",
     momentCopy:
       "Work is full of inputs: meetings, notifications, deadlines, decisions, presentations, and long focus blocks. More stimulation is not always the answer. Sometimes the better starting point is a calmer, clearer state.",
-    whyTitle: "Why AVRO fits tech + work",
+    whyTitle: "Why AVRO Fits Work",
     reasons: [
       [
         "Calm Before Output",
@@ -302,15 +302,15 @@ export const cohortData = {
       "Start calm. Stay clear. Choose the AVRO formula that matches your moment.",
   },
   gaming: {
-    eyebrow: "Gaming + online poker",
+    eyebrow: "Built for esports",
     title: "Built for the State Before the Session.",
-    copy: "AVRO supports calm, clarity, and composure before gaming, ranked play, tournaments, and online poker sessions.",
+    copy: "AVRO supports calm, clarity, and composure before gaming, ranked play, and competitive esports sessions.",
     visual: "gaming",
     primary: "Choose Your Formula",
     secondary: "Shop AVRO",
     momentTitle: "Sessions are shaped by state.",
     momentCopy:
-      "Long sessions create noise. Ranked play, tournaments, and online poker require patience, clarity, composure, and controlled attention without becoming overstimulated. More caffeine is not always the answer.",
+      "Long sessions create noise. Ranked play and tournaments require patience, clarity, composure, and controlled attention without becoming overstimulated. More caffeine is not always the answer.",
     whyTitle: "Why AVRO Fits Esports",
     reasons: [
       [

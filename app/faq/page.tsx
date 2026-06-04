@@ -47,7 +47,7 @@ const faqCategories = [
       ],
       [
         "Which formula is best for mornings?",
-        "Energy is designed for mornings and long days when you want natural caffeine with AVRO's calm-first foundation.",
+        "Energy is commonly used in the mornings and supports activities that involve alertness and focus.",
       ],
     ],
   },
@@ -61,7 +61,11 @@ const faqCategories = [
       ],
       [
         "Why does AVRO include prebiotic fiber?",
-        "AVRO includes PHGG and acacia gum as part of the daily ritual and formula base.",
+        "AVRO includes Soluble Guar Fiber and acacia fiber as part of its formula foundation and daily-use system.",
+      ],
+      [
+        "Why is non-GMO modified corn starch included in AVRO?",
+        "It is included in a small amount to help the product mix well and stay consistent from serving to serving. It is not one of AVRO's primary active ingredients.",
       ],
       [
         "Does AVRO contain sugar?",
@@ -100,8 +104,8 @@ const faqCategories = [
         "Yes. AVRO can support calm, clarity, and focus before deep work, meetings, presentations, coding sessions, and long workdays.",
       ],
       [
-        "Can I use AVRO before gaming or online poker?",
-        "Yes. AVRO can support calm, clarity, and composure before long sessions. It does not claim to improve win rates, betting decisions, or gameplay outcomes.",
+        "Can I use AVRO before esports or gaming?",
+        "Yes. AVRO can support calm, clarity, and composure before long sessions. It does not claim to improve win rates or gameplay outcomes.",
       ],
     ],
   },
@@ -119,7 +123,7 @@ const faqCategories = [
       ],
       [
         "Is AVRO intended for children?",
-        "AVRO is not positioned for children.",
+        "AVRO products are intended for adults.",
       ],
     ],
   },
@@ -129,15 +133,19 @@ const faqCategories = [
     faqs: [
       [
         "Where does AVRO ship?",
-        "Use the current shipping policy for final operational details.",
+        "AVRO currently ships to anywhere in the U.S.",
       ],
       [
         "How do I track my order?",
-        "Use your order confirmation link or contact support for order help.",
+        "Once your purchase is complete, you will receive an email with tracking information.",
       ],
       [
         "What is your return policy?",
-        "Use the current approved return policy for final refund and return details.",
+        "All refunds, returns, or exchanges must be submitted within 30 days from purchase date. If you are looking to request a refund, return, or exchange, please email us at hello@avrolife.com. Make sure you include your purchase information — i.e. order number and date of purchase.",
+      ],
+      [
+        "What are AVRO's Guarantee Guidelines?",
+        "AVRO reserves the right to verify information, require a valid proof of purchase, and to deny Guarantee requests in its discretion in cases of suspected fraud or if a customer has abused the AVRO 30-Day Satisfaction Guarantee. If you have any questions regarding whether a seller is an authorized AVRO seller, please contact us through our Contact Page.",
       ],
     ],
   },
@@ -164,7 +172,7 @@ export default function FaqPage() {
     <>
       <PageHero
         variant="flat"
-        title="How can we help?"
+        title="FAQ"
         lede="Find answers about AVRO formulas, ingredients, timing, caffeine, subscriptions, shipping, and how to choose the right product."
         imageSrc=""
         imageAlt=""
