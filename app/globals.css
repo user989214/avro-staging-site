@@ -489,11 +489,11 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
-  .btn-secondary-dark:hover {
-  background-color: transparent;
-  color: var(--gold);
+.btn-secondary-dark:hover {
+  background-color: var(--gold);
+  color: var(--deep-black);
   border-color: var(--gold);
-  }
+}
 
 .btn-accent {
   display: inline-flex;
@@ -503,8 +503,8 @@
   padding: 0 32px;
   border: 2px solid var(--avro-blue);
   border-radius: 999px;
-  background-color: var(--avro-blue);
-  color: var(--charcoal);
+  background-color: transparent;
+  color: var(--avro-blue);
   font-family: var(--font-sans);
   font-weight: 700;
   font-size: 16px;
@@ -513,8 +513,8 @@
   transition: all 0.2s ease;
 }
 .btn-accent:hover {
-  background-color: transparent;
-  color: var(--avro-blue);
+  background-color: var(--avro-blue);
+  color: var(--charcoal);
 }
 
 button[role="button"] {
