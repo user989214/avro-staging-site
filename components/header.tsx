@@ -152,7 +152,7 @@ export function Header() {
           padding: 0 28px;
           border-radius: 999px;
           font-weight: 700;
-          font-size: 15px;
+          font-size: 16px;
           letter-spacing: -0.005em;
           transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
         }
@@ -230,15 +230,15 @@ export function Header() {
                   justifyContent: "center",
                   margin: "0 28px",
                   padding: "0 28px",
-                  minHeight: 40,
+                  minHeight: 48,
                   borderRadius: 999,
                   border: `2px solid ${colors.annBtnBg}`,
                   backgroundColor: colors.annBtnBg,
                   color: colors.annBtnText,
                   fontFamily: "var(--font-sans)",
-                  fontWeight: 800,
-                  fontSize: 14,
-                  letterSpacing: "0.01em",
+                  fontWeight: 700,
+                  fontSize: 16,
+                  letterSpacing: "-0.005em",
                   textDecoration: "none",
                   whiteSpace: "nowrap",
                   flexShrink: 0,

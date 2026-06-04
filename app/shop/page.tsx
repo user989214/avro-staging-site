@@ -22,7 +22,7 @@ export default function ShopPage() {
       {/* ---------- HERO ---------- */}
       {/* Golf-style hero: full-width, square corners, image with cream fade overlay,
           serif headline with per-word rise animation, lede + CTAs that fade up.
-          CTAs keep their per-formula colors but are sized to match the homepage hero pills. */}
+          CTAs are black/white and sized identically to the homepage hero pills. */}
       <section
         style={{
           position: "relative",
@@ -54,8 +54,8 @@ export default function ShopPage() {
           .shop-lede { animation-delay: 0.85s; }
           .shop-cta-row { animation-delay: 1.15s; }
 
-          /* Per-formula colored pills — sized to match the homepage hero pills:
-             48px min-height, 28px horizontal padding, 16px font. */
+          /* Black/white pills — identical sizing to the homepage hero pills:
+             48px min-height, 28px horizontal padding, 16px font, 2px border. */
           .shop-btn-calm, .shop-btn-focus, .shop-btn-energy {
             display: inline-flex;
             align-items: center;
@@ -68,14 +68,14 @@ export default function ShopPage() {
             padding: 0 28px;
             border-radius: 999px;
             text-decoration: none;
+            border: 2px solid var(--charcoal);
+            background-color: transparent;
+            color: var(--charcoal);
             transition: background-color 0.2s ease, color 0.2s ease;
           }
-          .shop-btn-calm  { border: 2px solid var(--calm);   background-color: transparent; color: var(--calm); }
-          .shop-btn-focus { border: 2px solid var(--focus);  background-color: transparent; color: var(--focus); }
-          .shop-btn-energy{ border: 2px solid var(--energy); background-color: transparent; color: var(--energy); }
-          .shop-btn-calm:hover  { background-color: var(--calm);   color: #2D1B4E; }
-          .shop-btn-focus:hover { background-color: var(--focus);  color: #4A0A2E; }
-          .shop-btn-energy:hover{ background-color: var(--energy); color: #4A3D00; }
+          .shop-btn-calm:hover,
+          .shop-btn-focus:hover,
+          .shop-btn-energy:hover { background-color: var(--charcoal); color: var(--bone); }
 
           @media (max-width: 640px) {
             .shop-hero-ctas { flex-direction: column; align-items: stretch; max-width: 320px; }

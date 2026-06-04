@@ -1,7 +1,5 @@
 "use client"
 
-import Link from "next/link"
-
 const GC = "var(--font-geist), -apple-system, BlinkMacSystemFont, system-ui, sans-serif"
 
 export function CompareAtAGlance() {
@@ -81,42 +79,6 @@ export function CompareAtAGlance() {
               </div>
             </div>
           ))}
-
-        {/* CTA row */}
-        <style>{`
-          .compare-cta {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 11px;
-            min-height: 36px;
-            min-width: 80px;
-            padding: 0 14px;
-            border-radius: 999px;
-            text-decoration: none;
-            border: 2px solid var(--charcoal);
-            background-color: var(--charcoal);
-            color: var(--bone);
-            transition: background-color 0.2s ease, color 0.2s ease;
-          }
-          .compare-cta:hover {
-            background-color: transparent;
-            color: var(--charcoal);
-          }
-        `}</style>
-        <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr 1fr 1fr" }}>
-          <div style={{ minHeight: 60, padding: 10, backgroundColor: "var(--base-light)" }} />
-          <div style={{ minHeight: 60, padding: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Link href="/calm" className="compare-cta" style={{ fontFamily: GC }}>Shop Calm</Link>
-          </div>
-          <div style={{ minHeight: 60, padding: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Link href="/focus" className="compare-cta" style={{ fontFamily: GC }}>Shop Focus</Link>
-          </div>
-          <div style={{ minHeight: 60, padding: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Link href="/energy" className="compare-cta" style={{ fontFamily: GC }}>Shop Energy</Link>
-          </div>
-        </div>
         </div>
       </div>
     </div>
