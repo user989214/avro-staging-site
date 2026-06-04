@@ -88,9 +88,9 @@ const CHARTS: Record<string, CohortChartConfig> = {
   },
   golf: {
     kind: "dial",
-    title: "Tempo consistency, front nine to back nine",
+    title: "Tempo consistency through the round",
     description:
-      "An 18-hole tempo-consistency score — how steady your swing rhythm holds from the first tee to the last green.",
+      "A tempo-consistency score — how steady your swing rhythm holds from the first tee to the last green.",
     yMax: 100,
     unit: "",
     caption: "Source: AVRO golf cohort · self-reported tempo consistency, 0–100",
