@@ -239,9 +239,9 @@ export function ProductCards({
           {(Object.keys(formulas) as FormulaKey[]).map((key) => {
             const item = formulas[key]
             return (
-              <article key={key} style={{ backgroundColor: cardBg, borderRadius: 20, padding: "clamp(14px,1.8vw,20px)", display: "flex", flexDirection: "column", gap: 10 }}>
-                {/* Inner product frame — constrained height for compact cards */}
-                <div style={{ borderRadius: 16, height: "clamp(140px,18vw,200px)", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "var(--deep-black)" : "var(--bone)" }}>
+              <article key={key} style={{ backgroundColor: cardBg, borderRadius: 24, padding: "clamp(14px,1.8vw,20px)", display: "flex", flexDirection: "column", gap: 10 }}>
+                {/* Inner product frame — rounded corners visible around the image */}
+                <div style={{ borderRadius: 20, height: "clamp(140px,18vw,200px)", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "var(--deep-black)" : "var(--bone)", border: dark ? "none" : "1px solid rgba(0,0,0,0.06)" }}>
                   <ProductCard formulaKey={key} className="h-full w-auto object-contain" />
                 </div>
                 <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(18px,1.5vw,23px)", color: ink, margin: 0 }}>{item.name}</h3>
