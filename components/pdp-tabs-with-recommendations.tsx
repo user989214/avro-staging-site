@@ -349,7 +349,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
 
                   <Link
                     href={`/${formulaKey}`}
-                    className="ymal-btn btn-sm flex items-center justify-center w-full transition-colors"
+                    className="ymal-btn avro-size-sm flex items-center justify-center w-full transition-colors"
                     style={{
                       fontFamily: GC,
                       fontWeight: 800,

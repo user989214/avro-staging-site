@@ -595,7 +595,7 @@ export function Header() {
                 <p className="text-[14px] leading-[1.5] mt-2" style={{ color: colors.cardDarkText, opacity: 0.78 }}>Articles about calm performance, fermentation science and the rituals behind each formula.</p>
               </div>
               <span
-                className="btn-md"
+                className="avro-size-md"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -624,7 +624,7 @@ export function Header() {
                 <p className="text-[14px] leading-[1.5] mt-2" style={{ color: colors.cardLightText, opacity: 0.78 }}>Updates, perks, and calm-first insights — straight to your inbox.</p>
               </div>
               <span
-                className="btn-md"
+                className="avro-size-md"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",

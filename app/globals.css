@@ -326,15 +326,16 @@
    Button system — all pill, all DM Sans 700
    Outline by default, filled on hover
 
-   THREE canonical sizes — every button on the site uses one:
-     .btn-lg  48px  — primary page/section CTAs, commerce, hero pills (default)
-     .btn-md  40px  — secondary / nav-level buttons
-     .btn-sm  32px  — compact inline controls, card mini-CTAs, selectors
+   THREE canonical sizes — every button on the site uses one.
+   (Named avro-size-* because the build drops bare .btn-lg/.btn-sm names.)
+     .avro-size-lg  48px  — primary page/section CTAs, commerce, hero pills
+     .avro-size-md  40px  — secondary / nav-level buttons
+     .avro-size-sm  32px  — compact inline controls, card mini-CTAs, selectors
    Apply a size class and let it drive height / padding / font-size.
    ============================================================ */
-.btn-lg { min-height: 48px !important; padding: 0 28px !important; font-size: 16px !important; }
-.btn-md { min-height: 40px !important; padding: 0 20px !important; font-size: 14px !important; }
-.btn-sm { min-height: 32px !important; padding: 0 16px !important; font-size: 13px !important; }
+.avro-size-lg { min-height: 48px !important; padding: 0 28px !important; font-size: 16px !important; }
+.avro-size-md { min-height: 40px !important; padding: 0 20px !important; font-size: 14px !important; }
+.avro-size-sm { min-height: 32px !important; padding: 0 16px !important; font-size: 13px !important; }
 
 .btn-primary {
   display: inline-flex;

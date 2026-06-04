@@ -52,7 +52,7 @@ export function SupplementFactsDialog({
       <DialogTrigger asChild>
         <button
           type="button"
-          className={cn("sf-trigger btn-lg inline-flex items-center justify-center gap-2 transition-colors", className)}
+          className={cn("sf-trigger avro-size-lg inline-flex items-center justify-center gap-2 transition-colors", className)}
           style={{
             fontFamily: GC,
             fontWeight: 700,

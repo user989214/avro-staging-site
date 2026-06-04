@@ -258,7 +258,7 @@ export default async function ProductPage({
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   <a
                     href="/science"
-                    className="pdp-learn-btn btn-lg"
+                    className="pdp-learn-btn avro-size-lg"
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
@@ -424,7 +424,7 @@ export default async function ProductPage({
           `}</style>
           <a
             href={`/${key}`}
-            className="pdp-subscribe-btn btn-lg"
+            className="pdp-subscribe-btn avro-size-lg"
             style={{
               display: "inline-flex",
               alignItems: "center",
