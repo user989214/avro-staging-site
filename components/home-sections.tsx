@@ -260,26 +260,26 @@ export function HomeRefHero() {
           .hp-hero-fade { display: none !important; opacity: 0 !important; visibility: hidden !important; }
         }
         .hp-pill-primary {
-          background-color: var(--charcoal);
-          color: var(--bone);
+          background-color: transparent;
+          color: var(--charcoal);
           border: 2px solid var(--charcoal);
           border-radius: 999px;
           transition: background-color .2s ease, color .2s ease;
         }
         .hp-pill-primary:hover {
-          background-color: transparent;
-          color: var(--charcoal);
-        }
-        .hp-pill-secondary {
           background-color: var(--charcoal);
           color: var(--bone);
+        }
+        .hp-pill-secondary {
+          background-color: transparent;
+          color: var(--charcoal);
           border: 2px solid var(--charcoal);
           border-radius: 999px;
           transition: background-color .2s ease, color .2s ease;
         }
         .hp-pill-secondary:hover {
-          background-color: transparent;
-          color: var(--charcoal);
+          background-color: var(--charcoal);
+          color: var(--bone);
         }
         .hp-btn-black {
           transition: background-color .2s ease, color .2s ease;
