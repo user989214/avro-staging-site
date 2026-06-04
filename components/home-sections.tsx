@@ -1037,7 +1037,7 @@ export function HomeProductStrip() {
               key={key}
               style={{ display: "flex", flexDirection: "column", borderRadius: 20, overflow: "hidden", backgroundColor: "var(--base-light)", padding: "clamp(14px,1.8vw,20px)" }}
             >
-              <div style={{ position: "relative", height: "clamp(140px,18vw,200px)", overflow: "hidden", borderRadius: 16, backgroundColor: "var(--bone)" }}>
+              <div style={{ position: "relative", height: "clamp(200px,24vw,280px)", overflow: "hidden", borderRadius: 16, backgroundColor: "var(--bone)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={socialImages[key]}
