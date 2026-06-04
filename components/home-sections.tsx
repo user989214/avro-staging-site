@@ -98,6 +98,37 @@ function FormulaGraph() {
 // ── HERO ──────────────────────────────────────────────────────────────────────
 export function HomeRefHero() {
   const [progress, setProgress] = useState(0) // 0 = full-bleed, 1 = docked
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  // Carousel slide data from Peter's outline
+  const slides = [
+    {
+      headline: "Performance Starts with Being Calm.",
+      lede: "AVRO helps you steady first, with calm-first formulas built to support composure, clarity and controlled readiness when pressure rises.",
+      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4325552255-51euqtVRTaIeU2n0sGSiBvq4vuvEFe.png",
+      alt: "AVRO Energy stick packet next to a glass of green juice at an outdoor brunch",
+    },
+    {
+      headline: "Calm Comes First.",
+      lede: "AVRO is built for people who know pressure changes everything. Support composure, clarity and readiness before the moment matters.",
+      image: "/images/lifestyle/golfers-misty-tee-box.jpg",
+      alt: "Golfers on a misty tee box at sunrise",
+    },
+    {
+      headline: "Start Calm. Stay Ready.",
+      lede: "AVRO supports calm-first performance with formulas designed for pressure-sensitive moments in work, play, competition and social life.",
+      image: "/images/lifestyle/woman-journaling-mug.jpg",
+      alt: "Calm morning routine with journal and warm mug",
+    },
+  ]
+
+  // Auto-advance carousel every 6 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 6000)
+    return () => clearInterval(interval)
+  }, [slides.length])
 
   useEffect(() => {
     let raf = 0
@@ -297,23 +328,26 @@ export function HomeRefHero() {
           willChange: "border-radius, max-width, min-height",
         }}
       >
-        {/* Background image — full container */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4325552255-51euqtVRTaIeU2n0sGSiBvq4vuvEFe.png"
-          alt="AVRO Energy stick packet next to a glass of green juice at an outdoor brunch"
-          className="hp-hero-img"
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "contain",
-            objectPosition: "right center",
-            transform: "none",
-            transition: "transform 0.2s ease-out",
-          }}
-        />
+        {/* Background images — all slides, opacity-based crossfade */}
+        {slides.map((slide, idx) => (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            key={idx}
+            src={slide.image}
+            alt={slide.alt}
+            className="hp-hero-img"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+              objectPosition: "right center",
+              opacity: currentSlide === idx ? 1 : 0,
+              transition: "opacity 0.8s ease-in-out",
+            }}
+          />
+        ))}
 
         {/* Gradient overlay — wraps all four edges so the rectangular image border dissolves into the bone */}
         <div
@@ -345,8 +379,9 @@ export function HomeRefHero() {
         >
           {/* Left */}
           <div style={{ display: "flex", flexDirection: "column" }}>
-          {/* Hero headline — DM Sans per design system */}
+          {/* Hero headline — slides with fade */}
           <h1
+            key={currentSlide}
             style={{
               fontFamily: GC,
               fontSize: "clamp(40px,5vw,68px)",
@@ -356,35 +391,16 @@ export function HomeRefHero() {
               marginBottom: 24,
               maxWidth: 600,
               fontWeight: 700,
+              opacity: 1,
+              animation: "hp-fade 0.6s ease-out forwards",
             }}
           >
-            {(() => {
-              const lines = ["Calm first.", "Clear headed.", "Ready when pressure rises."]
-              let wordIdx = 0
-              return lines.map((line, lineIdx) => (
-                <span key={lineIdx} className="hp-line">
-                  {line.split(" ").map((word, i, arr) => {
-                    const delay = 0.1 + wordIdx * 0.18
-                    wordIdx++
-                    return (
-                      <span
-                        key={i}
-                        className="hp-word"
-                        style={{ animationDelay: `${delay.toFixed(2)}s` }}
-                      >
-                        {word}
-                        {i < arr.length - 1 ? "\u00A0" : ""}
-                      </span>
-                    )
-                  })}
-                </span>
-              ))
-            })()}
+            {slides[currentSlide].headline}
           </h1>
 
-          {/* Lede — DM Sans, body LG */}
+          {/* Lede — slides with fade */}
           <p
-            className="hp-fade-in hp-lede"
+            key={`lede-${currentSlide}`}
             style={{
               fontFamily: GC,
               fontWeight: 400,
@@ -392,14 +408,15 @@ export function HomeRefHero() {
               lineHeight: 1.55,
               color: "var(--warm-gray)",
               maxWidth: 520,
-              marginBottom: 36,
+              marginBottom: 28,
+              opacity: 1,
+              animation: "hp-fade 0.6s ease-out 0.1s forwards",
             }}
           >
-            Functional supplements formulated around naturally fermented PharmaGABA®. State control, not stimulation —
-            so you can show up calm, clear, and ready for what matters.
+            {slides[currentSlide].lede}
           </p>
 
-          <div className="hp-pill-row hp-fade-in hp-cta-row" style={{ display: "flex", flexWrap: "wrap", gap: 12, maxWidth: 520 }}>
+          <div className="hp-pill-row" style={{ display: "flex", flexWrap: "wrap", gap: 12, maxWidth: 520 }}>
             <a
               href="/shop"
               className="hp-pill-primary"
@@ -416,10 +433,10 @@ export function HomeRefHero() {
                 textDecoration: "none",
               }}
             >
-              Shop AVRO →
+              Shop AVRO
             </a>
             <a
-              href="/science"
+              href="/shop"
               className="hp-pill-secondary"
               style={{
                 display: "inline-flex",
@@ -434,8 +451,28 @@ export function HomeRefHero() {
                 textDecoration: "none",
               }}
             >
-              Learn the Science
+              Find Your Formula
             </a>
+          </div>
+
+          {/* Carousel dots */}
+          <div style={{ display: "flex", gap: 8, marginTop: 24 }}>
+            {slides.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+                style={{
+                  width: currentSlide === idx ? 24 : 8,
+                  height: 8,
+                  borderRadius: 4,
+                  backgroundColor: currentSlide === idx ? "var(--avro-blue)" : "rgba(0,0,0,0.2)",
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "width 0.3s ease, background-color 0.3s ease",
+                }}
+              />
+            ))}
           </div>
         </div>
 
@@ -1094,9 +1131,9 @@ export function HomeProductStrip() {
           {(Object.keys(formulas) as FormulaKey[]).map((key) => (
             <div
               key={key}
-              style={{ display: "flex", flexDirection: "column", borderRadius: 24, overflow: "hidden", backgroundColor: "var(--base-light)", padding: "clamp(16px,2vw,28px)" }}
+              style={{ display: "flex", flexDirection: "column", borderRadius: 20, overflow: "hidden", backgroundColor: "var(--base-light)", padding: "clamp(14px,1.8vw,20px)" }}
             >
-              <div style={{ position: "relative", aspectRatio: "1 / 1", overflow: "hidden", borderRadius: 20, backgroundColor: "var(--bone)" }}>
+              <div style={{ position: "relative", height: "clamp(140px,18vw,200px)", overflow: "hidden", borderRadius: 16, backgroundColor: "var(--bone)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={socialImages[key]}
