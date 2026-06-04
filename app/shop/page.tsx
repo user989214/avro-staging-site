@@ -60,6 +60,8 @@ export default function ShopPage() {
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            flex: 1 1 160px;
+            min-width: 160px;
             font-family: ${GC};
             font-weight: 700;
             font-size: 16px;
@@ -77,9 +79,9 @@ export default function ShopPage() {
           .shop-btn-focus:hover,
           .shop-btn-energy:hover { background-color: var(--charcoal); color: var(--bone); }
 
-          @media (max-width: 640px) {
+          @media (max-width: 768px) {
             .shop-hero-ctas { flex-direction: column; align-items: stretch; max-width: 320px; }
-            .shop-btn-calm, .shop-btn-focus, .shop-btn-energy { width: 100%; }
+            .shop-btn-calm, .shop-btn-focus, .shop-btn-energy { width: 100%; flex: 0 0 auto; }
           }
           @media (prefers-reduced-motion: reduce) {
             .shop-word, .shop-fade {
@@ -179,7 +181,7 @@ export default function ShopPage() {
 
             <div
               className="shop-hero-ctas shop-fade shop-cta-row"
-              style={{ display: "flex", flexWrap: "wrap", gap: 12 }}
+              style={{ display: "flex", flexWrap: "wrap", gap: 12, width: "100%", maxWidth: 560 }}
             >
               <Link href="/calm" className="shop-btn-calm">Shop Calm</Link>
               <Link href="/focus" className="shop-btn-focus">Shop Focus</Link>

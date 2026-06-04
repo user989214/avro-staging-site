@@ -100,11 +100,13 @@ const SHARED_HERO_STYLES = `
     }
   }
 
-  /* Button sizing aligned to home-page hero CTAs. */
+  /* Button sizing + width aligned to home-page hero CTAs. */
   .ph-pill-primary, .ph-pill-secondary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex: 1 1 180px;
+    min-width: 180px;
     font-family: ${GC};
     font-weight: 700;
     font-size: 16px;
@@ -136,10 +138,12 @@ const SHARED_HERO_STYLES = `
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+    width: 100%;
+    max-width: 520px;
   }
   @media (max-width: 640px) {
     .ph-pill-row { flex-direction: column; align-items: stretch; max-width: 320px; }
-    .ph-pill-primary, .ph-pill-secondary { width: 100%; }
+    .ph-pill-primary, .ph-pill-secondary { width: 100%; flex: 0 0 auto; }
   }
 `
 
