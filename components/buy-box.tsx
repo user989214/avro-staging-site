@@ -53,8 +53,19 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
             color: "var(--ink)",
           }}
         >
-          {formula.headline}
+          {formula.name}
         </h1>
+        <p
+          style={{
+            fontFamily: GC,
+            fontWeight: 600,
+            fontSize: "clamp(15px,1.3vw,18px)",
+            lineHeight: 1.35,
+            color: "var(--ink)",
+          }}
+        >
+          {formula.heroSupport}
+        </p>
         <p
           style={{
             fontFamily: GC,

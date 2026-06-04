@@ -23,7 +23,7 @@ const sharedFront: Ingredient[] = [
 const sharedBack: Ingredient[] = [
   {
     name: "Prebiotic Fiber",
-    amount: "PHGG + ACACIA",
+    amount: "SOLUBLE GUAR FIBER + ACACIA FIBER",
     description: "Supports gut comfort. Part of AVRO's daily formula.",
     image: "/images/ingredients/prebiotic-fiber-2.jpg",
   },
@@ -45,12 +45,6 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
       image: "/images/ingredients/magnesium-bisglycinate-2.jpg",
     },
     ...sharedBack,
-    {
-      name: "Natural Flavor",
-      amount: "BLUEBERRY ACAI",
-      description: "Bright, clean flavor without artificial sweeteners.",
-      image: "/images/ingredients/blueberry-acai-2.jpg",
-    },
   ],
   focus: [
     ...sharedFront,
@@ -61,12 +55,6 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
       image: "/images/ingredients/cognigrape-2.jpg",
     },
     ...sharedBack,
-    {
-      name: "Natural Flavor",
-      amount: "POMEGRANATE",
-      description: "Bright, clean flavor without artificial sweeteners.",
-      image: "/images/ingredients/pomegranate-raspberry-2.jpg",
-    },
   ],
   energy: [
     ...sharedFront,
@@ -77,12 +65,6 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
       image: "/images/ingredients/natural-caffeine-2.jpg",
     },
     ...sharedBack,
-    {
-      name: "Natural Flavor",
-      amount: "ORANGE TANGERINE",
-      description: "Bright, clean flavor without artificial sweeteners.",
-      image: "/images/ingredients/orange-tangerine.jpg",
-    },
   ],
 }
 

@@ -601,8 +601,8 @@ export function HomeBenefitRow() {
       tone: "blue" as const,
     },
     {
-      title: "Supports calm without sedation",
-      copy: "Designed to support composure without turning you off. Quiet focus, fully online.",
+  title: "Supports calm while helping you stay present",
+  copy: "Designed to support composure without turning you off. Quiet focus, fully online.",
       tone: "blue" as const,
     },
   ]
@@ -1246,7 +1246,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ─────────────����───────��─────────────────────��───����──────────������──
+// ── STORY STRIP ─────────────����───────��────────────��────────��───����──────────������──
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>

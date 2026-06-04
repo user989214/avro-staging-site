@@ -36,10 +36,10 @@ const navDropdownSections: { heading: string; items: { href: string; label: stri
   {
     heading: "By Use Case",
     items: [
+      { href: "/work", label: "Work / Tech", cta: "AVRO for Work" },
       { href: "/golf", label: "Golf", cta: "AVRO for Golf" },
-      { href: "/work", label: "Work / Tech", cta: "AVRO at Work" },
-      { href: "/gaming", label: "Gaming / Poker", cta: "AVRO for Gaming" },
-      { href: "/social", label: "Social / Non-Alcohol", cta: "AVRO for Social" },
+      { href: "/gaming", label: "Esports", cta: "AVRO for Esports" },
+      { href: "/social", label: "Social / Zero Proof", cta: "AVRO for Social" },
     ],
   },
 ]
@@ -372,8 +372,8 @@ export function Header() {
                         style={{ backgroundColor: colors.cardDarkBg }}
                       >
                         <div>
-                          <h3 className="font-serif font-black text-[30px] leading-[1.05]" style={{ color: colors.cardDarkText }}>From the Journal</h3>
-                          <p className="text-[14px] leading-[1.5] mt-3" style={{ color: colors.cardDarkText, opacity: 0.78 }}>Field notes on calm focus, fermentation science, and the rituals behind each formula.</p>
+                          <h3 className="font-serif font-black text-[30px] leading-[1.05]" style={{ color: colors.cardDarkText }}>News & Media</h3>
+                          <p className="text-[14px] leading-[1.5] mt-3" style={{ color: colors.cardDarkText, opacity: 0.78 }}>Articles about calm performance, fermentation science and the rituals behind each formula.</p>
                         </div>
                         <span
                           className="hdr-card-btn"
@@ -383,7 +383,7 @@ export function Header() {
                             border: `2px solid ${colors.cardDarkText}`,
                           }}
                         >
-                          Visit the Blog
+                          Learn More
                         </span>
                       </Link>
 
@@ -394,8 +394,8 @@ export function Header() {
                         style={{ backgroundColor: colors.cardLightBg }}
                       >
                         <div>
-                          <h3 className="font-serif font-black text-[30px] leading-[1.05]" style={{ color: colors.cardLightText }}>Stay in the Loop</h3>
-                          <p className="text-[14px] leading-[1.5] mt-3" style={{ color: colors.cardLightText, opacity: 0.78 }}>Weekly notes on calm performance, ingredient deep dives, and first looks at new launches.</p>
+                          <h3 className="font-serif font-black text-[30px] leading-[1.05]" style={{ color: colors.cardLightText }}>Join Our Community</h3>
+                          <p className="text-[14px] leading-[1.5] mt-3" style={{ color: colors.cardLightText, opacity: 0.78 }}>Updates, perks, and calm-first insights — straight to your inbox.</p>
                         </div>
                         <span
                           className="hdr-card-btn"
@@ -591,8 +591,8 @@ export function Header() {
               style={{ backgroundColor: colors.cardDarkBg }}
             >
               <div>
-                <h3 className="font-serif font-black text-[24px] leading-[1.1]" style={{ color: colors.cardDarkText }}>From the Journal</h3>
-                <p className="text-[14px] leading-[1.5] mt-2" style={{ color: colors.cardDarkText, opacity: 0.78 }}>Field notes on calm focus and the rituals behind each formula.</p>
+                <h3 className="font-serif font-black text-[24px] leading-[1.1]" style={{ color: colors.cardDarkText }}>News & Media</h3>
+                <p className="text-[14px] leading-[1.5] mt-2" style={{ color: colors.cardDarkText, opacity: 0.78 }}>Articles about calm performance, fermentation science and the rituals behind each formula.</p>
               </div>
               <span
                 style={{
@@ -611,7 +611,7 @@ export function Header() {
                   fontSize: 14,
                 }}
               >
-                Visit the Blog
+                Learn More
               </span>
             </Link>
 
@@ -622,8 +622,8 @@ export function Header() {
               style={{ backgroundColor: colors.cardLightBg }}
             >
               <div>
-                <h3 className="font-serif font-black text-[24px] leading-[1.1]" style={{ color: colors.cardLightText }}>Stay in the Loop</h3>
-                <p className="text-[14px] leading-[1.5] mt-2" style={{ color: colors.cardLightText, opacity: 0.78 }}>Weekly notes on calm performance and first looks at new launches.</p>
+                <h3 className="font-serif font-black text-[24px] leading-[1.1]" style={{ color: colors.cardLightText }}>Join Our Community</h3>
+                <p className="text-[14px] leading-[1.5] mt-2" style={{ color: colors.cardLightText, opacity: 0.78 }}>Updates, perks, and calm-first insights — straight to your inbox.</p>
               </div>
               <span
                 style={{

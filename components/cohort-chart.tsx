@@ -56,9 +56,9 @@ const CHARTS: Record<string, CohortChartConfig> = {
   },
   work: {
     kind: "area",
-    title: "Sustained focus through a 90-minute block",
+    title: "Built for mentally demanding moments.",
     description:
-      "Average focus rating across a 90-minute deep-work block, compared with common alternatives.",
+      "When work requires attention, meetings require presence, or projects require focus, AVRO supports calm, clarity, and readiness.",
     yMax: 100,
     yMin: 30,
     unit: "",
@@ -74,9 +74,9 @@ const CHARTS: Record<string, CohortChartConfig> = {
   },
   gaming: {
     kind: "line",
-    title: "Reaction time stays steady, hour by hour",
+    title: "State affects every session.",
     description:
-      "Mean reaction time across a 4-hour session — lower (and flatter) is better.",
+      "AVRO is designed for moments where attention, composure and focus matter most.",
     yMax: 280,
     yMin: 200,
     unit: "ms",

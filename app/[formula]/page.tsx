@@ -27,7 +27,7 @@ const feelingBenefits: Record<FormulaKey, { icon: AvroIconName; title: string }[
     { icon: "supports-clear-thinking", title: "Improved cognition & alertness" },
     { icon: "social-composure", title: "Calm, balanced mood" },
     { icon: "supports-focus-without-overload", title: "Sharper focus" },
-    { icon: "control-under-pressure", title: "Clean, sustained energy" },
+    { icon: "control-under-pressure", title: "Calm, sustained clarity" },
   ],
   energy: [
     { icon: "supports-clear-thinking", title: "Improved cognition & alertness" },
@@ -477,7 +477,7 @@ export default async function ProductPage({
           <div style={{ display: "flex", flexDirection: "column" }}>
             {[
               [
-                `What makes ${item.name} different from the original formula?`,
+                `What are the main ingredients in ${item.name}?`,
                 `${item.name} is ${key === "energy" ? "formulated with 120mg of natural caffeine combined with PharmaGABA® for steady energy without the jitters" : key === "focus" ? "formulated with Cognigrape® and PharmaGABA® for clear focus without overstimulation" : "formulated with Magnesium and PharmaGABA® for calm without drowsiness"}.`,
               ],
               [

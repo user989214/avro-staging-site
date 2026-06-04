@@ -15,9 +15,10 @@ export const formulas = {
     bundlePrice: 24.95,
     caffeine: "No caffeine",
     headline: "Calm first. Clear headed. Ready when pressure rises.",
+    heroSupport: "Clear headed. Ready when pressure rises.",
     support: "Calm support without stimulation.",
     bestFor:
-      "First tee nerves, evening rounds, travel days, clubhouse social settings, post-round wind down, and calm without caffeine.",
+      "Travel days, social calm, pre-match nerves and for a daily reset.",
     addition: "Magnesium Bisglycinate",
     review:
       "Helps me stay composed without feeling dull. It is part of my pre-meeting routine.",
@@ -41,9 +42,10 @@ export const formulas = {
     bundlePrice: 24.95,
     caffeine: "No caffeine",
     headline: "Calm first. Clear headed. Ready to focus.",
+    heroSupport: "Clear headed. Ready to focus.",
     support: "Clarity and focus support without caffeine.",
     bestFor:
-      "Deep work, practice sessions, competitive rounds, study, presentations, creative work, and longer attention blocks.",
+      "Deep work, competitive rounds, studying, creative work and longer attention blocks.",
     addition: "Cognigrape®",
     review:
       "Great for work blocks and long sessions. Clear without feeling frantic.",
@@ -66,9 +68,10 @@ export const formulas = {
     bundlePrice: 24.95,
     caffeine: "120 mg natural caffeine",
     headline: "Calm first. Steady energy. Ready when it matters.",
-    support: "Natural caffeine with AVRO's calm-first foundation.",
+    heroSupport: "Steady energy. Ready when it matters.",
+    support: "Natural caffeine with a calm-first foundation.",
     bestFor:
-      "Early tee times, mornings, long rounds, travel days, conferences, long workdays, and steady energy with calm built in.",
+      "Mornings, early start times, long workdays and steady energy with built in calm.",
     addition: "Natural Caffeine",
     review:
       "Clean lift for demanding mornings without feeling overcaffeinated.",
@@ -87,20 +90,22 @@ export const sharedProof = [
 
 export const testimonials = [
   {
-    quote: "Calm first is real. I feel clear and focused without the jitters.",
-    name: "Jake R.",
-    role: "Entrepreneur",
-  },
-  {
-    quote: "Great for work days and late nights. Smooth energy that lasts.",
-    name: "Megan T.",
-    role: "Product Manager",
+    quote:
+      "Highly recommend for anyone looking for a natural, functional way to support relaxation and balance!",
+    name: "Verified Buyer",
+    role: "AVRO Calm",
   },
   {
     quote:
-      "AVRO fits my routine perfectly. Noticeably better before pressure moments.",
-    name: "Chris B.",
-    role: "Golfer",
+      "Absolutely obsessed — the midday pick-me-up from Focus keeps me locked in throughout a work day.",
+    name: "Verified Buyer",
+    role: "AVRO Focus",
+  },
+  {
+    quote:
+      "The boost is clean, focused, and steady. No jitters. No weird crash. Just that dialed-in feeling.",
+    name: "Verified Buyer",
+    role: "AVRO Energy",
   },
 ]
 
@@ -179,7 +184,7 @@ export const cohortData = {
     momentTitle: "The social moment has a lot of noise.",
     momentCopy:
       "Social settings can bring pressure, alcohol defaults, stimulation, and the need to feel present without being pulled out of the moment. AVRO gives the ritual a calmer starting point.",
-    whyTitle: "Why AVRO fits social / non alcohol",
+    whyTitle: "Why AVRO Supports Social Settings",
     reasons: [
       [
         "Alcohol Free Ritual",
@@ -214,7 +219,7 @@ export const cohortData = {
       ],
     ],
     shopTitle: "Shop AVRO for social",
-    faqTitle: "Social / Non Alcohol FAQ",
+    faqTitle: "Social / Zero Proof FAQ",
     faqs: [
       ["Is AVRO alcoholic?", "No. AVRO is an alcohol-free daily drink mix."],
       [
@@ -306,7 +311,7 @@ export const cohortData = {
     momentTitle: "Sessions are shaped by state.",
     momentCopy:
       "Long sessions create noise. Ranked play, tournaments, and online poker require patience, clarity, composure, and controlled attention without becoming overstimulated. More caffeine is not always the answer.",
-    whyTitle: "Why AVRO fits gaming + online poker",
+    whyTitle: "Why AVRO Fits Esports",
     reasons: [
       [
         "Calm Before Pressure",
@@ -337,8 +342,8 @@ export const cohortData = {
         "For decision-heavy environments where composure matters.",
       ],
     ],
-    shopTitle: "Shop AVRO for gaming",
-    faqTitle: "Gaming + Poker FAQ",
+    shopTitle: "Shop AVRO for Esports",
+    faqTitle: "Esports FAQ",
     faqs: [
       [
         "Which AVRO formula is best for gaming?",

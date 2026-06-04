@@ -249,12 +249,13 @@ export function ProductCards({
                 <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.45, color: muted, margin: 0 }}>{item.support}</p>
                 <div style={{ borderTop: `1px solid ${border}`, paddingTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(14px,1.1vw,17px)", color: ink }}>Best for</span>
+                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(14px,1.1vw,17px)", color: ink }}>Best For:</span>
                     <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(14px,1.05vw,16px)", lineHeight: 1.5, color: muted, margin: "4px 0 0" }}>{item.bestFor}</p>
                   </div>
                   <div>
-                    <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(14px,1.1vw,17px)", color: ink }}>Caffeine</span>
-                    <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(14px,1.05vw,16px)", lineHeight: 1.5, color: muted, margin: "4px 0 0" }}>{item.caffeine}</p>
+                    <p style={{ fontFamily: GC_FINAL, fontWeight: key === "energy" ? 700 : 400, fontSize: "clamp(14px,1.05vw,16px)", lineHeight: 1.5, color: key === "energy" ? ink : muted, margin: 0 }}>
+                      {key === "energy" ? "120mg Natural Caffeine" : "No Caffeine"}
+                    </p>
                   </div>
                 </div>
                 <a 

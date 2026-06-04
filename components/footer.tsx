@@ -102,7 +102,7 @@ export function Footer() {
                 color: c.text,
               }}
             >
-              Stay in the loop.
+              Join Our Community
             </h3>
             <p
               className="mb-5"
@@ -113,7 +113,7 @@ export function Footer() {
                 color: c.textMuted,
               }}
             >
-              Updates, drops, and calm-first insights — straight to your inbox.
+              Updates, perks, and calm-first insights — straight to your inbox.
             </p>
             {submitted ? (
               <p
