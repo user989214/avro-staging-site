@@ -274,27 +274,27 @@ export function ProductCards({
                     borderRadius: 999, 
                     textDecoration: "none", 
                     border: dark ? "2px solid var(--deep-black)" : "2px solid var(--charcoal)",
-                    backgroundColor: dark ? "var(--deep-black)" : "var(--charcoal)", 
-                    color: dark ? "var(--gold)" : "var(--bone)", 
+                    backgroundColor: "transparent", 
+                    color: dark ? "var(--deep-black)" : "var(--charcoal)", 
                     marginTop: "auto",
                     transition: "background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease",
                   }}
                   onMouseEnter={(e) => {
-                    if (dark) {
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                      e.currentTarget.style.color = 'var(--deep-black)'
-                    } else {
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                      e.currentTarget.style.color = 'var(--charcoal)'
-                    }
-                  }}
-                  onMouseLeave={(e) => {
                     if (dark) {
                       e.currentTarget.style.backgroundColor = 'var(--deep-black)'
                       e.currentTarget.style.color = 'var(--gold)'
                     } else {
                       e.currentTarget.style.backgroundColor = 'var(--charcoal)'
                       e.currentTarget.style.color = 'var(--bone)'
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (dark) {
+                      e.currentTarget.style.backgroundColor = 'transparent'
+                      e.currentTarget.style.color = 'var(--deep-black)'
+                    } else {
+                      e.currentTarget.style.backgroundColor = 'transparent'
+                      e.currentTarget.style.color = 'var(--charcoal)'
                     }
                   }}
                 >
