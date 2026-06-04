@@ -1129,7 +1129,7 @@ export function HomeMomentGrid() {
               <div style={{ padding: "12px 4px 8px", flex: 1, display: "flex", flexDirection: "column" }}>
                 <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(14px,1.6vw,24px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 6 }}>{m.title}</h3>
                 <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(11px,1vw,15px)", lineHeight: 1.35, color: "var(--warm-gray)", marginBottom: 10, flex: 1 }}>{m.copy}</p>
-                <span className="hp-btn-black avro-size-sm" style={{ display: "inline-flex", alignSelf: "flex-start", alignItems: "center", justifyContent: "center", gap: 6, fontFamily: GC, fontWeight: 700, borderRadius: 999, border: "2px solid var(--charcoal)", backgroundColor: "transparent", color: "var(--charcoal)" }}>
+                <span className="hp-btn-black avro-size-md" style={{ display: "inline-flex", alignSelf: "flex-start", alignItems: "center", justifyContent: "center", gap: 6, fontFamily: GC, fontWeight: 700, borderRadius: 999, border: "2px solid var(--charcoal)", backgroundColor: "transparent", color: "var(--charcoal)" }}>
                   {m.cta}
                 </span>
               </div>
