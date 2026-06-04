@@ -151,9 +151,9 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
           style={{
             fontFamily: GC,
             fontWeight: 700,
-            fontSize: 14,
-            minHeight: 42,
-            padding: "0 22px",
+            fontSize: 16,
+            minHeight: 48,
+            padding: "0 28px",
             borderRadius: 999,
             backgroundColor: "var(--charcoal)",
             color: "var(--bone)",
