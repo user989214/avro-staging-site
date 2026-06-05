@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 interface GolfHeroRotatorProps {
   /** Image sources to cycle through, in order. */
@@ -17,8 +17,9 @@ interface GolfHeroRotatorProps {
 }
 
 /**
- * Crossfading background rotator for the golf hero. Renders every image stacked
- * absolutely and toggles opacity so the active frame fades into the next one.
+ * Crossfading background rotator for the golf hero. The current image sits fully
+ * opaque underneath while the incoming image fades in on top of it, so the cream
+ * page background never shows through mid-transition (no white flash).
  * Respects prefers-reduced-motion by holding on the first frame.
  */
 export function GolfHeroRotator({
@@ -29,7 +30,12 @@ export function GolfHeroRotator({
   interval = 4500,
   alt = "",
 }: GolfHeroRotatorProps) {
-  const [active, setActive] = useState(0)
+  // `base` is the image showing underneath; `top` fades in over it, then becomes base.
+  const [base, setBase] = useState(0)
+  const [top, setTop] = useState<number | null>(null)
+  const [topVisible, setTopVisible] = useState(false)
+  const fadeMs = 900
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([])
 
   useEffect(() => {
     if (images.length <= 1) return
@@ -39,10 +45,42 @@ export function GolfHeroRotator({
     if (reduce) return
 
     const id = setInterval(() => {
-      setActive((i) => (i + 1) % images.length)
+      setBase((current) => {
+        const next = (current + 1) % images.length
+        // Mount the next image on top (still transparent), then flip it to visible
+        // on the next frame so the opacity transition runs.
+        setTop(next)
+        setTopVisible(false)
+        const raf = setTimeout(() => setTopVisible(true), 20)
+        timers.current.push(raf)
+        // After the fade completes, promote the top image to the base and unmount the layer.
+        const settle = setTimeout(() => {
+          setBase(next)
+          setTop(null)
+          setTopVisible(false)
+        }, fadeMs + 40)
+        timers.current.push(settle)
+        return current
+      })
     }, interval)
-    return () => clearInterval(id)
+
+    return () => {
+      clearInterval(id)
+      timers.current.forEach(clearTimeout)
+      timers.current = []
+    }
   }, [images.length, interval])
+
+  const imgStyle = (visible: boolean): React.CSSProperties => ({
+    position: "absolute",
+    inset: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    objectPosition,
+    opacity: visible ? opacity : 0,
+    transition: `opacity ${fadeMs}ms ease-in-out`,
+  })
 
   return (
     <div
@@ -50,24 +88,15 @@ export function GolfHeroRotator({
       aria-hidden={alt === "" ? true : undefined}
       style={{ position: "absolute", inset: 0, overflow: "hidden" }}
     >
-      {images.map((src, i) => (
+      {/* Base layer: always fully visible, no white gap underneath */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={images[base] || "/placeholder.svg"} alt={alt} style={imgStyle(true)} />
+
+      {/* Incoming layer: fades in on top of the base */}
+      {top !== null && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img
-          key={src}
-          src={src || "/placeholder.svg"}
-          alt={i === active ? alt : ""}
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition,
-            opacity: i === active ? opacity : 0,
-            transition: "opacity 0.5s ease-in-out",
-          }}
-        />
-      ))}
+        <img src={images[top] || "/placeholder.svg"} alt="" style={imgStyle(topVisible)} />
+      )}
     </div>
   )
 }
