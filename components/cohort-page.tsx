@@ -43,11 +43,57 @@ const COHORT_GRAPHICS: Record<string, CohortGraphic> = {
   work: { src: "/graphics/work.html", ratio: "1400 / 620", title: "AVRO for work — cognitive functions" },
 }
 
+// Marketing header copy that sits above the embedded chart graphic for select cohorts.
+const COHORT_GRAPHIC_HEADERS: Record<string, { title: string; copy: string }> = {
+  work: {
+    title: "Built for mentally demanding moments.",
+    copy: "When work requires attention, meetings require presence, or projects require focus, AVRO supports calm, clarity, and readiness.",
+  },
+  gaming: {
+    title: "State affects every session.",
+    copy: "AVRO is designed for moments where attention, composure and focus matter most.",
+  },
+}
+
 // Themed section wrapper that frames an embedded brand graphic on the bone background.
-function CohortGraphicSection({ graphic }: { graphic: CohortGraphic }) {
+function CohortGraphicSection({
+  graphic,
+  header,
+}: {
+  graphic: CohortGraphic
+  header?: { title: string; copy: string }
+}) {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
       <div style={{ maxWidth: 1320, margin: "0 auto" }}>
+        {header && (
+          <div style={{ maxWidth: 760, marginBottom: "clamp(24px,3vw,40px)" }}>
+            <h2
+              className="font-serif"
+              style={{
+                fontWeight: 900,
+                fontSize: "clamp(32px,4.5vw,52px)",
+                lineHeight: 1.02,
+                letterSpacing: "-0.02em",
+                color: "var(--ink)",
+                marginBottom: 14,
+              }}
+            >
+              {header.title}
+            </h2>
+            <p
+              style={{
+                fontFamily: GC,
+                fontWeight: 400,
+                fontSize: "clamp(16px,1.4vw,20px)",
+                lineHeight: 1.55,
+                color: "var(--warm-gray)",
+              }}
+            >
+              {header.copy}
+            </p>
+          </div>
+        )}
         <EmbeddedGraphic src={graphic.src} ratio={graphic.ratio} title={graphic.title} />
       </div>
     </section>
@@ -503,7 +549,7 @@ export function CohortPage({ data }: { data: CohortData }) {
           intentionally skips the chart slot. Golf, Gaming and Work render the brand
           data graphics verbatim; remaining cohorts use the animated CohortChart. */}
       {!isZeroProof && COHORT_GRAPHICS[data.visual] ? (
-        <CohortGraphicSection graphic={COHORT_GRAPHICS[data.visual]} />
+        <CohortGraphicSection graphic={COHORT_GRAPHICS[data.visual]} header={COHORT_GRAPHIC_HEADERS[data.visual]} />
       ) : (
         !isZeroProof && <CohortChart visualKey={data.visual} accent={accent} dark={isZeroProof} />
       )}

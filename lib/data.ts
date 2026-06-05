@@ -177,7 +177,7 @@ export const cohortData = {
   social: {
     eyebrow: "Alcohol free social ritual",
     title: "Present. Clear. Alcohol Free.",
-    copy: "AVRO is a calm, clear, alcohol-free social ritual for dinners, gatherings, events, and evening routines.",
+    copy: "AVRO is a calm, clear, alcohol-free social ritual for gatherings, events and evening routines.",
     visual: "social",
     primary: "Shop AVRO",
     secondary: "Find Your Formula",
