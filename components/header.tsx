@@ -469,8 +469,8 @@ export function Header() {
           </button>
           <style>{`
             .hdr-cart-btn { transition: background-color 0.2s ease, color 0.2s ease; }
-            .hdr-cart-btn:hover { background-color: ${colors.cartBtnBorder}; color: ${colors.navBg}; }
-            .hdr-cart-btn:hover .hdr-cart-count { background-color: ${colors.navBg}; color: ${colors.cartBtnBorder}; }
+            .hdr-cart-btn:hover { background-color: ${colors.cartBtnBorder} !important; color: ${colors.navBg} !important; }
+            .hdr-cart-btn:hover .hdr-cart-count { background-color: ${colors.navBg} !important; color: ${colors.cartBtnBorder} !important; }
           `}</style>
         </div>
 
