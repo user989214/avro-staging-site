@@ -20,11 +20,12 @@ export default function SciencePage() {
   return (
     <>
       <PageHero
-        variant="flat"
+        variant="card"
         title="Calm first. Backed by science."
         lede="Every AVRO formula starts with naturally fermented PharmaGABA®, selected to support calm-first readiness, composure, and clarity before pressure-sensitive moments."
-        imageSrc=""
-        imageAlt=""
+        imageSrc="/images/lifestyle/science-hero.png"
+        imageAlt="Amber gel droplet over an embossed GABA chemical structure diagram"
+        imageObjectPosition="right center"
         primaryCta={{ href: "/shop", label: "Shop AVRO" }}
         secondaryCta={{ href: "#research", label: "View Research" }}
       >
