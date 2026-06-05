@@ -91,6 +91,8 @@ const GLASS_LIFESTYLE_FLAVORS = new Set<string>([
   "calm-blueberry-acai",
   "focus-red-dragon-fruit",
   "focus-pomegranate-raspberry",
+  "energy-orange-tangerine",
+  "energy-fuji-apple",
 ])
 
 /**
