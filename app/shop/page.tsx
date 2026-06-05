@@ -99,26 +99,27 @@ export default function ShopPage() {
             minHeight: "clamp(480px, 60vh, 620px)",
           }}
         >
-          {/* Background product image */}
+          {/* Background ingredient flat-lay image */}
           <div className="absolute inset-0">
             <Image
-              src="/images/lifestyle/avro-trio-stone-hero.png"
+              src="/images/lifestyle/avro-shop-hero.png"
               alt=""
               fill
               sizes="100vw"
-              className="object-contain object-right"
+              className="object-cover object-center"
               priority
             />
           </div>
 
-          {/* Cream fade overlay — matches golf hero treatment */}
+          {/* Cream scrim — keeps the left-aligned headline + lede readable
+              over the scattered ingredients while letting the flat-lay show through. */}
           <div
             aria-hidden="true"
             style={{
               position: "absolute",
               inset: 0,
               background:
-                "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 44%, rgba(245,241,234,0.55) 52%, rgba(245,241,234,0.15) 60%, rgba(245,241,234,0) 68%, rgba(245,241,234,0) 100%)",
+                "linear-gradient(to right, rgba(245,241,234,0.92) 0%, rgba(245,241,234,0.82) 30%, rgba(245,241,234,0.45) 55%, rgba(245,241,234,0.12) 75%, rgba(245,241,234,0) 100%)",
               pointerEvents: "none",
             }}
           />
