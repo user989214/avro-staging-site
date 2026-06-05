@@ -133,7 +133,7 @@ export const stacks: Stack[] = [
   },
 ]
 
-function FlavorCard({ flavor, accent }: { flavor: Flavor; accent: string }) {
+function FlavorCard({ flavor }: { flavor: Flavor }) {
   return (
     <article
       className="rounded-[20px] flex flex-col"
@@ -144,10 +144,7 @@ function FlavorCard({ flavor, accent }: { flavor: Flavor; accent: string }) {
         fontFamily: GC,
       }}
     >
-      <div className="flex items-center gap-2.5 mb-5">
-        <span aria-hidden="true" style={{ width: 12, height: 12, borderRadius: 999, backgroundColor: accent, flexShrink: 0 }} />
-        <h4 className="font-serif font-black text-[clamp(20px,2vw,26px)] leading-none text-ink">{flavor.name}</h4>
-      </div>
+      <h4 className="font-serif font-black text-[clamp(20px,2vw,26px)] leading-none text-ink mb-5">{flavor.name}</h4>
 
       {/* Active ingredients */}
       <p className="text-[12px] font-black tracking-[0.1em] uppercase text-warm-gray mb-3">Active Ingredients</p>
@@ -193,7 +190,7 @@ export function IngredientStacks() {
           <div className="flex flex-col gap-2 mb-8 max-w-[760px]">
             <span
               className="inline-flex items-center gap-2 self-start mb-1 px-3.5 py-1.5 rounded-full text-[12px] font-black tracking-[0.08em] uppercase"
-              style={{ backgroundColor: stack.accent, color: "var(--charcoal)" }}
+              style={{ backgroundColor: "var(--ink)", color: "var(--bone)" }}
             >
               {stack.tagline}
             </span>
@@ -203,7 +200,7 @@ export function IngredientStacks() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
             {stack.flavors.map((flavor) => (
-              <FlavorCard key={flavor.name} flavor={flavor} accent={stack.accent} />
+              <FlavorCard key={flavor.name} flavor={flavor} />
             ))}
           </div>
         </section>
