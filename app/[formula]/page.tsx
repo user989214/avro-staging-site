@@ -38,6 +38,13 @@ const feelingBenefits: Record<FormulaKey, { icon: AvroIconName; title: string }[
   ],
 }
 
+// "CALM = POWER." footer banner per formula (color-matched product shot).
+// Focus banner will be added once its artwork is attached.
+const footerBanner: Partial<Record<FormulaKey, string>> = {
+  calm: "/images/banners/calm-power.png",
+  energy: "/images/banners/energy-power.png",
+}
+
 export async function generateStaticParams() {
   return validFormulas.map((formula) => ({ formula }))
 }
@@ -564,6 +571,27 @@ export default async function ProductPage({
       <div id="reviews">
         <ReviewsBlock formula={item} formulaKey={key} />
       </div>
+
+      {/* "CALM = POWER." footer banner — color-matched to the formula */}
+      {footerBanner[key] && (
+        <section
+          aria-label={`${item.name} — Calm equals power`}
+          style={{ backgroundColor: "#ffffff", padding: "clamp(24px, 5vw, 64px) 16px" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={footerBanner[key] || "/placeholder.svg"}
+            alt={`${item.name} ${item.flavor} — Calm equals power.`}
+            style={{
+              display: "block",
+              width: "100%",
+              maxWidth: 1100,
+              height: "auto",
+              margin: "0 auto",
+            }}
+          />
+        </section>
+      )}
 
       {/* Final CTA */}
       <FinalCta
