@@ -18,11 +18,12 @@ export default function WhyPage() {
   return (
     <>
       <PageHero
-        variant="flat"
+        variant="card"
         title="State before stimulation."
         lede="AVRO was built on a simple observation: in many moments that matter most, people do not need more energy. They need more control. More energy is not the same as more control."
-        imageSrc=""
-        imageAlt=""
+        imageSrc="/images/lifestyle/why-hero.png"
+        imageAlt="AVRO CALM Blackberry Jasmine tube on a marble ledge"
+        imageObjectPosition="right center"
         primaryCta={{ href: "/shop", label: "Find Your Formula" }}
         secondaryCta={{ href: "/shop", label: "Shop AVRO" }}
       />
