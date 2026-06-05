@@ -94,7 +94,7 @@ export function CalmStudyChart() {
       {/* Y-axis caption + chart */}
       <div style={{ position: "relative", width: "100%", height: "clamp(200px,26vw,280px)" }}>
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={calmStudyData} margin={{ top: 16, right: 16, bottom: 18, left: 8 }}>
+          <LineChart data={calmStudyData} margin={{ top: 16, right: 48, bottom: 18, left: 8 }}>
             <CartesianGrid stroke="rgba(245,241,234,0.1)" vertical={false} />
             <XAxis
               dataKey="phase"
