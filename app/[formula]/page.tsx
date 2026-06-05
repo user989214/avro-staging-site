@@ -588,6 +588,10 @@ export default async function ProductPage({
               maxWidth: 1100,
               height: "auto",
               margin: "0 auto",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
+              maskImage:
+                "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
             }}
           />
         </section>
