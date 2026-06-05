@@ -188,12 +188,6 @@ export function IngredientStacks() {
       {stacks.map((stack) => (
         <section key={stack.key} id={stack.key} className="rounded-[28px] p-[clamp(28px,5vw,64px)]" style={{ backgroundColor: "var(--base-light)" }}>
           <div className="flex flex-col gap-2 mb-8 max-w-[760px]">
-            <span
-              className="inline-flex items-center gap-2 self-start mb-1 px-3.5 py-1.5 rounded-full text-[12px] font-black tracking-[0.08em] uppercase"
-              style={{ backgroundColor: "var(--ink)", color: "var(--bone)" }}
-            >
-              {stack.tagline}
-            </span>
             <h2 className="font-serif font-black text-[clamp(28px,4vw,46px)] leading-[1.02] tracking-[-0.02em] text-ink">{stack.name}</h2>
             <p className="text-[clamp(16px,1.4vw,19px)] leading-relaxed text-warm-gray">{stack.claim}</p>
           </div>
