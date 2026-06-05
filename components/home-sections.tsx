@@ -105,20 +105,20 @@ export function HomeRefHero() {
     {
       headline: "Performance Starts with Being Calm.",
       lede: "AVRO helps you steady first, with calm-first formulas built to support composure, clarity and controlled readiness when pressure rises.",
-      image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4325552255-51euqtVRTaIeU2n0sGSiBvq4vuvEFe.png",
-      alt: "AVRO Energy stick packet next to a glass of green juice at an outdoor brunch",
+      image: "/images/home/hero-01.jpg",
+      alt: "Pouring an AVRO Calm Blackberry Jasmine stick into a glass of water",
     },
     {
       headline: "Calm Comes First.",
       lede: "AVRO is built for people who know pressure changes everything. Support composure, clarity and readiness before the moment matters.",
-      image: "/images/lifestyle/golfers-misty-tee-box.jpg",
-      alt: "Golfers on a misty tee box at sunrise",
+      image: "/images/home/hero-03.jpg",
+      alt: "Hand holding an AVRO Focus Pomegranate Raspberry tube",
     },
     {
       headline: "Start Calm. Stay Ready.",
       lede: "AVRO supports calm-first performance with formulas designed for pressure-sensitive moments in work, play, competition and social life.",
-      image: "/images/lifestyle/woman-journaling-mug.jpg",
-      alt: "Calm morning routine with journal and warm mug",
+      image: "/images/home/hero-02.jpg",
+      alt: "Hand holding an AVRO Energy Fuji Apple tube",
     },
   ]
 
@@ -1013,9 +1013,9 @@ export function HomeProductStrip() {
     energy: "Natural Caffeine",
   }
   const socialImages: Record<FormulaKey, string> = {
-    calm: "/images/lifestyle/tube-social-calm-blueberry-acai.png",
-    focus: "/images/lifestyle/tube-tech-focus-pomegranate-raspberry.png",
-    energy: "/images/lifestyle/tube-golf-energy-orange-tangerine.png",
+    calm: "/images/home/card-calm.jpg",
+    focus: "/images/home/card-focus.jpg",
+    energy: "/images/home/card-energy.jpg",
   }
 
   return (
@@ -1099,10 +1099,10 @@ export function HomeProductStrip() {
 // ── MOMENT GRID ────────────────────────────���──────────────────────────────────
 export function HomeMomentGrid() {
   const moments = [
-    { title: "Golf", copy: "Before the first tee. Before the final putt.", cta: "Explore Golf", url: "/golf", image: "/images/lifestyle/golfers-misty-tee-box.jpg", alt: "Golfers on a misty tee box at sunrise", position: "50% 35%" },
-    { title: "Work", copy: "Before the meeting. Before deep work.", cta: "Explore Work", url: "/work", image: "/images/lifestyle/woman-journaling-mug.jpg", alt: "Calm morning routine with journal and warm mug", position: "50% 40%" },
-    { title: "Social", copy: "Show up present without alcohol.", cta: "Explore Social", url: "/social", image: "/images/lifestyle/coupes-grapefruit-stickpack.jpg", alt: "AVRO stickpack styled with grapefruit coupes on a bar", position: "50% 50%" },
-    { title: "Gaming", copy: "Before the session. Before the decision.", cta: "Explore Gaming", url: "/gaming", image: "/images/lifestyle/focus-iced-drink-headphones.jpg", alt: "Iced AVRO drink and headphones at a gaming desk", position: "50% 50%" },
+    { title: "Golf", copy: "Before the first tee. Before the final putt.", cta: "Explore Golf", url: "/golf", image: "/images/home/tile-golf.jpg", alt: "Golf club and ball on a tee", position: "50% 50%" },
+    { title: "Work", copy: "Before the meeting. Before deep work.", cta: "Explore Work", url: "/work", image: "/images/home/tile-work.jpg", alt: "Navy notebook and pen on a desk", position: "50% 50%" },
+    { title: "Social", copy: "Show up present without alcohol.", cta: "Explore Social", url: "/social", image: "/images/home/tile-social.png", alt: "Two ceramic cups leaning together", position: "50% 50%" },
+    { title: "Gaming", copy: "Before the session. Before the decision.", cta: "Explore Gaming", url: "/gaming", image: "/images/home/tile-gaming.jpg", alt: "Arcade-style button with a green ring", position: "50% 50%" },
   ]
 
   return (
@@ -1242,7 +1242,7 @@ export function HomeStoryStrip() {
             </div>
             <div style={{ position: "relative", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/team/founders-keigo-peter.jpg" alt="AVRO co-founders Keigo Sugawara and Peter van Stolk" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(1) contrast(1.05) brightness(0.98)" }} />
+              <img src="/images/home/founder.jpg" alt="AVRO co-founder Keigo Sugawara" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%", filter: "grayscale(1) contrast(1.05) brightness(0.98)" }} />
             </div>
           </div>
         </div>
