@@ -18,7 +18,7 @@ export function FooterBanner({ src, alt }: FooterBannerProps) {
           maxWidth: 1250,
           margin: "0 auto",
           backgroundColor: "#ffffff",
-          borderRadius: 24,
+          borderRadius: "clamp(0px,calc(6vw - 24px),24px)",
           overflow: "hidden",
           padding: "clamp(16px,3vw,40px)",
           display: "flex",
