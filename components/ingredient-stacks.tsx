@@ -47,7 +47,7 @@ export const stacks: Stack[] = [
     claim: "This stack supports focus and productivity without caffeine.",
     tagline: "Powered by Naturally Fermented GABA — Without Caffeine",
     accent: "var(--avro-blue)",
-    icon: "calm-first-foundation",
+    icon: "supports-focus-without-overload",
     flavors: [
       {
         name: "Pomegranate Raspberry",
@@ -77,7 +77,7 @@ export const stacks: Stack[] = [
     claim: "This stack supports sustained energy and mental clarity.",
     tagline: "Powered by Naturally Fermented GABA — With Caffeine",
     accent: "var(--gold)",
-    icon: "naturally-fermented-pharmagaba",
+    icon: "mental-clarity",
     flavors: [
       {
         name: "Fuji Apple",
@@ -107,7 +107,7 @@ export const stacks: Stack[] = [
     claim: "This stack supports stress reduction and improved sleep.",
     tagline: "Powered by Naturally Fermented GABA — With Magnesium",
     accent: "var(--avro-blue-deep)",
-    icon: "control-under-pressure",
+    icon: "relaxation-reduced-tension",
     flavors: [
       {
         name: "Blueberry Acai",

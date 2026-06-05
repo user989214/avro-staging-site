@@ -18,10 +18,10 @@ export const metadata = {
 }
 
 const designations: { label: string; icon: Parameters<typeof AvroIcon>[0]["name"] }[] = [
-  { label: "Zero Sugar", icon: "calm-first-foundation" },
-  { label: "Non-GMO", icon: "naturally-fermented-pharmagaba" },
-  { label: "Vegan", icon: "transparent-standards" },
-  { label: "Clinically Tested Ingredients", icon: "science-backed" },
+  { label: "Zero Sugar", icon: "free-sugar" },
+  { label: "Non-GMO", icon: "free-gmo" },
+  { label: "Vegan", icon: "free-vegan" },
+  { label: "Clinically Tested Ingredients", icon: "clinically-tested-ingredients" },
 ]
 
 export default function IngredientsPage() {
@@ -54,22 +54,22 @@ export default function IngredientsPage() {
           title="What every box has in common."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <InfoCard icon="naturally-fermented-pharmagaba" title="Powder stick packs">
+          <InfoCard icon="step-pour" title="Powder stick packs">
             A powder dietary supplement delivered in 10 single-serve stick packets per box.
           </InfoCard>
-          <InfoCard icon="calm-first-foundation" title="5g serving size">
+          <InfoCard icon="consistency-quality" title="5g serving size">
             One packet (5g) per serving — 1.76 oz (50g) net weight per box.
           </InfoCard>
-          <InfoCard icon="control-under-pressure" title="Simple to use">
+          <InfoCard icon="step-stir" title="Simple to use">
             Mix one packet into 12 fl oz of water. Enjoy up to three times per day.
           </InfoCard>
-          <InfoCard icon="transparent-standards" title="Clean by design">
+          <InfoCard icon="clear-labeling" title="Clean by design">
             Zero sugar, non-GMO, and vegan, with ingredients selected for clinical support.
           </InfoCard>
-          <InfoCard icon="science-backed" title="200mg PharmaGABA®">
+          <InfoCard icon="naturally-fermented-pharmagaba" title="200mg PharmaGABA®">
             Naturally fermented PharmaGABA® is the calm-first foundation in every single formula.
           </InfoCard>
-          <InfoCard icon="consistency-quality" title="Caffeine where it counts">
+          <InfoCard icon="control-under-pressure" title="Caffeine where it counts">
             Focus and Calm are caffeine-free. Only the Energy stack adds 120mg natural caffeine.
           </InfoCard>
         </div>
