@@ -238,8 +238,8 @@ export function PageHero({
                 position: "absolute",
                 inset: 0,
                 background: `
-                  linear-gradient(to right, var(--base-light) 0%, var(--base-light) 42%, rgba(245,241,234,0.95) 50%, rgba(245,241,234,0.7) 60%, rgba(245,241,234,0.35) 72%, rgba(245,241,234,0.15) 84%, rgba(245,241,234,0.25) 94%, var(--base-light) 100%),
-                  linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.3) 10%, rgba(245,241,234,0) 22%, rgba(245,241,234,0) 78%, rgba(245,241,234,0.3) 90%, var(--base-light) 100%)
+                  linear-gradient(to right, var(--base-light) 0%, var(--base-light) 30%, rgba(245,241,234,0.7) 45%, rgba(245,241,234,0.4) 58%, rgba(245,241,234,0.16) 72%, rgba(245,241,234,0.04) 86%, rgba(245,241,234,0.1) 95%, var(--base-light) 100%),
+                  linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.15) 8%, rgba(245,241,234,0) 18%, rgba(245,241,234,0) 82%, rgba(245,241,234,0.15) 92%, var(--base-light) 100%)
                 `,
                 pointerEvents: "none",
               }}

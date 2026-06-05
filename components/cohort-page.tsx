@@ -105,7 +105,7 @@ export function CohortPage({ data }: { data: CohortData }) {
         muted: "var(--warm-gray)",
         heroBg: "var(--base-light)",
         heroFade:
-          "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.95) 48%, rgba(245,241,234,0.7) 58%, rgba(245,241,234,0.3) 70%, rgba(245,241,234,0.1) 82%, rgba(245,241,234,0.15) 94%, var(--base-light) 100%), linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.2) 10%, rgba(245,241,234,0) 20%, rgba(245,241,234,0) 80%, rgba(245,241,234,0.2) 90%, var(--base-light) 100%)",
+          "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 28%, rgba(245,241,234,0.68) 44%, rgba(245,241,234,0.38) 57%, rgba(245,241,234,0.15) 70%, rgba(245,241,234,0.04) 84%, rgba(245,241,234,0.08) 95%, var(--base-light) 100%), linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.12) 8%, rgba(245,241,234,0) 18%, rgba(245,241,234,0) 82%, rgba(245,241,234,0.12) 92%, var(--base-light) 100%)",
         stepNumBg: "var(--charcoal)",
         stepNumFg: "var(--bone)",
         stepIconColor: "var(--avro-blue)",
