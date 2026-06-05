@@ -16,14 +16,44 @@ const GREY = "rgba(245,241,234,0.55)"
 // ── CALM PAGE — PharmaGABA stress study ─────────────────────────────────────
 // Source: T. Kanehira et al., J Nutr Sci Vitaminol. 2011;57(1):9-15.
 // Salivary Chromogranin A (CgA) & cortisol — stress markers — measured across
-// the Uchida-Kraepelin arithmetic task. Control rises sharply; the GABA
-// beverage group stays significantly lower. Values shown as a relative stress
-// index (baseline = 100).
+// the Uchida-Kraepelin arithmetic task. The control group's stress markers rise
+// sharply through the task, while the GABA beverage group stays low (and dips
+// below baseline). Values shown as a relative stress index (baseline = 100).
 const calmStudyData = [
-  { phase: "Before", control: 100, gaba: 100 },
-  { phase: "After 1st half", control: 138, gaba: 112 },
-  { phase: "After 2nd half", control: 162, gaba: 117 },
+  { phase: "Before the test", control: 100, gaba: 100 },
+  { phase: "After the first half", control: 150, gaba: 78 },
+  { phase: "After the second half", control: 146, gaba: 88 },
 ]
+
+// Wrap long x-axis labels onto up to two lines so they stay legible on mobile.
+function MultilineTick(props: any) {
+  const { x, y, payload } = props
+  const words: string[] = String(payload?.value ?? "").split(" ")
+  // Group into two balanced lines.
+  const mid = Math.ceil(words.length / 2)
+  const line1 = words.slice(0, mid).join(" ")
+  const line2 = words.slice(mid).join(" ")
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text
+        textAnchor="middle"
+        fill="rgba(245,241,234,0.6)"
+        fontFamily={GC}
+        fontSize={11}
+        fontWeight={700}
+      >
+        <tspan x={0} dy={12}>
+          {line1}
+        </tspan>
+        {line2 ? (
+          <tspan x={0} dy={13}>
+            {line2}
+          </tspan>
+        ) : null}
+      </text>
+    </g>
+  )
+}
 
 // Square marker for the control group
 function SquareDot(props: any) {
@@ -64,15 +94,18 @@ export function CalmStudyChart() {
       {/* Y-axis caption + chart */}
       <div style={{ position: "relative", width: "100%", height: "clamp(200px,26vw,280px)" }}>
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={calmStudyData} margin={{ top: 16, right: 16, bottom: 8, left: 8 }}>
+          <LineChart data={calmStudyData} margin={{ top: 16, right: 16, bottom: 18, left: 8 }}>
             <CartesianGrid stroke="rgba(245,241,234,0.1)" vertical={false} />
             <XAxis
               dataKey="phase"
-              tick={{ fill: "rgba(245,241,234,0.6)", fontFamily: GC, fontSize: 11, fontWeight: 700 }}
+              interval={0}
+              tick={<MultilineTick />}
               tickLine={false}
               axisLine={{ stroke: "rgba(245,241,234,0.2)" }}
             />
             <YAxis
+              domain={[60, 180]}
+              ticks={[60, 90, 120, 150, 180]}
               tick={{ fill: "rgba(245,241,234,0.5)", fontFamily: GC, fontSize: 11, fontWeight: 700 }}
               tickLine={false}
               axisLine={false}
@@ -127,7 +160,7 @@ export function CalmStudyChart() {
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
           <span style={{ width: 11, height: 11, backgroundColor: GREY, display: "inline-block" }} />
           <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(10px,0.9vw,12px)", color: "rgba(245,241,234,0.6)" }}>
-            Control
+            Control Group
           </span>
         </div>
       </div>
@@ -150,18 +183,39 @@ const cognitiveBenefits = [
   "Visuospatial & construction ability",
   "Long-term memory",
   "Vitality",
-  "Mental health",
 ]
 
 export function FocusBenefitsTable() {
   return (
     <div style={{ padding: "clamp(16px,2.4vw,28px)", backgroundColor: "var(--charcoal)", borderRadius: 20 }}>
-      <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(13px,1.2vw,16px)", color: "var(--bone)", margin: "0 0 4px" }}>
-        Improved cognitive functions by GABA
-      </h3>
-      <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(11px,1vw,13px)", color: "rgba(245,241,234,0.55)", margin: "0 0 16px" }}>
-        Measured at 200 mg in clinical study.
-      </p>
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, marginBottom: 16 }}>
+        <div>
+          <h3 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(13px,1.2vw,16px)", color: "var(--bone)", margin: "0 0 4px" }}>
+            Improved Cognitive Functions By GABA
+          </h3>
+          <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(11px,1vw,13px)", color: "rgba(245,241,234,0.55)", margin: 0 }}>
+            Measured in clinical study.
+          </p>
+        </div>
+        <span
+          style={{
+            flexShrink: 0,
+            display: "inline-flex",
+            alignItems: "center",
+            fontFamily: GC,
+            fontWeight: 700,
+            fontSize: "clamp(12px,1.1vw,15px)",
+            letterSpacing: "0.02em",
+            color: "var(--charcoal)",
+            backgroundColor: BLUE,
+            borderRadius: 999,
+            padding: "5px 12px",
+            lineHeight: 1,
+          }}
+        >
+          200 mg
+        </span>
+      </div>
       <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column" }}>
         {cognitiveBenefits.map((benefit, i) => (
           <li
@@ -196,13 +250,13 @@ export function FocusBenefitsTable() {
         ))}
       </ul>
       <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(9px,0.8vw,11px)", color: "rgba(245,241,234,0.4)", margin: "16px 0 0", lineHeight: 1.4 }}>
-        Adapted from PharmaGABA® clinical research. pharmagaba.com
+        *PharmaGABA® is the first ingredient reported to improve logical thinking. Adapted from PharmaGABA® clinical research.
       </p>
     </div>
   )
 }
 
-// ── WORK PAGE — same cognitive benefits chart as the Focus page ──────────────
+// ── WORK PAGE — same cognitive benefits chart as the Focus page ───���──────────
 export function WorkBenefitsSection() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>

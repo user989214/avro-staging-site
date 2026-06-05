@@ -6,7 +6,34 @@ const GC = "var(--font-sans)"
 
 type Point = { label: string; value: number }
 
-type ChartKind = "bars" | "area" | "line" | "dial" | "clocks"
+type ChartKind = "area" | "line" | "twoLine" | "clocks"
+
+/** Two-series comparison line chart (PharmaGABA vs Placebo). */
+type TwoLineSeries = {
+  /** Per-point x labels (omit for dense charts that only show an axis title). */
+  xLabels?: string[]
+  /** Centered axis title under the x-axis (e.g. "Number of games"). */
+  xAxisLabel?: string
+  /** AVRO / PharmaGABA series values (themed with the cohort accent). */
+  avro: number[]
+  /** Placebo / control series values (neutral grey). */
+  placebo: number[]
+  yMin: number
+  yMax: number
+  /** Explicit gridline values + numeric labels. Omit for a baseline-only chart. */
+  yTicks?: number[]
+  /** Rotated y-axis title. */
+  yAxisLabel?: string
+  /** Labels for the top/bottom of the axis when there are no numeric ticks. */
+  yTopLabel?: string
+  yBottomLabel?: string
+  /** Draw a solid baseline (e.g. 0 = no change from baseline). */
+  baselineValue?: number
+  avroLabel: string
+  placeboLabel: string
+  /** Indices where a dashed "Break" marker is drawn. */
+  breaks?: number[]
+}
 
 type CohortChartConfig = {
   kind: ChartKind
@@ -23,14 +50,12 @@ type CohortChartConfig = {
   caption: string
   /** Data points — animated on first scroll-in. */
   points: Point[]
-  /** Highlight the index of the AVRO bar/marker so it visually stands out (bars/line/area only). */
+  /** Highlight the index of the AVRO bar/marker so it visually stands out (line/area only). */
   avroIndex: number
-  /** Lower is better (used by the dial + line labels to phrase deltas correctly). */
+  /** Lower is better (used by line labels to phrase deltas correctly). */
   lowerIsBetter?: boolean
-  /** Dial-only: % of arc that represents the "good zone". */
-  dialGoodZone?: number
-  /** Dial-only: trailing value text shown under the number. */
-  dialSubLabel?: string
+  /** twoLine-only: two-series comparison data. */
+  twoLine?: TwoLineSeries
 }
 
 // Each cohort gets its own chart shape — a different visualization built from
@@ -73,31 +98,56 @@ const CHARTS: Record<string, CohortChartConfig> = {
     avroIndex: 3,
   },
   gaming: {
-    kind: "bars",
+    kind: "twoLine",
     title: "GABA x Esports Scores",
     description:
-      "AVRO is designed for moments where attention, composure and focus matter most.",
-    yMax: 100,
+      "Across a long session, the GABA group held a higher, steadier score than placebo — even across breaks.",
+    yMax: 1350,
     unit: "",
-    caption: "Illustrative — AVRO play-test cohort · self-reported esports performance, 0–100",
-    points: [
-      { label: "Placebo", value: 71 },
-      { label: "GABA", value: 87 },
-    ],
-    avroIndex: 1,
+    caption: "Illustrative — GABA beverage vs. placebo · score across number of games",
+    points: [],
+    avroIndex: 0,
+    twoLine: {
+      xAxisLabel: "Number of games (times)",
+      avro: [
+        1075, 1150, 1118, 1140, 1148, 1180, 1170, 1178, 1168, 1195, 1165, 1155, 1185, 1165, 1180,
+        1225, 1245, 1270,
+      ],
+      placebo: [
+        1030, 1050, 1088, 1130, 1090, 1065, 1110, 1070, 1070, 1030, 1050, 1040, 1120, 1078, 1095,
+        1125, 1070, 1062,
+      ],
+      yMin: 950,
+      yMax: 1350,
+      yTicks: [950, 1050, 1150, 1250, 1350],
+      yAxisLabel: "Score",
+      avroLabel: "GABA",
+      placeboLabel: "Placebo",
+      breaks: [6, 12],
+    },
   },
   golf: {
-    kind: "dial",
-    title: "Tempo consistency through the round",
+    kind: "twoLine",
+    title: "A more composed zone-state under pressure",
     description:
-      "A tempo-consistency score — how steady your swing rhythm holds from the first tee to the last green.",
+      "PharmaGABA® has been studied in pressure-sensitive performance settings and is associated with a more composed zone-state profile versus placebo.",
     yMax: 100,
     unit: "",
-    caption: "Source: AVRO golf cohort · self-reported tempo consistency, 0–100",
-    points: [{ label: "Tempo score", value: 88 }],
+    caption: "Zone-state score (change from baseline) · adapted from PharmaGABA® performance research",
+    points: [],
     avroIndex: 0,
-    dialGoodZone: 0.75,
-    dialSubLabel: "Steady tempo zone",
+    twoLine: {
+      xLabels: ["Early", "Mid", "Late"],
+      avro: [0, 4.5, 4],
+      placebo: [0, -3.5, -5],
+      yMin: -7,
+      yMax: 7,
+      yTopLabel: "High",
+      yBottomLabel: "Low",
+      baselineValue: 0,
+      avroLabel: "PharmaGABA®",
+      placeboLabel: "Placebo",
+    },
   },
   travel: {
     kind: "area",
@@ -222,14 +272,14 @@ export function CohortChart({
             </p>
           </div>
 
-          {data.kind === "bars" && (
-            <BarsChart
+          {data.kind === "twoLine" && (
+            <TwoLineChart
               data={data}
               ink={ink}
               muted={muted}
               gridLine={gridLine}
-              baseFill={baseFill}
-              avroFill={avroFill}
+              baseStroke={baseStroke}
+              avroStroke={avroStroke}
               visible={visible}
             />
           )}
@@ -259,17 +309,6 @@ export function CohortChart({
             />
           )}
 
-          {data.kind === "dial" && (
-            <DialChart
-              data={data}
-              ink={ink}
-              muted={muted}
-              gridLine={gridLine}
-              avroStroke={avroStroke}
-              visible={visible}
-            />
-          )}
-
           <p
             style={{
               fontFamily: GC,
@@ -290,153 +329,230 @@ export function CohortChart({
   )
 }
 
-/* ---------- Bars (social) ---------- */
-function BarsChart({
+/* ---------- Two-line comparison (golf, gaming) ----------
+ *
+ * PharmaGABA / GABA series (cohort accent, circle markers) vs Placebo
+ * (neutral grey, square markers). Supports an optional solid baseline
+ * (golf — change-from-baseline), numeric gridlines (gaming — score),
+ * and dashed "Break" markers between sessions.
+ */
+function TwoLineChart({
   data,
   ink,
   muted,
   gridLine,
-  baseFill,
-  avroFill,
+  baseStroke,
+  avroStroke,
   visible,
 }: {
   data: CohortChartConfig
   ink: string
   muted: string
   gridLine: string
-  baseFill: string
-  avroFill: string
+  baseStroke: string
+  avroStroke: string
   visible: boolean
 }) {
-  const ticks = useMemo(() => [0, Math.round(data.yMax / 2), data.yMax], [data.yMax])
+  const cfg = data.twoLine
+  if (!cfg) return null
+
+  const W = 820
+  const H = 360
+  const padLeft = 60
+  const padRight = 24
+  const padTop = 28
+  const padBottom = 48
+  const plotW = W - padLeft - padRight
+  const plotH = H - padTop - padBottom
+  const n = cfg.avro.length
+  const dense = n > 6
+
+  const xFor = (i: number) => padLeft + (n > 1 ? (plotW * i) / (n - 1) : plotW / 2)
+  const yFor = (v: number) => padTop + plotH - ((v - cfg.yMin) / (cfg.yMax - cfg.yMin)) * plotH
+
+  const buildPath = (vals: number[]) =>
+    vals.map((v, i) => `${i === 0 ? "M" : "L"} ${xFor(i).toFixed(1)} ${yFor(v).toFixed(1)}`).join(" ")
+
+  const avroD = buildPath(cfg.avro)
+  const placeboD = buildPath(cfg.placebo)
+  const pathLen = n * 260
+  const markerR = dense ? 4 : 6.5
+  const markerHalf = dense ? 4.5 : 6.5
+
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "clamp(260px, 38vw, 380px)",
-        padding: "8px 0 0 56px",
-      }}
-    >
-      {/* Y-axis */}
-      <div aria-hidden style={{ position: "absolute", inset: "8px 0 36px 0", pointerEvents: "none" }}>
-        {ticks.map((tick) => {
-          const pct = (tick / data.yMax) * 100
-          return (
-            <div
-              key={tick}
-              style={{
-                position: "absolute",
-                left: 0,
-                right: 0,
-                bottom: `${pct}%`,
-                borderTop: `1px dashed ${gridLine}`,
-              }}
-            >
-              <span
-                style={{
-                  position: "absolute",
-                  left: 0,
-                  top: -10,
-                  width: 48,
-                  textAlign: "right",
-                  paddingRight: 8,
-                  fontFamily: GC,
-                  fontWeight: 600,
-                  fontSize: 12,
-                  color: muted,
-                }}
-              >
-                {tick}
-                {data.unit}
-              </span>
-            </div>
-          )
-        })}
+    <div style={{ width: "100%" }}>
+      {/* Legend */}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "clamp(14px,2vw,28px)", marginBottom: 16 }}>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+          <span style={{ width: 13, height: 13, borderRadius: 999, backgroundColor: avroStroke, display: "inline-block" }} />
+          <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: ink }}>{cfg.avroLabel}</span>
+        </span>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+          <span style={{ width: 12, height: 12, backgroundColor: baseStroke, display: "inline-block" }} />
+          <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: muted }}>{cfg.placeboLabel}</span>
+        </span>
       </div>
 
-      <div
-        style={{
-          position: "absolute",
-          inset: "8px 0 36px 56px",
-          display: "flex",
-          alignItems: "flex-end",
-          gap: "clamp(10px,1.6vw,24px)",
-        }}
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        style={{ width: "100%", height: "clamp(260px, 40vw, 400px)", display: "block" }}
+        role="img"
+        aria-label={data.title}
       >
-        {data.points.map((p, i) => {
-          const isAvro = i === data.avroIndex
-          const targetH = (p.value / data.yMax) * 100
-          const fill = isAvro ? avroFill : baseFill
-          const delay = 0.1 + i * 0.12
+        {/* Numeric gridlines (gaming) */}
+        {cfg.yTicks?.map((t) => {
+          const y = yFor(t)
           return (
-            <div
-              key={p.label}
-              style={{
-                flex: 1,
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-end",
-                position: "relative",
-              }}
-            >
-              <span
-                style={{
-                  textAlign: "center",
-                  fontFamily: GC,
-                  fontWeight: 700,
-                  fontSize: isAvro ? 15 : 13,
-                  color: isAvro ? ink : muted,
-                  marginBottom: 6,
-                  opacity: visible ? 1 : 0,
-                  transition: `opacity 0.5s ease ${delay + 0.6}s`,
-                }}
-              >
-                {p.value}
-                {data.unit}
-              </span>
-              <div
-                style={{
-                  height: visible ? `${targetH}%` : "0%",
-                  backgroundColor: fill,
-                  borderRadius: 12,
-                  transition: `height 1.1s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s`,
-                }}
-              />
-            </div>
+            <g key={t}>
+              <line x1={padLeft} x2={W - padRight} y1={y} y2={y} stroke={gridLine} strokeDasharray="3 5" />
+              <text x={padLeft - 8} y={y + 4} textAnchor="end" fontFamily={GC} fontWeight={600} fontSize="12" fill={muted}>
+                {t}
+              </text>
+            </g>
           )
         })}
-      </div>
 
-      <div
-        style={{
-          position: "absolute",
-          left: 56,
-          right: 0,
-          bottom: 0,
-          display: "flex",
-          gap: "clamp(10px,1.6vw,24px)",
-        }}
-      >
-        {data.points.map((p, i) => (
-          <div
-            key={p.label}
-            style={{
-              flex: 1,
-              textAlign: "center",
-              fontFamily: GC,
-              fontWeight: 600,
-              fontSize: 12,
-              color: i === data.avroIndex ? ink : muted,
-              paddingTop: 12,
-              letterSpacing: "0.02em",
-            }}
+        {/* High / Low end labels (golf — no numeric ticks) */}
+        {!cfg.yTicks && cfg.yTopLabel && (
+          <text x={padLeft - 8} y={padTop + 10} textAnchor="end" fontFamily={GC} fontWeight={700} fontSize="12" fill={muted}>
+            {cfg.yTopLabel}
+          </text>
+        )}
+        {!cfg.yTicks && cfg.yBottomLabel && (
+          <text x={padLeft - 8} y={padTop + plotH} textAnchor="end" fontFamily={GC} fontWeight={700} fontSize="12" fill={muted}>
+            {cfg.yBottomLabel}
+          </text>
+        )}
+
+        {/* Solid baseline (golf — 0 = no change) */}
+        {cfg.baselineValue != null && (
+          <>
+            <line
+              x1={padLeft}
+              x2={W - padRight}
+              y1={yFor(cfg.baselineValue)}
+              y2={yFor(cfg.baselineValue)}
+              stroke={ink}
+              strokeWidth={2}
+            />
+            <text x={padLeft - 8} y={yFor(cfg.baselineValue) + 4} textAnchor="end" fontFamily={GC} fontWeight={600} fontSize="12" fill={muted}>
+              0
+            </text>
+          </>
+        )}
+
+        {/* Y axis line */}
+        <line x1={padLeft} x2={padLeft} y1={padTop} y2={padTop + plotH} stroke={ink} strokeWidth={2} />
+
+        {/* Break markers (gaming) */}
+        {cfg.breaks?.map((bi) => {
+          const x = xFor(bi)
+          return (
+            <g key={`brk-${bi}`} opacity={visible ? 1 : 0} style={{ transition: "opacity 0.5s ease 0.6s" }}>
+              <line x1={x} x2={x} y1={padTop} y2={padTop + plotH} stroke={baseStroke} strokeWidth={1.5} strokeDasharray="4 8" />
+              <text x={x} y={padTop - 8} textAnchor="middle" fontFamily={GC} fontWeight={700} fontSize="12" fill={muted}>
+                Break
+              </text>
+            </g>
+          )
+        })}
+
+        {/* Placebo line (under) */}
+        <path
+          d={placeboD}
+          fill="none"
+          stroke={baseStroke}
+          strokeWidth={dense ? 3 : 3.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeDasharray={pathLen}
+          strokeDashoffset={visible ? 0 : pathLen}
+          style={{ transition: "stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s" }}
+        />
+        {/* AVRO / GABA line */}
+        <path
+          d={avroD}
+          fill="none"
+          stroke={avroStroke}
+          strokeWidth={dense ? 3.5 : 4}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeDasharray={pathLen}
+          strokeDashoffset={visible ? 0 : pathLen}
+          style={{ transition: "stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.1s" }}
+        />
+
+        {/* Placebo markers (squares) */}
+        {cfg.placebo.map((v, i) => {
+          const delay = Math.min(0.6 + i * 0.06, 1.4)
+          return (
+            <rect
+              key={`pb-${i}`}
+              x={xFor(i) - markerHalf}
+              y={yFor(v) - markerHalf}
+              width={markerHalf * 2}
+              height={markerHalf * 2}
+              fill={baseStroke}
+              opacity={visible ? 1 : 0}
+              style={{ transition: `opacity 0.4s ease ${delay}s` }}
+            />
+          )
+        })}
+        {/* AVRO markers (circles) */}
+        {cfg.avro.map((v, i) => {
+          const delay = Math.min(0.6 + i * 0.06, 1.4)
+          return (
+            <circle
+              key={`av-${i}`}
+              cx={xFor(i)}
+              cy={yFor(v)}
+              r={markerR}
+              fill={avroStroke}
+              opacity={visible ? 1 : 0}
+              style={{ transition: `opacity 0.4s ease ${delay}s` }}
+            />
+          )
+        })}
+
+        {/* Per-point x labels (golf) */}
+        {cfg.xLabels?.map((lbl, i) => (
+          <text
+            key={`xl-${i}`}
+            x={xFor(i)}
+            y={H - 14}
+            textAnchor="middle"
+            fontFamily={GC}
+            fontWeight={600}
+            fontSize="12"
+            fill={muted}
           >
-            {p.label}
-          </div>
+            {lbl}
+          </text>
         ))}
-      </div>
+
+        {/* X-axis title (gaming) */}
+        {cfg.xAxisLabel && (
+          <text x={padLeft + plotW / 2} y={H - 10} textAnchor="middle" fontFamily={GC} fontWeight={600} fontSize="12" fill={muted}>
+            {cfg.xAxisLabel}
+          </text>
+        )}
+
+        {/* Y-axis title (rotated) */}
+        {cfg.yAxisLabel && (
+          <text
+            x={16}
+            y={padTop + plotH / 2}
+            transform={`rotate(-90 16 ${padTop + plotH / 2})`}
+            textAnchor="middle"
+            fontFamily={GC}
+            fontWeight={700}
+            fontSize="12"
+            fill={muted}
+          >
+            {cfg.yAxisLabel}
+          </text>
+        )}
+      </svg>
     </div>
   )
 }
@@ -605,149 +721,6 @@ function LineAreaChart({
             {p.label}
           </text>
         ))}
-      </svg>
-    </div>
-  )
-}
-
-/* ---------- Dial (golf) ---------- */
-function DialChart({
-  data,
-  ink,
-  muted,
-  gridLine,
-  avroStroke,
-  visible,
-}: {
-  data: CohortChartConfig
-  ink: string
-  muted: string
-  gridLine: string
-  avroStroke: string
-  visible: boolean
-}) {
-  const value = data.points[0]?.value ?? 0
-  const pct = Math.min(1, Math.max(0, value / data.yMax))
-
-  // Half-circle dial: 180° arc from (40, 170) to (360, 170), radius 160, centered at (200, 170).
-  const R = 160
-  const cx = 200
-  const cy = 170
-  const startX = cx - R
-  const startY = cy
-  const endX = cx + R
-  const endY = cy
-  const arcLen = Math.PI * R
-  const offset = arcLen * (1 - pct)
-
-  // Tick marks around the arc for legibility (every 25%).
-  const ticks = [0, 0.25, 0.5, 0.75, 1]
-
-  return (
-    <div style={{ position: "relative", width: "100%", display: "flex", justifyContent: "center" }}>
-      <svg
-        viewBox="0 0 400 220"
-        style={{ width: "100%", maxWidth: 560, height: "clamp(220px, 32vw, 320px)", display: "block" }}
-        role="img"
-        aria-label={data.title}
-      >
-        {/* Background track */}
-        <path
-          d={`M ${startX} ${startY} A ${R} ${R} 0 0 1 ${endX} ${endY}`}
-          fill="none"
-          stroke={gridLine}
-          strokeWidth={18}
-          strokeLinecap="round"
-        />
-
-        {/* Tick marks just outside the arc */}
-        {ticks.map((t) => {
-          const angle = Math.PI - Math.PI * t // 180° → 0°
-          const x1 = cx + (R + 14) * Math.cos(angle)
-          const y1 = cy - (R + 14) * Math.sin(angle)
-          const x2 = cx + (R + 24) * Math.cos(angle)
-          const y2 = cy - (R + 24) * Math.sin(angle)
-          return (
-            <line
-              key={t}
-              x1={x1}
-              y1={y1}
-              x2={x2}
-              y2={y2}
-              stroke={muted}
-              strokeWidth={2}
-              opacity={0.5}
-            />
-          )
-        })}
-
-        {/* Animated value arc */}
-        <path
-          d={`M ${startX} ${startY} A ${R} ${R} 0 0 1 ${endX} ${endY}`}
-          fill="none"
-          stroke={avroStroke}
-          strokeWidth={18}
-          strokeLinecap="round"
-          strokeDasharray={arcLen}
-          strokeDashoffset={visible ? offset : arcLen}
-          style={{ transition: "stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s" }}
-        />
-
-        {/* Center number */}
-        <text
-          x={cx}
-          y={cy - 6}
-          textAnchor="middle"
-          fontFamily="var(--font-serif), serif"
-          fontWeight={900}
-          fontSize="64"
-          fill={ink}
-          opacity={visible ? 1 : 0}
-          style={{ transition: "opacity 0.6s ease 0.9s" }}
-        >
-          {value}
-          {data.unit}
-        </text>
-
-        {/* Sublabel under the number */}
-        <text
-          x={cx}
-          y={cy + 22}
-          textAnchor="middle"
-          fontFamily={GC}
-          fontWeight={600}
-          fontSize="14"
-          letterSpacing="0.08em"
-          fill={muted}
-          opacity={visible ? 1 : 0}
-          style={{ transition: "opacity 0.6s ease 1.0s" }}
-        >
-          {data.dialSubLabel?.toUpperCase()}
-        </text>
-
-        {/* End-cap labels (0 and max) under the arc tips */}
-        <text
-          x={startX}
-          y={cy + 28}
-          textAnchor="middle"
-          fontFamily={GC}
-          fontWeight={600}
-          fontSize="12"
-          fill={muted}
-        >
-          0
-        </text>
-        <text
-          x={endX}
-          y={cy + 28}
-          textAnchor="middle"
-          fontFamily={GC}
-          fontWeight={600}
-          fontSize="12"
-          fill={muted}
-        >
-          {data.yMax}
-        </text>
       </svg>
     </div>
   )
