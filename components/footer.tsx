@@ -24,7 +24,7 @@ const footerLinks = {
     { href: "/why-avro", label: "Our Story" },
     { href: "/about", label: "The Team" },
     { href: "/science", label: "Science of AVRO" },
-    { href: "/learn", label: "Ingredients" },
+    { href: "/ingredients", label: "Ingredients" },
     { href: "/golf", label: "Golf" },
     { href: "/work", label: "Work / Tech" },
     { href: "/gaming", label: "Esports" },

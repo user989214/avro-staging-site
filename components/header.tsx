@@ -30,7 +30,7 @@ const navDropdownSections: { heading: string; items: { href: string; label: stri
     items: [
       { href: "/why-avro", label: "Why AVRO", cta: "Why AVRO" },
       { href: "/science", label: "The Science", cta: "The Science" },
-      { href: "/learn", label: "Ingredients", cta: "Ingredients" },
+      { href: "/ingredients", label: "Ingredients", cta: "Ingredients" },
     ],
   },
   {
