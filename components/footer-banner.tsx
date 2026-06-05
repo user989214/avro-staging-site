@@ -8,9 +8,9 @@ export function FooterBanner({ src, alt }: FooterBannerProps) {
     <section
       aria-label={alt}
       style={{
-        backgroundColor: "var(--bone)",
+        backgroundColor: "#ffffff",
         width: "100%",
-        padding: "clamp(24px,5vw,72px) clamp(0px,calc(6vw - 24px),64px)",
+        padding: "clamp(0px,calc(8vw - 32px),72px) clamp(0px,calc(6vw - 24px),64px)",
       }}
     >
       <div
