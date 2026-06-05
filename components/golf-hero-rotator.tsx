@@ -64,7 +64,7 @@ export function GolfHeroRotator({
             objectFit: "cover",
             objectPosition,
             opacity: i === active ? opacity : 0,
-            transition: "opacity 1.1s ease-in-out",
+            transition: "opacity 0.5s ease-in-out",
           }}
         />
       ))}
