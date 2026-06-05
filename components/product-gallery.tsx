@@ -5,6 +5,7 @@ import {
   tubeImageFor,
   stickImageFor,
   soloTubeImageFor,
+  glassLifestyleFor,
   TUBE_SCENE_LABELS,
   type TubeScene,
 } from "@/components/product-visual"
@@ -19,7 +20,7 @@ interface ProductGalleryProps {
   rating?: number
 }
 
-type ThumbKind = "studio" | "tube" | "stick" | TubeScene
+type ThumbKind = "studio" | "tube" | "stick" | "glass" | TubeScene
 
 interface Thumb {
   id: ThumbKind
@@ -29,10 +30,13 @@ interface Thumb {
   bg: "white" | "scene"
 }
 
-const THUMBS: Thumb[] = [
+const PRODUCT_THUMBS: Thumb[] = [
   { id: "studio", label: "Canister & Stick", bg: "white" },
   { id: "tube", label: "Display Tube", bg: "white" },
   { id: "stick", label: "Stick Pack", bg: "white" },
+]
+
+const SCENE_THUMBS: Thumb[] = [
   { id: "tech", label: TUBE_SCENE_LABELS.tech, bg: "scene" },
   { id: "golf", label: TUBE_SCENE_LABELS.golf, bg: "scene" },
   { id: "social", label: TUBE_SCENE_LABELS.social, bg: "scene" },
@@ -45,6 +49,14 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
   const studio = tubeImageFor("studio", formulaKey, flavorId)
   const soloTube = soloTubeImageFor(formulaKey, flavorId)
   const stick = stickImageFor(formulaKey, flavorId)
+  const glass = glassLifestyleFor(formulaKey, flavorId)
+
+  // The "in the glass" lifestyle shot leads the lineup when available.
+  const thumbs: Thumb[] = [
+    ...PRODUCT_THUMBS,
+    ...(glass ? [{ id: "glass" as const, label: "In the Glass", bg: "scene" as const }] : []),
+    ...SCENE_THUMBS,
+  ]
 
   void formula
 
@@ -88,8 +100,21 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
       )
     }
 
+    if (activeId === "glass" && glass) {
+      return (
+        <div className="relative w-full h-full overflow-hidden" style={{ backgroundColor: "#FBF8F1" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={glass.src}
+            alt={glass.alt}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+      )
+    }
+
     // Lifestyle cohort scene — render edge-to-edge so its real background fills the frame.
-    const scene = tubeImageFor(activeId, formulaKey, flavorId)
+    const scene = tubeImageFor(activeId as TubeScene, formulaKey, flavorId)
     return (
       <div className="relative w-full h-full overflow-hidden" style={{ backgroundColor: "#FBF8F1" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -133,7 +158,17 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
         />
       )
     }
-    const scene = tubeImageFor(thumb.id, formulaKey, flavorId)
+    if (thumb.id === "glass" && glass) {
+      return (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={glass.src}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      )
+    }
+    const scene = tubeImageFor(thumb.id as TubeScene, formulaKey, flavorId)
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
@@ -155,7 +190,7 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
           className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-y-auto lg:overflow-x-hidden -mx-1 px-1 pb-1 lg:mx-0 lg:px-0 lg:pb-0 lg:max-h-full snap-x lg:snap-y no-scrollbar"
           style={{ maxHeight: "min(72vh, 640px)" }}
         >
-          {THUMBS.map((thumb) => {
+          {thumbs.map((thumb) => {
             const isActive = activeId === thumb.id
             return (
               <li key={thumb.id} className="shrink-0 snap-start">

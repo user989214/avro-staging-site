@@ -81,6 +81,33 @@ export function stickImageFor(key: FormulaKey, flavorIdOrName?: string) {
 }
 
 /**
+ * Registry of flavors that have a dedicated "in the glass" lifestyle
+ * photo (hands holding the tube next to a prepared drink). Keyed by
+ * `${formulaKey}-${flavorSlug}`. Only these get the lifestyle slot in
+ * the PDP gallery so we never render a 404 for flavors without one.
+ */
+const GLASS_LIFESTYLE_FLAVORS = new Set<string>([
+  "calm-blackberry-jasmine",
+  "calm-blueberry-acai",
+])
+
+/**
+ * "In the glass" lifestyle shot for a flavor, if one exists.
+ * Returns null when the flavor has no dedicated lifestyle photo.
+ */
+export function glassLifestyleFor(key: FormulaKey, flavorIdOrName?: string) {
+  const formula = formulas[key]
+  const flavor = resolveFlavor(key, flavorIdOrName)
+  const slug = flavorSlug(flavor.name)
+  if (!GLASS_LIFESTYLE_FLAVORS.has(`${key}-${slug}`)) return null
+  return {
+    src: `/images/lifestyle/glass-${key}-${slug}.jpg`,
+    alt: `AVRO ${formula.short} ${flavor.name} prepared in a glass`,
+    flavor,
+  }
+}
+
+/**
  * Solo display tube render — the canister by itself with sticks inside,
  * on a clean white background. Used on the PDP gallery as the dedicated
  * "Display Tube" view.
