@@ -39,10 +39,10 @@ const feelingBenefits: Record<FormulaKey, { icon: AvroIconName; title: string }[
 }
 
 // "CALM = POWER." footer banner per formula (color-matched product shot).
-// Focus banner will be added once its artwork is attached.
 const footerBanner: Partial<Record<FormulaKey, string>> = {
   calm: "/images/banners/calm-power.png",
   energy: "/images/banners/energy-power.png",
+  focus: "/images/banners/focus-power.png",
 }
 
 export async function generateStaticParams() {
