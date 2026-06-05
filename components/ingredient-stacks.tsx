@@ -46,7 +46,7 @@ export const stacks: Stack[] = [
     name: "AVRO Focus Stack",
     claim: "This stack supports focus and productivity without caffeine.",
     tagline: "Powered by Naturally Fermented GABA — Without Caffeine",
-    accent: "var(--avro-blue)",
+    accent: "var(--focus)",
     icon: "supports-focus-without-overload",
     flavors: [
       {
@@ -76,7 +76,7 @@ export const stacks: Stack[] = [
     name: "AVRO Energy Stack",
     claim: "This stack supports sustained energy and mental clarity.",
     tagline: "Powered by Naturally Fermented GABA — With Caffeine",
-    accent: "var(--gold)",
+    accent: "var(--energy)",
     icon: "mental-clarity",
     flavors: [
       {
@@ -106,7 +106,7 @@ export const stacks: Stack[] = [
     name: "AVRO Calm Stack",
     claim: "This stack supports stress reduction and improved sleep.",
     tagline: "Powered by Naturally Fermented GABA — With Magnesium",
-    accent: "var(--avro-blue-deep)",
+    accent: "var(--calm)",
     icon: "relaxation-reduced-tension",
     flavors: [
       {
@@ -155,9 +155,7 @@ function FlavorCard({ flavor, accent }: { flavor: Flavor; accent: string }) {
         {flavor.actives.map((a) => (
           <li key={a.name} className="flex items-baseline justify-between gap-3 border-b border-[rgba(30,29,24,0.1)] pb-2.5">
             <span className="text-[14px] leading-snug text-ink font-medium">{a.name}</span>
-            <span className="text-[14px] font-extrabold text-ink whitespace-nowrap" style={{ color: accent === "var(--gold)" ? "var(--gold)" : "var(--ink)" }}>
-              {a.amount}
-            </span>
+            <span className="text-[14px] font-extrabold text-ink whitespace-nowrap">{a.amount}</span>
           </li>
         ))}
       </ul>
