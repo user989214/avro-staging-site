@@ -8,6 +8,7 @@ import {
   FinalCta,
 } from "@/components/sections"
 import { CompareAtAGlance } from "@/components/compare-at-a-glance"
+import { FooterBanner } from "@/components/footer-banner"
 
 export const metadata = {
   title: "Shop | AVRO",
@@ -221,6 +222,11 @@ export default function ShopPage() {
               "AVRO can fit into a daily routine. Choose your formula based on timing, caffeine preference, and your moment.",
             ],
           ]}
+        />
+
+        <FooterBanner
+          src="/images/banners/shop-banner.png"
+          alt="AVRO Energy Fuji Apple — Calm is the advantage."
         />
 
         <FinalCta

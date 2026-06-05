@@ -10,6 +10,7 @@ import {
 } from "@/components/sections"
 import { AvroIcon } from "@/components/avro-icons"
 import { PageHero } from "@/components/page-hero"
+import { FooterBanner } from "@/components/footer-banner"
 
 export const metadata = {
   title: "The Science of AVRO | AVRO",
@@ -125,6 +126,11 @@ export default function SciencePage() {
               "Calm and Focus are caffeine free. Energy contains 120 mg natural caffeine.",
             ],
           ]}
+        />
+
+        <FooterBanner
+          src="/images/banners/science-banner.png"
+          alt="AVRO Calm Blueberry Acai — Calm is the advantage."
         />
 
         <FinalCta

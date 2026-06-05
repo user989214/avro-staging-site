@@ -8,6 +8,7 @@ import {
   InfoCard,
 } from "@/components/sections"
 import { PageHero } from "@/components/page-hero"
+import { FooterBanner } from "@/components/footer-banner"
 
 export const metadata = {
   title: "Why AVRO | AVRO",
@@ -49,6 +50,10 @@ export default function WhyPage() {
       <ProductCards title="Choose the state that fits your moment." shopLabel="Shop" />
       <FormulaLogic />
       <SocialProof mode="compact" />
+      <FooterBanner
+        src="/images/banners/why-avro-banner.png"
+        alt="AVRO Energy Fuji Apple — Calm performs best."
+      />
       <FinalCta
         title="Less noise. More control."
         copy="Choose the formula that supports the state before the moment."

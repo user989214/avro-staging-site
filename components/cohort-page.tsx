@@ -16,6 +16,15 @@ import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { CohortChart } from "@/components/cohort-chart"
 import { WorkBenefitsSection } from "@/components/study-charts"
 import { GolfHeroRotator } from "@/components/golf-hero-rotator"
+import { FooterBanner } from "@/components/footer-banner"
+
+// "CALM = POWER." footer banner per cohort (color-matched product shot).
+const cohortFooterBanner: Record<string, { src: string; alt: string }> = {
+  work: { src: "/images/banners/work-banner.png", alt: "AVRO Focus Red Dragon Fruit — Calm equals power." },
+  golf: { src: "/images/banners/golf-banner.png", alt: "AVRO Focus Pomegranate Raspberry — Calm is the advantage." },
+  social: { src: "/images/banners/social-banner.png", alt: "AVRO Calm Blueberry Acai — Calm equals power." },
+  gaming: { src: "/images/banners/gaming-banner.png", alt: "AVRO Calm Blackberry Jasmine — Calm is the advantage." },
+}
 
 // Golf hero cycles through three studio product shots (cream studio background)
 const GOLF_HERO_IMAGES = [
@@ -523,6 +532,13 @@ export function CohortPage({ data }: { data: CohortData }) {
       >
         <FaqBlock title={data.faqTitle} faqs={data.faqs} dark={isZeroProof} />
       </div>
+      {cohortFooterBanner[data.visual] && (
+        <FooterBanner
+          src={cohortFooterBanner[data.visual].src}
+          alt={cohortFooterBanner[data.visual].alt}
+        />
+      )}
+
       <FinalCta
         title={data.finalTitle}
         copy={data.finalCopy}
