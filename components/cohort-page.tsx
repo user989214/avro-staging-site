@@ -15,6 +15,14 @@ import {
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { CohortChart } from "@/components/cohort-chart"
 import { WorkBenefitsSection } from "@/components/study-charts"
+import { GolfHeroRotator } from "@/components/golf-hero-rotator"
+
+// Golf hero cycles through three studio product shots (cream studio background)
+const GOLF_HERO_IMAGES = [
+  "/images/lifestyle/golf-hero-01.png",
+  "/images/lifestyle/golf-hero-02.png",
+  "/images/lifestyle/golf-hero-03.png",
+]
 
 const GC = '"DM Sans", system-ui, sans-serif'
 
@@ -47,6 +55,7 @@ export function CohortPage({ data }: { data: CohortData }) {
   //   Golf                → Fuji Apple  #BDD637 — light theme
   //   Social (Zero Proof) → Avro Gold   #CAA84B — DARK theme
   const isZeroProof = data.visual === "social"
+  const isGolf = data.visual === "golf"
   const accent =
     data.visual === "golf"
       ? "var(--golf)"
@@ -199,21 +208,31 @@ export function CohortPage({ data }: { data: CohortData }) {
             minHeight: "clamp(360px,50vh,560px)",
           }}
         >
-          {/* Desktop background image — hidden on mobile */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={cohortHero[data.visual]?.src}
-            alt={cohortHero[data.visual]?.alt ?? ""}
-            className="cohort-hero-image"
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: data.visual === "golf" ? "85% center" : "70% center",
-            }}
-          />
+          {/* Desktop background image — hidden on mobile.
+              Golf rotates through three studio shots; other cohorts use a single photo. */}
+          {isGolf ? (
+            <GolfHeroRotator
+              images={GOLF_HERO_IMAGES}
+              className="cohort-hero-image"
+              objectPosition="75% center"
+              alt={cohortHero[data.visual]?.alt ?? ""}
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={cohortHero[data.visual]?.src}
+              alt={cohortHero[data.visual]?.alt ?? ""}
+              className="cohort-hero-image"
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "70% center",
+              }}
+            />
+          )}
 
           {/* Desktop gradient fade */}
           <div
@@ -227,22 +246,33 @@ export function CohortPage({ data }: { data: CohortData }) {
             }}
           />
 
-          {/* Mobile background image (9:16) — hidden on desktop */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={cohortHeroMobile[data.visual]}
-            alt={cohortHero[data.visual]?.alt ?? ""}
-            className="cohort-hero-image-mobile"
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center top",
-              opacity: 0.55,
-            }}
-          />
+          {/* Mobile background image (9:16) — hidden on desktop.
+              Golf rotates the same three studio shots (dimmed for text legibility). */}
+          {isGolf ? (
+            <GolfHeroRotator
+              images={GOLF_HERO_IMAGES}
+              className="cohort-hero-image-mobile"
+              objectPosition="center"
+              opacity={0.55}
+              alt={cohortHero[data.visual]?.alt ?? ""}
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={cohortHeroMobile[data.visual]}
+              alt={cohortHero[data.visual]?.alt ?? ""}
+              className="cohort-hero-image-mobile"
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center top",
+                opacity: 0.55,
+              }}
+            />
+          )}
 
           {/* Mobile dark overlay for text legibility */}
           <div
