@@ -14,7 +14,7 @@ import {
 } from "@/components/sections"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { CohortChart } from "@/components/cohort-chart"
-import { WorkBenefitsSection } from "@/components/study-charts"
+import { EmbeddedGraphic } from "@/components/embedded-graphic"
 import { GolfHeroRotator } from "@/components/golf-hero-rotator"
 import { FooterBanner } from "@/components/footer-banner"
 
@@ -34,6 +34,25 @@ const GOLF_HERO_IMAGES = [
 ]
 
 const GC = '"DM Sans", system-ui, sans-serif'
+
+// Cohorts whose chart slot renders a brand data graphic verbatim (public/graphics/*.html).
+type CohortGraphic = { src: string; ratio: string; title: string }
+const COHORT_GRAPHICS: Record<string, CohortGraphic> = {
+  golf: { src: "/graphics/golf.html", ratio: "1200 / 560", title: "AVRO for golf — pressure-sensitive performance research" },
+  gaming: { src: "/graphics/esports.html", ratio: "1200 / 740", title: "AVRO for esports — GABA vs. placebo scores" },
+  work: { src: "/graphics/work.html", ratio: "1400 / 620", title: "AVRO for work — cognitive functions" },
+}
+
+// Themed section wrapper that frames an embedded brand graphic on the bone background.
+function CohortGraphicSection({ graphic }: { graphic: CohortGraphic }) {
+  return (
+    <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
+      <div style={{ maxWidth: 1320, margin: "0 auto" }}>
+        <EmbeddedGraphic src={graphic.src} ratio={graphic.ratio} title={graphic.title} />
+      </div>
+    </section>
+  )
+}
 
 interface CohortData {
   eyebrow: string
@@ -480,15 +499,14 @@ export function CohortPage({ data }: { data: CohortData }) {
 
       <FormulaLogic dark={isZeroProof} />
 
-      {/* Per-cohort animated chart — shown on every cohort EXCEPT social/Zero Proof,
-          which intentionally skips the chart slot. Work reuses the Focus page's
-          cognitive benefits chart. */}
-      {!isZeroProof &&
-        (data.visual === "work" ? (
-          <WorkBenefitsSection />
-        ) : (
-          <CohortChart visualKey={data.visual} accent={accent} dark={isZeroProof} />
-        ))}
+      {/* Per-cohort graphic — shown on every cohort EXCEPT social/Zero Proof, which
+          intentionally skips the chart slot. Golf, Gaming and Work render the brand
+          data graphics verbatim; remaining cohorts use the animated CohortChart. */}
+      {!isZeroProof && COHORT_GRAPHICS[data.visual] ? (
+        <CohortGraphicSection graphic={COHORT_GRAPHICS[data.visual]} />
+      ) : (
+        !isZeroProof && <CohortChart visualKey={data.visual} accent={accent} dark={isZeroProof} />
+      )}
 
       {/* Use Moments — eyebrow removed; title carries the section. */}
       <Section dark={isZeroProof}>

@@ -5,6 +5,7 @@ import Link from "next/link"
 import { formulas, type FormulaKey, testimonials } from "@/lib/data"
 import { Icon } from "@/components/icons"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
+import { EmbeddedGraphic } from "@/components/embedded-graphic"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const BLUE = "#94C6D4"
@@ -861,144 +862,9 @@ export function HomeLogicRow() {
 }
 
 // ── APPROACH CHART ─────────────────────────────────────────────────────────────
+// Renders the homepage "Calm-First Approach" philosophy graphic verbatim.
 function ApproachChart() {
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => {
-    const el = containerRef.current
-    if (!el) return
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            setMounted(true)
-            obs.disconnect()
-          }
-        })
-      },
-      { threshold: 0.35 }
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [])
-
-  // Path lengths (approximate — long enough to cover the longest stroke)
-  const STIM_LEN = 900
-  const CALM_LEN = 800
-
-  return (
-    <div
-      ref={containerRef}
-      style={{
-        borderRadius: 16,
-        backgroundColor: "var(--charcoal)",
-        padding: "clamp(14px,2.5vw,28px)",
-        display: "flex",
-        flexDirection: "column",
-        gap: 14,
-      }}
-    >
-      {/* Legend */}
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ display: "inline-block", width: 22, height: 3, borderRadius: 2, backgroundColor: "rgba(245,242,234,0.55)" }} />
-          <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "rgba(245,242,234,0.6)", letterSpacing: "0.02em" }}>Stimulant First</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ display: "inline-block", width: 22, height: 3, borderRadius: 2, backgroundColor: BLUE }} />
-          <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 11, color: "var(--bone)", letterSpacing: "0.02em" }}>Calm First</span>
-        </div>
-      </div>
-
-      {/* Chart */}
-      <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 7", minHeight: 160 }}>
-        <svg viewBox="0 0 800 320" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }}>
-          {/* Stimulant First — sharp spike then crash */}
-          <path
-            d="M 0 260 C 80 250, 120 230, 150 200 C 175 175, 195 90, 220 50 C 240 25, 260 30, 280 70 C 310 130, 340 250, 380 285 C 430 305, 480 295, 540 285 C 600 280, 680 290, 800 295"
-            fill="none"
-            stroke="rgba(245,242,234,0.55)"
-            strokeWidth="3.5"
-            strokeLinecap="round"
-            strokeDasharray={`${STIM_LEN} ${STIM_LEN}`}
-            strokeDashoffset={mounted ? 0 : STIM_LEN}
-            style={{
-              transition: "stroke-dashoffset 2.6s cubic-bezier(0.5,0,0.5,1)",
-            }}
-          />
-
-          {/* Calm First — smooth sustained ramp */}
-          <path
-            d="M 0 240 C 100 225, 180 200, 260 165 C 340 130, 420 110, 520 100 C 620 95, 700 100, 800 105"
-            fill="none"
-            stroke={BLUE}
-            strokeWidth="4"
-            strokeLinecap="round"
-            strokeDasharray={`${CALM_LEN} ${CALM_LEN}`}
-            strokeDashoffset={mounted ? 0 : CALM_LEN}
-            style={{
-              transition: "stroke-dashoffset 2.6s cubic-bezier(0.5,0,0.5,1)",
-            }}
-          />
-
-          {/* Calm endpoint dot — appears at the pause point */}
-          <circle
-            cx="800"
-            cy="105"
-            r={mounted ? 6 : 0}
-            fill={BLUE}
-            stroke="var(--bone)"
-            strokeWidth="2"
-            style={{
-              transition: "r 0.5s cubic-bezier(0.34,1.4,0.4,1) 2.7s",
-            }}
-          />
-          {/* Soft pulse ring around the endpoint */}
-          {mounted && (
-            <circle
-              cx="800"
-              cy="105"
-              r="6"
-              fill="none"
-              stroke={BLUE}
-              strokeWidth="2"
-              style={{
-                transformOrigin: "800px 105px",
-                animation: "calm-pulse 2.4s ease-out 2.9s infinite",
-                opacity: 0,
-              }}
-            />
-          )}
-          <style>{`
-            @keyframes calm-pulse {
-              0% { transform: scale(1); opacity: 0.55; }
-              100% { transform: scale(2.4); opacity: 0; }
-            }
-          `}</style>
-        </svg>
-      </div>
-
-      {/* Caption strip */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 4 }}>
-        <div style={{ padding: "12px 14px", borderRadius: 12, backgroundColor: "#8A8A82" }}>
-          <span style={{ display: "block", fontFamily: GC, fontWeight: 700, fontSize: 11, color: "rgba(255,255,255,0.75)", margin: "0 0 2px", letterSpacing: "0.06em", textTransform: "uppercase" }}>
-            Stimulant-First
-          </span>
-          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "var(--bone)", margin: 0, letterSpacing: "0.02em" }}>
-            Push. Spike. Crash.
-          </p>
-        </div>
-        <div style={{ padding: "12px 14px", borderRadius: 12, backgroundColor: BLUE }}>
-          <span style={{ display: "block", fontFamily: GC, fontWeight: 700, fontSize: 11, color: "rgba(20,20,30,0.6)", margin: "0 0 2px", letterSpacing: "0.06em", textTransform: "uppercase" }}>
-            Calm-First
-          </span>
-          <p style={{ fontFamily: GC, fontWeight: 700, fontSize: 13, color: "var(--ink)", margin: 0, letterSpacing: "0.02em" }}>
-            Settle. Focus. Sustain.
-          </p>
-        </div>
-      </div>
-    </div>
-  )
+  return <EmbeddedGraphic src="/graphics/homepage.html" ratio="1200 / 720" title="The Calm-First approach" />
 }
 
 function _ApproachSectionEnd() {

@@ -9,7 +9,7 @@ import { ProductComparisonGrid } from "@/components/product-comparison-grid"
 import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommendations"
 import { PdpIngredients } from "@/components/pdp-ingredients"
 import { SupplementFactsDialog } from "@/components/supplement-facts-dialog"
-import { CalmStudyChart, FocusBenefitsTable } from "@/components/study-charts"
+import { EmbeddedGraphic } from "@/components/embedded-graphic"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const BLUE = "#94C6D4"
@@ -288,9 +288,9 @@ export default async function ProductPage({
 
               {/* Right side - chart (study-based for Calm & Focus, curve for Energy) */}
               {key === "calm" ? (
-                <CalmStudyChart />
+                <EmbeddedGraphic src="/graphics/calm.html" ratio="1200 / 740" title="Calm: stress (CgA) & cortisol study" />
               ) : key === "focus" ? (
-                <FocusBenefitsTable />
+                <EmbeddedGraphic src="/graphics/focus.html" ratio="1400 / 620" title="Focus: improved cognitive functions by GABA" />
               ) : (
                 <div style={{ padding: "clamp(14px,2vw,24px)", backgroundColor: "var(--charcoal)", borderRadius: 20 }}>
                   {/* Graph */}
