@@ -10,7 +10,7 @@ export function FooterBanner({ src, alt }: FooterBannerProps) {
       style={{
         backgroundColor: "var(--bone)",
         width: "100%",
-        padding: "clamp(32px,5vw,72px) clamp(16px,4vw,64px)",
+        padding: "clamp(24px,5vw,72px) clamp(0px,calc(6vw - 24px),64px)",
       }}
     >
       <div
