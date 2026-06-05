@@ -46,7 +46,7 @@ export const stacks: Stack[] = [
     name: "AVRO Focus Stack",
     claim: "This stack supports focus and productivity without caffeine.",
     tagline: "Powered by Naturally Fermented GABA — Without Caffeine",
-    accent: "var(--focus)",
+    accent: "var(--avro-blue)",
     icon: "supports-focus-without-overload",
     flavors: [
       {
@@ -76,7 +76,7 @@ export const stacks: Stack[] = [
     name: "AVRO Energy Stack",
     claim: "This stack supports sustained energy and mental clarity.",
     tagline: "Powered by Naturally Fermented GABA — With Caffeine",
-    accent: "var(--energy)",
+    accent: "var(--avro-blue)",
     icon: "mental-clarity",
     flavors: [
       {
@@ -106,7 +106,7 @@ export const stacks: Stack[] = [
     name: "AVRO Calm Stack",
     claim: "This stack supports stress reduction and improved sleep.",
     tagline: "Powered by Naturally Fermented GABA — With Magnesium",
-    accent: "var(--calm)",
+    accent: "var(--avro-blue)",
     icon: "relaxation-reduced-tension",
     flavors: [
       {
