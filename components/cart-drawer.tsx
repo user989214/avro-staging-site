@@ -48,15 +48,23 @@ export function CartDrawer() {
         <div className="flex flex-col h-full">
           {/* Header */}
           <div
-            className="flex items-center justify-between px-6 py-5"
+            className="flex items-center justify-between px-6 py-6"
             style={{ borderBottom: "1px solid rgba(21,21,21,0.1)" }}
           >
-            <div className="flex items-baseline gap-3">
-              <h2 className="font-serif font-black text-[26px] leading-[1.05] tracking-[-0.01em]" style={{ color: "var(--ink)" }}>
+            <div className="flex items-center gap-3">
+              <Image
+                src="/brand/sumo-cart-icon.svg"
+                alt=""
+                width={44}
+                height={44}
+                className="flex-shrink-0"
+                aria-hidden="true"
+              />
+              <h2 className="font-serif font-black text-[32px] leading-[1.0] tracking-[-0.01em]" style={{ color: "var(--ink)" }}>
                 Your Cart
               </h2>
               <span
-                className="inline-flex items-center justify-center min-w-[26px] h-[26px] px-2 rounded-full font-serif font-black text-[13px] leading-none"
+                className="inline-flex items-center justify-center min-w-[36px] h-[32px] px-2.5 rounded-full font-serif font-black text-[16px] leading-none"
                 style={{ backgroundColor: BLUE, color: "var(--charcoal)" }}
                 aria-label={`${itemCount} items`}
               >
@@ -95,7 +103,7 @@ export function CartDrawer() {
                 <Link
                   href="/shop"
                   onClick={closeCart}
-                  className="inline-flex items-center justify-center font-serif font-black text-[15px] leading-none"
+                  className="inline-flex items-center justify-center font-serif font-black text-[15px] leading-none transition-colors"
                   style={{
                     backgroundColor: "var(--charcoal)",
                     color: "var(--bone)",
@@ -104,6 +112,14 @@ export function CartDrawer() {
                     borderRadius: 999,
                     textDecoration: "none",
                     letterSpacing: "0.01em",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--bone)"
+                    e.currentTarget.style.color = "var(--charcoal)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--charcoal)"
+                    e.currentTarget.style.color = "var(--bone)"
                   }}
                 >
                   Browse Formulas
@@ -215,6 +231,14 @@ export function CartDrawer() {
                   padding: "16px 28px",
                   borderRadius: 999,
                   letterSpacing: "0.01em",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--bone)"
+                  e.currentTarget.style.color = "var(--charcoal)"
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--charcoal)"
+                  e.currentTarget.style.color = "var(--bone)"
                 }}
               >
                 Checkout
