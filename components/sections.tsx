@@ -362,7 +362,7 @@ export function InfoCard({
   href,
   dark = false,
 }: {
-  icon: AvroIconName
+  icon?: AvroIconName
   title: string
   children: React.ReactNode
   href?: string
@@ -375,9 +375,11 @@ export function InfoCard({
   const textColor = dark ? "text-bone/60" : "text-ink/75"
   const content = (
     <>
-      <div className="mb-5">
-              <AvroIcon name={icon} golden={dark} size={72} className="md:w-[96px] md:h-[96px]" />
-      </div>
+      {icon && (
+        <div className="mb-5">
+          <AvroIcon name={icon} golden={dark} size={72} className="md:w-[96px] md:h-[96px]" />
+        </div>
+      )}
       <h3 className={cn("font-black mb-2", titleColor)}>{title}</h3>
       <p className={cn("text-base leading-relaxed", textColor)}>{children}</p>
     </>

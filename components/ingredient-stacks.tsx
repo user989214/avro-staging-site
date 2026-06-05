@@ -1,4 +1,4 @@
-import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
+import { type AvroIconName } from "@/components/avro-icons"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 
@@ -199,10 +199,7 @@ export function IngredientStacks() {
             >
               {stack.tagline}
             </span>
-            <div className="flex items-center gap-3">
-              <AvroIcon name={stack.icon} size={48} className="shrink-0 md:w-14 md:h-14" />
-              <h2 className="font-serif font-black text-[clamp(28px,4vw,46px)] leading-[1.02] tracking-[-0.02em] text-ink">{stack.name}</h2>
-            </div>
+            <h2 className="font-serif font-black text-[clamp(28px,4vw,46px)] leading-[1.02] tracking-[-0.02em] text-ink">{stack.name}</h2>
             <p className="text-[clamp(16px,1.4vw,19px)] leading-relaxed text-warm-gray">{stack.claim}</p>
           </div>
 
