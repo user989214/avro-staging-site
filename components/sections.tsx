@@ -243,7 +243,11 @@ export function ProductCards({
               <article key={key} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                 {/* Rounded thumbnail with gray background - matches reference exactly */}
                 <div style={{ borderRadius: 20, aspectRatio: "1 / 1", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "var(--deep-black)" : "#E5E5E5" }}>
-                  <ProductCard formulaKey={key} className="w-full h-full object-cover" />
+                  <ProductCard
+                    formulaKey={key}
+                    flavorId={key === "energy" ? "fuji-apple" : undefined}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(22px,2vw,32px)", color: ink, margin: 0 }}>{item.name}</h3>
                 <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.45, color: muted, margin: 0 }}>{item.support}</p>
