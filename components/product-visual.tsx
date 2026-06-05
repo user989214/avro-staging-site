@@ -89,6 +89,8 @@ export function stickImageFor(key: FormulaKey, flavorIdOrName?: string) {
 const GLASS_LIFESTYLE_FLAVORS = new Set<string>([
   "calm-blackberry-jasmine",
   "calm-blueberry-acai",
+  "focus-red-dragon-fruit",
+  "focus-pomegranate-raspberry",
 ])
 
 /**
