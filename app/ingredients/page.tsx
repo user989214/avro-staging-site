@@ -49,10 +49,7 @@ export default function IngredientsPage() {
 
       {/* General product details — applies to every flavor */}
       <CardedSection>
-        <SectionHeading
-          eyebrow="The essentials"
-          title="What every box has in common."
-        />
+        <SectionHeading title="What every box has in common." />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <InfoCard icon="step-pour" title="Powder stick packs">
             A powder dietary supplement delivered in 10 single-serve stick packets per box.
@@ -79,7 +76,6 @@ export default function IngredientsPage() {
       <section className="py-[clamp(8px,2vw,24px)]">
         <div className="w-full max-w-[1440px] mx-auto px-[clamp(16px,5vw,64px)] mb-[clamp(8px,2vw,16px)]">
           <SectionHeading
-            eyebrow="Full label disclosure"
             title="Three stacks. Six flavors. Nothing hidden."
             description="Every formula builds from the same naturally fermented PharmaGABA® base, then supports the moment in a different way."
           />
