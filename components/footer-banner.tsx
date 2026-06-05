@@ -7,24 +7,37 @@ export function FooterBanner({ src, alt }: FooterBannerProps) {
   return (
     <section
       aria-label={alt}
-      style={{ backgroundColor: "#ffffff", padding: "clamp(24px, 5vw, 64px) 16px" }}
+      style={{
+        backgroundColor: "var(--bone)",
+        width: "100%",
+        padding: "clamp(32px,5vw,72px) clamp(16px,4vw,64px)",
+      }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src || "/placeholder.svg"}
-        alt={alt}
+      <div
         style={{
-          display: "block",
-          width: "100%",
-          maxWidth: 1100,
-          height: "auto",
+          maxWidth: 1250,
           margin: "0 auto",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
-          maskImage:
-            "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
+          backgroundColor: "#ffffff",
+          borderRadius: 24,
+          overflow: "hidden",
+          padding: "clamp(16px,3vw,40px)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
-      />
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src || "/placeholder.svg"}
+          alt={alt}
+          style={{
+            display: "block",
+            width: "100%",
+            maxWidth: 1000,
+            height: "auto",
+          }}
+        />
+      </div>
     </section>
   )
 }
