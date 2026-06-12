@@ -1,0 +1,147 @@
+AVRO PROJECT - FULL EDIT HISTORY (LAST 2 WEEKS)
+Period: May 28 - June 5, 2026
+Total: 100 commits
+Generated: June 5, 2026
+
+================================================================
+JUNE 5, 2026 (40 EDITS)
+================================================================
+
+--- Cart, Nav & Bug Fixes ---
+2026-06-05 - Enforced hover invert styles with !important on nav cart button
+2026-06-05 - Enhanced product page with new components and detailed formula benefits
+2026-06-05 - Streamlined ProductPage component, removed unused imports (require-error fix)
+2026-06-05 - Added sumo cart icon + bigger title/count badge + hover inverts to cart drawer
+
+--- Ingredients Page ---
+2026-06-05 - Removed tagline kicker from IngredientStacks
+2026-06-05 - Simplified FlavorCard, updated stack styling
+2026-06-05 - Updated all stack accents to unified avro-blue
+2026-06-05 - Updated stack accent colors / FlavorCard styling (removed color dots)
+2026-06-05 - Removed icons from ingredient info cards, made InfoCard icon optional
+2026-06-05 - Removed eyebrow kickers from ingredients section headings
+2026-06-05 - Corrected all ingredient icon-to-label mappings
+2026-06-05 - Created /ingredients page; repointed header/footer links
+
+--- Cohort Pages & Charts ---
+2026-06-05 - Added graphic headers to cohort pages, updated social copy
+2026-06-05 - Replaced study charts with embedded graphics
+2026-06-05 - Added new charts, adjusted chart margins
+2026-06-05 - Introduced two-line chart type, updated cohort chart configs
+2026-06-05 - Updated gradient styles in cohort-page, home-sections, page-hero
+
+--- Footer Banners ---
+2026-06-05 - Updated footer banner styles, added mobile-nogap image
+2026-06-05 - Updated banner border radius, added mobile-square image
+2026-06-05 - Adjusted banner padding, added mobile shop images
+2026-06-05 - Updated footer banner style and layout
+2026-06-05 - Added FooterBanner component to multiple pages
+2026-06-05 - Added focus formula banner image and mapping
+2026-06-05 - Added gradient mask effect to product page
+2026-06-05 - Added "CALM = POWER." footer banners for formulas
+
+--- Heroes & Imagery ---
+2026-06-05 - WhyPage hero: new card style and image
+2026-06-05 - SciencePage hero: new card design and image
+2026-06-05 - New social hero image
+2026-06-05 - New gaming hero image
+2026-06-05 - Updated work hero images
+2026-06-05 - Hero rotator fade-in transition
+2026-06-05 - Adjusted GolfHeroRotator transition duration
+2026-06-05 - Added golf hero rotator for cohort backgrounds
+
+--- Shop & Product ---
+2026-06-05 - Added flavorId prop to ProductCard for energy product
+2026-06-05 - Updated shop page background and overlay gradient
+2026-06-05 - Added new glass flavors and images
+2026-06-05 - Added new focus flavors and images
+2026-06-05 - Added "in the glass" lifestyle gallery feature
+2026-06-05 - Added new lifestyle images
+2026-06-05 - Updated home section images and alt texts
+
+================================================================
+JUNE 4, 2026 (25 EDITS)
+================================================================
+
+--- Buttons & Typography System ---
+2026-06-04 - Science button size to medium
+2026-06-04 - Updated button size in HomeMomentGrid
+2026-06-04 - Migrated buttons to avro-size-* naming scheme
+2026-06-04 - Adjusted button alignment in HomeMomentGrid
+2026-06-04 - Updated button/link colors for contrast
+2026-06-04 - Standardized button sizes/styles across components
+2026-06-04 - Adjusted home product strip image height clamp
+2026-06-04 - Adjusted flexbox/breakpoints for shop page and heroes
+2026-06-04 - Standardized CTA styles, header font sizes
+2026-06-04 - Updated font sizes and paddings across components
+2026-06-04 - Adjusted button styles and globals padding
+2026-06-04 - Updated hover styles for .btn-secondary-dark and .btn-accent
+
+--- Content & Pages ---
+2026-06-04 - Updated cohort chart title/description
+2026-06-04 - Added study-based charts for Calm & Focus
+2026-06-04 - Updated FAQ content/title, gaming page title, compare header styling
+2026-06-04 - Updated formula benefits and ingredient details
+2026-06-04 - Revamped subscription page layout and content
+2026-06-04 - Enhanced product card layout/typography
+2026-06-04 - Updated product card frame style
+2026-06-04 - Added border to product card inner frame
+2026-06-04 - Removed header/footer from SubscribePage
+2026-06-04 - Updated home sections button styles (pill ordering)
+2026-06-04 - Streamlined global styles, removed unused animations
+2026-06-04 - Buttons: outline by default, filled on hover
+2026-06-04 - Added auto-advancing homepage carousel
+
+================================================================
+JUNE 1, 2026 (5 EDITS)
+================================================================
+
+2026-06-01 - Enhanced product strip styling/layout
+2026-06-01 - Updated HomeProductStrip layout and image styles
+2026-06-01 - Enhanced header transition, adjusted section styles
+2026-06-01 - Adjusted ProductCards padding/gap/font size
+2026-06-01 - Typography and layout adjustments across components
+
+================================================================
+MAY 28, 2026 (30 EDITS)
+================================================================
+
+--- Heroes ---
+2026-05-28 - Refined shop hero design and typography
+2026-05-28 - Refined shop hero fade
+2026-05-28 - Adjusted hero heights for desktop viewport fit
+2026-05-28 - Standardized hero sizing and animation
+2026-05-28 - Unified golf-style hero layout for all page heroes
+2026-05-28 - Aligned/restyled hero buttons
+2026-05-28 - Unified button styles, animated SVG curves
+
+--- Icon System ---
+2026-05-28 - Uniformly increased AvroIcon sizes site-wide
+2026-05-28 - Full-width dietary claim icons row
+2026-05-28 - Updated accordion card icon sizes
+2026-05-28 - Fixed benefit cards, quality row, icon sizes
+2026-05-28 - Updated Naturally Fermented / In Every Formula icons
+2026-05-28 - Matched icons to content (PharmaGABA, dietary)
+2026-05-28 - Updated HomeGABASection / HomeQualityRow icons
+2026-05-28 - Added dietary claim and quality icons (BuyBox, ritual steps)
+2026-05-28 - Fixed icon paths and naming
+2026-05-28 - Icon inventory update (Batch 3.3 GOLD)
+2026-05-28 - Added 20 gold icons
+2026-05-28 - Organized gold icons subfolder
+2026-05-28 - Added Zero Proof cocktail batch 3.3 icons
+2026-05-28 - Added 20 dark icons
+2026-05-28 - Added icon batch (free-from, cohort, benefit, quality)
+
+--- About & Founders ---
+2026-05-28 - Redesigned founders section (dark card, mobile)
+2026-05-28 - Matched About founders to homepage style
+2026-05-28 - Updated founders layout/image framing
+2026-05-28 - Enforced solid stroke-less design on About page
+2026-05-28 - Newsletter links scroll to footer section
+2026-05-28 - Added mobile-specific hero images with overlays
+2026-05-28 - Updated gaming hero to modern scene
+2026-05-28 - Updated hero image to conference room scene
+
+================================================================
+END OF HISTORY
+================================================================
