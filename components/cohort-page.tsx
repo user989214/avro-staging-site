@@ -243,7 +243,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             0%   { opacity: 0; transform: translateY(28px); color: ${wordStart}; }
             55%  { opacity: 1; transform: translateY(-4px); color: ${wordStart}; }
             80%  { opacity: 1; transform: translateY(0); color: ${wordStart}; }
-            100% { opacity: 1; transform: translateY(0); color: ${wordEnd}; }
+            100% { opacity: 1; transform: translateY(0); color: var(--hero-word-end, ${wordEnd}); }
           }
           @keyframes cohort-fade-up {
             0% { opacity: 0; transform: translateY(10px); }
@@ -320,8 +320,8 @@ export function CohortPage({ data }: { data: CohortData }) {
             }
             /* On desktop the ZP hero image is light (white-brick bar scene),
                so override gold content colors to black/dark for legibility. */
-            .cohort-hero-content.cohort-hero-zp h1 {
-              color: var(--ink) !important;
+            .cohort-hero-content.cohort-hero-zp {
+              --hero-word-end: var(--ink);
             }
             .cohort-hero-content.cohort-hero-zp p {
               color: var(--ink) !important;
@@ -380,7 +380,10 @@ export function CohortPage({ data }: { data: CohortData }) {
           </div>
 
           {/* Content — overlaid on desktop, below image on mobile */}
-          <div className={`cohort-hero-content${isZeroProof ? " cohort-hero-zp" : ""}`}>
+          <div
+            className={`cohort-hero-content${isZeroProof ? " cohort-hero-zp" : ""}`}
+            style={{ ["--hero-word-end" as string]: wordEnd }}
+          >
             {/* Eyebrow chip removed per design — title carries the moment via the per-cohort word animation. */}
             <h1
               className="font-serif"
@@ -389,7 +392,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                 fontSize: "clamp(36px,5.5vw,72px)",
                 lineHeight: 0.98,
                 letterSpacing: "-0.025em",
-                color: wordEnd,
+                color: `var(--hero-word-end, ${wordEnd})`,
                 marginBottom: 16,
                 maxWidth: 560,
               }}
