@@ -153,87 +153,117 @@ export function MockupLogicRow() {
  */
 export function MockupBlueCta({ title, copy }: { title: string; copy: string }) {
   return (
-    <section
-      style={{
-        width: "100%",
-        backgroundColor: "var(--avro-blue)",
-        color: "var(--charcoal)",
-        padding: "clamp(40px,6vw,96px) clamp(20px,5vw,80px)",
-      }}
-    >
+    /* Outer section is white so the rounded card sits on the same base as every other section */
+    <section style={{ width: "100%", backgroundColor: "var(--base)", padding: 0 }}>
       <style>{`
+        .mk-blue-card {
+          width: calc(100% - 32px);
+          margin: 0 auto 16px;
+          border-radius: 20px;
+          overflow: hidden;
+          background-color: var(--avro-blue);
+          color: var(--charcoal);
+        }
+        /* Calm Performance banner sits at the very top of the card */
+        .mk-blue-banner {
+          width: 100%;
+          display: block;
+          height: auto;
+        }
+        .mk-blue-inner {
+          padding: clamp(32px,4vw,72px) clamp(24px,5vw,80px) clamp(36px,5vw,80px);
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: flex-end;
+          justify-content: space-between;
+          gap: 28px;
+        }
+        .mk-blue-cta-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 14px 28px;
+          border-radius: 999px;
+          background-color: transparent;
+          border: 2px solid var(--charcoal);
+          color: var(--charcoal);
+          font-family: ${GC};
+          font-weight: 700;
+          font-size: 15px;
+          text-decoration: none;
+          white-space: nowrap;
+          transition: background-color .2s ease, color .2s ease;
+        }
         .mk-blue-cta-btn:hover {
-          background-color: var(--charcoal) !important;
-          color: var(--bone) !important;
+          background-color: var(--charcoal);
+          color: var(--bone);
+        }
+        .mk-blue-btn-row {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 10px;
+          align-items: center;
+        }
+        @media (max-width: 640px) {
+          .mk-blue-inner {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .mk-blue-btn-row {
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+          }
+          .mk-blue-cta-btn {
+            width: 100%;
+            justify-content: center;
+          }
         }
       `}</style>
-      <div
-        style={{
-          maxWidth: 1250,
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 28,
-        }}
-      >
-        <div style={{ flex: "1 1 320px", minWidth: 0, maxWidth: 560 }}>
-          <h2
-            style={{
-              fontFamily: GC,
-              fontWeight: 800,
-              fontSize: "clamp(28px,4.2vw,62px)",
-              lineHeight: 1.0,
-              letterSpacing: "-0.02em",
-              color: "var(--charcoal)",
-              marginBottom: 12,
-            }}
-          >
-            {title}
-          </h2>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.3vw,19px)", lineHeight: 1.5, color: "rgba(21,21,21,0.72)" }}>
-            {copy}
-          </p>
+
+      <div className="mk-blue-card">
+        {/* Calm Performance artwork — image sits ABOVE the copy */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/banners/calm-power.png"
+          alt="Calm Performance"
+          className="mk-blue-banner"
+        />
+
+        <div className="mk-blue-inner">
+          <div style={{ flex: "1 1 320px", minWidth: 0, maxWidth: 580 }}>
+            <h2
+              style={{
+                fontFamily: GC,
+                fontWeight: 800,
+                fontSize: "clamp(28px,4.2vw,62px)",
+                lineHeight: 1.0,
+                letterSpacing: "-0.02em",
+                color: "var(--charcoal)",
+                marginBottom: 12,
+              }}
+            >
+              {title}
+            </h2>
+            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.3vw,19px)", lineHeight: 1.5, color: "rgba(21,21,21,0.72)" }}>
+              {copy}*
+            </p>
+          </div>
+
+          <div className="mk-blue-btn-row">
+            <a href="/shop?formula=calm"   className="mk-blue-cta-btn">Shop Calm</a>
+            <a href="/shop?formula=focus"  className="mk-blue-cta-btn">Shop Focus</a>
+            <a href="/shop?formula=energy" className="mk-blue-cta-btn">Shop Energy</a>
+          </div>
         </div>
-        <a
-          href="/shop"
-          className="mk-blue-cta-btn"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "16px 32px",
-            borderRadius: 999,
-            backgroundColor: "transparent",
-            border: "2px solid var(--charcoal)",
-            color: "var(--charcoal)",
-            fontFamily: GC,
-            fontWeight: 700,
-            fontSize: 16,
-            textDecoration: "none",
-            whiteSpace: "nowrap",
-            transition: "background-color .2s ease, color .2s ease",
-          }}
-        >
-          Shop AVRO
-        </a>
       </div>
     </section>
   )
 }
 
-/** Full-bleed Calm Performance artwork band on a white background. */
+/** Kept for backwards-compat — the image is now rendered inside MockupBlueCta above the copy. */
 export function MockupCalmPerformance() {
-  return (
-    <section style={{ width: "100%", backgroundColor: "#FFFFFF" }}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/images/banners/calm-power.png"
-        alt="Calm Performance"
-        style={{ width: "100%", height: "auto", display: "block" }}
-      />
-    </section>
-  )
+  return null
 }
