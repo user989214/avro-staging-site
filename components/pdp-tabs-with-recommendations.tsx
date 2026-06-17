@@ -5,7 +5,6 @@ import Link from "next/link"
 import { formulas, type FormulaKey } from "@/lib/data"
 import { ProductCard } from "@/components/product-visual"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
-import { ReviewTODO } from "@/components/compliance"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 

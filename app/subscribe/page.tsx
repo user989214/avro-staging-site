@@ -7,7 +7,6 @@ import {
   FinalCta,
 } from "@/components/sections"
 import { PageHero } from "@/components/page-hero"
-import { ReviewTODO } from "@/components/compliance"
 
 export const metadata = {
   title: "Subscribe + Save | AVRO",
@@ -70,16 +69,6 @@ export default function SubscribePage() {
 
       <ProductCards title="Choose your formula." shopLabel="Shop" />
       <SocialProof mode="compact" />
-
-      <CardedSection>
-        <p className="text-[13px] leading-relaxed max-w-[760px]">
-          <ReviewTODO>
-            Confirm the live free-shipping rule for subscriptions (is the order-minimum
-            waived for subscribers?) and make every &quot;free shipping&quot; / &quot;2 or more
-            tubes&quot; line on this page match the commerce settings.
-          </ReviewTODO>
-        </p>
-      </CardedSection>
 
       <div style={{ backgroundColor: "var(--base-deep)" }}>
         <FinalCta
