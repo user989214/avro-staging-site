@@ -312,8 +312,8 @@ export function HomeRefHero() {
         }
         .moment-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
         .moment-card:hover { transform: translateY(-3px); }
-        .moment-card img { transition: transform 0.5s ease, filter 0.4s ease; filter: grayscale(100%); }
-        .moment-card:hover img { transform: scale(1.04); filter: grayscale(0%); }
+        .moment-card img { transition: transform 0.5s ease; }
+        .moment-card:hover img { transform: scale(1.04); }
       `}</style>
 
       <div
@@ -1056,11 +1056,11 @@ export function HomeStoryStrip() {
           <div style={{ display: "grid", gridTemplateColumns: "38% 62%", minHeight: 300, gap: 12 }}>
             <div style={{ position: "relative", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/science/fermentation-lab.jpg" alt="Stainless steel fermentation vessel cultivating naturally fermented PharmaGABA" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(1) contrast(1.05) brightness(0.98)" }} />
+              <img src="/images/science/fermentation-lab.jpg" alt="Stainless steel fermentation vessel cultivating naturally fermented PharmaGABA" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
             <div style={{ position: "relative", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/home/founder.jpg" alt="AVRO co-founder Keigo Sugawara" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%", filter: "grayscale(1) contrast(1.05) brightness(0.98)" }} />
+              <img src="/images/home/founder.jpg" alt="AVRO co-founder Keigo Sugawara" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }} />
             </div>
           </div>
         </div>

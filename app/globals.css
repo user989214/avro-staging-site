@@ -541,14 +541,11 @@ button[role="button"] {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   Hero imagery — matte / mono treatment
-   Desaturates the warm, brown cast in product photography so the
-   heroes read neutral and cohesive with the white/grey colorway,
-   while keeping the blue branding legible (partial, not full grey).
+   Hero imagery — display photos as-is, full color (no filter).
    ────────────────────────────────────────────────────────────── */
 .hp-hero-img,
 .ph-hero-img,
 .cohort-hero-image,
 .cohort-hero-image-mobile {
-  filter: saturate(0.62) contrast(0.96) brightness(1.03) sepia(0.04) hue-rotate(-6deg);
+  filter: none;
 }
