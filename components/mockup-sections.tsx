@@ -181,22 +181,22 @@ export function MockupBlueCta({ title, copy }: { title: string; copy: string }) 
         .mk-blue-btn-stack {
           display: flex;
           flex-direction: column;
-          gap: 12px;
-          flex: 0 0 300px;
-          width: 300px;
+          gap: 8px;
+          flex: 0 0 220px;
+          width: 220px;
         }
         .mk-blue-cta-btn {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 18px 32px;
+          padding: 11px 24px;
           border-radius: 999px;
           background-color: var(--charcoal);
           border: none;
           color: var(--bone);
           font-family: ${GC};
           font-weight: 700;
-          font-size: 16px;
+          font-size: 14px;
           text-decoration: none;
           transition: opacity .15s ease;
           width: 100%;
