@@ -83,7 +83,7 @@ export default function ShopPage() {
           .shop-hero-16x9 {
             position: relative;
             width: calc(100% - 32px);
-            margin: 16px auto;
+            margin: 0 auto 16px;
             aspect-ratio: 16/9;
             overflow: hidden;
             background-color: var(--base-light);

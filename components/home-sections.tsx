@@ -242,7 +242,7 @@ export function HomeRefHero() {
   .hp-hero-container {
     position: relative;
     width: calc(100% - 32px);
-    margin: 16px auto;
+    margin: 0 auto 16px;
     aspect-ratio: 16/9;
     overflow: hidden;
     background-color: var(--bone);
@@ -830,7 +830,7 @@ export function HomeLogicRow() {
   )
 }
 
-// ── APPROACH CHART ─────────────────────────────────────────────────────���─���─────
+// ── APPROACH CHART ──────────────────────────────────���──────────────────���─���─────
 // Renders the homepage "Calm-First Approach" philosophy graphic verbatim.
 function ApproachChart() {
   return (

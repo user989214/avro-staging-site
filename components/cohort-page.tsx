@@ -272,7 +272,7 @@ export function CohortPage({ data }: { data: CohortData }) {
           .cohort-hero-16x9 {
             position: relative;
             width: calc(100% - 32px);
-            margin: 16px auto;
+            margin: 0 auto 16px;
             aspect-ratio: 16/9;
             overflow: hidden;
             border-radius: 20px;
