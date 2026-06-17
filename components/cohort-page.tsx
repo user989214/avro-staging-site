@@ -208,8 +208,9 @@ export function CohortPage({ data }: { data: CohortData }) {
   const cohortHeroMobile: Record<string, string> = {
     golf:   "/images/lifestyle/cohort-golf-hero-mobile.png",
     social: "/images/lifestyle/cohort-social-hero.jpg",
-    work:   "/images/lifestyle/cohort-work-hero-mobile.png",
-    gaming: "/images/lifestyle/cohort-gaming-hero-mobile.png",
+    // Work and gaming reuse the desktop hero photo on mobile (no separate mobile crop).
+    work:   "/images/lifestyle/cohort-work-hero.png",
+    gaming: "/images/lifestyle/cohort-gaming-hero.png",
   }
 
   // Per-cohort animation accent — words begin at a dimmed shade of the accent and rise into the full bright accent (Zero Proof) or the page ink (light cohorts), so the brand color feels intentional, not just transitional.
