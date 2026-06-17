@@ -422,7 +422,7 @@ export function Header() {
         {/* Logo - center */}
         <Link
           href={isGolf ? "/golf" : "/"}
-          className={`flex flex-col items-center justify-center justify-self-center md:justify-self-auto ${
+          className={`flex items-center justify-center justify-self-center md:justify-self-auto ${
             isGolf ? "w-[clamp(118px,13vw,168px)]" : "w-[clamp(110px,12vw,160px)]"
           }`}
           aria-label={isGolf ? "AVRO Golf home" : "AVRO home"}
@@ -441,21 +441,6 @@ export function Header() {
             className="w-full h-auto"
             priority
           />
-          <span
-            style={{
-              marginTop: 4,
-              fontFamily: "var(--font-sans)",
-              fontWeight: 700,
-              fontSize: "clamp(7px,0.7vw,9px)",
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              whiteSpace: "nowrap",
-              color: colors.navTextMuted,
-              lineHeight: 1,
-            }}
-          >
-            Calm First Performance
-          </span>
         </Link>
 
         {/* Desktop nav - right */}
