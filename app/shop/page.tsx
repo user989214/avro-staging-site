@@ -80,10 +80,12 @@ export default function ShopPage() {
           .shop-btn-energy:hover { background-color: var(--charcoal); color: var(--bone); }
 
           .shop-hero-img-mobile { display: none; }
+          .shop-hero-img-desktop { display: block; }
           @media (max-width: 768px) {
             .shop-hero-ctas { flex-direction: column; align-items: stretch; max-width: 320px; }
             .shop-btn-calm, .shop-btn-focus, .shop-btn-energy { width: 100%; flex: 0 0 auto; }
             .shop-hero-img-mobile { display: block; }
+            .shop-hero-img-desktop { display: none; }
           }
           @media (prefers-reduced-motion: reduce) {
             .shop-word, .shop-fade {
@@ -101,6 +103,21 @@ export default function ShopPage() {
             minHeight: "clamp(480px, 60vh, 620px)",
           }}
         >
+          {/* Desktop background image */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/lifestyle/avro-shop-hero.png"
+            alt="AVRO CALM, FOCUS and ENERGY tubes with stick packets on a sandy beige surface"
+            className="shop-hero-img-desktop"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "right center",
+            }}
+          />
           {/* Mobile background image */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
