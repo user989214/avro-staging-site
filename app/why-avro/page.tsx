@@ -55,7 +55,12 @@ export default function WhyPage() {
         alt="AVRO Energy Fuji Apple — Calm performs best."
       />
       <FinalCta
-        title="Less noise. More control."
+        title={
+          <>
+            Less noise.<br />
+            More control.
+          </>
+        }
         copy="Choose the formula that supports the state before the moment."
       />
     </>

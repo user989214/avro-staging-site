@@ -304,7 +304,7 @@ export const cohortData = {
   gaming: {
     eyebrow: "Built for esports",
     title: "Built for the State Before the Session.",
-    copy: "AVRO supports calm, clarity, and composure before gaming, ranked play, and competitive esports sessions.",
+    copy: "AVRO supports calm, clarity, and composure before gaming, ranked play, and competitive esports sessions.*",
     visual: "gaming",
     primary: "Choose Your Formula",
     secondary: "Shop AVRO",

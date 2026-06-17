@@ -107,12 +107,12 @@ export default function ContactPage() {
             lineHeight: 1.5,
           }}
         >
-          Prefer email? Write us at{" "}
+          You can also contact us via email at{" "}
           <a
-            href="mailto:hello@avro.com"
+            href="mailto:hello@avrolife.com"
             style={{ color: "var(--ink)", fontWeight: 700 }}
           >
-            hello@avro.com
+            hello@avrolife.com
           </a>
           .
         </p>

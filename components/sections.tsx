@@ -73,7 +73,7 @@ export function SectionHeading({
   dark = false,
 }: {
   eyebrow?: string
-  title: string
+  title: React.ReactNode
   description?: string
   centered?: boolean
   dark?: boolean
@@ -343,7 +343,15 @@ export function FormulaLogic({ dark = false }: { dark?: boolean }) {
     <Section dark={dark}>
       <SectionHeading
         eyebrow="Science + formula logic"
-        title="Calm first. Then support the moment."
+        title={
+          <>
+            Calm first.{" "}
+            <span className="whitespace-nowrap">
+              <br className="hidden sm:inline" />
+              Then support the moment.
+            </span>
+          </>
+        }
         dark={dark}
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5">
@@ -455,8 +463,8 @@ export function FinalCta({
   eyebrow,
   bg = "var(--avro-blue)",
   dark = false,
-}: {
-  title: string
+  }: {
+  title: React.ReactNode
   copy: string
   productButtons?: boolean
   eyebrow?: string
