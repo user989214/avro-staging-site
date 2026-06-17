@@ -153,25 +153,31 @@ export function MockupLogicRow() {
  */
 export function MockupBlueCta({ title, copy }: { title: string; copy: string }) {
   return (
-    <section style={{ width: "100%", backgroundColor: "var(--base)", padding: "0 0 16px" }}>
+    /* Outer section padding matches FinalCta exactly — this is what gives the
+       card its nearly-full-width appearance with correct gutters site-wide. */
+    <section
+      style={{
+        width: "100%",
+        backgroundColor: "transparent",
+        padding: "clamp(32px,5vw,72px) clamp(16px,4vw,64px)",
+      }}
+    >
       <style>{`
         .mk-blue-card {
-          width: calc(100% - 32px);
+          max-width: 1250px;
           margin: 0 auto;
-          border-radius: 20px;
+          border-radius: 24px;
           overflow: hidden;
           background-color: var(--avro-blue);
           color: var(--charcoal);
-        }
-        .mk-blue-inner {
-          padding: clamp(48px,5vw,72px) clamp(40px,5vw,72px);
+          padding: clamp(32px,5vw,88px) clamp(20px,4vw,80px);
           display: flex;
           flex-direction: row;
+          flex-wrap: wrap;
           align-items: center;
           justify-content: space-between;
-          gap: 40px;
+          gap: 28px;
         }
-        /* Stacked solid-black pill buttons — fixed width matching reference */
         .mk-blue-btn-stack {
           display: flex;
           flex-direction: column;
@@ -195,47 +201,37 @@ export function MockupBlueCta({ title, copy }: { title: string; copy: string }) 
           transition: opacity .15s ease;
           width: 100%;
         }
-        .mk-blue-cta-btn:hover {
-          opacity: 0.82;
-        }
+        .mk-blue-cta-btn:hover { opacity: 0.82; }
         @media (max-width: 768px) {
-          .mk-blue-inner {
-            flex-direction: column;
-            align-items: flex-start;
-          }
-          .mk-blue-btn-stack {
-            flex: none;
-            width: 100%;
-          }
+          .mk-blue-card { flex-direction: column; align-items: flex-start; }
+          .mk-blue-btn-stack { flex: none; width: 100%; }
         }
       `}</style>
 
       <div className="mk-blue-card">
-        <div className="mk-blue-inner">
-          <div style={{ flex: "1 1 300px", minWidth: 0, maxWidth: 580 }}>
-            <h2
-              style={{
-                fontFamily: GC,
-                fontWeight: 800,
-                fontSize: "clamp(28px,4.2vw,62px)",
-                lineHeight: 1.0,
-                letterSpacing: "-0.02em",
-                color: "var(--charcoal)",
-                marginBottom: 12,
-              }}
-            >
-              {title}
-            </h2>
-            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.3vw,18px)", lineHeight: 1.5, color: "rgba(21,21,21,0.72)" }}>
-              {copy}*
-            </p>
-          </div>
+        <div style={{ flex: "1 1 300px", minWidth: 0, maxWidth: 520 }}>
+          <h2
+            style={{
+              fontFamily: GC,
+              fontWeight: 700,
+              fontSize: "clamp(26px,4vw,60px)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.02em",
+              color: "var(--charcoal)",
+              marginBottom: 10,
+            }}
+          >
+            {title}
+          </h2>
+          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.3vw,18px)", lineHeight: 1.5, color: "rgba(21,21,21,0.7)" }}>
+            {copy}*
+          </p>
+        </div>
 
-          <div className="mk-blue-btn-stack">
-            <a href="/shop?formula=calm"   className="mk-blue-cta-btn">Shop Calm</a>
-            <a href="/shop?formula=focus"  className="mk-blue-cta-btn">Shop Focus</a>
-            <a href="/shop?formula=energy" className="mk-blue-cta-btn">Shop Energy</a>
-          </div>
+        <div className="mk-blue-btn-stack">
+          <a href="/shop?formula=calm"   className="mk-blue-cta-btn">Shop Calm</a>
+          <a href="/shop?formula=focus"  className="mk-blue-cta-btn">Shop Focus</a>
+          <a href="/shop?formula=energy" className="mk-blue-cta-btn">Shop Energy</a>
         </div>
       </div>
     </section>
