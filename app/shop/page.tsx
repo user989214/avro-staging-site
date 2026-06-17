@@ -126,7 +126,7 @@ export default function ShopPage() {
                 maxWidth: 520,
               }}
             >
-              {"Choose your AVRO formula.".split(" ").map((word, i, arr) => {
+              {"Choose your AVRO® formula.".split(" ").map((word, i, arr) => {
                 const delay = 0.1 + i * 0.11
                 return (
                   <span
