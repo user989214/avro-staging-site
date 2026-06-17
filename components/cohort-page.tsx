@@ -319,9 +319,14 @@ export function CohortPage({ data }: { data: CohortData }) {
               border-radius: 0;
             }
             /* On desktop the ZP hero image is light (white-brick bar scene),
-               so override gold content colors to black/dark for legibility. */
-            .cohort-hero-content.cohort-hero-zp {
-              --hero-word-end: var(--ink);
+               so override gold content colors to black/dark for legibility.
+               animation-fill-mode:forwards locks the final keyframe color,
+               so we must cancel the animation entirely and set color directly. */
+            .cohort-hero-content.cohort-hero-zp h1,
+            .cohort-hero-content.cohort-hero-zp h1 span,
+            .cohort-hero-content.cohort-hero-zp h1 b {
+              animation: none !important;
+              color: var(--ink) !important;
             }
             .cohort-hero-content.cohort-hero-zp p {
               color: var(--ink) !important;
