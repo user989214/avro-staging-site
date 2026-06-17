@@ -19,22 +19,22 @@ const validFormulas = ["calm", "focus", "energy"] as const
 // "The feeling of good calm/focus/energy" section benefit cards - 4 icons
 const feelingBenefits: Record<FormulaKey, { icon: AvroIconName; title: string }[]> = {
   calm: [
-    { icon: "supports-clear-thinking", title: "Improved clarity & composure" },
-    { icon: "social-composure", title: "Calm, balanced mood" },
-    { icon: "supports-focus-without-overload", title: "Sharper decision making" },
-    { icon: "control-under-pressure", title: "Steady, sustained calm" },
+    { icon: "supports-clear-thinking", title: "Improved clarity & composure*" },
+    { icon: "social-composure", title: "Calm, balanced mood*" },
+    { icon: "supports-focus-without-overload", title: "Sharper decision making*" },
+    { icon: "control-under-pressure", title: "Steady, sustained calm*" },
   ],
   focus: [
-    { icon: "supports-clear-thinking", title: "Improved cognition & alertness" },
-    { icon: "social-composure", title: "Calm, balanced mood" },
-    { icon: "supports-focus-without-overload", title: "Sharper focus" },
-    { icon: "control-under-pressure", title: "Calm, sustained clarity" },
+    { icon: "supports-clear-thinking", title: "Improved cognition & alertness*" },
+    { icon: "social-composure", title: "Calm, balanced mood*" },
+    { icon: "supports-focus-without-overload", title: "Sharper focus*" },
+    { icon: "control-under-pressure", title: "Calm, sustained clarity*" },
   ],
   energy: [
-    { icon: "supports-clear-thinking", title: "Improved cognition & alertness" },
-    { icon: "social-composure", title: "Calm, balanced mood" },
-    { icon: "supports-focus-without-overload", title: "Sharper focus" },
-    { icon: "control-under-pressure", title: "Clean, sustained energy" },
+    { icon: "supports-clear-thinking", title: "Improved cognition & alertness*" },
+    { icon: "social-composure", title: "Calm, balanced mood*" },
+    { icon: "supports-focus-without-overload", title: "Sharper focus*" },
+    { icon: "control-under-pressure", title: "Clean, sustained energy*" },
   ],
 }
 
@@ -230,10 +230,10 @@ export default async function ProductPage({
                   }}
                 >
                   {key === "energy"
-                    ? "Instead of energy that spikes and crashes, AVRO is designed to support a smoother, more sustained curve. No crash. No jitters. Just good energy."
+                    ? "Instead of energy that spikes and crashes, AVRO is designed to support a smoother, more sustained curve. No crash. No jitters. Just good energy.*"
                     : key === "focus"
-                      ? "Instead of focus that fades, AVRO is designed to support a smoother, more sustained curve. No overstimulation. Just clear thinking."
-                      : "Instead of calm that makes you drowsy, AVRO is designed to support a smoother, more sustained baseline. No sedation. Just composure."}
+                      ? "Instead of focus that fades, AVRO is designed to support a smoother, more sustained curve. No overstimulation. Just clear thinking.*"
+                      : "Instead of calm that makes you drowsy, AVRO is designed to support a smoother, more sustained baseline. No sedation. Just composure.*"}
                 </p>
                 <style>{`
                   .pdp-learn-btn {

@@ -1,4 +1,5 @@
 import { type AvroIconName } from "@/components/avro-icons"
+import { ReviewTODO } from "@/components/compliance"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 
@@ -44,7 +45,7 @@ export const stacks: Stack[] = [
   {
     key: "focus",
     name: "AVRO Focus Stack",
-    claim: "This stack supports focus and productivity without caffeine.",
+    claim: "This stack supports focus and productivity without caffeine.*",
     tagline: "Powered by Naturally Fermented GABA — Without Caffeine",
     accent: "var(--avro-blue)",
     icon: "supports-focus-without-overload",
@@ -74,7 +75,7 @@ export const stacks: Stack[] = [
   {
     key: "energy",
     name: "AVRO Energy Stack",
-    claim: "This stack supports sustained energy and mental clarity.",
+    claim: "This stack supports sustained energy and mental clarity.*",
     tagline: "Powered by Naturally Fermented GABA — With Caffeine",
     accent: "var(--avro-blue)",
     icon: "mental-clarity",
@@ -104,7 +105,7 @@ export const stacks: Stack[] = [
   {
     key: "calm",
     name: "AVRO Calm Stack",
-    claim: "This stack supports stress reduction and improved sleep.",
+    claim: "This stack supports stress reduction and improved sleep.*",
     tagline: "Powered by Naturally Fermented GABA — With Magnesium",
     accent: "var(--avro-blue)",
     icon: "relaxation-reduced-tension",
@@ -197,6 +198,13 @@ export function IngredientStacks() {
               <FlavorCard key={flavor.name} flavor={flavor} />
             ))}
           </div>
+
+          <p className="mt-5 text-[13px] leading-relaxed">
+            <ReviewTODO>
+              Verify every active, amount, % DV, nutrition row, and &quot;other ingredients&quot;
+              line against the final approved {stack.name} label for each flavor.
+            </ReviewTODO>
+          </p>
         </section>
       ))}
     </div>

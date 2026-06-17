@@ -15,8 +15,8 @@ export const formulas = {
     bundlePrice: 24.95,
     caffeine: "No caffeine",
     headline: "Calm first. Clear headed. Ready when pressure rises.",
-    heroSupport: "Clear headed. Ready when pressure rises.",
-    support: "Calm support without stimulation.",
+    heroSupport: "Clear headed. Ready when pressure rises.*",
+    support: "Calm support without stimulation.*",
     bestFor:
       "Travel days, social calm, pre-match nerves and for a daily reset.",
     addition: "Magnesium Bisglycinate",
@@ -42,8 +42,8 @@ export const formulas = {
     bundlePrice: 24.95,
     caffeine: "No caffeine",
     headline: "Calm first. Clear headed. Ready to focus.",
-    heroSupport: "Clear headed. Ready to focus.",
-    support: "Clarity and focus support without caffeine.",
+    heroSupport: "Clear headed. Ready to focus.*",
+    support: "Clarity and focus support without caffeine.*",
     bestFor:
       "Deep work, competitive rounds, studying, creative work and longer attention blocks.",
     addition: "Cognigrape®",
@@ -68,8 +68,8 @@ export const formulas = {
     bundlePrice: 24.95,
     caffeine: "120 mg natural caffeine",
     headline: "Calm first. Steady energy. Ready when it matters.",
-    heroSupport: "Steady energy. Ready when it matters.",
-    support: "Natural caffeine with a calm-first foundation.",
+    heroSupport: "Steady energy. Ready when it matters.*",
+    support: "Natural caffeine with a calm-first foundation.*",
     bestFor:
       "Mornings, early start times, long workdays and steady energy with built in calm.",
     addition: "Natural Caffeine",
@@ -113,7 +113,7 @@ export const cohortData = {
   golf: {
     eyebrow: "Built for the game",
     title: "Built for the State Before the Round.",
-    copy: "AVRO supports calm, clarity, and composure before golf moments where state matters, from the first tee to the final stretch.",
+    copy: "AVRO supports calm, clarity, and composure before golf moments where state matters, from the first tee to the final stretch.*",
     visual: "golf",
     primary: "Choose Your Formula",
     secondary: "Shop AVRO",
@@ -177,7 +177,7 @@ export const cohortData = {
   social: {
     eyebrow: "Alcohol free social ritual",
     title: "Present. Clear. Alcohol Free.",
-    copy: "AVRO is a calm, clear, alcohol-free social ritual for gatherings, events and evening routines.",
+    copy: "AVRO is a calm, clear, alcohol-free social ritual for gatherings, events and evening routines.*",
     visual: "social",
     primary: "Shop AVRO",
     secondary: "Find Your Formula",
@@ -237,7 +237,7 @@ export const cohortData = {
   work: {
     eyebrow: "Built for modern work",
     title: "Built for the State Before the Work.",
-    copy: "AVRO supports calm, clarity, and composure before deep work, meetings, presentations, demos, coding sessions, and long workdays.",
+    copy: "AVRO supports calm, clarity, and composure before deep work, meetings, presentations, demos, coding sessions, and long workdays.*",
     visual: "work",
     primary: "Choose Your Formula",
     secondary: "Shop AVRO",

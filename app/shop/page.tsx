@@ -185,11 +185,11 @@ export default function ShopPage() {
           faqs={[
             [
               "What is AVRO?",
-              "AVRO is a calm-first daily drink mix designed to support calm, clarity, focus, and steady energy before pressure-sensitive moments.",
+              "AVRO is a calm-first daily drink mix designed to support calm, clarity, focus, and steady energy before pressure-sensitive moments.*",
             ],
             [
               "Which formula is right for me?",
-              "Choose Calm for caffeine-free composure, Focus for caffeine-free clarity support, or Energy for steady energy with 120 mg natural caffeine.",
+              "Choose Calm for caffeine-free composure, Focus for caffeine-free clarity support, or Energy for steady energy with 120 mg natural caffeine.*",
             ],
             [
               "Can I take AVRO every day?",

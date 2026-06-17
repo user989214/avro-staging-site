@@ -10,6 +10,7 @@ import { AvroIcon } from "@/components/avro-icons"
 import { PageHero } from "@/components/page-hero"
 import { FooterBanner } from "@/components/footer-banner"
 import { IngredientStacks } from "@/components/ingredient-stacks"
+import { ReviewTODO } from "@/components/compliance"
 
 export const metadata = {
   title: "Ingredients | AVRO",
@@ -70,6 +71,12 @@ export default function IngredientsPage() {
             Focus and Calm are caffeine-free. Only the Energy stack adds 120mg natural caffeine.
           </InfoCard>
         </div>
+        <p className="mt-5 text-[13px] leading-relaxed">
+          <ReviewTODO>
+            Confirm serving size, net weight, servings per box, and directions against the
+            final approved label before publishing.
+          </ReviewTODO>
+        </p>
       </CardedSection>
 
       {/* Per-stack labels: actives, nutrition facts, other ingredients */}
