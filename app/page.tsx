@@ -44,18 +44,18 @@ export default function HomePage() {
           font-weight: 700 !important;
         }
 
-        /* ── Hero CTA buttons → AVRO blue OUTLINE (no fill), fill on hover ────── */
+        /* ── Hero CTA buttons → BLACK OUTLINE, black fill + white text on hover ── */
         .home-theme .hp-pill-primary,
         .home-theme .hp-pill-secondary {
           background-color: transparent !important;
-          color: var(--avro-blue) !important;
-          border-color: var(--avro-blue) !important;
+          color: #000000 !important;
+          border-color: #000000 !important;
         }
         .home-theme .hp-pill-primary:hover,
         .home-theme .hp-pill-secondary:hover {
-          background-color: var(--avro-blue) !important;
-          border-color: var(--avro-blue) !important;
-          color: var(--charcoal) !important;
+          background-color: #000000 !important;
+          border-color: #000000 !important;
+          color: #FFFFFF !important;
         }
       `}</style>
 
