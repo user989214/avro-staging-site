@@ -32,11 +32,8 @@ const footerLinks = {
     { href: "/faq", label: "FAQ" },
   ],
   follow: [
-    // REVIEW: confirm correct social destinations (Instagram & LinkedIn flagged incorrect by legal/QA)
-    { href: "https://instagram.com/avrolife", label: "Instagram" },
-    { href: "https://tiktok.com/@avrolife", label: "TikTok" },
-    { href: "https://facebook.com/avrolife", label: "Facebook" },
-    { href: "https://linkedin.com/company/avrolife", label: "LinkedIn" },
+    { href: "https://www.instagram.com/avrohydrate", label: "Instagram" },
+    { href: "https://www.linkedin.com/company/avrohydrate", label: "LinkedIn" },
   ],
 }
 
