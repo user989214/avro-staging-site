@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { useCart } from "@/lib/cart-context"
 import { useThemeMode } from "@/lib/theme-context"
@@ -53,6 +54,8 @@ export function Header() {
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const themeMode = useThemeMode()
   const isZeroProof = themeMode === "zero-proof"
+  const pathname = usePathname()
+  const isGolf = pathname === "/golf" || pathname?.startsWith("/golf/")
 
   // Theme colors — Zero Proof uses deep-black + gold only
   const colors = isZeroProof
@@ -418,15 +421,23 @@ export function Header() {
 
         {/* Logo - center */}
         <Link
-          href="/"
-          className="flex items-center justify-center justify-self-center md:justify-self-auto w-[clamp(110px,12vw,160px)]"
-          aria-label="AVRO home"
+          href={isGolf ? "/golf" : "/"}
+          className={`flex items-center justify-center justify-self-center md:justify-self-auto ${
+            isGolf ? "w-[clamp(150px,18vw,230px)]" : "w-[clamp(110px,12vw,160px)]"
+          }`}
+          aria-label={isGolf ? "AVRO Golf home" : "AVRO home"}
         >
           <Image
-            src={isZeroProof ? "/avro-golden-social-logo.svg" : "/brand/avro-logo.svg"}
-            alt={isZeroProof ? "AVRO — social" : "AVRO"}
-            width={isZeroProof ? 632 : 178}
-            height={isZeroProof ? 204 : 58}
+            src={
+              isGolf
+                ? "/brand/avro-golf-logo.png"
+                : isZeroProof
+                  ? "/avro-golden-social-logo.svg"
+                  : "/brand/avro-logo.svg"
+            }
+            alt={isGolf ? "AVRO Golf" : isZeroProof ? "AVRO — social" : "AVRO"}
+            width={isGolf ? 460 : isZeroProof ? 632 : 178}
+            height={isGolf ? 138 : isZeroProof ? 204 : 58}
             className="w-full h-auto"
             priority
           />
