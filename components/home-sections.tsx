@@ -187,14 +187,8 @@ export function HomeRefHero() {
   // Lerp helpers
   const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 
-  // Section outer padding goes from 0 → normal as you scroll
-  const sectionPadX = lerp(0, 64, progress)
-  const sectionPadTop = lerp(0, 96, progress)
-  const sectionPadBottom = lerp(0, 80, progress)
-  const radius = lerp(0, 28, progress)
-  const imgScale = lerp(1.06, 1.0, progress)
-  // Compact enough so headline + lede + CTAs all fit on first load above the fold
-  const heroMinH = `clamp(560px, ${lerp(78, 56, progress)}vh, ${lerp(780, 680, progress)}px)`
+
+
 
   return (
     <section
@@ -202,11 +196,7 @@ export function HomeRefHero() {
         width: "100%",
         backgroundColor: "var(--base)",
         color: "var(--ink)",
-        paddingLeft: `clamp(${lerp(0, 20, progress)}px, ${5 * progress}vw, ${sectionPadX}px)`,
-        paddingRight: `clamp(${lerp(0, 20, progress)}px, ${5 * progress}vw, ${sectionPadX}px)`,
-        paddingTop: `clamp(${lerp(0, 48, progress)}px, ${7 * progress}vw, ${sectionPadTop}px)`,
-        paddingBottom: `clamp(${lerp(0, 48, progress)}px, ${6 * progress}vw, ${sectionPadBottom}px)`,
-        willChange: "padding",
+        padding: 0,
       }}
     >
       <style>{`
@@ -321,20 +311,18 @@ export function HomeRefHero() {
         .moment-card:hover img { transform: scale(1.04); }
       `}</style>
 
+      {/* 16:9 hero — image renders at its natural ratio, no crop or zoom */}
       <div
         className="hp-hero-container"
         style={{
           position: "relative",
-          maxWidth: lerp(2000, 1320, progress),
-          margin: "0 auto",
-          borderRadius: radius,
+          width: "100%",
+          aspectRatio: "16/9",
           overflow: "hidden",
           backgroundColor: "var(--bone)",
-          minHeight: heroMinH,
-          willChange: "border-radius, max-width, min-height",
         }}
       >
-        {/* Background images — all slides, opacity-based crossfade */}
+        {/* Desktop background images — all slides, opacity crossfade */}
         {slides.map((slide, idx) => (
           /* eslint-disable-next-line @next/next/no-img-element */
           <img
@@ -347,15 +335,15 @@ export function HomeRefHero() {
               inset: 0,
               width: "100%",
               height: "100%",
-              objectFit: "contain",
-              objectPosition: "right center",
+              objectFit: "cover",
+              objectPosition: "center center",
               opacity: currentSlide === idx ? 1 : 0,
               transition: "opacity 0.8s ease-in-out",
             }}
           />
         ))}
 
-        {/* Mobile background images — portrait crop, shown only on small screens */}
+        {/* Mobile background images — portrait, shown only on small screens */}
         {slides.map((slide, idx) => (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -370,7 +358,7 @@ export function HomeRefHero() {
               height: "100%",
               objectFit: "cover",
               objectPosition: "center top",
-              opacity: currentSlide === idx ? 0.6 : 0,
+              opacity: currentSlide === idx ? 1 : 0,
               transition: "opacity 0.8s ease-in-out",
             }}
           />
@@ -378,17 +366,16 @@ export function HomeRefHero() {
 
 
 
-        {/* Content grid sits on top */}
+        {/* Content grid sits on top of image */}
         <div
           className="hp-hero-grid"
           style={{
-            position: "relative",
-            display: "grid",
-            gridTemplateColumns: "1.05fr 1fr",
-            alignItems: "center",
-            gap: "clamp(32px,5vw,72px)",
-            padding: "clamp(36px,5vw,64px) clamp(28px,5vw,64px)",
-            minHeight: "inherit",
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "clamp(24px,4vw,64px) clamp(28px,5vw,64px)",
           }}
         >
           {/* Left */}
@@ -1056,7 +1043,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ─────────────����───────��─────���──────��────────��───����──────────������──
+// ── STORY STRIP ─────────────����───────��─────���──────��────────��───����──────────������─��
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>

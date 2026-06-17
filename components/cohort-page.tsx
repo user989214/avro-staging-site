@@ -277,25 +277,23 @@ export function CohortPage({ data }: { data: CohortData }) {
           }
         `}</style>
 
+        {/* 16:9 hero wrapper — image sits at its natural ratio, no crop or zoom */}
         <div
           style={{
             position: "relative",
             width: "100%",
-            margin: 0,
-            borderRadius: 0,
+            aspectRatio: "16/9",
             overflow: "hidden",
             backgroundColor: t.heroBg,
-            minHeight: "clamp(360px,50vh,560px)",
           }}
         >
-          {/* Desktop background image — hidden on mobile.
-              Golf rotates through three studio shots; other cohorts use a single photo. */}
+          {/* Desktop image — fills 16:9 naturally */}
           {isGolf ? (
             <GolfHeroRotator
               images={GOLF_HERO_IMAGES}
               mobileImages={GOLF_HERO_IMAGES_MOBILE}
               className="cohort-hero-image"
-              objectPosition="75% center"
+              objectPosition="center"
               alt={cohortHero[data.visual]?.alt ?? ""}
             />
           ) : (
@@ -310,22 +308,18 @@ export function CohortPage({ data }: { data: CohortData }) {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                objectPosition: "70% center",
+                objectPosition: "center center",
               }}
             />
           )}
 
-
-
-          {/* Mobile background image (9:16) — hidden on desktop.
-              Golf rotates the same three studio shots (dimmed for text legibility). */}
+          {/* Mobile portrait image — shown only on small screens */}
           {isGolf ? (
             <GolfHeroRotator
               images={GOLF_HERO_IMAGES}
               mobileImages={GOLF_HERO_IMAGES_MOBILE}
               className="cohort-hero-image-mobile"
               objectPosition="center"
-              opacity={0.55}
               alt={cohortHero[data.visual]?.alt ?? ""}
             />
           ) : (
@@ -341,7 +335,6 @@ export function CohortPage({ data }: { data: CohortData }) {
                 height: "100%",
                 objectFit: "cover",
                 objectPosition: "center top",
-                opacity: 0.55,
               }}
             />
           )}
@@ -350,14 +343,16 @@ export function CohortPage({ data }: { data: CohortData }) {
 
           <div
             style={{
-              position: "relative",
+              position: "absolute",
+              inset: 0,
               maxWidth: 1440,
               margin: "0 auto",
+              left: 0,
+              right: 0,
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              padding: "clamp(48px,7vw,128px) clamp(20px,5vw,64px)",
-              minHeight: "inherit",
+              padding: "clamp(24px,5vw,80px) clamp(20px,5vw,64px)",
               textAlign: "left",
               alignItems: "flex-start",
             }}

@@ -96,11 +96,14 @@ export default function ShopPage() {
           }
         `}</style>
 
+        {/* 16:9 hero — image sits at its natural ratio, no crop or zoom */}
         <div
           style={{
             position: "relative",
             width: "100%",
-            minHeight: "clamp(480px, 60vh, 620px)",
+            aspectRatio: "16/9",
+            overflow: "hidden",
+            backgroundColor: "var(--base-light)",
           }}
         >
           {/* Desktop background image */}
@@ -115,7 +118,7 @@ export default function ShopPage() {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "right center",
+              objectPosition: "center center",
             }}
           />
           {/* Mobile background image */}
@@ -132,20 +135,21 @@ export default function ShopPage() {
               height: "100%",
               objectFit: "cover",
               objectPosition: "center top",
-              opacity: 0.25,
             }}
           />
-          {/* Content */}
+          {/* Content overlay */}
           <div
             style={{
-              position: "relative",
+              position: "absolute",
+              inset: 0,
               maxWidth: 1440,
               margin: "0 auto",
+              left: 0,
+              right: 0,
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              padding: "clamp(88px,10vw,140px) clamp(20px,5vw,64px) clamp(64px,8vw,104px)",
-              minHeight: "inherit",
+              padding: "clamp(24px,5vw,80px) clamp(20px,5vw,64px)",
               textAlign: "left",
               alignItems: "flex-start",
             }}

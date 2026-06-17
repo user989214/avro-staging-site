@@ -204,95 +204,69 @@ export function PageHero({
         }
       `}</style>
 
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          margin: 0,
-          borderRadius: 0,
-          overflow: "hidden",
-          backgroundColor: "var(--base-light)",
-          minHeight: minH,
-        }}
-      >
+      {/* 16:9 wrapper — image sits naturally at full width with no crop or zoom */}
+      <div style={{ position: "relative", width: "100%", aspectRatio: "16/9", overflow: "hidden", backgroundColor: "var(--base-light)" }}>
+        {/* Desktop image — full width, 16:9, no objectFit distortion */}
         {imageSrc && (
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={imageSrc}
-              alt={imageAlt}
-              className={`ph-hero-img${mobileImageSrc ? " ph-hero-img-desktop" : ""}`}
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-                objectPosition: imageObjectPosition,
-              }}
-            />
-            {mobileImageSrc && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={mobileImageSrc}
-                alt={imageAlt}
-                className="ph-hero-img ph-hero-img-mobile"
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center top",
-                }}
-              />
-            )}
-
-
-          </>
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={imageSrc}
+            alt={imageAlt}
+            className={mobileImageSrc ? "ph-hero-img-desktop" : undefined}
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
+          />
+        )}
+        {/* Mobile portrait image */}
+        {mobileImageSrc && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={mobileImageSrc}
+            alt={imageAlt}
+            className="ph-hero-img-mobile"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+          />
         )}
 
+        {/* Content overlay — left-aligned text on top of image */}
         <div
           className="ph-hero-grid"
           style={{
-            position: "relative",
+            position: "absolute",
+            inset: 0,
             maxWidth: 1440,
             margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: imageSrc ? "1.05fr 1fr" : "1fr",
-            alignItems: "center",
-            gap: "clamp(32px,5vw,72px)",
-          padding: "clamp(56px,7vw,100px) clamp(20px,5vw,64px)",
-          minHeight: "inherit",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <AnimatedHeadline
-            text={title}
-            className="font-serif"
-            style={{
-              fontWeight: 900,
-              fontSize: compact
-                ? "clamp(32px,4.5vw,52px)"
-                : "clamp(36px,5vw,64px)",
-              lineHeight: 1,
-              letterSpacing: "-0.025em",
-              color: "var(--ink)",
-              marginBottom: 16,
-              maxWidth: 600,
-            }}
-          />
+            left: 0,
+            right: 0,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "clamp(32px,5vw,80px) clamp(20px,5vw,64px)",
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", maxWidth: 580 }}>
+            <AnimatedHeadline
+              text={title}
+              className="font-serif"
+              style={{
+                fontWeight: 900,
+                fontSize: compact ? "clamp(28px,3.5vw,48px)" : "clamp(32px,4vw,60px)",
+                lineHeight: 1,
+                letterSpacing: "-0.025em",
+                color: "var(--ink)",
+                marginBottom: 14,
+              }}
+            />
 
             <p
               className="ph-fade ph-lede"
               style={{
                 fontFamily: GC,
                 fontWeight: 500,
-                fontSize: "clamp(18px,1.7vw,21px)",
+                fontSize: "clamp(16px,1.4vw,20px)",
                 lineHeight: 1.5,
                 color: "rgba(0,0,0,0.72)",
-                maxWidth: 540,
-                marginBottom: children || primaryCta || secondaryCta ? 28 : 0,
+                maxWidth: 500,
+                marginBottom: children || primaryCta || secondaryCta ? 24 : 0,
               }}
             >
               {lede}
@@ -305,10 +279,7 @@ export function PageHero({
             )}
 
             {(primaryCta || secondaryCta) && (
-              <div
-                className="ph-fade ph-cta ph-pill-row"
-                style={{ marginTop: children ? 24 : 0 }}
-              >
+              <div className="ph-fade ph-cta ph-pill-row" style={{ marginTop: children ? 20 : 0 }}>
                 {primaryCta && (
                   <Link href={primaryCta.href} className="ph-pill-primary">
                     {primaryCta.label}
@@ -322,8 +293,6 @@ export function PageHero({
               </div>
             )}
           </div>
-
-          {imageSrc && <div aria-hidden="true" />}
         </div>
       </div>
     </section>
