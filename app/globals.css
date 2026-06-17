@@ -84,17 +84,17 @@
      AVRO Design System v2 — Main Cohort (avrolife.com)
      ============================================================ */
 
-  /* Surface — warm cream base (shared with Golf cohort) */
-  --base: #E9E7DB;          /* page background */
-  --base-light: #F2F0E8;    /* card surface, hover */
-  --base-deep: #DEDAD0;     /* alt sections, dividers */
-  --bone: #F5F0E8;          /* warm white on dark */
+  /* Surface — neutral white/grey (no beige) */
+  --base: #FFFFFF;          /* page background → white */
+  --base-light: #F2F2F2;    /* card surface, hover → light grey */
+  --base-deep: #EDEDED;     /* alt sections, dividers → light grey */
+  --bone: #FFFFFF;          /* white inner surfaces */
 
   /* Ink — warm dark instead of pure black */
   --charcoal: #151515;      /* dark sections, primary button, headlines */
   --ink: #1C1B14;           /* primary text */
   --warm-gray: #6B6857;     /* secondary copy, body */
-  --divider: #D5D2C6;       /* rules, card borders */
+  --divider: #E2E2E2;       /* rules, card borders */
 
   /* Main cohort accent */
   --avro-blue: #94C6D4;     /* primary accent, social proof stars, links */

@@ -591,7 +591,7 @@ export function CohortPage({ data }: { data: CohortData }) {
         style={{
           background: isZeroProof
             ? "var(--deep-black)"
-            : "linear-gradient(to bottom, #EAE6DC 0%, #DEDAD0 100%)",
+            : "var(--base-deep)",
         }}
       >
         <FaqBlock title={data.faqTitle} faqs={data.faqs} dark={isZeroProof} />
