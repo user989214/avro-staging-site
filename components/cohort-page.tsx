@@ -333,15 +333,17 @@ export function CohortPage({ data }: { data: CohortData }) {
             .cohort-hero-content.cohort-hero-zp p {
               color: var(--ink) !important;
             }
-            .cohort-hero-content.cohort-hero-zp .btn-primary-dark {
-              color: var(--bone) !important;
-              background-color: var(--ink) !important;
-              border-color: var(--ink) !important;
-            }
+            .cohort-hero-content.cohort-hero-zp .btn-primary-dark,
             .cohort-hero-content.cohort-hero-zp .btn-outline-dark {
-              color: var(--ink) !important;
+              color: var(--charcoal) !important;
               background-color: transparent !important;
-              border-color: var(--ink) !important;
+              border-color: var(--charcoal) !important;
+            }
+            .cohort-hero-content.cohort-hero-zp .btn-primary-dark:hover,
+            .cohort-hero-content.cohort-hero-zp .btn-outline-dark:hover {
+              background-color: var(--charcoal) !important;
+              color: var(--bone) !important;
+              border-color: var(--charcoal) !important;
             }
           }
         `}</style>
