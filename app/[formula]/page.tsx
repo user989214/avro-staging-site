@@ -214,10 +214,10 @@ export default async function ProductPage({
                   }}
                 >
                   {key === "energy"
-                    ? "AVRO's ingredients are formulated to work better together. Delivering steady energy in a convenient stick pack format."
+                    ? "AVRO's ingredients are formulated to work better together. Delivering steady energy in a convenient stick pack format.*"
                     : key === "focus"
-                      ? "AVRO's ingredients are formulated to work better together. Delivering steady focus in a convenient stick pack format."
-                      : "AVRO's ingredients are formulated to work better together. Delivering steady calm in a convenient stick pack format."}
+                      ? "AVRO's ingredients are formulated to work better together. Delivering steady focus in a convenient stick pack format.*"
+                      : "AVRO's ingredients are formulated to work better together. Delivering steady calm in a convenient stick pack format.*"}
                 </p>
                 <p
                   style={{
@@ -383,6 +383,25 @@ export default async function ProductPage({
                   </div>
                 </div>
               )}
+
+              {/* Data source attribution */}
+              <p
+                style={{
+                  fontFamily: GC,
+                  fontWeight: 400,
+                  fontSize: "clamp(11px,0.9vw,13px)",
+                  lineHeight: 1.5,
+                  color: "rgba(0,0,0,0.38)",
+                  marginTop: 10,
+                  gridColumn: "1 / -1",
+                }}
+              >
+                {key === "calm"
+                  ? "Source: Abdou et al. (2006). Relaxation and immunity enhancement effects of γ-aminobutyric acid (GABA) administration in humans. Biofactors, 26(3), 201–208. PharmaGABA® is a registered trademark of Pharma Foods International Co., Ltd."
+                  : key === "focus"
+                    ? "Source: Ota et al. (2020). GABA and Cognigrape® cognitive function study. PharmaGABA® and Cognigrape® are registered trademarks of their respective owners."
+                    : "For illustrative purposes only. Individual results may vary. Energy curve is a conceptual representation of ingredient-level kinetics and is not based on a single clinical trial.*"}
+              </p>
             </div>
           </div>
         </div>
@@ -581,7 +600,7 @@ export default async function ProductPage({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={footerBanner[key] || "/placeholder.svg"}
-            alt={`${item.name} ${item.flavor} — Calm equals power.`}
+            alt={`AVRO ${item.name} — Calm equals power.`}
             style={{
               display: "block",
               width: "100%",
@@ -594,6 +613,21 @@ export default async function ProductPage({
                 "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
             }}
           />
+          <p
+            style={{
+              fontFamily: GC,
+              fontWeight: 400,
+              fontSize: "clamp(11px,0.9vw,13px)",
+              lineHeight: 1.5,
+              color: "rgba(0,0,0,0.38)",
+              textAlign: "center",
+              marginTop: 12,
+              maxWidth: 600,
+              margin: "12px auto 0",
+            }}
+          >
+            Example serving shown. AVRO {item.name} is available in multiple flavors — flavor shown is for illustration only.
+          </p>
         </section>
       )}
 
