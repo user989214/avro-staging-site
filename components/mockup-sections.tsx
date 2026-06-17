@@ -153,38 +153,37 @@ export function MockupLogicRow() {
  */
 export function MockupBlueCta({ title, copy }: { title: string; copy: string }) {
   return (
-    <section style={{ width: "100%", backgroundColor: "var(--base)", padding: 0 }}>
+    <section style={{ width: "100%", backgroundColor: "var(--base)", padding: "0 0 16px" }}>
       <style>{`
         .mk-blue-card {
           width: calc(100% - 32px);
-          margin: 0 auto 16px;
+          margin: 0 auto;
           border-radius: 20px;
           overflow: hidden;
           background-color: var(--avro-blue);
           color: var(--charcoal);
         }
         .mk-blue-inner {
-          padding: clamp(40px,5vw,80px) clamp(32px,5vw,80px);
+          padding: clamp(48px,5vw,72px) clamp(40px,5vw,72px);
           display: flex;
           flex-direction: row;
-          flex-wrap: wrap;
           align-items: center;
           justify-content: space-between;
-          gap: 32px;
+          gap: 40px;
         }
-        /* Stacked solid-black pill buttons — matching the reference screenshot */
+        /* Stacked solid-black pill buttons — fixed width matching reference */
         .mk-blue-btn-stack {
           display: flex;
           flex-direction: column;
-          gap: 10px;
-          flex-shrink: 0;
-          min-width: 220px;
+          gap: 12px;
+          flex: 0 0 300px;
+          width: 300px;
         }
         .mk-blue-cta-btn {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 16px 36px;
+          padding: 18px 32px;
           border-radius: 999px;
           background-color: var(--charcoal);
           border: none;
@@ -193,21 +192,19 @@ export function MockupBlueCta({ title, copy }: { title: string; copy: string }) 
           font-weight: 700;
           font-size: 16px;
           text-decoration: none;
-          white-space: nowrap;
           transition: opacity .15s ease;
+          width: 100%;
         }
         .mk-blue-cta-btn:hover {
           opacity: 0.82;
         }
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           .mk-blue-inner {
             flex-direction: column;
             align-items: flex-start;
           }
           .mk-blue-btn-stack {
-            width: 100%;
-          }
-          .mk-blue-cta-btn {
+            flex: none;
             width: 100%;
           }
         }
