@@ -191,58 +191,96 @@ export function PageHero({
     >
       <style>{`
         ${SHARED_HERO_STYLES}
+        /* ── Desktop: 16:9 image with content overlaid ── */
+        .ph-hero-16x9 {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16/9;
+          overflow: hidden;
+          background-color: var(--base-light);
+        }
+        .ph-hero-16x9-content {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: clamp(32px,5vw,80px) clamp(20px,5vw,64px);
+        }
         .ph-hero-img-mobile { display: none; }
+        .ph-hero-img-desktop { display: block; }
+        /* ── Mobile: stacked — rounded image on top, text below ── */
         @media (max-width: 768px) {
-          .ph-hero-grid {
-            grid-template-columns: 1fr !important;
-            align-items: start !important;
-            padding: clamp(56px,9vw,80px) clamp(20px,5vw,28px) !important;
+          .ph-hero-16x9 {
+            aspect-ratio: unset !important;
+            height: auto !important;
+            overflow: visible !important;
+            display: flex;
+            flex-direction: column;
           }
-          .ph-hero-img { object-position: 65% 80% !important; }
+          .ph-hero-img-wrapper {
+            position: relative !important;
+            inset: unset !important;
+            width: calc(100% - 32px);
+            margin: 16px auto 0;
+            aspect-ratio: 4/3;
+            border-radius: 20px;
+            overflow: hidden;
+            flex-shrink: 0;
+          }
           .ph-hero-img-desktop { display: none !important; }
-          .ph-hero-img-mobile { display: block; }
+          .ph-hero-img-mobile { display: block !important; }
+          .ph-hero-16x9-content {
+            position: static !important;
+            padding: 24px 20px 32px !important;
+          }
+        }
+        @media (min-width: 769px) {
+          .ph-hero-img-wrapper {
+            position: absolute;
+            inset: 0;
+            border-radius: 0;
+          }
         }
       `}</style>
 
-      {/* 16:9 wrapper — image sits naturally at full width with no crop or zoom */}
-      <div style={{ position: "relative", width: "100%", aspectRatio: "16/9", overflow: "hidden", backgroundColor: "var(--base-light)" }}>
-        {/* Desktop image — full width, 16:9, no objectFit distortion */}
-        {imageSrc && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={imageSrc}
-            alt={imageAlt}
-            className={mobileImageSrc ? "ph-hero-img-desktop" : undefined}
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
-          />
-        )}
-        {/* Mobile portrait image */}
-        {mobileImageSrc && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={mobileImageSrc}
-            alt={imageAlt}
-            className="ph-hero-img-mobile"
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
-          />
-        )}
+      {/* Outer wrapper — 16:9 on desktop, column-stacked on mobile */}
+      <div className="ph-hero-16x9">
 
-        {/* Content overlay — left-aligned text on top of image */}
-        <div
-          className="ph-hero-grid"
-          style={{
-            position: "absolute",
-            inset: 0,
-            maxWidth: 1440,
-            margin: "0 auto",
-            left: 0,
-            right: 0,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            padding: "clamp(32px,5vw,80px) clamp(20px,5vw,64px)",
-          }}
-        >
+        {/* Image container — full-bleed on desktop, rounded-rect card on mobile */}
+        <div className="ph-hero-img-wrapper">
+          {imageSrc && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              className="ph-hero-img-desktop"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
+            />
+          )}
+          {mobileImageSrc && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={mobileImageSrc}
+              alt={imageAlt}
+              className="ph-hero-img-mobile"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+            />
+          )}
+          {/* Fallback: if no mobile src, show the desktop image on mobile too */}
+          {!mobileImageSrc && imageSrc && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              className="ph-hero-img-mobile"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
+            />
+          )}
+        </div>
+
+        {/* Content — overlaid on desktop, below image on mobile */}
+        <div className="ph-hero-16x9-content">
           <div style={{ display: "flex", flexDirection: "column", maxWidth: 580 }}>
             <AnimatedHeadline
               text={title}
@@ -250,7 +288,7 @@ export function PageHero({
               style={{
                 fontWeight: 900,
                 fontSize: compact ? "clamp(28px,3.5vw,48px)" : "clamp(32px,4vw,60px)",
-                lineHeight: 1,
+                lineHeight: 1.05,
                 letterSpacing: "-0.025em",
                 color: "var(--ink)",
                 marginBottom: 14,

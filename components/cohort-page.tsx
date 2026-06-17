@@ -268,95 +268,101 @@ export function CohortPage({ data }: { data: CohortData }) {
               color: ${wordEnd} !important;
             }
           }
+          /* ── Desktop: 16:9 with content overlaid ── */
+          .cohort-hero-16x9 {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+          }
+          .cohort-hero-image-mobile { display: none; }
+          .cohort-hero-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: clamp(24px,5vw,80px) clamp(20px,5vw,64px);
+            text-align: left;
+            align-items: flex-start;
+          }
+          /* ── Mobile: stacked — rounded image on top, text below ── */
           @media (max-width: 768px) {
+            .cohort-hero-16x9 {
+              aspect-ratio: unset !important;
+              overflow: visible !important;
+              display: flex;
+              flex-direction: column;
+            }
+            .cohort-hero-img-wrap {
+              position: relative;
+              width: calc(100% - 32px);
+              margin: 16px auto 0;
+              aspect-ratio: 4/3;
+              border-radius: 20px;
+              overflow: hidden;
+              flex-shrink: 0;
+            }
             .cohort-hero-image { display: none !important; }
             .cohort-hero-image-mobile { display: block !important; }
+            .cohort-hero-content {
+              position: static !important;
+              padding: 24px 20px 32px !important;
+            }
           }
           @media (min-width: 769px) {
             .cohort-hero-image-mobile { display: none !important; }
+            .cohort-hero-img-wrap {
+              position: absolute;
+              inset: 0;
+              border-radius: 0;
+            }
           }
         `}</style>
 
-        {/* 16:9 hero wrapper — image sits at its natural ratio, no crop or zoom */}
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            aspectRatio: "16/9",
-            overflow: "hidden",
-            backgroundColor: t.heroBg,
-          }}
-        >
-          {/* Desktop image — fills 16:9 naturally */}
-          {isGolf ? (
-            <GolfHeroRotator
-              images={GOLF_HERO_IMAGES}
-              mobileImages={GOLF_HERO_IMAGES_MOBILE}
-              className="cohort-hero-image"
-              objectPosition="center"
-              alt={cohortHero[data.visual]?.alt ?? ""}
-            />
-          ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={cohortHero[data.visual]?.src}
-              alt={cohortHero[data.visual]?.alt ?? ""}
-              className="cohort-hero-image"
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "center center",
-              }}
-            />
-          )}
+        {/* Outer wrapper — 16:9 on desktop, column-stacked on mobile */}
+        <div className="cohort-hero-16x9" style={{ backgroundColor: t.heroBg }}>
 
-          {/* Mobile portrait image — shown only on small screens */}
-          {isGolf ? (
-            <GolfHeroRotator
-              images={GOLF_HERO_IMAGES}
-              mobileImages={GOLF_HERO_IMAGES_MOBILE}
-              className="cohort-hero-image-mobile"
-              objectPosition="center"
-              alt={cohortHero[data.visual]?.alt ?? ""}
-            />
-          ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={cohortHeroMobile[data.visual]}
-              alt={cohortHero[data.visual]?.alt ?? ""}
-              className="cohort-hero-image-mobile"
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "center top",
-              }}
-            />
-          )}
+          {/* Image container — full-bleed on desktop, rounded-rect card on mobile */}
+          <div className="cohort-hero-img-wrap">
+            {isGolf ? (
+              <GolfHeroRotator
+                images={GOLF_HERO_IMAGES}
+                mobileImages={GOLF_HERO_IMAGES_MOBILE}
+                className="cohort-hero-image"
+                objectPosition="center"
+                alt={cohortHero[data.visual]?.alt ?? ""}
+              />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={cohortHero[data.visual]?.src}
+                alt={cohortHero[data.visual]?.alt ?? ""}
+                className="cohort-hero-image"
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
+              />
+            )}
+            {isGolf ? (
+              <GolfHeroRotator
+                images={GOLF_HERO_IMAGES}
+                mobileImages={GOLF_HERO_IMAGES_MOBILE}
+                className="cohort-hero-image-mobile"
+                objectPosition="center"
+                alt={cohortHero[data.visual]?.alt ?? ""}
+              />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={cohortHeroMobile[data.visual]}
+                alt={cohortHero[data.visual]?.alt ?? ""}
+                className="cohort-hero-image-mobile"
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+              />
+            )}
+          </div>
 
-
-
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              maxWidth: 1440,
-              margin: "0 auto",
-              left: 0,
-              right: 0,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              padding: "clamp(24px,5vw,80px) clamp(20px,5vw,64px)",
-              textAlign: "left",
-              alignItems: "flex-start",
-            }}
-          >
+          {/* Content — overlaid on desktop, below image on mobile */}
+          <div className="cohort-hero-content">
             {/* Eyebrow chip removed per design — title carries the moment via the per-cohort word animation. */}
             <h1
               className="font-serif"
@@ -404,8 +410,8 @@ export function CohortPage({ data }: { data: CohortData }) {
             <div className="cohort-fade cohort-cta">
               <CtaGroup primary={data.primary} secondary={data.secondary} dark={isZeroProof} hero />
             </div>
-          </div>
-        </div>
+          </div>{/* /cohort-hero-content */}
+        </div>{/* /cohort-hero-16x9 */}
       </section>
 
       <Section dark={isZeroProof}>

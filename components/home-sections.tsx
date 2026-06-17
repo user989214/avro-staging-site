@@ -237,24 +237,54 @@ export function HomeRefHero() {
           .hp-pill-row { flex-direction: column; align-items: stretch; max-width: 320px !important; }
           .hp-pill-primary, .hp-pill-secondary { width: 100%; flex: 0 0 auto; }
         }
+  /* ── Desktop: 16:9 image with content overlaid ── */
   .hp-hero-img-mobile { display: none; }
-  @media (max-width: 768px) {
   .hp-hero-container {
-    max-width: 100% !important;
-    width: 100% !important;
-    border-radius: 0 !important;
-    min-height: 520px !important;
-    background: var(--base-light) !important;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background-color: var(--bone);
   }
-          .hp-hero-grid {
-            grid-template-columns: 1fr !important;
-            align-items: end !important;
-            padding: clamp(48px,10vw,80px) clamp(20px,5vw,28px) clamp(40px,8vw,64px) !important;
-            background: transparent !important;
-          }
-          .hp-hero-img { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-          .hp-hero-img-mobile { display: block; }
-        }
+  .hp-hero-grid {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(24px,4vw,64px) clamp(28px,5vw,64px);
+  }
+  /* ── Mobile: stacked — rounded image on top, text below ── */
+  @media (max-width: 768px) {
+    .hp-hero-container {
+      aspect-ratio: unset !important;
+      overflow: visible !important;
+      display: flex;
+      flex-direction: column;
+    }
+    .hp-hero-img-wrap {
+      position: relative;
+      width: calc(100% - 32px);
+      margin: 16px auto 0;
+      aspect-ratio: 4/3;
+      border-radius: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .hp-hero-img { display: none !important; }
+    .hp-hero-img-mobile { display: block !important; }
+    .hp-hero-grid {
+      position: static !important;
+      padding: 24px 20px 32px !important;
+    }
+  }
+  @media (min-width: 769px) {
+    .hp-hero-img-wrap {
+      position: absolute;
+      inset: 0;
+      border-radius: 0;
+    }
+  }
         .hp-pill-primary {
           background-color: transparent;
           color: var(--charcoal);
@@ -311,73 +341,58 @@ export function HomeRefHero() {
         .moment-card:hover img { transform: scale(1.04); }
       `}</style>
 
-      {/* 16:9 hero — image renders at its natural ratio, no crop or zoom */}
-      <div
-        className="hp-hero-container"
-        style={{
-          position: "relative",
-          width: "100%",
-          aspectRatio: "16/9",
-          overflow: "hidden",
-          backgroundColor: "var(--bone)",
-        }}
-      >
-        {/* Desktop background images — all slides, opacity crossfade */}
-        {slides.map((slide, idx) => (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            key={idx}
-            src={slide.image}
-            alt={slide.alt}
-            className="hp-hero-img"
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center center",
-              opacity: currentSlide === idx ? 1 : 0,
-              transition: "opacity 0.8s ease-in-out",
-            }}
-          />
-        ))}
+      {/* Outer wrapper — 16:9 on desktop, column-stacked on mobile */}
+      <div className="hp-hero-container">
 
-        {/* Mobile background images — portrait, shown only on small screens */}
-        {slides.map((slide, idx) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            key={`mob-${idx}`}
-            src={slide.mobileImage}
-            alt={slide.alt}
-            className="hp-hero-img-mobile"
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center top",
-              opacity: currentSlide === idx ? 1 : 0,
-              transition: "opacity 0.8s ease-in-out",
-            }}
-          />
-        ))}
+        {/* Image container — full-bleed on desktop, rounded-rect card on mobile */}
+        <div className="hp-hero-img-wrap">
+          {/* Desktop slides */}
+          {slides.map((slide, idx) => (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              key={idx}
+              src={slide.image}
+              alt={slide.alt}
+              className="hp-hero-img"
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center center",
+                opacity: currentSlide === idx ? 1 : 0,
+                transition: "opacity 0.8s ease-in-out",
+              }}
+            />
+          ))}
+
+          {/* Mobile slides */}
+          {slides.map((slide, idx) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={`mob-${idx}`}
+              src={slide.mobileImage}
+              alt={slide.alt}
+              className="hp-hero-img-mobile"
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center top",
+                opacity: currentSlide === idx ? 1 : 0,
+                transition: "opacity 0.8s ease-in-out",
+              }}
+            />
+          ))}
+        </div>{/* /hp-hero-img-wrap */}
 
 
 
-        {/* Content grid sits on top of image */}
-        <div
-          className="hp-hero-grid"
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            padding: "clamp(24px,4vw,64px) clamp(28px,5vw,64px)",
-          }}
-        >
+        {/* Content — overlaid on desktop, below image on mobile */}
+        <div className="hp-hero-grid">
           {/* Left */}
           <div style={{ display: "flex", flexDirection: "column" }}>
           {/* Hero headline — slides with fade */}
