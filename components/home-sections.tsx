@@ -673,7 +673,6 @@ export function HomeBenefitRow() {
                 <img
                   src={b.image || "/placeholder.svg"}
                   alt=""
-                  aria-hidden="true"
                   style={{
                     position: "absolute",
                     inset: 0,
@@ -683,49 +682,6 @@ export function HomeBenefitRow() {
                     objectPosition: b.focal,
                   }}
                 />
-                {/* Bottom-up scrim keeps the title + copy legible */}
-                <div
-                  aria-hidden="true"
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "linear-gradient(to top, rgba(11,18,32,0.86) 0%, rgba(11,18,32,0.62) 32%, rgba(11,18,32,0.18) 62%, rgba(11,18,32,0) 100%)",
-                    pointerEvents: "none",
-                  }}
-                />
-                <h3
-                  className={`hp-benefit-title ${visible ? "is-visible" : ""}`}
-                  style={{
-                    position: "relative",
-                    fontFamily: GC,
-                    fontWeight: 700,
-                    fontSize: "clamp(20px,2vw,28px)",
-                    lineHeight: 1.12,
-                    color: "#fff",
-                    letterSpacing: "-0.02em",
-                    margin: 0,
-                    textWrap: "balance",
-                    animationDelay: `${(cardDelay + 0.1).toFixed(2)}s`,
-                  }}
-                >
-                  {b.title}
-                </h3>
-                <p
-                  className={`hp-benefit-copy ${visible ? "is-visible" : ""}`}
-                  style={{
-                    position: "relative",
-                    fontFamily: GC,
-                    fontWeight: 400,
-                    fontSize: "clamp(13px,1.1vw,16px)",
-                    lineHeight: 1.5,
-                    color: "rgba(255,255,255,0.92)",
-                    margin: 0,
-                    animationDelay: `${(cardDelay + 0.25).toFixed(2)}s`,
-                  }}
-                >
-                  {b.copy}
-                </p>
               </div>
             )
           })}
