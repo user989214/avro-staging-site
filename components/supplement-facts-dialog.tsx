@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog"
 import { Icon } from "@/components/icons"
 import type { Formula, FormulaKey } from "@/lib/data"
+import { cn } from "@/lib/utils"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const LIGHT_GRAY = "#f2f2f2"
