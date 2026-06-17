@@ -258,32 +258,33 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
               >
                 Simple 3-step ritual
               </h3>
-              <div className="space-y-4 lg:space-y-6">
+              <div className="space-y-5 lg:space-y-7">
                 {[
                   { n: 1, title: "Pour", body: "Empty one stick into 8-12 oz of cold water." },
                   { n: 2, title: "Mix", body: "Stir or shake until fully dissolved." },
                   { n: 3, title: "Drink", body: "Enjoy 20-30 minutes before your moment." },
                 ].map((step) => (
-                  <div key={step.n} className="flex items-start gap-4 lg:gap-6">
+                  <div key={step.n} className="flex items-baseline gap-5">
                     <span
                       style={{
                         fontFamily: GC,
                         fontWeight: 700,
-                        fontSize: "clamp(32px,4vw,56px)",
+                        fontSize: "clamp(36px,4vw,52px)",
                         lineHeight: 1,
                         color: "var(--ink)",
                         flexShrink: 0,
-                        width: "clamp(28px,3.2vw,48px)",
+                        width: 44,
                         textAlign: "right",
+                        display: "inline-block",
                       }}
                     >
                       {step.n}
                     </span>
-                    <div style={{ paddingTop: "clamp(3px,0.3vw,6px)" }}>
-                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(15px,1.5vw,21px)", color: "var(--ink)", display: "block", marginBottom: 4 }}>
+                    <div>
+                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(15px,1.4vw,20px)", color: "var(--ink)", display: "block", marginBottom: 3 }}>
                         {step.title}
                       </span>
-                      <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(14px,1.3vw,19px)", lineHeight: 1.4, color: "rgba(0,0,0,0.6)" }}>
+                      <p style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(14px,1.2vw,18px)", lineHeight: 1.45, color: "rgba(0,0,0,0.6)" }}>
                         {step.body}
                       </p>
                     </div>
