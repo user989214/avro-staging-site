@@ -423,7 +423,7 @@ export function Header() {
         <Link
           href={isGolf ? "/golf" : "/"}
           className={`flex items-center justify-center justify-self-center md:justify-self-auto ${
-            isGolf ? "w-[clamp(150px,18vw,230px)]" : "w-[clamp(110px,12vw,160px)]"
+            isGolf ? "w-[clamp(118px,13vw,168px)]" : "w-[clamp(110px,12vw,160px)]"
           }`}
           aria-label={isGolf ? "AVRO Golf home" : "AVRO home"}
         >
