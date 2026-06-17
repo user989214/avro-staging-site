@@ -47,21 +47,6 @@ const team = [
   },
 ]
 
-const values = [
-  {
-    title: "State before stimulation",
-    body: "Most products in this category push harder. AVRO starts by setting the baseline — calm, focus, or energy — so the moment can carry itself.",
-  },
-  {
-    title: "Ingredients with a reason",
-    body: "Every input earns its place: naturally fermented PharmaGABA®, whole-fruit polyphenols, prebiotic fiber, and clean support. No proprietary blends, no filler.",
-  },
-  {
-    title: "Built for real moments",
-    body: "Designed for the tee box, the pitch deck, the late table, the dinner party — wherever you want to show up as yourself.",
-  },
-]
-
 export default function AboutPage() {
   return (
     <>
@@ -109,29 +94,6 @@ export default function AboutPage() {
             &ldquo;Calm is not the opposite of performance. It is often what
             makes it possible.&rdquo;
           </p>
-        </div>
-      </Section>
-
-      {/* Values */}
-      <Section className="bg-cream/40">
-        <SectionHeading
-          title="Built on one clear belief."
-          description="Performance starts with composure. That belief shaped every formula, every ingredient, and every decision at AVRO."
-        />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-[1100px] mx-auto">
-          {values.map((v) => (
-            <div
-              key={v.title}
-              className="flex flex-col gap-3 p-6 bg-base-light rounded-2xl"
-            >
-              <h3 className="font-serif font-black text-lg md:text-xl leading-tight">
-                {v.title}
-              </h3>
-              <p className="text-muted-foreground text-[14px] md:text-[15px] leading-relaxed">
-                {v.body}
-              </p>
-            </div>
-          ))}
         </div>
       </Section>
 
@@ -184,7 +146,7 @@ export default function AboutPage() {
                 alt="AVRO co-founders Keigo Sugawara and Peter van Stolk"
                 fill
                 sizes="(min-width: 1024px) 1200px, 100vw"
-                className="object-cover grayscale contrast-[1.05] brightness-[0.98]"
+                className="object-cover"
               />
             </div>
           </div>
