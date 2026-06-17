@@ -264,7 +264,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   { n: 2, title: "Mix", body: "Stir or shake until fully dissolved." },
                   { n: 3, title: "Drink", body: "Enjoy 20-30 minutes before your moment." },
                 ].map((step) => (
-                  <div key={step.n} className="flex items-baseline gap-5">
+                  <div key={step.n} className="flex items-start gap-5">
                     <span
                       style={{
                         fontFamily: GC,
@@ -273,14 +273,15 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                         lineHeight: 1,
                         color: "var(--ink)",
                         flexShrink: 0,
-                        width: 44,
-                        textAlign: "right",
+                        width: 40,
+                        textAlign: "left",
                         display: "inline-block",
+                        paddingTop: 2,
                       }}
                     >
                       {step.n}
                     </span>
-                    <div>
+                    <div style={{ paddingTop: "clamp(6px,0.55vw,10px)" }}>
                       <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(15px,1.4vw,20px)", color: "var(--ink)", display: "block", marginBottom: 3 }}>
                         {step.title}
                       </span>
