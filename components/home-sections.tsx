@@ -595,16 +595,22 @@ export function HomeBenefitRow() {
       title: "Supports composure under pressure",
       copy: "Helps you steady first before the moment matters — so you arrive ready, not reactive.",
       tone: "blue" as const,
+      image: "/images/home/benefit-golf.png",
+      focal: "center 30%",
     },
     {
       title: "Supports clear-headed readiness",
       copy: "Calm, clear, and in control — without the spike or the crash.",
       tone: "blue" as const,
+      image: "/images/home/benefit-bar.png",
+      focal: "center 40%",
     },
     {
   title: "Supports calm while helping you stay present",
   copy: "Designed to support composure without turning you off. Quiet focus, fully online.",
       tone: "blue" as const,
+      image: "/images/home/benefit-community.png",
+      focal: "center 35%",
     },
   ]
 
@@ -687,6 +693,8 @@ export function HomeBenefitRow() {
                 key={b.title}
                 ref={(el) => { cardRefs.current[i] = el }}
                 style={{
+                  position: "relative",
+                  overflow: "hidden",
                   backgroundColor: BLUE,
                   borderRadius: 20,
                   padding: "clamp(24px,3vw,40px) clamp(24px,3vw,44px)",
@@ -694,20 +702,46 @@ export function HomeBenefitRow() {
                   display: "flex",
                   flexDirection: "column",
                   gap: 12,
-                  justifyContent: "space-between",
+                  justifyContent: "flex-end",
                   opacity: visible ? 1 : 0,
                   transform: visible ? "translateY(0) scale(1)" : "translateY(28px) scale(0.985)",
                   transition: `opacity 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s, transform 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s`,
                 }}
               >
+                {/* Photo fill, cropped to the box */}
+                <img
+                  src={b.image || "/placeholder.svg"}
+                  alt=""
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: b.focal,
+                  }}
+                />
+                {/* Bottom-up scrim keeps the title + copy legible */}
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "linear-gradient(to top, rgba(11,18,32,0.86) 0%, rgba(11,18,32,0.62) 32%, rgba(11,18,32,0.18) 62%, rgba(11,18,32,0) 100%)",
+                    pointerEvents: "none",
+                  }}
+                />
                 <h3
                   className={`hp-benefit-title ${visible ? "is-visible" : ""}`}
                   style={{
+                    position: "relative",
                     fontFamily: GC,
                     fontWeight: 700,
                     fontSize: "clamp(20px,2vw,28px)",
                     lineHeight: 1.12,
-                    color: "var(--ink)",
+                    color: "#fff",
                     letterSpacing: "-0.02em",
                     margin: 0,
                     textWrap: "balance",
@@ -719,11 +753,12 @@ export function HomeBenefitRow() {
                 <p
                   className={`hp-benefit-copy ${visible ? "is-visible" : ""}`}
                   style={{
+                    position: "relative",
                     fontFamily: GC,
                     fontWeight: 400,
                     fontSize: "clamp(13px,1.1vw,16px)",
                     lineHeight: 1.5,
-                    color: "var(--ink)",
+                    color: "rgba(255,255,255,0.92)",
                     margin: 0,
                     animationDelay: `${(cardDelay + 0.25).toFixed(2)}s`,
                   }}
