@@ -252,7 +252,7 @@ export function ProductCards({
                   />
                 </div>
                 <h3 style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(22px,2vw,32px)", color: ink, margin: 0 }}>{item.name}</h3>
-                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.45, color: muted, margin: 0 }}>{item.support}</p>
+                <p style={{ fontFamily: GC_FINAL, fontWeight: 400, fontSize: "clamp(16px,1.3vw,20px)", lineHeight: 1.45, color: muted, margin: 0, minHeight: "2.9em" }}>{item.support}</p>
                 <div style={{ borderTop: `1px solid ${border}`, paddingTop: 16, display: "flex", flexDirection: "column", gap: 12 }}>
                   <div>
                     <span style={{ fontFamily: GC_FINAL, fontWeight: 700, fontSize: "clamp(14px,1.1vw,17px)", color: ink }}>Best For:</span>
