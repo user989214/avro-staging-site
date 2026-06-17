@@ -487,10 +487,10 @@ export function HomeRefHero() {
 
 // ── PROOF BAR ────────────────────────────────────────────────────────────────
 export function HomeProofBar() {
-  const stats: { value: number; suffix: string; decimals: number; label: string }[] = [
-    { value: 4.8, suffix: "/5", decimals: 1, label: "Average customer rating" },
-    { value: 25000, suffix: "+", decimals: 0, label: "Customer reviews" },
-    { value: 100000, suffix: "+", decimals: 0, label: "Sticks sold" },
+  const stacks: { name: string }[] = [
+    { name: "AVRO Calm" },
+    { name: "AVRO Focus" },
+    { name: "AVRO Energy" },
   ]
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(32px,5vw,56px) clamp(16px,4vw,64px)" }}>
@@ -520,22 +520,16 @@ export function HomeProofBar() {
             }
           }
         `}</style>
-        {stats.map((item, i) => (
+        {stacks.map((item) => (
           <div
-            key={item.label}
+            key={item.name}
             className="proof-stat"
-            style={{ padding: "clamp(16px,2.5vw,36px) clamp(12px,2vw,32px)", textAlign: "center" }}
+            style={{ padding: "clamp(16px,2.5vw,36px) clamp(12px,2vw,32px)", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}
           >
-            <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(24px,3vw,48px)", lineHeight: 1.0, display: "block" }}>
-              <CountUpStat
-                value={item.value}
-                suffix={item.suffix}
-                decimals={item.decimals}
-                duration={1800}
-                delay={150 + i * 200}
-              />
+            <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(22px,3vw,42px)", lineHeight: 1.0, color: "var(--ink)", letterSpacing: "-0.02em" }}>
+              {item.name}
             </strong>
-            <span style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(12px,1.2vw,18px)", color: "var(--warm-gray)", marginTop: 4, display: "block" }}>{item.label}</span>
+            <StarRating />
           </div>
         ))}
       </div>
@@ -543,47 +537,14 @@ export function HomeProofBar() {
   )
 }
 
-function CountUpStat({ value, suffix = "", decimals = 0, duration = 1800, delay = 0 }: { value: number; suffix?: string; decimals?: number; duration?: number; delay?: number }) {
-  const [display, setDisplay] = useState(0)
-  const [colorPhase, setColorPhase] = useState(true)
-
-  useEffect(() => {
-    let raf = 0
-    let startTs = 0
-    const startTimeout = setTimeout(() => {
-      const animate = (ts: number) => {
-        if (!startTs) startTs = ts
-        const t = Math.min(1, (ts - startTs) / duration)
-        const eased = 1 - Math.pow(1 - t, 3)
-        setDisplay(value * eased)
-        if (t < 1) {
-          raf = requestAnimationFrame(animate)
-        } else {
-          setTimeout(() => setColorPhase(false), 180)
-        }
-      }
-      raf = requestAnimationFrame(animate)
-    }, delay)
-    return () => {
-      clearTimeout(startTimeout)
-      cancelAnimationFrame(raf)
-    }
-  }, [value, duration, delay])
-
-  const formatted = decimals > 0
-    ? display.toFixed(decimals)
-    : Math.round(display).toLocaleString("en-US")
-
+function StarRating() {
   return (
-    <span
-      style={{
-        color: colorPhase ? "var(--avro-blue)" : "var(--ink)",
-        transition: "color 0.7s cubic-bezier(0.22,1,0.36,1)",
-        display: "inline-block",
-        fontVariantNumeric: "tabular-nums",
-      }}
-    >
-      {formatted}{suffix}
+    <span role="img" aria-label="Rated 5 out of 5 stars" style={{ display: "inline-flex", gap: "clamp(2px,0.4vw,6px)" }}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg key={i} width="22" height="22" viewBox="0 0 24 24" fill="var(--avro-blue)" aria-hidden="true" style={{ width: "clamp(16px,1.6vw,24px)", height: "auto" }}>
+          <path d="M12 2.25l2.955 5.988 6.61.96-4.783 4.66 1.129 6.583L12 17.347l-5.911 3.094 1.129-6.583L2.435 9.198l6.61-.96L12 2.25z" />
+        </svg>
+      ))}
     </span>
   )
 }

@@ -66,7 +66,7 @@ export function SocialProofSection({ formulaKey }: SocialProofSectionProps) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {quotes.map((item, i) => (
           <div
-            key={item.name}
+            key={`${item.name}-${i}`}
             className="group relative bg-base rounded-2xl border border-line overflow-hidden transition-all hover:-translate-y-1 hover:shadow-lg"
           >
             {/* Image placeholder - using gradient for now */}
