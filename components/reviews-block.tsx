@@ -8,7 +8,7 @@ interface ReviewsBlockProps {
   formulaKey: FormulaKey
 }
 
-const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: string; body: string; size: string }[]> = {
+const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: string; body: string; size: string; flavor: string }[]> = {
   calm: [
     {
       name: "Jessica M.",
@@ -16,6 +16,7 @@ const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: st
       title: "Composed without feeling dull",
       body: "Helps me stay composed without feeling dull. I take it before meetings and travel. Easily part of my routine.",
       size: "30 Sticks",
+      flavor: "Blackberry Jasmine",
     },
     {
       name: "Anonymous",
@@ -23,6 +24,7 @@ const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: st
       title: "Better than I expected",
       body: "Smooth taste, no aftertaste. I notice a calmer baseline within about 30 minutes.",
       size: "10 Sticks",
+      flavor: "Red Dragon Fruit",
     },
     {
       name: "Samantha B.",
@@ -30,6 +32,7 @@ const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: st
       title: "Perfect blend",
       body: "Loved this flavor and how it makes me feel. Calm without being sleepy.",
       size: "30 Sticks",
+      flavor: "Blackberry Jasmine",
     },
     {
       name: "Kathy P.",
@@ -37,6 +40,7 @@ const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: st
       title: "Love this flavor",
       body: "Great flavor, and it actually helps before high-pressure days. Will keep restocking.",
       size: "60 Sticks",
+      flavor: "Red Dragon Fruit",
     },
   ],
   focus: [
@@ -46,6 +50,7 @@ const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: st
       title: "Stays clear and steady",
       body: "I use Focus before important meetings and it helps me stay clear and on point without the caffeine edge.",
       size: "30 Sticks",
+      flavor: "Pomegranate Raspberry",
     },
     {
       name: "Priya R.",
@@ -53,6 +58,7 @@ const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: st
       title: "Great for deep work",
       body: "Drink one before a long writing block and the difference is real. Tastes clean too.",
       size: "30 Sticks",
+      flavor: "Fuji Apple",
     },
     {
       name: "Anonymous",
@@ -60,6 +66,7 @@ const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: st
       title: "Subtle but reliable",
       body: "Not flashy, just dependable. I notice fewer scattered moments during the workday.",
       size: "10 Sticks",
+      flavor: "Pomegranate Raspberry",
     },
     {
       name: "David K.",
@@ -67,6 +74,7 @@ const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: st
       title: "My new pre-meeting drink",
       body: "Replaced my second coffee. I am steadier and clearer all afternoon.",
       size: "60 Sticks",
+      flavor: "Fuji Apple",
     },
   ],
   energy: [
@@ -76,6 +84,7 @@ const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: st
       title: "Calm-first energy is real",
       body: "Love the taste and how it fits my routine. It feels calm-first, not jittery.",
       size: "30 Sticks",
+      flavor: "Blood Orange",
     },
     {
       name: "Jordan L.",
@@ -83,6 +92,7 @@ const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: st
       title: "Perfect morning lift",
       body: "Lift without the crash. Great before early tee times and long workdays.",
       size: "30 Sticks",
+      flavor: "Yuzu Ginger",
     },
     {
       name: "Anonymous",
@@ -90,13 +100,15 @@ const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: st
       title: "Smooth caffeine",
       body: "Steady, controlled energy. I do not feel tense like with normal energy drinks.",
       size: "10 Sticks",
+      flavor: "Blood Orange",
     },
     {
       name: "Erin H.",
       date: "05/09/2026",
       title: "Clean and tasty",
-      body: "Bright orange flavor without being sweet. Easy daily addition.",
+      body: "Bright citrus flavor without being sweet. Easy daily addition.",
       size: "60 Sticks",
+      flavor: "Yuzu Ginger",
     },
   ],
 }
@@ -104,15 +116,16 @@ const REVIEWS_BY_KEY: Record<FormulaKey, { name: string; date: string; title: st
 export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
   const reviews = REVIEWS_BY_KEY[formulaKey]
   const reviewCount = formulaKey === "calm" ? 82 : formulaKey === "focus" ? 62 : 76
+  const flavorNames = formula.flavors.map((f) => f.name).join(" & ")
 
   return (
     <section className="w-full max-w-[1280px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(48px,6vw,80px)]" style={{ backgroundColor: "var(--base)" }}>
-      {/* Summary bar — clean, rounded, like reference */}
+      {/* Summary bar */}
       <div
         className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6 p-5 lg:p-6 mb-10"
         style={{ backgroundColor: "var(--base-light)", borderRadius: 20, border: "1px solid var(--line)" }}
       >
-        {/* Product mini */}
+        {/* Product mini — shows formula icon + all flavors */}
         <div className="flex items-center gap-4 shrink-0">
           <div
             className="relative flex items-center justify-center w-14 h-14 overflow-hidden border border-line"
@@ -120,22 +133,20 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
           >
             {(() => {
               const { src, alt } = stickImageFor(formulaKey)
-              return (
-                <img src={src} alt={alt} className="h-12 w-auto object-contain" />
-              )
+              return <img src={src} alt={alt} className="h-12 w-auto object-contain" />
             })()}
           </div>
           <div>
             <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: 17, color: "var(--ink)", display: "block", lineHeight: 1.1 }}>
               {formula.name}
             </strong>
-            <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 14, color: "var(--warm-gray)", display: "block", marginTop: 2 }}>
-              {formula.flavor}
+            <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 13, color: "var(--warm-gray)", display: "block", marginTop: 2 }}>
+              All flavors &middot; {flavorNames}
             </span>
           </div>
         </div>
 
-        {/* Rating block - centered on desktop */}
+        {/* Rating block */}
         <div className="flex items-center gap-3 lg:ml-auto">
           <strong style={{ fontFamily: GC, fontWeight: 800, fontSize: 32, lineHeight: 1, color: "var(--ink)" }}>4.8</strong>
           <div className="flex flex-col">
@@ -164,7 +175,7 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
         </button>
       </div>
 
-      {/* Review grid — cleaner, tighter */}
+      {/* Review grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-7">
         {reviews.map((r) => (
           <article key={r.name + r.title} className="pb-6" style={{ borderBottom: "1px solid var(--line)" }}>
@@ -175,8 +186,9 @@ export function ReviewsBlock({ formula, formulaKey }: ReviewsBlockProps) {
             <span style={{ fontSize: 13, letterSpacing: 1.5, color: "var(--ink)" }}>{"\u2605\u2605\u2605\u2605\u2605"}</span>
             <h3 style={{ fontFamily: GC, fontWeight: 800, fontSize: 16, color: "var(--ink)", marginTop: 8 }}>{r.title}</h3>
             <p style={{ fontFamily: GC, fontWeight: 400, fontSize: 15, color: "var(--warm-gray)", lineHeight: 1.55, marginTop: 6 }}>{r.body}</p>
+            {/* Each review shows its own specific flavor */}
             <p className="mt-3" style={{ fontFamily: GC, fontWeight: 500, fontSize: 12, color: "var(--warm-gray)" }}>
-              {formula.flavor} &middot; {r.size}
+              {r.flavor} &middot; {r.size}
             </p>
           </article>
         ))}
