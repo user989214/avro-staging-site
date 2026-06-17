@@ -16,6 +16,7 @@ interface ProductGalleryProps {
   formulaKey: FormulaKey
   flavorId: string
   onFlavorChange?: (flavorId: string) => void
+  onMainImageClick?: () => void
   reviewCount?: number
   rating?: number
 }
@@ -43,7 +44,7 @@ const SCENE_THUMBS: Thumb[] = [
   { id: "gaming", label: TUBE_SCENE_LABELS.gaming, bg: "scene" },
 ]
 
-export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rating = 4.8 }: ProductGalleryProps) {
+export function ProductGallery({ formula, formulaKey, flavorId, onMainImageClick, reviewCount, rating = 4.8 }: ProductGalleryProps) {
   const [activeId, setActiveId] = useState<ThumbKind>("studio")
 
   const studio = tubeImageFor("studio", formulaKey, flavorId)
@@ -224,8 +225,13 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
         </ul>
       </div>
 
-      {/* Main view — bright cream tile that pops on the section bg */}
+      {/* Main view ��� bright cream tile that pops on the section bg */}
       <div
+        role={onMainImageClick ? "button" : undefined}
+        tabIndex={onMainImageClick ? 0 : undefined}
+        aria-label={onMainImageClick ? "Add to cart" : undefined}
+        onClick={onMainImageClick}
+        onKeyDown={onMainImageClick ? (e) => { if (e.key === "Enter" || e.key === " ") onMainImageClick() } : undefined}
         className="relative w-full flex-1 overflow-hidden"
         style={{
           backgroundColor: "#FBF8F1",
@@ -233,6 +239,7 @@ export function ProductGallery({ formula, formulaKey, flavorId, reviewCount, rat
           border: "1px solid var(--line)",
           aspectRatio: "1 / 1",
           maxHeight: "min(72vh, 640px)",
+          cursor: onMainImageClick ? "pointer" : "default",
         }}
       >
         {renderMain()}

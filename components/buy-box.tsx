@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useCart } from "@/lib/cart-context"
 import { soloTubeImageFor } from "@/components/product-visual"
 import type { Formula, FormulaKey } from "@/lib/data"
@@ -14,9 +14,10 @@ interface BuyBoxProps {
   formulaKey: FormulaKey
   flavorId: string
   onFlavorChange: (flavorId: string) => void
+  onAddToCartReady?: (fn: () => void) => void
 }
 
-export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBoxProps) {
+export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange, onAddToCartReady }: BuyBoxProps) {
   const [purchaseType, setPurchaseType] = useState<"onetime" | "subscribe">("subscribe")
   const [quantity, setQuantity] = useState(1)
   const { addItem, openCart } = useCart()
@@ -36,6 +37,12 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
     }
     openCart()
   }
+
+  // Expose handleAdd to parent so gallery image click can trigger it
+  useEffect(() => {
+    onAddToCartReady?.(handleAdd)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [purchaseType, quantity])
 
   return (
     <aside
@@ -75,7 +82,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
             color: "var(--warm-gray)",
           }}
         >
-          10 stick packets per box
+          10 stick packets per box*
         </p>
       </header>
 

@@ -233,7 +233,7 @@ export default async function ProductPage({
                     ? "Instead of energy that spikes and crashes, AVRO is designed to support a smoother, more sustained curve. No crash. No jitters. Just good energy.*"
                     : key === "focus"
                       ? "Instead of focus that fades, AVRO is designed to support a smoother, more sustained curve. No overstimulation. Just clear thinking.*"
-                      : "Instead of calm that makes you drowsy, AVRO is designed to support a smoother, more sustained baseline. No sedation. Just composure.*"}
+                      : "Instead of calm that makes you drowsy, AVRO is designed to support a smoother, more sustained baseline. Just composure.*"}
                 </p>
                 <style>{`
                   .pdp-learn-btn {

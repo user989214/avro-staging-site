@@ -36,7 +36,6 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
       "No added sugar, artificial sweeteners, or sugar alcohols",
       "Vegan, gluten-free, non-GMO",
       "Third-party tested for purity and potency",
-      "HSA/FSA eligible",
     ],
     focus: [
       "Formulated with Cognigrape® and PharmaGABA®",
@@ -44,7 +43,6 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
       "No added sugar, artificial sweeteners, or sugar alcohols",
       "Vegan, gluten-free, non-GMO",
       "Third-party tested for purity and potency",
-      "HSA/FSA eligible",
     ],
     energy: [
       "Formulated with 120mg natural caffeine and PharmaGABA®",
@@ -52,7 +50,6 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
       "No added sugar, artificial sweeteners, or sugar alcohols",
       "Vegan, gluten-free, non-GMO",
       "Third-party tested for purity and potency",
-      "HSA/FSA eligible",
     ],
   }
 
