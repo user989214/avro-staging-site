@@ -263,7 +263,6 @@ export function HomeRefHero() {
             background: transparent !important;
           }
           .hp-hero-img { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-          .hp-hero-fade { display: none !important; opacity: 0 !important; visibility: hidden !important; }
           .hp-hero-img-mobile { display: block; }
         }
         .hp-pill-primary {
@@ -377,20 +376,7 @@ export function HomeRefHero() {
           />
         ))}
 
-        {/* Gradient overlay — wraps all four edges so the rectangular image border dissolves into the bone */}
-        <div
-          aria-hidden="true"
-          className="hp-hero-fade"
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: `
-              linear-gradient(to right, var(--bone) 0%, var(--bone) 32%, rgba(245,241,234,0.68) 46%, rgba(245,241,234,0.38) 58%, rgba(245,241,234,0.15) 72%, rgba(245,241,234,0.04) 86%, rgba(245,241,234,0.1) 95%, var(--bone) 100%),
-              linear-gradient(to bottom, var(--bone) 0%, rgba(245,241,234,0.13) 7%, rgba(245,241,234,0) 16%, rgba(245,241,234,0) 84%, rgba(245,241,234,0.13) 93%, var(--bone) 100%)
-            `,
-            pointerEvents: "none",
-          }}
-        />
+
 
         {/* Content grid sits on top */}
         <div

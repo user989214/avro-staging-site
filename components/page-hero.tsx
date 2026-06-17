@@ -199,9 +199,6 @@ export function PageHero({
             padding: clamp(56px,9vw,80px) clamp(20px,5vw,28px) !important;
           }
           .ph-hero-img { object-position: 65% 80% !important; }
-          .ph-hero-fade {
-            background: linear-gradient(180deg, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.94) 48%, rgba(245,241,234,0.55) 62%, rgba(245,241,234,0.1) 80%) !important;
-          }
           .ph-hero-img-desktop { display: none !important; }
           .ph-hero-img-mobile { display: block; }
         }
@@ -251,21 +248,7 @@ export function PageHero({
               />
             )}
 
-            {/* Edge-wrapping fade — stronger than before so text remains legible
-                and the hero reads as cohesive across every page. */}
-            <div
-              aria-hidden="true"
-              className="ph-hero-fade"
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: `
-                  linear-gradient(to right, var(--base-light) 0%, var(--base-light) 30%, rgba(245,241,234,0.7) 45%, rgba(245,241,234,0.4) 58%, rgba(245,241,234,0.16) 72%, rgba(245,241,234,0.04) 86%, rgba(245,241,234,0.1) 95%, var(--base-light) 100%),
-                  linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.15) 8%, rgba(245,241,234,0) 18%, rgba(245,241,234,0) 82%, rgba(245,241,234,0.15) 92%, var(--base-light) 100%)
-                `,
-                pointerEvents: "none",
-              }}
-            />
+
           </>
         )}
 

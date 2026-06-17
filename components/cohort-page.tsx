@@ -162,9 +162,6 @@ export function CohortPage({ data }: { data: CohortData }) {
         ink: "var(--gold)",
         muted: "rgba(202,168,75,0.7)",
   heroBg: "var(--deep-black)",
-  // Gradient hero overlay for dark theme — fades from solid dark on left to transparent on right
-  heroFade:
-    "linear-gradient(to right, rgba(13,13,13,1) 0%, rgba(13,13,13,0.95) 38%, rgba(13,13,13,0.85) 48%, rgba(13,13,13,0.7) 58%, rgba(13,13,13,0.5) 70%, rgba(13,13,13,0.35) 82%, rgba(13,13,13,0.4) 94%, rgba(13,13,13,0.6) 100%), linear-gradient(to bottom, rgba(13,13,13,0.5) 0%, rgba(13,13,13,0.2) 10%, rgba(13,13,13,0.1) 20%, rgba(13,13,13,0.1) 80%, rgba(13,13,13,0.2) 90%, rgba(13,13,13,0.5) 100%)",
         // Step number chip on the dark card → gold chip with dark numeral.
         stepNumBg: "var(--gold)",
         stepNumFg: "var(--deep-black)",
@@ -180,8 +177,6 @@ export function CohortPage({ data }: { data: CohortData }) {
         ink: "var(--ink)",
         muted: "var(--warm-gray)",
         heroBg: "var(--base-light)",
-        heroFade:
-          "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 28%, rgba(245,241,234,0.68) 44%, rgba(245,241,234,0.38) 57%, rgba(245,241,234,0.15) 70%, rgba(245,241,234,0.04) 84%, rgba(245,241,234,0.08) 95%, var(--base-light) 100%), linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.12) 8%, rgba(245,241,234,0) 18%, rgba(245,241,234,0) 82%, rgba(245,241,234,0.12) 92%, var(--base-light) 100%)",
         stepNumBg: "var(--charcoal)",
         stepNumFg: "var(--bone)",
         stepIconColor: "var(--avro-blue)",
@@ -320,17 +315,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             />
           )}
 
-          {/* Desktop gradient fade */}
-          <div
-            aria-hidden="true"
-            className="cohort-hero-image"
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: t.heroFade,
-              pointerEvents: "none",
-            }}
-          />
+
 
           {/* Mobile background image (9:16) — hidden on desktop.
               Golf rotates the same three studio shots (dimmed for text legibility). */}
@@ -361,19 +346,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             />
           )}
 
-          {/* Mobile dark overlay for text legibility */}
-          <div
-            aria-hidden="true"
-            className="cohort-hero-image-mobile"
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: isZeroProof
-                ? "linear-gradient(to bottom, rgba(13,13,13,0.45) 0%, rgba(13,13,13,0.2) 50%, rgba(13,13,13,0.45) 100%)"
-                : "linear-gradient(to bottom, rgba(242,240,232,0.35) 0%, rgba(242,240,232,0.1) 50%, rgba(242,240,232,0.35) 100%)",
-              pointerEvents: "none",
-            }}
-          />
+
 
           <div
             style={{
