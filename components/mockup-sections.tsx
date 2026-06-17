@@ -152,9 +152,26 @@ export function MockupLogicRow() {
  * spans edge to edge with no rounded card or side gutters.
  */
 export function MockupBlueCta({ title, copy }: { title: string; copy: string }) {
+  const btnStyle: React.CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    fontFamily: GC,
+    fontWeight: 700,
+    fontSize: 16,
+    letterSpacing: "-0.005em",
+    minHeight: 48,
+    padding: "0 28px",
+    borderRadius: 999,
+    border: "2px solid var(--charcoal)",
+    backgroundColor: "var(--charcoal)",
+    color: "var(--bone)",
+    textDecoration: "none",
+    transition: "background-color 0.18s ease, color 0.18s ease",
+  }
+
   return (
-    /* Outer section padding matches FinalCta exactly — this is what gives the
-       card its nearly-full-width appearance with correct gutters site-wide. */
     <section
       style={{
         width: "100%",
@@ -162,54 +179,24 @@ export function MockupBlueCta({ title, copy }: { title: string; copy: string }) 
         padding: "clamp(32px,5vw,72px) clamp(16px,4vw,64px)",
       }}
     >
-      <style>{`
-        .mk-blue-card {
-          max-width: 1250px;
-          margin: 0 auto;
-          border-radius: 24px;
-          overflow: hidden;
-          background-color: var(--avro-blue);
-          color: var(--charcoal);
-          padding: clamp(32px,5vw,88px) clamp(20px,4vw,80px);
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          align-items: center;
-          justify-content: space-between;
-          gap: 28px;
-        }
-        .mk-blue-btn-stack {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          flex: 0 0 220px;
-          width: 220px;
-        }
-        .mk-blue-cta-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 11px 24px;
-          border-radius: 999px;
-          background-color: var(--charcoal);
-          border: none;
-          color: var(--bone);
-          font-family: ${GC};
-          font-weight: 700;
-          font-size: 14px;
-          text-decoration: none;
-          transition: opacity .15s ease;
-          width: 100%;
-        }
-        .mk-blue-cta-btn:hover { opacity: 0.82; }
-        @media (max-width: 768px) {
-          .mk-blue-card { flex-direction: column; align-items: flex-start; }
-          .mk-blue-btn-stack { flex: none; width: 100%; }
-        }
-      `}</style>
-
-      <div className="mk-blue-card">
-        <div style={{ flex: "1 1 300px", minWidth: 0, maxWidth: 520 }}>
+      <div
+        style={{
+          maxWidth: 1250,
+          margin: "0 auto",
+          backgroundColor: "var(--avro-blue)",
+          color: "var(--charcoal)",
+          borderRadius: 24,
+          padding: "clamp(32px,5vw,88px) clamp(20px,4vw,80px)",
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 28,
+          fontFamily: GC,
+        }}
+      >
+        <div style={{ flex: "1 1 320px", minWidth: 0, maxWidth: 520 }}>
           <h2
             style={{
               fontFamily: GC,
@@ -223,15 +210,15 @@ export function MockupBlueCta({ title, copy }: { title: string; copy: string }) 
           >
             {title}
           </h2>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.3vw,18px)", lineHeight: 1.5, color: "rgba(21,21,21,0.7)" }}>
+          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.3vw,19px)", lineHeight: 1.5, color: "rgba(21,21,21,0.7)" }}>
             {copy}*
           </p>
         </div>
 
-        <div className="mk-blue-btn-stack">
-          <a href="/shop?formula=calm"   className="mk-blue-cta-btn">Shop Calm</a>
-          <a href="/shop?formula=focus"  className="mk-blue-cta-btn">Shop Focus</a>
-          <a href="/shop?formula=energy" className="mk-blue-cta-btn">Shop Energy</a>
+        <div style={{ flex: "1 1 280px", display: "flex", flexDirection: "column", gap: 8, minWidth: 240, maxWidth: 400 }}>
+          <a href="/calm"   style={btnStyle}>Shop Calm</a>
+          <a href="/focus"  style={btnStyle}>Shop Focus</a>
+          <a href="/energy" style={btnStyle}>Shop Energy</a>
         </div>
       </div>
     </section>
