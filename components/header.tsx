@@ -79,7 +79,7 @@ export function Header() {
         annText: "var(--charcoal)",
         annBtnBg: "var(--charcoal)",
         annBtnText: "var(--bone)",
-        navBg: "var(--base)",
+        navBg: "#EDEDED",
         navText: "var(--ink)",
         navTextMuted: "var(--warm-gray)",
         cardDarkBg: "var(--charcoal)",

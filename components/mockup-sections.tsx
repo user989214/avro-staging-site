@@ -161,6 +161,12 @@ export function MockupBlueCta({ title, copy }: { title: string; copy: string }) 
         padding: "clamp(40px,6vw,96px) clamp(20px,5vw,80px)",
       }}
     >
+      <style>{`
+        .mk-blue-cta-btn:hover {
+          background-color: var(--charcoal) !important;
+          color: var(--bone) !important;
+        }
+      `}</style>
       <div
         style={{
           maxWidth: 1250,
@@ -193,19 +199,22 @@ export function MockupBlueCta({ title, copy }: { title: string; copy: string }) 
         </div>
         <a
           href="/shop"
+          className="mk-blue-cta-btn"
           style={{
             display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
             padding: "16px 32px",
             borderRadius: 999,
-            backgroundColor: "var(--charcoal)",
-            color: "var(--bone)",
+            backgroundColor: "transparent",
+            border: "2px solid var(--charcoal)",
+            color: "var(--charcoal)",
             fontFamily: GC,
             fontWeight: 700,
             fontSize: 16,
             textDecoration: "none",
             whiteSpace: "nowrap",
+            transition: "background-color .2s ease, color .2s ease",
           }}
         >
           Shop AVRO
