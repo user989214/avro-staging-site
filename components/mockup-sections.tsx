@@ -153,7 +153,6 @@ export function MockupLogicRow() {
  */
 export function MockupBlueCta({ title, copy }: { title: string; copy: string }) {
   return (
-    /* Outer section is white so the rounded card sits on the same base as every other section */
     <section style={{ width: "100%", backgroundColor: "var(--base)", padding: 0 }}>
       <style>{`
         .mk-blue-card {
@@ -164,76 +163,59 @@ export function MockupBlueCta({ title, copy }: { title: string; copy: string }) 
           background-color: var(--avro-blue);
           color: var(--charcoal);
         }
-        /* Calm Performance banner sits at the very top of the card */
-        .mk-blue-banner {
-          width: 100%;
-          display: block;
-          height: auto;
-        }
         .mk-blue-inner {
-          padding: clamp(32px,4vw,72px) clamp(24px,5vw,80px) clamp(36px,5vw,80px);
+          padding: clamp(40px,5vw,80px) clamp(32px,5vw,80px);
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
-          align-items: flex-end;
+          align-items: center;
           justify-content: space-between;
-          gap: 28px;
+          gap: 32px;
+        }
+        /* Stacked solid-black pill buttons — matching the reference screenshot */
+        .mk-blue-btn-stack {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          flex-shrink: 0;
+          min-width: 220px;
         }
         .mk-blue-cta-btn {
-          display: inline-flex;
+          display: flex;
           align-items: center;
           justify-content: center;
-          padding: 14px 28px;
+          padding: 16px 36px;
           border-radius: 999px;
-          background-color: transparent;
-          border: 2px solid var(--charcoal);
-          color: var(--charcoal);
+          background-color: var(--charcoal);
+          border: none;
+          color: var(--bone);
           font-family: ${GC};
           font-weight: 700;
-          font-size: 15px;
+          font-size: 16px;
           text-decoration: none;
           white-space: nowrap;
-          transition: background-color .2s ease, color .2s ease;
+          transition: opacity .15s ease;
         }
         .mk-blue-cta-btn:hover {
-          background-color: var(--charcoal);
-          color: var(--bone);
-        }
-        .mk-blue-btn-row {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          gap: 10px;
-          align-items: center;
+          opacity: 0.82;
         }
         @media (max-width: 640px) {
           .mk-blue-inner {
             flex-direction: column;
             align-items: flex-start;
           }
-          .mk-blue-btn-row {
-            flex-direction: column;
-            align-items: stretch;
+          .mk-blue-btn-stack {
             width: 100%;
           }
           .mk-blue-cta-btn {
             width: 100%;
-            justify-content: center;
           }
         }
       `}</style>
 
       <div className="mk-blue-card">
-        {/* Calm Performance artwork — image sits ABOVE the copy */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/banners/calm-power.png"
-          alt="Calm Performance"
-          className="mk-blue-banner"
-        />
-
         <div className="mk-blue-inner">
-          <div style={{ flex: "1 1 320px", minWidth: 0, maxWidth: 580 }}>
+          <div style={{ flex: "1 1 300px", minWidth: 0, maxWidth: 580 }}>
             <h2
               style={{
                 fontFamily: GC,
@@ -247,12 +229,12 @@ export function MockupBlueCta({ title, copy }: { title: string; copy: string }) 
             >
               {title}
             </h2>
-            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.3vw,19px)", lineHeight: 1.5, color: "rgba(21,21,21,0.72)" }}>
+            <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.3vw,18px)", lineHeight: 1.5, color: "rgba(21,21,21,0.72)" }}>
               {copy}*
             </p>
           </div>
 
-          <div className="mk-blue-btn-row">
+          <div className="mk-blue-btn-stack">
             <a href="/shop?formula=calm"   className="mk-blue-cta-btn">Shop Calm</a>
             <a href="/shop?formula=focus"  className="mk-blue-cta-btn">Shop Focus</a>
             <a href="/shop?formula=energy" className="mk-blue-cta-btn">Shop Energy</a>
@@ -263,7 +245,16 @@ export function MockupBlueCta({ title, copy }: { title: string; copy: string }) 
   )
 }
 
-/** Kept for backwards-compat — the image is now rendered inside MockupBlueCta above the copy. */
+/** Calm Performance artwork — renders above MockupBlueCta in page.tsx. */
 export function MockupCalmPerformance() {
-  return null
+  return (
+    <section style={{ width: "100%", backgroundColor: "var(--base)" }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/banners/calm-power.png"
+        alt="Calm Performance"
+        style={{ width: "100%", height: "auto", display: "block" }}
+      />
+    </section>
+  )
 }
