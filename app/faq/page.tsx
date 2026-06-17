@@ -66,11 +66,11 @@ const faqCategories = [
       ],
       [
         "Why is non-GMO modified corn starch included in AVRO?",
-        "It is included in a small amount to help the product mix well and stay consistent from serving to serving. It is not one of AVRO's primary active ingredients.",
+        "It is included in a small amount to help the product mix well and stay consistent from serving to serving. It is not one of AVRO's primary active ingredients. [REVIEW: confirm ingredient list against final approved label]",
       ],
       [
         "Does AVRO contain sugar?",
-        "AVRO is positioned as sugar free and uses stevia at 2% or less for a clean, balanced finish.",
+        "AVRO is positioned as sugar free and uses stevia at 2% or less for a clean, balanced finish. [REVIEW: confirm sugar-free claim and stevia % against final approved label]",
       ],
     ],
   },
