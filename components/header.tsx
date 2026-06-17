@@ -298,7 +298,7 @@ export function Header() {
         {/* Desktop nav - left */}
         <div className="hidden md:flex items-center gap-8">
           <NavLink href="/shop" dark={isZeroProof}>Shop</NavLink>
-          <NavLink href="/shop" dark={isZeroProof}>Subscribe</NavLink>
+          <NavLink href="/subscribe" dark={isZeroProof}>Subscribe</NavLink>
           <div
             className="relative"
             onMouseEnter={openDropdown}
@@ -534,7 +534,7 @@ export function Header() {
               Shop
             </Link>
             <Link
-              href="/shop"
+              href="/subscribe"
               onClick={() => setMobileMenuOpen(false)}
               className="inline-block px-4 py-1.5 font-serif font-black text-[34px] leading-[1.1] rounded-full"
               style={{ color: colors.navText }}
