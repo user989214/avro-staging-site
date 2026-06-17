@@ -175,7 +175,7 @@ export function CohortPage({ data }: { data: CohortData }) {
         cardInk: "var(--ink)",
         cardMuted: "var(--warm-gray)",
         ink: "var(--ink)",
-        muted: "var(--warm-gray)",
+        muted: "var(--ink)",
         heroBg: "var(--base-light)",
         stepNumBg: "var(--charcoal)",
         stepNumFg: "var(--bone)",
@@ -268,12 +268,14 @@ export function CohortPage({ data }: { data: CohortData }) {
               color: ${wordEnd} !important;
             }
           }
-          /* ── Desktop: 16:9 with content overlaid ── */
+          /* ── Desktop: rounded 16:9 card with content overlaid ── */
           .cohort-hero-16x9 {
             position: relative;
-            width: 100%;
+            width: calc(100% - 32px);
+            margin: 16px auto;
             aspect-ratio: 16/9;
             overflow: hidden;
+            border-radius: 20px;
           }
           .cohort-hero-image-mobile { display: none; }
           .cohort-hero-content {

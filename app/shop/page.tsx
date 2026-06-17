@@ -82,10 +82,12 @@ export default function ShopPage() {
           /* ── Desktop: 16:9 with content overlaid ── */
           .shop-hero-16x9 {
             position: relative;
-            width: 100%;
+            width: calc(100% - 32px);
+            margin: 16px auto;
             aspect-ratio: 16/9;
             overflow: hidden;
             background-color: var(--base-light);
+            border-radius: 20px;
           }
           .shop-hero-img-desktop { display: block; }
           .shop-hero-img-mobile { display: none; }
@@ -198,7 +200,7 @@ export default function ShopPage() {
                 fontWeight: 400,
                 fontSize: "clamp(15px,1.4vw,18px)",
                 lineHeight: 1.55,
-                color: "var(--warm-gray)",
+                color: "var(--ink)",
                 maxWidth: 460,
                 marginBottom: 24,
               }}

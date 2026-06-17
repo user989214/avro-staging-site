@@ -191,13 +191,15 @@ export function PageHero({
     >
       <style>{`
         ${SHARED_HERO_STYLES}
-        /* ── Desktop: 16:9 image with content overlaid ── */
+        /* ── Desktop: rounded 16:9 card with content overlaid ── */
         .ph-hero-16x9 {
           position: relative;
-          width: 100%;
+          width: calc(100% - 32px);
+          margin: 16px auto;
           aspect-ratio: 16/9;
           overflow: hidden;
           background-color: var(--base-light);
+          border-radius: 20px;
         }
         .ph-hero-16x9-content {
           position: absolute;
@@ -302,7 +304,7 @@ export function PageHero({
                 fontWeight: 500,
                 fontSize: "clamp(16px,1.4vw,20px)",
                 lineHeight: 1.5,
-                color: "rgba(0,0,0,0.72)",
+                color: "var(--ink)",
                 maxWidth: 500,
                 marginBottom: children || primaryCta || secondaryCta ? 24 : 0,
               }}
@@ -418,7 +420,7 @@ function FlatHero({
             fontWeight: 500,
             fontSize: "clamp(18px,1.7vw,21px)",
             lineHeight: 1.5,
-            color: "rgba(0,0,0,0.72)",
+            color: "var(--ink)",
             maxWidth: 660,
             marginBottom: 0,
           }}

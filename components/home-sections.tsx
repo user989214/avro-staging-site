@@ -241,10 +241,12 @@ export function HomeRefHero() {
   .hp-hero-img-mobile { display: none; }
   .hp-hero-container {
     position: relative;
-    width: 100%;
+    width: calc(100% - 32px);
+    margin: 16px auto;
     aspect-ratio: 16/9;
     overflow: hidden;
     background-color: var(--bone);
+    border-radius: 20px;
   }
   .hp-hero-grid {
     position: absolute;
@@ -422,7 +424,7 @@ export function HomeRefHero() {
               fontWeight: 400,
               fontSize: "clamp(16px,1.4vw,18px)",
               lineHeight: 1.55,
-              color: "var(--warm-gray)",
+              color: "var(--ink)",
               maxWidth: 520,
               marginBottom: 28,
               opacity: 1,
@@ -828,7 +830,7 @@ export function HomeLogicRow() {
   )
 }
 
-// ── APPROACH CHART ───────────────────────────────────────────────────────���─────
+// ── APPROACH CHART ─────────────────────────────────────────────────────���─���─────
 // Renders the homepage "Calm-First Approach" philosophy graphic verbatim.
 function ApproachChart() {
   return (
