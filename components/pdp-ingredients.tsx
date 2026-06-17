@@ -14,7 +14,7 @@ type Ingredient = {
 const sharedFront: Ingredient[] = [
   {
     name: "PharmaGABA®",
-    amount: "200 mg",
+    amount: "00 mg",
     description: "Naturally fermented. AVRO's calm-first foundation.",
     image: "/images/ingredients/pharmagaba-2.jpg",
   },
@@ -24,7 +24,7 @@ const sharedBack: Ingredient[] = [
   {
     name: "Prebiotic Fiber",
     amount: "SOLUBLE GUAR FIBER + ACACIA FIBER",
-    description: "Supports gut comfort. Part of AVRO's daily formula.",
+    description: "Supports gut comfort.* Part of AVRO's daily formula.*",
     image: "/images/ingredients/prebiotic-fiber-2.jpg",
   },
   {
@@ -40,8 +40,8 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
     ...sharedFront,
     {
       name: "Magnesium Bisglycinate",
-      amount: "850 mg",
-      description: "Yields 100 mg of active magnesium. Supports muscle and nervous system function.",
+      amount: "00 mg",
+      description: "Yields 00 mg of active magnesium.* Supports muscle and nervous system function.",
       image: "/images/ingredients/magnesium-bisglycinate-2.jpg",
     },
     ...sharedBack,
@@ -50,8 +50,8 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
     ...sharedFront,
     {
       name: "Cognigrape®",
-      amount: "250 mg",
-      description: "Grape extract clinically shown to support cognitive function and clarity.",
+      amount: "00 mg",
+      description: "Grape extract clinically shown to support cognitive function and clarity.*",
       image: "/images/ingredients/cognigrape-2.jpg",
     },
     ...sharedBack,
@@ -60,8 +60,8 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
     ...sharedFront,
     {
       name: "Natural Caffeine",
-      amount: "120 mg",
-      description: "Plant-derived caffeine for clean, sustained energy without the jitters.",
+      amount: "00 mg",
+      description: "Plant-derived caffeine for clean, sustained energy without the jitters.*",
       image: "/images/ingredients/natural-caffeine-2.jpg",
     },
     ...sharedBack,

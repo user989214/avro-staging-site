@@ -55,25 +55,25 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
 
   const ingredientsList: Record<FormulaKey, { name: string; amount: string }[]> = {
     calm: [
-      { name: "PharmaGABA®", amount: "200 mg" },
-      { name: "Magnesium (as bisglycinate)", amount: "100 mg" },
-      { name: "L-Theanine", amount: "850 mg" },
-      { name: "Sodium (as bicarbonate)", amount: "80 mg" },
-      { name: "Potassium (as bicarbonate)", amount: "100 mg" },
+      { name: "PharmaGABA®", amount: "00 mg" },
+      { name: "Lorem bisglycinate", amount: "00 mg" },
+      { name: "Ipsum theanine", amount: "00 mg" },
+      { name: "Dolor (as bicarbonate)", amount: "00 mg" },
+      { name: "Amet (as bicarbonate)", amount: "00 mg" },
     ],
     focus: [
-      { name: "Cognigrape®", amount: "250 mg" },
-      { name: "PharmaGABA®", amount: "200 mg" },
-      { name: "L-Theanine", amount: "200 mg" },
-      { name: "Sodium (as bicarbonate)", amount: "80 mg" },
-      { name: "Potassium (as bicarbonate)", amount: "100 mg" },
+      { name: "PharmaGABA®", amount: "00 mg" },
+      { name: "Lorem cognitiva", amount: "00 mg" },
+      { name: "Ipsum theanine", amount: "00 mg" },
+      { name: "Dolor (as bicarbonate)", amount: "00 mg" },
+      { name: "Amet (as bicarbonate)", amount: "00 mg" },
     ],
     energy: [
-      { name: "Natural caffeine", amount: "120 mg" },
-      { name: "PharmaGABA®", amount: "200 mg" },
-      { name: "L-Theanine", amount: "200 mg" },
-      { name: "Sodium (as bicarbonate)", amount: "80 mg" },
-      { name: "Potassium (as bicarbonate)", amount: "100 mg" },
+      { name: "PharmaGABA®", amount: "00 mg" },
+      { name: "Lorem caffea", amount: "00 mg" },
+      { name: "Ipsum theanine", amount: "00 mg" },
+      { name: "Dolor (as bicarbonate)", amount: "00 mg" },
+      { name: "Amet (as bicarbonate)", amount: "00 mg" },
     ],
   }
 
@@ -202,12 +202,6 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
               >
                 Other ingredients: Citric acid, natural flavors, silica, stevia leaf extract.
               </p>
-              <p className="mt-3" style={{ fontFamily: GC, fontSize: "clamp(12px,1.1vw,15px)", lineHeight: 1.5 }}>
-                <ReviewTODO>
-                  Ingredient names, forms, amounts &amp; &quot;other ingredients&quot; must match the
-                  current approved label. Remove any ingredient/line not in the final formula.
-                </ReviewTODO>
-              </p>
             </div>
           )}
 
@@ -332,16 +326,18 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                 }}
               >
                 {/* Square image tile — bone fill, no stroke, image fills edge-to-edge */}
-                <div
-                  className="relative w-full overflow-hidden"
+                <Link
+                  href={`/${formulaKey}`}
+                  className="relative block w-full overflow-hidden"
                   style={{
                     backgroundColor: "var(--bone)",
                     borderRadius: 10,
                     aspectRatio: "1 / 1",
                   }}
+                  aria-label={`Shop ${formula.name}`}
                 >
                   <ProductCard formulaKey={formulaKey} className="absolute inset-0 w-full h-full object-cover" />
-                </div>
+                </Link>
 
                 <div className="pt-2 px-0.5 flex flex-col gap-1.5">
                   <div className="flex items-baseline justify-between gap-1 flex-wrap">
