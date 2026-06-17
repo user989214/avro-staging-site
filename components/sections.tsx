@@ -212,12 +212,12 @@ export function ProductCards({
   // product display. The product visual sits inside a deep-black inner panel so the
   // can/sachet pops against the gold card.
   const cardBg = dark ? "var(--gold)" : "var(--base-light)"
-  const ink = dark ? "var(--deep-black)" : "var(--ink)"
+  const ink = dark ? "var(--bone)" : "var(--ink)"
   // Section title sits on the deep-black page background, so it stays gold there.
   const titleInk = dark ? "var(--gold)" : "var(--ink)"
   const titleMuted = dark ? "rgba(202,168,75,0.7)" : "rgba(0,0,0,0.6)"
-  const muted = dark ? "rgba(13,13,13,0.7)" : "rgba(0,0,0,0.6)"
-  const border = dark ? "rgba(13,13,13,0.18)" : "rgba(0,0,0,0.08)"
+  const muted = dark ? "rgba(245,240,232,0.6)" : "rgba(0,0,0,0.6)"
+  const border = dark ? "rgba(245,240,232,0.18)" : "rgba(0,0,0,0.08)"
   return (
     <section style={{ backgroundColor: bg, width: "100%", padding: "clamp(32px,6vw,88px) clamp(16px,5vw,64px)" }}>
       <div style={{ maxWidth: 1080, margin: "0 auto" }}>
@@ -279,16 +279,16 @@ export function ProductCards({
                     padding: "0 28px", 
                     borderRadius: 999, 
                     textDecoration: "none", 
-                    border: dark ? "2px solid var(--deep-black)" : "2px solid var(--charcoal)",
+                    border: dark ? "2px solid var(--bone)" : "2px solid var(--charcoal)",
                     backgroundColor: "transparent", 
-                    color: dark ? "var(--deep-black)" : "var(--charcoal)", 
+                    color: dark ? "var(--bone)" : "var(--charcoal)", 
                     marginTop: "auto",
                     transition: "background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease",
                   }}
                   onMouseEnter={(e) => {
                     if (dark) {
-                      e.currentTarget.style.backgroundColor = 'var(--deep-black)'
-                      e.currentTarget.style.color = 'var(--gold)'
+                      e.currentTarget.style.backgroundColor = 'var(--bone)'
+                      e.currentTarget.style.color = 'var(--deep-black)'
                     } else {
                       e.currentTarget.style.backgroundColor = 'var(--charcoal)'
                       e.currentTarget.style.color = 'var(--bone)'
@@ -297,7 +297,7 @@ export function ProductCards({
                   onMouseLeave={(e) => {
                     if (dark) {
                       e.currentTarget.style.backgroundColor = 'transparent'
-                      e.currentTarget.style.color = 'var(--deep-black)'
+                      e.currentTarget.style.color = 'var(--bone)'
                     } else {
                       e.currentTarget.style.backgroundColor = 'transparent'
                       e.currentTarget.style.color = 'var(--charcoal)'
