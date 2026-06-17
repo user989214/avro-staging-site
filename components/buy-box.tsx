@@ -7,7 +7,7 @@ import type { Formula, FormulaKey } from "@/lib/data"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 // Matte mid-grey so unselected pills/rows read clearly on the cream section bg
-const LIGHT_GRAY = "#cfcbc1"
+  const LIGHT_GRAY = "#E2E2E2"
 
 interface BuyBoxProps {
   formula: Formula
@@ -104,7 +104,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
                   className="w-6 h-6 sm:w-8 sm:h-8 overflow-hidden flex-shrink-0 grid place-items-center"
                   style={{
                     borderRadius: 999,
-                    backgroundColor: "#FBF8F1",
+                    backgroundColor: "#F2F2F2",
                   }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
