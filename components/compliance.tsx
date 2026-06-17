@@ -31,30 +31,30 @@ export function ClaimMark() {
 }
 
 /**
- * Visible inline marker for content that still needs real data / legal sign-off.
- * Intentionally obvious so reviewers can spot every open item.
+ * Subtle source / citation line shown under a chart or data graphic.
+ * Styled to match the quiet footnote captions used elsewhere on the site.
  */
-export function ReviewTODO({ children }: { children: ReactNode }) {
+export function ChartSource({
+  children,
+  dark = false,
+}: {
+  children: ReactNode
+  dark?: boolean
+}) {
   return (
-    <mark
-      data-review-todo="true"
+    <p
       style={{
-        display: "inline-block",
-        backgroundColor: "#FEF3C7",
-        color: "#92400E",
-        border: "1px dashed #D97706",
-        borderRadius: 6,
-        padding: "1px 6px",
-        margin: "0 2px",
-        fontSize: "0.72em",
-        fontWeight: 700,
-        letterSpacing: "0.02em",
-        textTransform: "uppercase",
-        verticalAlign: "middle",
-        whiteSpace: "normal",
+        fontFamily: "var(--font-sans)",
+        fontWeight: 400,
+        fontSize: 12,
+        lineHeight: 1.5,
+        letterSpacing: "0.01em",
+        color: dark ? "rgba(245,240,232,0.55)" : "rgba(0,0,0,0.42)",
+        marginTop: 14,
+        marginBottom: 0,
       }}
     >
-      [REVIEW] {children}
-    </mark>
+      {children}
+    </p>
   )
 }

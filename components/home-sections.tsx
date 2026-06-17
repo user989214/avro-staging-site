@@ -6,6 +6,7 @@ import { formulas, type FormulaKey, testimonials } from "@/lib/data"
 import { Icon } from "@/components/icons"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { EmbeddedGraphic } from "@/components/embedded-graphic"
+import { ChartSource } from "@/components/compliance"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const BLUE = "#94C6D4"
@@ -816,7 +817,15 @@ export function HomeLogicRow() {
 // ── APPROACH CHART ─────────────────────────────────────────────────────────────
 // Renders the homepage "Calm-First Approach" philosophy graphic verbatim.
 function ApproachChart() {
-  return <EmbeddedGraphic src="/graphics/homepage.html" ratio="1200 / 720" title="The Calm-First approach" />
+  return (
+    <>
+      <EmbeddedGraphic src="/graphics/homepage.html" ratio="1200 / 720" title="The Calm-First approach" />
+      <ChartSource>
+        Illustrative — conceptual representation of stimulant push/crash vs. AVRO&apos;s calm-first
+        settle. Lorem ipsum dolor sit amet, not based on a single clinical trial.
+      </ChartSource>
+    </>
+  )
 }
 
 function _ApproachSectionEnd() {

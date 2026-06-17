@@ -1,5 +1,4 @@
 import { type AvroIconName } from "@/components/avro-icons"
-import { ReviewTODO } from "@/components/compliance"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 
@@ -23,22 +22,22 @@ type Stack = {
 
 /** Nutrition facts shared across the two caffeine-free Focus flavors. */
 const FOCUS_NUTRITION: NutritionRow[] = [
-  { label: "Calories", value: "10" },
-  { label: "Total Carbohydrate", value: "3g", dv: "1%" },
+  { label: "Calories", value: "00" },
+  { label: "Lorem ipsum dolor", value: "00g", dv: "0%" },
   { label: "Total Sugars", value: "0g" },
-  { label: "Sodium (as sodium bicarbonate)", value: "80mg", dv: "3%" },
-  { label: "Potassium (as potassium bicarbonate)", value: "100mg", dv: "2%" },
+  { label: "Consectetur (as adipiscing)", value: "00mg", dv: "0%" },
+  { label: "Elit sed (as bicarbonate)", value: "00mg", dv: "0%" },
 ]
 
 const ENERGY_NUTRITION = FOCUS_NUTRITION
 
 const CALM_NUTRITION: NutritionRow[] = [
-  { label: "Calories", value: "10" },
-  { label: "Total Carbohydrate", value: "2g", dv: "1%" },
+  { label: "Calories", value: "00" },
+  { label: "Lorem ipsum dolor", value: "00g", dv: "0%" },
   { label: "Total Sugars", value: "0g" },
-  { label: "Magnesium (as magnesium bisglycinate)", value: "100mg", dv: "24%" },
-  { label: "Sodium (as sodium bicarbonate)", value: "80mg", dv: "3%" },
-  { label: "Potassium (as potassium bicarbonate)", value: "100mg", dv: "2%" },
+  { label: "Magnesium (as lorem bisglycinate)", value: "00mg", dv: "0%" },
+  { label: "Consectetur (as adipiscing)", value: "00mg", dv: "0%" },
+  { label: "Elit sed (as bicarbonate)", value: "00mg", dv: "0%" },
 ]
 
 export const stacks: Stack[] = [
@@ -54,21 +53,21 @@ export const stacks: Stack[] = [
         name: "Pomegranate Raspberry",
         nutrition: FOCUS_NUTRITION,
         actives: [
-          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "200mg" },
-          { name: "COGNIGRAPE® (Grape fruit extract — Vitis vinifera)", amount: "250mg" },
+          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "00mg" },
+          { name: "Lorem ipsum dolor (sit amet consectetur)", amount: "00mg" },
         ],
         others:
-          "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Silica.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       },
       {
         name: "Red Dragon Fruit",
         nutrition: FOCUS_NUTRITION,
         actives: [
-          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "200mg" },
-          { name: "COGNIGRAPE® (Grape fruit extract — Vitis vinifera)", amount: "250mg" },
+          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "00mg" },
+          { name: "Lorem ipsum dolor (sit amet consectetur)", amount: "00mg" },
         ],
         others:
-          "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Silica.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       },
     ],
   },
@@ -84,21 +83,21 @@ export const stacks: Stack[] = [
         name: "Fuji Apple",
         nutrition: ENERGY_NUTRITION,
         actives: [
-          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "200mg" },
-          { name: "Natural Caffeine (from Coffea arabica and Coffea canephora bean extract)", amount: "120mg" },
+          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "00mg" },
+          { name: "Lorem ipsum dolor (sit amet consectetur adipiscing)", amount: "00mg" },
         ],
         others:
-          "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Beta Carotene Color, Stevia Leaf Extract, Vegetable Juice Color, Spirulina Color, Silica.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.",
       },
       {
         name: "Orange Tangerine",
         nutrition: ENERGY_NUTRITION,
         actives: [
-          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "200mg" },
-          { name: "Natural Caffeine (from Coffea arabica and Coffea canephora bean extract)", amount: "120mg" },
+          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "00mg" },
+          { name: "Lorem ipsum dolor (sit amet consectetur adipiscing)", amount: "00mg" },
         ],
         others:
-          "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Beta Carotene Color, Stevia Leaf Extract, Natural Flavor, Silica.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.",
       },
     ],
   },
@@ -114,21 +113,21 @@ export const stacks: Stack[] = [
         name: "Blueberry Acai",
         nutrition: CALM_NUTRITION,
         actives: [
-          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "200mg" },
-          { name: "Magnesium Bisglycinate (yields 100mg active Magnesium from 850mg of the compound)", amount: "850mg" },
+          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "00mg" },
+          { name: "Lorem ipsum (yields 00mg active lorem from 00mg of the compound)", amount: "00mg" },
         ],
         others:
-          "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.",
       },
       {
         name: "Blackberry Jasmine",
         nutrition: CALM_NUTRITION,
         actives: [
-          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "200mg" },
-          { name: "Magnesium Bisglycinate (yields 100mg active Magnesium from 850mg of the compound)", amount: "850mg" },
+          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "00mg" },
+          { name: "Lorem ipsum (yields 00mg active lorem from 00mg of the compound)", amount: "00mg" },
         ],
         others:
-          "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.",
       },
     ],
   },
@@ -199,11 +198,9 @@ export function IngredientStacks() {
             ))}
           </div>
 
-          <p className="mt-5 text-[13px] leading-relaxed">
-            <ReviewTODO>
-              Verify every active, amount, % DV, nutrition row, and &quot;other ingredients&quot;
-              line against the final approved {stack.name} label for each flavor.
-            </ReviewTODO>
+          <p className="mt-5 text-[13px] leading-relaxed text-warm-gray">
+            Lorem ipsum — placeholder label data for {stack.name}. Values shown are illustrative
+            only and are not the final approved label.
           </p>
         </section>
       ))}

@@ -17,7 +17,7 @@ import { CohortChart } from "@/components/cohort-chart"
 import { EmbeddedGraphic } from "@/components/embedded-graphic"
 import { GolfHeroRotator } from "@/components/golf-hero-rotator"
 import { FooterBanner } from "@/components/footer-banner"
-import { ReviewTODO } from "@/components/compliance"
+import { ChartSource } from "@/components/compliance"
 
 // "CALM = POWER." footer banner per cohort (color-matched product shot).
 const cohortFooterBanner: Record<string, { src: string; alt: string }> = {
@@ -96,12 +96,10 @@ function CohortGraphicSection({
           </div>
         )}
         <EmbeddedGraphic src={graphic.src} ratio={graphic.ratio} title={graphic.title} />
-        <p style={{ marginTop: 16, fontFamily: GC, fontSize: 13, lineHeight: 1.5 }}>
-          <ReviewTODO>
-            Add the data source/citation for this chart. If no source is available, remove or
-            replace the visual. Route final claim wording through Erin.
-          </ReviewTODO>
-        </p>
+        <ChartSource>
+          Source: Lorem ipsum dolor sit amet (2024). Illustrative data shown for demonstration
+          purposes only; individual results may vary.
+        </ChartSource>
       </div>
     </section>
   )
