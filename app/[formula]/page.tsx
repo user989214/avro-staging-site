@@ -193,6 +193,21 @@ export default async function ProductPage({
             ))}
           </div>
 
+          {/* Feeling section source footnote */}
+          <p
+            style={{
+              fontFamily: GC,
+              fontWeight: 400,
+              fontSize: "clamp(10px,0.85vw,12px)",
+              lineHeight: 1.5,
+              color: "rgba(0,0,0,0.38)",
+              marginBottom: "clamp(20px,3vw,40px)",
+              marginTop: -16,
+            }}
+          >
+            * These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Benefit icons are for illustrative purposes only.
+          </p>
+
           {/* Graph section - two columns */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 24, alignItems: "center" }}>
             <style>{`
@@ -397,10 +412,10 @@ export default async function ProductPage({
                 }}
               >
                 {key === "calm"
-                  ? "Source: Abdou et al. (2006). Relaxation and immunity enhancement effects of γ-aminobutyric acid (GABA) administration in humans. Biofactors, 26(3), 201–208. PharmaGABA® is a registered trademark of Pharma Foods International Co., Ltd."
+                  ? "For illustrative purposes only. Individual results may vary. This curve is a conceptual representation and is not based on a single clinical trial. * These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
                   : key === "focus"
-                    ? "Source: Ota et al. (2020). GABA and Cognigrape® cognitive function study. PharmaGABA® and Cognigrape® are registered trademarks of their respective owners."
-                    : "For illustrative purposes only. Individual results may vary. Energy curve is a conceptual representation of ingredient-level kinetics and is not based on a single clinical trial.*"}
+                    ? "For illustrative purposes only. Individual results may vary. This curve is a conceptual representation and is not based on a single clinical trial. * These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
+                    : "For illustrative purposes only. Individual results may vary. This curve is a conceptual representation and is not based on a single clinical trial. * These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."}
               </p>
             </div>
           </div>

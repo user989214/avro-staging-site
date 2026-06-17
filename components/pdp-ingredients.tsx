@@ -98,7 +98,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
               maxWidth: 720,
             }}
           >
-            Clear ingredient logic.<br />Nothing hidden.
+            Clear ingredient logic. Nothing hidden.
           </h2>
         </div>
 
