@@ -10,6 +10,7 @@ import {
 import { Icon } from "@/components/icons"
 import type { Formula, FormulaKey } from "@/lib/data"
 import { cn } from "@/lib/utils"
+import { ReviewTODO } from "@/components/compliance"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const LIGHT_GRAY = "#f2f2f2"
@@ -120,6 +121,12 @@ export function SupplementFactsDialog({
               }}
             >
               10 stick packets per box. Mix 1 packet into 12 fl oz of water; up to 3 times per day.
+            </p>
+            <p className="mt-3" style={{ fontFamily: GC, fontSize: 12, lineHeight: 1.5 }}>
+              <ReviewTODO>
+                Replace with the actual approved Supplement Facts panel — confirm serving size,
+                amount per serving, % Daily Value, and every line item against the current label.
+              </ReviewTODO>
             </p>
           </div>
         </div>

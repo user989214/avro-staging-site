@@ -5,6 +5,7 @@ import Link from "next/link"
 import { formulas, type FormulaKey } from "@/lib/data"
 import { ProductCard } from "@/components/product-visual"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
+import { ReviewTODO } from "@/components/compliance"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 
@@ -30,26 +31,26 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
 
   const descriptionBullets: Record<FormulaKey, string[]> = {
     calm: [
-      "Formulated with naturally fermented PharmaGABA",
-      "Promotes calm without drowsiness or sedation",
+      "Formulated with naturally fermented PharmaGABA®",
+      "Promotes calm without drowsiness or sedation*",
       "No added sugar, artificial sweeteners, or sugar alcohols",
-      "Vegan, gluten-free, non-GMO project verified",
+      "Vegan, gluten-free, non-GMO",
       "Third-party tested for purity and potency",
       "HSA/FSA eligible",
     ],
     focus: [
-      "Formulated with Cognigrape and PharmaGABA",
-      "Supports focus and mental clarity",
+      "Formulated with Cognigrape® and PharmaGABA®",
+      "Supports focus and mental clarity*",
       "No added sugar, artificial sweeteners, or sugar alcohols",
-      "Vegan, gluten-free, non-GMO project verified",
+      "Vegan, gluten-free, non-GMO",
       "Third-party tested for purity and potency",
       "HSA/FSA eligible",
     ],
     energy: [
-      "Formulated with 120mg natural caffeine and PharmaGABA",
-      "Clean energy without the jitters or crash",
+      "Formulated with 120mg natural caffeine and PharmaGABA®",
+      "Clean energy without the jitters or crash*",
       "No added sugar, artificial sweeteners, or sugar alcohols",
-      "Vegan, gluten-free, non-GMO project verified",
+      "Vegan, gluten-free, non-GMO",
       "Third-party tested for purity and potency",
       "HSA/FSA eligible",
     ],
@@ -57,22 +58,22 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
 
   const ingredientsList: Record<FormulaKey, { name: string; amount: string }[]> = {
     calm: [
-      { name: "PharmaGABA", amount: "200 mg" },
+      { name: "PharmaGABA®", amount: "200 mg" },
       { name: "Magnesium (as bisglycinate)", amount: "100 mg" },
       { name: "L-Theanine", amount: "850 mg" },
       { name: "Sodium (as bicarbonate)", amount: "80 mg" },
       { name: "Potassium (as bicarbonate)", amount: "100 mg" },
     ],
     focus: [
-      { name: "Cognigrape", amount: "250 mg" },
-      { name: "PharmaGABA", amount: "200 mg" },
+      { name: "Cognigrape®", amount: "250 mg" },
+      { name: "PharmaGABA®", amount: "200 mg" },
       { name: "L-Theanine", amount: "200 mg" },
       { name: "Sodium (as bicarbonate)", amount: "80 mg" },
       { name: "Potassium (as bicarbonate)", amount: "100 mg" },
     ],
     energy: [
       { name: "Natural caffeine", amount: "120 mg" },
-      { name: "PharmaGABA", amount: "200 mg" },
+      { name: "PharmaGABA®", amount: "200 mg" },
       { name: "L-Theanine", amount: "200 mg" },
       { name: "Sodium (as bicarbonate)", amount: "80 mg" },
       { name: "Potassium (as bicarbonate)", amount: "100 mg" },
@@ -204,6 +205,12 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
               >
                 Other ingredients: Citric acid, natural flavors, silica, stevia leaf extract.
               </p>
+              <p className="mt-3" style={{ fontFamily: GC, fontSize: "clamp(12px,1.1vw,15px)", lineHeight: 1.5 }}>
+                <ReviewTODO>
+                  Ingredient names, forms, amounts &amp; &quot;other ingredients&quot; must match the
+                  current approved label. Remove any ingredient/line not in the final formula.
+                </ReviewTODO>
+              </p>
             </div>
           )}
 
@@ -223,9 +230,9 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
               </h3>
               <div className="space-y-4 lg:space-y-6">
                 {[
-                  { title: "Morning routine", body: "Start your day with clarity and composure." },
+                  { title: "Morning routine", body: "Start your day with clarity and composure.*" },
                   { title: "Before important moments", body: "Meetings, presentations, or any high-stakes situation." },
-                  { title: "Afternoon reset", body: "Combat the midday slump without caffeine." },
+                  { title: "Afternoon reset", body: "Combat the midday slump without caffeine.*" },
                 ].map((item) => (
                   <div key={item.title}>
                     <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(15px,1.5vw,21px)", color: "var(--ink)", display: "block", marginBottom: 4 }}>

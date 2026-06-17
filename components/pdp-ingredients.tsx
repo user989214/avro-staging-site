@@ -13,7 +13,7 @@ type Ingredient = {
 
 const sharedFront: Ingredient[] = [
   {
-    name: "PharmaGABA",
+    name: "PharmaGABA®",
     amount: "200 mg",
     description: "Naturally fermented. AVRO's calm-first foundation.",
     image: "/images/ingredients/pharmagaba-2.jpg",
@@ -49,7 +49,7 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
   focus: [
     ...sharedFront,
     {
-      name: "Cognigrape",
+      name: "Cognigrape®",
       amount: "250 mg",
       description: "Grape extract clinically shown to support cognitive function and clarity.",
       image: "/images/ingredients/cognigrape-2.jpg",
@@ -98,7 +98,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
               maxWidth: 720,
             }}
           >
-            Clear ingredient logic. Nothing hidden.
+            Clear ingredient logic.<br />Nothing hidden.
           </h2>
         </div>
 

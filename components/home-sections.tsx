@@ -105,19 +105,19 @@ export function HomeRefHero() {
   const slides = [
     {
       headline: "Performance Starts with Being Calm.",
-      lede: "AVRO helps you steady first, with calm-first formulas built to support composure, clarity and controlled readiness when pressure rises.",
+      lede: "AVRO helps you steady first, with calm-first formulas built to support composure, clarity and controlled readiness when pressure rises.*",
       image: "/images/home/hero-01.jpg",
       alt: "Pouring an AVRO Calm Blackberry Jasmine stick into a glass of water",
     },
     {
       headline: "Calm Comes First.",
-      lede: "AVRO is built for people who know pressure changes everything. Support composure, clarity and readiness before the moment matters.",
+      lede: "AVRO is built for people who know pressure changes everything. Support composure, clarity and readiness before the moment matters.*",
       image: "/images/home/hero-03.jpg",
       alt: "Hand holding an AVRO Focus Pomegranate Raspberry tube",
     },
     {
       headline: "Start Calm. Stay Ready.",
-      lede: "AVRO supports calm-first performance with formulas designed for pressure-sensitive moments in work, play, competition and social life.",
+      lede: "AVRO supports calm-first performance with formulas designed for pressure-sensitive moments in work, play, competition and social life.*",
       image: "/images/home/hero-02.jpg",
       alt: "Hand holding an AVRO Energy Fuji Apple tube",
     },
@@ -553,21 +553,21 @@ function StarRating() {
 export function HomeBenefitRow() {
   const benefits = [
     {
-      title: "Supports composure under pressure",
+      title: "Supports composure under pressure*",
       copy: "Helps you steady first before the moment matters — so you arrive ready, not reactive.",
       tone: "blue" as const,
       image: "/images/home/benefit-golf.png",
       focal: "center 30%",
     },
     {
-      title: "Supports clear-headed readiness",
+      title: "Supports clear-headed readiness*",
       copy: "Calm, clear, and in control — without the spike or the crash.",
       tone: "blue" as const,
       image: "/images/home/benefit-bar.png",
       focal: "center 40%",
     },
     {
-  title: "Supports calm while helping you stay present",
+  title: "Supports calm while helping you stay present*",
   copy: "Designed to support composure without turning you off. Quiet focus, fully online.",
       tone: "blue" as const,
       image: "/images/home/benefit-community.png",
@@ -699,12 +699,12 @@ export function HomeLogicRow() {
     {
       title: "More energy is not always the answer.",
       icon: "control-under-pressure",
-      content: "Most products push stimulation. AVRO starts with calm, because calm helps create the conditions for clarity, composure, and readiness."
+      content: "Most products push stimulation. AVRO starts with calm, because calm helps create the conditions for clarity, composure, and readiness.*"
     },
     {
       title: "Performance starts with state.",
       icon: "supports-focus-without-overload",
-      content: "AVRO is built to support the state before the moment. Calm creates the foundation for clarity and readiness when it counts."
+      content: "AVRO is built to support the state before the moment. Calm creates the foundation for clarity and readiness when it counts.*"
     },
     {
       title: "Calm first, then clarity.",
