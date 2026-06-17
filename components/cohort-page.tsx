@@ -313,11 +313,27 @@ export function CohortPage({ data }: { data: CohortData }) {
             }
           }
           @media (min-width: 769px) {
-            .cohort-hero-image-mobile { display: none !important; }
             .cohort-hero-img-wrap {
               position: absolute;
               inset: 0;
               border-radius: 0;
+            }
+            /* On desktop the ZP hero image is light (white-brick bar scene),
+               so override gold content colors to black/dark for legibility. */
+            .cohort-hero-content.cohort-hero-zp h1 {
+              color: var(--ink) !important;
+            }
+            .cohort-hero-content.cohort-hero-zp p {
+              color: var(--ink) !important;
+            }
+            .cohort-hero-content.cohort-hero-zp .btn-primary-dark {
+              color: var(--bone) !important;
+              background-color: var(--ink) !important;
+              border-color: var(--ink) !important;
+            }
+            .cohort-hero-content.cohort-hero-zp .btn-outline-dark {
+              color: var(--ink) !important;
+              border-color: var(--ink) !important;
             }
           }
         `}</style>
@@ -364,7 +380,7 @@ export function CohortPage({ data }: { data: CohortData }) {
           </div>
 
           {/* Content — overlaid on desktop, below image on mobile */}
-          <div className="cohort-hero-content">
+          <div className={`cohort-hero-content${isZeroProof ? " cohort-hero-zp" : ""}`}>
             {/* Eyebrow chip removed per design — title carries the moment via the per-cohort word animation. */}
             <h1
               className="font-serif"
