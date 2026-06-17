@@ -86,9 +86,9 @@ export default function AboutPage() {
           <p className="text-ink/80 text-[clamp(16px,1.7vw,18px)] leading-relaxed">
             Every formula begins with a calm-first foundation of PharmaGABA®.
             From there, Calm, Focus, and Energy are each designed for a distinct
-            role. All three formulas also include a prebiotic fiber blend of
+            role.* All three formulas also include a prebiotic fiber blend of
             Soluble Guar Fiber and Acacia Fiber, reflecting the belief that
-            balance and function are connected.
+            balance and function are connected.*
           </p>
           <p className="text-ink/75 text-[clamp(15px,1.5vw,17px)] italic leading-relaxed border-l-2 border-olive pl-5">
             &ldquo;Calm is not the opposite of performance. It is often what
@@ -107,7 +107,8 @@ export default function AboutPage() {
               Born from science and brand instinct.
             </h2>
             <p className="text-white/80 text-[clamp(14px,1.2vw,17px)] leading-relaxed max-w-[680px] mb-8">
-              Together, Keigo and Peter built AVRO around one clear belief: performance starts with composure.
+              Together, Keigo and Peter built AVRO around one clear belief:{" "}
+              <span className="whitespace-nowrap">performance starts with composure.</span>
             </p>
             
             {/* Founder bios */}

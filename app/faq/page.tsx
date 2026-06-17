@@ -18,7 +18,7 @@ const faqCategories = [
     faqs: [
       [
         "What is AVRO?",
-        "AVRO is a calm-first daily drink mix made with naturally fermented PharmaGABA®, designed to support calm, clarity, focus, and steady energy before pressure-sensitive moments.",
+        "AVRO is a calm-first daily drink mix made with naturally fermented PharmaGABA®, designed to support calm, clarity, focus, and steady energy before pressure-sensitive moments.*",
       ],
       [
         "What does calm first mean?",
@@ -40,7 +40,7 @@ const faqCategories = [
     faqs: [
       [
         "What is the difference between Calm, Focus, and Energy?",
-        "Calm supports caffeine-free composure, Focus supports caffeine-free clarity and focus, and Energy supports steady energy with 120 mg natural caffeine.",
+        "Calm supports caffeine-free composure, Focus supports caffeine-free clarity and focus, and Energy supports steady energy with 120 mg natural caffeine.*",
       ],
       [
         "Which formulas are caffeine free?",
@@ -48,7 +48,7 @@ const faqCategories = [
       ],
       [
         "Which formula is best for mornings?",
-        "Energy is commonly used in the mornings and supports activities that involve alertness and focus.",
+        "Energy is commonly used in the mornings and supports activities that involve alertness and focus.*",
       ],
     ],
   },
@@ -98,15 +98,15 @@ const faqCategories = [
     faqs: [
       [
         "Can I use AVRO before golf?",
-        "Yes. AVRO can fit a pre-round routine before first tee moments, tournament days, practice sessions, and long days on the course.",
+        "Yes. AVRO can fit a pre-round routine before first tee moments, tournament days, practice sessions, and long days on the course.*",
       ],
       [
         "Can I use AVRO before work or deep focus?",
-        "Yes. AVRO can support calm, clarity, and focus before deep work, meetings, presentations, coding sessions, and long workdays.",
+        "Yes. AVRO can support calm, clarity, and focus before deep work, meetings, presentations, coding sessions, and long workdays.*",
       ],
       [
         "Can I use AVRO before esports or gaming?",
-        "Yes. AVRO can support calm, clarity, and composure before long sessions. It does not claim to improve win rates or gameplay outcomes.",
+        "Yes. AVRO can support calm, clarity, and composure before long sessions. It does not claim to improve win rates or gameplay outcomes.*",
       ],
     ],
   },
@@ -142,7 +142,7 @@ const faqCategories = [
       ],
       [
         "What is your return policy?",
-        "All refunds, returns, or exchanges must be submitted within 30 days from purchase date. If you are looking to request a refund, return, or exchange, please email us at hello@avrolife.com. Make sure you include your purchase information — i.e. order number and date of purchase.",
+        "All refunds, returns, or exchanges must be submitted within 30 days from purchase date. If you are looking to request a refund, return, or exchange, please contact us through our Contact Page. Make sure you include your purchase information — i.e. order number and date of purchase.",
       ],
       [
         "What are AVRO's Guarantee Guidelines?",

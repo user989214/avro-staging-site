@@ -23,7 +23,7 @@ export default function SciencePage() {
       <PageHero
         variant="card"
         title="Calm first. Backed by science."
-        lede="Every AVRO formula starts with naturally fermented PharmaGABA®, selected to support calm-first readiness, composure, and clarity before pressure-sensitive moments."
+        lede="Every AVRO formula starts with naturally fermented PharmaGABA®, selected to support calm-first readiness, composure, and clarity before pressure-sensitive moments.*"
         imageSrc="/images/lifestyle/science-hero.png"
         imageAlt="Amber gel droplet over an embossed GABA chemical structure diagram"
         imageObjectPosition="right center"
@@ -57,7 +57,7 @@ export default function SciencePage() {
           </InfoCard>
           <InfoCard icon="supports-clear-thinking" title="Calm supports clarity">
             A calmer state can help support clearer thinking and better
-            composure.
+            composure.*
           </InfoCard>
           <InfoCard icon="calm-first-foundation" title="AVRO starts with state">
             AVRO is built around state support before pressure-sensitive
@@ -70,7 +70,7 @@ export default function SciencePage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)]">
           <div>
             <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5">
-              A naturally occurring part of the body&apos;s balance system.
+              A naturally occurring part of the<br />body&apos;s balance system.
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               GABA is a naturally occurring compound involved in the body&apos;s

@@ -96,7 +96,7 @@ export default function ManageSubscriptionPage() {
             >
               <h3
                 className="font-serif"
-                style={{ fontWeight: 900, fontSize: 24, lineHeight: 1.05, marginBottom: 6 }}
+                style={{ fontWeight: 900, fontSize: 24, lineHeight: 1.05, marginBottom: 6, color: formula === f ? "var(--bone)" : "var(--ink)" }}
               >
                 AVRO {f}
               </h3>

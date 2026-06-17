@@ -7,6 +7,7 @@ import {
   FinalCta,
 } from "@/components/sections"
 import { PageHero } from "@/components/page-hero"
+import { ReviewTODO } from "@/components/compliance"
 
 export const metadata = {
   title: "Subscribe + Save | AVRO",
@@ -34,8 +35,8 @@ export default function SubscribePage() {
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <InfoCard icon="quality-standards" title="Save on every order">
-            Subscribe & save 15% on every order of 2 or more tubes, plus free
-            shipping on orders of 2 or more tubes.
+            Subscribers get 15% off every order — the best price on AVRO,
+            automatically.
           </InfoCard>
           <InfoCard icon="control-under-pressure" title="Total flexibility">
             Select your own delivery schedule, skip a shipment, or change and cancel
@@ -58,7 +59,7 @@ export default function SubscribePage() {
             Select the AVRO formula that fits your needs — Calm, Focus, or Energy.
           </InfoCard>
           <InfoCard icon="step-drink" title="2. Set your schedule">
-            Select your own delivery schedule — every 2, 4, or 6 weeks.
+            Select your own delivery schedule — every 30, 45, or 60 days.
           </InfoCard>
           <InfoCard icon="transparent-standards" title="3. Save 15% every time">
             Orders of 2 or more tubes ship automatically with 15% off and free
@@ -69,6 +70,16 @@ export default function SubscribePage() {
 
       <ProductCards title="Choose your formula." shopLabel="Shop" />
       <SocialProof mode="compact" />
+
+      <CardedSection>
+        <p className="text-[13px] leading-relaxed max-w-[760px]">
+          <ReviewTODO>
+            Confirm the live free-shipping rule for subscriptions (is the order-minimum
+            waived for subscribers?) and make every &quot;free shipping&quot; / &quot;2 or more
+            tubes&quot; line on this page match the commerce settings.
+          </ReviewTODO>
+        </p>
+      </CardedSection>
 
       <div style={{ backgroundColor: "var(--base-deep)" }}>
         <FinalCta
