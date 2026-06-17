@@ -152,82 +152,83 @@ export function MockupLogicRow() {
  * spans edge to edge with no rounded card or side gutters.
  */
 export function MockupBlueCta({ title, copy }: { title: string; copy: string }) {
+  const btnStyle: React.CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    fontFamily: GC,
+    fontWeight: 700,
+    fontSize: 16,
+    letterSpacing: "-0.005em",
+    minHeight: 48,
+    padding: "0 28px",
+    borderRadius: 999,
+    border: "2px solid var(--charcoal)",
+    backgroundColor: "var(--charcoal)",
+    color: "var(--bone)",
+    textDecoration: "none",
+    transition: "background-color 0.18s ease, color 0.18s ease",
+  }
+
   return (
     <section
       style={{
         width: "100%",
-        backgroundColor: "var(--avro-blue)",
-        color: "var(--charcoal)",
-        padding: "clamp(40px,6vw,96px) clamp(20px,5vw,80px)",
+        backgroundColor: "transparent",
+        padding: "clamp(32px,5vw,72px) clamp(16px,4vw,64px)",
       }}
     >
-      <style>{`
-        .mk-blue-cta-btn:hover {
-          background-color: var(--charcoal) !important;
-          color: var(--bone) !important;
-        }
-      `}</style>
       <div
         style={{
           maxWidth: 1250,
           margin: "0 auto",
+          backgroundColor: "var(--avro-blue)",
+          color: "var(--charcoal)",
+          borderRadius: 24,
+          padding: "clamp(32px,5vw,88px) clamp(20px,4vw,80px)",
           display: "flex",
           flexDirection: "row",
           flexWrap: "wrap",
           alignItems: "center",
           justifyContent: "space-between",
           gap: 28,
+          fontFamily: GC,
         }}
       >
-        <div style={{ flex: "1 1 320px", minWidth: 0, maxWidth: 560 }}>
+        <div style={{ flex: "1 1 320px", minWidth: 0, maxWidth: 520 }}>
           <h2
             style={{
               fontFamily: GC,
-              fontWeight: 800,
-              fontSize: "clamp(28px,4.2vw,62px)",
-              lineHeight: 1.0,
+              fontWeight: 700,
+              fontSize: "clamp(26px,4vw,60px)",
+              lineHeight: 1.02,
               letterSpacing: "-0.02em",
               color: "var(--charcoal)",
-              marginBottom: 12,
+              marginBottom: 10,
             }}
           >
             {title}
           </h2>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.3vw,19px)", lineHeight: 1.5, color: "rgba(21,21,21,0.72)" }}>
-            {copy}
+          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.3vw,19px)", lineHeight: 1.5, color: "rgba(21,21,21,0.7)" }}>
+            {copy}*
           </p>
         </div>
-        <a
-          href="/shop"
-          className="mk-blue-cta-btn"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "16px 32px",
-            borderRadius: 999,
-            backgroundColor: "transparent",
-            border: "2px solid var(--charcoal)",
-            color: "var(--charcoal)",
-            fontFamily: GC,
-            fontWeight: 700,
-            fontSize: 16,
-            textDecoration: "none",
-            whiteSpace: "nowrap",
-            transition: "background-color .2s ease, color .2s ease",
-          }}
-        >
-          Shop AVRO
-        </a>
+
+        <div style={{ flex: "1 1 280px", display: "flex", flexDirection: "column", gap: 8, minWidth: 240, maxWidth: 400 }}>
+          <a href="/calm"   style={btnStyle}>Shop Calm</a>
+          <a href="/focus"  style={btnStyle}>Shop Focus</a>
+          <a href="/energy" style={btnStyle}>Shop Energy</a>
+        </div>
       </div>
     </section>
   )
 }
 
-/** Full-bleed Calm Performance artwork band on a white background. */
+/** Calm Performance artwork — renders above MockupBlueCta in page.tsx. */
 export function MockupCalmPerformance() {
   return (
-    <section style={{ width: "100%", backgroundColor: "#FFFFFF" }}>
+    <section style={{ width: "100%", backgroundColor: "var(--base)" }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/images/banners/calm-power.png"
