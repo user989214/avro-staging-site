@@ -34,10 +34,15 @@ function FormulaGraph() {
     return () => obs.disconnect()
   }, [])
 
+  // Accent colors pulled directly from each tube's physical color identity
+  const CALM_COLOR  = "#7A79C8"  // Calm tube: purple/indigo
+  const FOCUS_COLOR = "#E05A7A"  // Focus tube: pink-red (Red Dragon Fruit)
+  const ENERGY_COLOR = "#C8E84B" // Energy tube: yellow-green
+
   const formulas = [
-    { name: "Calm", segments: [{ color: BLUE, width: 70, label: "PharmaGABA®" }, { color: "#C9B8E8", width: 30, label: "Magnesium" }] },
-    { name: "Focus", segments: [{ color: BLUE, width: 60, label: "PharmaGABA®" }, { color: "#A8D5BA", width: 40, label: "Cognigrape®" }] },
-    { name: "Energy", segments: [{ color: BLUE, width: 55, label: "PharmaGABA®" }, { color: "#F5C896", width: 45, label: "Caffeine" }] },
+    { name: "Calm",   nameColor: CALM_COLOR,   segments: [{ color: BLUE, width: 70, label: "PharmaGABA®" }, { color: CALM_COLOR,   width: 30, label: "Magnesium" }] },
+    { name: "Focus",  nameColor: FOCUS_COLOR,  segments: [{ color: BLUE, width: 60, label: "PharmaGABA®" }, { color: FOCUS_COLOR,  width: 40, label: "Cognigrape®" }] },
+    { name: "Energy", nameColor: ENERGY_COLOR, segments: [{ color: BLUE, width: 55, label: "PharmaGABA®" }, { color: ENERGY_COLOR, width: 45, label: "Caffeine" }] },
   ]
 
   return (
@@ -52,7 +57,7 @@ function FormulaGraph() {
         {formulas.map((formula, idx) => (
           <div key={formula.name} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
-              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "var(--charcoal)", letterSpacing: "-0.01em" }}>{formula.name}</span>
+              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: formula.nameColor, letterSpacing: "-0.01em" }}>{formula.name}</span>
               <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 11, color: "var(--warm-gray)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
                 {formula.segments.map((s) => s.label).join(" + ")}
               </span>
@@ -82,10 +87,10 @@ function FormulaGraph() {
       </div>
       <div style={{ display: "flex", gap: 12, marginTop: 22, flexWrap: "wrap", paddingTop: 16, borderTop: "1px solid var(--divider)" }}>
         {[
-          { color: BLUE, label: "PharmaGABA®" },
-          { color: "#C9B8E8", label: "Magnesium" },
-          { color: "#A8D5BA", label: "Cognigrape®" },
-          { color: "#F5C896", label: "Caffeine" },
+          { color: BLUE,         label: "PharmaGABA®" },
+          { color: CALM_COLOR,   label: "Magnesium" },
+          { color: FOCUS_COLOR,  label: "Cognigrape®" },
+          { color: ENERGY_COLOR, label: "Caffeine" },
         ].map((item) => (
           <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <div style={{ width: 12, height: 12, borderRadius: 999, backgroundColor: item.color }} />
@@ -830,7 +835,7 @@ export function HomeLogicRow() {
   )
 }
 
-// ── APPROACH CHART ──────────────────────────────────���──────────────────���─���─────
+// ── APPROACH CHART ─────────────────────────────────�����──────────────────���─���─────
 // Renders the homepage "Calm-First Approach" philosophy graphic verbatim.
 function ApproachChart() {
   return (
