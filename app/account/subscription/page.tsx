@@ -61,7 +61,7 @@ export default function ManageSubscriptionPage() {
                 AVRO {formula}
               </h2>
               <p style={{ marginTop: 8, fontSize: 15, color: "var(--warm-gray)" }}>
-                {cadence} · {paused ? "Paused" : "Active"}
+                {paused ? "Paused" : "Active"}
               </p>
             </div>
             <button
@@ -100,7 +100,7 @@ export default function ManageSubscriptionPage() {
               >
                 AVRO {f}
               </h3>
-              <p style={{ fontSize: 14, lineHeight: 1.5, opacity: 0.78 }}>
+              <p style={{ fontSize: 14, lineHeight: 1.5, color: formula === f ? "var(--bone)" : "var(--warm-gray)" }}>
                 {f === "Calm" && "Caffeine-free composure for evening pressure moments."}
                 {f === "Focus" && "Caffeine-free clarity for deep work and long sessions."}
                 {f === "Energy" && "Steady energy with 120 mg natural caffeine."}
