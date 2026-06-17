@@ -11,6 +11,8 @@ export interface PageHeroProps {
   imageSrc: string
   imageAlt: string
   imageObjectPosition?: string
+  /** Portrait (9:16) crop shown on mobile instead of the desktop image. */
+  mobileImageSrc?: string
   primaryCta?: { href: string; label: string }
   secondaryCta?: { href: string; label: string }
   /** Optional content rendered below the lede / CTAs (e.g. badges, search bar, chip row). */
@@ -160,6 +162,7 @@ export function PageHero({
   imageSrc,
   imageAlt,
   imageObjectPosition = "right center",
+  mobileImageSrc,
   primaryCta,
   secondaryCta,
   children,
@@ -188,106 +191,122 @@ export function PageHero({
     >
       <style>{`
         ${SHARED_HERO_STYLES}
+        /* ── Desktop: rounded 16:9 card with content overlaid ── */
+        .ph-hero-16x9 {
+          position: relative;
+          width: calc(100% - 32px);
+          margin: 0 auto 16px;
+          aspect-ratio: 16/9;
+          overflow: hidden;
+          background-color: var(--base-light);
+          border-radius: 20px;
+        }
+        .ph-hero-16x9-content {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: clamp(32px,5vw,80px) clamp(20px,5vw,64px);
+        }
+        .ph-hero-img-mobile { display: none; }
+        .ph-hero-img-desktop { display: block; }
+        /* ── Mobile: stacked — rounded image on top, text below ── */
         @media (max-width: 768px) {
-          .ph-hero-grid {
-            grid-template-columns: 1fr !important;
-            align-items: start !important;
-            padding: clamp(56px,9vw,80px) clamp(20px,5vw,28px) !important;
+          .ph-hero-16x9 {
+            aspect-ratio: unset !important;
+            height: auto !important;
+            overflow: visible !important;
+            display: flex;
+            flex-direction: column;
           }
-          .ph-hero-img { object-position: 65% 80% !important; }
-          .ph-hero-fade {
-            background: linear-gradient(180deg, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.94) 48%, rgba(245,241,234,0.55) 62%, rgba(245,241,234,0.1) 80%) !important;
+          .ph-hero-img-wrapper {
+            position: relative !important;
+            inset: unset !important;
+            width: calc(100% - 32px);
+            margin: 16px auto 0;
+            aspect-ratio: 3/4;
+            border-radius: 20px;
+            overflow: hidden;
+            flex-shrink: 0;
+          }
+          .ph-hero-img-desktop { display: none !important; }
+          .ph-hero-img-mobile { display: block !important; }
+          .ph-hero-16x9-content {
+            position: static !important;
+            padding: 24px 20px 32px !important;
+          }
+        }
+        @media (min-width: 769px) {
+          .ph-hero-img-wrapper {
+            position: absolute;
+            inset: 0;
+            border-radius: 0;
           }
         }
       `}</style>
 
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          margin: 0,
-          borderRadius: 0,
-          overflow: "hidden",
-          backgroundColor: "var(--base-light)",
-          minHeight: minH,
-        }}
-      >
-        {imageSrc && (
-          <>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+      {/* Outer wrapper — 16:9 on desktop, column-stacked on mobile */}
+      <div className="ph-hero-16x9">
+
+        {/* Image container — full-bleed on desktop, rounded-rect card on mobile */}
+        <div className="ph-hero-img-wrapper">
+          {imageSrc && (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={imageSrc}
               alt={imageAlt}
-              className="ph-hero-img"
+              className="ph-hero-img-desktop"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: imageObjectPosition }}
+            />
+          )}
+          {mobileImageSrc && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={mobileImageSrc}
+              alt={imageAlt}
+              className="ph-hero-img-mobile"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: imageObjectPosition }}
+            />
+          )}
+          {/* Fallback: if no mobile src, show the desktop image on mobile too */}
+          {!mobileImageSrc && imageSrc && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              className="ph-hero-img-mobile"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: imageObjectPosition }}
+            />
+          )}
+        </div>
+
+        {/* Content — overlaid on desktop, below image on mobile */}
+        <div className="ph-hero-16x9-content">
+          <div style={{ display: "flex", flexDirection: "column", maxWidth: 580 }}>
+            <AnimatedHeadline
+              text={title}
+              className="font-serif"
               style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-                objectPosition: imageObjectPosition,
+                fontWeight: 900,
+                fontSize: compact ? "clamp(28px,3.5vw,48px)" : "clamp(32px,4vw,60px)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.025em",
+                color: "var(--ink)",
+                marginBottom: 14,
               }}
             />
-
-            {/* Edge-wrapping fade — stronger than before so text remains legible
-                and the hero reads as cohesive across every page. */}
-            <div
-              aria-hidden="true"
-              className="ph-hero-fade"
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: `
-                  linear-gradient(to right, var(--base-light) 0%, var(--base-light) 30%, rgba(245,241,234,0.7) 45%, rgba(245,241,234,0.4) 58%, rgba(245,241,234,0.16) 72%, rgba(245,241,234,0.04) 86%, rgba(245,241,234,0.1) 95%, var(--base-light) 100%),
-                  linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.15) 8%, rgba(245,241,234,0) 18%, rgba(245,241,234,0) 82%, rgba(245,241,234,0.15) 92%, var(--base-light) 100%)
-                `,
-                pointerEvents: "none",
-              }}
-            />
-          </>
-        )}
-
-        <div
-          className="ph-hero-grid"
-          style={{
-            position: "relative",
-            maxWidth: 1440,
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: imageSrc ? "1.05fr 1fr" : "1fr",
-            alignItems: "center",
-            gap: "clamp(32px,5vw,72px)",
-          padding: "clamp(56px,7vw,100px) clamp(20px,5vw,64px)",
-          minHeight: "inherit",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <AnimatedHeadline
-            text={title}
-            className="font-serif"
-            style={{
-              fontWeight: 900,
-              fontSize: compact
-                ? "clamp(32px,4.5vw,52px)"
-                : "clamp(36px,5vw,64px)",
-              lineHeight: 1,
-              letterSpacing: "-0.025em",
-              color: "var(--ink)",
-              marginBottom: 16,
-              maxWidth: 600,
-            }}
-          />
 
             <p
               className="ph-fade ph-lede"
               style={{
                 fontFamily: GC,
                 fontWeight: 500,
-                fontSize: "clamp(18px,1.7vw,21px)",
+                fontSize: "clamp(16px,1.4vw,20px)",
                 lineHeight: 1.5,
-                color: "rgba(0,0,0,0.72)",
-                maxWidth: 540,
-                marginBottom: children || primaryCta || secondaryCta ? 28 : 0,
+                color: "var(--ink)",
+                maxWidth: 500,
+                marginBottom: children || primaryCta || secondaryCta ? 24 : 0,
               }}
             >
               {lede}
@@ -300,10 +319,7 @@ export function PageHero({
             )}
 
             {(primaryCta || secondaryCta) && (
-              <div
-                className="ph-fade ph-cta ph-pill-row"
-                style={{ marginTop: children ? 24 : 0 }}
-              >
+              <div className="ph-fade ph-cta ph-pill-row" style={{ marginTop: children ? 20 : 0 }}>
                 {primaryCta && (
                   <Link href={primaryCta.href} className="ph-pill-primary">
                     {primaryCta.label}
@@ -317,8 +333,6 @@ export function PageHero({
               </div>
             )}
           </div>
-
-          {imageSrc && <div aria-hidden="true" />}
         </div>
       </div>
     </section>
@@ -339,116 +353,125 @@ function FlatHero({
   centered,
 }: Omit<PageHeroProps, "imageSrc" | "imageAlt" | "imageObjectPosition" | "variant">) {
   return (
+    /* Outer section matches the site page background — pure white — so no
+       colour bleeds above or below the card. */
     <section
       style={{
-        position: "relative",
         width: "100%",
-        backgroundColor: "var(--base-light)",
+        backgroundColor: "var(--base)",
         color: "var(--ink)",
         padding: 0,
-        overflow: "hidden",
-        minHeight: compact
-          ? "clamp(420px, 52vh, 540px)"
-          : "clamp(480px, 60vh, 620px)",
       }}
     >
-      {/* Subtle tone-on-tone gradient — adds depth without visual noise */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: `
+      <style>{`
+        ${SHARED_HERO_STYLES}
+        .ph-flat-card {
+          position: relative;
+          width: calc(100% - 32px);
+          margin: 0 auto 16px;
+          border-radius: 20px;
+          overflow: hidden;
+          background-color: var(--base-light);
+        }
+        /* Subtle tone-on-tone gradient overlay */
+        .ph-flat-card::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background:
             radial-gradient(ellipse 70% 80% at 80% 50%, rgba(222,218,208,0.55) 0%, rgba(222,218,208,0) 60%),
-            radial-gradient(ellipse 80% 70% at 15% 100%, rgba(222,218,208,0.35) 0%, rgba(222,218,208,0) 65%),
-            linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.03) 100%)
-          `,
-          pointerEvents: "none",
-        }}
-      />
+            radial-gradient(ellipse 80% 70% at 15% 100%, rgba(222,218,208,0.35) 0%, rgba(222,218,208,0) 65%);
+          pointer-events: none;
+        }
+        .ph-flat-inner {
+          position: relative;
+          padding: ${compact
+            ? "clamp(56px,8vw,100px) clamp(20px,5vw,64px) clamp(48px,6vw,80px)"
+            : "clamp(72px,9vw,120px) clamp(20px,5vw,64px) clamp(64px,8vw,104px)"};
+          display: flex;
+          flex-direction: column;
+          align-items: ${centered ? "center" : "flex-start"};
+          text-align: ${centered ? "center" : "left"};
+        }
+        @media (max-width: 768px) {
+          .ph-flat-card {
+            width: calc(100% - 24px);
+          }
+          .ph-flat-inner {
+            padding: clamp(48px,10vw,72px) clamp(16px,5vw,28px) clamp(40px,8vw,60px);
+          }
+        }
+      `}</style>
 
-      <style>{SHARED_HERO_STYLES}</style>
-
-      <div
-        className="relative w-full max-w-[1440px] mx-auto"
-        style={{
-          padding: compact
-            ? "clamp(80px,9vw,120px) clamp(20px,5vw,64px) clamp(56px,7vw,88px)"
-            : "clamp(88px,10vw,140px) clamp(20px,5vw,64px) clamp(64px,8vw,104px)",
-          textAlign: centered ? "center" : "left",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: centered ? "center" : "flex-start",
-          minHeight: "inherit",
-          justifyContent: "center",
-        }}
-      >
-        <AnimatedHeadline
-          text={title}
-          className="font-serif"
-          style={{
-            fontWeight: 900,
-            fontSize: compact
-              ? "clamp(32px,4.5vw,52px)"
-              : "clamp(36px,5vw,64px)",
-            lineHeight: 1,
-            letterSpacing: "-0.025em",
-            color: "var(--ink)",
-            marginBottom: 16,
-            maxWidth: 820,
-          }}
-        />
-
-        <p
-          className="ph-fade ph-lede"
-          style={{
-            fontFamily: GC,
-            fontWeight: 500,
-            fontSize: "clamp(18px,1.7vw,21px)",
-            lineHeight: 1.5,
-            color: "rgba(0,0,0,0.72)",
-            maxWidth: 660,
-            marginBottom: 0,
-          }}
-        >
-          {lede}
-        </p>
-
-        {children && (
-          <div
-            className="ph-fade ph-extra"
+      <div className="ph-flat-card">
+        <div className="ph-flat-inner">
+          <AnimatedHeadline
+            text={title}
+            className="font-serif"
             style={{
-              marginTop: 22,
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: centered ? "center" : "flex-start",
+              fontWeight: 900,
+              fontSize: compact
+                ? "clamp(32px,4.5vw,52px)"
+                : "clamp(36px,5vw,64px)",
+              lineHeight: 1,
+              letterSpacing: "-0.025em",
+              color: "var(--ink)",
+              marginBottom: 16,
+              maxWidth: 820,
+            }}
+          />
+
+          <p
+            className="ph-fade ph-lede"
+            style={{
+              fontFamily: GC,
+              fontWeight: 500,
+              fontSize: "clamp(18px,1.7vw,21px)",
+              lineHeight: 1.5,
+              color: "var(--ink)",
+              maxWidth: 660,
+              marginBottom: 0,
             }}
           >
-            {children}
-          </div>
-        )}
+            {lede}
+          </p>
 
-        {(primaryCta || secondaryCta) && (
-          <div
-            className="ph-fade ph-cta ph-pill-row"
-            style={{
-              marginTop: 22,
-              justifyContent: centered ? "center" : "flex-start",
-            }}
-          >
-            {primaryCta && (
-              <Link href={primaryCta.href} className="ph-pill-primary">
-                {primaryCta.label}
-              </Link>
-            )}
-            {secondaryCta && (
-              <Link href={secondaryCta.href} className="ph-pill-secondary">
-                {secondaryCta.label}
-              </Link>
-            )}
-          </div>
-        )}
+          {children && (
+            <div
+              className="ph-fade ph-extra"
+              style={{
+                marginTop: 22,
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: centered ? "center" : "flex-start",
+              }}
+            >
+              {children}
+            </div>
+          )}
+
+          {(primaryCta || secondaryCta) && (
+            <div
+              className="ph-fade ph-cta ph-pill-row"
+              style={{
+                marginTop: 22,
+                justifyContent: centered ? "center" : "flex-start",
+              }}
+            >
+              {primaryCta && (
+                <Link href={primaryCta.href} className="ph-pill-primary">
+                  {primaryCta.label}
+                </Link>
+              )}
+              {secondaryCta && (
+                <Link href={secondaryCta.href} className="ph-pill-secondary">
+                  {secondaryCta.label}
+                </Link>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   )

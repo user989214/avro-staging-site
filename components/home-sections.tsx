@@ -34,10 +34,15 @@ function FormulaGraph() {
     return () => obs.disconnect()
   }, [])
 
+  // Accent colors pulled directly from each tube's physical color identity
+  const CALM_COLOR  = "#7A79C8"  // Calm tube: purple/indigo
+  const FOCUS_COLOR = "#E05A7A"  // Focus tube: pink-red (Red Dragon Fruit)
+  const ENERGY_COLOR = "#C8E84B" // Energy tube: yellow-green
+
   const formulas = [
-    { name: "Calm", segments: [{ color: BLUE, width: 70, label: "PharmaGABA®" }, { color: "#C9B8E8", width: 30, label: "Magnesium" }] },
-    { name: "Focus", segments: [{ color: BLUE, width: 60, label: "PharmaGABA®" }, { color: "#A8D5BA", width: 40, label: "Cognigrape®" }] },
-    { name: "Energy", segments: [{ color: BLUE, width: 55, label: "PharmaGABA®" }, { color: "#F5C896", width: 45, label: "Caffeine" }] },
+    { name: "Calm",   nameColor: CALM_COLOR,   segments: [{ color: BLUE, width: 70, label: "PharmaGABA®" }, { color: CALM_COLOR,   width: 30, label: "Magnesium" }] },
+    { name: "Focus",  nameColor: FOCUS_COLOR,  segments: [{ color: BLUE, width: 60, label: "PharmaGABA®" }, { color: FOCUS_COLOR,  width: 40, label: "Cognigrape®" }] },
+    { name: "Energy", nameColor: ENERGY_COLOR, segments: [{ color: BLUE, width: 55, label: "PharmaGABA®" }, { color: ENERGY_COLOR, width: 45, label: "Caffeine" }] },
   ]
 
   return (
@@ -52,7 +57,7 @@ function FormulaGraph() {
         {formulas.map((formula, idx) => (
           <div key={formula.name} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
-              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: "var(--charcoal)", letterSpacing: "-0.01em" }}>{formula.name}</span>
+              <span style={{ fontFamily: GC, fontWeight: 700, fontSize: 16, color: formula.nameColor, letterSpacing: "-0.01em" }}>{formula.name}</span>
               <span style={{ fontFamily: GC, fontWeight: 500, fontSize: 11, color: "var(--warm-gray)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
                 {formula.segments.map((s) => s.label).join(" + ")}
               </span>
@@ -82,10 +87,10 @@ function FormulaGraph() {
       </div>
       <div style={{ display: "flex", gap: 12, marginTop: 22, flexWrap: "wrap", paddingTop: 16, borderTop: "1px solid var(--divider)" }}>
         {[
-          { color: BLUE, label: "PharmaGABA®" },
-          { color: "#C9B8E8", label: "Magnesium" },
-          { color: "#A8D5BA", label: "Cognigrape®" },
-          { color: "#F5C896", label: "Caffeine" },
+          { color: BLUE,         label: "PharmaGABA®" },
+          { color: CALM_COLOR,   label: "Magnesium" },
+          { color: FOCUS_COLOR,  label: "Cognigrape®" },
+          { color: ENERGY_COLOR, label: "Caffeine" },
         ].map((item) => (
           <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <div style={{ width: 12, height: 12, borderRadius: 999, backgroundColor: item.color }} />
@@ -108,18 +113,21 @@ export function HomeRefHero() {
       headline: "Performance Starts with Being Calm.",
       lede: "AVRO helps you steady first, with calm-first formulas built to support composure, clarity and controlled readiness when pressure rises.*",
       image: "/images/home/hero-01.jpg",
+      mobileImage: "/images/home/hero-01-mobile.png",
       alt: "Pouring an AVRO Calm Blackberry Jasmine stick into a glass of water",
     },
     {
       headline: "Calm Comes First.",
       lede: "AVRO is built for people who know pressure changes everything. Support composure, clarity and readiness before the moment matters.*",
       image: "/images/home/hero-03.jpg",
+      mobileImage: "/images/home/hero-03-mobile.png",
       alt: "Hand holding an AVRO Focus Pomegranate Raspberry tube",
     },
     {
       headline: "Start Calm. Stay Ready.",
       lede: "AVRO supports calm-first performance with formulas designed for pressure-sensitive moments in work, play, competition and social life.*",
       image: "/images/home/hero-02.jpg",
+      mobileImage: "/images/home/hero-02-mobile.png",
       alt: "Hand holding an AVRO Energy Fuji Apple tube",
     },
   ]
@@ -184,14 +192,8 @@ export function HomeRefHero() {
   // Lerp helpers
   const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 
-  // Section outer padding goes from 0 → normal as you scroll
-  const sectionPadX = lerp(0, 64, progress)
-  const sectionPadTop = lerp(0, 96, progress)
-  const sectionPadBottom = lerp(0, 80, progress)
-  const radius = lerp(0, 28, progress)
-  const imgScale = lerp(1.06, 1.0, progress)
-  // Compact enough so headline + lede + CTAs all fit on first load above the fold
-  const heroMinH = `clamp(560px, ${lerp(78, 56, progress)}vh, ${lerp(780, 680, progress)}px)`
+
+
 
   return (
     <section
@@ -199,11 +201,7 @@ export function HomeRefHero() {
         width: "100%",
         backgroundColor: "var(--base)",
         color: "var(--ink)",
-        paddingLeft: `clamp(${lerp(0, 20, progress)}px, ${5 * progress}vw, ${sectionPadX}px)`,
-        paddingRight: `clamp(${lerp(0, 20, progress)}px, ${5 * progress}vw, ${sectionPadX}px)`,
-        paddingTop: `clamp(${lerp(0, 48, progress)}px, ${7 * progress}vw, ${sectionPadTop}px)`,
-        paddingBottom: `clamp(${lerp(0, 48, progress)}px, ${6 * progress}vw, ${sectionPadBottom}px)`,
-        willChange: "padding",
+        padding: 0,
       }}
     >
       <style>{`
@@ -244,23 +242,56 @@ export function HomeRefHero() {
           .hp-pill-row { flex-direction: column; align-items: stretch; max-width: 320px !important; }
           .hp-pill-primary, .hp-pill-secondary { width: 100%; flex: 0 0 auto; }
         }
-  @media (max-width: 768px) {
+  /* ── Desktop: 16:9 image with content overlaid ── */
+  .hp-hero-img-mobile { display: none; }
   .hp-hero-container {
-    max-width: 100% !important;
-    width: 100% !important;
-    border-radius: 0 !important;
-    min-height: auto !important;
-    background: var(--base-light) !important;
+    position: relative;
+    width: calc(100% - 32px);
+    margin: 0 auto 16px;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background-color: var(--bone);
+    border-radius: 20px;
   }
-          .hp-hero-grid {
-            grid-template-columns: 1fr !important;
-            align-items: start !important;
-            padding: clamp(48px,10vw,80px) clamp(20px,5vw,28px) !important;
-            background: var(--base-light) !important;
-          }
-          .hp-hero-img { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-          .hp-hero-fade { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-        }
+  .hp-hero-grid {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(24px,4vw,64px) clamp(28px,5vw,64px);
+  }
+  /* ── Mobile: stacked — rounded image on top, text below ── */
+  @media (max-width: 768px) {
+    .hp-hero-container {
+      aspect-ratio: unset !important;
+      overflow: visible !important;
+      display: flex;
+      flex-direction: column;
+    }
+    .hp-hero-img-wrap {
+      position: relative;
+      width: calc(100% - 32px);
+      margin: 16px auto 0;
+            aspect-ratio: 3/4;
+      border-radius: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .hp-hero-img { display: none !important; }
+    .hp-hero-img-mobile { display: block !important; }
+    .hp-hero-grid {
+      position: static !important;
+      padding: 24px 20px 32px !important;
+    }
+  }
+  @media (min-width: 769px) {
+    .hp-hero-img-wrap {
+      position: absolute;
+      inset: 0;
+      border-radius: 0;
+    }
+  }
         .hp-pill-primary {
           background-color: transparent;
           color: var(--charcoal);
@@ -317,68 +348,58 @@ export function HomeRefHero() {
         .moment-card:hover img { transform: scale(1.04); }
       `}</style>
 
-      <div
-        className="hp-hero-container"
-        style={{
-          position: "relative",
-          maxWidth: lerp(2000, 1320, progress),
-          margin: "0 auto",
-          borderRadius: radius,
-          overflow: "hidden",
-          backgroundColor: "var(--bone)",
-          minHeight: heroMinH,
-          willChange: "border-radius, max-width, min-height",
-        }}
-      >
-        {/* Background images — all slides, opacity-based crossfade */}
-        {slides.map((slide, idx) => (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            key={idx}
-            src={slide.image}
-            alt={slide.alt}
-            className="hp-hero-img"
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-              objectPosition: "right center",
-              opacity: currentSlide === idx ? 1 : 0,
-              transition: "opacity 0.8s ease-in-out",
-            }}
-          />
-        ))}
+      {/* Outer wrapper — 16:9 on desktop, column-stacked on mobile */}
+      <div className="hp-hero-container">
 
-        {/* Gradient overlay — wraps all four edges so the rectangular image border dissolves into the bone */}
-        <div
-          aria-hidden="true"
-          className="hp-hero-fade"
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: `
-              linear-gradient(to right, var(--bone) 0%, var(--bone) 32%, rgba(245,241,234,0.68) 46%, rgba(245,241,234,0.38) 58%, rgba(245,241,234,0.15) 72%, rgba(245,241,234,0.04) 86%, rgba(245,241,234,0.1) 95%, var(--bone) 100%),
-              linear-gradient(to bottom, var(--bone) 0%, rgba(245,241,234,0.13) 7%, rgba(245,241,234,0) 16%, rgba(245,241,234,0) 84%, rgba(245,241,234,0.13) 93%, var(--bone) 100%)
-            `,
-            pointerEvents: "none",
-          }}
-        />
+        {/* Image container — full-bleed on desktop, rounded-rect card on mobile */}
+        <div className="hp-hero-img-wrap">
+          {/* Desktop slides */}
+          {slides.map((slide, idx) => (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              key={idx}
+              src={slide.image}
+              alt={slide.alt}
+              className="hp-hero-img"
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center center",
+                opacity: currentSlide === idx ? 1 : 0,
+                transition: "opacity 0.8s ease-in-out",
+              }}
+            />
+          ))}
 
-        {/* Content grid sits on top */}
-        <div
-          className="hp-hero-grid"
-          style={{
-            position: "relative",
-            display: "grid",
-            gridTemplateColumns: "1.05fr 1fr",
-            alignItems: "center",
-            gap: "clamp(32px,5vw,72px)",
-            padding: "clamp(36px,5vw,64px) clamp(28px,5vw,64px)",
-            minHeight: "inherit",
-          }}
-        >
+          {/* Mobile slides */}
+          {slides.map((slide, idx) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={`mob-${idx}`}
+              src={slide.mobileImage}
+              alt={slide.alt}
+              className="hp-hero-img-mobile"
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center top",
+                opacity: currentSlide === idx ? 1 : 0,
+                transition: "opacity 0.8s ease-in-out",
+              }}
+            />
+          ))}
+        </div>{/* /hp-hero-img-wrap */}
+
+
+
+        {/* Content — overlaid on desktop, below image on mobile */}
+        <div className="hp-hero-grid">
           {/* Left */}
           <div style={{ display: "flex", flexDirection: "column" }}>
           {/* Hero headline — slides with fade */}
@@ -408,7 +429,7 @@ export function HomeRefHero() {
               fontWeight: 400,
               fontSize: "clamp(16px,1.4vw,18px)",
               lineHeight: 1.55,
-              color: "var(--warm-gray)",
+              color: "var(--ink)",
               maxWidth: 520,
               marginBottom: 28,
               opacity: 1,
@@ -814,7 +835,7 @@ export function HomeLogicRow() {
   )
 }
 
-// ── APPROACH CHART ─────────────────────────────────────────────────────────────
+// ── APPROACH CHART ─────────────────────────────────�����──────────────────���─���─────
 // Renders the homepage "Calm-First Approach" philosophy graphic verbatim.
 function ApproachChart() {
   return (
@@ -1044,7 +1065,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ─────────────����───────��─────���──────��────────��───����──────────������──
+// ── STORY STRIP ─────────────����───────��─────���──────��────────��───����──────────������─��
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>

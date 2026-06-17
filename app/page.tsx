@@ -58,12 +58,7 @@ export default function HomePage() {
           color: #FFFFFF !important;
         }
 
-        /* ── Hero edge-fade → neutral light grey (remove warm cream/green hue) ── */
-        .home-theme .hp-hero-fade {
-          background:
-            linear-gradient(to right, #FFFFFF 0%, #FFFFFF 32%, rgba(240,240,240,0.68) 46%, rgba(240,240,240,0.38) 58%, rgba(240,240,240,0.15) 72%, rgba(240,240,240,0.04) 86%, rgba(240,240,240,0.1) 95%, #FFFFFF 100%),
-            linear-gradient(to bottom, #FFFFFF 0%, rgba(240,240,240,0.13) 7%, rgba(240,240,240,0) 16%, rgba(240,240,240,0) 84%, rgba(240,240,240,0.13) 93%, #FFFFFF 100%) !important;
-        }
+
       `}</style>
 
       <HomeRefHero />

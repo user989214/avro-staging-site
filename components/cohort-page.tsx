@@ -33,6 +33,12 @@ const GOLF_HERO_IMAGES = [
   "/images/lifestyle/golf-hero-02.png",
   "/images/lifestyle/golf-hero-03.png",
 ]
+// Mobile (9:16) crops for the golf hero rotator
+const GOLF_HERO_IMAGES_MOBILE = [
+  "/images/lifestyle/golf-hero-01-mobile.png",
+  "/images/lifestyle/golf-hero-02-mobile.png",
+  "/images/lifestyle/golf-hero-03-mobile.png",
+]
 
 const GC = '"DM Sans", system-ui, sans-serif'
 
@@ -156,9 +162,6 @@ export function CohortPage({ data }: { data: CohortData }) {
         ink: "var(--gold)",
         muted: "rgba(202,168,75,0.7)",
   heroBg: "var(--deep-black)",
-  // Gradient hero overlay for dark theme — fades from solid dark on left to transparent on right
-  heroFade:
-    "linear-gradient(to right, rgba(13,13,13,1) 0%, rgba(13,13,13,0.95) 38%, rgba(13,13,13,0.85) 48%, rgba(13,13,13,0.7) 58%, rgba(13,13,13,0.5) 70%, rgba(13,13,13,0.35) 82%, rgba(13,13,13,0.4) 94%, rgba(13,13,13,0.6) 100%), linear-gradient(to bottom, rgba(13,13,13,0.5) 0%, rgba(13,13,13,0.2) 10%, rgba(13,13,13,0.1) 20%, rgba(13,13,13,0.1) 80%, rgba(13,13,13,0.2) 90%, rgba(13,13,13,0.5) 100%)",
         // Step number chip on the dark card → gold chip with dark numeral.
         stepNumBg: "var(--gold)",
         stepNumFg: "var(--deep-black)",
@@ -172,10 +175,8 @@ export function CohortPage({ data }: { data: CohortData }) {
         cardInk: "var(--ink)",
         cardMuted: "var(--warm-gray)",
         ink: "var(--ink)",
-        muted: "var(--warm-gray)",
-        heroBg: "var(--base-light)",
-        heroFade:
-          "linear-gradient(to right, var(--base-light) 0%, var(--base-light) 28%, rgba(245,241,234,0.68) 44%, rgba(245,241,234,0.38) 57%, rgba(245,241,234,0.15) 70%, rgba(245,241,234,0.04) 84%, rgba(245,241,234,0.08) 95%, var(--base-light) 100%), linear-gradient(to bottom, var(--base-light) 0%, rgba(245,241,234,0.12) 8%, rgba(245,241,234,0) 18%, rgba(245,241,234,0) 82%, rgba(245,241,234,0.12) 92%, var(--base-light) 100%)",
+        muted: "var(--ink)",
+        heroBg: "var(--base)",
         stepNumBg: "var(--charcoal)",
         stepNumFg: "var(--bone)",
         stepIconColor: "var(--avro-blue)",
@@ -211,11 +212,10 @@ export function CohortPage({ data }: { data: CohortData }) {
 
   // Mobile (9:16) versions of the hero — shown only on small screens
   const cohortHeroMobile: Record<string, string> = {
-    golf:   "/images/lifestyle/cohort-golf-hero-mobile.png",
-    social: "/images/lifestyle/cohort-social-hero.jpg",
-    // Work and gaming reuse the desktop hero photo on mobile (no separate mobile crop).
-    work:   "/images/lifestyle/cohort-work-hero.png",
-    gaming: "/images/lifestyle/cohort-gaming-hero.png",
+    golf:   "/images/lifestyle/golf-hero-01-mobile.png",
+    social: "/images/lifestyle/cohort-social-hero-mobile.png",
+    work:   "/images/lifestyle/cohort-work-hero-mobile.png",
+    gaming: "/images/lifestyle/cohort-gaming-hero-mobile.png",
   }
 
   // Per-cohort animation accent — words begin at a dimmed shade of the accent and rise into the full bright accent (Zero Proof) or the page ink (light cohorts), so the brand color feels intentional, not just transitional.
@@ -243,7 +243,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             0%   { opacity: 0; transform: translateY(28px); color: ${wordStart}; }
             55%  { opacity: 1; transform: translateY(-4px); color: ${wordStart}; }
             80%  { opacity: 1; transform: translateY(0); color: ${wordStart}; }
-            100% { opacity: 1; transform: translateY(0); color: ${wordEnd}; }
+            100% { opacity: 1; transform: translateY(0); color: var(--hero-word-end, ${wordEnd}); }
           }
           @keyframes cohort-fade-up {
             0% { opacity: 0; transform: translateY(10px); }
@@ -268,119 +268,131 @@ export function CohortPage({ data }: { data: CohortData }) {
               color: ${wordEnd} !important;
             }
           }
+          /* ── Desktop: rounded 16:9 card with content overlaid ── */
+          .cohort-hero-16x9 {
+            position: relative;
+            width: calc(100% - 32px);
+            margin: 0 auto 16px;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 20px;
+          }
+          .cohort-hero-image-mobile { display: none; }
+          .cohort-hero-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: clamp(24px,5vw,80px) clamp(20px,5vw,64px);
+            text-align: left;
+            align-items: flex-start;
+          }
+          /* ── Mobile: stacked — rounded image on top, text below ── */
           @media (max-width: 768px) {
+            .cohort-hero-16x9 {
+              aspect-ratio: unset !important;
+              overflow: visible !important;
+              display: flex;
+              flex-direction: column;
+            }
+            .cohort-hero-img-wrap {
+              position: relative;
+              width: calc(100% - 32px);
+              margin: 16px auto 0;
+              aspect-ratio: 3/4;
+              border-radius: 20px;
+              overflow: hidden;
+              flex-shrink: 0;
+            }
             .cohort-hero-image { display: none !important; }
             .cohort-hero-image-mobile { display: block !important; }
+            .cohort-hero-content {
+              position: static !important;
+              padding: 24px 20px 32px !important;
+            }
           }
           @media (min-width: 769px) {
-            .cohort-hero-image-mobile { display: none !important; }
+            .cohort-hero-img-wrap {
+              position: absolute;
+              inset: 0;
+              border-radius: 0;
+            }
+            /* On desktop the ZP hero image is light (white-brick bar scene),
+               so override gold content colors to black/dark for legibility.
+               animation-fill-mode:forwards locks the final keyframe color,
+               so we must cancel the animation entirely and set color directly. */
+            .cohort-hero-content.cohort-hero-zp h1,
+            .cohort-hero-content.cohort-hero-zp h1 span,
+            .cohort-hero-content.cohort-hero-zp h1 b {
+              animation: none !important;
+              opacity: 1 !important;
+              transform: none !important;
+              color: var(--ink) !important;
+            }
+            .cohort-hero-content.cohort-hero-zp p {
+              color: var(--ink) !important;
+            }
+            .cohort-hero-content.cohort-hero-zp .btn-primary-dark,
+            .cohort-hero-content.cohort-hero-zp .btn-outline-dark {
+              color: var(--charcoal) !important;
+              background-color: transparent !important;
+              border-color: var(--charcoal) !important;
+            }
+            .cohort-hero-content.cohort-hero-zp .btn-primary-dark:hover,
+            .cohort-hero-content.cohort-hero-zp .btn-outline-dark:hover {
+              background-color: var(--charcoal) !important;
+              color: var(--bone) !important;
+              border-color: var(--charcoal) !important;
+            }
           }
         `}</style>
 
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            margin: 0,
-            borderRadius: 0,
-            overflow: "hidden",
-            backgroundColor: t.heroBg,
-            minHeight: "clamp(360px,50vh,560px)",
-          }}
-        >
-          {/* Desktop background image — hidden on mobile.
-              Golf rotates through three studio shots; other cohorts use a single photo. */}
-          {isGolf ? (
-            <GolfHeroRotator
-              images={GOLF_HERO_IMAGES}
-              className="cohort-hero-image"
-              objectPosition="75% center"
-              alt={cohortHero[data.visual]?.alt ?? ""}
-            />
-          ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={cohortHero[data.visual]?.src}
-              alt={cohortHero[data.visual]?.alt ?? ""}
-              className="cohort-hero-image"
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "70% center",
-              }}
-            />
-          )}
+        {/* Outer wrapper — 16:9 on desktop, column-stacked on mobile */}
+        <div className="cohort-hero-16x9" style={{ backgroundColor: t.heroBg }}>
 
-          {/* Desktop gradient fade */}
+          {/* Image container — full-bleed on desktop, rounded-rect card on mobile */}
+          <div className="cohort-hero-img-wrap">
+            {isGolf ? (
+              <GolfHeroRotator
+                images={GOLF_HERO_IMAGES}
+                mobileImages={GOLF_HERO_IMAGES_MOBILE}
+                className="cohort-hero-image"
+                objectPosition="center"
+                alt={cohortHero[data.visual]?.alt ?? ""}
+              />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={cohortHero[data.visual]?.src}
+                alt={cohortHero[data.visual]?.alt ?? ""}
+                className="cohort-hero-image"
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
+              />
+            )}
+            {isGolf ? (
+              <GolfHeroRotator
+                images={GOLF_HERO_IMAGES}
+                mobileImages={GOLF_HERO_IMAGES_MOBILE}
+                className="cohort-hero-image-mobile"
+                objectPosition="center"
+                alt={cohortHero[data.visual]?.alt ?? ""}
+              />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={cohortHeroMobile[data.visual]}
+                alt={cohortHero[data.visual]?.alt ?? ""}
+                className="cohort-hero-image-mobile"
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+              />
+            )}
+          </div>
+
+          {/* Content — overlaid on desktop, below image on mobile */}
           <div
-            aria-hidden="true"
-            className="cohort-hero-image"
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: t.heroFade,
-              pointerEvents: "none",
-            }}
-          />
-
-          {/* Mobile background image (9:16) — hidden on desktop.
-              Golf rotates the same three studio shots (dimmed for text legibility). */}
-          {isGolf ? (
-            <GolfHeroRotator
-              images={GOLF_HERO_IMAGES}
-              className="cohort-hero-image-mobile"
-              objectPosition="center"
-              opacity={0.55}
-              alt={cohortHero[data.visual]?.alt ?? ""}
-            />
-          ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={cohortHeroMobile[data.visual]}
-              alt={cohortHero[data.visual]?.alt ?? ""}
-              className="cohort-hero-image-mobile"
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "center top",
-                opacity: 0.55,
-              }}
-            />
-          )}
-
-          {/* Mobile dark overlay for text legibility */}
-          <div
-            aria-hidden="true"
-            className="cohort-hero-image-mobile"
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: isZeroProof
-                ? "linear-gradient(to bottom, rgba(13,13,13,0.45) 0%, rgba(13,13,13,0.2) 50%, rgba(13,13,13,0.45) 100%)"
-                : "linear-gradient(to bottom, rgba(242,240,232,0.35) 0%, rgba(242,240,232,0.1) 50%, rgba(242,240,232,0.35) 100%)",
-              pointerEvents: "none",
-            }}
-          />
-
-          <div
-            style={{
-              position: "relative",
-              maxWidth: 1440,
-              margin: "0 auto",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              padding: "clamp(48px,7vw,128px) clamp(20px,5vw,64px)",
-              minHeight: "inherit",
-              textAlign: "left",
-              alignItems: "flex-start",
-            }}
+            className={`cohort-hero-content${isZeroProof ? " cohort-hero-zp" : ""}`}
+            style={{ ["--hero-word-end" as string]: wordEnd }}
           >
             {/* Eyebrow chip removed per design — title carries the moment via the per-cohort word animation. */}
             <h1
@@ -390,7 +402,7 @@ export function CohortPage({ data }: { data: CohortData }) {
                 fontSize: "clamp(36px,5.5vw,72px)",
                 lineHeight: 0.98,
                 letterSpacing: "-0.025em",
-                color: wordEnd,
+                color: `var(--hero-word-end, ${wordEnd})`,
                 marginBottom: 16,
                 maxWidth: 560,
               }}
@@ -429,8 +441,8 @@ export function CohortPage({ data }: { data: CohortData }) {
             <div className="cohort-fade cohort-cta">
               <CtaGroup primary={data.primary} secondary={data.secondary} dark={isZeroProof} hero />
             </div>
-          </div>
-        </div>
+          </div>{/* /cohort-hero-content */}
+        </div>{/* /cohort-hero-16x9 */}
       </section>
 
       <Section dark={isZeroProof}>

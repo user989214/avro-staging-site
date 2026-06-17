@@ -79,9 +79,60 @@ export default function ShopPage() {
           .shop-btn-focus:hover,
           .shop-btn-energy:hover { background-color: var(--charcoal); color: var(--bone); }
 
+          /* ── Desktop: 16:9 with content overlaid ── */
+          .shop-hero-16x9 {
+            position: relative;
+            width: calc(100% - 32px);
+            margin: 0 auto 16px;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            background-color: var(--base-light);
+            border-radius: 20px;
+          }
+          .shop-hero-img-desktop { display: block; }
+          .shop-hero-img-mobile { display: none; }
+          .shop-hero-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: clamp(24px,5vw,80px) clamp(20px,5vw,64px);
+            text-align: left;
+            align-items: flex-start;
+          }
+          /* ── Mobile: stacked — rounded image on top, text below ── */
           @media (max-width: 768px) {
+            .shop-hero-16x9 {
+              aspect-ratio: unset !important;
+              overflow: visible !important;
+              display: flex;
+              flex-direction: column;
+            }
+            .shop-hero-img-wrap {
+              position: relative;
+              width: calc(100% - 32px);
+              margin: 16px auto 0;
+              aspect-ratio: 3/4;
+              border-radius: 20px;
+              overflow: hidden;
+              flex-shrink: 0;
+            }
+            .shop-hero-img-desktop { display: none !important; }
+            .shop-hero-img-mobile { display: block !important; }
+            .shop-hero-content {
+              position: static !important;
+              padding: 24px 20px 32px !important;
+            }
             .shop-hero-ctas { flex-direction: column; align-items: stretch; max-width: 320px; }
             .shop-btn-calm, .shop-btn-focus, .shop-btn-energy { width: 100%; flex: 0 0 auto; }
+          }
+          @media (min-width: 769px) {
+            .shop-hero-img-wrap {
+              position: absolute;
+              inset: 0;
+              border-radius: 0;
+            }
           }
           @media (prefers-reduced-motion: reduce) {
             .shop-word, .shop-fade {
@@ -92,28 +143,30 @@ export default function ShopPage() {
           }
         `}</style>
 
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            minHeight: "clamp(480px, 60vh, 620px)",
-          }}
-        >
-          {/* Content */}
-          <div
-            style={{
-              position: "relative",
-              maxWidth: 1440,
-              margin: "0 auto",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              padding: "clamp(88px,10vw,140px) clamp(20px,5vw,64px) clamp(64px,8vw,104px)",
-              minHeight: "inherit",
-              textAlign: "left",
-              alignItems: "flex-start",
-            }}
-          >
+        {/* Outer wrapper — 16:9 on desktop, column-stacked on mobile */}
+        <div className="shop-hero-16x9">
+
+          {/* Image container — full-bleed on desktop, rounded-rect card on mobile */}
+          <div className="shop-hero-img-wrap">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/lifestyle/avro-shop-hero.png"
+              alt="AVRO CALM, FOCUS and ENERGY tubes with stick packets on a sandy beige surface"
+              className="shop-hero-img-desktop"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/lifestyle/shop-hero-mobile.png"
+              alt=""
+              aria-hidden="true"
+              className="shop-hero-img-mobile"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+            />
+          </div>
+
+          {/* Content — overlaid on desktop, below image on mobile */}
+          <div className="shop-hero-content">
             <h1
               className="font-serif"
               style={{
@@ -147,7 +200,7 @@ export default function ShopPage() {
                 fontWeight: 400,
                 fontSize: "clamp(15px,1.4vw,18px)",
                 lineHeight: 1.55,
-                color: "var(--warm-gray)",
+                color: "var(--ink)",
                 maxWidth: 460,
                 marginBottom: 24,
               }}
