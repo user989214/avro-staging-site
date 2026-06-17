@@ -326,6 +326,8 @@ export function CohortPage({ data }: { data: CohortData }) {
             .cohort-hero-content.cohort-hero-zp h1 span,
             .cohort-hero-content.cohort-hero-zp h1 b {
               animation: none !important;
+              opacity: 1 !important;
+              transform: none !important;
               color: var(--ink) !important;
             }
             .cohort-hero-content.cohort-hero-zp p {
@@ -338,6 +340,7 @@ export function CohortPage({ data }: { data: CohortData }) {
             }
             .cohort-hero-content.cohort-hero-zp .btn-outline-dark {
               color: var(--ink) !important;
+              background-color: transparent !important;
               border-color: var(--ink) !important;
             }
           }
