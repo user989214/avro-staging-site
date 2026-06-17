@@ -201,8 +201,8 @@ export function Header() {
           {Array.from({ length: 4 }).map((_, copyIdx) => (
             <div key={copyIdx} aria-hidden={copyIdx > 0} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
               {[
-                "Subscribe and save 25% on every order",
-                "Free shipping over $50",
+                "Subscribe & save 15% every order of 2 or more tubes",
+                "Free shipping on orders of 2 or more tubes",
                 "Naturally fermented PharmaGABA",
                 "Calm, focused energy — without the crash",
                 "New: AVRO Focus and AVRO Energy now shipping",

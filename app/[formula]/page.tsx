@@ -418,7 +418,7 @@ export default async function ProductPage({
               margin: "0 0 20px",
             }}
           >
-            Save 25% when you subscribe. Pick your favorites, set your schedule. Leave the rest to us.
+            Subscribe & save 15% every order of 2 or more tubes. Pick your favorites, set your schedule. Leave the rest to us.
           </p>
           <style>{`
             .pdp-subscribe-btn {

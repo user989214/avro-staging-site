@@ -72,7 +72,7 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
             const item = formulas[key]
             const data = comparisonData[key]
             const isActive = key === currentKey
-            const subscribePrice = (item.bundlePrice * 0.75).toFixed(2)
+            const subscribePrice = (item.bundlePrice * 0.85).toFixed(2)
 
             return (
               <div

@@ -11,7 +11,7 @@ import { PageHero } from "@/components/page-hero"
 export const metadata = {
   title: "Subscribe + Save | AVRO",
   description:
-    "Join the AVRO subscription and save 25% on every order. Free shipping, flexible scheduling, and calm-first support delivered on your terms.",
+    "Subscribe & save 15% every order of 2 or more tubes. Free shipping on orders of 2 or more tubes, a flexible delivery schedule, and calm-first support delivered on your terms.",
 }
 
 export default function SubscribePage() {
@@ -20,7 +20,7 @@ export default function SubscribePage() {
       <PageHero
         variant="flat"
         title="Subscribe + save."
-        lede="Join the AVRO subscription and save 25% on every order. Free shipping, a flexible delivery schedule, and the calm-first support you need — delivered on your terms."
+        lede="Subscribe & save 15% every order of 2 or more tubes. Select your own delivery schedule, get free shipping on orders of 2 or more tubes, and skip, change or cancel anytime."
         imageSrc=""
         imageAlt=""
         primaryCta={{ href: "/shop", label: "Start Your Subscription" }}
@@ -34,11 +34,11 @@ export default function SubscribePage() {
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <InfoCard icon="quality-standards" title="Save on every order">
-            Subscribers get 25% off every delivery plus free shipping — the best
-            price on AVRO, automatically.
+            Subscribe & save 15% on every order of 2 or more tubes, plus free
+            shipping on orders of 2 or more tubes.
           </InfoCard>
           <InfoCard icon="control-under-pressure" title="Total flexibility">
-            Adjust your delivery schedule, skip a shipment, or pause and cancel
+            Select your own delivery schedule, skip a shipment, or change and cancel
             anytime. No commitments, no hassle.
           </InfoCard>
           <InfoCard icon="consistency-quality" title="Never run out">
@@ -58,10 +58,11 @@ export default function SubscribePage() {
             Select the AVRO formula that fits your needs — Calm, Focus, or Energy.
           </InfoCard>
           <InfoCard icon="step-drink" title="2. Set your schedule">
-            Decide how often you want deliveries — every 2, 4, or 6 weeks.
+            Select your own delivery schedule — every 2, 4, or 6 weeks.
           </InfoCard>
-          <InfoCard icon="transparent-standards" title="3. Save 25% every time">
-            Your subscription ships automatically with 25% off and free shipping.
+          <InfoCard icon="transparent-standards" title="3. Save 15% every time">
+            Orders of 2 or more tubes ship automatically with 15% off and free
+            shipping.
           </InfoCard>
         </div>
       </CardedSection>
@@ -71,9 +72,9 @@ export default function SubscribePage() {
 
       <div style={{ backgroundColor: "var(--base-deep)" }}>
         <FinalCta
-          eyebrow="Subscribe + save 25%"
+          eyebrow="Subscribe & save 15%"
           title="Calm-first support, on your schedule."
-          copy="Start a subscription and save 25% on every order with free shipping. Pause, skip, or cancel anytime."
+          copy="Subscribe & save 15% every order of 2 or more tubes, with free shipping on orders of 2 or more tubes. Skip, change or cancel anytime."
         />
       </div>
     </>

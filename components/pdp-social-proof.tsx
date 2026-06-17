@@ -87,8 +87,8 @@ export function SocialProofSection({ formulaKey }: SocialProofSectionProps) {
                     width="16"
                     height="16"
                     viewBox="0 0 24 24"
-                    fill="#d79a23"
-                    className="text-[#d79a23]"
+                    fill="var(--avro-blue)"
+                    className="text-[color:var(--avro-blue)]"
                   >
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                   </svg>

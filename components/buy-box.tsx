@@ -23,7 +23,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
 
   const activeFlavor = formula.flavors.find((f) => f.id === flavorId) ?? formula.flavors[0]
   const baseTotal = formula.bundlePrice
-  const subscribeTotal = baseTotal * 0.75
+  const subscribeTotal = baseTotal * 0.85
   const oneTimeTotal = baseTotal
   const displayTotal = (purchaseType === "subscribe" ? subscribeTotal : oneTimeTotal) * quantity
   const reviewCount = formulaKey === "calm" ? 82 : formulaKey === "focus" ? 62 : 76
@@ -137,9 +137,9 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
         <PurchaseOption
           checked={purchaseType === "subscribe"}
           onChange={() => setPurchaseType("subscribe")}
-          title="Subscribe & save 25%"
-          mobileTitle="Subscribe & save"
-          subtitle="Delivered every 28 days. Pause, skip, or cancel anytime."
+          title="Subscribe & save 15% every order of 2 or more tubes"
+          mobileTitle="Subscribe & save 15%"
+          subtitle="Select your own delivery schedule."
           price={`$${subscribeTotal.toFixed(2)}`}
           badge="Most popular"
         />
@@ -150,6 +150,50 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange }: BuyBox
           subtitle="No commitment. Free shipping over $50."
           price={`$${oneTimeTotal.toFixed(2)}`}
         />
+        {purchaseType === "subscribe" && (
+          <ul
+            className="flex flex-col gap-1.5"
+            style={{ listStyle: "none", margin: 0, padding: "2px 4px 0" }}
+          >
+            {[
+              "Select your own delivery schedule.",
+              "Save 15% on every order.",
+              "Free shipping on all orders of 2 or more tubes.",
+              "Skip, change or cancel anytime.",
+            ].map((line) => (
+              <li
+                key={line}
+                className="flex items-start gap-2"
+                style={{
+                  fontFamily: GC,
+                  fontWeight: 500,
+                  fontSize: "clamp(12px,1vw,14px)",
+                  lineHeight: 1.4,
+                  color: "var(--ink)",
+                }}
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  className="shrink-0"
+                  style={{ marginTop: 2 }}
+                >
+                  <path
+                    d="M5 12.5l4.5 4.5L19 7"
+                    stroke="var(--avro-blue)"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                {line}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
       {/* Quantity - compact */}
