@@ -156,7 +156,7 @@ export function SocialProof({ mode = "full", dark = false }: { mode?: "full" | "
   // black + gold story end-to-end, so SocialProof falls in line with the rest of the page.
   const bg = dark
     ? "var(--deep-black)"
-    : "linear-gradient(to bottom, var(--base) 0%, #EAE6DC 100%)"
+    : "var(--base)"
   const ink = dark ? "var(--gold)" : "var(--ink)"
   return (
     <section
