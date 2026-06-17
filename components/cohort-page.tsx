@@ -176,7 +176,7 @@ export function CohortPage({ data }: { data: CohortData }) {
         cardMuted: "var(--warm-gray)",
         ink: "var(--ink)",
         muted: "var(--ink)",
-        heroBg: "var(--base-light)",
+        heroBg: "var(--base)",
         stepNumBg: "var(--charcoal)",
         stepNumFg: "var(--bone)",
         stepIconColor: "var(--avro-blue)",

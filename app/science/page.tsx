@@ -26,7 +26,7 @@ export default function SciencePage() {
         lede="Every AVRO formula starts with naturally fermented PharmaGABA®, selected to support calm-first readiness, composure, and clarity before pressure-sensitive moments.*"
         imageSrc="/images/lifestyle/science-hero.png"
         imageAlt="Amber gel droplet over an embossed GABA chemical structure diagram"
-        imageObjectPosition="right center"
+        imageObjectPosition="right top"
         mobileImageSrc="/images/lifestyle/science-hero-mobile.png"
         primaryCta={{ href: "/shop", label: "Shop AVRO" }}
         secondaryCta={{ href: "#research", label: "View Research" }}

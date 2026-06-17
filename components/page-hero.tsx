@@ -257,7 +257,7 @@ export function PageHero({
               src={imageSrc}
               alt={imageAlt}
               className="ph-hero-img-desktop"
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: imageObjectPosition }}
             />
           )}
           {mobileImageSrc && (
@@ -266,7 +266,7 @@ export function PageHero({
               src={mobileImageSrc}
               alt={imageAlt}
               className="ph-hero-img-mobile"
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: imageObjectPosition }}
             />
           )}
           {/* Fallback: if no mobile src, show the desktop image on mobile too */}
@@ -276,7 +276,7 @@ export function PageHero({
               src={imageSrc}
               alt={imageAlt}
               className="ph-hero-img-mobile"
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center" }}
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: imageObjectPosition }}
             />
           )}
         </div>
@@ -353,116 +353,125 @@ function FlatHero({
   centered,
 }: Omit<PageHeroProps, "imageSrc" | "imageAlt" | "imageObjectPosition" | "variant">) {
   return (
+    /* Outer section matches the site page background — pure white — so no
+       colour bleeds above or below the card. */
     <section
       style={{
-        position: "relative",
         width: "100%",
-        backgroundColor: "var(--base-light)",
+        backgroundColor: "var(--base)",
         color: "var(--ink)",
         padding: 0,
-        overflow: "hidden",
-        minHeight: compact
-          ? "clamp(420px, 52vh, 540px)"
-          : "clamp(480px, 60vh, 620px)",
       }}
     >
-      {/* Subtle tone-on-tone gradient — adds depth without visual noise */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: `
+      <style>{`
+        ${SHARED_HERO_STYLES}
+        .ph-flat-card {
+          position: relative;
+          width: calc(100% - 32px);
+          margin: 0 auto 16px;
+          border-radius: 20px;
+          overflow: hidden;
+          background-color: var(--base-light);
+        }
+        /* Subtle tone-on-tone gradient overlay */
+        .ph-flat-card::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background:
             radial-gradient(ellipse 70% 80% at 80% 50%, rgba(222,218,208,0.55) 0%, rgba(222,218,208,0) 60%),
-            radial-gradient(ellipse 80% 70% at 15% 100%, rgba(222,218,208,0.35) 0%, rgba(222,218,208,0) 65%),
-            linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.03) 100%)
-          `,
-          pointerEvents: "none",
-        }}
-      />
+            radial-gradient(ellipse 80% 70% at 15% 100%, rgba(222,218,208,0.35) 0%, rgba(222,218,208,0) 65%);
+          pointer-events: none;
+        }
+        .ph-flat-inner {
+          position: relative;
+          padding: ${compact
+            ? "clamp(56px,8vw,100px) clamp(20px,5vw,64px) clamp(48px,6vw,80px)"
+            : "clamp(72px,9vw,120px) clamp(20px,5vw,64px) clamp(64px,8vw,104px)"};
+          display: flex;
+          flex-direction: column;
+          align-items: ${centered ? "center" : "flex-start"};
+          text-align: ${centered ? "center" : "left"};
+        }
+        @media (max-width: 768px) {
+          .ph-flat-card {
+            width: calc(100% - 24px);
+          }
+          .ph-flat-inner {
+            padding: clamp(48px,10vw,72px) clamp(16px,5vw,28px) clamp(40px,8vw,60px);
+          }
+        }
+      `}</style>
 
-      <style>{SHARED_HERO_STYLES}</style>
-
-      <div
-        className="relative w-full max-w-[1440px] mx-auto"
-        style={{
-          padding: compact
-            ? "clamp(80px,9vw,120px) clamp(20px,5vw,64px) clamp(56px,7vw,88px)"
-            : "clamp(88px,10vw,140px) clamp(20px,5vw,64px) clamp(64px,8vw,104px)",
-          textAlign: centered ? "center" : "left",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: centered ? "center" : "flex-start",
-          minHeight: "inherit",
-          justifyContent: "center",
-        }}
-      >
-        <AnimatedHeadline
-          text={title}
-          className="font-serif"
-          style={{
-            fontWeight: 900,
-            fontSize: compact
-              ? "clamp(32px,4.5vw,52px)"
-              : "clamp(36px,5vw,64px)",
-            lineHeight: 1,
-            letterSpacing: "-0.025em",
-            color: "var(--ink)",
-            marginBottom: 16,
-            maxWidth: 820,
-          }}
-        />
-
-        <p
-          className="ph-fade ph-lede"
-          style={{
-            fontFamily: GC,
-            fontWeight: 500,
-            fontSize: "clamp(18px,1.7vw,21px)",
-            lineHeight: 1.5,
-            color: "var(--ink)",
-            maxWidth: 660,
-            marginBottom: 0,
-          }}
-        >
-          {lede}
-        </p>
-
-        {children && (
-          <div
-            className="ph-fade ph-extra"
+      <div className="ph-flat-card">
+        <div className="ph-flat-inner">
+          <AnimatedHeadline
+            text={title}
+            className="font-serif"
             style={{
-              marginTop: 22,
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: centered ? "center" : "flex-start",
+              fontWeight: 900,
+              fontSize: compact
+                ? "clamp(32px,4.5vw,52px)"
+                : "clamp(36px,5vw,64px)",
+              lineHeight: 1,
+              letterSpacing: "-0.025em",
+              color: "var(--ink)",
+              marginBottom: 16,
+              maxWidth: 820,
+            }}
+          />
+
+          <p
+            className="ph-fade ph-lede"
+            style={{
+              fontFamily: GC,
+              fontWeight: 500,
+              fontSize: "clamp(18px,1.7vw,21px)",
+              lineHeight: 1.5,
+              color: "var(--ink)",
+              maxWidth: 660,
+              marginBottom: 0,
             }}
           >
-            {children}
-          </div>
-        )}
+            {lede}
+          </p>
 
-        {(primaryCta || secondaryCta) && (
-          <div
-            className="ph-fade ph-cta ph-pill-row"
-            style={{
-              marginTop: 22,
-              justifyContent: centered ? "center" : "flex-start",
-            }}
-          >
-            {primaryCta && (
-              <Link href={primaryCta.href} className="ph-pill-primary">
-                {primaryCta.label}
-              </Link>
-            )}
-            {secondaryCta && (
-              <Link href={secondaryCta.href} className="ph-pill-secondary">
-                {secondaryCta.label}
-              </Link>
-            )}
-          </div>
-        )}
+          {children && (
+            <div
+              className="ph-fade ph-extra"
+              style={{
+                marginTop: 22,
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: centered ? "center" : "flex-start",
+              }}
+            >
+              {children}
+            </div>
+          )}
+
+          {(primaryCta || secondaryCta) && (
+            <div
+              className="ph-fade ph-cta ph-pill-row"
+              style={{
+                marginTop: 22,
+                justifyContent: centered ? "center" : "flex-start",
+              }}
+            >
+              {primaryCta && (
+                <Link href={primaryCta.href} className="ph-pill-primary">
+                  {primaryCta.label}
+                </Link>
+              )}
+              {secondaryCta && (
+                <Link href={secondaryCta.href} className="ph-pill-secondary">
+                  {secondaryCta.label}
+                </Link>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   )
