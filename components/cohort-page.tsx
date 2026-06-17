@@ -191,8 +191,8 @@ export function CohortPage({ data }: { data: CohortData }) {
       alt: "Golfer selecting club from bag with friends chatting in background",
     },
     social: {
-      src: "/images/lifestyle/cohort-social-hero.png",
-      alt: "Elegant restaurant setting at dusk with mountain view",
+      src: "/images/lifestyle/cohort-social-hero.jpg",
+      alt: "Bartender pouring an alcohol-free mixer into a jigger beside an AVRO Focus tube and crystal glasses of garnishes",
     },
     work: {
       src: "/images/lifestyle/cohort-work-hero.png",
@@ -207,7 +207,7 @@ export function CohortPage({ data }: { data: CohortData }) {
   // Mobile (9:16) versions of the hero — shown only on small screens
   const cohortHeroMobile: Record<string, string> = {
     golf:   "/images/lifestyle/cohort-golf-hero-mobile.png",
-    social: "/images/lifestyle/cohort-social-hero-mobile.png",
+    social: "/images/lifestyle/cohort-social-hero.jpg",
     work:   "/images/lifestyle/cohort-work-hero-mobile.png",
     gaming: "/images/lifestyle/cohort-gaming-hero-mobile.png",
   }
