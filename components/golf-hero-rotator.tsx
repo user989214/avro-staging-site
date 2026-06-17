@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react"
 interface GolfHeroRotatorProps {
   /** Image sources to cycle through, in order. */
   images: string[]
+  /** Portrait (9:16) images shown on mobile instead of `images`. Falls back to `images` if not provided. */
+  mobileImages?: string[]
   /** Class applied to the wrapper (used for the desktop/mobile show-hide logic). */
   className?: string
   /** CSS object-position for the images. */
@@ -24,12 +26,22 @@ interface GolfHeroRotatorProps {
  */
 export function GolfHeroRotator({
   images,
+  mobileImages,
   className,
   objectPosition = "center",
   opacity = 1,
   interval = 4500,
   alt = "",
 }: GolfHeroRotatorProps) {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)")
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener("change", handler)
+    return () => mq.removeEventListener("change", handler)
+  }, [])
+  const activeImages = (isMobile && mobileImages && mobileImages.length > 0) ? mobileImages : images
   // `base` is the image showing underneath; `top` fades in over it, then becomes base.
   const [base, setBase] = useState(0)
   const [top, setTop] = useState<number | null>(null)
@@ -38,7 +50,7 @@ export function GolfHeroRotator({
   const timers = useRef<ReturnType<typeof setTimeout>[]>([])
 
   useEffect(() => {
-    if (images.length <= 1) return
+    if (activeImages.length <= 1) return
     const reduce =
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
@@ -46,7 +58,7 @@ export function GolfHeroRotator({
 
     const id = setInterval(() => {
       setBase((current) => {
-        const next = (current + 1) % images.length
+        const next = (current + 1) % activeImages.length
         // Mount the next image on top (still transparent), then flip it to visible
         // on the next frame so the opacity transition runs.
         setTop(next)
@@ -69,7 +81,7 @@ export function GolfHeroRotator({
       timers.current.forEach(clearTimeout)
       timers.current = []
     }
-  }, [images.length, interval])
+    }, [activeImages.length, interval])
 
   const imgStyle = (visible: boolean): React.CSSProperties => ({
     position: "absolute",
@@ -90,12 +102,12 @@ export function GolfHeroRotator({
     >
       {/* Base layer: always fully visible, no white gap underneath */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={images[base] || "/placeholder.svg"} alt={alt} style={imgStyle(true)} />
+      <img src={activeImages[base] || "/placeholder.svg"} alt={alt} style={imgStyle(true)} />
 
       {/* Incoming layer: fades in on top of the base */}
       {top !== null && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={images[top] || "/placeholder.svg"} alt="" style={imgStyle(topVisible)} />
+        <img src={activeImages[top] || "/placeholder.svg"} alt="" style={imgStyle(topVisible)} />
       )}
     </div>
   )

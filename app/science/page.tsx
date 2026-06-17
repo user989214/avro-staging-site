@@ -27,6 +27,7 @@ export default function SciencePage() {
         imageSrc="/images/lifestyle/science-hero.png"
         imageAlt="Amber gel droplet over an embossed GABA chemical structure diagram"
         imageObjectPosition="right center"
+        mobileImageSrc="/images/lifestyle/science-hero-mobile.png"
         primaryCta={{ href: "/shop", label: "Shop AVRO" }}
         secondaryCta={{ href: "#research", label: "View Research" }}
       >

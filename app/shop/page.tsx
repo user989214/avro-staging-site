@@ -79,9 +79,11 @@ export default function ShopPage() {
           .shop-btn-focus:hover,
           .shop-btn-energy:hover { background-color: var(--charcoal); color: var(--bone); }
 
+          .shop-hero-img-mobile { display: none; }
           @media (max-width: 768px) {
             .shop-hero-ctas { flex-direction: column; align-items: stretch; max-width: 320px; }
             .shop-btn-calm, .shop-btn-focus, .shop-btn-energy { width: 100%; flex: 0 0 auto; }
+            .shop-hero-img-mobile { display: block; }
           }
           @media (prefers-reduced-motion: reduce) {
             .shop-word, .shop-fade {
@@ -99,6 +101,23 @@ export default function ShopPage() {
             minHeight: "clamp(480px, 60vh, 620px)",
           }}
         >
+          {/* Mobile background image */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/lifestyle/shop-hero-mobile.png"
+            alt=""
+            aria-hidden="true"
+            className="shop-hero-img-mobile"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center top",
+              opacity: 0.25,
+            }}
+          />
           {/* Content */}
           <div
             style={{

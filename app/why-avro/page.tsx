@@ -25,6 +25,7 @@ export default function WhyPage() {
         imageSrc="/images/lifestyle/why-hero.png"
         imageAlt="AVRO CALM Blackberry Jasmine tube on a marble ledge"
         imageObjectPosition="right center"
+        mobileImageSrc="/images/lifestyle/why-hero-mobile.png"
         primaryCta={{ href: "/shop", label: "Find Your Formula" }}
         secondaryCta={{ href: "/shop", label: "Shop AVRO" }}
       />

@@ -11,6 +11,8 @@ export interface PageHeroProps {
   imageSrc: string
   imageAlt: string
   imageObjectPosition?: string
+  /** Portrait (9:16) crop shown on mobile instead of the desktop image. */
+  mobileImageSrc?: string
   primaryCta?: { href: string; label: string }
   secondaryCta?: { href: string; label: string }
   /** Optional content rendered below the lede / CTAs (e.g. badges, search bar, chip row). */
@@ -160,6 +162,7 @@ export function PageHero({
   imageSrc,
   imageAlt,
   imageObjectPosition = "right center",
+  mobileImageSrc,
   primaryCta,
   secondaryCta,
   children,
@@ -188,6 +191,7 @@ export function PageHero({
     >
       <style>{`
         ${SHARED_HERO_STYLES}
+        .ph-hero-img-mobile { display: none; }
         @media (max-width: 768px) {
           .ph-hero-grid {
             grid-template-columns: 1fr !important;
@@ -198,6 +202,8 @@ export function PageHero({
           .ph-hero-fade {
             background: linear-gradient(180deg, var(--base-light) 0%, var(--base-light) 38%, rgba(245,241,234,0.94) 48%, rgba(245,241,234,0.55) 62%, rgba(245,241,234,0.1) 80%) !important;
           }
+          .ph-hero-img-desktop { display: none !important; }
+          .ph-hero-img-mobile { display: block; }
         }
       `}</style>
 
@@ -218,7 +224,7 @@ export function PageHero({
             <img
               src={imageSrc}
               alt={imageAlt}
-              className="ph-hero-img"
+              className={`ph-hero-img${mobileImageSrc ? " ph-hero-img-desktop" : ""}`}
               style={{
                 position: "absolute",
                 inset: 0,
@@ -228,6 +234,22 @@ export function PageHero({
                 objectPosition: imageObjectPosition,
               }}
             />
+            {mobileImageSrc && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={mobileImageSrc}
+                alt={imageAlt}
+                className="ph-hero-img ph-hero-img-mobile"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center top",
+                }}
+              />
+            )}
 
             {/* Edge-wrapping fade — stronger than before so text remains legible
                 and the hero reads as cohesive across every page. */}

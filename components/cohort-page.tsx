@@ -33,6 +33,12 @@ const GOLF_HERO_IMAGES = [
   "/images/lifestyle/golf-hero-02.png",
   "/images/lifestyle/golf-hero-03.png",
 ]
+// Mobile (9:16) crops for the golf hero rotator
+const GOLF_HERO_IMAGES_MOBILE = [
+  "/images/lifestyle/golf-hero-01-mobile.png",
+  "/images/lifestyle/golf-hero-02-mobile.png",
+  "/images/lifestyle/golf-hero-03-mobile.png",
+]
 
 const GC = '"DM Sans", system-ui, sans-serif'
 
@@ -211,11 +217,10 @@ export function CohortPage({ data }: { data: CohortData }) {
 
   // Mobile (9:16) versions of the hero — shown only on small screens
   const cohortHeroMobile: Record<string, string> = {
-    golf:   "/images/lifestyle/cohort-golf-hero-mobile.png",
-    social: "/images/lifestyle/cohort-social-hero.jpg",
-    // Work and gaming reuse the desktop hero photo on mobile (no separate mobile crop).
-    work:   "/images/lifestyle/cohort-work-hero.png",
-    gaming: "/images/lifestyle/cohort-gaming-hero.png",
+    golf:   "/images/lifestyle/golf-hero-01-mobile.png",
+    social: "/images/lifestyle/cohort-social-hero-mobile.png",
+    work:   "/images/lifestyle/cohort-work-hero-mobile.png",
+    gaming: "/images/lifestyle/cohort-gaming-hero-mobile.png",
   }
 
   // Per-cohort animation accent — words begin at a dimmed shade of the accent and rise into the full bright accent (Zero Proof) or the page ink (light cohorts), so the brand color feels intentional, not just transitional.
@@ -293,6 +298,7 @@ export function CohortPage({ data }: { data: CohortData }) {
           {isGolf ? (
             <GolfHeroRotator
               images={GOLF_HERO_IMAGES}
+              mobileImages={GOLF_HERO_IMAGES_MOBILE}
               className="cohort-hero-image"
               objectPosition="75% center"
               alt={cohortHero[data.visual]?.alt ?? ""}
@@ -331,6 +337,7 @@ export function CohortPage({ data }: { data: CohortData }) {
           {isGolf ? (
             <GolfHeroRotator
               images={GOLF_HERO_IMAGES}
+              mobileImages={GOLF_HERO_IMAGES_MOBILE}
               className="cohort-hero-image-mobile"
               objectPosition="center"
               opacity={0.55}

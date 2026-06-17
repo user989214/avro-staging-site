@@ -108,18 +108,21 @@ export function HomeRefHero() {
       headline: "Performance Starts with Being Calm.",
       lede: "AVRO helps you steady first, with calm-first formulas built to support composure, clarity and controlled readiness when pressure rises.*",
       image: "/images/home/hero-01.jpg",
+      mobileImage: "/images/home/hero-01-mobile.png",
       alt: "Pouring an AVRO Calm Blackberry Jasmine stick into a glass of water",
     },
     {
       headline: "Calm Comes First.",
       lede: "AVRO is built for people who know pressure changes everything. Support composure, clarity and readiness before the moment matters.*",
       image: "/images/home/hero-03.jpg",
+      mobileImage: "/images/home/hero-03-mobile.png",
       alt: "Hand holding an AVRO Focus Pomegranate Raspberry tube",
     },
     {
       headline: "Start Calm. Stay Ready.",
       lede: "AVRO supports calm-first performance with formulas designed for pressure-sensitive moments in work, play, competition and social life.*",
       image: "/images/home/hero-02.jpg",
+      mobileImage: "/images/home/hero-02-mobile.png",
       alt: "Hand holding an AVRO Energy Fuji Apple tube",
     },
   ]
@@ -244,22 +247,24 @@ export function HomeRefHero() {
           .hp-pill-row { flex-direction: column; align-items: stretch; max-width: 320px !important; }
           .hp-pill-primary, .hp-pill-secondary { width: 100%; flex: 0 0 auto; }
         }
+  .hp-hero-img-mobile { display: none; }
   @media (max-width: 768px) {
   .hp-hero-container {
     max-width: 100% !important;
     width: 100% !important;
     border-radius: 0 !important;
-    min-height: auto !important;
+    min-height: 520px !important;
     background: var(--base-light) !important;
   }
           .hp-hero-grid {
             grid-template-columns: 1fr !important;
-            align-items: start !important;
-            padding: clamp(48px,10vw,80px) clamp(20px,5vw,28px) !important;
-            background: var(--base-light) !important;
+            align-items: end !important;
+            padding: clamp(48px,10vw,80px) clamp(20px,5vw,28px) clamp(40px,8vw,64px) !important;
+            background: transparent !important;
           }
           .hp-hero-img { display: none !important; opacity: 0 !important; visibility: hidden !important; }
           .hp-hero-fade { display: none !important; opacity: 0 !important; visibility: hidden !important; }
+          .hp-hero-img-mobile { display: block; }
         }
         .hp-pill-primary {
           background-color: transparent;
@@ -346,6 +351,27 @@ export function HomeRefHero() {
               objectFit: "contain",
               objectPosition: "right center",
               opacity: currentSlide === idx ? 1 : 0,
+              transition: "opacity 0.8s ease-in-out",
+            }}
+          />
+        ))}
+
+        {/* Mobile background images — portrait crop, shown only on small screens */}
+        {slides.map((slide, idx) => (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            key={`mob-${idx}`}
+            src={slide.mobileImage}
+            alt={slide.alt}
+            className="hp-hero-img-mobile"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center top",
+              opacity: currentSlide === idx ? 0.6 : 0,
               transition: "opacity 0.8s ease-in-out",
             }}
           />

@@ -34,6 +34,7 @@ export default function IngredientsPage() {
         imageSrc="/images/ingredients/ingredients-hero.jpg"
         imageAlt="Flat-lay of AVRO ingredients — blackberries, dried lavender, jasmine flowers, and fine powders on a cream surface"
         imageObjectPosition="right center"
+        mobileImageSrc="/images/ingredients/ingredients-hero-mobile.png"
         primaryCta={{ href: "/shop", label: "Shop AVRO" }}
         secondaryCta={{ href: "#focus", label: "View Labels" }}
       >
