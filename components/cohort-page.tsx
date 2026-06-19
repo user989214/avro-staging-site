@@ -623,11 +623,12 @@ export function CohortPage({ data }: { data: CohortData }) {
         <FaqBlock title={data.faqTitle} faqs={data.faqs} dark={isZeroProof} />
       </div>
       {cohortFooterBanner[data.visual] && (
-        <MockupBlueCta
-          bgImage={cohortFooterBanner[data.visual].src}
-          shopHref="/shop"
-          shopLabel="Shop"
-        />
+          <MockupBlueCta
+            bgImage={cohortFooterBanner[data.visual].src}
+            shopHref="/shop"
+            shopLabel="Shop"
+            bgColor={isZeroProof ? t.pageBg : undefined}
+          />
       )}
     </div>
   )

@@ -156,16 +156,19 @@ export function MockupBlueCta({
   bgImage = "/images/banners/calm-power.png",
   shopHref = "/shop",
   shopLabel = "Shop",
+  bgColor = "var(--base-deep)",
 }: {
   bgImage?: string
   shopHref?: string
   shopLabel?: string
+  /** Section background — defaults to the grey base-deep; pass a dark token for dark-theme pages. */
+  bgColor?: string
 }) {
   return (
     <section
       style={{
         width: "100%",
-        backgroundColor: "var(--base-deep)",
+        backgroundColor: bgColor,
         padding: "clamp(32px,5vw,72px) clamp(16px,4vw,64px)",
       }}
     >
