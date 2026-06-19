@@ -677,7 +677,7 @@ export function HomeBenefitRow() {
                 style={{
                   position: "relative",
                   overflow: "hidden",
-                  backgroundColor: BLUE,
+                  backgroundColor: "var(--base-light)",
                   borderRadius: 20,
                   padding: "clamp(24px,3vw,40px) clamp(24px,3vw,44px)",
                   minHeight: "clamp(160px,18vw,240px)",
