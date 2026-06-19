@@ -343,6 +343,7 @@
   align-items: center;
   justify-content: center;
   min-height: 48px;
+  min-width: 160px;
   padding: 0 28px;
   border: 2px solid var(--charcoal);
   border-radius: 999px;
