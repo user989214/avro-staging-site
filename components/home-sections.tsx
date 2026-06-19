@@ -690,19 +690,20 @@ export function HomeBenefitRow() {
                   transition: `opacity 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s, transform 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s`,
                 }}
               >
-                {/* Photo fill, cropped to the box */}
-                <img
-                  src={b.image || "/placeholder.svg"}
-                  alt=""
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    objectPosition: b.focal,
-                  }}
-                />
+                {/* Photo fill — explicit wrapper enforces the border-radius clip */}
+                <div style={{ position: "absolute", inset: 0, borderRadius: 20, overflow: "hidden" }}>
+                  <img
+                    src={b.image || "/placeholder.svg"}
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      objectPosition: b.focal,
+                      display: "block",
+                    }}
+                  />
+                </div>
               </div>
             )
           })}
@@ -825,7 +826,7 @@ export function HomeLogicRow() {
               ))}
             </div>
 
-            {/* State-over-time chart — replaces the comparison table */}
+            {/* State-over-time chart �� replaces the comparison table */}
             <ApproachChart />
           </div>
         </div>
