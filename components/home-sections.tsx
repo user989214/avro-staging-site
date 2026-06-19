@@ -690,7 +690,8 @@ export function HomeBenefitRow() {
                   transition: `opacity 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s, transform 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s`,
                 }}
               >
-                {/* Photo fill — absolute inset so it covers the full card regardless of minHeight */}
+                {/* Photo fill — scaled up slightly to crop the PNG's baked-in rounded
+                    frame / edge shadow so no card background shows at the corners. */}
                 <img
                   src={b.image || "/placeholder.svg"}
                   alt=""
@@ -702,6 +703,7 @@ export function HomeBenefitRow() {
                     objectFit: "cover",
                     objectPosition: b.focal,
                     display: "block",
+                    transform: "scale(1.06)",
                   }}
                 />
               </div>
