@@ -31,6 +31,15 @@ export interface PageHeroProps {
    * coordinated family.
    */
   variant?: "card" | "flat"
+  /**
+   * Color of the overlaid hero content (headline, lede, CTAs, and any tinted
+   * icons passed as children via `var(--ph-content)`).
+   * - `dark` (default): ink text — for light/neutral hero images.
+   * - `light`: white text — for dark hero images. Reverts to ink on mobile,
+   *   where content stacks below the image on a light card.
+   * Only applies to the `card` variant.
+   */
+  contentTone?: "dark" | "light"
 }
 
 /**
@@ -147,6 +156,23 @@ const SHARED_HERO_STYLES = `
     .ph-pill-row { flex-direction: column; align-items: stretch; max-width: 320px; }
     .ph-pill-primary, .ph-pill-secondary { width: 100%; flex: 0 0 auto; }
   }
+
+  /* Light content tone — white headline/lede/CTAs/icons for dark hero images. */
+  .ph-tone-light { --ph-content: var(--bone); }
+  .ph-tone-light .ph-pill-primary,
+  .ph-tone-light .ph-pill-secondary {
+    color: var(--ph-content);
+    border-color: var(--ph-content);
+  }
+  .ph-tone-light .ph-pill-primary:hover,
+  .ph-tone-light .ph-pill-secondary:hover {
+    background-color: var(--bone);
+    color: var(--ink);
+  }
+  /* On mobile the content stacks below the image on a light card, so revert to ink. */
+  @media (max-width: 768px) {
+    .ph-tone-light { --ph-content: var(--ink); }
+  }
 `
 
 /**
@@ -169,6 +195,7 @@ export function PageHero({
   compact = false,
   centered = false,
   variant = "card",
+  contentTone = "dark",
 }: PageHeroProps) {
   if (variant === "flat") {
     return <FlatHero {...{ title, lede, primaryCta, secondaryCta, children, compact, centered }} />
@@ -182,6 +209,7 @@ export function PageHero({
 
   return (
     <section
+      className={contentTone === "light" ? "ph-tone-light" : undefined}
       style={{
         width: "100%",
         backgroundColor: "var(--base)",
@@ -292,7 +320,7 @@ export function PageHero({
                 fontSize: compact ? "clamp(28px,3.5vw,48px)" : "clamp(32px,4vw,60px)",
                 lineHeight: 1.05,
                 letterSpacing: "-0.025em",
-                color: "var(--ink)",
+                color: "var(--ph-content, var(--ink))",
                 marginBottom: 14,
               }}
             />
@@ -304,7 +332,7 @@ export function PageHero({
                 fontWeight: 500,
                 fontSize: "clamp(16px,1.4vw,20px)",
                 lineHeight: 1.5,
-                color: "var(--ink)",
+                color: "var(--ph-content, var(--ink))",
                 maxWidth: 500,
                 marginBottom: children || primaryCta || secondaryCta ? 24 : 0,
               }}

@@ -21,6 +21,7 @@ export default function SciencePage() {
     <>
       <PageHero
         variant="card"
+        contentTone="light"
         title="Calm first. Backed by science."
         lede="Every AVRO formula starts with naturally fermented PharmaGABA®, selected to support calm-first readiness, composure, and clarity before pressure-sensitive moments.*"
         imageSrc="/images/lifestyle/science-hero.png"
@@ -31,16 +32,16 @@ export default function SciencePage() {
         secondaryCta={{ href: "#research", label: "View Research" }}
       >
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2 max-w-[640px]">
-          <span className="flex items-center gap-3 text-olive-dark text-[12px] font-extrabold">
-            <AvroIcon name="naturally-fermented-pharmagaba" size={56} className="shrink-0 md:w-16 md:h-16" />
+          <span className="flex items-center gap-3 text-[12px] font-extrabold" style={{ color: "var(--ph-content, var(--ink))" }}>
+            <AvroIcon name="naturally-fermented-pharmagaba" size={56} className="shrink-0 md:w-16 md:h-16" tint="var(--ph-content, var(--ink))" />
             Naturally Fermented PharmaGABA®
           </span>
-          <span className="flex items-center gap-3 text-olive-dark text-[12px] font-extrabold">
-            <AvroIcon name="science-backed" size={56} className="shrink-0 md:w-16 md:h-16" />
+          <span className="flex items-center gap-3 text-[12px] font-extrabold" style={{ color: "var(--ph-content, var(--ink))" }}>
+            <AvroIcon name="science-backed" size={56} className="shrink-0 md:w-16 md:h-16" tint="var(--ph-content, var(--ink))" />
             Research Supported Ingredient
           </span>
-          <span className="flex items-center gap-3 text-olive-dark text-[12px] font-extrabold">
-            <AvroIcon name="transparent-standards" size={56} className="shrink-0 md:w-16 md:h-16" />
+          <span className="flex items-center gap-3 text-[12px] font-extrabold" style={{ color: "var(--ph-content, var(--ink))" }}>
+            <AvroIcon name="transparent-standards" size={56} className="shrink-0 md:w-16 md:h-16" tint="var(--ph-content, var(--ink))" />
             Transparent Standards
           </span>
         </div>

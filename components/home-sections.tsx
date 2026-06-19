@@ -718,25 +718,22 @@ export function HomeBenefitRow() {
 export function HomeLogicRow() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   
-  // Each card maps to a formula, so its icon is tinted with that tube's color:
-  // gauge → Energy (amber), eye → Focus (magenta), lotus → Calm (indigo).
-  const cards: { title: string; src: string; iconColor: string; content: string }[] = [
+  // Each icon represents a formula state, so AvroIcon auto-tints it with the
+  // matching tube color (gauge → Energy, eye → Focus, lotus → Calm).
+  const cards: { title: string; icon: AvroIconName; content: string }[] = [
     {
       title: "More energy is not always the answer.",
-      src: "/images/icons/control-under-pressure.png",
-      iconColor: "#E8A23D",
+      icon: "control-under-pressure",
       content: "Most products push stimulation. AVRO starts with calm, because calm helps create the conditions for clarity, composure, and readiness.*"
     },
     {
       title: "Performance starts with state.",
-      src: "/images/icons/supports-focus-without-overload.png",
-      iconColor: "#C13584",
+      icon: "supports-focus-without-overload",
       content: "AVRO is built to support the state before the moment. Calm creates the foundation for clarity and readiness when it counts.*"
     },
     {
       title: "Calm first, then clarity.",
-      src: "/images/icons/calm-first-foundation.png",
-      iconColor: "#4b4d9a",
+      icon: "calm-first-foundation",
       content: "Every AVRO formula starts with naturally fermented PharmaGABA®. It's the calm-first foundation that makes everything else work better."
     },
   ]
@@ -786,25 +783,7 @@ export function HomeLogicRow() {
                         flexShrink: 0,
                       }}
                     >
-                      <span
-                        aria-hidden="true"
-                        className="md:w-16 md:h-16"
-                        style={{
-                          display: "inline-block",
-                          width: 52,
-                          height: 52,
-                          flexShrink: 0,
-                          backgroundColor: card.iconColor,
-                          WebkitMaskImage: `url(${card.src})`,
-                          maskImage: `url(${card.src})`,
-                          WebkitMaskRepeat: "no-repeat",
-                          maskRepeat: "no-repeat",
-                          WebkitMaskPosition: "center",
-                          maskPosition: "center",
-                          WebkitMaskSize: "contain",
-                          maskSize: "contain",
-                        }}
-                      />
+                      <AvroIcon name={card.icon} size={52} className="md:w-16 md:h-16" />
                     </div>
                     <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(15px,1.3vw,19px)", lineHeight: 1.25, color: "var(--ink)", flex: 1 }}>
                       {card.title}
