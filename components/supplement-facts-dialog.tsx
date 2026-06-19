@@ -99,7 +99,7 @@ export function SupplementFactsDialog({
 
         {/* Flavor toggle — each flavor has its own approved panel */}
         {flavors.length > 1 && (
-          <div className="px-5 pb-3 pt-1 flex flex-wrap gap-2 shrink-0 sm:px-6">
+          <div className="px-5 pb-3 pt-1 flex flex-wrap gap-1.5 shrink-0 sm:px-6">
             {flavors.map((flavor) => {
               const active = flavor.id === selectedId
               return (
@@ -111,14 +111,16 @@ export function SupplementFactsDialog({
                   style={{
                     fontFamily: GC,
                     fontWeight: 700,
-                    fontSize: 13,
-                    padding: "7px 14px",
+                    fontSize: 12,
+                    lineHeight: 1,
+                    padding: "6px 12px",
                     borderRadius: 999,
                     cursor: "pointer",
+                    whiteSpace: "nowrap",
                     transition: "background-color 0.15s ease, color 0.15s ease",
                     backgroundColor: active ? "var(--charcoal)" : "transparent",
                     color: active ? "var(--bone)" : "var(--charcoal)",
-                    border: "2px solid var(--charcoal)",
+                    border: "1.5px solid var(--charcoal)",
                   }}
                 >
                   {flavor.name}
@@ -129,7 +131,7 @@ export function SupplementFactsDialog({
         )}
 
         <div className="px-5 pb-6 overflow-y-auto sm:px-6">
-          <div className="rounded-xl p-4 flex justify-center" style={{ backgroundColor: LIGHT_GRAY }}>
+          <div className="rounded-xl p-2.5 flex justify-center sm:p-4" style={{ backgroundColor: LIGHT_GRAY }}>
             {/* Approved Supplement Facts panel — rendered directly from the label graphic */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
