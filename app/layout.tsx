@@ -6,6 +6,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { CartProvider } from "@/lib/cart-context"
 import { CartDrawer } from "@/components/cart-drawer"
+import { PageTransition } from "@/components/page-transition"
 import { ThemeProvider } from "@/lib/theme-context"
 
 const dmSans = DM_Sans({
@@ -42,7 +43,7 @@ export default function RootLayout({
         <ThemeProvider>
           <CartProvider>
             <Header />
-            <main className="min-h-[60vh]">{children}</main>
+            <PageTransition>{children}</PageTransition>
             <Footer />
             <CartDrawer />
           </CartProvider>
