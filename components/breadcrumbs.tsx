@@ -6,17 +6,21 @@ export type Crumb = { label: string; href?: string }
 
 export function Breadcrumbs({ items }: { items: Crumb[] }) {
   return (
+    // Full-width band matches the surface below it (white on desktop, grey on
+    // mobile where the hero is full-bleed) so there's no white/grey seam.
+    <div className="crumb-band">
     <nav
       aria-label="Breadcrumb"
       style={{
         width: "100%",
         maxWidth: 1440,
         margin: "0 auto",
-        padding: "clamp(16px,2.5vw,24px) clamp(16px,5vw,64px) clamp(4px,1vw,8px)",
+        padding: "clamp(16px,2.5vw,24px) clamp(16px,5vw,64px) clamp(8px,1.5vw,12px)",
       }}
     >
       {/* Soft rounded pill keeps the trail in line with the site's card/button style */}
       <ol
+        className="crumb-pill"
         style={{
           display: "inline-flex",
           flexWrap: "wrap",
@@ -26,7 +30,6 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
           margin: 0,
           padding: "7px 14px",
           borderRadius: 999,
-          backgroundColor: "var(--base-light)",
           fontFamily: GC,
           fontSize: 13,
           fontWeight: 600,
@@ -77,7 +80,16 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
           )
         })}
       </ol>
-      <style>{`.crumb-link:hover{opacity:1 !important;}`}</style>
+      <style>{`
+        .crumb-band { width: 100%; background-color: var(--base); }
+        .crumb-pill { background-color: var(--base-light); border: 1px solid transparent; }
+        .crumb-link:hover { opacity: 1 !important; }
+        @media (max-width: 768px) {
+          .crumb-band { background-color: var(--base-light); }
+          .crumb-pill { background-color: var(--base); border-color: rgba(0,0,0,0.06); }
+        }
+      `}</style>
     </nav>
+    </div>
   )
 }
