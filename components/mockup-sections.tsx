@@ -191,15 +191,17 @@ export function MockupBlueCta({
         <a
           href={shopHref}
           style={{
-            display: "inline-flex",
+            display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            width: "100%",
+            maxWidth: 520,
             fontFamily: GC,
             fontWeight: 700,
-            fontSize: 16,
+            fontSize: 18,
             letterSpacing: "-0.005em",
-            minHeight: 52,
-            padding: "0 48px",
+            minHeight: 56,
+            padding: "0 28px",
             borderRadius: 999,
             border: "2px solid var(--charcoal)",
             backgroundColor: "var(--charcoal)",
