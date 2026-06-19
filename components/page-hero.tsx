@@ -40,6 +40,13 @@ export interface PageHeroProps {
    * Only applies to the `card` variant.
    */
   contentTone?: "dark" | "light"
+  /**
+   * Adds a soft light scrim behind the overlaid content so dark/ink text stays
+   * readable over a busy hero image. Only shows on desktop (where content
+   * overlays the image); on mobile the content stacks on a light card so no
+   * scrim is needed. Only applies to the `card` variant.
+   */
+  scrim?: boolean
 }
 
 /**
@@ -196,6 +203,7 @@ export function PageHero({
   centered = false,
   variant = "card",
   contentTone = "dark",
+  scrim = false,
 }: PageHeroProps) {
   if (variant === "flat") {
     return <FlatHero {...{ title, lede, primaryCta, secondaryCta, children, compact, centered }} />
@@ -237,6 +245,19 @@ export function PageHero({
           justify-content: center;
           padding: clamp(32px,5vw,80px) clamp(20px,5vw,64px);
         }
+        /* Soft readability scrim behind overlaid ink content (desktop only) */
+        .ph-scrim {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          background: linear-gradient(
+            100deg,
+            rgba(255,255,255,0.78) 0%,
+            rgba(255,255,255,0.62) 32%,
+            rgba(255,255,255,0.28) 58%,
+            rgba(255,255,255,0) 78%
+          );
+        }
         .ph-hero-img-mobile { display: none; }
         .ph-hero-img-desktop { display: block; }
         /* ── Mobile: stacked — rounded image on top, text below ── */
@@ -264,6 +285,7 @@ export function PageHero({
             position: static !important;
             padding: 24px 20px 32px !important;
           }
+          .ph-scrim { display: none !important; }
         }
         @media (min-width: 769px) {
           .ph-hero-img-wrapper {
