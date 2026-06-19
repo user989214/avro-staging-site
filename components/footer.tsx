@@ -138,7 +138,7 @@ export function Footer() {
                   placeholder="Email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 px-5 py-3 bg-transparent border-0 outline-none placeholder:opacity-50"
+                  className="flex-1 min-w-0 px-5 py-3 bg-transparent border-0 outline-none placeholder:opacity-50"
                   style={{
                     fontWeight: 400,
                     fontSize: "14px",
@@ -147,7 +147,7 @@ export function Footer() {
                 />
                 <button
                   type="submit"
-                  className="flex items-center gap-1.5 px-5 cursor-pointer hover:opacity-90 transition-opacity"
+                  className="flex items-center justify-center gap-1.5 shrink-0 whitespace-nowrap px-4 py-2 cursor-pointer hover:opacity-90 transition-opacity"
                   style={{
                     fontWeight: 700,
                     fontSize: "13px",
