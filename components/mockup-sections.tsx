@@ -169,39 +169,43 @@ export function MockupBlueCta({
         padding: "clamp(32px,5vw,72px) clamp(16px,4vw,64px)",
       }}
     >
+      {/* Scoped responsive rules — overlay bottom-right on desktop, stack below on mobile */}
+      <style>{`
+        .banner-cta-box {
+          position: relative;
+          max-width: 1250px;
+          margin: 0 auto;
+          border-radius: 24px;
+          overflow: hidden;
+          background-color: var(--base);
+        }
+        .banner-cta-img { width: 100%; height: auto; display: block; }
+        .banner-cta-btn {
+          position: absolute;
+          right: clamp(16px, 3%, 40px);
+          bottom: clamp(16px, 3%, 40px);
+          min-width: 220px;
+          text-decoration: none;
+        }
+        @media (max-width: 640px) {
+          .banner-cta-box { display: flex; flex-direction: column; padding-bottom: 20px; }
+          .banner-cta-btn {
+            position: static;
+            width: calc(100% - 32px);
+            min-width: 0;
+            margin: 16px auto 0;
+          }
+        }
+      `}</style>
+
       {/* Rounded box that confines the banner artwork */}
-      <div
-        style={{
-          position: "relative",
-          maxWidth: 1250,
-          margin: "0 auto",
-          borderRadius: 24,
-          overflow: "hidden",
-          backgroundColor: "var(--base)",
-          lineHeight: 0,
-        }}
-      >
+      <div className="banner-cta-box">
         {/* Banner artwork fills the box */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={bgImage}
-          alt=""
-          style={{ width: "100%", height: "auto", display: "block" }}
-        />
+        <img src={bgImage} alt="" className="banner-cta-img" />
 
-        {/* Wide Shop button — overlaid in the bottom-right corner */}
-        <a
-          href={shopHref}
-          className="btn-primary"
-          style={{
-            position: "absolute",
-            right: "clamp(16px,3%,40px)",
-            bottom: "clamp(16px,3%,40px)",
-            minWidth: 220,
-            fontFamily: GC,
-            textDecoration: "none",
-          }}
-        >
+        {/* Shop button — overlaid bottom-right on desktop, stacked below on mobile */}
+        <a href={shopHref} className="btn-primary banner-cta-btn" style={{ fontFamily: GC }}>
           {shopLabel}
         </a>
       </div>
