@@ -331,6 +331,9 @@ export function PageHero({
           )}
         </div>
 
+        {/* Optional readability scrim behind overlaid ink content (desktop only) */}
+        {scrim && <div className="ph-scrim" aria-hidden="true" />}
+
         {/* Content — overlaid on desktop, below image on mobile */}
         <div className="ph-hero-16x9-content">
           <div style={{ display: "flex", flexDirection: "column", maxWidth: 580 }}>
