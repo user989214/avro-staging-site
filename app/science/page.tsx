@@ -5,12 +5,11 @@ import {
   ProductCards,
   FormulaLogic,
   FaqBlock,
-  FinalCta,
   InfoCard,
 } from "@/components/sections"
 import { AvroIcon } from "@/components/avro-icons"
 import { PageHero } from "@/components/page-hero"
-import { FooterBanner } from "@/components/footer-banner"
+import { MockupBlueCta } from "@/components/mockup-sections"
 
 export const metadata = {
   title: "The Science of AVRO | AVRO",
@@ -129,15 +128,7 @@ export default function SciencePage() {
           ]}
         />
 
-        <FooterBanner
-          src="/images/banners/science-banner.png"
-          alt="AVRO Calm Blueberry Acai — Calm is the advantage."
-        />
-
-        <FinalCta
-          title="Start with calm. Show up ready."
-          copy="Choose Calm, Focus, or Energy based on the moment you want to support."
-        />
+        <MockupBlueCta bgImage="/images/banners/science-banner.png" shopHref="/shop" shopLabel="Shop" />
       </div>
     </>
   )

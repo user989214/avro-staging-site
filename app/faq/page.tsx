@@ -5,11 +5,10 @@ import {
   CardedSection,
   SectionHeading,
   SocialProof,
-  FinalCta,
 } from "@/components/sections"
 import { Icon } from "@/components/icons"
 import { PageHero } from "@/components/page-hero"
-import { FooterBanner } from "@/components/footer-banner"
+import { MockupBlueCta } from "@/components/mockup-sections"
 
 const faqCategories = [
   {
@@ -237,16 +236,7 @@ export default function FaqPage() {
       ))}
 
       <SocialProof mode="compact" />
-      <FooterBanner
-        src="/images/banners/faq-banner.png"
-        alt="AVRO Focus Pomegranate Raspberry — Calm performs best."
-      />
-      <div style={{ backgroundColor: "var(--base-deep)" }}>
-        <FinalCta
-          title="Ready to find your formula?"
-          copy="Choose Calm, Focus, or Energy based on the moment you want to support."
-        />
-      </div>
+      <MockupBlueCta bgImage="/images/banners/faq-banner.png" shopHref="/shop" shopLabel="Shop" />
     </>
   )
 }

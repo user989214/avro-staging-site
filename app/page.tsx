@@ -57,29 +57,6 @@ export default function HomePage() {
           color: #FFFFFF !important;
         }
 
-        /* Banner CTA button — outline pill, fills on hover */
-        .banner-shop-btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          background-color: transparent;
-          color: var(--charcoal);
-          border: 2px solid var(--charcoal);
-          border-radius: 999px;
-          font-weight: 700;
-          font-size: 16px;
-          letter-spacing: -0.005em;
-          min-height: 48px;
-          padding: 0 28px;
-          text-decoration: none;
-          transition: background-color .2s ease, color .2s ease;
-          cursor: pointer;
-        }
-        .banner-shop-btn:hover {
-          background-color: var(--charcoal);
-          color: var(--bone);
-        }
-
       `}</style>
 
       <HomeRefHero />

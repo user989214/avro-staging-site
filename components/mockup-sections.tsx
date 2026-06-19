@@ -148,8 +148,9 @@ export function MockupLogicRow() {
 }
 
 /**
- * Full-bleed blue section (mockup version of FinalCta) — the avro-blue band
- * spans edge to edge with no rounded card or side gutters.
+ * Banner CTA — a gray section containing a rounded rectangle box that the
+ * per-page banner artwork fills edge to edge, with a single wide "Shop" button
+ * overlaid in the bottom-right corner of the box.
  */
 export function MockupBlueCta({
   bgImage = "/images/banners/calm-power.png",
@@ -164,34 +165,41 @@ export function MockupBlueCta({
     <section
       style={{
         width: "100%",
-        padding: "0 clamp(16px,4vw,64px) clamp(24px,4vw,64px)",
+        backgroundColor: "var(--base-deep)",
+        padding: "clamp(32px,5vw,72px) clamp(16px,4vw,64px)",
       }}
     >
+      {/* Rounded box that confines the banner artwork */}
       <div
         style={{
+          position: "relative",
           maxWidth: 1250,
           margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 0,
+          borderRadius: 24,
+          overflow: "hidden",
+          backgroundColor: "var(--base)",
+          lineHeight: 0,
         }}
       >
-        {/* Banner artwork fills the card width */}
+        {/* Banner artwork fills the box */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={bgImage}
-          alt="Calm = Power"
+          alt=""
           style={{ width: "100%", height: "auto", display: "block" }}
         />
 
-        {/* Shop button sits directly below the banner */}
+        {/* Wide Shop button — overlaid in the bottom-right corner */}
         <a
           href={shopHref}
-          className="banner-shop-btn"
+          className="btn-primary"
           style={{
+            position: "absolute",
+            right: "clamp(16px,3%,40px)",
+            bottom: "clamp(16px,3%,40px)",
+            minWidth: 220,
             fontFamily: GC,
-            marginTop: 24,
+            textDecoration: "none",
           }}
         >
           {shopLabel}

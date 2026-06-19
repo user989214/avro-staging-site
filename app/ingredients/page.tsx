@@ -3,12 +3,11 @@ import {
   SectionHeading,
   ProductCards,
   FaqBlock,
-  FinalCta,
   InfoCard,
 } from "@/components/sections"
 import { AvroIcon } from "@/components/avro-icons"
 import { PageHero } from "@/components/page-hero"
-import { FooterBanner } from "@/components/footer-banner"
+import { MockupBlueCta } from "@/components/mockup-sections"
 import { IngredientStacks } from "@/components/ingredient-stacks"
 
 export const metadata = {
@@ -110,15 +109,7 @@ export default function IngredientsPage() {
           ]}
         />
 
-        <FooterBanner
-          src="/images/banners/ingredients-banner.png"
-          alt="AVRO Energy Orange Tangerine — Calm is the advantage."
-        />
-
-        <FinalCta
-          title="Clean label. Clear logic."
-          copy="Choose Calm, Focus, or Energy based on the moment you want to support — and know exactly what's in every stick."
-        />
+        <MockupBlueCta bgImage="/images/banners/ingredients-banner.png" shopHref="/shop" shopLabel="Shop" />
       </div>
     </>
   )
