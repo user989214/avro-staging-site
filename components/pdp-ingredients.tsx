@@ -40,8 +40,8 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
     ...sharedFront,
     {
       name: "Magnesium Bisglycinate",
-      amount: "100 mg",
-      description: "100 mg elemental magnesium (24% DV).* Supports muscle and nervous system function.",
+      amount: "850 mg",
+      description: "Yields 100 mg of active magnesium (24% DV).* Supports muscle and nervous system function.",
       image: "/images/ingredients/magnesium-bisglycinate-2.jpg",
     },
     ...sharedBack,
@@ -51,7 +51,7 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
     {
       name: "Cognigrape®",
       amount: "250 mg",
-      description: "Grape fruit extract (Vitis vinifera) studied to support cognitive function and clarity.*",
+      description: "Clinically shown to support cognitive function and clarity.*",
       image: "/images/ingredients/cognigrape-2.jpg",
     },
     ...sharedBack,
@@ -61,7 +61,7 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
     {
       name: "Natural Caffeine",
       amount: "120 mg",
-      description: "From Coffea arabica and Coffea canephora bean extract for clean, sustained energy.*",
+      description: "Clinically shown to support cognitive function and clarity.*",
       image: "/images/ingredients/natural-caffeine-2.jpg",
     },
     ...sharedBack,
