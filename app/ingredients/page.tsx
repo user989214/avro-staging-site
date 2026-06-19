@@ -14,14 +14,14 @@ import { IngredientStacks } from "@/components/ingredient-stacks"
 export const metadata = {
   title: "Ingredients | AVRO",
   description:
-    "Placeholder ingredient page — lorem ipsum label data shown for demonstration only.",
+    "Every AVRO ingredient, fully disclosed. See the approved Supplement Facts panel for all six flavors across Calm, Focus, and Energy.",
 }
 
 const designations: { label: string; icon: Parameters<typeof AvroIcon>[0]["name"] }[] = [
-  { label: "Lorem Ipsum", icon: "free-sugar" },
-  { label: "Dolor Sit", icon: "free-gmo" },
-  { label: "Amet", icon: "free-vegan" },
-  { label: "Consectetur Adipiscing", icon: "clinically-tested-ingredients" },
+  { label: "No Added Sugar", icon: "free-sugar" },
+  { label: "Non-GMO", icon: "free-gmo" },
+  { label: "Vegan", icon: "free-vegan" },
+  { label: "Clinically Studied Ingredients", icon: "clinically-tested-ingredients" },
 ]
 
 export default function IngredientsPage() {
@@ -30,7 +30,7 @@ export default function IngredientsPage() {
       <PageHero
         variant="card"
         title="Every ingredient, fully disclosed."
-        lede="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Placeholder copy only — not the final label."
+        lede="Every formula starts with 200 mg of naturally fermented PharmaGABA® and adds one studied active — magnesium, Cognigrape®, or natural caffeine. See the approved Supplement Facts panel for every flavor below."
         imageSrc="/images/ingredients/ingredients-hero.jpg"
         imageAlt="Flat-lay of AVRO ingredients — blackberries, dried lavender, jasmine flowers, and fine powders on a cream surface"
         imageObjectPosition="right center"
@@ -52,28 +52,28 @@ export default function IngredientsPage() {
       <CardedSection>
         <SectionHeading title="What every box has in common." />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <InfoCard title="Lorem ipsum dolor">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor per box.
+          <InfoCard title="10 servings per box">
+            Each box contains 10 single-serve packets — a two-week supply at one packet per day.
           </InfoCard>
-          <InfoCard title="Sit amet serving">
-            Lorem ipsum (00g) per serving — 0.00 oz (00g) net weight per box.
+          <InfoCard title="5 g per serving">
+            One packet is 5 g (0.18 oz), for a net weight of 1.76 oz (50 g) per box.
           </InfoCard>
-          <InfoCard title="Consectetur usage">
-            Lorem ipsum dolor sit amet into 00 fl oz of water. Adipiscing up to three times per day.
+          <InfoCard title="Simple to use">
+            Mix one packet into 16 fl oz of water. Enjoy up to one packet per day.
           </InfoCard>
-          <InfoCard title="Adipiscing by design">
-            Lorem ipsum, consectetur, and adipiscing, with ingredients selected for elit support.
+          <InfoCard title="10 calories, no added sugar">
+            Every serving is 10 calories with 0 g total sugars — sweetened lightly with stevia.
           </InfoCard>
-          <InfoCard title="00mg PharmaGABA®">
-            Lorem ipsum dolor sit amet is the calm-first foundation in every single formula.
+          <InfoCard title="200 mg PharmaGABA®">
+            Naturally fermented PharmaGABA® is the calm-first foundation in every single formula.
           </InfoCard>
-          <InfoCard title="Tempor where it counts">
-            Lorem ipsum dolor sit amet. Only the elit stack adds 00mg sed do eiusmod.
+          <InfoCard title="One active per stack">
+            Calm adds 100 mg magnesium, Focus adds 250 mg Cognigrape®, and Energy adds 120 mg natural caffeine.
           </InfoCard>
         </div>
         <p className="mt-5 text-[13px] leading-relaxed text-warm-gray">
-          Lorem ipsum — placeholder details only. Serving size, net weight, servings per box, and
-          directions shown here are illustrative and not the final approved label.
+          Calm and Focus are caffeine free. Only AVRO Energy contains caffeine (120 mg from natural
+          coffee bean extract). See each flavor&apos;s Supplement Facts panel below for full detail.
         </p>
       </CardedSection>
 
@@ -82,7 +82,7 @@ export default function IngredientsPage() {
         <div className="w-full max-w-[1440px] mx-auto px-[clamp(16px,5vw,64px)] mb-[clamp(8px,2vw,16px)]">
           <SectionHeading
             title="Three stacks. Six flavors. Nothing hidden."
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore."
+            description="Here is the approved Supplement Facts panel for every flavor across Calm, Focus, and Energy."
           />
         </div>
         <IngredientStacks />
@@ -96,16 +96,16 @@ export default function IngredientsPage() {
           centered={false}
           faqs={[
             [
-              "Lorem ipsum dolor sit amet consectetur?",
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Placeholder answer only.",
+              "What is in every AVRO formula?",
+              "Every formula is built on 200 mg of naturally fermented PharmaGABA®, plus sodium and potassium for electrolyte balance. Each serving is 10 calories with no added sugar.",
             ],
             [
-              "Adipiscing elit sed do eiusmod tempor?",
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder answer only — not the final approved copy.",
+              "What makes each stack different?",
+              "Calm adds 100 mg of magnesium (as magnesium bisglycinate), Focus adds 250 mg of Cognigrape® grape fruit extract, and Energy adds 120 mg of natural caffeine from coffee bean extract.",
             ],
             [
-              "Ut labore et dolore magna aliqua?",
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. Placeholder answer only.",
+              "Which formulas contain caffeine?",
+              "Only AVRO Energy contains caffeine — 120 mg from Coffea arabica and Coffea canephora bean extract. Calm and Focus are completely caffeine free.",
             ],
           ]}
         />

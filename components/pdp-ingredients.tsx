@@ -14,7 +14,7 @@ type Ingredient = {
 const sharedFront: Ingredient[] = [
   {
     name: "PharmaGABA®",
-    amount: "00 mg",
+    amount: "200 mg",
     description: "Naturally fermented. AVRO's calm-first foundation.",
     image: "/images/ingredients/pharmagaba-2.jpg",
   },
@@ -40,8 +40,8 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
     ...sharedFront,
     {
       name: "Magnesium Bisglycinate",
-      amount: "00 mg",
-      description: "Yields 00 mg of active magnesium.* Supports muscle and nervous system function.",
+      amount: "100 mg",
+      description: "100 mg elemental magnesium (24% DV).* Supports muscle and nervous system function.",
       image: "/images/ingredients/magnesium-bisglycinate-2.jpg",
     },
     ...sharedBack,
@@ -50,8 +50,8 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
     ...sharedFront,
     {
       name: "Cognigrape®",
-      amount: "00 mg",
-      description: "Grape extract clinically shown to support cognitive function and clarity.*",
+      amount: "250 mg",
+      description: "Grape fruit extract (Vitis vinifera) studied to support cognitive function and clarity.*",
       image: "/images/ingredients/cognigrape-2.jpg",
     },
     ...sharedBack,
@@ -60,8 +60,8 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
     ...sharedFront,
     {
       name: "Natural Caffeine",
-      amount: "00 mg",
-      description: "Plant-derived caffeine for clean, sustained energy without the jitters.*",
+      amount: "120 mg",
+      description: "From Coffea arabica and Coffea canephora bean extract for clean, sustained energy.*",
       image: "/images/ingredients/natural-caffeine-2.jpg",
     },
     ...sharedBack,

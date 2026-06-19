@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog"
 import { Icon } from "@/components/icons"
 import type { Formula, FormulaKey } from "@/lib/data"
+import { supplementFactsByFlavor, defaultPanelForFormula } from "@/lib/data"
 import { cn } from "@/lib/utils"
 
 const GC = '"DM Sans", system-ui, sans-serif'
@@ -30,6 +31,15 @@ export function SupplementFactsDialog({
   className,
 }: SupplementFactsDialogProps) {
   const isPrimary = variant === "primary"
+
+  // Resolve the approved panel image. If a specific flavor is provided, use it;
+  // otherwise fall back to the formula's default (first-flavor) panel.
+  const flavorMatch = flavorName
+    ? formula.flavors.find((f) => f.name === flavorName)
+    : undefined
+  const panelSrc = flavorMatch
+    ? supplementFactsByFlavor[flavorMatch.id]
+    : defaultPanelForFormula(formulaKey)
 
   return (
     <Dialog>
@@ -74,33 +84,15 @@ export function SupplementFactsDialog({
           </p>
         </div>
         <div className="px-6 pb-6">
-          <div className="rounded-xl p-5" style={{ backgroundColor: LIGHT_GRAY }}>
-            <div style={{ borderTop: "4px solid var(--ink)", paddingTop: 12 }}>
-              <p
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 700,
-                  fontSize: 14,
-                  color: "var(--ink)",
-                  marginBottom: 6,
-                }}
-              >
-                Pending approved Supplement Facts panel
-              </p>
-              <p
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 400,
-                  fontSize: 13,
-                  color: "var(--warm-gray)",
-                  lineHeight: 1.5,
-                }}
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris.
-              </p>
-            </div>
+          <div className="rounded-xl p-4" style={{ backgroundColor: LIGHT_GRAY }}>
+            {/* Approved Supplement Facts panel — rendered directly from the label graphic */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={panelSrc || "/placeholder.svg"}
+              alt={`${formula.name} Supplement Facts panel`}
+              className="w-full h-auto block rounded-md"
+              style={{ backgroundColor: "var(--base)" }}
+            />
           </div>
         </div>
       </DialogContent>
