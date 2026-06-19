@@ -67,9 +67,18 @@ export function SupplementFactsDialog({
         .sf-trigger:hover { background-color: ${isPrimary ? "transparent" : "var(--charcoal)"}; color: ${isPrimary ? "var(--charcoal)" : "var(--bone)"}; }
       `}</style>
       <DialogContent className="max-w-[420px] p-0 bg-base flex flex-col max-h-[90vh]">
-        <div className="p-6 pb-2 shrink-0">
+        <div className="p-5 pb-2 shrink-0 sm:p-6">
           <DialogHeader>
-            <DialogTitle style={{ fontFamily: GC, fontWeight: 700, fontSize: 32, color: "var(--ink)" }}>
+            <DialogTitle
+              className="pr-8"
+              style={{
+                fontFamily: GC,
+                fontWeight: 700,
+                fontSize: "clamp(20px, 6vw, 32px)",
+                lineHeight: 1.1,
+                color: "var(--ink)",
+              }}
+            >
               Supplement facts
             </DialogTitle>
           </DialogHeader>
@@ -78,7 +87,8 @@ export function SupplementFactsDialog({
             style={{
               fontFamily: GC,
               fontWeight: 500,
-              fontSize: 15,
+              fontSize: 14,
+              lineHeight: 1.4,
               color: "var(--warm-gray)",
             }}
           >
@@ -89,7 +99,7 @@ export function SupplementFactsDialog({
 
         {/* Flavor toggle — each flavor has its own approved panel */}
         {flavors.length > 1 && (
-          <div className="px-6 pb-3 flex flex-wrap gap-2 shrink-0">
+          <div className="px-5 pb-3 pt-1 flex flex-wrap gap-2 shrink-0 sm:px-6">
             {flavors.map((flavor) => {
               const active = flavor.id === selectedId
               return (
@@ -118,7 +128,7 @@ export function SupplementFactsDialog({
           </div>
         )}
 
-        <div className="px-6 pb-6 overflow-y-auto">
+        <div className="px-5 pb-6 overflow-y-auto sm:px-6">
           <div className="rounded-xl p-4 flex justify-center" style={{ backgroundColor: LIGHT_GRAY }}>
             {/* Approved Supplement Facts panel — rendered directly from the label graphic */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
