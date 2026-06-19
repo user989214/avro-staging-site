@@ -1,14 +1,11 @@
 import { type AvroIconName } from "@/components/avro-icons"
+import { supplementFactsByFlavor } from "@/lib/data"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 
-type NutritionRow = { label: string; value: string; dv?: string }
-type Active = { name: string; amount: string }
 type Flavor = {
   name: string
-  nutrition: NutritionRow[]
-  actives: Active[]
-  others: string
+  flavorId: string
 }
 type Stack = {
   key: string
@@ -20,26 +17,6 @@ type Stack = {
   flavors: Flavor[]
 }
 
-/** Nutrition facts shared across the two caffeine-free Focus flavors. */
-const FOCUS_NUTRITION: NutritionRow[] = [
-  { label: "Calories", value: "00" },
-  { label: "Lorem ipsum dolor", value: "00g", dv: "0%" },
-  { label: "Total Sugars", value: "0g" },
-  { label: "Consectetur (as adipiscing)", value: "00mg", dv: "0%" },
-  { label: "Elit sed (as bicarbonate)", value: "00mg", dv: "0%" },
-]
-
-const ENERGY_NUTRITION = FOCUS_NUTRITION
-
-const CALM_NUTRITION: NutritionRow[] = [
-  { label: "Calories", value: "00" },
-  { label: "Lorem ipsum dolor", value: "00g", dv: "0%" },
-  { label: "Total Sugars", value: "0g" },
-  { label: "Magnesium (as lorem bisglycinate)", value: "00mg", dv: "0%" },
-  { label: "Consectetur (as adipiscing)", value: "00mg", dv: "0%" },
-  { label: "Elit sed (as bicarbonate)", value: "00mg", dv: "0%" },
-]
-
 export const stacks: Stack[] = [
   {
     key: "focus",
@@ -49,26 +26,8 @@ export const stacks: Stack[] = [
     accent: "var(--avro-blue)",
     icon: "supports-focus-without-overload",
     flavors: [
-      {
-        name: "Pomegranate Raspberry",
-        nutrition: FOCUS_NUTRITION,
-        actives: [
-          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "00mg" },
-          { name: "Lorem ipsum dolor (sit amet consectetur)", amount: "00mg" },
-        ],
-        others:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      },
-      {
-        name: "Red Dragon Fruit",
-        nutrition: FOCUS_NUTRITION,
-        actives: [
-          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "00mg" },
-          { name: "Lorem ipsum dolor (sit amet consectetur)", amount: "00mg" },
-        ],
-        others:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      },
+      { name: "Pomegranate Raspberry", flavorId: "pomegranate-raspberry" },
+      { name: "Red Dragon Fruit", flavorId: "red-dragon-fruit" },
     ],
   },
   {
@@ -79,61 +38,26 @@ export const stacks: Stack[] = [
     accent: "var(--avro-blue)",
     icon: "mental-clarity",
     flavors: [
-      {
-        name: "Fuji Apple",
-        nutrition: ENERGY_NUTRITION,
-        actives: [
-          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "00mg" },
-          { name: "Lorem ipsum dolor (sit amet consectetur adipiscing)", amount: "00mg" },
-        ],
-        others:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.",
-      },
-      {
-        name: "Orange Tangerine",
-        nutrition: ENERGY_NUTRITION,
-        actives: [
-          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "00mg" },
-          { name: "Lorem ipsum dolor (sit amet consectetur adipiscing)", amount: "00mg" },
-        ],
-        others:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.",
-      },
+      { name: "Fuji Apple", flavorId: "fuji-apple" },
+      { name: "Orange Tangerine", flavorId: "orange-tangerine" },
     ],
   },
   {
     key: "calm",
     name: "AVRO Calm Stack",
-    claim: "This stack supports stress reduction and improved sleep.*",
+    claim: "This stack supports stress reduction and a calm, clear state.*",
     tagline: "Powered by Naturally Fermented GABA — With Magnesium",
     accent: "var(--avro-blue)",
     icon: "relaxation-reduced-tension",
     flavors: [
-      {
-        name: "Blueberry Acai",
-        nutrition: CALM_NUTRITION,
-        actives: [
-          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "00mg" },
-          { name: "Lorem ipsum (yields 00mg active lorem from 00mg of the compound)", amount: "00mg" },
-        ],
-        others:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.",
-      },
-      {
-        name: "Blackberry Jasmine",
-        nutrition: CALM_NUTRITION,
-        actives: [
-          { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "00mg" },
-          { name: "Lorem ipsum (yields 00mg active lorem from 00mg of the compound)", amount: "00mg" },
-        ],
-        others:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.",
-      },
+      { name: "Blueberry Acai", flavorId: "blueberry-acai" },
+      { name: "Blackberry Jasmine", flavorId: "blackberry-jasmine" },
     ],
   },
 ]
 
 function FlavorCard({ flavor }: { flavor: Flavor }) {
+  const panelSrc = supplementFactsByFlavor[flavor.flavorId]
   return (
     <article
       className="rounded-[20px] flex flex-col"
@@ -146,38 +70,16 @@ function FlavorCard({ flavor }: { flavor: Flavor }) {
     >
       <h4 className="font-serif font-black text-[clamp(20px,2vw,26px)] leading-none text-ink mb-5">{flavor.name}</h4>
 
-      {/* Active ingredients */}
-      <p className="text-[12px] font-black tracking-[0.1em] uppercase text-warm-gray mb-3">Active Ingredients</p>
-      <ul className="flex flex-col gap-2.5 mb-6">
-        {flavor.actives.map((a) => (
-          <li key={a.name} className="flex items-baseline justify-between gap-3 border-b border-[rgba(30,29,24,0.1)] pb-2.5">
-            <span className="text-[14px] leading-snug text-ink font-medium">{a.name}</span>
-            <span className="text-[14px] font-extrabold text-ink whitespace-nowrap">{a.amount}</span>
-          </li>
-        ))}
-      </ul>
-
-      {/* Nutrition facts */}
-      <p className="text-[12px] font-black tracking-[0.1em] uppercase text-warm-gray mb-3">Nutrition Facts</p>
-      <ul className="flex flex-col mb-6">
-        {flavor.nutrition.map((n, i) => (
-          <li
-            key={n.label}
-            className="flex items-baseline justify-between gap-3 py-2"
-            style={{ borderTop: i === 0 ? "2px solid var(--ink)" : "1px solid rgba(30,29,24,0.1)" }}
-          >
-            <span className="text-[13px] leading-snug text-ink">{n.label}</span>
-            <span className="text-[13px] text-ink whitespace-nowrap">
-              <span className="font-bold">{n.value}</span>
-              {n.dv ? <span className="text-warm-gray ml-2">{n.dv} DV</span> : null}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-      {/* Other ingredients */}
-      <p className="text-[12px] font-black tracking-[0.1em] uppercase text-warm-gray mb-2">Other Ingredients</p>
-      <p className="text-[13px] leading-relaxed text-ink/75 mt-auto">{flavor.others}</p>
+      {/* Approved Supplement Facts panel — rendered directly from the label graphic */}
+      <div className="rounded-[12px] overflow-hidden" style={{ border: "1px solid rgba(30,29,24,0.1)" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={panelSrc || "/placeholder.svg"}
+          alt={`${flavor.name} Supplement Facts panel`}
+          className="w-full h-auto block"
+          style={{ backgroundColor: "var(--base)" }}
+        />
+      </div>
     </article>
   )
 }
@@ -199,8 +101,7 @@ export function IngredientStacks() {
           </div>
 
           <p className="mt-5 text-[13px] leading-relaxed text-warm-gray">
-            Lorem ipsum — placeholder label data for {stack.name}. Values shown are illustrative
-            only and are not the final approved label.
+            Serving size 1 packet (5 g) · 10 servings per container. {stack.tagline}.
           </p>
         </section>
       ))}

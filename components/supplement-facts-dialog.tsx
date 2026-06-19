@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import {
   Dialog,
   DialogContent,
@@ -9,6 +10,7 @@ import {
 } from "@/components/ui/dialog"
 import { Icon } from "@/components/icons"
 import type { Formula, FormulaKey } from "@/lib/data"
+import { supplementFactsByFlavor, defaultPanelForFormula } from "@/lib/data"
 import { cn } from "@/lib/utils"
 
 const GC = '"DM Sans", system-ui, sans-serif'
@@ -30,6 +32,17 @@ export function SupplementFactsDialog({
   className,
 }: SupplementFactsDialogProps) {
   const isPrimary = variant === "primary"
+
+  // The flavors that ship for this formula, each with its own approved panel.
+  const flavors = formula.flavors
+
+  // Default to the explicitly-passed flavor if provided, else the first flavor.
+  const initialId =
+    (flavorName ? flavors.find((f) => f.name === flavorName)?.id : undefined) ?? flavors[0].id
+  const [selectedId, setSelectedId] = useState<string>(initialId)
+
+  const panelSrc = supplementFactsByFlavor[selectedId] || defaultPanelForFormula(formulaKey)
+  const selectedFlavor = flavors.find((f) => f.id === selectedId)
 
   return (
     <Dialog>
@@ -53,10 +66,19 @@ export function SupplementFactsDialog({
       <style>{`
         .sf-trigger:hover { background-color: ${isPrimary ? "transparent" : "var(--charcoal)"}; color: ${isPrimary ? "var(--charcoal)" : "var(--bone)"}; }
       `}</style>
-      <DialogContent className="max-w-[440px] p-0 bg-base">
-        <div className="p-6 pb-2">
+      <DialogContent className="max-w-[360px] p-0 bg-base flex flex-col max-h-[85vh]">
+        <div className="p-5 pb-2 shrink-0 sm:p-6">
           <DialogHeader>
-            <DialogTitle style={{ fontFamily: GC, fontWeight: 700, fontSize: 32, color: "var(--ink)" }}>
+            <DialogTitle
+              className="pr-8"
+              style={{
+                fontFamily: GC,
+                fontWeight: 700,
+                fontSize: "clamp(20px, 6vw, 32px)",
+                lineHeight: 1.1,
+                color: "var(--ink)",
+              }}
+            >
               Supplement facts
             </DialogTitle>
           </DialogHeader>
@@ -65,42 +87,59 @@ export function SupplementFactsDialog({
             style={{
               fontFamily: GC,
               fontWeight: 500,
-              fontSize: 15,
+              fontSize: 14,
+              lineHeight: 1.4,
               color: "var(--warm-gray)",
             }}
           >
             {formula.name}
-            {flavorName ? ` · ${flavorName}` : ""} · Serving size 1 stick (5 g)
+            {selectedFlavor ? ` · ${selectedFlavor.name}` : ""} · Serving size 1 stick (5 g)
           </p>
         </div>
-        <div className="px-6 pb-6">
-          <div className="rounded-xl p-5" style={{ backgroundColor: LIGHT_GRAY }}>
-            <div style={{ borderTop: "4px solid var(--ink)", paddingTop: 12 }}>
-              <p
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 700,
-                  fontSize: 14,
-                  color: "var(--ink)",
-                  marginBottom: 6,
-                }}
-              >
-                Pending approved Supplement Facts panel
-              </p>
-              <p
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 400,
-                  fontSize: 13,
-                  color: "var(--warm-gray)",
-                  lineHeight: 1.5,
-                }}
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris.
-              </p>
-            </div>
+
+        {/* Flavor toggle — each flavor has its own approved panel */}
+        {flavors.length > 1 && (
+          <div className="px-5 pb-3 pt-1 flex flex-wrap gap-1.5 shrink-0 sm:px-6">
+            {flavors.map((flavor) => {
+              const active = flavor.id === selectedId
+              return (
+                <button
+                  key={flavor.id}
+                  type="button"
+                  onClick={() => setSelectedId(flavor.id)}
+                  aria-pressed={active}
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: 12,
+                    lineHeight: 1,
+                    padding: "6px 12px",
+                    borderRadius: 999,
+                    cursor: "pointer",
+                    whiteSpace: "nowrap",
+                    transition: "background-color 0.15s ease, color 0.15s ease",
+                    backgroundColor: active ? "var(--charcoal)" : "transparent",
+                    color: active ? "var(--bone)" : "var(--charcoal)",
+                    border: "1.5px solid var(--charcoal)",
+                  }}
+                >
+                  {flavor.name}
+                </button>
+              )
+            })}
+          </div>
+        )}
+
+        <div className="px-5 pb-6 overflow-y-auto sm:px-6">
+          <div className="rounded-xl p-2.5 flex justify-center sm:p-4" style={{ backgroundColor: LIGHT_GRAY }}>
+            {/* Approved Supplement Facts panel — rendered directly from the label graphic */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={panelSrc || "/placeholder.svg"}
+              alt={`${formula.name} ${selectedFlavor?.name ?? ""} Supplement Facts panel`}
+              className="h-auto block rounded-md w-full"
+              style={{ backgroundColor: "var(--base)", maxWidth: 260 }}
+            />
           </div>
         </div>
       </DialogContent>

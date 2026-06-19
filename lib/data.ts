@@ -82,6 +82,26 @@ export type FormulaKey = keyof typeof formulas
 export type Formula = (typeof formulas)[FormulaKey]
 export type Flavor = Formula["flavors"][number]
 
+/**
+ * Approved Supplement Facts panels, keyed by flavor id.
+ * These are the real label graphics — render them directly. Do NOT
+ * hand-build or regenerate Supplement Facts tables anywhere in the app.
+ */
+export const supplementFactsByFlavor: Record<string, string> = {
+  "blueberry-acai": "/images/supplement-facts/blueberry-acai.png",
+  "blackberry-jasmine": "/images/supplement-facts/blackberry-jasmine.png",
+  "pomegranate-raspberry": "/images/supplement-facts/pomegranate-raspberry.png",
+  "red-dragon-fruit": "/images/supplement-facts/red-dragon-fruit.png",
+  "fuji-apple": "/images/supplement-facts/fuji-apple.png",
+  "orange-tangerine": "/images/supplement-facts/orange-tangerine.png",
+}
+
+/** Convenience: the default (first-flavor) panel image for each formula. */
+export function defaultPanelForFormula(key: FormulaKey): string {
+  const firstFlavorId = formulas[key].flavors[0].id
+  return supplementFactsByFlavor[firstFlavorId]
+}
+
 export const sharedProof = [
   { stat: "4.8/5", label: "Average customer rating" },
   { stat: "25,000+", label: "Customer reviews" },
