@@ -164,45 +164,34 @@ export function MockupBlueCta({
     <section
       style={{
         width: "100%",
-        backgroundColor: "transparent",
-        padding: "clamp(32px,5vw,72px) clamp(16px,4vw,64px)",
+        padding: "0 clamp(16px,4vw,64px) clamp(24px,4vw,64px)",
       }}
     >
       <div
         style={{
-          position: "relative",
           maxWidth: 1250,
           margin: "0 auto",
-          backgroundColor: "var(--avro-blue)",
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          borderRadius: 24,
-          overflow: "hidden",
-          aspectRatio: "1540 / 600",
           display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "center",
-          padding: "clamp(20px,4vw,56px)",
-          fontFamily: GC,
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 0,
         }}
       >
+        {/* Banner artwork fills the card width */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={bgImage}
+          alt="Calm = Power"
+          style={{ width: "100%", height: "auto", display: "block" }}
+        />
+
+        {/* Shop button sits directly below the banner */}
         <a
           href={shopHref}
-          className="hp-pill-primary"
+          className="banner-shop-btn"
           style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
             fontFamily: GC,
-            fontWeight: 700,
-            fontSize: 16,
-            letterSpacing: "-0.005em",
-            minHeight: 48,
-            padding: "0 28px",
-            textDecoration: "none",
-            color: "var(--charcoal)",
+            marginTop: 24,
           }}
         >
           {shopLabel}
