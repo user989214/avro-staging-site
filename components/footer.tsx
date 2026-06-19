@@ -169,10 +169,10 @@ export function Footer() {
           <div className="flex flex-col gap-4">
             <small
               style={{
-                fontWeight: 600,
-                fontSize: "clamp(15px,1.2vw,16px)",
-                lineHeight: 1.55,
-                color: c.text,
+                fontWeight: 400,
+                fontSize: "11px",
+                lineHeight: 1.5,
+                color: c.textFaint,
                 maxWidth: 760,
               }}
             >

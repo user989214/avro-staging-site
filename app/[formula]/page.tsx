@@ -215,7 +215,7 @@ export default async function ProductPage({
               marginTop: -16,
             }}
           >
-            * These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Benefit icons are for illustrative purposes only.
+            Benefit icons are for illustrative purposes only.
           </p>
 
           {/* Graph section - two columns */}

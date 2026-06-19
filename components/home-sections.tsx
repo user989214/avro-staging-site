@@ -6,7 +6,6 @@ import { formulas, type FormulaKey, testimonials } from "@/lib/data"
 import { Icon } from "@/components/icons"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { EmbeddedGraphic } from "@/components/embedded-graphic"
-import { ChartSource } from "@/components/compliance"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const BLUE = "#94C6D4"
@@ -843,10 +842,6 @@ function ApproachChart() {
   return (
     <>
       <EmbeddedGraphic src="/graphics/homepage.html" ratio="1200 / 720" title="The Calm-First approach" />
-      <ChartSource>
-        Illustrative — conceptual representation of stimulant push/crash vs. AVRO&apos;s calm-first
-        settle. Lorem ipsum dolor sit amet, not based on a single clinical trial.
-      </ChartSource>
     </>
   )
 }
@@ -1072,7 +1067,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ─────────────����───────��─────���──────��────────����───����──────────������─��
+// ── STORY STRIP ─────────────����───────��─────���──────��──────��─����───����──────────������─��
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
