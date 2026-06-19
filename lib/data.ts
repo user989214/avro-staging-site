@@ -201,7 +201,6 @@ export const cohortData = {
     visual: "social",
     primary: "Shop AVRO",
     secondary: "Find Your Formula",
-    logo: { src: "/brand/avro-zero-proof-logo.png", alt: "AVRO Zero Proof", width: 220 },
     momentTitle: "The social moment has a lot of noise.",
     momentCopy:
       "Social settings can bring pressure, alcohol defaults, stimulation, and the need to feel present without being pulled out of the moment. AVRO gives the ritual a calmer starting point.",
