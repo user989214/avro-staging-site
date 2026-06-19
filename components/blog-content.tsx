@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { CardedSection, SectionHeading, FinalCta } from "@/components/sections"
+import { CardedSection, SectionHeading } from "@/components/sections"
 import { PageHero } from "@/components/page-hero"
-import { FooterBanner } from "@/components/footer-banner"
+import { MockupBlueCta } from "@/components/mockup-sections"
 
 const categories = ["All", "Science", "Formula Guides", "Lifestyle", "Research"]
 
@@ -356,17 +356,8 @@ export function BlogContent() {
         )}
       </CardedSection>
 
-      {/* ── FOOTER BANNER + CTA ── matches science page exactly */}
-      <div style={{ backgroundColor: "var(--base-deep)" }}>
-        <FooterBanner
-          src="/images/banners/science-banner.png"
-          alt="AVRO — Calm is the advantage."
-        />
-        <FinalCta
-          title="Ready to find your formula?"
-          copy="Choose Calm, Focus, or Energy based on the moment you want to support."
-        />
-      </div>
+      {/* ── BANNER CTA ── matches site-wide rounded image box + Shop button */}
+      <MockupBlueCta bgImage="/images/banners/science-banner.png" shopHref="/shop" shopLabel="Shop" />
     </>
   )
 }
