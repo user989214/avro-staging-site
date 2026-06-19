@@ -206,33 +206,25 @@ export function HomeRefHero() {
     >
       <style>{`
         @keyframes hp-rise {
-          0% { opacity: 0; transform: translateY(28px); }
+          0%   { opacity: 0; transform: translateY(24px); }
           100% { opacity: 1; transform: translateY(0); }
         }
         @keyframes hp-fade {
           0% { opacity: 0; transform: translateY(12px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-        @keyframes hp-rise-color {
-          0%   { opacity: 0; transform: translateY(34px); color: var(--avro-blue); }
-          45%  { opacity: 1; transform: translateY(-6px); color: var(--avro-blue); }
-          70%  { opacity: 1; transform: translateY(0); color: var(--avro-blue); }
-          100% { opacity: 1; transform: translateY(0); color: var(--ink); }
-        }
-        .hp-line { display: block; }
+        /* Word-by-word rising headline — matches the cohort / PageHero animation
+           so the homepage hero shares the same motion language as every other page. */
         .hp-word {
           display: inline-block;
           opacity: 0;
-          transform: translateY(34px);
-          color: var(--avro-blue);
-          animation: hp-rise-color 1.5s cubic-bezier(0.34, 1.4, 0.4, 1) forwards;
-          will-change: transform, opacity, color;
+          transform: translateY(24px);
+          animation: hp-rise 0.95s cubic-bezier(0.34, 1.4, 0.4, 1) forwards;
+          will-change: transform, opacity;
         }
         .hp-fade-in { opacity: 0; animation: hp-fade 0.9s cubic-bezier(0.22,1,0.36,1) forwards; }
-        .hp-lede { animation-delay: 2.1s; }
-        .hp-cta-row { animation-delay: 2.5s; }
         @media (prefers-reduced-motion: reduce) {
-          .hp-word, .hp-fade-in { animation: none !important; opacity: 1 !important; transform: none !important; color: var(--ink) !important; }
+          .hp-word, .hp-fade-in { animation: none !important; opacity: 1 !important; transform: none !important; }
         }
         .hp-pill-primary, .hp-pill-secondary {
           flex: 1 1 180px;
@@ -402,7 +394,7 @@ export function HomeRefHero() {
         <div className="hp-hero-grid">
           {/* Left */}
           <div style={{ display: "flex", flexDirection: "column" }}>
-          {/* Hero headline — slides with fade */}
+          {/* Hero headline — word-by-word rise, re-animates on each slide change */}
           <h1
             key={currentSlide}
             style={{
@@ -414,11 +406,18 @@ export function HomeRefHero() {
               marginBottom: 24,
               maxWidth: 600,
               fontWeight: 700,
-              opacity: 1,
-              animation: "hp-fade 0.6s ease-out forwards",
             }}
           >
-            {slides[currentSlide].headline}
+            {slides[currentSlide].headline.split(" ").map((word, i, arr) => (
+              <span
+                key={i}
+                className="hp-word"
+                style={{ animationDelay: `${(0.1 + i * 0.09).toFixed(2)}s` }}
+              >
+                {word}
+                {i < arr.length - 1 ? "\u00A0" : ""}
+              </span>
+            ))}
           </h1>
 
           {/* Lede — slides with fade */}
