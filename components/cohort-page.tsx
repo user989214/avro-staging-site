@@ -118,6 +118,8 @@ interface CohortData {
   visual: string
   primary: string
   secondary: string
+  /** Optional cohort-specific logo rendered above the hero headline */
+  logo?: { src: string; alt: string; width?: number }
   momentTitle: string
   momentCopy: string
   whyTitle: string
@@ -394,6 +396,21 @@ export function CohortPage({ data }: { data: CohortData }) {
             className={`cohort-hero-content${isZeroProof ? " cohort-hero-zp" : ""}`}
             style={{ ["--hero-word-end" as string]: wordEnd }}
           >
+            {/* Cohort logo — Golf / Zero Proof brand mark above the headline */}
+            {data.logo && (
+              <div
+                className="cohort-fade"
+                style={{ marginBottom: 20, animationDelay: "0s" }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={data.logo.src}
+                  alt={data.logo.alt}
+                  width={data.logo.width ?? 180}
+                  style={{ height: "auto", display: "block" }}
+                />
+              </div>
+            )}
             {/* Eyebrow chip removed per design — title carries the moment via the per-cohort word animation. */}
             <h1
               className="font-serif"

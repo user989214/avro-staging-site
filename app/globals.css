@@ -259,10 +259,11 @@
     letter-spacing: -0.005em;
   }
 
-  /* Headlines: DM Sans sitewide per design system */
+  /* Headlines: DM Sans sitewide per design system, title case globally */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sans);
     color: var(--ink);
+    text-transform: capitalize;
     letter-spacing: -0.02em;
     line-height: 1.05;
     font-weight: 700;

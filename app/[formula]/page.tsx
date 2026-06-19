@@ -278,23 +278,12 @@ export default async function ProductPage({
                   }
                 `}</style>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                  <a
+                    <a
                     href="/science"
-                    className="pdp-learn-btn avro-size-lg"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 8,
-                      fontFamily: GC,
-                      fontWeight: 700,
-                      borderRadius: 999,
-                      backgroundColor: "var(--charcoal)",
-                      color: "var(--bone)",
-                      border: "2px solid var(--charcoal)",
-                      textDecoration: "none",
-                    }}
+                    className="btn-primary avro-size-lg"
+                    style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: GC, textDecoration: "none" }}
                   >
-                    Learn how it works
+                    Learn How It Works
                     <Icon name="arrowRight" className="w-4 h-4" />
                   </a>
                   <SupplementFactsDialog formula={item} formulaKey={key} />
@@ -378,21 +367,10 @@ export default async function ProductPage({
           `}</style>
           <a
             href={`/${key}`}
-            className="pdp-subscribe-btn avro-size-lg"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              fontFamily: GC,
-              fontWeight: 700,
-              borderRadius: 999,
-              backgroundColor: "var(--charcoal)",
-              color: "var(--bone)",
-              border: "2px solid var(--charcoal)",
-              textDecoration: "none",
-            }}
+            className="btn-primary avro-size-lg"
+            style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: GC, textDecoration: "none" }}
           >
-            Subscribe now
+            Subscribe Now
             <Icon name="arrowRight" className="w-4 h-4" />
           </a>
         </div>
