@@ -190,24 +190,19 @@ export function MockupBlueCta({
       >
         <a
           href={shopHref}
+          className="hp-pill-primary"
           style={{
-            display: "flex",
+            display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
-            width: "100%",
-            maxWidth: 520,
             fontFamily: GC,
             fontWeight: 700,
-            fontSize: 18,
+            fontSize: 16,
             letterSpacing: "-0.005em",
-            minHeight: 56,
+            minHeight: 48,
             padding: "0 28px",
-            borderRadius: 999,
-            border: "2px solid var(--charcoal)",
-            backgroundColor: "var(--charcoal)",
-            color: "var(--bone)",
             textDecoration: "none",
-            transition: "background-color 0.18s ease, color 0.18s ease",
+            color: "var(--charcoal)",
           }}
         >
           {shopLabel}
