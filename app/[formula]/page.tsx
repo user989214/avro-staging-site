@@ -356,15 +356,6 @@ export default async function ProductPage({
           >
             Subscribe & save 15% every order of 2 or more tubes. Pick your favorites, set your schedule. Leave the rest to us.
           </p>
-          <style>{`
-            .pdp-subscribe-btn {
-              transition: background-color 0.2s ease, color 0.2s ease;
-            }
-            .pdp-subscribe-btn:hover {
-              background-color: transparent;
-              color: var(--charcoal);
-            }
-          `}</style>
           <a
             href={`/${key}`}
             className="btn-primary avro-size-lg"
