@@ -8,10 +8,10 @@ const GC =
   "var(--font-dm-sans), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
 
 /**
- * Palette supplied for the mockup (used to colorize the calm-first chart icons).
- * green, magenta, lavender — one per card.
+ * Tube-derived palette for the calm-first chart icons — one per formula.
+ * Energy (gauge) → amber, Focus (eye) → magenta, Calm (lotus) → indigo.
  */
-const ICON_PALETTE = ["#A4C55A", "#C13B7C", "#C3B4D8"]
+const ICON_PALETTE = ["#E8A23D", "#C13584", "#4b4d9a"]
 
 /** Recolors a black-on-transparent PNG icon by using it as a CSS mask. */
 function ColorIcon({ src, color, size = 52 }: { src: string; color: string; size?: number }) {
