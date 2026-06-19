@@ -156,12 +156,12 @@ export function MockupBlueCta({
   bgImage = "/images/banners/calm-power.png",
   shopHref = "/shop",
   shopLabel = "Shop",
-  bgColor = "var(--base-deep)",
+  bgColor = "var(--base)",
 }: {
   bgImage?: string
   shopHref?: string
   shopLabel?: string
-  /** Section background — defaults to the grey base-deep; pass a dark token for dark-theme pages. */
+  /** Section background — defaults to white (base); pass a dark token for dark-theme pages. */
   bgColor?: string
 }) {
   return (
