@@ -10,6 +10,7 @@ import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommend
 import { PdpIngredients } from "@/components/pdp-ingredients"
 import { SupplementFactsDialog } from "@/components/supplement-facts-dialog"
 import { EmbeddedGraphic } from "@/components/embedded-graphic"
+import { Breadcrumbs } from "@/components/breadcrumbs"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const BLUE = "#94C6D4"
@@ -81,6 +82,15 @@ export default async function ProductPage({
 
   return (
     <>
+      {/* Minimalist breadcrumb trail */}
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Shop", href: "/shop" },
+          { label: item.name },
+        ]}
+      />
+
       {/* PDP Hero - full width on mobile, rounded on desktop */}
       <section
         className="pdp-hero-section"
