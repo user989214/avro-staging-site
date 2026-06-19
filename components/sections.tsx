@@ -476,34 +476,38 @@ export function FinalCta({
   // Light: charcoal text on blue/green card, charcoal buttons with bone text
   const textColor = dark ? "var(--deep-black)" : "var(--charcoal)"
   const mutedColor = dark ? "rgba(13,13,13,0.7)" : "rgba(21,21,21,0.7)"
-  const sectionBg = dark ? "var(--deep-black)" : "transparent"
   const btnBg = dark ? "var(--deep-black)" : "var(--charcoal)"
   const btnText = dark ? "var(--gold)" : "var(--bone)"
+  // Light variant is a full-width colored band (no rounded inset box).
+  // Dark (Zero Proof) keeps its gold card on a deep-black section.
+  const sectionBg = dark ? "var(--deep-black)" : bg
   return (
-    <section
-      style={{
-        backgroundColor: sectionBg,
-        width: "100%",
-        padding: "clamp(32px,5vw,72px) clamp(16px,4vw,64px)",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1250,
-          margin: "0 auto",
-          backgroundColor: bg,
-          color: textColor,
-          borderRadius: 24,
-          padding: "clamp(32px,5vw,88px) clamp(20px,4vw,80px)",
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 28,
-          fontFamily: GC_FINAL,
-        }}
-      >
+  <section
+  style={{
+  backgroundColor: sectionBg,
+  width: "100%",
+  padding: dark
+    ? "clamp(32px,5vw,72px) clamp(16px,4vw,64px)"
+    : "clamp(56px,8vw,104px) clamp(16px,4vw,64px)",
+  }}
+  >
+  <div
+  style={{
+  maxWidth: 1250,
+  margin: "0 auto",
+  backgroundColor: dark ? bg : "transparent",
+  color: textColor,
+  borderRadius: dark ? 24 : 0,
+  padding: dark ? "clamp(32px,5vw,88px) clamp(20px,4vw,80px)" : 0,
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  alignItems: "center",
+  justifyContent: "space-between",
+  gap: 28,
+  fontFamily: GC_FINAL,
+  }}
+  >
         {/* Left: eyebrow + heading + copy */}
         <div style={{ flex: "1 1 320px", minWidth: 0, maxWidth: 520 }}>
           {eyebrow && (
