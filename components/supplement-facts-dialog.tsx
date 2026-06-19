@@ -66,8 +66,8 @@ export function SupplementFactsDialog({
       <style>{`
         .sf-trigger:hover { background-color: ${isPrimary ? "transparent" : "var(--charcoal)"}; color: ${isPrimary ? "var(--charcoal)" : "var(--bone)"}; }
       `}</style>
-      <DialogContent className="max-w-[440px] p-0 bg-base">
-        <div className="p-6 pb-2">
+      <DialogContent className="max-w-[420px] p-0 bg-base flex flex-col max-h-[90vh]">
+        <div className="p-6 pb-2 shrink-0">
           <DialogHeader>
             <DialogTitle style={{ fontFamily: GC, fontWeight: 700, fontSize: 32, color: "var(--ink)" }}>
               Supplement facts
@@ -89,7 +89,7 @@ export function SupplementFactsDialog({
 
         {/* Flavor toggle — each flavor has its own approved panel */}
         {flavors.length > 1 && (
-          <div className="px-6 pb-3 flex flex-wrap gap-2">
+          <div className="px-6 pb-3 flex flex-wrap gap-2 shrink-0">
             {flavors.map((flavor) => {
               const active = flavor.id === selectedId
               return (
@@ -118,15 +118,15 @@ export function SupplementFactsDialog({
           </div>
         )}
 
-        <div className="px-6 pb-6">
-          <div className="rounded-xl p-4" style={{ backgroundColor: LIGHT_GRAY }}>
+        <div className="px-6 pb-6 overflow-y-auto">
+          <div className="rounded-xl p-4 flex justify-center" style={{ backgroundColor: LIGHT_GRAY }}>
             {/* Approved Supplement Facts panel — rendered directly from the label graphic */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={panelSrc || "/placeholder.svg"}
               alt={`${formula.name} ${selectedFlavor?.name ?? ""} Supplement Facts panel`}
-              className="w-full h-auto block rounded-md"
-              style={{ backgroundColor: "var(--base)" }}
+              className="h-auto block rounded-md w-full"
+              style={{ backgroundColor: "var(--base)", maxWidth: 320 }}
             />
           </div>
         </div>
