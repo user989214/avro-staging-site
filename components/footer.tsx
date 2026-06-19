@@ -21,7 +21,8 @@ const footerLinks = {
     { href: "/shop", label: "Bundle + Save" },
   ],
   learn: [
-    { href: "/about", label: "Our Story" },
+    { href: "/our-story", label: "Our Story" },
+    { href: "/our-story#team", label: "The Team" },
     { href: "/why-avro", label: "Why AVRO" },
     { href: "/science", label: "Science of AVRO" },
     { href: "/ingredients", label: "Ingredients" },

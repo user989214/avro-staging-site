@@ -2,9 +2,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { Section, SectionHeading, FinalCta } from "@/components/sections"
 import { PageHero } from "@/components/page-hero"
+import { ExpandableStory } from "@/components/expandable-story"
 
 export const metadata = {
-  title: "The Team | AVRO",
+  title: "Our Story | AVRO",
   description:
     "AVRO was founded by Keigo Sugawara and Peter van Stolk on one belief: performance starts with composure.",
 }
@@ -60,41 +61,9 @@ export default function AboutPage() {
         secondaryCta={{ href: "/science", label: "The Science" }}
       />
 
-      {/* Origin story */}
+      {/* Origin story — expandable with a quick preview */}
       <Section>
-        <div className="max-w-[780px] mx-auto flex flex-col gap-6">
-          <SectionHeading
-            title="A different starting point."
-          />
-          <p className="text-ink/80 text-[clamp(16px,1.7vw,18px)] leading-relaxed">
-            AVRO began with a simple observation. In many moments that matter
-            most, people do not need more energy. They need more control.
-          </p>
-          <p className="text-ink/80 text-[clamp(16px,1.7vw,18px)] leading-relaxed">
-            More energy is not the same as more control. So many energy products
-            are built around the opposite idea — more stimulation, more urgency,
-            more output. But when pressure rises, more is not always better.
-            Pressure can disrupt calm, blur clarity, and make control harder to
-            hold.
-          </p>
-          <p className="text-ink/80 text-[clamp(16px,1.7vw,18px)] leading-relaxed">
-            That tension became the starting point for AVRO. Founded by Keigo
-            Sugawara and Peter van Stolk, AVRO was created from a shared belief
-            that performance does not always come from pushing harder. Sometimes
-            it comes from feeling steadier, clearer, and more in control.
-          </p>
-          <p className="text-ink/80 text-[clamp(16px,1.7vw,18px)] leading-relaxed">
-            Every formula begins with a calm-first foundation of PharmaGABA®.
-            From there, Calm, Focus, and Energy are each designed for a distinct
-            role.* All three formulas also include a prebiotic fiber blend of
-            Soluble Guar Fiber and Acacia Fiber, reflecting the belief that
-            balance and function are connected.*
-          </p>
-          <p className="text-ink/75 text-[clamp(15px,1.5vw,17px)] italic leading-relaxed border-l-2 border-olive pl-5">
-            &ldquo;Calm is not the opposite of performance. It is often what
-            makes it possible.&rdquo;
-          </p>
-        </div>
+        <ExpandableStory />
       </Section>
 
       {/* Founders */}
@@ -119,7 +88,7 @@ export default function AboutPage() {
                     <h3 className="font-serif font-black text-[clamp(18px,2vw,24px)] leading-tight text-white">
                       {f.name}
                     </h3>
-                    <span className="text-white/50 text-[10px] md:text-[11px] font-bold tracking-[0.1em] uppercase">
+                    <span className="text-white/50 text-[12px] md:text-[13px] font-bold tracking-[0.04em]">
                       {f.role}
                     </span>
                   </div>
@@ -155,7 +124,7 @@ export default function AboutPage() {
       </section>
 
       {/* Full team portraits */}
-      <Section className="bg-cream/40">
+      <Section id="team" className="bg-cream/40">
         <SectionHeading
           title="The people behind AVRO."
         />
@@ -173,7 +142,7 @@ export default function AboutPage() {
               </div>
               <div>
                 <p className="font-black text-[13px] md:text-sm leading-tight">{member.name}</p>
-                <p className="text-ink/55 text-[10px] md:text-xs mt-0.5 font-medium tracking-wide uppercase">{member.role}</p>
+                <p className="text-ink/55 text-[11px] md:text-[13px] mt-0.5 font-medium tracking-wide">{member.role}</p>
               </div>
             </div>
           ))}
