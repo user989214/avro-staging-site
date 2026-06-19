@@ -9,14 +9,13 @@ import {
   ProductCards,
   FormulaLogic,
   FaqBlock,
-  FinalCta,
   InfoCard,
 } from "@/components/sections"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { CohortChart } from "@/components/cohort-chart"
 import { EmbeddedGraphic } from "@/components/embedded-graphic"
 import { GolfHeroRotator } from "@/components/golf-hero-rotator"
-import { FooterBanner } from "@/components/footer-banner"
+import { MockupBlueCta } from "@/components/mockup-sections"
 import { ChartSource } from "@/components/compliance"
 
 // "CALM = POWER." footer banner per cohort (color-matched product shot).
@@ -183,14 +182,6 @@ export function CohortPage({ data }: { data: CohortData }) {
         stepNumFg: "var(--bone)",
         stepIconColor: "var(--avro-blue)",
       }
-
-  // Golf gets a colored CTA closer (charcoal text on green); ZP gets a gold card on dark bg.
-  const finalCtaBg =
-    data.visual === "golf"
-      ? accent
-      : isZeroProof
-        ? "var(--gold)"
-        : undefined
 
   // Cohort-specific lifestyle hero photo
   const cohortHero: Record<string, { src: string; alt: string }> = {
@@ -632,19 +623,12 @@ export function CohortPage({ data }: { data: CohortData }) {
         <FaqBlock title={data.faqTitle} faqs={data.faqs} dark={isZeroProof} />
       </div>
       {cohortFooterBanner[data.visual] && (
-        <FooterBanner
-          src={cohortFooterBanner[data.visual].src}
-          alt={cohortFooterBanner[data.visual].alt}
+        <MockupBlueCta
+          bgImage={cohortFooterBanner[data.visual].src}
+          shopHref="/shop"
+          shopLabel="Shop"
         />
       )}
-
-      <FinalCta
-        title={data.finalTitle}
-        copy={data.finalCopy}
-        productButtons
-        bg={finalCtaBg}
-        dark={isZeroProof}
-      />
     </div>
   )
 }

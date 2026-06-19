@@ -4,7 +4,7 @@ import { ProductHero } from "@/components/product-hero"
 import { ReviewsBlock } from "@/components/reviews-block"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { Icon } from "@/components/icons"
-import { FinalCta } from "@/components/sections"
+import { MockupBlueCta } from "@/components/mockup-sections"
 import { ProductComparisonGrid } from "@/components/product-comparison-grid"
 import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommendations"
 import { PdpIngredients } from "@/components/pdp-ingredients"
@@ -488,52 +488,10 @@ export default async function ProductPage({
         <ReviewsBlock formula={item} formulaKey={key} />
       </div>
 
-      {/* "CALM = POWER." footer banner — color-matched to the formula */}
+      {/* Banner CTA — color-matched artwork confined to a rounded box with a single Shop button */}
       {footerBanner[key] && (
-        <section
-          aria-label={`${item.name} — Calm equals power`}
-          style={{ backgroundColor: "#ffffff", padding: "clamp(24px, 5vw, 64px) 16px" }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={footerBanner[key] || "/placeholder.svg"}
-            alt={`AVRO ${item.name} — Calm equals power.`}
-            style={{
-              display: "block",
-              width: "100%",
-              maxWidth: 1100,
-              height: "auto",
-              margin: "0 auto",
-              WebkitMaskImage:
-                "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
-              maskImage:
-                "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
-            }}
-          />
-          <p
-            style={{
-              fontFamily: GC,
-              fontWeight: 400,
-              fontSize: "clamp(11px,0.9vw,13px)",
-              lineHeight: 1.5,
-              color: "rgba(0,0,0,0.38)",
-              textAlign: "center",
-              marginTop: 12,
-              maxWidth: 600,
-              margin: "12px auto 0",
-            }}
-          >
-            Example serving shown. AVRO {item.name} is available in multiple flavors — flavor shown is for illustration only.
-          </p>
-        </section>
+        <MockupBlueCta bgImage={footerBanner[key]} shopHref="/shop" shopLabel="Shop" />
       )}
-
-      {/* Final CTA */}
-      <FinalCta
-        title="Good energy starts here."
-        copy="Get easy lifestyle tips, wellness inspo, plus early access to AVRO launches and offers."
-        productButtons
-      />
     </>
   )
 }
