@@ -8,10 +8,10 @@ const GC =
   "var(--font-dm-sans), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
 
 /**
- * Palette supplied for the mockup (used to colorize the calm-first chart icons).
- * green, magenta, lavender — one per card.
+ * Tube-derived palette for the calm-first chart icons — one per formula.
+ * Energy (gauge) → amber, Focus (eye) → magenta, Calm (lotus) → indigo.
  */
-const ICON_PALETTE = ["#A4C55A", "#C13B7C", "#C3B4D8"]
+const ICON_PALETTE = ["#E8A23D", "#C13584", "#4b4d9a"]
 
 /** Recolors a black-on-transparent PNG icon by using it as a CSS mask. */
 function ColorIcon({ src, color, size = 52 }: { src: string; color: string; size?: number }) {
@@ -156,16 +156,17 @@ export function MockupBlueCta({
   bgImage = "/images/banners/calm-power.png",
   shopHref = "/shop",
   shopLabel = "Shop",
-  bgColor = "var(--base-deep)",
+  bgColor = "var(--base)",
 }: {
   bgImage?: string
   shopHref?: string
   shopLabel?: string
-  /** Section background — defaults to the grey base-deep; pass a dark token for dark-theme pages. */
+  /** Section background — defaults to white (base); pass a dark token for dark-theme pages. */
   bgColor?: string
 }) {
   return (
     <section
+      className="banner-cta-section"
       style={{
         width: "100%",
         backgroundColor: bgColor,
@@ -185,18 +186,23 @@ export function MockupBlueCta({
         .banner-cta-img { width: 100%; height: auto; display: block; }
         .banner-cta-btn {
           position: absolute;
-          right: clamp(16px, 3%, 40px);
+          left: clamp(16px, 3%, 40px);
           bottom: clamp(16px, 3%, 40px);
           min-width: 220px;
           text-decoration: none;
         }
         @media (max-width: 640px) {
-          .banner-cta-box { display: flex; flex-direction: column; padding-bottom: 20px; }
+          /* Let the wide art use the full width so it's taller / more present (no cropping) */
+          .banner-cta-section { padding: 20px 8px !important; }
+          .banner-cta-box { display: flex; flex-direction: column; padding-bottom: 24px; border-radius: 18px; }
           .banner-cta-btn {
             position: static;
             width: calc(100% - 32px);
             min-width: 0;
-            margin: 16px auto 0;
+            margin: 20px auto 0;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            font-size: 16px;
           }
         }
       `}</style>

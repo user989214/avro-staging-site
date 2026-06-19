@@ -281,8 +281,22 @@ export function CohortPage({ data }: { data: CohortData }) {
             text-align: left;
             align-items: flex-start;
           }
+          /* Soft readability scrim behind overlaid ink content (desktop only) */
+          .cohort-hero-scrim {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(
+              100deg,
+              rgba(255,255,255,0.78) 0%,
+              rgba(255,255,255,0.62) 32%,
+              rgba(255,255,255,0.28) 58%,
+              rgba(255,255,255,0) 78%
+            );
+          }
           /* ── Mobile: stacked — rounded image on top, text below ── */
           @media (max-width: 768px) {
+            .cohort-hero-scrim { display: none !important; }
             .cohort-hero-16x9 {
               aspect-ratio: unset !important;
               overflow: visible !important;
@@ -381,6 +395,9 @@ export function CohortPage({ data }: { data: CohortData }) {
               />
             )}
           </div>
+
+          {/* Soft readability scrim behind overlaid ink content (desktop only) */}
+          <div className="cohort-hero-scrim" aria-hidden="true" />
 
           {/* Content — overlaid on desktop, below image on mobile */}
           <div

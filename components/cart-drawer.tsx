@@ -119,7 +119,7 @@ export function CartDrawer() {
                   >
                     <div
                       className="w-[88px] h-[88px] rounded-[18px] flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: item.formula.color }}
+                      style={{ backgroundColor: item.formula.iconColor ?? item.formula.color }}
                     >
                       <Image
                         src="/brand/avro-logo.svg"

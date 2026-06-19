@@ -433,12 +433,12 @@ export function Header() {
               isGolf
                 ? "/brand/avro-golf-logo.png"
                 : isZeroProof
-                  ? "/avro-golden-social-logo.svg"
+                  ? "/brand/avro-zero-proof-logo.png"
                   : "/brand/avro-logo.svg"
             }
-            alt={isGolf ? "AVRO Golf" : isZeroProof ? "AVRO — social" : "AVRO"}
+            alt={isGolf ? "AVRO Golf" : isZeroProof ? "AVRO Zero Proof" : "AVRO"}
             width={isGolf ? 460 : isZeroProof ? 632 : 178}
-            height={isGolf ? 138 : isZeroProof ? 204 : 58}
+            height={isGolf ? 138 : isZeroProof ? 182 : 58}
             className="w-full h-auto"
             priority
           />

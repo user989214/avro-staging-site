@@ -10,6 +10,8 @@ export const formulas = {
     ],
     color: "#4b4d9a",
     accent: "#7a79c8",
+    // Tube-derived color used only for the formula icon/marker (not cards/charts/CTAs).
+    iconColor: "#4b4d9a",
     price: 24.95,
     priceLabel: "$24.95",
     bundlePrice: 24.95,
@@ -37,6 +39,8 @@ export const formulas = {
     // grayscale instead of tinting cards, charts, badges, and CTAs pink.
     color: "#1E1D18",
     accent: "#3A3A38",
+    // Tube-derived color used only for the formula icon/marker (not cards/charts/CTAs).
+    iconColor: "#C13584",
     price: 24.95,
     priceLabel: "$24.95",
     bundlePrice: 24.95,
@@ -63,6 +67,8 @@ export const formulas = {
     // neutralized to ink/charcoal so it stops painting the site yellow.
     color: "#1E1D18",
     accent: "#3A3A38",
+    // Tube-derived color used only for the formula icon/marker (not cards/charts/CTAs).
+    iconColor: "#E8A23D",
     price: 24.95,
     priceLabel: "$24.95",
     bundlePrice: 24.95,
@@ -137,7 +143,6 @@ export const cohortData = {
     visual: "golf",
     primary: "Choose Your Formula",
     secondary: "Shop AVRO",
-    logo: { src: "/brand/avro-golf-logo.png", alt: "AVRO Golf", width: 200 },
     momentTitle: "Golf is a game of state.",
     momentCopy:
       "The first tee, a tight approach shot, a tournament round, or a long day on the course can create internal noise. More stimulation is not always the answer. A calmer starting state can help create the conditions for clarity and composure.",
@@ -202,7 +207,6 @@ export const cohortData = {
     visual: "social",
     primary: "Shop AVRO",
     secondary: "Find Your Formula",
-    // logo: { src: "/brand/avro-zero-logo.png", alt: "AVRO Zero", width: 200 }, // add asset to public/brand/ to enable
     momentTitle: "The social moment has a lot of noise.",
     momentCopy:
       "Social settings can bring pressure, alcohol defaults, stimulation, and the need to feel present without being pulled out of the moment. AVRO gives the ritual a calmer starting point.",

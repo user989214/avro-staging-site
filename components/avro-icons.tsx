@@ -144,12 +144,45 @@ export type AvroIconName = keyof typeof avroIconMap
 export type GoldenIconName = keyof typeof goldenIconMap
 export type AnyAvroIconName = AvroIconName | GoldenIconName
 
+/**
+ * Formula-state icon colors — tied to the product tubes.
+ * Only icons that REPRESENT a calm / focus / energy state are tinted; all other
+ * icons (quality, dietary, steps, science, cohort, zero-proof) keep their
+ * original appearance. The /social page uses the golden variant, which opts
+ * out of tinting automatically.
+ *   Calm   → indigo  #4b4d9a
+ *   Focus  → magenta #C13584
+ *   Energy → amber   #E8A23D
+ */
+export const formulaIconColors: Partial<Record<AvroIconName, string>> = {
+  // Calm
+  "calm-first-foundation": "#4b4d9a",
+  "relaxation-reduced-tension": "#4b4d9a",
+  "recovery-sleep-support": "#4b4d9a",
+  "social-composure": "#4b4d9a",
+  // Focus
+  "supports-focus-without-overload": "#C13584",
+  "supports-steady-attention": "#C13584",
+  "supports-clear-thinking": "#C13584",
+  "mental-clarity": "#C13584",
+  "mind": "#C13584",
+  // Energy
+  "control-under-pressure": "#E8A23D",
+}
+
 interface AvroIconProps {
   name: AnyAvroIconName
   className?: string
   golden?: boolean
   size?: number
   style?: React.CSSProperties
+  /**
+   * Icon color control:
+   * - a CSS color string (e.g. "#fff" or "var(--bone)") forces that color via a mask
+   * - `false` disables tinting (renders the raw PNG)
+   * - omitted (default) auto-tints formula-state icons with their tube color
+   */
+  tint?: string | false
 }
 
 /**
@@ -159,8 +192,9 @@ interface AvroIconProps {
  * @param className - Additional CSS classes
  * @param golden - Use golden variant (for /social page dark backgrounds)
  * @param size - Icon size in pixels (default 40)
+ * @param tint - Override/disable color tinting (see AvroIconProps)
  */
-export function AvroIcon({ name, className, golden = false, size = 40, style }: AvroIconProps) {
+export function AvroIcon({ name, className, golden = false, size = 40, style, tint }: AvroIconProps) {
   // Get the source path - try golden first if requested, then fall back to standard
   const goldenSrc = goldenIconMap[name as keyof typeof goldenIconMap]
   const standardSrc = avroIconMap[name as keyof typeof avroIconMap]
@@ -169,6 +203,39 @@ export function AvroIcon({ name, className, golden = false, size = 40, style }: 
   
   if (!src) {
     return null
+  }
+
+  // Resolve the effective tint color.
+  // Explicit string wins; explicit false disables; otherwise auto-tint
+  // formula-state icons (but never the golden /social variant).
+  const autoColor = formulaIconColors[name as AvroIconName]
+  const tintColor =
+    tint === false ? undefined : typeof tint === "string" ? tint : !golden ? autoColor : undefined
+
+  // Tinted icons render as a CSS-mask span so the PNG's alpha drives the shape
+  // while the color comes from the formula/tube palette.
+  if (tintColor) {
+    return (
+      <span
+        aria-hidden="true"
+        className={cn("inline-block", className)}
+        style={{
+          width: size,
+          height: size,
+          flexShrink: 0,
+          backgroundColor: tintColor,
+          WebkitMaskImage: `url(${src})`,
+          maskImage: `url(${src})`,
+          WebkitMaskRepeat: "no-repeat",
+          maskRepeat: "no-repeat",
+          WebkitMaskPosition: "center",
+          maskPosition: "center",
+          WebkitMaskSize: "contain",
+          maskSize: "contain",
+          ...style,
+        }}
+      />
+    )
   }
   
   // Use regular img for golden icons to avoid Next.js Image optimization issues
