@@ -201,6 +201,7 @@ export function Header() {
           {Array.from({ length: 4 }).map((_, copyIdx) => (
             <div key={copyIdx} aria-hidden={copyIdx > 0} style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
               {[
+                "Calm First Performance",
                 "Subscribe & save 15% every order of 2 or more tubes",
                 "Free shipping on orders of 2 or more tubes",
                 "Naturally fermented PharmaGABA",

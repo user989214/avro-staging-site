@@ -149,6 +149,7 @@ interface AvroIconProps {
   className?: string
   golden?: boolean
   size?: number
+  style?: React.CSSProperties
 }
 
 /**
@@ -159,7 +160,7 @@ interface AvroIconProps {
  * @param golden - Use golden variant (for /social page dark backgrounds)
  * @param size - Icon size in pixels (default 40)
  */
-export function AvroIcon({ name, className, golden = false, size = 40 }: AvroIconProps) {
+export function AvroIcon({ name, className, golden = false, size = 40, style }: AvroIconProps) {
   // Get the source path - try golden first if requested, then fall back to standard
   const goldenSrc = goldenIconMap[name as keyof typeof goldenIconMap]
   const standardSrc = avroIconMap[name as keyof typeof avroIconMap]
@@ -179,6 +180,7 @@ export function AvroIcon({ name, className, golden = false, size = 40 }: AvroIco
         width={size}
         height={size}
         className={cn("object-contain", className)}
+        style={style}
         aria-hidden="true"
       />
     )
@@ -191,6 +193,7 @@ export function AvroIcon({ name, className, golden = false, size = 40 }: AvroIco
       width={size}
       height={size}
       className={cn("object-contain", className)}
+      style={style}
       aria-hidden="true"
     />
   )

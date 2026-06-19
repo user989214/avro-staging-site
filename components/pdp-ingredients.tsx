@@ -40,8 +40,8 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
     ...sharedFront,
     {
       name: "Magnesium Bisglycinate",
-      amount: "100 mg",
-      description: "100 mg elemental magnesium (24% DV).* Supports muscle and nervous system function.",
+      amount: "850 mg",
+      description: "Yields 100 mg of active magnesium (24% DV).* Supports muscle and nervous system function.",
       image: "/images/ingredients/magnesium-bisglycinate-2.jpg",
     },
     ...sharedBack,
@@ -51,7 +51,7 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
     {
       name: "Cognigrape®",
       amount: "250 mg",
-      description: "Grape fruit extract (Vitis vinifera) studied to support cognitive function and clarity.*",
+      description: "Clinically shown to support cognitive function and clarity.*",
       image: "/images/ingredients/cognigrape-2.jpg",
     },
     ...sharedBack,
@@ -61,7 +61,7 @@ const formulaIngredients: Record<FormulaKey, Ingredient[]> = {
     {
       name: "Natural Caffeine",
       amount: "120 mg",
-      description: "From Coffea arabica and Coffea canephora bean extract for clean, sustained energy.*",
+      description: "Clinically shown to support cognitive function and clarity.*",
       image: "/images/ingredients/natural-caffeine-2.jpg",
     },
     ...sharedBack,
@@ -73,7 +73,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
 
   return (
     <section className="w-full bg-base py-[clamp(32px,6vw,80px)]" style={{ fontFamily: GC }}>
-      <div className="w-full max-w-[1280px] mx-auto px-[clamp(16px,5vw,64px)]">
+      <div className="w-full max-w-[1440px] mx-auto px-[clamp(16px,5vw,64px)]">
         {/* Header - left aligned, like reference */}
         <div className="mb-6 lg:mb-10">
           <span
@@ -92,10 +92,10 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
             className="font-serif"
             style={{
               fontWeight: 900,
-              fontSize: "clamp(22px,3.6vw,44px)",
+              fontSize: "clamp(24px,4.5vw,56px)",
               lineHeight: 1.0,
               color: "var(--ink)",
-              maxWidth: 720,
+              textWrap: "balance",
             }}
           >
             Clear ingredient logic. Nothing hidden.
@@ -103,7 +103,7 @@ export function PdpIngredients({ formulaKey }: { formulaKey: FormulaKey }) {
         </div>
 
         {/* Ingredients row — small framed image, name, amount label, short description */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-5">
           {ingredients.map((ingredient) => (
             <div
               key={ingredient.name}

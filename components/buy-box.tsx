@@ -255,27 +255,11 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange, onAddToC
       <button
         type="button"
         onClick={handleAdd}
-        className="bb-add-btn avro-size-lg w-full flex items-center justify-center transition-colors"
-        style={{
-          fontFamily: GC,
-          fontWeight: 800,
-          borderRadius: 999,
-          backgroundColor: "var(--charcoal)",
-          color: "var(--bone)",
-          border: "2px solid var(--charcoal)",
-          letterSpacing: "0.01em",
-        }}
+        className="btn-primary avro-size-lg w-full"
+        style={{ fontFamily: GC }}
       >
-        Add to cart
+        Add to Cart
       </button>
-      <style>{`
-        .bb-add-btn { cursor: pointer; }
-        .bb-add-btn:hover {
-          background-color: transparent !important;
-          color: var(--charcoal) !important;
-        }
-        .bb-add-btn:active { transform: scale(0.99); }
-      `}</style>
     </aside>
   )
 }

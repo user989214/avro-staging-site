@@ -4,7 +4,7 @@ import { ProductHero } from "@/components/product-hero"
 import { ReviewsBlock } from "@/components/reviews-block"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { Icon } from "@/components/icons"
-import { FinalCta } from "@/components/sections"
+import { MockupBlueCta } from "@/components/mockup-sections"
 import { ProductComparisonGrid } from "@/components/product-comparison-grid"
 import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommendations"
 import { PdpIngredients } from "@/components/pdp-ingredients"
@@ -278,23 +278,12 @@ export default async function ProductPage({
                   }
                 `}</style>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                  <a
+                    <a
                     href="/science"
-                    className="pdp-learn-btn avro-size-lg"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 8,
-                      fontFamily: GC,
-                      fontWeight: 700,
-                      borderRadius: 999,
-                      backgroundColor: "var(--charcoal)",
-                      color: "var(--bone)",
-                      border: "2px solid var(--charcoal)",
-                      textDecoration: "none",
-                    }}
+                    className="btn-primary avro-size-lg"
+                    style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: GC, textDecoration: "none" }}
                   >
-                    Learn how it works
+                    Learn How It Works
                     <Icon name="arrowRight" className="w-4 h-4" />
                   </a>
                   <SupplementFactsDialog formula={item} formulaKey={key} />
@@ -307,116 +296,29 @@ export default async function ProductPage({
               ) : key === "focus" ? (
                 <EmbeddedGraphic src="/graphics/focus.html" ratio="1400 / 620" title="Focus: improved cognitive functions by GABA" />
               ) : (
-                <div style={{ padding: "clamp(14px,2vw,24px)", backgroundColor: "var(--charcoal)", borderRadius: 20 }}>
-                  {/* Graph */}
-                  <div style={{ position: "relative", height: "clamp(140px,18vw,200px)" }}>
-                    {/* Grid lines */}
-                    <div style={{ position: "absolute", inset: "0 0 28px 0", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                      {[0, 1, 2, 3, 4].map((i) => (
-                        <div key={i} style={{ width: "100%", borderTop: "1px solid rgba(245,241,234,0.1)" }} />
-                      ))}
-                    </div>
-
-                    {/* SVG curves */}
-                    <svg
-                      viewBox="0 0 400 200"
-                      style={{ position: "absolute", inset: "0 0 28px 0", width: "100%", height: "calc(100% - 28px)" }}
-                      preserveAspectRatio="none"
-                    >
-                      <path
-                        className="pdp-graph-coffee"
-                        d="M 0 180 Q 40 180 70 30 Q 90 10 110 50 Q 150 130 200 160 Q 280 180 400 185"
-                        fill="none"
-                        stroke="rgba(245,241,234,0.4)"
-                        strokeWidth="3"
-                      />
-                      <path
-                        className="pdp-graph-avro"
-                        d="M 0 180 Q 60 160 100 90 Q 140 60 200 65 Q 300 70 400 85"
-                        fill="none"
-                        stroke={BLUE}
-                        strokeWidth="4"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-
-                    {/* Time labels */}
-                    <div
-                      style={{
-                        position: "absolute",
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        display: "flex",
-                        justifyContent: "space-between",
-                        fontFamily: GC,
-                        fontWeight: 700,
-                        fontSize: "clamp(9px,1vw,12px)",
-                        color: "rgba(245,241,234,0.5)",
-                      }}
-                    >
-                      <span>0 min</span>
-                      <span>30 min</span>
-                      <span>1 hr</span>
-                      <span>2 hr</span>
-                      <span>3 hr</span>
-                    </div>
-                  </div>
-
-                  {/* Legend */}
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "clamp(12px,2vw,24px)",
-                      marginTop: 12,
-                      paddingTop: 12,
-                      borderTop: "1px solid rgba(245,241,234,0.15)",
-                    }}
-                  >
-                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                      <div style={{ width: 20, height: 3, borderRadius: 999, backgroundColor: BLUE }} />
-                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(10px,0.9vw,12px)", color: "var(--bone)" }}>
-                        AVRO {item.short}
-                      </span>
-                    </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                      <div
-                        style={{
-                          width: 20,
-                          height: 3,
-                          borderRadius: 999,
-                          backgroundImage: "repeating-linear-gradient(90deg, rgba(245,241,234,0.4), rgba(245,241,234,0.4) 4px, transparent 4px, transparent 8px)",
-                        }}
-                      />
-                      <span style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(10px,0.9vw,12px)", color: "rgba(245,241,234,0.5)" }}>
-                        Coffee
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <EmbeddedGraphic src="/graphics/energy.html" ratio="1200 / 720" title="Energy: the calm-first energy curve" />
               )}
 
-              {/* Data source attribution */}
-              <p
-                style={{
-                  fontFamily: GC,
-                  fontWeight: 400,
-                  fontSize: "clamp(11px,0.9vw,13px)",
-                  lineHeight: 1.5,
-                  color: "rgba(0,0,0,0.38)",
-                  marginTop: 10,
-                  gridColumn: "1 / -1",
-                }}
-              >
-                {key === "calm"
-                  ? "For illustrative purposes only. Individual results may vary. This curve is a conceptual representation and is not based on a single clinical trial. * These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
-                  : key === "focus"
-                    ? "For illustrative purposes only. Individual results may vary. This curve is a conceptual representation and is not based on a single clinical trial. * These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
-                    : "For illustrative purposes only. Individual results may vary. This curve is a conceptual representation and is not based on a single clinical trial. * These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."}
-              </p>
+              {/* Data source attribution — study charts only (Calm & Focus). The Energy
+                  philosophy graphic carries its own disclaimer, so no page-width * line. */}
+              {key !== "energy" && (
+                <p
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 400,
+                    fontSize: "clamp(11px,0.9vw,13px)",
+                    lineHeight: 1.5,
+                    color: "rgba(0,0,0,0.38)",
+                    marginTop: 10,
+                    gridColumn: "1 / -1",
+                  }}
+                >
+                  For illustrative purposes only. Individual results may vary. This curve is a conceptual
+                  representation and is not based on a single clinical trial. * These statements have not
+                  been evaluated by the Food and Drug Administration. This product is not intended to
+                  diagnose, treat, cure, or prevent any disease.
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -454,32 +356,12 @@ export default async function ProductPage({
           >
             Subscribe & save 15% every order of 2 or more tubes. Pick your favorites, set your schedule. Leave the rest to us.
           </p>
-          <style>{`
-            .pdp-subscribe-btn {
-              transition: background-color 0.2s ease, color 0.2s ease;
-            }
-            .pdp-subscribe-btn:hover {
-              background-color: transparent;
-              color: var(--charcoal);
-            }
-          `}</style>
           <a
             href={`/${key}`}
-            className="pdp-subscribe-btn avro-size-lg"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              fontFamily: GC,
-              fontWeight: 700,
-              borderRadius: 999,
-              backgroundColor: "var(--charcoal)",
-              color: "var(--bone)",
-              border: "2px solid var(--charcoal)",
-              textDecoration: "none",
-            }}
+            className="btn-primary avro-size-lg"
+            style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: GC, textDecoration: "none" }}
           >
-            Subscribe now
+            Subscribe Now
             <Icon name="arrowRight" className="w-4 h-4" />
           </a>
         </div>
@@ -606,52 +488,10 @@ export default async function ProductPage({
         <ReviewsBlock formula={item} formulaKey={key} />
       </div>
 
-      {/* "CALM = POWER." footer banner — color-matched to the formula */}
+      {/* Banner CTA — color-matched artwork confined to a rounded box with a single Shop button */}
       {footerBanner[key] && (
-        <section
-          aria-label={`${item.name} — Calm equals power`}
-          style={{ backgroundColor: "#ffffff", padding: "clamp(24px, 5vw, 64px) 16px" }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={footerBanner[key] || "/placeholder.svg"}
-            alt={`AVRO ${item.name} — Calm equals power.`}
-            style={{
-              display: "block",
-              width: "100%",
-              maxWidth: 1100,
-              height: "auto",
-              margin: "0 auto",
-              WebkitMaskImage:
-                "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
-              maskImage:
-                "linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)",
-            }}
-          />
-          <p
-            style={{
-              fontFamily: GC,
-              fontWeight: 400,
-              fontSize: "clamp(11px,0.9vw,13px)",
-              lineHeight: 1.5,
-              color: "rgba(0,0,0,0.38)",
-              textAlign: "center",
-              marginTop: 12,
-              maxWidth: 600,
-              margin: "12px auto 0",
-            }}
-          >
-            Example serving shown. AVRO {item.name} is available in multiple flavors — flavor shown is for illustration only.
-          </p>
-        </section>
+        <MockupBlueCta bgImage={footerBanner[key]} shopHref="/shop" shopLabel="Shop" />
       )}
-
-      {/* Final CTA */}
-      <FinalCta
-        title="Good energy starts here."
-        copy="Get easy lifestyle tips, wellness inspo, plus early access to AVRO launches and offers."
-        productButtons
-      />
     </>
   )
 }

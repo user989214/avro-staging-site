@@ -362,16 +362,8 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
 
                   <Link
                     href={`/${formulaKey}`}
-                    className="ymal-btn avro-size-sm flex items-center justify-center w-full transition-colors"
-                    style={{
-                      fontFamily: GC,
-                      fontWeight: 800,
-                      borderRadius: 999,
-                      backgroundColor: "var(--charcoal)",
-                      color: "var(--bone)",
-                      border: "2px solid var(--charcoal)",
-                      letterSpacing: "0.01em",
-                    }}
+                    className="btn-primary avro-size-sm w-full"
+                    style={{ fontFamily: GC, textDecoration: "none" }}
                   >
                     Shop {formula.short}
                   </Link>
@@ -380,12 +372,6 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
             )
           })}
         </div>
-        <style>{`
-          .ymal-btn:hover {
-            background-color: transparent !important;
-            color: var(--charcoal) !important;
-          }
-        `}</style>
       </div>
     </div>
   )

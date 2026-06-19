@@ -19,10 +19,15 @@ export function EmbeddedGraphic({
   /** Optional max width (px) to keep the graphic from over-scaling. */
   maxWidth?: number
 }) {
+  // Bump this when the graphic HTML changes so browsers/iframes refetch the
+  // updated file instead of serving a stale cached copy.
+  const GRAPHIC_VERSION = "4"
+  const versionedSrc = src.includes("?") ? `${src}&v=${GRAPHIC_VERSION}` : `${src}?v=${GRAPHIC_VERSION}`
+
   return (
     <div style={{ width: "100%", maxWidth, margin: maxWidth ? "0 auto" : undefined }}>
       <iframe
-        src={src}
+        src={versionedSrc}
         title={title}
         loading="lazy"
         scrolling="no"

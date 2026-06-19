@@ -4,11 +4,10 @@ import {
   SocialProof,
   ProductCards,
   FormulaLogic,
-  FinalCta,
   InfoCard,
 } from "@/components/sections"
 import { PageHero } from "@/components/page-hero"
-import { FooterBanner } from "@/components/footer-banner"
+import { MockupBlueCta } from "@/components/mockup-sections"
 
 export const metadata = {
   title: "Why AVRO | AVRO",
@@ -51,19 +50,7 @@ export default function WhyPage() {
       <ProductCards title="Choose the state that fits your moment." shopLabel="Shop" />
       <FormulaLogic />
       <SocialProof mode="compact" />
-      <FooterBanner
-        src="/images/banners/why-avro-banner.png"
-        alt="AVRO Energy Fuji Apple — Calm performs best."
-      />
-      <FinalCta
-        title={
-          <>
-            Less noise.<br />
-            More control.
-          </>
-        }
-        copy="Choose the formula that supports the state before the moment."
-      />
+      <MockupBlueCta bgImage="/images/banners/why-avro-banner.png" shopHref="/shop" shopLabel="Shop" />
     </>
   )
 }

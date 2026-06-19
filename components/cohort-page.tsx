@@ -9,14 +9,13 @@ import {
   ProductCards,
   FormulaLogic,
   FaqBlock,
-  FinalCta,
   InfoCard,
 } from "@/components/sections"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { CohortChart } from "@/components/cohort-chart"
 import { EmbeddedGraphic } from "@/components/embedded-graphic"
 import { GolfHeroRotator } from "@/components/golf-hero-rotator"
-import { FooterBanner } from "@/components/footer-banner"
+import { MockupBlueCta } from "@/components/mockup-sections"
 import { ChartSource } from "@/components/compliance"
 
 // "CALM = POWER." footer banner per cohort (color-matched product shot).
@@ -118,6 +117,8 @@ interface CohortData {
   visual: string
   primary: string
   secondary: string
+  /** Optional cohort-specific logo rendered above the hero headline */
+  logo?: { src: string; alt: string; width?: number }
   momentTitle: string
   momentCopy: string
   whyTitle: string
@@ -181,14 +182,6 @@ export function CohortPage({ data }: { data: CohortData }) {
         stepNumFg: "var(--bone)",
         stepIconColor: "var(--avro-blue)",
       }
-
-  // Golf gets a colored CTA closer (charcoal text on green); ZP gets a gold card on dark bg.
-  const finalCtaBg =
-    data.visual === "golf"
-      ? accent
-      : isZeroProof
-        ? "var(--gold)"
-        : undefined
 
   // Cohort-specific lifestyle hero photo
   const cohortHero: Record<string, { src: string; alt: string }> = {
@@ -394,6 +387,21 @@ export function CohortPage({ data }: { data: CohortData }) {
             className={`cohort-hero-content${isZeroProof ? " cohort-hero-zp" : ""}`}
             style={{ ["--hero-word-end" as string]: wordEnd }}
           >
+            {/* Cohort logo — Golf / Zero Proof brand mark above the headline */}
+            {data.logo && (
+              <div
+                className="cohort-fade"
+                style={{ marginBottom: 20, animationDelay: "0s" }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={data.logo.src}
+                  alt={data.logo.alt}
+                  width={data.logo.width ?? 180}
+                  style={{ height: "auto", display: "block" }}
+                />
+              </div>
+            )}
             {/* Eyebrow chip removed per design — title carries the moment via the per-cohort word animation. */}
             <h1
               className="font-serif"
@@ -615,19 +623,12 @@ export function CohortPage({ data }: { data: CohortData }) {
         <FaqBlock title={data.faqTitle} faqs={data.faqs} dark={isZeroProof} />
       </div>
       {cohortFooterBanner[data.visual] && (
-        <FooterBanner
-          src={cohortFooterBanner[data.visual].src}
-          alt={cohortFooterBanner[data.visual].alt}
+        <MockupBlueCta
+          bgImage={cohortFooterBanner[data.visual].src}
+          shopHref="/shop"
+          shopLabel="Shop"
         />
       )}
-
-      <FinalCta
-        title={data.finalTitle}
-        copy={data.finalCopy}
-        productButtons
-        bg={finalCtaBg}
-        dark={isZeroProof}
-      />
     </div>
   )
 }

@@ -148,93 +148,67 @@ export function MockupLogicRow() {
 }
 
 /**
- * Full-bleed blue section (mockup version of FinalCta) — the avro-blue band
- * spans edge to edge with no rounded card or side gutters.
+ * Banner CTA — a gray section containing a rounded rectangle box that the
+ * per-page banner artwork fills edge to edge, with a single wide "Shop" button
+ * overlaid in the bottom-right corner of the box.
  */
-export function MockupBlueCta({ title, copy }: { title: string; copy: string }) {
-  const btnStyle: React.CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    fontFamily: GC,
-    fontWeight: 700,
-    fontSize: 16,
-    letterSpacing: "-0.005em",
-    minHeight: 48,
-    padding: "0 28px",
-    borderRadius: 999,
-    border: "2px solid var(--charcoal)",
-    backgroundColor: "var(--charcoal)",
-    color: "var(--bone)",
-    textDecoration: "none",
-    transition: "background-color 0.18s ease, color 0.18s ease",
-  }
-
+export function MockupBlueCta({
+  bgImage = "/images/banners/calm-power.png",
+  shopHref = "/shop",
+  shopLabel = "Shop",
+}: {
+  bgImage?: string
+  shopHref?: string
+  shopLabel?: string
+}) {
   return (
     <section
       style={{
         width: "100%",
-        backgroundColor: "transparent",
+        backgroundColor: "var(--base-deep)",
         padding: "clamp(32px,5vw,72px) clamp(16px,4vw,64px)",
       }}
     >
-      <div
-        style={{
-          maxWidth: 1250,
-          margin: "0 auto",
-          backgroundColor: "var(--avro-blue)",
-          color: "var(--charcoal)",
-          borderRadius: 24,
-          padding: "clamp(32px,5vw,88px) clamp(20px,4vw,80px)",
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 28,
-          fontFamily: GC,
-        }}
-      >
-        <div style={{ flex: "1 1 320px", minWidth: 0, maxWidth: 520 }}>
-          <h2
-            style={{
-              fontFamily: GC,
-              fontWeight: 700,
-              fontSize: "clamp(26px,4vw,60px)",
-              lineHeight: 1.02,
-              letterSpacing: "-0.02em",
-              color: "var(--charcoal)",
-              marginBottom: 10,
-            }}
-          >
-            {title}
-          </h2>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.3vw,19px)", lineHeight: 1.5, color: "rgba(21,21,21,0.7)" }}>
-            {copy}*
-          </p>
-        </div>
+      {/* Scoped responsive rules — overlay bottom-right on desktop, stack below on mobile */}
+      <style>{`
+        .banner-cta-box {
+          position: relative;
+          max-width: 1250px;
+          margin: 0 auto;
+          border-radius: 24px;
+          overflow: hidden;
+          background-color: var(--base);
+        }
+        .banner-cta-img { width: 100%; height: auto; display: block; }
+        .banner-cta-btn {
+          position: absolute;
+          right: clamp(16px, 3%, 40px);
+          bottom: clamp(16px, 3%, 40px);
+          min-width: 220px;
+          text-decoration: none;
+        }
+        @media (max-width: 640px) {
+          .banner-cta-box { display: flex; flex-direction: column; padding-bottom: 20px; }
+          .banner-cta-btn {
+            position: static;
+            width: calc(100% - 32px);
+            min-width: 0;
+            margin: 16px auto 0;
+          }
+        }
+      `}</style>
 
-        <div style={{ flex: "1 1 280px", display: "flex", flexDirection: "column", gap: 8, minWidth: 240, maxWidth: 400 }}>
-          <a href="/calm"   style={btnStyle}>Shop Calm</a>
-          <a href="/focus"  style={btnStyle}>Shop Focus</a>
-          <a href="/energy" style={btnStyle}>Shop Energy</a>
-        </div>
+      {/* Rounded box that confines the banner artwork */}
+      <div className="banner-cta-box">
+        {/* Banner artwork fills the box */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={bgImage} alt="" className="banner-cta-img" />
+
+        {/* Shop button — overlaid bottom-right on desktop, stacked below on mobile */}
+        <a href={shopHref} className="btn-primary banner-cta-btn" style={{ fontFamily: GC }}>
+          {shopLabel}
+        </a>
       </div>
-    </section>
-  )
-}
-
-/** Calm Performance artwork — renders above MockupBlueCta in page.tsx. */
-export function MockupCalmPerformance() {
-  return (
-    <section style={{ width: "100%", backgroundColor: "var(--base)" }}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/images/banners/calm-power.png"
-        alt="Calm Performance"
-        style={{ width: "100%", height: "auto", display: "block" }}
-      />
     </section>
   )
 }

@@ -103,24 +103,8 @@ export function CartDrawer() {
                 <Link
                   href="/shop"
                   onClick={closeCart}
-                  className="inline-flex items-center justify-center font-serif font-black text-[15px] leading-none transition-colors"
-                  style={{
-                    backgroundColor: "var(--charcoal)",
-                    color: "var(--bone)",
-                    border: "2px solid var(--charcoal)",
-                    padding: "14px 36px",
-                    borderRadius: 999,
-                    textDecoration: "none",
-                    letterSpacing: "0.01em",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--bone)"
-                    e.currentTarget.style.color = "var(--charcoal)"
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--charcoal)"
-                    e.currentTarget.style.color = "var(--bone)"
-                  }}
+                  className="btn-primary avro-size-lg"
+                  style={{ textDecoration: "none" }}
                 >
                   Browse Formulas
                 </Link>
@@ -223,23 +207,7 @@ export function CartDrawer() {
                 Shipping and taxes calculated at checkout.
               </p>
               <button
-                className="w-full inline-flex items-center justify-center font-serif font-black text-[16px] leading-none transition-colors"
-                style={{
-                  backgroundColor: "var(--charcoal)",
-                  color: "var(--bone)",
-                  border: "2px solid var(--charcoal)",
-                  padding: "16px 28px",
-                  borderRadius: 999,
-                  letterSpacing: "0.01em",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--bone)"
-                  e.currentTarget.style.color = "var(--charcoal)"
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--charcoal)"
-                  e.currentTarget.style.color = "var(--bone)"
-                }}
+                className="btn-primary avro-size-lg w-full"
               >
                 Checkout
               </button>

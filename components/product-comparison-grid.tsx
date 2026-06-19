@@ -142,30 +142,11 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
 
                 {/* CTA buttons */}
                 <div className="px-2 pb-2 flex flex-col gap-2">
-                  <style>{`
-                    .compare-btn {
-                      background-color: var(--charcoal);
-                      border: 2px solid var(--charcoal);
-                      color: var(--bone);
-                      transition: background-color 0.2s ease, color 0.2s ease;
-                    }
-                    .compare-btn:hover {
-                      background-color: transparent !important;
-                      color: var(--charcoal) !important;
-                    }
-                  `}</style>
                   <button
-                    className="compare-btn w-full flex items-center justify-center"
-                    style={{
-                      fontFamily: GC,
-                      fontWeight: 700,
-                      fontSize: 16,
-                      minHeight: 48,
-                      padding: "0 28px",
-                      borderRadius: 999,
-                    }}
+                    className="btn-primary avro-size-lg w-full"
+                    style={{ fontFamily: GC }}
                   >
-                    Add to cart — ${item.bundlePrice.toFixed(2)}
+                    Add to Cart — ${item.bundlePrice.toFixed(2)}
                   </button>
                   <Link
                     href={`/${key}`}

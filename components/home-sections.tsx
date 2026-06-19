@@ -206,33 +206,25 @@ export function HomeRefHero() {
     >
       <style>{`
         @keyframes hp-rise {
-          0% { opacity: 0; transform: translateY(28px); }
+          0%   { opacity: 0; transform: translateY(24px); }
           100% { opacity: 1; transform: translateY(0); }
         }
         @keyframes hp-fade {
           0% { opacity: 0; transform: translateY(12px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-        @keyframes hp-rise-color {
-          0%   { opacity: 0; transform: translateY(34px); color: var(--avro-blue); }
-          45%  { opacity: 1; transform: translateY(-6px); color: var(--avro-blue); }
-          70%  { opacity: 1; transform: translateY(0); color: var(--avro-blue); }
-          100% { opacity: 1; transform: translateY(0); color: var(--ink); }
-        }
-        .hp-line { display: block; }
+        /* Word-by-word rising headline — matches the cohort / PageHero animation
+           so the homepage hero shares the same motion language as every other page. */
         .hp-word {
           display: inline-block;
           opacity: 0;
-          transform: translateY(34px);
-          color: var(--avro-blue);
-          animation: hp-rise-color 1.5s cubic-bezier(0.34, 1.4, 0.4, 1) forwards;
-          will-change: transform, opacity, color;
+          transform: translateY(24px);
+          animation: hp-rise 0.95s cubic-bezier(0.34, 1.4, 0.4, 1) forwards;
+          will-change: transform, opacity;
         }
         .hp-fade-in { opacity: 0; animation: hp-fade 0.9s cubic-bezier(0.22,1,0.36,1) forwards; }
-        .hp-lede { animation-delay: 2.1s; }
-        .hp-cta-row { animation-delay: 2.5s; }
         @media (prefers-reduced-motion: reduce) {
-          .hp-word, .hp-fade-in { animation: none !important; opacity: 1 !important; transform: none !important; color: var(--ink) !important; }
+          .hp-word, .hp-fade-in { animation: none !important; opacity: 1 !important; transform: none !important; }
         }
         .hp-pill-primary, .hp-pill-secondary {
           flex: 1 1 180px;
@@ -402,7 +394,7 @@ export function HomeRefHero() {
         <div className="hp-hero-grid">
           {/* Left */}
           <div style={{ display: "flex", flexDirection: "column" }}>
-          {/* Hero headline — slides with fade */}
+          {/* Hero headline — word-by-word rise, re-animates on each slide change */}
           <h1
             key={currentSlide}
             style={{
@@ -414,11 +406,18 @@ export function HomeRefHero() {
               marginBottom: 24,
               maxWidth: 600,
               fontWeight: 700,
-              opacity: 1,
-              animation: "hp-fade 0.6s ease-out forwards",
             }}
           >
-            {slides[currentSlide].headline}
+            {slides[currentSlide].headline.split(" ").map((word, i, arr) => (
+              <span
+                key={i}
+                className="hp-word"
+                style={{ animationDelay: `${(0.1 + i * 0.09).toFixed(2)}s` }}
+              >
+                {word}
+                {i < arr.length - 1 ? "\u00A0" : ""}
+              </span>
+            ))}
           </h1>
 
           {/* Lede — slides with fade */}
@@ -678,7 +677,7 @@ export function HomeBenefitRow() {
                 style={{
                   position: "relative",
                   overflow: "hidden",
-                  backgroundColor: BLUE,
+                  backgroundColor: "var(--base-light)",
                   borderRadius: 20,
                   padding: "clamp(24px,3vw,40px) clamp(24px,3vw,44px)",
                   minHeight: "clamp(160px,18vw,240px)",
@@ -691,7 +690,8 @@ export function HomeBenefitRow() {
                   transition: `opacity 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s, transform 0.85s cubic-bezier(0.22,1,0.36,1) ${cardDelay.toFixed(2)}s`,
                 }}
               >
-                {/* Photo fill, cropped to the box */}
+                {/* Photo fill — scaled up slightly to crop the PNG's baked-in rounded
+                    frame / edge shadow so no card background shows at the corners. */}
                 <img
                   src={b.image || "/placeholder.svg"}
                   alt=""
@@ -702,6 +702,8 @@ export function HomeBenefitRow() {
                     height: "100%",
                     objectFit: "cover",
                     objectPosition: b.focal,
+                    display: "block",
+                    transform: "scale(1.06)",
                   }}
                 />
               </div>
@@ -826,7 +828,7 @@ export function HomeLogicRow() {
               ))}
             </div>
 
-            {/* State-over-time chart — replaces the comparison table */}
+            {/* State-over-time chart �� replaces the comparison table */}
             <ApproachChart />
           </div>
         </div>
@@ -868,7 +870,7 @@ export function HomeProductStrip() {
 
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(32px,6vw,72px) clamp(16px,5vw,64px)" }}>
-      <div style={{ maxWidth: 1080, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1250, margin: "0 auto" }}>
         <h2 style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(24px,3.2vw,48px)", lineHeight: 1.0, color: "var(--ink)", marginBottom: 24 }}>
           Three formulas. One foundation.
         </h2>
@@ -1048,7 +1050,12 @@ export function HomeQualityRow() {
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
         {/* Outer container card */}
         <div style={{ backgroundColor: "var(--base-light)", borderRadius: 28, padding: "clamp(20px,3vw,32px)", border: "1px solid var(--divider)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px,1fr))", gap: 2, backgroundColor: "var(--base-deep)", borderRadius: 20, overflow: "hidden" }}>
+          <style>{`
+            .quality-badge-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; background-color: var(--base-deep); border-radius: 20px; overflow: hidden; }
+            @media (max-width: 900px) { .quality-badge-grid { grid-template-columns: repeat(3, 1fr); } }
+            @media (max-width: 520px) { .quality-badge-grid { grid-template-columns: repeat(2, 1fr); } }
+          `}</style>
+          <div className="quality-badge-grid">
             {badges.map((b) => (
               <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, padding: "clamp(20px,3vw,32px) clamp(12px,2vw,20px)", textAlign: "center", backgroundColor: "var(--bone)" }}>
                 <AvroIcon name={b.icon} size={64} className="md:w-20 md:h-20 opacity-80" />
@@ -1065,7 +1072,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ─────────────����───────��─────���──────��────────��───����──────────������─��
+// ── STORY STRIP ─────────────����───────��─────���──────��────────����───����──────────������─��
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>
@@ -1078,7 +1085,7 @@ export function HomeStoryStrip() {
             AVRO was built by Keigo Sugawara and Peter van Stolk for people who wanted a better option before the moments that matter. Every formula is backed by research and designed for real routines.
           </p>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-            <a href="/why-avro" className="hp-btn-outline-light" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none", border: "2px solid #fff", backgroundColor: "transparent", color: "#fff" }}>Our Story</a>
+            <a href="/our-story" className="hp-btn-outline-light" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none", border: "2px solid #fff", backgroundColor: "transparent", color: "#fff" }}>Our Story</a>
             <a href="/science" className="hp-btn-blue" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", fontFamily: GC, fontWeight: 700, fontSize: 16, minHeight: 48, padding: "0 28px", borderRadius: 999, textDecoration: "none", border: `2px solid ${BLUE}`, backgroundColor: BLUE, color: "var(--charcoal)" }}>The Science</a>
           </div>
         </div>
@@ -1086,7 +1093,7 @@ export function HomeStoryStrip() {
           <div style={{ display: "grid", gridTemplateColumns: "38% 62%", minHeight: 300, gap: 12 }}>
             <div style={{ position: "relative", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/science/fermentation-lab.jpg" alt="Stainless steel fermentation vessel cultivating naturally fermented PharmaGABA" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src="/images/science/science-hero-4x3.jpg" alt="Trays of AVRO Energy sticks on a stainless cart in the production lab" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
             <div style={{ position: "relative", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}

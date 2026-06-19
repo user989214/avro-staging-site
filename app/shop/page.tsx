@@ -4,10 +4,9 @@ import {
   SocialProof,
   ProductCards,
   FaqBlock,
-  FinalCta,
 } from "@/components/sections"
 import { CompareAtAGlance } from "@/components/compare-at-a-glance"
-import { FooterBanner } from "@/components/footer-banner"
+import { MockupBlueCta } from "@/components/mockup-sections"
 
 export const metadata = {
   title: "Shop | AVRO",
@@ -251,16 +250,7 @@ export default function ShopPage() {
           ]}
         />
 
-        <FooterBanner
-          src="/images/banners/shop-banner.png"
-          alt="AVRO Energy Fuji Apple — Calm is the advantage."
-        />
-
-        <FinalCta
-          title="Find your formula. Show up ready."
-          copy="Choose your formula and start your calm-first routine today."
-          productButtons
-        />
+        <MockupBlueCta bgImage="/images/banners/shop-banner.png" shopHref="/shop" shopLabel="Shop" />
       </div>
     </>
   )
