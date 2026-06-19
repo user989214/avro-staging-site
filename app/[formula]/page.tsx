@@ -309,26 +309,6 @@ export default async function ProductPage({
                 <EmbeddedGraphic src="/graphics/energy.html" ratio="1200 / 720" title="Energy: the calm-first energy curve" />
               )}
 
-              {/* Data source attribution — study charts only (Calm & Focus). The Energy
-                  philosophy graphic carries its own disclaimer, so no page-width * line. */}
-              {key !== "energy" && (
-                <p
-                  style={{
-                    fontFamily: GC,
-                    fontWeight: 400,
-                    fontSize: "clamp(11px,0.9vw,13px)",
-                    lineHeight: 1.5,
-                    color: "rgba(0,0,0,0.38)",
-                    marginTop: 10,
-                    gridColumn: "1 / -1",
-                  }}
-                >
-                  For illustrative purposes only. Individual results may vary. This curve is a conceptual
-                  representation and is not based on a single clinical trial. * These statements have not
-                  been evaluated by the Food and Drug Administration. This product is not intended to
-                  diagnose, treat, cure, or prevent any disease.
-                </p>
-              )}
             </div>
           </div>
         </div>
