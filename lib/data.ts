@@ -10,6 +10,8 @@ export const formulas = {
     ],
     color: "#4b4d9a",
     accent: "#7a79c8",
+    // Tube-derived color used only for the formula icon/marker (not cards/charts/CTAs).
+    iconColor: "#4b4d9a",
     price: 24.95,
     priceLabel: "$24.95",
     bundlePrice: 24.95,
@@ -37,6 +39,8 @@ export const formulas = {
     // grayscale instead of tinting cards, charts, badges, and CTAs pink.
     color: "#1E1D18",
     accent: "#3A3A38",
+    // Tube-derived color used only for the formula icon/marker (not cards/charts/CTAs).
+    iconColor: "#C13584",
     price: 24.95,
     priceLabel: "$24.95",
     bundlePrice: 24.95,
@@ -63,6 +67,8 @@ export const formulas = {
     // neutralized to ink/charcoal so it stops painting the site yellow.
     color: "#1E1D18",
     accent: "#3A3A38",
+    // Tube-derived color used only for the formula icon/marker (not cards/charts/CTAs).
+    iconColor: "#E8A23D",
     price: 24.95,
     priceLabel: "$24.95",
     bundlePrice: 24.95,

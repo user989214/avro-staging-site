@@ -34,9 +34,9 @@ function FormulaGraph() {
   }, [])
 
   // Accent colors pulled directly from each tube's physical color identity
-  const CALM_COLOR  = "#7A79C8"  // Calm tube: purple/indigo
-  const FOCUS_COLOR = "#E05A7A"  // Focus tube: pink-red (Red Dragon Fruit)
-  const ENERGY_COLOR = "#C8E84B" // Energy tube: yellow-green
+  const CALM_COLOR  = "#4b4d9a"  // Calm tube: indigo/blue
+  const FOCUS_COLOR = "#C13584"  // Focus tube: raspberry magenta
+  const ENERGY_COLOR = "#E8A23D" // Energy tube: tangerine amber
 
   const formulas = [
     { name: "Calm",   nameColor: CALM_COLOR,   segments: [{ color: BLUE, width: 70, label: "PharmaGABA®" }, { color: CALM_COLOR,   width: 30, label: "Magnesium" }] },
