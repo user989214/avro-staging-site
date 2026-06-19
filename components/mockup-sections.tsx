@@ -191,12 +191,15 @@ export function MockupBlueCta({
           text-decoration: none;
         }
         @media (max-width: 640px) {
-          .banner-cta-box { display: flex; flex-direction: column; padding-bottom: 20px; }
+          .banner-cta-box { display: flex; flex-direction: column; padding-bottom: 24px; }
           .banner-cta-btn {
             position: static;
             width: calc(100% - 32px);
             min-width: 0;
-            margin: 16px auto 0;
+            margin: 20px auto 0;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            font-size: 16px;
           }
         }
       `}</style>
