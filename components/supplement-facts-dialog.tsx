@@ -66,7 +66,7 @@ export function SupplementFactsDialog({
       <style>{`
         .sf-trigger:hover { background-color: ${isPrimary ? "transparent" : "var(--charcoal)"}; color: ${isPrimary ? "var(--charcoal)" : "var(--bone)"}; }
       `}</style>
-      <DialogContent className="max-w-[420px] p-0 bg-base flex flex-col max-h-[90vh]">
+      <DialogContent className="max-w-[360px] p-0 bg-base flex flex-col max-h-[85vh]">
         <div className="p-5 pb-2 shrink-0 sm:p-6">
           <DialogHeader>
             <DialogTitle
@@ -138,7 +138,7 @@ export function SupplementFactsDialog({
               src={panelSrc || "/placeholder.svg"}
               alt={`${formula.name} ${selectedFlavor?.name ?? ""} Supplement Facts panel`}
               className="h-auto block rounded-md w-full"
-              style={{ backgroundColor: "var(--base)", maxWidth: 320 }}
+              style={{ backgroundColor: "var(--base)", maxWidth: 260 }}
             />
           </div>
         </div>
