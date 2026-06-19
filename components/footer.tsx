@@ -172,7 +172,7 @@ export function Footer() {
                 fontWeight: 400,
                 fontSize: "11px",
                 lineHeight: 1.5,
-                color: c.textFaint,
+                color: c.text,
                 maxWidth: 760,
               }}
             >
