@@ -185,7 +185,7 @@ export function MockupBlueCta({
         .banner-cta-img { width: 100%; height: auto; display: block; }
         .banner-cta-btn {
           position: absolute;
-          right: clamp(16px, 3%, 40px);
+          left: clamp(16px, 3%, 40px);
           bottom: clamp(16px, 3%, 40px);
           min-width: 220px;
           text-decoration: none;
