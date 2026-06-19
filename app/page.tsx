@@ -13,7 +13,6 @@ import { SocialProof, ProductCards } from "@/components/sections"
 import {
   MockupLogicRow,
   MockupBlueCta,
-  MockupCalmPerformance,
 } from "@/components/mockup-sections"
 
 export default function HomePage() {
@@ -74,14 +73,8 @@ export default function HomePage() {
       <ProductCards title="Choose your AVRO formula" shopLabel="Shop" />
       <SocialProof mode="full" />
 
-      {/* Calm Performance artwork — sits above the blue CTA card */}
-      <MockupCalmPerformance />
-
-      {/* Rounded blue CTA card */}
-      <MockupBlueCta
-        title="Calm first. Clear headed. Ready for what matters."
-        copy="Support composure, clarity, and calm-first readiness for the moments that matter."
-      />
+      {/* Calm = Power banner as the background of the blue CTA card, single Shop button */}
+      <MockupBlueCta bgImage="/images/banners/calm-power.png" shopHref="/shop" shopLabel="Shop" />
     </div>
   )
 }

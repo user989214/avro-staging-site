@@ -151,26 +151,15 @@ export function MockupLogicRow() {
  * Full-bleed blue section (mockup version of FinalCta) — the avro-blue band
  * spans edge to edge with no rounded card or side gutters.
  */
-export function MockupBlueCta({ title, copy }: { title: string; copy: string }) {
-  const btnStyle: React.CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    fontFamily: GC,
-    fontWeight: 700,
-    fontSize: 16,
-    letterSpacing: "-0.005em",
-    minHeight: 48,
-    padding: "0 28px",
-    borderRadius: 999,
-    border: "2px solid var(--charcoal)",
-    backgroundColor: "var(--charcoal)",
-    color: "var(--bone)",
-    textDecoration: "none",
-    transition: "background-color 0.18s ease, color 0.18s ease",
-  }
-
+export function MockupBlueCta({
+  bgImage = "/images/banners/calm-power.png",
+  shopHref = "/shop",
+  shopLabel = "Shop",
+}: {
+  bgImage?: string
+  shopHref?: string
+  shopLabel?: string
+}) {
   return (
     <section
       style={{
@@ -181,60 +170,47 @@ export function MockupBlueCta({ title, copy }: { title: string; copy: string }) 
     >
       <div
         style={{
+          position: "relative",
           maxWidth: 1250,
           margin: "0 auto",
           backgroundColor: "var(--avro-blue)",
-          color: "var(--charcoal)",
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
           borderRadius: 24,
-          padding: "clamp(32px,5vw,88px) clamp(20px,4vw,80px)",
+          overflow: "hidden",
+          aspectRatio: "1540 / 600",
           display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 28,
+          alignItems: "flex-end",
+          justifyContent: "center",
+          padding: "clamp(20px,4vw,56px)",
           fontFamily: GC,
         }}
       >
-        <div style={{ flex: "1 1 320px", minWidth: 0, maxWidth: 520 }}>
-          <h2
-            style={{
-              fontFamily: GC,
-              fontWeight: 700,
-              fontSize: "clamp(26px,4vw,60px)",
-              lineHeight: 1.02,
-              letterSpacing: "-0.02em",
-              color: "var(--charcoal)",
-              marginBottom: 10,
-            }}
-          >
-            {title}
-          </h2>
-          <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(15px,1.3vw,19px)", lineHeight: 1.5, color: "rgba(21,21,21,0.7)" }}>
-            {copy}*
-          </p>
-        </div>
-
-        <div style={{ flex: "1 1 280px", display: "flex", flexDirection: "column", gap: 8, minWidth: 240, maxWidth: 400 }}>
-          <a href="/calm"   style={btnStyle}>Shop Calm</a>
-          <a href="/focus"  style={btnStyle}>Shop Focus</a>
-          <a href="/energy" style={btnStyle}>Shop Energy</a>
-        </div>
+        <a
+          href={shopHref}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: GC,
+            fontWeight: 700,
+            fontSize: 16,
+            letterSpacing: "-0.005em",
+            minHeight: 52,
+            padding: "0 48px",
+            borderRadius: 999,
+            border: "2px solid var(--charcoal)",
+            backgroundColor: "var(--charcoal)",
+            color: "var(--bone)",
+            textDecoration: "none",
+            transition: "background-color 0.18s ease, color 0.18s ease",
+          }}
+        >
+          {shopLabel}
+        </a>
       </div>
-    </section>
-  )
-}
-
-/** Calm Performance artwork — renders above MockupBlueCta in page.tsx. */
-export function MockupCalmPerformance() {
-  return (
-    <section style={{ width: "100%", backgroundColor: "var(--base)" }}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/images/banners/calm-power.png"
-        alt="Calm Performance"
-        style={{ width: "100%", height: "auto", display: "block" }}
-      />
     </section>
   )
 }
