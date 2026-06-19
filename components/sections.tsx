@@ -242,8 +242,28 @@ export function ProductCards({
           {(Object.keys(formulas) as FormulaKey[]).map((key) => {
             const item = formulas[key]
             return (
-              <article key={key} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                {/* Rounded thumbnail with gray background - matches reference exactly */}
+              <Link
+                key={key}
+                href={`/${key}`}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 16,
+                  textDecoration: "none",
+                  cursor: "pointer",
+                  borderRadius: 20,
+                  transition: "transform 0.18s ease, box-shadow 0.18s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-3px)"
+                  e.currentTarget.style.boxShadow = "0 12px 40px rgba(0,0,0,0.10)"
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)"
+                  e.currentTarget.style.boxShadow = "none"
+                }}
+              >
+                {/* Rounded thumbnail */}
                 <div style={{ borderRadius: 20, aspectRatio: "1 / 1", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", backgroundColor: dark ? "var(--deep-black)" : "#E5E5E5" }}>
                   <ProductCard
                     formulaKey={key}
@@ -264,49 +284,7 @@ export function ProductCards({
                     </p>
                   </div>
                 </div>
-                <a 
-                  href={`/${key}`} 
-                  className={dark ? "hp-btn-gold" : "hp-btn-black"}
-                  style={{ 
-                    display: "flex", 
-                    alignItems: "center", 
-                    justifyContent: "center", 
-                    fontFamily: GC_FINAL, 
-                    fontWeight: 700, 
-                    fontSize: 16, 
-                    width: "100%",
-                    minHeight: 48, 
-                    padding: "0 28px", 
-                    borderRadius: 999, 
-                    textDecoration: "none", 
-                    border: dark ? "2px solid var(--bone)" : "2px solid var(--charcoal)",
-                    backgroundColor: "transparent", 
-                    color: dark ? "var(--bone)" : "var(--charcoal)", 
-                    marginTop: "auto",
-                    transition: "background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (dark) {
-                      e.currentTarget.style.backgroundColor = 'var(--bone)'
-                      e.currentTarget.style.color = 'var(--deep-black)'
-                    } else {
-                      e.currentTarget.style.backgroundColor = 'var(--charcoal)'
-                      e.currentTarget.style.color = 'var(--bone)'
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (dark) {
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                      e.currentTarget.style.color = 'var(--bone)'
-                    } else {
-                      e.currentTarget.style.backgroundColor = 'transparent'
-                      e.currentTarget.style.color = 'var(--charcoal)'
-                    }
-                  }}
-                >
-                  {shopLabel} {item.short}
-                </a>
-              </article>
+              </Link>
             )
           })}
         </div>
