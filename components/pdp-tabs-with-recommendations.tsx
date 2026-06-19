@@ -54,25 +54,22 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
 
   const ingredientsList: Record<FormulaKey, { name: string; amount: string }[]> = {
     calm: [
-      { name: "PharmaGABA®", amount: "00 mg" },
-      { name: "Lorem bisglycinate", amount: "00 mg" },
-      { name: "Ipsum theanine", amount: "00 mg" },
-      { name: "Dolor (as bicarbonate)", amount: "00 mg" },
-      { name: "Amet (as bicarbonate)", amount: "00 mg" },
+      { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "200 mg" },
+      { name: "Magnesium (as magnesium bisglycinate)", amount: "100 mg" },
+      { name: "Sodium (as sodium bicarbonate)", amount: "80 mg" },
+      { name: "Potassium (as potassium bicarbonate)", amount: "100 mg" },
     ],
     focus: [
-      { name: "PharmaGABA®", amount: "00 mg" },
-      { name: "Lorem cognitiva", amount: "00 mg" },
-      { name: "Ipsum theanine", amount: "00 mg" },
-      { name: "Dolor (as bicarbonate)", amount: "00 mg" },
-      { name: "Amet (as bicarbonate)", amount: "00 mg" },
+      { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "200 mg" },
+      { name: "Cognigrape® (grape fruit extract, Vitis vinifera)", amount: "250 mg" },
+      { name: "Sodium (as sodium bicarbonate)", amount: "80 mg" },
+      { name: "Potassium (as potassium bicarbonate)", amount: "100 mg" },
     ],
     energy: [
-      { name: "PharmaGABA®", amount: "00 mg" },
-      { name: "Lorem caffea", amount: "00 mg" },
-      { name: "Ipsum theanine", amount: "00 mg" },
-      { name: "Dolor (as bicarbonate)", amount: "00 mg" },
-      { name: "Amet (as bicarbonate)", amount: "00 mg" },
+      { name: "PharmaGABA® (Gamma-Aminobutyric Acid)", amount: "200 mg" },
+      { name: "Natural Caffeine (from coffee bean extract)", amount: "120 mg" },
+      { name: "Sodium (as sodium bicarbonate)", amount: "80 mg" },
+      { name: "Potassium (as potassium bicarbonate)", amount: "100 mg" },
     ],
   }
 

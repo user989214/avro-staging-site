@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import {
   Dialog,
   DialogContent,
@@ -32,14 +33,16 @@ export function SupplementFactsDialog({
 }: SupplementFactsDialogProps) {
   const isPrimary = variant === "primary"
 
-  // Resolve the approved panel image. If a specific flavor is provided, use it;
-  // otherwise fall back to the formula's default (first-flavor) panel.
-  const flavorMatch = flavorName
-    ? formula.flavors.find((f) => f.name === flavorName)
-    : undefined
-  const panelSrc = flavorMatch
-    ? supplementFactsByFlavor[flavorMatch.id]
-    : defaultPanelForFormula(formulaKey)
+  // The flavors that ship for this formula, each with its own approved panel.
+  const flavors = formula.flavors
+
+  // Default to the explicitly-passed flavor if provided, else the first flavor.
+  const initialId =
+    (flavorName ? flavors.find((f) => f.name === flavorName)?.id : undefined) ?? flavors[0].id
+  const [selectedId, setSelectedId] = useState<string>(initialId)
+
+  const panelSrc = supplementFactsByFlavor[selectedId] || defaultPanelForFormula(formulaKey)
+  const selectedFlavor = flavors.find((f) => f.id === selectedId)
 
   return (
     <Dialog>
@@ -80,16 +83,48 @@ export function SupplementFactsDialog({
             }}
           >
             {formula.name}
-            {flavorName ? ` · ${flavorName}` : ""} · Serving size 1 stick (5 g)
+            {selectedFlavor ? ` · ${selectedFlavor.name}` : ""} · Serving size 1 stick (5 g)
           </p>
         </div>
+
+        {/* Flavor toggle — each flavor has its own approved panel */}
+        {flavors.length > 1 && (
+          <div className="px-6 pb-3 flex flex-wrap gap-2">
+            {flavors.map((flavor) => {
+              const active = flavor.id === selectedId
+              return (
+                <button
+                  key={flavor.id}
+                  type="button"
+                  onClick={() => setSelectedId(flavor.id)}
+                  aria-pressed={active}
+                  style={{
+                    fontFamily: GC,
+                    fontWeight: 700,
+                    fontSize: 13,
+                    padding: "7px 14px",
+                    borderRadius: 999,
+                    cursor: "pointer",
+                    transition: "background-color 0.15s ease, color 0.15s ease",
+                    backgroundColor: active ? "var(--charcoal)" : "transparent",
+                    color: active ? "var(--bone)" : "var(--charcoal)",
+                    border: "2px solid var(--charcoal)",
+                  }}
+                >
+                  {flavor.name}
+                </button>
+              )
+            })}
+          </div>
+        )}
+
         <div className="px-6 pb-6">
           <div className="rounded-xl p-4" style={{ backgroundColor: LIGHT_GRAY }}>
             {/* Approved Supplement Facts panel — rendered directly from the label graphic */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={panelSrc || "/placeholder.svg"}
-              alt={`${formula.name} Supplement Facts panel`}
+              alt={`${formula.name} ${selectedFlavor?.name ?? ""} Supplement Facts panel`}
               className="w-full h-auto block rounded-md"
               style={{ backgroundColor: "var(--base)" }}
             />
