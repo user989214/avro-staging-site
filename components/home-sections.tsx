@@ -1085,7 +1085,7 @@ export function HomeStoryStrip() {
           <div style={{ display: "grid", gridTemplateColumns: "38% 62%", minHeight: 300, gap: 12 }}>
             <div style={{ position: "relative", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/science/fermentation-lab.jpg" alt="Stainless steel fermentation vessel cultivating naturally fermented PharmaGABA" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src="/images/science/science-hero-4x3.jpg" alt="Trays of AVRO Energy sticks on a stainless cart in the production lab" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
             <div style={{ position: "relative", overflow: "hidden", borderRadius: 18, backgroundColor: "var(--bone)" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
