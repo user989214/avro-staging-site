@@ -6,7 +6,6 @@ import {
   stickImageFor,
   soloTubeImageFor,
   glassLifestyleFor,
-  TUBE_SCENE_LABELS,
   type TubeScene,
 } from "@/components/product-visual"
 import type { FormulaKey, Formula } from "@/lib/data"
@@ -37,13 +36,6 @@ const PRODUCT_THUMBS: Thumb[] = [
   { id: "stick", label: "Stick Pack", bg: "white" },
 ]
 
-const SCENE_THUMBS: Thumb[] = [
-  { id: "tech", label: TUBE_SCENE_LABELS.tech, bg: "scene" },
-  { id: "golf", label: TUBE_SCENE_LABELS.golf, bg: "scene" },
-  { id: "social", label: TUBE_SCENE_LABELS.social, bg: "scene" },
-  { id: "gaming", label: TUBE_SCENE_LABELS.gaming, bg: "scene" },
-]
-
 export function ProductGallery({ formula, formulaKey, flavorId, onMainImageClick, reviewCount, rating = 4.8 }: ProductGalleryProps) {
   const [activeId, setActiveId] = useState<ThumbKind>("studio")
 
@@ -52,11 +44,11 @@ export function ProductGallery({ formula, formulaKey, flavorId, onMainImageClick
   const stick = stickImageFor(formulaKey, flavorId)
   const glass = glassLifestyleFor(formulaKey, flavorId)
 
-  // The "in the glass" lifestyle shot leads the lineup when available.
+  // Keep only the product/packshot views plus the in-glass lifestyle shot.
+  // The AVRO-in-environment cohort renders (SCENE_THUMBS) are intentionally omitted.
   const thumbs: Thumb[] = [
     ...PRODUCT_THUMBS,
     ...(glass ? [{ id: "glass" as const, label: "In the Glass", bg: "scene" as const }] : []),
-    ...SCENE_THUMBS,
   ]
 
   void formula
