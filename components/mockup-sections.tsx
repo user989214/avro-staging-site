@@ -166,6 +166,7 @@ export function MockupBlueCta({
 }) {
   return (
     <section
+      className="banner-cta-section"
       style={{
         width: "100%",
         backgroundColor: bgColor,
@@ -191,7 +192,9 @@ export function MockupBlueCta({
           text-decoration: none;
         }
         @media (max-width: 640px) {
-          .banner-cta-box { display: flex; flex-direction: column; padding-bottom: 24px; }
+          /* Let the wide art use the full width so it's taller / more present (no cropping) */
+          .banner-cta-section { padding: 20px 8px !important; }
+          .banner-cta-box { display: flex; flex-direction: column; padding-bottom: 24px; border-radius: 18px; }
           .banner-cta-btn {
             position: static;
             width: calc(100% - 32px);
