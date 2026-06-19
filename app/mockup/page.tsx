@@ -10,11 +10,7 @@ import {
   HomeRitualSection,
 } from "@/components/home-sections"
 import { SocialProof, ProductCards } from "@/components/sections"
-import {
-  MockupLogicRow,
-  MockupBlueCta,
-  MockupCalmPerformance,
-} from "@/components/mockup-sections"
+import { MockupLogicRow, MockupBlueCta } from "@/components/mockup-sections"
 
 export const metadata = {
   title: "AVRO — Homepage Mockup",
@@ -73,14 +69,8 @@ export default function MockupPage() {
       <ProductCards title="Choose your AVRO formula" shopLabel="Shop" />
       <SocialProof mode="full" />
 
-      {/* Full-bleed blue section */}
-      <MockupBlueCta
-        title="Calm first. Clear headed. Ready for what matters."
-        copy="Support composure, clarity, and calm-first readiness for the moments that matter."
-      />
-
-      {/* Full-bleed Calm Performance artwork (white background) — footer follows */}
-      <MockupCalmPerformance />
+      {/* Full-bleed banner CTA with artwork + Shop button */}
+      <MockupBlueCta />
     </div>
   )
 }

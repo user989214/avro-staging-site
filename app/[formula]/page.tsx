@@ -10,6 +10,7 @@ import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommend
 import { PdpIngredients } from "@/components/pdp-ingredients"
 import { SupplementFactsDialog } from "@/components/supplement-facts-dialog"
 import { EmbeddedGraphic } from "@/components/embedded-graphic"
+import { Breadcrumbs } from "@/components/breadcrumbs"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 const BLUE = "#94C6D4"
@@ -81,6 +82,15 @@ export default async function ProductPage({
 
   return (
     <>
+      {/* Minimalist breadcrumb trail */}
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Shop", href: "/shop" },
+          { label: item.name },
+        ]}
+      />
+
       {/* PDP Hero - full width on mobile, rounded on desktop */}
       <section
         className="pdp-hero-section"
@@ -205,7 +215,7 @@ export default async function ProductPage({
               marginTop: -16,
             }}
           >
-            * These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Benefit icons are for illustrative purposes only.
+            Benefit icons are for illustrative purposes only.
           </p>
 
           {/* Graph section - two columns */}
@@ -299,26 +309,6 @@ export default async function ProductPage({
                 <EmbeddedGraphic src="/graphics/energy.html" ratio="1200 / 720" title="Energy: the calm-first energy curve" />
               )}
 
-              {/* Data source attribution — study charts only (Calm & Focus). The Energy
-                  philosophy graphic carries its own disclaimer, so no page-width * line. */}
-              {key !== "energy" && (
-                <p
-                  style={{
-                    fontFamily: GC,
-                    fontWeight: 400,
-                    fontSize: "clamp(11px,0.9vw,13px)",
-                    lineHeight: 1.5,
-                    color: "rgba(0,0,0,0.38)",
-                    marginTop: 10,
-                    gridColumn: "1 / -1",
-                  }}
-                >
-                  For illustrative purposes only. Individual results may vary. This curve is a conceptual
-                  representation and is not based on a single clinical trial. * These statements have not
-                  been evaluated by the Food and Drug Administration. This product is not intended to
-                  diagnose, treat, cure, or prevent any disease.
-                </p>
-              )}
             </div>
           </div>
         </div>

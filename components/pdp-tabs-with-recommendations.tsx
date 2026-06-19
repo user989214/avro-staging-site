@@ -363,7 +363,7 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                   <Link
                     href={`/${formulaKey}`}
                     className="btn-primary avro-size-sm w-full"
-                    style={{ fontFamily: GC, textDecoration: "none" }}
+                    style={{ fontFamily: GC, textDecoration: "none", minWidth: 0, paddingLeft: 8, paddingRight: 8 }}
                   >
                     Shop {formula.short}
                   </Link>
