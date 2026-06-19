@@ -1050,7 +1050,12 @@ export function HomeQualityRow() {
       <div style={{ maxWidth: 1250, margin: "0 auto" }}>
         {/* Outer container card */}
         <div style={{ backgroundColor: "var(--base-light)", borderRadius: 28, padding: "clamp(20px,3vw,32px)", border: "1px solid var(--divider)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px,1fr))", gap: 2, backgroundColor: "var(--base-deep)", borderRadius: 20, overflow: "hidden" }}>
+          <style>{`
+            .quality-badge-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; background-color: var(--base-deep); border-radius: 20px; overflow: hidden; }
+            @media (max-width: 900px) { .quality-badge-grid { grid-template-columns: repeat(3, 1fr); } }
+            @media (max-width: 520px) { .quality-badge-grid { grid-template-columns: repeat(2, 1fr); } }
+          `}</style>
+          <div className="quality-badge-grid">
             {badges.map((b) => (
               <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, padding: "clamp(20px,3vw,32px) clamp(12px,2vw,20px)", textAlign: "center", backgroundColor: "var(--bone)" }}>
                 <AvroIcon name={b.icon} size={64} className="md:w-20 md:h-20 opacity-80" />
