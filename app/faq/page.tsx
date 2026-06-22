@@ -5,6 +5,7 @@ import {
   CardedSection,
   SectionHeading,
   SocialProof,
+  FinalCta,
 } from "@/components/sections"
 import { Icon } from "@/components/icons"
 import { PageHero } from "@/components/page-hero"
@@ -236,6 +237,10 @@ export default function FaqPage() {
       ))}
 
       <SocialProof mode="compact" />
+      <FinalCta
+        title="Ready to find your formula?"
+        copy="Choose Calm, Focus, or Energy based on the moment you want to support."
+      />
       <MockupBlueCta bgImage="/images/banners/faq-banner.png" shopHref="/shop" shopLabel="Shop" />
     </>
   )

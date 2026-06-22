@@ -4,6 +4,7 @@ import { ProductHero } from "@/components/product-hero"
 import { ReviewsBlock } from "@/components/reviews-block"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { Icon } from "@/components/icons"
+import { FinalCta } from "@/components/sections"
 import { MockupBlueCta } from "@/components/mockup-sections"
 import { ProductComparisonGrid } from "@/components/product-comparison-grid"
 import { PdpTabsWithRecommendations } from "@/components/pdp-tabs-with-recommendations"
@@ -477,6 +478,12 @@ export default async function ProductPage({
       <div id="reviews">
         <ReviewsBlock formula={item} formulaKey={key} />
       </div>
+
+      <FinalCta
+        title="Good energy starts here."
+        copy="Get easy lifestyle tips, wellness inspo, plus early access to AVRO launches and offers."
+        productButtons
+      />
 
       {/* Banner CTA — color-matched artwork confined to a rounded box with a single Shop button */}
       {footerBanner[key] && (

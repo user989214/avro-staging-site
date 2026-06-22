@@ -4,6 +4,7 @@ import {
   SocialProof,
   ProductCards,
   FaqBlock,
+  FinalCta,
 } from "@/components/sections"
 import { CompareAtAGlance } from "@/components/compare-at-a-glance"
 import { MockupBlueCta } from "@/components/mockup-sections"
@@ -250,6 +251,11 @@ export default function ShopPage() {
           ]}
         />
 
+        <FinalCta
+          title="Find your formula. Show up ready."
+          copy="Choose your formula and start your calm-first routine today."
+          productButtons
+        />
         <MockupBlueCta bgImage="/images/banners/shop-banner.png" shopHref="/shop" shopLabel="Shop" />
       </div>
     </>
