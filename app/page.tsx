@@ -9,7 +9,7 @@ import {
   HomeStoryStrip,
   HomeRitualSection,
 } from "@/components/home-sections"
-import { SocialProof, ProductCards } from "@/components/sections"
+import { SocialProof, ProductCards, FinalCta } from "@/components/sections"
 import {
   MockupLogicRow,
   MockupBlueCta,
@@ -71,6 +71,11 @@ export default function HomePage() {
       <HomeRitualSection />
       <ProductCards title="Choose your AVRO formula" shopLabel="Shop" />
       <SocialProof mode="full" />
+
+      <FinalCta
+        title="Calm first. Clear headed. Ready for what matters."
+        copy="Support composure, clarity, and calm-first readiness for the moments that matter."
+      />
 
       {/* Calm = Power banner as the background of the blue CTA card, single Shop button */}
       <MockupBlueCta bgImage="/images/banners/calm-power.png" shopHref="/shop" shopLabel="Shop" />

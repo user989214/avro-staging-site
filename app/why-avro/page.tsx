@@ -5,6 +5,7 @@ import {
   ProductCards,
   FormulaLogic,
   InfoCard,
+  FinalCta,
 } from "@/components/sections"
 import { PageHero } from "@/components/page-hero"
 import { MockupBlueCta } from "@/components/mockup-sections"
@@ -50,6 +51,15 @@ export default function WhyPage() {
       <ProductCards title="Choose the state that fits your moment." shopLabel="Shop" />
       <FormulaLogic />
       <SocialProof mode="compact" />
+      <FinalCta
+        title={
+          <>
+            Less noise.<br />
+            More control.
+          </>
+        }
+        copy="Choose the formula that supports the state before the moment."
+      />
       <MockupBlueCta bgImage="/images/banners/why-avro-banner.png" shopHref="/shop" shopLabel="Shop" />
     </>
   )

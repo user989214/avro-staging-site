@@ -6,6 +6,7 @@ import {
   FormulaLogic,
   FaqBlock,
   InfoCard,
+  FinalCta,
 } from "@/components/sections"
 import { AvroIcon } from "@/components/avro-icons"
 import { PageHero } from "@/components/page-hero"
@@ -129,6 +130,10 @@ export default function SciencePage() {
           ]}
         />
 
+        <FinalCta
+          title="Start with calm. Show up ready."
+          copy="Choose Calm, Focus, or Energy based on the moment you want to support."
+        />
         <MockupBlueCta bgImage="/images/banners/science-banner.png" shopHref="/shop" shopLabel="Shop" />
       </div>
     </>

@@ -10,6 +10,7 @@ import {
   FormulaLogic,
   FaqBlock,
   InfoCard,
+  FinalCta,
 } from "@/components/sections"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { CohortChart } from "@/components/cohort-chart"
@@ -149,6 +150,15 @@ export function CohortPage({ data }: { data: CohortData }) {
         ? "var(--gold)"
         : "var(--avro-blue)"
 
+  // Final CTA closer: Golf gets a green band (charcoal text); Zero Proof gets a
+  // gold card on a deep-black section; all others use the default AVRO blue band.
+  const finalCtaBg =
+    data.visual === "golf"
+      ? accent
+      : isZeroProof
+        ? "var(--gold)"
+        : undefined
+
   // Theme surfaces — light cohorts use the bone/cream system; Zero Proof uses solid
   // deep-black sections with dark cards and gold accents/icons.
   const t = isZeroProof
@@ -222,7 +232,15 @@ export function CohortPage({ data }: { data: CohortData }) {
   const wordEnd = isZeroProof ? "var(--gold)" : t.ink
 
   return (
-    <div style={{ backgroundColor: t.pageBg, color: t.ink }}>
+    <div
+      style={{
+        backgroundColor: t.pageBg,
+        color: t.ink,
+        // Golf tints all non-formula icons green; calm/focus/energy icons keep
+        // their tube colors. Social uses gold PNGs so it doesn't need this.
+        ...(isGolf ? ({ ["--icon-spot" as string]: "var(--golf)" } as React.CSSProperties) : {}),
+      }}
+    >
       {/* Hero — full-width, square corners (matches site-wide page hero language) */}
       <section
         style={{
@@ -639,6 +657,13 @@ export function CohortPage({ data }: { data: CohortData }) {
       >
         <FaqBlock title={data.faqTitle} faqs={data.faqs} dark={isZeroProof} />
       </div>
+      <FinalCta
+        title={data.finalTitle}
+        copy={data.finalCopy}
+        productButtons
+        bg={finalCtaBg}
+        dark={isZeroProof}
+      />
       {cohortFooterBanner[data.visual] && (
           <MockupBlueCta
             bgImage={cohortFooterBanner[data.visual].src}
