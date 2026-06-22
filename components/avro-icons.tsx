@@ -205,12 +205,23 @@ export function AvroIcon({ name, className, golden = false, size = 40, style, ti
     return null
   }
 
-  // Resolve the effective tint color.
-  // Explicit string wins; explicit false disables; otherwise auto-tint
-  // formula-state icons (but never the golden /social variant).
+  // Resolve the effective tint color. No icon should render black/raw.
+  // Priority:
+  //  1. explicit `tint` string  → forced color
+  //  2. `tint === false`        → opt out (raw PNG)
+  //  3. golden /social variant  → rendered from the gold PNG below (no mask)
+  //  4. formula-state icon       → its tube color (calm/focus/energy), always
+  //  5. everything else          → the page spot color via --icon-spot
+  //     (defaults to AVRO blue; golf/PDP pages override --icon-spot)
   const autoColor = formulaIconColors[name as AvroIconName]
   const tintColor =
-    tint === false ? undefined : typeof tint === "string" ? tint : !golden ? autoColor : undefined
+    tint === false
+      ? undefined
+      : typeof tint === "string"
+        ? tint
+        : golden
+          ? undefined
+          : autoColor ?? "var(--icon-spot, var(--avro-blue-deep))"
 
   // Tinted icons render as a CSS-mask span so the PNG's alpha drives the shape
   // while the color comes from the formula/tube palette.

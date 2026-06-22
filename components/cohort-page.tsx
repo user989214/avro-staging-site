@@ -232,7 +232,15 @@ export function CohortPage({ data }: { data: CohortData }) {
   const wordEnd = isZeroProof ? "var(--gold)" : t.ink
 
   return (
-    <div style={{ backgroundColor: t.pageBg, color: t.ink }}>
+    <div
+      style={{
+        backgroundColor: t.pageBg,
+        color: t.ink,
+        // Golf tints all non-formula icons green; calm/focus/energy icons keep
+        // their tube colors. Social uses gold PNGs so it doesn't need this.
+        ...(isGolf ? ({ ["--icon-spot" as string]: "var(--golf)" } as React.CSSProperties) : {}),
+      }}
+    >
       {/* Hero — full-width, square corners (matches site-wide page hero language) */}
       <section
         style={{
