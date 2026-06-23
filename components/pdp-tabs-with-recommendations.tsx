@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { formulas, type FormulaKey } from "@/lib/data"
+import { formulas, otherIngredientsByFlavor, type FormulaKey } from "@/lib/data"
 import { ProductCard } from "@/components/product-visual"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 
@@ -196,7 +196,8 @@ export function PdpTabsWithRecommendations({ currentKey }: PdpTabsWithRecommenda
                 className="mt-4"
                 style={{ fontFamily: GC, fontWeight: 400, fontSize: "clamp(13px,1.2vw,17px)", color: "rgba(0,0,0,0.5)" }}
               >
-                Other ingredients: Citric acid, natural flavors, silica, stevia leaf extract.
+                <span style={{ fontWeight: 700, color: "var(--ink)" }}>Other ingredients:</span>{" "}
+                {otherIngredientsByFlavor[formulas[currentKey].flavors[0].id]}
               </p>
             </div>
           )}

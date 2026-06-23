@@ -24,7 +24,7 @@ const sharedBack: Ingredient[] = [
   {
     name: "Prebiotic Fiber",
     amount: "SOLUBLE GUAR FIBER + ACACIA FIBER",
-    description: "Supports gut comfort.* Part of AVRO's daily formula.*",
+    description: "Supports gut comfort.* Part of AVRO's daily formula.",
     image: "/images/ingredients/prebiotic-fiber-2.jpg",
   },
   {

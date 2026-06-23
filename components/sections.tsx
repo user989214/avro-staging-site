@@ -21,6 +21,8 @@ export function Section({ children, className, id, dark = false }: SectionProps 
       id={id}
       className={cn(
         "w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(52px,7vw,86px)]",
+        // Clear the 90px sticky nav when scrolled to via an anchor (#team etc.)
+        id && "scroll-mt-28",
         className
       )}
       style={bg ? { backgroundColor: bg } : undefined}
@@ -52,6 +54,7 @@ export function CardedSection({
       id={id}
       className={cn(
         "w-full max-w-[1440px] mx-auto px-[clamp(16px,5vw,64px)] py-[clamp(28px,4vw,56px)]",
+        id && "scroll-mt-28",
         className
       )}
     >
@@ -478,27 +481,25 @@ export function FinalCta({
   const mutedColor = dark ? "rgba(13,13,13,0.7)" : "rgba(21,21,21,0.7)"
   const btnBg = dark ? "var(--deep-black)" : "var(--charcoal)"
   const btnText = dark ? "var(--gold)" : "var(--bone)"
-  // Light variant is a full-width colored band (no rounded inset box).
-  // Dark (Zero Proof) keeps its gold card on a deep-black section.
-  const sectionBg = dark ? "var(--deep-black)" : bg
+  // Both variants render as a full-width colored band (no rounded inset box):
+  // light cohorts use the AVRO blue/green band, Zero Proof uses the gold band.
+  const sectionBg = bg
   return (
   <section
   style={{
   backgroundColor: sectionBg,
   width: "100%",
-  padding: dark
-    ? "clamp(32px,5vw,72px) clamp(16px,4vw,64px)"
-    : "clamp(56px,8vw,104px) clamp(16px,4vw,64px)",
+  padding: "clamp(56px,8vw,104px) clamp(16px,4vw,64px)",
   }}
   >
   <div
   style={{
   maxWidth: 1250,
   margin: "0 auto",
-  backgroundColor: dark ? bg : "transparent",
+  backgroundColor: "transparent",
   color: textColor,
-  borderRadius: dark ? 24 : 0,
-  padding: dark ? "clamp(32px,5vw,88px) clamp(20px,4vw,80px)" : 0,
+  borderRadius: 0,
+  padding: 0,
   display: "flex",
   flexDirection: "row",
   flexWrap: "wrap",

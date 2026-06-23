@@ -1,5 +1,5 @@
 import { type AvroIconName } from "@/components/avro-icons"
-import { supplementFactsByFlavor } from "@/lib/data"
+import { supplementFactsByFlavor, otherIngredientsByFlavor } from "@/lib/data"
 
 const GC = '"DM Sans", system-ui, sans-serif'
 
@@ -18,6 +18,18 @@ type Stack = {
 }
 
 export const stacks: Stack[] = [
+  {
+    key: "calm",
+    name: "AVRO Calm Stack",
+    claim: "This stack supports stress reduction and a calm, clear state.*",
+    tagline: "Powered by Naturally Fermented GABA — With Magnesium",
+    accent: "var(--avro-blue)",
+    icon: "relaxation-reduced-tension",
+    flavors: [
+      { name: "Blueberry Acai", flavorId: "blueberry-acai" },
+      { name: "Blackberry Jasmine", flavorId: "blackberry-jasmine" },
+    ],
+  },
   {
     key: "focus",
     name: "AVRO Focus Stack",
@@ -42,22 +54,11 @@ export const stacks: Stack[] = [
       { name: "Orange Tangerine", flavorId: "orange-tangerine" },
     ],
   },
-  {
-    key: "calm",
-    name: "AVRO Calm Stack",
-    claim: "This stack supports stress reduction and a calm, clear state.*",
-    tagline: "Powered by Naturally Fermented GABA — With Magnesium",
-    accent: "var(--avro-blue)",
-    icon: "relaxation-reduced-tension",
-    flavors: [
-      { name: "Blueberry Acai", flavorId: "blueberry-acai" },
-      { name: "Blackberry Jasmine", flavorId: "blackberry-jasmine" },
-    ],
-  },
 ]
 
 function FlavorCard({ flavor }: { flavor: Flavor }) {
   const panelSrc = supplementFactsByFlavor[flavor.flavorId]
+  const otherIngredients = otherIngredientsByFlavor[flavor.flavorId]
   return (
     <article
       className="rounded-[20px] flex flex-col"
@@ -80,6 +81,12 @@ function FlavorCard({ flavor }: { flavor: Flavor }) {
           style={{ backgroundColor: "var(--base)" }}
         />
       </div>
+
+      {otherIngredients && (
+        <p className="mt-4 text-[clamp(12px,1.1vw,14px)] leading-relaxed text-warm-gray">
+          <span className="font-bold text-ink">Other ingredients:</span> {otherIngredients}
+        </p>
+      )}
     </article>
   )
 }

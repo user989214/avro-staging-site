@@ -38,10 +38,13 @@ function FormulaGraph() {
   const FOCUS_COLOR = "#C13584"  // Focus tube: raspberry magenta
   const ENERGY_COLOR = "#E8A23D" // Energy tube: tangerine amber
 
+  // All three formulas share the same 200 mg PharmaGABA® base, so the blue
+  // segment is an identical width across every bar (equal row totals keep the
+  // flex normalization rendering the blue lines at the same pixel length).
   const formulas = [
-    { name: "Calm",   nameColor: CALM_COLOR,   segments: [{ color: BLUE, width: 70, label: "PharmaGABA®" }, { color: CALM_COLOR,   width: 30, label: "Magnesium" }] },
+    { name: "Calm",   nameColor: CALM_COLOR,   segments: [{ color: BLUE, width: 60, label: "PharmaGABA®" }, { color: CALM_COLOR,   width: 40, label: "Magnesium" }] },
     { name: "Focus",  nameColor: FOCUS_COLOR,  segments: [{ color: BLUE, width: 60, label: "PharmaGABA®" }, { color: FOCUS_COLOR,  width: 40, label: "Cognigrape®" }] },
-    { name: "Energy", nameColor: ENERGY_COLOR, segments: [{ color: BLUE, width: 55, label: "PharmaGABA®" }, { color: ENERGY_COLOR, width: 45, label: "Caffeine" }] },
+    { name: "Energy", nameColor: ENERGY_COLOR, segments: [{ color: BLUE, width: 60, label: "PharmaGABA®" }, { color: ENERGY_COLOR, width: 40, label: "Caffeine" }] },
   ]
 
   return (
@@ -1054,11 +1057,12 @@ export function HomeQualityRow() {
           `}</style>
           <div className="quality-badge-grid">
             {badges.map((b) => (
-              <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, padding: "clamp(20px,3vw,32px) clamp(12px,2vw,20px)", textAlign: "center", backgroundColor: "var(--bone)" }}>
+              <div key={b.label} style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", gap: 10, padding: "clamp(20px,3vw,32px) clamp(12px,2vw,20px)", textAlign: "center", backgroundColor: "var(--bone)" }}>
                 <AvroIcon name={b.icon} size={64} className="md:w-20 md:h-20 opacity-80" />
                 <div>
-                  <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(15px,1.4vw,19px)", color: "var(--ink)", lineHeight: 1.2, display: "block" }}>{b.label}</strong>
-                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(13px,1.05vw,16px)", color: "var(--warm-gray)" }}>{b.sub}</span>
+                  {/* Reserve two lines for every label so titles + sub-labels align across all badges, even when one wraps (e.g. "Naturally Fermented") */}
+                  <strong style={{ fontFamily: GC, fontWeight: 700, fontSize: "clamp(15px,1.4vw,19px)", color: "var(--ink)", lineHeight: 1.2, display: "flex", alignItems: "center", justifyContent: "center", minHeight: "2.4em" }}>{b.label}</strong>
+                  <span style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(13px,1.05vw,16px)", color: "var(--warm-gray)", display: "block" }}>{b.sub}</span>
                 </div>
               </div>
             ))}

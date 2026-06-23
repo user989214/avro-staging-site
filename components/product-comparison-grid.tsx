@@ -89,12 +89,12 @@ export function ProductComparisonGrid({ currentKey }: ProductComparisonGridProps
                   href={`/${key}`}
                   className="relative flex items-center justify-center overflow-hidden"
                   style={{
-                    backgroundColor: "var(--bone)",
+                    backgroundColor: "#ffffff",
                     borderRadius: 20,
                     aspectRatio: "1 / 1",
                   }}
                 >
-                  <ProductCard formulaKey={key} className="h-full w-full object-cover" />
+                  <ProductCard formulaKey={key} className="h-full w-full object-contain p-4" />
                   {isActive && (
                     <span
                       className="absolute top-4 right-4 px-3 py-1.5"

@@ -37,13 +37,13 @@ const team = [
     image: "/images/team/peter.jpg",
   },
   {
-    name: "Holly",
-    role: "Team",
+    name: "Holly Weber",
+    role: "Partnerships & Customer Success Manager",
     image: "/images/team/holly.jpg",
   },
   {
-    name: "Marianne",
-    role: "Team",
+    name: "Marianne Lyles",
+    role: "Growth & Marketing Director",
     image: "/images/team/marianne.jpg",
   },
 ]

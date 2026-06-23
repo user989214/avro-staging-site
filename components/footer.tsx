@@ -188,25 +188,22 @@ export function Footer() {
                   color: c.text,
                 }}
               >
-                ** Source:{" "}
-                <a
-                  href="https://www.pharmagaba.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: c.text, fontWeight: 700, textDecoration: "underline" }}
-                >
-                  www.pharmagaba.com
-                </a>
+                ** Source: www.pharmagaba.com
               </small>
             </div>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 pt-6">
               <span style={{ fontWeight: 400, fontSize: "12px", color: c.textFaint }}>
                 © 2026 AVRO Life
               </span>
-              {["Privacy", "Terms", "Accessibility", "Returns"].map((label) => (
+              {[
+                { label: "Privacy", href: "/privacy" },
+                { label: "Terms", href: "/terms" },
+                { label: "Accessibility", href: "/accessibility" },
+                { label: "Returns", href: "/returns" },
+              ].map(({ label, href }) => (
                 <Link
                   key={label}
-                  href="/faq"
+                  href={href}
                   className="hover:opacity-100 transition-opacity"
                   style={{
                     fontWeight: 500,
