@@ -441,7 +441,7 @@ export function FaqBlock({
             <summary className="flex justify-between gap-4 px-5.5 py-4.5 cursor-pointer font-extrabold select-none after:content-['+'] after:text-[22px] after:leading-none group-open:after:content-['-']">
               {q}
             </summary>
-            <p className={cn("px-5.5 pb-5 leading-relaxed", mutedText)}>{a}</p>
+            <p className={cn("px-5.5 pb-5 leading-relaxed whitespace-pre-line", mutedText)}>{a}</p>
           </details>
         ))}
       </div>

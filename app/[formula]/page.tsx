@@ -204,21 +204,6 @@ export default async function ProductPage({
             ))}
           </div>
 
-          {/* Feeling section source footnote */}
-          <p
-            style={{
-              fontFamily: GC,
-              fontWeight: 400,
-              fontSize: "clamp(10px,0.85vw,12px)",
-              lineHeight: 1.5,
-              color: "rgba(0,0,0,0.38)",
-              marginBottom: "clamp(20px,3vw,40px)",
-              marginTop: -16,
-            }}
-          >
-            Benefit icons are for illustrative purposes only.
-          </p>
-
           {/* Graph section - two columns */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 24, alignItems: "center" }}>
             <style>{`

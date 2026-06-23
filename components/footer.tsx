@@ -179,6 +179,8 @@ export function Footer() {
               * These statements have not been evaluated by the Food and Drug
               Administration. This product is not intended to diagnose, treat,
               cure, or prevent any disease.
+              <br />
+              ** Source: www.pharmagaba.com
             </small>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 pt-6">
               <span style={{ fontWeight: 400, fontSize: "12px", color: c.textFaint }}>
