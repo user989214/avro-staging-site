@@ -82,7 +82,7 @@ export default function IngredientsPage() {
         <div className="w-full max-w-[1440px] mx-auto px-[clamp(16px,5vw,64px)] mb-[clamp(8px,2vw,16px)]">
           <SectionHeading
             title="Three stacks. Six flavors. Nothing hidden."
-            description="Here is the approved Supplement Facts panel for every flavor across Calm, Focus, and Energy."
+            description="These are the Supplement Facts panels for every flavor across Calm, Focus, and Energy."
           />
         </div>
         <IngredientStacks />

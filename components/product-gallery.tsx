@@ -9,6 +9,7 @@ import {
   type TubeScene,
 } from "@/components/product-visual"
 import type { FormulaKey, Formula } from "@/lib/data"
+import { supplementFactsByFlavor, defaultPanelForFormula } from "@/lib/data"
 
 interface ProductGalleryProps {
   formula: Formula
@@ -20,7 +21,7 @@ interface ProductGalleryProps {
   rating?: number
 }
 
-type ThumbKind = "studio" | "tube" | "stick" | "glass" | TubeScene
+type ThumbKind = "studio" | "tube" | "stick" | "glass" | "facts" | TubeScene
 
 interface Thumb {
   id: ThumbKind
@@ -44,11 +45,16 @@ export function ProductGallery({ formula, formulaKey, flavorId, onMainImageClick
   const stick = stickImageFor(formulaKey, flavorId)
   const glass = glassLifestyleFor(formulaKey, flavorId)
 
-  // Keep only the product/packshot views plus the in-glass lifestyle shot.
+  // Approved Supplement Facts panel for the selected flavor.
+  const factsPanel = supplementFactsByFlavor[flavorId] || defaultPanelForFormula(formulaKey)
+
+  // Keep only the product/packshot views plus the in-glass lifestyle shot,
+  // then the approved Supplement Facts panel as the final thumbnail.
   // The AVRO-in-environment cohort renders (SCENE_THUMBS) are intentionally omitted.
   const thumbs: Thumb[] = [
     ...PRODUCT_THUMBS,
     ...(glass ? [{ id: "glass" as const, label: "In the Glass", bg: "scene" as const }] : []),
+    ...(factsPanel ? [{ id: "facts" as const, label: "Supplement Facts", bg: "white" as const }] : []),
   ]
 
   void formula
@@ -106,6 +112,19 @@ export function ProductGallery({ formula, formulaKey, flavorId, onMainImageClick
       )
     }
 
+    if (activeId === "facts") {
+      return (
+        <div className="relative w-full h-full overflow-hidden flex items-center justify-center p-6 sm:p-10" style={{ backgroundColor: "#FFFFFF" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={factsPanel || "/placeholder.svg"}
+            alt={`${formula.name} Supplement Facts panel`}
+            className="max-w-full max-h-full object-contain"
+          />
+        </div>
+      )
+    }
+
     // Lifestyle cohort scene — render edge-to-edge so its real background fills the frame.
     const scene = tubeImageFor(activeId as TubeScene, formulaKey, flavorId)
     return (
@@ -158,6 +177,17 @@ export function ProductGallery({ formula, formulaKey, flavorId, onMainImageClick
           src={glass.src}
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
+        />
+      )
+    }
+    if (thumb.id === "facts") {
+      return (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={factsPanel || "/placeholder.svg"}
+          alt=""
+          className="absolute inset-0 w-full h-full object-contain p-1"
+          style={{ backgroundColor: "#FFFFFF" }}
         />
       )
     }

@@ -167,19 +167,38 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <small
-              style={{
-                fontWeight: 400,
-                fontSize: "11px",
-                lineHeight: 1.5,
-                color: c.text,
-                maxWidth: 760,
-              }}
-            >
-              * These statements have not been evaluated by the Food and Drug
-              Administration. This product is not intended to diagnose, treat,
-              cure, or prevent any disease.
-            </small>
+            <div style={{ maxWidth: 760, display: "flex", flexDirection: "column", gap: 8 }}>
+              <small
+                style={{
+                  fontWeight: 400,
+                  fontSize: "11px",
+                  lineHeight: 1.6,
+                  color: c.text,
+                }}
+              >
+                * These statements have not been evaluated by the Food and Drug
+                Administration. This product is not intended to diagnose, treat,
+                cure, or prevent any disease.
+              </small>
+              <small
+                style={{
+                  fontWeight: 700,
+                  fontSize: "11px",
+                  lineHeight: 1.6,
+                  color: c.text,
+                }}
+              >
+                ** Source:{" "}
+                <a
+                  href="https://www.pharmagaba.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: c.text, fontWeight: 700, textDecoration: "underline" }}
+                >
+                  www.pharmagaba.com
+                </a>
+              </small>
+            </div>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 pt-6">
               <span style={{ fontWeight: 400, fontSize: "12px", color: c.textFaint }}>
                 © 2026 AVRO Life

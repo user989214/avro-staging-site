@@ -100,7 +100,7 @@ export function SectionHeading({
         {title}
       </h2>
       {description && (
-        <p className={cn("max-w-[760px] mx-auto text-lg md:text-xl leading-relaxed font-medium", mutedText)}>
+        <p className={cn("max-w-[760px] text-lg md:text-xl leading-relaxed font-medium", centered && "mx-auto", mutedText)}>
           {description}
         </p>
       )}
@@ -441,7 +441,7 @@ export function FaqBlock({
             <summary className="flex justify-between gap-4 px-5.5 py-4.5 cursor-pointer font-extrabold select-none after:content-['+'] after:text-[22px] after:leading-none group-open:after:content-['-']">
               {q}
             </summary>
-            <p className={cn("px-5.5 pb-5 leading-relaxed", mutedText)}>{a}</p>
+            <p className={cn("px-5.5 pb-5 leading-relaxed whitespace-pre-line", mutedText)}>{a}</p>
           </details>
         ))}
       </div>

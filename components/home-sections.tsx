@@ -734,7 +734,7 @@ export function HomeLogicRow() {
     {
       title: "Calm first, then clarity.",
       icon: "calm-first-foundation",
-      content: "Every AVRO formula starts with naturally fermented PharmaGABA®. It's the calm-first foundation that makes everything else work better."
+      content: "Every AVRO formula starts with naturally fermented PharmaGABA®. It's the calm-first foundation that makes everything else work better.*"
     },
   ]
 
@@ -1002,7 +1002,7 @@ export function HomeScienceGrid() {
                 Why GABA matters.
               </h2>
               <p style={{ fontFamily: GC, fontWeight: 500, fontSize: "clamp(14px,1.1vw,18px)", lineHeight: 1.5, color: "var(--warm-gray)", marginBottom: 18 }}>
-                GABA is a naturally occurring compound associated with relaxation and balance. AVRO uses naturally fermented PharmaGABA® as the foundation of every formula.
+                GABA is a naturally occurring compound associated with relaxation and balance. AVRO uses naturally fermented PharmaGABA® as the foundation of every formula.**
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap", marginBottom: 18 }}>
                 {([["Naturally Fermented", "naturally-fermented-pharmagaba"], ["Calm First", "calm-first-foundation"], ["In Every Formula", "ingredient-disclosure"]] as const).map(([label, iconName], i) => (

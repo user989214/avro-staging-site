@@ -422,11 +422,11 @@ export function Header() {
 
         {/* Logo - center */}
         <Link
-          href={isGolf ? "/golf" : "/"}
+          href="/"
           className={`flex items-center justify-center justify-self-center md:justify-self-auto ${
             isGolf ? "w-[clamp(118px,13vw,168px)]" : "w-[clamp(110px,12vw,160px)]"
           }`}
-          aria-label={isGolf ? "AVRO Golf home" : "AVRO home"}
+          aria-label="AVRO home"
         >
           <Image
             src={

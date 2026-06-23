@@ -20,7 +20,7 @@ export const formulas = {
     heroSupport: "Clear headed. Ready when pressure rises.*",
     support: "Calm support without stimulation.*",
     bestFor:
-      "Travel days, social calm, pre-match nerves and for a daily reset.",
+      "Golf, competition, travel, social situations, and other pressure-filled moments.*",
     addition: "Magnesium Bisglycinate",
     review:
       "Helps me stay composed without feeling dull. It is part of my pre-meeting routine.",
@@ -49,7 +49,7 @@ export const formulas = {
     heroSupport: "Clear headed. Ready to focus.*",
     support: "Clarity and focus support without caffeine.*",
     bestFor:
-      "Deep work, competitive rounds, studying, creative work and longer attention blocks.",
+      "Deep work, studying, gaming, creative work, and longer attention blocks.*",
     addition: "Cognigrape®",
     review:
       "Great for work blocks and long sessions. Clear without feeling frantic.",
@@ -77,7 +77,7 @@ export const formulas = {
     heroSupport: "Steady energy. Ready when it matters.*",
     support: "Natural caffeine with a calm-first foundation.*",
     bestFor:
-      "Mornings, early start times, long workdays and steady energy with built in calm.",
+      "Early starts, long workdays, training, competition, and steady energy without the overamped feeling.*",
     addition: "Natural Caffeine",
     review:
       "Clean lift for demanding mornings without feeling overcaffeinated.",
@@ -185,20 +185,22 @@ export const cohortData = {
     faqs: [
       [
         "Which AVRO formula is best for golf?",
-        "The best fit depends on your tee time, caffeine preference, and type of round. Calm is caffeine free, Focus is caffeine free with clarity support, and Energy adds 120 mg natural caffeine with a calm-first foundation.",
+        "The right AVRO formula depends on your tee time, caffeine preference, and the type of support you want.\nCalm is caffeine-free and designed for moments when composure matters.\nFocus is caffeine-free and supports clarity and concentration.\nEnergy provides 120 mg of natural caffeine with AVRO's calm-first foundation.*",
       ],
       [
         "When should I take AVRO before a round?",
-        "Most people use one stick about 30 minutes before the round, practice session, or golf moment.",
+        "Many golfers choose to take one stick about 30 minutes before a round, lesson, practice session, or competition. Mix with water and use as directed on the package.",
       ],
       [
-        "Is AVRO a sports performance supplement?",
-        "AVRO is positioned as a calm-first drink mix for state, routine, clarity, and composure before pressure-sensitive moments. It does not claim to improve scores, accuracy, putting, or swing mechanics.",
+        "Is AVRO a sports-performance supplement?",
+        "AVRO is a calm-first performance drink mix designed to support clarity, composure, and the right headspace before pressure-filled moments.*",
       ],
     ],
     finalTitle: "Choose the formula that fits your round.",
     finalCopy:
       "Start calm. Stay clear. Choose the AVRO formula that matches your moment on the course.",
+    chartSource:
+      "Graphic adapted from information provided by Pharma Foods International Co., Ltd., manufacturer of PharmaGABA®. Source: PharmaGABA.com**",
   },
   social: {
     eyebrow: "Alcohol free social ritual",
@@ -247,14 +249,21 @@ export const cohortData = {
     shopTitle: "Shop AVRO for social",
     faqTitle: "Social / Zero Proof FAQ",
     faqs: [
-      ["Is AVRO alcoholic?", "No. AVRO is an alcohol-free daily drink mix."],
       [
-        "Which formula is best for evening social settings?",
-        "Calm is usually the best fit for evening social settings because it is caffeine free and designed for calm support.",
+        "Is AVRO alcoholic?",
+        "No. AVRO is an alcohol-free drink mix designed for people who want a more intentional option for social occasions, evenings out, and everyday routines.",
       ],
       [
-        "Can I use AVRO as a mocktail base?",
-        "Yes. AVRO can be mixed with still or sparkling water and used as a functional mocktail base.",
+        "Which AVRO formula is best for social occasions?",
+        "AVRO Calm is usually the best choice for evening social settings. It is caffeine-free and supports a calm, composed headspace without stimulation.*\nAVRO Focus is also caffeine-free and may be a better fit when you want clarity and concentration.*\nAVRO Energy contains 120 mg of natural caffeine and is better suited to daytime events, long evenings, or occasions when you want added energy.*",
+      ],
+      [
+        "Can I use AVRO as a zero-proof cocktail base?",
+        "Yes. Mix AVRO with still or sparkling water and serve it over ice. You can also add citrus, fresh herbs, fruit, or another alcohol-free mixer to create a simple zero-proof drink.",
+      ],
+      [
+        "Is AVRO only for people who do not drink alcohol?",
+        "No. AVRO is for anyone looking for an alcohol-free option—whether you are skipping alcohol for the night, cutting back, driving, training, or simply choosing something different.",
       ],
     ],
     finalTitle: "Choose your state for the moment.",
@@ -312,20 +321,22 @@ export const cohortData = {
     faqs: [
       [
         "Which AVRO formula is best for work?",
-        "The best fit depends on the work moment. Calm supports calm without caffeine, Focus supports clarity and focus without caffeine, and Energy supports steady energy with 120 mg natural caffeine.",
+        "The right formula depends on the work moment.\nCalm is caffeine-free and designed for presentations, high-pressure meetings, travel days, and moments when composure matters.\nFocus is caffeine-free and supports clarity and concentration during deep work, studying, coding, creative projects, and longer attention blocks.*\nEnergy provides 120 mg of natural caffeine with AVRO's calm-first foundation for early starts, demanding workdays, and sustained productivity.*",
       ],
       [
         "Is AVRO just another energy product?",
-        "No. AVRO starts with a calm-first foundation and Energy is only one part of the lineup.",
+        "No. AVRO is built around a calm-first approach to performance.\nThe lineup includes two caffeine-free formulas—Calm and Focus—plus Energy for people who want natural caffeine without abandoning the calm-first foundation.*",
       ],
       [
         "Can I take AVRO with coffee?",
-        "You can, but consider total caffeine intake, especially with AVRO Energy. If you are caffeine sensitive, speak with a healthcare professional.",
+        "Calm and Focus are caffeine-free. AVRO Energy contains 120 mg of natural caffeine per serving.\nWhen combining AVRO Energy with coffee or other caffeinated products, consider your total daily caffeine intake and personal sensitivity. Use as directed, and consult a healthcare professional when appropriate.",
       ],
     ],
     finalTitle: "Choose the formula that fits your workday.",
     finalCopy:
       "Start calm. Stay clear. Choose the AVRO formula that matches your moment.",
+    chartSource:
+      'Based on a randomized, double-blind, placebo-controlled human study evaluating daily intake of 200 mg of GABA and measures of cognitive function.\nSource: Pharma Foods International Co., Ltd., "Improvement of Cognitive Health," PharmaGABA.com.\nResults are from an ingredient study and may not be representative of all users. The study evaluated GABA and was not conducted on the finished AVRO product.',
   },
   gaming: {
     eyebrow: "Built for esports",
@@ -387,6 +398,8 @@ export const cohortData = {
     finalTitle: "Choose the formula that fits your session.",
     finalCopy:
       "Start calm. Stay clear. Choose the AVRO formula that matches your moment.",
+    chartSource:
+      "Graphic adapted from information provided by Pharma Foods International Co., Ltd., manufacturer of PharmaGABA®. Source: PharmaGABA.com**",
   },
 } as const
 

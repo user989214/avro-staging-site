@@ -233,20 +233,20 @@ export default function ShopPage() {
       {/* Tone-band switch — soft shift to --base-deep to differentiate the lower-page rhythm */}
       <div style={{ backgroundColor: "var(--base-deep)" }}>
         <FaqBlock
-          title="Questions? We have answers."
+          title="Questions? We Have Answers."
           centered={false}
           faqs={[
             [
               "What is AVRO?",
-              "AVRO is a calm-first daily drink mix designed to support calm, clarity, focus, and steady energy before pressure-sensitive moments.*",
+              "AVRO is a calm-first performance drink mix designed to support composure, clarity, focus, and steady energy for the moments that demand more from you.*",
             ],
             [
-              "Which formula is right for me?",
-              "Choose Calm for caffeine-free composure, Focus for caffeine-free clarity support, or Energy for steady energy with 120 mg natural caffeine.*",
+              "Which AVRO formula is right for me?",
+              "Choose Calm for caffeine-free composure, Focus for caffeine-free clarity and concentration, or Energy for 120 mg of natural caffeine with a calm-first foundation.*",
             ],
             [
               "Can I take AVRO every day?",
-              "AVRO can fit into a daily routine. Choose your formula based on timing, caffeine preference, and your moment.",
+              "Yes. AVRO is designed to fit into a daily routine. Choose the formula that matches your schedule, caffeine preference, and the kind of support you want that day.",
             ],
           ]}
         />

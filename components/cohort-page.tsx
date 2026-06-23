@@ -66,9 +66,11 @@ const COHORT_GRAPHIC_HEADERS: Record<string, { title: string; copy: string }> = 
 function CohortGraphicSection({
   graphic,
   header,
+  source,
 }: {
   graphic: CohortGraphic
   header?: { title: string; copy: string }
+  source?: string
 }) {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)" }}>
@@ -102,10 +104,11 @@ function CohortGraphicSection({
           </div>
         )}
         <EmbeddedGraphic src={graphic.src} ratio={graphic.ratio} title={graphic.title} />
-        <ChartSource>
-          Source: Lorem ipsum dolor sit amet (2024). Illustrative data shown for demonstration
-          purposes only; individual results may vary.
-        </ChartSource>
+        {source && (
+          <ChartSource>
+            <span style={{ whiteSpace: "pre-line" }}>{source}</span>
+          </ChartSource>
+        )}
       </div>
     </section>
   )
@@ -134,6 +137,8 @@ interface CohortData {
   faqs: [string, string][]
   finalTitle: string
   finalCopy: string
+  /** Optional source / disclaimer line(s) shown under the chart graphic. */
+  chartSource?: string
 }
 
 export function CohortPage({ data }: { data: CohortData }) {
@@ -610,7 +615,7 @@ export function CohortPage({ data }: { data: CohortData }) {
           intentionally skips the chart slot. Golf, Gaming and Work render the brand
           data graphics verbatim; remaining cohorts use the animated CohortChart. */}
       {!isZeroProof && COHORT_GRAPHICS[data.visual] ? (
-        <CohortGraphicSection graphic={COHORT_GRAPHICS[data.visual]} header={COHORT_GRAPHIC_HEADERS[data.visual]} />
+        <CohortGraphicSection graphic={COHORT_GRAPHICS[data.visual]} header={COHORT_GRAPHIC_HEADERS[data.visual]} source={data.chartSource} />
       ) : (
         !isZeroProof && <CohortChart visualKey={data.visual} accent={accent} dark={isZeroProof} />
       )}

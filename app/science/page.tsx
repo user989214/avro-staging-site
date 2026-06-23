@@ -72,34 +72,35 @@ export default function SciencePage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(28px,6vw,80px)]">
           <div>
             <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5">
-              A naturally occurring part of the<br />body&apos;s balance system.
+              Calm Performance Starts With GABA
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               GABA is a naturally occurring compound involved in the body&apos;s
-              signaling and regulation processes. AVRO uses a naturally
-              fermented form as part of its calm-first foundation.
+              communication and regulation processes. AVRO uses naturally
+              fermented PharmaGABA® to help support a calm, composed state before
+              pressure-filled moments.*
             </p>
           </div>
           <div>
             <h2 className="font-serif font-black text-[clamp(30px,4vw,52px)] leading-[1.05] mb-3.5">
-              Why AVRO uses PharmaGABA®.
+              Why PharmaGABA®
             </h2>
             <div className="grid gap-5">
           <p className="grid grid-cols-[64px_1fr] md:grid-cols-[80px_1fr] gap-4 items-center text-ink">
               <AvroIcon name="naturally-fermented-pharmagaba" size={64} className="md:w-20 md:h-20" />
-              Produced through a natural fermentation process.
+              Naturally fermented
               </p>
           <p className="grid grid-cols-[64px_1fr] md:grid-cols-[80px_1fr] gap-4 items-center text-ink">
               <AvroIcon name="consistency-quality" size={64} className="md:w-20 md:h-20" />
-              Selected for reliable composition and ingredient quality.
+              Consistent ingredient quality
               </p>
           <p className="grid grid-cols-[64px_1fr] md:grid-cols-[80px_1fr] gap-4 items-center text-ink">
               <AvroIcon name="science-backed" size={64} className="md:w-20 md:h-20" />
-              Supported by published studies and ingredient research.
+              Supported by published research
               </p>
           <p className="grid grid-cols-[64px_1fr] md:grid-cols-[80px_1fr] gap-4 items-center text-ink">
               <AvroIcon name="calm-first-foundation" size={64} className="md:w-20 md:h-20" />
-                Chosen because it fits AVRO&apos;s calm-first foundation.
+                Used at 200 mg active GABA in every AVRO formula
               </p>
             </div>
           </div>
