@@ -180,7 +180,15 @@ export function Footer() {
               Administration. This product is not intended to diagnose, treat,
               cure, or prevent any disease.
               <br />
-              ** Source: www.pharmagaba.com
+              ** Source:{" "}
+              <a
+                href="https://www.pharmagaba.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: c.text, textDecoration: "underline" }}
+              >
+                www.pharmagaba.com
+              </a>
             </small>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 pt-6">
               <span style={{ fontWeight: 400, fontSize: "12px", color: c.textFaint }}>
