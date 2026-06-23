@@ -20,7 +20,7 @@ export const formulas = {
     heroSupport: "Clear headed. Ready when pressure rises.*",
     support: "Calm support without stimulation.*",
     bestFor:
-      "Travel days, social calm, pre-match nerves and for a daily reset.",
+      "Golf, competition, travel, social situations, and other pressure-filled moments.*",
     addition: "Magnesium Bisglycinate",
     review:
       "Helps me stay composed without feeling dull. It is part of my pre-meeting routine.",
@@ -49,7 +49,7 @@ export const formulas = {
     heroSupport: "Clear headed. Ready to focus.*",
     support: "Clarity and focus support without caffeine.*",
     bestFor:
-      "Deep work, competitive rounds, studying, creative work and longer attention blocks.",
+      "Deep work, studying, gaming, creative work, and longer attention blocks.*",
     addition: "Cognigrape®",
     review:
       "Great for work blocks and long sessions. Clear without feeling frantic.",
@@ -77,7 +77,7 @@ export const formulas = {
     heroSupport: "Steady energy. Ready when it matters.*",
     support: "Natural caffeine with a calm-first foundation.*",
     bestFor:
-      "Mornings, early start times, long workdays and steady energy with built in calm.",
+      "Early starts, long workdays, training, competition, and steady energy without the overamped feeling.*",
     addition: "Natural Caffeine",
     review:
       "Clean lift for demanding mornings without feeling overcaffeinated.",
