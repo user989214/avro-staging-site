@@ -182,10 +182,10 @@ export function Footer() {
               </small>
               <small
                 style={{
-                  fontWeight: 400,
+                  fontWeight: 700,
                   fontSize: "11px",
                   lineHeight: 1.6,
-                  color: c.textFaint,
+                  color: c.text,
                 }}
               >
                 ** Source:{" "}
@@ -193,7 +193,7 @@ export function Footer() {
                   href="https://www.pharmagaba.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: c.textFaint, textDecoration: "underline" }}
+                  style={{ color: c.text, fontWeight: 700, textDecoration: "underline" }}
                 >
                   www.pharmagaba.com
                 </a>
