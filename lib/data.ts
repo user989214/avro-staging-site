@@ -102,6 +102,26 @@ export const supplementFactsByFlavor: Record<string, string> = {
   "orange-tangerine": "/images/supplement-facts/orange-tangerine.png",
 }
 
+/**
+ * "Other ingredients" statement per flavor, transcribed from the approved
+ * Supplement Facts labels. Energy flavors differ (Fuji Apple includes
+ * Vegetable Juice + Spirulina color), so this is keyed per flavor, not stack.
+ */
+export const otherIngredientsByFlavor: Record<string, string> = {
+  "blueberry-acai":
+    "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica.",
+  "blackberry-jasmine":
+    "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica.",
+  "pomegranate-raspberry":
+    "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Silica.",
+  "red-dragon-fruit":
+    "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Silica.",
+  "fuji-apple":
+    "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Beta Carotene Color, Stevia Leaf Extract, Vegetable Juice Color, Spirulina Color, Silica.",
+  "orange-tangerine":
+    "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Beta Carotene Color, Stevia Leaf Extract, Natural Flavor, Silica.",
+}
+
 /** Convenience: the default (first-flavor) panel image for each formula. */
 export function defaultPanelForFormula(key: FormulaKey): string {
   const firstFlavorId = formulas[key].flavors[0].id
