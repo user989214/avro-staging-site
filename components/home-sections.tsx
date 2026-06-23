@@ -38,10 +38,13 @@ function FormulaGraph() {
   const FOCUS_COLOR = "#C13584"  // Focus tube: raspberry magenta
   const ENERGY_COLOR = "#E8A23D" // Energy tube: tangerine amber
 
+  // All three formulas share the same 200 mg PharmaGABA® base, so the blue
+  // segment is an identical width across every bar (equal row totals keep the
+  // flex normalization rendering the blue lines at the same pixel length).
   const formulas = [
-    { name: "Calm",   nameColor: CALM_COLOR,   segments: [{ color: BLUE, width: 70, label: "PharmaGABA®" }, { color: CALM_COLOR,   width: 30, label: "Magnesium" }] },
+    { name: "Calm",   nameColor: CALM_COLOR,   segments: [{ color: BLUE, width: 60, label: "PharmaGABA®" }, { color: CALM_COLOR,   width: 40, label: "Magnesium" }] },
     { name: "Focus",  nameColor: FOCUS_COLOR,  segments: [{ color: BLUE, width: 60, label: "PharmaGABA®" }, { color: FOCUS_COLOR,  width: 40, label: "Cognigrape®" }] },
-    { name: "Energy", nameColor: ENERGY_COLOR, segments: [{ color: BLUE, width: 55, label: "PharmaGABA®" }, { color: ENERGY_COLOR, width: 45, label: "Caffeine" }] },
+    { name: "Energy", nameColor: ENERGY_COLOR, segments: [{ color: BLUE, width: 60, label: "PharmaGABA®" }, { color: ENERGY_COLOR, width: 40, label: "Caffeine" }] },
   ]
 
   return (

@@ -82,7 +82,7 @@ export function BuyBox({ formula, formulaKey, flavorId, onFlavorChange, onAddToC
             color: "var(--warm-gray)",
           }}
         >
-          10 stick packets per box*
+          10 stick packets per box
         </p>
       </header>
 

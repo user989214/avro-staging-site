@@ -203,10 +203,15 @@ export function Footer() {
               <span style={{ fontWeight: 400, fontSize: "12px", color: c.textFaint }}>
                 © 2026 AVRO Life
               </span>
-              {["Privacy", "Terms", "Accessibility", "Returns"].map((label) => (
+              {[
+                { label: "Privacy", href: "/privacy" },
+                { label: "Terms", href: "/terms" },
+                { label: "Accessibility", href: "/accessibility" },
+                { label: "Returns", href: "/returns" },
+              ].map(({ label, href }) => (
                 <Link
                   key={label}
-                  href="/faq"
+                  href={href}
                   className="hover:opacity-100 transition-opacity"
                   style={{
                     fontWeight: 500,

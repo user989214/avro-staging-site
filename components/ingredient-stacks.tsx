@@ -19,6 +19,18 @@ type Stack = {
 
 export const stacks: Stack[] = [
   {
+    key: "calm",
+    name: "AVRO Calm Stack",
+    claim: "This stack supports stress reduction and a calm, clear state.*",
+    tagline: "Powered by Naturally Fermented GABA — With Magnesium",
+    accent: "var(--avro-blue)",
+    icon: "relaxation-reduced-tension",
+    flavors: [
+      { name: "Blueberry Acai", flavorId: "blueberry-acai" },
+      { name: "Blackberry Jasmine", flavorId: "blackberry-jasmine" },
+    ],
+  },
+  {
     key: "focus",
     name: "AVRO Focus Stack",
     claim: "This stack supports focus and productivity without caffeine.*",
@@ -40,18 +52,6 @@ export const stacks: Stack[] = [
     flavors: [
       { name: "Fuji Apple", flavorId: "fuji-apple" },
       { name: "Orange Tangerine", flavorId: "orange-tangerine" },
-    ],
-  },
-  {
-    key: "calm",
-    name: "AVRO Calm Stack",
-    claim: "This stack supports stress reduction and a calm, clear state.*",
-    tagline: "Powered by Naturally Fermented GABA — With Magnesium",
-    accent: "var(--avro-blue)",
-    icon: "relaxation-reduced-tension",
-    flavors: [
-      { name: "Blueberry Acai", flavorId: "blueberry-acai" },
-      { name: "Blackberry Jasmine", flavorId: "blackberry-jasmine" },
     ],
   },
 ]
