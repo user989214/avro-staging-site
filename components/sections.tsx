@@ -100,7 +100,7 @@ export function SectionHeading({
         {title}
       </h2>
       {description && (
-        <p className={cn("max-w-[760px] mx-auto text-lg md:text-xl leading-relaxed font-medium", mutedText)}>
+        <p className={cn("max-w-[760px] text-lg md:text-xl leading-relaxed font-medium", centered && "mx-auto", mutedText)}>
           {description}
         </p>
       )}

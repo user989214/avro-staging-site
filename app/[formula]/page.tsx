@@ -16,6 +16,25 @@ import { Breadcrumbs } from "@/components/breadcrumbs"
 const GC = '"DM Sans", system-ui, sans-serif'
 const BLUE = "#94C6D4"
 
+// Small source/disclaimer note rendered beneath a study chart.
+function ChartSourceNote({ children }: { children: React.ReactNode }) {
+  return (
+    <p
+      style={{
+        fontFamily: GC,
+        fontWeight: 400,
+        fontSize: "clamp(10px,0.85vw,12px)",
+        lineHeight: 1.5,
+        color: "var(--warm-gray)",
+        marginTop: 12,
+        whiteSpace: "pre-line",
+      }}
+    >
+      {children}
+    </p>
+  )
+}
+
 const validFormulas = ["calm", "focus", "energy"] as const
 
 // "The feeling of good calm/focus/energy" section benefit cards - 4 icons
@@ -288,9 +307,19 @@ export default async function ProductPage({
 
               {/* Right side - chart (study-based for Calm & Focus, curve for Energy) */}
               {key === "calm" ? (
-                <EmbeddedGraphic src="/graphics/calm.html" ratio="1200 / 740" title="Calm: stress (CgA) & cortisol study" />
+                <div>
+                  <EmbeddedGraphic src="/graphics/calm.html" ratio="1200 / 740" title="Calm: stress (CgA) & cortisol study" />
+                  <ChartSourceNote>
+                    Graphic adapted from information provided by Pharma Foods International Co., Ltd., manufacturer of PharmaGABA®. Source: PharmaGABA.com**
+                  </ChartSourceNote>
+                </div>
               ) : key === "focus" ? (
-                <EmbeddedGraphic src="/graphics/focus.html" ratio="1400 / 620" title="Focus: improved cognitive functions by GABA" />
+                <div>
+                  <EmbeddedGraphic src="/graphics/focus.html" ratio="1400 / 620" title="Focus: improved cognitive functions by GABA" />
+                  <ChartSourceNote>
+                    {'Based on a randomized, double-blind, placebo-controlled human study evaluating daily intake of 200 mg of GABA and measures of cognitive function.\nSource: Pharma Foods International Co., Ltd., "Improvement of Cognitive Health," PharmaGABA.com.\nResults are from an ingredient study and may not be representative of all users. The study evaluated GABA and was not conducted on the finished AVRO product.'}
+                  </ChartSourceNote>
+                </div>
               ) : (
                 <EmbeddedGraphic src="/graphics/energy.html" ratio="1200 / 720" title="Energy: the calm-first energy curve" />
               )}
