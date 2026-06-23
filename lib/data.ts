@@ -199,6 +199,8 @@ export const cohortData = {
     finalTitle: "Choose the formula that fits your round.",
     finalCopy:
       "Start calm. Stay clear. Choose the AVRO formula that matches your moment on the course.",
+    chartSource:
+      "Graphic adapted from information provided by Pharma Foods International Co., Ltd., manufacturer of PharmaGABA®. Source: PharmaGABA.com**",
   },
   social: {
     eyebrow: "Alcohol free social ritual",
@@ -396,6 +398,8 @@ export const cohortData = {
     finalTitle: "Choose the formula that fits your session.",
     finalCopy:
       "Start calm. Stay clear. Choose the AVRO formula that matches your moment.",
+    chartSource:
+      "Graphic adapted from information provided by Pharma Foods International Co., Ltd., manufacturer of PharmaGABA®. Source: PharmaGABA.com**",
   },
 } as const
 

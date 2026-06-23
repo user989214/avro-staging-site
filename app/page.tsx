@@ -74,7 +74,7 @@ export default function HomePage() {
 
       <FinalCta
         title="Calm first. Clear headed. Ready for what matters."
-        copy="Support composure, clarity, and calm-first readiness for the moments that matter."
+        copy="Supports composure, clarity, and calm-first readiness for the moments that matter.*"
       />
 
       {/* Calm = Power banner as the background of the blue CTA card, single Shop button */}
