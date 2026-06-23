@@ -188,15 +188,7 @@ export function Footer() {
                   color: c.text,
                 }}
               >
-                ** Source:{" "}
-                <a
-                  href="https://www.pharmagaba.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: c.text, fontWeight: 700, textDecoration: "underline" }}
-                >
-                  www.pharmagaba.com
-                </a>
+                ** Source: www.pharmagaba.com
               </small>
             </div>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 pt-6">

@@ -247,7 +247,7 @@ export const cohortData = {
       ],
     ],
     shopTitle: "Shop AVRO for social",
-    faqTitle: "Social / Zero Proof FAQ",
+    faqTitle: "Social + Zero-Proof FAQ",
     faqs: [
       [
         "Is AVRO alcoholic?",
@@ -317,7 +317,7 @@ export const cohortData = {
       ],
     ],
     shopTitle: "Shop AVRO for work",
-    faqTitle: "Tech + Work FAQ",
+    faqTitle: "Work FAQ",
     faqs: [
       [
         "Which AVRO formula is best for work?",
