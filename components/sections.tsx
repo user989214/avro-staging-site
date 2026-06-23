@@ -21,6 +21,8 @@ export function Section({ children, className, id, dark = false }: SectionProps 
       id={id}
       className={cn(
         "w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(52px,7vw,86px)]",
+        // Clear the 90px sticky nav when scrolled to via an anchor (#team etc.)
+        id && "scroll-mt-28",
         className
       )}
       style={bg ? { backgroundColor: bg } : undefined}
@@ -52,6 +54,7 @@ export function CardedSection({
       id={id}
       className={cn(
         "w-full max-w-[1440px] mx-auto px-[clamp(16px,5vw,64px)] py-[clamp(28px,4vw,56px)]",
+        id && "scroll-mt-28",
         className
       )}
     >
