@@ -170,31 +170,30 @@ export function MockupBlueCta({
       style={{
         width: "100%",
         backgroundColor: bgColor,
-        padding: "clamp(32px,5vw,72px) clamp(16px,4vw,64px)",
+        padding: 0,
       }}
     >
-      {/* Scoped responsive rules — overlay bottom-right on desktop, stack below on mobile */}
+      {/* Scoped responsive rules — full-bleed banner with the Shop button overlaid bottom-left on desktop, stacked below on mobile */}
       <style>{`
         .banner-cta-box {
           position: relative;
-          max-width: 1250px;
-          margin: 0 auto;
-          border-radius: 24px;
+          width: 100%;
+          margin: 0;
+          border-radius: 0;
           overflow: hidden;
           background-color: var(--base);
         }
         .banner-cta-img { width: 100%; height: auto; display: block; }
         .banner-cta-btn {
           position: absolute;
-          left: clamp(16px, 3%, 40px);
-          bottom: clamp(16px, 3%, 40px);
+          left: clamp(16px, 4vw, 64px);
+          bottom: clamp(16px, 4vw, 56px);
           min-width: 220px;
           text-decoration: none;
         }
         @media (max-width: 640px) {
           /* Let the wide art use the full width so it's taller / more present (no cropping) */
-          .banner-cta-section { padding: 20px 8px !important; }
-          .banner-cta-box { display: flex; flex-direction: column; padding-bottom: 24px; border-radius: 18px; }
+          .banner-cta-box { display: flex; flex-direction: column; padding-bottom: 24px; }
           .banner-cta-btn {
             position: static;
             width: calc(100% - 32px);
