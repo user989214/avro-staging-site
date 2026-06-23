@@ -465,8 +465,12 @@ export default async function ProductPage({
       </div>
 
       <FinalCta
-        title="Good energy starts here."
-        copy="Get easy lifestyle tips, wellness inspo, plus early access to AVRO launches and offers."
+        title={key === "calm" ? "Calm first. Clear headed. Ready for what matters." : "Good energy starts here."}
+        copy={
+          key === "calm"
+            ? "Supports composure, clarity, and calm-first readiness for the moments that matter.*"
+            : "Get easy lifestyle tips, wellness inspo, plus early access to AVRO launches and offers."
+        }
         productButtons
       />
 
