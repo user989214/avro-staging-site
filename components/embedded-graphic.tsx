@@ -21,7 +21,7 @@ export function EmbeddedGraphic({
 }) {
   // Bump this when the graphic HTML changes so browsers/iframes refetch the
   // updated file instead of serving a stale cached copy.
-  const GRAPHIC_VERSION = "6"
+  const GRAPHIC_VERSION = "7"
   const versionedSrc = src.includes("?") ? `${src}&v=${GRAPHIC_VERSION}` : `${src}?v=${GRAPHIC_VERSION}`
 
   return (
