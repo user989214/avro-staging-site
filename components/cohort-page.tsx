@@ -45,8 +45,8 @@ const GC = '"DM Sans", system-ui, sans-serif'
 // Cohorts whose chart slot renders a brand data graphic verbatim (public/graphics/*.html).
 type CohortGraphic = { src: string; ratio: string; title: string }
 const COHORT_GRAPHICS: Record<string, CohortGraphic> = {
-  golf: { src: "/graphics/golf.html", ratio: "1200 / 560", title: "AVRO for golf — pressure-sensitive performance research" },
-  gaming: { src: "/graphics/esports.html", ratio: "1200 / 740", title: "AVRO for esports — GABA vs. placebo scores" },
+  golf: { src: "/graphics/golf.html", ratio: "1200 / 788", title: "AVRO for golf — pressure-sensitive performance research" },
+  gaming: { src: "/graphics/esports.html", ratio: "1200 / 884", title: "AVRO for esports — GABA vs. placebo scores" },
   work: { src: "/graphics/work.html", ratio: "1400 / 620", title: "AVRO for work — cognitive functions" },
 }
 
@@ -615,7 +615,12 @@ export function CohortPage({ data }: { data: CohortData }) {
           intentionally skips the chart slot. Golf, Gaming and Work render the brand
           data graphics verbatim; remaining cohorts use the animated CohortChart. */}
       {!isZeroProof && COHORT_GRAPHICS[data.visual] ? (
-        <CohortGraphicSection graphic={COHORT_GRAPHICS[data.visual]} header={COHORT_GRAPHIC_HEADERS[data.visual]} source={data.chartSource} />
+          <CohortGraphicSection
+            graphic={COHORT_GRAPHICS[data.visual]}
+            header={COHORT_GRAPHIC_HEADERS[data.visual]}
+            // golf + esports bake the source/disclaimer inside the graphic card itself
+            source={data.visual === "golf" || data.visual === "gaming" ? undefined : data.chartSource}
+          />
       ) : (
         !isZeroProof && <CohortChart visualKey={data.visual} accent={accent} dark={isZeroProof} />
       )}

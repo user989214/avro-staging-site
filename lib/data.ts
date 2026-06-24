@@ -20,7 +20,7 @@ export const formulas = {
     heroSupport: "Clear headed. Ready when pressure rises.*",
     support: "Calm support without stimulation.*",
     bestFor:
-      "Golf, competition, travel, social situations, and other pressure-filled moments.*",
+      "Golf, competition, travel, social situations, and pressure-filled moments.*",
     addition: "Magnesium Bisglycinate",
     review:
       "Helps me stay composed without feeling dull. It is part of my pre-meeting routine.",
@@ -77,7 +77,7 @@ export const formulas = {
     heroSupport: "Steady energy. Ready when it matters.*",
     support: "Natural caffeine with a calm-first foundation.*",
     bestFor:
-      "Early starts, long workdays, training, competition, and steady energy without the overamped feeling.*",
+      "Early starts, long workdays, training, competition, and steady energy.*",
     addition: "Natural Caffeine",
     review:
       "Clean lift for demanding mornings without feeling overcaffeinated.",
@@ -220,7 +220,7 @@ export const cohortData = {
     finalCopy:
       "Start calm. Stay clear. Choose the AVRO formula that matches your moment on the course.",
     chartSource:
-      "Graphic adapted from information provided by Pharma Foods International Co., Ltd., manufacturer of PharmaGABA®. Source: PharmaGABA.com**",
+      'Illustrative representation based on clinical research evaluating PharmaGABA® versus placebo during a standardized esports task. The study measured sensorimotor-rhythm activity as a physiological indicator associated with calm, sustained attention and cognitive engagement.\nSource: Pharma Foods International Co., Ltd., "New Study: PharmaGABA® Helps the Brain Achieve the \'Zone\' for Optimal Performance," PharmaGABA.com, April 3, 2026.\nThe values and progression shown are illustrative and do not reproduce the study\'s measured data. The research evaluated PharmaGABA® as an ingredient and was not conducted on the finished AVRO product. Individual results may vary.',
   },
   social: {
     eyebrow: "Alcohol free social ritual",
@@ -419,7 +419,7 @@ export const cohortData = {
     finalCopy:
       "Start calm. Stay clear. Choose the AVRO formula that matches your moment.",
     chartSource:
-      "Graphic adapted from information provided by Pharma Foods International Co., Ltd., manufacturer of PharmaGABA®. Source: PharmaGABA.com**",
+      "Based on a randomized, double-blind, placebo-controlled crossover study of eight male university esports players who consumed 200 mg of GABA or placebo before a standardized gaming task.\nSource: Hara et al., Nutrients, 2025;17(11):1870.\nResults are from a small ingredient study and may not be representative of all users. The study evaluated 200 mg of GABA and was not conducted on the finished AVRO product.",
   },
 } as const
 
