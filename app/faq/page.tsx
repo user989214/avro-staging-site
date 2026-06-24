@@ -13,24 +13,20 @@ import { MockupBlueCta } from "@/components/mockup-sections"
 
 const faqCategories = [
   {
-    name: "Start Here",
+    name: "Questions? We Have Answers.",
     slug: "start-here",
     faqs: [
       [
         "What is AVRO?",
-        "AVRO is a calm-first daily drink mix made with naturally fermented PharmaGABA®, designed to support calm, clarity, focus, and steady energy before pressure-sensitive moments.*",
+        "AVRO is a calm-first daily drink mix designed to support calm, clarity, focus, and steady energy before pressure-sensitive moments.*",
       ],
       [
-        "What does calm first mean?",
-        "It means AVRO starts with state support before stimulation. The goal is calm, clarity, and composure before the moment.",
+        "Which formula is right for me?",
+        "Choose Calm for caffeine-free composure, Focus for caffeine-free clarity support, or Energy for steady energy with 120 mg natural caffeine.*",
       ],
       [
-        "Is AVRO an energy drink?",
-        "AVRO Energy contains natural caffeine, but AVRO as a brand is not stimulant-first. Calm and Focus are caffeine free.",
-      ],
-      [
-        "Is AVRO a sleep product?",
-        "No. AVRO Calm is designed for calm support without positioning as a sleep product.",
+        "Can I take AVRO every day?",
+        "AVRO can fit into a daily routine. Choose your formula based on timing, caffeine preference, and your moment.",
       ],
     ],
   },
