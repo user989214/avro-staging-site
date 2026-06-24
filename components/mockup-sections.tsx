@@ -64,7 +64,7 @@ export function MockupLogicRow() {
       icon: "calm-first-foundation",
       src: "/images/icons/calm-first-foundation.png",
       content:
-        "Every AVRO formula starts with naturally fermented PharmaGABA®. It's the calm-first foundation that makes everything else work better.",
+        "Every AVRO formula starts with naturally fermented PharmaGABA®. It's the calm-first foundation that makes everything else work better.**",
     },
   ]
 
