@@ -47,7 +47,7 @@ type CohortGraphic = { src: string; ratio: string; title: string }
 const COHORT_GRAPHICS: Record<string, CohortGraphic> = {
   golf: { src: "/graphics/golf.html", ratio: "1200 / 788", title: "AVRO for golf — pressure-sensitive performance research" },
   gaming: { src: "/graphics/esports.html", ratio: "1200 / 884", title: "AVRO for esports — GABA vs. placebo scores" },
-  work: { src: "/graphics/work.html", ratio: "1400 / 812", title: "AVRO for work — cognitive functions" },
+  work: { src: "/graphics/work.html", ratio: "1400 / 700", title: "AVRO for work — cognitive functions" },
 }
 
 // Marketing header copy that sits above the embedded chart graphic for select cohorts.

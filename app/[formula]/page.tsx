@@ -292,7 +292,7 @@ export default async function ProductPage({
                 <EmbeddedGraphic src="/graphics/calm.html" ratio="1200 / 740" title="Calm: stress (CgA) & cortisol study" />
               ) : key === "focus" ? (
                 // focus.html bakes the study source/disclaimer inside the graphic card itself
-                <EmbeddedGraphic src="/graphics/focus.html" ratio="1400 / 812" title="Focus: improved cognitive functions by GABA" />
+                <EmbeddedGraphic src="/graphics/focus.html" ratio="1400 / 700" title="Focus: improved cognitive functions by GABA" />
               ) : (
                 <EmbeddedGraphic src="/graphics/energy.html" ratio="1200 / 720" title="Energy: the calm-first energy curve" />
               )}
