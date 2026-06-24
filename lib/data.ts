@@ -20,7 +20,7 @@ export const formulas = {
     heroSupport: "Clear headed. Ready when pressure rises.*",
     support: "Calm support without stimulation.*",
     bestFor:
-      "Golf, competition, travel, social situations, and other pressure-filled moments.*",
+      "Golf, competition, travel, social situations, and pressure-filled moments.*",
     addition: "Magnesium Bisglycinate",
     review:
       "Helps me stay composed without feeling dull. It is part of my pre-meeting routine.",
@@ -77,7 +77,7 @@ export const formulas = {
     heroSupport: "Steady energy. Ready when it matters.*",
     support: "Natural caffeine with a calm-first foundation.*",
     bestFor:
-      "Early starts, long workdays, training, competition, and steady energy without the overamped feeling.*",
+      "Early starts, long workdays, training, competition, and steady energy.*",
     addition: "Natural Caffeine",
     review:
       "Clean lift for demanding mornings without feeling overcaffeinated.",
