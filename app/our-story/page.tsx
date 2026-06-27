@@ -3,7 +3,6 @@ import Link from "next/link"
 import { Section, SectionHeading } from "@/components/sections"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { ProductCard } from "@/components/product-visual"
-import { PageHero } from "@/components/page-hero"
 import type { FormulaKey } from "@/lib/data"
 
 export const metadata = {
@@ -120,17 +119,180 @@ function IkigaiVenn({ className }: { className?: string }) {
 }
 
 /* ---- 1. HERO ---------------------------------------------------------------- */
+/* Gold enso brush-circle accent (kept minimal, ~10% Japanese visual language). */
+function HeroEnso({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 120 120" className={className} aria-hidden="true" role="presentation">
+      <path
+        d="M84 22 C 104 36, 110 70, 92 92 C 72 116, 32 112, 16 86 C 2 64, 10 30, 38 18 C 52 12, 70 13, 82 21"
+        fill="none"
+        stroke="var(--gold)"
+        strokeWidth="6"
+        strokeLinecap="round"
+        opacity="0.85"
+      />
+    </svg>
+  )
+}
+
 function Hero() {
   return (
-    <PageHero
-      variant="flat"
-      title="Calm is not the opposite of performance. It is where performance begins."
-      lede="Many of life's most important moments do not require more stimulation — they require us to become calmer, clearer and more composed. AVRO is creating Calm Performance for people who want to bring the right headspace to the moments that matter."
-      imageSrc=""
-      imageAlt=""
-      primaryCta={{ href: "/shop", label: "Find Your Formula" }}
-      secondaryCta={{ href: "/science", label: "Explore the Science" }}
-    />
+    <section className="os-hero-section">
+      <style>{`
+        @keyframes os-rise { 0% { opacity: 0; transform: translateY(24px); } 100% { opacity: 1; transform: translateY(0); } }
+        .os-fade { opacity: 0; animation: os-rise 0.9s cubic-bezier(0.22,1,0.36,1) forwards; }
+        .os-hero-section { width: 100%; background-color: var(--base); padding: 0; }
+        .os-hero-card {
+          position: relative;
+          width: calc(100% - 32px);
+          margin: 0 auto 16px;
+          aspect-ratio: 16/9;
+          overflow: hidden;
+          border-radius: 20px;
+          background-color: var(--base-light);
+        }
+        .os-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .os-hero-scrim {
+          position: absolute; inset: 0; pointer-events: none;
+          background: linear-gradient(100deg,
+            rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.74) 30%,
+            rgba(255,255,255,0.34) 56%, rgba(255,255,255,0) 76%);
+        }
+        .os-hero-content {
+          position: absolute; inset: 0;
+          display: flex; flex-direction: column; justify-content: center;
+          padding: clamp(28px,5vw,72px) clamp(20px,5vw,64px);
+          max-width: 700px;
+        }
+        .os-hero-accents {
+          position: absolute; top: clamp(24px,4vw,52px); right: clamp(24px,4vw,68px);
+          display: flex; align-items: flex-start; gap: clamp(14px,1.6vw,22px);
+        }
+        .os-hero-vtext {
+          writing-mode: vertical-rl; text-orientation: upright;
+          font-size: clamp(14px,1.5vw,20px); letter-spacing: 0.18em;
+          color: var(--ink); opacity: 0.7; font-weight: 500;
+        }
+        .os-hero-seal {
+          display: flex; align-items: center; justify-content: center;
+          width: clamp(22px,2.4vw,30px); height: clamp(22px,2.4vw,30px);
+          border-radius: 4px; background-color: #b23b2e; color: #fff;
+          font-size: clamp(11px,1.2vw,15px); font-weight: 700; line-height: 1;
+        }
+        .os-hero-label {
+          position: absolute; left: clamp(20px,5vw,64px); bottom: clamp(14px,2.4vw,26px);
+          font-weight: 800; letter-spacing: 0.14em; font-size: clamp(12px,1.1vw,14px);
+          text-transform: uppercase; color: var(--ink);
+        }
+        .os-hero-img-mobile { display: none; }
+        @media (max-width: 768px) {
+          .os-hero-card {
+            aspect-ratio: unset; overflow: visible; border-radius: 0;
+            background: transparent; display: flex; flex-direction: column;
+            width: calc(100% - 24px);
+          }
+          .os-hero-img-wrap {
+            position: relative; width: 100%; margin: 12px auto 0;
+            aspect-ratio: 4/3; border-radius: 20px; overflow: hidden; flex-shrink: 0;
+          }
+          .os-hero-scrim, .os-hero-accents, .os-hero-label { display: none !important; }
+          .os-hero-content { position: static; padding: 24px 8px 24px; max-width: none; }
+        }
+        @media (min-width: 769px) {
+          .os-hero-img-wrap { position: absolute; inset: 0; }
+        }
+      `}</style>
+
+      <div className="os-hero-card">
+        <div className="os-hero-img-wrap">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/lifestyle/journal-coffee-window.jpg"
+            alt="A calm, composed moment before a demanding day begins."
+            className="os-hero-img"
+          />
+        </div>
+
+        <div className="os-hero-scrim" aria-hidden="true" />
+
+        {/* Japanese accents — enso, vertical phrase, red seal */}
+        <div className="os-hero-accents os-fade" style={{ animationDelay: "0.4s" }} aria-hidden="true">
+          <HeroEnso className="w-[clamp(48px,6vw,84px)] h-auto" />
+          <span className="os-hero-vtext">良い一日を積み重ねること。</span>
+          <span className="os-hero-seal">静</span>
+        </div>
+
+        <div className="os-hero-content">
+          {/* Breadcrumb */}
+          <nav
+            className="os-fade flex items-center gap-2 text-[11px] md:text-[12px] font-bold tracking-[0.12em] uppercase text-ink/55 mb-5"
+            aria-label="Breadcrumb"
+            style={{ animationDelay: "0.05s" }}
+          >
+            <Link href="/" className="hover:text-ink transition-colors">
+              Home
+            </Link>
+            <span aria-hidden="true">›</span>
+            <span className="text-ink/80">Our Story</span>
+          </nav>
+
+          {/* Gold eyebrow */}
+          <span
+            className="os-fade text-[var(--gold)] text-[clamp(12px,1.1vw,14px)] font-bold tracking-[0.16em] uppercase mb-3"
+            style={{ animationDelay: "0.12s" }}
+          >
+            Our Story
+          </span>
+
+          {/* Two-tone serif headline */}
+          <h1 className="font-serif font-black leading-[1.04] tracking-[-0.02em] text-[clamp(26px,3.3vw,44px)] text-balance">
+            <span className="os-fade block text-ink" style={{ animationDelay: "0.2s" }}>
+              Calm is not the opposite of performance.
+            </span>
+            <span className="os-fade block text-[var(--gold)] mt-1" style={{ animationDelay: "0.34s" }}>
+              It is where performance begins.
+            </span>
+          </h1>
+
+          {/* Gold divider */}
+          <span
+            className="os-fade block h-[3px] w-14 bg-[var(--gold)] rounded-full mt-6 mb-5"
+            style={{ animationDelay: "0.5s" }}
+            aria-hidden="true"
+          />
+
+          {/* Body copy */}
+          <div
+            className="os-fade flex flex-col gap-3 max-w-[440px] text-ink/75 text-[clamp(14px,1.15vw,16px)] leading-relaxed font-medium"
+            style={{ animationDelay: "0.58s" }}
+          >
+            <p>
+              {
+                "Many of life's most important moments don't require more stimulation. They require us to become calmer, clearer and more composed."
+              }
+            </p>
+            <p>
+              AVRO is creating Calm Performance for people who want to bring the right headspace to the
+              moments that matter.*
+            </p>
+          </div>
+
+          {/* CTAs */}
+          <div className="os-fade flex flex-wrap gap-3 mt-8" style={{ animationDelay: "0.7s" }}>
+            <Link href="/shop" className="btn-primary">
+              Find Your Formula
+            </Link>
+            <Link href="/science" className="btn-secondary">
+              Explore the Science
+            </Link>
+          </div>
+        </div>
+
+        <span className="os-hero-label os-fade" style={{ animationDelay: "0.8s" }}>
+          A Better Headspace
+        </span>
+      </div>
+    </section>
   )
 }
 
