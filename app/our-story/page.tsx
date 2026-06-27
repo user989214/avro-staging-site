@@ -238,7 +238,7 @@ function IkigaiSection() {
             <ul className="flex flex-col gap-6">
               {principles.map((p) => (
                 <li key={p.term} className="flex items-start gap-4">
-                  <AvroIcon name={p.icon} size={56} className="shrink-0 -mt-1 md:w-16 md:h-16" tint="var(--avro-blue-deep)" />
+                  <AvroIcon name={p.icon} size={56} className="shrink-0 -mt-1 md:w-16 md:h-16" />
                   <div>
                     <h3 className="font-black text-[clamp(14px,1.1vw,16px)] tracking-[0.04em] uppercase text-ink mb-1">
                       {p.term}
