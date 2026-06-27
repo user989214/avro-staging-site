@@ -147,14 +147,14 @@ function Hero() {
           .os-hero-card {
             aspect-ratio: unset; overflow: visible; border-radius: 0;
             background: transparent; display: flex; flex-direction: column;
-            width: calc(100% - 24px);
+            width: 100%;
           }
           .os-hero-img-wrap {
-            position: relative; width: 100%; margin: 12px auto 0;
+            position: relative; width: calc(100% - 32px); margin: 16px auto 0;
             aspect-ratio: 4/3; border-radius: 20px; overflow: hidden; flex-shrink: 0;
           }
           .os-hero-scrim { display: none !important; }
-          .os-hero-content { position: static; padding: 24px 8px 24px; max-width: none; }
+          .os-hero-content { position: static; padding: 24px 20px 32px; max-width: none; }
         }
         @media (min-width: 769px) {
           .os-hero-img-wrap { position: absolute; inset: 0; }
