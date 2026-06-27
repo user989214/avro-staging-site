@@ -21,10 +21,10 @@ function IkigaiVenn({ className }: { className?: string }) {
   // 280 x 280 canvas, center 140,140. Four large overlapping circles (r 78)
   // with their labels set INSIDE each circle, pushed toward the outer edge.
   const circles = [
-    { cx: 140, cy: 78, fill: "var(--avro-blue)" }, // top
-    { cx: 78, cy: 140, fill: "var(--avro-blue-deep)" }, // left
-    { cx: 202, cy: 140, fill: "var(--warm-gray)" }, // right
-    { cx: 140, cy: 202, fill: "var(--olive)" }, // bottom
+    { cx: 140, cy: 78 }, // top
+    { cx: 78, cy: 140 }, // left
+    { cx: 202, cy: 140 }, // right
+    { cx: 140, cy: 202 }, // bottom
   ]
   const labels = [
     { x: 140, y: 50, lines: ["What you", "love"] }, // top
@@ -53,16 +53,9 @@ function IkigaiVenn({ className }: { className?: string }) {
           <stop offset="0%" stopColor="#06336f" />
           <stop offset="100%" stopColor="#001f4a" />
         </linearGradient>
-        {circles.map((c, i) => (
-          <radialGradient key={i} id={`ikv-fill-${i}`} cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor={c.fill} stopOpacity="0.02" />
-            <stop offset="62%" stopColor={c.fill} stopOpacity="0.05" />
-            <stop offset="100%" stopColor={c.fill} stopOpacity="0.22" />
-          </radialGradient>
-        ))}
       </defs>
 
-      {/* four overlapping circles with a soft edge fade */}
+      {/* four overlapping circles in a single, simple blue */}
       <g className="ikv-circles">
         {circles.map((c, i) => (
           <circle
@@ -70,10 +63,11 @@ function IkigaiVenn({ className }: { className?: string }) {
             cx={c.cx}
             cy={c.cy}
             r="78"
-            fill={`url(#ikv-fill-${i})`}
-            stroke={c.fill}
-            strokeOpacity="0.4"
-            strokeWidth="1.75"
+            fill="var(--avro-blue)"
+            fillOpacity="0.06"
+            stroke="var(--avro-blue)"
+            strokeOpacity="0.45"
+            strokeWidth="1.5"
           />
         ))}
       </g>
