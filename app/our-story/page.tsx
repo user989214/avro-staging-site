@@ -92,9 +92,7 @@ function HeadspaceSection() {
             key={u.label}
             className="group flex flex-col items-center text-center gap-4 rounded-[22px] bg-base-light border border-[var(--ink)]/[0.06] px-[clamp(14px,1.6vw,22px)] py-[clamp(22px,2.6vw,34px)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_50px_rgba(28,27,20,0.07)]"
           >
-            <span className="flex items-center justify-center w-[clamp(64px,7vw,84px)] h-[clamp(64px,7vw,84px)] rounded-full bg-base ring-1 ring-[var(--ink)]/[0.07] shadow-[0_6px_18px_rgba(28,27,20,0.05)]">
-              <AvroIcon name={u.icon} size={40} className="md:w-[46px] md:h-[46px]" />
-            </span>
+            <AvroIcon name={u.icon} size={48} className="md:w-[56px] md:h-[56px]" />
             <span className="font-bold text-[clamp(13px,1.05vw,15px)] leading-snug text-ink text-balance">
               {u.label}
             </span>
@@ -375,15 +373,15 @@ function TeamSection() {
   return (
     <Section id="team">
       <SectionHeading title="The people behind AVRO." />
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 max-w-[1100px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-8 max-w-[1100px]">
         {team.map((member) => (
-          <div key={member.name} className="flex flex-col gap-2 md:gap-3">
-            <div className="relative aspect-square rounded-2xl overflow-hidden bg-soft">
+          <div key={member.name} className="flex flex-col gap-3 md:gap-4">
+            <div className="relative aspect-[4/3] rounded-[24px] overflow-hidden bg-soft">
               <Image
                 src={member.image}
                 alt={member.name}
                 fill
-                sizes="(min-width: 640px) 25vw, 50vw"
+                sizes="(min-width: 640px) 50vw, 100vw"
                 className="object-cover object-top"
               />
             </div>
