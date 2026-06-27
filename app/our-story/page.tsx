@@ -19,83 +19,86 @@ export const metadata = {
    the graphic has quiet life while the labels stay perfectly legible.
 ---------------------------------------------------------------------------- */
 function IkigaiVenn({ className }: { className?: string }) {
-  // four circles arranged around the center (260 x 260 canvas, center 130,130)
+  // 280 x 280 canvas, center 140,140. Four large overlapping circles (r 78)
+  // with their labels set INSIDE each circle, pushed toward the outer edge.
   const circles = [
-    { cx: 130, cy: 96, fill: "var(--avro-blue)" }, // top — what you love
-    { cx: 164, cy: 130, fill: "var(--gold)" }, // right — what the world needs
-    { cx: 130, cy: 164, fill: "var(--olive)" }, // bottom — what you can be paid for
-    { cx: 96, cy: 130, fill: "var(--avro-blue-deep)" }, // left — what you are good at
+    { cx: 140, cy: 78 }, // top
+    { cx: 78, cy: 140 }, // left
+    { cx: 202, cy: 140 }, // right
+    { cx: 140, cy: 202 }, // bottom
+  ]
+  const labels = [
+    { x: 140, y: 50, lines: ["What you", "love"] }, // top
+    { x: 60, y: 134, lines: ["What you are", "good at"] }, // left
+    { x: 220, y: 134, lines: ["What the world", "needs"] }, // right
+    { x: 140, y: 222, lines: ["What you can be", "paid for"] }, // bottom
   ]
   return (
-    <svg viewBox="0 0 260 260" className={className} role="img" aria-label="The Ikigai Venn diagram: what you love, what the world needs, what you can be paid for, and what you are good at — meeting at your Ikigai.">
+    <svg
+      viewBox="0 0 280 280"
+      className={className}
+      role="img"
+      aria-label="The Ikigai Venn diagram: what you love, what you are good at, what the world needs, and what you can be paid for — meeting at your Ikigai."
+    >
       <style>{`
         @keyframes ikv-breathe {
           0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.018); }
+          50% { transform: scale(1.012); }
         }
-        .ikv-circles { transform-origin: 130px 130px; animation: ikv-breathe 8s ease-in-out infinite; }
+        .ikv-circles { transform-origin: 140px 140px; animation: ikv-breathe 9s ease-in-out infinite; }
         @media (prefers-reduced-motion: reduce) { .ikv-circles { animation: none; } }
       `}</style>
 
-      <g className="ikv-circles">
+      <defs>
+        <linearGradient id="ikv-center" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#06336f" />
+          <stop offset="100%" stopColor="#001f4a" />
+        </linearGradient>
+      </defs>
+
+      {/* four overlapping outline circles */}
+      <g className="ikv-circles" fill="none" stroke="var(--ink)" strokeOpacity="0.32" strokeWidth="2">
         {circles.map((c, i) => (
-          <circle
-            key={i}
-            cx={c.cx}
-            cy={c.cy}
-            r="62"
-            fill={c.fill}
-            fillOpacity="0.10"
-            stroke={c.fill}
-            strokeOpacity="0.45"
-            strokeWidth="1.25"
-          />
+          <circle key={i} cx={c.cx} cy={c.cy} r="78" />
         ))}
       </g>
 
-      {/* center navy lens where all four overlap */}
-      <path
-        d="M130 96 C 146 112, 146 148, 130 164 C 114 148, 114 112, 130 96 Z"
-        fill="var(--charcoal)"
-      />
-      <text
-        x="130"
-        y="134"
-        textAnchor="middle"
-        fontSize="13"
-        fontWeight="800"
-        letterSpacing="0.06em"
-        fill="var(--bone)"
-        style={{ fontFamily: "var(--font-sans, system-ui)" }}
-      >
-        IKIGAI
-      </text>
-
-      {/* labels in each circle's outer area */}
-      {[
-        { x: 130, y: 52, lines: ["What you", "love"] },
-        { x: 224, y: 126, lines: ["What the", "world needs"] },
-        { x: 130, y: 212, lines: ["What you can", "be paid for"] },
-        { x: 36, y: 126, lines: ["What you", "are good at"] },
-      ].map((l, i) => (
+      {/* labels inside each circle */}
+      {labels.map((l, i) => (
         <text
           key={i}
           x={l.x}
           y={l.y}
           textAnchor="middle"
-          fontSize="9.5"
-          fontWeight="600"
+          fontSize="11"
+          fontWeight="700"
+          letterSpacing="-0.01em"
           fill="var(--ink)"
-          fillOpacity="0.72"
+          fillOpacity="0.88"
           style={{ fontFamily: "var(--font-sans, system-ui)" }}
         >
           {l.lines.map((line, j) => (
-            <tspan key={j} x={l.x} dy={j === 0 ? 0 : 11}>
+            <tspan key={j} x={l.x} dy={j === 0 ? 0 : 13}>
               {line}
             </tspan>
           ))}
         </text>
       ))}
+
+      {/* center navy lens where all four overlap */}
+      <ellipse cx="140" cy="140" rx="30" ry="40" fill="url(#ikv-center)" />
+      <text
+        x="140"
+        y="145"
+        textAnchor="middle"
+        fontSize="15"
+        fontWeight="800"
+        letterSpacing="0.05em"
+        fill="#ffffff"
+        style={{ fontFamily: "var(--font-sans, system-ui)" }}
+      >
+        IKIGAI
+      </text>
     </svg>
   )
 }
