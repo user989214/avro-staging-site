@@ -13,34 +13,74 @@ export const metadata = {
 }
 
 /* ----------------------------------------------------------------------------
-   Ikigai "bloom" — four softly overlapping, brand-tinted circles meeting at a
-   calm center. A simple, modern nod to Ikigai's converging elements without a
-   large or labelled Venn diagram.
+   Ikigai "bloom" — four generously spaced, brand-tinted circles that softly
+   overlap toward a calm center. Each petal breathes gently and a thin dashed
+   ring orbits the whole composition, giving the graphic quiet motion. A modern,
+   minimal nod to Ikigai's converging elements (no large or labelled Venn).
 ---------------------------------------------------------------------------- */
 function IkigaiBloom({ className }: { className?: string }) {
-  const circles = [
-    { cx: 90, cy: 90, fill: "var(--avro-blue)" },
-    { cx: 130, cy: 90, fill: "var(--gold-light)" },
-    { cx: 90, cy: 130, fill: "var(--warm-gray)" },
-    { cx: 130, cy: 130, fill: "var(--avro-blue-deep)" },
+  const petals = [
+    { cx: 96, cy: 86, fill: "var(--avro-blue)" },
+    { cx: 164, cy: 96, fill: "var(--gold)" },
+    { cx: 86, cy: 164, fill: "var(--olive)" },
+    { cx: 174, cy: 174, fill: "var(--avro-blue-deep)" },
   ]
   return (
-    <svg viewBox="0 0 220 220" className={className} aria-hidden="true" role="presentation">
-      {circles.map((c, i) => (
-        <circle
-          key={i}
-          cx={c.cx}
-          cy={c.cy}
-          r="50"
-          fill={c.fill}
-          fillOpacity="0.16"
-          stroke={c.fill}
-          strokeOpacity="0.5"
-          strokeWidth="1.5"
-        />
+    <svg viewBox="0 0 260 260" className={className} aria-hidden="true" role="presentation">
+      <style>{`
+        @keyframes ikb-breathe {
+          0%, 100% { transform: scale(1); opacity: .9; }
+          50% { transform: scale(1.045); opacity: 1; }
+        }
+        @keyframes ikb-orbit { to { transform: rotate(360deg); } }
+        @keyframes ikb-glow {
+          0%, 100% { opacity: .35; transform: scale(1); }
+          50% { opacity: .6; transform: scale(1.12); }
+        }
+        .ikb-petal { transform-origin: 130px 130px; animation: ikb-breathe 7s ease-in-out infinite; }
+        .ikb-petal-1 { animation-delay: 0s; }
+        .ikb-petal-2 { animation-delay: 1.6s; }
+        .ikb-petal-3 { animation-delay: 3.2s; }
+        .ikb-petal-4 { animation-delay: 4.8s; }
+        .ikb-orbit { transform-origin: 130px 130px; animation: ikb-orbit 48s linear infinite; }
+        .ikb-glow { transform-origin: 130px 130px; animation: ikb-glow 7s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .ikb-petal, .ikb-orbit, .ikb-glow { animation: none; }
+        }
+      `}</style>
+      <defs>
+        {petals.map((p, i) => (
+          <radialGradient key={i} id={`ikb-grad-${i}`} cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor={p.fill} stopOpacity="0.26" />
+            <stop offset="100%" stopColor={p.fill} stopOpacity="0.08" />
+          </radialGradient>
+        ))}
+      </defs>
+
+      {/* orbiting dashed ring */}
+      <circle
+        className="ikb-orbit"
+        cx="130"
+        cy="130"
+        r="118"
+        fill="none"
+        stroke="var(--ink)"
+        strokeOpacity="0.14"
+        strokeWidth="1.25"
+        strokeDasharray="2 12"
+        strokeLinecap="round"
+      />
+
+      {/* four breathing petals */}
+      {petals.map((p, i) => (
+        <g key={i} className={`ikb-petal ikb-petal-${i + 1}`}>
+          <circle cx={p.cx} cy={p.cy} r="62" fill={`url(#ikb-grad-${i})`} stroke={p.fill} strokeOpacity="0.45" strokeWidth="1.25" />
+        </g>
       ))}
-      {/* quiet center where the four meet */}
-      <circle cx="110" cy="110" r="5" fill="var(--ink)" opacity="0.55" />
+
+      {/* calm center glow + dot */}
+      <circle className="ikb-glow" cx="130" cy="130" r="22" fill="var(--gold)" fillOpacity="0.18" />
+      <circle cx="130" cy="130" r="5.5" fill="var(--ink)" opacity="0.5" />
     </svg>
   )
 }
@@ -86,13 +126,10 @@ function HeadspaceSection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5 mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-10 max-w-[1100px]">
         {useCases.map((u) => (
-          <div
-            key={u.label}
-            className="group flex flex-col items-center text-center gap-4 rounded-[22px] bg-base-light border border-[var(--ink)]/[0.06] px-[clamp(14px,1.6vw,22px)] py-[clamp(22px,2.6vw,34px)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_50px_rgba(28,27,20,0.07)]"
-          >
-            <AvroIcon name={u.icon} size={48} className="md:w-[56px] md:h-[56px]" />
+          <div key={u.label} className="flex flex-col items-center text-center gap-3.5">
+            <AvroIcon name={u.icon} size={56} className="md:w-16 md:h-16" />
             <span className="font-bold text-[clamp(13px,1.05vw,15px)] leading-snug text-ink text-balance">
               {u.label}
             </span>
@@ -140,10 +177,10 @@ function IkigaiSection() {
           </div>
 
           {/* Center: simple, modern Ikigai bloom (no complex Venn diagram) */}
-          <div className="flex items-center justify-center py-2 lg:py-0">
-            <div className="relative w-[clamp(220px,26vw,320px)] aspect-square flex items-center justify-center">
+          <div className="flex items-center justify-center py-6 lg:py-2">
+            <div className="relative w-[clamp(260px,30vw,380px)] aspect-square flex items-center justify-center">
               <IkigaiBloom className="absolute inset-0 w-full h-full" />
-              <span className="relative font-serif font-black text-[clamp(15px,1.4vw,19px)] text-ink text-center leading-tight px-10">
+              <span className="relative font-serif font-black text-[clamp(16px,1.5vw,21px)] text-ink text-center leading-tight px-12">
                 Purpose,
                 <br />
                 met with calm.
@@ -373,15 +410,15 @@ function TeamSection() {
   return (
     <Section id="team">
       <SectionHeading title="The people behind AVRO." />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-8 max-w-[1100px]">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 md:gap-6 max-w-[1100px] mx-auto">
         {team.map((member) => (
-          <div key={member.name} className="flex flex-col gap-3 md:gap-4">
-            <div className="relative aspect-[4/3] rounded-[24px] overflow-hidden bg-soft">
+          <div key={member.name} className="flex flex-col gap-3">
+            <div className="relative aspect-[4/3] rounded-[20px] overflow-hidden bg-soft">
               <Image
                 src={member.image}
                 alt={member.name}
                 fill
-                sizes="(min-width: 640px) 50vw, 100vw"
+                sizes="(min-width: 640px) 25vw, 50vw"
                 className="object-cover object-top"
               />
             </div>
