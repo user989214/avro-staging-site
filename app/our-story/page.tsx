@@ -423,17 +423,21 @@ function ScienceSection() {
             </div>
           </div>
 
-          {/* Right: three clean tubes with captions */}
-          <div className="grid grid-cols-3 gap-[clamp(10px,1.6vw,24px)]">
+          {/* Right: three product cards in the site style */}
+          <div className="grid grid-cols-3 gap-[clamp(10px,1.6vw,20px)]">
             {productTrio.map((p) => (
-              <Link key={p.name} href={p.href} className="group flex flex-col items-center text-center">
-                <div className="relative flex items-end justify-center h-[clamp(180px,22vw,300px)] w-full">
-                  <ProductCard
-                    formulaKey={p.formulaKey}
-                    className="h-full w-auto object-contain transition-transform duration-300 group-hover:-translate-y-1.5"
-                  />
+              <Link
+                key={p.name}
+                href={p.href}
+                className="group flex flex-col gap-4 rounded-[24px] bg-base-light p-[clamp(12px,1.6vw,24px)] transition-all hover:-translate-y-0.5"
+              >
+                <div
+                  className="relative flex items-center justify-center overflow-hidden rounded-[20px]"
+                  style={{ backgroundColor: "var(--bone)", aspectRatio: "1 / 1" }}
+                >
+                  <ProductCard formulaKey={p.formulaKey} className="h-full w-full object-cover" />
                 </div>
-                <p className="mt-5 text-ink/70 text-[clamp(12px,1vw,14px)] leading-relaxed font-medium text-balance px-1">
+                <p className="text-ink/70 text-[clamp(12px,1vw,14px)] leading-relaxed font-medium text-balance text-center px-1">
                   {p.copy}
                 </p>
               </Link>
@@ -450,11 +454,11 @@ function RealLifeSection() {
   return (
     <section className="w-full">
       <div className="grid lg:grid-cols-2 items-stretch">
-        {/* Full-bleed summit image */}
+        {/* Full-bleed lifestyle image */}
         <div className="relative min-h-[280px] lg:min-h-[560px] order-first">
           <Image
-            src="/images/lifestyle/summit-sunrise-contemplation.png"
-            alt="A person standing calmly on a mountain summit at sunrise, looking out over the ridges ahead."
+            src="/images/lifestyle/journal-coffee-window.jpg"
+            alt="A calm, considered moment before a demanding day begins."
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"
