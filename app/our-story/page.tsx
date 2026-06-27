@@ -10,20 +10,71 @@ export const metadata = {
 }
 
 /* ----------------------------------------------------------------------------
-   Subtle Japanese detail — a single enso (brush circle). Kept minimal so
-   Japanese imagery stays ~10% of the visual language per the brand brief.
+   Subtle Japanese detail — a single enso (brush circle). Rendered with a
+   soft underlay, a tapered ink gradient and a brush-lift dot so it reads as a
+   real brush stroke rather than a plain ring. Kept minimal so Japanese imagery
+   stays ~10% of the visual language per the brand brief.
 ---------------------------------------------------------------------------- */
-function Enso({ className, stroke = "var(--charcoal)" }: { className?: string; stroke?: string }) {
+function Enso({
+  className,
+  stroke = "var(--charcoal)",
+  gradientId,
+}: {
+  className?: string
+  stroke?: string
+  gradientId: string
+}) {
+  const d =
+    "M141 38 C 179 60, 192 113, 165 152 C 138 191, 76 199, 39 169 C 4 141, 3 82, 37 47 C 65 18, 116 13, 150 33"
   return (
     <svg viewBox="0 0 200 200" className={className} aria-hidden="true" role="presentation">
-      <path
-        d="M138 40 C 175 62, 188 112, 162 150 C 136 188, 78 196, 42 168 C 6 140, 4 84, 36 50 C 62 22, 110 16, 146 32"
-        fill="none"
-        stroke={stroke}
-        strokeWidth="9"
-        strokeLinecap="round"
-        opacity="0.9"
-      />
+      <defs>
+        <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor={stroke} stopOpacity="0.12" />
+          <stop offset="32%" stopColor={stroke} stopOpacity="1" />
+          <stop offset="78%" stopColor={stroke} stopOpacity="0.85" />
+          <stop offset="100%" stopColor={stroke} stopOpacity="0.35" />
+        </linearGradient>
+      </defs>
+      {/* soft, wide underlay to suggest ink bleed */}
+      <path d={d} fill="none" stroke={stroke} strokeWidth="16" strokeLinecap="round" opacity="0.1" />
+      {/* main tapered brush stroke */}
+      <path d={d} fill="none" stroke={`url(#${gradientId})`} strokeWidth="9" strokeLinecap="round" />
+      {/* where the brush lifts off */}
+      <circle cx="150" cy="33" r="4.5" fill={stroke} opacity="0.65" />
+    </svg>
+  )
+}
+
+/* ----------------------------------------------------------------------------
+   Ikigai "bloom" — four softly overlapping, brand-tinted circles meeting at a
+   calm center. A simple, modern nod to Ikigai's converging elements without a
+   large or labelled Venn diagram.
+---------------------------------------------------------------------------- */
+function IkigaiBloom({ className }: { className?: string }) {
+  const circles = [
+    { cx: 90, cy: 90, fill: "var(--avro-blue)" },
+    { cx: 130, cy: 90, fill: "var(--gold-light)" },
+    { cx: 90, cy: 130, fill: "var(--warm-gray)" },
+    { cx: 130, cy: 130, fill: "var(--avro-blue-deep)" },
+  ]
+  return (
+    <svg viewBox="0 0 220 220" className={className} aria-hidden="true" role="presentation">
+      {circles.map((c, i) => (
+        <circle
+          key={i}
+          cx={c.cx}
+          cy={c.cy}
+          r="50"
+          fill={c.fill}
+          fillOpacity="0.16"
+          stroke={c.fill}
+          strokeOpacity="0.5"
+          strokeWidth="1.5"
+        />
+      ))}
+      {/* quiet center where the four meet */}
+      <circle cx="110" cy="110" r="5" fill="var(--ink)" opacity="0.55" />
     </svg>
   )
 }
@@ -75,7 +126,8 @@ function Hero() {
             />
           </div>
           <Enso
-            className="pointer-events-none absolute -top-5 -right-3 w-[clamp(72px,9vw,120px)] h-auto opacity-[0.16]"
+            gradientId="enso-hero"
+            className="pointer-events-none absolute -top-5 -right-3 w-[clamp(72px,9vw,120px)] h-auto opacity-[0.18]"
             stroke="var(--ink)"
           />
         </div>
@@ -96,7 +148,7 @@ const useCases: { label: string; icon: AvroIconName }[] = [
 function HeadspaceSection() {
   return (
     <Section>
-      <div className="max-w-[820px] mb-10">
+      <div className="max-w-[820px] mb-[clamp(32px,4vw,52px)]">
         <h2 className="font-serif font-black text-[clamp(28px,4vw,48px)] leading-[1.06] text-ink mb-5 text-balance">
           A Better Headspace for What Comes Next
         </h2>
@@ -110,14 +162,18 @@ function HeadspaceSection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5 mx-auto">
         {useCases.map((u) => (
           <div
             key={u.label}
-            className="flex flex-col items-center text-center gap-3 rounded-[18px] bg-base-light p-[clamp(16px,2vw,28px)]"
+            className="group flex flex-col items-center text-center gap-4 rounded-[22px] bg-base-light border border-[var(--ink)]/[0.06] px-[clamp(14px,1.6vw,22px)] py-[clamp(22px,2.6vw,34px)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_50px_rgba(28,27,20,0.07)]"
           >
-            <AvroIcon name={u.icon} size={48} className="md:w-[56px] md:h-[56px]" />
-            <span className="font-bold text-[clamp(13px,1.1vw,15px)] leading-snug text-ink">{u.label}</span>
+            <span className="flex items-center justify-center w-[clamp(64px,7vw,84px)] h-[clamp(64px,7vw,84px)] rounded-full bg-base ring-1 ring-[var(--ink)]/[0.07] shadow-[0_6px_18px_rgba(28,27,20,0.05)]">
+              <AvroIcon name={u.icon} size={40} className="md:w-[46px] md:h-[46px]" />
+            </span>
+            <span className="font-bold text-[clamp(13px,1.05vw,15px)] leading-snug text-ink text-balance">
+              {u.label}
+            </span>
           </div>
         ))}
       </div>
@@ -136,7 +192,7 @@ function IkigaiSection() {
   return (
     <section className="w-full bg-[var(--base-light)]">
       <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(52px,7vw,86px)]">
-        <div className="max-w-[820px] mb-10">
+        <div className="max-w-[820px] mb-[clamp(32px,4vw,52px)]">
           <span className="inline-block mb-4 px-4 py-2 rounded-full text-[12px] font-black tracking-[0.12em] uppercase bg-charcoal text-bone">
             Our Philosophy
           </span>
@@ -145,7 +201,7 @@ function IkigaiSection() {
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-[clamp(28px,4vw,48px)] items-start">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr_1.1fr] gap-[clamp(28px,4vw,56px)] items-center">
           {/* Left: explanation */}
           <div className="flex flex-col gap-4 text-ink/75 text-[clamp(15px,1.2vw,17px)] leading-relaxed font-medium">
             <p>
@@ -158,16 +214,14 @@ function IkigaiSection() {
               worthwhile.
             </p>
             <p className="text-ink font-bold">Your Ikigai is personal.</p>
-            <p>
-              AVRO does not define it for you. We simply believe the headspace you bring to it matters.
-            </p>
+            <p>AVRO does not define it for you. We simply believe the headspace you bring to it matters.</p>
           </div>
 
-          {/* Center: simple enso visual (no complex Venn diagram) */}
-          <div className="flex items-center justify-center py-4 lg:py-0">
-            <div className="relative w-[clamp(180px,22vw,260px)] aspect-square flex items-center justify-center">
-              <Enso className="absolute inset-0 w-full h-full opacity-90" stroke="var(--avro-blue-deep)" />
-              <span className="font-serif font-black text-[clamp(15px,1.4vw,19px)] text-ink text-center leading-tight px-8">
+          {/* Center: simple, modern Ikigai bloom (no complex Venn diagram) */}
+          <div className="flex items-center justify-center py-2 lg:py-0">
+            <div className="relative w-[clamp(220px,26vw,320px)] aspect-square flex items-center justify-center">
+              <IkigaiBloom className="absolute inset-0 w-full h-full" />
+              <span className="relative font-serif font-black text-[clamp(15px,1.4vw,19px)] text-ink text-center leading-tight px-10">
                 Purpose,
                 <br />
                 met with calm.
@@ -178,9 +232,16 @@ function IkigaiSection() {
           {/* Right: Japanese philosophy principles */}
           <div className="flex flex-col gap-5">
             {principles.map((p) => (
-              <div key={p.term} className="border-l-2 border-[var(--avro-blue-deep)] pl-5">
-                <h3 className="font-serif font-black text-[clamp(18px,1.8vw,22px)] text-ink mb-1">{p.term}</h3>
-                <p className="text-ink/70 text-[clamp(14px,1.1vw,16px)] leading-relaxed font-medium">{p.copy}</p>
+              <div
+                key={p.term}
+                className="rounded-[18px] bg-base border border-[var(--ink)]/[0.06] p-[clamp(18px,1.8vw,24px)]"
+              >
+                <h3 className="font-serif font-black text-[clamp(18px,1.8vw,22px)] text-ink mb-1.5">
+                  {p.term}
+                </h3>
+                <p className="text-ink/70 text-[clamp(14px,1.1vw,16px)] leading-relaxed font-medium">
+                  {p.copy}
+                </p>
               </div>
             ))}
           </div>
@@ -217,27 +278,32 @@ const founders = [
 function FoundersSection() {
   return (
     <Section>
-      <div className="max-w-[820px] mb-9">
+      <div className="max-w-[820px] mb-[clamp(28px,3.5vw,44px)]">
         <h2 className="font-serif font-black text-[clamp(28px,4vw,48px)] leading-[1.06] text-ink text-balance">
           Two Founders. One Shared Belief.
         </h2>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-5 md:gap-6 max-w-[980px]">
+      <div className="grid sm:grid-cols-2 gap-6 md:gap-8 max-w-[1040px] mx-auto">
         {founders.map((f) => (
-          <article key={f.name} className="flex flex-col rounded-[20px] bg-base-light overflow-hidden">
+          <article
+            key={f.name}
+            className="flex flex-col rounded-[24px] bg-base-light border border-[var(--ink)]/[0.06] overflow-hidden"
+          >
             <div className="relative aspect-[4/3]">
               <Image
                 src={f.image}
                 alt={`${f.name}, ${f.role} of AVRO`}
                 fill
-                sizes="(min-width: 640px) 480px, 100vw"
+                sizes="(min-width: 640px) 510px, 100vw"
                 className="object-cover object-top"
               />
             </div>
-            <div className="p-[clamp(20px,2.5vw,28px)]">
-              <h3 className="font-serif font-black text-[clamp(19px,2vw,24px)] leading-tight text-ink">{f.name}</h3>
-              <p className="text-ink/55 text-[12px] md:text-[13px] font-bold tracking-[0.04em] uppercase mt-1 mb-3">
+            <div className="p-[clamp(22px,2.8vw,34px)]">
+              <h3 className="font-serif font-black text-[clamp(20px,2.1vw,26px)] leading-tight text-ink">
+                {f.name}
+              </h3>
+              <p className="text-ink/55 text-[12px] md:text-[13px] font-bold tracking-[0.04em] uppercase mt-1 mb-3.5">
                 {f.role}
               </p>
               <p className="text-ink/75 text-[clamp(14px,1.1vw,16px)] leading-relaxed font-medium">{f.bio}</p>
@@ -247,7 +313,7 @@ function FoundersSection() {
       </div>
 
       {/* Shared quote */}
-      <blockquote className="mt-[clamp(32px,4vw,48px)] max-w-[760px] border-l-2 border-charcoal pl-6">
+      <blockquote className="mt-[clamp(32px,4vw,48px)] max-w-[820px] mx-auto text-center">
         <p className="font-serif font-black text-[clamp(19px,2.4vw,30px)] leading-[1.18] text-ink text-balance">
           {'"People do not always need more stimulation. Sometimes they need a better headspace."'}
         </p>
@@ -281,7 +347,7 @@ const productTrio: { name: string; copy: string; image: string; href: string }[]
 function ScienceSection() {
   return (
     <Section>
-      <div className="max-w-[820px] mb-10">
+      <div className="max-w-[820px] mb-[clamp(32px,4vw,52px)]">
         <h2 className="font-serif font-black text-[clamp(28px,4vw,48px)] leading-[1.06] text-ink mb-5 text-balance">
           Japanese Science. Modern Performance.
         </h2>
@@ -295,20 +361,20 @@ function ScienceSection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 md:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 max-w-[1100px] mx-auto">
         {productTrio.map((p) => (
           <Link
             key={p.name}
             href={p.href}
-            className="group flex flex-col gap-4 rounded-[20px] bg-base-light p-[clamp(18px,2vw,28px)] transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_70px_rgba(30,29,24,0.08)]"
+            className="group flex flex-col gap-4 rounded-[24px] bg-base-light border border-[var(--ink)]/[0.06] p-[clamp(20px,2.4vw,32px)] transition-all hover:-translate-y-1 hover:shadow-[0_24px_72px_rgba(28,27,20,0.09)]"
           >
-            <div className="relative aspect-square rounded-[14px] overflow-hidden bg-soft">
+            <div className="relative aspect-square rounded-[16px] overflow-hidden bg-soft">
               <Image
                 src={p.image}
                 alt={`${p.name} product render`}
                 fill
                 sizes="(min-width: 640px) 33vw, 100vw"
-                className="object-contain p-3"
+                className="object-contain p-4 transition-transform duration-300 group-hover:scale-[1.03]"
               />
             </div>
             <h3 className="font-serif font-black text-[clamp(20px,2vw,26px)] text-ink">{p.name}</h3>
@@ -317,7 +383,7 @@ function ScienceSection() {
         ))}
       </div>
 
-      <div className="mt-8">
+      <div className="mt-[clamp(28px,3vw,40px)] flex justify-center">
         <Link href="/science" className="btn-secondary">
           Explore the Science
         </Link>
