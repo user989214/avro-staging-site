@@ -23,7 +23,7 @@ function IkigaiVenn({ className }: { className?: string }) {
   const circles = [
     { cx: 140, cy: 78, fill: "var(--avro-blue)" }, // top
     { cx: 78, cy: 140, fill: "var(--avro-blue-deep)" }, // left
-    { cx: 202, cy: 140, fill: "var(--gold)" }, // right
+    { cx: 202, cy: 140, fill: "var(--warm-gray)" }, // right
     { cx: 140, cy: 202, fill: "var(--olive)" }, // bottom
   ]
   const labels = [
@@ -148,10 +148,6 @@ function Hero() {
           padding: clamp(28px,5vw,72px) clamp(20px,5vw,64px);
           max-width: 700px;
         }
-        .os-hero-accents {
-          position: absolute; top: clamp(24px,4vw,52px); right: clamp(24px,4vw,68px);
-          display: flex; align-items: flex-start; gap: clamp(14px,1.6vw,22px);
-        }
         .os-hero-img-mobile { display: none; }
         @media (max-width: 768px) {
           .os-hero-card {
@@ -163,7 +159,7 @@ function Hero() {
             position: relative; width: 100%; margin: 12px auto 0;
             aspect-ratio: 4/3; border-radius: 20px; overflow: hidden; flex-shrink: 0;
           }
-          .os-hero-scrim, .os-hero-accents { display: none !important; }
+          .os-hero-scrim { display: none !important; }
           .os-hero-content { position: static; padding: 24px 8px 24px; max-width: none; }
         }
         @media (min-width: 769px) {
@@ -322,8 +318,8 @@ function IkigaiSection() {
               </p>
             </div>
             <blockquote className="mt-7">
-              <p className="font-serif font-black text-[clamp(19px,1.9vw,24px)] leading-[1.18] text-[var(--gold)] text-balance">
-                Your purpose is yours.
+            <p className="font-serif font-black text-[clamp(19px,1.9vw,24px)] leading-[1.18] text-[var(--avro-blue-deep)] text-balance">
+              Your purpose is yours.
                 <br /> Meet it with composure.
               </p>
             </blockquote>
@@ -386,12 +382,12 @@ const founders = [
   },
 ]
 
-/* Small gold monogram ornament for the center divider — two interlocking
+/* Small monogram ornament for the center divider — two interlocking
    rounded diamonds suggesting union ("one shared belief"). */
 function FounderMonogram({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 48 48" className={className} aria-hidden="true" role="presentation">
-      <g fill="none" stroke="var(--gold)" strokeWidth="1.75" strokeLinejoin="round">
+      <g fill="none" stroke="var(--avro-blue-deep)" strokeWidth="1.75" strokeLinejoin="round">
         <rect x="9" y="9" width="22" height="22" rx="4" transform="rotate(45 20 20)" />
         <rect x="17" y="17" width="22" height="22" rx="4" transform="rotate(45 28 28)" />
       </g>
@@ -419,7 +415,7 @@ function FounderText({ founder }: { founder: (typeof founders)[number] }) {
       <h3 className="font-serif font-black text-[clamp(20px,2.1vw,26px)] leading-tight text-ink">
         {founder.name}
       </h3>
-      <p className="text-[var(--gold)] text-[clamp(13px,1.05vw,15px)] font-bold mt-1 mb-4">{founder.role}</p>
+      <p className="text-[var(--avro-blue-deep)] text-[clamp(13px,1.05vw,15px)] font-bold mt-1 mb-4">{founder.role}</p>
       <div className="flex flex-col gap-3.5 text-ink/75 text-[clamp(14px,1.1vw,16px)] leading-relaxed font-medium">
         {founder.bio.map((p, i) => (
           <p key={i}>{p}</p>
@@ -476,7 +472,7 @@ function FoundersSection() {
         <p className="font-serif font-black text-[clamp(19px,2.4vw,30px)] leading-[1.2] text-balance">
           <span className="text-ink">People don&apos;t always need more stimulation.</span>
           <br />
-          <span className="text-[var(--gold)]">Sometimes they need a better headspace.</span>
+          <span className="text-[var(--avro-blue-deep)]">Sometimes they need a better headspace.</span>
         </p>
       </blockquote>
     </Section>
@@ -585,7 +581,7 @@ function RealLifeSection() {
                 conversation. While preparing to create, compete, lead or decide.
               </p>
               <p>These moments may look different, but they ask the same question:</p>
-              <p className="font-serif font-black text-[clamp(18px,2vw,24px)] leading-snug text-[var(--gold)]">
+              <p className="font-serif font-black text-[clamp(18px,2vw,24px)] leading-snug text-[var(--avro-blue-deep)]">
                 What headspace are you bringing with you?
               </p>
               <p>AVRO is designed to support calm, clarity and composure when the answer matters.*</p>
