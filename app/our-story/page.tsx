@@ -2,6 +2,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { Section, SectionHeading } from "@/components/sections"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
+import { ProductCard } from "@/components/product-visual"
+import type { FormulaKey } from "@/lib/data"
 
 export const metadata = {
   title: "Our Story | AVRO",
@@ -323,23 +325,23 @@ function FoundersSection() {
 }
 
 /* ---- 5. SCIENCE + PRODUCT ---------------------------------------------------- */
-const productTrio: { name: string; copy: string; image: string; href: string }[] = [
+const productTrio: { name: string; copy: string; formulaKey: FormulaKey; href: string }[] = [
   {
     name: "AVRO Calm",
     copy: "For moments when composure comes first.*",
-    image: "/images/products/avro-calm-blackberry-jasmine.png",
+    formulaKey: "calm",
     href: "/calm",
   },
   {
     name: "AVRO Focus",
     copy: "For moments that call for sustained attention and clarity.*",
-    image: "/images/products/avro-focus-pomegranate-raspberry.png",
+    formulaKey: "focus",
     href: "/focus",
   },
   {
     name: "AVRO Energy",
     copy: "For moments when you want steady energy while maintaining a sense of control.*",
-    image: "/images/products/avro-energy-fuji-apple.png",
+    formulaKey: "energy",
     href: "/energy",
   },
 ]
@@ -368,13 +370,13 @@ function ScienceSection() {
             href={p.href}
             className="group flex flex-col gap-4 rounded-[24px] bg-base-light border border-[var(--ink)]/[0.06] p-[clamp(20px,2.4vw,32px)] transition-all hover:-translate-y-1 hover:shadow-[0_24px_72px_rgba(28,27,20,0.09)]"
           >
-            <div className="relative aspect-square rounded-[16px] overflow-hidden bg-soft">
-              <Image
-                src={p.image}
-                alt={`${p.name} product render`}
-                fill
-                sizes="(min-width: 640px) 33vw, 100vw"
-                className="object-contain p-4 transition-transform duration-300 group-hover:scale-[1.03]"
+            <div
+              className="relative flex items-center justify-center overflow-hidden aspect-square rounded-[16px]"
+              style={{ backgroundColor: "var(--bone)" }}
+            >
+              <ProductCard
+                formulaKey={p.formulaKey}
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
               />
             </div>
             <h3 className="font-serif font-black text-[clamp(20px,2vw,26px)] text-ink">{p.name}</h3>
