@@ -3,49 +3,13 @@ import Link from "next/link"
 import { Section, SectionHeading } from "@/components/sections"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { ProductCard } from "@/components/product-visual"
+import { PageHero } from "@/components/page-hero"
 import type { FormulaKey } from "@/lib/data"
 
 export const metadata = {
   title: "Our Story | AVRO",
   description:
     "Calm is not the opposite of performance — it is where performance begins. AVRO pairs Japanese scientific roots and the spirit of Ikigai with modern Calm Performance.",
-}
-
-/* ----------------------------------------------------------------------------
-   Subtle Japanese detail — a single enso (brush circle). Rendered with a
-   soft underlay, a tapered ink gradient and a brush-lift dot so it reads as a
-   real brush stroke rather than a plain ring. Kept minimal so Japanese imagery
-   stays ~10% of the visual language per the brand brief.
----------------------------------------------------------------------------- */
-function Enso({
-  className,
-  stroke = "var(--charcoal)",
-  gradientId,
-}: {
-  className?: string
-  stroke?: string
-  gradientId: string
-}) {
-  const d =
-    "M141 38 C 179 60, 192 113, 165 152 C 138 191, 76 199, 39 169 C 4 141, 3 82, 37 47 C 65 18, 116 13, 150 33"
-  return (
-    <svg viewBox="0 0 200 200" className={className} aria-hidden="true" role="presentation">
-      <defs>
-        <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor={stroke} stopOpacity="0.12" />
-          <stop offset="32%" stopColor={stroke} stopOpacity="1" />
-          <stop offset="78%" stopColor={stroke} stopOpacity="0.85" />
-          <stop offset="100%" stopColor={stroke} stopOpacity="0.35" />
-        </linearGradient>
-      </defs>
-      {/* soft, wide underlay to suggest ink bleed */}
-      <path d={d} fill="none" stroke={stroke} strokeWidth="16" strokeLinecap="round" opacity="0.1" />
-      {/* main tapered brush stroke */}
-      <path d={d} fill="none" stroke={`url(#${gradientId})`} strokeWidth="9" strokeLinecap="round" />
-      {/* where the brush lifts off */}
-      <circle cx="150" cy="33" r="4.5" fill={stroke} opacity="0.65" />
-    </svg>
-  )
 }
 
 /* ----------------------------------------------------------------------------
@@ -84,57 +48,15 @@ function IkigaiBloom({ className }: { className?: string }) {
 /* ---- 1. HERO ---------------------------------------------------------------- */
 function Hero() {
   return (
-    <section className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] pt-[clamp(28px,4vw,52px)] pb-[clamp(40px,6vw,72px)]">
-      <div className="grid lg:grid-cols-2 gap-[clamp(28px,4vw,56px)] items-center">
-        {/* Left: copy */}
-        <div className="flex flex-col">
-          <span className="inline-block self-start mb-5 px-4 py-2 rounded-full text-[12px] font-black tracking-[0.14em] uppercase bg-charcoal text-bone">
-            Our Story
-          </span>
-          <h1 className="font-serif font-black text-[clamp(34px,5vw,60px)] leading-[1.02] tracking-[-0.02em] text-ink text-balance">
-            Calm is not the opposite of performance. It is where performance begins.
-          </h1>
-          <div className="mt-6 flex flex-col gap-4 max-w-[520px] text-ink/75 text-[clamp(16px,1.4vw,19px)] leading-relaxed font-medium">
-            <p>
-              {
-                "Many of life's most important moments do not require more stimulation. They require us to become calmer, clearer and more composed."
-              }
-            </p>
-            <p>
-              AVRO is creating Calm Performance for people who want to bring the right headspace to the
-              moments that matter.
-            </p>
-          </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/shop" className="btn-primary">
-              Find Your Formula
-            </Link>
-            <Link href="/science" className="btn-secondary">
-              Explore the Science
-            </Link>
-          </div>
-        </div>
-
-        {/* Right: lifestyle image with a subtle enso accent */}
-        <div className="relative">
-          <div className="relative aspect-[4/3] lg:aspect-[5/4] rounded-[24px] overflow-hidden bg-soft">
-            <Image
-              src="/images/lifestyle/journal-coffee-window.jpg"
-              alt="A composed, unhurried moment before a demanding day begins."
-              fill
-              priority
-              sizes="(min-width: 1024px) 620px, 100vw"
-              className="object-cover"
-            />
-          </div>
-          <Enso
-            gradientId="enso-hero"
-            className="pointer-events-none absolute -top-5 -right-3 w-[clamp(72px,9vw,120px)] h-auto opacity-[0.18]"
-            stroke="var(--ink)"
-          />
-        </div>
-      </div>
-    </section>
+    <PageHero
+      variant="flat"
+      title="Calm is not the opposite of performance. It is where performance begins."
+      lede="Many of life's most important moments do not require more stimulation — they require us to become calmer, clearer and more composed. AVRO is creating Calm Performance for people who want to bring the right headspace to the moments that matter."
+      imageSrc=""
+      imageAlt=""
+      primaryCta={{ href: "/shop", label: "Find Your Formula" }}
+      secondaryCta={{ href: "/science", label: "Explore the Science" }}
+    />
   )
 }
 
