@@ -263,57 +263,113 @@ const founders = [
     name: "Keigo Sugawara",
     role: "Co-Founder & CEO",
     image: "/images/team/keigo.jpg",
-    bio: "Keigo grew up in Japan and studied applied microbiology and fermentation science at the University of Tokyo. His background shaped his respect for ingredients, scientific discipline and the role fermentation can play in creating thoughtful, functional products.",
+    bio: [
+      "Keigo grew up in Japan and studied applied microbiology and fermentation science at the University of Tokyo.",
+      "His background shaped his respect for ingredients, scientific discipline and the role fermentation can play in creating thoughtful, functional products.",
+    ],
   },
   {
     name: "Peter van Stolk",
     role: "Co-Founder & CMO",
     image: "/images/team/peter.jpg",
-    bio: "Peter brought decades of experience building consumer brands and challenging established categories. He saw that AVRO could introduce a new way of thinking about how people prepare for demanding moments.",
+    bio: [
+      "Peter brought decades of experience building consumer brands and challenging established categories.",
+      "He saw that AVRO could introduce a new way of thinking about how people prepare for demanding moments.",
+    ],
   },
 ]
 
+/* Small gold monogram ornament for the center divider — two interlocking
+   rounded diamonds suggesting union ("one shared belief"). */
+function FounderMonogram({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} aria-hidden="true" role="presentation">
+      <g fill="none" stroke="var(--gold)" strokeWidth="1.75" strokeLinejoin="round">
+        <rect x="9" y="9" width="22" height="22" rx="4" transform="rotate(45 20 20)" />
+        <rect x="17" y="17" width="22" height="22" rx="4" transform="rotate(45 28 28)" />
+      </g>
+    </svg>
+  )
+}
+
+function FounderPhoto({ founder }: { founder: (typeof founders)[number] }) {
+  return (
+    <div className="relative aspect-[3/4] w-full rounded-[18px] overflow-hidden bg-soft">
+      <Image
+        src={founder.image}
+        alt={`${founder.name}, ${founder.role} of AVRO`}
+        fill
+        sizes="(min-width: 1024px) 240px, (min-width: 640px) 40vw, 80vw"
+        className="object-cover object-top"
+      />
+    </div>
+  )
+}
+
+function FounderText({ founder }: { founder: (typeof founders)[number] }) {
+  return (
+    <div className="flex flex-col">
+      <h3 className="font-serif font-black text-[clamp(20px,2.1vw,26px)] leading-tight text-ink">
+        {founder.name}
+      </h3>
+      <p className="text-[var(--gold)] text-[clamp(13px,1.05vw,15px)] font-bold mt-1 mb-4">{founder.role}</p>
+      <div className="flex flex-col gap-3.5 text-ink/75 text-[clamp(14px,1.1vw,16px)] leading-relaxed font-medium">
+        {founder.bio.map((p, i) => (
+          <p key={i}>{p}</p>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function FoundersSection() {
+  const [keigo, peter] = founders
   return (
     <Section>
-      <div className="max-w-[820px] mb-[clamp(28px,3.5vw,44px)]">
-        <h2 className="font-serif font-black text-[clamp(28px,4vw,48px)] leading-[1.06] text-ink text-balance">
+      <div className="text-center max-w-[820px] mx-auto mb-[clamp(32px,4.5vw,56px)]">
+        <h2 className="font-serif font-black text-[clamp(26px,3.4vw,42px)] leading-[1.08] text-ink text-balance">
           Two Founders. One Shared Belief.
         </h2>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-6 md:gap-8 max-w-[1040px] mx-auto">
-        {founders.map((f) => (
-          <article
-            key={f.name}
-            className="flex flex-col rounded-[24px] bg-base-light border border-[var(--ink)]/[0.06] overflow-hidden"
-          >
-            <div className="relative aspect-[4/3]">
-              <Image
-                src={f.image}
-                alt={`${f.name}, ${f.role} of AVRO`}
-                fill
-                sizes="(min-width: 640px) 510px, 100vw"
-                className="object-cover object-top"
-              />
-            </div>
-            <div className="p-[clamp(22px,2.8vw,34px)]">
-              <h3 className="font-serif font-black text-[clamp(20px,2.1vw,26px)] leading-tight text-ink">
-                {f.name}
-              </h3>
-              <p className="text-ink/55 text-[12px] md:text-[13px] font-bold tracking-[0.04em] uppercase mt-1 mb-3.5">
-                {f.role}
-              </p>
-              <p className="text-ink/75 text-[clamp(14px,1.1vw,16px)] leading-relaxed font-medium">{f.bio}</p>
-            </div>
-          </article>
-        ))}
+      {/* Symmetric editorial layout: photo · text · divider · text · photo */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[minmax(170px,210px)_1fr_auto_1fr_minmax(170px,210px)] gap-x-[clamp(20px,2.6vw,40px)] gap-y-8 items-center max-w-[1200px] mx-auto">
+        {/* Keigo */}
+        <div className="hidden lg:block">
+          <FounderPhoto founder={keigo} />
+        </div>
+        <div className="flex flex-col sm:flex-row lg:flex-col gap-5 md:gap-6 lg:gap-0">
+          <div className="w-full sm:w-[200px] lg:hidden shrink-0">
+            <FounderPhoto founder={keigo} />
+          </div>
+          <FounderText founder={keigo} />
+        </div>
+
+        {/* Center divider + monogram */}
+        <div className="hidden lg:flex flex-col items-center self-stretch py-2">
+          <span className="flex-1 w-px bg-[var(--ink)]/[0.12]" />
+          <FounderMonogram className="w-9 h-9 my-4" />
+          <span className="flex-1 w-px bg-[var(--ink)]/[0.12]" />
+        </div>
+
+        {/* Peter */}
+        <div className="flex flex-col sm:flex-row-reverse lg:flex-col gap-5 md:gap-6 lg:gap-0">
+          <div className="w-full sm:w-[200px] lg:hidden shrink-0">
+            <FounderPhoto founder={peter} />
+          </div>
+          <FounderText founder={peter} />
+        </div>
+        <div className="hidden lg:block">
+          <FounderPhoto founder={peter} />
+        </div>
       </div>
 
-      {/* Shared quote */}
-      <blockquote className="mt-[clamp(32px,4vw,48px)] max-w-[820px] mx-auto text-center">
-        <p className="font-serif font-black text-[clamp(19px,2.4vw,30px)] leading-[1.18] text-ink text-balance">
-          {'"People do not always need more stimulation. Sometimes they need a better headspace."'}
+      {/* Shared two-line quote */}
+      <blockquote className="mt-[clamp(36px,5vw,60px)] max-w-[820px] mx-auto text-center">
+        <p className="font-serif font-black text-[clamp(19px,2.4vw,30px)] leading-[1.2] text-balance">
+          <span className="text-ink">People don&apos;t always need more stimulation.</span>
+          <br />
+          <span className="text-[var(--gold)]">Sometimes they need a better headspace.</span>
         </p>
       </blockquote>
     </Section>
