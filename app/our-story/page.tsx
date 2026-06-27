@@ -430,7 +430,7 @@ function FoundersSection() {
       </div>
 
       {/* Symmetric editorial layout: photo · text · divider · text · photo */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[minmax(170px,210px)_1fr_auto_1fr_minmax(170px,210px)] gap-x-[clamp(20px,2.6vw,40px)] gap-y-8 items-center max-w-[1200px] mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[minmax(170px,210px)_1fr_auto_1fr_minmax(170px,210px)] gap-x-[clamp(20px,2.6vw,40px)] gap-y-8 items-start max-w-[1200px] mx-auto">
         {/* Keigo */}
         <div className="hidden lg:block">
           <FounderPhoto founder={keigo} />
