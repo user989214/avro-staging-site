@@ -400,82 +400,83 @@ const productTrio: { name: string; copy: string; formulaKey: FormulaKey; href: s
 
 function ScienceSection() {
   return (
-    <Section>
-      <div className="max-w-[820px] mb-[clamp(32px,4vw,52px)]">
-        <h2 className="font-serif font-black text-[clamp(28px,4vw,48px)] leading-[1.06] text-ink mb-5 text-balance">
-          Japanese Science. Modern Performance.
-        </h2>
-        <div className="flex flex-col gap-4 text-ink/75 text-[clamp(16px,1.3vw,18px)] leading-relaxed font-medium">
-          <p>Every AVRO formula begins with naturally fermented PharmaGABA®.*</p>
-          <p>
-            {
-              "This calm-first foundation connects AVRO's Japanese scientific roots with its modern purpose: supporting the headspace people want for what comes next."
-            }
-          </p>
+    <section className="w-full bg-[var(--base-light)]">
+      <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(52px,7vw,86px)]">
+        <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-[clamp(32px,4vw,64px)] items-center">
+          {/* Left: heading, copy + CTA */}
+          <div className="flex flex-col">
+            <h2 className="font-serif font-black text-[clamp(26px,3.4vw,42px)] leading-[1.08] text-ink mb-5 text-balance">
+              Japanese Science. Modern Performance.
+            </h2>
+            <div className="flex flex-col gap-4 text-ink/75 text-[clamp(15px,1.3vw,17px)] leading-relaxed font-medium">
+              <p>Every AVRO formula begins with naturally fermented PharmaGABA®.*</p>
+              <p>
+                {
+                  "This calm-first foundation connects AVRO's Japanese scientific roots with its modern purpose: supporting the headspace you want for what comes next."
+                }
+              </p>
+            </div>
+            <div className="mt-8">
+              <Link href="/science" className="btn-secondary">
+                Explore the Science
+              </Link>
+            </div>
+          </div>
+
+          {/* Right: three clean tubes with captions */}
+          <div className="grid grid-cols-3 gap-[clamp(10px,1.6vw,24px)]">
+            {productTrio.map((p) => (
+              <Link key={p.name} href={p.href} className="group flex flex-col items-center text-center">
+                <div className="relative flex items-end justify-center h-[clamp(180px,22vw,300px)] w-full">
+                  <ProductCard
+                    formulaKey={p.formulaKey}
+                    className="h-full w-auto object-contain transition-transform duration-300 group-hover:-translate-y-1.5"
+                  />
+                </div>
+                <p className="mt-5 text-ink/70 text-[clamp(12px,1vw,14px)] leading-relaxed font-medium text-balance px-1">
+                  {p.copy}
+                </p>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 max-w-[1100px] mx-auto">
-        {productTrio.map((p) => (
-          <Link
-            key={p.name}
-            href={p.href}
-            className="group flex flex-col gap-4 rounded-[24px] bg-base-light border border-[var(--ink)]/[0.06] p-[clamp(20px,2.4vw,32px)] transition-all hover:-translate-y-1 hover:shadow-[0_24px_72px_rgba(28,27,20,0.09)]"
-          >
-            <div
-              className="relative flex items-center justify-center overflow-hidden aspect-square rounded-[16px]"
-              style={{ backgroundColor: "var(--bone)" }}
-            >
-              <ProductCard
-                formulaKey={p.formulaKey}
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-              />
-            </div>
-            <h3 className="font-serif font-black text-[clamp(20px,2vw,26px)] text-ink">{p.name}</h3>
-            <p className="text-ink/70 text-[clamp(14px,1.1vw,16px)] leading-relaxed font-medium">{p.copy}</p>
-          </Link>
-        ))}
-      </div>
-
-      <div className="mt-[clamp(28px,3vw,40px)] flex justify-center">
-        <Link href="/science" className="btn-secondary">
-          Explore the Science
-        </Link>
-      </div>
-    </Section>
+    </section>
   )
 }
 
 /* ---- 6. BUILT FOR REAL LIFE -------------------------------------------------- */
 function RealLifeSection() {
   return (
-    <section className="w-full bg-[var(--base-light)]">
-      <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(52px,7vw,86px)]">
-        <div className="grid lg:grid-cols-2 gap-[clamp(28px,4vw,56px)] items-center">
-          {/* Image */}
-          <div className="relative aspect-[4/3] rounded-[24px] overflow-hidden bg-soft order-last lg:order-first">
-            <Image
-              src="/images/lifestyle/woman-journaling-mug.jpg"
-              alt="A calm, considered moment in an everyday routine."
-              fill
-              sizes="(min-width: 1024px) 620px, 100vw"
-              className="object-cover"
-            />
-          </div>
+    <section className="w-full">
+      <div className="grid lg:grid-cols-2 items-stretch">
+        {/* Full-bleed summit image */}
+        <div className="relative min-h-[280px] lg:min-h-[560px] order-first">
+          <Image
+            src="/images/lifestyle/summit-sunrise-contemplation.png"
+            alt="A person standing calmly on a mountain summit at sunrise, looking out over the ridges ahead."
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
+        </div>
 
-          {/* Copy + CTA */}
-          <div className="flex flex-col">
-            <h2 className="font-serif font-black text-[clamp(28px,4vw,48px)] leading-[1.06] text-ink mb-5 text-balance">
+        {/* Copy + CTA */}
+        <div className="flex flex-col justify-center bg-[var(--base-light)] px-[clamp(20px,5vw,72px)] py-[clamp(40px,6vw,80px)]">
+          <div className="max-w-[560px]">
+            <h2 className="font-serif font-black text-[clamp(26px,3.4vw,42px)] leading-[1.08] text-ink mb-5 text-balance">
               Built for Real Life
             </h2>
-            <div className="flex flex-col gap-4 text-ink/75 text-[clamp(15px,1.3vw,18px)] leading-relaxed font-medium">
+            <div className="flex flex-col gap-4 text-ink/75 text-[clamp(15px,1.3vw,17px)] leading-relaxed font-medium">
               <p>AVRO is for anyone who cares about how they show up.</p>
               <p>
                 Before an important meeting. During a demanding workday. On the first tee. Before a difficult
                 conversation. While preparing to create, compete, lead or decide.
               </p>
               <p>These moments may look different, but they ask the same question:</p>
-              <p className="text-ink font-bold">What headspace are you bringing with you?</p>
+              <p className="font-serif font-black text-[clamp(18px,2vw,24px)] leading-snug text-[var(--gold)]">
+                What headspace are you bringing with you?
+              </p>
               <p>AVRO is designed to support calm, clarity and composure when the answer matters.*</p>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
