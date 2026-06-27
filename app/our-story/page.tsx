@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Section, SectionHeading } from "@/components/sections"
+import { Section } from "@/components/sections"
 import { AvroIcon, type AvroIconName } from "@/components/avro-icons"
 import { ProductCard } from "@/components/product-visual"
 import type { FormulaKey } from "@/lib/data"
@@ -168,11 +168,6 @@ function Hero() {
           position: absolute; top: clamp(24px,4vw,52px); right: clamp(24px,4vw,68px);
           display: flex; align-items: flex-start; gap: clamp(14px,1.6vw,22px);
         }
-        .os-hero-label {
-          position: absolute; left: clamp(20px,5vw,64px); bottom: clamp(14px,2.4vw,26px);
-          font-weight: 800; letter-spacing: 0.14em; font-size: clamp(12px,1.1vw,14px);
-          text-transform: uppercase; color: var(--ink);
-        }
         .os-hero-img-mobile { display: none; }
         @media (max-width: 768px) {
           .os-hero-card {
@@ -184,7 +179,7 @@ function Hero() {
             position: relative; width: 100%; margin: 12px auto 0;
             aspect-ratio: 4/3; border-radius: 20px; overflow: hidden; flex-shrink: 0;
           }
-          .os-hero-scrim, .os-hero-accents, .os-hero-label { display: none !important; }
+          .os-hero-scrim, .os-hero-accents { display: none !important; }
           .os-hero-content { position: static; padding: 24px 8px 24px; max-width: none; }
         }
         @media (min-width: 769px) {
@@ -275,9 +270,6 @@ function Hero() {
           </div>
         </div>
 
-        <span className="os-hero-label os-fade" style={{ animationDelay: "0.8s" }}>
-          A Better Headspace
-        </span>
       </div>
     </section>
   )
@@ -647,43 +639,6 @@ function RealLifeSection() {
   )
 }
 
-/* ---- TEAM (kept from existing approved team content) ------------------------- */
-const team = [
-  { name: "Keigo Sugawara", role: "Co-Founder & CEO", image: "/images/team/keigo.jpg" },
-  { name: "Peter van Stolk", role: "Co-Founder & CMO", image: "/images/team/peter.jpg" },
-  { name: "Holly Weber", role: "Partnerships & Customer Success Manager", image: "/images/team/holly.jpg" },
-  { name: "Marianne Lyles", role: "Growth & Marketing Director", image: "/images/team/marianne.jpg" },
-]
-
-function TeamSection() {
-  return (
-    <Section id="team">
-      <SectionHeading title="The people behind AVRO." />
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 md:gap-6 max-w-[1100px] mx-auto">
-        {team.map((member) => (
-          <div key={member.name} className="flex flex-col gap-3">
-            <div className="relative aspect-[4/3] rounded-[20px] overflow-hidden bg-soft">
-              <Image
-                src={member.image}
-                alt={member.name}
-                fill
-                sizes="(min-width: 640px) 25vw, 50vw"
-                className="object-cover object-top"
-              />
-            </div>
-            <div>
-              <p className="font-black text-[13px] md:text-sm leading-tight">{member.name}</p>
-              <p className="text-ink/55 text-[11px] md:text-[13px] mt-0.5 font-medium tracking-wide">
-                {member.role}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </Section>
-  )
-}
-
 export default function OurStoryPage() {
   return (
     <>
@@ -693,7 +648,6 @@ export default function OurStoryPage() {
       <FoundersSection />
       <ScienceSection />
       <RealLifeSection />
-      <TeamSection />
     </>
   )
 }
