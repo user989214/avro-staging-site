@@ -119,22 +119,6 @@ function IkigaiVenn({ className }: { className?: string }) {
 }
 
 /* ---- 1. HERO ---------------------------------------------------------------- */
-/* Gold enso brush-circle accent (kept minimal, ~10% Japanese visual language). */
-function HeroEnso({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 120 120" className={className} aria-hidden="true" role="presentation">
-      <path
-        d="M84 22 C 104 36, 110 70, 92 92 C 72 116, 32 112, 16 86 C 2 64, 10 30, 38 18 C 52 12, 70 13, 82 21"
-        fill="none"
-        stroke="var(--gold)"
-        strokeWidth="6"
-        strokeLinecap="round"
-        opacity="0.85"
-      />
-    </svg>
-  )
-}
-
 function Hero() {
   return (
     <section className="os-hero-section">
@@ -199,46 +183,28 @@ function Hero() {
 
         <div className="os-hero-scrim" aria-hidden="true" />
 
-        {/* Single subtle Japanese element — a light gold enso brush circle */}
-        <div className="os-hero-accents os-fade" style={{ animationDelay: "0.4s" }} aria-hidden="true">
-          <HeroEnso className="w-[clamp(56px,7vw,96px)] h-auto" />
-        </div>
-
         <div className="os-hero-content">
-          {/* Breadcrumb */}
-          <nav
-            className="os-fade flex items-center gap-2 text-[11px] md:text-[12px] font-bold tracking-[0.12em] uppercase text-ink/55 mb-5"
-            aria-label="Breadcrumb"
-            style={{ animationDelay: "0.05s" }}
-          >
-            <Link href="/" className="hover:text-ink transition-colors">
-              Home
-            </Link>
-            <span aria-hidden="true">›</span>
-            <span className="text-ink/80">Our Story</span>
-          </nav>
-
-          {/* Gold eyebrow */}
+          {/* Eyebrow */}
           <span
-            className="os-fade text-[var(--gold)] text-[clamp(12px,1.1vw,14px)] font-bold tracking-[0.16em] uppercase mb-3"
+            className="os-fade text-warm-gray text-[clamp(12px,1.1vw,14px)] font-bold tracking-[0.16em] uppercase mb-3"
             style={{ animationDelay: "0.12s" }}
           >
             Our Story
           </span>
 
-          {/* Two-tone serif headline */}
-          <h1 className="font-serif font-black leading-[1.04] tracking-[-0.02em] text-[clamp(26px,3.3vw,44px)] text-balance">
-            <span className="os-fade block text-ink" style={{ animationDelay: "0.2s" }}>
+          {/* Serif headline */}
+          <h1 className="font-serif font-black leading-[1.04] tracking-[-0.02em] text-[clamp(26px,3.3vw,44px)] text-balance text-ink">
+            <span className="os-fade block" style={{ animationDelay: "0.2s" }}>
               Calm is not the opposite of performance.
             </span>
-            <span className="os-fade block text-[var(--gold)] mt-1" style={{ animationDelay: "0.34s" }}>
+            <span className="os-fade block mt-1" style={{ animationDelay: "0.34s" }}>
               It is where performance begins.
             </span>
           </h1>
 
-          {/* Gold divider */}
+          {/* Divider */}
           <span
-            className="os-fade block h-[3px] w-14 bg-[var(--gold)] rounded-full mt-6 mb-5"
+            className="os-fade block h-[3px] w-14 bg-ink/15 rounded-full mt-6 mb-5"
             style={{ animationDelay: "0.5s" }}
             aria-hidden="true"
           />
