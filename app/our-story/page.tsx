@@ -257,11 +257,11 @@ function HeadspaceSection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-10 max-w-[1100px]">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-[clamp(20px,3vw,48px)] gap-y-12 w-full">
         {useCases.map((u) => (
-          <div key={u.label} className="flex flex-col items-center text-center gap-3.5">
-            <AvroIcon name={u.icon} size={56} className="md:w-16 md:h-16" />
-            <span className="font-bold text-[clamp(13px,1.05vw,15px)] leading-snug text-ink text-balance">
+          <div key={u.label} className="flex flex-col items-center text-center gap-4">
+            <AvroIcon name={u.icon} size={80} className="md:w-24 md:h-24 lg:w-28 lg:h-28" />
+            <span className="font-bold text-[clamp(14px,1.15vw,17px)] leading-snug text-ink text-balance">
               {u.label}
             </span>
           </div>
