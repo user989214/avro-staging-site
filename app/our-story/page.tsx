@@ -168,17 +168,6 @@ function Hero() {
           position: absolute; top: clamp(24px,4vw,52px); right: clamp(24px,4vw,68px);
           display: flex; align-items: flex-start; gap: clamp(14px,1.6vw,22px);
         }
-        .os-hero-vtext {
-          writing-mode: vertical-rl; text-orientation: upright;
-          font-size: clamp(14px,1.5vw,20px); letter-spacing: 0.18em;
-          color: var(--ink); opacity: 0.7; font-weight: 500;
-        }
-        .os-hero-seal {
-          display: flex; align-items: center; justify-content: center;
-          width: clamp(22px,2.4vw,30px); height: clamp(22px,2.4vw,30px);
-          border-radius: 4px; background-color: #b23b2e; color: #fff;
-          font-size: clamp(11px,1.2vw,15px); font-weight: 700; line-height: 1;
-        }
         .os-hero-label {
           position: absolute; left: clamp(20px,5vw,64px); bottom: clamp(14px,2.4vw,26px);
           font-weight: 800; letter-spacing: 0.14em; font-size: clamp(12px,1.1vw,14px);
@@ -215,11 +204,9 @@ function Hero() {
 
         <div className="os-hero-scrim" aria-hidden="true" />
 
-        {/* Japanese accents — enso, vertical phrase, red seal */}
+        {/* Single subtle Japanese element — a light gold enso brush circle */}
         <div className="os-hero-accents os-fade" style={{ animationDelay: "0.4s" }} aria-hidden="true">
-          <HeroEnso className="w-[clamp(48px,6vw,84px)] h-auto" />
-          <span className="os-hero-vtext">良い一日を積み重ねること。</span>
-          <span className="os-hero-seal">静</span>
+          <HeroEnso className="w-[clamp(56px,7vw,96px)] h-auto" />
         </div>
 
         <div className="os-hero-content">
