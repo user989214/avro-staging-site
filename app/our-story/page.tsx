@@ -152,9 +152,6 @@ function IkigaiSection() {
     <section className="w-full bg-[var(--base-light)]">
       <div className="w-full max-w-[1440px] mx-auto px-[clamp(18px,5vw,64px)] py-[clamp(52px,7vw,86px)]">
         <div className="max-w-[820px] mb-[clamp(32px,4vw,52px)]">
-          <span className="inline-block mb-4 px-4 py-2 rounded-full text-[12px] font-black tracking-[0.12em] uppercase bg-charcoal text-bone">
-            Our Philosophy
-          </span>
           <h2 className="font-serif font-black text-[clamp(28px,4vw,48px)] leading-[1.06] text-ink text-balance">
             Inspired by Ikigai
           </h2>
