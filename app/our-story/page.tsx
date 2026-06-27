@@ -22,10 +22,10 @@ function IkigaiVenn({ className }: { className?: string }) {
   // 280 x 280 canvas, center 140,140. Four large overlapping circles (r 78)
   // with their labels set INSIDE each circle, pushed toward the outer edge.
   const circles = [
-    { cx: 140, cy: 78 }, // top
-    { cx: 78, cy: 140 }, // left
-    { cx: 202, cy: 140 }, // right
-    { cx: 140, cy: 202 }, // bottom
+    { cx: 140, cy: 78, fill: "var(--avro-blue)" }, // top
+    { cx: 78, cy: 140, fill: "var(--avro-blue-deep)" }, // left
+    { cx: 202, cy: 140, fill: "var(--gold)" }, // right
+    { cx: 140, cy: 202, fill: "var(--olive)" }, // bottom
   ]
   const labels = [
     { x: 140, y: 50, lines: ["What you", "love"] }, // top
@@ -54,12 +54,28 @@ function IkigaiVenn({ className }: { className?: string }) {
           <stop offset="0%" stopColor="#06336f" />
           <stop offset="100%" stopColor="#001f4a" />
         </linearGradient>
+        {circles.map((c, i) => (
+          <radialGradient key={i} id={`ikv-fill-${i}`} cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor={c.fill} stopOpacity="0.02" />
+            <stop offset="62%" stopColor={c.fill} stopOpacity="0.05" />
+            <stop offset="100%" stopColor={c.fill} stopOpacity="0.22" />
+          </radialGradient>
+        ))}
       </defs>
 
-      {/* four overlapping outline circles */}
-      <g className="ikv-circles" fill="none" stroke="var(--ink)" strokeOpacity="0.32" strokeWidth="2">
+      {/* four overlapping circles with a soft edge fade */}
+      <g className="ikv-circles">
         {circles.map((c, i) => (
-          <circle key={i} cx={c.cx} cy={c.cy} r="78" />
+          <circle
+            key={i}
+            cx={c.cx}
+            cy={c.cy}
+            r="78"
+            fill={`url(#ikv-fill-${i})`}
+            stroke={c.fill}
+            strokeOpacity="0.4"
+            strokeWidth="1.75"
+          />
         ))}
       </g>
 
@@ -222,7 +238,9 @@ function IkigaiSection() {
             <ul className="flex flex-col gap-6">
               {principles.map((p) => (
                 <li key={p.term} className="flex items-start gap-4">
-                  <AvroIcon name={p.icon} size={40} className="shrink-0 mt-0.5 md:w-11 md:h-11" />
+                  <span className="shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-[var(--avro-blue)]/[0.08] ring-1 ring-[var(--avro-blue)]/[0.12]">
+                    <AvroIcon name={p.icon} size={26} tint="var(--avro-blue-deep)" />
+                  </span>
                   <div>
                     <h3 className="font-black text-[clamp(14px,1.1vw,16px)] tracking-[0.04em] uppercase text-ink mb-1">
                       {p.term}
