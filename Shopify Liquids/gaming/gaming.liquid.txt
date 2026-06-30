@@ -1,0 +1,450 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — ESPORTS / GAMING use-case page  (Shopify OS 2.0 section, standalone)
+  ----------------------------------------------------------------------------
+  THEME: light / blue accent (Avro Blue #94C6D4)
+  HOW TO USE
+  1. Create sections/avro-gaming.liquid and paste this ENTIRE file in.
+  2. Upload every image in this folder to your theme Assets (same filenames),
+     including esports.html for the research graphic.
+  3. Add "AVRO — Esports" to any page in the theme editor.
+  4. Headings, body, buttons and images are editable; reason cards, steps,
+     formula bars, use-moments, products, testimonials and FAQ are blocks.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-gaming-{{ section.id }} {
+    --base:#FFFFFF; --base-light:#F2F2F2; --base-deep:#EDEDED; --bone:#FFFFFF;
+    --charcoal:#151515; --ink:#1C1B14; --warm-gray:#6B6857; --divider:#E2E2E2;
+    --avro-blue:#94C6D4; --accent:#94C6D4; --accent-deep:#4F8194;
+    font-family:"DM Sans", system-ui, sans-serif; background:var(--base); color:var(--ink); display:block;
+  }
+  #avro-gaming-{{ section.id }} * { box-sizing:border-box; }
+  #avro-gaming-{{ section.id }} h1,#avro-gaming-{{ section.id }} h2,#avro-gaming-{{ section.id }} h3 { margin:0; }
+  #avro-gaming-{{ section.id }} img { max-width:100%; }
+  #avro-gaming-{{ section.id }} a { text-decoration:none; }
+
+  #avro-gaming-{{ section.id }} .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:700; border-radius:999px; cursor:pointer; min-height:48px; padding:0 28px; font-size:16px; transition:background-color .2s, color .2s, border-color .2s; }
+  #avro-gaming-{{ section.id }} .btn-outline { background:transparent; color:var(--charcoal); border:2px solid var(--charcoal); }
+  #avro-gaming-{{ section.id }} .btn-outline:hover { background:var(--charcoal); color:var(--bone); }
+  #avro-gaming-{{ section.id }} .btn-accent { background:var(--accent); color:var(--charcoal); border:2px solid var(--accent); }
+  #avro-gaming-{{ section.id }} .btn-accent:hover { background:transparent; color:var(--accent-deep); }
+
+  #avro-gaming-{{ section.id }} .hero { width:100%; }
+  #avro-gaming-{{ section.id }} .hero-card { position:relative; width:calc(100% - 32px); margin:0 auto 16px; aspect-ratio:16/9; overflow:hidden; border-radius:20px; background:var(--bone); }
+  #avro-gaming-{{ section.id }} .hero-imgs { position:absolute; inset:0; }
+  #avro-gaming-{{ section.id }} .hero-imgs img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  #avro-gaming-{{ section.id }} .hero-imgs .m { display:none; }
+  #avro-gaming-{{ section.id }} .hero-scrim { position:absolute; inset:0; pointer-events:none; background:linear-gradient(100deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.62) 32%, rgba(255,255,255,.28) 58%, rgba(255,255,255,0) 78%); }
+  #avro-gaming-{{ section.id }} .hero-content { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:clamp(24px,5vw,80px) clamp(20px,5vw,64px); }
+  #avro-gaming-{{ section.id }} .hero-content h1 { font-weight:900; font-size:clamp(36px,5.5vw,72px); line-height:.98; letter-spacing:-.025em; color:var(--ink); margin-bottom:16px; max-width:560px; }
+  #avro-gaming-{{ section.id }} .hero-content p { font-weight:400; font-size:clamp(17px,2vw,20px); line-height:1.55; color:var(--ink); max-width:480px; margin-bottom:28px; }
+  #avro-gaming-{{ section.id }} .hero-btns { display:flex; gap:10px; flex-wrap:wrap; }
+
+  #avro-gaming-{{ section.id }} .sec { width:100%; padding:clamp(40px,6vw,80px) clamp(20px,5vw,64px); }
+  #avro-gaming-{{ section.id }} .wrap { max-width:1320px; margin:0 auto; }
+  #avro-gaming-{{ section.id }} .head { max-width:760px; margin:0 auto 40px; text-align:center; }
+  #avro-gaming-{{ section.id }} .head.left { margin-left:0; text-align:left; }
+  #avro-gaming-{{ section.id }} .head h2 { font-weight:900; font-size:clamp(32px,4.5vw,52px); line-height:1.02; letter-spacing:-.02em; color:var(--ink); margin-bottom:14px; }
+  #avro-gaming-{{ section.id }} .head p { font-weight:400; font-size:clamp(16px,1.4vw,20px); line-height:1.55; color:var(--warm-gray); }
+
+  #avro-gaming-{{ section.id }} .cards { display:grid; gap:16px; }
+  #avro-gaming-{{ section.id }} .cards.c3 { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+  #avro-gaming-{{ section.id }} .cards.c4 { grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+  #avro-gaming-{{ section.id }} .icard { background:var(--base-light); border-radius:20px; padding:clamp(20px,2.5vw,32px); }
+  #avro-gaming-{{ section.id }} .icard .ic { width:56px; height:56px; margin-bottom:16px; }
+  #avro-gaming-{{ section.id }} .icard .ic span { display:block; width:56px; height:56px; background:var(--accent-deep); -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; -webkit-mask-size:contain; mask-size:contain; }
+  #avro-gaming-{{ section.id }} .icard h3 { font-weight:700; font-size:clamp(18px,1.6vw,22px); line-height:1.1; color:var(--ink); margin-bottom:10px; }
+  #avro-gaming-{{ section.id }} .icard p { font-weight:400; font-size:clamp(14px,1.1vw,16px); line-height:1.5; color:var(--warm-gray); margin:0; }
+
+  #avro-gaming-{{ section.id }} .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+  #avro-gaming-{{ section.id }} .step { position:relative; padding:28px; background:var(--base-light); border-radius:20px; }
+  #avro-gaming-{{ section.id }} .step .num { display:grid; place-items:center; width:30px; height:30px; margin-bottom:18px; border-radius:999px; font-weight:700; font-size:14px; background:var(--charcoal); color:var(--bone); }
+  #avro-gaming-{{ section.id }} .step .ic { width:72px; height:72px; margin-bottom:12px; }
+  #avro-gaming-{{ section.id }} .step .ic span { display:block; width:72px; height:72px; background:var(--accent-deep); -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; -webkit-mask-size:contain; mask-size:contain; }
+  #avro-gaming-{{ section.id }} .step h3 { font-weight:700; font-size:18px; color:var(--ink); margin-bottom:8px; }
+  #avro-gaming-{{ section.id }} .step p { font-weight:400; font-size:15px; line-height:1.5; color:var(--warm-gray); margin:0; }
+
+  #avro-gaming-{{ section.id }} .graph { background:var(--base-light); border-radius:20px; padding:clamp(24px,3vw,40px); }
+  #avro-gaming-{{ section.id }} .graph h2 { font-weight:900; font-size:clamp(22px,2.6vw,36px); line-height:1.05; color:var(--ink); margin-bottom:6px; }
+  #avro-gaming-{{ section.id }} .graph .sub { font-weight:400; font-size:14px; color:var(--warm-gray); margin-bottom:24px; }
+  #avro-gaming-{{ section.id }} .grow { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
+  #avro-gaming-{{ section.id }} .grow .top { display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  #avro-gaming-{{ section.id }} .grow .nm { font-weight:700; font-size:16px; }
+  #avro-gaming-{{ section.id }} .grow .lg { font-weight:500; font-size:11px; color:var(--warm-gray); text-transform:uppercase; letter-spacing:.06em; }
+  #avro-gaming-{{ section.id }} .gbar { display:flex; gap:4px; height:14px; }
+  #avro-gaming-{{ section.id }} .gbar span { border-radius:999px; }
+
+  #avro-gaming-{{ section.id }} .graphic-frame { width:100%; border:0; display:block; color-scheme:light; border-radius:20px; }
+
+  #avro-gaming-{{ section.id }} .pc-row { display:flex; flex-direction:column; gap:24px; }
+  #avro-gaming-{{ section.id }} .pc { display:flex; flex-direction:column; gap:14px; background:var(--base-light); border-radius:20px; padding:clamp(14px,1.8vw,20px); }
+  #avro-gaming-{{ section.id }} .pc-thumb { border-radius:16px; aspect-ratio:1/1; overflow:hidden; background:#E5E5E5; }
+  #avro-gaming-{{ section.id }} .pc-thumb img { width:100%; height:100%; object-fit:cover; }
+  #avro-gaming-{{ section.id }} .pc h3 { font-weight:900; font-size:clamp(22px,2vw,30px); color:var(--ink); }
+  #avro-gaming-{{ section.id }} .pc p { font-weight:400; font-size:14px; line-height:1.45; color:var(--warm-gray); margin:0; flex:1; }
+  #avro-gaming-{{ section.id }} .pc .btn { width:100%; }
+  @media (min-width:640px){ #avro-gaming-{{ section.id }} .pc-row { flex-direction:row; } #avro-gaming-{{ section.id }} .pc { flex:1 1 0; } }
+
+  #avro-gaming-{{ section.id }} .tg { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; }
+  #avro-gaming-{{ section.id }} .tc { background:var(--base-light); border-radius:24px; padding:clamp(24px,3vw,36px); }
+  #avro-gaming-{{ section.id }} .tc .stars { display:flex; gap:2px; margin-bottom:12px; }
+  #avro-gaming-{{ section.id }} .tc .stars svg { fill:var(--accent-deep); }
+  #avro-gaming-{{ section.id }} .tc p { font-weight:400; font-size:clamp(17px,1.5vw,20px); line-height:1.4; color:rgba(0,0,0,.75); margin-bottom:16px; }
+  #avro-gaming-{{ section.id }} .tc strong { font-weight:700; font-size:17px; color:var(--ink); display:block; }
+  #avro-gaming-{{ section.id }} .tc .role { font-weight:500; font-size:14px; color:rgba(0,0,0,.55); }
+
+  #avro-gaming-{{ section.id }} .faq-sec { background:var(--base-deep); }
+  #avro-gaming-{{ section.id }} .faq { max-width:860px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
+  #avro-gaming-{{ section.id }} .fitem { background:var(--bone); border-radius:16px; overflow:hidden; }
+  #avro-gaming-{{ section.id }} .fbtn { width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px; background:transparent; border:none; cursor:pointer; text-align:left; font-weight:700; font-size:clamp(16px,1.4vw,19px); color:var(--ink); }
+  #avro-gaming-{{ section.id }} .fchev { transition:transform .25s ease; flex-shrink:0; }
+  #avro-gaming-{{ section.id }} .fitem.open .fchev { transform:rotate(180deg); }
+  #avro-gaming-{{ section.id }} .fbody { max-height:0; overflow:hidden; transition:max-height .3s ease; }
+  #avro-gaming-{{ section.id }} .fitem.open .fbody { max-height:520px; }
+  #avro-gaming-{{ section.id }} .fbody p { padding:0 24px 22px; font-weight:400; font-size:16px; line-height:1.6; color:var(--warm-gray); margin:0; white-space:pre-line; }
+
+  #avro-gaming-{{ section.id }} .cta { background:var(--avro-blue); padding:clamp(56px,8vw,104px) clamp(20px,4vw,64px); }
+  #avro-gaming-{{ section.id }} .cta-in { max-width:1320px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:28px; color:var(--charcoal); }
+  #avro-gaming-{{ section.id }} .cta-l { flex:1 1 320px; max-width:560px; }
+  #avro-gaming-{{ section.id }} .cta-l h2 { font-weight:900; font-size:clamp(26px,4vw,56px); line-height:1.02; letter-spacing:-.02em; margin-bottom:10px; }
+  #avro-gaming-{{ section.id }} .cta-l p { font-weight:500; font-size:clamp(15px,1.3vw,19px); line-height:1.5; color:rgba(21,21,21,.7); }
+  #avro-gaming-{{ section.id }} .cta-btns { flex:1 1 280px; display:flex; flex-direction:column; gap:8px; max-width:400px; }
+  #avro-gaming-{{ section.id }} .cta-btns .btn { width:100%; background:var(--charcoal); color:var(--bone); border-color:var(--charcoal); }
+  #avro-gaming-{{ section.id }} .cta-btns .btn:hover { background:transparent; color:var(--charcoal); }
+
+  #avro-gaming-{{ section.id }} .banner { position:relative; width:100%; overflow:hidden; }
+  #avro-gaming-{{ section.id }} .banner img { width:100%; height:auto; display:block; }
+  #avro-gaming-{{ section.id }} .banner .btn { position:absolute; left:clamp(16px,4vw,64px); bottom:clamp(16px,4vw,56px); min-width:220px; background:var(--charcoal); color:var(--bone); border-color:var(--charcoal); }
+  #avro-gaming-{{ section.id }} .banner .btn:hover { background:transparent; color:var(--charcoal); }
+
+  @media (max-width:768px){
+    #avro-gaming-{{ section.id }} .hero-card { aspect-ratio:unset; overflow:visible; display:flex; flex-direction:column; }
+    #avro-gaming-{{ section.id }} .hero-imgs { position:relative; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:3/4; border-radius:20px; overflow:hidden; flex-shrink:0; }
+    #avro-gaming-{{ section.id }} .hero-imgs img.d { display:none; }
+    #avro-gaming-{{ section.id }} .hero-imgs img.m { display:block; }
+    #avro-gaming-{{ section.id }} .hero-scrim { display:none; }
+    #avro-gaming-{{ section.id }} .hero-content { position:static; padding:24px 20px 32px; }
+    #avro-gaming-{{ section.id }} .banner .btn { position:static; width:calc(100% - 32px); margin:20px auto 24px; }
+  }
+{% endstyle %}
+
+{%- capture star -%}<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>{%- endcapture -%}
+{%- capture chev -%}<svg class="fchev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>{%- endcapture -%}
+
+{%- assign reasons = section.blocks | where: "type", "reason" -%}
+{%- assign steps = section.blocks | where: "type", "step" -%}
+{%- assign bars = section.blocks | where: "type", "formula_bar" -%}
+{%- assign moments = section.blocks | where: "type", "moment" -%}
+{%- assign products = section.blocks | where: "type", "product" -%}
+{%- assign reviews = section.blocks | where: "type", "testimonial" -%}
+{%- assign faqs = section.blocks | where: "type", "faq" -%}
+
+<div id="avro-gaming-{{ section.id }}">
+
+  <section class="hero">
+    <div class="hero-card">
+      <div class="hero-imgs">
+        {%- if section.settings.hero_image != blank -%}
+          <img class="d" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}">
+        {%- else -%}
+          <img class="d" src="{{ 'cohort-gaming-hero.png' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}">
+        {%- endif -%}
+        <img class="m" src="{{ 'cohort-gaming-hero-mobile.png' | asset_url }}" alt="">
+      </div>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="hero-content">
+        <h1>{{ section.settings.hero_title | default: 'Built for the State Before the Session.' }}</h1>
+        <p>{{ section.settings.hero_copy | default: 'AVRO supports calm, clarity, and composure before gaming, ranked play, and competitive esports sessions.*' }}</p>
+        <div class="hero-btns">
+          <a href="{{ section.settings.hero_btn1_link | default: '/collections/all' }}" class="btn btn-outline">{{ section.settings.hero_btn1_label | default: 'Choose Your Formula' }}</a>
+          <a href="{{ section.settings.hero_btn2_link | default: '/collections/all' }}" class="btn btn-accent">{{ section.settings.hero_btn2_label | default: 'Shop AVRO' }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec"><div class="wrap"><div class="head">
+    <h2>{{ section.settings.moment_title | default: 'Sessions are shaped by state.' }}</h2>
+    <p>{{ section.settings.moment_copy }}</p>
+  </div></div></section>
+
+  {%- if reasons.size > 0 -%}
+  <section class="sec" style="padding-top:0;"><div class="wrap">
+    <div class="head"><h2>{{ section.settings.why_title | default: 'Why AVRO Fits Esports' }}</h2></div>
+    <div class="cards c3">
+      {%- for b in reasons -%}
+      <div class="icard" {{ b.shopify_attributes }}>
+        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign iu = b.settings.icon | image_url: width: 120 -%}{%- else -%}{%- assign iu = b.settings.icon_fallback | default: 'control-under-pressure.png' | asset_url -%}{%- endif -%}<span style="-webkit-mask-image:url({{ iu }});mask-image:url({{ iu }});"></span></div>
+        <h3>{{ b.settings.title }}</h3>
+        <p>{{ b.settings.copy }}</p>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div></section>
+  {%- endif -%}
+
+  {%- if steps.size > 0 -%}
+  <section class="sec"><div class="wrap">
+    <div class="head"><h2>{{ section.settings.how_title | default: 'How to use before play' }}</h2></div>
+    <div class="steps">
+      {%- for b in steps -%}
+      <article class="step" {{ b.shopify_attributes }}>
+        <span class="num">{{ forloop.index }}</span>
+        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign su = b.settings.icon | image_url: width: 160 -%}{%- else -%}{%- assign su = b.settings.icon_fallback | default: 'step-pour.png' | asset_url -%}{%- endif -%}<span style="-webkit-mask-image:url({{ su }});mask-image:url({{ su }});"></span></div>
+        <h3>{{ b.settings.title }}</h3>
+        <p>{{ b.settings.copy }}</p>
+      </article>
+      {%- endfor -%}
+    </div>
+  </div></section>
+  {%- endif -%}
+
+  {%- if bars.size > 0 -%}
+  <section class="sec" style="padding-top:0;"><div class="wrap"><div class="graph">
+    <h2>{{ section.settings.graph_title | default: 'Every formula starts calm first.' }}</h2>
+    <p class="sub">{{ section.settings.graph_sub | default: 'Same calm-first base. Different active addition.' }}</p>
+    {%- for b in bars -%}
+    <div class="grow" {{ b.shopify_attributes }}>
+      <div class="top"><span class="nm" style="color:{{ b.settings.color | default: '#4b4d9a' }};">{{ b.settings.name }}</span><span class="lg">PharmaGABA&reg; + {{ b.settings.addition }}</span></div>
+      <div class="gbar"><span style="flex:60 0 0;background:#94C6D4;"></span><span style="flex:40 0 0;background:{{ b.settings.color | default: '#4b4d9a' }};"></span></div>
+    </div>
+    {%- endfor -%}
+  </div></div></section>
+  {%- endif -%}
+
+  {%- if section.settings.show_graphic -%}
+  <section class="sec"><div class="wrap">
+    {%- if section.settings.graphic_title != blank -%}
+    <div class="head left" style="max-width:760px;"><h2>{{ section.settings.graphic_title }}</h2>{%- if section.settings.graphic_copy != blank -%}<p>{{ section.settings.graphic_copy }}</p>{%- endif -%}</div>
+    {%- endif -%}
+    <iframe class="graphic-frame" style="aspect-ratio:{{ section.settings.graphic_ratio | default: '1200 / 884' }};" src="{{ section.settings.graphic_asset | default: 'esports.html' | asset_url }}" title="{{ section.settings.graphic_a11y | default: 'AVRO for esports research graphic' | escape }}" loading="lazy" scrolling="no"></iframe>
+    {%- if section.settings.chart_source != blank -%}<p style="font-size:12px;line-height:1.5;color:var(--warm-gray);margin-top:16px;white-space:pre-line;">{{ section.settings.chart_source }}</p>{%- endif -%}
+  </div></section>
+  {%- endif -%}
+
+  {%- if moments.size > 0 -%}
+  <section class="sec"><div class="wrap">
+    <div class="head"><h2>{{ section.settings.use_title | default: 'Session use moments' }}</h2></div>
+    <div class="cards c4">
+      {%- for b in moments -%}
+      <div class="icard" {{ b.shopify_attributes }}>
+        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign mu = b.settings.icon | image_url: width: 120 -%}{%- else -%}{%- assign mu = b.settings.icon_fallback | default: 'cohort-games.png' | asset_url -%}{%- endif -%}<span style="-webkit-mask-image:url({{ mu }});mask-image:url({{ mu }});"></span></div>
+        <h3>{{ b.settings.title }}</h3>
+        <p>{{ b.settings.copy }}</p>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div></section>
+  {%- endif -%}
+
+  {%- if products.size > 0 -%}
+  <section class="sec" style="padding-top:0;"><div class="wrap">
+    <div class="head"><h2>{{ section.settings.shop_title | default: 'Shop AVRO for Esports' }}</h2></div>
+    <div class="pc-row">
+      {%- for b in products -%}
+      <article class="pc" {{ b.shopify_attributes }}>
+        <div class="pc-thumb">{%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">{%- else -%}<img src="{{ b.settings.image_fallback | default: 'calm-blackberry-jasmine.png' | asset_url }}" alt="{{ b.settings.name | escape }}">{%- endif -%}</div>
+        <h3>{{ b.settings.name }}</h3>
+        <p>{{ b.settings.copy }}</p>
+        <a href="{{ b.settings.link | default: '/collections/all' }}" class="btn btn-outline">{{ b.settings.button_label | default: 'Shop' }}</a>
+      </article>
+      {%- endfor -%}
+    </div>
+  </div></section>
+  {%- endif -%}
+
+  {%- if reviews.size > 0 -%}
+  <section class="sec" style="padding-top:0;"><div class="wrap">
+    <div class="tg">
+      {%- for b in reviews -%}
+      <article class="tc" {{ b.shopify_attributes }}>
+        <div class="stars">{{ star }}{{ star }}{{ star }}{{ star }}{{ star }}</div>
+        <p>&ldquo;{{ b.settings.quote }}&rdquo;</p>
+        <strong>{{ b.settings.name }}</strong><span class="role">{{ b.settings.role }}</span>
+      </article>
+      {%- endfor -%}
+    </div>
+  </div></section>
+  {%- endif -%}
+
+  {%- if faqs.size > 0 -%}
+  <section class="sec faq-sec"><div class="wrap">
+    <div class="head"><h2>{{ section.settings.faq_title | default: 'Esports FAQ' }}</h2></div>
+    <div class="faq">
+      {%- for b in faqs -%}
+      <div class="fitem{% if forloop.first %} open{% endif %}" data-faq {{ b.shopify_attributes }}>
+        <button class="fbtn" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">{{ b.settings.q }}{{ chev }}</button>
+        <div class="fbody"><p>{{ b.settings.a }}</p></div>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div></section>
+  {%- endif -%}
+
+  <section class="cta"><div class="cta-in">
+    <div class="cta-l">
+      <h2>{{ section.settings.final_title | default: 'Choose the formula that fits your session.' }}</h2>
+      <p>{{ section.settings.final_copy | default: 'Start calm. Stay clear. Choose the AVRO formula that matches your moment.' }}</p>
+    </div>
+    <div class="cta-btns">
+      <a href="{{ section.settings.final_btn1_link | default: '/collections/calm' }}" class="btn">{{ section.settings.final_btn1_label | default: 'Shop Calm' }}</a>
+      <a href="{{ section.settings.final_btn2_link | default: '/collections/focus' }}" class="btn">{{ section.settings.final_btn2_label | default: 'Shop Focus' }}</a>
+      <a href="{{ section.settings.final_btn3_link | default: '/collections/energy' }}" class="btn">{{ section.settings.final_btn3_label | default: 'Shop Energy' }}</a>
+    </div>
+  </div></section>
+
+  <section class="banner">
+    {%- if section.settings.banner_image != blank -%}<img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">{%- else -%}<img src="{{ 'gaming-banner.png' | asset_url }}" alt="">{%- endif -%}
+    <a href="{{ section.settings.banner_link | default: '/collections/all' }}" class="btn">{{ section.settings.banner_label | default: 'Shop' }}</a>
+  </section>
+
+</div>
+
+<script>
+  (function(){
+    var root=document.getElementById("avro-gaming-{{ section.id }}");
+    if(!root) return;
+    root.querySelectorAll("[data-faq]").forEach(function(it){
+      var b=it.querySelector("button"); if(!b) return;
+      b.addEventListener("click",function(){
+        var open=it.classList.contains("open");
+        it.classList.toggle("open",!open); b.setAttribute("aria-expanded",!open);
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AVRO — Esports",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_title", "label": "Title", "default": "Built for the State Before the Session." },
+    { "type": "textarea", "id": "hero_copy", "label": "Copy" },
+    { "type": "text", "id": "hero_alt", "label": "Hero image alt" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_btn1_label", "label": "Button 1 label", "default": "Choose Your Formula" },
+    { "type": "url", "id": "hero_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "hero_btn2_label", "label": "Button 2 label", "default": "Shop AVRO" },
+    { "type": "url", "id": "hero_btn2_link", "label": "Button 2 link" },
+
+    { "type": "header", "content": "Moment heading" },
+    { "type": "text", "id": "moment_title", "label": "Title", "default": "Sessions are shaped by state." },
+    { "type": "textarea", "id": "moment_copy", "label": "Copy" },
+
+    { "type": "header", "content": "Why AVRO fits" },
+    { "type": "text", "id": "why_title", "label": "Title", "default": "Why AVRO Fits Esports" },
+
+    { "type": "header", "content": "How to use" },
+    { "type": "text", "id": "how_title", "label": "Title", "default": "How to use before play" },
+
+    { "type": "header", "content": "Formula graph" },
+    { "type": "text", "id": "graph_title", "label": "Title", "default": "Every formula starts calm first." },
+    { "type": "text", "id": "graph_sub", "label": "Subheading", "default": "Same calm-first base. Different active addition." },
+
+    { "type": "header", "content": "Research graphic" },
+    { "type": "checkbox", "id": "show_graphic", "label": "Show research graphic", "default": true },
+    { "type": "text", "id": "graphic_title", "label": "Heading (optional)", "default": "State affects every session." },
+    { "type": "textarea", "id": "graphic_copy", "label": "Body (optional)", "default": "AVRO is designed for moments where attention, composure and focus matter most." },
+    { "type": "text", "id": "graphic_asset", "label": "Graphic asset filename", "default": "esports.html" },
+    { "type": "text", "id": "graphic_ratio", "label": "Aspect ratio", "default": "1200 / 884" },
+    { "type": "text", "id": "graphic_a11y", "label": "Graphic title (a11y)", "default": "AVRO for esports research graphic" },
+    { "type": "textarea", "id": "chart_source", "label": "Source / disclaimer" },
+
+    { "type": "header", "content": "Use moments" },
+    { "type": "text", "id": "use_title", "label": "Title", "default": "Session use moments" },
+
+    { "type": "header", "content": "Shop" },
+    { "type": "text", "id": "shop_title", "label": "Title", "default": "Shop AVRO for Esports" },
+
+    { "type": "header", "content": "FAQ" },
+    { "type": "text", "id": "faq_title", "label": "Title", "default": "Esports FAQ" },
+
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "final_title", "label": "Title", "default": "Choose the formula that fits your session." },
+    { "type": "textarea", "id": "final_copy", "label": "Copy" },
+    { "type": "text", "id": "final_btn1_label", "label": "Button 1 label", "default": "Shop Calm" },
+    { "type": "url", "id": "final_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "final_btn2_label", "label": "Button 2 label", "default": "Shop Focus" },
+    { "type": "url", "id": "final_btn2_link", "label": "Button 2 link" },
+    { "type": "text", "id": "final_btn3_label", "label": "Button 3 label", "default": "Shop Energy" },
+    { "type": "url", "id": "final_btn3_link", "label": "Button 3 link" },
+
+    { "type": "header", "content": "Footer banner" },
+    { "type": "image_picker", "id": "banner_image", "label": "Banner image" },
+    { "type": "text", "id": "banner_label", "label": "Button label", "default": "Shop" },
+    { "type": "url", "id": "banner_link", "label": "Button link" }
+  ],
+  "blocks": [
+    { "type": "reason", "name": "Reason card", "settings": [
+      { "type": "image_picker", "id": "icon", "label": "Icon" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "control-under-pressure.png" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Calm Before Pressure" },
+      { "type": "textarea", "id": "copy", "label": "Copy" }
+    ]},
+    { "type": "step", "name": "How-to step", "settings": [
+      { "type": "image_picker", "id": "icon", "label": "Icon" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "step-pour.png" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Mix" },
+      { "type": "textarea", "id": "copy", "label": "Copy" }
+    ]},
+    { "type": "formula_bar", "name": "Formula bar", "settings": [
+      { "type": "text", "id": "name", "label": "Name", "default": "Calm" },
+      { "type": "text", "id": "addition", "label": "Active addition", "default": "Magnesium" },
+      { "type": "color", "id": "color", "label": "Accent color", "default": "#4b4d9a" }
+    ]},
+    { "type": "moment", "name": "Use moment", "settings": [
+      { "type": "image_picker", "id": "icon", "label": "Icon" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "cohort-games.png" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Ranked Play" },
+      { "type": "textarea", "id": "copy", "label": "Copy" }
+    ]},
+    { "type": "product", "name": "Product card", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "calm-blackberry-jasmine.png" },
+      { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
+      { "type": "textarea", "id": "copy", "label": "Copy" },
+      { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ]},
+    { "type": "testimonial", "name": "Testimonial", "settings": [
+      { "type": "textarea", "id": "quote", "label": "Quote" },
+      { "type": "text", "id": "name", "label": "Name", "default": "Verified Buyer" },
+      { "type": "text", "id": "role", "label": "Role / product", "default": "AVRO Focus" }
+    ]},
+    { "type": "faq", "name": "FAQ item", "settings": [
+      { "type": "text", "id": "q", "label": "Question" },
+      { "type": "textarea", "id": "a", "label": "Answer" }
+    ]}
+  ],
+  "presets": [
+    { "name": "AVRO — Esports", "blocks": [
+      { "type": "reason", "settings": { "icon_fallback": "control-under-pressure.png", "title": "Calm Before Pressure", "copy": "Supports a calmer state before high-pressure moments." } },
+      { "type": "reason", "settings": { "icon_fallback": "supports-clear-thinking.png", "title": "Clarity Without the Edge", "copy": "Supports clear focus without turning the session into stimulant overload." } },
+      { "type": "reason", "settings": { "icon_fallback": "supports-steady-attention.png", "title": "Built for Long Sessions", "copy": "A simple pre-session ritual for extended attention and pressure-sensitive play." } },
+      { "type": "step", "settings": { "icon_fallback": "step-pour.png", "title": "Mix", "copy": "Mix one stick with water." } },
+      { "type": "step", "settings": { "icon_fallback": "step-stir.png", "title": "Time it", "copy": "Drink about 30 minutes before your session." } },
+      { "type": "step", "settings": { "icon_fallback": "step-drink.png", "title": "Show up", "copy": "Step in with a calmer, clearer routine." } },
+      { "type": "formula_bar", "settings": { "name": "Calm", "addition": "Magnesium", "color": "#4b4d9a" } },
+      { "type": "formula_bar", "settings": { "name": "Focus", "addition": "Cognigrape®", "color": "#C13584" } },
+      { "type": "formula_bar", "settings": { "name": "Energy", "addition": "Caffeine", "color": "#E8A23D" } },
+      { "type": "moment", "settings": { "icon_fallback": "cohort-games.png", "title": "Ranked Play", "copy": "For a pre-session routine before competitive play." } },
+      { "type": "moment", "settings": { "icon_fallback": "control-under-pressure.png", "title": "Tournament Play", "copy": "For longer, pressure-sensitive sessions." } },
+      { "type": "moment", "settings": { "icon_fallback": "supports-steady-attention.png", "title": "Long Sessions", "copy": "For extended attention blocks when overstimulation can become a problem." } },
+      { "type": "moment", "settings": { "icon_fallback": "supports-clear-thinking.png", "title": "Online Poker Sessions", "copy": "For decision-heavy environments where composure matters." } },
+      { "type": "product", "settings": { "image_fallback": "calm-blackberry-jasmine.png", "name": "AVRO Calm", "copy": "Caffeine-free composure for late and pressure-sensitive sessions.*", "button_label": "Shop Calm", "link": "/collections/calm" } },
+      { "type": "product", "settings": { "image_fallback": "focus-pomegranate-raspberry.png", "name": "AVRO Focus", "copy": "Caffeine-free clarity support for ranked and competitive play.*", "button_label": "Shop Focus", "link": "/collections/focus" } },
+      { "type": "product", "settings": { "image_fallback": "energy-fuji-apple.png", "name": "AVRO Energy", "copy": "Natural caffeine with a calm-first foundation for longer sessions.*", "button_label": "Shop Energy", "link": "/collections/energy" } },
+      { "type": "testimonial", "settings": { "quote": "Calm and locked in through a full ranked grind. No jittery tilt.", "name": "Verified Buyer", "role": "AVRO Focus" } },
+      { "type": "testimonial", "settings": { "quote": "Composed through late tournament sets instead of fried by hour three.", "name": "Verified Buyer", "role": "AVRO Calm" } },
+      { "type": "testimonial", "settings": { "quote": "Steady energy for long sessions without the crash. Exactly what I needed.", "name": "Verified Buyer", "role": "AVRO Energy" } },
+      { "type": "faq", "settings": { "q": "Which AVRO formula is best for gaming?", "a": "Focus is a strong fit for caffeine-free clarity support, Calm is useful for late sessions, and Energy fits earlier or longer sessions when you want natural caffeine." } },
+      { "type": "faq", "settings": { "q": "Which AVRO formula is best for online poker?", "a": "Focus or Calm are the most natural fits for caffeine-free composure and clarity support. AVRO does not claim to improve betting decisions, win rates, or gambling outcomes." } },
+      { "type": "faq", "settings": { "q": "Will AVRO make me jittery?", "a": "Calm and Focus are caffeine free. Energy contains 120 mg natural caffeine, so people who are caffeine sensitive should consider timing and total intake." } }
+    ]}
+  ]
+}
+{% endschema %}

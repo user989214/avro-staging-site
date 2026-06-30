@@ -1,0 +1,437 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — SOCIAL / ZERO PROOF use-case page  (Shopify OS 2.0 section, standalone)
+  ----------------------------------------------------------------------------
+  THEME: DARK / gold accent (Avro Gold #CAA84B). Uses the gold icon PNGs in
+  this folder (rendered directly — no color masking). No research graphic.
+  HOW TO USE
+  1. Create sections/avro-social.liquid and paste this ENTIRE file in.
+  2. Upload every image in this folder to your theme Assets (same filenames).
+  3. Add "AVRO — Social" to any page in the theme editor.
+  4. Headings, body, buttons and images are editable; reason cards, steps,
+     use-moments, products, testimonials and FAQ are blocks.
+  NOTE: the hero photo is a light bar scene, so on desktop the overlaid text is
+  dark for legibility; on mobile the copy sits below the image on deep black and
+  is rendered in gold/bone.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-social-{{ section.id }} {
+    --deep-black:#0A0A08; --zp-surface:#1A1A17; --card:#111110; --bone:#F5F0E8;
+    --charcoal:#151515; --gold:#CAA84B; --gold-soft:rgba(202,168,75,.7);
+    font-family:"DM Sans", system-ui, sans-serif; background:var(--deep-black); color:var(--gold); display:block;
+  }
+  #avro-social-{{ section.id }} * { box-sizing:border-box; }
+  #avro-social-{{ section.id }} h1,#avro-social-{{ section.id }} h2,#avro-social-{{ section.id }} h3 { margin:0; }
+  #avro-social-{{ section.id }} img { max-width:100%; }
+  #avro-social-{{ section.id }} a { text-decoration:none; }
+
+  #avro-social-{{ section.id }} .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:700; border-radius:999px; cursor:pointer; min-height:48px; padding:0 28px; font-size:16px; transition:background-color .2s, color .2s, border-color .2s; }
+  #avro-social-{{ section.id }} .btn-gold { background:var(--gold); color:var(--deep-black); border:2px solid var(--gold); }
+  #avro-social-{{ section.id }} .btn-gold:hover { background:transparent; color:var(--gold); }
+  #avro-social-{{ section.id }} .btn-ghost { background:transparent; color:var(--gold); border:2px solid var(--gold); }
+  #avro-social-{{ section.id }} .btn-ghost:hover { background:var(--gold); color:var(--deep-black); }
+
+  #avro-social-{{ section.id }} .hero { width:100%; background:var(--deep-black); }
+  #avro-social-{{ section.id }} .hero-card { position:relative; width:calc(100% - 32px); margin:0 auto 16px; aspect-ratio:16/9; overflow:hidden; border-radius:20px; background:var(--deep-black); }
+  #avro-social-{{ section.id }} .hero-imgs { position:absolute; inset:0; }
+  #avro-social-{{ section.id }} .hero-imgs img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  #avro-social-{{ section.id }} .hero-imgs .m { display:none; }
+  #avro-social-{{ section.id }} .hero-scrim { position:absolute; inset:0; pointer-events:none; background:linear-gradient(100deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.62) 32%, rgba(255,255,255,.28) 58%, rgba(255,255,255,0) 78%); }
+  #avro-social-{{ section.id }} .hero-content { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:clamp(24px,5vw,80px) clamp(20px,5vw,64px); }
+  /* Desktop: dark text over the light bar photo */
+  #avro-social-{{ section.id }} .hero-content h1 { font-weight:900; font-size:clamp(36px,5.5vw,72px); line-height:.98; letter-spacing:-.025em; color:var(--charcoal); margin-bottom:16px; max-width:560px; }
+  #avro-social-{{ section.id }} .hero-content p { font-weight:400; font-size:clamp(17px,2vw,20px); line-height:1.55; color:var(--charcoal); max-width:480px; margin-bottom:28px; }
+  #avro-social-{{ section.id }} .hero-content .btn { color:var(--charcoal); border-color:var(--charcoal); background:transparent; }
+  #avro-social-{{ section.id }} .hero-content .btn:hover { background:var(--charcoal); color:var(--bone); }
+  #avro-social-{{ section.id }} .hero-btns { display:flex; gap:10px; flex-wrap:wrap; }
+
+  #avro-social-{{ section.id }} .sec { width:100%; padding:clamp(40px,6vw,80px) clamp(20px,5vw,64px); background:var(--deep-black); }
+  #avro-social-{{ section.id }} .sec.surface { background:var(--zp-surface); }
+  #avro-social-{{ section.id }} .wrap { max-width:1320px; margin:0 auto; }
+  #avro-social-{{ section.id }} .head { max-width:760px; margin:0 auto 40px; text-align:center; }
+  #avro-social-{{ section.id }} .head h2 { font-weight:900; font-size:clamp(32px,4.5vw,52px); line-height:1.02; letter-spacing:-.02em; color:var(--gold); margin-bottom:14px; }
+  #avro-social-{{ section.id }} .head p { font-weight:400; font-size:clamp(16px,1.4vw,20px); line-height:1.55; color:var(--gold-soft); }
+
+  #avro-social-{{ section.id }} .cards { display:grid; gap:16px; }
+  #avro-social-{{ section.id }} .cards.c3 { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+  #avro-social-{{ section.id }} .cards.c4 { grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+  #avro-social-{{ section.id }} .icard { background:var(--card); border-radius:20px; padding:clamp(20px,2.5vw,32px); }
+  #avro-social-{{ section.id }} .icard .ic img { width:56px; height:56px; object-fit:contain; margin-bottom:16px; }
+  #avro-social-{{ section.id }} .icard h3 { font-weight:700; font-size:clamp(18px,1.6vw,22px); line-height:1.1; color:var(--bone); margin-bottom:10px; }
+  #avro-social-{{ section.id }} .icard p { font-weight:400; font-size:clamp(14px,1.1vw,16px); line-height:1.5; color:rgba(245,240,232,.6); margin:0; }
+
+  #avro-social-{{ section.id }} .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+  #avro-social-{{ section.id }} .step { position:relative; padding:28px; background:var(--card); border-radius:20px; }
+  #avro-social-{{ section.id }} .step .num { display:grid; place-items:center; width:30px; height:30px; margin-bottom:18px; border-radius:999px; font-weight:700; font-size:14px; background:var(--gold); color:var(--deep-black); }
+  #avro-social-{{ section.id }} .step .ic img { width:72px; height:72px; object-fit:contain; margin-bottom:12px; }
+  #avro-social-{{ section.id }} .step h3 { font-weight:700; font-size:18px; color:var(--bone); margin-bottom:8px; }
+  #avro-social-{{ section.id }} .step p { font-weight:400; font-size:15px; line-height:1.5; color:rgba(245,240,232,.6); margin:0; }
+
+  #avro-social-{{ section.id }} .graph { background:var(--card); border-radius:20px; padding:clamp(24px,3vw,40px); }
+  #avro-social-{{ section.id }} .graph h2 { font-weight:900; font-size:clamp(22px,2.6vw,36px); line-height:1.05; color:var(--gold); margin-bottom:6px; }
+  #avro-social-{{ section.id }} .graph .sub { font-weight:400; font-size:14px; color:rgba(245,240,232,.55); margin-bottom:24px; }
+  #avro-social-{{ section.id }} .grow { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
+  #avro-social-{{ section.id }} .grow .top { display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  #avro-social-{{ section.id }} .grow .nm { font-weight:700; font-size:16px; color:var(--bone); }
+  #avro-social-{{ section.id }} .grow .lg { font-weight:500; font-size:11px; color:rgba(245,240,232,.5); text-transform:uppercase; letter-spacing:.06em; }
+  #avro-social-{{ section.id }} .gbar { display:flex; gap:4px; height:14px; }
+  #avro-social-{{ section.id }} .gbar span { border-radius:999px; }
+
+  #avro-social-{{ section.id }} .pc-row { display:flex; flex-direction:column; gap:24px; }
+  #avro-social-{{ section.id }} .pc { display:flex; flex-direction:column; gap:14px; background:var(--card); border-radius:20px; padding:clamp(14px,1.8vw,20px); }
+  #avro-social-{{ section.id }} .pc-thumb { border-radius:16px; aspect-ratio:1/1; overflow:hidden; background:#1d1d1a; }
+  #avro-social-{{ section.id }} .pc-thumb img { width:100%; height:100%; object-fit:cover; }
+  #avro-social-{{ section.id }} .pc h3 { font-weight:900; font-size:clamp(22px,2vw,30px); color:var(--bone); }
+  #avro-social-{{ section.id }} .pc p { font-weight:400; font-size:14px; line-height:1.45; color:rgba(245,240,232,.6); margin:0; flex:1; }
+  #avro-social-{{ section.id }} .pc .btn { width:100%; }
+  @media (min-width:640px){ #avro-social-{{ section.id }} .pc-row { flex-direction:row; } #avro-social-{{ section.id }} .pc { flex:1 1 0; } }
+
+  #avro-social-{{ section.id }} .tg { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; }
+  #avro-social-{{ section.id }} .tc { background:var(--card); border-radius:24px; padding:clamp(24px,3vw,36px); }
+  #avro-social-{{ section.id }} .tc .stars { display:flex; gap:2px; margin-bottom:12px; }
+  #avro-social-{{ section.id }} .tc .stars svg { fill:var(--gold); }
+  #avro-social-{{ section.id }} .tc p { font-weight:400; font-size:clamp(17px,1.5vw,20px); line-height:1.4; color:rgba(245,240,232,.8); margin-bottom:16px; }
+  #avro-social-{{ section.id }} .tc strong { font-weight:700; font-size:17px; color:var(--bone); display:block; }
+  #avro-social-{{ section.id }} .tc .role { font-weight:500; font-size:14px; color:rgba(245,240,232,.5); }
+
+  #avro-social-{{ section.id }} .faq { max-width:860px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
+  #avro-social-{{ section.id }} .fitem { background:var(--card); border-radius:16px; overflow:hidden; }
+  #avro-social-{{ section.id }} .fbtn { width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px; background:transparent; border:none; cursor:pointer; text-align:left; font-weight:700; font-size:clamp(16px,1.4vw,19px); color:var(--gold); }
+  #avro-social-{{ section.id }} .fchev { transition:transform .25s ease; flex-shrink:0; color:var(--gold); }
+  #avro-social-{{ section.id }} .fitem.open .fchev { transform:rotate(180deg); }
+  #avro-social-{{ section.id }} .fbody { max-height:0; overflow:hidden; transition:max-height .3s ease; }
+  #avro-social-{{ section.id }} .fitem.open .fbody { max-height:600px; }
+  #avro-social-{{ section.id }} .fbody p { padding:0 24px 22px; font-weight:400; font-size:16px; line-height:1.6; color:rgba(245,240,232,.6); margin:0; white-space:pre-line; }
+
+  #avro-social-{{ section.id }} .cta { background:var(--gold); padding:clamp(56px,8vw,104px) clamp(20px,4vw,64px); }
+  #avro-social-{{ section.id }} .cta-in { max-width:1320px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:28px; color:var(--deep-black); }
+  #avro-social-{{ section.id }} .cta-l { flex:1 1 320px; max-width:560px; }
+  #avro-social-{{ section.id }} .cta-l h2 { font-weight:900; font-size:clamp(26px,4vw,56px); line-height:1.02; letter-spacing:-.02em; margin-bottom:10px; }
+  #avro-social-{{ section.id }} .cta-l p { font-weight:500; font-size:clamp(15px,1.3vw,19px); line-height:1.5; color:rgba(10,10,8,.72); }
+  #avro-social-{{ section.id }} .cta-btns { flex:1 1 280px; display:flex; flex-direction:column; gap:8px; max-width:400px; }
+  #avro-social-{{ section.id }} .cta-btns .btn { width:100%; background:var(--deep-black); color:var(--gold); border-color:var(--deep-black); }
+  #avro-social-{{ section.id }} .cta-btns .btn:hover { background:transparent; color:var(--deep-black); }
+
+  #avro-social-{{ section.id }} .banner { position:relative; width:100%; overflow:hidden; background:var(--deep-black); }
+  #avro-social-{{ section.id }} .banner img { width:100%; height:auto; display:block; }
+  #avro-social-{{ section.id }} .banner .btn { position:absolute; left:clamp(16px,4vw,64px); bottom:clamp(16px,4vw,56px); min-width:220px; background:var(--gold); color:var(--deep-black); border-color:var(--gold); }
+  #avro-social-{{ section.id }} .banner .btn:hover { background:transparent; color:var(--gold); }
+
+  @media (max-width:768px){
+    #avro-social-{{ section.id }} .hero-card { aspect-ratio:unset; overflow:visible; display:flex; flex-direction:column; background:var(--deep-black); }
+    #avro-social-{{ section.id }} .hero-imgs { position:relative; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:3/4; border-radius:20px; overflow:hidden; flex-shrink:0; }
+    #avro-social-{{ section.id }} .hero-imgs img.d { display:none; }
+    #avro-social-{{ section.id }} .hero-imgs img.m { display:block; }
+    #avro-social-{{ section.id }} .hero-scrim { display:none; }
+    #avro-social-{{ section.id }} .hero-content { position:static; padding:24px 20px 32px; }
+    /* Mobile copy sits on deep black → gold / bone text */
+    #avro-social-{{ section.id }} .hero-content h1 { color:var(--gold); }
+    #avro-social-{{ section.id }} .hero-content p { color:var(--gold-soft); }
+    #avro-social-{{ section.id }} .hero-content .btn { color:var(--gold); border-color:var(--gold); }
+    #avro-social-{{ section.id }} .hero-content .btn:hover { background:var(--gold); color:var(--deep-black); }
+    #avro-social-{{ section.id }} .banner .btn { position:static; width:calc(100% - 32px); margin:20px auto 24px; }
+  }
+{% endstyle %}
+
+{%- capture star -%}<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>{%- endcapture -%}
+{%- capture chev -%}<svg class="fchev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>{%- endcapture -%}
+
+{%- assign reasons = section.blocks | where: "type", "reason" -%}
+{%- assign steps = section.blocks | where: "type", "step" -%}
+{%- assign bars = section.blocks | where: "type", "formula_bar" -%}
+{%- assign moments = section.blocks | where: "type", "moment" -%}
+{%- assign products = section.blocks | where: "type", "product" -%}
+{%- assign reviews = section.blocks | where: "type", "testimonial" -%}
+{%- assign faqs = section.blocks | where: "type", "faq" -%}
+
+<div id="avro-social-{{ section.id }}">
+
+  <section class="hero">
+    <div class="hero-card">
+      <div class="hero-imgs">
+        {%- if section.settings.hero_image != blank -%}
+          <img class="d" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}">
+        {%- else -%}
+          <img class="d" src="{{ 'cohort-social-hero.jpg' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}">
+        {%- endif -%}
+        <img class="m" src="{{ 'cohort-social-hero-mobile.png' | asset_url }}" alt="">
+      </div>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="hero-content">
+        <h1>{{ section.settings.hero_title | default: 'Present. Clear. Alcohol Free.' }}</h1>
+        <p>{{ section.settings.hero_copy | default: 'AVRO is a calm, clear, alcohol-free social ritual for gatherings, events and evening routines.*' }}</p>
+        <div class="hero-btns">
+          <a href="{{ section.settings.hero_btn1_link | default: '/collections/all' }}" class="btn">{{ section.settings.hero_btn1_label | default: 'Shop AVRO' }}</a>
+          <a href="{{ section.settings.hero_btn2_link | default: '/collections/all' }}" class="btn">{{ section.settings.hero_btn2_label | default: 'Find Your Formula' }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec"><div class="wrap"><div class="head">
+    <h2>{{ section.settings.moment_title | default: 'The social moment has a lot of noise.' }}</h2>
+    <p>{{ section.settings.moment_copy }}</p>
+  </div></div></section>
+
+  {%- if reasons.size > 0 -%}
+  <section class="sec" style="padding-top:0;"><div class="wrap">
+    <div class="head"><h2>{{ section.settings.why_title | default: 'Why AVRO Supports Social Settings' }}</h2></div>
+    <div class="cards c3">
+      {%- for b in reasons -%}
+      <div class="icard" {{ b.shopify_attributes }}>
+        <div class="ic"><img src="{% if b.settings.icon != blank %}{{ b.settings.icon | image_url: width: 160 }}{% else %}{{ b.settings.icon_fallback | default: 'zp-zero-percent-alcohol.png' | asset_url }}{% endif %}" alt="" loading="lazy"></div>
+        <h3>{{ b.settings.title }}</h3>
+        <p>{{ b.settings.copy }}</p>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div></section>
+  {%- endif -%}
+
+  {%- if steps.size > 0 -%}
+  <section class="sec surface"><div class="wrap">
+    <div class="head"><h2>{{ section.settings.how_title | default: 'How to use before social settings' }}</h2></div>
+    <div class="steps">
+      {%- for b in steps -%}
+      <article class="step" {{ b.shopify_attributes }}>
+        <span class="num">{{ forloop.index }}</span>
+        <div class="ic"><img src="{% if b.settings.icon != blank %}{{ b.settings.icon | image_url: width: 200 }}{% else %}{{ b.settings.icon_fallback | default: 'step-pour.png' | asset_url }}{% endif %}" alt="" loading="lazy"></div>
+        <h3>{{ b.settings.title }}</h3>
+        <p>{{ b.settings.copy }}</p>
+      </article>
+      {%- endfor -%}
+    </div>
+  </div></section>
+  {%- endif -%}
+
+  {%- if bars.size > 0 -%}
+  <section class="sec" style="padding-top:0;"><div class="wrap"><div class="graph">
+    <h2>{{ section.settings.graph_title | default: 'Every formula starts calm first.' }}</h2>
+    <p class="sub">{{ section.settings.graph_sub | default: 'Same calm-first base. Different active addition.' }}</p>
+    {%- for b in bars -%}
+    <div class="grow" {{ b.shopify_attributes }}>
+      <div class="top"><span class="nm">{{ b.settings.name }}</span><span class="lg">PharmaGABA&reg; + {{ b.settings.addition }}</span></div>
+      <div class="gbar"><span style="flex:60 0 0;background:var(--gold);"></span><span style="flex:40 0 0;background:{{ b.settings.color | default: '#8C7430' }};"></span></div>
+    </div>
+    {%- endfor -%}
+  </div></div></section>
+  {%- endif -%}
+
+  {%- if moments.size > 0 -%}
+  <section class="sec"><div class="wrap">
+    <div class="head"><h2>{{ section.settings.use_title | default: 'Social use moments' }}</h2></div>
+    <div class="cards c4">
+      {%- for b in moments -%}
+      <div class="icard" {{ b.shopify_attributes }}>
+        <div class="ic"><img src="{% if b.settings.icon != blank %}{{ b.settings.icon | image_url: width: 160 }}{% else %}{{ b.settings.icon_fallback | default: 'zp-calm-first-cocktails.png' | asset_url }}{% endif %}" alt="" loading="lazy"></div>
+        <h3>{{ b.settings.title }}</h3>
+        <p>{{ b.settings.copy }}</p>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div></section>
+  {%- endif -%}
+
+  {%- if products.size > 0 -%}
+  <section class="sec surface"><div class="wrap">
+    <div class="head"><h2>{{ section.settings.shop_title | default: 'Shop AVRO for social' }}</h2></div>
+    <div class="pc-row">
+      {%- for b in products -%}
+      <article class="pc" {{ b.shopify_attributes }}>
+        <div class="pc-thumb"><img src="{% if b.settings.image != blank %}{{ b.settings.image | image_url: width: 800 }}{% else %}{{ b.settings.image_fallback | default: 'calm-blueberry-acai.png' | asset_url }}{% endif %}" alt="{{ b.settings.name | escape }}"></div>
+        <h3>{{ b.settings.name }}</h3>
+        <p>{{ b.settings.copy }}</p>
+        <a href="{{ b.settings.link | default: '/collections/all' }}" class="btn btn-ghost">{{ b.settings.button_label | default: 'Shop' }}</a>
+      </article>
+      {%- endfor -%}
+    </div>
+  </div></section>
+  {%- endif -%}
+
+  {%- if reviews.size > 0 -%}
+  <section class="sec"><div class="wrap">
+    <div class="tg">
+      {%- for b in reviews -%}
+      <article class="tc" {{ b.shopify_attributes }}>
+        <div class="stars">{{ star }}{{ star }}{{ star }}{{ star }}{{ star }}</div>
+        <p>&ldquo;{{ b.settings.quote }}&rdquo;</p>
+        <strong>{{ b.settings.name }}</strong><span class="role">{{ b.settings.role }}</span>
+      </article>
+      {%- endfor -%}
+    </div>
+  </div></section>
+  {%- endif -%}
+
+  {%- if faqs.size > 0 -%}
+  <section class="sec"><div class="wrap">
+    <div class="head"><h2>{{ section.settings.faq_title | default: 'Social + Zero-Proof FAQ' }}</h2></div>
+    <div class="faq">
+      {%- for b in faqs -%}
+      <div class="fitem{% if forloop.first %} open{% endif %}" data-faq {{ b.shopify_attributes }}>
+        <button class="fbtn" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">{{ b.settings.q }}{{ chev }}</button>
+        <div class="fbody"><p>{{ b.settings.a }}</p></div>
+      </div>
+      {%- endfor -%}
+    </div>
+  </div></section>
+  {%- endif -%}
+
+  <section class="cta"><div class="cta-in">
+    <div class="cta-l">
+      <h2>{{ section.settings.final_title | default: 'Choose your state for the moment.' }}</h2>
+      <p>{{ section.settings.final_copy | default: 'Find the AVRO formula that fits how you want to show up.' }}</p>
+    </div>
+    <div class="cta-btns">
+      <a href="{{ section.settings.final_btn1_link | default: '/collections/calm' }}" class="btn">{{ section.settings.final_btn1_label | default: 'Shop Calm' }}</a>
+      <a href="{{ section.settings.final_btn2_link | default: '/collections/focus' }}" class="btn">{{ section.settings.final_btn2_label | default: 'Shop Focus' }}</a>
+      <a href="{{ section.settings.final_btn3_link | default: '/collections/energy' }}" class="btn">{{ section.settings.final_btn3_label | default: 'Shop Energy' }}</a>
+    </div>
+  </div></section>
+
+  <section class="banner">
+    {%- if section.settings.banner_image != blank -%}<img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">{%- else -%}<img src="{{ 'social-banner.png' | asset_url }}" alt="">{%- endif -%}
+    <a href="{{ section.settings.banner_link | default: '/collections/all' }}" class="btn">{{ section.settings.banner_label | default: 'Shop' }}</a>
+  </section>
+
+</div>
+
+<script>
+  (function(){
+    var root=document.getElementById("avro-social-{{ section.id }}");
+    if(!root) return;
+    root.querySelectorAll("[data-faq]").forEach(function(it){
+      var b=it.querySelector("button"); if(!b) return;
+      b.addEventListener("click",function(){
+        var open=it.classList.contains("open");
+        it.classList.toggle("open",!open); b.setAttribute("aria-expanded",!open);
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AVRO — Social",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_title", "label": "Title", "default": "Present. Clear. Alcohol Free." },
+    { "type": "textarea", "id": "hero_copy", "label": "Copy" },
+    { "type": "text", "id": "hero_alt", "label": "Hero image alt" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_btn1_label", "label": "Button 1 label", "default": "Shop AVRO" },
+    { "type": "url", "id": "hero_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "hero_btn2_label", "label": "Button 2 label", "default": "Find Your Formula" },
+    { "type": "url", "id": "hero_btn2_link", "label": "Button 2 link" },
+
+    { "type": "header", "content": "Moment heading" },
+    { "type": "text", "id": "moment_title", "label": "Title", "default": "The social moment has a lot of noise." },
+    { "type": "textarea", "id": "moment_copy", "label": "Copy" },
+
+    { "type": "header", "content": "Why AVRO fits" },
+    { "type": "text", "id": "why_title", "label": "Title", "default": "Why AVRO Supports Social Settings" },
+
+    { "type": "header", "content": "How to use" },
+    { "type": "text", "id": "how_title", "label": "Title", "default": "How to use before social settings" },
+
+    { "type": "header", "content": "Formula graph" },
+    { "type": "text", "id": "graph_title", "label": "Title", "default": "Every formula starts calm first." },
+    { "type": "text", "id": "graph_sub", "label": "Subheading", "default": "Same calm-first base. Different active addition." },
+
+    { "type": "header", "content": "Use moments" },
+    { "type": "text", "id": "use_title", "label": "Title", "default": "Social use moments" },
+
+    { "type": "header", "content": "Shop" },
+    { "type": "text", "id": "shop_title", "label": "Title", "default": "Shop AVRO for social" },
+
+    { "type": "header", "content": "FAQ" },
+    { "type": "text", "id": "faq_title", "label": "Title", "default": "Social + Zero-Proof FAQ" },
+
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "final_title", "label": "Title", "default": "Choose your state for the moment." },
+    { "type": "textarea", "id": "final_copy", "label": "Copy" },
+    { "type": "text", "id": "final_btn1_label", "label": "Button 1 label", "default": "Shop Calm" },
+    { "type": "url", "id": "final_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "final_btn2_label", "label": "Button 2 label", "default": "Shop Focus" },
+    { "type": "url", "id": "final_btn2_link", "label": "Button 2 link" },
+    { "type": "text", "id": "final_btn3_label", "label": "Button 3 label", "default": "Shop Energy" },
+    { "type": "url", "id": "final_btn3_link", "label": "Button 3 link" },
+
+    { "type": "header", "content": "Footer banner" },
+    { "type": "image_picker", "id": "banner_image", "label": "Banner image" },
+    { "type": "text", "id": "banner_label", "label": "Button label", "default": "Shop" },
+    { "type": "url", "id": "banner_link", "label": "Button link" }
+  ],
+  "blocks": [
+    { "type": "reason", "name": "Reason card", "settings": [
+      { "type": "image_picker", "id": "icon", "label": "Icon (gold PNG)" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "zp-zero-percent-alcohol.png" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Alcohol Free Ritual" },
+      { "type": "textarea", "id": "copy", "label": "Copy" }
+    ]},
+    { "type": "step", "name": "How-to step", "settings": [
+      { "type": "image_picker", "id": "icon", "label": "Icon (gold PNG)" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "step-pour.png" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Mix" },
+      { "type": "textarea", "id": "copy", "label": "Copy" }
+    ]},
+    { "type": "formula_bar", "name": "Formula bar", "settings": [
+      { "type": "text", "id": "name", "label": "Name", "default": "Calm" },
+      { "type": "text", "id": "addition", "label": "Active addition", "default": "Magnesium" },
+      { "type": "color", "id": "color", "label": "Accent color", "default": "#8C7430" }
+    ]},
+    { "type": "moment", "name": "Use moment", "settings": [
+      { "type": "image_picker", "id": "icon", "label": "Icon (gold PNG)" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "zp-calm-first-cocktails.png" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Dinner / Hosting" },
+      { "type": "textarea", "id": "copy", "label": "Copy" }
+    ]},
+    { "type": "product", "name": "Product card", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "calm-blueberry-acai.png" },
+      { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
+      { "type": "textarea", "id": "copy", "label": "Copy" },
+      { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ]},
+    { "type": "testimonial", "name": "Testimonial", "settings": [
+      { "type": "textarea", "id": "quote", "label": "Quote" },
+      { "type": "text", "id": "name", "label": "Name", "default": "Verified Buyer" },
+      { "type": "text", "id": "role", "label": "Role / product", "default": "AVRO Calm" }
+    ]},
+    { "type": "faq", "name": "FAQ item", "settings": [
+      { "type": "text", "id": "q", "label": "Question" },
+      { "type": "textarea", "id": "a", "label": "Answer" }
+    ]}
+  ],
+  "presets": [
+    { "name": "AVRO — Social", "blocks": [
+      { "type": "reason", "settings": { "icon_fallback": "zp-zero-percent-alcohol.png", "title": "Alcohol Free Ritual", "copy": "A functional ritual for nights when alcohol is not the move." } },
+      { "type": "reason", "settings": { "icon_fallback": "zp-social-lift.png", "title": "Calm and Clear Presence", "copy": "Supports calm, clarity, and composed presence before social moments." } },
+      { "type": "reason", "settings": { "icon_fallback": "zp-function-forward.png", "title": "Adult Alternative", "copy": "A more intentional option than stimulant-heavy or sugar-heavy drinks." } },
+      { "type": "step", "settings": { "icon_fallback": "step-pour.png", "title": "Mix", "copy": "Mix one stick with water." } },
+      { "type": "step", "settings": { "icon_fallback": "step-stir.png", "title": "Time it", "copy": "Drink about 30 minutes before your social moment." } },
+      { "type": "step", "settings": { "icon_fallback": "step-drink.png", "title": "Show up", "copy": "Step in with a calmer, clearer routine." } },
+      { "type": "formula_bar", "settings": { "name": "Calm", "addition": "Magnesium", "color": "#8C7430" } },
+      { "type": "formula_bar", "settings": { "name": "Focus", "addition": "Cognigrape®", "color": "#A8893A" } },
+      { "type": "formula_bar", "settings": { "name": "Energy", "addition": "Caffeine", "color": "#CAA84B" } },
+      { "type": "moment", "settings": { "icon_fallback": "zp-calm-first-cocktails.png", "title": "Dinner / Hosting", "copy": "A calm-first ritual for meals, hosting, and gatherings." } },
+      { "type": "moment", "settings": { "icon_fallback": "zp-zero-percent-alcohol.png", "title": "Alcohol Free Nights", "copy": "For evenings where you want something intentional without alcohol." } },
+      { "type": "moment", "settings": { "icon_fallback": "zp-social-lift.png", "title": "Events / Networking", "copy": "For long social settings where calm, clarity, and presence matter." } },
+      { "type": "moment", "settings": { "icon_fallback": "relaxation-reduced-tension.png", "title": "Evening Wind Down", "copy": "For a gentler close to the day on your own terms." } },
+      { "type": "product", "settings": { "image_fallback": "calm-blueberry-acai.png", "name": "AVRO Calm", "copy": "Caffeine-free composure for evening social settings.*", "button_label": "Shop Calm", "link": "/collections/calm" } },
+      { "type": "product", "settings": { "image_fallback": "focus-pomegranate-raspberry.png", "name": "AVRO Focus", "copy": "Caffeine-free clarity for when you want to stay present and sharp.*", "button_label": "Shop Focus", "link": "/collections/focus" } },
+      { "type": "product", "settings": { "image_fallback": "energy-fuji-apple.png", "name": "AVRO Energy", "copy": "Natural caffeine for daytime events and longer evenings.*", "button_label": "Shop Energy", "link": "/collections/energy" } },
+      { "type": "testimonial", "settings": { "quote": "Finally a zero-proof option that feels intentional. Calm and present all night.", "name": "Verified Buyer", "role": "AVRO Calm" } },
+      { "type": "testimonial", "settings": { "quote": "My go-to when I'm hosting. Mixes into a beautiful alcohol-free cocktail.", "name": "Verified Buyer", "role": "AVRO Focus" } },
+      { "type": "testimonial", "settings": { "quote": "Clear-headed at a long networking event with zero alcohol. Loved it.", "name": "Verified Buyer", "role": "AVRO Energy" } },
+      { "type": "faq", "settings": { "q": "Is AVRO alcoholic?", "a": "No. AVRO is an alcohol-free drink mix designed for people who want a more intentional option for social occasions, evenings out, and everyday routines." } },
+      { "type": "faq", "settings": { "q": "Which AVRO formula is best for social occasions?", "a": "AVRO Calm is usually the best choice for evening social settings. It is caffeine-free and supports a calm, composed headspace without stimulation.*\nAVRO Focus is also caffeine-free and may be a better fit when you want clarity and concentration.*\nAVRO Energy contains 120 mg of natural caffeine and is better suited to daytime events, long evenings, or occasions when you want added energy.*" } },
+      { "type": "faq", "settings": { "q": "Can I use AVRO as a zero-proof cocktail base?", "a": "Yes. Mix AVRO with still or sparkling water and serve it over ice. You can also add citrus, fresh herbs, fruit, or another alcohol-free mixer to create a simple zero-proof drink." } },
+      { "type": "faq", "settings": { "q": "Is AVRO only for people who do not drink alcohol?", "a": "No. AVRO is for anyone looking for an alcohol-free option—whether you are skipping alcohol for the night, cutting back, driving, training, or simply choosing something different." } }
+    ]}
+  ]
+}
+{% endschema %}
