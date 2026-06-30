@@ -1,0 +1,132 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — CONTACT  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-contact.liquid and paste this entire file in.
+  2. Add it to a page via the theme editor, or render from a page template.
+  3. This uses Shopify's native {% form 'contact' %}, so submissions are
+     delivered to your store's contact email automatically — no third-party
+     setup needed. On success Shopify reloads with ?contact_posted=true and
+     the confirmation message shows.
+  4. Editable: hero (title + lede + two buttons), the form heading, the inquiry
+     type options (comma-separated), the email line, and the closing CTA.
+  No images are required for this page.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-contact-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --divider: #E2E2E2;
+    --avro-blue: #94C6D4;
+    font-family: "DM Sans", system-ui, sans-serif;
+    background-color: var(--base); color: var(--ink); display: block;
+  }
+  #avro-contact-{{ section.id }} * { box-sizing: border-box; }
+  #avro-contact-{{ section.id }} .ct-hero { padding: clamp(48px,7vw,88px) clamp(20px,5vw,64px) clamp(20px,3vw,32px); text-align: center; }
+  #avro-contact-{{ section.id }} .ct-hero h1 { font-weight: 800; font-size: clamp(34px,5vw,62px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin: 0 auto; max-width: 720px; }
+  #avro-contact-{{ section.id }} .ct-hero p { font-weight: 400; font-size: clamp(16px,1.4vw,19px); line-height: 1.55; color: var(--warm-gray); margin: 16px auto 0; max-width: 620px; }
+  #avro-contact-{{ section.id }} .ct-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 24px; }
+  #avro-contact-{{ section.id }} .ct-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 28px; font-size: 16px; font-weight: 700; border-radius: 999px; text-decoration: none; border: 2px solid var(--charcoal); color: var(--charcoal); background: transparent; transition: background-color .2s ease, color .2s ease; }
+  #avro-contact-{{ section.id }} .ct-btn:hover { background: var(--charcoal); color: var(--bone); }
+  #avro-contact-{{ section.id }} .ct-body { padding: clamp(40px,5vw,72px) clamp(20px,5vw,64px); }
+  #avro-contact-{{ section.id }} .ct-form { display: grid; gap: 16px; margin: 0 auto; width: 100%; max-width: 640px; padding: clamp(28px,4vw,40px); background: var(--base-light); border: 1px solid var(--divider); border-radius: 24px; box-shadow: 0 10px 30px rgba(31,29,24,0.04); }
+  #avro-contact-{{ section.id }} .ct-field { display: grid; gap: 8px; font-weight: 700; font-size: 14px; color: var(--ink); }
+  #avro-contact-{{ section.id }} .ct-input { width: 100%; min-height: 48px; padding: 12px 16px; background: var(--base); color: var(--ink); border: 1.5px solid var(--divider); border-radius: 12px; font-weight: 500; font-size: 15px; outline: none; transition: border-color .18s ease, background-color .18s ease; font-family: inherit; }
+  #avro-contact-{{ section.id }} textarea.ct-input { resize: vertical; }
+  #avro-contact-{{ section.id }} .ct-input:focus { border-color: var(--charcoal); background: var(--bone); }
+  #avro-contact-{{ section.id }} .ct-input::placeholder { color: var(--warm-gray); opacity: 0.7; }
+  #avro-contact-{{ section.id }} .ct-submit { margin-top: 8px; justify-self: start; min-height: 48px; padding: 0 28px; background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); border-radius: 999px; font-weight: 700; font-size: 16px; cursor: pointer; transition: background-color .2s ease, color .2s ease; }
+  #avro-contact-{{ section.id }} .ct-submit:hover { background: transparent; color: var(--charcoal); }
+  #avro-contact-{{ section.id }} .ct-note { margin: 20px auto 0; width: 100%; max-width: 640px; text-align: center; font-size: 13px; line-height: 1.5; color: var(--warm-gray); }
+  #avro-contact-{{ section.id }} .ct-note a { color: var(--ink); font-weight: 700; }
+  #avro-contact-{{ section.id }} .ct-success { margin: 0 auto 20px; width: 100%; max-width: 640px; padding: 16px 20px; background: var(--avro-blue); color: var(--charcoal); border-radius: 12px; font-weight: 700; text-align: center; }
+  #avro-contact-{{ section.id }} .ct-errors { margin: 0 auto 20px; width: 100%; max-width: 640px; padding: 16px 20px; background: #FBE9E7; color: #8A2B1E; border-radius: 12px; font-weight: 600; }
+  #avro-contact-{{ section.id }} .ct-errors ul { margin: 8px 0 0; padding-left: 20px; }
+  /* closing CTA */
+  #avro-contact-{{ section.id }} .ct-final { background: var(--avro-blue); padding: clamp(56px,8vw,104px) clamp(16px,4vw,64px); text-align: center; }
+  #avro-contact-{{ section.id }} .ct-final h2 { font-weight: 800; font-size: clamp(26px,4vw,52px); line-height: 1.02; letter-spacing: -0.02em; color: var(--charcoal); margin: 0 auto 10px; max-width: 640px; }
+  #avro-contact-{{ section.id }} .ct-final p { font-weight: 500; font-size: clamp(15px,1.3vw,19px); line-height: 1.5; color: rgba(21,21,21,0.7); margin: 0 auto; max-width: 520px; }
+{% endstyle %}
+
+<div id="avro-contact-{{ section.id }}">
+  <section class="ct-hero">
+    <h1>{{ section.settings.title | default: 'Contact AVRO.' }}</h1>
+    {%- if section.settings.lede != blank -%}<p>{{ section.settings.lede }}</p>{%- endif -%}
+    <div class="ct-btns">
+      {%- if section.settings.btn1_label != blank -%}<a class="ct-btn" href="#ct-message-{{ section.id }}">{{ section.settings.btn1_label }}</a>{%- endif -%}
+      {%- if section.settings.btn2_label != blank -%}<a class="ct-btn" href="{{ section.settings.btn2_link | default: '/pages/faq' }}">{{ section.settings.btn2_label }}</a>{%- endif -%}
+    </div>
+  </section>
+
+  <section class="ct-body" id="ct-message-{{ section.id }}">
+    {%- assign types = section.settings.inquiry_types | default: 'Order Support, Subscription Support, Product Question, Retail / Wholesale, Creator / Partnership, Press, Other' | split: ',' -%}
+    {%- form 'contact' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="ct-success">{{ section.settings.success_message | default: 'Thanks — your message has been sent. We will be in touch soon.' }}</p>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <div class="ct-errors">
+          Please fix the following:
+          <ul>{%- for field in form.errors -%}<li>{{ form.errors.messages[field] }}</li>{%- endfor -%}</ul>
+        </div>
+      {%- endif -%}
+      <div class="ct-form">
+        <label class="ct-field">Name
+          <input class="ct-input" type="text" name="contact[name]" required placeholder="Your name" value="{{ form.name }}">
+        </label>
+        <label class="ct-field">Email
+          <input class="ct-input" type="email" name="contact[email]" required placeholder="you@example.com" value="{{ form.email }}">
+        </label>
+        <label class="ct-field">Order number (optional)
+          <input class="ct-input" type="text" name="contact[order number]" placeholder="#AVRO">
+        </label>
+        <label class="ct-field">Inquiry type
+          <select class="ct-input" name="contact[inquiry type]">
+            {%- for t in types -%}<option>{{ t | strip }}</option>{%- endfor -%}
+          </select>
+        </label>
+        <label class="ct-field">Message
+          <textarea class="ct-input" name="contact[body]" rows="5" required placeholder="How can we help?">{{ form.body }}</textarea>
+        </label>
+        <button class="ct-submit" type="submit">{{ section.settings.submit_label | default: 'Send Message' }}</button>
+      </div>
+    {%- endform -%}
+
+    {%- if section.settings.email != blank -%}
+      <p class="ct-note">You can also contact us via email at <a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a>.</p>
+    {%- endif -%}
+  </section>
+
+  <section class="ct-final">
+    <h2>{{ section.settings.cta_title | default: 'Still need help?' }}</h2>
+    <p>{{ section.settings.cta_copy | default: 'Our team will respond as soon as possible.' }}</p>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "AVRO — Contact",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Contact AVRO." },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Have a question about your order, subscription, formula, or partnership? Send us a note and we will point you in the right direction." },
+    { "type": "text", "id": "btn1_label", "label": "Button 1 label", "default": "Send Message" },
+    { "type": "text", "id": "btn2_label", "label": "Button 2 label", "default": "Visit Help Center" },
+    { "type": "url", "id": "btn2_link", "label": "Button 2 link" },
+    { "type": "header", "content": "Form" },
+    { "type": "text", "id": "inquiry_types", "label": "Inquiry types (comma-separated)", "default": "Order Support, Subscription Support, Product Question, Retail / Wholesale, Creator / Partnership, Press, Other" },
+    { "type": "text", "id": "submit_label", "label": "Submit button label", "default": "Send Message" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks — your message has been sent. We will be in touch soon." },
+    { "type": "text", "id": "email", "label": "Contact email shown below form", "default": "hello@avrolife.com" },
+    { "type": "header", "content": "Closing CTA" },
+    { "type": "text", "id": "cta_title", "label": "Title", "default": "Still need help?" },
+    { "type": "textarea", "id": "cta_copy", "label": "Copy", "default": "Our team will respond as soon as possible." }
+  ],
+  "presets": [
+    { "name": "AVRO — Contact" }
+  ]
+}
+{% endschema %}

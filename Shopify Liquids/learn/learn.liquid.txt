@@ -1,0 +1,127 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — LEARN / ARTICLES HUB  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-learn.liquid and paste this entire file in.
+  2. Add it to a page (e.g. a "Learn" page) via the theme editor, or render
+     it from a page template.
+  3. The hero (title, lede, two buttons) and the section heading are editable.
+     Each "Pillar card" is a BLOCK that holds a title plus up to 6 article
+     links (label + URL). Add / remove / reorder pillar cards in the editor.
+  No images are required for this page.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-learn-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --divider: #E2E2E2;
+    font-family: "DM Sans", system-ui, sans-serif;
+    background-color: var(--base); color: var(--ink); display: block;
+  }
+  #avro-learn-{{ section.id }} * { box-sizing: border-box; }
+  #avro-learn-{{ section.id }} .lh-hero { padding: clamp(48px,7vw,96px) clamp(20px,5vw,64px) clamp(24px,3vw,40px); text-align: center; }
+  #avro-learn-{{ section.id }} .lh-hero h1 { font-weight: 800; font-size: clamp(34px,5vw,62px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin: 0 auto; max-width: 820px; }
+  #avro-learn-{{ section.id }} .lh-hero p { font-weight: 400; font-size: clamp(16px,1.4vw,19px); line-height: 1.55; color: var(--warm-gray); margin: 18px auto 0; max-width: 640px; }
+  #avro-learn-{{ section.id }} .lh-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 28px; }
+  #avro-learn-{{ section.id }} .lh-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 28px; font-size: 16px; font-weight: 700; border-radius: 999px; text-decoration: none; border: 2px solid var(--charcoal); color: var(--charcoal); background: transparent; transition: background-color .2s ease, color .2s ease; }
+  #avro-learn-{{ section.id }} .lh-btn:hover { background: var(--charcoal); color: var(--bone); }
+  #avro-learn-{{ section.id }} .lh-body { padding: clamp(32px,5vw,72px) clamp(20px,5vw,64px); }
+  #avro-learn-{{ section.id }} .lh-wrap { max-width: 1250px; margin: 0 auto; }
+  #avro-learn-{{ section.id }} .lh-eyebrow { font-weight: 700; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warm-gray); margin: 0 0 8px; }
+  #avro-learn-{{ section.id }} .lh-heading { font-weight: 800; font-size: clamp(24px,3vw,40px); line-height: 1.05; color: var(--ink); margin: 0 0 28px; }
+  #avro-learn-{{ section.id }} .lh-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  #avro-learn-{{ section.id }} .lh-card { background: var(--bone); border: 1px solid rgba(30,29,24,0.14); border-radius: 18px; padding: 26px 24px 28px; display: flex; flex-direction: column; min-height: 280px; }
+  #avro-learn-{{ section.id }} .lh-card h3 { font-weight: 800; font-size: 22px; line-height: 1.2; letter-spacing: -0.01em; color: var(--ink); margin: 0 0 20px; }
+  #avro-learn-{{ section.id }} .lh-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+  #avro-learn-{{ section.id }} .lh-card a { display: block; font-size: 15px; line-height: 1.45; font-weight: 600; color: var(--ink); text-decoration: none; transition: color .15s ease; }
+  #avro-learn-{{ section.id }} .lh-card a:hover { color: rgba(28,27,20,0.6); }
+  @media (min-width: 640px) { #avro-learn-{{ section.id }} .lh-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (min-width: 1024px) { #avro-learn-{{ section.id }} .lh-grid { grid-template-columns: repeat(4,1fr); } }
+{% endstyle %}
+
+<div id="avro-learn-{{ section.id }}">
+  <section class="lh-hero">
+    <h1>{{ section.settings.title | default: 'Category ownership, not content noise.' }}</h1>
+    {%- if section.settings.lede != blank -%}<p>{{ section.settings.lede }}</p>{%- endif -%}
+    <div class="lh-btns">
+      {%- if section.settings.btn1_label != blank -%}<a class="lh-btn" href="{{ section.settings.btn1_link | default: '#articles' }}">{{ section.settings.btn1_label }}</a>{%- endif -%}
+      {%- if section.settings.btn2_label != blank -%}<a class="lh-btn" href="{{ section.settings.btn2_link | default: '/collections/all' }}">{{ section.settings.btn2_label }}</a>{%- endif -%}
+    </div>
+  </section>
+
+  <section class="lh-body" id="articles">
+    <div class="lh-wrap">
+      {%- if section.settings.eyebrow != blank -%}<p class="lh-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="lh-heading">{{ section.settings.heading }}</h2>{%- endif -%}
+      <div class="lh-grid">
+        {%- for block in section.blocks -%}
+          <article class="lh-card" {{ block.shopify_attributes }}>
+            <h3>{{ block.settings.title }}</h3>
+            <ul>
+              {%- for i in (1..6) -%}
+                {%- assign lbl = 'article_' | append: i | append: '_label' -%}
+                {%- assign url = 'article_' | append: i | append: '_link' -%}
+                {%- if block.settings[lbl] != blank -%}
+                  <li><a href="{{ block.settings[url] | default: '#' }}">{{ block.settings[lbl] }}</a></li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "AVRO — Learn",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Category ownership, not content noise." },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Learn how AVRO thinks about calm performance, PharmaGABA®, calm-first energy, state before pressure moments, and choosing the right formula." },
+    { "type": "text", "id": "btn1_label", "label": "Button 1 label", "default": "Read Articles" },
+    { "type": "url", "id": "btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "btn2_label", "label": "Button 2 label", "default": "Shop AVRO" },
+    { "type": "url", "id": "btn2_link", "label": "Button 2 link" },
+    { "type": "header", "content": "Articles section" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Recommended structure" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Start with 12 strong articles." }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Pillar title", "default": "Start Here" },
+        { "type": "text", "id": "article_1_label", "label": "Article 1 label" },
+        { "type": "url", "id": "article_1_link", "label": "Article 1 link" },
+        { "type": "text", "id": "article_2_label", "label": "Article 2 label" },
+        { "type": "url", "id": "article_2_link", "label": "Article 2 link" },
+        { "type": "text", "id": "article_3_label", "label": "Article 3 label" },
+        { "type": "url", "id": "article_3_link", "label": "Article 3 link" },
+        { "type": "text", "id": "article_4_label", "label": "Article 4 label" },
+        { "type": "url", "id": "article_4_link", "label": "Article 4 link" },
+        { "type": "text", "id": "article_5_label", "label": "Article 5 label" },
+        { "type": "url", "id": "article_5_link", "label": "Article 5 link" },
+        { "type": "text", "id": "article_6_label", "label": "Article 6 label" },
+        { "type": "url", "id": "article_6_link", "label": "Article 6 link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Learn",
+      "blocks": [
+        { "type": "pillar", "settings": { "title": "Start Here", "article_1_label": "What Is Calm Performance?", "article_1_link": "/blogs/learn/what-is-calm-performance", "article_2_label": "Why More Energy Is Not Always the Answer", "article_2_link": "/blogs/learn/more-energy-not-always-the-answer", "article_3_label": "Calm First vs. Stimulant First: What's the Difference?", "article_3_link": "/blogs/learn/calm-first-vs-stimulant-first" } },
+        { "type": "pillar", "settings": { "title": "Science of Calm", "article_1_label": "What Is GABA?", "article_1_link": "/blogs/learn/what-is-gaba", "article_2_label": "What Is PharmaGABA®?", "article_2_link": "/blogs/learn/what-is-pharmagaba", "article_3_label": "Why Fermentation Matters in AVRO", "article_3_link": "/blogs/learn/why-fermentation-matters" } },
+        { "type": "pillar", "settings": { "title": "Formula Guides", "article_1_label": "AVRO Calm vs. Focus vs. Energy", "article_1_link": "/blogs/learn/calm-vs-focus-vs-energy", "article_2_label": "Why AVRO Focus Is Caffeine Free", "article_2_link": "/blogs/learn/why-focus-is-caffeine-free", "article_3_label": "What Makes AVRO Energy Different?", "article_3_link": "/blogs/learn/what-makes-energy-different" } },
+        { "type": "pillar", "settings": { "title": "Use Guides", "article_1_label": "What to Drink Before Golf When You Do Not Want More Caffeine", "article_1_link": "/blogs/learn/what-to-drink-before-golf", "article_2_label": "A Calm First Routine Before Deep Work", "article_2_link": "/blogs/learn/calm-first-routine-deep-work", "article_3_label": "Why Long Gaming Sessions Do Not Always Need More Stimulation", "article_3_link": "/blogs/learn/long-gaming-sessions" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

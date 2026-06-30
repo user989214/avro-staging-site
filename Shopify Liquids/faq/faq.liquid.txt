@@ -1,0 +1,228 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — FAQ  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-faq.liquid and paste this entire file in.
+  2. Add it to a page via the theme editor, or render from a page template.
+  3. Editable: hero (title + lede + two buttons), the live search box, the
+     jump-to-category pills (auto-generated from the category blocks), and the
+     closing CTA + banner.
+     - Each "FAQ category" is a BLOCK with a name and up to 6 Q&A pairs.
+     - The search box filters questions/answers live across all categories.
+  4. Upload this folder's banner image (faq-banner.png) to your theme Assets,
+     or choose your own in the editor.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-faq-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --divider: #E2E2E2;
+    --avro-blue: #94C6D4;
+    font-family: "DM Sans", system-ui, sans-serif;
+    background-color: var(--base); color: var(--ink); display: block;
+  }
+  #avro-faq-{{ section.id }} * { box-sizing: border-box; }
+  #avro-faq-{{ section.id }} .fq-hero { padding: clamp(48px,7vw,88px) clamp(20px,5vw,64px) clamp(20px,3vw,32px); text-align: center; }
+  #avro-faq-{{ section.id }} .fq-hero h1 { font-weight: 800; font-size: clamp(34px,5vw,62px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin: 0 auto; max-width: 720px; }
+  #avro-faq-{{ section.id }} .fq-hero p { font-weight: 400; font-size: clamp(16px,1.4vw,19px); line-height: 1.55; color: var(--warm-gray); margin: 16px auto 0; max-width: 620px; }
+  #avro-faq-{{ section.id }} .fq-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 24px; }
+  #avro-faq-{{ section.id }} .fq-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 28px; font-size: 16px; font-weight: 700; border-radius: 999px; text-decoration: none; border: 2px solid var(--charcoal); color: var(--charcoal); background: transparent; transition: background-color .2s ease, color .2s ease; }
+  #avro-faq-{{ section.id }} .fq-btn:hover { background: var(--charcoal); color: var(--bone); }
+  #avro-faq-{{ section.id }} .fq-search { display: flex; align-items: center; gap: 12px; width: 100%; max-width: 860px; margin: 32px auto 0; padding: 18px 28px; background: var(--bone); border: 1.5px solid var(--charcoal); border-radius: 999px; box-shadow: 0 4px 24px rgba(30,29,24,0.08); }
+  #avro-faq-{{ section.id }} .fq-search svg { width: 24px; height: 24px; color: var(--charcoal); flex-shrink: 0; }
+  #avro-faq-{{ section.id }} .fq-search input { border: 0; outline: 0; background: transparent; width: 100%; font-size: 16px; font-weight: 500; color: var(--ink); }
+  #avro-faq-{{ section.id }} .fq-search input::placeholder { color: var(--warm-gray); }
+  #avro-faq-{{ section.id }} .fq-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 720px; margin: 20px auto 0; }
+  #avro-faq-{{ section.id }} .fq-pill { padding: 8px 14px; background: var(--base-light); border-radius: 999px; font-size: 12px; font-weight: 800; color: var(--ink); text-decoration: none; transition: background-color .15s ease, color .15s ease; }
+  #avro-faq-{{ section.id }} .fq-pill:hover { background: var(--charcoal); color: var(--bone); }
+  #avro-faq-{{ section.id }} .fq-cat { padding: clamp(28px,4vw,48px) clamp(20px,5vw,64px); }
+  #avro-faq-{{ section.id }} .fq-wrap { max-width: 1250px; margin: 0 auto; }
+  #avro-faq-{{ section.id }} .fq-catname { font-weight: 800; font-size: clamp(20px,2.4vw,30px); color: var(--ink); margin: 0 0 20px; }
+  #avro-faq-{{ section.id }} .fq-list { display: grid; gap: 8px; }
+  #avro-faq-{{ section.id }} .fq-item { background: var(--base); border-radius: 12px; }
+  #avro-faq-{{ section.id }} .fq-item summary { display: flex; justify-content: space-between; gap: 16px; padding: 18px 22px; cursor: pointer; font-weight: 800; color: var(--ink); list-style: none; }
+  #avro-faq-{{ section.id }} .fq-item summary::-webkit-details-marker { display: none; }
+  #avro-faq-{{ section.id }} .fq-item summary::after { content: '+'; font-size: 22px; line-height: 1; flex-shrink: 0; }
+  #avro-faq-{{ section.id }} .fq-item[open] summary::after { content: '-'; }
+  #avro-faq-{{ section.id }} .fq-item p { padding: 0 22px 20px; color: var(--warm-gray); line-height: 1.6; margin: 0; }
+  #avro-faq-{{ section.id }} .fq-noresult { display: none; text-align: center; color: var(--warm-gray); font-size: 16px; padding: 24px; }
+  /* CTA */
+  #avro-faq-{{ section.id }} .fq-final { background: var(--avro-blue); padding: clamp(56px,8vw,104px) clamp(16px,4vw,64px); }
+  #avro-faq-{{ section.id }} .fq-final-wrap { max-width: 1250px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; }
+  #avro-faq-{{ section.id }} .fq-final h2 { font-weight: 800; font-size: clamp(26px,4vw,52px); line-height: 1.02; letter-spacing: -0.02em; color: var(--charcoal); margin: 0 0 10px; max-width: 600px; }
+  #avro-faq-{{ section.id }} .fq-final p { font-weight: 500; font-size: clamp(15px,1.3vw,19px); line-height: 1.5; color: rgba(21,21,21,0.7); margin: 0; max-width: 520px; }
+  #avro-faq-{{ section.id }} .fq-final-btns { display: flex; flex-direction: column; gap: 8px; min-width: 240px; max-width: 360px; flex: 1 1 260px; }
+  #avro-faq-{{ section.id }} .fq-final-btn { width: 100%; min-height: 48px; padding: 0 28px; display: inline-flex; align-items: center; justify-content: center; background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); border-radius: 999px; font-weight: 700; font-size: 16px; text-decoration: none; }
+  #avro-faq-{{ section.id }} .fq-final-btn:hover { background: transparent; color: var(--charcoal); }
+  /* banner */
+  #avro-faq-{{ section.id }} .fq-banner { position: relative; width: 100%; overflow: hidden; }
+  #avro-faq-{{ section.id }} .fq-banner img { width: 100%; height: auto; display: block; }
+  #avro-faq-{{ section.id }} .fq-banner-btn { position: absolute; left: clamp(16px,4vw,64px); bottom: clamp(16px,4vw,56px); min-width: 220px; min-height: 48px; padding: 0 28px; display: inline-flex; align-items: center; justify-content: center; background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); border-radius: 999px; font-weight: 700; font-size: 16px; text-decoration: none; }
+  #avro-faq-{{ section.id }} .fq-banner-btn:hover { background: transparent; color: var(--charcoal); }
+  @media (max-width: 640px) {
+    #avro-faq-{{ section.id }} .fq-banner { display: flex; flex-direction: column; padding-bottom: 24px; }
+    #avro-faq-{{ section.id }} .fq-banner-btn { position: static; width: calc(100% - 32px); margin: 20px auto 0; }
+  }
+{% endstyle %}
+
+<div id="avro-faq-{{ section.id }}">
+  <section class="fq-hero">
+    <h1>{{ section.settings.title | default: 'FAQ' }}</h1>
+    {%- if section.settings.lede != blank -%}<p>{{ section.settings.lede }}</p>{%- endif -%}
+    <div class="fq-btns">
+      {%- if section.settings.btn1_label != blank -%}<a class="fq-btn" href="{{ section.settings.btn1_link | default: '/collections/all' }}">{{ section.settings.btn1_label }}</a>{%- endif -%}
+      {%- if section.settings.btn2_label != blank -%}<a class="fq-btn" href="{{ section.settings.btn2_link | default: '/pages/contact' }}">{{ section.settings.btn2_label }}</a>{%- endif -%}
+    </div>
+    <label class="fq-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" data-faq-search placeholder="{{ section.settings.search_placeholder | default: 'Search AVRO answers' }}" aria-label="Search FAQ">
+    </label>
+    <div class="fq-pills">
+      {%- for block in section.blocks -%}
+        <a class="fq-pill" href="#fq-{{ block.id }}">{{ block.settings.name }}</a>
+      {%- endfor -%}
+    </div>
+  </section>
+
+  {%- for block in section.blocks -%}
+    <section class="fq-cat" id="fq-{{ block.id }}" data-faq-cat {{ block.shopify_attributes }}>
+      <div class="fq-wrap">
+        <h2 class="fq-catname">{{ block.settings.name }}</h2>
+        <div class="fq-list">
+          {%- for i in (1..6) -%}
+            {%- assign qk = 'q' | append: i -%}
+            {%- assign ak = 'a' | append: i -%}
+            {%- if block.settings[qk] != blank -%}
+              <details class="fq-item" data-faq-item>
+                <summary>{{ block.settings[qk] }}</summary>
+                <p>{{ block.settings[ak] }}</p>
+              </details>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endfor -%}
+
+  <p class="fq-noresult" data-faq-noresult>No answers match your search — try a different term or <a href="{{ section.settings.btn2_link | default: '/pages/contact' }}">contact us</a>.</p>
+
+  {%- comment -%} FINAL CTA {%- endcomment -%}
+  <section class="fq-final">
+    <div class="fq-final-wrap">
+      <div>
+        <h2>{{ section.settings.cta_title | default: 'Ready to find your formula?' }}</h2>
+        <p>{{ section.settings.cta_copy | default: 'Choose Calm, Focus, or Energy based on the moment you want to support.' }}</p>
+      </div>
+      <div class="fq-final-btns">
+        <a class="fq-final-btn" href="{{ section.settings.cta_btn1_link | default: '/collections/calm' }}">{{ section.settings.cta_btn1_label | default: 'Shop Calm' }}</a>
+        <a class="fq-final-btn" href="{{ section.settings.cta_btn2_link | default: '/collections/focus' }}">{{ section.settings.cta_btn2_label | default: 'Shop Focus' }}</a>
+        <a class="fq-final-btn" href="{{ section.settings.cta_btn3_link | default: '/collections/energy' }}">{{ section.settings.cta_btn3_label | default: 'Shop Energy' }}</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} BANNER {%- endcomment -%}
+  <section>
+    <div class="fq-banner">
+      {%- if section.settings.banner_image != blank -%}
+        <img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">
+      {%- else -%}
+        <img src="{{ 'faq-banner.png' | asset_url }}" alt="">
+      {%- endif -%}
+      <a class="fq-banner-btn" href="{{ section.settings.banner_link | default: '/collections/all' }}">{{ section.settings.banner_label | default: 'Shop' }}</a>
+    </div>
+  </section>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById("avro-faq-{{ section.id }}");
+    if (!root) return;
+    var input = root.querySelector("[data-faq-search]");
+    var cats = root.querySelectorAll("[data-faq-cat]");
+    var items = root.querySelectorAll("[data-faq-item]");
+    var noResult = root.querySelector("[data-faq-noresult]");
+    if (!input) return;
+
+    input.addEventListener("input", function () {
+      var q = input.value.trim().toLowerCase();
+      var anyVisible = 0;
+      items.forEach(function (it) {
+        var text = it.textContent.toLowerCase();
+        var show = q === "" || text.indexOf(q) !== -1;
+        it.style.display = show ? "" : "none";
+        if (show) anyVisible++;
+        if (q !== "" && show) it.setAttribute("open", ""); else if (q !== "") it.removeAttribute("open");
+      });
+      cats.forEach(function (cat) {
+        var visibleInCat = cat.querySelectorAll("[data-faq-item]");
+        var n = 0;
+        visibleInCat.forEach(function (v) { if (v.style.display !== "none") n++; });
+        cat.style.display = n === 0 && q !== "" ? "none" : "";
+      });
+      if (noResult) noResult.style.display = (q !== "" && anyVisible === 0) ? "block" : "none";
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AVRO — FAQ",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "title", "label": "Title", "default": "FAQ" },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Find answers about AVRO formulas, ingredients, timing, caffeine, subscriptions, shipping, and how to choose the right product." },
+    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search AVRO answers" },
+    { "type": "text", "id": "btn1_label", "label": "Button 1 label", "default": "Shop AVRO" },
+    { "type": "url", "id": "btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "btn2_label", "label": "Button 2 label", "default": "Contact Us" },
+    { "type": "url", "id": "btn2_link", "label": "Button 2 link" },
+    { "type": "header", "content": "Closing CTA" },
+    { "type": "text", "id": "cta_title", "label": "Title", "default": "Ready to find your formula?" },
+    { "type": "textarea", "id": "cta_copy", "label": "Copy", "default": "Choose Calm, Focus, or Energy based on the moment you want to support." },
+    { "type": "text", "id": "cta_btn1_label", "label": "CTA button 1 label", "default": "Shop Calm" },
+    { "type": "url", "id": "cta_btn1_link", "label": "CTA button 1 link" },
+    { "type": "text", "id": "cta_btn2_label", "label": "CTA button 2 label", "default": "Shop Focus" },
+    { "type": "url", "id": "cta_btn2_link", "label": "CTA button 2 link" },
+    { "type": "text", "id": "cta_btn3_label", "label": "CTA button 3 label", "default": "Shop Energy" },
+    { "type": "url", "id": "cta_btn3_link", "label": "CTA button 3 link" },
+    { "type": "header", "content": "Bottom banner" },
+    { "type": "image_picker", "id": "banner_image", "label": "Banner image" },
+    { "type": "text", "id": "banner_label", "label": "Button label", "default": "Shop" },
+    { "type": "url", "id": "banner_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "FAQ category",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Category name", "default": "Questions? We Have Answers." },
+        { "type": "text", "id": "q1", "label": "Q1" }, { "type": "textarea", "id": "a1", "label": "A1" },
+        { "type": "text", "id": "q2", "label": "Q2" }, { "type": "textarea", "id": "a2", "label": "A2" },
+        { "type": "text", "id": "q3", "label": "Q3" }, { "type": "textarea", "id": "a3", "label": "A3" },
+        { "type": "text", "id": "q4", "label": "Q4" }, { "type": "textarea", "id": "a4", "label": "A4" },
+        { "type": "text", "id": "q5", "label": "Q5" }, { "type": "textarea", "id": "a5", "label": "A5" },
+        { "type": "text", "id": "q6", "label": "Q6" }, { "type": "textarea", "id": "a6", "label": "A6" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — FAQ",
+      "blocks": [
+        { "type": "category", "settings": { "name": "Questions? We Have Answers.", "q1": "What is AVRO?", "a1": "AVRO is a calm-first daily drink mix designed to support calm, clarity, focus, and steady energy before pressure-sensitive moments.*", "q2": "Which formula is right for me?", "a2": "Choose Calm for caffeine-free composure, Focus for caffeine-free clarity support, or Energy for steady energy with 120 mg natural caffeine.*", "q3": "Can I take AVRO every day?", "a3": "AVRO can fit into a daily routine. Choose your formula based on timing, caffeine preference, and your moment." } },
+        { "type": "category", "settings": { "name": "Choose Your Formula", "q1": "What is the difference between Calm, Focus, and Energy?", "a1": "Calm supports caffeine-free composure, Focus supports caffeine-free clarity and focus, and Energy supports steady energy with 120 mg natural caffeine.*", "q2": "Which formulas are caffeine free?", "a2": "Calm and Focus are caffeine free.", "q3": "Which formula is best for mornings?", "a3": "Energy is commonly used in the mornings and supports activities that involve alertness and focus.*" } },
+        { "type": "category", "settings": { "name": "Ingredients + Science", "q1": "What is PharmaGABA®?", "a1": "PharmaGABA® is a naturally fermented form of GABA used in every AVRO formula as part of AVRO's calm-first foundation.", "q2": "Why does AVRO include prebiotic fiber?", "a2": "AVRO includes Soluble Guar Fiber and acacia fiber as part of its formula foundation and daily-use system.", "q3": "Why is non-GMO modified corn starch included in AVRO?", "a3": "It is included in a small amount to help the product mix well and stay consistent from serving to serving. It is not one of AVRO's primary active ingredients.", "q4": "Does AVRO contain sugar?", "a4": "AVRO is positioned as sugar free and uses stevia at 2% or less for a clean, balanced finish." } },
+        { "type": "category", "settings": { "name": "How to Use AVRO", "q1": "When should I take AVRO?", "a1": "Mix one stick with water and drink about 30 minutes before your moment.", "q2": "Can I mix AVRO into sparkling water?", "a2": "Yes. AVRO can be mixed with still or sparkling water.", "q3": "Can I use AVRO as a mocktail base?", "a3": "Yes. AVRO can work as a functional alcohol-free mocktail base." } },
+        { "type": "category", "settings": { "name": "Use Moments", "q1": "Can I use AVRO before golf?", "a1": "Yes. AVRO can fit a pre-round routine before first tee moments, tournament days, practice sessions, and long days on the course.*", "q2": "Can I use AVRO before work or deep focus?", "a2": "Yes. AVRO can support calm, clarity, and focus before deep work, meetings, presentations, coding sessions, and long workdays.*", "q3": "Can I use AVRO before esports or gaming?", "a3": "Yes. AVRO can support calm, clarity, and composure before long sessions. It does not claim to improve win rates or gameplay outcomes.*" } },
+        { "type": "category", "settings": { "name": "Caffeine + Safety", "q1": "Which AVRO formulas contain caffeine?", "a1": "Energy contains 120 mg natural caffeine. Calm and Focus are caffeine free.", "q2": "Can I take AVRO with coffee?", "a2": "Consider your total caffeine intake, especially with AVRO Energy. People who are pregnant, nursing, taking medication, managing a medical condition, or caffeine sensitive should consult a healthcare professional before use.", "q3": "Is AVRO intended for children?", "a3": "AVRO products are intended for adults." } },
+        { "type": "category", "settings": { "name": "Shipping + Returns", "q1": "Where does AVRO ship?", "a1": "AVRO currently ships to anywhere in the U.S.", "q2": "How do I track my order?", "a2": "Once your purchase is complete, you will receive an email with tracking information.", "q3": "What is your return policy?", "a3": "All refunds, returns, or exchanges must be submitted within 30 days from purchase date. If you are looking to request a refund, return, or exchange, please contact us through our Contact Page. Make sure you include your purchase information — i.e. order number and date of purchase.", "q4": "What are AVRO's Guarantee Guidelines?", "a4": "AVRO reserves the right to verify information, require a valid proof of purchase, and to deny Guarantee requests in its discretion in cases of suspected fraud or if a customer has abused the AVRO 30-Day Satisfaction Guarantee. If you have any questions regarding whether a seller is an authorized AVRO seller, please contact us through our Contact Page." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
