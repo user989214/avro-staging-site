@@ -9,7 +9,7 @@
        blueberry-acai.png, blackberry-jasmine.png, pomegranate-raspberry.png,
        red-dragon-fruit.png, fuji-apple.png, orange-tangerine.png
   3. Add the section to a page template (templates/page.ingredients.json) or
-     render it with {% section 'avro-ingredients' %}.
+     render it through the theme editor as the avro-ingredients section.
   4. Every heading, body, badge, stack, flavor panel, product card, and FAQ is
      editable in the theme editor. Stacks, flavors, badges, products and FAQs
      are blocks — add / remove / reorder them.

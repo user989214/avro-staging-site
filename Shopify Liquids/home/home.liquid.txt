@@ -5,7 +5,7 @@
   HOW TO USE
   1. In your Shopify theme, create:  sections/avro-home.liquid
      Paste the ENTIRE contents of this file into it (including the
-     {% schema %} block at the bottom). Save.
+     schema block at the bottom). Save.
   2. Upload every image in this same folder to your theme assets
      (Online Store > Themes > Edit code > Assets > Add a new asset),
      OR drag them into /assets. Filenames must stay exactly the same.

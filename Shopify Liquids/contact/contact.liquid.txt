@@ -5,7 +5,7 @@
   HOW TO USE
   1. Create sections/avro-contact.liquid and paste this entire file in.
   2. Add it to a page via the theme editor, or render from a page template.
-  3. This uses Shopify's native {% form 'contact' %}, so submissions are
+  3. This uses Shopify's native contact form (the "contact" form type), so submissions are
      delivered to your store's contact email automatically — no third-party
      setup needed. On success Shopify reloads with ?contact_posted=true and
      the confirmation message shows.

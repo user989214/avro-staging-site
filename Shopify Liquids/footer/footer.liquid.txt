@@ -6,7 +6,7 @@
   1. Create sections/avro-footer.liquid and paste this entire file in.
   2. Upload avro-logo-footer.svg (in this folder) to your theme Assets.
   3. Reference from your footer group (sections/footer-group.json) or render
-     {% section 'avro-footer' %} in layout/theme.liquid.
+     the avro-footer section in layout/theme.liquid.
   4. Newsletter heading/body, legal disclaimers, and every link column are
      editable. Link columns are blocks (add a "Footer column" block, then add
      "Footer link" sub-items via its list). Links here use simple link blocks.

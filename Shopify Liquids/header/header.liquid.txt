@@ -5,7 +5,7 @@
   HOW TO USE
   1. Create sections/avro-header.liquid and paste this entire file in.
   2. Reference this section from your theme's header group
-     (sections/header-group.json) or render {% section 'avro-header' %} in
+     (sections/header-group.json) or render the avro-header section in
      layout/theme.liquid.
   3. The logo is embedded inline as SVG, so it renders with no asset upload.
      To use a different logo, set the "Logo image" setting in the theme editor.
