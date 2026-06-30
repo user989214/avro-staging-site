@@ -1,0 +1,94 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — PRIVACY POLICY  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-privacy.liquid and paste this entire file in.
+  2. Add it to a page (e.g. a "Privacy Policy" page) via the theme editor,
+     or render it from a page template.
+  3. The title, lede, "last updated" date, and every policy section
+     (heading + body) are editable. Policy sections are repeatable BLOCKS —
+     add / remove / reorder them in the theme editor.
+  No images are required for this page.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-legal-{{ section.id }} {
+    --base: #FFFFFF; --bone: #FFFFFF; --charcoal: #151515; --ink: #1C1B14;
+    --warm-gray: #6B6857; --divider: #E2E2E2;
+    font-family: "DM Sans", system-ui, sans-serif;
+    background-color: var(--base); color: var(--ink); display: block;
+  }
+  #avro-legal-{{ section.id }} * { box-sizing: border-box; }
+  #avro-legal-{{ section.id }} .legal-hero { padding: clamp(48px,7vw,96px) clamp(20px,5vw,64px) clamp(8px,2vw,24px); text-align: center; }
+  #avro-legal-{{ section.id }} .legal-hero h1 { font-weight: 800; font-size: clamp(34px,5vw,60px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin: 0 auto; max-width: 760px; }
+  #avro-legal-{{ section.id }} .legal-hero p { font-weight: 400; font-size: clamp(16px,1.4vw,19px); line-height: 1.55; color: var(--warm-gray); margin: 16px auto 0; max-width: 620px; }
+  #avro-legal-{{ section.id }} .legal-body { padding: clamp(40px,5vw,72px) clamp(20px,5vw,64px); }
+  #avro-legal-{{ section.id }} .legal-wrap { margin: 0 auto; width: 100%; max-width: 760px; }
+  #avro-legal-{{ section.id }} .legal-updated { font-size: 13px; color: var(--warm-gray); margin: 0 0 32px; }
+  #avro-legal-{{ section.id }} .legal-list { display: flex; flex-direction: column; gap: 36px; }
+  #avro-legal-{{ section.id }} .legal-item { display: flex; flex-direction: column; gap: 12px; }
+  #avro-legal-{{ section.id }} .legal-item h2 { font-weight: 800; font-size: clamp(20px,2.4vw,26px); line-height: 1.2; color: var(--ink); margin: 0; }
+  #avro-legal-{{ section.id }} .legal-item .rte,
+  #avro-legal-{{ section.id }} .legal-item .rte p { font-size: 15px; line-height: 1.65; color: var(--warm-gray); margin: 0 0 12px; }
+  #avro-legal-{{ section.id }} .legal-item .rte p:last-child { margin-bottom: 0; }
+  #avro-legal-{{ section.id }} .legal-item .rte a { color: var(--ink); text-decoration: underline; }
+{% endstyle %}
+
+<div id="avro-legal-{{ section.id }}">
+  <section class="legal-hero">
+    <h1>{{ section.settings.title | default: 'Privacy Policy' }}</h1>
+    {%- if section.settings.lede != blank -%}<p>{{ section.settings.lede }}</p>{%- endif -%}
+  </section>
+
+  <section class="legal-body">
+    <div class="legal-wrap">
+      {%- if section.settings.updated != blank -%}
+        <p class="legal-updated">Last updated: {{ section.settings.updated }}</p>
+      {%- endif -%}
+      <div class="legal-list">
+        {%- for block in section.blocks -%}
+          <div class="legal-item" {{ block.shopify_attributes }}>
+            <h2>{{ block.settings.heading }}</h2>
+            <div class="rte">{{ block.settings.body }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "AVRO — Privacy",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Page title", "default": "Privacy Policy" },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "We respect your privacy. This policy explains what information we collect, how we use it, and the choices you have." },
+    { "type": "text", "id": "updated", "label": "Last updated", "default": "June 2026" }
+  ],
+  "blocks": [
+    {
+      "type": "policy_section",
+      "name": "Policy section",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Information we collect" },
+        { "type": "richtext", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Privacy",
+      "blocks": [
+        { "type": "policy_section", "settings": { "heading": "Information we collect", "body": "<p>We collect information you provide directly, such as your name, email address, shipping address, and payment details when you place an order, create an account, or subscribe to our newsletter.</p><p>We also automatically collect certain technical information when you visit our site, including your device type, browser, and pages viewed, through cookies and similar technologies.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "How we use your information", "body": "<p>We use your information to process orders, manage subscriptions, provide customer support, send updates you have opted into, and improve our products and website experience.</p><p>We do not sell your personal information.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "Sharing your information", "body": "<p>We share information only with service providers who help us operate our business — such as payment processors, shipping carriers, and email platforms — and only to the extent necessary to provide their services.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "Your choices", "body": "<p>You can unsubscribe from marketing emails at any time using the link in any message. You may also request access to, correction of, or deletion of your personal information by contacting us.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "Contact us", "body": "<p>Questions about this policy can be sent to <a href=\"mailto:hello@avrolife.com\">hello@avrolife.com</a>.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,93 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — ACCESSIBILITY  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-accessibility.liquid and paste this entire file in.
+  2. Add it to a page (e.g. an "Accessibility" page) via the theme editor,
+     or render it from a page template.
+  3. The title, lede, "last updated" date, and every policy section
+     (heading + body) are editable. Policy sections are repeatable BLOCKS —
+     add / remove / reorder them in the theme editor.
+  No images are required for this page.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-legal-{{ section.id }} {
+    --base: #FFFFFF; --bone: #FFFFFF; --charcoal: #151515; --ink: #1C1B14;
+    --warm-gray: #6B6857; --divider: #E2E2E2;
+    font-family: "DM Sans", system-ui, sans-serif;
+    background-color: var(--base); color: var(--ink); display: block;
+  }
+  #avro-legal-{{ section.id }} * { box-sizing: border-box; }
+  #avro-legal-{{ section.id }} .legal-hero { padding: clamp(48px,7vw,96px) clamp(20px,5vw,64px) clamp(8px,2vw,24px); text-align: center; }
+  #avro-legal-{{ section.id }} .legal-hero h1 { font-weight: 800; font-size: clamp(34px,5vw,60px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin: 0 auto; max-width: 760px; }
+  #avro-legal-{{ section.id }} .legal-hero p { font-weight: 400; font-size: clamp(16px,1.4vw,19px); line-height: 1.55; color: var(--warm-gray); margin: 16px auto 0; max-width: 620px; }
+  #avro-legal-{{ section.id }} .legal-body { padding: clamp(40px,5vw,72px) clamp(20px,5vw,64px); }
+  #avro-legal-{{ section.id }} .legal-wrap { margin: 0 auto; width: 100%; max-width: 760px; }
+  #avro-legal-{{ section.id }} .legal-updated { font-size: 13px; color: var(--warm-gray); margin: 0 0 32px; }
+  #avro-legal-{{ section.id }} .legal-list { display: flex; flex-direction: column; gap: 36px; }
+  #avro-legal-{{ section.id }} .legal-item { display: flex; flex-direction: column; gap: 12px; }
+  #avro-legal-{{ section.id }} .legal-item h2 { font-weight: 800; font-size: clamp(20px,2.4vw,26px); line-height: 1.2; color: var(--ink); margin: 0; }
+  #avro-legal-{{ section.id }} .legal-item .rte,
+  #avro-legal-{{ section.id }} .legal-item .rte p { font-size: 15px; line-height: 1.65; color: var(--warm-gray); margin: 0 0 12px; }
+  #avro-legal-{{ section.id }} .legal-item .rte p:last-child { margin-bottom: 0; }
+  #avro-legal-{{ section.id }} .legal-item .rte a { color: var(--ink); text-decoration: underline; }
+{% endstyle %}
+
+<div id="avro-legal-{{ section.id }}">
+  <section class="legal-hero">
+    <h1>{{ section.settings.title | default: 'Accessibility' }}</h1>
+    {%- if section.settings.lede != blank -%}<p>{{ section.settings.lede }}</p>{%- endif -%}
+  </section>
+
+  <section class="legal-body">
+    <div class="legal-wrap">
+      {%- if section.settings.updated != blank -%}
+        <p class="legal-updated">Last updated: {{ section.settings.updated }}</p>
+      {%- endif -%}
+      <div class="legal-list">
+        {%- for block in section.blocks -%}
+          <div class="legal-item" {{ block.shopify_attributes }}>
+            <h2>{{ block.settings.heading }}</h2>
+            <div class="rte">{{ block.settings.body }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "AVRO — Accessibility",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Page title", "default": "Accessibility" },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "We are committed to making AVRO accessible to as many people as possible, regardless of ability or technology." },
+    { "type": "text", "id": "updated", "label": "Last updated", "default": "June 2026" }
+  ],
+  "blocks": [
+    {
+      "type": "policy_section",
+      "name": "Policy section",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Our commitment" },
+        { "type": "richtext", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Accessibility",
+      "blocks": [
+        { "type": "policy_section", "settings": { "heading": "Our commitment", "body": "<p>We strive to meet or exceed the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA. We continually review our site to improve the experience for users of assistive technologies.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "What we do", "body": "<p>We use semantic HTML, descriptive alt text for meaningful images, sufficient color contrast, keyboard-navigable controls, and clear focus states throughout the site.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "Ongoing improvement", "body": "<p>Accessibility is an ongoing effort. We test regularly and address issues as we find them or as they are reported to us.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "Feedback", "body": "<p>If you encounter a barrier or have a suggestion, please email <a href=\"mailto:hello@avrolife.com\">hello@avrolife.com</a> and we will do our best to address it promptly.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
