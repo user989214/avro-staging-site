@@ -4,26 +4,50 @@
   ----------------------------------------------------------------------------
   HOW TO USE
   1. Create sections/avro-terms.liquid and paste this entire file in.
-  2. Add it to a page (e.g. a "Terms of Service" page) via the theme editor,
-     or render it from a page template.
+  2. Add it to a page (e.g. a "Terms of Service" page) via the theme editor.
   3. The title, lede, "last updated" date, and every policy section
      (heading + body) are editable. Policy sections are repeatable BLOCKS —
      add / remove / reorder them in the theme editor.
-  No images are required for this page.
+  Matches the live AVRO site: rounded base-light hero card with a soft
+  radial gradient and a weight-900 animated headline, then a constrained
+  reading column. No images required.
   ============================================================================
 {%- endcomment -%}
 
 {% style %}
   #avro-legal-{{ section.id }} {
-    --base: #FFFFFF; --bone: #FFFFFF; --charcoal: #151515; --ink: #1C1B14;
-    --warm-gray: #6B6857; --divider: #E2E2E2;
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --divider: #E2E2E2;
     font-family: "DM Sans", system-ui, sans-serif;
     background-color: var(--base); color: var(--ink); display: block;
   }
   #avro-legal-{{ section.id }} * { box-sizing: border-box; }
-  #avro-legal-{{ section.id }} .legal-hero { padding: clamp(48px,7vw,96px) clamp(20px,5vw,64px) clamp(8px,2vw,24px); text-align: center; }
-  #avro-legal-{{ section.id }} .legal-hero h1 { font-weight: 800; font-size: clamp(34px,5vw,60px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin: 0 auto; max-width: 760px; }
-  #avro-legal-{{ section.id }} .legal-hero p { font-weight: 400; font-size: clamp(16px,1.4vw,19px); line-height: 1.55; color: var(--warm-gray); margin: 16px auto 0; max-width: 620px; }
+
+  /* ── Hero card (matches site FlatHero: compact + centered) ── */
+  #avro-legal-{{ section.id }} .legal-hero { width: 100%; background-color: var(--base); padding: 0; }
+  #avro-legal-{{ section.id }} .legal-hero-card { position: relative; width: calc(100% - 32px); margin: 0 auto 16px; border-radius: 20px; overflow: hidden; background-color: var(--base-light); }
+  #avro-legal-{{ section.id }} .legal-hero-card::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 80% at 80% 50%, rgba(222,218,208,0.55) 0%, rgba(222,218,208,0) 60%),
+      radial-gradient(ellipse 80% 70% at 15% 100%, rgba(222,218,208,0.35) 0%, rgba(222,218,208,0) 65%); }
+  #avro-legal-{{ section.id }} .legal-hero-inner { position: relative; padding: clamp(56px,8vw,100px) clamp(20px,5vw,64px) clamp(48px,6vw,80px); display: flex; flex-direction: column; align-items: center; text-align: center; }
+  #avro-legal-{{ section.id }} .legal-hero-inner h1 { font-weight: 900; font-size: clamp(32px,4.5vw,52px); line-height: 1; letter-spacing: -0.025em; color: var(--ink); margin: 0 0 16px; max-width: 820px; }
+  #avro-legal-{{ section.id }} .legal-hero-inner p { font-weight: 500; font-size: clamp(18px,1.7vw,21px); line-height: 1.5; color: var(--ink); max-width: 660px; margin: 0; }
+  @media (max-width: 768px) {
+    #avro-legal-{{ section.id }} .legal-hero-card { width: calc(100% - 24px); }
+    #avro-legal-{{ section.id }} .legal-hero-inner { padding: clamp(48px,10vw,72px) clamp(16px,5vw,28px) clamp(40px,8vw,60px); }
+  }
+
+  /* ── Headline rise + lede fade (matches site hero motion) ── */
+  @keyframes lg-rise-{{ section.id }} { 0% { opacity: 0; transform: translateY(24px); } 100% { opacity: 1; transform: translateY(0); } }
+  @keyframes lg-fade-{{ section.id }} { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+  #avro-legal-{{ section.id }} .lg-word { display: inline-block; opacity: 0; transform: translateY(24px); animation: lg-rise-{{ section.id }} .95s cubic-bezier(0.34,1.4,0.4,1) forwards; will-change: transform, opacity; }
+  #avro-legal-{{ section.id }} .lg-fade { opacity: 0; animation: lg-fade-{{ section.id }} .7s cubic-bezier(0.22,1,0.36,1) forwards; animation-delay: .85s; }
+  @media (prefers-reduced-motion: reduce) {
+    #avro-legal-{{ section.id }} .lg-word, #avro-legal-{{ section.id }} .lg-fade { animation: none !important; opacity: 1 !important; transform: none !important; }
+  }
+
+  /* ── Body reading column ── */
   #avro-legal-{{ section.id }} .legal-body { padding: clamp(40px,5vw,72px) clamp(20px,5vw,64px); }
   #avro-legal-{{ section.id }} .legal-wrap { margin: 0 auto; width: 100%; max-width: 760px; }
   #avro-legal-{{ section.id }} .legal-updated { font-size: 13px; color: var(--warm-gray); margin: 0 0 32px; }
@@ -38,8 +62,17 @@
 
 <div id="avro-legal-{{ section.id }}">
   <section class="legal-hero">
-    <h1>{{ section.settings.title | default: 'Terms of Service' }}</h1>
-    {%- if section.settings.lede != blank -%}<p>{{ section.settings.lede }}</p>{%- endif -%}
+    <div class="legal-hero-card">
+      <div class="legal-hero-inner">
+        <h1>
+          {%- assign legal_words = section.settings.title | default: 'Terms of Service' | split: ' ' -%}
+          {%- for w in legal_words -%}
+            <span class="lg-word" style="animation-delay: {{ forloop.index0 | times: 0.09 | plus: 0.1 }}s">{{ w }}{% unless forloop.last %}&nbsp;{% endunless %}</span>
+          {%- endfor -%}
+        </h1>
+        {%- if section.settings.lede != blank -%}<p class="lg-fade">{{ section.settings.lede }}</p>{%- endif -%}
+      </div>
+    </div>
   </section>
 
   <section class="legal-body">
