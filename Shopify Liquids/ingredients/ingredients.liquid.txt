@@ -1,0 +1,435 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — INGREDIENTS PAGE  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-ingredients.liquid and paste this entire file in.
+  2. Upload every image in this folder to your theme Assets (filenames must
+     stay the same). The Supplement Facts panels are:
+       blueberry-acai.png, blackberry-jasmine.png, pomegranate-raspberry.png,
+       red-dragon-fruit.png, fuji-apple.png, orange-tangerine.png
+  3. Add the section to a page template (templates/page.ingredients.json) or
+     render it with {% section 'avro-ingredients' %}.
+  4. Every heading, body, badge, stack, flavor panel, product card, and FAQ is
+     editable in the theme editor. Stacks, flavors, badges, products and FAQs
+     are blocks — add / remove / reorder them.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-ing-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857;
+    --divider: #E2E2E2; --avro-blue: #94C6D4; --avro-blue-deep: #5AAEBC;
+    font-family: "DM Sans", system-ui, sans-serif; background: var(--base); color: var(--ink); display: block;
+  }
+  #avro-ing-{{ section.id }} * { box-sizing: border-box; }
+  #avro-ing-{{ section.id }} h1, #avro-ing-{{ section.id }} h2, #avro-ing-{{ section.id }} h3, #avro-ing-{{ section.id }} h4 { margin: 0; }
+  #avro-ing-{{ section.id }} img { max-width: 100%; }
+  #avro-ing-{{ section.id }} .wrap { max-width: 1250px; margin: 0 auto; }
+  #avro-ing-{{ section.id }} .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; border-radius: 999px; text-decoration: none; cursor: pointer; min-height: 48px; padding: 0 28px; font-size: 16px; transition: background-color .2s ease, color .2s ease; }
+  #avro-ing-{{ section.id }} .btn-outline { background: transparent; color: var(--charcoal); border: 2px solid var(--charcoal); }
+  #avro-ing-{{ section.id }} .btn-outline:hover { background: var(--charcoal); color: var(--bone); }
+  #avro-ing-{{ section.id }} .btn-dark { background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); }
+  #avro-ing-{{ section.id }} .btn-dark:hover { background: transparent; color: var(--charcoal); }
+
+  /* Hero (card style) */
+  #avro-ing-{{ section.id }} .hero { padding: clamp(16px,4vw,24px); }
+  #avro-ing-{{ section.id }} .hero-card { position: relative; max-width: 1250px; margin: 0 auto; border-radius: 28px; overflow: hidden; min-height: clamp(340px,46vw,520px); display: flex; align-items: flex-end; }
+  #avro-ing-{{ section.id }} .hero-card img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #avro-ing-{{ section.id }} .hero-card .scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(21,21,21,0.72) 0%, rgba(21,21,21,0.25) 45%, rgba(21,21,21,0.05) 100%); }
+  #avro-ing-{{ section.id }} .hero-inner { position: relative; padding: clamp(28px,5vw,64px); color: #fff; max-width: 720px; }
+  #avro-ing-{{ section.id }} .hero-inner .eyebrow { font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--avro-blue); margin-bottom: 14px; }
+  #avro-ing-{{ section.id }} .hero-inner h1 { font-weight: 700; font-size: clamp(34px,5vw,64px); line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 16px; }
+  #avro-ing-{{ section.id }} .hero-inner p { font-weight: 400; font-size: clamp(15px,1.4vw,19px); line-height: 1.5; color: rgba(255,255,255,0.88); }
+
+  /* Free-from badges */
+  #avro-ing-{{ section.id }} .free-sec { padding: clamp(32px,5vw,56px) clamp(16px,5vw,64px); }
+  #avro-ing-{{ section.id }} .free-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; background: var(--divider); border: 1px solid var(--divider); border-radius: 20px; overflow: hidden; }
+  #avro-ing-{{ section.id }} .free-badge { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: clamp(20px,3vw,32px) clamp(12px,2vw,20px); background: var(--bone); }
+  #avro-ing-{{ section.id }} .free-badge img { width: 56px; height: 56px; object-fit: contain; opacity: 0.85; }
+  #avro-ing-{{ section.id }} .free-badge strong { font-weight: 700; font-size: clamp(14px,1.3vw,18px); color: var(--ink); line-height: 1.2; }
+  #avro-ing-{{ section.id }} .free-badge span { font-weight: 500; font-size: clamp(12px,1.05vw,15px); color: var(--warm-gray); }
+  @media (max-width: 720px) { #avro-ing-{{ section.id }} .free-grid { grid-template-columns: repeat(2,1fr); } }
+
+  /* Intro */
+  #avro-ing-{{ section.id }} .intro-sec { padding: 0 clamp(16px,5vw,64px) clamp(8px,2vw,16px); }
+  #avro-ing-{{ section.id }} .intro-sec h2 { font-weight: 700; font-size: clamp(26px,3.4vw,46px); line-height: 1.04; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 14px; max-width: 760px; }
+  #avro-ing-{{ section.id }} .intro-sec p { font-weight: 400; font-size: clamp(16px,1.4vw,20px); line-height: 1.55; color: var(--warm-gray); max-width: 720px; }
+
+  /* Stacks */
+  #avro-ing-{{ section.id }} .stacks { padding: clamp(24px,4vw,40px) clamp(16px,5vw,64px); display: flex; flex-direction: column; gap: clamp(20px,4vw,40px); }
+  #avro-ing-{{ section.id }} .stack { border-radius: 28px; padding: clamp(28px,5vw,64px); background: var(--base-light); }
+  #avro-ing-{{ section.id }} .stack-head { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 28px; max-width: 820px; }
+  #avro-ing-{{ section.id }} .stack-icon { width: 64px; height: 64px; border-radius: 16px; background: var(--bone); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  #avro-ing-{{ section.id }} .stack-icon img { width: 40px; height: 40px; object-fit: contain; }
+  #avro-ing-{{ section.id }} .stack-head h2 { font-weight: 700; font-size: clamp(26px,4vw,46px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 6px; }
+  #avro-ing-{{ section.id }} .stack-head p { font-weight: 400; font-size: clamp(15px,1.4vw,19px); line-height: 1.5; color: var(--warm-gray); }
+  #avro-ing-{{ section.id }} .flavor-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: clamp(14px,1.6vw,20px); }
+  #avro-ing-{{ section.id }} .flavor-card { background: var(--bone); border: 1px solid rgba(30,29,24,0.12); border-radius: 20px; padding: clamp(22px,3vw,32px); display: flex; flex-direction: column; }
+  #avro-ing-{{ section.id }} .flavor-card h4 { font-weight: 700; font-size: clamp(20px,2vw,26px); line-height: 1; color: var(--ink); margin-bottom: 20px; }
+  #avro-ing-{{ section.id }} .flavor-panel { border-radius: 12px; overflow: hidden; border: 1px solid rgba(30,29,24,0.1); background: var(--base); }
+  #avro-ing-{{ section.id }} .flavor-panel img { width: 100%; height: auto; display: block; }
+  #avro-ing-{{ section.id }} .flavor-card .other { margin-top: 16px; font-size: clamp(12px,1.1vw,14px); line-height: 1.6; color: var(--warm-gray); }
+  #avro-ing-{{ section.id }} .flavor-card .other b { font-weight: 700; color: var(--ink); }
+  #avro-ing-{{ section.id }} .stack-foot { margin-top: 20px; font-size: 13px; line-height: 1.5; color: var(--warm-gray); }
+  @media (max-width: 720px) { #avro-ing-{{ section.id }} .flavor-grid { grid-template-columns: 1fr; } }
+
+  /* Product cards */
+  #avro-ing-{{ section.id }} .prod-sec { padding: clamp(32px,6vw,72px) clamp(16px,5vw,64px); }
+  #avro-ing-{{ section.id }} .prod-sec > .wrap > h2 { font-weight: 700; font-size: clamp(24px,3.2vw,46px); line-height: 1; color: var(--ink); margin-bottom: 24px; }
+  #avro-ing-{{ section.id }} .prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+  #avro-ing-{{ section.id }} .prod-card { display: flex; flex-direction: column; border-radius: 20px; overflow: hidden; background: var(--base-light); padding: clamp(14px,1.8vw,20px); }
+  #avro-ing-{{ section.id }} .prod-thumb { height: clamp(200px,24vw,280px); border-radius: 16px; overflow: hidden; background: var(--bone); }
+  #avro-ing-{{ section.id }} .prod-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  #avro-ing-{{ section.id }} .prod-body { padding: 16px 4px 4px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  #avro-ing-{{ section.id }} .prod-card h3 { font-weight: 900; font-size: clamp(22px,2vw,30px); line-height: 1.05; color: var(--ink); letter-spacing: -0.02em; }
+  #avro-ing-{{ section.id }} .prod-card p { font-weight: 400; font-size: 14px; line-height: 1.45; color: var(--warm-gray); margin: 0; flex: 1; }
+  @media (max-width: 768px) { #avro-ing-{{ section.id }} .prod-grid { grid-template-columns: 1fr; } }
+
+  /* FAQ */
+  #avro-ing-{{ section.id }} .faq-sec { padding: clamp(32px,6vw,72px) clamp(16px,5vw,64px); }
+  #avro-ing-{{ section.id }} .faq-sec > .wrap > h2 { font-weight: 700; font-size: clamp(24px,3.2vw,46px); line-height: 1; color: var(--ink); margin-bottom: 24px; }
+  #avro-ing-{{ section.id }} .faq-item { border-top: 1px solid var(--divider); }
+  #avro-ing-{{ section.id }} .faq-item:last-child { border-bottom: 1px solid var(--divider); }
+  #avro-ing-{{ section.id }} .faq-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 4px; background: none; border: none; cursor: pointer; text-align: left; font-weight: 700; font-size: clamp(16px,1.5vw,20px); color: var(--ink); }
+  #avro-ing-{{ section.id }} .faq-chev { transition: transform .25s ease; flex-shrink: 0; color: var(--ink); }
+  #avro-ing-{{ section.id }} .faq-item.is-open .faq-chev { transform: rotate(180deg); }
+  #avro-ing-{{ section.id }} .faq-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+  #avro-ing-{{ section.id }} .faq-item.is-open .faq-body { max-height: 320px; }
+  #avro-ing-{{ section.id }} .faq-body p { padding: 0 4px 24px; font-weight: 400; font-size: clamp(15px,1.2vw,17px); line-height: 1.6; color: var(--warm-gray); margin: 0; }
+
+  /* Final CTA */
+  #avro-ing-{{ section.id }} .cta-sec { background: var(--avro-blue); padding: clamp(56px,8vw,104px) clamp(16px,4vw,64px); }
+  #avro-ing-{{ section.id }} .cta-wrap { max-width: 1250px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; }
+  #avro-ing-{{ section.id }} .cta-left { flex: 1 1 320px; max-width: 560px; }
+  #avro-ing-{{ section.id }} .cta-left h2 { font-weight: 700; font-size: clamp(26px,4vw,56px); line-height: 1.02; letter-spacing: -0.02em; color: var(--charcoal); margin-bottom: 10px; }
+  #avro-ing-{{ section.id }} .cta-left p { font-weight: 500; font-size: clamp(15px,1.3vw,19px); line-height: 1.5; color: rgba(21,21,21,0.7); }
+  #avro-ing-{{ section.id }} .cta-btns { flex: 1 1 280px; display: flex; flex-direction: column; gap: 8px; max-width: 400px; }
+  #avro-ing-{{ section.id }} .cta-btns .btn { width: 100%; }
+
+  /* Banner */
+  #avro-ing-{{ section.id }} .banner-box { position: relative; width: 100%; overflow: hidden; }
+  #avro-ing-{{ section.id }} .banner-box img { width: 100%; height: auto; display: block; }
+  #avro-ing-{{ section.id }} .banner-btn { position: absolute; left: clamp(16px,4vw,64px); bottom: clamp(16px,4vw,56px); min-width: 220px; }
+  @media (max-width: 640px) {
+    #avro-ing-{{ section.id }} .banner-box { display: flex; flex-direction: column; padding-bottom: 24px; }
+    #avro-ing-{{ section.id }} .banner-btn { position: static; width: calc(100% - 32px); margin: 20px auto 0; min-width: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { #avro-ing-{{ section.id }} * { animation: none !important; } }
+{% endstyle %}
+
+{%- capture chevron -%}<svg class="faq-chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>{%- endcapture -%}
+
+<div id="avro-ing-{{ section.id }}">
+
+  {%- comment -%} ===== HERO ===== {%- endcomment -%}
+  <section class="hero">
+    <div class="hero-card">
+      {%- if section.settings.hero_image != blank -%}
+        <img class="bg" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="">
+      {%- else -%}
+        <img class="bg" src="{{ 'ingredients-hero.jpg' | asset_url }}" alt="">
+      {%- endif -%}
+      <div class="scrim"></div>
+      <div class="hero-inner">
+        {%- if section.settings.hero_eyebrow != blank -%}<p class="eyebrow">{{ section.settings.hero_eyebrow }}</p>{%- endif -%}
+        <h1>{{ section.settings.hero_heading | default: 'What goes into AVRO.' }}</h1>
+        <p>{{ section.settings.hero_body | default: 'Every formula is built on naturally fermented PharmaGABA®, with clinically studied ingredients and full label transparency. No proprietary blends, no hidden doses.' }}</p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== FREE-FROM BADGES ===== {%- endcomment -%}
+  {%- assign badges = section.blocks | where: "type", "free_badge" -%}
+  {%- if badges.size > 0 -%}
+  <section class="free-sec">
+    <div class="wrap">
+      <div class="free-grid">
+        {%- for b in badges -%}
+        <div class="free-badge" {{ b.shopify_attributes }}>
+          {%- if b.settings.icon != blank -%}
+            <img src="{{ b.settings.icon | image_url: width: 140 }}" alt="">
+          {%- else -%}
+            <img src="{{ b.settings.icon_fallback | default: 'free-sugar.png' | asset_url }}" alt="">
+          {%- endif -%}
+          <strong>{{ b.settings.label }}</strong>
+          <span>{{ b.settings.sub }}</span>
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== INTRO ===== {%- endcomment -%}
+  {%- if section.settings.intro_heading != blank or section.settings.intro_body != blank -%}
+  <section class="intro-sec">
+    <div class="wrap">
+      {%- if section.settings.intro_heading != blank -%}<h2>{{ section.settings.intro_heading }}</h2>{%- endif -%}
+      {%- if section.settings.intro_body != blank -%}<p>{{ section.settings.intro_body }}</p>{%- endif -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== STACKS (with nested flavor panels) ===== {%- endcomment -%}
+  {%- assign stacks = section.blocks | where: "type", "stack" -%}
+  {%- if stacks.size > 0 -%}
+  <section class="stacks">
+    {%- for s in stacks -%}
+    <div class="stack" id="{{ s.settings.anchor | default: s.id }}" {{ s.shopify_attributes }}>
+      <div class="stack-head">
+        <div class="stack-icon">
+          {%- if s.settings.icon != blank -%}
+            <img src="{{ s.settings.icon | image_url: width: 120 }}" alt="">
+          {%- else -%}
+            <img src="{{ s.settings.icon_fallback | default: 'free-vegan.png' | asset_url }}" alt="">
+          {%- endif -%}
+        </div>
+        <div>
+          <h2>{{ s.settings.name }}</h2>
+          <p>{{ s.settings.claim }}</p>
+        </div>
+      </div>
+      <div class="flavor-grid">
+        {%- comment -%} flavor 1 {%- endcomment -%}
+        {%- if s.settings.flavor1_name != blank -%}
+        <article class="flavor-card">
+          <h4>{{ s.settings.flavor1_name }}</h4>
+          <div class="flavor-panel">
+            {%- if s.settings.flavor1_panel != blank -%}
+              <img src="{{ s.settings.flavor1_panel | image_url: width: 800 }}" alt="{{ s.settings.flavor1_name | escape }} Supplement Facts panel">
+            {%- else -%}
+              <img src="{{ s.settings.flavor1_panel_fallback | default: 'blueberry-acai.png' | asset_url }}" alt="{{ s.settings.flavor1_name | escape }} Supplement Facts panel">
+            {%- endif -%}
+          </div>
+          {%- if s.settings.flavor1_other != blank -%}<p class="other"><b>Other ingredients:</b> {{ s.settings.flavor1_other }}</p>{%- endif -%}
+        </article>
+        {%- endif -%}
+        {%- comment -%} flavor 2 {%- endcomment -%}
+        {%- if s.settings.flavor2_name != blank -%}
+        <article class="flavor-card">
+          <h4>{{ s.settings.flavor2_name }}</h4>
+          <div class="flavor-panel">
+            {%- if s.settings.flavor2_panel != blank -%}
+              <img src="{{ s.settings.flavor2_panel | image_url: width: 800 }}" alt="{{ s.settings.flavor2_name | escape }} Supplement Facts panel">
+            {%- else -%}
+              <img src="{{ s.settings.flavor2_panel_fallback | default: 'blackberry-jasmine.png' | asset_url }}" alt="{{ s.settings.flavor2_name | escape }} Supplement Facts panel">
+            {%- endif -%}
+          </div>
+          {%- if s.settings.flavor2_other != blank -%}<p class="other"><b>Other ingredients:</b> {{ s.settings.flavor2_other }}</p>{%- endif -%}
+        </article>
+        {%- endif -%}
+      </div>
+      {%- if s.settings.footnote != blank -%}<p class="stack-foot">{{ s.settings.footnote }}</p>{%- endif -%}
+    </div>
+    {%- endfor -%}
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== PRODUCT CARDS ===== {%- endcomment -%}
+  {%- assign products = section.blocks | where: "type", "product" -%}
+  {%- if products.size > 0 -%}
+  <section class="prod-sec">
+    <div class="wrap">
+      <h2>{{ section.settings.prod_heading | default: 'Shop the formulas.' }}</h2>
+      <div class="prod-grid">
+        {%- for b in products -%}
+        <div class="prod-card" {{ b.shopify_attributes }}>
+          <div class="prod-thumb">
+            {%- if b.settings.image != blank -%}
+              <img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">
+            {%- else -%}
+              <img src="{{ b.settings.image_fallback | default: 'calm-blueberry-acai.png' | asset_url }}" alt="{{ b.settings.name | escape }}">
+            {%- endif -%}
+          </div>
+          <div class="prod-body">
+            <h3>{{ b.settings.name }}</h3>
+            <p>{{ b.settings.tagline }}</p>
+            <a href="{{ b.settings.link | default: '/collections/all' }}" class="btn btn-outline">{{ b.settings.button_label | default: 'Shop' }}</a>
+          </div>
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== FAQ ===== {%- endcomment -%}
+  {%- assign faqs = section.blocks | where: "type", "faq" -%}
+  {%- if faqs.size > 0 -%}
+  <section class="faq-sec">
+    <div class="wrap">
+      <h2>{{ section.settings.faq_heading | default: 'Ingredient questions.' }}</h2>
+      <div>
+        {%- for b in faqs -%}
+        <div class="faq-item" data-faq {{ b.shopify_attributes }}>
+          <button class="faq-btn" type="button" aria-expanded="false">
+            <span>{{ b.settings.question }}</span>
+            {{ chevron }}
+          </button>
+          <div class="faq-body"><p>{{ b.settings.answer }}</p></div>
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ===== FINAL CTA ===== {%- endcomment -%}
+  <section class="cta-sec">
+    <div class="cta-wrap">
+      <div class="cta-left">
+        <h2>{{ section.settings.cta_heading | default: 'Clean label. Clear conscience.' }}</h2>
+        <p>{{ section.settings.cta_copy | default: 'Every ingredient disclosed. Every dose transparent. Choose your formula.' }}</p>
+      </div>
+      <div class="cta-btns">
+        <a href="{{ section.settings.cta_btn1_link | default: '/collections/calm' }}" class="btn btn-dark">{{ section.settings.cta_btn1_label | default: 'Shop Calm' }}</a>
+        <a href="{{ section.settings.cta_btn2_link | default: '/collections/focus' }}" class="btn btn-dark">{{ section.settings.cta_btn2_label | default: 'Shop Focus' }}</a>
+        <a href="{{ section.settings.cta_btn3_link | default: '/collections/energy' }}" class="btn btn-dark">{{ section.settings.cta_btn3_label | default: 'Shop Energy' }}</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== BANNER ===== {%- endcomment -%}
+  <section>
+    <div class="banner-box">
+      {%- if section.settings.banner_image != blank -%}
+        <img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">
+      {%- else -%}
+        <img src="{{ 'ingredients-banner.png' | asset_url }}" alt="">
+      {%- endif -%}
+      <a href="{{ section.settings.banner_link | default: '/collections/all' }}" class="btn btn-dark banner-btn">{{ section.settings.banner_label | default: 'Shop AVRO' }}</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById("avro-ing-{{ section.id }}");
+    if (!root) return;
+    root.querySelectorAll("[data-faq]").forEach(function (item) {
+      var btn = item.querySelector(".faq-btn");
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var open = item.classList.toggle("is-open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AVRO — Ingredients",
+  "tag": "section",
+  "class": "avro-ingredients-section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Full Transparency" },
+    { "type": "text", "id": "hero_heading", "label": "Heading", "default": "What goes into AVRO." },
+    { "type": "textarea", "id": "hero_body", "label": "Body" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+
+    { "type": "header", "content": "Intro" },
+    { "type": "text", "id": "intro_heading", "label": "Heading", "default": "No proprietary blends. No hidden doses." },
+    { "type": "textarea", "id": "intro_body", "label": "Body" },
+
+    { "type": "header", "content": "Product cards" },
+    { "type": "text", "id": "prod_heading", "label": "Heading", "default": "Shop the formulas." },
+
+    { "type": "header", "content": "FAQ" },
+    { "type": "text", "id": "faq_heading", "label": "Heading", "default": "Ingredient questions." },
+
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Clean label. Clear conscience." },
+    { "type": "richtext", "id": "cta_copy", "label": "Copy" },
+    { "type": "text", "id": "cta_btn1_label", "label": "Button 1 label", "default": "Shop Calm" },
+    { "type": "url", "id": "cta_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "cta_btn2_label", "label": "Button 2 label", "default": "Shop Focus" },
+    { "type": "url", "id": "cta_btn2_link", "label": "Button 2 link" },
+    { "type": "text", "id": "cta_btn3_label", "label": "Button 3 label", "default": "Shop Energy" },
+    { "type": "url", "id": "cta_btn3_link", "label": "Button 3 link" },
+
+    { "type": "header", "content": "Bottom banner" },
+    { "type": "image_picker", "id": "banner_image", "label": "Banner image" },
+    { "type": "text", "id": "banner_label", "label": "Button label", "default": "Shop AVRO" },
+    { "type": "url", "id": "banner_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "free_badge",
+      "name": "Free-from badge",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "free-sugar.png" },
+        { "type": "text", "id": "label", "label": "Label", "default": "No Added Sugar" },
+        { "type": "text", "id": "sub", "label": "Sub-label", "default": "Stevia sweetened" }
+      ]
+    },
+    {
+      "type": "stack",
+      "name": "Ingredient stack",
+      "settings": [
+        { "type": "text", "id": "anchor", "label": "Anchor id (optional)", "info": "Used for in-page links, e.g. calm / focus / energy." },
+        { "type": "image_picker", "id": "icon", "label": "Stack icon" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "free-vegan.png" },
+        { "type": "text", "id": "name", "label": "Stack name", "default": "AVRO Calm Stack" },
+        { "type": "textarea", "id": "claim", "label": "Claim line" },
+        { "type": "text", "id": "footnote", "label": "Footnote", "default": "Serving size 1 packet (5 g) · 10 servings per container." },
+        { "type": "header", "content": "Flavor 1" },
+        { "type": "text", "id": "flavor1_name", "label": "Flavor 1 name", "default": "Blueberry Acai" },
+        { "type": "image_picker", "id": "flavor1_panel", "label": "Flavor 1 Supplement Facts panel" },
+        { "type": "text", "id": "flavor1_panel_fallback", "label": "Flavor 1 panel asset filename", "default": "blueberry-acai.png" },
+        { "type": "textarea", "id": "flavor1_other", "label": "Flavor 1 other ingredients" },
+        { "type": "header", "content": "Flavor 2" },
+        { "type": "text", "id": "flavor2_name", "label": "Flavor 2 name", "default": "Blackberry Jasmine" },
+        { "type": "image_picker", "id": "flavor2_panel", "label": "Flavor 2 Supplement Facts panel" },
+        { "type": "text", "id": "flavor2_panel_fallback", "label": "Flavor 2 panel asset filename", "default": "blackberry-jasmine.png" },
+        { "type": "textarea", "id": "flavor2_other", "label": "Flavor 2 other ingredients" }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "calm-blueberry-acai.png" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Calm" },
+        { "type": "textarea", "id": "tagline", "label": "Tagline" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
+        { "type": "url", "id": "link", "label": "Button link" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Are AVRO ingredients third-party tested?" },
+        { "type": "textarea", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Ingredients",
+      "blocks": [
+        { "type": "free_badge", "settings": { "icon_fallback": "free-sugar.png", "label": "No Added Sugar", "sub": "Stevia sweetened" } },
+        { "type": "free_badge", "settings": { "icon_fallback": "free-gmo.png", "label": "Non-GMO", "sub": "Always" } },
+        { "type": "free_badge", "settings": { "icon_fallback": "free-vegan.png", "label": "Vegan", "sub": "Plant-based" } },
+        { "type": "free_badge", "settings": { "icon_fallback": "clinically-tested-ingredients.png", "label": "Clinically Studied", "sub": "Key ingredients" } },
+        { "type": "stack", "settings": { "anchor": "calm", "icon_fallback": "free-vegan.png", "name": "AVRO Calm Stack", "claim": "This stack supports stress reduction and a calm, clear state.*", "footnote": "Serving size 1 packet (5 g) · 10 servings per container. Powered by Naturally Fermented GABA — With Magnesium.", "flavor1_name": "Blueberry Acai", "flavor1_panel_fallback": "blueberry-acai.png", "flavor1_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica.", "flavor2_name": "Blackberry Jasmine", "flavor2_panel_fallback": "blackberry-jasmine.png", "flavor2_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica." } },
+        { "type": "stack", "settings": { "anchor": "focus", "icon_fallback": "free-vegan.png", "name": "AVRO Focus Stack", "claim": "This stack supports focus and productivity without caffeine.*", "footnote": "Serving size 1 packet (5 g) · 10 servings per container. Powered by Naturally Fermented GABA — Without Caffeine.", "flavor1_name": "Pomegranate Raspberry", "flavor1_panel_fallback": "pomegranate-raspberry.png", "flavor1_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Silica.", "flavor2_name": "Red Dragon Fruit", "flavor2_panel_fallback": "red-dragon-fruit.png", "flavor2_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Silica." } },
+        { "type": "stack", "settings": { "anchor": "energy", "icon_fallback": "free-vegan.png", "name": "AVRO Energy Stack", "claim": "This stack supports sustained energy and mental clarity.*", "footnote": "Serving size 1 packet (5 g) · 10 servings per container. Powered by Naturally Fermented GABA — With Caffeine.", "flavor1_name": "Fuji Apple", "flavor1_panel_fallback": "fuji-apple.png", "flavor1_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Beta Carotene Color, Stevia Leaf Extract, Vegetable Juice Color, Spirulina Color, Silica.", "flavor2_name": "Orange Tangerine", "flavor2_panel_fallback": "orange-tangerine.png", "flavor2_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Beta Carotene Color, Stevia Leaf Extract, Natural Flavor, Silica." } },
+        { "type": "product", "settings": { "image_fallback": "calm-blueberry-acai.png", "name": "Calm", "tagline": "Naturally fermented GABA with magnesium.", "button_label": "Shop Calm", "link": "/collections/calm" } },
+        { "type": "product", "settings": { "image_fallback": "focus-pomegranate-raspberry.png", "name": "Focus", "tagline": "Caffeine-free clarity and focus support.", "button_label": "Shop Focus", "link": "/collections/focus" } },
+        { "type": "product", "settings": { "image_fallback": "energy-fuji-apple.png", "name": "Energy", "tagline": "Natural caffeine on a calm-first base.", "button_label": "Shop Energy", "link": "/collections/energy" } },
+        { "type": "faq", "settings": { "question": "Are AVRO ingredients third-party tested?", "answer": "Yes. Every batch is produced in a GMP-certified facility and tested for purity and potency." } },
+        { "type": "faq", "settings": { "question": "What is naturally fermented PharmaGABA®?", "answer": "PharmaGABA® is a form of GABA produced through a natural fermentation process using Lactobacillus bacteria, rather than synthetic production." } },
+        { "type": "faq", "settings": { "question": "Do you use proprietary blends?", "answer": "Never. Every ingredient and its exact dose is listed on the Supplement Facts panel so you know precisely what you're getting." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
