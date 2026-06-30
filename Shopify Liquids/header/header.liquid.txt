@@ -12,8 +12,12 @@
   4. Editable in the theme editor:
        - Nav link labels + URLs (Shop / Subscribe / Science / FAQ)
        - Dropdown trigger label + the two column headings
-       - Dropdown links (Discover + Use-case links are add/remove BLOCKS)
+       - Dropdown links: fixed, per-item label + URL settings (pre-filled with
+         the default AVRO nav, so they always show even before you touch them).
+         Clear a label to hide that link.
        - The two dropdown feature cards (heading / body / button / link / colors)
+       - Color mode: "Dark-mode paths" makes the nav switch to the deep-black +
+         gold Zero-Proof palette on matching pages (default: the Social page).
      The announcement bar lives in a SEPARATE section (handled on its own).
   ============================================================================
 {%- endcomment -%}
@@ -28,37 +32,37 @@
   #avro-header-{{ section.id }} a { text-decoration: none; }
 
   /* Nav bar */
-  #avro-header-{{ section.id }} .nav { position: sticky; top: 0; z-index: 50; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 16px; background: var(--base); transition: box-shadow .2s ease; }
+  #avro-header-{{ section.id }} .nav { position: sticky; top: 0; z-index: 50; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 16px; background: var(--nav-bg); transition: box-shadow .2s ease, background-color .2s ease; }
   #avro-header-{{ section.id }} .nav.scrolled { box-shadow: 0 1px 16px rgba(21,21,21,0.06); }
   #avro-header-{{ section.id }} .nav-left, #avro-header-{{ section.id }} .nav-right { display: none; align-items: center; gap: 32px; }
-  #avro-header-{{ section.id }} .nav-link { font-weight: 900; font-size: 20px; line-height: 1.1; letter-spacing: -0.005em; color: var(--ink); transition: opacity .2s ease; }
+  #avro-header-{{ section.id }} .nav-link { font-weight: 900; font-size: 20px; line-height: 1.1; letter-spacing: -0.005em; color: var(--nav-text); transition: opacity .2s ease; }
   #avro-header-{{ section.id }} .nav-link:hover { opacity: 0.7; }
-  #avro-header-{{ section.id }} .nav-logo { display: flex; align-items: center; justify-content: center; justify-self: center; width: clamp(110px,12vw,160px); color: var(--ink); }
+  #avro-header-{{ section.id }} .nav-logo { display: flex; align-items: center; justify-content: center; justify-self: center; width: clamp(110px,12vw,160px); color: var(--nav-text); }
   #avro-header-{{ section.id }} .nav-logo svg, #avro-header-{{ section.id }} .nav-logo img { width: 100%; height: auto; display: block; }
-  #avro-header-{{ section.id }} .icon-btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 999px; background: transparent; border: none; color: var(--ink); cursor: pointer; }
-  #avro-header-{{ section.id }} .cart-btn { display: none; align-items: center; gap: 8px; padding: 8px 16px 8px 14px; border-radius: 999px; border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; transition: background-color .2s ease, color .2s ease; }
-  #avro-header-{{ section.id }} .cart-btn:hover { background: var(--ink); color: var(--base); }
+  #avro-header-{{ section.id }} .icon-btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 999px; background: transparent; border: none; color: var(--nav-text); cursor: pointer; }
+  #avro-header-{{ section.id }} .cart-btn { display: none; align-items: center; gap: 8px; padding: 8px 16px 8px 14px; border-radius: 999px; border: 2px solid var(--cart-border); background: transparent; color: var(--cart-text); cursor: pointer; transition: background-color .2s ease, color .2s ease; }
+  #avro-header-{{ section.id }} .cart-btn:hover { background: var(--cart-text); color: var(--cart-fill-text); }
   #avro-header-{{ section.id }} .cart-btn .lbl { font-weight: 900; font-size: 18px; line-height: 1.1; letter-spacing: -0.005em; }
-  #avro-header-{{ section.id }} .cart-count { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 999px; background: var(--ink); color: var(--bone); font-weight: 900; font-size: 12px; }
+  #avro-header-{{ section.id }} .cart-count { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 999px; background: var(--cart-count-bg); color: var(--cart-count-text); font-weight: 900; font-size: 12px; }
 
   /* Dropdown trigger */
   #avro-header-{{ section.id }} .nav-dd-wrap { position: static; }
-  #avro-header-{{ section.id }} .nav-dd-trigger { position: relative; font-family: inherit; font-weight: 900; font-size: 20px; line-height: 1.1; color: var(--ink); background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+  #avro-header-{{ section.id }} .nav-dd-trigger { position: relative; font-family: inherit; font-weight: 900; font-size: 20px; line-height: 1.1; color: var(--nav-text); background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; }
   #avro-header-{{ section.id }} .nav-dd-trigger svg { transition: transform .3s ease; }
   #avro-header-{{ section.id }} .nav-dd-wrap.open .nav-dd-trigger svg { transform: rotate(180deg); }
 
   /* Full-width dropdown panel (matches live site) */
-  #avro-header-{{ section.id }} .nav-dd { position: absolute; left: 0; right: 0; top: 100%; z-index: 49; background: var(--base); box-shadow: 0 24px 60px rgba(21,21,21,0.10); opacity: 0; transform: translateY(-12px); clip-path: inset(0 0 100% 0); pointer-events: none; transition: opacity .2s ease, transform .25s ease, clip-path .25s ease; }
+  #avro-header-{{ section.id }} .nav-dd { position: absolute; left: 0; right: 0; top: 100%; z-index: 49; background: var(--nav-bg); box-shadow: 0 24px 60px rgba(21,21,21,0.10); opacity: 0; transform: translateY(-12px); clip-path: inset(0 0 100% 0); pointer-events: none; transition: opacity .2s ease, transform .25s ease, clip-path .25s ease; }
   #avro-header-{{ section.id }} .nav-dd-wrap.open .nav-dd { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); pointer-events: auto; transition: opacity .3s ease, transform .4s cubic-bezier(0.22,1,0.36,1), clip-path .4s cubic-bezier(0.22,1,0.36,1); }
   #avro-header-{{ section.id }} .dd-inner { padding: 24px 56px; }
   #avro-header-{{ section.id }} .dd-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 40px; max-width: 1500px; margin: 0 auto; }
   #avro-header-{{ section.id }} .dd-links { display: grid; grid-template-columns: 1fr 1.3fr; }
   #avro-header-{{ section.id }} .dd-col { padding-right: 24px; }
-  #avro-header-{{ section.id }} .dd-col + .dd-col { padding-right: 0; padding-left: 24px; border-left: 1px solid var(--ink); }
-  #avro-header-{{ section.id }} .dd-col-heading { font-size: 12px; font-weight: 700; color: var(--warm-gray); padding-bottom: 12px; margin: 0; }
+  #avro-header-{{ section.id }} .dd-col + .dd-col { padding-right: 0; padding-left: 24px; border-left: 1px solid var(--nav-text); }
+  #avro-header-{{ section.id }} .dd-col-heading { font-size: 12px; font-weight: 700; color: var(--nav-muted); padding-bottom: 12px; margin: 0; }
   #avro-header-{{ section.id }} .dd-link-list { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
-  #avro-header-{{ section.id }} .dd-link { display: inline-block; padding: 6px 16px; font-weight: 900; font-size: 26px; line-height: 1.15; border-radius: 999px; color: var(--ink); transition: background-color .15s ease; }
-  #avro-header-{{ section.id }} .dd-link:hover { background: var(--avro-blue); }
+  #avro-header-{{ section.id }} .dd-link { display: inline-block; padding: 6px 16px; font-weight: 900; font-size: 26px; line-height: 1.15; border-radius: 999px; color: var(--nav-text); transition: background-color .15s ease; }
+  #avro-header-{{ section.id }} .dd-link:hover { background: var(--nav-hover); }
   #avro-header-{{ section.id }} .dd-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   #avro-header-{{ section.id }} .dd-card { display: flex; flex-direction: column; justify-content: space-between; border-radius: 24px; padding: 28px; min-height: 230px; }
   #avro-header-{{ section.id }} .dd-card h3 { font-weight: 900; font-size: 30px; line-height: 1.05; margin: 0; }
@@ -67,11 +71,11 @@
 
   /* Mobile menu */
   #avro-header-{{ section.id }} .mobile-toggle { display: flex; }
-  #avro-header-{{ section.id }} .mobile-menu { position: fixed; inset: 0; background: var(--base); z-index: 60; overflow-y: auto; padding: 88px 20px 40px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity .4s ease, transform .4s ease; }
+  #avro-header-{{ section.id }} .mobile-menu { position: fixed; inset: 0; background: var(--nav-bg); z-index: 60; overflow-y: auto; padding: 88px 20px 40px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity .4s ease, transform .4s ease; }
   #avro-header-{{ section.id }} .mobile-menu.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
   #avro-header-{{ section.id }} .mobile-close { position: absolute; top: 22px; right: 20px; }
-  #avro-header-{{ section.id }} .mobile-link { display: block; padding: 6px 16px; font-weight: 900; font-size: 30px; line-height: 1.1; color: var(--ink); }
-  #avro-header-{{ section.id }} .mobile-heading { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--warm-gray); padding: 16px 4px 6px; margin: 0; }
+  #avro-header-{{ section.id }} .mobile-link { display: block; padding: 6px 16px; font-weight: 900; font-size: 30px; line-height: 1.1; color: var(--nav-text); }
+  #avro-header-{{ section.id }} .mobile-heading { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nav-muted); padding: 16px 4px 6px; margin: 0; }
 
   @media (min-width: 768px) {
     #avro-header-{{ section.id }} .nav { grid-template-columns: 1fr auto 1fr; padding: 20px 56px; }
@@ -86,15 +90,33 @@
   }
 {% endstyle %}
 
-{%- assign disc_links = section.blocks | where: "type", "discover_link" -%}
-{%- assign use_links = section.blocks | where: "type", "usecase_link" -%}
+{%- comment -%}
+  Color mode: the nav switches to the dark "Zero Proof / Social" palette
+  (deep-black + gold) on any page whose path matches one of the entries in the
+  "Dark-mode paths" setting. This mirrors the live site, where the Social page
+  uses the dark theme. Done server-side with Liquid (no JS / no context needed).
+{%- endcomment -%}
+{%- assign is_dark = false -%}
+{%- assign dark_paths = section.settings.dark_paths | default: '/pages/social' | split: ',' -%}
+{%- for p in dark_paths -%}
+  {%- assign pp = p | strip -%}
+  {%- if pp != blank and request.path contains pp -%}{%- assign is_dark = true -%}{%- endif -%}
+{%- endfor -%}
+{%- if is_dark -%}
+  {%- capture palette -%}--nav-bg:#0D0D0D;--nav-text:#CAA84B;--nav-muted:rgba(202,168,75,0.72);--nav-hover:#1A1A17;--cart-border:#CAA84B;--cart-text:#CAA84B;--cart-fill-text:#0D0D0D;--cart-count-bg:#CAA84B;--cart-count-text:#0D0D0D;{%- endcapture -%}
+{%- else -%}
+  {%- capture palette -%}--nav-bg:#FFFFFF;--nav-text:#1C1B14;--nav-muted:#6B6857;--nav-hover:#94C6D4;--cart-border:#1C1B14;--cart-text:#1C1B14;--cart-fill-text:#F5F0E8;--cart-count-bg:#1C1B14;--cart-count-text:#F5F0E8;{%- endcapture -%}
+{%- endif -%}
+
+{%- comment -%} Dropdown links are now fixed, editable settings (not blocks) so they
+  always render with defaults — even inside a header section group. {%- endcomment -%}
 
 {%- comment -%} Inlined logo SVG so it always renders without uploading an asset {%- endcomment -%}
 {%- capture avro_logo_svg -%}
 <svg viewBox="492 412 3165 1023" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AVRO"><path fill="currentColor" d="M 3190.370117 412.410034 C 3392.409912 408.545044 3559.409912 569.02002 3563.610107 771.051025 C 3567.800049 973.08197 3407.600098 1140.349976 3205.580078 1144.869995 C 3003.090088 1149.400024 2835.350098 988.752014 2831.149902 786.255981 C 2826.939941 583.759033 2987.870117 416.283936 3190.370117 412.410034 Z M 3208.669922 965.04303 C 3370.76001 949.937988 3406.97998 719.093994 3291.909912 625.468018 C 3264.879883 603.474976 3223.909912 589.182983 3188.800049 593.396973 C 3025.590088 609.61499 2986.429932 834.513977 3104.449951 930.10199 C 3135.649902 955.372986 3168.72998 966.026978 3208.669922 965.04303 Z"/><path fill="currentColor" d="M 2130.159912 422.493042 L 2345.870117 422.447021 C 2411.77002 422.446045 2469.689941 418.804932 2535.149902 432.021973 C 2693.790039 464.052979 2749.419922 606.630981 2716.949951 752.843994 C 2702.709961 816.995972 2669.27002 865.028992 2612.699951 900.609985 C 2656.909912 977.869019 2703.389893 1055.640015 2748.51001 1132.51001 L 2667.5 1132.51001 L 2522.47998 1132.51001 L 2433.48999 941.166992 L 2328.639893 941.166992 L 2328.639893 1132.51001 L 2129.669922 1132.51001 L 2129.669922 634.091064 L 2129.639893 489.270996 C 2129.639893 476.831055 2128.73999 432.917969 2130.159912 422.493042 Z M 2328.639893 779 L 2401.659912 779.071045 C 2441.389893 779.098022 2479.5 783.820068 2510.840088 754.35498 C 2522.25 741.151001 2528.709961 730.025024 2532.439941 712.755981 C 2543.840088 660.015015 2528.929932 599.31897 2468.98999 587.602051 C 2447.939941 583.486084 2427.959961 584.755005 2406.669922 584.77002 L 2328.639893 584.835938 L 2328.639893 779 Z"/><path fill="currentColor" d="M 778.736023 422.48999 L 983.437988 422.48999 C 994.265991 448.535034 1004.77002 477.077026 1015.070007 503.572998 L 1074.640015 656.720947 L 1259.890015 1132.51001 L 1047.290039 1132.51001 L 1008.059998 1019 L 974.5 1019 L 737.911011 1019 L 697.815979 1132.51001 L 492.980988 1132.51001 C 524.062988 1052.780029 557.393982 972.244995 589.429016 892.77002 L 778.736023 422.48999 Z M 793.237976 865 L 874.5 865 L 955.580017 865 L 894.624023 689.467041 C 891.672974 681.078979 878.044983 639.355957 875.106018 634.536987 L 822.968994 781.586914 C 813.327026 808.84198 803.554016 838.130005 793.237976 865 Z"/><path fill="currentColor" d="M 1816.430054 551.921021 L 2060.679932 423.533936 L 1934.969971 690.291992 L 1583.530029 1434.459961 L 1106.47998 423.800049 C 1129.719971 434.302979 1165.02002 454.386963 1188.430054 466.69397 L 1350.72998 551.952026 L 1583.540039 1045.01001 L 1816.430054 551.921021 Z"/><path fill="currentColor" d="M 3594.149902 420 L 3609.060059 420 L 3625.320068 447.651001 C 3630.399902 438.396973 3636.080078 429.103027 3641.469971 420 L 3656.159912 420 L 3656.159912 486 L 3642.659912 486 L 3642.659912 458.5 L 3642.629883 443.376953 L 3625.120117 471.526001 C 3619.320068 462.885986 3613.22998 452.504028 3607.72998 443.546997 L 3607.72998 485.99707 L 3594.149902 486 L 3594.149902 420 Z"/><path fill="currentColor" d="M 3532.209961 420 L 3583.77002 420 L 3583.77002 433.51001 L 3565.090088 433.51001 L 3565.090088 466.5 L 3565.090088 486 L 3551.100098 486 L 3551.100098 433.51001 L 3532.209961 433.51001 L 3532.209961 420 Z"/></svg>
 {%- endcapture -%}
 
-<div id="avro-header-{{ section.id }}">
+<div id="avro-header-{{ section.id }}" style="{{ palette }}">
   <header>
     {%- comment -%} Main nav {%- endcomment -%}
     <nav class="nav" aria-label="Primary navigation">
@@ -120,37 +142,46 @@
                   <div class="dd-col">
                     <p class="dd-col-heading">{{ section.settings.dd_col1_heading | default: 'Discover' }}</p>
                     <div class="dd-link-list">
-                      {%- for b in disc_links -%}
-                      <a class="dd-link" href="{{ b.settings.link }}" {{ b.shopify_attributes }}>{{ b.settings.label }}</a>
-                      {%- endfor -%}
+                      {%- if section.settings.dd_d1_label != blank -%}<a class="dd-link" href="{{ section.settings.dd_d1_link | default: '/pages/why-avro' }}">{{ section.settings.dd_d1_label }}</a>{%- endif -%}
+                      {%- if section.settings.dd_d2_label != blank -%}<a class="dd-link" href="{{ section.settings.dd_d2_link | default: '/pages/science' }}">{{ section.settings.dd_d2_label }}</a>{%- endif -%}
+                      {%- if section.settings.dd_d3_label != blank -%}<a class="dd-link" href="{{ section.settings.dd_d3_link | default: '/pages/ingredients' }}">{{ section.settings.dd_d3_label }}</a>{%- endif -%}
                     </div>
                   </div>
                   <div class="dd-col">
                     <p class="dd-col-heading">{{ section.settings.dd_col2_heading | default: 'By Use Case' }}</p>
                     <div class="dd-link-list">
-                      {%- for b in use_links -%}
-                      <a class="dd-link" href="{{ b.settings.link }}" {{ b.shopify_attributes }}>{{ b.settings.label }}</a>
-                      {%- endfor -%}
+                      {%- if section.settings.dd_u1_label != blank -%}<a class="dd-link" href="{{ section.settings.dd_u1_link | default: '/pages/work' }}">{{ section.settings.dd_u1_label }}</a>{%- endif -%}
+                      {%- if section.settings.dd_u2_label != blank -%}<a class="dd-link" href="{{ section.settings.dd_u2_link | default: '/pages/golf' }}">{{ section.settings.dd_u2_label }}</a>{%- endif -%}
+                      {%- if section.settings.dd_u3_label != blank -%}<a class="dd-link" href="{{ section.settings.dd_u3_link | default: '/pages/gaming' }}">{{ section.settings.dd_u3_label }}</a>{%- endif -%}
+                      {%- if section.settings.dd_u4_label != blank -%}<a class="dd-link" href="{{ section.settings.dd_u4_link | default: '/pages/social' }}">{{ section.settings.dd_u4_label }}</a>{%- endif -%}
                     </div>
                   </div>
                 </div>
 
                 {%- comment -%} Right: two feature cards {%- endcomment -%}
+                {%- comment -%} Cards use the dark Zero-Proof palette on social/dark pages, otherwise the merchant's chosen colors {%- endcomment -%}
+                {%- if is_dark -%}
+                  {%- assign c1_bg = '#1A1A17' -%}{%- assign c1_text = '#CAA84B' -%}
+                  {%- assign c2_bg = '#CAA84B' -%}{%- assign c2_text = '#0D0D0D' -%}
+                {%- else -%}
+                  {%- assign c1_bg = section.settings.card1_bg | default: '#151515' -%}{%- assign c1_text = section.settings.card1_text | default: '#F5F0E8' -%}
+                  {%- assign c2_bg = section.settings.card2_bg | default: '#94C6D4' -%}{%- assign c2_text = section.settings.card2_text | default: '#151515' -%}
+                {%- endif -%}
                 <div class="dd-cards">
-                  <a class="dd-card" href="{{ section.settings.card1_link | default: '/blogs/news' }}" style="background-color: {{ section.settings.card1_bg | default: '#151515' }};">
+                  <a class="dd-card" href="{{ section.settings.card1_link | default: '/blogs/news' }}" style="background-color: {{ c1_bg }};">
                     <div>
-                      <h3 style="color: {{ section.settings.card1_text | default: '#F5F0E8' }};">{{ section.settings.card1_heading | default: 'News & Media' }}</h3>
-                      <p style="color: {{ section.settings.card1_text | default: '#F5F0E8' }};">{{ section.settings.card1_body | default: 'Articles about calm performance, fermentation science and the rituals behind each formula.' }}</p>
+                      <h3 style="color: {{ c1_text }};">{{ section.settings.card1_heading | default: 'News & Media' }}</h3>
+                      <p style="color: {{ c1_text }};">{{ section.settings.card1_body | default: 'Articles about calm performance, fermentation science and the rituals behind each formula.' }}</p>
                     </div>
-                    <span class="dd-card-btn" style="background-color: {{ section.settings.card1_text | default: '#F5F0E8' }}; color: {{ section.settings.card1_bg | default: '#151515' }};">{{ section.settings.card1_button | default: 'Learn More' }}</span>
+                    <span class="dd-card-btn" style="background-color: {{ c1_text }}; color: {{ c1_bg }};">{{ section.settings.card1_button | default: 'Learn More' }}</span>
                   </a>
 
-                  <a class="dd-card" href="{{ section.settings.card2_link | default: '/#footer-newsletter' }}" style="background-color: {{ section.settings.card2_bg | default: '#94C6D4' }};">
+                  <a class="dd-card" href="{{ section.settings.card2_link | default: '/#footer-newsletter' }}" style="background-color: {{ c2_bg }};">
                     <div>
-                      <h3 style="color: {{ section.settings.card2_text | default: '#151515' }};">{{ section.settings.card2_heading | default: 'Join Our Community' }}</h3>
-                      <p style="color: {{ section.settings.card2_text | default: '#151515' }};">{{ section.settings.card2_body | default: 'Updates, perks, and calm-first insights — straight to your inbox.' }}</p>
+                      <h3 style="color: {{ c2_text }};">{{ section.settings.card2_heading | default: 'Join Our Community' }}</h3>
+                      <p style="color: {{ c2_text }};">{{ section.settings.card2_body | default: 'Updates, perks, and calm-first insights — straight to your inbox.' }}</p>
                     </div>
-                    <span class="dd-card-btn" style="background-color: {{ section.settings.card2_text | default: '#151515' }}; color: {{ section.settings.card2_bg | default: '#94C6D4' }};">{{ section.settings.card2_button | default: 'Subscribe to Newsletter' }}</span>
+                    <span class="dd-card-btn" style="background-color: {{ c2_text }}; color: {{ c2_bg }};">{{ section.settings.card2_button | default: 'Subscribe to Newsletter' }}</span>
                   </a>
                 </div>
               </div>
@@ -190,9 +221,14 @@
       <a class="mobile-link" href="{{ section.settings.link_shop | default: '/collections/all' }}">{{ section.settings.label_shop | default: 'Shop' }}</a>
       <a class="mobile-link" href="{{ section.settings.link_subscribe | default: '/pages/subscribe' }}">{{ section.settings.label_subscribe | default: 'Subscribe' }}</a>
       <p class="mobile-heading">{{ section.settings.dd_col1_heading | default: 'Discover' }}</p>
-      {%- for b in disc_links -%}<a class="mobile-link" style="font-size:24px;" href="{{ b.settings.link }}">{{ b.settings.label }}</a>{%- endfor -%}
+      {%- if section.settings.dd_d1_label != blank -%}<a class="mobile-link" style="font-size:24px;" href="{{ section.settings.dd_d1_link | default: '/pages/why-avro' }}">{{ section.settings.dd_d1_label }}</a>{%- endif -%}
+      {%- if section.settings.dd_d2_label != blank -%}<a class="mobile-link" style="font-size:24px;" href="{{ section.settings.dd_d2_link | default: '/pages/science' }}">{{ section.settings.dd_d2_label }}</a>{%- endif -%}
+      {%- if section.settings.dd_d3_label != blank -%}<a class="mobile-link" style="font-size:24px;" href="{{ section.settings.dd_d3_link | default: '/pages/ingredients' }}">{{ section.settings.dd_d3_label }}</a>{%- endif -%}
       <p class="mobile-heading">{{ section.settings.dd_col2_heading | default: 'By Use Case' }}</p>
-      {%- for b in use_links -%}<a class="mobile-link" style="font-size:24px;" href="{{ b.settings.link }}">{{ b.settings.label }}</a>{%- endfor -%}
+      {%- if section.settings.dd_u1_label != blank -%}<a class="mobile-link" style="font-size:24px;" href="{{ section.settings.dd_u1_link | default: '/pages/work' }}">{{ section.settings.dd_u1_label }}</a>{%- endif -%}
+      {%- if section.settings.dd_u2_label != blank -%}<a class="mobile-link" style="font-size:24px;" href="{{ section.settings.dd_u2_link | default: '/pages/golf' }}">{{ section.settings.dd_u2_label }}</a>{%- endif -%}
+      {%- if section.settings.dd_u3_label != blank -%}<a class="mobile-link" style="font-size:24px;" href="{{ section.settings.dd_u3_link | default: '/pages/gaming' }}">{{ section.settings.dd_u3_label }}</a>{%- endif -%}
+      {%- if section.settings.dd_u4_label != blank -%}<a class="mobile-link" style="font-size:24px;" href="{{ section.settings.dd_u4_link | default: '/pages/social' }}">{{ section.settings.dd_u4_label }}</a>{%- endif -%}
       <p class="mobile-heading">More</p>
       <a class="mobile-link" style="font-size:24px;" href="{{ section.settings.link_science | default: '/pages/science' }}">{{ section.settings.label_science | default: 'Science' }}</a>
       <a class="mobile-link" style="font-size:24px;" href="{{ section.settings.link_faq | default: '/pages/faq' }}">{{ section.settings.label_faq | default: 'FAQ' }}</a>
@@ -255,10 +291,29 @@
     { "type": "url", "id": "link_science", "label": "Science link" },
     { "type": "text", "id": "label_faq", "label": "FAQ label", "default": "FAQ" },
     { "type": "url", "id": "link_faq", "label": "FAQ link" },
+    { "type": "header", "content": "Color mode" },
+    { "type": "paragraph", "content": "The nav uses the dark Zero-Proof palette (deep-black + gold) on any page whose URL path contains one of these entries. Comma-separated. Leave blank to keep the nav light everywhere." },
+    { "type": "text", "id": "dark_paths", "label": "Dark-mode paths", "default": "/pages/social" },
     { "type": "header", "content": "Dropdown" },
     { "type": "text", "id": "dd_label", "label": "Dropdown trigger label", "default": "Why AVRO" },
     { "type": "text", "id": "dd_col1_heading", "label": "Column 1 heading", "default": "Discover" },
     { "type": "text", "id": "dd_col2_heading", "label": "Column 2 heading", "default": "By Use Case" },
+    { "type": "header", "content": "Dropdown — Discover links" },
+    { "type": "text", "id": "dd_d1_label", "label": "Link 1 label", "default": "Why AVRO" },
+    { "type": "url", "id": "dd_d1_link", "label": "Link 1 URL" },
+    { "type": "text", "id": "dd_d2_label", "label": "Link 2 label", "default": "The Science" },
+    { "type": "url", "id": "dd_d2_link", "label": "Link 2 URL" },
+    { "type": "text", "id": "dd_d3_label", "label": "Link 3 label", "default": "Ingredients" },
+    { "type": "url", "id": "dd_d3_link", "label": "Link 3 URL" },
+    { "type": "header", "content": "Dropdown — By Use Case links" },
+    { "type": "text", "id": "dd_u1_label", "label": "Link 1 label", "default": "AVRO for Work" },
+    { "type": "url", "id": "dd_u1_link", "label": "Link 1 URL" },
+    { "type": "text", "id": "dd_u2_label", "label": "Link 2 label", "default": "AVRO for Golf" },
+    { "type": "url", "id": "dd_u2_link", "label": "Link 2 URL" },
+    { "type": "text", "id": "dd_u3_label", "label": "Link 3 label", "default": "AVRO for Esports" },
+    { "type": "url", "id": "dd_u3_link", "label": "Link 3 URL" },
+    { "type": "text", "id": "dd_u4_label", "label": "Link 4 label", "default": "AVRO for Social" },
+    { "type": "url", "id": "dd_u4_link", "label": "Link 4 URL" },
     { "type": "header", "content": "Dropdown card 1 (left)" },
     { "type": "text", "id": "card1_heading", "label": "Heading", "default": "News & Media" },
     { "type": "textarea", "id": "card1_body", "label": "Body", "default": "Articles about calm performance, fermentation science and the rituals behind each formula." },
@@ -274,37 +329,8 @@
     { "type": "color", "id": "card2_bg", "label": "Background", "default": "#94C6D4" },
     { "type": "color", "id": "card2_text", "label": "Text / button", "default": "#151515" }
   ],
-  "blocks": [
-    {
-      "type": "discover_link",
-      "name": "Discover link",
-      "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Why AVRO" },
-        { "type": "url", "id": "link", "label": "Link" }
-      ]
-    },
-    {
-      "type": "usecase_link",
-      "name": "Use-case link",
-      "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "AVRO for Golf" },
-        { "type": "url", "id": "link", "label": "Link" }
-      ]
-    }
-  ],
   "presets": [
-    {
-      "name": "AVRO — Header",
-      "blocks": [
-        { "type": "discover_link", "settings": { "label": "Why AVRO", "link": "/pages/why-avro" } },
-        { "type": "discover_link", "settings": { "label": "The Science", "link": "/pages/science" } },
-        { "type": "discover_link", "settings": { "label": "Ingredients", "link": "/pages/ingredients" } },
-        { "type": "usecase_link", "settings": { "label": "AVRO for Work", "link": "/pages/work" } },
-        { "type": "usecase_link", "settings": { "label": "AVRO for Golf", "link": "/pages/golf" } },
-        { "type": "usecase_link", "settings": { "label": "AVRO for Esports", "link": "/pages/gaming" } },
-        { "type": "usecase_link", "settings": { "label": "AVRO for Social", "link": "/pages/social" } }
-      ]
-    }
+    { "name": "AVRO — Header" }
   ]
 }
 {% endschema %}
