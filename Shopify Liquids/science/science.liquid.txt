@@ -1,0 +1,445 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — SCIENCE PAGE  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-science.liquid and paste this entire file in.
+  2. Upload every image in this folder to your theme Assets (filenames must match).
+  3. Add "AVRO — Science" to a page via the theme editor.
+  4. Headings/body/buttons/images are editable. Hero badges, foundation cards,
+     PharmaGABA reasons, formula-logic cards, product cards, and FAQs are
+     add/remove/reorder BLOCKS.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-sci-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --base-deep: #EDEDED; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --olive-dark: #44432F;
+    --avro-blue: #94C6D4;
+    font-family: "DM Sans", system-ui, sans-serif; color: var(--ink); display: block; background: var(--base);
+  }
+  #avro-sci-{{ section.id }} * { box-sizing: border-box; }
+  #avro-sci-{{ section.id }} h1, #avro-sci-{{ section.id }} h2, #avro-sci-{{ section.id }} h3, #avro-sci-{{ section.id }} h4 { margin: 0; }
+  #avro-sci-{{ section.id }} img { max-width: 100%; }
+  #avro-sci-{{ section.id }} .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 28px; font-size: 16px; font-weight: 700; border-radius: 999px; text-decoration: none; cursor: pointer; border: 2px solid var(--charcoal); background: transparent; color: var(--charcoal); transition: background-color .2s ease, color .2s ease; }
+  #avro-sci-{{ section.id }} .btn:hover { background: var(--charcoal); color: var(--bone); }
+
+  /* HERO */
+  @keyframes ph-rise { 0% { opacity: 0; transform: translateY(24px);} 100% { opacity: 1; transform: translateY(0);} }
+  @keyframes ph-fade-up { 0% { opacity: 0; transform: translateY(10px);} 100% { opacity: 1; transform: translateY(0);} }
+  #avro-sci-{{ section.id }} .ph-word { display: inline-block; opacity: 0; transform: translateY(24px); animation: ph-rise .95s cubic-bezier(0.34,1.4,0.4,1) forwards; }
+  #avro-sci-{{ section.id }} .ph-fade { opacity: 0; animation: ph-fade-up .7s cubic-bezier(0.22,1,0.36,1) forwards; }
+  @media (prefers-reduced-motion: reduce) { #avro-sci-{{ section.id }} .ph-word, #avro-sci-{{ section.id }} .ph-fade { animation: none !important; opacity: 1 !important; transform: none !important; } }
+  #avro-sci-{{ section.id }} .ph-card { position: relative; width: calc(100% - 32px); margin: 0 auto 16px; aspect-ratio: 16/9; overflow: hidden; background: var(--base-light); border-radius: 20px; }
+  #avro-sci-{{ section.id }} .ph-img-wrap { position: absolute; inset: 0; }
+  #avro-sci-{{ section.id }} .ph-img-desktop, #avro-sci-{{ section.id }} .ph-img-mobile { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right top; }
+  #avro-sci-{{ section.id }} .ph-img-mobile { display: none; }
+  #avro-sci-{{ section.id }} .ph-scrim { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(100deg, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.62) 32%, rgba(255,255,255,0.28) 58%, rgba(255,255,255,0) 78%); }
+  #avro-sci-{{ section.id }} .ph-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: clamp(32px,5vw,80px) clamp(20px,5vw,64px); }
+  #avro-sci-{{ section.id }} .ph-content .inner { display: flex; flex-direction: column; max-width: 580px; }
+  #avro-sci-{{ section.id }} .ph-content h1 { font-weight: 900; font-size: clamp(32px,4vw,60px); line-height: 1.05; letter-spacing: -0.025em; color: var(--ink); margin-bottom: 14px; }
+  #avro-sci-{{ section.id }} .ph-lede { animation-delay: .85s; font-weight: 500; font-size: clamp(16px,1.4vw,20px); line-height: 1.5; color: var(--ink); max-width: 500px; margin-bottom: 24px; }
+  #avro-sci-{{ section.id }} .ph-badges { animation-delay: .95s; display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 640px; margin-bottom: 20px; }
+  #avro-sci-{{ section.id }} .ph-badge { display: flex; align-items: center; gap: 12px; color: var(--olive-dark); font-size: 12px; font-weight: 800; line-height: 1.2; }
+  #avro-sci-{{ section.id }} .ph-badge img { width: 56px; height: 56px; object-fit: contain; flex-shrink: 0; }
+  #avro-sci-{{ section.id }} .ph-cta { animation-delay: 1.05s; display: flex; flex-wrap: wrap; gap: 12px; width: 100%; max-width: 520px; }
+  #avro-sci-{{ section.id }} .ph-cta .btn { flex: 1 1 180px; min-width: 180px; }
+  @media (min-width: 480px) { #avro-sci-{{ section.id }} .ph-badges { grid-template-columns: repeat(3,1fr); } }
+  @media (min-width: 769px) { #avro-sci-{{ section.id }} .ph-badge img { width: 64px; height: 64px; } }
+  @media (max-width: 768px) {
+    #avro-sci-{{ section.id }} .ph-card { aspect-ratio: unset; overflow: visible; display: flex; flex-direction: column; }
+    #avro-sci-{{ section.id }} .ph-img-wrap { position: relative; width: calc(100% - 32px); margin: 16px auto 0; aspect-ratio: 3/4; border-radius: 20px; overflow: hidden; flex-shrink: 0; }
+    #avro-sci-{{ section.id }} .ph-img-desktop { display: none; } #avro-sci-{{ section.id }} .ph-img-mobile { display: block; }
+    #avro-sci-{{ section.id }} .ph-scrim { display: none; }
+    #avro-sci-{{ section.id }} .ph-content { position: static; padding: 24px 20px 32px; }
+    #avro-sci-{{ section.id }} .ph-cta { flex-direction: column; align-items: stretch; max-width: 320px; }
+    #avro-sci-{{ section.id }} .ph-cta .btn { width: 100%; flex: 0 0 auto; }
+  }
+
+  /* CARDED SECTIONS */
+  #avro-sci-{{ section.id }} .carded { width: 100%; max-width: 1440px; margin: 0 auto; padding: clamp(28px,4vw,56px) clamp(16px,5vw,64px); }
+  #avro-sci-{{ section.id }} .carded .panel { border-radius: 28px; background: var(--base-light); padding: clamp(28px,5vw,64px); }
+  #avro-sci-{{ section.id }} .sec-h2 { font-weight: 900; font-size: clamp(30px,4vw,52px); line-height: 1.05; color: var(--ink); margin-bottom: 16px; }
+  #avro-sci-{{ section.id }} .cards-3 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 768px) { #avro-sci-{{ section.id }} .cards-3 { grid-template-columns: repeat(3,1fr); } }
+  #avro-sci-{{ section.id }} .info-card { background: var(--base-light); border-radius: 20px; padding: 28px; min-height: 180px; }
+  #avro-sci-{{ section.id }} .panel .info-card { background: var(--bone); }
+  #avro-sci-{{ section.id }} .info-card img { width: 72px; height: 72px; object-fit: contain; margin-bottom: 20px; }
+  #avro-sci-{{ section.id }} .info-card h3 { font-weight: 900; margin-bottom: 8px; color: var(--ink); }
+  #avro-sci-{{ section.id }} .info-card p { font-size: 16px; line-height: 1.6; color: rgba(28,27,20,0.75); margin: 0; }
+
+  /* GABA two-column */
+  #avro-sci-{{ section.id }} .gaba-grid { display: grid; grid-template-columns: 1fr; gap: clamp(28px,6vw,80px); }
+  #avro-sci-{{ section.id }} .gaba-grid h2 { font-weight: 900; font-size: clamp(30px,4vw,52px); line-height: 1.05; margin-bottom: 14px; color: var(--ink); }
+  #avro-sci-{{ section.id }} .gaba-grid > div > p.lead { color: var(--warm-gray); line-height: 1.6; }
+  #avro-sci-{{ section.id }} .pharma-list { display: grid; gap: 20px; }
+  #avro-sci-{{ section.id }} .pharma-row { display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: center; color: var(--ink); font-weight: 500; }
+  #avro-sci-{{ section.id }} .pharma-row img { width: 64px; height: 64px; object-fit: contain; }
+  @media (min-width: 1024px) { #avro-sci-{{ section.id }} .gaba-grid { grid-template-columns: 1fr 1fr; } #avro-sci-{{ section.id }} .pharma-row { grid-template-columns: 80px 1fr; } #avro-sci-{{ section.id }} .pharma-row img { width: 80px; height: 80px; } }
+
+  /* FORMULA LOGIC */
+  #avro-sci-{{ section.id }} .fl-sec { width: 100%; max-width: 1440px; margin: 0 auto; padding: clamp(52px,7vw,86px) clamp(18px,5vw,64px); }
+  #avro-sci-{{ section.id }} .eyebrow { display: inline-block; margin-bottom: 16px; padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; background: var(--charcoal); color: var(--bone); }
+  #avro-sci-{{ section.id }} .cards-4 { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 640px) { #avro-sci-{{ section.id }} .cards-4 { grid-template-columns: repeat(2,1fr); } }
+  @media (min-width: 1024px) { #avro-sci-{{ section.id }} .cards-4 { grid-template-columns: repeat(4,1fr); } }
+
+  /* PRODUCT CARDS */
+  #avro-sci-{{ section.id }} .pc-sec { background: var(--base-light); padding: clamp(32px,6vw,88px) clamp(16px,5vw,64px); }
+  #avro-sci-{{ section.id }} .pc-wrap { max-width: 1080px; margin: 0 auto; }
+  #avro-sci-{{ section.id }} .pc-wrap > h2 { font-weight: 700; font-size: clamp(24px,3.2vw,48px); line-height: 1; color: var(--ink); margin-bottom: 10px; }
+  #avro-sci-{{ section.id }} .pc-wrap > p.intro { font-weight: 500; font-size: clamp(16px,1.3vw,20px); line-height: 1.45; color: rgba(0,0,0,0.6); margin-bottom: 28px; }
+  #avro-sci-{{ section.id }} .pc-row { display: flex; flex-direction: column; gap: 32px; }
+  #avro-sci-{{ section.id }} .pc-card { display: flex; flex-direction: column; gap: 16px; }
+  #avro-sci-{{ section.id }} .pc-thumb { border-radius: 20px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #E5E5E5; }
+  #avro-sci-{{ section.id }} .pc-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  #avro-sci-{{ section.id }} .pc-card h3 { font-weight: 700; font-size: clamp(22px,2vw,32px); color: var(--ink); }
+  #avro-sci-{{ section.id }} .pc-card p.support { font-weight: 400; font-size: clamp(16px,1.3vw,20px); line-height: 1.45; color: rgba(0,0,0,0.6); margin: 0; min-height: 2.9em; }
+  #avro-sci-{{ section.id }} .pc-card .btn { width: 100%; margin-top: auto; }
+  @media (min-width: 640px) { #avro-sci-{{ section.id }} .pc-row { flex-direction: row; gap: 24px; } #avro-sci-{{ section.id }} .pc-card { flex: 1 1 0; } }
+
+  /* FAQ + CTA + BANNER (shared lower band) */
+  #avro-sci-{{ section.id }} .lower { background: var(--base-deep); }
+  #avro-sci-{{ section.id }} .faq-inner { width: 100%; max-width: 1080px; margin: 0 auto; padding: clamp(52px,7vw,86px) clamp(18px,5vw,64px); }
+  #avro-sci-{{ section.id }} .faq-inner > h2 { font-weight: 900; font-size: clamp(30px,4vw,52px); line-height: 1.05; margin-bottom: 34px; }
+  #avro-sci-{{ section.id }} .faq-list { display: grid; gap: 8px; }
+  #avro-sci-{{ section.id }} .faq-item { background: var(--base-light); border-radius: 12px; }
+  #avro-sci-{{ section.id }} .faq-item summary { display: flex; justify-content: space-between; gap: 16px; padding: 18px 22px; cursor: pointer; font-weight: 800; list-style: none; }
+  #avro-sci-{{ section.id }} .faq-item summary::-webkit-details-marker { display: none; }
+  #avro-sci-{{ section.id }} .faq-item summary::after { content: '+'; font-size: 22px; line-height: 1; }
+  #avro-sci-{{ section.id }} .faq-item[open] summary::after { content: '-'; }
+  #avro-sci-{{ section.id }} .faq-item p { padding: 0 22px 20px; line-height: 1.6; color: var(--ink); opacity: 0.75; margin: 0; }
+  #avro-sci-{{ section.id }} .faq-more { margin-top: 22px; }
+  #avro-sci-{{ section.id }} .cta-sec { background: var(--avro-blue); padding: clamp(56px,8vw,104px) clamp(16px,4vw,64px); }
+  #avro-sci-{{ section.id }} .cta-wrap { max-width: 1250px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; }
+  #avro-sci-{{ section.id }} .cta-left { flex: 1 1 320px; max-width: 520px; }
+  #avro-sci-{{ section.id }} .cta-left h2 { font-weight: 700; font-size: clamp(26px,4vw,60px); line-height: 1.02; letter-spacing: -0.02em; color: var(--charcoal); margin-bottom: 10px; }
+  #avro-sci-{{ section.id }} .cta-left p { font-weight: 500; font-size: clamp(15px,1.3vw,19px); line-height: 1.5; color: rgba(21,21,21,0.7); }
+  #avro-sci-{{ section.id }} .cta-btns { flex: 1 1 280px; display: flex; flex-direction: column; gap: 8px; min-width: 240px; max-width: 400px; }
+  #avro-sci-{{ section.id }} .cta-btns .btn { width: 100%; background: var(--charcoal); color: var(--bone); }
+  #avro-sci-{{ section.id }} .cta-btns .btn:hover { background: transparent; color: var(--charcoal); }
+  #avro-sci-{{ section.id }} .banner-box { position: relative; width: 100%; overflow: hidden; }
+  #avro-sci-{{ section.id }} .banner-box img { width: 100%; height: auto; display: block; }
+  #avro-sci-{{ section.id }} .banner-btn { position: absolute; left: clamp(16px,4vw,64px); bottom: clamp(16px,4vw,56px); min-width: 220px; background: var(--charcoal); color: var(--bone); }
+  #avro-sci-{{ section.id }} .banner-btn:hover { background: transparent; color: var(--charcoal); }
+  @media (max-width: 640px) { #avro-sci-{{ section.id }} .banner-box { display: flex; flex-direction: column; padding-bottom: 24px; } #avro-sci-{{ section.id }} .banner-btn { position: static; width: calc(100% - 32px); min-width: 0; margin: 20px auto 0; } }
+{% endstyle %}
+
+{%- assign badges = section.blocks | where: "type", "hero_badge" -%}
+{%- assign foundation = section.blocks | where: "type", "foundation_card" -%}
+{%- assign pharma = section.blocks | where: "type", "pharma_reason" -%}
+{%- assign logic = section.blocks | where: "type", "logic_card" -%}
+{%- assign products = section.blocks | where: "type", "product" -%}
+{%- assign faqs = section.blocks | where: "type", "faq" -%}
+
+<div id="avro-sci-{{ section.id }}">
+
+  {%- comment -%} HERO {%- endcomment -%}
+  <section>
+    <div class="ph-card">
+      <div class="ph-img-wrap">
+        {%- if section.settings.hero_image != blank -%}
+          <img class="ph-img-desktop" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}">
+        {%- else -%}
+          <img class="ph-img-desktop" src="{{ 'science-hero.png' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}">
+        {%- endif -%}
+        {%- if section.settings.hero_image_mobile != blank -%}
+          <img class="ph-img-mobile" src="{{ section.settings.hero_image_mobile | image_url: width: 1200 }}" alt="{{ section.settings.hero_alt | escape }}">
+        {%- else -%}
+          <img class="ph-img-mobile" src="{{ 'science-hero-mobile.png' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}">
+        {%- endif -%}
+      </div>
+      <div class="ph-scrim" aria-hidden="true"></div>
+      <div class="ph-content">
+        <div class="inner">
+          {%- assign words = section.settings.hero_heading | default: 'Calm first. Backed by science.' | split: ' ' -%}
+          <h1>{%- for w in words -%}<span class="ph-word" style="animation-delay: {{ forloop.index0 | times: 0.09 | plus: 0.1 }}s;">{{ w }}{% unless forloop.last %}&nbsp;{% endunless %}</span>{%- endfor -%}</h1>
+          <p class="ph-fade ph-lede">{{ section.settings.hero_lede | default: 'Every AVRO formula starts with naturally fermented PharmaGABA®, selected to support calm-first readiness, composure, and clarity before pressure-sensitive moments.*' }}</p>
+          {%- if badges.size > 0 -%}
+          <div class="ph-fade ph-badges">
+            {%- for b in badges -%}
+            <span class="ph-badge" {{ b.shopify_attributes }}>
+              {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 128 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'science-backed.png' | asset_url }}" alt="">{%- endif -%}
+              {{ b.settings.label }}
+            </span>
+            {%- endfor -%}
+          </div>
+          {%- endif -%}
+          <div class="ph-fade ph-cta">
+            <a href="{{ section.settings.hero_btn1_link | default: '/collections/all' }}" class="btn">{{ section.settings.hero_btn1_label | default: 'Shop AVRO' }}</a>
+            <a href="{{ section.settings.hero_btn2_link | default: '#research' }}" class="btn">{{ section.settings.hero_btn2_label | default: 'View Research' }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} FOUNDATION CARDS {%- endcomment -%}
+  {%- if foundation.size > 0 -%}
+  <section class="carded">
+    <div class="panel">
+      <h2 class="sec-h2">{{ section.settings.foundation_heading | default: 'Calm is the foundation.' }}</h2>
+      <div class="cards-3">
+        {%- for b in foundation -%}
+        <article class="info-card" {{ b.shopify_attributes }}>
+          {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 144 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'calm-first-foundation.png' | asset_url }}" alt="">{%- endif -%}
+          <h3>{{ b.settings.title }}</h3>
+          <p>{{ b.settings.copy }}</p>
+        </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} GABA TWO-COLUMN {%- endcomment -%}
+  <section class="carded" id="research">
+    <div class="panel">
+      <div class="gaba-grid">
+        <div>
+          <h2>{{ section.settings.gaba_heading | default: 'Calm Performance Starts With GABA' }}</h2>
+          <p class="lead">{{ section.settings.gaba_body | default: "GABA is a naturally occurring compound involved in the body's communication and regulation processes. AVRO uses naturally fermented PharmaGABA® to help support a calm, composed state before pressure-filled moments.*" }}</p>
+        </div>
+        <div>
+          <h2>{{ section.settings.pharma_heading | default: 'Why PharmaGABA®' }}</h2>
+          {%- if pharma.size > 0 -%}
+          <div class="pharma-list">
+            {%- for b in pharma -%}
+            <p class="pharma-row" {{ b.shopify_attributes }}>
+              {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 160 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'naturally-fermented-pharmagaba.png' | asset_url }}" alt="">{%- endif -%}
+              <span>{{ b.settings.label }}</span>
+            </p>
+            {%- endfor -%}
+          </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} FORMULA LOGIC {%- endcomment -%}
+  {%- if logic.size > 0 -%}
+  <section class="fl-sec">
+    <div style="max-width:900px; margin-bottom:34px;">
+      <span class="eyebrow">{{ section.settings.logic_eyebrow | default: 'Science + formula logic' }}</span>
+      <h2 class="sec-h2" style="margin-bottom:0;">{{ section.settings.logic_heading | default: 'Calm first. Then support the moment.' }}</h2>
+    </div>
+    <div class="cards-4">
+      {%- for b in logic -%}
+      <article class="info-card" {{ b.shopify_attributes }}>
+        {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 144 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'naturally-fermented-pharmagaba.png' | asset_url }}" alt="">{%- endif -%}
+        <h3>{{ b.settings.title }}</h3>
+        <p>{{ b.settings.copy }}</p>
+      </article>
+      {%- endfor -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} PRODUCT CARDS {%- endcomment -%}
+  {%- if products.size > 0 -%}
+  <section class="pc-sec">
+    <div class="pc-wrap">
+      <h2>{{ section.settings.products_heading | default: 'Three formulas. One foundation.' }}</h2>
+      <p class="intro">{{ section.settings.products_intro | default: 'Every AVRO formula starts with the same calm-first base, then supports the moment in a different way.' }}</p>
+      <div class="pc-row">
+        {%- for b in products -%}
+        <article class="pc-card" {{ b.shopify_attributes }}>
+          <div class="pc-thumb">
+            {%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">{%- else -%}<img src="{{ b.settings.image_fallback | default: 'calm-blueberry-acai.png' | asset_url }}" alt="{{ b.settings.name | escape }}">{%- endif -%}
+          </div>
+          <h3>{{ b.settings.name }}</h3>
+          <p class="support">{{ b.settings.support }}</p>
+          <a href="{{ b.settings.link | default: '/collections/all' }}" class="btn">{{ b.settings.button_label | default: 'Shop' }}</a>
+        </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} LOWER BAND: FAQ + CTA + BANNER {%- endcomment -%}
+  <div class="lower">
+    {%- if faqs.size > 0 -%}
+    <section>
+      <div class="faq-inner">
+        <h2>{{ section.settings.faq_heading | default: 'Science FAQ' }}</h2>
+        <div class="faq-list">
+          {%- for b in faqs -%}
+          <details class="faq-item" {{ b.shopify_attributes }}>
+            <summary>{{ b.settings.question }}</summary>
+            <p>{{ b.settings.answer }}</p>
+          </details>
+          {%- endfor -%}
+        </div>
+        <div class="faq-more"><a href="{{ section.settings.faq_link | default: '/pages/faq' }}" class="btn">{{ section.settings.faq_button | default: 'View All FAQs' }}</a></div>
+      </div>
+    </section>
+    {%- endif -%}
+
+    <section class="cta-sec">
+      <div class="cta-wrap">
+        <div class="cta-left">
+          <h2>{{ section.settings.cta_heading | default: 'Start with calm. Show up ready.' }}</h2>
+          <p>{{ section.settings.cta_copy | default: 'Choose Calm, Focus, or Energy based on the moment you want to support.' }}</p>
+        </div>
+        <div class="cta-btns">
+          <a href="{{ section.settings.cta_btn1_link | default: '/collections/calm' }}" class="btn">{{ section.settings.cta_btn1_label | default: 'Shop Calm' }}</a>
+          <a href="{{ section.settings.cta_btn2_link | default: '/collections/focus' }}" class="btn">{{ section.settings.cta_btn2_label | default: 'Shop Focus' }}</a>
+          <a href="{{ section.settings.cta_btn3_link | default: '/collections/energy' }}" class="btn">{{ section.settings.cta_btn3_label | default: 'Shop Energy' }}</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="banner-box">
+        {%- if section.settings.banner_image != blank -%}<img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">{%- else -%}<img src="{{ 'science-banner.png' | asset_url }}" alt="">{%- endif -%}
+        <a href="{{ section.settings.banner_link | default: '/collections/all' }}" class="btn banner-btn">{{ section.settings.banner_label | default: 'Shop' }}</a>
+      </div>
+    </section>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "AVRO — Science",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_heading", "label": "Heading", "default": "Calm first. Backed by science." },
+    { "type": "textarea", "id": "hero_lede", "label": "Lede" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (desktop)" },
+    { "type": "image_picker", "id": "hero_image_mobile", "label": "Hero image (mobile)" },
+    { "type": "text", "id": "hero_alt", "label": "Hero image alt", "default": "Amber gel droplet over a GABA chemical structure diagram" },
+    { "type": "text", "id": "hero_btn1_label", "label": "Button 1 label", "default": "Shop AVRO" },
+    { "type": "url", "id": "hero_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "hero_btn2_label", "label": "Button 2 label", "default": "View Research" },
+    { "type": "text", "id": "hero_btn2_link", "label": "Button 2 link (e.g. #research)", "default": "#research" },
+
+    { "type": "header", "content": "Foundation cards" },
+    { "type": "text", "id": "foundation_heading", "label": "Heading", "default": "Calm is the foundation." },
+
+    { "type": "header", "content": "GABA two-column" },
+    { "type": "text", "id": "gaba_heading", "label": "Left heading", "default": "Calm Performance Starts With GABA" },
+    { "type": "textarea", "id": "gaba_body", "label": "Left body" },
+    { "type": "text", "id": "pharma_heading", "label": "Right heading", "default": "Why PharmaGABA®" },
+
+    { "type": "header", "content": "Formula logic" },
+    { "type": "text", "id": "logic_eyebrow", "label": "Eyebrow", "default": "Science + formula logic" },
+    { "type": "text", "id": "logic_heading", "label": "Heading", "default": "Calm first. Then support the moment." },
+
+    { "type": "header", "content": "Product cards" },
+    { "type": "text", "id": "products_heading", "label": "Heading", "default": "Three formulas. One foundation." },
+    { "type": "richtext", "id": "products_intro", "label": "Intro" },
+
+    { "type": "header", "content": "FAQ" },
+    { "type": "text", "id": "faq_heading", "label": "Heading", "default": "Science FAQ" },
+    { "type": "text", "id": "faq_button", "label": "Button label", "default": "View All FAQs" },
+    { "type": "url", "id": "faq_link", "label": "Button link" },
+
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Start with calm. Show up ready." },
+    { "type": "richtext", "id": "cta_copy", "label": "Copy" },
+    { "type": "text", "id": "cta_btn1_label", "label": "Button 1 label", "default": "Shop Calm" },
+    { "type": "url", "id": "cta_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "cta_btn2_label", "label": "Button 2 label", "default": "Shop Focus" },
+    { "type": "url", "id": "cta_btn2_link", "label": "Button 2 link" },
+    { "type": "text", "id": "cta_btn3_label", "label": "Button 3 label", "default": "Shop Energy" },
+    { "type": "url", "id": "cta_btn3_link", "label": "Button 3 link" },
+
+    { "type": "header", "content": "Bottom banner" },
+    { "type": "image_picker", "id": "banner_image", "label": "Banner image" },
+    { "type": "text", "id": "banner_label", "label": "Button label", "default": "Shop" },
+    { "type": "url", "id": "banner_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "hero_badge",
+      "name": "Hero badge",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "science-backed.png" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Research Supported Ingredient" }
+      ]
+    },
+    {
+      "type": "foundation_card",
+      "name": "Foundation card",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "calm-first-foundation.png" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Calm supports clarity" },
+        { "type": "textarea", "id": "copy", "label": "Copy" }
+      ]
+    },
+    {
+      "type": "pharma_reason",
+      "name": "PharmaGABA reason",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "naturally-fermented-pharmagaba.png" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Naturally fermented" }
+      ]
+    },
+    {
+      "type": "logic_card",
+      "name": "Formula logic card",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "naturally-fermented-pharmagaba.png" },
+        { "type": "text", "id": "title", "label": "Title", "default": "PharmaGABA®" },
+        { "type": "textarea", "id": "copy", "label": "Copy" }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Product image" },
+        { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "calm-blueberry-acai.png" },
+        { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
+        { "type": "textarea", "id": "support", "label": "Support line" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
+        { "type": "url", "id": "link", "label": "Button link" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "What makes PharmaGABA different?" },
+        { "type": "textarea", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Science",
+      "blocks": [
+        { "type": "hero_badge", "settings": { "icon_fallback": "naturally-fermented-pharmagaba.png", "label": "Naturally Fermented PharmaGABA®" } },
+        { "type": "hero_badge", "settings": { "icon_fallback": "science-backed.png", "label": "Research Supported Ingredient" } },
+        { "type": "hero_badge", "settings": { "icon_fallback": "transparent-standards.png", "label": "Transparent Standards" } },
+        { "type": "foundation_card", "settings": { "icon_fallback": "control-under-pressure.png", "title": "Pressure creates noise", "copy": "When pressure rises, more stimulation is not always better." } },
+        { "type": "foundation_card", "settings": { "icon_fallback": "supports-clear-thinking.png", "title": "Calm supports clarity", "copy": "A calmer state can help support clearer thinking and better composure.*" } },
+        { "type": "foundation_card", "settings": { "icon_fallback": "calm-first-foundation.png", "title": "AVRO starts with state", "copy": "AVRO is built around state support before pressure-sensitive moments." } },
+        { "type": "pharma_reason", "settings": { "icon_fallback": "naturally-fermented-pharmagaba.png", "label": "Naturally fermented" } },
+        { "type": "pharma_reason", "settings": { "icon_fallback": "consistency-quality.png", "label": "Consistent ingredient quality" } },
+        { "type": "pharma_reason", "settings": { "icon_fallback": "science-backed.png", "label": "Supported by published research" } },
+        { "type": "pharma_reason", "settings": { "icon_fallback": "calm-first-foundation.png", "label": "Used at 200 mg active GABA in every AVRO formula" } },
+        { "type": "logic_card", "settings": { "icon_fallback": "naturally-fermented-pharmagaba.png", "title": "PharmaGABA®", "copy": "Naturally fermented PharmaGABA® is the calm-first foundation in every AVRO formula." } },
+        { "type": "logic_card", "settings": { "icon_fallback": "mind-body-diagram.png", "title": "Formula Logic", "copy": "Each formula builds from the same base, then adds targeted support for the moment." } },
+        { "type": "logic_card", "settings": { "icon_fallback": "transparent-standards.png", "title": "Quality + Transparency", "copy": "Clear ingredient disclosure and quality standards, with documentation where applicable." } },
+        { "type": "logic_card", "settings": { "icon_fallback": "calm-first-foundation.png", "title": "Calm First Foundation", "copy": "AVRO is designed to support state before stimulation." } },
+        { "type": "product", "settings": { "image_fallback": "calm-blueberry-acai.png", "name": "AVRO Calm", "support": "Calm support without stimulation.*", "button_label": "Shop Calm", "link": "/collections/calm" } },
+        { "type": "product", "settings": { "image_fallback": "focus-pomegranate-raspberry.png", "name": "AVRO Focus", "support": "Clarity and focus support without caffeine.*", "button_label": "Shop Focus", "link": "/collections/focus" } },
+        { "type": "product", "settings": { "image_fallback": "energy-fuji-apple.png", "name": "AVRO Energy", "support": "Natural caffeine with a calm-first foundation.*", "button_label": "Shop Energy", "link": "/collections/energy" } },
+        { "type": "faq", "settings": { "question": "What makes PharmaGABA different?", "answer": "PharmaGABA is a naturally fermented form of GABA used as part of AVRO's calm-first foundation." } },
+        { "type": "faq", "settings": { "question": "Why does AVRO start with calm?", "answer": "AVRO is built around the idea that state matters before pressure-sensitive moments, and more stimulation is not always the answer." } },
+        { "type": "faq", "settings": { "question": "Does AVRO contain caffeine?", "answer": "Calm and Focus are caffeine free. Energy contains 120 mg natural caffeine." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

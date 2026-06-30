@@ -1,0 +1,453 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — OUR STORY PAGE  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-our-story.liquid and paste this entire file in.
+  2. Upload every image in this folder to your theme Assets (filenames must match).
+  3. Add "AVRO — Our Story" to a page via the theme editor.
+  4. All headings/body/buttons/images are editable. The use-case icons, Japanese
+     principles, founders, and product trio are add/remove/reorder BLOCKS.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-os-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF; --soft: #ECECEC;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857;
+    --avro-blue: #94C6D4; --avro-blue-deep: #5AAEBC;
+    font-family: "DM Sans", system-ui, sans-serif; color: var(--ink); display: block; background: var(--base);
+  }
+  #avro-os-{{ section.id }} * { box-sizing: border-box; }
+  #avro-os-{{ section.id }} h1, #avro-os-{{ section.id }} h2, #avro-os-{{ section.id }} h3 { margin: 0; }
+  #avro-os-{{ section.id }} img { max-width: 100%; }
+  #avro-os-{{ section.id }} .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 28px; font-size: 16px; font-weight: 700; border-radius: 999px; text-decoration: none; cursor: pointer; transition: background-color .2s ease, color .2s ease; }
+  #avro-os-{{ section.id }} .btn-primary { background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); }
+  #avro-os-{{ section.id }} .btn-primary:hover { background: transparent; color: var(--charcoal); }
+  #avro-os-{{ section.id }} .btn-secondary { background: transparent; color: var(--charcoal); border: 2px solid var(--charcoal); }
+  #avro-os-{{ section.id }} .btn-secondary:hover { background: var(--charcoal); color: var(--bone); }
+  #avro-os-{{ section.id }} .wrap { width: 100%; max-width: 1440px; margin: 0 auto; padding: clamp(52px,7vw,86px) clamp(18px,5vw,64px); }
+
+  @keyframes os-rise { 0% { opacity: 0; transform: translateY(24px);} 100% { opacity: 1; transform: translateY(0);} }
+  #avro-os-{{ section.id }} .os-fade { opacity: 0; animation: os-rise .9s cubic-bezier(0.22,1,0.36,1) forwards; }
+  @media (prefers-reduced-motion: reduce) { #avro-os-{{ section.id }} .os-fade { animation: none; opacity: 1; } }
+
+  /* HERO */
+  #avro-os-{{ section.id }} .hero-card { position: relative; width: calc(100% - 32px); margin: 0 auto 16px; aspect-ratio: 16/9; overflow: hidden; border-radius: 20px; background: var(--base-light); }
+  #avro-os-{{ section.id }} .hero-img-wrap { position: absolute; inset: 0; }
+  #avro-os-{{ section.id }} .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #avro-os-{{ section.id }} .hero-scrim { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(100deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.74) 30%, rgba(255,255,255,0.34) 56%, rgba(255,255,255,0) 76%); }
+  #avro-os-{{ section.id }} .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: clamp(28px,5vw,72px) clamp(20px,5vw,64px); max-width: 700px; }
+  #avro-os-{{ section.id }} .hero-eyebrow { color: var(--warm-gray); font-size: clamp(12px,1.1vw,14px); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 12px; }
+  #avro-os-{{ section.id }} .hero-content h1 { font-weight: 900; line-height: 1.04; letter-spacing: -0.02em; font-size: clamp(26px,3.3vw,44px); color: var(--ink); }
+  #avro-os-{{ section.id }} .hero-content h1 span { display: block; }
+  #avro-os-{{ section.id }} .hero-divider { display: block; height: 3px; width: 56px; background: rgba(28,27,20,0.15); border-radius: 999px; margin: 24px 0 20px; }
+  #avro-os-{{ section.id }} .hero-body { display: flex; flex-direction: column; gap: 12px; max-width: 440px; color: rgba(28,27,20,0.75); font-size: clamp(14px,1.15vw,16px); line-height: 1.6; font-weight: 500; }
+  #avro-os-{{ section.id }} .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  #avro-os-{{ section.id }} .hero-img-mobile { display: none; }
+  @media (max-width: 768px) {
+    #avro-os-{{ section.id }} .hero-card { aspect-ratio: unset; overflow: visible; border-radius: 0; background: transparent; display: flex; flex-direction: column; width: 100%; }
+    #avro-os-{{ section.id }} .hero-img-wrap { position: relative; width: calc(100% - 32px); margin: 16px auto 0; aspect-ratio: 4/3; border-radius: 20px; overflow: hidden; flex-shrink: 0; }
+    #avro-os-{{ section.id }} .hero-scrim { display: none; }
+    #avro-os-{{ section.id }} .hero-content { position: static; padding: 24px 20px 32px; max-width: none; }
+  }
+
+  /* HEADSPACE */
+  #avro-os-{{ section.id }} .hs-intro { max-width: 820px; margin-bottom: clamp(32px,4vw,52px); }
+  #avro-os-{{ section.id }} .hs-intro h2 { font-weight: 900; font-size: clamp(28px,4vw,48px); line-height: 1.06; color: var(--ink); margin-bottom: 20px; }
+  #avro-os-{{ section.id }} .hs-intro .copy { display: flex; flex-direction: column; gap: 16px; color: rgba(28,27,20,0.75); font-size: clamp(16px,1.3vw,18px); line-height: 1.6; font-weight: 500; }
+  #avro-os-{{ section.id }} .hs-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 48px clamp(20px,3vw,48px); }
+  #avro-os-{{ section.id }} .hs-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+  #avro-os-{{ section.id }} .hs-item img { width: 80px; height: 80px; object-fit: contain; }
+  #avro-os-{{ section.id }} .hs-item span { font-weight: 700; font-size: clamp(14px,1.15vw,17px); line-height: 1.3; color: var(--ink); }
+  @media (min-width: 640px) { #avro-os-{{ section.id }} .hs-grid { grid-template-columns: repeat(3,1fr); } }
+  @media (min-width: 1024px) { #avro-os-{{ section.id }} .hs-grid { grid-template-columns: repeat(5,1fr); } #avro-os-{{ section.id }} .hs-item img { width: 112px; height: 112px; } }
+
+  /* IKIGAI */
+  #avro-os-{{ section.id }} .ik-sec { background: var(--base-light); }
+  #avro-os-{{ section.id }} .ik-grid { display: grid; gap: clamp(32px,4vw,64px); align-items: center; }
+  #avro-os-{{ section.id }} .ik-grid h2 { font-weight: 900; font-size: clamp(24px,2.6vw,34px); line-height: 1.08; color: var(--ink); margin-bottom: 20px; }
+  #avro-os-{{ section.id }} .ik-copy { display: flex; flex-direction: column; gap: 16px; color: rgba(28,27,20,0.75); font-size: clamp(15px,1.15vw,16px); line-height: 1.6; font-weight: 500; }
+  #avro-os-{{ section.id }} .ik-copy .strong { color: var(--ink); font-weight: 700; }
+  #avro-os-{{ section.id }} .ik-quote { margin-top: 28px; font-weight: 900; font-size: clamp(19px,1.9vw,24px); line-height: 1.18; color: var(--avro-blue-deep); }
+  #avro-os-{{ section.id }} .ik-venn { display: flex; align-items: center; justify-content: center; padding: 16px 0; }
+  #avro-os-{{ section.id }} .ik-venn svg { width: clamp(280px,32vw,400px); height: auto; }
+  #avro-os-{{ section.id }} .ik-principles { display: flex; flex-direction: column; gap: 24px; }
+  #avro-os-{{ section.id }} .ik-prin { display: flex; align-items: flex-start; gap: 16px; }
+  #avro-os-{{ section.id }} .ik-prin img { width: 56px; height: 56px; object-fit: contain; flex-shrink: 0; margin-top: -4px; }
+  #avro-os-{{ section.id }} .ik-prin h3 { font-weight: 900; font-size: clamp(14px,1.1vw,16px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); margin-bottom: 4px; }
+  #avro-os-{{ section.id }} .ik-prin p { color: rgba(28,27,20,0.7); font-size: clamp(14px,1.1vw,16px); line-height: 1.6; font-weight: 500; margin: 0; }
+  @media (min-width: 1024px) { #avro-os-{{ section.id }} .ik-grid { grid-template-columns: 1fr 1.05fr 1fr; } }
+
+  /* FOUNDERS */
+  #avro-os-{{ section.id }} .fd-head { text-align: center; max-width: 820px; margin: 0 auto clamp(32px,4.5vw,56px); }
+  #avro-os-{{ section.id }} .fd-head h2 { font-weight: 900; font-size: clamp(26px,3.4vw,42px); line-height: 1.08; color: var(--ink); }
+  #avro-os-{{ section.id }} .fd-grid { display: grid; grid-template-columns: 1fr; gap: 40px clamp(20px,2.6vw,40px); max-width: 1100px; margin: 0 auto; }
+  #avro-os-{{ section.id }} .fd-card { display: flex; flex-direction: column; gap: 20px; }
+  #avro-os-{{ section.id }} .fd-photo { position: relative; width: 200px; aspect-ratio: 3/4; border-radius: 18px; overflow: hidden; background: var(--soft); flex-shrink: 0; }
+  #avro-os-{{ section.id }} .fd-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  #avro-os-{{ section.id }} .fd-card h3 { font-weight: 900; font-size: clamp(20px,2.1vw,26px); line-height: 1.15; color: var(--ink); }
+  #avro-os-{{ section.id }} .fd-role { color: var(--avro-blue-deep); font-size: clamp(13px,1.05vw,15px); font-weight: 700; margin: 4px 0 0; }
+  #avro-os-{{ section.id }} .fd-bio { display: flex; flex-direction: column; gap: 14px; color: rgba(28,27,20,0.75); font-size: clamp(14px,1.1vw,16px); line-height: 1.6; font-weight: 500; margin-top: 12px; }
+  #avro-os-{{ section.id }} .fd-quote { margin: clamp(36px,5vw,60px) auto 0; max-width: 820px; text-align: center; font-weight: 900; font-size: clamp(19px,2.4vw,30px); line-height: 1.2; }
+  #avro-os-{{ section.id }} .fd-quote .a { color: var(--ink); } #avro-os-{{ section.id }} .fd-quote .b { color: var(--avro-blue-deep); }
+  @media (min-width: 640px) { #avro-os-{{ section.id }} .fd-card { flex-direction: row; align-items: flex-start; gap: 28px; } }
+  @media (min-width: 900px) { #avro-os-{{ section.id }} .fd-grid { grid-template-columns: 1fr 1fr; gap: 56px; } }
+
+  /* SCIENCE + PRODUCT TRIO */
+  #avro-os-{{ section.id }} .sci-sec { background: var(--base-light); }
+  #avro-os-{{ section.id }} .sci-grid { display: grid; gap: clamp(32px,4vw,64px); align-items: center; }
+  #avro-os-{{ section.id }} .sci-grid h2 { font-weight: 900; font-size: clamp(26px,3.4vw,42px); line-height: 1.08; color: var(--ink); margin-bottom: 20px; }
+  #avro-os-{{ section.id }} .sci-copy { display: flex; flex-direction: column; gap: 16px; color: rgba(28,27,20,0.75); font-size: clamp(15px,1.3vw,17px); line-height: 1.6; font-weight: 500; }
+  #avro-os-{{ section.id }} .sci-trio { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(10px,1.6vw,20px); }
+  #avro-os-{{ section.id }} .sci-prod { display: flex; flex-direction: column; gap: 16px; border-radius: 24px; background: var(--base-light); padding: clamp(12px,1.6vw,24px); text-decoration: none; transition: transform .2s ease; }
+  #avro-os-{{ section.id }} .sci-prod:hover { transform: translateY(-2px); }
+  #avro-os-{{ section.id }} .sci-prod .thumb { position: relative; aspect-ratio: 1/1; border-radius: 20px; overflow: hidden; background: var(--bone); display: flex; align-items: center; justify-content: center; }
+  #avro-os-{{ section.id }} .sci-prod .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  #avro-os-{{ section.id }} .sci-prod p { color: rgba(28,27,20,0.7); font-size: clamp(12px,1vw,14px); line-height: 1.6; font-weight: 500; text-align: center; margin: 0; padding: 0 4px; }
+  @media (min-width: 1024px) { #avro-os-{{ section.id }} .sci-grid { grid-template-columns: 0.85fr 1.15fr; } #avro-os-{{ section.id }} .sci-prod { background: var(--bone); } }
+
+  /* REAL LIFE */
+  #avro-os-{{ section.id }} .rl-grid { display: grid; grid-template-columns: 1fr; align-items: stretch; }
+  #avro-os-{{ section.id }} .rl-img { position: relative; min-height: 280px; }
+  #avro-os-{{ section.id }} .rl-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #avro-os-{{ section.id }} .rl-copy { display: flex; flex-direction: column; justify-content: center; background: var(--base-light); padding: clamp(40px,6vw,80px) clamp(20px,5vw,72px); }
+  #avro-os-{{ section.id }} .rl-copy .inner { max-width: 560px; }
+  #avro-os-{{ section.id }} .rl-copy h2 { font-weight: 900; font-size: clamp(26px,3.4vw,42px); line-height: 1.08; color: var(--ink); margin-bottom: 20px; }
+  #avro-os-{{ section.id }} .rl-body { display: flex; flex-direction: column; gap: 16px; color: rgba(28,27,20,0.75); font-size: clamp(15px,1.3vw,17px); line-height: 1.6; font-weight: 500; }
+  #avro-os-{{ section.id }} .rl-body .accent { font-weight: 900; font-size: clamp(18px,2vw,24px); line-height: 1.3; color: var(--avro-blue-deep); }
+  #avro-os-{{ section.id }} .rl-ctas { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
+  @media (min-width: 1024px) { #avro-os-{{ section.id }} .rl-grid { grid-template-columns: 1fr 1fr; } #avro-os-{{ section.id }} .rl-img { min-height: 560px; } }
+{% endstyle %}
+
+{%- assign use_cases = section.blocks | where: "type", "use_case" -%}
+{%- assign principles = section.blocks | where: "type", "principle" -%}
+{%- assign founders = section.blocks | where: "type", "founder" -%}
+{%- assign products = section.blocks | where: "type", "product" -%}
+
+<div id="avro-os-{{ section.id }}">
+
+  {%- comment -%} HERO {%- endcomment -%}
+  <section>
+    <div class="hero-card">
+      <div class="hero-img-wrap">
+        {%- if section.settings.hero_image != blank -%}
+          <img class="hero-img" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}">
+        {%- else -%}
+          <img class="hero-img" src="{{ 'journal-coffee-window.jpg' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}">
+        {%- endif -%}
+      </div>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="hero-content">
+        <span class="hero-eyebrow os-fade" style="animation-delay:.12s;">{{ section.settings.hero_eyebrow | default: 'Our Story' }}</span>
+        <h1>
+          <span class="os-fade" style="animation-delay:.2s;">{{ section.settings.hero_line1 | default: 'Calm is not the opposite of performance.' }}</span>
+          <span class="os-fade" style="animation-delay:.34s; margin-top:4px;">{{ section.settings.hero_line2 | default: 'It is where performance begins.' }}</span>
+        </h1>
+        <span class="hero-divider os-fade" style="animation-delay:.5s;" aria-hidden="true"></span>
+        <div class="hero-body os-fade" style="animation-delay:.58s;">
+          <p>{{ section.settings.hero_body1 | default: "Many of life's most important moments don't require more stimulation. They require us to become calmer, clearer and more composed." }}</p>
+          <p>{{ section.settings.hero_body2 | default: 'AVRO is creating Calm Performance for people who want to bring the right headspace to the moments that matter.*' }}</p>
+        </div>
+        <div class="hero-ctas os-fade" style="animation-delay:.7s;">
+          <a href="{{ section.settings.hero_btn1_link | default: '/collections/all' }}" class="btn btn-primary">{{ section.settings.hero_btn1_label | default: 'Find Your Formula' }}</a>
+          <a href="{{ section.settings.hero_btn2_link | default: '/pages/science' }}" class="btn btn-secondary">{{ section.settings.hero_btn2_label | default: 'Explore the Science' }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} HEADSPACE {%- endcomment -%}
+  <section class="wrap">
+    <div class="hs-intro">
+      <h2>{{ section.settings.hs_heading | default: 'A Better Headspace for What Comes Next' }}</h2>
+      <div class="copy">{{ section.settings.hs_body | default: '<p>Pressure is part of life. The goal is not to eliminate it. The goal is to meet it well.</p><p>To respond instead of react. To stay clear when the environment becomes noisy. To remain composed when the stakes rise.</p><p>AVRO supports the calm, clear and composed headspace people want when pressure rises.*</p>' }}</div>
+    </div>
+    {%- if use_cases.size > 0 -%}
+    <div class="hs-grid">
+      {%- for b in use_cases -%}
+      <div class="hs-item" {{ b.shopify_attributes }}>
+        {%- if b.settings.icon != blank -%}
+          <img src="{{ b.settings.icon | image_url: width: 224 }}" alt="">
+        {%- else -%}
+          <img src="{{ b.settings.icon_fallback | default: 'social-composure.png' | asset_url }}" alt="">
+        {%- endif -%}
+        <span>{{ b.settings.label }}</span>
+      </div>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+  </section>
+
+  {%- comment -%} IKIGAI {%- endcomment -%}
+  <section class="ik-sec">
+    <div class="wrap">
+      <div class="ik-grid">
+        <div>
+          <h2>{{ section.settings.ik_heading | default: 'Inspired by Ikigai' }}</h2>
+          <div class="ik-copy">{{ section.settings.ik_body | default: '<p>Ikigai is often described as the reason you get up in the morning — the people, activities, responsibilities and ambitions that give your life meaning.</p><p>It does not need to be one grand purpose. It can be the work you care about, the people who rely on you, the challenge you are preparing to meet or the everyday moments that make life worthwhile.</p><p class="strong">Your Ikigai is personal.</p><p>AVRO does not define it for you. We simply believe the headspace you bring to it matters.</p>' }}</div>
+          <p class="ik-quote">{{ section.settings.ik_quote | default: 'Your purpose is yours. Meet it with composure.' }}</p>
+        </div>
+
+        <div class="ik-venn" aria-hidden="false">
+          <svg viewBox="0 0 280 280" role="img" aria-label="The Ikigai Venn diagram">
+            <defs>
+              <linearGradient id="ikv-center-{{ section.id }}" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#06336f"/>
+                <stop offset="100%" stop-color="#001f4a"/>
+              </linearGradient>
+            </defs>
+            <g>
+              <circle cx="140" cy="78" r="78" fill="#94C6D4" fill-opacity="0.06" stroke="#94C6D4" stroke-opacity="0.45" stroke-width="1.5"/>
+              <circle cx="78" cy="140" r="78" fill="#94C6D4" fill-opacity="0.06" stroke="#94C6D4" stroke-opacity="0.45" stroke-width="1.5"/>
+              <circle cx="202" cy="140" r="78" fill="#94C6D4" fill-opacity="0.06" stroke="#94C6D4" stroke-opacity="0.45" stroke-width="1.5"/>
+              <circle cx="140" cy="202" r="78" fill="#94C6D4" fill-opacity="0.06" stroke="#94C6D4" stroke-opacity="0.45" stroke-width="1.5"/>
+            </g>
+            <text x="140" y="50" text-anchor="middle" font-size="11" font-weight="700" fill="#1C1B14" fill-opacity="0.88"><tspan x="140" dy="0">What you</tspan><tspan x="140" dy="13">love</tspan></text>
+            <text x="60" y="134" text-anchor="middle" font-size="11" font-weight="700" fill="#1C1B14" fill-opacity="0.88"><tspan x="60" dy="0">What you are</tspan><tspan x="60" dy="13">good at</tspan></text>
+            <text x="220" y="134" text-anchor="middle" font-size="11" font-weight="700" fill="#1C1B14" fill-opacity="0.88"><tspan x="220" dy="0">What the world</tspan><tspan x="220" dy="13">needs</tspan></text>
+            <text x="140" y="222" text-anchor="middle" font-size="11" font-weight="700" fill="#1C1B14" fill-opacity="0.88"><tspan x="140" dy="0">What you can be</tspan><tspan x="140" dy="13">paid for</tspan></text>
+            <ellipse cx="140" cy="140" rx="30" ry="40" fill="url(#ikv-center-{{ section.id }})"/>
+            <text x="140" y="145" text-anchor="middle" font-size="15" font-weight="800" letter-spacing="0.05em" fill="#ffffff">IKIGAI</text>
+          </svg>
+        </div>
+
+        <div>
+          <h2>{{ section.settings.jp_heading | default: 'A Japanese Influence' }}</h2>
+          <p class="ik-copy" style="margin-bottom:28px;">{{ section.settings.jp_body | default: 'AVRO is shaped by ideas that have long influenced Japanese culture and craftsmanship.' }}</p>
+          {%- if principles.size > 0 -%}
+          <div class="ik-principles">
+            {%- for b in principles -%}
+            <div class="ik-prin" {{ b.shopify_attributes }}>
+              {%- if b.settings.icon != blank -%}
+                <img src="{{ b.settings.icon | image_url: width: 128 }}" alt="">
+              {%- else -%}
+                <img src="{{ b.settings.icon_fallback | default: 'mind.png' | asset_url }}" alt="">
+              {%- endif -%}
+              <div>
+                <h3>{{ b.settings.term }}</h3>
+                <p>{{ b.settings.copy }}</p>
+              </div>
+            </div>
+            {%- endfor -%}
+          </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} FOUNDERS {%- endcomment -%}
+  {%- if founders.size > 0 -%}
+  <section class="wrap">
+    <div class="fd-head">
+      <h2>{{ section.settings.fd_heading | default: 'Two Founders. One Shared Belief.' }}</h2>
+    </div>
+    <div class="fd-grid">
+      {%- for b in founders -%}
+      <div class="fd-card" {{ b.shopify_attributes }}>
+        <div class="fd-photo">
+          {%- if b.settings.image != blank -%}
+            <img src="{{ b.settings.image | image_url: width: 500 }}" alt="{{ b.settings.name | escape }}, {{ b.settings.role | escape }} of AVRO">
+          {%- else -%}
+            <img src="{{ b.settings.image_fallback | default: 'keigo.jpg' | asset_url }}" alt="{{ b.settings.name | escape }}, {{ b.settings.role | escape }} of AVRO">
+          {%- endif -%}
+        </div>
+        <div>
+          <h3>{{ b.settings.name }}</h3>
+          <p class="fd-role">{{ b.settings.role }}</p>
+          <div class="fd-bio">{{ b.settings.bio }}</div>
+        </div>
+      </div>
+      {%- endfor -%}
+    </div>
+    <blockquote class="fd-quote">
+      <span class="a">{{ section.settings.fd_quote_a | default: "People don't always need more stimulation." }}</span><br>
+      <span class="b">{{ section.settings.fd_quote_b | default: 'Sometimes they need a better headspace.' }}</span>
+    </blockquote>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} SCIENCE + PRODUCT TRIO {%- endcomment -%}
+  <section class="sci-sec">
+    <div class="wrap">
+      <div class="sci-grid">
+        <div>
+          <h2>{{ section.settings.sci_heading | default: 'Japanese Science. Modern Performance.' }}</h2>
+          <div class="sci-copy">{{ section.settings.sci_body | default: "<p>Every AVRO formula begins with naturally fermented PharmaGABA®.*</p><p>This calm-first foundation connects AVRO's Japanese scientific roots with its modern purpose: supporting the headspace you want for what comes next.</p>" }}</div>
+          <div style="margin-top:32px;">
+            <a href="{{ section.settings.sci_btn_link | default: '/pages/science' }}" class="btn btn-secondary">{{ section.settings.sci_btn_label | default: 'Explore the Science' }}</a>
+          </div>
+        </div>
+        {%- if products.size > 0 -%}
+        <div class="sci-trio">
+          {%- for b in products -%}
+          <a href="{{ b.settings.link | default: '/collections/all' }}" class="sci-prod" {{ b.shopify_attributes }}>
+            <div class="thumb">
+              {%- if b.settings.image != blank -%}
+                <img src="{{ b.settings.image | image_url: width: 600 }}" alt="{{ b.settings.name | escape }}">
+              {%- else -%}
+                <img src="{{ b.settings.image_fallback | default: 'calm-blueberry-acai.png' | asset_url }}" alt="{{ b.settings.name | escape }}">
+              {%- endif -%}
+            </div>
+            <p>{{ b.settings.copy }}</p>
+          </a>
+          {%- endfor -%}
+        </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} REAL LIFE {%- endcomment -%}
+  <section>
+    <div class="rl-grid">
+      <div class="rl-img">
+        {%- if section.settings.rl_image != blank -%}
+          <img src="{{ section.settings.rl_image | image_url: width: 1600 }}" alt="{{ section.settings.rl_alt | escape }}">
+        {%- else -%}
+          <img src="{{ 'journal-coffee-window.jpg' | asset_url }}" alt="{{ section.settings.rl_alt | escape }}">
+        {%- endif -%}
+      </div>
+      <div class="rl-copy">
+        <div class="inner">
+          <h2>{{ section.settings.rl_heading | default: 'Built for Real Life' }}</h2>
+          <div class="rl-body">
+            <p>{{ section.settings.rl_body1 | default: 'AVRO is for anyone who cares about how they show up.' }}</p>
+            <p>{{ section.settings.rl_body2 | default: 'Before an important meeting. During a demanding workday. On the first tee. Before a difficult conversation. While preparing to create, compete, lead or decide.' }}</p>
+            <p>{{ section.settings.rl_body3 | default: 'These moments may look different, but they ask the same question:' }}</p>
+            <p class="accent">{{ section.settings.rl_accent | default: 'What headspace are you bringing with you?' }}</p>
+            <p>{{ section.settings.rl_body4 | default: 'AVRO is designed to support calm, clarity and composure when the answer matters.*' }}</p>
+          </div>
+          <div class="rl-ctas">
+            <a href="{{ section.settings.rl_btn1_link | default: '/collections/all' }}" class="btn btn-primary">{{ section.settings.rl_btn1_label | default: 'Find Your Formula' }}</a>
+            <a href="{{ section.settings.rl_btn2_link | default: '/pages/why-avro' }}" class="btn btn-secondary">{{ section.settings.rl_btn2_label | default: 'Why AVRO' }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "AVRO — Our Story",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_alt", "label": "Hero image alt", "default": "A calm, composed moment before a demanding day begins." },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Our Story" },
+    { "type": "text", "id": "hero_line1", "label": "Headline line 1", "default": "Calm is not the opposite of performance." },
+    { "type": "text", "id": "hero_line2", "label": "Headline line 2", "default": "It is where performance begins." },
+    { "type": "textarea", "id": "hero_body1", "label": "Body paragraph 1" },
+    { "type": "textarea", "id": "hero_body2", "label": "Body paragraph 2" },
+    { "type": "text", "id": "hero_btn1_label", "label": "Button 1 label", "default": "Find Your Formula" },
+    { "type": "url", "id": "hero_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "hero_btn2_label", "label": "Button 2 label", "default": "Explore the Science" },
+    { "type": "url", "id": "hero_btn2_link", "label": "Button 2 link" },
+
+    { "type": "header", "content": "Headspace" },
+    { "type": "text", "id": "hs_heading", "label": "Heading", "default": "A Better Headspace for What Comes Next" },
+    { "type": "richtext", "id": "hs_body", "label": "Body" },
+
+    { "type": "header", "content": "Ikigai (left column)" },
+    { "type": "text", "id": "ik_heading", "label": "Heading", "default": "Inspired by Ikigai" },
+    { "type": "richtext", "id": "ik_body", "label": "Body" },
+    { "type": "text", "id": "ik_quote", "label": "Pull quote", "default": "Your purpose is yours. Meet it with composure." },
+
+    { "type": "header", "content": "Japanese Influence (right column)" },
+    { "type": "text", "id": "jp_heading", "label": "Heading", "default": "A Japanese Influence" },
+    { "type": "richtext", "id": "jp_body", "label": "Intro" },
+
+    { "type": "header", "content": "Founders" },
+    { "type": "text", "id": "fd_heading", "label": "Heading", "default": "Two Founders. One Shared Belief." },
+    { "type": "text", "id": "fd_quote_a", "label": "Quote line 1", "default": "People don't always need more stimulation." },
+    { "type": "text", "id": "fd_quote_b", "label": "Quote line 2", "default": "Sometimes they need a better headspace." },
+
+    { "type": "header", "content": "Science + product trio" },
+    { "type": "text", "id": "sci_heading", "label": "Heading", "default": "Japanese Science. Modern Performance." },
+    { "type": "richtext", "id": "sci_body", "label": "Body" },
+    { "type": "text", "id": "sci_btn_label", "label": "Button label", "default": "Explore the Science" },
+    { "type": "url", "id": "sci_btn_link", "label": "Button link" },
+
+    { "type": "header", "content": "Built for Real Life" },
+    { "type": "image_picker", "id": "rl_image", "label": "Image" },
+    { "type": "text", "id": "rl_alt", "label": "Image alt", "default": "A calm, considered moment before a demanding day begins." },
+    { "type": "text", "id": "rl_heading", "label": "Heading", "default": "Built for Real Life" },
+    { "type": "textarea", "id": "rl_body1", "label": "Body 1" },
+    { "type": "textarea", "id": "rl_body2", "label": "Body 2" },
+    { "type": "textarea", "id": "rl_body3", "label": "Body 3" },
+    { "type": "text", "id": "rl_accent", "label": "Accent line", "default": "What headspace are you bringing with you?" },
+    { "type": "textarea", "id": "rl_body4", "label": "Body 4" },
+    { "type": "text", "id": "rl_btn1_label", "label": "Button 1 label", "default": "Find Your Formula" },
+    { "type": "url", "id": "rl_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "rl_btn2_label", "label": "Button 2 label", "default": "Why AVRO" },
+    { "type": "url", "id": "rl_btn2_link", "label": "Button 2 link" }
+  ],
+  "blocks": [
+    {
+      "type": "use_case",
+      "name": "Use case",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "social-composure.png" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Important conversations" }
+      ]
+    },
+    {
+      "type": "principle",
+      "name": "Japanese principle",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "mind.png" },
+        { "type": "text", "id": "term", "label": "Term", "default": "Ikigai" },
+        { "type": "textarea", "id": "copy", "label": "Copy" }
+      ]
+    },
+    {
+      "type": "founder",
+      "name": "Founder",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "image_fallback", "label": "Photo asset filename", "default": "keigo.jpg" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Keigo Sugawara" },
+        { "type": "text", "id": "role", "label": "Role", "default": "Co-Founder & CEO" },
+        { "type": "richtext", "id": "bio", "label": "Bio" }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Product image" },
+        { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "calm-blueberry-acai.png" },
+        { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
+        { "type": "textarea", "id": "copy", "label": "Copy" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Our Story",
+      "blocks": [
+        { "type": "use_case", "settings": { "icon_fallback": "social-composure.png", "label": "Important conversations" } },
+        { "type": "use_case", "settings": { "icon_fallback": "cohort-tech.png", "label": "Demanding workdays" } },
+        { "type": "use_case", "settings": { "icon_fallback": "cohort-golf.png", "label": "Competitive moments" } },
+        { "type": "use_case", "settings": { "icon_fallback": "control-under-pressure.png", "label": "Training and workouts" } },
+        { "type": "use_case", "settings": { "icon_fallback": "supports-clear-thinking.png", "label": "Presentations and decisions" } },
+        { "type": "principle", "settings": { "icon_fallback": "mind.png", "term": "Ikigai", "copy": "A sense of meaning that gives direction to everyday life." } },
+        { "type": "principle", "settings": { "icon_fallback": "consistency-quality.png", "term": "Kaizen", "copy": "Meaningful improvement through consistent, thoughtful progress." } },
+        { "type": "principle", "settings": { "icon_fallback": "quality-standards.png", "term": "Kodawari", "copy": "A commitment to quality, craft and the details others may overlook." } },
+        { "type": "founder", "settings": { "image_fallback": "keigo.jpg", "name": "Keigo Sugawara", "role": "Co-Founder & CEO", "bio": "<p>Keigo grew up in Japan and studied applied microbiology and fermentation science at the University of Tokyo.</p><p>His background shaped his respect for ingredients, scientific discipline and the role fermentation can play in creating thoughtful, functional products.</p>" } },
+        { "type": "founder", "settings": { "image_fallback": "peter.jpg", "name": "Peter van Stolk", "role": "Co-Founder & CMO", "bio": "<p>Peter brought decades of experience building consumer brands and challenging established categories.</p><p>He saw that AVRO could introduce a new way of thinking about how people prepare for demanding moments.</p>" } },
+        { "type": "product", "settings": { "image_fallback": "calm-blueberry-acai.png", "name": "AVRO Calm", "copy": "For moments when composure comes first.*", "link": "/collections/calm" } },
+        { "type": "product", "settings": { "image_fallback": "focus-pomegranate-raspberry.png", "name": "AVRO Focus", "copy": "For moments that call for sustained attention and clarity.*", "link": "/collections/focus" } },
+        { "type": "product", "settings": { "image_fallback": "energy-fuji-apple.png", "name": "AVRO Energy", "copy": "For moments when you want steady energy while maintaining a sense of control.*", "link": "/collections/energy" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

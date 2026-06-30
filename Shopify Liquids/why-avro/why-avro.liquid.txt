@@ -1,0 +1,300 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — WHY AVRO PAGE  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-why.liquid and paste this entire file in.
+  2. Upload every image in this folder to your theme Assets (filenames must match).
+  3. Add "AVRO — Why AVRO" to a page via the theme editor.
+  4. Headings/body/buttons/images are editable. Difference cards, product cards,
+     and formula-logic cards are add/remove/reorder BLOCKS.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-why-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --avro-blue: #94C6D4;
+    font-family: "DM Sans", system-ui, sans-serif; color: var(--ink); display: block; background: var(--base);
+  }
+  #avro-why-{{ section.id }} * { box-sizing: border-box; }
+  #avro-why-{{ section.id }} h1, #avro-why-{{ section.id }} h2, #avro-why-{{ section.id }} h3 { margin: 0; }
+  #avro-why-{{ section.id }} img { max-width: 100%; }
+  #avro-why-{{ section.id }} .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 28px; font-size: 16px; font-weight: 700; border-radius: 999px; text-decoration: none; cursor: pointer; border: 2px solid var(--charcoal); background: transparent; color: var(--charcoal); transition: background-color .2s ease, color .2s ease; }
+  #avro-why-{{ section.id }} .btn:hover { background: var(--charcoal); color: var(--bone); }
+
+  /* HERO */
+  @keyframes ph-rise { 0% { opacity: 0; transform: translateY(24px);} 100% { opacity: 1; transform: translateY(0);} }
+  @keyframes ph-fade-up { 0% { opacity: 0; transform: translateY(10px);} 100% { opacity: 1; transform: translateY(0);} }
+  #avro-why-{{ section.id }} .ph-word { display: inline-block; opacity: 0; transform: translateY(24px); animation: ph-rise .95s cubic-bezier(0.34,1.4,0.4,1) forwards; }
+  #avro-why-{{ section.id }} .ph-fade { opacity: 0; animation: ph-fade-up .7s cubic-bezier(0.22,1,0.36,1) forwards; }
+  @media (prefers-reduced-motion: reduce) { #avro-why-{{ section.id }} .ph-word, #avro-why-{{ section.id }} .ph-fade { animation: none !important; opacity: 1 !important; transform: none !important; } }
+  #avro-why-{{ section.id }} .ph-card { position: relative; width: calc(100% - 32px); margin: 0 auto 16px; aspect-ratio: 16/9; overflow: hidden; background: var(--base-light); border-radius: 20px; }
+  #avro-why-{{ section.id }} .ph-img-wrap { position: absolute; inset: 0; }
+  #avro-why-{{ section.id }} .ph-img-desktop, #avro-why-{{ section.id }} .ph-img-mobile { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: right center; }
+  #avro-why-{{ section.id }} .ph-img-mobile { display: none; }
+  #avro-why-{{ section.id }} .ph-content { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: clamp(32px,5vw,80px) clamp(20px,5vw,64px); }
+  #avro-why-{{ section.id }} .ph-content .inner { display: flex; flex-direction: column; max-width: 580px; }
+  #avro-why-{{ section.id }} .ph-content h1 { font-weight: 900; font-size: clamp(32px,4vw,60px); line-height: 1.05; letter-spacing: -0.025em; color: var(--ink); margin-bottom: 14px; }
+  #avro-why-{{ section.id }} .ph-lede { animation-delay: .85s; font-weight: 500; font-size: clamp(16px,1.4vw,20px); line-height: 1.5; color: var(--ink); max-width: 500px; margin-bottom: 24px; }
+  #avro-why-{{ section.id }} .ph-cta { animation-delay: 1.05s; display: flex; flex-wrap: wrap; gap: 12px; width: 100%; max-width: 520px; }
+  #avro-why-{{ section.id }} .ph-cta .btn { flex: 1 1 180px; min-width: 180px; }
+  @media (max-width: 768px) {
+    #avro-why-{{ section.id }} .ph-card { aspect-ratio: unset; overflow: visible; display: flex; flex-direction: column; }
+    #avro-why-{{ section.id }} .ph-img-wrap { position: relative; width: calc(100% - 32px); margin: 16px auto 0; aspect-ratio: 3/4; border-radius: 20px; overflow: hidden; flex-shrink: 0; }
+    #avro-why-{{ section.id }} .ph-img-desktop { display: none; } #avro-why-{{ section.id }} .ph-img-mobile { display: block; }
+    #avro-why-{{ section.id }} .ph-content { position: static; padding: 24px 20px 32px; }
+    #avro-why-{{ section.id }} .ph-cta { flex-direction: column; align-items: stretch; max-width: 320px; }
+    #avro-why-{{ section.id }} .ph-cta .btn { width: 100%; flex: 0 0 auto; }
+  }
+
+  /* SECTIONS */
+  #avro-why-{{ section.id }} .sec { width: 100%; max-width: 1440px; margin: 0 auto; padding: clamp(52px,7vw,86px) clamp(18px,5vw,64px); }
+  #avro-why-{{ section.id }} .sec-h2 { font-weight: 900; font-size: clamp(30px,4vw,52px); line-height: 1.05; color: var(--ink); margin-bottom: 34px; max-width: 900px; }
+  #avro-why-{{ section.id }} .cards-3 { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 768px) { #avro-why-{{ section.id }} .cards-3 { grid-template-columns: repeat(3,1fr); } }
+  #avro-why-{{ section.id }} .info-card { background: var(--base-light); border-radius: 20px; padding: 28px; min-height: 180px; }
+  #avro-why-{{ section.id }} .info-card img { width: 72px; height: 72px; object-fit: contain; margin-bottom: 20px; }
+  #avro-why-{{ section.id }} .info-card h3 { font-weight: 900; margin-bottom: 8px; color: var(--ink); }
+  #avro-why-{{ section.id }} .info-card p { font-size: 16px; line-height: 1.6; color: rgba(28,27,20,0.75); margin: 0; }
+  #avro-why-{{ section.id }} .eyebrow { display: inline-block; margin-bottom: 16px; padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; background: var(--charcoal); color: var(--bone); }
+  #avro-why-{{ section.id }} .cards-4 { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 640px) { #avro-why-{{ section.id }} .cards-4 { grid-template-columns: repeat(2,1fr); } }
+  @media (min-width: 1024px) { #avro-why-{{ section.id }} .cards-4 { grid-template-columns: repeat(4,1fr); } }
+
+  /* PRODUCT CARDS */
+  #avro-why-{{ section.id }} .pc-sec { background: var(--base-light); padding: clamp(32px,6vw,88px) clamp(16px,5vw,64px); }
+  #avro-why-{{ section.id }} .pc-wrap { max-width: 1080px; margin: 0 auto; }
+  #avro-why-{{ section.id }} .pc-wrap > h2 { font-weight: 700; font-size: clamp(24px,3.2vw,48px); line-height: 1; color: var(--ink); margin-bottom: 10px; }
+  #avro-why-{{ section.id }} .pc-wrap > p.intro { font-weight: 500; font-size: clamp(16px,1.3vw,20px); line-height: 1.45; color: rgba(0,0,0,0.6); margin-bottom: 28px; }
+  #avro-why-{{ section.id }} .pc-row { display: flex; flex-direction: column; gap: 32px; }
+  #avro-why-{{ section.id }} .pc-card { display: flex; flex-direction: column; gap: 16px; }
+  #avro-why-{{ section.id }} .pc-thumb { border-radius: 20px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #E5E5E5; }
+  #avro-why-{{ section.id }} .pc-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  #avro-why-{{ section.id }} .pc-card h3 { font-weight: 700; font-size: clamp(22px,2vw,32px); color: var(--ink); }
+  #avro-why-{{ section.id }} .pc-card p.support { font-weight: 400; font-size: clamp(16px,1.3vw,20px); line-height: 1.45; color: rgba(0,0,0,0.6); margin: 0; min-height: 2.9em; }
+  #avro-why-{{ section.id }} .pc-card .btn { width: 100%; margin-top: auto; }
+  @media (min-width: 640px) { #avro-why-{{ section.id }} .pc-row { flex-direction: row; gap: 24px; } #avro-why-{{ section.id }} .pc-card { flex: 1 1 0; } }
+
+  /* FINAL CTA */
+  #avro-why-{{ section.id }} .cta-sec { background: var(--avro-blue); padding: clamp(56px,8vw,104px) clamp(16px,4vw,64px); }
+  #avro-why-{{ section.id }} .cta-wrap { max-width: 1250px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; }
+  #avro-why-{{ section.id }} .cta-left { flex: 1 1 320px; max-width: 520px; }
+  #avro-why-{{ section.id }} .cta-left h2 { font-weight: 700; font-size: clamp(26px,4vw,60px); line-height: 1.02; letter-spacing: -0.02em; color: var(--charcoal); margin-bottom: 10px; }
+  #avro-why-{{ section.id }} .cta-left p { font-weight: 500; font-size: clamp(15px,1.3vw,19px); line-height: 1.5; color: rgba(21,21,21,0.7); }
+  #avro-why-{{ section.id }} .cta-btns { flex: 1 1 280px; display: flex; flex-direction: column; gap: 8px; min-width: 240px; max-width: 400px; }
+  #avro-why-{{ section.id }} .cta-btns .btn { width: 100%; background: var(--charcoal); color: var(--bone); }
+  #avro-why-{{ section.id }} .cta-btns .btn:hover { background: transparent; color: var(--charcoal); }
+
+  /* BANNER */
+  #avro-why-{{ section.id }} .banner-box { position: relative; width: 100%; overflow: hidden; }
+  #avro-why-{{ section.id }} .banner-box img { width: 100%; height: auto; display: block; }
+  #avro-why-{{ section.id }} .banner-btn { position: absolute; left: clamp(16px,4vw,64px); bottom: clamp(16px,4vw,56px); min-width: 220px; background: var(--charcoal); color: var(--bone); }
+  #avro-why-{{ section.id }} .banner-btn:hover { background: transparent; color: var(--charcoal); }
+  @media (max-width: 640px) { #avro-why-{{ section.id }} .banner-box { display: flex; flex-direction: column; padding-bottom: 24px; } #avro-why-{{ section.id }} .banner-btn { position: static; width: calc(100% - 32px); min-width: 0; margin: 20px auto 0; } }
+{% endstyle %}
+
+{%- assign diffs = section.blocks | where: "type", "difference_card" -%}
+{%- assign products = section.blocks | where: "type", "product" -%}
+{%- assign logic = section.blocks | where: "type", "logic_card" -%}
+
+<div id="avro-why-{{ section.id }}">
+
+  {%- comment -%} HERO {%- endcomment -%}
+  <section>
+    <div class="ph-card">
+      <div class="ph-img-wrap">
+        {%- if section.settings.hero_image != blank -%}<img class="ph-img-desktop" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}">{%- else -%}<img class="ph-img-desktop" src="{{ 'why-hero.png' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}">{%- endif -%}
+        {%- if section.settings.hero_image_mobile != blank -%}<img class="ph-img-mobile" src="{{ section.settings.hero_image_mobile | image_url: width: 1200 }}" alt="{{ section.settings.hero_alt | escape }}">{%- else -%}<img class="ph-img-mobile" src="{{ 'why-hero-mobile.png' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}">{%- endif -%}
+      </div>
+      <div class="ph-content">
+        <div class="inner">
+          {%- assign words = section.settings.hero_heading | default: 'State before stimulation.' | split: ' ' -%}
+          <h1>{%- for w in words -%}<span class="ph-word" style="animation-delay: {{ forloop.index0 | times: 0.09 | plus: 0.1 }}s;">{{ w }}{% unless forloop.last %}&nbsp;{% endunless %}</span>{%- endfor -%}</h1>
+          <p class="ph-fade ph-lede">{{ section.settings.hero_lede | default: 'AVRO was built on a simple observation: in many moments that matter most, people do not need more energy. They need more control. More energy is not the same as more control.' }}</p>
+          <div class="ph-fade ph-cta">
+            <a href="{{ section.settings.hero_btn1_link | default: '/collections/all' }}" class="btn">{{ section.settings.hero_btn1_label | default: 'Find Your Formula' }}</a>
+            <a href="{{ section.settings.hero_btn2_link | default: '/collections/all' }}" class="btn">{{ section.settings.hero_btn2_label | default: 'Shop AVRO' }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} DIFFERENCE CARDS {%- endcomment -%}
+  {%- if diffs.size > 0 -%}
+  <section class="sec">
+    <h2 class="sec-h2">{{ section.settings.diff_heading | default: 'AVRO is different by design.' }}</h2>
+    <div class="cards-3">
+      {%- for b in diffs -%}
+      <article class="info-card" {{ b.shopify_attributes }}>
+        {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 144 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'calm-first-foundation.png' | asset_url }}" alt="">{%- endif -%}
+        <h3>{{ b.settings.title }}</h3>
+        <p>{{ b.settings.copy }}</p>
+      </article>
+      {%- endfor -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} PRODUCT CARDS {%- endcomment -%}
+  {%- if products.size > 0 -%}
+  <section class="pc-sec">
+    <div class="pc-wrap">
+      <h2>{{ section.settings.products_heading | default: 'Choose the state that fits your moment.' }}</h2>
+      <p class="intro">{{ section.settings.products_intro | default: 'Every AVRO formula starts with the same calm-first base, then supports the moment in a different way.' }}</p>
+      <div class="pc-row">
+        {%- for b in products -%}
+        <article class="pc-card" {{ b.shopify_attributes }}>
+          <div class="pc-thumb">
+            {%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">{%- else -%}<img src="{{ b.settings.image_fallback | default: 'calm-blueberry-acai.png' | asset_url }}" alt="{{ b.settings.name | escape }}">{%- endif -%}
+          </div>
+          <h3>{{ b.settings.name }}</h3>
+          <p class="support">{{ b.settings.support }}</p>
+          <a href="{{ b.settings.link | default: '/collections/all' }}" class="btn">{{ b.settings.button_label | default: 'Shop' }}</a>
+        </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} FORMULA LOGIC {%- endcomment -%}
+  {%- if logic.size > 0 -%}
+  <section class="sec">
+    <div style="max-width:900px; margin-bottom:34px;">
+      <span class="eyebrow">{{ section.settings.logic_eyebrow | default: 'Science + formula logic' }}</span>
+      <h2 class="sec-h2" style="margin-bottom:0;">{{ section.settings.logic_heading | default: 'Calm first. Then support the moment.' }}</h2>
+    </div>
+    <div class="cards-4">
+      {%- for b in logic -%}
+      <article class="info-card" {{ b.shopify_attributes }}>
+        {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 144 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'naturally-fermented-pharmagaba.png' | asset_url }}" alt="">{%- endif -%}
+        <h3>{{ b.settings.title }}</h3>
+        <p>{{ b.settings.copy }}</p>
+      </article>
+      {%- endfor -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} FINAL CTA {%- endcomment -%}
+  <section class="cta-sec">
+    <div class="cta-wrap">
+      <div class="cta-left">
+        <h2>{{ section.settings.cta_heading | default: 'Less noise. More control.' }}</h2>
+        <p>{{ section.settings.cta_copy | default: 'Choose the formula that supports the state before the moment.' }}</p>
+      </div>
+      <div class="cta-btns">
+        <a href="{{ section.settings.cta_btn1_link | default: '/collections/calm' }}" class="btn">{{ section.settings.cta_btn1_label | default: 'Shop Calm' }}</a>
+        <a href="{{ section.settings.cta_btn2_link | default: '/collections/focus' }}" class="btn">{{ section.settings.cta_btn2_label | default: 'Shop Focus' }}</a>
+        <a href="{{ section.settings.cta_btn3_link | default: '/collections/energy' }}" class="btn">{{ section.settings.cta_btn3_label | default: 'Shop Energy' }}</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} BANNER {%- endcomment -%}
+  <section>
+    <div class="banner-box">
+      {%- if section.settings.banner_image != blank -%}<img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">{%- else -%}<img src="{{ 'why-avro-banner.png' | asset_url }}" alt="">{%- endif -%}
+      <a href="{{ section.settings.banner_link | default: '/collections/all' }}" class="btn banner-btn">{{ section.settings.banner_label | default: 'Shop' }}</a>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "AVRO — Why AVRO",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_heading", "label": "Heading", "default": "State before stimulation." },
+    { "type": "textarea", "id": "hero_lede", "label": "Lede" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (desktop)" },
+    { "type": "image_picker", "id": "hero_image_mobile", "label": "Hero image (mobile)" },
+    { "type": "text", "id": "hero_alt", "label": "Hero image alt", "default": "AVRO Calm tube on a marble ledge" },
+    { "type": "text", "id": "hero_btn1_label", "label": "Button 1 label", "default": "Find Your Formula" },
+    { "type": "url", "id": "hero_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "hero_btn2_label", "label": "Button 2 label", "default": "Shop AVRO" },
+    { "type": "url", "id": "hero_btn2_link", "label": "Button 2 link" },
+
+    { "type": "header", "content": "Difference cards" },
+    { "type": "text", "id": "diff_heading", "label": "Heading", "default": "AVRO is different by design." },
+
+    { "type": "header", "content": "Product cards" },
+    { "type": "text", "id": "products_heading", "label": "Heading", "default": "Choose the state that fits your moment." },
+    { "type": "richtext", "id": "products_intro", "label": "Intro" },
+
+    { "type": "header", "content": "Formula logic" },
+    { "type": "text", "id": "logic_eyebrow", "label": "Eyebrow", "default": "Science + formula logic" },
+    { "type": "text", "id": "logic_heading", "label": "Heading", "default": "Calm first. Then support the moment." },
+
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Less noise. More control." },
+    { "type": "richtext", "id": "cta_copy", "label": "Copy" },
+    { "type": "text", "id": "cta_btn1_label", "label": "Button 1 label", "default": "Shop Calm" },
+    { "type": "url", "id": "cta_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "cta_btn2_label", "label": "Button 2 label", "default": "Shop Focus" },
+    { "type": "url", "id": "cta_btn2_link", "label": "Button 2 link" },
+    { "type": "text", "id": "cta_btn3_label", "label": "Button 3 label", "default": "Shop Energy" },
+    { "type": "url", "id": "cta_btn3_link", "label": "Button 3 link" },
+
+    { "type": "header", "content": "Bottom banner" },
+    { "type": "image_picker", "id": "banner_image", "label": "Banner image" },
+    { "type": "text", "id": "banner_label", "label": "Button label", "default": "Shop" },
+    { "type": "url", "id": "banner_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "difference_card",
+      "name": "Difference card",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "calm-first-foundation.png" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Calm comes first" },
+        { "type": "textarea", "id": "copy", "label": "Copy" }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Product image" },
+        { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "calm-blueberry-acai.png" },
+        { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
+        { "type": "textarea", "id": "support", "label": "Support line" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
+        { "type": "url", "id": "link", "label": "Button link" }
+      ]
+    },
+    {
+      "type": "logic_card",
+      "name": "Formula logic card",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "naturally-fermented-pharmagaba.png" },
+        { "type": "text", "id": "title", "label": "Title", "default": "PharmaGABA®" },
+        { "type": "textarea", "id": "copy", "label": "Copy" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Why AVRO",
+      "blocks": [
+        { "type": "difference_card", "settings": { "icon_fallback": "calm-first-foundation.png", "title": "Calm comes first", "copy": "Every formula starts with naturally fermented PharmaGABA® as part of the calm-first foundation." } },
+        { "type": "difference_card", "settings": { "icon_fallback": "supports-focus-without-overload.png", "title": "Support the moment", "copy": "Calm, Focus, and Energy each support a different kind of readiness while staying rooted in the same system." } },
+        { "type": "difference_card", "settings": { "icon_fallback": "quality-standards.png", "title": "No stimulant culture", "copy": "AVRO is not built around hype language or more-is-more energy positioning." } },
+        { "type": "product", "settings": { "image_fallback": "calm-blueberry-acai.png", "name": "AVRO Calm", "support": "Calm support without stimulation.*", "button_label": "Shop Calm", "link": "/collections/calm" } },
+        { "type": "product", "settings": { "image_fallback": "focus-pomegranate-raspberry.png", "name": "AVRO Focus", "support": "Clarity and focus support without caffeine.*", "button_label": "Shop Focus", "link": "/collections/focus" } },
+        { "type": "product", "settings": { "image_fallback": "energy-fuji-apple.png", "name": "AVRO Energy", "support": "Natural caffeine with a calm-first foundation.*", "button_label": "Shop Energy", "link": "/collections/energy" } },
+        { "type": "logic_card", "settings": { "icon_fallback": "naturally-fermented-pharmagaba.png", "title": "PharmaGABA®", "copy": "Naturally fermented PharmaGABA® is the calm-first foundation in every AVRO formula." } },
+        { "type": "logic_card", "settings": { "icon_fallback": "mind-body-diagram.png", "title": "Formula Logic", "copy": "Each formula builds from the same base, then adds targeted support for the moment." } },
+        { "type": "logic_card", "settings": { "icon_fallback": "transparent-standards.png", "title": "Quality + Transparency", "copy": "Clear ingredient disclosure and quality standards, with documentation where applicable." } },
+        { "type": "logic_card", "settings": { "icon_fallback": "calm-first-foundation.png", "title": "Calm First Foundation", "copy": "AVRO is designed to support state before stimulation." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
