@@ -1,0 +1,377 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — PRODUCT DETAIL (PDP)  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-product.liquid and paste this entire file in.
+  2. In the theme editor go to a Product template (Products > Default product)
+     and add the "AVRO — Product" section (or set it as the product template's
+     main section). It automatically reads the CURRENT product — no picker.
+  3. Everything below is driven by your real Shopify product:
+       - Title, price, compare-at price, images, and availability are live.
+       - The flavor selector is built from a product OPTION. Set which option
+         is the flavor in the section settings (default "Flavor"). Each option
+         value becomes a pill; selecting it switches the variant + image.
+       - "Subscribe & save" appears automatically when the product has a
+         selling plan (subscription). Otherwise only one-time shows.
+       - Quantity stepper + Add to Cart post to the real cart.
+  4. Editable copy: support line, "per box" line, purchase labels, and the
+     subscribe benefit BLOCKS (add/remove/reorder).
+  NOTE: Set up the product (flavors as an option, images, selling plan) once in
+  Shopify and this page stays in sync.
+  ============================================================================
+{%- endcomment -%}
+
+{%- assign flavor_opt_name = section.settings.flavor_option_name | default: 'Flavor' -%}
+{%- assign flavor_opt_index = 0 -%}
+{%- for opt in product.options_with_values -%}
+  {%- assign onm = opt.name | downcase -%}
+  {%- if onm == flavor_opt_name | downcase -%}{%- assign flavor_opt_index = forloop.index -%}{%- endif -%}
+{%- endfor -%}
+
+{%- comment -%} Does this product have a subscription selling plan? {%- endcomment -%}
+{%- assign has_plan = false -%}
+{%- if product.selling_plan_groups.size > 0 -%}{%- assign has_plan = true -%}{%- endif -%}
+{%- if section.settings.show_subscribe == false -%}{%- assign has_plan = false -%}{%- endif -%}
+
+{% style %}
+  #avro-pdp-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --gray: #E2E2E2;
+    --avro-blue: #94C6D4;
+    font-family: "DM Sans", system-ui, sans-serif; color: var(--ink); display: block;
+    background: var(--base-light);
+  }
+  #avro-pdp-{{ section.id }} * { box-sizing: border-box; }
+  #avro-pdp-{{ section.id }} .pdp-wrap { max-width: 1180px; margin: 0 auto; padding: clamp(20px,4vw,48px) clamp(16px,4vw,48px); }
+  #avro-pdp-{{ section.id }} .pdp-grid { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: start; }
+  @media (min-width: 900px) { #avro-pdp-{{ section.id }} .pdp-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 48px; } }
+
+  /* GALLERY */
+  #avro-pdp-{{ section.id }} .gal-main { position: relative; aspect-ratio: 1/1; border-radius: 20px; overflow: hidden; background: var(--gray); }
+  #avro-pdp-{{ section.id }} .gal-main img { width: 100%; height: 100%; object-fit: cover; display: none; }
+  #avro-pdp-{{ section.id }} .gal-main img.is-active { display: block; }
+  #avro-pdp-{{ section.id }} .gal-rating { position: absolute; left: 14px; top: 14px; display: inline-flex; align-items: center; gap: 6px; background: var(--bone); border-radius: 999px; padding: 6px 12px; font-weight: 700; font-size: 13px; color: var(--ink); }
+  #avro-pdp-{{ section.id }} .gal-rating .stars { color: #E8A23D; letter-spacing: 1px; }
+  #avro-pdp-{{ section.id }} .gal-thumbs { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  #avro-pdp-{{ section.id }} .gal-thumb { width: 64px; height: 64px; border-radius: 12px; overflow: hidden; background: var(--gray); border: 2px solid transparent; cursor: pointer; padding: 0; }
+  #avro-pdp-{{ section.id }} .gal-thumb.is-active { border-color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .gal-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* BUY BOX */
+  #avro-pdp-{{ section.id }} .bb { display: flex; flex-direction: column; gap: 16px; }
+  #avro-pdp-{{ section.id }} .bb h1 { font-weight: 900; font-size: clamp(26px,3.2vw,40px); line-height: 0.98; margin: 0; color: var(--ink); }
+  #avro-pdp-{{ section.id }} .bb .support { font-weight: 600; font-size: clamp(15px,1.3vw,18px); line-height: 1.35; color: var(--ink); margin: 4px 0 0; }
+  #avro-pdp-{{ section.id }} .bb .per-box { font-weight: 500; font-size: clamp(13px,1.1vw,15px); line-height: 1.4; color: var(--warm-gray); margin: 2px 0 0; }
+  #avro-pdp-{{ section.id }} .bb .lbl { font-weight: 700; font-size: clamp(12px,1vw,13px); color: var(--ink); margin-bottom: 2px; display: block; }
+
+  /* FLAVOR PILLS */
+  #avro-pdp-{{ section.id }} .flavors { display: flex; flex-wrap: wrap; gap: 8px; }
+  #avro-pdp-{{ section.id }} .flavor { display: inline-flex; align-items: center; gap: 8px; padding: 4px 16px 4px 5px; border-radius: 999px; background: var(--gray); border: 2px solid transparent; cursor: pointer; transition: all .15s ease; }
+  #avro-pdp-{{ section.id }} .flavor .dot { width: 30px; height: 30px; border-radius: 999px; overflow: hidden; background: #F2F2F2; flex-shrink: 0; display: grid; place-items: center; }
+  #avro-pdp-{{ section.id }} .flavor .dot img { width: 100%; height: 100%; object-fit: cover; }
+  #avro-pdp-{{ section.id }} .flavor .nm { font-weight: 700; font-size: clamp(11px,1vw,14px); color: var(--ink); white-space: nowrap; }
+  #avro-pdp-{{ section.id }} .flavor.is-active { background: var(--charcoal); border-color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .flavor.is-active .nm { color: var(--bone); }
+  #avro-pdp-{{ section.id }} .flavor.is-soldout { opacity: 0.4; }
+
+  /* PURCHASE OPTIONS */
+  #avro-pdp-{{ section.id }} .buy-opt { position: relative; display: flex; align-items: center; gap: 12px; padding: 10px 14px 10px 12px; border-radius: 999px; background: var(--gray); border: 2px solid transparent; color: var(--ink); cursor: pointer; }
+  #avro-pdp-{{ section.id }} .buy-opt.is-active { background: var(--charcoal); border-color: var(--charcoal); color: var(--bone); }
+  #avro-pdp-{{ section.id }} .buy-opt .radio { width: 18px; height: 18px; border-radius: 999px; border: 2px solid var(--warm-gray); display: grid; place-items: center; flex-shrink: 0; }
+  #avro-pdp-{{ section.id }} .buy-opt.is-active .radio { border-color: var(--bone); }
+  #avro-pdp-{{ section.id }} .buy-opt.is-active .radio::after { content: ''; width: 8px; height: 8px; border-radius: 999px; background: var(--bone); }
+  #avro-pdp-{{ section.id }} .buy-opt .ttl { flex: 1; min-width: 0; font-weight: 700; font-size: clamp(12px,1.1vw,15px); line-height: 1.2; }
+  #avro-pdp-{{ section.id }} .buy-opt .badge { font-weight: 700; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 999px; background: var(--charcoal); color: var(--bone); white-space: nowrap; margin-left: 6px; }
+  #avro-pdp-{{ section.id }} .buy-opt.is-active .badge { background: var(--bone); color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .buy-opt .sub { display: block; font-weight: 500; font-size: clamp(10px,0.9vw,12px); margin-top: 2px; opacity: 0.7; }
+  #avro-pdp-{{ section.id }} .buy-opt .pr { font-weight: 800; font-size: clamp(14px,1.3vw,18px); white-space: nowrap; }
+  #avro-pdp-{{ section.id }} .benefits { list-style: none; margin: 0; padding: 2px 4px 0; display: flex; flex-direction: column; gap: 6px; }
+  #avro-pdp-{{ section.id }} .benefits li { display: flex; align-items: flex-start; gap: 8px; font-weight: 500; font-size: clamp(12px,1vw,14px); line-height: 1.4; color: var(--ink); }
+  #avro-pdp-{{ section.id }} .benefits svg { flex-shrink: 0; margin-top: 2px; }
+
+  /* QUANTITY + CTA */
+  #avro-pdp-{{ section.id }} .qty-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  #avro-pdp-{{ section.id }} .qty-row .lbl { margin: 0; font-size: clamp(13px,1.1vw,16px); }
+  #avro-pdp-{{ section.id }} .stepper { display: inline-flex; align-items: center; background: var(--bone); border-radius: 999px; border: 2px solid var(--charcoal); }
+  #avro-pdp-{{ section.id }} .stepper button { width: 44px; height: 44px; border: 0; background: transparent; font-weight: 700; font-size: 20px; color: var(--charcoal); cursor: pointer; border-radius: 999px; }
+  #avro-pdp-{{ section.id }} .stepper button:hover { background: rgba(0,0,0,0.05); }
+  #avro-pdp-{{ section.id }} .stepper button:disabled { opacity: 0.4; cursor: not-allowed; }
+  #avro-pdp-{{ section.id }} .stepper .q { width: 40px; text-align: center; font-weight: 800; font-size: 18px; color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .add-btn { width: 100%; min-height: 56px; border-radius: 999px; border: 2px solid var(--charcoal); background: var(--charcoal); color: var(--bone); font-family: inherit; font-weight: 700; font-size: 17px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+  #avro-pdp-{{ section.id }} .add-btn:hover { background: transparent; color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .add-btn:disabled { background: var(--gray); border-color: var(--gray); color: var(--warm-gray); cursor: not-allowed; }
+{% endstyle %}
+
+<div id="avro-pdp-{{ section.id }}" data-flavor-index="{{ flavor_opt_index }}">
+  <div class="pdp-wrap">
+    {%- if product == blank -%}
+      <p style="text-align:center;padding:40px;">Add this section to a product template to preview it with live product data.</p>
+    {%- else -%}
+    <div class="pdp-grid">
+
+      {%- comment -%} ---------- GALLERY ---------- {%- endcomment -%}
+      <div class="gal">
+        <div class="gal-main" id="gal-main-{{ section.id }}">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media -%}
+              {%- if media.media_type == 'image' -%}
+                <img data-media-id="{{ media.id }}" class="{% if forloop.first %}is-active{% endif %}" src="{{ media | image_url: width: 1200 }}" alt="{{ media.alt | default: product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            <img class="is-active" src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title | escape }}">
+          {%- endif -%}
+          {%- if section.settings.show_rating -%}
+            <span class="gal-rating"><span class="stars">★★★★★</span> {{ section.settings.rating_value | default: '4.8' }}</span>
+          {%- endif -%}
+        </div>
+        {%- if product.media.size > 1 -%}
+          <div class="gal-thumbs">
+            {%- for media in product.media -%}
+              {%- if media.media_type == 'image' -%}
+                <button type="button" class="gal-thumb {% if forloop.first %}is-active{% endif %}" data-target="{{ media.id }}" aria-label="View image {{ forloop.index }}">
+                  <img src="{{ media | image_url: width: 160 }}" alt="">
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ---------- BUY BOX ---------- {%- endcomment -%}
+      <div class="bb">
+        <header>
+          <h1>{{ product.title }}</h1>
+          {%- assign support_text = section.settings.support_line -%}
+          {%- if product.metafields.custom.support_line != blank -%}{%- assign support_text = product.metafields.custom.support_line -%}{%- endif -%}
+          {%- if support_text != blank -%}<p class="support">{{ support_text }}</p>{%- endif -%}
+          {%- if section.settings.per_box_line != blank -%}<p class="per-box">{{ section.settings.per_box_line }}</p>{%- endif -%}
+        </header>
+
+        <form method="post" action="{{ routes.cart_add_url }}" id="pdp-form-{{ section.id }}" accept-charset="UTF-8" enctype="multipart/form-data">
+          <input type="hidden" name="form_type" value="product">
+          <input type="hidden" name="utf8" value="✓">
+          <input type="hidden" name="id" id="pdp-vid-{{ section.id }}" value="{{ product.selected_or_first_available_variant.id }}">
+          <input type="hidden" name="selling_plan" id="pdp-plan-{{ section.id }}" value="" {% unless has_plan %}disabled{% endunless %}>
+
+          {%- comment -%} FLAVOR SELECTOR (from chosen option) {%- endcomment -%}
+          {%- if flavor_opt_index > 0 -%}
+            {%- assign flavor_opt = product.options_with_values[flavor_opt_index | minus: 1] -%}
+            <div class="flavor-block" style="display:flex;flex-direction:column;gap:6px;">
+              <span class="lbl">{{ flavor_opt.name }}</span>
+              <div class="flavors" role="radiogroup" aria-label="{{ flavor_opt.name }}">
+                {%- for val in flavor_opt.values -%}
+                  <button type="button" class="flavor {% if forloop.first %}is-active{% endif %}" data-flavor="{{ val | escape }}" role="radio" aria-checked="{% if forloop.first %}true{% else %}false{% endif %}">
+                    <span class="nm">{{ val }}</span>
+                  </button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- comment -%} PURCHASE OPTIONS {%- endcomment -%}
+          {%- if has_plan -%}
+            {%- assign first_group = product.selling_plan_groups | first -%}
+            {%- assign first_plan = first_group.selling_plans | first -%}
+            <div class="purchase" style="display:flex;flex-direction:column;gap:10px;">
+              <button type="button" class="buy-opt is-active" data-buy="subscribe" data-plan="{{ first_plan.id }}">
+                <span class="radio"></span>
+                <span class="ttl">{{ section.settings.subscribe_label | default: 'Subscribe & save' }}
+                  {%- if section.settings.subscribe_badge != blank %}<span class="badge">{{ section.settings.subscribe_badge }}</span>{% endif -%}
+                  <span class="sub">{{ first_plan.name }}</span>
+                </span>
+                <span class="pr" data-price-subscribe></span>
+              </button>
+              <button type="button" class="buy-opt" data-buy="onetime">
+                <span class="radio"></span>
+                <span class="ttl">{{ section.settings.onetime_label | default: 'One-time purchase' }}
+                  <span class="sub">{{ section.settings.onetime_sub | default: 'No commitment.' }}</span>
+                </span>
+                <span class="pr" data-price-onetime></span>
+              </button>
+              {%- assign benefits = section.blocks | where: 'type', 'benefit' -%}
+              {%- if benefits.size > 0 -%}
+                <ul class="benefits" data-subscribe-benefits>
+                  {%- for b in benefits -%}
+                    <li {{ b.shopify_attributes }}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" stroke="var(--avro-blue)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      {{ b.settings.text }}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            <div class="price-only" style="font-weight:800;font-size:clamp(20px,2vw,28px);" data-price-onetime></div>
+          {%- endif -%}
+
+          {%- comment -%} QUANTITY {%- endcomment -%}
+          <div class="qty-row">
+            <span class="lbl">Quantity</span>
+            <div class="stepper">
+              <button type="button" data-step="-1" aria-label="Decrease quantity" disabled>&minus;</button>
+              <span class="q" id="pdp-qty-{{ section.id }}">1</span>
+              <button type="button" data-step="1" aria-label="Increase quantity">+</button>
+            </div>
+            <input type="hidden" name="quantity" id="pdp-qtyinput-{{ section.id }}" value="1">
+          </div>
+
+          <button type="submit" class="add-btn" id="pdp-add-{{ section.id }}">{{ section.settings.add_label | default: 'Add to Cart' }}</button>
+        </form>
+      </div>
+
+    </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- if product != blank -%}
+<script>
+  (function () {
+    var root = document.getElementById("avro-pdp-{{ section.id }}");
+    if (!root) return;
+    var variants = {{ product.variants | json }};
+    var flavorIndex = parseInt(root.dataset.flavorIndex || "0", 10); // 1-based option index, 0 = none
+    var hasPlan = {{ has_plan | json }};
+
+    var vidInput = document.getElementById("pdp-vid-{{ section.id }}");
+    var planInput = document.getElementById("pdp-plan-{{ section.id }}");
+    var qtyEl = document.getElementById("pdp-qty-{{ section.id }}");
+    var qtyInput = document.getElementById("pdp-qtyinput-{{ section.id }}");
+    var addBtn = document.getElementById("pdp-add-{{ section.id }}");
+    var galMain = document.getElementById("gal-main-{{ section.id }}");
+
+    var state = { variant: variants.find(function (v) { return v.id == vidInput.value; }) || variants[0], buy: hasPlan ? "subscribe" : "onetime", qty: 1 };
+
+    function money(cents) {
+      return "$" + (cents / 100).toFixed(2);
+    }
+
+    function planAllocation(v) {
+      if (!v || !v.selling_plan_allocations || !v.selling_plan_allocations.length) return null;
+      return v.selling_plan_allocations[0];
+    }
+
+    function render() {
+      var v = state.variant;
+      // Prices
+      var oneEls = root.querySelectorAll("[data-price-onetime]");
+      var subEls = root.querySelectorAll("[data-price-subscribe]");
+      oneEls.forEach(function (el) { el.textContent = v ? money(v.price * state.qty) : ""; });
+      var alloc = planAllocation(v);
+      subEls.forEach(function (el) { el.textContent = alloc ? money(alloc.price * state.qty) : (v ? money(v.price * state.qty) : ""); });
+
+      // Selling plan + variant inputs
+      vidInput.value = v ? v.id : "";
+      if (hasPlan) {
+        if (state.buy === "subscribe" && alloc) {
+          planInput.disabled = false;
+          planInput.value = alloc.selling_plan.id;
+        } else {
+          planInput.value = "";
+          planInput.disabled = true;
+        }
+      }
+
+      // Availability
+      var available = v && v.available;
+      addBtn.disabled = !available;
+      addBtn.textContent = available ? "{{ section.settings.add_label | default: 'Add to Cart' | escape }}" : "Sold Out";
+
+      // Swap main image to variant image
+      if (v && v.featured_media && galMain) {
+        galMain.querySelectorAll("img").forEach(function (img) {
+          img.classList.toggle("is-active", img.dataset.mediaId == v.featured_media.id);
+        });
+        var thumbs = root.querySelectorAll(".gal-thumb");
+        thumbs.forEach(function (t) { t.classList.toggle("is-active", t.dataset.target == v.featured_media.id); });
+      }
+    }
+
+    // Flavor selection: match on the chosen option index
+    if (flavorIndex > 0) {
+      root.querySelectorAll(".flavor").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var val = btn.dataset.flavor;
+          root.querySelectorAll(".flavor").forEach(function (b) { b.classList.remove("is-active"); b.setAttribute("aria-checked", "false"); });
+          btn.classList.add("is-active");
+          btn.setAttribute("aria-checked", "true");
+          var match = variants.find(function (v) { return v["option" + flavorIndex] === val; });
+          if (match) { state.variant = match; render(); }
+        });
+      });
+    }
+
+    // Purchase type
+    root.querySelectorAll(".buy-opt").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        root.querySelectorAll(".buy-opt").forEach(function (b) { b.classList.remove("is-active"); });
+        btn.classList.add("is-active");
+        state.buy = btn.dataset.buy;
+        var benefits = root.querySelector("[data-subscribe-benefits]");
+        if (benefits) benefits.style.display = state.buy === "subscribe" ? "flex" : "none";
+        render();
+      });
+    });
+
+    // Quantity stepper
+    root.querySelectorAll(".stepper button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var step = parseInt(btn.dataset.step, 10);
+        state.qty = Math.max(1, state.qty + step);
+        qtyEl.textContent = state.qty;
+        qtyInput.value = state.qty;
+        root.querySelector('.stepper button[data-step="-1"]').disabled = state.qty <= 1;
+        render();
+      });
+    });
+
+    render();
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "AVRO — Product",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Copy" },
+    { "type": "textarea", "id": "support_line", "label": "Support line", "info": "Falls back to the product metafield custom.support_line if set.", "default": "Clear headed. Ready when pressure rises.*" },
+    { "type": "text", "id": "per_box_line", "label": "Per-box line", "default": "10 stick packets per box" },
+    { "type": "header", "content": "Flavor" },
+    { "type": "text", "id": "flavor_option_name", "label": "Flavor option name", "info": "The product option used as the flavor selector (case-insensitive). Leave matching your product's option name.", "default": "Flavor" },
+    { "type": "header", "content": "Rating badge" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating badge", "default": true },
+    { "type": "text", "id": "rating_value", "label": "Rating value", "default": "4.8" },
+    { "type": "header", "content": "Purchase options" },
+    { "type": "checkbox", "id": "show_subscribe", "label": "Show subscribe option (when product has a selling plan)", "default": true },
+    { "type": "text", "id": "subscribe_label", "label": "Subscribe label", "default": "Subscribe & save" },
+    { "type": "text", "id": "subscribe_badge", "label": "Subscribe badge", "default": "Most popular" },
+    { "type": "text", "id": "onetime_label", "label": "One-time label", "default": "One-time purchase" },
+    { "type": "text", "id": "onetime_sub", "label": "One-time subtitle", "default": "No commitment. Free shipping over $50." },
+    { "type": "text", "id": "add_label", "label": "Add-to-cart label", "default": "Add to Cart" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Subscribe benefit",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Benefit", "default": "Skip, change or cancel anytime." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Product",
+      "blocks": [
+        { "type": "benefit", "settings": { "text": "Select your own delivery schedule." } },
+        { "type": "benefit", "settings": { "text": "Save 15% on every order." } },
+        { "type": "benefit", "settings": { "text": "Free shipping on all orders of 2 or more tubes." } },
+        { "type": "benefit", "settings": { "text": "Skip, change or cancel anytime." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
