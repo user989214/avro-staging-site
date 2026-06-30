@@ -29,6 +29,7 @@
   {%- assign onm = opt.name | downcase -%}
   {%- if onm == flavor_opt_name_dc -%}{%- assign flavor_opt_index = forloop.index -%}{%- endif -%}
 {%- endfor -%}
+{%- assign flavor_opt_index0 = flavor_opt_index | minus: 1 -%}
 
 {%- comment -%} Does this product have a subscription selling plan? {%- endcomment -%}
 {%- assign has_plan = false -%}
@@ -158,7 +159,7 @@
 
           {%- comment -%} FLAVOR SELECTOR (from chosen option) {%- endcomment -%}
           {%- if flavor_opt_index > 0 -%}
-            {%- assign flavor_opt = product.options_with_values[flavor_opt_index | minus: 1] -%}
+            {%- assign flavor_opt = product.options_with_values[flavor_opt_index0] -%}
             <div class="flavor-block" style="display:flex;flex-direction:column;gap:6px;">
               <span class="lbl">{{ flavor_opt.name }}</span>
               <div class="flavors" role="radiogroup" aria-label="{{ flavor_opt.name }}">
