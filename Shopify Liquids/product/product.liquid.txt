@@ -23,10 +23,11 @@
 {%- endcomment -%}
 
 {%- assign flavor_opt_name = section.settings.flavor_option_name | default: 'Flavor' -%}
+{%- assign flavor_opt_name_dc = flavor_opt_name | downcase -%}
 {%- assign flavor_opt_index = 0 -%}
 {%- for opt in product.options_with_values -%}
   {%- assign onm = opt.name | downcase -%}
-  {%- if onm == flavor_opt_name | downcase -%}{%- assign flavor_opt_index = forloop.index -%}{%- endif -%}
+  {%- if onm == flavor_opt_name_dc -%}{%- assign flavor_opt_index = forloop.index -%}{%- endif -%}
 {%- endfor -%}
 
 {%- comment -%} Does this product have a subscription selling plan? {%- endcomment -%}
