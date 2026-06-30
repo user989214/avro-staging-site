@@ -7,8 +7,9 @@
   2. Upload avro-logo.svg (in this folder) to your theme Assets.
   3. Reference this section from your theme's header group (sections/header-group.json)
      or render {% section 'avro-header' %} in layout/theme.liquid.
-  4. The announcement messages, nav links, dropdown cards, and logo are all
-     editable in the theme editor (announcements + nav links are blocks).
+  4. The nav links, dropdown links, and logo are all editable in the theme
+     editor (Discover + Use-case links are blocks). The announcement bar lives
+     in a separate section.
   ============================================================================
 {%- endcomment -%}
 
@@ -20,18 +21,6 @@
   }
   #avro-header-{{ section.id }} * { box-sizing: border-box; }
   #avro-header-{{ section.id }} a { text-decoration: none; }
-
-  /* Announcement marquee */
-  #avro-header-{{ section.id }} .ann-bar { background: var(--avro-blue); color: var(--charcoal); overflow: hidden; position: relative; padding: 11px 0; border-bottom: 1px solid rgba(21,21,21,0.08); }
-  #avro-header-{{ section.id }} .ann-track { display: flex; width: max-content; will-change: transform; animation: ann-marquee 42s linear infinite; }
-  #avro-header-{{ section.id }} .ann-bar:hover .ann-track { animation-play-state: paused; }
-  #avro-header-{{ section.id }} .ann-group { display: flex; align-items: center; flex-shrink: 0; }
-  #avro-header-{{ section.id }} .ann-msg { font-weight: 900; font-size: 17px; letter-spacing: -0.005em; white-space: nowrap; padding: 0 28px; }
-  #avro-header-{{ section.id }} .ann-plus { font-size: 14px; line-height: 1; opacity: 0.55; font-weight: 700; }
-  #avro-header-{{ section.id }} .ann-shop { display: inline-flex; align-items: center; justify-content: center; margin: 0 28px; padding: 0 28px; min-height: 48px; border-radius: 999px; border: 2px solid var(--charcoal); background: var(--charcoal); color: var(--bone); font-weight: 700; font-size: 16px; white-space: nowrap; flex-shrink: 0; transition: background-color .15s ease, color .15s ease; }
-  #avro-header-{{ section.id }} .ann-shop:hover { background: transparent; color: var(--charcoal); }
-  @keyframes ann-marquee { 0% { transform: translateX(0);} 100% { transform: translateX(-25%);} }
-  @media (prefers-reduced-motion: reduce) { #avro-header-{{ section.id }} .ann-track { animation: none; } }
 
   /* Nav */
   #avro-header-{{ section.id }} .nav { position: sticky; top: 0; z-index: 50; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 16px; background: var(--base); transition: box-shadow .2s ease; }
@@ -77,28 +66,9 @@
 
 {%- assign disc_links = section.blocks | where: "type", "discover_link" -%}
 {%- assign use_links = section.blocks | where: "type", "usecase_link" -%}
-{%- assign messages = section.blocks | where: "type", "announcement" -%}
 
 <div id="avro-header-{{ section.id }}">
   <header>
-    {%- comment -%} Announcement marquee {%- endcomment -%}
-    <div class="ann-bar" aria-label="Site announcements">
-      <div class="ann-track">
-        {%- for n in (1..4) -%}
-        <div class="ann-group" {% if forloop.index0 > 0 %}aria-hidden="true"{% endif %}>
-          {%- for b in messages -%}
-            <span style="display:flex;align-items:center;flex-shrink:0;">
-              <span class="ann-msg">{{ b.settings.text }}</span>
-              <span class="ann-plus" aria-hidden="true">+</span>
-            </span>
-          {%- endfor -%}
-          <a href="{{ section.settings.ann_button_link | default: '/collections/all' }}" class="ann-shop">{{ section.settings.ann_button_label | default: 'Shop AVRO' }}</a>
-          <span class="ann-plus" aria-hidden="true">+</span>
-        </div>
-        {%- endfor -%}
-      </div>
-    </div>
-
     {%- comment -%} Main nav {%- endcomment -%}
     <nav class="nav" aria-label="Primary navigation">
       <button class="icon-btn mobile-toggle" type="button" aria-label="Open menu" data-mobile-toggle>
@@ -200,9 +170,6 @@
   "settings": [
     { "type": "header", "content": "Logo" },
     { "type": "image_picker", "id": "logo", "label": "Logo (falls back to avro-logo.svg asset)" },
-    { "type": "header", "content": "Announcement bar" },
-    { "type": "text", "id": "ann_button_label", "label": "Announcement button label", "default": "Shop AVRO" },
-    { "type": "url", "id": "ann_button_link", "label": "Announcement button link" },
     { "type": "header", "content": "Primary links" },
     { "type": "url", "id": "link_shop", "label": "Shop link" },
     { "type": "url", "id": "link_subscribe", "label": "Subscribe link" },
@@ -214,11 +181,6 @@
     { "type": "text", "id": "dd_col2_heading", "label": "Column 2 heading", "default": "By Use Case" }
   ],
   "blocks": [
-    {
-      "type": "announcement",
-      "name": "Announcement message",
-      "settings": [ { "type": "text", "id": "text", "label": "Message", "default": "Calm First Performance" } ]
-    },
     {
       "type": "discover_link",
       "name": "Discover link",
@@ -240,12 +202,6 @@
     {
       "name": "AVRO — Header",
       "blocks": [
-        { "type": "announcement", "settings": { "text": "Calm First Performance" } },
-        { "type": "announcement", "settings": { "text": "Subscribe & save 15% every order of 2 or more tubes" } },
-        { "type": "announcement", "settings": { "text": "Free shipping on orders of 2 or more tubes" } },
-        { "type": "announcement", "settings": { "text": "Naturally fermented PharmaGABA" } },
-        { "type": "announcement", "settings": { "text": "Calm, focused energy — without the crash" } },
-        { "type": "announcement", "settings": { "text": "New: AVRO Focus and AVRO Energy now shipping" } },
         { "type": "discover_link", "settings": { "label": "Why AVRO", "link": "/pages/why-avro" } },
         { "type": "discover_link", "settings": { "label": "The Science", "link": "/pages/science" } },
         { "type": "discover_link", "settings": { "label": "Ingredients", "link": "/pages/ingredients" } },
