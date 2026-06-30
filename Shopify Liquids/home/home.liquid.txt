@@ -954,7 +954,7 @@
     },
     {
       "type": "formula_card",
-      "name": "Formula card (Choose your formula)",
+      "name": "Formula card",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Product image" },
         { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "calm-blueberry-acai.png" },
