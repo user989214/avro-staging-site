@@ -1,0 +1,1027 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — HOME PAGE  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. In your Shopify theme, create:  sections/avro-home.liquid
+     Paste the ENTIRE contents of this file into it (including the
+     {% schema %} block at the bottom). Save.
+  2. Upload every image in this same folder to your theme assets
+     (Online Store > Themes > Edit code > Assets > Add a new asset),
+     OR drag them into /assets. Filenames must stay exactly the same.
+  3. Add the section to your home page:
+     - Theme editor > Home page > Add section > "AVRO — Home"
+     - OR set templates/index.json to render this section.
+  4. Everything labelled in the theme editor (headings, body copy, button
+     labels/links, and images) is editable. Repeating items (hero slides,
+     benefit cards, product cards, moments, badges, steps, testimonials)
+     are editable BLOCKS — add / remove / reorder them in the editor.
+
+  NOTE ON IMAGES: each image setting falls back to the bundled asset of the
+  same name when no image is chosen in the editor, so the page looks correct
+  immediately after import. Pick an image in the editor to override.
+  ============================================================================
+{%- endcomment -%}
+
+{%- liquid
+  assign GC = '"DM Sans", system-ui, sans-serif'
+-%}
+
+{% style %}
+  /* ── AVRO design tokens (scoped to this section) ───────────────────────── */
+  #avro-home-{{ section.id }} {
+    --base: #FFFFFF;
+    --base-light: #F2F2F2;
+    --base-deep: #EDEDED;
+    --bone: #FFFFFF;
+    --charcoal: #151515;
+    --ink: #1C1B14;
+    --warm-gray: #6B6857;
+    --divider: #E2E2E2;
+    --avro-blue: #94C6D4;
+    --avro-blue-deep: #5AAEBC;
+    font-family: "DM Sans", system-ui, sans-serif;
+    background-color: var(--base);
+    color: var(--ink);
+    display: block;
+  }
+  #avro-home-{{ section.id }} * { box-sizing: border-box; }
+  #avro-home-{{ section.id }} h1,
+  #avro-home-{{ section.id }} h2,
+  #avro-home-{{ section.id }} h3 { margin: 0; }
+  #avro-home-{{ section.id }} img { max-width: 100%; }
+
+  /* Section wrappers */
+  #avro-home-{{ section.id }} .hp-sec { width: 100%; background-color: var(--base); }
+  #avro-home-{{ section.id }} .hp-wrap { max-width: 1250px; margin: 0 auto; }
+
+  /* Buttons */
+  #avro-home-{{ section.id }} .hp-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-weight: 700; border-radius: 999px; text-decoration: none; cursor: pointer;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  }
+  #avro-home-{{ section.id }} .hp-btn-md { min-height: 40px; padding: 0 16px; font-size: 13px; }
+  #avro-home-{{ section.id }} .hp-btn-lg { min-height: 48px; padding: 0 28px; font-size: 16px; }
+  #avro-home-{{ section.id }} .hp-btn-outline {
+    background: transparent; color: var(--charcoal); border: 2px solid var(--charcoal);
+  }
+  #avro-home-{{ section.id }} .hp-btn-outline:hover { background: var(--charcoal); color: var(--bone); }
+  #avro-home-{{ section.id }} .hp-btn-outline-light { background: transparent; color: #fff; border: 2px solid #fff; }
+  #avro-home-{{ section.id }} .hp-btn-outline-light:hover { background: #fff; color: var(--charcoal); }
+  #avro-home-{{ section.id }} .hp-btn-blue { background: var(--avro-blue); color: var(--charcoal); border: 2px solid var(--avro-blue); }
+  #avro-home-{{ section.id }} .hp-btn-blue:hover { background: transparent; color: var(--avro-blue-deep); }
+
+  /* ── HERO ───────────────────────────────────────────────────────────────── */
+  @keyframes hp-rise { 0% { opacity: 0; transform: translateY(24px);} 100% { opacity: 1; transform: translateY(0);} }
+  @keyframes hp-fade { 0% { opacity: 0; transform: translateY(12px);} 100% { opacity: 1; transform: translateY(0);} }
+  #avro-home-{{ section.id }} .hp-hero-container {
+    position: relative; width: calc(100% - 32px); margin: 0 auto 16px;
+    aspect-ratio: 16/9; overflow: hidden; background: var(--bone); border-radius: 20px;
+  }
+  #avro-home-{{ section.id }} .hp-hero-img-wrap { position: absolute; inset: 0; }
+  #avro-home-{{ section.id }} .hp-hero-img, #avro-home-{{ section.id }} .hp-hero-img-mobile {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    object-position: center; opacity: 0; transition: opacity .8s ease-in-out;
+  }
+  #avro-home-{{ section.id }} .hp-hero-img.is-active,
+  #avro-home-{{ section.id }} .hp-hero-img-mobile.is-active { opacity: 1; }
+  #avro-home-{{ section.id }} .hp-hero-img-mobile { display: none; }
+  #avro-home-{{ section.id }} .hp-hero-grid {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    justify-content: center; padding: clamp(24px,4vw,64px) clamp(28px,5vw,64px);
+  }
+  #avro-home-{{ section.id }} .hp-slide { display: none; }
+  #avro-home-{{ section.id }} .hp-slide.is-active { display: block; }
+  #avro-home-{{ section.id }} .hp-hero h1 {
+    font-size: clamp(40px,5vw,68px); line-height: 1.02; letter-spacing: -0.03em;
+    color: var(--ink); margin-bottom: 24px; max-width: 600px; font-weight: 700;
+  }
+  #avro-home-{{ section.id }} .hp-slide.is-active h1 { animation: hp-rise .9s cubic-bezier(0.34,1.4,0.4,1) both; }
+  #avro-home-{{ section.id }} .hp-hero p.lede {
+    font-weight: 400; font-size: clamp(16px,1.4vw,18px); line-height: 1.55; color: var(--ink);
+    max-width: 520px; margin-bottom: 28px;
+  }
+  #avro-home-{{ section.id }} .hp-slide.is-active p.lede { animation: hp-fade .6s ease-out .1s both; }
+  #avro-home-{{ section.id }} .hp-pill-row { display: flex; flex-wrap: wrap; gap: 12px; max-width: 520px; }
+  #avro-home-{{ section.id }} .hp-pill-row .hp-btn { flex: 1 1 180px; min-width: 180px; }
+  #avro-home-{{ section.id }} .hp-dots { display: flex; gap: 8px; margin-top: 24px; }
+  #avro-home-{{ section.id }} .hp-dot { width: 8px; height: 8px; border-radius: 4px; background: rgba(0,0,0,0.2); border: none; cursor: pointer; transition: width .3s ease, background-color .3s ease; padding: 0; }
+  #avro-home-{{ section.id }} .hp-dot.is-active { width: 24px; background: var(--avro-blue); }
+
+  /* ── PROOF BAR ───────────────────────────────────────────────────────────── */
+  #avro-home-{{ section.id }} .proof-bar { padding: clamp(32px,5vw,56px) clamp(16px,4vw,64px); }
+  #avro-home-{{ section.id }} .proof-bar-container { max-width: 1250px; margin: 0 auto; border: 2px solid var(--charcoal); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; }
+  #avro-home-{{ section.id }} .proof-stat { padding: clamp(16px,2.5vw,36px) clamp(12px,2vw,32px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; border-top: 2px solid var(--charcoal); }
+  #avro-home-{{ section.id }} .proof-stat:first-child { border-top: none; }
+  #avro-home-{{ section.id }} .proof-stat strong { font-weight: 700; font-size: clamp(22px,3vw,42px); line-height: 1; color: var(--ink); letter-spacing: -0.02em; }
+  #avro-home-{{ section.id }} .proof-stars { display: inline-flex; gap: clamp(2px,0.4vw,6px); }
+  #avro-home-{{ section.id }} .proof-stars svg { width: clamp(16px,1.6vw,24px); height: auto; fill: var(--avro-blue); }
+  @media (min-width: 640px) {
+    #avro-home-{{ section.id }} .proof-bar-container { flex-direction: row; }
+    #avro-home-{{ section.id }} .proof-stat { flex: 1 1 0; border-top: none; border-left: 2px solid var(--charcoal); }
+    #avro-home-{{ section.id }} .proof-stat:first-child { border-left: none; }
+  }
+
+  /* ── BENEFIT ROW ─────────────────────────────────────────────────────────── */
+  #avro-home-{{ section.id }} .benefit-sec { padding: 0 clamp(20px,5vw,64px) clamp(48px,6vw,72px); }
+  #avro-home-{{ section.id }} .benefit-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  #avro-home-{{ section.id }} .benefit-card { position: relative; overflow: hidden; background: var(--base-light); border-radius: 20px; min-height: clamp(160px,18vw,240px); }
+  #avro-home-{{ section.id }} .benefit-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); }
+  @media (min-width: 768px) { #avro-home-{{ section.id }} .benefit-grid { grid-template-columns: repeat(3,1fr); } }
+
+  /* ── APPROACH (accordion + graphic) ──────────────────────────────────────── */
+  #avro-home-{{ section.id }} .pad-sec { padding: clamp(32px,6vw,88px) clamp(16px,5vw,64px); }
+  #avro-home-{{ section.id }} .card-shell { background: var(--base-light); border-radius: 20px; padding: clamp(16px,3vw,48px); }
+  #avro-home-{{ section.id }} .approach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 16px; }
+  #avro-home-{{ section.id }} .approach-col { display: flex; flex-direction: column; gap: 8px; }
+  #avro-home-{{ section.id }} .approach-col > h2 { font-weight: 800; font-size: clamp(22px,2.6vw,44px); line-height: 1.03; color: var(--ink); margin-bottom: 6px; }
+  #avro-home-{{ section.id }} .accord { background: var(--bone); border-radius: 12px; overflow: hidden; }
+  #avro-home-{{ section.id }} .accord-btn { width: 100%; display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: transparent; border: none; cursor: pointer; text-align: left; }
+  #avro-home-{{ section.id }} .accord-icon { width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  #avro-home-{{ section.id }} .accord-icon span { display: inline-block; width: 52px; height: 52px; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; }
+  #avro-home-{{ section.id }} .accord-title { font-weight: 700; font-size: clamp(15px,1.3vw,19px); line-height: 1.25; color: var(--ink); flex: 1; }
+  #avro-home-{{ section.id }} .accord-chev { transition: transform .25s ease; color: var(--ink); flex-shrink: 0; }
+  #avro-home-{{ section.id }} .accord.is-open .accord-chev { transform: rotate(180deg); }
+  #avro-home-{{ section.id }} .accord-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+  #avro-home-{{ section.id }} .accord.is-open .accord-body { max-height: 260px; }
+  #avro-home-{{ section.id }} .accord-body p { padding: 0 16px 18px 64px; font-weight: 500; font-size: clamp(14px,1.1vw,17px); line-height: 1.5; color: var(--warm-gray); margin: 0; }
+  #avro-home-{{ section.id }} .approach-graphic { width: 100%; aspect-ratio: 1200 / 720; border: 0; display: block; color-scheme: light; }
+
+  /* ── PRODUCT STRIP ───────────────────────────────────────────────────────── */
+  #avro-home-{{ section.id }} .strip-sec { padding: clamp(32px,6vw,72px) clamp(16px,5vw,64px); }
+  #avro-home-{{ section.id }} .strip-sec > .hp-wrap > h2 { font-weight: 700; font-size: clamp(24px,3.2vw,48px); line-height: 1; color: var(--ink); margin-bottom: 24px; }
+  #avro-home-{{ section.id }} .strip-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+  #avro-home-{{ section.id }} .strip-card { display: flex; flex-direction: column; border-radius: 20px; overflow: hidden; background: var(--base-light); padding: clamp(14px,1.8vw,20px); }
+  #avro-home-{{ section.id }} .strip-thumb { position: relative; height: clamp(200px,24vw,280px); overflow: hidden; border-radius: 16px; background: var(--bone); }
+  #avro-home-{{ section.id }} .strip-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #avro-home-{{ section.id }} .strip-body { padding: 16px 4px 4px; display: flex; flex-direction: column; gap: 10px; }
+  #avro-home-{{ section.id }} .strip-found { display: flex; flex-direction: column; gap: 3px; padding-bottom: 10px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  #avro-home-{{ section.id }} .strip-found .lbl { font-weight: 700; font-size: 11px; color: var(--ink); }
+  #avro-home-{{ section.id }} .strip-found .val { font-weight: 500; font-size: 13px; line-height: 1.4; color: rgba(0,0,0,0.6); }
+  #avro-home-{{ section.id }} .strip-card h3 { font-weight: 900; font-size: clamp(22px,2vw,32px); line-height: 1.05; color: var(--ink); letter-spacing: -0.02em; }
+  #avro-home-{{ section.id }} .strip-card p { font-weight: 400; font-size: 14px; line-height: 1.45; color: rgba(0,0,0,0.6); margin: 0; }
+  @media (max-width: 768px) { #avro-home-{{ section.id }} .strip-grid { grid-template-columns: 1fr; } }
+
+  /* ── MOMENT GRID ─────────────────────────────────────────────────────────── */
+  #avro-home-{{ section.id }} .moment-sec > .hp-wrap > h2 { font-weight: 700; font-size: clamp(22px,3.2vw,48px); line-height: 1; color: var(--ink); margin-bottom: 20px; }
+  #avro-home-{{ section.id }} .moment-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+  #avro-home-{{ section.id }} .moment-card { display: flex; flex-direction: column; text-decoration: none; border-radius: 16px; overflow: hidden; background: var(--base-light); padding: 10px; transition: transform .2s ease; }
+  #avro-home-{{ section.id }} .moment-card:hover { transform: translateY(-3px); }
+  #avro-home-{{ section.id }} .moment-thumb { position: relative; aspect-ratio: 1/1; overflow: hidden; border-radius: 12px; background: var(--bone); }
+  #avro-home-{{ section.id }} .moment-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+  #avro-home-{{ section.id }} .moment-card:hover .moment-thumb img { transform: scale(1.04); }
+  #avro-home-{{ section.id }} .moment-body { padding: 12px 4px 8px; flex: 1; display: flex; flex-direction: column; }
+  #avro-home-{{ section.id }} .moment-body h3 { font-weight: 700; font-size: clamp(14px,1.6vw,24px); line-height: 1; color: var(--ink); margin-bottom: 6px; }
+  #avro-home-{{ section.id }} .moment-body p { font-weight: 400; font-size: clamp(11px,1vw,15px); line-height: 1.35; color: var(--warm-gray); margin-bottom: 10px; flex: 1; }
+  @media (min-width: 768px) { #avro-home-{{ section.id }} .moment-grid { grid-template-columns: repeat(4,1fr); gap: 16px; } }
+
+  /* ── SCIENCE GRID (GABA + formula graph) ─────────────────────────────────── */
+  #avro-home-{{ section.id }} .sci-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 14px; }
+  #avro-home-{{ section.id }} .sci-card { background: var(--bone); border-radius: 16px; padding: clamp(16px,2.5vw,40px); }
+  #avro-home-{{ section.id }} .sci-card h2 { font-weight: 700; font-size: clamp(18px,2.4vw,36px); line-height: 1; color: var(--charcoal); margin-bottom: 10px; }
+  #avro-home-{{ section.id }} .sci-card p.body { font-weight: 500; font-size: clamp(14px,1.1vw,18px); line-height: 1.5; color: var(--warm-gray); margin-bottom: 18px; }
+  #avro-home-{{ section.id }} .sci-chips { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+  #avro-home-{{ section.id }} .sci-chip { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; min-width: 72px; }
+  #avro-home-{{ section.id }} .sci-chip img { width: 48px; height: 48px; object-fit: contain; }
+  #avro-home-{{ section.id }} .sci-chip span { font-weight: 700; font-size: clamp(11px,0.95vw,14px); color: var(--charcoal); line-height: 1.2; }
+  #avro-home-{{ section.id }} .sci-arrow { font-weight: 700; font-size: 14px; color: var(--avro-blue); }
+  #avro-home-{{ section.id }} .graph-card { background: var(--bone); border-radius: 20px; padding: clamp(24px,3vw,36px); display: flex; flex-direction: column; }
+  #avro-home-{{ section.id }} .graph-card h2 { font-weight: 700; font-size: clamp(22px,2.4vw,30px); line-height: 1.05; color: var(--charcoal); margin-bottom: 8px; }
+  #avro-home-{{ section.id }} .graph-card .sub { font-weight: 400; font-size: 13px; line-height: 1.45; color: var(--warm-gray); margin-bottom: 24px; }
+  #avro-home-{{ section.id }} .graph-rows { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+  #avro-home-{{ section.id }} .graph-row { display: flex; flex-direction: column; gap: 8px; }
+  #avro-home-{{ section.id }} .graph-row .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  #avro-home-{{ section.id }} .graph-row .nm { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
+  #avro-home-{{ section.id }} .graph-row .lg { font-weight: 500; font-size: 11px; color: var(--warm-gray); text-transform: uppercase; letter-spacing: 0.06em; }
+  #avro-home-{{ section.id }} .graph-bar { display: flex; gap: 4px; height: 14px; }
+  #avro-home-{{ section.id }} .graph-bar span { border-radius: 999px; }
+  #avro-home-{{ section.id }} .graph-legend { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid var(--divider); }
+  #avro-home-{{ section.id }} .graph-legend div { display: flex; align-items: center; gap: 8px; }
+  #avro-home-{{ section.id }} .graph-legend .dot { width: 12px; height: 12px; border-radius: 999px; }
+  #avro-home-{{ section.id }} .graph-legend span { font-weight: 600; font-size: 14px; color: var(--warm-gray); }
+
+  /* ── QUALITY ROW ─────────────────────────────────────────────────────────── */
+  #avro-home-{{ section.id }} .quality-sec { padding: 0 clamp(20px,5vw,64px) clamp(48px,6vw,72px); }
+  #avro-home-{{ section.id }} .quality-shell { background: var(--base-light); border-radius: 28px; padding: clamp(20px,3vw,32px); border: 1px solid var(--divider); }
+  #avro-home-{{ section.id }} .quality-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 2px; background: var(--base-deep); border-radius: 20px; overflow: hidden; }
+  #avro-home-{{ section.id }} .quality-badge { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: clamp(20px,3vw,32px) clamp(12px,2vw,20px); text-align: center; background: var(--bone); }
+  #avro-home-{{ section.id }} .quality-badge img { width: 64px; height: 64px; object-fit: contain; opacity: 0.8; }
+  #avro-home-{{ section.id }} .quality-badge strong { font-weight: 700; font-size: clamp(15px,1.4vw,19px); color: var(--ink); line-height: 1.2; display: flex; align-items: center; justify-content: center; min-height: 2.4em; }
+  #avro-home-{{ section.id }} .quality-badge .sub { font-weight: 500; font-size: clamp(13px,1.05vw,16px); color: var(--warm-gray); display: block; }
+  @media (max-width: 900px) { #avro-home-{{ section.id }} .quality-grid { grid-template-columns: repeat(3,1fr); } }
+  @media (max-width: 520px) { #avro-home-{{ section.id }} .quality-grid { grid-template-columns: repeat(2,1fr); } }
+
+  /* ── STORY STRIP ─────────────────────────────────────────────────────────── */
+  #avro-home-{{ section.id }} .story-sec { padding: clamp(40px,6vw,72px) clamp(20px,5vw,64px); }
+  #avro-home-{{ section.id }} .story-card { max-width: 1250px; margin: 0 auto; background: var(--charcoal); border-radius: 28px; overflow: hidden; }
+  #avro-home-{{ section.id }} .story-text { padding: clamp(36px,5vw,64px) clamp(28px,5vw,72px); }
+  #avro-home-{{ section.id }} .story-text h2 { font-weight: 700; font-size: clamp(28px,3.4vw,46px); line-height: 1; color: #fff; margin-bottom: 16px; }
+  #avro-home-{{ section.id }} .story-text p { font-weight: 400; font-size: clamp(15px,1.2vw,18px); line-height: 1.5; color: rgba(255,255,255,0.85); max-width: 680px; margin-bottom: 28px; }
+  #avro-home-{{ section.id }} .story-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  #avro-home-{{ section.id }} .story-imgs { padding: 0 clamp(20px,4vw,32px) clamp(20px,4vw,32px); }
+  #avro-home-{{ section.id }} .story-imgs .grid { display: grid; grid-template-columns: 38% 62%; min-height: 300px; gap: 12px; }
+  #avro-home-{{ section.id }} .story-imgs .cell { position: relative; overflow: hidden; border-radius: 18px; background: var(--bone); }
+  #avro-home-{{ section.id }} .story-imgs .cell img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 640px) { #avro-home-{{ section.id }} .story-imgs { display: none; } }
+
+  /* ── RITUAL ──────────────────────────────────────────────────────────────── */
+  #avro-home-{{ section.id }} .ritual-sec { padding: clamp(48px,7vw,88px) clamp(20px,5vw,64px); }
+  #avro-home-{{ section.id }} .ritual-shell { background: var(--base-light); border-radius: 28px; padding: clamp(24px,4vw,48px); }
+  #avro-home-{{ section.id }} .ritual-shell h2 { font-weight: 700; font-size: clamp(28px,3.6vw,48px); line-height: 1; color: var(--ink); margin-bottom: 24px; }
+  #avro-home-{{ section.id }} .ritual-list { display: flex; flex-direction: column; gap: 12px; }
+  #avro-home-{{ section.id }} .ritual-item { background: var(--bone); border-radius: 16px; overflow: hidden; }
+  #avro-home-{{ section.id }} .ritual-btn { width: 100%; display: flex; align-items: center; gap: 20px; padding: 20px 24px; background: transparent; border: none; cursor: pointer; text-align: left; }
+  #avro-home-{{ section.id }} .ritual-num { width: 48px; height: 48px; border-radius: 999px; border: 2px solid var(--charcoal); display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--bone); transition: all .2s ease; }
+  #avro-home-{{ section.id }} .ritual-num img { width: 28px; height: 28px; object-fit: contain; transition: filter .2s ease; }
+  #avro-home-{{ section.id }} .ritual-item.is-open .ritual-num { background: var(--charcoal); }
+  #avro-home-{{ section.id }} .ritual-item.is-open .ritual-num img { filter: invert(1) brightness(2); }
+  #avro-home-{{ section.id }} .ritual-item .title { font-weight: 700; font-size: 20px; color: var(--charcoal); flex: 1; }
+  #avro-home-{{ section.id }} .ritual-chev { transition: transform .25s ease; color: var(--charcoal); }
+  #avro-home-{{ section.id }} .ritual-item.is-open .ritual-chev { transform: rotate(180deg); }
+  #avro-home-{{ section.id }} .ritual-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+  #avro-home-{{ section.id }} .ritual-item.is-open .ritual-body { max-height: 160px; }
+  #avro-home-{{ section.id }} .ritual-body p { padding: 0 24px 24px 92px; font-weight: 400; font-size: 17px; line-height: 1.55; color: var(--warm-gray); margin: 0; }
+
+  /* ── PRODUCT CARDS (Choose your formula) ─────────────────────────────────── */
+  #avro-home-{{ section.id }} .pc-sec { background: var(--base-light); padding: clamp(32px,6vw,88px) clamp(16px,5vw,64px); }
+  #avro-home-{{ section.id }} .pc-wrap { max-width: 1080px; margin: 0 auto; }
+  #avro-home-{{ section.id }} .pc-wrap > h2 { font-weight: 700; font-size: clamp(24px,3.2vw,48px); line-height: 1; color: var(--ink); margin-bottom: 10px; }
+  #avro-home-{{ section.id }} .pc-wrap > p.intro { font-weight: 500; font-size: clamp(16px,1.3vw,20px); line-height: 1.45; color: rgba(0,0,0,0.6); margin-bottom: 28px; }
+  #avro-home-{{ section.id }} .pc-row { display: flex; flex-direction: column; gap: 32px; }
+  #avro-home-{{ section.id }} .pc-card { display: flex; flex-direction: column; gap: 16px; }
+  #avro-home-{{ section.id }} .pc-thumb { border-radius: 20px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #E5E5E5; }
+  #avro-home-{{ section.id }} .pc-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  #avro-home-{{ section.id }} .pc-card h3 { font-weight: 700; font-size: clamp(22px,2vw,32px); color: var(--ink); }
+  #avro-home-{{ section.id }} .pc-card p.support { font-weight: 400; font-size: clamp(16px,1.3vw,20px); line-height: 1.45; color: rgba(0,0,0,0.6); margin: 0; min-height: 2.9em; }
+  #avro-home-{{ section.id }} .pc-meta { border-top: 1px solid rgba(0,0,0,0.08); padding-top: 16px; display: flex; flex-direction: column; gap: 12px; }
+  #avro-home-{{ section.id }} .pc-meta .lbl { font-weight: 700; font-size: clamp(14px,1.1vw,17px); color: var(--ink); }
+  #avro-home-{{ section.id }} .pc-meta p { font-weight: 400; font-size: clamp(14px,1.05vw,16px); line-height: 1.5; color: rgba(0,0,0,0.6); margin: 4px 0 0; }
+  #avro-home-{{ section.id }} .pc-meta .caf { font-weight: 700; font-size: clamp(14px,1.05vw,16px); color: var(--ink); margin: 0; }
+  #avro-home-{{ section.id }} .pc-card .hp-btn { width: 100%; margin-top: auto; }
+  @media (min-width: 640px) {
+    #avro-home-{{ section.id }} .pc-row { flex-direction: row; gap: 24px; }
+    #avro-home-{{ section.id }} .pc-card { flex: 1 1 0; }
+  }
+
+  /* ── SOCIAL PROOF ────────────────────────────────────────────────────────── */
+  #avro-home-{{ section.id }} .sp-sec { padding: clamp(64px,8vw,112px) clamp(20px,5vw,64px) clamp(72px,9vw,120px); }
+  #avro-home-{{ section.id }} .sp-wrap { max-width: 1250px; margin: 0 auto; }
+  #avro-home-{{ section.id }} .sp-wrap > h2 { font-weight: 700; font-size: clamp(34px,4.4vw,60px); line-height: 1; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 40px; }
+  #avro-home-{{ section.id }} .sp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 16px; }
+  #avro-home-{{ section.id }} .sp-card { background: var(--base-light); border-radius: 24px; padding: clamp(24px,3vw,36px); }
+  #avro-home-{{ section.id }} .sp-stars { display: flex; gap: 2px; margin-bottom: 12px; }
+  #avro-home-{{ section.id }} .sp-stars svg { fill: var(--avro-blue); }
+  #avro-home-{{ section.id }} .sp-card p { font-weight: 400; font-size: clamp(18px,1.6vw,22px); line-height: 1.4; color: rgba(0,0,0,0.75); margin-bottom: 16px; }
+  #avro-home-{{ section.id }} .sp-card strong { font-weight: 700; font-size: 18px; color: var(--ink); display: block; }
+  #avro-home-{{ section.id }} .sp-card .role { font-weight: 500; font-size: 15px; color: rgba(0,0,0,0.55); display: block; margin-top: 4px; }
+
+  /* ── FINAL CTA ───────────────────────────────────────────────────────────── */
+  #avro-home-{{ section.id }} .cta-sec { background: var(--avro-blue); padding: clamp(56px,8vw,104px) clamp(16px,4vw,64px); }
+  #avro-home-{{ section.id }} .cta-wrap { max-width: 1250px; margin: 0 auto; color: var(--charcoal); display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; }
+  #avro-home-{{ section.id }} .cta-left { flex: 1 1 320px; min-width: 0; max-width: 520px; }
+  #avro-home-{{ section.id }} .cta-left h2 { font-weight: 700; font-size: clamp(26px,4vw,60px); line-height: 1.02; letter-spacing: -0.02em; color: var(--charcoal); margin-bottom: 10px; }
+  #avro-home-{{ section.id }} .cta-left p { font-weight: 500; font-size: clamp(15px,1.3vw,19px); line-height: 1.5; color: rgba(21,21,21,0.7); }
+  #avro-home-{{ section.id }} .cta-btns { flex: 1 1 280px; display: flex; flex-direction: column; gap: 8px; min-width: 240px; max-width: 400px; }
+  #avro-home-{{ section.id }} .cta-pill { width: 100%; background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); }
+  #avro-home-{{ section.id }} .cta-pill:hover { background: transparent; color: var(--charcoal); }
+
+  /* ── BANNER CTA ──────────────────────────────────────────────────────────── */
+  #avro-home-{{ section.id }} .banner-box { position: relative; width: 100%; overflow: hidden; background: var(--base); }
+  #avro-home-{{ section.id }} .banner-box img { width: 100%; height: auto; display: block; }
+  #avro-home-{{ section.id }} .banner-btn { position: absolute; left: clamp(16px,4vw,64px); bottom: clamp(16px,4vw,56px); min-width: 220px; background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); }
+  #avro-home-{{ section.id }} .banner-btn:hover { background: transparent; color: var(--charcoal); }
+  @media (max-width: 640px) {
+    #avro-home-{{ section.id }} .banner-box { display: flex; flex-direction: column; padding-bottom: 24px; }
+    #avro-home-{{ section.id }} .banner-btn { position: static; width: calc(100% - 32px); min-width: 0; margin: 20px auto 0; }
+  }
+
+  /* ── MOBILE HERO STACK ───────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    #avro-home-{{ section.id }} .hp-hero-container { aspect-ratio: unset; overflow: visible; display: flex; flex-direction: column; }
+    #avro-home-{{ section.id }} .hp-hero-img-wrap { position: relative; width: calc(100% - 32px); margin: 16px auto 0; aspect-ratio: 3/4; border-radius: 20px; overflow: hidden; flex-shrink: 0; }
+    #avro-home-{{ section.id }} .hp-hero-img { display: none; }
+    #avro-home-{{ section.id }} .hp-hero-img-mobile { display: block; }
+    #avro-home-{{ section.id }} .hp-hero-grid { position: static; padding: 24px 20px 32px; }
+    #avro-home-{{ section.id }} .hp-pill-row { flex-direction: column; align-items: stretch; max-width: 320px; }
+    #avro-home-{{ section.id }} .hp-pill-row .hp-btn { width: 100%; flex: 0 0 auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #avro-home-{{ section.id }} * { animation: none !important; }
+  }
+{% endstyle %}
+
+{%- comment -%} Reusable star SVG {%- endcomment -%}
+{%- capture star_svg -%}<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>{%- endcapture -%}
+{%- capture chevron -%}<svg class="accord-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>{%- endcapture -%}
+{%- capture arrow_svg -%}<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>{%- endcapture -%}
+
+<div id="avro-home-{{ section.id }}">
+
+  {%- comment -%} ============ HERO ============ {%- endcomment -%}
+  {%- assign slides = section.blocks | where: "type", "slide" -%}
+  {%- if slides.size > 0 -%}
+  <section class="hp-sec hp-hero">
+    <div class="hp-hero-container">
+      <div class="hp-hero-img-wrap">
+        {%- for b in slides -%}
+          {%- assign i = forloop.index0 -%}
+          {%- if b.settings.image != blank -%}
+            <img class="hp-hero-img{% if i == 0 %} is-active{% endif %}" src="{{ b.settings.image | image_url: width: 2400 }}" alt="{{ b.settings.alt | escape }}" loading="lazy">
+          {%- else -%}
+            <img class="hp-hero-img{% if i == 0 %} is-active{% endif %}" src="{{ b.settings.image_fallback | default: 'hero-01.jpg' | asset_url }}" alt="{{ b.settings.alt | escape }}" loading="lazy">
+          {%- endif -%}
+        {%- endfor -%}
+        {%- for b in slides -%}
+          {%- assign i = forloop.index0 -%}
+          {%- if b.settings.mobile_image != blank -%}
+            <img class="hp-hero-img-mobile{% if i == 0 %} is-active{% endif %}" src="{{ b.settings.mobile_image | image_url: width: 1200 }}" alt="{{ b.settings.alt | escape }}" loading="lazy">
+          {%- else -%}
+            <img class="hp-hero-img-mobile{% if i == 0 %} is-active{% endif %}" src="{{ b.settings.mobile_image_fallback | default: 'hero-01-mobile.png' | asset_url }}" alt="{{ b.settings.alt | escape }}" loading="lazy">
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="hp-hero-grid">
+        <div>
+          {%- for b in slides -%}
+          <div class="hp-slide{% if forloop.first %} is-active{% endif %}" {{ b.shopify_attributes }}>
+            <h1>{{ b.settings.headline }}</h1>
+            <p class="lede">{{ b.settings.lede }}</p>
+          </div>
+          {%- endfor -%}
+          <div class="hp-pill-row">
+            <a href="{{ section.settings.hero_btn1_link | default: '/collections/all' }}" class="hp-btn hp-btn-lg hp-btn-outline">{{ section.settings.hero_btn1_label | default: 'Shop AVRO' }}</a>
+            <a href="{{ section.settings.hero_btn2_link | default: '/collections/all' }}" class="hp-btn hp-btn-lg hp-btn-outline">{{ section.settings.hero_btn2_label | default: 'Find Your Formula' }}</a>
+          </div>
+          {%- if slides.size > 1 -%}
+          <div class="hp-dots" role="tablist" aria-label="Hero slides">
+            {%- for b in slides -%}
+            <button class="hp-dot{% if forloop.first %} is-active{% endif %}" data-slide="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}"></button>
+            {%- endfor -%}
+          </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ============ PROOF BAR ============ {%- endcomment -%}
+  {%- assign proofs = section.blocks | where: "type", "proof" -%}
+  {%- if proofs.size > 0 -%}
+  <section class="hp-sec proof-bar">
+    <div class="proof-bar-container">
+      {%- for b in proofs -%}
+      <div class="proof-stat" {{ b.shopify_attributes }}>
+        <strong>{{ b.settings.name }}</strong>
+        <span class="proof-stars" role="img" aria-label="Rated 5 out of 5 stars">
+          {{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}
+        </span>
+      </div>
+      {%- endfor -%}
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ============ BENEFIT ROW ============ {%- endcomment -%}
+  {%- assign benefits = section.blocks | where: "type", "benefit" -%}
+  {%- if benefits.size > 0 -%}
+  <section class="hp-sec benefit-sec">
+    <div class="hp-wrap">
+      <div class="benefit-grid">
+        {%- for b in benefits -%}
+        <div class="benefit-card" {{ b.shopify_attributes }}>
+          {%- if b.settings.image != blank -%}
+            <img src="{{ b.settings.image | image_url: width: 1200 }}" alt="" style="object-position: {{ b.settings.focal | default: 'center' }};">
+          {%- else -%}
+            <img src="{{ b.settings.image_fallback | default: 'benefit-golf.png' | asset_url }}" alt="" style="object-position: {{ b.settings.focal | default: 'center' }};">
+          {%- endif -%}
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ============ APPROACH (accordion + graphic) ============ {%- endcomment -%}
+  {%- assign approaches = section.blocks | where: "type", "approach_item" -%}
+  {%- if approaches.size > 0 or section.settings.approach_heading != blank -%}
+  <section class="hp-sec pad-sec">
+    <div class="hp-wrap">
+      <div class="card-shell">
+        <div class="approach-grid">
+          <div class="approach-col">
+            <h2>{{ section.settings.approach_heading | default: 'The calm-first approach.' }}</h2>
+            {%- for b in approaches -%}
+            <div class="accord{% if forloop.first %} is-open{% endif %}" data-accordion {{ b.shopify_attributes }}>
+              <button class="accord-btn" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+                <span class="accord-icon">
+                  {%- if b.settings.icon != blank -%}
+                    {%- assign icon_url = b.settings.icon | image_url: width: 120 -%}
+                  {%- else -%}
+                    {%- assign icon_url = b.settings.icon_fallback | default: 'control-under-pressure.png' | asset_url -%}
+                  {%- endif -%}
+                  <span style="background-color: {{ b.settings.icon_color | default: '#E8A23D' }}; -webkit-mask-image: url({{ icon_url }}); mask-image: url({{ icon_url }});"></span>
+                </span>
+                <span class="accord-title">{{ b.settings.title }}</span>
+                {{ chevron }}
+              </button>
+              <div class="accord-body"><p>{{ b.settings.content }}</p></div>
+            </div>
+            {%- endfor -%}
+          </div>
+          <div>
+            <iframe class="approach-graphic" src="{{ section.settings.approach_graphic_fallback | default: 'homepage.html' | asset_url }}" title="{{ section.settings.approach_graphic_title | default: 'The Calm-First approach' | escape }}" loading="lazy" scrolling="no"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ============ PRODUCT STRIP ============ {%- endcomment -%}
+  {%- assign products = section.blocks | where: "type", "product" -%}
+  {%- if products.size > 0 -%}
+  <section class="hp-sec strip-sec">
+    <div class="hp-wrap">
+      <h2>{{ section.settings.strip_heading | default: 'Three formulas. One foundation.' }}</h2>
+      <div class="strip-grid">
+        {%- for b in products -%}
+        <div class="strip-card" {{ b.shopify_attributes }}>
+          <div class="strip-thumb">
+            {%- if b.settings.image != blank -%}
+              <img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">
+            {%- else -%}
+              <img src="{{ b.settings.image_fallback | default: 'card-calm.jpg' | asset_url }}" alt="{{ b.settings.name | escape }}">
+            {%- endif -%}
+          </div>
+          <div class="strip-body">
+            <div class="strip-found">
+              <span class="lbl">{{ b.settings.foundation_label | default: 'Foundation' }}</span>
+              <span class="val">{{ b.settings.foundation_value }}</span>
+            </div>
+            <h3>{{ b.settings.name }}</h3>
+            <p>{{ b.settings.tagline }}</p>
+            <a href="{{ b.settings.link | default: '/collections/all' }}" class="hp-btn hp-btn-md hp-btn-outline">{{ b.settings.button_label | default: 'Explore' }}{{ arrow_svg }}</a>
+          </div>
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ============ MOMENT GRID ============ {%- endcomment -%}
+  {%- assign moments = section.blocks | where: "type", "moment" -%}
+  {%- if moments.size > 0 -%}
+  <section class="hp-sec pad-sec moment-sec">
+    <div class="hp-wrap">
+      <h2>{{ section.settings.moment_heading | default: 'Built for pressure sensitive moments.' }}</h2>
+      <div class="moment-grid">
+        {%- for b in moments -%}
+        <a href="{{ b.settings.link | default: '#' }}" class="moment-card" {{ b.shopify_attributes }}>
+          <div class="moment-thumb">
+            {%- if b.settings.image != blank -%}
+              <img src="{{ b.settings.image | image_url: width: 700 }}" alt="{{ b.settings.alt | escape }}">
+            {%- else -%}
+              <img src="{{ b.settings.image_fallback | default: 'tile-golf.jpg' | asset_url }}" alt="{{ b.settings.alt | escape }}">
+            {%- endif -%}
+          </div>
+          <div class="moment-body">
+            <h3>{{ b.settings.title }}</h3>
+            <p>{{ b.settings.copy }}</p>
+            <span class="hp-btn hp-btn-md hp-btn-outline" style="align-self:flex-start;">{{ b.settings.cta }}</span>
+          </div>
+        </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ============ SCIENCE GRID (GABA card + formula graph) ============ {%- endcomment -%}
+  <section class="hp-sec pad-sec">
+    <div class="hp-wrap">
+      <div class="card-shell" style="overflow:hidden;">
+        <div class="sci-grid">
+          <div class="sci-card">
+            <h2>{{ section.settings.gaba_heading | default: 'Why GABA matters.' }}</h2>
+            <p class="body">{{ section.settings.gaba_body | default: 'GABA is a naturally occurring compound associated with relaxation and balance. AVRO uses naturally fermented PharmaGABA® as the foundation of every formula.**' }}</p>
+            <div class="sci-chips">
+              {%- assign gaba_chips = section.blocks | where: "type", "gaba_chip" -%}
+              {%- for b in gaba_chips -%}
+                <div class="sci-chip" {{ b.shopify_attributes }}>
+                  {%- if b.settings.icon != blank -%}
+                    <img src="{{ b.settings.icon | image_url: width: 120 }}" alt="">
+                  {%- else -%}
+                    <img src="{{ b.settings.icon_fallback | default: 'naturally-fermented-pharmagaba.png' | asset_url }}" alt="">
+                  {%- endif -%}
+                  <span>{{ b.settings.label }}</span>
+                </div>
+                {%- unless forloop.last -%}<span class="sci-arrow">&rarr;</span>{%- endunless -%}
+              {%- endfor -%}
+            </div>
+            <a href="{{ section.settings.gaba_link | default: '/pages/science' }}" class="hp-btn hp-btn-md hp-btn-outline">{{ section.settings.gaba_button | default: 'Learn the Science of AVRO' }}{{ arrow_svg }}</a>
+          </div>
+
+          <div class="graph-card">
+            <h2>{{ section.settings.graph_heading | default: 'Every formula starts calm first.' }}</h2>
+            <p class="sub">{{ section.settings.graph_sub | default: 'Same calm-first base. Different active addition.' }}</p>
+            <div class="graph-rows">
+              {%- assign bars = section.blocks | where: "type", "formula_bar" -%}
+              {%- for b in bars -%}
+              <div class="graph-row" {{ b.shopify_attributes }}>
+                <div class="top">
+                  <span class="nm" style="color: {{ b.settings.color | default: '#4b4d9a' }};">{{ b.settings.name }}</span>
+                  <span class="lg">PharmaGABA® + {{ b.settings.addition }}</span>
+                </div>
+                <div class="graph-bar">
+                  <span style="flex: 60 0 0; background: #94C6D4;"></span>
+                  <span style="flex: 40 0 0; background: {{ b.settings.color | default: '#4b4d9a' }};"></span>
+                </div>
+              </div>
+              {%- endfor -%}
+            </div>
+            <div class="graph-legend">
+              <div><span class="dot" style="background:#94C6D4;"></span><span>PharmaGABA®</span></div>
+              <div><span class="dot" style="background:#4b4d9a;"></span><span>Magnesium</span></div>
+              <div><span class="dot" style="background:#C13584;"></span><span>Cognigrape®</span></div>
+              <div><span class="dot" style="background:#E8A23D;"></span><span>Caffeine</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============ QUALITY ROW ============ {%- endcomment -%}
+  {%- assign badges = section.blocks | where: "type", "quality_badge" -%}
+  {%- if badges.size > 0 -%}
+  <section class="hp-sec quality-sec">
+    <div class="hp-wrap">
+      <div class="quality-shell">
+        <div class="quality-grid">
+          {%- for b in badges -%}
+          <div class="quality-badge" {{ b.shopify_attributes }}>
+            {%- if b.settings.icon != blank -%}
+              <img src="{{ b.settings.icon | image_url: width: 160 }}" alt="">
+            {%- else -%}
+              <img src="{{ b.settings.icon_fallback | default: 'third-party-tested.png' | asset_url }}" alt="">
+            {%- endif -%}
+            <div>
+              <strong>{{ b.settings.label }}</strong>
+              <span class="sub">{{ b.settings.sub }}</span>
+            </div>
+          </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ============ STORY STRIP ============ {%- endcomment -%}
+  <section class="hp-sec story-sec">
+    <div class="story-card">
+      <div class="story-text">
+        <h2>{{ section.settings.story_heading | default: 'Science-backed. Founder-driven.' }}</h2>
+        <p>{{ section.settings.story_body | default: 'AVRO was built by Keigo Sugawara and Peter van Stolk for people who wanted a better option before the moments that matter. Every formula is backed by research and designed for real routines.' }}</p>
+        <div class="story-btns">
+          <a href="{{ section.settings.story_btn1_link | default: '/pages/our-story' }}" class="hp-btn hp-btn-lg hp-btn-outline-light">{{ section.settings.story_btn1_label | default: 'Our Story' }}</a>
+          <a href="{{ section.settings.story_btn2_link | default: '/pages/science' }}" class="hp-btn hp-btn-lg hp-btn-blue">{{ section.settings.story_btn2_label | default: 'The Science' }}</a>
+        </div>
+      </div>
+      <div class="story-imgs">
+        <div class="grid">
+          <div class="cell">
+            {%- if section.settings.story_image1 != blank -%}
+              <img src="{{ section.settings.story_image1 | image_url: width: 900 }}" alt="{{ section.settings.story_image1_alt | escape }}">
+            {%- else -%}
+              <img src="{{ 'science-hero-4x3.jpg' | asset_url }}" alt="{{ section.settings.story_image1_alt | default: 'AVRO production lab' | escape }}">
+            {%- endif -%}
+          </div>
+          <div class="cell">
+            {%- if section.settings.story_image2 != blank -%}
+              <img src="{{ section.settings.story_image2 | image_url: width: 1400 }}" alt="{{ section.settings.story_image2_alt | escape }}" style="object-position:center 30%;">
+            {%- else -%}
+              <img src="{{ 'founder.jpg' | asset_url }}" alt="{{ section.settings.story_image2_alt | default: 'AVRO co-founder Keigo Sugawara' | escape }}" style="object-position:center 30%;">
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============ RITUAL ============ {%- endcomment -%}
+  {%- assign steps = section.blocks | where: "type", "ritual_step" -%}
+  {%- if steps.size > 0 -%}
+  <section class="hp-sec ritual-sec">
+    <div class="hp-wrap">
+      <div class="ritual-shell">
+        <h2>{{ section.settings.ritual_heading | default: 'How to use AVRO.' }}</h2>
+        <div class="ritual-list">
+          {%- for b in steps -%}
+          <div class="ritual-item{% if forloop.first %} is-open{% endif %}" data-accordion {{ b.shopify_attributes }}>
+            <button class="ritual-btn" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+              <span class="ritual-num">
+                {%- if b.settings.icon != blank -%}
+                  <img src="{{ b.settings.icon | image_url: width: 80 }}" alt="">
+                {%- else -%}
+                  <img src="{{ b.settings.icon_fallback | default: 'step-pour.png' | asset_url }}" alt="">
+                {%- endif -%}
+              </span>
+              <span class="title">{{ b.settings.title }}</span>
+              {{ chevron }}
+            </button>
+            <div class="ritual-body"><p>{{ b.settings.detail }}</p></div>
+          </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ============ PRODUCT CARDS (Choose your formula) ============ {%- endcomment -%}
+  {%- assign formula_cards = section.blocks | where: "type", "formula_card" -%}
+  {%- if formula_cards.size > 0 -%}
+  <section class="hp-sec pc-sec">
+    <div class="pc-wrap">
+      <h2>{{ section.settings.pc_heading | default: 'Choose your AVRO formula' }}</h2>
+      <p class="intro">{{ section.settings.pc_intro | default: 'Every AVRO formula starts with the same calm-first base, then supports the moment in a different way.' }}</p>
+      <div class="pc-row">
+        {%- for b in formula_cards -%}
+        <article class="pc-card" {{ b.shopify_attributes }}>
+          <div class="pc-thumb">
+            {%- if b.settings.image != blank -%}
+              <img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">
+            {%- else -%}
+              <img src="{{ b.settings.image_fallback | default: 'calm-blueberry-acai.png' | asset_url }}" alt="{{ b.settings.name | escape }}">
+            {%- endif -%}
+          </div>
+          <h3>{{ b.settings.name }}</h3>
+          <p class="support">{{ b.settings.support }}</p>
+          <div class="pc-meta">
+            <div>
+              <span class="lbl">Best For:</span>
+              <p>{{ b.settings.best_for }}</p>
+            </div>
+            <p class="caf">{{ b.settings.caffeine }}</p>
+          </div>
+          <a href="{{ b.settings.link | default: '/collections/all' }}" class="hp-btn hp-btn-lg hp-btn-outline">{{ b.settings.button_label | default: 'Shop' }}</a>
+        </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ============ SOCIAL PROOF ============ {%- endcomment -%}
+  {%- assign reviews = section.blocks | where: "type", "testimonial" -%}
+  {%- if reviews.size > 0 -%}
+  <section class="hp-sec sp-sec">
+    <div class="sp-wrap">
+      <h2>{{ section.settings.sp_heading | default: 'Trusted for calm-first routines.' }}</h2>
+      <div class="sp-grid">
+        {%- for b in reviews -%}
+        <article class="sp-card" {{ b.shopify_attributes }}>
+          <div class="sp-stars">{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}</div>
+          <p>&ldquo;{{ b.settings.quote }}&rdquo;</p>
+          <strong>{{ b.settings.name }}</strong>
+          <span class="role">{{ b.settings.role }}</span>
+        </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ============ FINAL CTA ============ {%- endcomment -%}
+  <section class="hp-sec cta-sec">
+    <div class="cta-wrap">
+      <div class="cta-left">
+        <h2>{{ section.settings.cta_heading | default: 'Calm first. Clear headed. Ready for what matters.' }}</h2>
+        <p>{{ section.settings.cta_copy | default: 'Supports composure, clarity, and calm-first readiness for the moments that matter.*' }}</p>
+      </div>
+      <div class="cta-btns">
+        <a href="{{ section.settings.cta_btn1_link | default: '/collections/calm' }}" class="hp-btn hp-btn-lg cta-pill">{{ section.settings.cta_btn1_label | default: 'Shop Calm' }}</a>
+        <a href="{{ section.settings.cta_btn2_link | default: '/collections/focus' }}" class="hp-btn hp-btn-lg cta-pill">{{ section.settings.cta_btn2_label | default: 'Shop Focus' }}</a>
+        <a href="{{ section.settings.cta_btn3_link | default: '/collections/energy' }}" class="hp-btn hp-btn-lg cta-pill">{{ section.settings.cta_btn3_label | default: 'Shop Energy' }}</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ============ BANNER CTA ============ {%- endcomment -%}
+  <section class="hp-sec">
+    <div class="banner-box">
+      {%- if section.settings.banner_image != blank -%}
+        <img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">
+      {%- else -%}
+        <img src="{{ 'calm-power.png' | asset_url }}" alt="">
+      {%- endif -%}
+      <a href="{{ section.settings.banner_link | default: '/collections/all' }}" class="hp-btn hp-btn-lg banner-btn">{{ section.settings.banner_label | default: 'Shop' }}</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById("avro-home-{{ section.id }}");
+    if (!root) return;
+
+    /* Hero carousel */
+    var dots = root.querySelectorAll(".hp-dot");
+    var slides = root.querySelectorAll(".hp-slide");
+    var imgs = root.querySelectorAll(".hp-hero-img");
+    var mobImgs = root.querySelectorAll(".hp-hero-img-mobile");
+    var current = 0;
+    var timer = null;
+
+    function show(n) {
+      if (!slides.length) return;
+      current = (n + slides.length) % slides.length;
+      slides.forEach(function (s, i) { s.classList.toggle("is-active", i === current); });
+      dots.forEach(function (d, i) { d.classList.toggle("is-active", i === current); });
+      imgs.forEach(function (im, i) { im.classList.toggle("is-active", i === current); });
+      mobImgs.forEach(function (im, i) { im.classList.toggle("is-active", i === current); });
+    }
+    function start() {
+      if (slides.length < 2) return;
+      stop();
+      timer = setInterval(function () { show(current + 1); }, 6000);
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    dots.forEach(function (d) {
+      d.addEventListener("click", function () { show(parseInt(d.getAttribute("data-slide"), 10)); start(); });
+    });
+    start();
+
+    /* Accordions (approach + ritual) */
+    root.querySelectorAll("[data-accordion]").forEach(function (item) {
+      var btn = item.querySelector("button");
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var isOpen = item.classList.contains("is-open");
+        var group = item.parentElement;
+        group.querySelectorAll("[data-accordion]").forEach(function (sib) {
+          sib.classList.remove("is-open");
+          var b = sib.querySelector("button");
+          if (b) b.setAttribute("aria-expanded", "false");
+        });
+        if (!isOpen) { item.classList.add("is-open"); btn.setAttribute("aria-expanded", "true"); }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AVRO — Home",
+  "tag": "section",
+  "class": "avro-home-section",
+  "settings": [
+    { "type": "header", "content": "Hero — buttons" },
+    { "type": "text", "id": "hero_btn1_label", "label": "Button 1 label", "default": "Shop AVRO" },
+    { "type": "url", "id": "hero_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "hero_btn2_label", "label": "Button 2 label", "default": "Find Your Formula" },
+    { "type": "url", "id": "hero_btn2_link", "label": "Button 2 link" },
+    { "type": "paragraph", "content": "Add / edit hero slides using the blocks below the section." },
+
+    { "type": "header", "content": "Approach (accordion + graphic)" },
+    { "type": "text", "id": "approach_heading", "label": "Heading", "default": "The calm-first approach." },
+    { "type": "text", "id": "approach_graphic_title", "label": "Graphic title (a11y)", "default": "The Calm-First approach" },
+    { "type": "text", "id": "approach_graphic_fallback", "label": "Graphic asset filename", "default": "homepage.html", "info": "An .html asset uploaded to your theme; shown in an iframe." },
+
+    { "type": "header", "content": "Product strip" },
+    { "type": "text", "id": "strip_heading", "label": "Heading", "default": "Three formulas. One foundation." },
+
+    { "type": "header", "content": "Moments" },
+    { "type": "text", "id": "moment_heading", "label": "Heading", "default": "Built for pressure sensitive moments." },
+
+    { "type": "header", "content": "Science — Why GABA card" },
+    { "type": "text", "id": "gaba_heading", "label": "Heading", "default": "Why GABA matters." },
+    { "type": "richtext", "id": "gaba_body", "label": "Body" },
+    { "type": "text", "id": "gaba_button", "label": "Button label", "default": "Learn the Science of AVRO" },
+    { "type": "url", "id": "gaba_link", "label": "Button link" },
+
+    { "type": "header", "content": "Science — Formula graph" },
+    { "type": "text", "id": "graph_heading", "label": "Heading", "default": "Every formula starts calm first." },
+    { "type": "text", "id": "graph_sub", "label": "Subheading", "default": "Same calm-first base. Different active addition." },
+
+    { "type": "header", "content": "Story strip" },
+    { "type": "text", "id": "story_heading", "label": "Heading", "default": "Science-backed. Founder-driven." },
+    { "type": "richtext", "id": "story_body", "label": "Body" },
+    { "type": "text", "id": "story_btn1_label", "label": "Button 1 label", "default": "Our Story" },
+    { "type": "url", "id": "story_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "story_btn2_label", "label": "Button 2 label", "default": "The Science" },
+    { "type": "url", "id": "story_btn2_link", "label": "Button 2 link" },
+    { "type": "image_picker", "id": "story_image1", "label": "Image 1 (left)" },
+    { "type": "text", "id": "story_image1_alt", "label": "Image 1 alt", "default": "AVRO production lab" },
+    { "type": "image_picker", "id": "story_image2", "label": "Image 2 (right)" },
+    { "type": "text", "id": "story_image2_alt", "label": "Image 2 alt", "default": "AVRO co-founder Keigo Sugawara" },
+
+    { "type": "header", "content": "Ritual (How to use)" },
+    { "type": "text", "id": "ritual_heading", "label": "Heading", "default": "How to use AVRO." },
+
+    { "type": "header", "content": "Choose your formula" },
+    { "type": "text", "id": "pc_heading", "label": "Heading", "default": "Choose your AVRO formula" },
+    { "type": "richtext", "id": "pc_intro", "label": "Intro" },
+
+    { "type": "header", "content": "Social proof" },
+    { "type": "text", "id": "sp_heading", "label": "Heading", "default": "Trusted for calm-first routines." },
+
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Calm first. Clear headed. Ready for what matters." },
+    { "type": "richtext", "id": "cta_copy", "label": "Copy" },
+    { "type": "text", "id": "cta_btn1_label", "label": "Button 1 label", "default": "Shop Calm" },
+    { "type": "url", "id": "cta_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "cta_btn2_label", "label": "Button 2 label", "default": "Shop Focus" },
+    { "type": "url", "id": "cta_btn2_link", "label": "Button 2 link" },
+    { "type": "text", "id": "cta_btn3_label", "label": "Button 3 label", "default": "Shop Energy" },
+    { "type": "url", "id": "cta_btn3_link", "label": "Button 3 link" },
+
+    { "type": "header", "content": "Bottom banner" },
+    { "type": "image_picker", "id": "banner_image", "label": "Banner image" },
+    { "type": "text", "id": "banner_label", "label": "Button label", "default": "Shop" },
+    { "type": "url", "id": "banner_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Hero slide",
+      "settings": [
+        { "type": "text", "id": "headline", "label": "Headline", "default": "Performance Starts with Being Calm." },
+        { "type": "textarea", "id": "lede", "label": "Lede", "default": "AVRO helps you steady first, with calm-first formulas built to support composure, clarity and controlled readiness when pressure rises.*" },
+        { "type": "image_picker", "id": "image", "label": "Desktop image" },
+        { "type": "text", "id": "image_fallback", "label": "Desktop image asset filename", "default": "hero-01.jpg" },
+        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
+        { "type": "text", "id": "mobile_image_fallback", "label": "Mobile image asset filename", "default": "hero-01-mobile.png" },
+        { "type": "text", "id": "alt", "label": "Image alt text" }
+      ]
+    },
+    {
+      "type": "proof",
+      "name": "Proof stat",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Product name", "default": "AVRO Calm" }
+      ]
+    },
+    {
+      "type": "benefit",
+      "name": "Benefit card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "benefit-golf.png" },
+        { "type": "text", "id": "focal", "label": "Focal point (CSS object-position)", "default": "center 30%" }
+      ]
+    },
+    {
+      "type": "approach_item",
+      "name": "Approach accordion item",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "More energy is not always the answer." },
+        { "type": "textarea", "id": "content", "label": "Content" },
+        { "type": "image_picker", "id": "icon", "label": "Icon (PNG, masked to color)" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "control-under-pressure.png" },
+        { "type": "color", "id": "icon_color", "label": "Icon color", "default": "#E8A23D" }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product strip card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "card-calm.jpg" },
+        { "type": "text", "id": "foundation_label", "label": "Foundation label", "default": "Foundation" },
+        { "type": "text", "id": "foundation_value", "label": "Foundation value", "default": "PharmaGABA® + Magnesium Bisglycinate" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Calm" },
+        { "type": "textarea", "id": "tagline", "label": "Tagline" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Explore AVRO Calm" },
+        { "type": "url", "id": "link", "label": "Button link" }
+      ]
+    },
+    {
+      "type": "moment",
+      "name": "Moment tile",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "tile-golf.jpg" },
+        { "type": "text", "id": "alt", "label": "Image alt" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Golf" },
+        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Before the first tee. Before the final putt." },
+        { "type": "text", "id": "cta", "label": "CTA label", "default": "Explore Golf" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    },
+    {
+      "type": "gaba_chip",
+      "name": "GABA chip",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "naturally-fermented-pharmagaba.png" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Naturally Fermented" }
+      ]
+    },
+    {
+      "type": "formula_bar",
+      "name": "Formula graph bar",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Formula name", "default": "Calm" },
+        { "type": "text", "id": "addition", "label": "Active addition", "default": "Magnesium" },
+        { "type": "color", "id": "color", "label": "Accent color", "default": "#4b4d9a" }
+      ]
+    },
+    {
+      "type": "quality_badge",
+      "name": "Quality badge",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "third-party-tested.png" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Third-Party" },
+        { "type": "text", "id": "sub", "label": "Sub-label", "default": "Tested" }
+      ]
+    },
+    {
+      "type": "ritual_step",
+      "name": "Ritual step",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "step-pour.png" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Pour one stick into water" },
+        { "type": "textarea", "id": "detail", "label": "Detail" }
+      ]
+    },
+    {
+      "type": "formula_card",
+      "name": "Formula card (Choose your formula)",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Product image" },
+        { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "calm-blueberry-acai.png" },
+        { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
+        { "type": "textarea", "id": "support", "label": "Support line" },
+        { "type": "textarea", "id": "best_for", "label": "Best for" },
+        { "type": "text", "id": "caffeine", "label": "Caffeine line", "default": "No Caffeine" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
+        { "type": "url", "id": "link", "label": "Button link" }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Verified Buyer" },
+        { "type": "text", "id": "role", "label": "Role / product", "default": "AVRO Calm" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Home",
+      "blocks": [
+        { "type": "slide", "settings": { "headline": "Performance Starts with Being Calm.", "lede": "AVRO helps you steady first, with calm-first formulas built to support composure, clarity and controlled readiness when pressure rises.*", "image_fallback": "hero-01.jpg", "mobile_image_fallback": "hero-01-mobile.png", "alt": "Pouring an AVRO Calm stick into a glass of water" } },
+        { "type": "slide", "settings": { "headline": "Calm Comes First.", "lede": "AVRO is built for people who know pressure changes everything. Support composure, clarity and readiness before the moment matters.*", "image_fallback": "hero-03.jpg", "mobile_image_fallback": "hero-03-mobile.png", "alt": "Hand holding an AVRO Focus tube" } },
+        { "type": "slide", "settings": { "headline": "Start Calm. Stay Ready.", "lede": "AVRO supports calm-first performance with formulas designed for pressure-sensitive moments in work, play, competition and social life.*", "image_fallback": "hero-02.jpg", "mobile_image_fallback": "hero-02-mobile.png", "alt": "Hand holding an AVRO Energy tube" } },
+        { "type": "proof", "settings": { "name": "AVRO Calm" } },
+        { "type": "proof", "settings": { "name": "AVRO Focus" } },
+        { "type": "proof", "settings": { "name": "AVRO Energy" } },
+        { "type": "benefit", "settings": { "image_fallback": "benefit-golf.png", "focal": "center 30%" } },
+        { "type": "benefit", "settings": { "image_fallback": "benefit-bar.png", "focal": "center 40%" } },
+        { "type": "benefit", "settings": { "image_fallback": "benefit-community.png", "focal": "center 35%" } },
+        { "type": "approach_item", "settings": { "title": "More energy is not always the answer.", "content": "Most products push stimulation. AVRO starts with calm, because calm helps create the conditions for clarity, composure, and readiness.", "icon_fallback": "control-under-pressure.png", "icon_color": "#E8A23D" } },
+        { "type": "approach_item", "settings": { "title": "Performance starts with state.", "content": "AVRO is built to support the state before the moment. Calm creates the foundation for clarity and readiness when it counts.", "icon_fallback": "supports-focus-without-overload.png", "icon_color": "#C13584" } },
+        { "type": "approach_item", "settings": { "title": "Calm first, then clarity.", "content": "Every AVRO formula starts with naturally fermented PharmaGABA®. It's the calm-first foundation that makes everything else work better.**", "icon_fallback": "calm-first-foundation.png", "icon_color": "#4b4d9a" } },
+        { "type": "product", "settings": { "image_fallback": "card-calm.jpg", "foundation_value": "PharmaGABA® + Magnesium Bisglycinate", "name": "Calm", "tagline": "Bright berry. Clean finish.", "button_label": "Explore AVRO Calm", "link": "/collections/calm" } },
+        { "type": "product", "settings": { "image_fallback": "card-focus.jpg", "foundation_value": "PharmaGABA® + Cognigrape®", "name": "Focus", "tagline": "Tart. Bright. Clean.", "button_label": "Explore AVRO Focus", "link": "/collections/focus" } },
+        { "type": "product", "settings": { "image_fallback": "card-energy.jpg", "foundation_value": "PharmaGABA® + Natural Caffeine", "name": "Energy", "tagline": "Bright citrus. Sunny lift.", "button_label": "Explore AVRO Energy", "link": "/collections/energy" } },
+        { "type": "moment", "settings": { "image_fallback": "tile-golf.jpg", "alt": "Golf club and ball on a tee", "title": "Golf", "copy": "Before the first tee. Before the final putt.", "cta": "Explore Golf", "link": "/pages/golf" } },
+        { "type": "moment", "settings": { "image_fallback": "tile-work.jpg", "alt": "Navy notebook and pen on a desk", "title": "Work", "copy": "Before the meeting. Before deep work.", "cta": "Explore Work", "link": "/pages/work" } },
+        { "type": "moment", "settings": { "image_fallback": "tile-social.png", "alt": "Two ceramic cups leaning together", "title": "Social", "copy": "Show up present without alcohol.", "cta": "Explore Social", "link": "/pages/social" } },
+        { "type": "moment", "settings": { "image_fallback": "tile-gaming.jpg", "alt": "Arcade-style button with a green ring", "title": "Gaming", "copy": "Before the session. Before the decision.", "cta": "Explore Gaming", "link": "/pages/gaming" } },
+        { "type": "gaba_chip", "settings": { "icon_fallback": "naturally-fermented-pharmagaba.png", "label": "Naturally Fermented" } },
+        { "type": "gaba_chip", "settings": { "icon_fallback": "calm-first-foundation.png", "label": "Calm First" } },
+        { "type": "gaba_chip", "settings": { "icon_fallback": "ingredient-disclosure.png", "label": "In Every Formula" } },
+        { "type": "formula_bar", "settings": { "name": "Calm", "addition": "Magnesium", "color": "#4b4d9a" } },
+        { "type": "formula_bar", "settings": { "name": "Focus", "addition": "Cognigrape®", "color": "#C13584" } },
+        { "type": "formula_bar", "settings": { "name": "Energy", "addition": "Caffeine", "color": "#E8A23D" } },
+        { "type": "quality_badge", "settings": { "icon_fallback": "naturally-fermented-pharmagaba.png", "label": "Naturally Fermented", "sub": "PharmaGABA®" } },
+        { "type": "quality_badge", "settings": { "icon_fallback": "calm-first-foundation.png", "label": "Calm First", "sub": "Foundation" } },
+        { "type": "quality_badge", "settings": { "icon_fallback": "third-party-tested.png", "label": "Third-Party", "sub": "Tested" } },
+        { "type": "quality_badge", "settings": { "icon_fallback": "free-vegan.png", "label": "Vegan", "sub": "Plant-based" } },
+        { "type": "quality_badge", "settings": { "icon_fallback": "gluten-free.png", "label": "Gluten Free", "sub": "Always" } },
+        { "type": "quality_badge", "settings": { "icon_fallback": "gmp-certified-facility.png", "label": "GMP Certified", "sub": "Facility" } },
+        { "type": "ritual_step", "settings": { "icon_fallback": "step-pour.png", "title": "Pour one stick into water", "detail": "Add one AVRO stick to 8–12 oz of cold water. Use more water for a lighter taste, less for a stronger flavor." } },
+        { "type": "ritual_step", "settings": { "icon_fallback": "step-stir.png", "title": "Mix until fully dissolved", "detail": "Stir or shake until the powder is completely dissolved. AVRO mixes easily without clumping." } },
+        { "type": "ritual_step", "settings": { "icon_fallback": "step-drink.png", "title": "Drink before your moment", "detail": "Drink about 30 minutes before the moment that matters. Give it time to settle in so you're ready when it counts." } },
+        { "type": "formula_card", "settings": { "image_fallback": "calm-blueberry-acai.png", "name": "AVRO Calm", "support": "Calm support without stimulation.*", "best_for": "Golf, competition, travel, social situations, and pressure-filled moments.*", "caffeine": "No Caffeine", "button_label": "Shop Calm", "link": "/collections/calm" } },
+        { "type": "formula_card", "settings": { "image_fallback": "focus-pomegranate-raspberry.png", "name": "AVRO Focus", "support": "Clarity and focus support without caffeine.*", "best_for": "Deep work, studying, gaming, creative work, and longer attention blocks.*", "caffeine": "No Caffeine", "button_label": "Shop Focus", "link": "/collections/focus" } },
+        { "type": "formula_card", "settings": { "image_fallback": "energy-fuji-apple.png", "name": "AVRO Energy", "support": "Natural caffeine with a calm-first foundation.*", "best_for": "Early starts, long workdays, training, competition, and steady energy.*", "caffeine": "120mg Natural Caffeine", "button_label": "Shop Energy", "link": "/collections/energy" } },
+        { "type": "testimonial", "settings": { "quote": "Highly recommend for anyone looking for a natural, functional way to support relaxation and balance!", "name": "Verified Buyer", "role": "AVRO Calm" } },
+        { "type": "testimonial", "settings": { "quote": "Absolutely obsessed — the midday pick-me-up from Focus keeps me locked in throughout a work day.", "name": "Verified Buyer", "role": "AVRO Focus" } },
+        { "type": "testimonial", "settings": { "quote": "The boost is clean, focused, and steady. No jitters. No weird crash. Just that dialed-in feeling.", "name": "Verified Buyer", "role": "AVRO Energy" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

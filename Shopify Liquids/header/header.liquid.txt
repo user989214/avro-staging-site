@@ -1,0 +1,260 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — HEADER / NAV  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-header.liquid and paste this entire file in.
+  2. Upload avro-logo.svg (in this folder) to your theme Assets.
+  3. Reference this section from your theme's header group (sections/header-group.json)
+     or render {% section 'avro-header' %} in layout/theme.liquid.
+  4. The announcement messages, nav links, dropdown cards, and logo are all
+     editable in the theme editor (announcements + nav links are blocks).
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-header-{{ section.id }} {
+    --base: #FFFFFF; --bone: #FFFFFF; --charcoal: #151515; --ink: #1C1B14;
+    --warm-gray: #6B6857; --avro-blue: #94C6D4;
+    font-family: "DM Sans", system-ui, sans-serif; display: block;
+  }
+  #avro-header-{{ section.id }} * { box-sizing: border-box; }
+  #avro-header-{{ section.id }} a { text-decoration: none; }
+
+  /* Announcement marquee */
+  #avro-header-{{ section.id }} .ann-bar { background: var(--avro-blue); color: var(--charcoal); overflow: hidden; position: relative; padding: 11px 0; border-bottom: 1px solid rgba(21,21,21,0.08); }
+  #avro-header-{{ section.id }} .ann-track { display: flex; width: max-content; will-change: transform; animation: ann-marquee 42s linear infinite; }
+  #avro-header-{{ section.id }} .ann-bar:hover .ann-track { animation-play-state: paused; }
+  #avro-header-{{ section.id }} .ann-group { display: flex; align-items: center; flex-shrink: 0; }
+  #avro-header-{{ section.id }} .ann-msg { font-weight: 900; font-size: 17px; letter-spacing: -0.005em; white-space: nowrap; padding: 0 28px; }
+  #avro-header-{{ section.id }} .ann-plus { font-size: 14px; line-height: 1; opacity: 0.55; font-weight: 700; }
+  #avro-header-{{ section.id }} .ann-shop { display: inline-flex; align-items: center; justify-content: center; margin: 0 28px; padding: 0 28px; min-height: 48px; border-radius: 999px; border: 2px solid var(--charcoal); background: var(--charcoal); color: var(--bone); font-weight: 700; font-size: 16px; white-space: nowrap; flex-shrink: 0; transition: background-color .15s ease, color .15s ease; }
+  #avro-header-{{ section.id }} .ann-shop:hover { background: transparent; color: var(--charcoal); }
+  @keyframes ann-marquee { 0% { transform: translateX(0);} 100% { transform: translateX(-25%);} }
+  @media (prefers-reduced-motion: reduce) { #avro-header-{{ section.id }} .ann-track { animation: none; } }
+
+  /* Nav */
+  #avro-header-{{ section.id }} .nav { position: sticky; top: 0; z-index: 50; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 16px; background: var(--base); transition: box-shadow .2s ease; }
+  #avro-header-{{ section.id }} .nav.scrolled { box-shadow: 0 1px 16px rgba(21,21,21,0.06); }
+  #avro-header-{{ section.id }} .nav-left, #avro-header-{{ section.id }} .nav-right { display: none; align-items: center; gap: 32px; }
+  #avro-header-{{ section.id }} .nav-link { font-weight: 900; font-size: 20px; line-height: 1.1; letter-spacing: -0.005em; color: var(--ink); transition: opacity .2s ease; }
+  #avro-header-{{ section.id }} .nav-link:hover { opacity: 0.7; }
+  #avro-header-{{ section.id }} .nav-logo { display: flex; align-items: center; justify-content: center; justify-self: center; width: clamp(110px,12vw,160px); }
+  #avro-header-{{ section.id }} .nav-logo img { width: 100%; height: auto; }
+  #avro-header-{{ section.id }} .icon-btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 999px; background: transparent; border: none; color: var(--ink); cursor: pointer; }
+  #avro-header-{{ section.id }} .cart-btn { display: none; align-items: center; gap: 8px; padding: 8px 16px 8px 14px; border-radius: 999px; border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; transition: background-color .2s ease, color .2s ease; }
+  #avro-header-{{ section.id }} .cart-btn:hover { background: var(--ink); color: var(--base); }
+  #avro-header-{{ section.id }} .cart-btn .lbl { font-weight: 900; font-size: 18px; line-height: 1.1; letter-spacing: -0.005em; }
+  #avro-header-{{ section.id }} .cart-count { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 999px; background: var(--ink); color: var(--bone); font-weight: 900; font-size: 12px; }
+  #avro-header-{{ section.id }} .nav-dd-trigger { position: relative; font-weight: 900; font-size: 20px; line-height: 1.1; color: var(--ink); background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+
+  /* Dropdown (desktop) */
+  #avro-header-{{ section.id }} .nav-dd-wrap { position: relative; }
+  #avro-header-{{ section.id }} .nav-dd { position: absolute; left: 0; top: 100%; width: 720px; max-width: 92vw; background: var(--base); border-radius: 0 0 24px 24px; box-shadow: 0 20px 60px rgba(21,21,21,0.12); padding: 24px; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: opacity .25s ease, transform .3s ease, visibility .25s; }
+  #avro-header-{{ section.id }} .nav-dd-wrap:hover .nav-dd { opacity: 1; visibility: visible; transform: translateY(0); }
+  #avro-header-{{ section.id }} .nav-dd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  #avro-header-{{ section.id }} .dd-col-heading { font-size: 12px; font-weight: 700; color: var(--warm-gray); padding-bottom: 8px; }
+  #avro-header-{{ section.id }} .dd-link { display: inline-block; padding: 6px 16px; font-weight: 900; font-size: 22px; line-height: 1.15; border-radius: 999px; color: var(--ink); transition: background-color .15s ease; }
+  #avro-header-{{ section.id }} .dd-link:hover { background: var(--avro-blue); }
+  #avro-header-{{ section.id }} .dd-card { display: flex; flex-direction: column; justify-content: space-between; border-radius: 24px; padding: 24px; min-height: 200px; }
+
+  /* Mobile menu */
+  #avro-header-{{ section.id }} .mobile-toggle { display: flex; }
+  #avro-header-{{ section.id }} .mobile-menu { position: fixed; left: 0; right: 0; top: 0; bottom: 0; background: var(--base); z-index: 40; overflow-y: auto; padding: 88px 20px 40px; transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity .4s ease, transform .4s ease; }
+  #avro-header-{{ section.id }} .mobile-menu.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  #avro-header-{{ section.id }} .mobile-link { display: block; padding: 6px 16px; font-weight: 900; font-size: 30px; line-height: 1.1; color: var(--ink); }
+  #avro-header-{{ section.id }} .mobile-heading { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--warm-gray); padding: 16px 4px 6px; }
+
+  @media (min-width: 768px) {
+    #avro-header-{{ section.id }} .nav { grid-template-columns: 1fr auto 1fr; padding: 20px 56px; }
+    #avro-header-{{ section.id }} .nav-left, #avro-header-{{ section.id }} .nav-right { display: flex; }
+    #avro-header-{{ section.id }} .nav-right { justify-content: flex-end; }
+    #avro-header-{{ section.id }} .cart-btn { display: inline-flex; }
+    #avro-header-{{ section.id }} .mobile-toggle, #avro-header-{{ section.id }} .cart-btn-mobile { display: none; }
+    #avro-header-{{ section.id }} .nav-logo { justify-self: auto; }
+  }
+{% endstyle %}
+
+{%- assign disc_links = section.blocks | where: "type", "discover_link" -%}
+{%- assign use_links = section.blocks | where: "type", "usecase_link" -%}
+{%- assign messages = section.blocks | where: "type", "announcement" -%}
+
+<div id="avro-header-{{ section.id }}">
+  <header>
+    {%- comment -%} Announcement marquee {%- endcomment -%}
+    <div class="ann-bar" aria-label="Site announcements">
+      <div class="ann-track">
+        {%- for n in (1..4) -%}
+        <div class="ann-group" {% if forloop.index0 > 0 %}aria-hidden="true"{% endif %}>
+          {%- for b in messages -%}
+            <span style="display:flex;align-items:center;flex-shrink:0;">
+              <span class="ann-msg">{{ b.settings.text }}</span>
+              <span class="ann-plus" aria-hidden="true">+</span>
+            </span>
+          {%- endfor -%}
+          <a href="{{ section.settings.ann_button_link | default: '/collections/all' }}" class="ann-shop">{{ section.settings.ann_button_label | default: 'Shop AVRO' }}</a>
+          <span class="ann-plus" aria-hidden="true">+</span>
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- comment -%} Main nav {%- endcomment -%}
+    <nav class="nav" aria-label="Primary navigation">
+      <button class="icon-btn mobile-toggle" type="button" aria-label="Open menu" data-mobile-toggle>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+
+      <div class="nav-left">
+        <a class="nav-link" href="{{ section.settings.link_shop | default: '/collections/all' }}">Shop</a>
+        <a class="nav-link" href="{{ section.settings.link_subscribe | default: '/pages/subscribe' }}">Subscribe</a>
+        <div class="nav-dd-wrap">
+          <button class="nav-dd-trigger" type="button">
+            {{ section.settings.dd_label | default: 'Why AVRO' }}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-dd">
+            <div class="nav-dd-grid">
+              <div>
+                <p class="dd-col-heading">{{ section.settings.dd_col1_heading | default: 'Discover' }}</p>
+                <div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;">
+                  {%- for b in disc_links -%}
+                  <a class="dd-link" href="{{ b.settings.link }}" {{ b.shopify_attributes }}>{{ b.settings.label }}</a>
+                  {%- endfor -%}
+                </div>
+              </div>
+              <div style="border-left:1px solid var(--ink);padding-left:24px;">
+                <p class="dd-col-heading">{{ section.settings.dd_col2_heading | default: 'By Use Case' }}</p>
+                <div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;">
+                  {%- for b in use_links -%}
+                  <a class="dd-link" href="{{ b.settings.link }}" {{ b.shopify_attributes }}>{{ b.settings.label }}</a>
+                  {%- endfor -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a class="nav-logo" href="/" aria-label="AVRO home">
+        {%- if section.settings.logo != blank -%}
+          <img src="{{ section.settings.logo | image_url: width: 360 }}" alt="AVRO">
+        {%- else -%}
+          <img src="{{ 'avro-logo.svg' | asset_url }}" alt="AVRO">
+        {%- endif -%}
+      </a>
+
+      <div class="nav-right">
+        <a class="nav-link" href="{{ section.settings.link_science | default: '/pages/science' }}">Science</a>
+        <a class="nav-link" href="{{ section.settings.link_faq | default: '/pages/faq' }}">FAQ</a>
+        <a class="cart-btn" href="/cart" aria-label="Cart">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7z"/></svg>
+          <span class="lbl">Cart</span>
+          <span class="cart-count">{{ cart.item_count | default: 0 }}</span>
+        </a>
+      </div>
+
+      <a class="icon-btn cart-btn-mobile" href="/cart" aria-label="Cart" style="justify-self:end;">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7z"/></svg>
+      </a>
+    </nav>
+
+    {%- comment -%} Mobile menu {%- endcomment -%}
+    <div class="mobile-menu" data-mobile-menu>
+      <a class="mobile-link" href="{{ section.settings.link_shop | default: '/collections/all' }}">Shop</a>
+      <a class="mobile-link" href="{{ section.settings.link_subscribe | default: '/pages/subscribe' }}">Subscribe</a>
+      <p class="mobile-heading">{{ section.settings.dd_col1_heading | default: 'Discover' }}</p>
+      {%- for b in disc_links -%}<a class="mobile-link" style="font-size:24px;" href="{{ b.settings.link }}">{{ b.settings.label }}</a>{%- endfor -%}
+      <p class="mobile-heading">{{ section.settings.dd_col2_heading | default: 'By Use Case' }}</p>
+      {%- for b in use_links -%}<a class="mobile-link" style="font-size:24px;" href="{{ b.settings.link }}">{{ b.settings.label }}</a>{%- endfor -%}
+      <p class="mobile-heading">More</p>
+      <a class="mobile-link" style="font-size:24px;" href="{{ section.settings.link_science | default: '/pages/science' }}">Science</a>
+      <a class="mobile-link" style="font-size:24px;" href="{{ section.settings.link_faq | default: '/pages/faq' }}">FAQ</a>
+    </div>
+  </header>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById("avro-header-{{ section.id }}");
+    if (!root) return;
+    var nav = root.querySelector(".nav");
+    window.addEventListener("scroll", function () {
+      if (nav) nav.classList.toggle("scrolled", window.scrollY > 10);
+    }, { passive: true });
+    var toggle = root.querySelector("[data-mobile-toggle]");
+    var menu = root.querySelector("[data-mobile-menu]");
+    if (toggle && menu) {
+      toggle.addEventListener("click", function () {
+        var open = menu.classList.toggle("open");
+        document.body.style.overflow = open ? "hidden" : "";
+        toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AVRO — Header",
+  "settings": [
+    { "type": "header", "content": "Logo" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (falls back to avro-logo.svg asset)" },
+    { "type": "header", "content": "Announcement bar" },
+    { "type": "text", "id": "ann_button_label", "label": "Announcement button label", "default": "Shop AVRO" },
+    { "type": "url", "id": "ann_button_link", "label": "Announcement button link" },
+    { "type": "header", "content": "Primary links" },
+    { "type": "url", "id": "link_shop", "label": "Shop link" },
+    { "type": "url", "id": "link_subscribe", "label": "Subscribe link" },
+    { "type": "url", "id": "link_science", "label": "Science link" },
+    { "type": "url", "id": "link_faq", "label": "FAQ link" },
+    { "type": "header", "content": "Dropdown" },
+    { "type": "text", "id": "dd_label", "label": "Dropdown trigger label", "default": "Why AVRO" },
+    { "type": "text", "id": "dd_col1_heading", "label": "Column 1 heading", "default": "Discover" },
+    { "type": "text", "id": "dd_col2_heading", "label": "Column 2 heading", "default": "By Use Case" }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement message",
+      "settings": [ { "type": "text", "id": "text", "label": "Message", "default": "Calm First Performance" } ]
+    },
+    {
+      "type": "discover_link",
+      "name": "Discover link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Why AVRO" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    },
+    {
+      "type": "usecase_link",
+      "name": "Use-case link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Golf" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Header",
+      "blocks": [
+        { "type": "announcement", "settings": { "text": "Calm First Performance" } },
+        { "type": "announcement", "settings": { "text": "Subscribe & save 15% every order of 2 or more tubes" } },
+        { "type": "announcement", "settings": { "text": "Free shipping on orders of 2 or more tubes" } },
+        { "type": "announcement", "settings": { "text": "Naturally fermented PharmaGABA" } },
+        { "type": "announcement", "settings": { "text": "Calm, focused energy — without the crash" } },
+        { "type": "announcement", "settings": { "text": "New: AVRO Focus and AVRO Energy now shipping" } },
+        { "type": "discover_link", "settings": { "label": "Why AVRO", "link": "/pages/why-avro" } },
+        { "type": "discover_link", "settings": { "label": "The Science", "link": "/pages/science" } },
+        { "type": "discover_link", "settings": { "label": "Ingredients", "link": "/pages/ingredients" } },
+        { "type": "usecase_link", "settings": { "label": "AVRO for Work", "link": "/pages/work" } },
+        { "type": "usecase_link", "settings": { "label": "AVRO for Golf", "link": "/pages/golf" } },
+        { "type": "usecase_link", "settings": { "label": "AVRO for Esports", "link": "/pages/gaming" } },
+        { "type": "usecase_link", "settings": { "label": "AVRO for Social", "link": "/pages/social" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
