@@ -1,0 +1,917 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — PRODUCT DETAIL · FOCUS (PDP)  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-product.liquid and paste this entire file in.
+  2. In the theme editor go to a Product template (Products > Default product)
+     and add the "AVRO — Product" section (or set it as the product template's
+     main section). It automatically reads the CURRENT product — no picker.
+  3. Everything below is driven by your real Shopify product:
+       - Title, price, compare-at price, images, and availability are live.
+       - The flavor selector is built from a product OPTION. Set which option
+         is the flavor in the section settings (default "Flavor"). Each option
+         value becomes a pill; selecting it switches the variant + image.
+       - "Subscribe & save" appears automatically when the product has a
+         selling plan (subscription). Otherwise only one-time shows.
+       - Quantity stepper + Add to Cart post to the real cart.
+  4. Editable copy: support line, "per box" line, purchase labels, and the
+     subscribe benefit BLOCKS (add/remove/reorder).
+  NOTE: Set up the product (flavors as an option, images, selling plan) once in
+  Shopify and this page stays in sync.
+  ============================================================================
+{%- endcomment -%}
+
+{%- assign flavor_opt_name = section.settings.flavor_option_name | default: 'Flavor' -%}
+{%- assign flavor_opt_name_dc = flavor_opt_name | downcase -%}
+{%- assign flavor_opt_index = 0 -%}
+{%- for opt in product.options_with_values -%}
+  {%- assign onm = opt.name | downcase -%}
+  {%- if onm == flavor_opt_name_dc -%}{%- assign flavor_opt_index = forloop.index -%}{%- endif -%}
+{%- endfor -%}
+{%- assign flavor_opt_index0 = flavor_opt_index | minus: 1 -%}
+
+{%- comment -%} Does this product have a subscription selling plan? {%- endcomment -%}
+{%- assign has_plan = false -%}
+{%- if product.selling_plan_groups.size > 0 -%}{%- assign has_plan = true -%}{%- endif -%}
+{%- if section.settings.show_subscribe == false -%}{%- assign has_plan = false -%}{%- endif -%}
+
+{%- comment -%} ---- PRESET MAPPING: turn simple choices into matched sizing ---- {%- endcomment -%}
+{%- case section.settings.button_size -%}
+  {%- when 'compact' -%}{%- assign btn_height = 48 -%}
+  {%- when 'large' -%}{%- assign btn_height = 64 -%}
+  {%- else -%}{%- assign btn_height = 56 -%}
+{%- endcase -%}
+{%- case section.settings.corner_style -%}
+  {%- when 'square' -%}{%- assign btn_radius = 12 -%}
+  {%- when 'soft' -%}{%- assign btn_radius = 22 -%}
+  {%- else -%}{%- assign btn_radius = 100 -%}
+{%- endcase -%}
+{%- case section.settings.spacing -%}
+  {%- when 'cozy' -%}{%- assign pdp_gap = 16 -%}{%- assign pdp_pad_y = 32 -%}{%- assign pdp_pad_x = 24 -%}
+  {%- when 'roomy' -%}{%- assign pdp_gap = 30 -%}{%- assign pdp_pad_y = 56 -%}{%- assign pdp_pad_x = 40 -%}
+  {%- else -%}{%- assign pdp_gap = 22 -%}{%- assign pdp_pad_y = 44 -%}{%- assign pdp_pad_x = 32 -%}
+{%- endcase -%}
+
+{% style %}
+  #avro-pdp-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --gray: #E2E2E2;
+    --avro-blue: #E4B457; /* Focus accent (warm gold) */
+    /* Preset-driven spacing/sizing tokens (set from theme editor) */
+    --pdp-pad-y: {{ pdp_pad_y }}px;
+    --pdp-pad-x: {{ pdp_pad_x }}px;
+    --pdp-gap: {{ pdp_gap }}px;
+    --btn-height: {{ btn_height }}px;
+    --btn-radius: {{ btn_radius }}px;
+    font-family: "DM Sans", system-ui, sans-serif; color: var(--ink); display: block;
+    background: var(--base-light);
+  }
+  #avro-pdp-{{ section.id }} * { box-sizing: border-box; }
+  #avro-pdp-{{ section.id }} .pdp-wrap { max-width: 1180px; margin: 0 auto; padding: var(--pdp-pad-y) var(--pdp-pad-x); }
+  #avro-pdp-{{ section.id }} .pdp-grid { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: start; }
+  @media (min-width: 900px) { #avro-pdp-{{ section.id }} .pdp-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 48px; } }
+
+  /* GALLERY */
+  #avro-pdp-{{ section.id }} .gal-main { position: relative; aspect-ratio: 1/1; border-radius: 20px; overflow: hidden; background: var(--gray); }
+  #avro-pdp-{{ section.id }} .gal-main img { width: 100%; height: 100%; object-fit: cover; display: none; }
+  #avro-pdp-{{ section.id }} .gal-main img.is-active { display: block; }
+  #avro-pdp-{{ section.id }} .gal-rating { position: absolute; left: 14px; top: 14px; display: inline-flex; align-items: center; gap: 6px; background: var(--bone); border-radius: 999px; padding: 6px 12px; font-weight: 700; font-size: 13px; color: var(--ink); }
+  #avro-pdp-{{ section.id }} .gal-rating .stars { color: #E8A23D; letter-spacing: 1px; }
+  #avro-pdp-{{ section.id }} .gal-thumbs { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  #avro-pdp-{{ section.id }} .gal-thumb { width: 64px; height: 64px; border-radius: 12px; overflow: hidden; background: var(--gray); border: 2px solid transparent; cursor: pointer; padding: 0; }
+  #avro-pdp-{{ section.id }} .gal-thumb.is-active { border-color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .gal-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* BUY BOX */
+  #avro-pdp-{{ section.id }} .bb { display: flex; flex-direction: column; gap: var(--pdp-gap); }
+  #avro-pdp-{{ section.id }} .bb h1 { font-weight: 900; font-size: clamp(26px,3.2vw,40px); line-height: 0.98; margin: 0; color: var(--ink); }
+  #avro-pdp-{{ section.id }} .bb .support { font-weight: 600; font-size: clamp(15px,1.3vw,18px); line-height: 1.35; color: var(--ink); margin: 4px 0 0; }
+  #avro-pdp-{{ section.id }} .bb .per-box { font-weight: 500; font-size: clamp(13px,1.1vw,15px); line-height: 1.4; color: var(--warm-gray); margin: 2px 0 0; }
+  #avro-pdp-{{ section.id }} .bb .lbl { font-weight: 700; font-size: clamp(12px,1vw,13px); color: var(--ink); margin-bottom: 2px; display: block; }
+
+  /* FLAVOR PILLS */
+  #avro-pdp-{{ section.id }} .flavors { display: flex; flex-wrap: wrap; gap: 8px; }
+  #avro-pdp-{{ section.id }} .flavor { display: inline-flex; align-items: center; gap: 8px; padding: 4px 16px 4px 5px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; cursor: pointer; transition: all .15s ease; }
+  #avro-pdp-{{ section.id }} .flavor .dot { width: 30px; height: 30px; border-radius: 999px; overflow: hidden; background: #F2F2F2; flex-shrink: 0; display: grid; place-items: center; }
+  #avro-pdp-{{ section.id }} .flavor .dot img { width: 100%; height: 100%; object-fit: cover; }
+  #avro-pdp-{{ section.id }} .flavor .nm { font-weight: 700; font-size: clamp(11px,1vw,14px); color: var(--ink); white-space: nowrap; }
+  #avro-pdp-{{ section.id }} .flavor.is-active { background: var(--charcoal); border-color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .flavor.is-active .nm { color: var(--bone); }
+  #avro-pdp-{{ section.id }} .flavor.is-soldout { opacity: 0.4; }
+
+  /* PURCHASE OPTIONS */
+  #avro-pdp-{{ section.id }} .buy-opt { position: relative; display: flex; align-items: center; gap: 12px; min-height: var(--btn-height); padding: 10px 18px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; color: var(--ink); cursor: pointer; }
+  #avro-pdp-{{ section.id }} .buy-opt.is-active { background: var(--charcoal); border-color: var(--charcoal); color: var(--bone); }
+  #avro-pdp-{{ section.id }} .buy-opt .radio { width: 18px; height: 18px; border-radius: 999px; border: 2px solid var(--warm-gray); display: grid; place-items: center; flex-shrink: 0; }
+  #avro-pdp-{{ section.id }} .buy-opt.is-active .radio { border-color: var(--bone); }
+  #avro-pdp-{{ section.id }} .buy-opt.is-active .radio::after { content: ''; width: 8px; height: 8px; border-radius: 999px; background: var(--bone); }
+  #avro-pdp-{{ section.id }} .buy-opt .ttl { flex: 1; min-width: 0; font-weight: 700; font-size: clamp(12px,1.1vw,15px); line-height: 1.2; }
+  #avro-pdp-{{ section.id }} .buy-opt .badge { font-weight: 700; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 999px; background: var(--charcoal); color: var(--bone); white-space: nowrap; margin-left: 6px; }
+  #avro-pdp-{{ section.id }} .buy-opt.is-active .badge { background: var(--bone); color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .buy-opt .sub { display: block; font-weight: 500; font-size: clamp(10px,0.9vw,12px); margin-top: 2px; opacity: 0.7; }
+  #avro-pdp-{{ section.id }} .buy-opt .pr { font-weight: 800; font-size: clamp(14px,1.3vw,18px); white-space: nowrap; }
+  #avro-pdp-{{ section.id }} .benefits { list-style: none; margin: 0; padding: 2px 4px 0; display: flex; flex-direction: column; gap: 6px; }
+  #avro-pdp-{{ section.id }} .benefits li { display: flex; align-items: flex-start; gap: 8px; font-weight: 500; font-size: clamp(12px,1vw,14px); line-height: 1.4; color: var(--ink); }
+  #avro-pdp-{{ section.id }} .benefits svg { flex-shrink: 0; margin-top: 2px; }
+
+  /* QUANTITY + CTA (single inline row) */
+  #avro-pdp-{{ section.id }} .buy-row { display: flex; align-items: stretch; gap: 12px; margin-top: calc(var(--pdp-gap) + 8px); padding-top: var(--pdp-gap); border-top: 1px solid var(--gray); }
+  #avro-pdp-{{ section.id }} .stepper { display: inline-flex; align-items: center; justify-content: space-between; flex: 0 0 auto; background: var(--bone); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); height: var(--btn-height); overflow: hidden; }
+  #avro-pdp-{{ section.id }} .stepper button { width: 44px; align-self: stretch; border: 0; background: transparent; font-weight: 700; font-size: 18px; line-height: 1; color: var(--charcoal); cursor: pointer; display: grid; place-items: center; }
+  #avro-pdp-{{ section.id }} .stepper button:hover { background: rgba(0,0,0,0.05); }
+  #avro-pdp-{{ section.id }} .stepper button:disabled { opacity: 0.35; cursor: not-allowed; }
+  #avro-pdp-{{ section.id }} .stepper .q { min-width: 26px; text-align: center; font-weight: 800; font-size: 16px; color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .add-btn { flex: 1 1 auto; min-height: var(--btn-height); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); background: var(--charcoal); color: var(--bone); font-family: inherit; font-weight: 700; font-size: 17px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+  #avro-pdp-{{ section.id }} .add-btn:hover { background: transparent; color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .add-btn:disabled { background: var(--gray); border-color: var(--gray); color: var(--warm-gray); cursor: not-allowed; }
+{% endstyle %}
+
+<div id="avro-pdp-{{ section.id }}" data-flavor-index="{{ flavor_opt_index }}">
+  <div class="pdp-wrap">
+    {%- if product == blank -%}
+      <p style="text-align:center;padding:40px;">Add this section to a product template to preview it with live product data.</p>
+    {%- else -%}
+    <div class="pdp-grid">
+
+      {%- comment -%} ---------- GALLERY ---------- {%- endcomment -%}
+      <div class="gal">
+        <div class="gal-main" id="gal-main-{{ section.id }}">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media -%}
+              {%- if media.media_type == 'image' -%}
+                <img data-media-id="{{ media.id }}" class="{% if forloop.first %}is-active{% endif %}" src="{{ media | image_url: width: 1200 }}" alt="{{ media.alt | default: product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            <img class="is-active" src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title | escape }}">
+          {%- endif -%}
+          {%- if section.settings.show_rating -%}
+            <span class="gal-rating"><span class="stars">★★★★★</span> {{ section.settings.rating_value | default: '4.8' }}</span>
+          {%- endif -%}
+        </div>
+        {%- if product.media.size > 1 -%}
+          <div class="gal-thumbs">
+            {%- for media in product.media -%}
+              {%- if media.media_type == 'image' -%}
+                <button type="button" class="gal-thumb {% if forloop.first %}is-active{% endif %}" data-target="{{ media.id }}" aria-label="View image {{ forloop.index }}">
+                  <img src="{{ media | image_url: width: 160 }}" alt="">
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ---------- BUY BOX ---------- {%- endcomment -%}
+      <div class="bb">
+        <header>
+          <h1>{{ product.title }}</h1>
+          {%- assign support_text = section.settings.support_line -%}
+          {%- if product.metafields.custom.support_line != blank -%}{%- assign support_text = product.metafields.custom.support_line -%}{%- endif -%}
+          {%- if support_text != blank -%}<p class="support">{{ support_text }}</p>{%- endif -%}
+          {%- if section.settings.per_box_line != blank -%}<p class="per-box">{{ section.settings.per_box_line }}</p>{%- endif -%}
+        </header>
+
+        <form method="post" action="{{ routes.cart_add_url }}" id="pdp-form-{{ section.id }}" accept-charset="UTF-8" enctype="multipart/form-data">
+          <input type="hidden" name="form_type" value="product">
+          <input type="hidden" name="utf8" value="✓">
+          <input type="hidden" name="id" id="pdp-vid-{{ section.id }}" value="{{ product.selected_or_first_available_variant.id }}">
+          <input type="hidden" name="selling_plan" id="pdp-plan-{{ section.id }}" value="" {% unless has_plan %}disabled{% endunless %}>
+
+          {%- comment -%} FLAVOR SELECTOR (from chosen option) {%- endcomment -%}
+          {%- if flavor_opt_index > 0 -%}
+            {%- assign flavor_opt = product.options_with_values[flavor_opt_index0] -%}
+            <div class="flavor-block" style="display:flex;flex-direction:column;gap:6px;">
+              <span class="lbl">{{ flavor_opt.name }}</span>
+              <div class="flavors" role="radiogroup" aria-label="{{ flavor_opt.name }}">
+                {%- for val in flavor_opt.values -%}
+                  <button type="button" class="flavor {% if forloop.first %}is-active{% endif %}" data-flavor="{{ val | escape }}" role="radio" aria-checked="{% if forloop.first %}true{% else %}false{% endif %}">
+                    <span class="nm">{{ val }}</span>
+                  </button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- comment -%} PURCHASE OPTIONS {%- endcomment -%}
+          {%- if has_plan -%}
+            {%- assign first_group = product.selling_plan_groups | first -%}
+            {%- assign first_plan = first_group.selling_plans | first -%}
+            <div class="purchase" style="display:flex;flex-direction:column;gap:10px;">
+              <button type="button" class="buy-opt is-active" data-buy="subscribe" data-plan="{{ first_plan.id }}">
+                <span class="radio"></span>
+                <span class="ttl">{{ section.settings.subscribe_label | default: 'Subscribe & save' }}
+                  {%- if section.settings.subscribe_badge != blank %}<span class="badge">{{ section.settings.subscribe_badge }}</span>{% endif -%}
+                  <span class="sub">{{ first_plan.name }}</span>
+                </span>
+                <span class="pr" data-price-subscribe></span>
+              </button>
+              <button type="button" class="buy-opt" data-buy="onetime">
+                <span class="radio"></span>
+                <span class="ttl">{{ section.settings.onetime_label | default: 'One-time purchase' }}
+                  <span class="sub">{{ section.settings.onetime_sub | default: 'No commitment.' }}</span>
+                </span>
+                <span class="pr" data-price-onetime></span>
+              </button>
+              {%- assign benefits = section.blocks | where: 'type', 'benefit' -%}
+              {%- if benefits.size > 0 -%}
+                <ul class="benefits" data-subscribe-benefits>
+                  {%- for b in benefits -%}
+                    <li {{ b.shopify_attributes }}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7" stroke="var(--avro-blue)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      {{ b.settings.text }}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            <div class="price-only" style="font-weight:800;font-size:clamp(20px,2vw,28px);" data-price-onetime></div>
+          {%- endif -%}
+
+          {%- comment -%} QUANTITY + ADD TO CART (inline) {%- endcomment -%}
+          <div class="buy-row">
+            <div class="stepper" role="group" aria-label="Quantity">
+              <button type="button" data-step="-1" aria-label="Decrease quantity" disabled>&minus;</button>
+              <span class="q" id="pdp-qty-{{ section.id }}">1</span>
+              <button type="button" data-step="1" aria-label="Increase quantity">+</button>
+            </div>
+            <input type="hidden" name="quantity" id="pdp-qtyinput-{{ section.id }}" value="1">
+            <button type="submit" class="add-btn" id="pdp-add-{{ section.id }}">{{ section.settings.add_label | default: 'Add to Cart' }}</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- comment -%} ============================================================================
+  BELOW THE BUY BOX — full PDP (tabs, ingredients, feeling, compare, sub CTA,
+  FAQ, reviews, final CTA + banner). Self-contained scoped styles + JS.
+============================================================================ {%- endcomment -%}
+<div id="avro-more-{{ section.id }}">
+
+  {%- comment -%} A) TABS + YOU MIGHT ALSO LIKE {%- endcomment -%}
+  <section class="am-sec am-tabs-sec">
+    <div class="am-wrap am-tabs-grid">
+      <div class="am-tabs">
+        <div class="am-tablist" role="tablist">
+          <button type="button" class="am-tab is-active" data-tab="desc" role="tab">{{ section.settings.tab1_label | default: 'Description' }}</button>
+          <button type="button" class="am-tab" data-tab="ing" role="tab">{{ section.settings.tab2_label | default: 'Ingredients' }}</button>
+          <button type="button" class="am-tab" data-tab="when" role="tab">{{ section.settings.tab3_label | default: 'When to take' }}</button>
+          <button type="button" class="am-tab" data-tab="how" role="tab">{{ section.settings.tab4_label | default: 'How to use' }}</button>
+        </div>
+        <div class="am-panes">
+          <div class="am-pane is-active" data-pane="desc">{{ section.settings.tabs_desc }}</div>
+          <div class="am-pane" data-pane="ing">
+            <h3 class="am-pane-h">Active ingredients</h3>
+            {%- for block in section.blocks -%}{%- if block.type == 'ingredient' -%}
+              <div class="am-ing-row"><span class="am-ing-name">{{ block.settings.name }}</span><span class="am-ing-amt">{{ block.settings.amount }}</span></div>
+            {%- endif -%}{%- endfor -%}
+            {%- if section.settings.other_ingredients != blank -%}<p class="am-ing-other"><strong>Other ingredients:</strong> {{ section.settings.other_ingredients }}</p>{%- endif -%}
+          </div>
+          <div class="am-pane" data-pane="when">{{ section.settings.tabs_when }}</div>
+          <div class="am-pane" data-pane="how">{{ section.settings.tabs_how }}</div>
+        </div>
+      </div>
+      <div class="am-related">
+        <h3 class="am-related-h">{{ section.settings.related_heading | default: 'You might also like' }}</h3>
+        <div class="am-related-grid">
+          {%- for block in section.blocks -%}{%- if block.type == 'related' -%}
+            {%- assign rp = block.settings.product -%}
+            <div class="am-rcard" {{ block.shopify_attributes }}>
+              <a href="{{ rp.url | default: '#' }}" class="am-rthumb" aria-label="{{ rp.title | default: block.settings.fallback_name | escape }}">
+                {%- if rp != blank and rp.featured_image -%}<img src="{{ rp.featured_image | image_url: width: 600 }}" alt="{{ rp.title | escape }}" loading="lazy">{%- endif -%}
+              </a>
+              <div class="am-rmeta">
+                <div class="am-rtop">
+                  <span class="am-rname">{{ rp.title | default: block.settings.fallback_name }}</span>
+                  <span class="am-rprice">{%- if rp != blank -%}{{ rp.price | money }}{%- else -%}{{ block.settings.fallback_price }}{%- endif -%}</span>
+                </div>
+                <a href="{{ rp.url | default: '#' }}" class="am-btn am-btn-sm">{{ block.settings.button_label | default: 'Shop' }}</a>
+              </div>
+            </div>
+          {%- endif -%}{%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} B) INGREDIENTS GRID {%- endcomment -%}
+  <section class="am-sec">
+    <div class="am-wrap">
+      <span class="am-eyebrow">{{ section.settings.ing_eyebrow | default: "What's inside" }}</span>
+      <h2 class="am-h2">{{ section.settings.ing_heading | default: 'Clear ingredient logic. Nothing hidden.' }}</h2>
+      <div class="am-ing-grid">
+        {%- for block in section.blocks -%}{%- if block.type == 'ingredient' -%}
+          <div class="am-ing-card" {{ block.shopify_attributes }}>
+            <div class="am-ing-thumb">{%- if block.settings.image -%}<img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name | escape }}" loading="lazy">{%- endif -%}</div>
+            <h3 class="am-ing-cardname">{{ block.settings.name }}</h3>
+            <span class="am-ing-cardamt">{{ block.settings.amount }}</span>
+            <p class="am-ing-carddesc">{{ block.settings.description }}</p>
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} C) THE FEELING OF GOOD ... {%- endcomment -%}
+  <section class="am-sec">
+    <div class="am-wrap">
+      <h2 class="am-h2">{{ section.settings.feeling_heading | default: 'The feeling of good calm.' }}</h2>
+      <div class="am-feel-grid">
+        {%- for block in section.blocks -%}{%- if block.type == 'feeling' -%}
+          <div class="am-feel-card" {{ block.shopify_attributes }}>
+            <div class="am-feel-icon">{%- if block.settings.icon -%}<img src="{{ block.settings.icon | image_url: width: 200 }}" alt="" loading="lazy">{%- endif -%}</div>
+            <h3 class="am-feel-title">{{ block.settings.title }}</h3>
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+      <div class="am-feel-lower">
+        <div class="am-feel-text">
+          {%- if section.settings.feeling_p1 != blank -%}<p>{{ section.settings.feeling_p1 }}</p>{%- endif -%}
+          {%- if section.settings.feeling_p2 != blank -%}<p>{{ section.settings.feeling_p2 }}</p>{%- endif -%}
+          {%- if section.settings.feeling_btn_label != blank -%}<a href="{{ section.settings.feeling_btn_link | default: '#' }}" class="am-btn">{{ section.settings.feeling_btn_label }}</a>{%- endif -%}
+        </div>
+        <div class="am-feel-graph">
+          {%- if section.settings.feeling_embed != blank -%}
+            <div class="am-feel-embed">{{ section.settings.feeling_embed }}</div>
+          {%- elsif section.settings.feeling_graph -%}
+            <img src="{{ section.settings.feeling_graph | image_url: width: 1400 }}" alt="{{ section.settings.feeling_graph.alt | escape }}" loading="lazy">
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} D) COMPARISON GRID (dark) {%- endcomment -%}
+  <section class="am-sec am-compare">
+    <div class="am-wrap am-wrap-narrow">
+      <h2 class="am-h2 am-h2-light">{{ section.settings.compare_heading | default: 'We put intention into every formula.' }}</h2>
+      <p class="am-compare-sub">{{ section.settings.compare_sub | default: 'Find the one that was made with your day in mind.' }}</p>
+      <div class="am-compare-grid">
+        {%- for block in section.blocks -%}{%- if block.type == 'compare' -%}
+          {%- assign cp = block.settings.product -%}
+          <div class="am-ccard" {{ block.shopify_attributes }}>
+            <a href="{{ cp.url | default: '#' }}" class="am-cthumb" aria-label="{{ cp.title | default: block.settings.fallback_name | escape }}">{%- if cp != blank and cp.featured_image -%}<img src="{{ cp.featured_image | image_url: width: 800 }}" alt="{{ cp.title | escape }}" loading="lazy">{%- endif -%}</a>
+            <h3 class="am-cname">{{ cp.title | default: block.settings.fallback_name }}</h3>
+            <p class="am-cheadline">{{ block.settings.headline }}</p>
+            <div class="am-cspecs">
+              <div class="am-crow"><span>Caffeine</span><span>{{ block.settings.caffeine }}</span></div>
+              <div class="am-crow"><span>Experience</span><span>{{ block.settings.experience }}</span></div>
+              <div class="am-crow"><span>Best for</span><span>{{ block.settings.best_for }}</span></div>
+            </div>
+            <a href="{{ cp.url | default: '#' }}" class="am-btn am-btn-full">{{ block.settings.button_label | default: 'Shop' }}{%- if cp != blank %} — {{ cp.price | money }}{%- endif -%}</a>
+          </div>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} E) SUBSCRIBE & SAVE CTA (blue) {%- endcomment -%}
+  <section class="am-sec am-subcta">
+    <div class="am-wrap am-wrap-narrow">
+      <h2 class="am-h2">{{ section.settings.sub_heading | default: 'Your favorites. On repeat.' }}</h2>
+      {%- if section.settings.sub_copy != blank -%}<p class="am-subcopy">{{ section.settings.sub_copy }}</p>{%- endif -%}
+      <a href="{{ section.settings.sub_btn_link | default: '#' }}" class="am-btn">{{ section.settings.sub_btn_label | default: 'Subscribe Now' }}</a>
+    </div>
+  </section>
+
+  {%- comment -%} F) FAQ {%- endcomment -%}
+  <section class="am-sec">
+    <div class="am-wrap am-faq-grid">
+      <div><h2 class="am-h2">{{ section.settings.faq_heading | default: 'Frequently asked, all answered.' }}</h2></div>
+      <div class="am-faq-list">
+        {%- for block in section.blocks -%}{%- if block.type == 'faq' -%}
+          <details class="am-faq" {{ block.shopify_attributes }}>
+            <summary><span>{{ block.settings.question }}</span><span class="am-faq-plus">+</span></summary>
+            <div class="am-faq-a">{{ block.settings.answer }}</div>
+          </details>
+        {%- endif -%}{%- endfor -%}
+        {%- if section.settings.faq_more_label != blank -%}<a href="{{ section.settings.faq_more_link | default: '#' }}" class="am-faq-more">{{ section.settings.faq_more_label }}</a>{%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} G) REVIEWS {%- endcomment -%}
+  <section class="am-sec" id="reviews">
+    <div class="am-wrap am-rev-wrap">
+      <div class="am-rev-summary">
+        <div class="am-rev-prod">
+          <div class="am-rev-thumb">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.title | escape }}">{%- endif -%}</div>
+          <div class="am-rev-prodtext"><strong>{{ product.title }}</strong><span>{{ section.settings.reviews_sub | default: 'Verified reviews' }}</span></div>
+        </div>
+        <div class="am-rev-rating">
+          <strong>{{ section.settings.reviews_rating | default: '4.8' }}</strong>
+          <div><span class="am-stars">★★★★★</span><span class="am-rev-count">Based on {{ section.settings.reviews_count | default: '82 verified reviews' }}</span></div>
+        </div>
+        <button type="button" class="am-btn">{{ section.settings.reviews_cta | default: 'Write a review' }}</button>
+      </div>
+      <div class="am-rev-grid">
+        {%- for block in section.blocks -%}{%- if block.type == 'review' -%}
+          <article class="am-rev" {{ block.shopify_attributes }}>
+            <div class="am-rev-top"><strong>{{ block.settings.name }}</strong><time>{{ block.settings.date }}</time></div>
+            <span class="am-stars">★★★★★</span>
+            <h3 class="am-rev-title">{{ block.settings.title }}</h3>
+            <p class="am-rev-body">{{ block.settings.body }}</p>
+            {%- if block.settings.meta != blank -%}<p class="am-rev-meta">{{ block.settings.meta }}</p>{%- endif -%}
+          </article>
+        {%- endif -%}{%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} H) FINAL CTA + BANNER {%- endcomment -%}
+  <section class="am-sec am-final">
+    <div class="am-wrap am-wrap-narrow am-final-inner">
+      <h2 class="am-h2 am-h2-light">{{ section.settings.final_heading | default: 'Calm first. Clear headed. Ready for what matters.' }}</h2>
+      {%- if section.settings.final_copy != blank -%}<p class="am-final-copy">{{ section.settings.final_copy }}</p>{%- endif -%}
+      <a href="{{ section.settings.final_shop_link | default: '#' }}" class="am-btn am-btn-light">{{ section.settings.final_shop_label | default: 'Shop' }}</a>
+    </div>
+  </section>
+  {%- if section.settings.final_banner -%}
+  <section class="am-sec am-banner-sec">
+    <div class="am-wrap">
+      <div class="am-banner">
+        <img src="{{ section.settings.final_banner | image_url: width: 2000 }}" alt="{{ section.settings.final_banner.alt | escape }}" loading="lazy">
+        <a href="{{ section.settings.final_shop_link | default: '#' }}" class="am-btn am-btn-light am-banner-btn">{{ section.settings.final_shop_label | default: 'Shop' }}</a>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+</div>
+
+{% style %}
+  #avro-more-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF; --charcoal: #151515;
+    --ink: #1C1B14; --warm-gray: #6B6857; --gray: #E2E2E2; --avro-blue: #E4B457; --line: #E2E2E2;
+    --am-radius: {{ btn_radius }}px;
+    font-family: "DM Sans", system-ui, sans-serif; color: var(--ink); display: block; background: var(--base);
+  }
+  #avro-more-{{ section.id }} * { box-sizing: border-box; }
+  #avro-more-{{ section.id }} .am-sec { width: 100%; padding: clamp(32px,6vw,80px) 0; }
+  #avro-more-{{ section.id }} .am-wrap { width: 100%; max-width: 1250px; margin: 0 auto; padding: 0 clamp(16px,5vw,64px); }
+  #avro-more-{{ section.id }} .am-wrap-narrow { max-width: 1100px; }
+  #avro-more-{{ section.id }} .am-h2 { font-family: inherit; font-weight: 900; font-size: clamp(24px,4.2vw,52px); line-height: 1.02; color: var(--ink); margin: 0 0 12px; text-wrap: balance; }
+  #avro-more-{{ section.id }} .am-h2-light { color: var(--bone); }
+  #avro-more-{{ section.id }} .am-eyebrow { display: block; text-transform: uppercase; letter-spacing: 0.18em; font-weight: 700; font-size: clamp(10px,0.9vw,12px); color: var(--warm-gray); margin-bottom: 8px; }
+  #avro-more-{{ section.id }} p { margin: 0; }
+
+  /* buttons */
+  #avro-more-{{ section.id }} .am-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 26px; border-radius: var(--am-radius); background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); font-family: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease; }
+  #avro-more-{{ section.id }} .am-btn:hover { background: transparent; color: var(--charcoal); }
+  #avro-more-{{ section.id }} .am-btn-sm { min-height: 40px; padding: 0 14px; font-size: 13px; width: 100%; }
+  #avro-more-{{ section.id }} .am-btn-full { width: 100%; }
+  #avro-more-{{ section.id }} .am-btn-light { background: var(--bone); color: var(--charcoal); border-color: var(--bone); }
+  #avro-more-{{ section.id }} .am-btn-light:hover { background: transparent; color: var(--bone); }
+
+  /* A) tabs + related */
+  #avro-more-{{ section.id }} .am-tabs-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
+  @media (min-width: 1000px) { #avro-more-{{ section.id }} .am-tabs-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 48px; } }
+  #avro-more-{{ section.id }} .am-tablist { display: flex; flex-wrap: wrap; gap: 16px 28px; border-bottom: 2px solid rgba(0,0,0,0.12); margin-bottom: 22px; }
+  #avro-more-{{ section.id }} .am-tab { position: relative; padding: 0 0 12px; background: none; border: 0; cursor: pointer; font-family: inherit; font-weight: 500; font-size: clamp(14px,1.3vw,20px); color: rgba(0,0,0,0.45); }
+  #avro-more-{{ section.id }} .am-tab.is-active { font-weight: 800; color: #000; }
+  #avro-more-{{ section.id }} .am-tab.is-active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 3px; background: var(--charcoal); }
+  #avro-more-{{ section.id }} .am-pane { display: none; }
+  #avro-more-{{ section.id }} .am-pane.is-active { display: block; }
+  #avro-more-{{ section.id }} .am-pane-h { font-weight: 700; font-size: clamp(22px,3vw,42px); line-height: 1; margin: 0 0 20px; color: var(--ink); }
+  #avro-more-{{ section.id }} .am-pane ul, #avro-more-{{ section.id }} .am-pane ol { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 10px; }
+  #avro-more-{{ section.id }} .am-pane li, #avro-more-{{ section.id }} .am-pane p { font-weight: 500; font-size: clamp(13px,1.1vw,16px); line-height: 1.5; color: rgba(0,0,0,0.7); }
+  #avro-more-{{ section.id }} .am-ing-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+  #avro-more-{{ section.id }} .am-ing-name { font-weight: 700; font-size: clamp(13px,1.2vw,17px); color: var(--ink); }
+  #avro-more-{{ section.id }} .am-ing-amt { font-weight: 500; font-size: clamp(13px,1.2vw,17px); color: rgba(0,0,0,0.6); }
+  #avro-more-{{ section.id }} .am-ing-other { margin-top: 16px; font-size: clamp(13px,1.2vw,16px); color: rgba(0,0,0,0.5); line-height: 1.5; }
+  #avro-more-{{ section.id }} .am-related-h { font-weight: 700; font-size: clamp(16px,1.8vw,24px); margin: 0 0 18px; color: var(--ink); }
+  #avro-more-{{ section.id }} .am-related-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+  #avro-more-{{ section.id }} .am-rcard { display: flex; flex-direction: column; background: var(--base-light); border-radius: 14px; padding: 10px; overflow: hidden; }
+  #avro-more-{{ section.id }} .am-rthumb { display: block; position: relative; aspect-ratio: 1/1; background: var(--bone); border-radius: 10px; overflow: hidden; }
+  #avro-more-{{ section.id }} .am-rthumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #avro-more-{{ section.id }} .am-rmeta { padding: 10px 2px 2px; display: flex; flex-direction: column; gap: 8px; }
+  #avro-more-{{ section.id }} .am-rtop { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; flex-wrap: wrap; }
+  #avro-more-{{ section.id }} .am-rname { font-weight: 800; font-size: clamp(12px,1.1vw,15px); color: var(--ink); }
+  #avro-more-{{ section.id }} .am-rprice { font-weight: 700; font-size: clamp(11px,1vw,13px); color: rgba(0,0,0,0.6); }
+
+  /* B) ingredients grid */
+  #avro-more-{{ section.id }} .am-ing-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+  @media (min-width: 768px) { #avro-more-{{ section.id }} .am-ing-grid { grid-template-columns: repeat(4,1fr); gap: 20px; } }
+  #avro-more-{{ section.id }} .am-ing-card { display: flex; flex-direction: column; background: var(--base-light); border-radius: 14px; padding: clamp(10px,1.5vw,14px); }
+  #avro-more-{{ section.id }} .am-ing-thumb { position: relative; aspect-ratio: 1/1; background: var(--bone); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
+  #avro-more-{{ section.id }} .am-ing-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #avro-more-{{ section.id }} .am-ing-cardname { font-weight: 800; font-size: clamp(12px,1.2vw,16px); line-height: 1.15; color: var(--ink); margin: 0 0 2px; }
+  #avro-more-{{ section.id }} .am-ing-cardamt { display: block; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; font-size: clamp(9px,0.8vw,11px); color: var(--warm-gray); margin-bottom: 6px; }
+  #avro-more-{{ section.id }} .am-ing-carddesc { font-weight: 500; font-size: clamp(11px,1vw,13.5px); line-height: 1.4; color: var(--warm-gray); }
+
+  /* C) feeling */
+  #avro-more-{{ section.id }} .am-feel-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-bottom: clamp(24px,3vw,40px); }
+  @media (min-width: 768px) { #avro-more-{{ section.id }} .am-feel-grid { grid-template-columns: repeat(4,1fr); gap: 16px; } }
+  #avro-more-{{ section.id }} .am-feel-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: clamp(14px,2vw,24px); background: var(--base-light); border-radius: 16px; }
+  #avro-more-{{ section.id }} .am-feel-icon { width: clamp(48px,6vw,88px); height: clamp(48px,6vw,88px); display: grid; place-items: center; }
+  #avro-more-{{ section.id }} .am-feel-icon img { width: 100%; height: 100%; object-fit: contain; }
+  #avro-more-{{ section.id }} .am-feel-title { font-weight: 700; font-size: clamp(11px,1.2vw,16px); line-height: 1.2; color: var(--ink); margin: 0; }
+  #avro-more-{{ section.id }} .am-feel-lower { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; }
+  @media (min-width: 1000px) { #avro-more-{{ section.id }} .am-feel-lower { grid-template-columns: 1fr 1fr; gap: 40px; } }
+  #avro-more-{{ section.id }} .am-feel-text p { font-size: clamp(14px,1.3vw,18px); line-height: 1.55; color: var(--warm-gray); margin: 0 0 16px; }
+  #avro-more-{{ section.id }} .am-feel-graph { border-radius: 16px; overflow: hidden; background: var(--base-light); }
+  #avro-more-{{ section.id }} .am-feel-graph img { width: 100%; height: auto; display: block; }
+  #avro-more-{{ section.id }} .am-feel-embed { position: relative; width: 100%; }
+  #avro-more-{{ section.id }} .am-feel-embed iframe,
+  #avro-more-{{ section.id }} .am-feel-embed video,
+  #avro-more-{{ section.id }} .am-feel-embed img,
+  #avro-more-{{ section.id }} .am-feel-embed svg { display: block; width: 100%; height: auto; border: 0; }
+
+  /* D) compare */
+  #avro-more-{{ section.id }} .am-compare { background: var(--charcoal); }
+  #avro-more-{{ section.id }} .am-compare-sub { font-weight: 500; font-size: clamp(16px,1.4vw,20px); color: rgba(245,242,234,0.65); max-width: 480px; margin-bottom: clamp(28px,3vw,44px); }
+  #avro-more-{{ section.id }} .am-compare-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 768px) { #avro-more-{{ section.id }} .am-compare-grid { grid-template-columns: repeat(3,1fr); } }
+  #avro-more-{{ section.id }} .am-ccard { display: flex; flex-direction: column; background: var(--base-light); border-radius: 24px; padding: clamp(20px,3vw,32px); }
+  #avro-more-{{ section.id }} .am-cthumb { display: grid; place-items: center; aspect-ratio: 1/1; background: #fff; border-radius: 20px; overflow: hidden; margin-bottom: 20px; }
+  #avro-more-{{ section.id }} .am-cthumb img { width: 100%; height: 100%; object-fit: contain; padding: 16px; }
+  #avro-more-{{ section.id }} .am-cname { font-family: inherit; font-weight: 900; font-size: clamp(24px,2.5vw,32px); line-height: 1.05; color: var(--ink); margin: 0 0 8px; }
+  #avro-more-{{ section.id }} .am-cheadline { font-size: 16px; color: rgba(0,0,0,0.6); line-height: 1.45; margin: 0 0 20px; }
+  #avro-more-{{ section.id }} .am-cspecs { padding: 16px 0; margin-bottom: 16px; border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08); display: flex; flex-direction: column; gap: 12px; }
+  #avro-more-{{ section.id }} .am-crow { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  #avro-more-{{ section.id }} .am-crow span:first-child { font-weight: 500; font-size: 15px; color: rgba(0,0,0,0.5); }
+  #avro-more-{{ section.id }} .am-crow span:last-child { font-weight: 700; font-size: 15px; color: var(--ink); text-align: right; }
+
+  /* E) subscribe cta */
+  #avro-more-{{ section.id }} .am-subcta { background: var(--avro-blue); }
+  #avro-more-{{ section.id }} .am-subcta .am-h2 { color: var(--charcoal); }
+  #avro-more-{{ section.id }} .am-subcopy { font-size: clamp(13px,1.2vw,17px); line-height: 1.5; color: var(--charcoal); opacity: 0.8; max-width: 520px; margin-bottom: 20px; }
+
+  /* F) faq */
+  #avro-more-{{ section.id }} .am-faq-grid { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: start; }
+  @media (min-width: 1000px) { #avro-more-{{ section.id }} .am-faq-grid { grid-template-columns: 0.7fr 1.3fr; } }
+  #avro-more-{{ section.id }} .am-faq-list { display: flex; flex-direction: column; }
+  #avro-more-{{ section.id }} .am-faq { border-top: 1px solid var(--gray); }
+  #avro-more-{{ section.id }} .am-faq:first-child { border-top: 0; }
+  #avro-more-{{ section.id }} .am-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; cursor: pointer; list-style: none; font-weight: 700; font-size: clamp(13px,1.2vw,17px); color: var(--ink); }
+  #avro-more-{{ section.id }} .am-faq summary::-webkit-details-marker { display: none; }
+  #avro-more-{{ section.id }} .am-faq-plus { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 999px; background: var(--charcoal); color: var(--bone); font-size: 16px; line-height: 1; flex-shrink: 0; transition: transform .2s ease; }
+  #avro-more-{{ section.id }} .am-faq[open] .am-faq-plus { transform: rotate(45deg); }
+  #avro-more-{{ section.id }} .am-faq-a { padding: 0 40px 14px 0; font-size: clamp(13px,1.1vw,16px); line-height: 1.55; color: var(--warm-gray); }
+  #avro-more-{{ section.id }} .am-faq-a p { margin: 0 0 8px; }
+  #avro-more-{{ section.id }} .am-faq-more { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; }
+  #avro-more-{{ section.id }} .am-faq-more:hover { text-decoration: underline; }
+
+  /* G) reviews */
+  #avro-more-{{ section.id }} .am-rev-wrap { max-width: 1280px; }
+  #avro-more-{{ section.id }} .am-rev-summary { display: flex; flex-direction: column; gap: 16px; padding: 20px; margin-bottom: 40px; background: var(--base-light); border-radius: 20px; border: 1px solid var(--line); }
+  @media (min-width: 1000px) { #avro-more-{{ section.id }} .am-rev-summary { flex-direction: row; align-items: center; gap: 24px; } }
+  #avro-more-{{ section.id }} .am-rev-prod { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+  #avro-more-{{ section.id }} .am-rev-thumb { display: grid; place-items: center; width: 56px; height: 56px; background: var(--bone); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  #avro-more-{{ section.id }} .am-rev-thumb img { height: 48px; width: auto; object-fit: contain; }
+  #avro-more-{{ section.id }} .am-rev-prodtext strong { display: block; font-weight: 800; font-size: 17px; color: var(--ink); line-height: 1.1; }
+  #avro-more-{{ section.id }} .am-rev-prodtext span { display: block; font-weight: 500; font-size: 13px; color: var(--warm-gray); margin-top: 2px; }
+  #avro-more-{{ section.id }} .am-rev-rating { display: flex; align-items: center; gap: 12px; }
+  @media (min-width: 1000px) { #avro-more-{{ section.id }} .am-rev-rating { margin-left: auto; } }
+  #avro-more-{{ section.id }} .am-rev-rating > strong { font-weight: 800; font-size: 32px; line-height: 1; color: var(--ink); }
+  #avro-more-{{ section.id }} .am-stars { color: #E8A23D; letter-spacing: 1.5px; font-size: 14px; }
+  #avro-more-{{ section.id }} .am-rev-count { display: block; font-weight: 500; font-size: 12px; color: var(--warm-gray); margin-top: 4px; }
+  #avro-more-{{ section.id }} .am-rev-grid { display: grid; grid-template-columns: 1fr; gap: 28px 40px; }
+  @media (min-width: 768px) { #avro-more-{{ section.id }} .am-rev-grid { grid-template-columns: repeat(2,1fr); } }
+  #avro-more-{{ section.id }} .am-rev { padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+  #avro-more-{{ section.id }} .am-rev-top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 6px; }
+  #avro-more-{{ section.id }} .am-rev-top strong { font-weight: 800; font-size: 16px; color: var(--ink); }
+  #avro-more-{{ section.id }} .am-rev-top time { font-weight: 500; font-size: 13px; color: var(--warm-gray); }
+  #avro-more-{{ section.id }} .am-rev-title { font-weight: 800; font-size: 16px; color: var(--ink); margin: 8px 0 0; }
+  #avro-more-{{ section.id }} .am-rev-body { font-size: 15px; color: var(--warm-gray); line-height: 1.55; margin: 6px 0 0; }
+  #avro-more-{{ section.id }} .am-rev-meta { font-weight: 500; font-size: 12px; color: var(--warm-gray); margin: 12px 0 0; }
+
+  /* H) final + banner */
+  #avro-more-{{ section.id }} .am-final { background: var(--charcoal); }
+  #avro-more-{{ section.id }} .am-final-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
+  #avro-more-{{ section.id }} .am-final-copy { color: rgba(245,242,234,0.7); font-size: clamp(14px,1.3vw,18px); line-height: 1.5; max-width: 560px; margin: 0 0 24px; }
+  #avro-more-{{ section.id }} .am-banner-sec { padding-top: 0; }
+  #avro-more-{{ section.id }} .am-banner { position: relative; border-radius: 24px; overflow: hidden; }
+  #avro-more-{{ section.id }} .am-banner img { width: 100%; height: auto; display: block; }
+  #avro-more-{{ section.id }} .am-banner-btn { position: absolute; left: clamp(20px,4vw,48px); bottom: clamp(20px,4vw,48px); }
+{% endstyle %}
+
+<script>
+  (function () {
+    var root = document.getElementById("avro-more-{{ section.id }}");
+    if (!root) return;
+    var tabs = root.querySelectorAll(".am-tab");
+    var panes = root.querySelectorAll(".am-pane");
+    tabs.forEach(function (t) {
+      t.addEventListener("click", function () {
+        tabs.forEach(function (x) { x.classList.remove("is-active"); x.setAttribute("aria-selected", "false"); });
+        panes.forEach(function (p) { p.classList.remove("is-active"); });
+        t.classList.add("is-active");
+        t.setAttribute("aria-selected", "true");
+        var pane = root.querySelector('.am-pane[data-pane="' + t.dataset.tab + '"]');
+        if (pane) pane.classList.add("is-active");
+      });
+    });
+  })();
+</script>
+
+{%- if product != blank -%}
+<script>
+  (function () {
+    var root = document.getElementById("avro-pdp-{{ section.id }}");
+    if (!root) return;
+    var variants = {{ product.variants | json }};
+    var flavorIndex = parseInt(root.dataset.flavorIndex || "0", 10); // 1-based option index, 0 = none
+    var hasPlan = {{ has_plan | json }};
+
+    var vidInput = document.getElementById("pdp-vid-{{ section.id }}");
+    var planInput = document.getElementById("pdp-plan-{{ section.id }}");
+    var qtyEl = document.getElementById("pdp-qty-{{ section.id }}");
+    var qtyInput = document.getElementById("pdp-qtyinput-{{ section.id }}");
+    var addBtn = document.getElementById("pdp-add-{{ section.id }}");
+    var galMain = document.getElementById("gal-main-{{ section.id }}");
+
+    var state = { variant: variants.find(function (v) { return v.id == vidInput.value; }) || variants[0], buy: hasPlan ? "subscribe" : "onetime", qty: 1 };
+
+    function money(cents) {
+      return "$" + (cents / 100).toFixed(2);
+    }
+
+    function planAllocation(v) {
+      if (!v || !v.selling_plan_allocations || !v.selling_plan_allocations.length) return null;
+      return v.selling_plan_allocations[0];
+    }
+
+    function render() {
+      var v = state.variant;
+      // Prices
+      var oneEls = root.querySelectorAll("[data-price-onetime]");
+      var subEls = root.querySelectorAll("[data-price-subscribe]");
+      oneEls.forEach(function (el) { el.textContent = v ? money(v.price * state.qty) : ""; });
+      var alloc = planAllocation(v);
+      subEls.forEach(function (el) { el.textContent = alloc ? money(alloc.price * state.qty) : (v ? money(v.price * state.qty) : ""); });
+
+      // Selling plan + variant inputs
+      vidInput.value = v ? v.id : "";
+      if (hasPlan) {
+        if (state.buy === "subscribe" && alloc) {
+          planInput.disabled = false;
+          planInput.value = alloc.selling_plan.id;
+        } else {
+          planInput.value = "";
+          planInput.disabled = true;
+        }
+      }
+
+      // Availability
+      var available = v && v.available;
+      addBtn.disabled = !available;
+      addBtn.textContent = available ? "{{ section.settings.add_label | default: 'Add to Cart' | escape }}" : "Sold Out";
+
+      // Swap main image to variant image
+      if (v && v.featured_media && galMain) {
+        galMain.querySelectorAll("img").forEach(function (img) {
+          img.classList.toggle("is-active", img.dataset.mediaId == v.featured_media.id);
+        });
+        var thumbs = root.querySelectorAll(".gal-thumb");
+        thumbs.forEach(function (t) { t.classList.toggle("is-active", t.dataset.target == v.featured_media.id); });
+      }
+    }
+
+    // Flavor selection: match on the chosen option index
+    if (flavorIndex > 0) {
+      root.querySelectorAll(".flavor").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var val = btn.dataset.flavor;
+          root.querySelectorAll(".flavor").forEach(function (b) { b.classList.remove("is-active"); b.setAttribute("aria-checked", "false"); });
+          btn.classList.add("is-active");
+          btn.setAttribute("aria-checked", "true");
+          var match = variants.find(function (v) { return v["option" + flavorIndex] === val; });
+          if (match) { state.variant = match; render(); }
+        });
+      });
+    }
+
+    // Purchase type
+    root.querySelectorAll(".buy-opt").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        root.querySelectorAll(".buy-opt").forEach(function (b) { b.classList.remove("is-active"); });
+        btn.classList.add("is-active");
+        state.buy = btn.dataset.buy;
+        var benefits = root.querySelector("[data-subscribe-benefits]");
+        if (benefits) benefits.style.display = state.buy === "subscribe" ? "flex" : "none";
+        render();
+      });
+    });
+
+    // Quantity stepper
+    root.querySelectorAll(".stepper button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var step = parseInt(btn.dataset.step, 10);
+        state.qty = Math.max(1, state.qty + step);
+        qtyEl.textContent = state.qty;
+        qtyInput.value = state.qty;
+        root.querySelector('.stepper button[data-step="-1"]').disabled = state.qty <= 1;
+        render();
+      });
+    });
+
+    render();
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "AVRO — Product (Focus)",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Spacing & buttons", "info": "Three matched presets per option — every combination is designed to stay consistent." },
+    { "type": "select", "id": "button_size", "label": "Button size", "default": "standard", "info": "Applies to Add to Cart, purchase options, and the quantity stepper.", "options": [
+      { "value": "compact", "label": "Compact" },
+      { "value": "standard", "label": "Standard" },
+      { "value": "large", "label": "Large" }
+    ] },
+    { "type": "select", "id": "corner_style", "label": "Corner style", "default": "pill", "options": [
+      { "value": "square", "label": "Square" },
+      { "value": "soft", "label": "Soft" },
+      { "value": "pill", "label": "Pill (fully rounded)" }
+    ] },
+    { "type": "select", "id": "spacing", "label": "Spacing", "default": "standard", "info": "Controls the gap between rows and the section padding.", "options": [
+      { "value": "cozy", "label": "Cozy" },
+      { "value": "standard", "label": "Standard" },
+      { "value": "roomy", "label": "Roomy" }
+    ] },
+    { "type": "header", "content": "Copy" },
+    { "type": "textarea", "id": "support_line", "label": "Support line", "info": "Falls back to the product metafield custom.support_line if set.", "default": "Steady attention. Clear thinking when it counts.*" },
+    { "type": "text", "id": "per_box_line", "label": "Per-box line", "default": "10 stick packets per box" },
+    { "type": "header", "content": "Flavor" },
+    { "type": "text", "id": "flavor_option_name", "label": "Flavor option name", "info": "The product option used as the flavor selector (case-insensitive). Leave matching your product's option name.", "default": "Flavor" },
+    { "type": "header", "content": "Rating badge" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating badge", "default": true },
+    { "type": "text", "id": "rating_value", "label": "Rating value", "default": "4.8" },
+    { "type": "header", "content": "Purchase options" },
+    { "type": "checkbox", "id": "show_subscribe", "label": "Show subscribe option (when product has a selling plan)", "default": true },
+    { "type": "text", "id": "subscribe_label", "label": "Subscribe label", "default": "Subscribe & save" },
+    { "type": "text", "id": "subscribe_badge", "label": "Subscribe badge", "default": "Most popular" },
+    { "type": "text", "id": "onetime_label", "label": "One-time label", "default": "One-time purchase" },
+    { "type": "text", "id": "onetime_sub", "label": "One-time subtitle", "default": "No commitment. Free shipping over $50." },
+    { "type": "text", "id": "add_label", "label": "Add-to-cart label", "default": "Add to Cart" },
+
+    { "type": "header", "content": "Tabs (Description / Ingredients / When / How)" },
+    { "type": "text", "id": "tab1_label", "label": "Tab 1 label", "default": "Description" },
+    { "type": "text", "id": "tab2_label", "label": "Tab 2 label", "default": "Ingredients" },
+    { "type": "text", "id": "tab3_label", "label": "Tab 3 label", "default": "When to take" },
+    { "type": "text", "id": "tab4_label", "label": "Tab 4 label", "default": "How to use" },
+    { "type": "richtext", "id": "tabs_desc", "label": "Description tab content", "default": "<p>Our formula</p><ul><li>Formulated with L-Theanine and PharmaGABA® for calm-first focus</li><li>Supports steady attention and clear thinking without the jitters*</li><li>Caffeine free — focus without a crash*</li><li>No added sugar, artificial sweeteners, or sugar alcohols</li><li>Vegan, gluten-free, non-GMO</li><li>Third-party tested for purity and potency</li></ul>" },
+    { "type": "textarea", "id": "other_ingredients", "label": "Ingredients tab — \"Other ingredients\" line", "default": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica." },
+    { "type": "richtext", "id": "tabs_when", "label": "When-to-take tab content", "default": "<p><strong>Deep work blocks</strong> — Before focused, heads-down sessions.*</p><p><strong>Before high-stakes tasks</strong> — Meetings, presentations, study, or gaming.</p><p><strong>Afternoon reset</strong> — Sharpen attention through the midday slump without caffeine.*</p>" },
+    { "type": "richtext", "id": "tabs_how", "label": "How-to-use tab content", "default": "<p><strong>1. Pour</strong> — Empty one stick into 8-12 oz of cold water.</p><p><strong>2. Mix</strong> — Stir or shake until fully dissolved.</p><p><strong>3. Drink</strong> — Enjoy 20-30 minutes before your moment.</p>" },
+    { "type": "text", "id": "related_heading", "label": "\"You might also like\" heading", "default": "You might also like" },
+
+    { "type": "header", "content": "Ingredients grid" },
+    { "type": "text", "id": "ing_eyebrow", "label": "Eyebrow", "default": "What's inside" },
+    { "type": "text", "id": "ing_heading", "label": "Heading", "default": "Clear ingredient logic. Nothing hidden." },
+
+    { "type": "header", "content": "The feeling of good…" },
+    { "type": "text", "id": "feeling_heading", "label": "Heading", "default": "The feeling of good focus." },
+    { "type": "textarea", "id": "feeling_p1", "label": "Paragraph 1", "default": "AVRO Focus pairs L-Theanine with naturally fermented PharmaGABA® to support steady, sustained attention in a convenient stick pack format.*" },
+    { "type": "textarea", "id": "feeling_p2", "label": "Paragraph 2", "default": "Instead of a caffeine spike and crash, AVRO Focus is designed for clear thinking with a calm baseline. Sharp, not wired.*" },
+    { "type": "text", "id": "feeling_btn_label", "label": "Button label", "default": "Learn How It Works" },
+    { "type": "url", "id": "feeling_btn_link", "label": "Button link" },
+    { "type": "html", "id": "feeling_embed", "label": "Graph / chart embed", "info": "Paste an embed (iframe, chart script, SVG, etc.). If set, this is used instead of the image below." },
+    { "type": "image_picker", "id": "feeling_graph", "label": "Graph / chart image", "info": "Used when no embed is set above." },
+
+    { "type": "header", "content": "Comparison grid (dark)" },
+    { "type": "text", "id": "compare_heading", "label": "Heading", "default": "We put intention into every formula." },
+    { "type": "text", "id": "compare_sub", "label": "Subheading", "default": "Find the one that was made with your day in mind." },
+
+    { "type": "header", "content": "Subscribe & save CTA (blue)" },
+    { "type": "text", "id": "sub_heading", "label": "Heading", "default": "Your favorites. On repeat." },
+    { "type": "textarea", "id": "sub_copy", "label": "Copy", "default": "Subscribe & save 15% every order of 2 or more tubes. Pick your favorites, set your schedule. Leave the rest to us." },
+    { "type": "text", "id": "sub_btn_label", "label": "Button label", "default": "Subscribe Now" },
+    { "type": "url", "id": "sub_btn_link", "label": "Button link" },
+
+    { "type": "header", "content": "FAQ" },
+    { "type": "text", "id": "faq_heading", "label": "Heading", "default": "Frequently asked, all answered." },
+    { "type": "text", "id": "faq_more_label", "label": "\"See more\" label", "default": "See more answers" },
+    { "type": "url", "id": "faq_more_link", "label": "\"See more\" link" },
+
+    { "type": "header", "content": "Reviews" },
+    { "type": "text", "id": "reviews_rating", "label": "Rating value", "default": "4.8" },
+    { "type": "text", "id": "reviews_count", "label": "Reviews count text", "default": "82 verified reviews" },
+    { "type": "text", "id": "reviews_sub", "label": "Product subtitle", "default": "Verified reviews" },
+    { "type": "text", "id": "reviews_cta", "label": "Button label", "default": "Write a review" },
+
+    { "type": "header", "content": "Final CTA + banner" },
+    { "type": "text", "id": "final_heading", "label": "Heading", "default": "Focused. Clear headed. Ready for what matters." },
+    { "type": "textarea", "id": "final_copy", "label": "Copy", "default": "Support steady attention, clear thinking, and calm-first focus for the moments that matter.*" },
+    { "type": "text", "id": "final_shop_label", "label": "Shop button label", "default": "Shop" },
+    { "type": "url", "id": "final_shop_link", "label": "Shop button link" },
+    { "type": "image_picker", "id": "final_banner", "label": "Bottom banner image" }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Subscribe benefit",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Benefit", "default": "Skip, change or cancel anytime." }
+      ]
+    },
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "name", "label": "Name", "default": "PharmaGABA®" },
+        { "type": "text", "id": "amount", "label": "Amount / label", "default": "200 mg" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Naturally fermented. AVRO's calm-first foundation." }
+      ]
+    },
+    {
+      "type": "related",
+      "name": "Related product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop" },
+        { "type": "text", "id": "fallback_name", "label": "Fallback name (if no product)", "default": "AVRO Focus" },
+        { "type": "text", "id": "fallback_price", "label": "Fallback price (if no product)", "default": "$24.95" }
+      ]
+    },
+    {
+      "type": "feeling",
+      "name": "Feeling benefit",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Improved clarity & composure*" }
+      ]
+    },
+    {
+      "type": "compare",
+      "name": "Comparison card",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "fallback_name", "label": "Fallback name (if no product)", "default": "AVRO Calm" },
+        { "type": "textarea", "id": "headline", "label": "Headline", "default": "Calm first. Clear headed. Ready when pressure rises." },
+        { "type": "text", "id": "caffeine", "label": "Caffeine", "default": "0 mg" },
+        { "type": "text", "id": "experience", "label": "Experience", "default": "Gentle" },
+        { "type": "text", "id": "best_for", "label": "Best for", "default": "Stress relief & focused calm" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Add to Cart" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "What are the main ingredients?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Formulated with L-Theanine and PharmaGABA® for focused attention without the jitters.</p>" }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Jessica M." },
+        { "type": "text", "id": "date", "label": "Date", "default": "05/14/2026" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Locked in without the jitters" },
+        { "type": "textarea", "id": "body", "label": "Review body", "default": "Helps me stay locked in without the jitters. Part of my routine." },
+        { "type": "text", "id": "meta", "label": "Meta (flavor · size)", "default": "Pomegranate Raspberry · 30 Sticks" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Product (Focus)",
+      "blocks": [
+        { "type": "benefit", "settings": { "text": "Select your own delivery schedule." } },
+        { "type": "benefit", "settings": { "text": "Save 15% on every order." } },
+        { "type": "benefit", "settings": { "text": "Free shipping on all orders of 2 or more tubes." } },
+        { "type": "benefit", "settings": { "text": "Skip, change or cancel anytime." } },
+
+        { "type": "ingredient", "settings": { "name": "L-Theanine", "amount": "200 mg", "description": "Supports calm, focused attention without drowsiness.*" } },
+        { "type": "ingredient", "settings": { "name": "PharmaGABA®", "amount": "100 mg", "description": "Naturally fermented. AVRO's calm-first foundation." } },
+        { "type": "ingredient", "settings": { "name": "L-Tyrosine", "amount": "300 mg", "description": "Supports clear thinking under mental load.*" } },
+        { "type": "ingredient", "settings": { "name": "Prebiotic Fiber", "amount": "Soluble Guar Fiber + Acacia Fiber", "description": "Supports gut comfort.* Part of AVRO's daily formula." } },
+
+        { "type": "feeling", "settings": { "title": "Sharper, sustained attention*" } },
+        { "type": "feeling", "settings": { "title": "Clear thinking under load*" } },
+        { "type": "feeling", "settings": { "title": "Calm, focused energy*" } },
+        { "type": "feeling", "settings": { "title": "Reduced mental fatigue*" } },
+
+        { "type": "related", "settings": { "fallback_name": "AVRO Calm", "fallback_price": "$24.95", "button_label": "Shop Calm" } },
+        { "type": "related", "settings": { "fallback_name": "AVRO Energy", "fallback_price": "$24.95", "button_label": "Shop Energy" } },
+
+        { "type": "compare", "settings": { "fallback_name": "AVRO Calm", "headline": "Calm first. Clear headed. Ready when pressure rises.", "caffeine": "0 mg", "experience": "Gentle", "best_for": "Stress relief & focused calm" } },
+        { "type": "compare", "settings": { "fallback_name": "AVRO Focus", "headline": "Calm first. Clear headed. Ready to focus.", "caffeine": "0 mg", "experience": "Steady", "best_for": "Desk work & daily routines" } },
+        { "type": "compare", "settings": { "fallback_name": "AVRO Energy", "headline": "Calm first. Steady energy. Ready when it matters.", "caffeine": "120 mg", "experience": "Stronger", "best_for": "Workouts or peak-demand moments" } },
+
+        { "type": "faq", "settings": { "question": "What are the main ingredients?", "answer": "<p>Formulated with L-Theanine and PharmaGABA® for focused attention without the jitters.</p>" } },
+        { "type": "faq", "settings": { "question": "What is the best time to take it?", "answer": "<p>Most people use one stick about 20 to 30 minutes before focused work or any high-focus moment.</p>" } },
+        { "type": "faq", "settings": { "question": "Can I take it if I'm sensitive to caffeine?", "answer": "<p>This formula is caffeine free, making it perfect for those sensitive to caffeine.</p>" } },
+        { "type": "faq", "settings": { "question": "Does it have added sugar or artificial sweeteners?", "answer": "<p>No. AVRO uses no added sugars and no artificial sweeteners. Just clean, functional ingredients.</p>" } },
+
+        { "type": "review", "settings": { "name": "Jessica M.", "date": "05/14/2026", "title": "Locked in without the jitters", "body": "I take it before deep work blocks and my attention stays steady for hours. No crash, no jitters. Easily part of my routine.", "meta": "Pomegranate Raspberry · 30 Sticks" } },
+        { "type": "review", "settings": { "name": "Anonymous", "date": "05/12/2026", "title": "Better than coffee for focus", "body": "Smooth taste, no aftertaste. I feel clear headed within about 30 minutes without the caffeine spike.", "meta": "Pomegranate Raspberry · 10 Sticks" } },
+        { "type": "review", "settings": { "name": "Samantha B.", "date": "05/12/2026", "title": "Perfect for study sessions", "body": "Loved this flavor and how it helps me concentrate. Focused without feeling wired.", "meta": "Pomegranate Raspberry · 30 Sticks" } },
+        { "type": "review", "settings": { "name": "Kathy P.", "date": "05/11/2026", "title": "My go-to before big days", "body": "Great flavor, and it actually helps me stay sharp before high-pressure days. Will keep restocking.", "meta": "Pomegranate Raspberry · 60 Sticks" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
