@@ -36,17 +36,34 @@
 {%- if product.selling_plan_groups.size > 0 -%}{%- assign has_plan = true -%}{%- endif -%}
 {%- if section.settings.show_subscribe == false -%}{%- assign has_plan = false -%}{%- endif -%}
 
+{%- comment -%} ---- PRESET MAPPING: turn simple choices into matched sizing ---- {%- endcomment -%}
+{%- case section.settings.button_size -%}
+  {%- when 'compact' -%}{%- assign btn_height = 48 -%}
+  {%- when 'large' -%}{%- assign btn_height = 64 -%}
+  {%- else -%}{%- assign btn_height = 56 -%}
+{%- endcase -%}
+{%- case section.settings.corner_style -%}
+  {%- when 'square' -%}{%- assign btn_radius = 12 -%}
+  {%- when 'soft' -%}{%- assign btn_radius = 22 -%}
+  {%- else -%}{%- assign btn_radius = 100 -%}
+{%- endcase -%}
+{%- case section.settings.spacing -%}
+  {%- when 'cozy' -%}{%- assign pdp_gap = 16 -%}{%- assign pdp_pad_y = 32 -%}{%- assign pdp_pad_x = 24 -%}
+  {%- when 'roomy' -%}{%- assign pdp_gap = 30 -%}{%- assign pdp_pad_y = 56 -%}{%- assign pdp_pad_x = 40 -%}
+  {%- else -%}{%- assign pdp_gap = 22 -%}{%- assign pdp_pad_y = 44 -%}{%- assign pdp_pad_x = 32 -%}
+{%- endcase -%}
+
 {% style %}
   #avro-pdp-{{ section.id }} {
     --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
     --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --gray: #E2E2E2;
     --avro-blue: #94C6D4;
-    /* Editable spacing/sizing tokens (set from theme editor) */
-    --pdp-pad-y: {{ section.settings.section_padding_y | default: 40 }}px;
-    --pdp-pad-x: {{ section.settings.section_padding_x | default: 32 }}px;
-    --pdp-gap: {{ section.settings.row_gap | default: 16 }}px;
-    --btn-height: {{ section.settings.button_height | default: 56 }}px;
-    --btn-radius: {{ section.settings.button_radius | default: 100 }}px;
+    /* Preset-driven spacing/sizing tokens (set from theme editor) */
+    --pdp-pad-y: {{ pdp_pad_y }}px;
+    --pdp-pad-x: {{ pdp_pad_x }}px;
+    --pdp-gap: {{ pdp_gap }}px;
+    --btn-height: {{ btn_height }}px;
+    --btn-radius: {{ btn_radius }}px;
     font-family: "DM Sans", system-ui, sans-serif; color: var(--ink); display: block;
     background: var(--base-light);
   }
@@ -345,12 +362,22 @@
   "name": "AVRO — Product",
   "tag": "section",
   "settings": [
-    { "type": "header", "content": "Spacing & buttons", "info": "Match these to the rest of your site's spacing." },
-    { "type": "range", "id": "button_height", "label": "Button height", "min": 40, "max": 72, "step": 2, "unit": "px", "default": 56, "info": "Applies to Add to Cart, purchase options, and the quantity stepper." },
-    { "type": "range", "id": "button_radius", "label": "Button corner radius", "min": 0, "max": 100, "step": 2, "unit": "px", "default": 100, "info": "100 = fully rounded pill. Lower for softer/square corners." },
-    { "type": "range", "id": "row_gap", "label": "Spacing between rows", "min": 8, "max": 40, "step": 2, "unit": "px", "default": 16 },
-    { "type": "range", "id": "section_padding_y", "label": "Section top/bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
-    { "type": "range", "id": "section_padding_x", "label": "Section side padding", "min": 0, "max": 64, "step": 2, "unit": "px", "default": 32 },
+    { "type": "header", "content": "Spacing & buttons", "info": "Three matched presets per option — every combination is designed to stay consistent." },
+    { "type": "select", "id": "button_size", "label": "Button size", "default": "standard", "info": "Applies to Add to Cart, purchase options, and the quantity stepper.", "options": [
+      { "value": "compact", "label": "Compact" },
+      { "value": "standard", "label": "Standard" },
+      { "value": "large", "label": "Large" }
+    ] },
+    { "type": "select", "id": "corner_style", "label": "Corner style", "default": "pill", "options": [
+      { "value": "square", "label": "Square" },
+      { "value": "soft", "label": "Soft" },
+      { "value": "pill", "label": "Pill (fully rounded)" }
+    ] },
+    { "type": "select", "id": "spacing", "label": "Spacing", "default": "standard", "info": "Controls the gap between rows and the section padding.", "options": [
+      { "value": "cozy", "label": "Cozy" },
+      { "value": "standard", "label": "Standard" },
+      { "value": "roomy", "label": "Roomy" }
+    ] },
     { "type": "header", "content": "Copy" },
     { "type": "textarea", "id": "support_line", "label": "Support line", "info": "Falls back to the product metafield custom.support_line if set.", "default": "Clear headed. Ready when pressure rises.*" },
     { "type": "text", "id": "per_box_line", "label": "Per-box line", "default": "10 stick packets per box" },
