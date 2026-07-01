@@ -101,11 +101,11 @@
   /* QUANTITY + CTA */
   #avro-pdp-{{ section.id }} .qty-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
   #avro-pdp-{{ section.id }} .qty-row .lbl { margin: 0; font-size: clamp(13px,1.1vw,16px); }
-  #avro-pdp-{{ section.id }} .stepper { display: inline-flex; align-items: center; background: var(--bone); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); height: var(--btn-height); }
-  #avro-pdp-{{ section.id }} .stepper button { width: 48px; height: 100%; border: 0; background: transparent; font-weight: 700; font-size: 20px; color: var(--charcoal); cursor: pointer; border-radius: var(--btn-radius); }
+  #avro-pdp-{{ section.id }} .stepper { display: inline-flex; align-items: center; background: var(--bone); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); height: var(--btn-height); overflow: hidden; }
+  #avro-pdp-{{ section.id }} .stepper button { width: 40px; height: 100%; border: 0; background: transparent; font-weight: 700; font-size: 18px; line-height: 1; color: var(--charcoal); cursor: pointer; display: grid; place-items: center; }
   #avro-pdp-{{ section.id }} .stepper button:hover { background: rgba(0,0,0,0.05); }
-  #avro-pdp-{{ section.id }} .stepper button:disabled { opacity: 0.4; cursor: not-allowed; }
-  #avro-pdp-{{ section.id }} .stepper .q { width: 40px; text-align: center; font-weight: 800; font-size: 18px; color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .stepper button:disabled { opacity: 0.35; cursor: not-allowed; }
+  #avro-pdp-{{ section.id }} .stepper .q { min-width: 28px; text-align: center; font-weight: 800; font-size: 16px; color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .add-btn { width: 100%; min-height: var(--btn-height); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); background: var(--charcoal); color: var(--bone); font-family: inherit; font-weight: 700; font-size: 17px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
   #avro-pdp-{{ section.id }} .add-btn:hover { background: transparent; color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .add-btn:disabled { background: var(--gray); border-color: var(--gray); color: var(--warm-gray); cursor: not-allowed; }
