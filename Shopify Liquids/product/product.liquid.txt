@@ -336,7 +336,13 @@
           {%- if section.settings.feeling_p2 != blank -%}<p>{{ section.settings.feeling_p2 }}</p>{%- endif -%}
           {%- if section.settings.feeling_btn_label != blank -%}<a href="{{ section.settings.feeling_btn_link | default: '#' }}" class="am-btn">{{ section.settings.feeling_btn_label }}</a>{%- endif -%}
         </div>
-        <div class="am-feel-graph">{%- if section.settings.feeling_graph -%}<img src="{{ section.settings.feeling_graph | image_url: width: 1400 }}" alt="{{ section.settings.feeling_graph.alt | escape }}" loading="lazy">{%- endif -%}</div>
+        <div class="am-feel-graph">
+          {%- if section.settings.feeling_embed != blank -%}
+            <div class="am-feel-embed">{{ section.settings.feeling_embed }}</div>
+          {%- elsif section.settings.feeling_graph -%}
+            <img src="{{ section.settings.feeling_graph | image_url: width: 1400 }}" alt="{{ section.settings.feeling_graph.alt | escape }}" loading="lazy">
+          {%- endif -%}
+        </div>
       </div>
     </div>
   </section>
@@ -450,7 +456,7 @@
   #avro-more-{{ section.id }} .am-sec { width: 100%; padding: clamp(32px,6vw,80px) 0; }
   #avro-more-{{ section.id }} .am-wrap { width: 100%; max-width: 1250px; margin: 0 auto; padding: 0 clamp(16px,5vw,64px); }
   #avro-more-{{ section.id }} .am-wrap-narrow { max-width: 1100px; }
-  #avro-more-{{ section.id }} .am-h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 900; font-size: clamp(24px,4.2vw,52px); line-height: 1.02; color: var(--ink); margin: 0 0 12px; text-wrap: balance; }
+  #avro-more-{{ section.id }} .am-h2 { font-family: inherit; font-weight: 900; font-size: clamp(24px,4.2vw,52px); line-height: 1.02; color: var(--ink); margin: 0 0 12px; text-wrap: balance; }
   #avro-more-{{ section.id }} .am-h2-light { color: var(--bone); }
   #avro-more-{{ section.id }} .am-eyebrow { display: block; text-transform: uppercase; letter-spacing: 0.18em; font-weight: 700; font-size: clamp(10px,0.9vw,12px); color: var(--warm-gray); margin-bottom: 8px; }
   #avro-more-{{ section.id }} p { margin: 0; }
@@ -511,6 +517,11 @@
   #avro-more-{{ section.id }} .am-feel-text p { font-size: clamp(14px,1.3vw,18px); line-height: 1.55; color: var(--warm-gray); margin: 0 0 16px; }
   #avro-more-{{ section.id }} .am-feel-graph { border-radius: 16px; overflow: hidden; background: var(--base-light); }
   #avro-more-{{ section.id }} .am-feel-graph img { width: 100%; height: auto; display: block; }
+  #avro-more-{{ section.id }} .am-feel-embed { position: relative; width: 100%; }
+  #avro-more-{{ section.id }} .am-feel-embed iframe,
+  #avro-more-{{ section.id }} .am-feel-embed video,
+  #avro-more-{{ section.id }} .am-feel-embed img,
+  #avro-more-{{ section.id }} .am-feel-embed svg { display: block; width: 100%; height: auto; border: 0; }
 
   /* D) compare */
   #avro-more-{{ section.id }} .am-compare { background: var(--charcoal); }
@@ -520,7 +531,7 @@
   #avro-more-{{ section.id }} .am-ccard { display: flex; flex-direction: column; background: var(--base-light); border-radius: 24px; padding: clamp(20px,3vw,32px); }
   #avro-more-{{ section.id }} .am-cthumb { display: grid; place-items: center; aspect-ratio: 1/1; background: #fff; border-radius: 20px; overflow: hidden; margin-bottom: 20px; }
   #avro-more-{{ section.id }} .am-cthumb img { width: 100%; height: 100%; object-fit: contain; padding: 16px; }
-  #avro-more-{{ section.id }} .am-cname { font-family: Georgia,"Times New Roman",serif; font-weight: 900; font-size: clamp(24px,2.5vw,32px); line-height: 1.05; color: var(--ink); margin: 0 0 8px; }
+  #avro-more-{{ section.id }} .am-cname { font-family: inherit; font-weight: 900; font-size: clamp(24px,2.5vw,32px); line-height: 1.05; color: var(--ink); margin: 0 0 8px; }
   #avro-more-{{ section.id }} .am-cheadline { font-size: 16px; color: rgba(0,0,0,0.6); line-height: 1.45; margin: 0 0 20px; }
   #avro-more-{{ section.id }} .am-cspecs { padding: 16px 0; margin-bottom: 16px; border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px solid rgba(0,0,0,0.08); display: flex; flex-direction: column; gap: 12px; }
   #avro-more-{{ section.id }} .am-crow { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
@@ -764,7 +775,8 @@
     { "type": "textarea", "id": "feeling_p2", "label": "Paragraph 2", "default": "Instead of calm that makes you drowsy, AVRO is designed to support a smoother, more sustained baseline. Just composure.*" },
     { "type": "text", "id": "feeling_btn_label", "label": "Button label", "default": "Learn How It Works" },
     { "type": "url", "id": "feeling_btn_link", "label": "Button link" },
-    { "type": "image_picker", "id": "feeling_graph", "label": "Graph / chart image" },
+    { "type": "html", "id": "feeling_embed", "label": "Graph / chart embed", "info": "Paste an embed (iframe, chart script, SVG, etc.). If set, this is used instead of the image below." },
+    { "type": "image_picker", "id": "feeling_graph", "label": "Graph / chart image", "info": "Used when no embed is set above." },
 
     { "type": "header", "content": "Comparison grid (dark)" },
     { "type": "text", "id": "compare_heading", "label": "Heading", "default": "We put intention into every formula." },
