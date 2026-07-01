@@ -116,7 +116,7 @@
   #avro-pdp-{{ section.id }} .benefits svg { flex-shrink: 0; margin-top: 2px; }
 
   /* QUANTITY + CTA (single inline row) */
-  #avro-pdp-{{ section.id }} .buy-row { display: flex; align-items: stretch; gap: 12px; }
+  #avro-pdp-{{ section.id }} .buy-row { display: flex; align-items: stretch; gap: 12px; margin-top: calc(var(--pdp-gap) + 8px); padding-top: var(--pdp-gap); border-top: 1px solid var(--gray); }
   #avro-pdp-{{ section.id }} .stepper { display: inline-flex; align-items: center; justify-content: space-between; flex: 0 0 auto; background: var(--bone); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); height: var(--btn-height); overflow: hidden; }
   #avro-pdp-{{ section.id }} .stepper button { width: 44px; align-self: stretch; border: 0; background: transparent; font-weight: 700; font-size: 18px; line-height: 1; color: var(--charcoal); cursor: pointer; display: grid; place-items: center; }
   #avro-pdp-{{ section.id }} .stepper button:hover { background: rgba(0,0,0,0.05); }
