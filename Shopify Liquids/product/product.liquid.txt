@@ -46,7 +46,7 @@
     --pdp-pad-x: {{ section.settings.section_padding_x | default: 32 }}px;
     --pdp-gap: {{ section.settings.row_gap | default: 16 }}px;
     --btn-height: {{ section.settings.button_height | default: 56 }}px;
-    --btn-radius: {{ section.settings.button_radius | default: 999 }}px;
+    --btn-radius: {{ section.settings.button_radius | default: 100 }}px;
     font-family: "DM Sans", system-ui, sans-serif; color: var(--ink); display: block;
     background: var(--base-light);
   }
@@ -347,7 +347,7 @@
   "settings": [
     { "type": "header", "content": "Spacing & buttons", "info": "Match these to the rest of your site's spacing." },
     { "type": "range", "id": "button_height", "label": "Button height", "min": 40, "max": 72, "step": 2, "unit": "px", "default": 56, "info": "Applies to Add to Cart, purchase options, and the quantity stepper." },
-    { "type": "range", "id": "button_radius", "label": "Button corner radius", "min": 0, "max": 999, "step": 1, "unit": "px", "default": 999, "info": "999 = fully rounded pill. Lower for softer/square corners." },
+    { "type": "range", "id": "button_radius", "label": "Button corner radius", "min": 0, "max": 100, "step": 2, "unit": "px", "default": 100, "info": "100 = fully rounded pill. Lower for softer/square corners." },
     { "type": "range", "id": "row_gap", "label": "Spacing between rows", "min": 8, "max": 40, "step": 2, "unit": "px", "default": 16 },
     { "type": "range", "id": "section_padding_y", "label": "Section top/bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
     { "type": "range", "id": "section_padding_x", "label": "Section side padding", "min": 0, "max": 64, "step": 2, "unit": "px", "default": 32 },
