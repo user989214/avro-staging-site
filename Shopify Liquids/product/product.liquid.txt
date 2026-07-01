@@ -115,15 +115,14 @@
   #avro-pdp-{{ section.id }} .benefits li { display: flex; align-items: flex-start; gap: 8px; font-weight: 500; font-size: clamp(12px,1vw,14px); line-height: 1.4; color: var(--ink); }
   #avro-pdp-{{ section.id }} .benefits svg { flex-shrink: 0; margin-top: 2px; }
 
-  /* QUANTITY + CTA */
-  #avro-pdp-{{ section.id }} .qty-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-  #avro-pdp-{{ section.id }} .qty-row .lbl { margin: 0; font-size: clamp(13px,1.1vw,16px); }
-  #avro-pdp-{{ section.id }} .stepper { display: inline-flex; align-items: center; background: var(--bone); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); height: var(--btn-height); overflow: hidden; }
-  #avro-pdp-{{ section.id }} .stepper button { width: 40px; height: 100%; border: 0; background: transparent; font-weight: 700; font-size: 18px; line-height: 1; color: var(--charcoal); cursor: pointer; display: grid; place-items: center; }
+  /* QUANTITY + CTA (single inline row) */
+  #avro-pdp-{{ section.id }} .buy-row { display: flex; align-items: stretch; gap: 12px; }
+  #avro-pdp-{{ section.id }} .stepper { display: inline-flex; align-items: center; justify-content: space-between; flex: 0 0 auto; background: var(--bone); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); height: var(--btn-height); overflow: hidden; }
+  #avro-pdp-{{ section.id }} .stepper button { width: 44px; align-self: stretch; border: 0; background: transparent; font-weight: 700; font-size: 18px; line-height: 1; color: var(--charcoal); cursor: pointer; display: grid; place-items: center; }
   #avro-pdp-{{ section.id }} .stepper button:hover { background: rgba(0,0,0,0.05); }
   #avro-pdp-{{ section.id }} .stepper button:disabled { opacity: 0.35; cursor: not-allowed; }
-  #avro-pdp-{{ section.id }} .stepper .q { min-width: 28px; text-align: center; font-weight: 800; font-size: 16px; color: var(--charcoal); }
-  #avro-pdp-{{ section.id }} .add-btn { width: 100%; min-height: var(--btn-height); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); background: var(--charcoal); color: var(--bone); font-family: inherit; font-weight: 700; font-size: 17px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+  #avro-pdp-{{ section.id }} .stepper .q { min-width: 26px; text-align: center; font-weight: 800; font-size: 16px; color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .add-btn { flex: 1 1 auto; min-height: var(--btn-height); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); background: var(--charcoal); color: var(--bone); font-family: inherit; font-weight: 700; font-size: 17px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
   #avro-pdp-{{ section.id }} .add-btn:hover { background: transparent; color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .add-btn:disabled { background: var(--gray); border-color: var(--gray); color: var(--warm-gray); cursor: not-allowed; }
 {% endstyle %}
@@ -231,18 +230,16 @@
             <div class="price-only" style="font-weight:800;font-size:clamp(20px,2vw,28px);" data-price-onetime></div>
           {%- endif -%}
 
-          {%- comment -%} QUANTITY {%- endcomment -%}
-          <div class="qty-row">
-            <span class="lbl">Quantity</span>
-            <div class="stepper">
+          {%- comment -%} QUANTITY + ADD TO CART (inline) {%- endcomment -%}
+          <div class="buy-row">
+            <div class="stepper" role="group" aria-label="Quantity">
               <button type="button" data-step="-1" aria-label="Decrease quantity" disabled>&minus;</button>
               <span class="q" id="pdp-qty-{{ section.id }}">1</span>
               <button type="button" data-step="1" aria-label="Increase quantity">+</button>
             </div>
             <input type="hidden" name="quantity" id="pdp-qtyinput-{{ section.id }}" value="1">
+            <button type="submit" class="add-btn" id="pdp-add-{{ section.id }}">{{ section.settings.add_label | default: 'Add to Cart' }}</button>
           </div>
-
-          <button type="submit" class="add-btn" id="pdp-add-{{ section.id }}">{{ section.settings.add_label | default: 'Add to Cart' }}</button>
         </form>
       </div>
 
