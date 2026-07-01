@@ -41,11 +41,17 @@
     --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
     --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --gray: #E2E2E2;
     --avro-blue: #94C6D4;
+    /* Editable spacing/sizing tokens (set from theme editor) */
+    --pdp-pad-y: {{ section.settings.section_padding_y | default: 40 }}px;
+    --pdp-pad-x: {{ section.settings.section_padding_x | default: 32 }}px;
+    --pdp-gap: {{ section.settings.row_gap | default: 16 }}px;
+    --btn-height: {{ section.settings.button_height | default: 56 }}px;
+    --btn-radius: {{ section.settings.button_radius | default: 999 }}px;
     font-family: "DM Sans", system-ui, sans-serif; color: var(--ink); display: block;
     background: var(--base-light);
   }
   #avro-pdp-{{ section.id }} * { box-sizing: border-box; }
-  #avro-pdp-{{ section.id }} .pdp-wrap { max-width: 1180px; margin: 0 auto; padding: clamp(20px,4vw,48px) clamp(16px,4vw,48px); }
+  #avro-pdp-{{ section.id }} .pdp-wrap { max-width: 1180px; margin: 0 auto; padding: var(--pdp-pad-y) var(--pdp-pad-x); }
   #avro-pdp-{{ section.id }} .pdp-grid { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: start; }
   @media (min-width: 900px) { #avro-pdp-{{ section.id }} .pdp-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 48px; } }
 
@@ -61,7 +67,7 @@
   #avro-pdp-{{ section.id }} .gal-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
   /* BUY BOX */
-  #avro-pdp-{{ section.id }} .bb { display: flex; flex-direction: column; gap: 16px; }
+  #avro-pdp-{{ section.id }} .bb { display: flex; flex-direction: column; gap: var(--pdp-gap); }
   #avro-pdp-{{ section.id }} .bb h1 { font-weight: 900; font-size: clamp(26px,3.2vw,40px); line-height: 0.98; margin: 0; color: var(--ink); }
   #avro-pdp-{{ section.id }} .bb .support { font-weight: 600; font-size: clamp(15px,1.3vw,18px); line-height: 1.35; color: var(--ink); margin: 4px 0 0; }
   #avro-pdp-{{ section.id }} .bb .per-box { font-weight: 500; font-size: clamp(13px,1.1vw,15px); line-height: 1.4; color: var(--warm-gray); margin: 2px 0 0; }
@@ -69,7 +75,7 @@
 
   /* FLAVOR PILLS */
   #avro-pdp-{{ section.id }} .flavors { display: flex; flex-wrap: wrap; gap: 8px; }
-  #avro-pdp-{{ section.id }} .flavor { display: inline-flex; align-items: center; gap: 8px; padding: 4px 16px 4px 5px; border-radius: 999px; background: var(--gray); border: 2px solid transparent; cursor: pointer; transition: all .15s ease; }
+  #avro-pdp-{{ section.id }} .flavor { display: inline-flex; align-items: center; gap: 8px; padding: 4px 16px 4px 5px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; cursor: pointer; transition: all .15s ease; }
   #avro-pdp-{{ section.id }} .flavor .dot { width: 30px; height: 30px; border-radius: 999px; overflow: hidden; background: #F2F2F2; flex-shrink: 0; display: grid; place-items: center; }
   #avro-pdp-{{ section.id }} .flavor .dot img { width: 100%; height: 100%; object-fit: cover; }
   #avro-pdp-{{ section.id }} .flavor .nm { font-weight: 700; font-size: clamp(11px,1vw,14px); color: var(--ink); white-space: nowrap; }
@@ -78,7 +84,7 @@
   #avro-pdp-{{ section.id }} .flavor.is-soldout { opacity: 0.4; }
 
   /* PURCHASE OPTIONS */
-  #avro-pdp-{{ section.id }} .buy-opt { position: relative; display: flex; align-items: center; gap: 12px; padding: 10px 14px 10px 12px; border-radius: 999px; background: var(--gray); border: 2px solid transparent; color: var(--ink); cursor: pointer; }
+  #avro-pdp-{{ section.id }} .buy-opt { position: relative; display: flex; align-items: center; gap: 12px; min-height: var(--btn-height); padding: 10px 18px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; color: var(--ink); cursor: pointer; }
   #avro-pdp-{{ section.id }} .buy-opt.is-active { background: var(--charcoal); border-color: var(--charcoal); color: var(--bone); }
   #avro-pdp-{{ section.id }} .buy-opt .radio { width: 18px; height: 18px; border-radius: 999px; border: 2px solid var(--warm-gray); display: grid; place-items: center; flex-shrink: 0; }
   #avro-pdp-{{ section.id }} .buy-opt.is-active .radio { border-color: var(--bone); }
@@ -95,12 +101,12 @@
   /* QUANTITY + CTA */
   #avro-pdp-{{ section.id }} .qty-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
   #avro-pdp-{{ section.id }} .qty-row .lbl { margin: 0; font-size: clamp(13px,1.1vw,16px); }
-  #avro-pdp-{{ section.id }} .stepper { display: inline-flex; align-items: center; background: var(--bone); border-radius: 999px; border: 2px solid var(--charcoal); }
-  #avro-pdp-{{ section.id }} .stepper button { width: 44px; height: 44px; border: 0; background: transparent; font-weight: 700; font-size: 20px; color: var(--charcoal); cursor: pointer; border-radius: 999px; }
+  #avro-pdp-{{ section.id }} .stepper { display: inline-flex; align-items: center; background: var(--bone); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); height: var(--btn-height); }
+  #avro-pdp-{{ section.id }} .stepper button { width: 48px; height: 100%; border: 0; background: transparent; font-weight: 700; font-size: 20px; color: var(--charcoal); cursor: pointer; border-radius: var(--btn-radius); }
   #avro-pdp-{{ section.id }} .stepper button:hover { background: rgba(0,0,0,0.05); }
   #avro-pdp-{{ section.id }} .stepper button:disabled { opacity: 0.4; cursor: not-allowed; }
   #avro-pdp-{{ section.id }} .stepper .q { width: 40px; text-align: center; font-weight: 800; font-size: 18px; color: var(--charcoal); }
-  #avro-pdp-{{ section.id }} .add-btn { width: 100%; min-height: 56px; border-radius: 999px; border: 2px solid var(--charcoal); background: var(--charcoal); color: var(--bone); font-family: inherit; font-weight: 700; font-size: 17px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+  #avro-pdp-{{ section.id }} .add-btn { width: 100%; min-height: var(--btn-height); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); background: var(--charcoal); color: var(--bone); font-family: inherit; font-weight: 700; font-size: 17px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
   #avro-pdp-{{ section.id }} .add-btn:hover { background: transparent; color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .add-btn:disabled { background: var(--gray); border-color: var(--gray); color: var(--warm-gray); cursor: not-allowed; }
 {% endstyle %}
@@ -339,6 +345,12 @@
   "name": "AVRO — Product",
   "tag": "section",
   "settings": [
+    { "type": "header", "content": "Spacing & buttons", "info": "Match these to the rest of your site's spacing." },
+    { "type": "range", "id": "button_height", "label": "Button height", "min": 40, "max": 72, "step": 2, "unit": "px", "default": 56, "info": "Applies to Add to Cart, purchase options, and the quantity stepper." },
+    { "type": "range", "id": "button_radius", "label": "Button corner radius", "min": 0, "max": 999, "step": 1, "unit": "px", "default": 999, "info": "999 = fully rounded pill. Lower for softer/square corners." },
+    { "type": "range", "id": "row_gap", "label": "Spacing between rows", "min": 8, "max": 40, "step": 2, "unit": "px", "default": 16 },
+    { "type": "range", "id": "section_padding_y", "label": "Section top/bottom padding", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "section_padding_x", "label": "Section side padding", "min": 0, "max": 64, "step": 2, "unit": "px", "default": 32 },
     { "type": "header", "content": "Copy" },
     { "type": "textarea", "id": "support_line", "label": "Support line", "info": "Falls back to the product metafield custom.support_line if set.", "default": "Clear headed. Ready when pressure rises.*" },
     { "type": "text", "id": "per_box_line", "label": "Per-box line", "default": "10 stick packets per box" },
