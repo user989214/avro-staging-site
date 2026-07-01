@@ -1,0 +1,302 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — BLOG POST / ARTICLE TEMPLATE  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  Renders a REAL Shopify article (the current `article` object) styled exactly
+  like the AVRO site (matches avro-blog: DM Sans, charcoal, blue accent, rounded
+  hero). Anyone can publish a post from the Shopify admin — no code needed — and
+  it will automatically look right here.
+
+  HOW TO USE
+  1. Create sections/avro-blog-post.liquid and paste this whole file in.
+  2. In the theme editor, open a blog POST and set this as the article's main
+     section (or add it in the blog post template JSON).
+  3. Everything auto-wires from the article:
+       - Title, author, date, featured image, and body content are live.
+       - "Category" comes from the article's FIRST TAG.
+       - Read time is estimated from word count (or set an article metafield
+         custom.read_time to override, e.g. "6 min read").
+  4. Editable in the theme editor: back-link label/url, which meta items show,
+     max content width, share row, and the bottom "keep reading" CTA.
+  5. Native Shopify comments are preserved at the bottom (if enabled on the blog).
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-post-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --divider: #E2E2E2;
+    --avro-blue: #94C6D4;
+    font-family: "DM Sans", system-ui, sans-serif;
+    background-color: var(--base); color: var(--ink); display: block;
+  }
+  #avro-post-{{ section.id }} * { box-sizing: border-box; }
+  #avro-post-{{ section.id }} .po-wrap { max-width: 820px; margin: 0 auto; padding: 0 clamp(20px,5vw,32px); }
+  #avro-post-{{ section.id }} .po-wrap--wide { max-width: 1100px; }
+
+  /* back link */
+  #avro-post-{{ section.id }} .po-top { padding: clamp(24px,4vw,44px) 0 0; }
+  #avro-post-{{ section.id }} .po-back { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; color: var(--warm-gray); text-decoration: none; }
+  #avro-post-{{ section.id }} .po-back:hover { color: var(--charcoal); }
+
+  /* header */
+  #avro-post-{{ section.id }} .po-head { padding: clamp(20px,3vw,32px) 0 clamp(20px,3vw,28px); }
+  #avro-post-{{ section.id }} .po-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+  #avro-post-{{ section.id }} .po-cat { font-weight: 700; font-size: 14px; color: var(--charcoal); background: var(--base-light); border-radius: 999px; padding: 6px 14px; }
+  #avro-post-{{ section.id }} .po-mut { font-size: 14px; color: var(--warm-gray); }
+  #avro-post-{{ section.id }} .po-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--divider); }
+  #avro-post-{{ section.id }} .po-title { font-weight: 800; font-size: clamp(30px,4.6vw,56px); line-height: 1.03; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
+  #avro-post-{{ section.id }} .po-excerpt { font-weight: 400; font-size: clamp(16px,1.5vw,20px); line-height: 1.5; color: var(--warm-gray); margin: 18px 0 0; }
+  #avro-post-{{ section.id }} .po-byline { display: flex; align-items: center; gap: 12px; margin-top: 24px; }
+  #avro-post-{{ section.id }} .po-avatar { width: 44px; height: 44px; border-radius: 999px; background: var(--charcoal); color: var(--bone); display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; flex-shrink: 0; }
+  #avro-post-{{ section.id }} .po-byline .nm { font-weight: 700; font-size: 15px; color: var(--ink); }
+  #avro-post-{{ section.id }} .po-byline .rl { font-size: 13px; color: var(--warm-gray); }
+
+  /* hero image */
+  #avro-post-{{ section.id }} .po-hero { margin: clamp(8px,2vw,20px) 0 clamp(24px,4vw,44px); }
+  #avro-post-{{ section.id }} .po-hero img { width: 100%; height: auto; display: block; border-radius: 24px; background: #E5E5E5; }
+
+  /* body */
+  #avro-post-{{ section.id }} .po-body { font-size: clamp(17px,1.4vw,19px); line-height: 1.7; color: var(--ink); }
+  #avro-post-{{ section.id }} .po-body > *:first-child { margin-top: 0; }
+  #avro-post-{{ section.id }} .po-body p { margin: 0 0 1.25em; }
+  #avro-post-{{ section.id }} .po-body h2 { font-weight: 800; font-size: clamp(24px,2.6vw,34px); line-height: 1.1; letter-spacing: -0.01em; color: var(--ink); margin: 1.8em 0 0.6em; }
+  #avro-post-{{ section.id }} .po-body h3 { font-weight: 800; font-size: clamp(20px,2vw,26px); line-height: 1.15; color: var(--ink); margin: 1.6em 0 0.5em; }
+  #avro-post-{{ section.id }} .po-body a { color: var(--charcoal); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 2px; }
+  #avro-post-{{ section.id }} .po-body a:hover { color: var(--warm-gray); }
+  #avro-post-{{ section.id }} .po-body ul, #avro-post-{{ section.id }} .po-body ol { margin: 0 0 1.25em; padding-left: 1.4em; }
+  #avro-post-{{ section.id }} .po-body li { margin: 0 0 0.5em; }
+  #avro-post-{{ section.id }} .po-body img { max-width: 100%; height: auto; border-radius: 16px; margin: 1.5em 0; }
+  #avro-post-{{ section.id }} .po-body blockquote { margin: 1.5em 0; padding: 8px 0 8px 24px; border-left: 4px solid var(--avro-blue); font-size: clamp(19px,1.8vw,24px); font-weight: 600; line-height: 1.4; color: var(--ink); }
+  #avro-post-{{ section.id }} .po-body strong { font-weight: 700; }
+  #avro-post-{{ section.id }} .po-body hr { border: 0; border-top: 1px solid var(--divider); margin: 2em 0; }
+
+  /* tags + share */
+  #avro-post-{{ section.id }} .po-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin: clamp(32px,5vw,56px) 0 0; padding-top: 24px; border-top: 1px solid var(--divider); }
+  #avro-post-{{ section.id }} .po-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  #avro-post-{{ section.id }} .po-tag { font-weight: 600; font-size: 13px; color: var(--warm-gray); background: var(--base-light); border-radius: 999px; padding: 6px 14px; text-decoration: none; }
+  #avro-post-{{ section.id }} .po-tag:hover { background: var(--charcoal); color: var(--bone); }
+  #avro-post-{{ section.id }} .po-share { display: flex; align-items: center; gap: 10px; }
+  #avro-post-{{ section.id }} .po-share .lbl { font-weight: 700; font-size: 13px; color: var(--ink); }
+  #avro-post-{{ section.id }} .po-share a { width: 40px; height: 40px; border-radius: 999px; border: 2px solid var(--divider); color: var(--charcoal); display: inline-flex; align-items: center; justify-content: center; }
+  #avro-post-{{ section.id }} .po-share a:hover { border-color: var(--charcoal); background: var(--charcoal); color: var(--bone); }
+
+  /* prev / next */
+  #avro-post-{{ section.id }} .po-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: clamp(28px,4vw,44px) 0 0; }
+  #avro-post-{{ section.id }} .po-navcard { display: flex; flex-direction: column; gap: 6px; padding: 20px 24px; border-radius: 18px; background: var(--base-light); text-decoration: none; transition: background-color .18s ease; }
+  #avro-post-{{ section.id }} .po-navcard:hover { background: var(--charcoal); }
+  #avro-post-{{ section.id }} .po-navcard .dir { font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warm-gray); }
+  #avro-post-{{ section.id }} .po-navcard .t { font-weight: 700; font-size: 16px; color: var(--ink); line-height: 1.2; }
+  #avro-post-{{ section.id }} .po-navcard:hover .dir { color: var(--avro-blue); }
+  #avro-post-{{ section.id }} .po-navcard:hover .t { color: var(--bone); }
+  #avro-post-{{ section.id }} .po-navcard--next { text-align: right; }
+  @media (max-width: 640px) { #avro-post-{{ section.id }} .po-nav { grid-template-columns: 1fr; } #avro-post-{{ section.id }} .po-navcard--next { text-align: left; } }
+
+  /* CTA banner */
+  #avro-post-{{ section.id }} .po-cta { margin: clamp(40px,6vw,72px) 0 clamp(24px,4vw,40px); background: var(--charcoal); border-radius: 24px; padding: clamp(32px,5vw,56px); text-align: center; }
+  #avro-post-{{ section.id }} .po-cta h2 { font-weight: 800; font-size: clamp(24px,3vw,38px); line-height: 1.05; color: var(--bone); margin: 0 0 12px; }
+  #avro-post-{{ section.id }} .po-cta p { font-size: clamp(15px,1.4vw,18px); line-height: 1.5; color: rgba(255,255,255,0.7); margin: 0 auto 24px; max-width: 460px; }
+  #avro-post-{{ section.id }} .po-cta a { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 32px; border-radius: 999px; background: var(--bone); color: var(--charcoal); border: 2px solid var(--bone); font-weight: 700; font-size: 16px; text-decoration: none; }
+  #avro-post-{{ section.id }} .po-cta a:hover { background: transparent; color: var(--bone); }
+
+  /* native comments (themed) */
+  #avro-post-{{ section.id }} .po-comments { max-width: 820px; margin: clamp(32px,5vw,56px) auto 0; padding: clamp(28px,4vw,40px) clamp(20px,5vw,32px) 0; border-top: 1px solid var(--divider); }
+  #avro-post-{{ section.id }} .po-comments h2 { font-weight: 800; font-size: clamp(20px,2.2vw,28px); color: var(--ink); margin: 0 0 24px; }
+  #avro-post-{{ section.id }} .po-comment { padding: 20px 0; border-bottom: 1px solid var(--divider); }
+  #avro-post-{{ section.id }} .po-comment .c-body { font-size: 16px; line-height: 1.6; color: var(--ink); }
+  #avro-post-{{ section.id }} .po-comment .c-auth { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 13px; color: var(--warm-gray); }
+  #avro-post-{{ section.id }} .po-comment .c-auth .nm { font-weight: 700; color: var(--ink); }
+  #avro-post-{{ section.id }} .po-cpag { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
+  #avro-post-{{ section.id }} .po-cpag a, #avro-post-{{ section.id }} .po-cpag span { padding: 6px 12px; color: var(--charcoal); }
+  #avro-post-{{ section.id }} .po-cpag .current { font-weight: 800; }
+{% endstyle %}
+
+{%- liquid
+  assign words = article.content | strip_html | split: ' ' | size
+  assign mins = words | divided_by: 200 | plus: 1
+  assign cat = article.tags.first
+  assign initials = article.author | slice: 0, 1 | upcase
+-%}
+
+<div id="avro-post-{{ section.id }}">
+  {%- if section.settings.show_back -%}
+  <div class="po-top">
+    <div class="po-wrap{% if section.settings.wide_layout %} po-wrap--wide{% endif %}">
+      <a class="po-back" href="{{ section.settings.back_url | default: blog.url | default: '/blogs/news' }}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        {{ section.settings.back_label | default: 'All Articles' }}
+      </a>
+    </div>
+  </div>
+  {%- endif -%}
+
+  <header class="po-head">
+    <div class="po-wrap">
+      <div class="po-meta">
+        {%- if cat != blank and section.settings.show_category -%}<span class="po-cat">{{ cat }}</span>{%- endif -%}
+        {%- if section.settings.show_date -%}<span class="po-mut">{{ article.published_at | date: "%B %-d, %Y" }}</span>{%- endif -%}
+        {%- if section.settings.show_readtime -%}
+          <span class="po-sep"></span>
+          <span class="po-mut">{% if article.metafields.custom.read_time != blank %}{{ article.metafields.custom.read_time }}{% else %}{{ mins }} min read{% endif %}</span>
+        {%- endif -%}
+      </div>
+      <h1 class="po-title">{{ article.title }}</h1>
+      {%- if article.excerpt != blank -%}<p class="po-excerpt">{{ article.excerpt | strip_html }}</p>{%- endif -%}
+      {%- if section.settings.show_author and article.author != blank -%}
+      <div class="po-byline">
+        <span class="po-avatar">{{ initials }}</span>
+        <span>
+          <span class="nm">{{ article.author }}</span><br>
+          <span class="rl">{{ section.settings.author_role | default: 'AVRO Team' }}</span>
+        </span>
+      </div>
+      {%- endif -%}
+    </div>
+  </header>
+
+  {%- if article.image != blank and section.settings.show_image -%}
+  <div class="po-wrap{% if section.settings.wide_layout %} po-wrap--wide{% endif %}">
+    <div class="po-hero">
+      <img src="{{ article.image | image_url: width: 1600 }}" alt="{{ article.image.alt | default: article.title | escape }}" loading="eager">
+    </div>
+  </div>
+  {%- endif -%}
+
+  <div class="po-wrap">
+    {%- comment -%} Theme blocks (optional custom content) render first, then the article body {%- endcomment -%}
+    {% content_for 'blocks' %}
+
+    <div class="po-body rte">
+      {{ article.content }}
+    </div>
+
+    {%- comment -%} Tags + share {%- endcomment -%}
+    {%- if section.settings.show_tags or section.settings.show_share -%}
+    <div class="po-foot">
+      {%- if section.settings.show_tags and article.tags.size > 0 -%}
+      <div class="po-tags">
+        {%- for tag in article.tags -%}
+          <a class="po-tag" href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+        {%- endfor -%}
+      </div>
+      {%- else -%}<span></span>{%- endif -%}
+      {%- if section.settings.show_share -%}
+      <div class="po-share">
+        <span class="lbl">Share</span>
+        <a href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ article.url }}&text={{ article.title | url_encode }}" target="_blank" rel="noopener" aria-label="Share on X">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ article.url }}" target="_blank" rel="noopener" aria-label="Share on Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.02 4.39 11.01 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.08 24 18.09 24 12.07z"/></svg>
+        </a>
+        <a href="mailto:?subject={{ article.title | url_encode }}&body={{ shop.url }}{{ article.url }}" aria-label="Share by email">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+        </a>
+      </div>
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+
+    {%- comment -%} Prev / Next {%- endcomment -%}
+    {%- if section.settings.show_prevnext and blog != blank -%}
+      {%- if blog.next_article or blog.previous_article -%}
+      <nav class="po-nav" aria-label="More articles">
+        {%- if blog.previous_article -%}
+        <a class="po-navcard" href="{{ blog.previous_article.url }}">
+          <span class="dir">Previous</span>
+          <span class="t">{{ blog.previous_article.title }}</span>
+        </a>
+        {%- else -%}<span></span>{%- endif -%}
+        {%- if blog.next_article -%}
+        <a class="po-navcard po-navcard--next" href="{{ blog.next_article.url }}">
+          <span class="dir">Next</span>
+          <span class="t">{{ blog.next_article.title }}</span>
+        </a>
+        {%- else -%}<span></span>{%- endif -%}
+      </nav>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- comment -%} CTA banner {%- endcomment -%}
+    {%- if section.settings.show_cta -%}
+    <div class="po-cta">
+      <h2>{{ section.settings.cta_title | default: 'Feel the difference calm makes.' }}</h2>
+      {%- if section.settings.cta_text != blank -%}<p>{{ section.settings.cta_text }}</p>{%- endif -%}
+      <a href="{{ section.settings.cta_link | default: '/collections/all' }}">{{ section.settings.cta_label | default: 'Shop AVRO' }}</a>
+    </div>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} Native Shopify comments (themed) {%- endcomment -%}
+  {% if blog.comments_enabled? %}
+    <div class="po-comments">
+      <h2>{{ 'blogs.article.comments_heading' | t: count: article.comments_count }}</h2>
+      {% paginate article.comments by 10 %}
+        {% for comment in article.comments %}
+          <div class="po-comment">
+            <div class="c-body">{{ comment.content }}</div>
+            <div class="c-auth">
+              <span class="nm">{{ comment.author }}</span>
+              <span class="po-sep"></span>
+              <span>{{ comment.created_at | time_tag: format: 'date' }}</span>
+            </div>
+          </div>
+        {% endfor %}
+        {% if paginate.pages > 1 %}
+          <div class="po-cpag">{{ paginate | default_pagination }}</div>
+        {% endif %}
+      {% endpaginate %}
+      {% render 'blog-comment-form', article: article, section_id: section.id %}
+    </div>
+  {% endif %}
+</div>
+
+<script type="application/ld+json">
+  {{ article | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "AVRO — Blog Post",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "Renders the current article automatically (title, author, date, image, body). Category = the article's first tag. Read time is auto-estimated, or set an article metafield custom.read_time to override." },
+    { "type": "header", "content": "Layout" },
+    { "type": "checkbox", "id": "wide_layout", "label": "Wide hero image", "info": "Widens the back-link and featured image while keeping body text readable.", "default": true },
+    { "type": "header", "content": "Back link" },
+    { "type": "checkbox", "id": "show_back", "label": "Show back link", "default": true },
+    { "type": "text", "id": "back_label", "label": "Back link label", "default": "All Articles" },
+    { "type": "url", "id": "back_url", "label": "Back link URL", "info": "Leave blank to use the current blog." },
+    { "type": "header", "content": "Meta" },
+    { "type": "checkbox", "id": "show_category", "label": "Show category (first tag)", "default": true },
+    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": true },
+    { "type": "checkbox", "id": "show_readtime", "label": "Show read time", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author byline", "default": true },
+    { "type": "text", "id": "author_role", "label": "Author role label", "default": "AVRO Team" },
+    { "type": "header", "content": "Featured image" },
+    { "type": "checkbox", "id": "show_image", "label": "Show featured image", "default": true },
+    { "type": "header", "content": "Footer" },
+    { "type": "checkbox", "id": "show_tags", "label": "Show tags", "default": true },
+    { "type": "checkbox", "id": "show_share", "label": "Show share buttons", "default": true },
+    { "type": "checkbox", "id": "show_prevnext", "label": "Show previous / next links", "default": true },
+    { "type": "header", "content": "Bottom CTA" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show CTA banner", "default": true },
+    { "type": "text", "id": "cta_title", "label": "CTA title", "default": "Feel the difference calm makes." },
+    { "type": "textarea", "id": "cta_text", "label": "CTA text", "default": "A calm-first daily ritual for steady focus and composure when pressure rises." },
+    { "type": "text", "id": "cta_label", "label": "CTA button label", "default": "Shop AVRO" },
+    { "type": "url", "id": "cta_link", "label": "CTA button link" },
+    { "type": "header", "content": "Background" },
+    { "type": "color", "id": "background_color", "label": "Background color" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding-block-start", "label": "Top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "Bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "presets": [
+    { "name": "AVRO — Blog Post" }
+  ]
+}
+{% endschema %}
