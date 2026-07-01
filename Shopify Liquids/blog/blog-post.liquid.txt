@@ -49,6 +49,7 @@
   #avro-post-{{ section.id }} .po-excerpt { font-weight: 400; font-size: clamp(16px,1.5vw,20px); line-height: 1.5; color: var(--warm-gray); margin: 18px 0 0; }
   #avro-post-{{ section.id }} .po-byline { display: flex; align-items: center; gap: 12px; margin-top: 24px; }
   #avro-post-{{ section.id }} .po-avatar { width: 44px; height: 44px; border-radius: 999px; background: var(--charcoal); color: var(--bone); display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; flex-shrink: 0; }
+  #avro-post-{{ section.id }} .po-avatar--img { object-fit: cover; padding: 0; }
   #avro-post-{{ section.id }} .po-byline .nm { font-weight: 700; font-size: 15px; color: var(--ink); }
   #avro-post-{{ section.id }} .po-byline .rl { font-size: 13px; color: var(--warm-gray); }
 
@@ -112,10 +113,22 @@
 {% endstyle %}
 
 {%- liquid
-  assign words = article.content | strip_html | split: ' ' | size
+  # Body content: use the editable override if provided, else the real article body
+  assign body_content = article.content
+  if section.settings.body_content != blank
+    assign body_content = section.settings.body_content
+  endif
+
+  assign words = body_content | strip_html | split: ' ' | size
   assign mins = words | divided_by: 200 | plus: 1
   assign cat = article.tags.first
-  assign initials = article.author | slice: 0, 1 | upcase
+
+  # Author name: editable override, else the real article author
+  assign author_name = article.author
+  if section.settings.author_name != blank
+    assign author_name = section.settings.author_name
+  endif
+  assign initials = author_name | slice: 0, 1 | upcase
 -%}
 
 <div id="avro-post-{{ section.id }}">
@@ -142,11 +155,15 @@
       </div>
       <h1 class="po-title">{{ article.title }}</h1>
       {%- if article.excerpt != blank -%}<p class="po-excerpt">{{ article.excerpt | strip_html }}</p>{%- endif -%}
-      {%- if section.settings.show_author and article.author != blank -%}
+      {%- if section.settings.show_author and author_name != blank -%}
       <div class="po-byline">
-        <span class="po-avatar">{{ initials }}</span>
+        {%- if section.settings.author_image != blank -%}
+          <img class="po-avatar po-avatar--img" src="{{ section.settings.author_image | image_url: width: 120 }}" alt="{{ author_name | escape }}" width="44" height="44" loading="lazy">
+        {%- else -%}
+          <span class="po-avatar">{{ initials }}</span>
+        {%- endif -%}
         <span>
-          <span class="nm">{{ article.author }}</span><br>
+          <span class="nm">{{ author_name }}</span><br>
           <span class="rl">{{ section.settings.author_role | default: 'AVRO Team' }}</span>
         </span>
       </div>
@@ -167,7 +184,7 @@
     {% content_for 'blocks' %}
 
     <div class="po-body rte">
-      {{ article.content }}
+      {{ body_content }}
     </div>
 
     {%- comment -%} Tags + share {%- endcomment -%}
@@ -272,7 +289,11 @@
     { "type": "checkbox", "id": "show_date", "label": "Show date", "default": true },
     { "type": "checkbox", "id": "show_readtime", "label": "Show read time", "default": true },
     { "type": "checkbox", "id": "show_author", "label": "Show author byline", "default": true },
-    { "type": "text", "id": "author_role", "label": "Author role label", "default": "AVRO Team" },
+    { "type": "text", "id": "author_name", "label": "Author name", "info": "Leave blank to use the article's real author." },
+    { "type": "text", "id": "author_role", "label": "Author role / team label", "default": "AVRO Team" },
+    { "type": "image_picker", "id": "author_image", "label": "Author profile picture", "info": "Leave blank to show the author's initials instead." },
+    { "type": "header", "content": "Body content" },
+    { "type": "richtext", "id": "body_content", "label": "Body content override", "info": "Leave blank to use the article's own content. Fill this in to write/replace the post body right here in the editor." },
     { "type": "header", "content": "Featured image" },
     { "type": "checkbox", "id": "show_image", "label": "Show featured image", "default": true },
     { "type": "header", "content": "Footer" },
