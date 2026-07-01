@@ -814,7 +814,7 @@
     },
     {
       "type": "related",
-      "name": "You might also like — card",
+      "name": "Related product",
       "settings": [
         { "type": "product", "id": "product", "label": "Product" },
         { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop" },
