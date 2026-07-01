@@ -1,0 +1,315 @@
+{% comment %}
+  ============================================================================
+  AVRO — BLOG POSTS  (Shopify Horizon section — adjusted from default)
+  ----------------------------------------------------------------------------
+  WHAT CHANGED vs. the default Horizon blog-posts section:
+  1. Added an editable HEADER (eyebrow + heading + intro) with AVRO copy.
+     Turn it off with the "Show header" toggle. Leave a field blank to hide it.
+  2. Added an EMPTY STATE message for when a blog has no articles yet.
+  3. Replaced the "t:" translation-key labels with plain English labels so the
+     section reads clearly in the editor.
+  KEPT (do not remove):
+  - The responsive grid logic that scales the first post into a hero.
+  - Horizon theme blocks: {% content_for 'blocks' %} and the per-article
+    'static-blog-post-card' block. These render your real articles.
+  - Horizon color/typography tokens (var(--color-foreground), color schemes),
+    so this section follows your Theme settings > Colors + Typography.
+
+  HOW TO USE
+  - This is the "Blog posts" template section. Assign it to your blog template
+    (Online Store > Themes > Customize > pick a Blog page).
+  - Edit the header text below in the theme editor. Article cards come straight
+    from your Shopify blog posts.
+  ============================================================================
+{% endcomment %}
+
+<script
+  src="{{ 'blog-posts-list.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<blog-posts-list section-id="{{ section.id }}">
+  <div
+    class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+  ></div>
+  <div
+    class="
+      section
+      {% if section.settings.background_color != blank %}color-custom-{{ section.id }}{% endif %}
+      blog-posts
+      spacing-style
+      size-style
+    "
+    data-testid="blog-posts"
+    style="{% render 'spacing-style', settings: section.settings %}"
+  >
+    {% if section.settings.show_header %}
+      <header class="avro-blog-header avro-blog-header--{{ section.settings.header_alignment }}">
+        {% if section.settings.eyebrow != blank %}
+          <p class="avro-blog-header__eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          <h1 class="avro-blog-header__heading">{{ section.settings.heading }}</h1>
+        {% endif %}
+        {% if section.settings.intro != blank %}
+          <div class="avro-blog-header__intro">{{ section.settings.intro }}</div>
+        {% endif %}
+      </header>
+    {% endif %}
+
+    {% content_for 'blocks' %}
+
+    {% if blog.articles.size > 0 %}
+      <div
+        ref="grid"
+        class="blog-posts-container"
+      >
+        {% liquid
+          assign items_on_page = blog.articles.size
+        %}
+        {% for article in blog.articles %}
+          {% liquid
+            # Defaults for compact layout
+            assign col_span = 2
+            assign scale = 0.6
+            assign is_horizontal = false
+
+            case items_on_page
+              when 1
+                # Single post: full width hero
+                assign col_span = 6
+                assign scale = 1
+                assign is_horizontal = true
+              when 2
+                # Two posts: both standard side by side
+                assign col_span = 3
+                assign scale = 0.8
+              when 3
+                # Three posts: hero + 2 standard
+                if forloop.index == 1
+                  assign col_span = 6
+                  assign scale = 1
+                  assign is_horizontal = true
+                else
+                  assign col_span = 3
+                  assign scale = 0.8
+                endif
+              when 4
+                # Four posts: all standard in 2x2 grid
+                assign col_span = 3
+                assign scale = 0.8
+              when 5
+                # Five posts: hero + 4 standard
+                if forloop.index == 1
+                  assign col_span = 6
+                  assign scale = 1
+                  assign is_horizontal = true
+                else
+                  assign col_span = 3
+                  assign scale = 0.8
+                endif
+              else
+                # 6+ posts: hero, 2 standard, rest compact
+                if forloop.index == 1
+                  assign col_span = 6
+                  assign scale = 1
+                  assign is_horizontal = true
+                elsif forloop.index <= 3
+                  assign col_span = 3
+                  assign scale = 0.8
+                else
+                  assign col_span = 2
+                  assign scale = 0.6
+                endif
+            endcase
+          %}
+          {% style %}
+            [data-blog-index="{{ section.id }}-{{ forloop.index }}"] {
+              --col-span: {{ col_span }};
+              --blog-post-card-scale: {{ scale }};
+            }
+
+            @media screen and (max-width: 749px) {
+              [data-blog-index="{{ section.id }}-{{ forloop.index }}"] {
+                --col-span: 6;
+                --blog-post-card-scale: 0.5;
+              }
+            }
+          {% endstyle %}
+          <div
+            class="blog-post-item{% if is_horizontal %} blog-post-item--horizontal{% endif %}"
+            data-testid="blog-post-item"
+            data-blog-index="{{ section.id }}-{{ forloop.index }}"
+          >
+            {% content_for 'block', id: 'static-blog-post-card', type: '_blog-post-card', article: article %}
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="avro-blog-empty">
+        <p class="avro-blog-empty__title">{{ section.settings.empty_title }}</p>
+        <p class="avro-blog-empty__text">{{ section.settings.empty_text }}</p>
+      </div>
+    {% endif %}
+  </div>
+</blog-posts-list>
+
+{% stylesheet %}
+  /**
+   * Blog posts page layout
+   */
+  .blog-posts {
+    --page-content-width: var(--narrow-page-width);
+    --page-width: calc(var(--page-content-width) + (var(--page-margin) * 2));
+    --columns-gap: 36px;
+    --rows-gap: 36px;
+  }
+
+  /**
+   * AVRO editable header
+   */
+  .avro-blog-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 46rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .avro-blog-header--center {
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .avro-blog-header--left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .avro-blog-header__eyebrow {
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-60, 0.6));
+  }
+
+  .avro-blog-header__heading {
+    margin: 0;
+    line-height: 1.05;
+    color: var(--color-foreground);
+  }
+
+  .avro-blog-header__intro {
+    margin: 0;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-70, 0.75));
+  }
+
+  .avro-blog-header__intro > * {
+    margin: 0;
+  }
+
+  .blog-posts-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    width: 100%;
+    column-gap: var(--columns-gap);
+    row-gap: var(--rows-gap);
+  }
+
+  /**
+   * Blog post item grid positioning and scaling.
+   * Layout is calculated in Liquid based on total article count.
+   * Mobile overrides are applied per-item in inline styles for proper specificity.
+   */
+  .blog-post-item {
+    grid-column: span var(--col-span);
+    background-color: var(--color-background);
+  }
+
+  /**
+   * When there's no image, the blog post item has a border.
+   */
+  .blog-post-item {
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-20));
+    padding: 0 1rem 1rem;
+  }
+
+  .blog-post-item:has(.blog-post-card__image-container) {
+    border: none;
+    padding: 0;
+  }
+
+  /**
+   * AVRO empty state
+   */
+  .avro-blog-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    max-width: 34rem;
+    margin: 0 auto;
+  }
+
+  .avro-blog-empty__title {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-foreground);
+  }
+
+  .avro-blog-empty__text {
+    margin: 0;
+    line-height: 1.55;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-70, 0.75));
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "AVRO — Blog Posts",
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" },
+    { "type": "text" },
+    { "type": "icon" },
+    { "type": "image" },
+    { "type": "button" },
+    { "type": "video" },
+    { "type": "group" },
+    { "type": "spacer" },
+    { "type": "_divider" }
+  ],
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    { "type": "header", "content": "Header" },
+    { "type": "checkbox", "id": "show_header", "label": "Show header", "default": true },
+    { "type": "select", "id": "header_alignment", "label": "Header alignment", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ], "default": "left" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "AVRO JOURNAL" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Calm-first thinking, in writing." },
+    { "type": "richtext", "id": "intro", "label": "Intro", "default": "<p>Research, routines, and field notes on composure, clarity, and steady energy — from the team building AVRO.</p>" },
+    { "type": "header", "content": "Empty state" },
+    { "type": "text", "id": "empty_title", "label": "Empty title", "default": "New articles are on the way." },
+    { "type": "textarea", "id": "empty_text", "label": "Empty text", "default": "Check back soon for field notes on calm-first performance, ingredients, and daily routines." },
+    { "type": "header", "content": "Background" },
+    { "type": "color", "id": "background_color", "label": "Background color" },
+    { "type": "header", "content": "Padding" },
+    { "type": "range", "id": "padding-block-start", "label": "Top", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding-block-end", "label": "Bottom", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 40 }
+  ]
+}
+{% endschema %}
