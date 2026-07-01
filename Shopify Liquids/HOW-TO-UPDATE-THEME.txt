@@ -1,0 +1,70 @@
+==============================================================================
+AVRO — HOW TO UPDATE THE WHOLE SITE (colors, fonts, buttons)
+Theme: Shopify "Horizon"
+No code needed. Everything below is done in the Shopify admin.
+==============================================================================
+
+WHERE TO GO
+------------------------------------------------------------------------------
+1. Shopify admin > Online Store > Themes
+2. On your live theme, click "Customize"
+3. Bottom-left of the editor, click the GEAR / "Theme settings" icon
+   (this is the site-wide panel, NOT a single page)
+
+Everything site-wide lives in that Theme settings panel.
+
+
+1) COLORS  (backgrounds, text, and BUTTONS)
+------------------------------------------------------------------------------
+Theme settings > Colors
+
+- Horizon uses "color schemes" (Scheme 1, Scheme 2, etc.).
+  A scheme is a saved set of: Background, Text, Button, Button text, etc.
+- Edit a scheme to change those colors everywhere it is used.
+- BUTTONS are controlled here: set "Solid button background" and
+  "Solid button text" (and outline button colors) inside the scheme.
+- Each section on a page has a "Color scheme" dropdown — that picks which
+  scheme that section uses. Change the scheme's colors once and every
+  section on that scheme updates at the same time.
+
+Tip: keep one scheme for light sections and one for dark (our Social /
+Zero-Proof look). Edit those two and the whole site follows.
+
+
+2) FONTS (typography)
+------------------------------------------------------------------------------
+Theme settings > Typography
+
+- Set the Heading font and the Body font here.
+- This changes text across the entire site at once.
+
+
+3) BUTTON SHAPE / STYLE
+------------------------------------------------------------------------------
+Theme settings > Buttons  (and/or Theme settings > Layout / Corners)
+
+- Corner radius (rounded vs square), border thickness, and button style
+  are set here and apply to every button site-wide.
+
+
+4) SAVE
+------------------------------------------------------------------------------
+Click "Save" (top-right). Changes go live on the published theme, or on
+whichever theme you are editing.
+
+
+==============================================================================
+IMPORTANT NOTE ABOUT THE CUSTOM AVRO SECTIONS
+==============================================================================
+The custom sections we built (header, announcement bar, shop page, product
+page) currently have their colors and font "hard-coded" (fixed hex values
+like #151515 and the "DM Sans" font).
+
+That means: changing Colors / Typography / Buttons above will update the
+THEME's native sections, but it will NOT change our custom AVRO sections.
+
+To make the custom sections ALSO follow these site-wide settings, they need
+a one-time refactor to point at the theme's color schemes and font variables
+instead of fixed values. Ask v0 to "wire the AVRO sections into the theme
+color schemes and fonts" when you're ready and it will handle it.
+==============================================================================
