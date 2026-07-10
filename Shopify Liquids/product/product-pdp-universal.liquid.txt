@@ -23,15 +23,20 @@
   {%- endif -%}
 {%- endif -%}
 
+{%- comment -%}
+  Preset data mirrors lib/data.ts on the current site.
+  Only Calm carries the blue cohort accent; Focus and Energy are
+  intentionally neutralized to ink/charcoal per the site's theme rules.
+{%- endcomment -%}
 {%- case preset -%}
   {%- when 'energy' -%}
-    {%- assign accent = '#E4674A' -%}
-    {%- assign default_support = 'Clean, steady energy. Calm-first, never wired.*' -%}
+    {%- assign accent = '#3A3A38' -%}
+    {%- assign default_support = 'Steady energy. Ready when it matters.*' -%}
   {%- when 'focus' -%}
-    {%- assign accent = '#E4B457' -%}
-    {%- assign default_support = 'Steady attention. Clear thinking when it counts.*' -%}
+    {%- assign accent = '#3A3A38' -%}
+    {%- assign default_support = 'Clear headed. Ready to focus.*' -%}
   {%- else -%}
-    {%- assign accent = '#94C6D4' -%}
+    {%- assign accent = '#7a79c8' -%}
     {%- assign default_support = 'Clear headed. Ready when pressure rises.*' -%}
 {%- endcase -%}
 
@@ -366,9 +371,9 @@
     { "type": "header", "content": "Product preset" },
     { "type": "select", "id": "product_preset", "label": "Preset", "default": "auto", "info": "Auto-detect reads the product title (Calm / Focus / Energy) and sets the accent color and support line. Pick one to force it.", "options": [
       { "value": "auto", "label": "Auto-detect from product title" },
-      { "value": "calm", "label": "Calm (soft blue)" },
-      { "value": "focus", "label": "Focus (amber)" },
-      { "value": "energy", "label": "Energy (coral)" }
+      { "value": "calm", "label": "Calm (blue accent)" },
+      { "value": "focus", "label": "Focus (charcoal)" },
+      { "value": "energy", "label": "Energy (charcoal)" }
     ] },
     { "type": "header", "content": "Spacing & buttons" },
     { "type": "select", "id": "button_size", "label": "Button size", "default": "standard", "options": [
