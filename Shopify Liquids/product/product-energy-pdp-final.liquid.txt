@@ -45,9 +45,9 @@
 
 {% style %}
   #avro-pdp-{{ section.id }} {
-    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
-    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --gray: #E2E2E2;
-    --avro-blue: {{ accent }}; /* preset accent */
+    --base: #FFFFFF; --base-light: {{ section.settings.bg_color | default: '#F2F2F2' }}; --bone: {{ section.settings.button_text_color | default: '#FFFFFF' }};
+    --charcoal: {{ section.settings.button_color | default: '#151515' }}; --ink: {{ section.settings.text_color | default: '#1C1B14' }}; --warm-gray: #6B6857; --gray: #E2E2E2;
+    --avro-blue: {{ section.settings.accent_color | default: accent }}; /* live site accent, customizable */
     --pdp-pad-y: {{ pdp_pad_y }}px;
     --pdp-pad-x: {{ pdp_pad_x }}px;
     --pdp-gap: {{ pdp_gap }}px;
@@ -123,31 +123,59 @@
     {%- else -%}
     <div class="pdp-grid">
 
-      {%- comment -%} ---------- GALLERY ---------- {%- endcomment -%}
+      {%- comment -%} ---------- GALLERY (uploaded images + product media) ---------- {%- endcomment -%}
+      {%- assign gallery_blocks = section.blocks | where: 'type', 'image' -%}
+      {%- assign uploaded_count = 0 -%}
+      {%- for b in gallery_blocks -%}
+        {%- if b.settings.image != blank -%}{%- assign uploaded_count = uploaded_count | plus: 1 -%}{%- endif -%}
+      {%- endfor -%}
+      {%- assign total_slides = uploaded_count -%}
+      {%- if section.settings.show_product_images -%}{%- assign total_slides = total_slides | plus: product.media.size -%}{%- endif -%}
       <div class="gal">
         <div class="gal-main" id="gal-main-{{ section.id }}">
-          {%- if product.media.size > 0 -%}
+          {%- assign slide_i = 0 -%}
+          {%- for b in gallery_blocks -%}
+            {%- if b.settings.image != blank -%}
+              {%- assign slide_i = slide_i | plus: 1 -%}
+              <img data-media-id="block-{{ b.id }}" class="{% if slide_i == 1 %}is-active{% endif %}" src="{{ b.settings.image | image_url: width: 1200 }}" alt="{{ b.settings.image.alt | default: product.title | escape }}" loading="{% if slide_i == 1 %}eager{% else %}lazy{% endif %}" {{ b.shopify_attributes }}>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if section.settings.show_product_images -%}
             {%- for media in product.media -%}
               {%- if media.media_type == 'image' -%}
-                <img data-media-id="{{ media.id }}" class="{% if forloop.first %}is-active{% endif %}" src="{{ media | image_url: width: 1200 }}" alt="{{ media.alt | default: product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+                {%- assign slide_i = slide_i | plus: 1 -%}
+                <img data-media-id="{{ media.id }}" class="{% if slide_i == 1 %}is-active{% endif %}" src="{{ media | image_url: width: 1200 }}" alt="{{ media.alt | default: product.title | escape }}" loading="{% if slide_i == 1 %}eager{% else %}lazy{% endif %}">
               {%- endif -%}
             {%- endfor -%}
-          {%- else -%}
+          {%- endif -%}
+          {%- if slide_i == 0 -%}
             <img class="is-active" src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title | escape }}">
           {%- endif -%}
           {%- if section.settings.show_rating -%}
             <span class="gal-rating"><span class="stars">★★★★★</span> {{ section.settings.rating_value | default: '4.8' }}</span>
           {%- endif -%}
         </div>
-        {%- if product.media.size > 1 -%}
+        {%- if total_slides > 1 -%}
           <div class="gal-thumbs">
-            {%- for media in product.media -%}
-              {%- if media.media_type == 'image' -%}
-                <button type="button" class="gal-thumb {% if forloop.first %}is-active{% endif %}" data-target="{{ media.id }}" aria-label="View image {{ forloop.index }}">
-                  <img src="{{ media | image_url: width: 160 }}" alt="">
+            {%- assign thumb_i = 0 -%}
+            {%- for b in gallery_blocks -%}
+              {%- if b.settings.image != blank -%}
+                {%- assign thumb_i = thumb_i | plus: 1 -%}
+                <button type="button" class="gal-thumb {% if thumb_i == 1 %}is-active{% endif %}" data-target="block-{{ b.id }}" aria-label="View image {{ thumb_i }}">
+                  <img src="{{ b.settings.image | image_url: width: 160 }}" alt="">
                 </button>
               {%- endif -%}
             {%- endfor -%}
+            {%- if section.settings.show_product_images -%}
+              {%- for media in product.media -%}
+                {%- if media.media_type == 'image' -%}
+                  {%- assign thumb_i = thumb_i | plus: 1 -%}
+                  <button type="button" class="gal-thumb {% if thumb_i == 1 %}is-active{% endif %}" data-target="{{ media.id }}" aria-label="View image {{ thumb_i }}">
+                    <img src="{{ media | image_url: width: 160 }}" alt="">
+                  </button>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
           </div>
         {%- endif -%}
       </div>
@@ -330,6 +358,14 @@
       });
     });
 
+    root.querySelectorAll(".gal-thumb").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.dataset.target;
+        if (galMain) galMain.querySelectorAll("img").forEach(function (img) { img.classList.toggle("is-active", img.dataset.mediaId == id); });
+        root.querySelectorAll(".gal-thumb").forEach(function (t) { t.classList.toggle("is-active", t === btn); });
+      });
+    });
+
     render();
   })();
 </script>
@@ -340,6 +376,54 @@
   "name": "AVRO Product · Energy",
   "tag": "section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#94C6D4"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section background",
+      "default": "#F2F2F2"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#1C1B14"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button & selected color",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "paragraph",
+      "content": "Upload your own images by adding \"Gallery image\" blocks to this section. Uploaded images show first, before the product’s own images."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_images",
+      "label": "Also show the product's own images",
+      "default": true
+    },
     {
       "type": "header",
       "content": "Spacing & buttons"
@@ -490,6 +574,17 @@
     }
   ],
   "blocks": [
+    {
+      "type": "image",
+      "name": "Gallery image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    },
     {
       "type": "benefit",
       "name": "Subscribe benefit",
