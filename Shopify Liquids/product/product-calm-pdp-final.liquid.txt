@@ -9,7 +9,7 @@
   ============================================================================
 {%- endcomment -%}
 
-{%- assign accent = '#7a79c8' -%}
+{%- assign accent = '#94C6D4' -%}
 {%- assign default_support = 'Clear headed. Ready when pressure rises.*' -%}
 
 {%- assign flavor_opt_name = section.settings.flavor_option_name | default: 'Flavor' -%}

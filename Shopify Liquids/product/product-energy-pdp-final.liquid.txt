@@ -9,7 +9,7 @@
   ============================================================================
 {%- endcomment -%}
 
-{%- assign accent = '#3A3A38' -%}
+{%- assign accent = '#94C6D4' -%}
 {%- assign default_support = 'Steady energy. Ready when it matters.*' -%}
 
 {%- assign flavor_opt_name = section.settings.flavor_option_name | default: 'Flavor' -%}
