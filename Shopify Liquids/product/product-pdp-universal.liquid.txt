@@ -29,7 +29,7 @@
     {%- assign default_support = 'Clean, steady energy. Calm-first, never wired.*' -%}
   {%- when 'focus' -%}
     {%- assign accent = '#E4B457' -%}
-    {%- assign default_support = 'Clear headed. Locked in. Ready to focus.*' -%}
+    {%- assign default_support = 'Steady attention. Clear thinking when it counts.*' -%}
   {%- else -%}
     {%- assign accent = '#94C6D4' -%}
     {%- assign default_support = 'Clear headed. Ready when pressure rises.*' -%}
