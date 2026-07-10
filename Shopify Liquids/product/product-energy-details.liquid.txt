@@ -363,7 +363,7 @@
 
 {% schema %}
 {
-  "name": "AVRO Product Details · Energy",
+  "name": "AVRO Details · Energy",
   "tag": "section",
   "settings": [
     { "type": "header", "content": "Style" },
@@ -481,7 +481,7 @@
   ],
   "presets": [
     {
-      "name": "AVRO Product Details · Energy",
+      "name": "AVRO Details · Energy",
       "blocks": [
         { "type": "ingredient", "settings": { "name": "Natural Caffeine", "amount": "120 mg", "description": "Clean energy from green coffee beans, without the crash.*" } },
         { "type": "ingredient", "settings": { "name": "L-Theanine", "amount": "200 mg", "description": "Smooths caffeine for calm, focused energy.*" } },
