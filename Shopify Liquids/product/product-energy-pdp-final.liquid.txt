@@ -21,6 +21,13 @@
 {%- assign prod = pa -%}
 {%- if prod == blank -%}{%- assign prod = pb -%}{%- endif -%}
 
+{%- comment -%} Precompute booleans (Liquid can't use comparisons inside {{ }}) {%- endcomment -%}
+{%- assign pa_has = false -%}{%- if pa != blank -%}{%- assign pa_has = true -%}{%- endif -%}
+{%- assign pb_has = false -%}{%- if pb != blank -%}{%- assign pb_has = true -%}{%- endif -%}
+{%- assign pa_plan = false -%}{%- if pa.selling_plan_groups.size > 0 -%}{%- assign pa_plan = true -%}{%- endif -%}
+{%- assign pb_plan = false -%}{%- if pb.selling_plan_groups.size > 0 -%}{%- assign pb_plan = true -%}{%- endif -%}
+{%- assign no_products = false -%}{%- if pa == blank and pb == blank -%}{%- assign no_products = true -%}{%- endif -%}
+
 {%- assign accent = '#94C6D4' -%}
 {%- assign default_support = 'Steady energy. Ready when it matters.*' -%}
 
@@ -34,7 +41,7 @@
 
 {%- assign show_sub = section.settings.show_subscribe -%}
 {%- assign any_plan = false -%}
-{%- if pa.selling_plan_groups.size > 0 or pb.selling_plan_groups.size > 0 -%}{%- assign any_plan = true -%}{%- endif -%}
+{%- if pa_plan or pb_plan -%}{%- assign any_plan = true -%}{%- endif -%}
 {%- assign has_plan = false -%}
 {%- if any_plan and show_sub -%}{%- assign has_plan = true -%}{%- endif -%}
 
@@ -118,7 +125,7 @@
 
 <div id="avro-pdp-{{ section.id }}" data-flavor-index="{{ flavor_opt_index }}">
   <div class="pdp-wrap">
-    {%- if pa == blank and pb == blank -%}
+    {%- if no_products -%}
       <p style="text-align:center;padding:40px;">Pick a product for each flavor in the section settings to preview it.</p>
     {%- else -%}
     <div class="pdp-grid">
@@ -236,7 +243,7 @@
   </div>
 </div>
 
-{%- unless pa == blank and pb == blank -%}
+{%- unless no_products -%}
 <script>
   (function () {
     var root = document.getElementById("avro-pdp-{{ section.id }}");
@@ -250,26 +257,22 @@
         label: "Orange Tangerine",
         tokens: ["orange","tangerine"],
         gallery: ["https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-orange-tangerine.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/solo/energy-orange-tangerine.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/sticks/energy-orange-tangerine.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/lifestyle/glass-energy-orange-tangerine.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/orange-tangerine.png"],
-        {%- assign fp_a = section.settings.product_flavor_a -%}
-        {%- if fp_a == blank -%}{%- assign fp_a = product -%}{%- endif -%}
-        hasProduct: {{ fp_a != blank | json }},
-        title: {{ fp_a.title | json }},
-        variants: {{ fp_a.variants | json }},
-        hasPlan: {{ fp_a.selling_plan_groups.size > 0 | json }},
-        planName: {% if fp_a.selling_plan_groups.size > 0 %}{{ fp_a.selling_plan_groups.first.selling_plans.first.name | json }}{% else %}""{% endif %}
+        hasProduct: {{ pa_has | json }},
+        title: {{ pa.title | json }},
+        variants: {{ pa.variants | json }},
+        hasPlan: {{ pa_plan | json }},
+        planName: {% if pa_plan %}{{ pa.selling_plan_groups.first.selling_plans.first.name | json }}{% else %}""{% endif %}
       },
       {
         key: "fuji-apple",
         label: "Fuji Apple",
         tokens: ["fuji","apple"],
         gallery: ["https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/solo/energy-fuji-apple.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/sticks/energy-fuji-apple.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/lifestyle/glass-energy-fuji-apple.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/fuji-apple.png"],
-        {%- assign fp_b = section.settings.product_flavor_b -%}
-        {%- if fp_b == blank -%}{%- assign fp_b = product -%}{%- endif -%}
-        hasProduct: {{ fp_b != blank | json }},
-        title: {{ fp_b.title | json }},
-        variants: {{ fp_b.variants | json }},
-        hasPlan: {{ fp_b.selling_plan_groups.size > 0 | json }},
-        planName: {% if fp_b.selling_plan_groups.size > 0 %}{{ fp_b.selling_plan_groups.first.selling_plans.first.name | json }}{% else %}""{% endif %}
+        hasProduct: {{ pb_has | json }},
+        title: {{ pb.title | json }},
+        variants: {{ pb.variants | json }},
+        hasPlan: {{ pb_plan | json }},
+        planName: {% if pb_plan %}{{ pb.selling_plan_groups.first.selling_plans.first.name | json }}{% else %}""{% endif %}
       }
     ];
 
