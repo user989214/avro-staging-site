@@ -2,11 +2,11 @@
   ============================================================================
   AVRO — PRODUCT DETAIL (PDP) · ENERGY
   Drop-in export. Gallery images are hardcoded to the live site (one full set
-  per flavor). Buy box is wired to Shopify (price, variants, add-to-cart, subscribe).
+  per flavor). Buy box is wired to Shopify (price, add-to-cart, subscribe).
   • Connect a product: section setting "Connected product" (falls back to the
     template's product when left empty).
-  • Both flavors are selectable; picking a flavor swaps the gallery AND the
-    Shopify variant.
+  • BOTH flavors always render and are selectable; picking a flavor swaps the
+    gallery and selects the matching Shopify variant when one exists.
   NOTE: Deployment Protection on the staging site must be OFF for images to load.
   HOW TO USE
   1. Create sections/product-energy.liquid and paste this file in.
@@ -27,7 +27,6 @@
   {%- assign onm = opt.name | downcase -%}
   {%- if onm == flavor_opt_name_dc -%}{%- assign flavor_opt_index = forloop.index -%}{%- endif -%}
 {%- endfor -%}
-{%- assign flavor_opt_index0 = flavor_opt_index | minus: 1 -%}
 
 {%- assign has_plan = false -%}
 {%- if prod.selling_plan_groups.size > 0 -%}{%- assign has_plan = true -%}{%- endif -%}
@@ -82,10 +81,11 @@
   #avro-pdp-{{ section.id }} .bb .per-box { font-weight: 500; font-size: clamp(13px,1.1vw,15px); line-height: 1.4; color: var(--warm-gray); margin: 2px 0 0; }
   #avro-pdp-{{ section.id }} .bb .lbl { font-weight: 700; font-size: clamp(12px,1vw,13px); color: var(--ink); margin-bottom: 2px; display: block; }
   #avro-pdp-{{ section.id }} .flavors { display: flex; flex-wrap: wrap; gap: 8px; }
-  #avro-pdp-{{ section.id }} .flavor { display: inline-flex; align-items: center; gap: 8px; padding: 4px 16px 4px 5px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; cursor: pointer; transition: all .15s ease; }
+  #avro-pdp-{{ section.id }} .flavor { display: inline-flex; align-items: center; gap: 8px; padding: 4px 16px 4px 5px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; cursor: pointer; transition: all .15s ease; padding: 10px 18px; }
   #avro-pdp-{{ section.id }} .flavor .nm { font-weight: 700; font-size: clamp(11px,1vw,14px); color: var(--ink); white-space: nowrap; }
   #avro-pdp-{{ section.id }} .flavor.is-active { background: var(--charcoal); border-color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .flavor.is-active .nm { color: var(--bone); }
+  #avro-pdp-{{ section.id }} .flavor.is-soldout { opacity: 0.45; }
   #avro-pdp-{{ section.id }} .buy-opt { position: relative; display: flex; align-items: center; gap: 12px; min-height: var(--btn-height); padding: 10px 18px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; color: var(--ink); cursor: pointer; }
   #avro-pdp-{{ section.id }} .buy-opt.is-active { background: var(--charcoal); border-color: var(--charcoal); color: var(--bone); }
   #avro-pdp-{{ section.id }} .buy-opt .radio { width: 18px; height: 18px; border-radius: 999px; border: 2px solid var(--warm-gray); display: grid; place-items: center; flex-shrink: 0; }
@@ -167,19 +167,18 @@
           <input type="hidden" name="id" id="pdp-vid-{{ section.id }}" value="{{ prod.selected_or_first_available_variant.id }}">
           <input type="hidden" name="selling_plan" id="pdp-plan-{{ section.id }}" value="" {% unless has_plan %}disabled{% endunless %}>
 
-          {%- if flavor_opt_index > 0 -%}
-            {%- assign flavor_opt = prod.options_with_values[flavor_opt_index0] -%}
-            <div class="flavor-block" style="display:flex;flex-direction:column;gap:6px;">
-              <span class="lbl">{{ flavor_opt.name }}</span>
-              <div class="flavors" role="radiogroup" aria-label="{{ flavor_opt.name }}">
-                {%- for val in flavor_opt.values -%}
-                  <button type="button" class="flavor {% if forloop.first %}is-active{% endif %}" data-flavor="{{ val | escape }}" role="radio" aria-checked="{% if forloop.first %}true{% else %}false{% endif %}">
-                    <span class="nm">{{ val }}</span>
-                  </button>
-                {%- endfor -%}
-              </div>
+          {%- comment -%} Flavor selector — BOTH flavors always render (independent of Shopify options) {%- endcomment -%}
+          <div class="flavor-block" style="display:flex;flex-direction:column;gap:6px;">
+            <span class="lbl">{{ flavor_opt_name }}</span>
+            <div class="flavors" role="radiogroup" aria-label="{{ flavor_opt_name }}">
+                <button type="button" class="flavor is-active" data-flavor-key="orange-tangerine" data-flavor-label="Orange Tangerine" role="radio" aria-checked="true">
+                  <span class="nm">Orange Tangerine</span>
+                </button>
+                <button type="button" class="flavor" data-flavor-key="fuji-apple" data-flavor-label="Fuji Apple" role="radio" aria-checked="false">
+                  <span class="nm">Fuji Apple</span>
+                </button>
             </div>
-          {%- endif -%}
+          </div>
 
           {%- if has_plan -%}
             {%- assign first_group = prod.selling_plan_groups | first -%}
@@ -243,7 +242,7 @@
     var hasPlan = {{ has_plan | json }};
 
     var GALLERIES = {"orange-tangerine":["https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-orange-tangerine.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/solo/energy-orange-tangerine.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/sticks/energy-orange-tangerine.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/lifestyle/glass-energy-orange-tangerine.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/orange-tangerine.png"],"fuji-apple":["https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/solo/energy-fuji-apple.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/sticks/energy-fuji-apple.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/lifestyle/glass-energy-fuji-apple.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/fuji-apple.png"]};
-    var FLAVOR_MATCH = [{"key":"orange-tangerine","tokens":["orange","tangerine"]},{"key":"fuji-apple","tokens":["fuji","apple"]}];
+    var FLAVOR_MATCH = [{"key":"orange-tangerine","label":"Orange Tangerine","tokens":["orange","tangerine"]},{"key":"fuji-apple","label":"Fuji Apple","tokens":["fuji","apple"]}];
 
     var vidInput = document.getElementById("pdp-vid-{{ section.id }}");
     var planInput = document.getElementById("pdp-plan-{{ section.id }}");
@@ -253,23 +252,32 @@
     var galImgs = document.getElementById("gal-imgs-{{ section.id }}");
     var galThumbs = document.getElementById("gal-thumbs-{{ section.id }}");
 
-    var state = { variant: variants.find(function (v) { return v.id == vidInput.value; }) || variants[0], buy: hasPlan ? "subscribe" : "onetime", qty: 1 };
+    function tokensForKey(key) {
+      for (var i = 0; i < FLAVOR_MATCH.length; i++) { if (FLAVOR_MATCH[i].key === key) return FLAVOR_MATCH[i].tokens; }
+      return [];
+    }
+    // Find the Shopify variant whose flavor option matches the given flavor key (by token). May be null.
+    function variantForKey(key) {
+      var toks = tokensForKey(key);
+      for (var i = 0; i < variants.length; i++) {
+        var v = variants[i];
+        var val = flavorIndex > 0 ? (v["option" + flavorIndex] || "") : (v.title || "");
+        val = val.toString().toLowerCase();
+        for (var j = 0; j < toks.length; j++) { if (val.indexOf(toks[j]) > -1) return v; }
+      }
+      return null;
+    }
+
+    var defaultKey = FLAVOR_MATCH[0].key;
+    var state = { key: defaultKey, variant: variantForKey(defaultKey) || variants[0], buy: hasPlan ? "subscribe" : "onetime", qty: 1 };
 
     function money(cents) { return "$" + (cents / 100).toFixed(2); }
     function planAllocation(v) {
       if (!v || !v.selling_plan_allocations || !v.selling_plan_allocations.length) return null;
       return v.selling_plan_allocations[0];
     }
-    function galleryKeyForFlavor(val) {
-      var n = (val || "").toString().toLowerCase();
-      for (var i = 0; i < FLAVOR_MATCH.length; i++) {
-        var toks = FLAVOR_MATCH[i].tokens;
-        for (var j = 0; j < toks.length; j++) { if (n.indexOf(toks[j]) > -1) return FLAVOR_MATCH[i].key; }
-      }
-      return FLAVOR_MATCH[0].key;
-    }
     function renderGallery(key) {
-      var urls = GALLERIES[key] || GALLERIES[FLAVOR_MATCH[0].key];
+      var urls = GALLERIES[key] || GALLERIES[defaultKey];
       if (!urls || !galImgs || !galThumbs) return;
       galImgs.innerHTML = urls.map(function (src, i) {
         return '<img data-idx="' + i + '" class="' + (i === 0 ? 'is-active' : '') + '" src="' + src + '" alt="" loading="' + (i === 0 ? 'eager' : 'lazy') + '">';
@@ -300,53 +308,27 @@
         if (state.buy === "subscribe" && alloc) { planInput.disabled = false; planInput.value = alloc.selling_plan.id; }
         else { planInput.value = ""; planInput.disabled = true; }
       }
+      // Add-to-cart is enabled as long as we have a matching variant that's available.
       var available = v && v.available;
-      addBtn.disabled = !available;
-      addBtn.textContent = available ? "{{ section.settings.add_label | default: 'Add to Cart' | escape }}" : "Sold Out";
+      addBtn.disabled = !v || !available;
+      addBtn.textContent = (!v) ? "Unavailable" : (available ? "{{ section.settings.add_label | default: 'Add to Cart' | escape }}" : "Sold Out");
     }
 
-    if (flavorIndex > 0) {
-      root.querySelectorAll(".flavor").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var val = btn.dataset.flavor;
-          root.querySelectorAll(".flavor").forEach(function (b) { b.classList.remove("is-active"); b.setAttribute("aria-checked", "false"); });
-          btn.classList.add("is-active"); btn.setAttribute("aria-checked", "true");
-          var match = variants.find(function (v) { return v["option" + flavorIndex] === val; });
-          if (match) { state.variant = match; }
-          renderGallery(galleryKeyForFlavor(val));
-          render();
-        });
-      });
-    }
-
-    // Initial gallery to match the pre-selected variant's flavor
-    (function initGallery() {
-      var v = state.variant;
-      var val = (v && flavorIndex > 0) ? v["option" + flavorIndex] : null;
-      renderGallery(val ? galleryKeyForFlavor(val) : FLAVOR_MATCH[0].key);
-    })();
-
-    root.querySelectorAll(".buy-opt").forEach(function (btn) {
+    // Flavor selection (both buttons always present)
+    root.querySelectorAll(".flavor").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        root.querySelectorAll(".buy-opt").forEach(function (b) { b.classList.remove("is-active"); });
-        btn.classList.add("is-active");
-        state.buy = btn.dataset.buy;
-        var benefits = root.querySelector("[data-subscribe-benefits]");
-        if (benefits) benefits.style.display = state.buy === "subscribe" ? "flex" : "none";
+        var key = btn.dataset.flavorKey;
+        root.querySelectorAll(".flavor").forEach(function (b) { b.classList.remove("is-active"); b.setAttribute("aria-checked", "false"); });
+        btn.classList.add("is-active"); btn.setAttribute("aria-checked", "true");
+        state.key = key;
+        var match = variantForKey(key);
+        state.variant = match || state.variant;
+        renderGallery(key);
         render();
       });
     });
 
-    root.querySelectorAll(".stepper button").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var step = parseInt(btn.dataset.step, 10);
-        state.qty = Math.max(1, state.qty + step);
-        qtyEl.textContent = state.qty; qtyInput.value = state.qty;
-        root.querySelector('.stepper button[data-step="-1"]').disabled = state.qty <= 1;
-        render();
-      });
-    });
-
+    renderGallery(state.key);
     render();
   })();
 </script>
@@ -391,8 +373,8 @@
     {
       "type": "text",
       "id": "flavor_option_name",
-      "label": "Flavor option name",
-      "info": "The product option used as the flavor selector (case-insensitive). Flavor names should contain: Orange Tangerine / Fuji Apple.",
+      "label": "Flavor label",
+      "info": "Heading shown above the flavor buttons, and the Shopify option name used to match variants (case-insensitive). Both flavors always show: Orange Tangerine / Fuji Apple.",
       "default": "Flavor"
     },
     {
