@@ -2,20 +2,24 @@
   ============================================================================
   AVRO — PRODUCT DETAIL (PDP) · ENERGY
   Drop-in export. Gallery images are hardcoded to the live site (one full set
-  per flavor). Buy box is wired to Shopify (price, add-to-cart, subscribe).
-  • Connect a product: section setting "Connected product" (falls back to the
-    template's product when left empty).
-  • BOTH flavors always render and are selectable; picking a flavor swaps the
-    gallery and selects the matching Shopify variant when one exists.
+  per flavor). Buy box is wired to Shopify.
+  • TWO product pickers — one per flavor. Selecting a flavor switches the
+    connected product: title, price, variant, subscription and gallery all swap.
+  • If a flavor's product picker is left empty, it falls back to the template's
+    own product.
   NOTE: Deployment Protection on the staging site must be OFF for images to load.
   HOW TO USE
   1. Create sections/product-energy.liquid and paste this file in.
-  2. Add the "AVRO Product · Energy" section to a template (or pick a product in the setting).
+  2. Add the "AVRO Product · Energy" section, then pick a product for each flavor in settings.
   ============================================================================
 {%- endcomment -%}
 
-{%- assign prod = product -%}
-{%- if section.settings.product != blank -%}{%- assign prod = section.settings.product -%}{%- endif -%}
+{%- assign pa = section.settings.product_flavor_a -%}
+{%- if pa == blank -%}{%- assign pa = product -%}{%- endif -%}
+{%- assign pb = section.settings.product_flavor_b -%}
+{%- if pb == blank -%}{%- assign pb = product -%}{%- endif -%}
+{%- assign prod = pa -%}
+{%- if prod == blank -%}{%- assign prod = pb -%}{%- endif -%}
 
 {%- assign accent = '#94C6D4' -%}
 {%- assign default_support = 'Steady energy. Ready when it matters.*' -%}
@@ -28,24 +32,22 @@
   {%- if onm == flavor_opt_name_dc -%}{%- assign flavor_opt_index = forloop.index -%}{%- endif -%}
 {%- endfor -%}
 
+{%- assign show_sub = section.settings.show_subscribe -%}
+{%- assign any_plan = false -%}
+{%- if pa.selling_plan_groups.size > 0 or pb.selling_plan_groups.size > 0 -%}{%- assign any_plan = true -%}{%- endif -%}
 {%- assign has_plan = false -%}
-{%- if prod.selling_plan_groups.size > 0 -%}{%- assign has_plan = true -%}{%- endif -%}
-{%- if section.settings.show_subscribe == false -%}{%- assign has_plan = false -%}{%- endif -%}
+{%- if any_plan and show_sub -%}{%- assign has_plan = true -%}{%- endif -%}
 
-{%- case section.settings.button_size -%}
-  {%- when 'compact' -%}{%- assign btn_height = 48 -%}
-  {%- when 'large' -%}{%- assign btn_height = 64 -%}
-  {%- else -%}{%- assign btn_height = 56 -%}
-{%- endcase -%}
 {%- case section.settings.corner_style -%}
   {%- when 'square' -%}{%- assign btn_radius = 12 -%}
   {%- when 'soft' -%}{%- assign btn_radius = 22 -%}
   {%- else -%}{%- assign btn_radius = 100 -%}
 {%- endcase -%}
+{%- assign btn_height = 56 -%}
 {%- case section.settings.spacing -%}
-  {%- when 'cozy' -%}{%- assign pdp_gap = 16 -%}{%- assign pdp_pad_y = 32 -%}{%- assign pdp_pad_x = 24 -%}
-  {%- when 'roomy' -%}{%- assign pdp_gap = 30 -%}{%- assign pdp_pad_y = 56 -%}{%- assign pdp_pad_x = 40 -%}
-  {%- else -%}{%- assign pdp_gap = 22 -%}{%- assign pdp_pad_y = 44 -%}{%- assign pdp_pad_x = 32 -%}
+  {%- when 'cozy' -%}{%- assign pdp_gap = 18 -%}{%- assign pdp_pad_y = 36 -%}{%- assign pdp_pad_x = 24 -%}
+  {%- when 'roomy' -%}{%- assign pdp_gap = 30 -%}{%- assign pdp_pad_y = 64 -%}{%- assign pdp_pad_x = 40 -%}
+  {%- else -%}{%- assign pdp_gap = 24 -%}{%- assign pdp_pad_y = 52 -%}{%- assign pdp_pad_x = 32 -%}
 {%- endcase -%}
 
 {% style %}
@@ -63,61 +65,65 @@
   }
   #avro-pdp-{{ section.id }} * { box-sizing: border-box; }
   #avro-pdp-{{ section.id }} .pdp-wrap { max-width: 1180px; margin: 0 auto; padding: var(--pdp-pad-y) var(--pdp-pad-x); }
-  #avro-pdp-{{ section.id }} .pdp-grid { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: start; }
-  @media (min-width: 900px) { #avro-pdp-{{ section.id }} .pdp-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 48px; } }
+  #avro-pdp-{{ section.id }} .pdp-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
+  @media (min-width: 900px) { #avro-pdp-{{ section.id }} .pdp-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 56px; } }
+  #avro-pdp-{{ section.id }} .gal { position: sticky; top: 24px; }
   #avro-pdp-{{ section.id }} .gal-main { position: relative; aspect-ratio: 1/1; border-radius: 20px; overflow: hidden; background: var(--gray); }
   #avro-pdp-{{ section.id }} .gal-imgs { position: absolute; inset: 0; }
   #avro-pdp-{{ section.id }} .gal-imgs img { width: 100%; height: 100%; object-fit: cover; display: none; }
   #avro-pdp-{{ section.id }} .gal-imgs img.is-active { display: block; }
-  #avro-pdp-{{ section.id }} .gal-rating { position: absolute; left: 14px; top: 14px; display: inline-flex; align-items: center; gap: 6px; background: var(--bone); border-radius: 999px; padding: 6px 12px; font-weight: 700; font-size: 13px; color: var(--ink); z-index: 2; }
+  #avro-pdp-{{ section.id }} .gal-rating { position: absolute; left: 16px; top: 16px; display: inline-flex; align-items: center; gap: 6px; background: var(--bone); border-radius: 999px; padding: 7px 13px; font-weight: 700; font-size: 13px; color: var(--ink); z-index: 2; }
   #avro-pdp-{{ section.id }} .gal-rating .stars { color: #E8A23D; letter-spacing: 1px; }
-  #avro-pdp-{{ section.id }} .gal-thumbs { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
-  #avro-pdp-{{ section.id }} .gal-thumb { width: 64px; height: 64px; border-radius: 12px; overflow: hidden; background: var(--gray); border: 2px solid transparent; cursor: pointer; padding: 0; }
+  #avro-pdp-{{ section.id }} .gal-thumbs { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+  #avro-pdp-{{ section.id }} .gal-thumb { width: 66px; height: 66px; border-radius: 12px; overflow: hidden; background: var(--gray); border: 2px solid transparent; cursor: pointer; padding: 0; }
   #avro-pdp-{{ section.id }} .gal-thumb.is-active { border-color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .gal-thumb img { width: 100%; height: 100%; object-fit: cover; }
-  #avro-pdp-{{ section.id }} .bb { display: flex; flex-direction: column; gap: var(--pdp-gap); }
-  #avro-pdp-{{ section.id }} .bb h1 { font-weight: 900; font-size: clamp(26px,3.2vw,40px); line-height: 0.98; margin: 0; color: var(--ink); }
-  #avro-pdp-{{ section.id }} .bb .support { font-weight: 600; font-size: clamp(15px,1.3vw,18px); line-height: 1.35; color: var(--ink); margin: 4px 0 0; }
-  #avro-pdp-{{ section.id }} .bb .per-box { font-weight: 500; font-size: clamp(13px,1.1vw,15px); line-height: 1.4; color: var(--warm-gray); margin: 2px 0 0; }
-  #avro-pdp-{{ section.id }} .bb .lbl { font-weight: 700; font-size: clamp(12px,1vw,13px); color: var(--ink); margin-bottom: 2px; display: block; }
-  #avro-pdp-{{ section.id }} .flavors { display: flex; flex-wrap: wrap; gap: 8px; }
-  #avro-pdp-{{ section.id }} .flavor { display: inline-flex; align-items: center; gap: 8px; padding: 4px 16px 4px 5px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; cursor: pointer; transition: all .15s ease; padding: 10px 18px; }
-  #avro-pdp-{{ section.id }} .flavor .nm { font-weight: 700; font-size: clamp(11px,1vw,14px); color: var(--ink); white-space: nowrap; }
+  #avro-pdp-{{ section.id }} .bb { display: flex; flex-direction: column; gap: calc(var(--pdp-gap) + 4px); }
+  #avro-pdp-{{ section.id }} .bb header { display: flex; flex-direction: column; gap: 10px; }
+  #avro-pdp-{{ section.id }} .bb h1 { font-weight: 900; font-size: clamp(28px,3.4vw,42px); line-height: 1.0; margin: 0; color: var(--ink); letter-spacing: -0.01em; }
+  #avro-pdp-{{ section.id }} .bb .support { font-weight: 600; font-size: clamp(15px,1.3vw,18px); line-height: 1.4; color: var(--ink); margin: 0; }
+  #avro-pdp-{{ section.id }} .bb .per-box { font-weight: 500; font-size: clamp(13px,1.1vw,15px); line-height: 1.4; color: var(--warm-gray); margin: 0; }
+  #avro-pdp-{{ section.id }} .bb .lbl { font-weight: 700; font-size: clamp(12px,1vw,13px); color: var(--ink); margin: 0 0 10px; display: block; text-transform: uppercase; letter-spacing: 0.04em; }
+  #avro-pdp-{{ section.id }} .flavor-block { display: flex; flex-direction: column; }
+  #avro-pdp-{{ section.id }} .flavors { display: flex; flex-wrap: wrap; gap: 10px; }
+  #avro-pdp-{{ section.id }} .flavor { display: inline-flex; align-items: center; gap: 8px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; cursor: pointer; transition: all .15s ease; padding: 11px 20px; }
+  #avro-pdp-{{ section.id }} .flavor .nm { font-weight: 700; font-size: clamp(12px,1vw,14px); color: var(--ink); white-space: nowrap; }
   #avro-pdp-{{ section.id }} .flavor.is-active { background: var(--charcoal); border-color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .flavor.is-active .nm { color: var(--bone); }
-  #avro-pdp-{{ section.id }} .flavor.is-soldout { opacity: 0.45; }
-  #avro-pdp-{{ section.id }} .buy-opt { position: relative; display: flex; align-items: center; gap: 12px; min-height: var(--btn-height); padding: 10px 18px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; color: var(--ink); cursor: pointer; }
+  #avro-pdp-{{ section.id }} .purchase { display: flex; flex-direction: column; gap: 12px; }
+  #avro-pdp-{{ section.id }} .buy-opt { position: relative; display: flex; align-items: center; gap: 14px; min-height: var(--btn-height); padding: 12px 20px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; color: var(--ink); cursor: pointer; }
   #avro-pdp-{{ section.id }} .buy-opt.is-active { background: var(--charcoal); border-color: var(--charcoal); color: var(--bone); }
   #avro-pdp-{{ section.id }} .buy-opt .radio { width: 18px; height: 18px; border-radius: 999px; border: 2px solid var(--warm-gray); display: grid; place-items: center; flex-shrink: 0; }
   #avro-pdp-{{ section.id }} .buy-opt.is-active .radio { border-color: var(--bone); }
   #avro-pdp-{{ section.id }} .buy-opt.is-active .radio::after { content: ''; width: 8px; height: 8px; border-radius: 999px; background: var(--bone); }
-  #avro-pdp-{{ section.id }} .buy-opt .ttl { flex: 1; min-width: 0; font-weight: 700; font-size: clamp(12px,1.1vw,15px); line-height: 1.2; }
-  #avro-pdp-{{ section.id }} .buy-opt .badge { font-weight: 700; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 6px; border-radius: 999px; background: var(--charcoal); color: var(--bone); white-space: nowrap; margin-left: 6px; }
+  #avro-pdp-{{ section.id }} .buy-opt .ttl { flex: 1; min-width: 0; font-weight: 700; font-size: clamp(13px,1.1vw,15px); line-height: 1.25; }
+  #avro-pdp-{{ section.id }} .buy-opt .badge { font-weight: 700; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; background: var(--charcoal); color: var(--bone); white-space: nowrap; margin-left: 6px; }
   #avro-pdp-{{ section.id }} .buy-opt.is-active .badge { background: var(--bone); color: var(--charcoal); }
-  #avro-pdp-{{ section.id }} .buy-opt .sub { display: block; font-weight: 500; font-size: clamp(10px,0.9vw,12px); margin-top: 2px; opacity: 0.7; }
-  #avro-pdp-{{ section.id }} .buy-opt .pr { font-weight: 800; font-size: clamp(14px,1.3vw,18px); white-space: nowrap; }
-  #avro-pdp-{{ section.id }} .benefits { list-style: none; margin: 0; padding: 2px 4px 0; display: flex; flex-direction: column; gap: 6px; }
-  #avro-pdp-{{ section.id }} .benefits li { display: flex; align-items: flex-start; gap: 8px; font-weight: 500; font-size: clamp(12px,1vw,14px); line-height: 1.4; color: var(--ink); }
+  #avro-pdp-{{ section.id }} .buy-opt .sub { display: block; font-weight: 500; font-size: clamp(11px,0.9vw,12px); margin-top: 3px; opacity: 0.7; }
+  #avro-pdp-{{ section.id }} .buy-opt .pr { font-weight: 800; font-size: clamp(15px,1.3vw,18px); white-space: nowrap; }
+  #avro-pdp-{{ section.id }} .benefits { list-style: none; margin: 6px 0 0; padding: 0 4px; display: flex; flex-direction: column; gap: 9px; }
+  #avro-pdp-{{ section.id }} .benefits li { display: flex; align-items: flex-start; gap: 10px; font-weight: 500; font-size: clamp(12px,1vw,14px); line-height: 1.45; color: var(--ink); }
   #avro-pdp-{{ section.id }} .benefits svg { flex-shrink: 0; margin-top: 2px; }
-  #avro-pdp-{{ section.id }} .buy-row { display: flex; align-items: stretch; gap: 12px; margin-top: calc(var(--pdp-gap) + 8px); padding-top: var(--pdp-gap); border-top: 1px solid var(--gray); }
+  #avro-pdp-{{ section.id }} .buy-row { display: flex; align-items: stretch; gap: 14px; margin-top: 8px; padding-top: calc(var(--pdp-gap) + 4px); border-top: 1px solid var(--gray); }
   #avro-pdp-{{ section.id }} .stepper { display: inline-flex; align-items: center; justify-content: space-between; flex: 0 0 auto; background: var(--bone); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); height: var(--btn-height); overflow: hidden; }
-  #avro-pdp-{{ section.id }} .stepper button { width: 44px; align-self: stretch; border: 0; background: transparent; font-weight: 700; font-size: 18px; line-height: 1; color: var(--charcoal); cursor: pointer; display: grid; place-items: center; }
+  #avro-pdp-{{ section.id }} .stepper button { width: 46px; align-self: stretch; border: 0; background: transparent; font-weight: 700; font-size: 18px; line-height: 1; color: var(--charcoal); cursor: pointer; display: grid; place-items: center; }
   #avro-pdp-{{ section.id }} .stepper button:hover { background: rgba(0,0,0,0.05); }
   #avro-pdp-{{ section.id }} .stepper button:disabled { opacity: 0.35; cursor: not-allowed; }
-  #avro-pdp-{{ section.id }} .stepper .q { min-width: 26px; text-align: center; font-weight: 800; font-size: 16px; color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .stepper .q { min-width: 28px; text-align: center; font-weight: 800; font-size: 16px; color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .add-btn { flex: 1 1 auto; min-height: var(--btn-height); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); background: var(--charcoal); color: var(--bone); font-family: inherit; font-weight: 700; font-size: 17px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
   #avro-pdp-{{ section.id }} .add-btn:hover { background: transparent; color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .add-btn:disabled { background: var(--gray); border-color: var(--gray); color: var(--warm-gray); cursor: not-allowed; }
+  #avro-pdp-{{ section.id }} .price-only { font-weight: 800; font-size: clamp(22px,2vw,30px); }
 {% endstyle %}
 
 <div id="avro-pdp-{{ section.id }}" data-flavor-index="{{ flavor_opt_index }}">
   <div class="pdp-wrap">
-    {%- if prod == blank -%}
-      <p style="text-align:center;padding:40px;">Pick a product in the section settings (or add this section to a product template) to preview it.</p>
+    {%- if pa == blank and pb == blank -%}
+      <p style="text-align:center;padding:40px;">Pick a product for each flavor in the section settings to preview it.</p>
     {%- else -%}
     <div class="pdp-grid">
 
-      {%- comment -%} ---------- GALLERY (hardcoded per-flavor image sets; JS swaps on flavor change) ---------- {%- endcomment -%}
+      {%- comment -%} ---------- GALLERY (per-flavor image sets; JS swaps on flavor change) ---------- {%- endcomment -%}
       <div class="gal">
         <div class="gal-main" id="gal-main-{{ section.id }}">
           <div class="gal-imgs" id="gal-imgs-{{ section.id }}">
@@ -150,10 +156,10 @@
         </div>
       </div>
 
-      {%- comment -%} ---------- BUY BOX (wired to Shopify) ---------- {%- endcomment -%}
+      {%- comment -%} ---------- BUY BOX ---------- {%- endcomment -%}
       <div class="bb">
         <header>
-          <h1>{{ prod.title }}</h1>
+          <h1 id="pdp-title-{{ section.id }}">{{ prod.title }}</h1>
           {%- assign support_text = section.settings.support_line -%}
           {%- if support_text == blank -%}{%- assign support_text = default_support -%}{%- endif -%}
           {%- if prod.metafields.custom.support_line != blank -%}{%- assign support_text = prod.metafields.custom.support_line -%}{%- endif -%}
@@ -165,10 +171,10 @@
           <input type="hidden" name="form_type" value="product">
           <input type="hidden" name="utf8" value="✓">
           <input type="hidden" name="id" id="pdp-vid-{{ section.id }}" value="{{ prod.selected_or_first_available_variant.id }}">
-          <input type="hidden" name="selling_plan" id="pdp-plan-{{ section.id }}" value="" {% unless has_plan %}disabled{% endunless %}>
+          <input type="hidden" name="selling_plan" id="pdp-plan-{{ section.id }}" value="" disabled>
 
-          {%- comment -%} Flavor selector — BOTH flavors always render (independent of Shopify options) {%- endcomment -%}
-          <div class="flavor-block" style="display:flex;flex-direction:column;gap:6px;">
+          {%- comment -%} Flavor selector — BOTH flavors always render; each maps to its own product {%- endcomment -%}
+          <div class="flavor-block">
             <span class="lbl">{{ flavor_opt_name }}</span>
             <div class="flavors" role="radiogroup" aria-label="{{ flavor_opt_name }}">
                 <button type="button" class="flavor is-active" data-flavor-key="orange-tangerine" data-flavor-label="Orange Tangerine" role="radio" aria-checked="true">
@@ -181,14 +187,12 @@
           </div>
 
           {%- if has_plan -%}
-            {%- assign first_group = prod.selling_plan_groups | first -%}
-            {%- assign first_plan = first_group.selling_plans | first -%}
-            <div class="purchase" style="display:flex;flex-direction:column;gap:10px;">
-              <button type="button" class="buy-opt is-active" data-buy="subscribe" data-plan="{{ first_plan.id }}">
+            <div class="purchase" data-purchase>
+              <button type="button" class="buy-opt is-active" data-buy="subscribe" data-subscribe-opt>
                 <span class="radio"></span>
                 <span class="ttl">{{ section.settings.subscribe_label | default: 'Subscribe & save' }}
                   {%- if section.settings.subscribe_badge != blank %}<span class="badge">{{ section.settings.subscribe_badge }}</span>{% endif -%}
-                  <span class="sub">{{ first_plan.name }}</span>
+                  <span class="sub" data-plan-name></span>
                 </span>
                 <span class="pr" data-price-subscribe></span>
               </button>
@@ -212,7 +216,7 @@
               {%- endif -%}
             </div>
           {%- else -%}
-            <div class="price-only" style="font-weight:800;font-size:clamp(20px,2vw,28px);" data-price-onetime></div>
+            <div class="price-only" data-price-onetime></div>
           {%- endif -%}
 
           <div class="buy-row">
@@ -232,53 +236,78 @@
   </div>
 </div>
 
-{%- if prod != blank -%}
+{%- unless pa == blank and pb == blank -%}
 <script>
   (function () {
     var root = document.getElementById("avro-pdp-{{ section.id }}");
     if (!root) return;
-    var variants = {{ prod.variants | json }};
+    var SHOW_SUB = {{ show_sub | json }};
     var flavorIndex = parseInt(root.dataset.flavorIndex || "0", 10);
-    var hasPlan = {{ has_plan | json }};
 
-    var GALLERIES = {"orange-tangerine":["https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-orange-tangerine.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/solo/energy-orange-tangerine.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/sticks/energy-orange-tangerine.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/lifestyle/glass-energy-orange-tangerine.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/orange-tangerine.png"],"fuji-apple":["https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/solo/energy-fuji-apple.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/sticks/energy-fuji-apple.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/lifestyle/glass-energy-fuji-apple.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/fuji-apple.png"]};
-    var FLAVOR_MATCH = [{"key":"orange-tangerine","label":"Orange Tangerine","tokens":["orange","tangerine"]},{"key":"fuji-apple","label":"Fuji Apple","tokens":["fuji","apple"]}];
+    var FLAVORS = [
+      {
+        key: "orange-tangerine",
+        label: "Orange Tangerine",
+        tokens: ["orange","tangerine"],
+        gallery: ["https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-orange-tangerine.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/solo/energy-orange-tangerine.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/sticks/energy-orange-tangerine.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/lifestyle/glass-energy-orange-tangerine.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/orange-tangerine.png"],
+        {%- assign fp_a = section.settings.product_flavor_a -%}
+        {%- if fp_a == blank -%}{%- assign fp_a = product -%}{%- endif -%}
+        hasProduct: {{ fp_a != blank | json }},
+        title: {{ fp_a.title | json }},
+        variants: {{ fp_a.variants | json }},
+        hasPlan: {{ fp_a.selling_plan_groups.size > 0 | json }},
+        planName: {% if fp_a.selling_plan_groups.size > 0 %}{{ fp_a.selling_plan_groups.first.selling_plans.first.name | json }}{% else %}""{% endif %}
+      },
+      {
+        key: "fuji-apple",
+        label: "Fuji Apple",
+        tokens: ["fuji","apple"],
+        gallery: ["https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/solo/energy-fuji-apple.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/sticks/energy-fuji-apple.png","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/lifestyle/glass-energy-fuji-apple.jpg","https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/fuji-apple.png"],
+        {%- assign fp_b = section.settings.product_flavor_b -%}
+        {%- if fp_b == blank -%}{%- assign fp_b = product -%}{%- endif -%}
+        hasProduct: {{ fp_b != blank | json }},
+        title: {{ fp_b.title | json }},
+        variants: {{ fp_b.variants | json }},
+        hasPlan: {{ fp_b.selling_plan_groups.size > 0 | json }},
+        planName: {% if fp_b.selling_plan_groups.size > 0 %}{{ fp_b.selling_plan_groups.first.selling_plans.first.name | json }}{% else %}""{% endif %}
+      }
+    ];
 
     var vidInput = document.getElementById("pdp-vid-{{ section.id }}");
     var planInput = document.getElementById("pdp-plan-{{ section.id }}");
     var qtyEl = document.getElementById("pdp-qty-{{ section.id }}");
     var qtyInput = document.getElementById("pdp-qtyinput-{{ section.id }}");
     var addBtn = document.getElementById("pdp-add-{{ section.id }}");
+    var titleEl = document.getElementById("pdp-title-{{ section.id }}");
     var galImgs = document.getElementById("gal-imgs-{{ section.id }}");
     var galThumbs = document.getElementById("gal-thumbs-{{ section.id }}");
+    var addLabel = {{ section.settings.add_label | default: 'Add to Cart' | json }};
 
-    function tokensForKey(key) {
-      for (var i = 0; i < FLAVOR_MATCH.length; i++) { if (FLAVOR_MATCH[i].key === key) return FLAVOR_MATCH[i].tokens; }
-      return [];
-    }
-    // Find the Shopify variant whose flavor option matches the given flavor key (by token). May be null.
-    function variantForKey(key) {
-      var toks = tokensForKey(key);
-      for (var i = 0; i < variants.length; i++) {
-        var v = variants[i];
-        var val = flavorIndex > 0 ? (v["option" + flavorIndex] || "") : (v.title || "");
-        val = val.toString().toLowerCase();
-        for (var j = 0; j < toks.length; j++) { if (val.indexOf(toks[j]) > -1) return v; }
-      }
-      return null;
-    }
-
-    var defaultKey = FLAVOR_MATCH[0].key;
-    var state = { key: defaultKey, variant: variantForKey(defaultKey) || variants[0], buy: hasPlan ? "subscribe" : "onetime", qty: 1 };
+    var state = { flavor: FLAVORS[0], variant: null, buy: SHOW_SUB ? "subscribe" : "onetime", qty: 1 };
 
     function money(cents) { return "$" + (cents / 100).toFixed(2); }
     function planAllocation(v) {
       if (!v || !v.selling_plan_allocations || !v.selling_plan_allocations.length) return null;
       return v.selling_plan_allocations[0];
     }
-    function renderGallery(key) {
-      var urls = GALLERIES[key] || GALLERIES[defaultKey];
-      if (!urls || !galImgs || !galThumbs) return;
+    function pickVariant(fl) {
+      var vs = fl.variants || [];
+      if (!vs.length) return null;
+      // token match on the flavor option / title first
+      for (var i = 0; i < vs.length; i++) {
+        var v = vs[i];
+        var val = (flavorIndex > 0 ? (v["option" + flavorIndex] || "") : (v.title || "")).toString().toLowerCase();
+        for (var j = 0; j < fl.tokens.length; j++) { if (val.indexOf(fl.tokens[j]) > -1) return v; }
+      }
+      // else first available, else first
+      for (var k = 0; k < vs.length; k++) { if (vs[k].available) return vs[k]; }
+      return vs[0];
+    }
+    function flPlanActive(fl) { return SHOW_SUB && fl.hasPlan; }
+
+    function renderGallery(fl) {
+      var urls = fl.gallery || [];
+      if (!urls.length || !galImgs || !galThumbs) return;
       galImgs.innerHTML = urls.map(function (src, i) {
         return '<img data-idx="' + i + '" class="' + (i === 0 ? 'is-active' : '') + '" src="' + src + '" alt="" loading="' + (i === 0 ? 'eager' : 'lazy') + '">';
       }).join("");
@@ -298,41 +327,84 @@
     }
 
     function render() {
-      var v = state.variant;
+      var fl = state.flavor, v = state.variant;
       root.querySelectorAll("[data-price-onetime]").forEach(function (el) { el.textContent = v ? money(v.price * state.qty) : ""; });
       var alloc = planAllocation(v);
       root.querySelectorAll("[data-price-subscribe]").forEach(function (el) { el.textContent = alloc ? money(alloc.price * state.qty) : (v ? money(v.price * state.qty) : ""); });
 
-      vidInput.value = v ? v.id : "";
-      if (hasPlan) {
-        if (state.buy === "subscribe" && alloc) { planInput.disabled = false; planInput.value = alloc.selling_plan.id; }
-        else { planInput.value = ""; planInput.disabled = true; }
+      // Subscribe availability for this flavor's product
+      var subOpt = root.querySelector("[data-subscribe-opt]");
+      var oneOpt = root.querySelector('[data-buy="onetime"]');
+      var planNameEl = root.querySelector("[data-plan-name]");
+      if (subOpt) {
+        if (flPlanActive(fl)) {
+          subOpt.style.display = "";
+          if (planNameEl) planNameEl.textContent = fl.planName || "";
+        } else {
+          subOpt.style.display = "none";
+          if (state.buy === "subscribe") {
+            state.buy = "onetime";
+            subOpt.classList.remove("is-active");
+            if (oneOpt) oneOpt.classList.add("is-active");
+          }
+        }
       }
-      // Add-to-cart is enabled as long as we have a matching variant that's available.
+
+      vidInput.value = v ? v.id : "";
+      if (state.buy === "subscribe" && alloc) { planInput.disabled = false; planInput.value = alloc.selling_plan.id; }
+      else { planInput.value = ""; planInput.disabled = true; }
+
       var available = v && v.available;
       addBtn.disabled = !v || !available;
-      addBtn.textContent = (!v) ? "Unavailable" : (available ? "{{ section.settings.add_label | default: 'Add to Cart' | escape }}" : "Sold Out");
+      addBtn.textContent = (!v) ? "Unavailable" : (available ? addLabel : "Sold Out");
+
+      var benefits = root.querySelector("[data-subscribe-benefits]");
+      if (benefits) benefits.style.display = (state.buy === "subscribe") ? "flex" : "none";
     }
 
-    // Flavor selection (both buttons always present)
+    function applyFlavor(fl) {
+      state.flavor = fl;
+      state.variant = pickVariant(fl);
+      if (titleEl && fl.title) titleEl.textContent = fl.title;
+      renderGallery(fl);
+      render();
+    }
+
     root.querySelectorAll(".flavor").forEach(function (btn) {
       btn.addEventListener("click", function () {
         var key = btn.dataset.flavorKey;
+        var fl = FLAVORS.filter(function (f) { return f.key === key; })[0];
+        if (!fl) return;
         root.querySelectorAll(".flavor").forEach(function (b) { b.classList.remove("is-active"); b.setAttribute("aria-checked", "false"); });
         btn.classList.add("is-active"); btn.setAttribute("aria-checked", "true");
-        state.key = key;
-        var match = variantForKey(key);
-        state.variant = match || state.variant;
-        renderGallery(key);
+        applyFlavor(fl);
+      });
+    });
+
+    root.querySelectorAll(".buy-opt").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        if (btn.style.display === "none") return;
+        root.querySelectorAll(".buy-opt").forEach(function (b) { b.classList.remove("is-active"); });
+        btn.classList.add("is-active");
+        state.buy = btn.dataset.buy;
         render();
       });
     });
 
-    renderGallery(state.key);
-    render();
+    root.querySelectorAll(".stepper button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var step = parseInt(btn.dataset.step, 10);
+        state.qty = Math.max(1, state.qty + step);
+        qtyEl.textContent = state.qty; qtyInput.value = state.qty;
+        root.querySelector('.stepper button[data-step="-1"]').disabled = state.qty <= 1;
+        render();
+      });
+    });
+
+    applyFlavor(FLAVORS[0]);
   })();
 </script>
-{%- endif -%}
+{%- endunless -%}
 
 {% schema %}
 {
@@ -341,13 +413,19 @@
   "settings": [
     {
       "type": "header",
-      "content": "Product"
+      "content": "Products (one per flavor)"
     },
     {
       "type": "product",
-      "id": "product",
-      "label": "Connected product",
-      "info": "Leave empty to use the product this template is assigned to."
+      "id": "product_flavor_a",
+      "label": "Orange Tangerine product",
+      "info": "Shopify product shown when the Orange Tangerine flavor is selected."
+    },
+    {
+      "type": "product",
+      "id": "product_flavor_b",
+      "label": "Fuji Apple product",
+      "info": "Shopify product shown when the Fuji Apple flavor is selected."
     },
     {
       "type": "header",
@@ -374,7 +452,7 @@
       "type": "text",
       "id": "flavor_option_name",
       "label": "Flavor label",
-      "info": "Heading shown above the flavor buttons, and the Shopify option name used to match variants (case-insensitive). Both flavors always show: Orange Tangerine / Fuji Apple.",
+      "info": "Heading above the flavor buttons, and the Shopify option name used to match variants. Flavors: Orange Tangerine / Fuji Apple.",
       "default": "Flavor"
     },
     {
@@ -432,6 +510,50 @@
       "id": "add_label",
       "label": "Add-to-cart label",
       "default": "Add to Cart"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "spacing",
+      "label": "Spacing",
+      "options": [
+        {
+          "value": "cozy",
+          "label": "Cozy"
+        },
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "roomy",
+          "label": "Roomy"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "select",
+      "id": "corner_style",
+      "label": "Corner style",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "soft",
+          "label": "Soft"
+        },
+        {
+          "value": "pill",
+          "label": "Pill"
+        }
+      ],
+      "default": "pill"
     }
   ],
   "blocks": [
