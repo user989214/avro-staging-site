@@ -5,8 +5,9 @@
   THEME: light / blue accent (Avro Blue #94C6D4)
   HOW TO USE
   1. Create sections/avro-work.liquid and paste this ENTIRE file in.
-  2. Upload every image in this folder to your theme Assets (same filenames),
-     including work.html for the research graphic.
+  2. Images render from hardcoded live-site URLs by default — no asset upload
+     needed (including the research graphic iframe). Pick an image in the
+     editor to override any of them.
   3. Add "AVRO — Work" to any page in the theme editor.
   4. Headings, body, buttons and images are editable; reason cards, steps,
      formula bars, use-moments, products, testimonials and FAQ are blocks.
@@ -135,6 +136,7 @@
 {%- capture star -%}<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>{%- endcapture -%}
 {%- capture chev -%}<svg class="fchev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>{%- endcapture -%}
 
+{%- assign base = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app' -%}
 {%- assign reasons = section.blocks | where: "type", "reason" -%}
 {%- assign steps = section.blocks | where: "type", "step" -%}
 {%- assign bars = section.blocks | where: "type", "formula_bar" -%}
@@ -151,9 +153,9 @@
         {%- if section.settings.hero_image != blank -%}
           <img class="d" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}">
         {%- else -%}
-          <img class="d" src="{{ 'cohort-work-hero.png' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}">
+          <img class="d" src="{{ base }}/images/lifestyle/cohort-work-hero.png" alt="{{ section.settings.hero_alt | escape }}">
         {%- endif -%}
-        <img class="m" src="{{ 'cohort-work-hero-mobile.png' | asset_url }}" alt="">
+        <img class="m" src="{{ base }}/images/lifestyle/cohort-work-hero-mobile.png" alt="">
       </div>
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="hero-content">
@@ -178,7 +180,7 @@
     <div class="cards c3">
       {%- for b in reasons -%}
       <div class="icard" {{ b.shopify_attributes }}>
-        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign iu = b.settings.icon | image_url: width: 120 -%}{%- else -%}{%- assign iu = b.settings.icon_fallback | default: 'calm-first-foundation.png' | asset_url -%}{%- endif -%}<span style="-webkit-mask-image:url({{ iu }});mask-image:url({{ iu }});"></span></div>
+        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign iu = b.settings.icon | image_url: width: 120 -%}{%- else -%}{%- assign iu = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png' -%}{%- endif -%}<span style="-webkit-mask-image:url({{ iu }});mask-image:url({{ iu }});"></span></div>
         <h3>{{ b.settings.title }}</h3>
         <p>{{ b.settings.copy }}</p>
       </div>
@@ -194,7 +196,7 @@
       {%- for b in steps -%}
       <article class="step" {{ b.shopify_attributes }}>
         <span class="num">{{ forloop.index }}</span>
-        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign su = b.settings.icon | image_url: width: 160 -%}{%- else -%}{%- assign su = b.settings.icon_fallback | default: 'step-pour.png' | asset_url -%}{%- endif -%}<span style="-webkit-mask-image:url({{ su }});mask-image:url({{ su }});"></span></div>
+        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign su = b.settings.icon | image_url: width: 160 -%}{%- else -%}{%- assign su = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png' -%}{%- endif -%}<span style="-webkit-mask-image:url({{ su }});mask-image:url({{ su }});"></span></div>
         <h3>{{ b.settings.title }}</h3>
         <p>{{ b.settings.copy }}</p>
       </article>
@@ -221,7 +223,8 @@
     {%- if section.settings.graphic_title != blank -%}
     <div class="head left" style="max-width:760px;"><h2>{{ section.settings.graphic_title }}</h2>{%- if section.settings.graphic_copy != blank -%}<p>{{ section.settings.graphic_copy }}</p>{%- endif -%}</div>
     {%- endif -%}
-    <iframe class="graphic-frame" style="aspect-ratio:{{ section.settings.graphic_ratio | default: '1400 / 700' }};" src="{{ section.settings.graphic_asset | default: 'work.html' | asset_url }}" title="{{ section.settings.graphic_a11y | default: 'AVRO for work research graphic' | escape }}" loading="lazy" scrolling="no"></iframe>
+    {%- if section.settings.graphic_asset != blank -%}{%- assign graphic_src = section.settings.graphic_asset -%}{%- else -%}{%- assign graphic_src = base | append: '/graphics/work.html' -%}{%- endif -%}
+    <iframe class="graphic-frame" style="aspect-ratio:{{ section.settings.graphic_ratio | default: '1400 / 700' }};" src="{{ graphic_src }}" title="{{ section.settings.graphic_a11y | default: 'AVRO for work research graphic' | escape }}" loading="lazy" scrolling="no"></iframe>
     {%- if section.settings.chart_source != blank -%}<p style="font-size:12px;line-height:1.5;color:var(--warm-gray);margin-top:16px;white-space:pre-line;">{{ section.settings.chart_source }}</p>{%- endif -%}
   </div></section>
   {%- endif -%}
@@ -232,7 +235,7 @@
     <div class="cards c4">
       {%- for b in moments -%}
       <div class="icard" {{ b.shopify_attributes }}>
-        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign mu = b.settings.icon | image_url: width: 120 -%}{%- else -%}{%- assign mu = b.settings.icon_fallback | default: 'cohort-tech.png' | asset_url -%}{%- endif -%}<span style="-webkit-mask-image:url({{ mu }});mask-image:url({{ mu }});"></span></div>
+        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign mu = b.settings.icon | image_url: width: 120 -%}{%- else -%}{%- assign mu = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-tech.png' -%}{%- endif -%}<span style="-webkit-mask-image:url({{ mu }});mask-image:url({{ mu }});"></span></div>
         <h3>{{ b.settings.title }}</h3>
         <p>{{ b.settings.copy }}</p>
       </div>
@@ -247,7 +250,7 @@
     <div class="pc-row">
       {%- for b in products -%}
       <article class="pc" {{ b.shopify_attributes }}>
-        <div class="pc-thumb">{%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">{%- else -%}<img src="{{ b.settings.image_fallback | default: 'calm-blueberry-acai.png' | asset_url }}" alt="{{ b.settings.name | escape }}">{%- endif -%}</div>
+        <div class="pc-thumb">{%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">{%- else -%}<img src="{{ b.settings.image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png' }}" alt="{{ b.settings.name | escape }}">{%- endif -%}</div>
         <h3>{{ b.settings.name }}</h3>
         <p>{{ b.settings.copy }}</p>
         <a href="{{ b.settings.link | default: '/collections/all' }}" class="btn btn-outline">{{ b.settings.button_label | default: 'Shop' }}</a>
@@ -298,7 +301,7 @@
   </div></section>
 
   <section class="banner">
-    {%- if section.settings.banner_image != blank -%}<img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">{%- else -%}<img src="{{ 'work-banner.png' | asset_url }}" alt="">{%- endif -%}
+    {%- if section.settings.banner_image != blank -%}<img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">{%- else -%}<img src="{{ base }}/images/banners/work-banner.png" alt="">{%- endif -%}
     <a href="{{ section.settings.banner_link | default: '/collections/all' }}" class="btn">{{ section.settings.banner_label | default: 'Shop' }}</a>
   </section>
 
@@ -351,7 +354,7 @@
     { "type": "checkbox", "id": "show_graphic", "label": "Show research graphic", "default": true },
     { "type": "text", "id": "graphic_title", "label": "Heading (optional)", "default": "Built for mentally demanding moments." },
     { "type": "textarea", "id": "graphic_copy", "label": "Body (optional)", "default": "When work requires attention, meetings require presence, or projects require focus, AVRO supports calm, clarity, and readiness." },
-    { "type": "text", "id": "graphic_asset", "label": "Graphic asset filename", "default": "work.html" },
+    { "type": "text", "id": "graphic_asset", "label": "Graphic URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/graphics/work.html" },
     { "type": "text", "id": "graphic_ratio", "label": "Aspect ratio", "default": "1400 / 700" },
     { "type": "text", "id": "graphic_a11y", "label": "Graphic title (a11y)", "default": "AVRO for work research graphic" },
     { "type": "textarea", "id": "chart_source", "label": "Source / disclaimer" },
@@ -383,13 +386,13 @@
   "blocks": [
     { "type": "reason", "name": "Reason card", "settings": [
       { "type": "image_picker", "id": "icon", "label": "Icon" },
-      { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "calm-first-foundation.png" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png" },
       { "type": "text", "id": "title", "label": "Title", "default": "Calm Before Output" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
     { "type": "step", "name": "How-to step", "settings": [
       { "type": "image_picker", "id": "icon", "label": "Icon" },
-      { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "step-pour.png" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png" },
       { "type": "text", "id": "title", "label": "Title", "default": "Mix" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
@@ -400,13 +403,13 @@
     ]},
     { "type": "moment", "name": "Use moment", "settings": [
       { "type": "image_picker", "id": "icon", "label": "Icon" },
-      { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "cohort-tech.png" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-tech.png" },
       { "type": "text", "id": "title", "label": "Title", "default": "Deep Work" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
     { "type": "product", "name": "Product card", "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
-      { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "calm-blueberry-acai.png" },
+      { "type": "text", "id": "image_fallback", "label": "Image URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" },
       { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
       { "type": "textarea", "id": "copy", "label": "Copy" },
       { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
@@ -424,22 +427,22 @@
   ],
   "presets": [
     { "name": "AVRO — Work", "blocks": [
-      { "type": "reason", "settings": { "icon_fallback": "calm-first-foundation.png", "title": "Calm Before Output", "copy": "Supports a calmer state before demanding work moments." } },
-      { "type": "reason", "settings": { "icon_fallback": "supports-clear-thinking.png", "title": "Clarity Without the Edge", "copy": "Supports clear focus without turning the workday into stimulant overload." } },
-      { "type": "reason", "settings": { "icon_fallback": "cohort-tech.png", "title": "Built for Mental Demands", "copy": "A simple pre-work ritual for meetings, deep work, coding sessions, presentations, and long days." } },
-      { "type": "step", "settings": { "icon_fallback": "step-pour.png", "title": "Mix", "copy": "Mix one stick with water." } },
-      { "type": "step", "settings": { "icon_fallback": "step-stir.png", "title": "Time it", "copy": "Drink about 30 minutes before your work moment." } },
-      { "type": "step", "settings": { "icon_fallback": "step-drink.png", "title": "Show up", "copy": "Step in with a calmer, clearer routine." } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png", "title": "Calm Before Output", "copy": "Supports a calmer state before demanding work moments." } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-clear-thinking.png", "title": "Clarity Without the Edge", "copy": "Supports clear focus without turning the workday into stimulant overload." } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-tech.png", "title": "Built for Mental Demands", "copy": "A simple pre-work ritual for meetings, deep work, coding sessions, presentations, and long days." } },
+      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png", "title": "Mix", "copy": "Mix one stick with water." } },
+      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-stir.png", "title": "Time it", "copy": "Drink about 30 minutes before your work moment." } },
+      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-drink.png", "title": "Show up", "copy": "Step in with a calmer, clearer routine." } },
       { "type": "formula_bar", "settings": { "name": "Calm", "addition": "Magnesium", "color": "#4b4d9a" } },
       { "type": "formula_bar", "settings": { "name": "Focus", "addition": "Cognigrape®", "color": "#C13584" } },
       { "type": "formula_bar", "settings": { "name": "Energy", "addition": "Caffeine", "color": "#E8A23D" } },
-      { "type": "moment", "settings": { "icon_fallback": "supports-focus-without-overload.png", "title": "Deep Work", "copy": "For focus blocks, writing, planning, strategy, and long attention sessions." } },
-      { "type": "moment", "settings": { "icon_fallback": "control-under-pressure.png", "title": "Meetings + Presentations", "copy": "For moments when composure and clarity matter." } },
-      { "type": "moment", "settings": { "icon_fallback": "cohort-tech.png", "title": "Coding + Building Sessions", "copy": "For long technical sessions where overstimulation can become a problem." } },
-      { "type": "moment", "settings": { "icon_fallback": "supports-steady-attention.png", "title": "Travel + Long Workdays", "copy": "For demanding days when you want steady support without defaulting to more stimulation." } },
-      { "type": "product", "settings": { "image_fallback": "calm-blueberry-acai.png", "name": "AVRO Calm", "copy": "Caffeine-free composure for presentations and high-pressure meetings.*", "button_label": "Shop Calm", "link": "/collections/calm" } },
-      { "type": "product", "settings": { "image_fallback": "focus-red-dragon-fruit.png", "name": "AVRO Focus", "copy": "Caffeine-free clarity for deep work and long attention blocks.*", "button_label": "Shop Focus", "link": "/collections/focus" } },
-      { "type": "product", "settings": { "image_fallback": "energy-fuji-apple.png", "name": "AVRO Energy", "copy": "Natural caffeine with a calm-first foundation for demanding days.*", "button_label": "Shop Energy", "link": "/collections/energy" } },
+      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-focus-without-overload.png", "title": "Deep Work", "copy": "For focus blocks, writing, planning, strategy, and long attention sessions." } },
+      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png", "title": "Meetings + Presentations", "copy": "For moments when composure and clarity matter." } },
+      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-tech.png", "title": "Coding + Building Sessions", "copy": "For long technical sessions where overstimulation can become a problem." } },
+      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-steady-attention.png", "title": "Travel + Long Workdays", "copy": "For demanding days when you want steady support without defaulting to more stimulation." } },
+      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "name": "AVRO Calm", "copy": "Caffeine-free composure for presentations and high-pressure meetings.*", "button_label": "Shop Calm", "link": "/collections/calm" } },
+      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-red-dragon-fruit.png", "name": "AVRO Focus", "copy": "Caffeine-free clarity for deep work and long attention blocks.*", "button_label": "Shop Focus", "link": "/collections/focus" } },
+      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "name": "AVRO Energy", "copy": "Natural caffeine with a calm-first foundation for demanding days.*", "button_label": "Shop Energy", "link": "/collections/energy" } },
       { "type": "testimonial", "settings": { "quote": "I hit deep work without the caffeine crash. Clear and calm for hours.", "name": "Verified Buyer", "role": "AVRO Focus" } },
       { "type": "testimonial", "settings": { "quote": "Walked into a big presentation composed instead of wired. Game changer.", "name": "Verified Buyer", "role": "AVRO Calm" } },
       { "type": "testimonial", "settings": { "quote": "Early starts feel manageable now without the jittery edge.", "name": "Verified Buyer", "role": "AVRO Energy" } },
