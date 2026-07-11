@@ -1,11 +1,13 @@
 {%- comment -%}
   ============================================================================
   AVRO — PRODUCT DETAIL (PDP) · FOCUS
-  Preloaded with the live site data from lib/data.ts and the site buy box.
+  Drop-in export. Images are hardcoded to the live site; buy box is wired to
+  the Shopify product (price, variants, add-to-cart, subscribe).
+  NOTE: images load from the AVRO staging deployment. Deployment Protection
+  must be OFF for these to render publicly.
   HOW TO USE
-  1. Create sections/avro-product-focus.liquid and paste this entire file in.
-  2. Add the "AVRO Product · Focus" section to the Focus product template.
-  3. Live data: title, price, images, availability, flavor option, selling plan.
+  1. Create sections/product-focus.liquid and paste this entire file in.
+  2. Add the "AVRO Product · Focus" section to the matching product template.
   ============================================================================
 {%- endcomment -%}
 
@@ -21,12 +23,10 @@
 {%- endfor -%}
 {%- assign flavor_opt_index0 = flavor_opt_index | minus: 1 -%}
 
-{%- comment -%} Does this product have a subscription selling plan? {%- endcomment -%}
 {%- assign has_plan = false -%}
 {%- if product.selling_plan_groups.size > 0 -%}{%- assign has_plan = true -%}{%- endif -%}
 {%- if section.settings.show_subscribe == false -%}{%- assign has_plan = false -%}{%- endif -%}
 
-{%- comment -%} ---- PRESET MAPPING: turn simple choices into matched sizing ---- {%- endcomment -%}
 {%- case section.settings.button_size -%}
   {%- when 'compact' -%}{%- assign btn_height = 48 -%}
   {%- when 'large' -%}{%- assign btn_height = 64 -%}
@@ -45,9 +45,9 @@
 
 {% style %}
   #avro-pdp-{{ section.id }} {
-    --base: #FFFFFF; --base-light: {{ section.settings.bg_color | default: '#F2F2F2' }}; --bone: {{ section.settings.button_text_color | default: '#FFFFFF' }};
-    --charcoal: {{ section.settings.button_color | default: '#151515' }}; --ink: {{ section.settings.text_color | default: '#1C1B14' }}; --warm-gray: #6B6857; --gray: #E2E2E2;
-    --avro-blue: {{ section.settings.accent_color | default: accent }}; /* live site accent, customizable */
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --gray: #E2E2E2;
+    --avro-blue: {{ accent }};
     --pdp-pad-y: {{ pdp_pad_y }}px;
     --pdp-pad-x: {{ pdp_pad_x }}px;
     --pdp-gap: {{ pdp_gap }}px;
@@ -60,8 +60,6 @@
   #avro-pdp-{{ section.id }} .pdp-wrap { max-width: 1180px; margin: 0 auto; padding: var(--pdp-pad-y) var(--pdp-pad-x); }
   #avro-pdp-{{ section.id }} .pdp-grid { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: start; }
   @media (min-width: 900px) { #avro-pdp-{{ section.id }} .pdp-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 48px; } }
-
-  /* GALLERY */
   #avro-pdp-{{ section.id }} .gal-main { position: relative; aspect-ratio: 1/1; border-radius: 20px; overflow: hidden; background: var(--gray); }
   #avro-pdp-{{ section.id }} .gal-main img { width: 100%; height: 100%; object-fit: cover; display: none; }
   #avro-pdp-{{ section.id }} .gal-main img.is-active { display: block; }
@@ -71,25 +69,16 @@
   #avro-pdp-{{ section.id }} .gal-thumb { width: 64px; height: 64px; border-radius: 12px; overflow: hidden; background: var(--gray); border: 2px solid transparent; cursor: pointer; padding: 0; }
   #avro-pdp-{{ section.id }} .gal-thumb.is-active { border-color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .gal-thumb img { width: 100%; height: 100%; object-fit: cover; }
-
-  /* BUY BOX */
   #avro-pdp-{{ section.id }} .bb { display: flex; flex-direction: column; gap: var(--pdp-gap); }
   #avro-pdp-{{ section.id }} .bb h1 { font-weight: 900; font-size: clamp(26px,3.2vw,40px); line-height: 0.98; margin: 0; color: var(--ink); }
   #avro-pdp-{{ section.id }} .bb .support { font-weight: 600; font-size: clamp(15px,1.3vw,18px); line-height: 1.35; color: var(--ink); margin: 4px 0 0; }
   #avro-pdp-{{ section.id }} .bb .per-box { font-weight: 500; font-size: clamp(13px,1.1vw,15px); line-height: 1.4; color: var(--warm-gray); margin: 2px 0 0; }
   #avro-pdp-{{ section.id }} .bb .lbl { font-weight: 700; font-size: clamp(12px,1vw,13px); color: var(--ink); margin-bottom: 2px; display: block; }
-
-  /* FLAVOR PILLS */
   #avro-pdp-{{ section.id }} .flavors { display: flex; flex-wrap: wrap; gap: 8px; }
   #avro-pdp-{{ section.id }} .flavor { display: inline-flex; align-items: center; gap: 8px; padding: 4px 16px 4px 5px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; cursor: pointer; transition: all .15s ease; }
-  #avro-pdp-{{ section.id }} .flavor .dot { width: 30px; height: 30px; border-radius: 999px; overflow: hidden; background: #F2F2F2; flex-shrink: 0; display: grid; place-items: center; }
-  #avro-pdp-{{ section.id }} .flavor .dot img { width: 100%; height: 100%; object-fit: cover; }
   #avro-pdp-{{ section.id }} .flavor .nm { font-weight: 700; font-size: clamp(11px,1vw,14px); color: var(--ink); white-space: nowrap; }
   #avro-pdp-{{ section.id }} .flavor.is-active { background: var(--charcoal); border-color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .flavor.is-active .nm { color: var(--bone); }
-  #avro-pdp-{{ section.id }} .flavor.is-soldout { opacity: 0.4; }
-
-  /* PURCHASE OPTIONS */
   #avro-pdp-{{ section.id }} .buy-opt { position: relative; display: flex; align-items: center; gap: 12px; min-height: var(--btn-height); padding: 10px 18px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; color: var(--ink); cursor: pointer; }
   #avro-pdp-{{ section.id }} .buy-opt.is-active { background: var(--charcoal); border-color: var(--charcoal); color: var(--bone); }
   #avro-pdp-{{ section.id }} .buy-opt .radio { width: 18px; height: 18px; border-radius: 999px; border: 2px solid var(--warm-gray); display: grid; place-items: center; flex-shrink: 0; }
@@ -103,8 +92,6 @@
   #avro-pdp-{{ section.id }} .benefits { list-style: none; margin: 0; padding: 2px 4px 0; display: flex; flex-direction: column; gap: 6px; }
   #avro-pdp-{{ section.id }} .benefits li { display: flex; align-items: flex-start; gap: 8px; font-weight: 500; font-size: clamp(12px,1vw,14px); line-height: 1.4; color: var(--ink); }
   #avro-pdp-{{ section.id }} .benefits svg { flex-shrink: 0; margin-top: 2px; }
-
-  /* QUANTITY + CTA (single inline row) */
   #avro-pdp-{{ section.id }} .buy-row { display: flex; align-items: stretch; gap: 12px; margin-top: calc(var(--pdp-gap) + 8px); padding-top: var(--pdp-gap); border-top: 1px solid var(--gray); }
   #avro-pdp-{{ section.id }} .stepper { display: inline-flex; align-items: center; justify-content: space-between; flex: 0 0 auto; background: var(--bone); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); height: var(--btn-height); overflow: hidden; }
   #avro-pdp-{{ section.id }} .stepper button { width: 44px; align-self: stretch; border: 0; background: transparent; font-weight: 700; font-size: 18px; line-height: 1; color: var(--charcoal); cursor: pointer; display: grid; place-items: center; }
@@ -119,68 +106,42 @@
 <div id="avro-pdp-{{ section.id }}" data-flavor-index="{{ flavor_opt_index }}">
   <div class="pdp-wrap">
     {%- if product == blank -%}
-      <p style="text-align:center;padding:40px;">Add this section to a product template to preview it with live product data.</p>
+      <p style="text-align:center;padding:40px;">Add this section to a product template to preview it.</p>
     {%- else -%}
     <div class="pdp-grid">
 
-      {%- comment -%} ---------- GALLERY (uploaded images + product media) ---------- {%- endcomment -%}
-      {%- assign gallery_blocks = section.blocks | where: 'type', 'image' -%}
-      {%- assign uploaded_count = 0 -%}
-      {%- for b in gallery_blocks -%}
-        {%- if b.settings.image != blank -%}{%- assign uploaded_count = uploaded_count | plus: 1 -%}{%- endif -%}
-      {%- endfor -%}
-      {%- assign total_slides = uploaded_count -%}
-      {%- if section.settings.show_product_images -%}{%- assign total_slides = total_slides | plus: product.media.size -%}{%- endif -%}
+      {%- comment -%} ---------- GALLERY (hardcoded live-site images) ---------- {%- endcomment -%}
       <div class="gal">
         <div class="gal-main" id="gal-main-{{ section.id }}">
-          {%- assign slide_i = 0 -%}
-          {%- for b in gallery_blocks -%}
-            {%- if b.settings.image != blank -%}
-              {%- assign slide_i = slide_i | plus: 1 -%}
-              <img data-media-id="block-{{ b.id }}" class="{% if slide_i == 1 %}is-active{% endif %}" src="{{ b.settings.image | image_url: width: 1200 }}" alt="{{ b.settings.image.alt | default: product.title | escape }}" loading="{% if slide_i == 1 %}eager{% else %}lazy{% endif %}" {{ b.shopify_attributes }}>
-            {%- endif -%}
-          {%- endfor -%}
-          {%- if section.settings.show_product_images -%}
-            {%- for media in product.media -%}
-              {%- if media.media_type == 'image' -%}
-                {%- assign slide_i = slide_i | plus: 1 -%}
-                <img data-media-id="{{ media.id }}" class="{% if slide_i == 1 %}is-active{% endif %}" src="{{ media | image_url: width: 1200 }}" alt="{{ media.alt | default: product.title | escape }}" loading="{% if slide_i == 1 %}eager{% else %}lazy{% endif %}">
-              {%- endif -%}
-            {%- endfor -%}
-          {%- endif -%}
-          {%- if slide_i == 0 -%}
-            <img class="is-active" src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title | escape }}">
-          {%- endif -%}
+          <img data-idx="0" class="is-active" src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png" alt="AVRO Product · Focus image 1" loading="eager">
+          <img data-idx="1" class="" src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/solo/focus-pomegranate-raspberry.jpg" alt="AVRO Product · Focus image 2" loading="lazy">
+          <img data-idx="2" class="" src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/sticks/focus-pomegranate-raspberry.png" alt="AVRO Product · Focus image 3" loading="lazy">
+          <img data-idx="3" class="" src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/lifestyle/glass-focus-pomegranate-raspberry.jpg" alt="AVRO Product · Focus image 4" loading="lazy">
+          <img data-idx="4" class="" src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/pomegranate-raspberry.png" alt="AVRO Product · Focus image 5" loading="lazy">
           {%- if section.settings.show_rating -%}
             <span class="gal-rating"><span class="stars">★★★★★</span> {{ section.settings.rating_value | default: '4.8' }}</span>
           {%- endif -%}
         </div>
-        {%- if total_slides > 1 -%}
-          <div class="gal-thumbs">
-            {%- assign thumb_i = 0 -%}
-            {%- for b in gallery_blocks -%}
-              {%- if b.settings.image != blank -%}
-                {%- assign thumb_i = thumb_i | plus: 1 -%}
-                <button type="button" class="gal-thumb {% if thumb_i == 1 %}is-active{% endif %}" data-target="block-{{ b.id }}" aria-label="View image {{ thumb_i }}">
-                  <img src="{{ b.settings.image | image_url: width: 160 }}" alt="">
-                </button>
-              {%- endif -%}
-            {%- endfor -%}
-            {%- if section.settings.show_product_images -%}
-              {%- for media in product.media -%}
-                {%- if media.media_type == 'image' -%}
-                  {%- assign thumb_i = thumb_i | plus: 1 -%}
-                  <button type="button" class="gal-thumb {% if thumb_i == 1 %}is-active{% endif %}" data-target="{{ media.id }}" aria-label="View image {{ thumb_i }}">
-                    <img src="{{ media | image_url: width: 160 }}" alt="">
-                  </button>
-                {%- endif -%}
-              {%- endfor -%}
-            {%- endif -%}
-          </div>
-        {%- endif -%}
+        <div class="gal-thumbs">
+            <button type="button" class="gal-thumb is-active" data-target="0" aria-label="View image 1">
+              <img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png" alt="">
+            </button>
+            <button type="button" class="gal-thumb " data-target="1" aria-label="View image 2">
+              <img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/solo/focus-pomegranate-raspberry.jpg" alt="">
+            </button>
+            <button type="button" class="gal-thumb " data-target="2" aria-label="View image 3">
+              <img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/sticks/focus-pomegranate-raspberry.png" alt="">
+            </button>
+            <button type="button" class="gal-thumb " data-target="3" aria-label="View image 4">
+              <img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/lifestyle/glass-focus-pomegranate-raspberry.jpg" alt="">
+            </button>
+            <button type="button" class="gal-thumb " data-target="4" aria-label="View image 5">
+              <img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/pomegranate-raspberry.png" alt="">
+            </button>
+        </div>
       </div>
 
-      {%- comment -%} ---------- BUY BOX ---------- {%- endcomment -%}
+      {%- comment -%} ---------- BUY BOX (wired to Shopify) ---------- {%- endcomment -%}
       <div class="bb">
         <header>
           <h1>{{ product.title }}</h1>
@@ -197,7 +158,6 @@
           <input type="hidden" name="id" id="pdp-vid-{{ section.id }}" value="{{ product.selected_or_first_available_variant.id }}">
           <input type="hidden" name="selling_plan" id="pdp-plan-{{ section.id }}" value="" {% unless has_plan %}disabled{% endunless %}>
 
-          {%- comment -%} FLAVOR SELECTOR (from chosen option) {%- endcomment -%}
           {%- if flavor_opt_index > 0 -%}
             {%- assign flavor_opt = product.options_with_values[flavor_opt_index0] -%}
             <div class="flavor-block" style="display:flex;flex-direction:column;gap:6px;">
@@ -212,7 +172,6 @@
             </div>
           {%- endif -%}
 
-          {%- comment -%} PURCHASE OPTIONS {%- endcomment -%}
           {%- if has_plan -%}
             {%- assign first_group = product.selling_plan_groups | first -%}
             {%- assign first_plan = first_group.selling_plans | first -%}
@@ -248,7 +207,6 @@
             <div class="price-only" style="font-weight:800;font-size:clamp(20px,2vw,28px);" data-price-onetime></div>
           {%- endif -%}
 
-          {%- comment -%} QUANTITY + ADD TO CART (inline) {%- endcomment -%}
           <div class="buy-row">
             <div class="stepper" role="group" aria-label="Quantity">
               <button type="button" data-step="-1" aria-label="Decrease quantity" disabled>&minus;</button>
@@ -285,7 +243,6 @@
     var state = { variant: variants.find(function (v) { return v.id == vidInput.value; }) || variants[0], buy: hasPlan ? "subscribe" : "onetime", qty: 1 };
 
     function money(cents) { return "$" + (cents / 100).toFixed(2); }
-
     function planAllocation(v) {
       if (!v || !v.selling_plan_allocations || !v.selling_plan_allocations.length) return null;
       return v.selling_plan_allocations[0];
@@ -293,34 +250,18 @@
 
     function render() {
       var v = state.variant;
-      var oneEls = root.querySelectorAll("[data-price-onetime]");
-      var subEls = root.querySelectorAll("[data-price-subscribe]");
-      oneEls.forEach(function (el) { el.textContent = v ? money(v.price * state.qty) : ""; });
+      root.querySelectorAll("[data-price-onetime]").forEach(function (el) { el.textContent = v ? money(v.price * state.qty) : ""; });
       var alloc = planAllocation(v);
-      subEls.forEach(function (el) { el.textContent = alloc ? money(alloc.price * state.qty) : (v ? money(v.price * state.qty) : ""); });
+      root.querySelectorAll("[data-price-subscribe]").forEach(function (el) { el.textContent = alloc ? money(alloc.price * state.qty) : (v ? money(v.price * state.qty) : ""); });
 
       vidInput.value = v ? v.id : "";
       if (hasPlan) {
-        if (state.buy === "subscribe" && alloc) {
-          planInput.disabled = false;
-          planInput.value = alloc.selling_plan.id;
-        } else {
-          planInput.value = "";
-          planInput.disabled = true;
-        }
+        if (state.buy === "subscribe" && alloc) { planInput.disabled = false; planInput.value = alloc.selling_plan.id; }
+        else { planInput.value = ""; planInput.disabled = true; }
       }
-
       var available = v && v.available;
       addBtn.disabled = !available;
       addBtn.textContent = available ? "{{ section.settings.add_label | default: 'Add to Cart' | escape }}" : "Sold Out";
-
-      if (v && v.featured_media && galMain) {
-        galMain.querySelectorAll("img").forEach(function (img) {
-          img.classList.toggle("is-active", img.dataset.mediaId == v.featured_media.id);
-        });
-        var thumbs = root.querySelectorAll(".gal-thumb");
-        thumbs.forEach(function (t) { t.classList.toggle("is-active", t.dataset.target == v.featured_media.id); });
-      }
     }
 
     if (flavorIndex > 0) {
@@ -328,8 +269,7 @@
         btn.addEventListener("click", function () {
           var val = btn.dataset.flavor;
           root.querySelectorAll(".flavor").forEach(function (b) { b.classList.remove("is-active"); b.setAttribute("aria-checked", "false"); });
-          btn.classList.add("is-active");
-          btn.setAttribute("aria-checked", "true");
+          btn.classList.add("is-active"); btn.setAttribute("aria-checked", "true");
           var match = variants.find(function (v) { return v["option" + flavorIndex] === val; });
           if (match) { state.variant = match; render(); }
         });
@@ -351,8 +291,7 @@
       btn.addEventListener("click", function () {
         var step = parseInt(btn.dataset.step, 10);
         state.qty = Math.max(1, state.qty + step);
-        qtyEl.textContent = state.qty;
-        qtyInput.value = state.qty;
+        qtyEl.textContent = state.qty; qtyInput.value = state.qty;
         root.querySelector('.stepper button[data-step="-1"]').disabled = state.qty <= 1;
         render();
       });
@@ -360,8 +299,8 @@
 
     root.querySelectorAll(".gal-thumb").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        var id = btn.dataset.target;
-        if (galMain) galMain.querySelectorAll("img").forEach(function (img) { img.classList.toggle("is-active", img.dataset.mediaId == id); });
+        var idx = btn.dataset.target;
+        if (galMain) galMain.querySelectorAll("img").forEach(function (img) { img.classList.toggle("is-active", img.dataset.idx == idx); });
         root.querySelectorAll(".gal-thumb").forEach(function (t) { t.classList.toggle("is-active", t === btn); });
       });
     });
@@ -376,118 +315,6 @@
   "name": "AVRO Product · Focus",
   "tag": "section",
   "settings": [
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Accent color",
-      "default": "#94C6D4"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Section background",
-      "default": "#F2F2F2"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#1C1B14"
-    },
-    {
-      "type": "color",
-      "id": "button_color",
-      "label": "Button & selected color",
-      "default": "#151515"
-    },
-    {
-      "type": "color",
-      "id": "button_text_color",
-      "label": "Button text color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "header",
-      "content": "Images"
-    },
-    {
-      "type": "paragraph",
-      "content": "Upload your own images by adding \"Gallery image\" blocks to this section. Uploaded images show first, before the product’s own images."
-    },
-    {
-      "type": "checkbox",
-      "id": "show_product_images",
-      "label": "Also show the product's own images",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Spacing & buttons"
-    },
-    {
-      "type": "select",
-      "id": "button_size",
-      "label": "Button size",
-      "default": "standard",
-      "options": [
-        {
-          "value": "compact",
-          "label": "Compact"
-        },
-        {
-          "value": "standard",
-          "label": "Standard"
-        },
-        {
-          "value": "large",
-          "label": "Large"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "corner_style",
-      "label": "Corner style",
-      "default": "pill",
-      "options": [
-        {
-          "value": "square",
-          "label": "Square"
-        },
-        {
-          "value": "soft",
-          "label": "Soft"
-        },
-        {
-          "value": "pill",
-          "label": "Pill (fully rounded)"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "spacing",
-      "label": "Spacing",
-      "default": "standard",
-      "options": [
-        {
-          "value": "cozy",
-          "label": "Cozy"
-        },
-        {
-          "value": "standard",
-          "label": "Standard"
-        },
-        {
-          "value": "roomy",
-          "label": "Roomy"
-        }
-      ]
-    },
     {
       "type": "header",
       "content": "Copy"
@@ -574,17 +401,6 @@
     }
   ],
   "blocks": [
-    {
-      "type": "image",
-      "name": "Gallery image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        }
-      ]
-    },
     {
       "type": "benefit",
       "name": "Subscribe benefit",
