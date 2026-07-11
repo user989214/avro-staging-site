@@ -147,6 +147,8 @@
   #avro-home-{{ section.id }} .accord.is-open .accord-body { max-height: 260px; }
   #avro-home-{{ section.id }} .accord-body p { padding: 0 16px 18px 64px; font-weight: 500; font-size: clamp(14px,1.1vw,17px); line-height: 1.5; color: var(--warm-gray); margin: 0; }
   #avro-home-{{ section.id }} .approach-graphic { width: 100%; aspect-ratio: 1200 / 720; border: 0; display: block; color-scheme: light; }
+  #avro-home-{{ section.id }} .approach-image { width: 100%; height: 100%; min-height: clamp(280px,32vw,460px); object-fit: cover; border-radius: 16px; display: block; }
+  #avro-home-{{ section.id }} .approach-grid.is-single { grid-template-columns: 1fr; }
 
   /* ── PRODUCT STRIP ───────────────────────────────────────────────────────── */
   #avro-home-{{ section.id }} .strip-sec { padding: clamp(32px,6vw,72px) clamp(16px,5vw,64px); }
@@ -408,8 +410,11 @@
   {%- if approaches.size > 0 or section.settings.approach_heading != blank -%}
   <section class="hp-sec pad-sec">
     <div class="hp-wrap">
+      {%- assign approach_media = section.settings.approach_media | default: 'graphic' -%}
+      {%- assign approach_has_media = true -%}
+      {%- if approach_media == 'none' -%}{%- assign approach_has_media = false -%}{%- endif -%}
       <div class="card-shell">
-        <div class="approach-grid">
+        <div class="approach-grid{% unless approach_has_media %} is-single{% endunless %}">
           <div class="approach-col">
             <h2>{{ section.settings.approach_heading | default: 'The calm-first approach.' }}</h2>
             {%- for b in approaches -%}
@@ -430,9 +435,19 @@
             </div>
             {%- endfor -%}
           </div>
-          <div>
-            <iframe class="approach-graphic" src="{{ section.settings.approach_graphic_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/graphics/homepage.html' }}" title="{{ section.settings.approach_graphic_title | default: 'The Calm-First approach' | escape }}" loading="lazy" scrolling="no"></iframe>
-          </div>
+          {%- if approach_media == 'image' -%}
+            <div>
+              {%- if section.settings.approach_image != blank -%}
+                <img class="approach-image" src="{{ section.settings.approach_image | image_url: width: 1600 }}" alt="{{ section.settings.approach_graphic_title | default: 'The Calm-First approach' | escape }}" loading="lazy">
+              {%- else -%}
+                <img class="approach-image" src="{{ section.settings.approach_image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/card-calm.jpg' }}" alt="{{ section.settings.approach_graphic_title | default: 'The Calm-First approach' | escape }}" loading="lazy">
+              {%- endif -%}
+            </div>
+          {%- elsif approach_media == 'graphic' -%}
+            <div>
+              <iframe class="approach-graphic" src="{{ section.settings.approach_graphic_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/graphics/homepage.html' }}" title="{{ section.settings.approach_graphic_title | default: 'The Calm-First approach' | escape }}" loading="lazy" scrolling="no"></iframe>
+            </div>
+          {%- endif -%}
         </div>
       </div>
     </div>
@@ -790,8 +805,11 @@
 
     { "type": "header", "content": "Approach (accordion + graphic)" },
     { "type": "text", "id": "approach_heading", "label": "Heading", "default": "The calm-first approach." },
-    { "type": "text", "id": "approach_graphic_title", "label": "Graphic title (a11y)", "default": "The Calm-First approach" },
-    { "type": "text", "id": "approach_graphic_fallback", "label": "Graphic asset filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/graphics/homepage.html", "info": "An .html asset uploaded to your theme; shown in an iframe." },
+    { "type": "select", "id": "approach_media", "label": "Side media", "options": [ { "value": "graphic", "label": "Interactive graphic" }, { "value": "image", "label": "Image" }, { "value": "none", "label": "None (accordion full width)" } ], "default": "graphic", "info": "Choose what shows beside the accordion. Select None to hide it entirely." },
+    { "type": "text", "id": "approach_graphic_title", "label": "Media title (a11y)", "default": "The Calm-First approach" },
+    { "type": "image_picker", "id": "approach_image", "label": "Image (when Side media = Image)" },
+    { "type": "text", "id": "approach_image_fallback", "label": "Image URL (fallback)", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/card-calm.jpg" },
+    { "type": "text", "id": "approach_graphic_fallback", "label": "Graphic URL (when Side media = Interactive graphic)", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/graphics/homepage.html", "info": "An .html page shown in an iframe." },
 
     { "type": "header", "content": "Product strip" },
     { "type": "text", "id": "strip_heading", "label": "Heading", "default": "Three formulas. One foundation." },
