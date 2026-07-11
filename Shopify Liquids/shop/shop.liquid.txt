@@ -142,12 +142,12 @@
         {%- if section.settings.hero_image != blank -%}
           <img class="shop-hero-img-desktop" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}">
         {%- else -%}
-          <img class="shop-hero-img-desktop" src="{{ 'avro-shop-hero.png' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}">
+              <img class="shop-hero-img-desktop" src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/lifestyle/avro-shop-hero.png" alt="{{ section.settings.hero_alt | escape }}">
         {%- endif -%}
         {%- if section.settings.hero_image_mobile != blank -%}
           <img class="shop-hero-img-mobile" src="{{ section.settings.hero_image_mobile | image_url: width: 1200 }}" alt="" aria-hidden="true">
         {%- else -%}
-          <img class="shop-hero-img-mobile" src="{{ 'shop-hero-mobile.png' | asset_url }}" alt="" aria-hidden="true">
+              <img class="shop-hero-img-mobile" src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/lifestyle/avro-shop-hero.png" alt="" aria-hidden="true">
         {%- endif -%}
       </div>
       <div class="shop-hero-content">
@@ -194,7 +194,7 @@
             {%- elsif card_product != blank and card_product.featured_image != blank -%}
               <img src="{{ card_product.featured_image | image_url: width: 800 }}" alt="{{ card_product.featured_image.alt | default: card_name | escape }}">
             {%- else -%}
-              <img src="{{ b.settings.image_fallback | default: 'calm-blueberry-acai.png' | asset_url }}" alt="{{ card_name | escape }}">
+                  <img src="{{ b.settings.image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png' }}" alt="{{ card_name | escape }}">
             {%- endif -%}
           </div>
           <h3>{{ card_name }}</h3>
@@ -289,7 +289,7 @@
       {%- if section.settings.banner_image != blank -%}
         <img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">
       {%- else -%}
-        <img src="{{ 'shop-banner.png' | asset_url }}" alt="">
+                <img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/banners/shop-banner.png" alt="">
       {%- endif -%}
       <a href="{{ section.settings.banner_link | default: '/collections/all' }}" class="hp-btn banner-btn">{{ section.settings.banner_label | default: 'Shop' }}</a>
     </div>
@@ -355,7 +355,7 @@
         { "type": "paragraph", "content": "Pick a product above to auto-pull its price, image, link, and availability. The fields below are marketing copy and stay editable. Leave the product empty to run the card fully manually." },
         { "type": "header", "content": "Optional overrides" },
         { "type": "image_picker", "id": "image", "label": "Image override (uses product image if empty)" },
-        { "type": "text", "id": "image_fallback", "label": "Image asset filename (last-resort fallback)", "default": "calm-blueberry-acai.png" },
+        { "type": "text", "id": "image_fallback", "label": "Image URL (last-resort fallback)", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" },
         { "type": "text", "id": "name", "label": "Name override (uses product title if empty)" },
         { "type": "header", "content": "Marketing copy" },
         { "type": "textarea", "id": "support", "label": "Support line" },
@@ -388,9 +388,9 @@
     {
       "name": "AVRO — Shop",
       "blocks": [
-        { "type": "formula_card", "settings": { "image_fallback": "calm-blueberry-acai.png", "name": "AVRO Calm", "support": "Calm support without stimulation.*", "best_for": "Travel, social calm, daily reset, and pressure-filled moments.*", "caffeine": "No Caffeine", "button_label": "Shop Calm", "link": "/collections/calm" } },
-        { "type": "formula_card", "settings": { "image_fallback": "focus-pomegranate-raspberry.png", "name": "AVRO Focus", "support": "Clarity and focus support without caffeine.*", "best_for": "Deep work, meetings, study, and longer attention blocks.*", "caffeine": "No Caffeine", "button_label": "Shop Focus", "link": "/collections/focus" } },
-        { "type": "formula_card", "settings": { "image_fallback": "energy-fuji-apple.png", "name": "AVRO Energy", "support": "Natural caffeine with a calm-first foundation.*", "best_for": "Mornings, long days, training, and travel.*", "caffeine": "120mg Natural Caffeine", "button_label": "Shop Energy", "link": "/collections/energy" } },
+        { "type": "formula_card", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "name": "AVRO Calm", "support": "Calm support without stimulation.*", "best_for": "Travel, social calm, daily reset, and pressure-filled moments.*", "caffeine": "No Caffeine", "button_label": "Shop Calm", "link": "/collections/calm" } },
+        { "type": "formula_card", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "name": "AVRO Focus", "support": "Clarity and focus support without caffeine.*", "best_for": "Deep work, meetings, study, and longer attention blocks.*", "caffeine": "No Caffeine", "button_label": "Shop Focus", "link": "/collections/focus" } },
+        { "type": "formula_card", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "name": "AVRO Energy", "support": "Natural caffeine with a calm-first foundation.*", "best_for": "Mornings, long days, training, and travel.*", "caffeine": "120mg Natural Caffeine", "button_label": "Shop Energy", "link": "/collections/energy" } },
         { "type": "compare_row", "settings": { "label": "Primary State", "calm": "Composure", "focus": "Clear Focus", "energy": "Steady Energy" } },
         { "type": "compare_row", "settings": { "label": "Best For", "calm": "Travel, Social Calm, Daily Reset", "focus": "Deep Work, Meetings, Study", "energy": "Mornings, Long Days, Travel" } },
         { "type": "compare_row", "settings": { "label": "Caffeine", "calm": "No", "focus": "No", "energy": "Yes, 120 mg" } },
