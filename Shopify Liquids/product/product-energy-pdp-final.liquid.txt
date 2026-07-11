@@ -48,7 +48,7 @@
 {%- case section.settings.corner_style -%}
   {%- when 'square' -%}{%- assign btn_radius = 12 -%}
   {%- when 'soft' -%}{%- assign btn_radius = 22 -%}
-  {%- else -%}{%- assign btn_radius = 100 -%}
+  {%- else -%}{%- assign btn_radius = 16 -%}
 {%- endcase -%}
 {%- assign btn_height = 56 -%}
 {%- case section.settings.spacing -%}
