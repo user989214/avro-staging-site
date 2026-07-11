@@ -100,7 +100,7 @@
   #avro-pdp-{{ section.id }} .flavor.is-active { background: var(--charcoal); border-color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .flavor.is-active .nm { color: var(--bone); }
   #avro-pdp-{{ section.id }} .purchase { display: flex; flex-direction: column; gap: 12px; }
-  #avro-pdp-{{ section.id }} .buy-opt { position: relative; display: flex; align-items: center; gap: 14px; min-height: var(--btn-height); padding: 14px 20px; border-radius: var(--card-radius); background: var(--bone); border: 2px solid var(--gray); color: var(--ink); cursor: pointer; transition: border-color .15s ease; }
+  #avro-pdp-{{ section.id }} .buy-opt { position: relative; display: flex; align-items: center; gap: 14px; min-height: var(--btn-height); padding: 14px 24px; border-radius: var(--card-radius); background: var(--bone); border: 2px solid var(--gray); color: var(--ink); cursor: pointer; transition: border-color .15s ease; }
   #avro-pdp-{{ section.id }} .buy-opt.is-active { background: var(--bone); border-color: var(--charcoal); color: var(--ink); }
   #avro-pdp-{{ section.id }} .buy-opt .radio { width: 18px; height: 18px; border-radius: 999px; border: 2px solid var(--warm-gray); display: grid; place-items: center; flex-shrink: 0; }
   #avro-pdp-{{ section.id }} .buy-opt.is-active .radio { border-color: var(--charcoal); }
