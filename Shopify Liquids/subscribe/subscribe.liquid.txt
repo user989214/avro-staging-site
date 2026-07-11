@@ -62,43 +62,43 @@
 
   /* ── HERO ─────────────────────────────────────────────────────────────── */
   #avro-sub-{{ section.id }} .sub-hero {
-    position: relative; width: calc(100% - 32px); margin: 16px auto 0;
+    position: relative; width: calc(100% - 32px); margin: 24px auto 0;
     border-radius: 20px; overflow: hidden; background: var(--base-light);
   }
   #avro-sub-{{ section.id }} .sub-hero-inner {
     position: relative; z-index: 1;
-    padding: clamp(40px,7vw,96px) clamp(28px,5vw,72px);
+    padding: clamp(56px,8vw,120px) clamp(28px,5vw,80px);
     display: flex; flex-direction: column; align-items: flex-start;
   }
   #avro-sub-{{ section.id }} .sub-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
   #avro-sub-{{ section.id }} .sub-hero.has-bg .sub-hero-inner { background: linear-gradient(90deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.75) 55%, rgba(255,255,255,0.25) 100%); }
   #avro-sub-{{ section.id }} .sub-hero h1 {
     font-weight: 700; font-size: clamp(40px,6vw,72px); line-height: 1.0;
-    letter-spacing: -0.03em; color: var(--ink); margin-bottom: 20px; max-width: 640px;
+    letter-spacing: -0.03em; color: var(--ink); margin-bottom: 24px; max-width: 640px;
   }
   #avro-sub-{{ section.id }} .sub-hero p.lede {
-    font-weight: 400; font-size: clamp(16px,1.4vw,19px); line-height: 1.55;
-    color: var(--ink); max-width: 560px; margin-bottom: 28px;
+    font-weight: 400; font-size: clamp(16px,1.4vw,19px); line-height: 1.6;
+    color: var(--ink); max-width: 560px; margin-bottom: 40px;
   }
-  #avro-sub-{{ section.id }} .sub-hero-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+  #avro-sub-{{ section.id }} .sub-hero-btns { display: flex; flex-wrap: wrap; gap: 16px; }
 
   /* ── SHARED SECTION HEADINGS ──────────────────────────────────────────── */
-  #avro-sub-{{ section.id }} .sub-sec { padding: clamp(40px,6vw,80px) clamp(20px,5vw,64px); }
+  #avro-sub-{{ section.id }} .sub-sec { padding: clamp(56px,8vw,120px) clamp(20px,5vw,64px); }
   #avro-sub-{{ section.id }} .sub-sec > .sub-wrap > h2 {
     font-weight: 700; font-size: clamp(28px,3.6vw,52px); line-height: 1;
-    letter-spacing: -0.02em; color: var(--ink); margin-bottom: 8px;
+    letter-spacing: -0.02em; color: var(--ink); margin-bottom: 12px;
   }
   #avro-sub-{{ section.id }} .sub-sec > .sub-wrap > p.intro {
-    font-weight: 500; font-size: clamp(15px,1.3vw,19px); line-height: 1.45;
-    color: var(--warm-gray); max-width: 640px; margin-bottom: 28px;
+    font-weight: 500; font-size: clamp(15px,1.3vw,19px); line-height: 1.55;
+    color: var(--warm-gray); max-width: 640px; margin-bottom: 48px;
   }
 
   /* ── WHY SUBSCRIBE / HOW IT WORKS (shared card grid) ──────────────────── */
   #avro-sub-{{ section.id }} .why-sec { background: var(--base-light); }
-  #avro-sub-{{ section.id }} .why-sec .why-shell { background: var(--bone); border-radius: 24px; padding: clamp(24px,4vw,56px); }
-  #avro-sub-{{ section.id }} .info-grid { display: grid; grid-template-columns: 1fr; gap: clamp(24px,3vw,40px); margin-top: 8px; }
+  #avro-sub-{{ section.id }} .why-sec .why-shell { background: var(--bone); border-radius: 24px; padding: clamp(32px,5vw,72px); }
+  #avro-sub-{{ section.id }} .info-grid { display: grid; grid-template-columns: 1fr; gap: clamp(32px,4vw,56px); margin-top: 40px; }
   @media (min-width: 768px) { #avro-sub-{{ section.id }} .info-grid { grid-template-columns: repeat(3,1fr); } }
-  #avro-sub-{{ section.id }} .info-card { display: flex; flex-direction: column; gap: 12px; }
+  #avro-sub-{{ section.id }} .info-card { display: flex; flex-direction: column; gap: 16px; }
   #avro-sub-{{ section.id }} .info-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
   #avro-sub-{{ section.id }} .info-icon span {
     display: inline-block; width: 44px; height: 44px;
@@ -109,9 +109,9 @@
   #avro-sub-{{ section.id }} .info-card h3 { font-weight: 700; font-size: clamp(17px,1.5vw,21px); line-height: 1.2; color: var(--ink); }
   #avro-sub-{{ section.id }} .info-card p { font-weight: 400; font-size: clamp(14px,1.1vw,16px); line-height: 1.5; color: var(--warm-gray); }
 
-  #avro-sub-{{ section.id }} .step-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  #avro-sub-{{ section.id }} .step-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
   @media (min-width: 768px) { #avro-sub-{{ section.id }} .step-grid { grid-template-columns: repeat(3,1fr); } }
-  #avro-sub-{{ section.id }} .step-card { background: var(--base-light); border-radius: 16px; padding: clamp(20px,2.5vw,32px); display: flex; flex-direction: column; gap: 12px; }
+  #avro-sub-{{ section.id }} .step-card { background: var(--base-light); border-radius: 16px; padding: clamp(28px,3vw,44px); display: flex; flex-direction: column; gap: 16px; }
   #avro-sub-{{ section.id }} .step-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
   #avro-sub-{{ section.id }} .step-icon span {
     display: inline-block; width: 44px; height: 44px;
@@ -124,8 +124,8 @@
 
   /* ── CHOOSE YOUR FORMULA ──────────────────────────────────────────────── */
   #avro-sub-{{ section.id }} .formula-sec { background: var(--base-light); }
-  #avro-sub-{{ section.id }} .formula-row { display: flex; flex-direction: column; gap: 32px; }
-  #avro-sub-{{ section.id }} .formula-card { display: flex; flex-direction: column; gap: 16px; }
+  #avro-sub-{{ section.id }} .formula-row { display: flex; flex-direction: column; gap: 40px; }
+  #avro-sub-{{ section.id }} .formula-card { display: flex; flex-direction: column; gap: 20px; }
   #avro-sub-{{ section.id }} .formula-thumb { border-radius: 20px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #E5E5E5; }
   #avro-sub-{{ section.id }} .formula-thumb img { width: 100%; height: 100%; object-fit: cover; }
   #avro-sub-{{ section.id }} .formula-card h3 { font-weight: 700; font-size: clamp(22px,2vw,32px); color: var(--ink); }
@@ -136,13 +136,13 @@
   #avro-sub-{{ section.id }} .formula-meta .caf { font-weight: 700; font-size: clamp(14px,1.05vw,16px); color: var(--ink); }
   #avro-sub-{{ section.id }} .formula-card .sub-btn { width: 100%; margin-top: auto; }
   @media (min-width: 640px) {
-    #avro-sub-{{ section.id }} .formula-row { flex-direction: row; gap: 24px; }
+    #avro-sub-{{ section.id }} .formula-row { flex-direction: row; gap: 32px; }
     #avro-sub-{{ section.id }} .formula-card { flex: 1 1 0; }
   }
 
   /* ── BOTTOM CTA BAND ──────────────────────────────────────────────────── */
-  #avro-sub-{{ section.id }} .cta-band { background: var(--avro-blue); padding: clamp(48px,7vw,96px) clamp(20px,5vw,64px); }
-  #avro-sub-{{ section.id }} .cta-inner { max-width: 1250px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+  #avro-sub-{{ section.id }} .cta-band { background: var(--avro-blue); padding: clamp(64px,9vw,128px) clamp(20px,5vw,64px); }
+  #avro-sub-{{ section.id }} .cta-inner { max-width: 1250px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
   #avro-sub-{{ section.id }} .cta-eyebrow { font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(21,21,21,0.7); }
   #avro-sub-{{ section.id }} .cta-band h2 { font-weight: 700; font-size: clamp(30px,4vw,56px); line-height: 1.02; letter-spacing: -0.02em; color: var(--charcoal); margin-top: 8px; }
   #avro-sub-{{ section.id }} .cta-band p { font-weight: 500; font-size: clamp(15px,1.3vw,18px); line-height: 1.5; color: rgba(21,21,21,0.72); max-width: 560px; margin-top: 12px; }
@@ -185,7 +185,7 @@
   <section class="sub-sec why-sec">
     <div class="sub-wrap">
       <div class="why-shell">
-        <h2 style="margin-bottom:8px;">{{ section.settings.why_heading | default: 'Why Subscribe.' }}</h2>
+        <h2 style="margin-bottom:0;">{{ section.settings.why_heading | default: 'Why Subscribe.' }}</h2>
         <div class="info-grid">
           {%- for b in benefits -%}
           <article class="info-card" {{ b.shopify_attributes }}>
@@ -212,7 +212,7 @@
   {%- if steps.size > 0 -%}
   <section class="sub-sec">
     <div class="sub-wrap">
-      <h2 style="margin-bottom:24px;">{{ section.settings.how_heading | default: 'How It Works.' }}</h2>
+      <h2 style="margin-bottom:48px;">{{ section.settings.how_heading | default: 'How It Works.' }}</h2>
       <div class="step-grid">
         {%- for b in steps -%}
         <article class="step-card" {{ b.shopify_attributes }}>
