@@ -92,9 +92,9 @@
   #avro-pdp-{{ section.id }} .bb .per-box { font-weight: 500; font-size: clamp(13px,1.1vw,15px); line-height: 1.4; color: var(--warm-gray); margin: 0; }
   #avro-pdp-{{ section.id }} .bb .lbl { font-weight: 700; font-size: clamp(12px,1vw,13px); color: var(--ink); margin: 0 0 10px; display: block; text-transform: uppercase; letter-spacing: 0.04em; }
   #avro-pdp-{{ section.id }} .flavor-block { display: flex; flex-direction: column; }
-  #avro-pdp-{{ section.id }} .flavors { display: flex; flex-wrap: wrap; gap: 10px; }
-  #avro-pdp-{{ section.id }} .flavor { display: inline-flex; align-items: center; gap: 8px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; cursor: pointer; transition: all .15s ease; padding: 11px 20px; }
-  #avro-pdp-{{ section.id }} .flavor .nm { font-weight: 700; font-size: clamp(12px,1vw,14px); color: var(--ink); white-space: nowrap; }
+  #avro-pdp-{{ section.id }} .flavors { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  #avro-pdp-{{ section.id }} .flavor { display: flex; align-items: center; justify-content: center; text-align: center; gap: 8px; min-height: 62px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; cursor: pointer; transition: all .15s ease; padding: 14px 18px; }
+  #avro-pdp-{{ section.id }} .flavor .nm { font-weight: 700; font-size: clamp(13px,1.05vw,15px); color: var(--ink); white-space: normal; line-height: 1.45; }
   #avro-pdp-{{ section.id }} .flavor.is-active { background: var(--charcoal); border-color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .flavor.is-active .nm { color: var(--bone); }
   #avro-pdp-{{ section.id }} .purchase { display: flex; flex-direction: column; gap: 12px; }
