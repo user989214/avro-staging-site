@@ -46,9 +46,9 @@
 {%- if any_plan and show_sub -%}{%- assign has_plan = true -%}{%- endif -%}
 
 {%- case section.settings.corner_style -%}
-  {%- when 'square' -%}{%- assign btn_radius = 12 -%}
-  {%- when 'soft' -%}{%- assign btn_radius = 22 -%}
-  {%- else -%}{%- assign btn_radius = 16 -%}
+  {%- when 'square' -%}{%- assign btn_radius = 12 -%}{%- assign card_radius = 10 -%}
+  {%- when 'soft' -%}{%- assign btn_radius = 22 -%}{%- assign card_radius = 16 -%}
+  {%- else -%}{%- assign btn_radius = 16 -%}{%- assign card_radius = 16 -%}
 {%- endcase -%}
 {%- assign btn_height = 56 -%}
 {%- case section.settings.spacing -%}
@@ -67,6 +67,7 @@
     --pdp-gap: {{ pdp_gap }}px;
     --btn-height: {{ btn_height }}px;
     --btn-radius: {{ btn_radius }}px;
+    --card-radius: {{ card_radius }}px;
     font-family: "DM Sans", system-ui, sans-serif; color: var(--ink); display: block;
     background: var(--base-light);
   }
@@ -93,19 +94,19 @@
   #avro-pdp-{{ section.id }} .bb .lbl { font-weight: 700; font-size: clamp(12px,1vw,13px); color: var(--ink); margin: 0 0 10px; display: block; text-transform: uppercase; letter-spacing: 0.04em; }
   #avro-pdp-{{ section.id }} .flavor-block { display: flex; flex-direction: column; }
   #avro-pdp-{{ section.id }} .flavors { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  #avro-pdp-{{ section.id }} .flavor { display: flex; align-items: center; justify-content: center; text-align: center; gap: 8px; min-height: 62px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; cursor: pointer; transition: all .15s ease; padding: 14px 18px; }
+  #avro-pdp-{{ section.id }} .flavor { display: flex; align-items: center; justify-content: center; text-align: center; gap: 8px; min-height: 54px; border-radius: var(--card-radius); background: var(--bone); border: 2px solid var(--gray); cursor: pointer; transition: all .15s ease; padding: 12px 16px; }
   #avro-pdp-{{ section.id }} .flavor .nm { font-weight: 700; font-size: clamp(13px,1.05vw,15px); color: var(--ink); white-space: normal; line-height: 1.45; }
   #avro-pdp-{{ section.id }} .flavor.is-active { background: var(--charcoal); border-color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .flavor.is-active .nm { color: var(--bone); }
   #avro-pdp-{{ section.id }} .purchase { display: flex; flex-direction: column; gap: 12px; }
-  #avro-pdp-{{ section.id }} .buy-opt { position: relative; display: flex; align-items: center; gap: 14px; min-height: var(--btn-height); padding: 12px 20px; border-radius: var(--btn-radius); background: var(--gray); border: 2px solid transparent; color: var(--ink); cursor: pointer; }
-  #avro-pdp-{{ section.id }} .buy-opt.is-active { background: var(--charcoal); border-color: var(--charcoal); color: var(--bone); }
+  #avro-pdp-{{ section.id }} .buy-opt { position: relative; display: flex; align-items: center; gap: 14px; min-height: var(--btn-height); padding: 14px 20px; border-radius: var(--card-radius); background: var(--bone); border: 2px solid var(--gray); color: var(--ink); cursor: pointer; transition: border-color .15s ease; }
+  #avro-pdp-{{ section.id }} .buy-opt.is-active { background: var(--bone); border-color: var(--charcoal); color: var(--ink); }
   #avro-pdp-{{ section.id }} .buy-opt .radio { width: 18px; height: 18px; border-radius: 999px; border: 2px solid var(--warm-gray); display: grid; place-items: center; flex-shrink: 0; }
-  #avro-pdp-{{ section.id }} .buy-opt.is-active .radio { border-color: var(--bone); }
-  #avro-pdp-{{ section.id }} .buy-opt.is-active .radio::after { content: ''; width: 8px; height: 8px; border-radius: 999px; background: var(--bone); }
+  #avro-pdp-{{ section.id }} .buy-opt.is-active .radio { border-color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .buy-opt.is-active .radio::after { content: ''; width: 8px; height: 8px; border-radius: 999px; background: var(--charcoal); }
   #avro-pdp-{{ section.id }} .buy-opt .ttl { flex: 1; min-width: 0; font-weight: 700; font-size: clamp(13px,1.1vw,15px); line-height: 1.25; }
   #avro-pdp-{{ section.id }} .buy-opt .badge { font-weight: 700; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; background: var(--charcoal); color: var(--bone); white-space: nowrap; margin-left: 6px; }
-  #avro-pdp-{{ section.id }} .buy-opt.is-active .badge { background: var(--bone); color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .buy-opt.is-active .badge { background: var(--charcoal); color: var(--bone); }
   #avro-pdp-{{ section.id }} .buy-opt .sub { display: block; font-weight: 500; font-size: clamp(11px,0.9vw,12px); margin-top: 3px; opacity: 0.7; }
   #avro-pdp-{{ section.id }} .buy-opt .pr { font-weight: 800; font-size: clamp(15px,1.3vw,18px); white-space: nowrap; }
   #avro-pdp-{{ section.id }} .benefits { list-style: none; margin: 6px 0 0; padding: 0 4px; display: flex; flex-direction: column; gap: 9px; }
