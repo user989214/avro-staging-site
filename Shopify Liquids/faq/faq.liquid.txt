@@ -10,8 +10,8 @@
      closing CTA + banner.
      - Each "FAQ category" is a BLOCK with a name and up to 6 Q&A pairs.
      - The search box filters questions/answers live across all categories.
-  4. Upload this folder's banner image (faq-banner.png) to your theme Assets,
-     or choose your own in the editor.
+  4. The bottom banner renders from a hardcoded live-site URL by default — no
+     asset upload needed. Pick an image in the theme editor to override it.
   ============================================================================
 {%- endcomment -%}
 
@@ -67,6 +67,7 @@
   }
 {% endstyle %}
 
+{%- assign base = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app' -%}
 <div id="avro-faq-{{ section.id }}">
   <section class="fq-hero">
     <h1>{{ section.settings.title | default: 'FAQ' }}</h1>
@@ -129,7 +130,7 @@
       {%- if section.settings.banner_image != blank -%}
         <img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">
       {%- else -%}
-        <img src="{{ 'faq-banner.png' | asset_url }}" alt="">
+        <img src="{{ base }}/images/banners/faq-banner.png" alt="">
       {%- endif -%}
       <a class="fq-banner-btn" href="{{ section.settings.banner_link | default: '/collections/all' }}">{{ section.settings.banner_label | default: 'Shop' }}</a>
     </div>
