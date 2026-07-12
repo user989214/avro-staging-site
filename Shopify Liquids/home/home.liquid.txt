@@ -6,9 +6,8 @@
   1. In your Shopify theme, create:  sections/avro-home.liquid
      Paste the ENTIRE contents of this file into it (including the
      schema block at the bottom). Save.
-  2. Upload every image in this same folder to your theme assets
-     (Online Store > Themes > Edit code > Assets > Add a new asset),
-     OR drag them into /assets. Filenames must stay exactly the same.
+  2. No asset upload needed. Every image falls back to a hardcoded live-site
+     URL, so the page looks correct immediately after import.
   3. Add the section to your home page:
      - Theme editor > Home page > Add section > "AVRO — Home"
      - OR set templates/index.json to render this section.
@@ -17,9 +16,9 @@
      benefit cards, product cards, moments, badges, steps, testimonials)
      are editable BLOCKS — add / remove / reorder them in the editor.
 
-  NOTE ON IMAGES: each image setting falls back to the bundled asset of the
-  same name when no image is chosen in the editor, so the page looks correct
-  immediately after import. Pick an image in the editor to override.
+  NOTE ON IMAGES: each image setting falls back to a hardcoded live-site URL
+  when no image is chosen in the editor, so the page looks correct immediately
+  after import. Pick an image in the editor to override any of them.
   ============================================================================
 {%- endcomment -%}
 
@@ -123,7 +122,7 @@
     #avro-home-{{ section.id }} .proof-stat:first-child { border-left: none; }
   }
 
-  /* ── BENEFIT ROW ─────────────────────────────────────────────────────────── */
+  /* ── BENEFIT ROW ─────────────────────────────────────���───────────────────── */
   #avro-home-{{ section.id }} .benefit-sec { padding: 0 clamp(20px,5vw,64px) clamp(48px,6vw,72px); }
   #avro-home-{{ section.id }} .benefit-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
   #avro-home-{{ section.id }} .benefit-card { position: relative; overflow: hidden; background: var(--base-light); border-radius: 20px; min-height: clamp(160px,18vw,240px); }
