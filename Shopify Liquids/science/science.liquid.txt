@@ -161,8 +161,9 @@
           {%- if badges.size > 0 -%}
           <div class="ph-fade ph-badges">
             {%- for b in badges -%}
+            {%- if b.settings.icon != blank -%}{%- assign badge_src = b.settings.icon | image_url: width: 128 -%}{%- elsif b.settings.icon_fallback contains 'http' -%}{%- assign badge_src = b.settings.icon_fallback -%}{%- elsif b.settings.icon_fallback != blank -%}{%- assign badge_src = base | append: '/images/icons/' | append: b.settings.icon_fallback -%}{%- else -%}{%- assign badge_src = base | append: '/images/icons/science-backed.png' -%}{%- endif -%}
             <span class="ph-badge" {{ b.shopify_attributes }}>
-              {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 128 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/science-backed.png' }}" alt="">{%- endif -%}
+              <img src="{{ badge_src }}" alt="">
               {{ b.settings.label }}
             </span>
             {%- endfor -%}
@@ -184,8 +185,9 @@
       <h2 class="sec-h2">{{ section.settings.foundation_heading | default: 'Calm is the foundation.' }}</h2>
       <div class="cards-3">
         {%- for b in foundation -%}
+        {%- if b.settings.icon != blank -%}{%- assign found_src = b.settings.icon | image_url: width: 144 -%}{%- elsif b.settings.icon_fallback contains 'http' -%}{%- assign found_src = b.settings.icon_fallback -%}{%- elsif b.settings.icon_fallback != blank -%}{%- assign found_src = base | append: '/images/icons/' | append: b.settings.icon_fallback -%}{%- else -%}{%- assign found_src = base | append: '/images/icons/calm-first-foundation.png' -%}{%- endif -%}
         <article class="info-card" {{ b.shopify_attributes }}>
-          {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 144 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png' }}" alt="">{%- endif -%}
+          <img src="{{ found_src }}" alt="">
           <h3>{{ b.settings.title }}</h3>
           <p>{{ b.settings.copy }}</p>
         </article>
@@ -208,8 +210,9 @@
           {%- if pharma.size > 0 -%}
           <div class="pharma-list">
             {%- for b in pharma -%}
+            {%- if b.settings.icon != blank -%}{%- assign pharma_src = b.settings.icon | image_url: width: 160 -%}{%- elsif b.settings.icon_fallback contains 'http' -%}{%- assign pharma_src = b.settings.icon_fallback -%}{%- elsif b.settings.icon_fallback != blank -%}{%- assign pharma_src = base | append: '/images/icons/' | append: b.settings.icon_fallback -%}{%- else -%}{%- assign pharma_src = base | append: '/images/icons/naturally-fermented-pharmagaba.png' -%}{%- endif -%}
             <p class="pharma-row" {{ b.shopify_attributes }}>
-              {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 160 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png' }}" alt="">{%- endif -%}
+              <img src="{{ pharma_src }}" alt="">
               <span>{{ b.settings.label }}</span>
             </p>
             {%- endfor -%}
@@ -229,8 +232,9 @@
     </div>
     <div class="cards-4">
       {%- for b in logic -%}
+      {%- if b.settings.icon != blank -%}{%- assign logic_src = b.settings.icon | image_url: width: 144 -%}{%- elsif b.settings.icon_fallback contains 'http' -%}{%- assign logic_src = b.settings.icon_fallback -%}{%- elsif b.settings.icon_fallback != blank -%}{%- assign logic_src = base | append: '/images/icons/' | append: b.settings.icon_fallback -%}{%- else -%}{%- assign logic_src = base | append: '/images/icons/naturally-fermented-pharmagaba.png' -%}{%- endif -%}
       <article class="info-card" {{ b.shopify_attributes }}>
-        {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 144 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png' }}" alt="">{%- endif -%}
+        <img src="{{ logic_src }}" alt="">
         <h3>{{ b.settings.title }}</h3>
         <p>{{ b.settings.copy }}</p>
       </article>
@@ -248,8 +252,9 @@
       <div class="pc-row">
         {%- for b in products -%}
         <article class="pc-card" {{ b.shopify_attributes }}>
+          {%- if b.settings.image != blank -%}{%- assign prod_src = b.settings.image | image_url: width: 800 -%}{%- elsif b.settings.image_fallback contains 'http' -%}{%- assign prod_src = b.settings.image_fallback -%}{%- elsif b.settings.image_fallback != blank -%}{%- assign prod_src = base | append: '/images/tubes/studio/' | append: b.settings.image_fallback -%}{%- else -%}{%- assign prod_src = base | append: '/images/tubes/studio/calm-blueberry-acai.png' -%}{%- endif -%}
           <div class="pc-thumb">
-            {%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">{%- else -%}<img src="{{ b.settings.image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png' }}" alt="{{ b.settings.name | escape }}">{%- endif -%}
+            <img src="{{ prod_src }}" alt="{{ b.settings.name | escape }}">
           </div>
           <h3>{{ b.settings.name }}</h3>
           <p class="support">{{ b.settings.support }}</p>
