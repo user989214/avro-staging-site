@@ -4,10 +4,11 @@
   ----------------------------------------------------------------------------
   HOW TO USE
   1. Create sections/avro-ingredients.liquid and paste this entire file in.
-  2. Upload every image in this folder to your theme Assets (filenames must
-     stay the same). The Supplement Facts panels are:
-       blueberry-acai.png, blackberry-jasmine.png, pomegranate-raspberry.png,
-       red-dragon-fruit.png, fuji-apple.png, orange-tangerine.png
+  2. Images render from hardcoded live-site URLs by default — no asset upload
+     needed. Pick an image in the theme editor to override any of them. The
+     Supplement Facts panels default to /images/supplement-facts/ (blueberry-acai,
+     blackberry-jasmine, pomegranate-raspberry, red-dragon-fruit, fuji-apple,
+     orange-tangerine).
   3. Add the section to a page template (templates/page.ingredients.json) or
      render it through the theme editor as the avro-ingredients section.
   4. Every heading, body, badge, stack, flavor panel, product card, and FAQ is
@@ -65,7 +66,7 @@
   #avro-ing-{{ section.id }} .stack-icon img { width: 40px; height: 40px; object-fit: contain; }
   #avro-ing-{{ section.id }} .stack-head h2 { font-weight: 700; font-size: clamp(26px,4vw,46px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 6px; }
   #avro-ing-{{ section.id }} .stack-head p { font-weight: 400; font-size: clamp(15px,1.4vw,19px); line-height: 1.5; color: var(--warm-gray); }
-  #avro-ing-{{ section.id }} .flavor-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: clamp(14px,1.6vw,20px); }
+  #avro-ing-{{ section.id }} .flavor-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: clamp(20px,2vw,28px); }
   #avro-ing-{{ section.id }} .flavor-card { background: var(--bone); border: 1px solid rgba(30,29,24,0.12); border-radius: 20px; padding: clamp(22px,3vw,32px); display: flex; flex-direction: column; }
   #avro-ing-{{ section.id }} .flavor-card h4 { font-weight: 700; font-size: clamp(20px,2vw,26px); line-height: 1; color: var(--ink); margin-bottom: 20px; }
   #avro-ing-{{ section.id }} .flavor-panel { border-radius: 12px; overflow: hidden; border: 1px solid rgba(30,29,24,0.1); background: var(--base); }
@@ -78,7 +79,7 @@
   /* Product cards */
   #avro-ing-{{ section.id }} .prod-sec { padding: clamp(32px,6vw,72px) clamp(16px,5vw,64px); }
   #avro-ing-{{ section.id }} .prod-sec > .wrap > h2 { font-weight: 700; font-size: clamp(24px,3.2vw,46px); line-height: 1; color: var(--ink); margin-bottom: 24px; }
-  #avro-ing-{{ section.id }} .prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+  #avro-ing-{{ section.id }} .prod-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
   #avro-ing-{{ section.id }} .prod-card { display: flex; flex-direction: column; border-radius: 20px; overflow: hidden; background: var(--base-light); padding: clamp(14px,1.8vw,20px); }
   #avro-ing-{{ section.id }} .prod-thumb { height: clamp(200px,24vw,280px); border-radius: 16px; overflow: hidden; background: var(--bone); }
   #avro-ing-{{ section.id }} .prod-thumb img { width: 100%; height: 100%; object-fit: cover; }
@@ -121,6 +122,8 @@
 
 {%- capture chevron -%}<svg class="faq-chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>{%- endcapture -%}
 
+{%- assign base = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app' -%}
+
 <div id="avro-ing-{{ section.id }}">
 
   {%- comment -%} ===== HERO ===== {%- endcomment -%}
@@ -129,7 +132,7 @@
       {%- if section.settings.hero_image != blank -%}
         <img class="bg" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="">
       {%- else -%}
-        <img class="bg" src="{{ 'ingredients-hero.jpg' | asset_url }}" alt="">
+        <img class="bg" src="{{ base }}/images/ingredients/ingredients-hero.jpg" alt="">
       {%- endif -%}
       <div class="scrim"></div>
       <div class="hero-inner">
@@ -147,12 +150,9 @@
     <div class="wrap">
       <div class="free-grid">
         {%- for b in badges -%}
+        {%- if b.settings.icon != blank -%}{%- assign badge_src = b.settings.icon | image_url: width: 140 -%}{%- elsif b.settings.icon_fallback contains 'http' -%}{%- assign badge_src = b.settings.icon_fallback -%}{%- elsif b.settings.icon_fallback != blank -%}{%- assign badge_src = base | append: '/images/icons/' | append: b.settings.icon_fallback -%}{%- else -%}{%- assign badge_src = base | append: '/images/icons/free-sugar.png' -%}{%- endif -%}
         <div class="free-badge" {{ b.shopify_attributes }}>
-          {%- if b.settings.icon != blank -%}
-            <img src="{{ b.settings.icon | image_url: width: 140 }}" alt="">
-          {%- else -%}
-            <img src="{{ b.settings.icon_fallback | default: 'free-sugar.png' | asset_url }}" alt="">
-          {%- endif -%}
+          <img src="{{ badge_src }}" alt="">
           <strong>{{ b.settings.label }}</strong>
           <span>{{ b.settings.sub }}</span>
         </div>
@@ -177,14 +177,11 @@
   {%- if stacks.size > 0 -%}
   <section class="stacks">
     {%- for s in stacks -%}
+    {%- if s.settings.icon != blank -%}{%- assign stack_src = s.settings.icon | image_url: width: 120 -%}{%- elsif s.settings.icon_fallback contains 'http' -%}{%- assign stack_src = s.settings.icon_fallback -%}{%- elsif s.settings.icon_fallback != blank -%}{%- assign stack_src = base | append: '/images/icons/' | append: s.settings.icon_fallback -%}{%- else -%}{%- assign stack_src = base | append: '/images/icons/free-vegan.png' -%}{%- endif -%}
     <div class="stack" id="{{ s.settings.anchor | default: s.id }}" {{ s.shopify_attributes }}>
       <div class="stack-head">
         <div class="stack-icon">
-          {%- if s.settings.icon != blank -%}
-            <img src="{{ s.settings.icon | image_url: width: 120 }}" alt="">
-          {%- else -%}
-            <img src="{{ s.settings.icon_fallback | default: 'free-vegan.png' | asset_url }}" alt="">
-          {%- endif -%}
+          <img src="{{ stack_src }}" alt="">
         </div>
         <div>
           <h2>{{ s.settings.name }}</h2>
@@ -194,28 +191,22 @@
       <div class="flavor-grid">
         {%- comment -%} flavor 1 {%- endcomment -%}
         {%- if s.settings.flavor1_name != blank -%}
+        {%- if s.settings.flavor1_panel != blank -%}{%- assign f1_src = s.settings.flavor1_panel | image_url: width: 800 -%}{%- elsif s.settings.flavor1_panel_fallback contains 'http' -%}{%- assign f1_src = s.settings.flavor1_panel_fallback -%}{%- elsif s.settings.flavor1_panel_fallback != blank -%}{%- assign f1_src = base | append: '/images/supplement-facts/' | append: s.settings.flavor1_panel_fallback -%}{%- else -%}{%- assign f1_src = base | append: '/images/supplement-facts/blueberry-acai.png' -%}{%- endif -%}
         <article class="flavor-card">
           <h4>{{ s.settings.flavor1_name }}</h4>
           <div class="flavor-panel">
-            {%- if s.settings.flavor1_panel != blank -%}
-              <img src="{{ s.settings.flavor1_panel | image_url: width: 800 }}" alt="{{ s.settings.flavor1_name | escape }} Supplement Facts panel">
-            {%- else -%}
-              <img src="{{ s.settings.flavor1_panel_fallback | default: 'blueberry-acai.png' | asset_url }}" alt="{{ s.settings.flavor1_name | escape }} Supplement Facts panel">
-            {%- endif -%}
+            <img src="{{ f1_src }}" alt="{{ s.settings.flavor1_name | escape }} Supplement Facts panel">
           </div>
           {%- if s.settings.flavor1_other != blank -%}<p class="other"><b>Other ingredients:</b> {{ s.settings.flavor1_other }}</p>{%- endif -%}
         </article>
         {%- endif -%}
         {%- comment -%} flavor 2 {%- endcomment -%}
         {%- if s.settings.flavor2_name != blank -%}
+        {%- if s.settings.flavor2_panel != blank -%}{%- assign f2_src = s.settings.flavor2_panel | image_url: width: 800 -%}{%- elsif s.settings.flavor2_panel_fallback contains 'http' -%}{%- assign f2_src = s.settings.flavor2_panel_fallback -%}{%- elsif s.settings.flavor2_panel_fallback != blank -%}{%- assign f2_src = base | append: '/images/supplement-facts/' | append: s.settings.flavor2_panel_fallback -%}{%- else -%}{%- assign f2_src = base | append: '/images/supplement-facts/blackberry-jasmine.png' -%}{%- endif -%}
         <article class="flavor-card">
           <h4>{{ s.settings.flavor2_name }}</h4>
           <div class="flavor-panel">
-            {%- if s.settings.flavor2_panel != blank -%}
-              <img src="{{ s.settings.flavor2_panel | image_url: width: 800 }}" alt="{{ s.settings.flavor2_name | escape }} Supplement Facts panel">
-            {%- else -%}
-              <img src="{{ s.settings.flavor2_panel_fallback | default: 'blackberry-jasmine.png' | asset_url }}" alt="{{ s.settings.flavor2_name | escape }} Supplement Facts panel">
-            {%- endif -%}
+            <img src="{{ f2_src }}" alt="{{ s.settings.flavor2_name | escape }} Supplement Facts panel">
           </div>
           {%- if s.settings.flavor2_other != blank -%}<p class="other"><b>Other ingredients:</b> {{ s.settings.flavor2_other }}</p>{%- endif -%}
         </article>
@@ -235,13 +226,10 @@
       <h2>{{ section.settings.prod_heading | default: 'Shop the formulas.' }}</h2>
       <div class="prod-grid">
         {%- for b in products -%}
+        {%- if b.settings.image != blank -%}{%- assign prod_src = b.settings.image | image_url: width: 800 -%}{%- elsif b.settings.image_fallback contains 'http' -%}{%- assign prod_src = b.settings.image_fallback -%}{%- elsif b.settings.image_fallback != blank -%}{%- assign prod_src = base | append: '/images/tubes/studio/' | append: b.settings.image_fallback -%}{%- else -%}{%- assign prod_src = base | append: '/images/tubes/studio/calm-blueberry-acai.png' -%}{%- endif -%}
         <div class="prod-card" {{ b.shopify_attributes }}>
           <div class="prod-thumb">
-            {%- if b.settings.image != blank -%}
-              <img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">
-            {%- else -%}
-              <img src="{{ b.settings.image_fallback | default: 'calm-blueberry-acai.png' | asset_url }}" alt="{{ b.settings.name | escape }}">
-            {%- endif -%}
+            <img src="{{ prod_src }}" alt="{{ b.settings.name | escape }}">
           </div>
           <div class="prod-body">
             <h3>{{ b.settings.name }}</h3>
@@ -297,7 +285,7 @@
       {%- if section.settings.banner_image != blank -%}
         <img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">
       {%- else -%}
-        <img src="{{ 'ingredients-banner.png' | asset_url }}" alt="">
+        <img src="{{ base }}/images/banners/ingredients-banner.png" alt="">
       {%- endif -%}
       <a href="{{ section.settings.banner_link | default: '/collections/all' }}" class="btn btn-dark banner-btn">{{ section.settings.banner_label | default: 'Shop AVRO' }}</a>
     </div>
@@ -363,7 +351,7 @@
       "name": "Free-from badge",
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "Icon" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "free-sugar.png" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon URL or filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-sugar.png" },
         { "type": "text", "id": "label", "label": "Label", "default": "No Added Sugar" },
         { "type": "text", "id": "sub", "label": "Sub-label", "default": "Stevia sweetened" }
       ]
@@ -374,19 +362,19 @@
       "settings": [
         { "type": "text", "id": "anchor", "label": "Anchor id (optional)", "info": "Used for in-page links, e.g. calm / focus / energy." },
         { "type": "image_picker", "id": "icon", "label": "Stack icon" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "free-vegan.png" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon URL or filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-vegan.png" },
         { "type": "text", "id": "name", "label": "Stack name", "default": "AVRO Calm Stack" },
         { "type": "textarea", "id": "claim", "label": "Claim line" },
         { "type": "text", "id": "footnote", "label": "Footnote", "default": "Serving size 1 packet (5 g) · 10 servings per container." },
         { "type": "header", "content": "Flavor 1" },
         { "type": "text", "id": "flavor1_name", "label": "Flavor 1 name", "default": "Blueberry Acai" },
         { "type": "image_picker", "id": "flavor1_panel", "label": "Flavor 1 Supplement Facts panel" },
-        { "type": "text", "id": "flavor1_panel_fallback", "label": "Flavor 1 panel asset filename", "default": "blueberry-acai.png" },
+        { "type": "text", "id": "flavor1_panel_fallback", "label": "Flavor 1 panel URL or filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/blueberry-acai.png" },
         { "type": "textarea", "id": "flavor1_other", "label": "Flavor 1 other ingredients" },
         { "type": "header", "content": "Flavor 2" },
         { "type": "text", "id": "flavor2_name", "label": "Flavor 2 name", "default": "Blackberry Jasmine" },
         { "type": "image_picker", "id": "flavor2_panel", "label": "Flavor 2 Supplement Facts panel" },
-        { "type": "text", "id": "flavor2_panel_fallback", "label": "Flavor 2 panel asset filename", "default": "blackberry-jasmine.png" },
+        { "type": "text", "id": "flavor2_panel_fallback", "label": "Flavor 2 panel URL or filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/blackberry-jasmine.png" },
         { "type": "textarea", "id": "flavor2_other", "label": "Flavor 2 other ingredients" }
       ]
     },
@@ -395,7 +383,7 @@
       "name": "Product card",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "calm-blueberry-acai.png" },
+        { "type": "text", "id": "image_fallback", "label": "Image URL or filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" },
         { "type": "text", "id": "name", "label": "Name", "default": "Calm" },
         { "type": "textarea", "id": "tagline", "label": "Tagline" },
         { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
@@ -415,16 +403,16 @@
     {
       "name": "AVRO — Ingredients",
       "blocks": [
-        { "type": "free_badge", "settings": { "icon_fallback": "free-sugar.png", "label": "No Added Sugar", "sub": "Stevia sweetened" } },
-        { "type": "free_badge", "settings": { "icon_fallback": "free-gmo.png", "label": "Non-GMO", "sub": "Always" } },
-        { "type": "free_badge", "settings": { "icon_fallback": "free-vegan.png", "label": "Vegan", "sub": "Plant-based" } },
-        { "type": "free_badge", "settings": { "icon_fallback": "clinically-tested-ingredients.png", "label": "Clinically Studied", "sub": "Key ingredients" } },
-        { "type": "stack", "settings": { "anchor": "calm", "icon_fallback": "free-vegan.png", "name": "AVRO Calm Stack", "claim": "This stack supports stress reduction and a calm, clear state.*", "footnote": "Serving size 1 packet (5 g) · 10 servings per container. Powered by Naturally Fermented GABA — With Magnesium.", "flavor1_name": "Blueberry Acai", "flavor1_panel_fallback": "blueberry-acai.png", "flavor1_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica.", "flavor2_name": "Blackberry Jasmine", "flavor2_panel_fallback": "blackberry-jasmine.png", "flavor2_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica." } },
-        { "type": "stack", "settings": { "anchor": "focus", "icon_fallback": "free-vegan.png", "name": "AVRO Focus Stack", "claim": "This stack supports focus and productivity without caffeine.*", "footnote": "Serving size 1 packet (5 g) · 10 servings per container. Powered by Naturally Fermented GABA — Without Caffeine.", "flavor1_name": "Pomegranate Raspberry", "flavor1_panel_fallback": "pomegranate-raspberry.png", "flavor1_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Silica.", "flavor2_name": "Red Dragon Fruit", "flavor2_panel_fallback": "red-dragon-fruit.png", "flavor2_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Silica." } },
-        { "type": "stack", "settings": { "anchor": "energy", "icon_fallback": "free-vegan.png", "name": "AVRO Energy Stack", "claim": "This stack supports sustained energy and mental clarity.*", "footnote": "Serving size 1 packet (5 g) · 10 servings per container. Powered by Naturally Fermented GABA — With Caffeine.", "flavor1_name": "Fuji Apple", "flavor1_panel_fallback": "fuji-apple.png", "flavor1_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Beta Carotene Color, Stevia Leaf Extract, Vegetable Juice Color, Spirulina Color, Silica.", "flavor2_name": "Orange Tangerine", "flavor2_panel_fallback": "orange-tangerine.png", "flavor2_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Beta Carotene Color, Stevia Leaf Extract, Natural Flavor, Silica." } },
-        { "type": "product", "settings": { "image_fallback": "calm-blueberry-acai.png", "name": "Calm", "tagline": "Naturally fermented GABA with magnesium.", "button_label": "Shop Calm", "link": "/collections/calm" } },
-        { "type": "product", "settings": { "image_fallback": "focus-pomegranate-raspberry.png", "name": "Focus", "tagline": "Caffeine-free clarity and focus support.", "button_label": "Shop Focus", "link": "/collections/focus" } },
-        { "type": "product", "settings": { "image_fallback": "energy-fuji-apple.png", "name": "Energy", "tagline": "Natural caffeine on a calm-first base.", "button_label": "Shop Energy", "link": "/collections/energy" } },
+        { "type": "free_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-sugar.png", "label": "No Added Sugar", "sub": "Stevia sweetened" } },
+        { "type": "free_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-gmo.png", "label": "Non-GMO", "sub": "Always" } },
+        { "type": "free_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-vegan.png", "label": "Vegan", "sub": "Plant-based" } },
+        { "type": "free_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/clinically-tested-ingredients.png", "label": "Clinically Studied", "sub": "Key ingredients" } },
+        { "type": "stack", "settings": { "anchor": "calm", "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-vegan.png", "name": "AVRO Calm Stack", "claim": "This stack supports stress reduction and a calm, clear state.*", "footnote": "Serving size 1 packet (5 g) · 10 servings per container. Powered by Naturally Fermented GABA — With Magnesium.", "flavor1_name": "Blueberry Acai", "flavor1_panel_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/blueberry-acai.png", "flavor1_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica.", "flavor2_name": "Blackberry Jasmine", "flavor2_panel_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/blackberry-jasmine.png", "flavor2_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica." } },
+        { "type": "stack", "settings": { "anchor": "focus", "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-vegan.png", "name": "AVRO Focus Stack", "claim": "This stack supports focus and productivity without caffeine.*", "footnote": "Serving size 1 packet (5 g) · 10 servings per container. Powered by Naturally Fermented GABA — Without Caffeine.", "flavor1_name": "Pomegranate Raspberry", "flavor1_panel_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/pomegranate-raspberry.png", "flavor1_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Silica.", "flavor2_name": "Red Dragon Fruit", "flavor2_panel_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/red-dragon-fruit.png", "flavor2_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Silica." } },
+        { "type": "stack", "settings": { "anchor": "energy", "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-vegan.png", "name": "AVRO Energy Stack", "claim": "This stack supports sustained energy and mental clarity.*", "footnote": "Serving size 1 packet (5 g) · 10 servings per container. Powered by Naturally Fermented GABA — With Caffeine.", "flavor1_name": "Fuji Apple", "flavor1_panel_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/fuji-apple.png", "flavor1_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Natural Flavor, Contains 2% or less of Acacia Fiber, Beta Carotene Color, Stevia Leaf Extract, Vegetable Juice Color, Spirulina Color, Silica.", "flavor2_name": "Orange Tangerine", "flavor2_panel_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/supplement-facts/orange-tangerine.png", "flavor2_other": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Beta Carotene Color, Stevia Leaf Extract, Natural Flavor, Silica." } },
+        { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "name": "Calm", "tagline": "Naturally fermented GABA with magnesium.", "button_label": "Shop Calm", "link": "/collections/calm" } },
+        { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "name": "Focus", "tagline": "Caffeine-free clarity and focus support.", "button_label": "Shop Focus", "link": "/collections/focus" } },
+        { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "name": "Energy", "tagline": "Natural caffeine on a calm-first base.", "button_label": "Shop Energy", "link": "/collections/energy" } },
         { "type": "faq", "settings": { "question": "Are AVRO ingredients third-party tested?", "answer": "Yes. Every batch is produced in a GMP-certified facility and tested for purity and potency." } },
         { "type": "faq", "settings": { "question": "What is naturally fermented PharmaGABA®?", "answer": "PharmaGABA® is a form of GABA produced through a natural fermentation process using Lactobacillus bacteria, rather than synthetic production." } },
         { "type": "faq", "settings": { "question": "Do you use proprietary blends?", "answer": "Never. Every ingredient and its exact dose is listed on the Supplement Facts panel so you know precisely what you're getting." } }
