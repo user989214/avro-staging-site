@@ -4,7 +4,10 @@
   ----------------------------------------------------------------------------
   HOW TO USE
   1. Create sections/avro-our-story.liquid and paste this entire file in.
-  2. Upload every image in this folder to your theme Assets (filenames must match).
+  2. Images render from hardcoded live-site URLs by default — no asset upload
+     needed. Pick an image in the theme editor to override any of them.
+     (Icons default to /images/icons/, founders to /images/team/, product tubes
+     to /images/tubes/studio/, lifestyle photos to /images/lifestyle/.)
   3. Add "AVRO — Our Story" to a page via the theme editor.
   4. All headings/body/buttons/images are editable. The use-case icons, Japanese
      principles, founders, and product trio are add/remove/reorder BLOCKS.
@@ -120,6 +123,7 @@
   @media (min-width: 1024px) { #avro-os-{{ section.id }} .rl-grid { grid-template-columns: 1fr 1fr; } #avro-os-{{ section.id }} .rl-img { min-height: 560px; } }
 {% endstyle %}
 
+{%- assign base = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app' -%}
 {%- assign use_cases = section.blocks | where: "type", "use_case" -%}
 {%- assign principles = section.blocks | where: "type", "principle" -%}
 {%- assign founders = section.blocks | where: "type", "founder" -%}
@@ -134,7 +138,7 @@
         {%- if section.settings.hero_image != blank -%}
           <img class="hero-img" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}">
         {%- else -%}
-          <img class="hero-img" src="{{ 'journal-coffee-window.jpg' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}">
+          <img class="hero-img" src="{{ base }}/images/lifestyle/journal-coffee-window.jpg" alt="{{ section.settings.hero_alt | escape }}">
         {%- endif -%}
       </div>
       <div class="hero-scrim" aria-hidden="true"></div>
@@ -166,12 +170,9 @@
     {%- if use_cases.size > 0 -%}
     <div class="hs-grid">
       {%- for b in use_cases -%}
+      {%- if b.settings.icon != blank -%}{%- assign uc_src = b.settings.icon | image_url: width: 224 -%}{%- elsif b.settings.icon_fallback contains 'http' -%}{%- assign uc_src = b.settings.icon_fallback -%}{%- elsif b.settings.icon_fallback != blank -%}{%- assign uc_src = base | append: '/images/icons/' | append: b.settings.icon_fallback -%}{%- else -%}{%- assign uc_src = base | append: '/images/icons/social-composure.png' -%}{%- endif -%}
       <div class="hs-item" {{ b.shopify_attributes }}>
-        {%- if b.settings.icon != blank -%}
-          <img src="{{ b.settings.icon | image_url: width: 224 }}" alt="">
-        {%- else -%}
-          <img src="{{ b.settings.icon_fallback | default: 'social-composure.png' | asset_url }}" alt="">
-        {%- endif -%}
+        <img src="{{ uc_src }}" alt="">
         <span>{{ b.settings.label }}</span>
       </div>
       {%- endfor -%}
@@ -218,12 +219,9 @@
           {%- if principles.size > 0 -%}
           <div class="ik-principles">
             {%- for b in principles -%}
+            {%- if b.settings.icon != blank -%}{%- assign pr_src = b.settings.icon | image_url: width: 128 -%}{%- elsif b.settings.icon_fallback contains 'http' -%}{%- assign pr_src = b.settings.icon_fallback -%}{%- elsif b.settings.icon_fallback != blank -%}{%- assign pr_src = base | append: '/images/icons/' | append: b.settings.icon_fallback -%}{%- else -%}{%- assign pr_src = base | append: '/images/icons/mind.png' -%}{%- endif -%}
             <div class="ik-prin" {{ b.shopify_attributes }}>
-              {%- if b.settings.icon != blank -%}
-                <img src="{{ b.settings.icon | image_url: width: 128 }}" alt="">
-              {%- else -%}
-                <img src="{{ b.settings.icon_fallback | default: 'mind.png' | asset_url }}" alt="">
-              {%- endif -%}
+              <img src="{{ pr_src }}" alt="">
               <div>
                 <h3>{{ b.settings.term }}</h3>
                 <p>{{ b.settings.copy }}</p>
@@ -245,13 +243,10 @@
     </div>
     <div class="fd-grid">
       {%- for b in founders -%}
+      {%- if b.settings.image != blank -%}{%- assign fd_src = b.settings.image | image_url: width: 500 -%}{%- elsif b.settings.image_fallback contains 'http' -%}{%- assign fd_src = b.settings.image_fallback -%}{%- elsif b.settings.image_fallback != blank -%}{%- assign fd_src = base | append: '/images/team/' | append: b.settings.image_fallback -%}{%- else -%}{%- assign fd_src = base | append: '/images/team/keigo.jpg' -%}{%- endif -%}
       <div class="fd-card" {{ b.shopify_attributes }}>
         <div class="fd-photo">
-          {%- if b.settings.image != blank -%}
-            <img src="{{ b.settings.image | image_url: width: 500 }}" alt="{{ b.settings.name | escape }}, {{ b.settings.role | escape }} of AVRO">
-          {%- else -%}
-            <img src="{{ b.settings.image_fallback | default: 'keigo.jpg' | asset_url }}" alt="{{ b.settings.name | escape }}, {{ b.settings.role | escape }} of AVRO">
-          {%- endif -%}
+          <img src="{{ fd_src }}" alt="{{ b.settings.name | escape }}, {{ b.settings.role | escape }} of AVRO">
         </div>
         <div>
           <h3>{{ b.settings.name }}</h3>
@@ -282,13 +277,10 @@
         {%- if products.size > 0 -%}
         <div class="sci-trio">
           {%- for b in products -%}
+          {%- if b.settings.image != blank -%}{%- assign pt_src = b.settings.image | image_url: width: 600 -%}{%- elsif b.settings.image_fallback contains 'http' -%}{%- assign pt_src = b.settings.image_fallback -%}{%- elsif b.settings.image_fallback != blank -%}{%- assign pt_src = base | append: '/images/tubes/studio/' | append: b.settings.image_fallback -%}{%- else -%}{%- assign pt_src = base | append: '/images/tubes/studio/calm-blueberry-acai.png' -%}{%- endif -%}
           <a href="{{ b.settings.link | default: '/collections/all' }}" class="sci-prod" {{ b.shopify_attributes }}>
             <div class="thumb">
-              {%- if b.settings.image != blank -%}
-                <img src="{{ b.settings.image | image_url: width: 600 }}" alt="{{ b.settings.name | escape }}">
-              {%- else -%}
-                <img src="{{ b.settings.image_fallback | default: 'calm-blueberry-acai.png' | asset_url }}" alt="{{ b.settings.name | escape }}">
-              {%- endif -%}
+              <img src="{{ pt_src }}" alt="{{ b.settings.name | escape }}">
             </div>
             <p>{{ b.settings.copy }}</p>
           </a>
@@ -306,7 +298,7 @@
         {%- if section.settings.rl_image != blank -%}
           <img src="{{ section.settings.rl_image | image_url: width: 1600 }}" alt="{{ section.settings.rl_alt | escape }}">
         {%- else -%}
-          <img src="{{ 'journal-coffee-window.jpg' | asset_url }}" alt="{{ section.settings.rl_alt | escape }}">
+          <img src="{{ base }}/images/lifestyle/journal-coffee-window.jpg" alt="{{ section.settings.rl_alt | escape }}">
         {%- endif -%}
       </div>
       <div class="rl-copy">
@@ -392,7 +384,7 @@
       "name": "Use case",
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "Icon" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "social-composure.png" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon URL or filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/social-composure.png" },
         { "type": "text", "id": "label", "label": "Label", "default": "Important conversations" }
       ]
     },
@@ -401,7 +393,7 @@
       "name": "Japanese principle",
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "Icon" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "mind.png" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon URL or filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/mind.png" },
         { "type": "text", "id": "term", "label": "Term", "default": "Ikigai" },
         { "type": "textarea", "id": "copy", "label": "Copy" }
       ]
@@ -411,7 +403,7 @@
       "name": "Founder",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Photo" },
-        { "type": "text", "id": "image_fallback", "label": "Photo asset filename", "default": "keigo.jpg" },
+        { "type": "text", "id": "image_fallback", "label": "Photo URL or filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/team/keigo.jpg" },
         { "type": "text", "id": "name", "label": "Name", "default": "Keigo Sugawara" },
         { "type": "text", "id": "role", "label": "Role", "default": "Co-Founder & CEO" },
         { "type": "richtext", "id": "bio", "label": "Bio" }
@@ -422,7 +414,7 @@
       "name": "Product card",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Product image" },
-        { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "calm-blueberry-acai.png" },
+        { "type": "text", "id": "image_fallback", "label": "Image URL or filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" },
         { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
         { "type": "textarea", "id": "copy", "label": "Copy" },
         { "type": "url", "id": "link", "label": "Link" }
@@ -433,19 +425,19 @@
     {
       "name": "AVRO — Our Story",
       "blocks": [
-        { "type": "use_case", "settings": { "icon_fallback": "social-composure.png", "label": "Important conversations" } },
-        { "type": "use_case", "settings": { "icon_fallback": "cohort-tech.png", "label": "Demanding workdays" } },
-        { "type": "use_case", "settings": { "icon_fallback": "cohort-golf.png", "label": "Competitive moments" } },
-        { "type": "use_case", "settings": { "icon_fallback": "control-under-pressure.png", "label": "Training and workouts" } },
-        { "type": "use_case", "settings": { "icon_fallback": "supports-clear-thinking.png", "label": "Presentations and decisions" } },
-        { "type": "principle", "settings": { "icon_fallback": "mind.png", "term": "Ikigai", "copy": "A sense of meaning that gives direction to everyday life." } },
-        { "type": "principle", "settings": { "icon_fallback": "consistency-quality.png", "term": "Kaizen", "copy": "Meaningful improvement through consistent, thoughtful progress." } },
-        { "type": "principle", "settings": { "icon_fallback": "quality-standards.png", "term": "Kodawari", "copy": "A commitment to quality, craft and the details others may overlook." } },
-        { "type": "founder", "settings": { "image_fallback": "keigo.jpg", "name": "Keigo Sugawara", "role": "Co-Founder & CEO", "bio": "<p>Keigo grew up in Japan and studied applied microbiology and fermentation science at the University of Tokyo.</p><p>His background shaped his respect for ingredients, scientific discipline and the role fermentation can play in creating thoughtful, functional products.</p>" } },
-        { "type": "founder", "settings": { "image_fallback": "peter.jpg", "name": "Peter van Stolk", "role": "Co-Founder & CMO", "bio": "<p>Peter brought decades of experience building consumer brands and challenging established categories.</p><p>He saw that AVRO could introduce a new way of thinking about how people prepare for demanding moments.</p>" } },
-        { "type": "product", "settings": { "image_fallback": "calm-blueberry-acai.png", "name": "AVRO Calm", "copy": "For moments when composure comes first.*", "link": "/collections/calm" } },
-        { "type": "product", "settings": { "image_fallback": "focus-pomegranate-raspberry.png", "name": "AVRO Focus", "copy": "For moments that call for sustained attention and clarity.*", "link": "/collections/focus" } },
-        { "type": "product", "settings": { "image_fallback": "energy-fuji-apple.png", "name": "AVRO Energy", "copy": "For moments when you want steady energy while maintaining a sense of control.*", "link": "/collections/energy" } }
+        { "type": "use_case", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/social-composure.png", "label": "Important conversations" } },
+        { "type": "use_case", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-tech.png", "label": "Demanding workdays" } },
+        { "type": "use_case", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-golf.png", "label": "Competitive moments" } },
+        { "type": "use_case", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png", "label": "Training and workouts" } },
+        { "type": "use_case", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-clear-thinking.png", "label": "Presentations and decisions" } },
+        { "type": "principle", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/mind.png", "term": "Ikigai", "copy": "A sense of meaning that gives direction to everyday life." } },
+        { "type": "principle", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/consistency-quality.png", "term": "Kaizen", "copy": "Meaningful improvement through consistent, thoughtful progress." } },
+        { "type": "principle", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/quality-standards.png", "term": "Kodawari", "copy": "A commitment to quality, craft and the details others may overlook." } },
+        { "type": "founder", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/team/keigo.jpg", "name": "Keigo Sugawara", "role": "Co-Founder & CEO", "bio": "<p>Keigo grew up in Japan and studied applied microbiology and fermentation science at the University of Tokyo.</p><p>His background shaped his respect for ingredients, scientific discipline and the role fermentation can play in creating thoughtful, functional products.</p>" } },
+        { "type": "founder", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/team/peter.jpg", "name": "Peter van Stolk", "role": "Co-Founder & CMO", "bio": "<p>Peter brought decades of experience building consumer brands and challenging established categories.</p><p>He saw that AVRO could introduce a new way of thinking about how people prepare for demanding moments.</p>" } },
+        { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "name": "AVRO Calm", "copy": "For moments when composure comes first.*", "link": "/collections/calm" } },
+        { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "name": "AVRO Focus", "copy": "For moments that call for sustained attention and clarity.*", "link": "/collections/focus" } },
+        { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "name": "AVRO Energy", "copy": "For moments when you want steady energy while maintaining a sense of control.*", "link": "/collections/energy" } }
       ]
     }
   ]
