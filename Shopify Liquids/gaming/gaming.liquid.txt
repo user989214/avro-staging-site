@@ -221,7 +221,7 @@
     {%- if section.settings.graphic_title != blank -%}
     <div class="head left" style="max-width:760px;"><h2>{{ section.settings.graphic_title }}</h2>{%- if section.settings.graphic_copy != blank -%}<p>{{ section.settings.graphic_copy }}</p>{%- endif -%}</div>
     {%- endif -%}
-    {%- if section.settings.graphic_asset != blank -%}{%- assign graphic_src = section.settings.graphic_asset -%}{%- else -%}{%- assign graphic_src = base | append: '/graphics/esports.html' -%}{%- endif -%}
+    {%- if section.settings.graphic_asset != blank and section.settings.graphic_asset contains 'http' -%}{%- assign graphic_src = section.settings.graphic_asset -%}{%- else -%}{%- assign graphic_src = base | append: '/graphics/esports.html' -%}{%- endif -%}
     <iframe class="graphic-frame" style="aspect-ratio:{{ section.settings.graphic_ratio | default: '1200 / 884' }};" src="{{ graphic_src }}" title="{{ section.settings.graphic_a11y | default: 'AVRO for esports research graphic' | escape }}" loading="lazy" scrolling="no"></iframe>
     {%- if section.settings.chart_source != blank -%}<p style="font-size:12px;line-height:1.5;color:var(--warm-gray);margin-top:16px;white-space:pre-line;">{{ section.settings.chart_source }}</p>{%- endif -%}
   </div></section>
