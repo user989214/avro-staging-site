@@ -4,7 +4,8 @@
   ----------------------------------------------------------------------------
   HOW TO USE
   1. Create sections/avro-science.liquid and paste this entire file in.
-  2. Upload every image in this folder to your theme Assets (filenames must match).
+  2. Images render from hardcoded live-site URLs by default — no asset upload
+     needed. Pick an image in the editor to override any of them.
   3. Add "AVRO — Science" to a page via the theme editor.
   4. Headings/body/buttons/images are editable. Hero badges, foundation cards,
      PharmaGABA reasons, formula-logic cards, product cards, and FAQs are
@@ -58,12 +59,12 @@
   }
 
   /* CARDED SECTIONS */
-  #avro-sci-{{ section.id }} .carded { width: 100%; max-width: 1440px; margin: 0 auto; padding: clamp(28px,4vw,56px) clamp(16px,5vw,64px); }
+  #avro-sci-{{ section.id }} .carded { width: 100%; max-width: 1440px; margin: 0 auto; padding: clamp(40px,6vw,80px) clamp(16px,5vw,64px); }
   #avro-sci-{{ section.id }} .carded .panel { border-radius: 28px; background: var(--base-light); padding: clamp(28px,5vw,64px); }
   #avro-sci-{{ section.id }} .sec-h2 { font-weight: 900; font-size: clamp(30px,4vw,52px); line-height: 1.05; color: var(--ink); margin-bottom: 16px; }
-  #avro-sci-{{ section.id }} .cards-3 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  #avro-sci-{{ section.id }} .cards-3 { display: grid; grid-template-columns: 1fr; gap: 24px; }
   @media (min-width: 768px) { #avro-sci-{{ section.id }} .cards-3 { grid-template-columns: repeat(3,1fr); } }
-  #avro-sci-{{ section.id }} .info-card { background: var(--base-light); border-radius: 20px; padding: 28px; min-height: 180px; }
+  #avro-sci-{{ section.id }} .info-card { background: var(--base-light); border-radius: 20px; padding: clamp(28px,3vw,40px); min-height: 180px; }
   #avro-sci-{{ section.id }} .panel .info-card { background: var(--bone); }
   #avro-sci-{{ section.id }} .info-card img { width: 72px; height: 72px; object-fit: contain; margin-bottom: 20px; }
   #avro-sci-{{ section.id }} .info-card h3 { font-weight: 900; margin-bottom: 8px; color: var(--ink); }
@@ -81,7 +82,7 @@
   /* FORMULA LOGIC */
   #avro-sci-{{ section.id }} .fl-sec { width: 100%; max-width: 1440px; margin: 0 auto; padding: clamp(52px,7vw,86px) clamp(18px,5vw,64px); }
   #avro-sci-{{ section.id }} .eyebrow { display: inline-block; margin-bottom: 16px; padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; background: var(--charcoal); color: var(--bone); }
-  #avro-sci-{{ section.id }} .cards-4 { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  #avro-sci-{{ section.id }} .cards-4 { display: grid; grid-template-columns: 1fr; gap: 24px; }
   @media (min-width: 640px) { #avro-sci-{{ section.id }} .cards-4 { grid-template-columns: repeat(2,1fr); } }
   @media (min-width: 1024px) { #avro-sci-{{ section.id }} .cards-4 { grid-template-columns: repeat(4,1fr); } }
 
@@ -126,6 +127,7 @@
   @media (max-width: 640px) { #avro-sci-{{ section.id }} .banner-box { display: flex; flex-direction: column; padding-bottom: 24px; } #avro-sci-{{ section.id }} .banner-btn { position: static; width: calc(100% - 32px); min-width: 0; margin: 20px auto 0; } }
 {% endstyle %}
 
+{%- assign base = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app' -%}
 {%- assign badges = section.blocks | where: "type", "hero_badge" -%}
 {%- assign foundation = section.blocks | where: "type", "foundation_card" -%}
 {%- assign pharma = section.blocks | where: "type", "pharma_reason" -%}
@@ -142,12 +144,12 @@
         {%- if section.settings.hero_image != blank -%}
           <img class="ph-img-desktop" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}">
         {%- else -%}
-          <img class="ph-img-desktop" src="{{ 'science-hero.png' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}">
+          <img class="ph-img-desktop" src="{{ base }}/images/lifestyle/science-hero.png" alt="{{ section.settings.hero_alt | escape }}">
         {%- endif -%}
         {%- if section.settings.hero_image_mobile != blank -%}
           <img class="ph-img-mobile" src="{{ section.settings.hero_image_mobile | image_url: width: 1200 }}" alt="{{ section.settings.hero_alt | escape }}">
         {%- else -%}
-          <img class="ph-img-mobile" src="{{ 'science-hero-mobile.png' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}">
+          <img class="ph-img-mobile" src="{{ base }}/images/lifestyle/science-hero-mobile.png" alt="{{ section.settings.hero_alt | escape }}">
         {%- endif -%}
       </div>
       <div class="ph-scrim" aria-hidden="true"></div>
@@ -160,7 +162,7 @@
           <div class="ph-fade ph-badges">
             {%- for b in badges -%}
             <span class="ph-badge" {{ b.shopify_attributes }}>
-              {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 128 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'science-backed.png' | asset_url }}" alt="">{%- endif -%}
+              {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 128 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/science-backed.png' }}" alt="">{%- endif -%}
               {{ b.settings.label }}
             </span>
             {%- endfor -%}
@@ -183,7 +185,7 @@
       <div class="cards-3">
         {%- for b in foundation -%}
         <article class="info-card" {{ b.shopify_attributes }}>
-          {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 144 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'calm-first-foundation.png' | asset_url }}" alt="">{%- endif -%}
+          {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 144 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png' }}" alt="">{%- endif -%}
           <h3>{{ b.settings.title }}</h3>
           <p>{{ b.settings.copy }}</p>
         </article>
@@ -207,7 +209,7 @@
           <div class="pharma-list">
             {%- for b in pharma -%}
             <p class="pharma-row" {{ b.shopify_attributes }}>
-              {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 160 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'naturally-fermented-pharmagaba.png' | asset_url }}" alt="">{%- endif -%}
+              {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 160 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png' }}" alt="">{%- endif -%}
               <span>{{ b.settings.label }}</span>
             </p>
             {%- endfor -%}
@@ -228,7 +230,7 @@
     <div class="cards-4">
       {%- for b in logic -%}
       <article class="info-card" {{ b.shopify_attributes }}>
-        {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 144 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'naturally-fermented-pharmagaba.png' | asset_url }}" alt="">{%- endif -%}
+        {%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 144 }}" alt="">{%- else -%}<img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png' }}" alt="">{%- endif -%}
         <h3>{{ b.settings.title }}</h3>
         <p>{{ b.settings.copy }}</p>
       </article>
@@ -247,7 +249,7 @@
         {%- for b in products -%}
         <article class="pc-card" {{ b.shopify_attributes }}>
           <div class="pc-thumb">
-            {%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">{%- else -%}<img src="{{ b.settings.image_fallback | default: 'calm-blueberry-acai.png' | asset_url }}" alt="{{ b.settings.name | escape }}">{%- endif -%}
+            {%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">{%- else -%}<img src="{{ b.settings.image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png' }}" alt="{{ b.settings.name | escape }}">{%- endif -%}
           </div>
           <h3>{{ b.settings.name }}</h3>
           <p class="support">{{ b.settings.support }}</p>
@@ -294,7 +296,7 @@
 
     <section>
       <div class="banner-box">
-        {%- if section.settings.banner_image != blank -%}<img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">{%- else -%}<img src="{{ 'science-banner.png' | asset_url }}" alt="">{%- endif -%}
+        {%- if section.settings.banner_image != blank -%}<img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">{%- else -%}<img src="{{ base }}/images/banners/science-banner.png" alt="">{%- endif -%}
         <a href="{{ section.settings.banner_link | default: '/collections/all' }}" class="btn banner-btn">{{ section.settings.banner_label | default: 'Shop' }}</a>
       </div>
     </section>
@@ -360,7 +362,7 @@
       "name": "Hero badge",
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "Icon" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "science-backed.png" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/science-backed.png" },
         { "type": "text", "id": "label", "label": "Label", "default": "Research Supported Ingredient" }
       ]
     },
@@ -369,7 +371,7 @@
       "name": "Foundation card",
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "Icon" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "calm-first-foundation.png" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png" },
         { "type": "text", "id": "title", "label": "Title", "default": "Calm supports clarity" },
         { "type": "textarea", "id": "copy", "label": "Copy" }
       ]
@@ -379,7 +381,7 @@
       "name": "PharmaGABA reason",
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "Icon" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "naturally-fermented-pharmagaba.png" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png" },
         { "type": "text", "id": "label", "label": "Label", "default": "Naturally fermented" }
       ]
     },
@@ -388,7 +390,7 @@
       "name": "Formula logic card",
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "Icon" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "naturally-fermented-pharmagaba.png" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png" },
         { "type": "text", "id": "title", "label": "Title", "default": "PharmaGABA®" },
         { "type": "textarea", "id": "copy", "label": "Copy" }
       ]
@@ -398,7 +400,7 @@
       "name": "Product card",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Product image" },
-        { "type": "text", "id": "image_fallback", "label": "Image asset filename", "default": "calm-blueberry-acai.png" },
+        { "type": "text", "id": "image_fallback", "label": "Image URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" },
         { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
         { "type": "textarea", "id": "support", "label": "Support line" },
         { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
@@ -418,23 +420,23 @@
     {
       "name": "AVRO — Science",
       "blocks": [
-        { "type": "hero_badge", "settings": { "icon_fallback": "naturally-fermented-pharmagaba.png", "label": "Naturally Fermented PharmaGABA®" } },
-        { "type": "hero_badge", "settings": { "icon_fallback": "science-backed.png", "label": "Research Supported Ingredient" } },
-        { "type": "hero_badge", "settings": { "icon_fallback": "transparent-standards.png", "label": "Transparent Standards" } },
-        { "type": "foundation_card", "settings": { "icon_fallback": "control-under-pressure.png", "title": "Pressure creates noise", "copy": "When pressure rises, more stimulation is not always better." } },
-        { "type": "foundation_card", "settings": { "icon_fallback": "supports-clear-thinking.png", "title": "Calm supports clarity", "copy": "A calmer state can help support clearer thinking and better composure.*" } },
-        { "type": "foundation_card", "settings": { "icon_fallback": "calm-first-foundation.png", "title": "AVRO starts with state", "copy": "AVRO is built around state support before pressure-sensitive moments." } },
-        { "type": "pharma_reason", "settings": { "icon_fallback": "naturally-fermented-pharmagaba.png", "label": "Naturally fermented" } },
-        { "type": "pharma_reason", "settings": { "icon_fallback": "consistency-quality.png", "label": "Consistent ingredient quality" } },
-        { "type": "pharma_reason", "settings": { "icon_fallback": "science-backed.png", "label": "Supported by published research" } },
-        { "type": "pharma_reason", "settings": { "icon_fallback": "calm-first-foundation.png", "label": "Used at 200 mg active GABA in every AVRO formula" } },
-        { "type": "logic_card", "settings": { "icon_fallback": "naturally-fermented-pharmagaba.png", "title": "PharmaGABA®", "copy": "Naturally fermented PharmaGABA® is the calm-first foundation in every AVRO formula." } },
-        { "type": "logic_card", "settings": { "icon_fallback": "mind-body-diagram.png", "title": "Formula Logic", "copy": "Each formula builds from the same base, then adds targeted support for the moment." } },
-        { "type": "logic_card", "settings": { "icon_fallback": "transparent-standards.png", "title": "Quality + Transparency", "copy": "Clear ingredient disclosure and quality standards, with documentation where applicable." } },
-        { "type": "logic_card", "settings": { "icon_fallback": "calm-first-foundation.png", "title": "Calm First Foundation", "copy": "AVRO is designed to support state before stimulation." } },
-        { "type": "product", "settings": { "image_fallback": "calm-blueberry-acai.png", "name": "AVRO Calm", "support": "Calm support without stimulation.*", "button_label": "Shop Calm", "link": "/collections/calm" } },
-        { "type": "product", "settings": { "image_fallback": "focus-pomegranate-raspberry.png", "name": "AVRO Focus", "support": "Clarity and focus support without caffeine.*", "button_label": "Shop Focus", "link": "/collections/focus" } },
-        { "type": "product", "settings": { "image_fallback": "energy-fuji-apple.png", "name": "AVRO Energy", "support": "Natural caffeine with a calm-first foundation.*", "button_label": "Shop Energy", "link": "/collections/energy" } },
+        { "type": "hero_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png", "label": "Naturally Fermented PharmaGABA®" } },
+        { "type": "hero_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/science-backed.png", "label": "Research Supported Ingredient" } },
+        { "type": "hero_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/transparent-standards.png", "label": "Transparent Standards" } },
+        { "type": "foundation_card", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png", "title": "Pressure creates noise", "copy": "When pressure rises, more stimulation is not always better." } },
+        { "type": "foundation_card", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-clear-thinking.png", "title": "Calm supports clarity", "copy": "A calmer state can help support clearer thinking and better composure.*" } },
+        { "type": "foundation_card", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png", "title": "AVRO starts with state", "copy": "AVRO is built around state support before pressure-sensitive moments." } },
+        { "type": "pharma_reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png", "label": "Naturally fermented" } },
+        { "type": "pharma_reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/consistency-quality.png", "label": "Consistent ingredient quality" } },
+        { "type": "pharma_reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/science-backed.png", "label": "Supported by published research" } },
+        { "type": "pharma_reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png", "label": "Used at 200 mg active GABA in every AVRO formula" } },
+        { "type": "logic_card", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png", "title": "PharmaGABA®", "copy": "Naturally fermented PharmaGABA® is the calm-first foundation in every AVRO formula." } },
+        { "type": "logic_card", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/mind-body-diagram.png", "title": "Formula Logic", "copy": "Each formula builds from the same base, then adds targeted support for the moment." } },
+        { "type": "logic_card", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/transparent-standards.png", "title": "Quality + Transparency", "copy": "Clear ingredient disclosure and quality standards, with documentation where applicable." } },
+        { "type": "logic_card", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png", "title": "Calm First Foundation", "copy": "AVRO is designed to support state before stimulation." } },
+        { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "name": "AVRO Calm", "support": "Calm support without stimulation.*", "button_label": "Shop Calm", "link": "/collections/calm" } },
+        { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "name": "AVRO Focus", "support": "Clarity and focus support without caffeine.*", "button_label": "Shop Focus", "link": "/collections/focus" } },
+        { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "name": "AVRO Energy", "support": "Natural caffeine with a calm-first foundation.*", "button_label": "Shop Energy", "link": "/collections/energy" } },
         { "type": "faq", "settings": { "question": "What makes PharmaGABA different?", "answer": "PharmaGABA is a naturally fermented form of GABA used as part of AVRO's calm-first foundation." } },
         { "type": "faq", "settings": { "question": "Why does AVRO start with calm?", "answer": "AVRO is built around the idea that state matters before pressure-sensitive moments, and more stimulation is not always the answer." } },
         { "type": "faq", "settings": { "question": "Does AVRO contain caffeine?", "answer": "Calm and Focus are caffeine free. Energy contains 120 mg natural caffeine." } }
