@@ -34,7 +34,7 @@
             {%- assign rp = block.settings.product -%}
             <div class="am-rcard" {{ block.shopify_attributes }}>
               <a href="{{ rp.url | default: '#' }}" class="am-rthumb" aria-label="{{ rp.title | default: block.settings.fallback_name | escape }}">
-                {%- if rp != blank and rp.featured_image -%}<img src="{{ rp.featured_image | image_url: width: 600 }}" alt="{{ rp.title | escape }}" loading="lazy">{%- endif -%}
+                {%- if rp != blank and rp.featured_image -%}<img src="{{ rp.featured_image | image_url: width: 600 }}" alt="{{ rp.title | escape }}" loading="lazy">{%- elsif block.settings.fallback_image != blank -%}<img src="{{ block.settings.fallback_image }}" alt="{{ block.settings.fallback_name | escape }}" loading="lazy">{%- endif -%}
               </a>
               <div class="am-rmeta">
                 <div class="am-rtop">
@@ -58,7 +58,7 @@
       <div class="am-ing-grid">
         {%- for block in section.blocks -%}{%- if block.type == 'ingredient' -%}
           <div class="am-ing-card" {{ block.shopify_attributes }}>
-            <div class="am-ing-thumb">{%- if block.settings.image -%}<img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name | escape }}" loading="lazy">{%- endif -%}</div>
+            <div class="am-ing-thumb">{%- if block.settings.image -%}<img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name | escape }}" loading="lazy">{%- elsif block.settings.image_url != blank -%}<img src="{{ block.settings.image_url }}" alt="{{ block.settings.name | escape }}" loading="lazy">{%- endif -%}</div>
             <h3 class="am-ing-cardname">{{ block.settings.name }}</h3>
             <span class="am-ing-cardamt">{{ block.settings.amount }}</span>
             <p class="am-ing-carddesc">{{ block.settings.description }}</p>
@@ -75,7 +75,7 @@
       <div class="am-feel-grid">
         {%- for block in section.blocks -%}{%- if block.type == 'feeling' -%}
           <div class="am-feel-card" {{ block.shopify_attributes }}>
-            <div class="am-feel-icon">{%- if block.settings.icon -%}<img src="{{ block.settings.icon | image_url: width: 200 }}" alt="" loading="lazy">{%- endif -%}</div>
+            <div class="am-feel-icon">{%- if block.settings.icon -%}<img src="{{ block.settings.icon | image_url: width: 200 }}" alt="" loading="lazy">{%- elsif block.settings.icon_url != blank -%}<img src="{{ block.settings.icon_url }}" alt="" loading="lazy">{%- endif -%}</div>
             <h3 class="am-feel-title">{{ block.settings.title }}</h3>
           </div>
         {%- endif -%}{%- endfor -%}
@@ -91,6 +91,8 @@
             <div class="am-feel-embed">{{ section.settings.feeling_embed }}</div>
           {%- elsif section.settings.feeling_graph -%}
             <img src="{{ section.settings.feeling_graph | image_url: width: 1400 }}" alt="{{ section.settings.feeling_graph.alt | escape }}" loading="lazy">
+          {%- elsif section.settings.feeling_graph_url != blank -%}
+            <div class="am-feel-embed"><iframe src="{{ section.settings.feeling_graph_url }}" style="width:100%;aspect-ratio:1200/740;border:0;display:block" loading="lazy" title="How it works chart"></iframe></div>
           {%- endif -%}
         </div>
       </div>
@@ -106,7 +108,7 @@
         {%- for block in section.blocks -%}{%- if block.type == 'compare' -%}
           {%- assign cp = block.settings.product -%}
           <div class="am-ccard" {{ block.shopify_attributes }}>
-            <a href="{{ cp.url | default: '#' }}" class="am-cthumb" aria-label="{{ cp.title | default: block.settings.fallback_name | escape }}">{%- if cp != blank and cp.featured_image -%}<img src="{{ cp.featured_image | image_url: width: 800 }}" alt="{{ cp.title | escape }}" loading="lazy">{%- endif -%}</a>
+            <a href="{{ cp.url | default: '#' }}" class="am-cthumb" aria-label="{{ cp.title | default: block.settings.fallback_name | escape }}">{%- if cp != blank and cp.featured_image -%}<img src="{{ cp.featured_image | image_url: width: 800 }}" alt="{{ cp.title | escape }}" loading="lazy">{%- elsif block.settings.fallback_image != blank -%}<img src="{{ block.settings.fallback_image }}" alt="{{ block.settings.fallback_name | escape }}" loading="lazy">{%- endif -%}</a>
             <h3 class="am-cname">{{ cp.title | default: block.settings.fallback_name }}</h3>
             <p class="am-cheadline">{{ block.settings.headline }}</p>
             <div class="am-cspecs">
@@ -151,8 +153,8 @@
     <div class="am-wrap am-rev-wrap">
       <div class="am-rev-summary">
         <div class="am-rev-prod">
-          <div class="am-rev-thumb">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.title | escape }}">{%- endif -%}</div>
-          <div class="am-rev-prodtext"><strong>{{ product.title }}</strong><span>{{ section.settings.reviews_sub | default: 'Verified reviews' }}</span></div>
+          <div class="am-rev-thumb">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.title | escape }}">{%- elsif section.settings.reviews_image_url != blank -%}<img src="{{ section.settings.reviews_image_url }}" alt="">{%- endif -%}</div>
+          <div class="am-rev-prodtext"><strong>{{ product.title | default: 'AVRO Energy' }}</strong><span>{{ section.settings.reviews_sub | default: 'Verified reviews' }}</span></div>
         </div>
         <div class="am-rev-rating">
           <strong>{{ section.settings.reviews_rating | default: '4.8' }}</strong>
@@ -182,11 +184,13 @@
       <a href="{{ section.settings.final_shop_link | default: '#' }}" class="am-btn am-btn-light">{{ section.settings.final_shop_label | default: 'Shop' }}</a>
     </div>
   </section>
-  {%- if section.settings.final_banner -%}
+  {%- assign banner_src = '' -%}
+  {%- if section.settings.final_banner -%}{%- assign banner_src = section.settings.final_banner | image_url: width: 2000 -%}{%- elsif section.settings.final_banner_url != blank -%}{%- assign banner_src = section.settings.final_banner_url -%}{%- endif -%}
+  {%- if banner_src != '' -%}
   <section class="am-sec am-banner-sec">
     <div class="am-wrap">
       <div class="am-banner">
-        <img src="{{ section.settings.final_banner | image_url: width: 2000 }}" alt="{{ section.settings.final_banner.alt | escape }}" loading="lazy">
+        <img src="{{ banner_src }}" alt="" loading="lazy">
         <a href="{{ section.settings.final_shop_link | default: '#' }}" class="am-btn am-btn-light am-banner-btn">{{ section.settings.final_shop_label | default: 'Shop' }}</a>
       </div>
     </div>
@@ -393,6 +397,7 @@
     { "type": "url", "id": "feeling_btn_link", "label": "Button link" },
     { "type": "html", "id": "feeling_embed", "label": "Graph / chart embed", "info": "Paste an embed (iframe, chart script, SVG, etc.). If set, this is used instead of the image below." },
     { "type": "image_picker", "id": "feeling_graph", "label": "Graph / chart image", "info": "Used when no embed is set above." },
+    { "type": "text", "id": "feeling_graph_url", "label": "Graph embed URL (pre-embedded)", "info": "Used when neither an embed nor an image is set above.", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/graphics/energy.html" },
     { "type": "header", "content": "Comparison grid (dark)" },
     { "type": "text", "id": "compare_heading", "label": "Heading", "default": "We put intention into every formula." },
     { "type": "text", "id": "compare_sub", "label": "Subheading", "default": "Find the one that was made with your day in mind." },
@@ -410,12 +415,14 @@
     { "type": "text", "id": "reviews_count", "label": "Reviews count text", "default": "82 verified reviews" },
     { "type": "text", "id": "reviews_sub", "label": "Product subtitle", "default": "Verified reviews" },
     { "type": "text", "id": "reviews_cta", "label": "Button label", "default": "Write a review" },
+    { "type": "text", "id": "reviews_image_url", "label": "Product thumb URL (pre-embedded)", "info": "Used when the product has no featured image.", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-orange-tangerine.png" },
     { "type": "header", "content": "Final CTA + banner" },
     { "type": "text", "id": "final_heading", "label": "Heading", "default": "Calm first. Clean energy. Ready for what matters." },
     { "type": "textarea", "id": "final_copy", "label": "Copy", "default": "Support clean, steady energy and calm-first drive for the moments that matter.*" },
     { "type": "text", "id": "final_shop_label", "label": "Shop button label", "default": "Shop" },
     { "type": "url", "id": "final_shop_link", "label": "Shop button link" },
-    { "type": "image_picker", "id": "final_banner", "label": "Bottom banner image" }
+    { "type": "image_picker", "id": "final_banner", "label": "Bottom banner image" },
+    { "type": "text", "id": "final_banner_url", "label": "Bottom banner URL (pre-embedded)", "info": "Used when no image is picked above.", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/banners/energy-power.png" }
   ],
   "blocks": [
     {
@@ -423,6 +430,7 @@
       "name": "Ingredient",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_url", "label": "Image URL (pre-embedded)", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/pharmagaba-2.jpg" },
         { "type": "text", "id": "name", "label": "Name", "default": "PharmaGABA®" },
         { "type": "text", "id": "amount", "label": "Amount / label", "default": "200 mg" },
         { "type": "textarea", "id": "description", "label": "Description", "default": "Naturally fermented. AVRO's calm-first foundation." }
@@ -435,7 +443,8 @@
         { "type": "product", "id": "product", "label": "Product" },
         { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop" },
         { "type": "text", "id": "fallback_name", "label": "Fallback name (if no product)", "default": "AVRO Focus" },
-        { "type": "text", "id": "fallback_price", "label": "Fallback price (if no product)", "default": "$24.95" }
+        { "type": "text", "id": "fallback_price", "label": "Fallback price (if no product)", "default": "$24.95" },
+        { "type": "text", "id": "fallback_image", "label": "Fallback image URL (pre-embedded)", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png" }
       ]
     },
     {
@@ -443,6 +452,7 @@
       "name": "Feeling benefit",
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_url", "label": "Icon URL (pre-embedded)", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-clear-thinking.png" },
         { "type": "text", "id": "title", "label": "Title", "default": "Improved clarity & composure*" }
       ]
     },
@@ -452,6 +462,7 @@
       "settings": [
         { "type": "product", "id": "product", "label": "Product" },
         { "type": "text", "id": "fallback_name", "label": "Fallback name (if no product)", "default": "AVRO Calm" },
+        { "type": "text", "id": "fallback_image", "label": "Fallback image URL (pre-embedded)", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" },
         { "type": "textarea", "id": "headline", "label": "Headline", "default": "Calm first. Clear headed. Ready when pressure rises." },
         { "type": "text", "id": "caffeine", "label": "Caffeine", "default": "0 mg" },
         { "type": "text", "id": "experience", "label": "Experience", "default": "Gentle" },
@@ -483,22 +494,22 @@
     {
       "name": "AVRO Details · Energy",
       "blocks": [
-        { "type": "ingredient", "settings": { "name": "Natural Caffeine", "amount": "120 mg", "description": "Clean energy from green coffee beans, without the crash.*" } },
-        { "type": "ingredient", "settings": { "name": "L-Theanine", "amount": "200 mg", "description": "Smooths caffeine for calm, focused energy.*" } },
-        { "type": "ingredient", "settings": { "name": "PharmaGABA®", "amount": "100 mg", "description": "Naturally fermented. AVRO's calm-first foundation." } },
-        { "type": "ingredient", "settings": { "name": "Prebiotic Fiber", "amount": "Soluble Guar Fiber + Acacia Fiber", "description": "Supports gut comfort.* Part of AVRO's daily formula." } },
+        { "type": "ingredient", "settings": { "name": "Natural Caffeine", "amount": "120 mg", "description": "Clean energy from green coffee beans, without the crash.*", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/natural-caffeine-2.jpg" } },
+        { "type": "ingredient", "settings": { "name": "L-Theanine", "amount": "200 mg", "description": "Smooths caffeine for calm, focused energy.*", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/ltheanine.jpg" } },
+        { "type": "ingredient", "settings": { "name": "PharmaGABA®", "amount": "100 mg", "description": "Naturally fermented. AVRO's calm-first foundation.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/pharmagaba-2.jpg" } },
+        { "type": "ingredient", "settings": { "name": "Prebiotic Fiber", "amount": "Soluble Guar Fiber + Acacia Fiber", "description": "Supports gut comfort.* Part of AVRO's daily formula.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/prebiotic-fiber-2.jpg" } },
 
-        { "type": "feeling", "settings": { "title": "Clean, steady energy*" } },
-        { "type": "feeling", "settings": { "title": "No jitters or crash*" } },
-        { "type": "feeling", "settings": { "title": "Calm, focused drive*" } },
-        { "type": "feeling", "settings": { "title": "Sustained stamina*" } },
+        { "type": "feeling", "settings": { "title": "Clean, steady energy*", "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-clear-thinking.png" } },
+        { "type": "feeling", "settings": { "title": "No jitters or crash*", "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/social-composure.png" } },
+        { "type": "feeling", "settings": { "title": "Calm, focused drive*", "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-focus-without-overload.png" } },
+        { "type": "feeling", "settings": { "title": "Sustained stamina*", "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png" } },
 
-        { "type": "related", "settings": { "fallback_name": "AVRO Calm", "fallback_price": "$24.95", "button_label": "Shop Calm" } },
-        { "type": "related", "settings": { "fallback_name": "AVRO Focus", "fallback_price": "$24.95", "button_label": "Shop Focus" } },
+        { "type": "related", "settings": { "fallback_name": "AVRO Calm", "fallback_price": "$24.95", "button_label": "Shop Calm", "fallback_image": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" } },
+        { "type": "related", "settings": { "fallback_name": "AVRO Focus", "fallback_price": "$24.95", "button_label": "Shop Focus", "fallback_image": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png" } },
 
-        { "type": "compare", "settings": { "fallback_name": "AVRO Calm", "headline": "Calm first. Clear headed. Ready when pressure rises.", "caffeine": "0 mg", "experience": "Gentle", "best_for": "Stress relief & focused calm" } },
-        { "type": "compare", "settings": { "fallback_name": "AVRO Focus", "headline": "Calm first. Clear headed. Ready to focus.", "caffeine": "0 mg", "experience": "Steady", "best_for": "Desk work & daily routines" } },
-        { "type": "compare", "settings": { "fallback_name": "AVRO Energy", "headline": "Calm first. Steady energy. Ready when it matters.", "caffeine": "120 mg", "experience": "Stronger", "best_for": "Workouts or peak-demand moments" } },
+        { "type": "compare", "settings": { "fallback_name": "AVRO Calm", "fallback_image": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "headline": "Calm first. Clear headed. Ready when pressure rises.", "caffeine": "0 mg", "experience": "Gentle", "best_for": "Stress relief & focused calm" } },
+        { "type": "compare", "settings": { "fallback_name": "AVRO Focus", "fallback_image": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "headline": "Calm first. Clear headed. Ready to focus.", "caffeine": "0 mg", "experience": "Steady", "best_for": "Desk work & daily routines" } },
+        { "type": "compare", "settings": { "fallback_name": "AVRO Energy", "fallback_image": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "headline": "Calm first. Steady energy. Ready when it matters.", "caffeine": "120 mg", "experience": "Stronger", "best_for": "Workouts or peak-demand moments" } },
 
         { "type": "faq", "settings": { "question": "What are the main ingredients?", "answer": "<p>Formulated with natural caffeine, L-Theanine, and PharmaGABA® for clean energy without the jitters.</p>" } },
         { "type": "faq", "settings": { "question": "What is the best time to take it?", "answer": "<p>Most people use one stick about 20 to 30 minutes before a workout, a long day, or the afternoon slump.</p>" } },
