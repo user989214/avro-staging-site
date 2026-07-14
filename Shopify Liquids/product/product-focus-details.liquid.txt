@@ -34,7 +34,7 @@
             {%- assign rp = block.settings.product -%}
             <div class="am-rcard" {{ block.shopify_attributes }}>
               <a href="{{ rp.url | default: '#' }}" class="am-rthumb" aria-label="{{ rp.title | default: block.settings.fallback_name | escape }}">
-                {%- if rp != blank and rp.featured_image -%}<img src="{{ rp.featured_image | image_url: width: 600 }}" alt="{{ rp.title | escape }}" loading="lazy">{%- endif -%}
+                {%- if rp != blank and rp.featured_image -%}<img src="{{ rp.featured_image | image_url: width: 600 }}" alt="{{ rp.title | escape }}" loading="lazy">{%- elsif block.settings.fallback_image != blank -%}<img src="{{ block.settings.fallback_image }}" alt="{{ block.settings.fallback_name | escape }}" loading="lazy">{%- endif -%}
               </a>
               <div class="am-rmeta">
                 <div class="am-rtop">
@@ -58,7 +58,7 @@
       <div class="am-ing-grid">
         {%- for block in section.blocks -%}{%- if block.type == 'ingredient' -%}
           <div class="am-ing-card" {{ block.shopify_attributes }}>
-            <div class="am-ing-thumb">{%- if block.settings.image -%}<img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name | escape }}" loading="lazy">{%- endif -%}</div>
+            <div class="am-ing-thumb">{%- if block.settings.image -%}<img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name | escape }}" loading="lazy">{%- elsif block.settings.image_url != blank -%}<img src="{{ block.settings.image_url }}" alt="{{ block.settings.name | escape }}" loading="lazy">{%- endif -%}</div>
             <h3 class="am-ing-cardname">{{ block.settings.name }}</h3>
             <span class="am-ing-cardamt">{{ block.settings.amount }}</span>
             <p class="am-ing-carddesc">{{ block.settings.description }}</p>
@@ -71,11 +71,11 @@
   {%- comment -%} C) THE FEELING OF GOOD ... {%- endcomment -%}
   <section class="am-sec">
     <div class="am-wrap">
-      <h2 class="am-h2">{{ section.settings.feeling_heading | default: 'The feeling of good calm.' }}</h2>
+      <h2 class="am-h2">{{ section.settings.feeling_heading | default: 'The feeling of good focus.' }}</h2>
       <div class="am-feel-grid">
         {%- for block in section.blocks -%}{%- if block.type == 'feeling' -%}
           <div class="am-feel-card" {{ block.shopify_attributes }}>
-            <div class="am-feel-icon">{%- if block.settings.icon -%}<img src="{{ block.settings.icon | image_url: width: 200 }}" alt="" loading="lazy">{%- endif -%}</div>
+            <div class="am-feel-icon">{%- if block.settings.icon -%}<img src="{{ block.settings.icon | image_url: width: 200 }}" alt="" loading="lazy">{%- elsif block.settings.icon_url != blank -%}<img src="{{ block.settings.icon_url }}" alt="" loading="lazy">{%- endif -%}</div>
             <h3 class="am-feel-title">{{ block.settings.title }}</h3>
           </div>
         {%- endif -%}{%- endfor -%}
@@ -91,6 +91,8 @@
             <div class="am-feel-embed">{{ section.settings.feeling_embed }}</div>
           {%- elsif section.settings.feeling_graph -%}
             <img src="{{ section.settings.feeling_graph | image_url: width: 1400 }}" alt="{{ section.settings.feeling_graph.alt | escape }}" loading="lazy">
+          {%- elsif section.settings.feeling_graph_url != blank -%}
+            <div class="am-feel-embed"><iframe src="{{ section.settings.feeling_graph_url }}" style="width:100%;aspect-ratio:1200/740;border:0;display:block" loading="lazy" title="How it works chart"></iframe></div>
           {%- endif -%}
         </div>
       </div>
@@ -106,7 +108,7 @@
         {%- for block in section.blocks -%}{%- if block.type == 'compare' -%}
           {%- assign cp = block.settings.product -%}
           <div class="am-ccard" {{ block.shopify_attributes }}>
-            <a href="{{ cp.url | default: '#' }}" class="am-cthumb" aria-label="{{ cp.title | default: block.settings.fallback_name | escape }}">{%- if cp != blank and cp.featured_image -%}<img src="{{ cp.featured_image | image_url: width: 800 }}" alt="{{ cp.title | escape }}" loading="lazy">{%- endif -%}</a>
+            <a href="{{ cp.url | default: '#' }}" class="am-cthumb" aria-label="{{ cp.title | default: block.settings.fallback_name | escape }}">{%- if cp != blank and cp.featured_image -%}<img src="{{ cp.featured_image | image_url: width: 800 }}" alt="{{ cp.title | escape }}" loading="lazy">{%- elsif block.settings.fallback_image != blank -%}<img src="{{ block.settings.fallback_image }}" alt="{{ block.settings.fallback_name | escape }}" loading="lazy">{%- endif -%}</a>
             <h3 class="am-cname">{{ cp.title | default: block.settings.fallback_name }}</h3>
             <p class="am-cheadline">{{ block.settings.headline }}</p>
             <div class="am-cspecs">
@@ -151,8 +153,8 @@
     <div class="am-wrap am-rev-wrap">
       <div class="am-rev-summary">
         <div class="am-rev-prod">
-          <div class="am-rev-thumb">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.title | escape }}">{%- endif -%}</div>
-          <div class="am-rev-prodtext"><strong>{{ product.title }}</strong><span>{{ section.settings.reviews_sub | default: 'Verified reviews' }}</span></div>
+          <div class="am-rev-thumb">{%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 200 }}" alt="{{ product.title | escape }}">{%- elsif section.settings.reviews_image_url != blank -%}<img src="{{ section.settings.reviews_image_url }}" alt="">{%- endif -%}</div>
+          <div class="am-rev-prodtext"><strong>{{ product.title | default: 'AVRO Focus' }}</strong><span>{{ section.settings.reviews_sub | default: 'Verified reviews' }}</span></div>
         </div>
         <div class="am-rev-rating">
           <strong>{{ section.settings.reviews_rating | default: '4.8' }}</strong>
@@ -174,20 +176,28 @@
     </div>
   </section>
 
-  {%- comment -%} H) FINAL CTA + BANNER {%- endcomment -%}
+  {%- comment -%} H) FINAL CTA (colored band with shop buttons) + BANNER {%- endcomment -%}
   <section class="am-sec am-final">
-    <div class="am-wrap am-wrap-narrow am-final-inner">
-      <h2 class="am-h2 am-h2-light">{{ section.settings.final_heading | default: 'Calm first. Clear headed. Ready for what matters.' }}</h2>
-      {%- if section.settings.final_copy != blank -%}<p class="am-final-copy">{{ section.settings.final_copy }}</p>{%- endif -%}
-      <a href="{{ section.settings.final_shop_link | default: '#' }}" class="am-btn am-btn-light">{{ section.settings.final_shop_label | default: 'Shop' }}</a>
+    <div class="am-wrap am-wrap-narrow am-final-grid">
+      <div class="am-final-text">
+        <h2 class="am-h2">{{ section.settings.final_heading | default: 'Focused. Clear headed. Ready for what matters.' }}</h2>
+        {%- if section.settings.final_copy != blank -%}<p class="am-final-copy">{{ section.settings.final_copy }}</p>{%- endif -%}
+      </div>
+      <div class="am-final-btns">
+        {%- if section.settings.final_btn1_label != blank -%}<a href="{{ section.settings.final_btn1_link | default: '#' }}" class="am-btn">{{ section.settings.final_btn1_label }}</a>{%- endif -%}
+        {%- if section.settings.final_btn2_label != blank -%}<a href="{{ section.settings.final_btn2_link | default: '#' }}" class="am-btn">{{ section.settings.final_btn2_label }}</a>{%- endif -%}
+        {%- if section.settings.final_btn3_label != blank -%}<a href="{{ section.settings.final_btn3_link | default: '#' }}" class="am-btn">{{ section.settings.final_btn3_label }}</a>{%- endif -%}
+      </div>
     </div>
   </section>
-  {%- if section.settings.final_banner -%}
+  {%- assign banner_src = '' -%}
+  {%- if section.settings.final_banner -%}{%- assign banner_src = section.settings.final_banner | image_url: width: 2000 -%}{%- elsif section.settings.final_banner_url != blank -%}{%- assign banner_src = section.settings.final_banner_url -%}{%- endif -%}
+  {%- if banner_src != '' -%}
   <section class="am-sec am-banner-sec">
     <div class="am-wrap">
       <div class="am-banner">
-        <img src="{{ section.settings.final_banner | image_url: width: 2000 }}" alt="{{ section.settings.final_banner.alt | escape }}" loading="lazy">
-        <a href="{{ section.settings.final_shop_link | default: '#' }}" class="am-btn am-btn-light am-banner-btn">{{ section.settings.final_shop_label | default: 'Shop' }}</a>
+        <img src="{{ banner_src }}" alt="" loading="lazy">
+        <a href="{{ section.settings.final_shop_link | default: '#' }}" class="am-btn am-banner-btn">{{ section.settings.final_shop_label | default: 'Shop' }}</a>
       </div>
     </div>
   </section>
@@ -198,7 +208,7 @@
 {% style %}
   #avro-more-{{ section.id }} {
     --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF; --charcoal: #151515;
-    --ink: #1C1B14; --warm-gray: #6B6857; --gray: #E2E2E2; --avro-blue: #E4B457; --line: #E2E2E2;
+    --ink: #1C1B14; --warm-gray: #6B6857; --gray: #E2E2E2; --avro-blue: #94C6D4; --line: #E2E2E2;
     --am-radius: {{ btn_radius }}px;
     font-family: "DM Sans", system-ui, sans-serif; color: var(--ink); display: block; background: var(--base);
   }
@@ -289,7 +299,7 @@
   #avro-more-{{ section.id }} .am-crow span:last-child { font-weight: 700; font-size: 15px; color: var(--ink); text-align: right; }
 
   /* E) subscribe cta */
-  #avro-more-{{ section.id }} .am-subcta { background: var(--avro-blue); }
+  #avro-more-{{ section.id }} .am-subcta { background: {{ section.settings.sub_bg | default: '#94C6D4' }}; }
   #avro-more-{{ section.id }} .am-subcta .am-h2 { color: var(--charcoal); }
   #avro-more-{{ section.id }} .am-subcopy { font-size: clamp(13px,1.2vw,17px); line-height: 1.5; color: var(--charcoal); opacity: 0.8; max-width: 520px; margin-bottom: 20px; }
 
@@ -333,13 +343,19 @@
   #avro-more-{{ section.id }} .am-rev-meta { font-weight: 500; font-size: 12px; color: var(--warm-gray); margin: 12px 0 0; }
 
   /* H) final + banner */
-  #avro-more-{{ section.id }} .am-final { background: var(--charcoal); }
-  #avro-more-{{ section.id }} .am-final-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
-  #avro-more-{{ section.id }} .am-final-copy { color: rgba(245,242,234,0.7); font-size: clamp(14px,1.3vw,18px); line-height: 1.5; max-width: 560px; margin: 0 0 24px; }
+  #avro-more-{{ section.id }} .am-final { background: {{ section.settings.final_bg | default: '#94C6D4' }}; }
+  #avro-more-{{ section.id }} .am-final-grid { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; }
+  #avro-more-{{ section.id }} .am-final-text { flex: 1 1 320px; min-width: 0; max-width: 560px; }
+  #avro-more-{{ section.id }} .am-final .am-h2 { color: var(--charcoal); }
+  #avro-more-{{ section.id }} .am-final-copy { color: rgba(21,21,21,0.7); font-size: clamp(14px,1.3vw,18px); line-height: 1.5; margin: 0; }
+  #avro-more-{{ section.id }} .am-final-btns { flex: 1 1 280px; min-width: 240px; max-width: 400px; display: flex; flex-direction: column; gap: 8px; }
+  #avro-more-{{ section.id }} .am-final-btns .am-btn { width: 100%; }
   #avro-more-{{ section.id }} .am-banner-sec { padding-top: 0; }
   #avro-more-{{ section.id }} .am-banner { position: relative; border-radius: 24px; overflow: hidden; }
   #avro-more-{{ section.id }} .am-banner img { width: 100%; height: auto; display: block; }
-  #avro-more-{{ section.id }} .am-banner-btn { position: absolute; left: clamp(20px,4vw,48px); bottom: clamp(20px,4vw,48px); }
+  #avro-more-{{ section.id }} .am-banner-btn { position: absolute; left: clamp(20px,4vw,48px); bottom: clamp(20px,4vw,48px); min-width: 200px; background: transparent; color: var(--charcoal); border-color: var(--charcoal); }
+  #avro-more-{{ section.id }} .am-banner-btn:hover { background: var(--charcoal); color: var(--bone); border-color: var(--charcoal); }
+  @media (max-width: 640px) { #avro-more-{{ section.id }} .am-banner-btn { position: static; width: calc(100% - 32px); min-width: 0; margin: 20px auto 0; } }
 {% endstyle %}
 
 <script>
@@ -366,450 +382,132 @@
   "name": "AVRO Details · Focus",
   "tag": "section",
   "settings": [
-    {
-      "type": "header",
-      "content": "Style"
-    },
-    {
-      "type": "select",
-      "id": "corner_style",
-      "label": "Corner style",
-      "default": "pill",
-      "options": [
-        {
-          "value": "square",
-          "label": "Square"
-        },
-        {
-          "value": "soft",
-          "label": "Soft"
-        },
-        {
-          "value": "pill",
-          "label": "Pill (fully rounded)"
-        }
-      ],
-      "info": "Match this to the PDP section above."
-    },
-    {
-      "type": "header",
-      "content": "Tabs (Description / Ingredients / When / How)"
-    },
-    {
-      "type": "text",
-      "id": "tab1_label",
-      "label": "Tab 1 label",
-      "default": "Description"
-    },
-    {
-      "type": "text",
-      "id": "tab2_label",
-      "label": "Tab 2 label",
-      "default": "Ingredients"
-    },
-    {
-      "type": "text",
-      "id": "tab3_label",
-      "label": "Tab 3 label",
-      "default": "When to take"
-    },
-    {
-      "type": "text",
-      "id": "tab4_label",
-      "label": "Tab 4 label",
-      "default": "How to use"
-    },
-    {
-      "type": "richtext",
-      "id": "tabs_desc",
-      "label": "Description tab content",
-      "default": "<p>Our formula</p><ul><li>Formulated with L-Theanine and PharmaGABA® for calm-first focus</li><li>Supports steady attention and clear thinking without the jitters*</li><li>Caffeine free — focus without a crash*</li><li>No added sugar, artificial sweeteners, or sugar alcohols</li><li>Vegan, gluten-free, non-GMO</li><li>Third-party tested for purity and potency</li></ul>"
-    },
-    {
-      "type": "textarea",
-      "id": "other_ingredients",
-      "label": "Ingredients tab — \"Other ingredients\" line",
-      "default": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica."
-    },
-    {
-      "type": "richtext",
-      "id": "tabs_when",
-      "label": "When-to-take tab content",
-      "default": "<p><strong>Deep work blocks</strong> — Before focused, heads-down sessions.*</p><p><strong>Before high-stakes tasks</strong> — Meetings, presentations, study, or gaming.</p><p><strong>Afternoon reset</strong> — Sharpen attention through the midday slump without caffeine.*</p>"
-    },
-    {
-      "type": "richtext",
-      "id": "tabs_how",
-      "label": "How-to-use tab content",
-      "default": "<p><strong>1. Pour</strong> — Empty one stick into 8-12 oz of cold water.</p><p><strong>2. Mix</strong> — Stir or shake until fully dissolved.</p><p><strong>3. Drink</strong> — Enjoy 20-30 minutes before your moment.</p>"
-    },
-    {
-      "type": "text",
-      "id": "related_heading",
-      "label": "\"You might also like\" heading",
-      "default": "You might also like"
-    },
-    {
-      "type": "header",
-      "content": "Ingredients grid"
-    },
-    {
-      "type": "text",
-      "id": "ing_eyebrow",
-      "label": "Eyebrow",
-      "default": "What's inside"
-    },
-    {
-      "type": "text",
-      "id": "ing_heading",
-      "label": "Heading",
-      "default": "Clear ingredient logic. Nothing hidden."
-    },
-    {
-      "type": "header",
-      "content": "The feeling of good…"
-    },
-    {
-      "type": "text",
-      "id": "feeling_heading",
-      "label": "Heading",
-      "default": "The feeling of good focus."
-    },
-    {
-      "type": "textarea",
-      "id": "feeling_p1",
-      "label": "Paragraph 1",
-      "default": "AVRO Focus pairs L-Theanine with naturally fermented PharmaGABA® to support steady, sustained attention in a convenient stick pack format.*"
-    },
-    {
-      "type": "textarea",
-      "id": "feeling_p2",
-      "label": "Paragraph 2",
-      "default": "Instead of a caffeine spike and crash, AVRO Focus is designed for clear thinking with a calm baseline. Sharp, not wired.*"
-    },
-    {
-      "type": "text",
-      "id": "feeling_btn_label",
-      "label": "Button label",
-      "default": "Learn How It Works"
-    },
-    {
-      "type": "url",
-      "id": "feeling_btn_link",
-      "label": "Button link"
-    },
-    {
-      "type": "html",
-      "id": "feeling_embed",
-      "label": "Graph / chart embed",
-      "info": "Paste an embed (iframe, chart script, SVG, etc.). If set, this is used instead of the image below."
-    },
-    {
-      "type": "image_picker",
-      "id": "feeling_graph",
-      "label": "Graph / chart image",
-      "info": "Used when no embed is set above."
-    },
-    {
-      "type": "header",
-      "content": "Comparison grid (dark)"
-    },
-    {
-      "type": "text",
-      "id": "compare_heading",
-      "label": "Heading",
-      "default": "We put intention into every formula."
-    },
-    {
-      "type": "text",
-      "id": "compare_sub",
-      "label": "Subheading",
-      "default": "Find the one that was made with your day in mind."
-    },
-    {
-      "type": "header",
-      "content": "Subscribe & save CTA (blue)"
-    },
-    {
-      "type": "text",
-      "id": "sub_heading",
-      "label": "Heading",
-      "default": "Your favorites. On repeat."
-    },
-    {
-      "type": "textarea",
-      "id": "sub_copy",
-      "label": "Copy",
-      "default": "Subscribe & save 15% every order of 2 or more tubes. Pick your favorites, set your schedule. Leave the rest to us."
-    },
-    {
-      "type": "text",
-      "id": "sub_btn_label",
-      "label": "Button label",
-      "default": "Subscribe Now"
-    },
-    {
-      "type": "url",
-      "id": "sub_btn_link",
-      "label": "Button link"
-    },
-    {
-      "type": "header",
-      "content": "FAQ"
-    },
-    {
-      "type": "text",
-      "id": "faq_heading",
-      "label": "Heading",
-      "default": "Frequently asked, all answered."
-    },
-    {
-      "type": "text",
-      "id": "faq_more_label",
-      "label": "\"See more\" label",
-      "default": "See more answers"
-    },
-    {
-      "type": "url",
-      "id": "faq_more_link",
-      "label": "\"See more\" link"
-    },
-    {
-      "type": "header",
-      "content": "Reviews"
-    },
-    {
-      "type": "text",
-      "id": "reviews_rating",
-      "label": "Rating value",
-      "default": "4.8"
-    },
-    {
-      "type": "text",
-      "id": "reviews_count",
-      "label": "Reviews count text",
-      "default": "82 verified reviews"
-    },
-    {
-      "type": "text",
-      "id": "reviews_sub",
-      "label": "Product subtitle",
-      "default": "Verified reviews"
-    },
-    {
-      "type": "text",
-      "id": "reviews_cta",
-      "label": "Button label",
-      "default": "Write a review"
-    },
-    {
-      "type": "header",
-      "content": "Final CTA + banner"
-    },
-    {
-      "type": "text",
-      "id": "final_heading",
-      "label": "Heading",
-      "default": "Focused. Clear headed. Ready for what matters."
-    },
-    {
-      "type": "textarea",
-      "id": "final_copy",
-      "label": "Copy",
-      "default": "Support steady attention, clear thinking, and calm-first focus for the moments that matter.*"
-    },
-    {
-      "type": "text",
-      "id": "final_shop_label",
-      "label": "Shop button label",
-      "default": "Shop"
-    },
-    {
-      "type": "url",
-      "id": "final_shop_link",
-      "label": "Shop button link"
-    },
-    {
-      "type": "image_picker",
-      "id": "final_banner",
-      "label": "Bottom banner image"
-    }
+    { "type": "header", "content": "Style" },
+    { "type": "select", "id": "corner_style", "label": "Corner style", "default": "pill", "info": "Match this to the PDP section above.", "options": [
+      { "value": "square", "label": "Square" },
+      { "value": "soft", "label": "Soft" },
+      { "value": "pill", "label": "Pill (fully rounded)" }
+    ] },
+    { "type": "header", "content": "Tabs (Description / Ingredients / When / How)" },
+    { "type": "text", "id": "tab1_label", "label": "Tab 1 label", "default": "Description" },
+    { "type": "text", "id": "tab2_label", "label": "Tab 2 label", "default": "Ingredients" },
+    { "type": "text", "id": "tab3_label", "label": "Tab 3 label", "default": "When to take" },
+    { "type": "text", "id": "tab4_label", "label": "Tab 4 label", "default": "How to use" },
+    { "type": "richtext", "id": "tabs_desc", "label": "Description tab content", "default": "<p>Our formula</p><ul><li>Formulated with Cognigrape® and PharmaGABA®</li><li>Supports focus and mental clarity*</li><li>Calm-first focus — sharp, not wired*</li><li>No added sugar, artificial sweeteners, or sugar alcohols</li><li>Vegan, gluten-free, non-GMO</li><li>Third-party tested for purity and potency</li></ul>" },
+    { "type": "textarea", "id": "other_ingredients", "label": "Ingredients tab — \"Other ingredients\" line", "default": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica." },
+    { "type": "richtext", "id": "tabs_when", "label": "When-to-take tab content", "default": "<p><strong>Deep work blocks</strong> — Before focused, heads-down sessions.*</p><p><strong>Before high-stakes tasks</strong> — Meetings, presentations, study, or gaming.</p><p><strong>Afternoon reset</strong> — Sharpen attention through the midday slump without caffeine.*</p>" },
+    { "type": "richtext", "id": "tabs_how", "label": "How-to-use tab content", "default": "<p><strong>1. Pour</strong> — Empty one stick into 8-12 oz of cold water.</p><p><strong>2. Mix</strong> — Stir or shake until fully dissolved.</p><p><strong>3. Drink</strong> — Enjoy 20-30 minutes before your moment.</p>" },
+    { "type": "text", "id": "related_heading", "label": "\"You might also like\" heading", "default": "You might also like" },
+    { "type": "header", "content": "Ingredients grid" },
+    { "type": "text", "id": "ing_eyebrow", "label": "Eyebrow", "default": "What's inside" },
+    { "type": "text", "id": "ing_heading", "label": "Heading", "default": "Clear ingredient logic. Nothing hidden." },
+    { "type": "header", "content": "The feeling of good…" },
+    { "type": "text", "id": "feeling_heading", "label": "Heading", "default": "The feeling of good focus." },
+    { "type": "textarea", "id": "feeling_p1", "label": "Paragraph 1", "default": "AVRO Focus pairs Cognigrape® with naturally fermented PharmaGABA® to support steady, sustained attention in a convenient stick pack format.*" },
+    { "type": "textarea", "id": "feeling_p2", "label": "Paragraph 2", "default": "Instead of a caffeine spike and crash, AVRO Focus is designed for clear thinking with a calm baseline. Sharp, not wired.*" },
+    { "type": "text", "id": "feeling_btn_label", "label": "Button label", "default": "Learn How It Works" },
+    { "type": "url", "id": "feeling_btn_link", "label": "Button link" },
+    { "type": "html", "id": "feeling_embed", "label": "Graph / chart embed", "info": "Paste an embed (iframe, chart script, SVG, etc.). If set, this is used instead of the image below." },
+    { "type": "image_picker", "id": "feeling_graph", "label": "Graph / chart image", "info": "Used when no embed is set above." },
+    { "type": "text", "id": "feeling_graph_url", "label": "Graph embed URL (pre-embedded)", "info": "Used when neither an embed nor an image is set above.", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/graphics/focus.html" },
+    { "type": "header", "content": "Comparison grid (dark)" },
+    { "type": "text", "id": "compare_heading", "label": "Heading", "default": "We put intention into every formula." },
+    { "type": "text", "id": "compare_sub", "label": "Subheading", "default": "Find the one that was made with your day in mind." },
+    { "type": "header", "content": "Subscribe & save CTA (blue)" },
+    { "type": "color", "id": "sub_bg", "label": "Background color", "default": "#94C6D4" },
+    { "type": "text", "id": "sub_heading", "label": "Heading", "default": "Your favorites. On repeat." },
+    { "type": "textarea", "id": "sub_copy", "label": "Copy", "default": "Subscribe & save 15% every order of 2 or more tubes. Pick your favorites, set your schedule. Leave the rest to us." },
+    { "type": "text", "id": "sub_btn_label", "label": "Button label", "default": "Subscribe Now" },
+    { "type": "url", "id": "sub_btn_link", "label": "Button link" },
+    { "type": "header", "content": "FAQ" },
+    { "type": "text", "id": "faq_heading", "label": "Heading", "default": "Frequently asked, all answered." },
+    { "type": "text", "id": "faq_more_label", "label": "\"See more\" label", "default": "See more answers" },
+    { "type": "url", "id": "faq_more_link", "label": "\"See more\" link" },
+    { "type": "header", "content": "Reviews" },
+    { "type": "text", "id": "reviews_rating", "label": "Rating value", "default": "4.8" },
+    { "type": "text", "id": "reviews_count", "label": "Reviews count text", "default": "82 verified reviews" },
+    { "type": "text", "id": "reviews_sub", "label": "Product subtitle", "default": "Verified reviews" },
+    { "type": "text", "id": "reviews_cta", "label": "Button label", "default": "Write a review" },
+    { "type": "text", "id": "reviews_image_url", "label": "Product thumb URL (pre-embedded)", "info": "Used when the product has no featured image.", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png" },
+    { "type": "header", "content": "Final CTA (colored band)" },
+    { "type": "color", "id": "final_bg", "label": "Background color", "default": "#94C6D4" },
+    { "type": "text", "id": "final_heading", "label": "Heading", "default": "Focused. Clear headed. Ready for what matters." },
+    { "type": "textarea", "id": "final_copy", "label": "Copy", "default": "Support steady attention, clear thinking, and calm-first focus for the moments that matter.*" },
+    { "type": "text", "id": "final_btn1_label", "label": "Button 1 label", "default": "Shop Calm" },
+    { "type": "url", "id": "final_btn1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "final_btn2_label", "label": "Button 2 label", "default": "Shop Focus" },
+    { "type": "url", "id": "final_btn2_link", "label": "Button 2 link" },
+    { "type": "text", "id": "final_btn3_label", "label": "Button 3 label", "default": "Shop Energy" },
+    { "type": "url", "id": "final_btn3_link", "label": "Button 3 link" },
+    { "type": "header", "content": "Bottom banner" },
+    { "type": "text", "id": "final_shop_label", "label": "Banner button label", "default": "Shop" },
+    { "type": "url", "id": "final_shop_link", "label": "Banner button link" },
+    { "type": "image_picker", "id": "final_banner", "label": "Bottom banner image" },
+    { "type": "text", "id": "final_banner_url", "label": "Bottom banner URL (pre-embedded)", "info": "Used when no image is picked above.", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/banners/focus-power.png" }
   ],
   "blocks": [
     {
       "type": "ingredient",
       "name": "Ingredient",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Name",
-          "default": "PharmaGABA®"
-        },
-        {
-          "type": "text",
-          "id": "amount",
-          "label": "Amount / label",
-          "default": "200 mg"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Description",
-          "default": "Naturally fermented. AVRO's calm-first foundation."
-        }
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_url", "label": "Image URL (pre-embedded)", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/pharmagaba-2.jpg" },
+        { "type": "text", "id": "name", "label": "Name", "default": "PharmaGABA®" },
+        { "type": "text", "id": "amount", "label": "Amount / label", "default": "200 mg" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "Naturally fermented. AVRO's calm-first foundation." }
       ]
     },
     {
       "type": "related",
       "name": "Related product",
       "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Product"
-        },
-        {
-          "type": "text",
-          "id": "button_label",
-          "label": "Button label",
-          "default": "Shop"
-        },
-        {
-          "type": "text",
-          "id": "fallback_name",
-          "label": "Fallback name (if no product)",
-          "default": "AVRO Focus"
-        },
-        {
-          "type": "text",
-          "id": "fallback_price",
-          "label": "Fallback price (if no product)",
-          "default": "$24.95"
-        }
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop" },
+        { "type": "text", "id": "fallback_name", "label": "Fallback name (if no product)", "default": "AVRO Calm" },
+        { "type": "text", "id": "fallback_price", "label": "Fallback price (if no product)", "default": "$24.95" },
+        { "type": "text", "id": "fallback_image", "label": "Fallback image URL (pre-embedded)", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" }
       ]
     },
     {
       "type": "feeling",
       "name": "Feeling benefit",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "icon",
-          "label": "Icon"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Improved clarity & composure*"
-        }
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "icon_url", "label": "Icon URL (pre-embedded)", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-steady-attention.png" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Sharper, sustained attention*" }
       ]
     },
     {
       "type": "compare",
       "name": "Comparison card",
       "settings": [
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Product"
-        },
-        {
-          "type": "text",
-          "id": "fallback_name",
-          "label": "Fallback name (if no product)",
-          "default": "AVRO Calm"
-        },
-        {
-          "type": "textarea",
-          "id": "headline",
-          "label": "Headline",
-          "default": "Calm first. Clear headed. Ready when pressure rises."
-        },
-        {
-          "type": "text",
-          "id": "caffeine",
-          "label": "Caffeine",
-          "default": "0 mg"
-        },
-        {
-          "type": "text",
-          "id": "experience",
-          "label": "Experience",
-          "default": "Gentle"
-        },
-        {
-          "type": "text",
-          "id": "best_for",
-          "label": "Best for",
-          "default": "Stress relief & focused calm"
-        },
-        {
-          "type": "text",
-          "id": "button_label",
-          "label": "Button label",
-          "default": "Add to Cart"
-        }
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "fallback_name", "label": "Fallback name (if no product)", "default": "AVRO Calm" },
+        { "type": "text", "id": "fallback_image", "label": "Fallback image URL (pre-embedded)", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" },
+        { "type": "textarea", "id": "headline", "label": "Headline", "default": "Calm first. Clear headed. Ready when pressure rises." },
+        { "type": "text", "id": "caffeine", "label": "Caffeine", "default": "0 mg" },
+        { "type": "text", "id": "experience", "label": "Experience", "default": "Gentle" },
+        { "type": "text", "id": "best_for", "label": "Best for", "default": "Stress relief & focused calm" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Add to Cart" }
       ]
     },
     {
       "type": "faq",
       "name": "FAQ item",
       "settings": [
-        {
-          "type": "text",
-          "id": "question",
-          "label": "Question",
-          "default": "What are the main ingredients?"
-        },
-        {
-          "type": "richtext",
-          "id": "answer",
-          "label": "Answer",
-          "default": "<p>Formulated with L-Theanine and PharmaGABA® for focused attention without the jitters.</p>"
-        }
+        { "type": "text", "id": "question", "label": "Question", "default": "What are the main ingredients?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Formulated with Cognigrape® and PharmaGABA® for clear focus without overstimulation.</p>" }
       ]
     },
     {
       "type": "review",
       "name": "Review",
       "settings": [
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Name",
-          "default": "Jessica M."
-        },
-        {
-          "type": "text",
-          "id": "date",
-          "label": "Date",
-          "default": "05/14/2026"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Locked in without the jitters"
-        },
-        {
-          "type": "textarea",
-          "id": "body",
-          "label": "Review body",
-          "default": "Helps me stay locked in without the jitters. Part of my routine."
-        },
-        {
-          "type": "text",
-          "id": "meta",
-          "label": "Meta (flavor · size)",
-          "default": "Pomegranate Raspberry · 30 Sticks"
-        }
+        { "type": "text", "id": "name", "label": "Name", "default": "Jessica M." },
+        { "type": "text", "id": "date", "label": "Date", "default": "05/14/2026" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Locked in without the jitters" },
+        { "type": "textarea", "id": "body", "label": "Review body", "default": "Helps me stay locked in without the jitters. Part of my routine." },
+        { "type": "text", "id": "meta", "label": "Meta (flavor · size)", "default": "Pomegranate Raspberry · 30 Sticks" }
       ]
     }
   ],
@@ -817,176 +515,32 @@
     {
       "name": "AVRO Details · Focus",
       "blocks": [
-        {
-          "type": "ingredient",
-          "settings": {
-            "name": "L-Theanine",
-            "amount": "200 mg",
-            "description": "Supports calm, focused attention without drowsiness.*"
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "name": "PharmaGABA®",
-            "amount": "100 mg",
-            "description": "Naturally fermented. AVRO's calm-first foundation."
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "name": "L-Tyrosine",
-            "amount": "300 mg",
-            "description": "Supports clear thinking under mental load.*"
-          }
-        },
-        {
-          "type": "ingredient",
-          "settings": {
-            "name": "Prebiotic Fiber",
-            "amount": "Soluble Guar Fiber + Acacia Fiber",
-            "description": "Supports gut comfort.* Part of AVRO's daily formula."
-          }
-        },
-        {
-          "type": "feeling",
-          "settings": {
-            "title": "Sharper, sustained attention*"
-          }
-        },
-        {
-          "type": "feeling",
-          "settings": {
-            "title": "Clear thinking under load*"
-          }
-        },
-        {
-          "type": "feeling",
-          "settings": {
-            "title": "Calm, focused energy*"
-          }
-        },
-        {
-          "type": "feeling",
-          "settings": {
-            "title": "Reduced mental fatigue*"
-          }
-        },
-        {
-          "type": "related",
-          "settings": {
-            "fallback_name": "AVRO Calm",
-            "fallback_price": "$24.95",
-            "button_label": "Shop Calm"
-          }
-        },
-        {
-          "type": "related",
-          "settings": {
-            "fallback_name": "AVRO Energy",
-            "fallback_price": "$24.95",
-            "button_label": "Shop Energy"
-          }
-        },
-        {
-          "type": "compare",
-          "settings": {
-            "fallback_name": "AVRO Calm",
-            "headline": "Calm first. Clear headed. Ready when pressure rises.",
-            "caffeine": "0 mg",
-            "experience": "Gentle",
-            "best_for": "Stress relief & focused calm"
-          }
-        },
-        {
-          "type": "compare",
-          "settings": {
-            "fallback_name": "AVRO Focus",
-            "headline": "Calm first. Clear headed. Ready to focus.",
-            "caffeine": "0 mg",
-            "experience": "Steady",
-            "best_for": "Desk work & daily routines"
-          }
-        },
-        {
-          "type": "compare",
-          "settings": {
-            "fallback_name": "AVRO Energy",
-            "headline": "Calm first. Steady energy. Ready when it matters.",
-            "caffeine": "120 mg",
-            "experience": "Stronger",
-            "best_for": "Workouts or peak-demand moments"
-          }
-        },
-        {
-          "type": "faq",
-          "settings": {
-            "question": "What are the main ingredients?",
-            "answer": "<p>Formulated with L-Theanine and PharmaGABA® for focused attention without the jitters.</p>"
-          }
-        },
-        {
-          "type": "faq",
-          "settings": {
-            "question": "What is the best time to take it?",
-            "answer": "<p>Most people use one stick about 20 to 30 minutes before focused work or any high-focus moment.</p>"
-          }
-        },
-        {
-          "type": "faq",
-          "settings": {
-            "question": "Can I take it if I'm sensitive to caffeine?",
-            "answer": "<p>This formula is caffeine free, making it perfect for those sensitive to caffeine.</p>"
-          }
-        },
-        {
-          "type": "faq",
-          "settings": {
-            "question": "Does it have added sugar or artificial sweeteners?",
-            "answer": "<p>No. AVRO uses no added sugars and no artificial sweeteners. Just clean, functional ingredients.</p>"
-          }
-        },
-        {
-          "type": "review",
-          "settings": {
-            "name": "Jessica M.",
-            "date": "05/14/2026",
-            "title": "Locked in without the jitters",
-            "body": "I take it before deep work blocks and my attention stays steady for hours. No crash, no jitters. Easily part of my routine.",
-            "meta": "Pomegranate Raspberry · 30 Sticks"
-          }
-        },
-        {
-          "type": "review",
-          "settings": {
-            "name": "Anonymous",
-            "date": "05/12/2026",
-            "title": "Better than coffee for focus",
-            "body": "Smooth taste, no aftertaste. I feel clear headed within about 30 minutes without the caffeine spike.",
-            "meta": "Pomegranate Raspberry · 10 Sticks"
-          }
-        },
-        {
-          "type": "review",
-          "settings": {
-            "name": "Samantha B.",
-            "date": "05/12/2026",
-            "title": "Perfect for study sessions",
-            "body": "Loved this flavor and how it helps me concentrate. Focused without feeling wired.",
-            "meta": "Pomegranate Raspberry · 30 Sticks"
-          }
-        },
-        {
-          "type": "review",
-          "settings": {
-            "name": "Kathy P.",
-            "date": "05/11/2026",
-            "title": "My go-to before big days",
-            "body": "Great flavor, and it actually helps me stay sharp before high-pressure days. Will keep restocking.",
-            "meta": "Pomegranate Raspberry · 60 Sticks"
-          }
-        }
+        { "type": "ingredient", "settings": { "name": "PharmaGABA®", "amount": "200 mg", "description": "Naturally fermented. AVRO's calm-first foundation.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/pharmagaba-2.jpg" } },
+        { "type": "ingredient", "settings": { "name": "Cognigrape®", "amount": "250 mg", "description": "Clinically shown to support cognitive function and clarity.*", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/cognigrape-2.jpg" } },
+        { "type": "ingredient", "settings": { "name": "Prebiotic Fiber", "amount": "Soluble Guar Fiber + Acacia Fiber", "description": "Supports gut comfort.* Part of AVRO's daily formula.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/prebiotic-fiber-2.jpg" } },
+        { "type": "ingredient", "settings": { "name": "Stevia", "amount": "< 2%", "description": "Used in a small amount for a clean, balanced finish.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/stevia-2.jpg" } },
+
+        { "type": "feeling", "settings": { "title": "Sharper, sustained attention*", "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-steady-attention.png" } },
+        { "type": "feeling", "settings": { "title": "Clear thinking under load*", "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-clear-thinking.png" } },
+        { "type": "feeling", "settings": { "title": "Calm, focused energy*", "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-focus-without-overload.png" } },
+        { "type": "feeling", "settings": { "title": "Reduced mental fatigue*", "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/mental-clarity.png" } },
+
+        { "type": "related", "settings": { "fallback_name": "AVRO Calm", "fallback_price": "$24.95", "button_label": "Shop Calm", "fallback_image": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" } },
+        { "type": "related", "settings": { "fallback_name": "AVRO Energy", "fallback_price": "$24.95", "button_label": "Shop Energy", "fallback_image": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png" } },
+
+        { "type": "compare", "settings": { "fallback_name": "AVRO Calm", "fallback_image": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "headline": "Calm first. Clear headed. Ready when pressure rises.", "caffeine": "0 mg", "experience": "Gentle", "best_for": "Stress relief & focused calm" } },
+        { "type": "compare", "settings": { "fallback_name": "AVRO Focus", "fallback_image": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "headline": "Calm first. Clear headed. Ready to focus.", "caffeine": "0 mg", "experience": "Steady", "best_for": "Desk work & daily routines" } },
+        { "type": "compare", "settings": { "fallback_name": "AVRO Energy", "fallback_image": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "headline": "Calm first. Steady energy. Ready when it matters.", "caffeine": "120 mg", "experience": "Stronger", "best_for": "Workouts or peak-demand moments" } },
+
+        { "type": "faq", "settings": { "question": "What are the main ingredients?", "answer": "<p>Formulated with Cognigrape® and PharmaGABA® for clear focus without overstimulation.</p>" } },
+        { "type": "faq", "settings": { "question": "What is the best time to take it?", "answer": "<p>Most people use one stick about 20 to 30 minutes before focused work or any high-focus moment.</p>" } },
+        { "type": "faq", "settings": { "question": "Can I take it if I'm sensitive to caffeine?", "answer": "<p>This formula is caffeine free, making it perfect for those sensitive to caffeine.</p>" } },
+        { "type": "faq", "settings": { "question": "Does it have added sugar or artificial sweeteners?", "answer": "<p>No. AVRO uses no added sugars and no artificial sweeteners. Just clean, functional ingredients.</p>" } },
+
+        { "type": "review", "settings": { "name": "Jessica M.", "date": "05/14/2026", "title": "Locked in without the jitters", "body": "I take it before deep work blocks and my attention stays steady for hours. No crash, no jitters. Easily part of my routine.", "meta": "Pomegranate Raspberry · 30 Sticks" } },
+        { "type": "review", "settings": { "name": "Anonymous", "date": "05/12/2026", "title": "Better than coffee for focus", "body": "Smooth taste, no aftertaste. I feel clear headed within about 30 minutes without the caffeine spike.", "meta": "Pomegranate Raspberry · 10 Sticks" } },
+        { "type": "review", "settings": { "name": "Samantha B.", "date": "05/12/2026", "title": "Perfect for study sessions", "body": "Loved this flavor and how it helps me concentrate. Focused without feeling wired.", "meta": "Pomegranate Raspberry · 30 Sticks" } },
+        { "type": "review", "settings": { "name": "Kathy P.", "date": "05/11/2026", "title": "My go-to before big days", "body": "Great flavor, and it actually helps me stay sharp before high-pressure days. Will keep restocking.", "meta": "Pomegranate Raspberry · 60 Sticks" } }
       ]
     }
   ]
