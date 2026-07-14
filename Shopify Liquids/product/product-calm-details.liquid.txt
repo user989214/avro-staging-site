@@ -925,7 +925,7 @@
   ],
   "presets": [
     {
-      "name": "AVRO Details · Calm",
+      "name": "AVRO Details �� Calm",
       "blocks": [
         {
           "type": "ingredient",
@@ -948,9 +948,9 @@
         {
           "type": "ingredient",
           "settings": {
-            "name": "Prebiotic Fiber",
+                "name": "Fiber",
             "amount": "Soluble Guar Fiber + Acacia Fiber",
-            "description": "Supports gut comfort.* Part of AVRO's daily formula.",
+                "description": "Part of AVRO's daily formula.",
             "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/prebiotic-fiber-2.jpg"
           }
         },

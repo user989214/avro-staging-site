@@ -759,7 +759,7 @@
     { "type": "text", "id": "tab2_label", "label": "Tab 2 label", "default": "Ingredients" },
     { "type": "text", "id": "tab3_label", "label": "Tab 3 label", "default": "When to take" },
     { "type": "text", "id": "tab4_label", "label": "Tab 4 label", "default": "How to use" },
-    { "type": "richtext", "id": "tabs_desc", "label": "Description tab content", "default": "<p>Our formula</p><ul><li>Formulated with L-Theanine and PharmaGABA® for calm-first focus</li><li>Supports steady attention and clear thinking without the jitters*</li><li>Caffeine free — focus without a crash*</li><li>No added sugar, artificial sweeteners, or sugar alcohols</li><li>Vegan, gluten-free, non-GMO</li><li>Third-party tested for purity and potency</li></ul>" },
+    { "type": "richtext", "id": "tabs_desc", "label": "Description tab content", "default": "<p>Our formula</p><ul><li>Formulated with Cognigrape® and PharmaGABA® for calm-first focus</li><li>Supports steady attention and clear thinking without the jitters*</li><li>Caffeine free — focus without a crash*</li><li>No added sugar, artificial sweeteners, or sugar alcohols</li><li>Vegan, gluten-free, non-GMO</li><li>Third-party tested for purity and potency</li></ul>" },
     { "type": "textarea", "id": "other_ingredients", "label": "Ingredients tab — \"Other ingredients\" line", "default": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica." },
     { "type": "richtext", "id": "tabs_when", "label": "When-to-take tab content", "default": "<p><strong>Deep work blocks</strong> — Before focused, heads-down sessions.*</p><p><strong>Before high-stakes tasks</strong> — Meetings, presentations, study, or gaming.</p><p><strong>Afternoon reset</strong> — Sharpen attention through the midday slump without caffeine.*</p>" },
     { "type": "richtext", "id": "tabs_how", "label": "How-to-use tab content", "default": "<p><strong>1. Pour</strong> — Empty one stick into 8-12 oz of cold water.</p><p><strong>2. Mix</strong> — Stir or shake until fully dissolved.</p><p><strong>3. Drink</strong> — Enjoy 20-30 minutes before your moment.</p>" },
@@ -771,7 +771,7 @@
 
     { "type": "header", "content": "The feeling of good…" },
     { "type": "text", "id": "feeling_heading", "label": "Heading", "default": "The feeling of good focus." },
-    { "type": "textarea", "id": "feeling_p1", "label": "Paragraph 1", "default": "AVRO Focus pairs L-Theanine with naturally fermented PharmaGABA® to support steady, sustained attention in a convenient stick pack format.*" },
+    { "type": "textarea", "id": "feeling_p1", "label": "Paragraph 1", "default": "AVRO Focus pairs Cognigrape® with naturally fermented PharmaGABA® to support steady, sustained attention in a convenient stick pack format.*" },
     { "type": "textarea", "id": "feeling_p2", "label": "Paragraph 2", "default": "Instead of a caffeine spike and crash, AVRO Focus is designed for clear thinking with a calm baseline. Sharp, not wired.*" },
     { "type": "text", "id": "feeling_btn_label", "label": "Button label", "default": "Learn How It Works" },
     { "type": "url", "id": "feeling_btn_link", "label": "Button link" },
@@ -860,7 +860,7 @@
       "name": "FAQ item",
       "settings": [
         { "type": "text", "id": "question", "label": "Question", "default": "What are the main ingredients?" },
-        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Formulated with L-Theanine and PharmaGABA® for focused attention without the jitters.</p>" }
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Formulated with Cognigrape® and PharmaGABA® for focused attention without the jitters.</p>" }
       ]
     },
     {
@@ -884,10 +884,10 @@
         { "type": "benefit", "settings": { "text": "Free shipping on all orders of 2 or more tubes." } },
         { "type": "benefit", "settings": { "text": "Skip, change or cancel anytime." } },
 
-        { "type": "ingredient", "settings": { "name": "L-Theanine", "amount": "200 mg", "description": "Supports calm, focused attention without drowsiness.*" } },
-        { "type": "ingredient", "settings": { "name": "PharmaGABA®", "amount": "100 mg", "description": "Naturally fermented. AVRO's calm-first foundation." } },
-        { "type": "ingredient", "settings": { "name": "L-Tyrosine", "amount": "300 mg", "description": "Supports clear thinking under mental load.*" } },
-        { "type": "ingredient", "settings": { "name": "Prebiotic Fiber", "amount": "Soluble Guar Fiber + Acacia Fiber", "description": "Supports gut comfort.* Part of AVRO's daily formula." } },
+        { "type": "ingredient", "settings": { "name": "PharmaGABA®", "amount": "200 mg", "description": "Naturally fermented. AVRO's calm-first foundation." } },
+        { "type": "ingredient", "settings": { "name": "Cognigrape®", "amount": "250 mg", "description": "Clinically shown to support cognitive function and clarity.*" } },
+        { "type": "ingredient", "settings": { "name": "Fiber", "amount": "Soluble Guar Fiber + Acacia Fiber", "description": "Part of AVRO's daily formula." } },
+        { "type": "ingredient", "settings": { "name": "Stevia", "amount": "< 2%", "description": "Used in a small amount for a clean, balanced finish." } },
 
         { "type": "feeling", "settings": { "title": "Sharper, sustained attention*" } },
         { "type": "feeling", "settings": { "title": "Clear thinking under load*" } },
@@ -901,7 +901,7 @@
         { "type": "compare", "settings": { "fallback_name": "AVRO Focus", "headline": "Calm first. Clear headed. Ready to focus.", "caffeine": "0 mg", "experience": "Steady", "best_for": "Desk work & daily routines" } },
         { "type": "compare", "settings": { "fallback_name": "AVRO Energy", "headline": "Calm first. Steady energy. Ready when it matters.", "caffeine": "120 mg", "experience": "Stronger", "best_for": "Workouts or peak-demand moments" } },
 
-        { "type": "faq", "settings": { "question": "What are the main ingredients?", "answer": "<p>Formulated with L-Theanine and PharmaGABA® for focused attention without the jitters.</p>" } },
+        { "type": "faq", "settings": { "question": "What are the main ingredients?", "answer": "<p>Formulated with Cognigrape® and PharmaGABA® for focused attention without the jitters.</p>" } },
         { "type": "faq", "settings": { "question": "What is the best time to take it?", "answer": "<p>Most people use one stick about 20 to 30 minutes before focused work or any high-focus moment.</p>" } },
         { "type": "faq", "settings": { "question": "Can I take it if I'm sensitive to caffeine?", "answer": "<p>This formula is caffeine free, making it perfect for those sensitive to caffeine.</p>" } },
         { "type": "faq", "settings": { "question": "Does it have added sugar or artificial sweeteners?", "answer": "<p>No. AVRO uses no added sugars and no artificial sweeteners. Just clean, functional ingredients.</p>" } },

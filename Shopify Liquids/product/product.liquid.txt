@@ -886,7 +886,7 @@
 
         { "type": "ingredient", "settings": { "name": "PharmaGABA®", "amount": "200 mg", "description": "Naturally fermented. AVRO's calm-first foundation." } },
         { "type": "ingredient", "settings": { "name": "Magnesium Bisglycinate", "amount": "850 mg", "description": "Yields 100 mg of active magnesium (24% DV).* Supports muscle and nervous system function." } },
-        { "type": "ingredient", "settings": { "name": "Prebiotic Fiber", "amount": "Soluble Guar Fiber + Acacia Fiber", "description": "Supports gut comfort.* Part of AVRO's daily formula." } },
+        { "type": "ingredient", "settings": { "name": "Fiber", "amount": "Soluble Guar Fiber + Acacia Fiber", "description": "Part of AVRO's daily formula." } },
         { "type": "ingredient", "settings": { "name": "Stevia", "amount": "< 2%", "description": "Used in a small amount for a clean, balanced finish." } },
 
         { "type": "feeling", "settings": { "title": "Improved clarity & composure*" } },

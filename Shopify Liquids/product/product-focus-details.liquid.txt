@@ -517,7 +517,7 @@
       "blocks": [
         { "type": "ingredient", "settings": { "name": "PharmaGABA®", "amount": "200 mg", "description": "Naturally fermented. AVRO's calm-first foundation.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/pharmagaba-2.jpg" } },
         { "type": "ingredient", "settings": { "name": "Cognigrape®", "amount": "250 mg", "description": "Clinically shown to support cognitive function and clarity.*", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/cognigrape-2.jpg" } },
-        { "type": "ingredient", "settings": { "name": "Prebiotic Fiber", "amount": "Soluble Guar Fiber + Acacia Fiber", "description": "Supports gut comfort.* Part of AVRO's daily formula.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/prebiotic-fiber-2.jpg" } },
+        { "type": "ingredient", "settings": { "name": "Fiber", "amount": "Soluble Guar Fiber + Acacia Fiber", "description": "Part of AVRO's daily formula.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/prebiotic-fiber-2.jpg" } },
         { "type": "ingredient", "settings": { "name": "Stevia", "amount": "< 2%", "description": "Used in a small amount for a clean, balanced finish.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/stevia-2.jpg" } },
 
         { "type": "feeling", "settings": { "title": "Sharper, sustained attention*", "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-steady-attention.png" } },

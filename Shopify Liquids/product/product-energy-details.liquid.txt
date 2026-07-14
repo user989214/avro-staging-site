@@ -393,7 +393,7 @@
     { "type": "text", "id": "tab2_label", "label": "Tab 2 label", "default": "Ingredients" },
     { "type": "text", "id": "tab3_label", "label": "Tab 3 label", "default": "When to take" },
     { "type": "text", "id": "tab4_label", "label": "Tab 4 label", "default": "How to use" },
-    { "type": "richtext", "id": "tabs_desc", "label": "Description tab content", "default": "<p>Our formula</p><ul><li>120 mg natural caffeine paired with L-Theanine and PharmaGABA®</li><li>Clean, steady energy without the jitters or crash*</li><li>Calm-first energy — sharp, not wired*</li><li>No added sugar, artificial sweeteners, or sugar alcohols</li><li>Vegan, gluten-free, non-GMO</li><li>Third-party tested for purity and potency</li></ul>" },
+    { "type": "richtext", "id": "tabs_desc", "label": "Description tab content", "default": "<p>Our formula</p><ul><li>Formulated with 120 mg natural caffeine and PharmaGABA®</li><li>Clean, steady energy without the jitters or crash*</li><li>Calm-first energy — sharp, not wired*</li><li>No added sugar, artificial sweeteners, or sugar alcohols</li><li>Vegan, gluten-free, non-GMO</li><li>Third-party tested for purity and potency</li></ul>" },
     { "type": "textarea", "id": "other_ingredients", "label": "Ingredients tab — \"Other ingredients\" line", "default": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica." },
     { "type": "richtext", "id": "tabs_when", "label": "When-to-take tab content", "default": "<p><strong>Morning kickstart</strong> — Clean energy to start the day sharp.*</p><p><strong>Before workouts</strong> — Steady drive for training or peak-demand moments.</p><p><strong>Afternoon lift</strong> — Beat the midday slump without the crash.*</p>" },
     { "type": "richtext", "id": "tabs_how", "label": "How-to-use tab content", "default": "<p><strong>1. Pour</strong> — Empty one stick into 8-12 oz of cold water.</p><p><strong>2. Mix</strong> — Stir or shake until fully dissolved.</p><p><strong>3. Drink</strong> — Enjoy 20-30 minutes before your moment.</p>" },
@@ -403,7 +403,7 @@
     { "type": "text", "id": "ing_heading", "label": "Heading", "default": "Clear ingredient logic. Nothing hidden." },
     { "type": "header", "content": "The feeling of good…" },
     { "type": "text", "id": "feeling_heading", "label": "Heading", "default": "The feeling of good energy." },
-    { "type": "textarea", "id": "feeling_p1", "label": "Paragraph 1", "default": "AVRO Energy pairs natural caffeine with L-Theanine and PharmaGABA® to deliver clean, steady energy in a convenient stick pack format.*" },
+    { "type": "textarea", "id": "feeling_p1", "label": "Paragraph 1", "default": "AVRO Energy pairs natural caffeine with naturally fermented PharmaGABA® to deliver clean, steady energy in a convenient stick pack format.*" },
     { "type": "textarea", "id": "feeling_p2", "label": "Paragraph 2", "default": "Instead of a spike and crash, AVRO Energy is designed for smooth, sustained drive with a calm baseline. Energized, not wired.*" },
     { "type": "text", "id": "feeling_btn_label", "label": "Button label", "default": "Learn How It Works" },
     { "type": "url", "id": "feeling_btn_link", "label": "Button link" },
@@ -496,7 +496,7 @@
       "name": "FAQ item",
       "settings": [
         { "type": "text", "id": "question", "label": "Question", "default": "What are the main ingredients?" },
-        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Formulated with natural caffeine, L-Theanine, and PharmaGABA® for clean energy without the jitters.</p>" }
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Formulated with 120 mg of natural caffeine combined with PharmaGABA® for steady energy without the jitters.</p>" }
       ]
     },
     {
@@ -515,10 +515,10 @@
     {
       "name": "AVRO Details · Energy",
       "blocks": [
-        { "type": "ingredient", "settings": { "name": "Natural Caffeine", "amount": "120 mg", "description": "Clean energy from green coffee beans, without the crash.*", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/natural-caffeine-2.jpg" } },
-        { "type": "ingredient", "settings": { "name": "L-Theanine", "amount": "200 mg", "description": "Smooths caffeine for calm, focused energy.*", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/ltheanine.jpg" } },
-        { "type": "ingredient", "settings": { "name": "PharmaGABA®", "amount": "100 mg", "description": "Naturally fermented. AVRO's calm-first foundation.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/pharmagaba-2.jpg" } },
-        { "type": "ingredient", "settings": { "name": "Prebiotic Fiber", "amount": "Soluble Guar Fiber + Acacia Fiber", "description": "Supports gut comfort.* Part of AVRO's daily formula.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/prebiotic-fiber-2.jpg" } },
+        { "type": "ingredient", "settings": { "name": "PharmaGABA®", "amount": "200 mg", "description": "Naturally fermented. AVRO's calm-first foundation.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/pharmagaba-2.jpg" } },
+        { "type": "ingredient", "settings": { "name": "Natural Caffeine", "amount": "120 mg", "description": "Clinically shown to support cognitive function and clarity.*", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/natural-caffeine-2.jpg" } },
+        { "type": "ingredient", "settings": { "name": "Fiber", "amount": "Soluble Guar Fiber + Acacia Fiber", "description": "Part of AVRO's daily formula.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/prebiotic-fiber-2.jpg" } },
+        { "type": "ingredient", "settings": { "name": "Stevia", "amount": "< 2%", "description": "Used in a small amount for a clean, balanced finish.", "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/ingredients/stevia-2.jpg" } },
 
         { "type": "feeling", "settings": { "title": "Clean, steady energy*", "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-clear-thinking.png" } },
         { "type": "feeling", "settings": { "title": "No jitters or crash*", "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/social-composure.png" } },
@@ -532,9 +532,9 @@
         { "type": "compare", "settings": { "fallback_name": "AVRO Focus", "fallback_image": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "headline": "Calm first. Clear headed. Ready to focus.", "caffeine": "0 mg", "experience": "Steady", "best_for": "Desk work & daily routines" } },
         { "type": "compare", "settings": { "fallback_name": "AVRO Energy", "fallback_image": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "headline": "Calm first. Steady energy. Ready when it matters.", "caffeine": "120 mg", "experience": "Stronger", "best_for": "Workouts or peak-demand moments" } },
 
-        { "type": "faq", "settings": { "question": "What are the main ingredients?", "answer": "<p>Formulated with natural caffeine, L-Theanine, and PharmaGABA® for clean energy without the jitters.</p>" } },
+        { "type": "faq", "settings": { "question": "What are the main ingredients?", "answer": "<p>Formulated with 120 mg of natural caffeine combined with PharmaGABA® for steady energy without the jitters.</p>" } },
         { "type": "faq", "settings": { "question": "What is the best time to take it?", "answer": "<p>Most people use one stick about 20 to 30 minutes before a workout, a long day, or the afternoon slump.</p>" } },
-        { "type": "faq", "settings": { "question": "How much caffeine is in it?", "answer": "<p>Each stick has 120 mg of natural caffeine — about a cup of coffee — paired with L-Theanine so the energy stays smooth and jitter-free.</p>" } },
+        { "type": "faq", "settings": { "question": "How much caffeine is in it?", "answer": "<p>Each stick has 120 mg of natural caffeine — about a cup of coffee — delivered with AVRO's calm-first foundation so the energy stays smooth and jitter-free.</p>" } },
         { "type": "faq", "settings": { "question": "Does it have added sugar or artificial sweeteners?", "answer": "<p>No. AVRO uses no added sugars and no artificial sweeteners. Just clean, functional ingredients.</p>" } },
 
         { "type": "review", "settings": { "name": "Jessica M.", "date": "05/14/2026", "title": "Energy without the crash", "body": "Clean energy that lasts without the jitters or the 2pm crash. I take it before workouts and long days. Easily part of my routine.", "meta": "Fuji Apple · 30 Sticks" } },
