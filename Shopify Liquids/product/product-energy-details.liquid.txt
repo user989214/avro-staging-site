@@ -197,7 +197,7 @@
     <div class="am-wrap">
       <div class="am-banner">
         <img src="{{ banner_src }}" alt="" loading="lazy">
-        <a href="{{ section.settings.final_shop_link | default: '#' }}" class="am-btn am-btn-light am-banner-btn">{{ section.settings.final_shop_label | default: 'Shop' }}</a>
+        <a href="{{ section.settings.final_shop_link | default: '#' }}" class="am-btn am-banner-btn">{{ section.settings.final_shop_label | default: 'Shop' }}</a>
       </div>
     </div>
   </section>
@@ -353,7 +353,9 @@
   #avro-more-{{ section.id }} .am-banner-sec { padding-top: 0; }
   #avro-more-{{ section.id }} .am-banner { position: relative; border-radius: 24px; overflow: hidden; }
   #avro-more-{{ section.id }} .am-banner img { width: 100%; height: auto; display: block; }
-  #avro-more-{{ section.id }} .am-banner-btn { position: absolute; left: clamp(20px,4vw,48px); bottom: clamp(20px,4vw,48px); }
+  #avro-more-{{ section.id }} .am-banner-btn { position: absolute; left: clamp(20px,4vw,48px); bottom: clamp(20px,4vw,48px); min-width: 200px; background: transparent; color: var(--charcoal); border-color: var(--charcoal); }
+  #avro-more-{{ section.id }} .am-banner-btn:hover { background: var(--charcoal); color: var(--bone); border-color: var(--charcoal); }
+  @media (max-width: 640px) { #avro-more-{{ section.id }} .am-banner-btn { position: static; width: calc(100% - 32px); min-width: 0; margin: 20px auto 0; } }
 {% endstyle %}
 
 <script>
