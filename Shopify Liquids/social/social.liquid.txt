@@ -44,7 +44,7 @@
   /* Desktop: dark text over the light bar photo */
   #avro-social-{{ section.id }} .hero-content h1 { font-weight:900; font-size:clamp(36px,5.5vw,72px); line-height:.98; letter-spacing:-.025em; color:var(--charcoal); margin-bottom:16px; max-width:560px; }
   #avro-social-{{ section.id }} .hero-content p { font-weight:400; font-size:clamp(17px,2vw,20px); line-height:1.55; color:var(--charcoal); max-width:480px; margin-bottom:28px; }
-  #avro-social-{{ section.id }} .hero-content .btn { color:var(--charcoal); border-color:var(--charcoal); background:transparent; }
+  #avro-social-{{ section.id }} .hero-content .btn { color:var(--charcoal); border:2px solid var(--charcoal); background:transparent; }
   #avro-social-{{ section.id }} .hero-content .btn:hover { background:var(--charcoal); color:var(--bone); }
   #avro-social-{{ section.id }} .hero-btns { display:flex; gap:10px; flex-wrap:wrap; }
 
@@ -117,8 +117,8 @@
 
   #avro-social-{{ section.id }} .banner { position:relative; width:100%; overflow:hidden; background:var(--deep-black); }
   #avro-social-{{ section.id }} .banner img { width:100%; height:auto; display:block; }
-  #avro-social-{{ section.id }} .banner .btn { position:absolute; left:clamp(16px,4vw,64px); bottom:clamp(16px,4vw,56px); min-width:220px; background:var(--gold); color:var(--deep-black); border-color:var(--gold); }
-  #avro-social-{{ section.id }} .banner .btn:hover { background:transparent; color:var(--gold); }
+  #avro-social-{{ section.id }} .banner .btn { position:absolute; left:clamp(16px,4vw,64px); bottom:clamp(16px,4vw,56px); min-width:220px; background:#000000; color:#FFFFFF; border:2px solid #000000; }
+  #avro-social-{{ section.id }} .banner .btn:hover { background:#FFFFFF; color:#000000; border-color:#FFFFFF; }
 
   @media (max-width:768px){
     #avro-social-{{ section.id }} .hero-card { aspect-ratio:unset; overflow:visible; display:flex; flex-direction:column; background:var(--deep-black); }
