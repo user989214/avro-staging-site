@@ -122,7 +122,7 @@
     #avro-home-{{ section.id }} .proof-stat:first-child { border-left: none; }
   }
 
-  /* ── BENEFIT ROW ─────────────────────────────────────���───────────────────── */
+  /* ── BENEFIT ROW ─────────────────────────────────────���──────────────────���── */
   #avro-home-{{ section.id }} .benefit-sec { padding: 0 clamp(20px,5vw,64px) clamp(48px,6vw,72px); }
   #avro-home-{{ section.id }} .benefit-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
   #avro-home-{{ section.id }} .benefit-card { position: relative; overflow: hidden; background: var(--base-light); border-radius: 20px; min-height: clamp(160px,18vw,240px); }
@@ -321,7 +321,6 @@
 
   {%- comment -%} ============ HERO ============ {%- endcomment -%}
   {%- assign slides = section.blocks | where: "type", "slide" -%}
-  {%- if slides.size > 0 -%}
   <section class="hp-sec hp-hero">
     <div class="hp-hero-container">
       <div class="hp-hero-img-wrap">
@@ -332,6 +331,10 @@
           {%- else -%}
             <img class="hp-hero-img{% if i == 0 %} is-active{% endif %}" src="{{ b.settings.image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/hero-01.jpg' }}" alt="{{ b.settings.alt | escape }}" loading="lazy">
           {%- endif -%}
+        {%- else -%}
+          <img class="hp-hero-img is-active" src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/hero-01.jpg" alt="Pouring an AVRO Calm stick into a glass of water" loading="lazy">
+          <img class="hp-hero-img" src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/hero-03.jpg" alt="" loading="lazy">
+          <img class="hp-hero-img" src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/hero-02.jpg" alt="" loading="lazy">
         {%- endfor -%}
         {%- for b in slides -%}
           {%- assign i = forloop.index0 -%}
@@ -340,6 +343,10 @@
           {%- else -%}
             <img class="hp-hero-img-mobile{% if i == 0 %} is-active{% endif %}" src="{{ b.settings.mobile_image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/hero-01-mobile.png' }}" alt="{{ b.settings.alt | escape }}" loading="lazy">
           {%- endif -%}
+        {%- else -%}
+          <img class="hp-hero-img-mobile is-active" src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/hero-01-mobile.png" alt="Pouring an AVRO Calm stick into a glass of water" loading="lazy">
+          <img class="hp-hero-img-mobile" src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/hero-03-mobile.png" alt="" loading="lazy">
+          <img class="hp-hero-img-mobile" src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/hero-02-mobile.png" alt="" loading="lazy">
         {%- endfor -%}
       </div>
       <div class="hp-hero-grid">
@@ -348,6 +355,19 @@
           <div class="hp-slide{% if forloop.first %} is-active{% endif %}" {{ b.shopify_attributes }}>
             <h1>{{ b.settings.headline }}</h1>
             <p class="lede">{{ b.settings.lede }}</p>
+          </div>
+          {%- else -%}
+          <div class="hp-slide is-active">
+            <h1>Performance Starts with Being Calm.</h1>
+            <p class="lede">AVRO helps you steady first, with calm-first formulas built to support composure, clarity and controlled readiness when pressure rises.*</p>
+          </div>
+          <div class="hp-slide">
+            <h1>Calm Comes First.</h1>
+            <p class="lede">AVRO is built for people who know pressure changes everything. Support composure, clarity and readiness before the moment matters.*</p>
+          </div>
+          <div class="hp-slide">
+            <h1>Start Calm. Stay Ready.</h1>
+            <p class="lede">AVRO supports calm-first performance with formulas designed for pressure-sensitive moments in work, play, competition and social life.*</p>
           </div>
           {%- endfor -%}
           <div class="hp-pill-row">
@@ -360,16 +380,20 @@
             <button class="hp-dot{% if forloop.first %} is-active{% endif %}" data-slide="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}"></button>
             {%- endfor -%}
           </div>
+          {%- elsif slides.size == 0 -%}
+          <div class="hp-dots" role="tablist" aria-label="Hero slides">
+            <button class="hp-dot is-active" data-slide="0" aria-label="Go to slide 1"></button>
+            <button class="hp-dot" data-slide="1" aria-label="Go to slide 2"></button>
+            <button class="hp-dot" data-slide="2" aria-label="Go to slide 3"></button>
+          </div>
           {%- endif -%}
         </div>
       </div>
     </div>
   </section>
-  {%- endif -%}
 
   {%- comment -%} ============ PROOF BAR ============ {%- endcomment -%}
   {%- assign proofs = section.blocks | where: "type", "proof" -%}
-  {%- if proofs.size > 0 -%}
   <section class="hp-sec proof-bar">
     <div class="proof-bar-container">
       {%- for b in proofs -%}
@@ -379,14 +403,25 @@
           {{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}
         </span>
       </div>
+      {%- else -%}
+      <div class="proof-stat">
+        <strong>AVRO Calm</strong>
+        <span class="proof-stars" role="img" aria-label="Rated 5 out of 5 stars">{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}</span>
+      </div>
+      <div class="proof-stat">
+        <strong>AVRO Focus</strong>
+        <span class="proof-stars" role="img" aria-label="Rated 5 out of 5 stars">{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}</span>
+      </div>
+      <div class="proof-stat">
+        <strong>AVRO Energy</strong>
+        <span class="proof-stars" role="img" aria-label="Rated 5 out of 5 stars">{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}</span>
+      </div>
       {%- endfor -%}
     </div>
   </section>
-  {%- endif -%}
 
   {%- comment -%} ============ BENEFIT ROW ============ {%- endcomment -%}
   {%- assign benefits = section.blocks | where: "type", "benefit" -%}
-  {%- if benefits.size > 0 -%}
   <section class="hp-sec benefit-sec">
     <div class="hp-wrap">
       <div class="benefit-grid">
@@ -398,15 +433,17 @@
             <img src="{{ b.settings.image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/benefit-golf.png' }}" alt="" style="object-position: {{ b.settings.focal | default: 'center' }};">
           {%- endif -%}
         </div>
+        {%- else -%}
+        <div class="benefit-card"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/benefit-golf.png" alt="" style="object-position: center 30%;"></div>
+        <div class="benefit-card"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/benefit-bar.png" alt="" style="object-position: center 40%;"></div>
+        <div class="benefit-card"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/benefit-community.png" alt="" style="object-position: center 35%;"></div>
         {%- endfor -%}
       </div>
     </div>
   </section>
-  {%- endif -%}
 
   {%- comment -%} ============ APPROACH (accordion + graphic) ============ {%- endcomment -%}
   {%- assign approaches = section.blocks | where: "type", "approach_item" -%}
-  {%- if approaches.size > 0 or section.settings.approach_heading != blank -%}
   <section class="hp-sec pad-sec">
     <div class="hp-wrap">
       {%- assign approach_media = section.settings.approach_media | default: 'graphic' -%}
@@ -432,6 +469,31 @@
               </button>
               <div class="accord-body"><p>{{ b.settings.content }}</p></div>
             </div>
+            {%- else -%}
+            <div class="accord is-open" data-accordion>
+              <button class="accord-btn" type="button" aria-expanded="true">
+                <span class="accord-icon"><span style="background-color: #E8A23D; -webkit-mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/control-under-pressure.png); mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/control-under-pressure.png);"></span></span>
+                <span class="accord-title">More energy is not always the answer.</span>
+                {{ chevron }}
+              </button>
+              <div class="accord-body"><p>Most products push stimulation. AVRO starts with calm, because calm helps create the conditions for clarity, composure, and readiness.</p></div>
+            </div>
+            <div class="accord" data-accordion>
+              <button class="accord-btn" type="button" aria-expanded="false">
+                <span class="accord-icon"><span style="background-color: #C13584; -webkit-mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/supports-focus-without-overload.png); mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/supports-focus-without-overload.png);"></span></span>
+                <span class="accord-title">Performance starts with state.</span>
+                {{ chevron }}
+              </button>
+              <div class="accord-body"><p>AVRO is built to support the state before the moment. Calm creates the foundation for clarity and readiness when it counts.</p></div>
+            </div>
+            <div class="accord" data-accordion>
+              <button class="accord-btn" type="button" aria-expanded="false">
+                <span class="accord-icon"><span style="background-color: #4b4d9a; -webkit-mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/calm-first-foundation.png); mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/calm-first-foundation.png);"></span></span>
+                <span class="accord-title">Calm first, then clarity.</span>
+                {{ chevron }}
+              </button>
+              <div class="accord-body"><p>Every AVRO formula starts with naturally fermented PharmaGABA®. It's the calm-first foundation that makes everything else work better.**</p></div>
+            </div>
             {%- endfor -%}
           </div>
           {%- if approach_media == 'image' -%}
@@ -451,11 +513,9 @@
       </div>
     </div>
   </section>
-  {%- endif -%}
 
   {%- comment -%} ============ PRODUCT STRIP ============ {%- endcomment -%}
   {%- assign products = section.blocks | where: "type", "product" -%}
-  {%- if products.size > 0 -%}
   <section class="hp-sec strip-sec">
     <div class="hp-wrap">
       <h2>{{ section.settings.strip_heading | default: 'Three formulas. One foundation.' }}</h2>
@@ -479,15 +539,41 @@
             <a href="{{ b.settings.link | default: '/collections/all' }}" class="hp-btn hp-btn-md hp-btn-outline">{{ b.settings.button_label | default: 'Explore' }}{{ arrow_svg }}</a>
           </div>
         </div>
+        {%- else -%}
+        <div class="strip-card">
+          <div class="strip-thumb"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" alt="AVRO Calm — Blueberry Acai"></div>
+          <div class="strip-body">
+            <div class="strip-found"><span class="lbl">Foundation</span><span class="val">PharmaGABA® + Magnesium</span></div>
+            <h3>Calm</h3>
+            <p>Supports a calmer, steadier state before the moments that matter.*</p>
+            <a href="/collections/calm" class="hp-btn hp-btn-md hp-btn-outline">Explore{{ arrow_svg }}</a>
+          </div>
+        </div>
+        <div class="strip-card">
+          <div class="strip-thumb"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png" alt="AVRO Focus — Pomegranate Raspberry"></div>
+          <div class="strip-body">
+            <div class="strip-found"><span class="lbl">Foundation</span><span class="val">PharmaGABA® + Cognigrape®</span></div>
+            <h3>Focus</h3>
+            <p>Supports clear thinking and steady attention without overload.*</p>
+            <a href="/collections/focus" class="hp-btn hp-btn-md hp-btn-outline">Explore{{ arrow_svg }}</a>
+          </div>
+        </div>
+        <div class="strip-card">
+          <div class="strip-thumb"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png" alt="AVRO Energy — Fuji Apple"></div>
+          <div class="strip-body">
+            <div class="strip-found"><span class="lbl">Foundation</span><span class="val">PharmaGABA® + Caffeine</span></div>
+            <h3>Energy</h3>
+            <p>Supports calm-first energy and controlled readiness when it counts.*</p>
+            <a href="/collections/energy" class="hp-btn hp-btn-md hp-btn-outline">Explore{{ arrow_svg }}</a>
+          </div>
+        </div>
         {%- endfor -%}
       </div>
     </div>
   </section>
-  {%- endif -%}
 
   {%- comment -%} ============ MOMENT GRID ============ {%- endcomment -%}
   {%- assign moments = section.blocks | where: "type", "moment" -%}
-  {%- if moments.size > 0 -%}
   <section class="hp-sec pad-sec moment-sec">
     <div class="hp-wrap">
       <h2>{{ section.settings.moment_heading | default: 'Built for pressure sensitive moments.' }}</h2>
@@ -507,11 +593,27 @@
             <span class="hp-btn hp-btn-md hp-btn-outline" style="align-self:flex-start;">{{ b.settings.cta }}</span>
           </div>
         </a>
+        {%- else -%}
+        <a href="/pages/golf" class="moment-card">
+          <div class="moment-thumb"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/tile-golf.jpg" alt="AVRO for golf"></div>
+          <div class="moment-body"><h3>Golf</h3><p>Composure from the first tee to the final stretch.</p><span class="hp-btn hp-btn-md hp-btn-outline" style="align-self:flex-start;">Explore</span></div>
+        </a>
+        <a href="/pages/gaming" class="moment-card">
+          <div class="moment-thumb"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/tile-gaming.jpg" alt="AVRO for gaming"></div>
+          <div class="moment-body"><h3>Gaming</h3><p>Clear thinking and steady attention under pressure.</p><span class="hp-btn hp-btn-md hp-btn-outline" style="align-self:flex-start;">Explore</span></div>
+        </a>
+        <a href="#" class="moment-card">
+          <div class="moment-thumb"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/tile-work.jpg" alt="AVRO for work"></div>
+          <div class="moment-body"><h3>Work</h3><p>Calm-first focus for meetings, deadlines and deep work.</p><span class="hp-btn hp-btn-md hp-btn-outline" style="align-self:flex-start;">Explore</span></div>
+        </a>
+        <a href="#" class="moment-card">
+          <div class="moment-thumb"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/tile-social.png" alt="AVRO for social moments"></div>
+          <div class="moment-body"><h3>Social</h3><p>Ease and composure before the moments that matter.</p><span class="hp-btn hp-btn-md hp-btn-outline" style="align-self:flex-start;">Explore</span></div>
+        </a>
         {%- endfor -%}
       </div>
     </div>
   </section>
-  {%- endif -%}
 
   {%- comment -%} ============ SCIENCE GRID (GABA card + formula graph) ============ {%- endcomment -%}
   <section class="hp-sec pad-sec">
@@ -533,6 +635,12 @@
                   <span>{{ b.settings.label }}</span>
                 </div>
                 {%- unless forloop.last -%}<span class="sci-arrow">&rarr;</span>{%- endunless -%}
+              {%- else -%}
+                <div class="sci-chip"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/naturally-fermented-pharmagaba.png" alt=""><span>Naturally Fermented PharmaGABA®</span></div>
+                <span class="sci-arrow">&rarr;</span>
+                <div class="sci-chip"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/calm-first-foundation.png" alt=""><span>Calm-First Foundation</span></div>
+                <span class="sci-arrow">&rarr;</span>
+                <div class="sci-chip"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/supports-focus-without-overload.png" alt=""><span>Clarity &amp; Composure</span></div>
               {%- endfor -%}
             </div>
             <a href="{{ section.settings.gaba_link | default: '/pages/science' }}" class="hp-btn hp-btn-md hp-btn-outline">{{ section.settings.gaba_button | default: 'Learn the Science of AVRO' }}{{ arrow_svg }}</a>
@@ -554,6 +662,19 @@
                   <span style="flex: 40 0 0; background: {{ b.settings.color | default: '#4b4d9a' }};"></span>
                 </div>
               </div>
+              {%- else -%}
+              <div class="graph-row">
+                <div class="top"><span class="nm" style="color: #4b4d9a;">Calm</span><span class="lg">PharmaGABA® + Magnesium</span></div>
+                <div class="graph-bar"><span style="flex: 60 0 0; background: #94C6D4;"></span><span style="flex: 40 0 0; background: #4b4d9a;"></span></div>
+              </div>
+              <div class="graph-row">
+                <div class="top"><span class="nm" style="color: #C13584;">Focus</span><span class="lg">PharmaGABA® + Cognigrape®</span></div>
+                <div class="graph-bar"><span style="flex: 60 0 0; background: #94C6D4;"></span><span style="flex: 40 0 0; background: #C13584;"></span></div>
+              </div>
+              <div class="graph-row">
+                <div class="top"><span class="nm" style="color: #E8A23D;">Energy</span><span class="lg">PharmaGABA® + Caffeine</span></div>
+                <div class="graph-bar"><span style="flex: 60 0 0; background: #94C6D4;"></span><span style="flex: 40 0 0; background: #E8A23D;"></span></div>
+              </div>
               {%- endfor -%}
             </div>
             <div class="graph-legend">
@@ -570,7 +691,6 @@
 
   {%- comment -%} ============ QUALITY ROW ============ {%- endcomment -%}
   {%- assign badges = section.blocks | where: "type", "quality_badge" -%}
-  {%- if badges.size > 0 -%}
   <section class="hp-sec quality-sec">
     <div class="hp-wrap">
       <div class="quality-shell">
@@ -587,12 +707,18 @@
               <span class="sub">{{ b.settings.sub }}</span>
             </div>
           </div>
+          {%- else -%}
+          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/third-party-tested.png" alt=""><div><strong>Third-Party Tested</strong><span class="sub">Verified for purity</span></div></div>
+          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/gluten-free.png" alt=""><div><strong>Gluten Free</strong><span class="sub">No gluten</span></div></div>
+          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/free-vegan.png" alt=""><div><strong>Vegan</strong><span class="sub">Plant based</span></div></div>
+          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/gmp-certified-facility.png" alt=""><div><strong>GMP Certified</strong><span class="sub">Quality facility</span></div></div>
+          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/ingredient-disclosure.png" alt=""><div><strong>Full Disclosure</strong><span class="sub">Every ingredient</span></div></div>
+          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/naturally-fermented-pharmagaba.png" alt=""><div><strong>PharmaGABA®</strong><span class="sub">Naturally fermented</span></div></div>
           {%- endfor -%}
         </div>
       </div>
     </div>
   </section>
-  {%- endif -%}
 
   {%- comment -%} ============ STORY STRIP ============ {%- endcomment -%}
   <section class="hp-sec story-sec">
@@ -628,7 +754,6 @@
 
   {%- comment -%} ============ RITUAL ============ {%- endcomment -%}
   {%- assign steps = section.blocks | where: "type", "ritual_step" -%}
-  {%- if steps.size > 0 -%}
   <section class="hp-sec ritual-sec">
     <div class="hp-wrap">
       <div class="ritual-shell">
@@ -649,16 +774,39 @@
             </button>
             <div class="ritual-body"><p>{{ b.settings.detail }}</p></div>
           </div>
+          {%- else -%}
+          <div class="ritual-item is-open" data-accordion>
+            <button class="ritual-btn" type="button" aria-expanded="true">
+              <span class="ritual-num"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/step-pour.png" alt=""></span>
+              <span class="title">Pour</span>
+              {{ chevron }}
+            </button>
+            <div class="ritual-body"><p>Pour one AVRO stick into 8-12 oz of cold water.</p></div>
+          </div>
+          <div class="ritual-item" data-accordion>
+            <button class="ritual-btn" type="button" aria-expanded="false">
+              <span class="ritual-num"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/step-stir.png" alt=""></span>
+              <span class="title">Stir</span>
+              {{ chevron }}
+            </button>
+            <div class="ritual-body"><p>Stir or shake until fully dissolved.</p></div>
+          </div>
+          <div class="ritual-item" data-accordion>
+            <button class="ritual-btn" type="button" aria-expanded="false">
+              <span class="ritual-num"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/step-drink.png" alt=""></span>
+              <span class="title">Drink</span>
+              {{ chevron }}
+            </button>
+            <div class="ritual-body"><p>Drink about 20-30 minutes before the moment that matters.</p></div>
+          </div>
           {%- endfor -%}
         </div>
       </div>
     </div>
   </section>
-  {%- endif -%}
 
   {%- comment -%} ============ PRODUCT CARDS (Choose your formula) ============ {%- endcomment -%}
   {%- assign formula_cards = section.blocks | where: "type", "formula_card" -%}
-  {%- if formula_cards.size > 0 -%}
   <section class="hp-sec pc-sec">
     <div class="pc-wrap">
       <h2>{{ section.settings.pc_heading | default: 'Choose your AVRO formula' }}</h2>
@@ -684,15 +832,35 @@
           </div>
           <a href="{{ b.settings.link | default: '/collections/all' }}" class="hp-btn hp-btn-lg hp-btn-outline">{{ b.settings.button_label | default: 'Shop' }}</a>
         </article>
+        {%- else -%}
+        <article class="pc-card">
+          <div class="pc-thumb"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" alt="AVRO Calm"></div>
+          <h3>Calm</h3>
+          <p class="support">Supports a calmer, steadier state before pressure.*</p>
+          <div class="pc-meta"><div><span class="lbl">Best For:</span><p>Winding down, pre-moment nerves, reset</p></div><p class="caf">Caffeine Free</p></div>
+          <a href="/collections/calm" class="hp-btn hp-btn-lg hp-btn-outline">Shop Calm</a>
+        </article>
+        <article class="pc-card">
+          <div class="pc-thumb"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png" alt="AVRO Focus"></div>
+          <h3>Focus</h3>
+          <p class="support">Supports clear thinking and steady attention.*</p>
+          <div class="pc-meta"><div><span class="lbl">Best For:</span><p>Deep work, study, competition</p></div><p class="caf">Caffeine Free</p></div>
+          <a href="/collections/focus" class="hp-btn hp-btn-lg hp-btn-outline">Shop Focus</a>
+        </article>
+        <article class="pc-card">
+          <div class="pc-thumb"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png" alt="AVRO Energy"></div>
+          <h3>Energy</h3>
+          <p class="support">Supports calm-first energy and controlled readiness.*</p>
+          <div class="pc-meta"><div><span class="lbl">Best For:</span><p>Early starts, training, long days</p></div><p class="caf">With Caffeine</p></div>
+          <a href="/collections/energy" class="hp-btn hp-btn-lg hp-btn-outline">Shop Energy</a>
+        </article>
         {%- endfor -%}
       </div>
     </div>
   </section>
-  {%- endif -%}
 
   {%- comment -%} ============ SOCIAL PROOF ============ {%- endcomment -%}
   {%- assign reviews = section.blocks | where: "type", "testimonial" -%}
-  {%- if reviews.size > 0 -%}
   <section class="hp-sec sp-sec">
     <div class="sp-wrap">
       <h2>{{ section.settings.sp_heading | default: 'Trusted for calm-first routines.' }}</h2>
@@ -704,11 +872,29 @@
           <strong>{{ b.settings.name }}</strong>
           <span class="role">{{ b.settings.role }}</span>
         </article>
+        {%- else -%}
+        <article class="sp-card">
+          <div class="sp-stars">{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}</div>
+          <p>&ldquo;AVRO helps me feel steady before big meetings. Calm first really does change how the rest of the day goes.&rdquo;</p>
+          <strong>Jordan M.</strong>
+          <span class="role">Product Manager</span>
+        </article>
+        <article class="sp-card">
+          <div class="sp-stars">{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}</div>
+          <p>&ldquo;I use Focus before rounds. Clear headed, composed, no jittery crash. It's part of my routine now.&rdquo;</p>
+          <strong>Alex R.</strong>
+          <span class="role">Amateur Golfer</span>
+        </article>
+        <article class="sp-card">
+          <div class="sp-stars">{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}{{ star_svg }}</div>
+          <p>&ldquo;Energy without the anxiety. It's the first thing that actually feels calm and alert at the same time.&rdquo;</p>
+          <strong>Sam T.</strong>
+          <span class="role">Competitive Gamer</span>
+        </article>
         {%- endfor -%}
       </div>
     </div>
   </section>
-  {%- endif -%}
 
   {%- comment -%} ============ FINAL CTA ============ {%- endcomment -%}
   <section class="hp-sec cta-sec">
