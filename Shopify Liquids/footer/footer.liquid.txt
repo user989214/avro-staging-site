@@ -8,8 +8,12 @@
   3. Reference from your footer group (sections/footer-group.json) or render
      the avro-footer section in layout/theme.liquid.
   4. Newsletter heading/body, legal disclaimers, and every link column are
-     editable. Link columns are blocks (add a "Footer column" block, then add
-     "Footer link" sub-items via its list). Links here use simple link blocks.
+     editable. Columns are built from blocks: a "Column heading" block starts
+     a new column, and each "Link" block after it renders inside that column.
+     Every Link block has a label + a native Shopify URL picker, so you can
+     point each one at any product / page / collection from a dropdown.
+     The preset ships pre-filled with the full AVRO footer (Shop links point
+     at /products/calm, /products/focus, /products/energy).
 
   NOTE: The newsletter form posts to Shopify's customer signup
   (customer[tags]=newsletter). Adjust as needed for your marketing app.
@@ -51,8 +55,6 @@
   }
 {% endstyle %}
 
-{%- assign columns = section.blocks | where: "type", "column" -%}
-
 <div id="avro-footer-{{ section.id }}">
   <footer>
     <div class="ft-inner">
@@ -87,23 +89,28 @@
         </div>
       </div>
 
+      {%- comment -%}
+        Columns are built from blocks: a "Column heading" block starts a new
+        column, and each "Link" block after it (label + native URL picker)
+        renders inside that column — so every link is a proper link setting
+        you can point at any product / page / collection from the editor.
+      {%- endcomment -%}
       <div class="ft-cols">
-        {%- for b in columns -%}
-        <div class="ft-col" {{ b.shopify_attributes }}>
-          <h4>{{ b.settings.heading }}</h4>
-          <ul>
-            {%- assign pairs = b.settings.links | newline_to_br | split: '<br />' -%}
-            {%- for pair in pairs -%}
-              {%- assign parts = pair | strip | split: '|' -%}
-              {%- if parts.size >= 2 -%}
-                <li><a href="{{ parts[1] | strip }}">{{ parts[0] | strip }}</a></li>
-              {%- elsif parts.size == 1 and parts[0] != blank -%}
-                <li><a href="#">{{ parts[0] | strip }}</a></li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
-        </div>
+        {%- assign col_open = false -%}
+        {%- for b in section.blocks -%}
+          {%- if b.type == 'column' -%}
+            {%- if col_open -%}</ul></div>{%- endif -%}
+            <div class="ft-col" {{ b.shopify_attributes }}>
+              <h4>{{ b.settings.heading }}</h4>
+              <ul>
+            {%- assign col_open = true -%}
+          {%- elsif b.type == 'link' and col_open -%}
+            {%- if b.settings.label != blank -%}
+              <li {{ b.shopify_attributes }}><a href="{{ b.settings.url | default: '#' }}">{{ b.settings.label }}</a></li>
+            {%- endif -%}
+          {%- endif -%}
         {%- endfor -%}
+        {%- if col_open -%}</ul></div>{%- endif -%}
       </div>
     </div>
 
@@ -137,13 +144,22 @@
     { "type": "header", "content": "Watermark" },
     { "type": "image_picker", "id": "watermark", "label": "Watermark logo (falls back to avro-logo-footer.svg)" }
   ],
+  "max_blocks": 50,
   "blocks": [
     {
       "type": "column",
-      "name": "Footer column",
+      "name": "Column heading",
       "settings": [
-        { "type": "text", "id": "heading", "label": "Column heading", "default": "Shop" },
-        { "type": "textarea", "id": "links", "label": "Links", "info": "One link per line, formatted as: Label | /url", "default": "Shop All | /collections/all\nCalm | /products/calm\nFocus | /products/focus\nEnergy | /products/energy" }
+        { "type": "paragraph", "content": "Starts a new footer column. Add Link blocks below it — they render inside this column." },
+        { "type": "text", "id": "heading", "label": "Column heading", "default": "Shop" }
+      ]
+    },
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Shop All" },
+        { "type": "url", "id": "url", "label": "Link" }
       ]
     }
   ],
@@ -151,10 +167,30 @@
     {
       "name": "AVRO — Footer",
       "blocks": [
-        { "type": "column", "settings": { "heading": "Company", "links": "Contact Us | /pages/contact\nMy Account | /account\nManage Subscription | /account\nSubscribe | /pages/subscribe" } },
-        { "type": "column", "settings": { "heading": "Shop", "links": "Shop All | /collections/all\nCalm | /products/calm\nFocus | /products/focus\nEnergy | /products/energy\nBundle + Save | /collections/all" } },
-        { "type": "column", "settings": { "heading": "Learn", "links": "Our Story | /pages/our-story\nThe Team | /pages/our-story\nWhy AVRO | /pages/why-avro\nScience of AVRO | /pages/science\nIngredients | /pages/ingredients\nGolf | /pages/golf\nWork / Tech | /pages/work\nEsports | /pages/gaming\nSocial / Zero Proof | /pages/social\nFAQ | /pages/faq" } },
-        { "type": "column", "settings": { "heading": "Follow", "links": "Instagram | https://www.instagram.com/avrohydrate\nLinkedIn | https://www.linkedin.com/company/avrohydrate" } }
+        { "type": "column", "settings": { "heading": "Company" } },
+        { "type": "link", "settings": { "label": "Contact Us", "url": "/pages/contact" } },
+        { "type": "link", "settings": { "label": "My Account", "url": "/account" } },
+        { "type": "link", "settings": { "label": "Manage Subscription", "url": "/account" } },
+        { "type": "link", "settings": { "label": "Subscribe", "url": "/pages/subscribe" } },
+        { "type": "column", "settings": { "heading": "Shop" } },
+        { "type": "link", "settings": { "label": "Shop All", "url": "/collections/all" } },
+        { "type": "link", "settings": { "label": "Calm", "url": "/products/calm" } },
+        { "type": "link", "settings": { "label": "Focus", "url": "/products/focus" } },
+        { "type": "link", "settings": { "label": "Energy", "url": "/products/energy" } },
+        { "type": "link", "settings": { "label": "Bundle + Save", "url": "/collections/all" } },
+        { "type": "column", "settings": { "heading": "Learn" } },
+        { "type": "link", "settings": { "label": "Our Story", "url": "/pages/our-story" } },
+        { "type": "link", "settings": { "label": "Why AVRO", "url": "/pages/why-avro" } },
+        { "type": "link", "settings": { "label": "Science of AVRO", "url": "/pages/science" } },
+        { "type": "link", "settings": { "label": "Ingredients", "url": "/pages/ingredients" } },
+        { "type": "link", "settings": { "label": "Golf", "url": "/pages/golf" } },
+        { "type": "link", "settings": { "label": "Work / Tech", "url": "/pages/work" } },
+        { "type": "link", "settings": { "label": "Esports", "url": "/pages/gaming" } },
+        { "type": "link", "settings": { "label": "Social / Zero Proof", "url": "/pages/social" } },
+        { "type": "link", "settings": { "label": "FAQ", "url": "/pages/faq" } },
+        { "type": "column", "settings": { "heading": "Follow" } },
+        { "type": "link", "settings": { "label": "Instagram", "url": "https://www.instagram.com/avrohydrate" } },
+        { "type": "link", "settings": { "label": "LinkedIn", "url": "https://www.linkedin.com/company/avrohydrate" } }
       ]
     }
   ]
