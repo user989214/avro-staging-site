@@ -182,8 +182,10 @@
     <div class="head"><h2>{{ section.settings.why_title | default: 'Why AVRO Supports Social Settings' }}</h2></div>
     <div class="cards c3">
       {%- for b in reasons -%}
+      {%- assign fb = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-zero-percent-alcohol.png' -%}
+      {%- if fb contains '/images/' -%}{%- assign fbp = fb | split: '/images/' -%}{%- assign fb = base | append: '/images/' | append: fbp[1] -%}{%- endif -%}
       <div class="icard" {{ b.shopify_attributes }}>
-        <div class="ic"><img src="{% if b.settings.icon != blank %}{{ b.settings.icon | image_url: width: 160 }}{% else %}{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-zero-percent-alcohol.png' }}{% endif %}" alt="" loading="lazy"></div>
+        <div class="ic"><img src="{% if b.settings.icon != blank %}{{ b.settings.icon | image_url: width: 160 }}{% else %}{{ fb }}{% endif %}" alt="" loading="lazy"></div>
         <h3>{{ b.settings.title }}</h3>
         <p>{{ b.settings.copy }}</p>
       </div>
@@ -197,9 +199,11 @@
     <div class="head"><h2>{{ section.settings.how_title | default: 'How to use before social settings' }}</h2></div>
     <div class="steps">
       {%- for b in steps -%}
+      {%- assign fb = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png' -%}
+      {%- if fb contains '/images/' -%}{%- assign fbp = fb | split: '/images/' -%}{%- assign fb = base | append: '/images/' | append: fbp[1] -%}{%- endif -%}
       <article class="step" {{ b.shopify_attributes }}>
         <span class="num">{{ forloop.index }}</span>
-        <div class="ic"><img src="{% if b.settings.icon != blank %}{{ b.settings.icon | image_url: width: 200 }}{% else %}{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png' }}{% endif %}" alt="" loading="lazy"></div>
+        <div class="ic"><img src="{% if b.settings.icon != blank %}{{ b.settings.icon | image_url: width: 200 }}{% else %}{{ fb }}{% endif %}" alt="" loading="lazy"></div>
         <h3>{{ b.settings.title }}</h3>
         <p>{{ b.settings.copy }}</p>
       </article>
@@ -226,8 +230,10 @@
     <div class="head"><h2>{{ section.settings.use_title | default: 'Social use moments' }}</h2></div>
     <div class="cards c4">
       {%- for b in moments -%}
+      {%- assign fb = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-calm-first-cocktails.png' -%}
+      {%- if fb contains '/images/' -%}{%- assign fbp = fb | split: '/images/' -%}{%- assign fb = base | append: '/images/' | append: fbp[1] -%}{%- endif -%}
       <div class="icard" {{ b.shopify_attributes }}>
-        <div class="ic"><img src="{% if b.settings.icon != blank %}{{ b.settings.icon | image_url: width: 160 }}{% else %}{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-calm-first-cocktails.png' }}{% endif %}" alt="" loading="lazy"></div>
+        <div class="ic"><img src="{% if b.settings.icon != blank %}{{ b.settings.icon | image_url: width: 160 }}{% else %}{{ fb }}{% endif %}" alt="" loading="lazy"></div>
         <h3>{{ b.settings.title }}</h3>
         <p>{{ b.settings.copy }}</p>
       </div>
@@ -241,8 +247,10 @@
     <div class="head"><h2>{{ section.settings.shop_title | default: 'Shop AVRO for social' }}</h2></div>
     <div class="pc-row">
       {%- for b in products -%}
+      {%- assign fb = b.settings.image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png' -%}
+      {%- if fb contains '/images/' -%}{%- assign fbp = fb | split: '/images/' -%}{%- assign fb = base | append: '/images/' | append: fbp[1] -%}{%- endif -%}
       <article class="pc" {{ b.shopify_attributes }}>
-        <div class="pc-thumb"><img src="{% if b.settings.image != blank %}{{ b.settings.image | image_url: width: 800 }}{% else %}{{ b.settings.image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png' }}{% endif %}" alt="{{ b.settings.name | escape }}"></div>
+        <div class="pc-thumb"><img src="{% if b.settings.image != blank %}{{ b.settings.image | image_url: width: 800 }}{% else %}{{ fb }}{% endif %}" alt="{{ b.settings.name | escape }}"></div>
         <h3>{{ b.settings.name }}</h3>
         <p>{{ b.settings.copy }}</p>
         <a href="{{ b.settings.link | default: '/collections/all' }}" class="btn btn-ghost">{{ b.settings.button_label | default: 'Shop' }}</a>
