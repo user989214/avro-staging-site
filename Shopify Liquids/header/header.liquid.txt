@@ -7,8 +7,14 @@
   2. Reference this section from your theme's header group
      (sections/header-group.json) or render the avro-header section in
      layout/theme.liquid.
-  3. The logo is embedded inline as SVG, so it renders with no asset upload.
-     To use a different logo, set the "Logo image" setting in the theme editor.
+  3. LOGOS — the header automatically switches logos per page:
+       - Golf pages ("Golf paths" setting, default /pages/golf) use the
+         AVRO Golf logo (preloaded from the live site).
+       - Dark/Zero-Proof pages ("Dark-mode paths" setting, default
+         /pages/social) use the gold AVRO Zero Proof logo (preloaded).
+       - All other pages use the standard AVRO logo (inline SVG, no upload
+         needed).
+     Each variant can be overridden with its own image picker in the editor.
   4. Editable in the theme editor:
        - Nav link labels + URLs (Shop / Subscribe / Science / FAQ)
        - Dropdown trigger label + the two column headings
@@ -39,6 +45,7 @@
   #avro-header-{{ section.id }} .nav-link:hover { opacity: 0.7; }
   #avro-header-{{ section.id }} .nav-logo { display: flex; align-items: center; justify-content: center; justify-self: center; width: clamp(110px,12vw,160px); color: var(--nav-text); }
   #avro-header-{{ section.id }} .nav-logo svg, #avro-header-{{ section.id }} .nav-logo img { width: 100%; height: auto; display: block; }
+  #avro-header-{{ section.id }} .nav-logo.golf { width: clamp(118px,13vw,168px); }
   #avro-header-{{ section.id }} .icon-btn { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 999px; background: transparent; border: none; color: var(--nav-text); cursor: pointer; }
   #avro-header-{{ section.id }} .cart-btn { display: none; align-items: center; gap: 8px; padding: 8px 16px 8px 14px; border-radius: 999px; border: 2px solid var(--cart-border); background: transparent; color: var(--cart-text); cursor: pointer; transition: background-color .2s ease, color .2s ease; }
   #avro-header-{{ section.id }} .cart-btn:hover { background: var(--cart-text); color: var(--cart-fill-text); }
@@ -107,6 +114,18 @@
 {%- else -%}
   {%- capture palette -%}--nav-bg:#FFFFFF;--nav-text:#1C1B14;--nav-muted:#6B6857;--nav-hover:#94C6D4;--cart-border:#1C1B14;--cart-text:#1C1B14;--cart-fill-text:#F5F0E8;--cart-count-bg:#1C1B14;--cart-count-text:#F5F0E8;{%- endcapture -%}
 {%- endif -%}
+
+{%- comment -%}
+  Logo mode: golf pages get the AVRO Golf logo, dark/zero-proof pages get the
+  gold AVRO Zero Proof logo, and every other page gets the standard AVRO logo.
+{%- endcomment -%}
+{%- assign logo_base = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app' -%}
+{%- assign is_golf = false -%}
+{%- assign golf_paths = section.settings.golf_paths | default: '/pages/golf' | split: ',' -%}
+{%- for p in golf_paths -%}
+  {%- assign pp = p | strip -%}
+  {%- if pp != blank and request.path contains pp -%}{%- assign is_golf = true -%}{%- endif -%}
+{%- endfor -%}
 
 {%- comment -%} Dropdown links are now fixed, editable settings (not blocks) so they
   always render with defaults — even inside a header section group. {%- endcomment -%}
@@ -190,8 +209,20 @@
         </div>
       </div>
 
-      <a class="nav-logo" href="/" aria-label="AVRO home">
-        {%- if section.settings.logo != blank -%}
+      <a class="nav-logo{% if is_golf %} golf{% endif %}" href="/" aria-label="AVRO home">
+        {%- if is_golf -%}
+          {%- if section.settings.logo_golf != blank -%}
+            <img src="{{ section.settings.logo_golf | image_url: width: 460 }}" alt="AVRO Golf" width="168">
+          {%- else -%}
+            <img src="{{ logo_base }}/brand/avro-golf-logo.png" alt="AVRO Golf" width="168">
+          {%- endif -%}
+        {%- elsif is_dark -%}
+          {%- if section.settings.logo_dark != blank -%}
+            <img src="{{ section.settings.logo_dark | image_url: width: 632 }}" alt="AVRO Zero Proof" width="160">
+          {%- else -%}
+            <img src="{{ logo_base }}/brand/avro-zero-proof-logo.png" alt="AVRO Zero Proof" width="160">
+          {%- endif -%}
+        {%- elsif section.settings.logo != blank -%}
           <img src="{{ section.settings.logo | image_url: width: 360 }}" alt="AVRO" width="160">
         {%- else -%}
           {{ avro_logo_svg }}
@@ -279,9 +310,13 @@
 {
   "name": "AVRO — Header",
   "settings": [
-    { "type": "header", "content": "Logo" },
-    { "type": "paragraph", "content": "The AVRO logo is embedded as inline SVG and renders automatically. Set an image below only to override it." },
-    { "type": "image_picker", "id": "logo", "label": "Logo image (optional override)" },
+    { "type": "header", "content": "Logos" },
+    { "type": "paragraph", "content": "The header switches logos automatically: Golf pages get the AVRO Golf logo, dark/Zero-Proof pages (e.g. Social) get the gold AVRO Zero Proof logo, and every other page gets the standard AVRO logo. All three are preloaded — set an image below only to override one." },
+    { "type": "image_picker", "id": "logo", "label": "Default logo (optional override)" },
+    { "type": "image_picker", "id": "logo_dark", "label": "Zero-Proof / dark logo (optional override)" },
+    { "type": "image_picker", "id": "logo_golf", "label": "Golf logo (optional override)" },
+    { "type": "paragraph", "content": "The Golf logo shows on any page whose URL path contains one of these entries. Comma-separated." },
+    { "type": "text", "id": "golf_paths", "label": "Golf paths", "default": "/pages/golf" },
     { "type": "header", "content": "Primary links" },
     { "type": "text", "id": "label_shop", "label": "Shop label", "default": "Shop" },
     { "type": "url", "id": "link_shop", "label": "Shop link" },
