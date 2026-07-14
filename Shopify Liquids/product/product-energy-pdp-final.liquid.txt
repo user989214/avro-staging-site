@@ -168,7 +168,7 @@
       {%- comment -%} ---------- BUY BOX ---------- {%- endcomment -%}
       <div class="bb">
         <header>
-          <h1 id="pdp-title-{{ section.id }}">{{ prod.title }}</h1>
+          <h1 id="pdp-title-{{ section.id }}">{{ section.settings.title_override | default: prod.title }}</h1>
           {%- assign support_text = section.settings.support_line -%}
           {%- if support_text == blank -%}{%- assign support_text = default_support -%}{%- endif -%}
           {%- if prod.metafields.custom.support_line != blank -%}{%- assign support_text = prod.metafields.custom.support_line -%}{%- endif -%}
@@ -287,6 +287,7 @@
     var galImgs = document.getElementById("gal-imgs-{{ section.id }}");
     var galThumbs = document.getElementById("gal-thumbs-{{ section.id }}");
     var addLabel = {{ section.settings.add_label | default: 'Add to Cart' | json }};
+    var TITLE_OVERRIDE = {{ section.settings.title_override | json }};
 
     var state = { flavor: FLAVORS[0], variant: null, buy: SHOW_SUB ? "subscribe" : "onetime", qty: 1 };
 
@@ -370,7 +371,7 @@
     function applyFlavor(fl) {
       state.flavor = fl;
       state.variant = pickVariant(fl);
-      if (titleEl && fl.title) titleEl.textContent = fl.title;
+      if (titleEl) { if (TITLE_OVERRIDE) { titleEl.textContent = TITLE_OVERRIDE; } else if (fl.title) { titleEl.textContent = fl.title; } }
       renderGallery(fl);
       render();
     }
@@ -419,6 +420,13 @@
     {
       "type": "header",
       "content": "Products (one per flavor)"
+    },
+    {
+      "type": "text",
+      "id": "title_override",
+      "label": "Title override",
+      "default": "AVRO Energy",
+      "info": "Shown as the PDP title instead of the Shopify product title. Clear this to use the product title."
     },
     {
       "type": "product",
