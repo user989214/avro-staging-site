@@ -2,228 +2,200 @@
   ============================================================================
   AVRO — SUBSCRIBE PAGE  (Shopify Online Store 2.0 section)
   ----------------------------------------------------------------------------
+  1:1 match of the live site /subscribe page:
+    1. Flat hero — light card, tone-on-tone radial gradient, word-rise
+       headline animation, two OUTLINE pill CTAs.
+    2. "Why subscribe."  — white page, light rounded panel, 3 icon cards.
+    3. "How it works."   — white panel, 3 light rounded icon cards.
+    4. "Choose your formula." — full-width light band, 3 product cards
+       (studio packshot, support line, Best For, caffeine, outline Shop pill).
+    5. White spacer band (matches the site's compact social-proof band).
+    6. Final CTA — full-width AVRO-blue band, eyebrow + heading + copy left,
+       3 stacked filled pill buttons right.
   HOW TO USE
-  1. In your Shopify theme, create:  sections/avro-subscribe.liquid
-     Paste the ENTIRE contents of this file into it (including the
-     schema block at the bottom). Save.
-  2. Images render from hardcoded live-site URLs by default — no asset upload
-     needed. Pick an image in the editor to override any of them.
-  3. Add the section to a page:
-     - Create a "Subscribe" page and assign a template that renders this
-       section, OR add "AVRO — Subscribe" via the theme editor.
-  4. Everything labelled in the theme editor (headings, body copy, button
-     labels/links, and images) is editable. Repeating items (benefits, steps,
-     formula cards) are editable BLOCKS — add / remove / reorder them.
-
-  NOTE ON IMAGES: each image / icon setting falls back to a hardcoded live-site
-  URL when nothing is chosen in the editor, so the page looks correct
-  immediately after import. Pick an image in the editor to override.
+  1. Paste this ENTIRE file into sections/avro-subscribe.liquid (replace all).
+  2. IMPORTANT: if the section was already added to a page, REMOVE it and
+     RE-ADD it in the theme editor — Shopify keeps old saved text/blocks
+     otherwise and the new defaults will not apply.
+  3. All copy, links, icons and images are editable in the theme editor.
+     Images fall back to hardcoded live-site URLs so it looks right instantly.
   ============================================================================
 {%- endcomment -%}
 
+{%- assign asset_base = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app' -%}
+
 {% style %}
-  /* ── AVRO design tokens (scoped to this section) ───────────────────────── */
+  /* ── AVRO design tokens (scoped) ──────────────────────────────────────── */
   #avro-sub-{{ section.id }} {
     --base: #FFFFFF;
     --base-light: #F2F2F2;
     --base-deep: #EDEDED;
     --bone: #FFFFFF;
     --charcoal: #151515;
+    --deep-black: #0D0D0D;
     --ink: #1C1B14;
     --warm-gray: #6B6857;
-    --divider: #E2E2E2;
     --avro-blue: #94C6D4;
-    --avro-blue-deep: #5AAEBC;
     font-family: "DM Sans", system-ui, sans-serif;
     background-color: var(--base);
     color: var(--ink);
     display: block;
   }
   #avro-sub-{{ section.id }} * { box-sizing: border-box; }
-  #avro-sub-{{ section.id }} h1,
-  #avro-sub-{{ section.id }} h2,
-  #avro-sub-{{ section.id }} h3 { margin: 0; }
+  #avro-sub-{{ section.id }} h1, #avro-sub-{{ section.id }} h2, #avro-sub-{{ section.id }} h3 { margin: 0; }
   #avro-sub-{{ section.id }} p { margin: 0; }
   #avro-sub-{{ section.id }} img { max-width: 100%; }
 
-  #avro-sub-{{ section.id }} .sub-wrap { max-width: 1250px; margin: 0 auto; }
+  /* ── Animations (match site hero) ─────────────────────────────────────── */
+  @keyframes avroSubRise { 0% { opacity: 0; transform: translateY(24px); } 100% { opacity: 1; transform: translateY(0); } }
+  @keyframes avroSubFadeUp { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+  #avro-sub-{{ section.id }} .ph-word { display: inline-block; opacity: 0; transform: translateY(24px); animation: avroSubRise 0.95s cubic-bezier(0.34,1.4,0.4,1) forwards; will-change: transform, opacity; }
+  #avro-sub-{{ section.id }} .ph-fade { opacity: 0; animation: avroSubFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
+  #avro-sub-{{ section.id }} .ph-lede { animation-delay: 0.85s; }
+  #avro-sub-{{ section.id }} .ph-cta { animation-delay: 1.05s; }
+  @media (prefers-reduced-motion: reduce) {
+    #avro-sub-{{ section.id }} .ph-word, #avro-sub-{{ section.id }} .ph-fade { animation: none !important; opacity: 1 !important; transform: none !important; }
+  }
 
-  /* Buttons */
-  #avro-sub-{{ section.id }} .sub-btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    font-weight: 700; border-radius: 999px; text-decoration: none; cursor: pointer;
-    min-height: 48px; padding: 0 28px; font-size: 16px;
+  /* ── Pill buttons ─────────────────────────────────────────────────────── */
+  #avro-sub-{{ section.id }} .pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: "DM Sans", system-ui, sans-serif; font-weight: 700; font-size: 16px;
+    letter-spacing: -0.005em; min-height: 48px; padding: 0 28px; border-radius: 999px;
+    text-decoration: none; cursor: pointer;
     transition: background-color .2s ease, color .2s ease, border-color .2s ease;
   }
-  #avro-sub-{{ section.id }} .sub-btn-dark { background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); }
-  #avro-sub-{{ section.id }} .sub-btn-dark:hover { background: transparent; color: var(--charcoal); }
-  #avro-sub-{{ section.id }} .sub-btn-outline { background: transparent; color: var(--charcoal); border: 2px solid var(--charcoal); }
-  #avro-sub-{{ section.id }} .sub-btn-outline:hover { background: var(--charcoal); color: var(--bone); }
+  #avro-sub-{{ section.id }} .pill-outline { background: transparent; color: var(--charcoal); border: 2px solid var(--charcoal); }
+  #avro-sub-{{ section.id }} .pill-outline:hover { background: var(--charcoal); color: var(--bone); }
+  #avro-sub-{{ section.id }} .pill-fill { background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); }
+  #avro-sub-{{ section.id }} .pill-fill:hover { background: transparent; color: var(--deep-black); }
 
-  /* ── HERO ─────────────────────────────────────────────────────────────── */
-  #avro-sub-{{ section.id }} .sub-hero {
-    position: relative; width: calc(100% - 32px); margin: 24px auto 0;
-    border-radius: 20px; overflow: hidden; background: var(--base-light);
+  /* ── 1. FLAT HERO ─────────────────────────────────────────────────────── */
+  #avro-sub-{{ section.id }} .hero-card {
+    position: relative; width: calc(100% - 32px); margin: 0 auto 16px;
+    border-radius: 20px; overflow: hidden; background-color: var(--base-light);
   }
-  #avro-sub-{{ section.id }} .sub-hero-inner {
-    position: relative; z-index: 1;
-    padding: clamp(56px,8vw,120px) clamp(28px,5vw,80px);
-    display: flex; flex-direction: column; align-items: flex-start;
+  #avro-sub-{{ section.id }} .hero-card::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 80% at 80% 50%, rgba(222,218,208,0.55) 0%, rgba(222,218,208,0) 60%),
+      radial-gradient(ellipse 80% 70% at 15% 100%, rgba(222,218,208,0.35) 0%, rgba(222,218,208,0) 65%);
   }
-  #avro-sub-{{ section.id }} .sub-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
-  #avro-sub-{{ section.id }} .sub-hero.has-bg .sub-hero-inner { background: linear-gradient(90deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.75) 55%, rgba(255,255,255,0.25) 100%); }
-  #avro-sub-{{ section.id }} .sub-hero h1 {
-    font-weight: 700; font-size: clamp(40px,6vw,72px); line-height: 1.0;
-    letter-spacing: -0.03em; color: var(--ink); margin-bottom: 24px; max-width: 640px;
+  #avro-sub-{{ section.id }} .hero-inner {
+    position: relative;
+    padding: clamp(72px,9vw,120px) clamp(20px,5vw,64px) clamp(64px,8vw,104px);
+    display: flex; flex-direction: column; align-items: flex-start; text-align: left;
   }
-  #avro-sub-{{ section.id }} .sub-hero p.lede {
-    font-weight: 400; font-size: clamp(16px,1.4vw,19px); line-height: 1.6;
-    color: var(--ink); max-width: 560px; margin-bottom: 40px;
+  #avro-sub-{{ section.id }} .hero-inner h1 {
+    font-weight: 900; font-size: clamp(36px,5vw,64px); line-height: 1;
+    letter-spacing: -0.025em; color: var(--ink); margin-bottom: 16px; max-width: 820px;
   }
-  #avro-sub-{{ section.id }} .sub-hero-btns { display: flex; flex-wrap: wrap; gap: 16px; }
+  #avro-sub-{{ section.id }} .hero-inner .lede {
+    font-weight: 500; font-size: clamp(18px,1.7vw,21px); line-height: 1.5;
+    color: var(--ink); max-width: 660px;
+  }
+  #avro-sub-{{ section.id }} .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; width: 100%; max-width: 520px; margin-top: 22px; }
+  #avro-sub-{{ section.id }} .hero-btns .pill { flex: 1 1 180px; min-width: 180px; }
+  @media (max-width: 768px) {
+    #avro-sub-{{ section.id }} .hero-card { width: calc(100% - 24px); }
+    #avro-sub-{{ section.id }} .hero-inner { padding: clamp(48px,10vw,72px) clamp(16px,5vw,28px) clamp(40px,8vw,60px); }
+  }
+  @media (max-width: 640px) {
+    #avro-sub-{{ section.id }} .hero-btns { flex-direction: column; align-items: stretch; max-width: 320px; }
+    #avro-sub-{{ section.id }} .hero-btns .pill { width: 100%; flex: 0 0 auto; }
+  }
 
-  /* ── SHARED SECTION HEADINGS ──────────────────────────────────────────── */
-  #avro-sub-{{ section.id }} .sub-sec { padding: clamp(56px,8vw,120px) clamp(20px,5vw,64px); }
-  #avro-sub-{{ section.id }} .sub-sec > .sub-wrap > h2 {
-    font-weight: 700; font-size: clamp(28px,3.6vw,52px); line-height: 1;
-    letter-spacing: -0.02em; color: var(--ink); margin-bottom: 12px;
+  /* ── 2 & 3. CARDED SECTIONS (Why subscribe / How it works) ────────────── */
+  #avro-sub-{{ section.id }} .carded { width: 100%; max-width: 1440px; margin: 0 auto; padding: clamp(28px,4vw,56px) clamp(16px,5vw,64px); }
+  #avro-sub-{{ section.id }} .carded .panel { border-radius: 28px; padding: clamp(28px,5vw,64px); }
+  #avro-sub-{{ section.id }} .panel-light { background-color: var(--base-light); }
+  #avro-sub-{{ section.id }} .panel-white { background-color: var(--base); }
+  #avro-sub-{{ section.id }} .sec-heading { max-width: 900px; margin-bottom: 34px; }
+  #avro-sub-{{ section.id }} .sec-heading h2 {
+    font-weight: 900; font-size: clamp(30px,4vw,52px); line-height: 1.05;
+    color: var(--ink); margin-bottom: 16px;
   }
-  #avro-sub-{{ section.id }} .sub-sec > .sub-wrap > p.intro {
-    font-weight: 500; font-size: clamp(15px,1.3vw,19px); line-height: 1.55;
-    color: var(--warm-gray); max-width: 640px; margin-bottom: 48px;
-  }
-
-  /* ── WHY SUBSCRIBE / HOW IT WORKS (shared card grid) ──────────────────── */
-  #avro-sub-{{ section.id }} .why-sec { background: var(--base-light); }
-  #avro-sub-{{ section.id }} .why-sec .why-shell { background: var(--bone); border-radius: 24px; padding: clamp(32px,5vw,72px); }
-  #avro-sub-{{ section.id }} .info-grid { display: grid; grid-template-columns: 1fr; gap: clamp(32px,4vw,56px); margin-top: 40px; }
+  #avro-sub-{{ section.id }} .info-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
   @media (min-width: 768px) { #avro-sub-{{ section.id }} .info-grid { grid-template-columns: repeat(3,1fr); } }
-  #avro-sub-{{ section.id }} .info-card { display: flex; flex-direction: column; gap: 16px; }
-  #avro-sub-{{ section.id }} .info-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
-  #avro-sub-{{ section.id }} .info-icon span {
-    display: inline-block; width: 44px; height: 44px;
-    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
-    -webkit-mask-position: center; mask-position: center;
-    -webkit-mask-size: contain; mask-size: contain;
-  }
-  #avro-sub-{{ section.id }} .info-card h3 { font-weight: 700; font-size: clamp(17px,1.5vw,21px); line-height: 1.2; color: var(--ink); }
-  #avro-sub-{{ section.id }} .info-card p { font-weight: 400; font-size: clamp(14px,1.1vw,16px); line-height: 1.5; color: var(--warm-gray); }
+  #avro-sub-{{ section.id }} .info-card { min-height: 180px; padding: 28px; border-radius: 20px; background-color: var(--base-light); }
+  #avro-sub-{{ section.id }} .info-card .icard-icon { margin-bottom: 20px; }
+  #avro-sub-{{ section.id }} .info-card .icard-icon img { width: 72px; height: 72px; object-fit: contain; display: block; }
+  @media (min-width: 768px) { #avro-sub-{{ section.id }} .info-card .icard-icon img { width: 96px; height: 96px; } }
+  #avro-sub-{{ section.id }} .info-card h3 { font-weight: 900; font-size: 16px; line-height: 1.4; margin-bottom: 8px; color: var(--ink); }
+  #avro-sub-{{ section.id }} .info-card p { font-size: 16px; line-height: 1.625; color: rgba(28,27,20,0.75); }
 
-  #avro-sub-{{ section.id }} .step-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-  @media (min-width: 768px) { #avro-sub-{{ section.id }} .step-grid { grid-template-columns: repeat(3,1fr); } }
-  #avro-sub-{{ section.id }} .step-card { background: var(--base-light); border-radius: 16px; padding: clamp(28px,3vw,44px); display: flex; flex-direction: column; gap: 16px; }
-  #avro-sub-{{ section.id }} .step-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
-  #avro-sub-{{ section.id }} .step-icon span {
-    display: inline-block; width: 44px; height: 44px;
-    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
-    -webkit-mask-position: center; mask-position: center;
-    -webkit-mask-size: contain; mask-size: contain;
-  }
-  #avro-sub-{{ section.id }} .step-card h3 { font-weight: 700; font-size: clamp(16px,1.4vw,20px); line-height: 1.2; color: var(--ink); }
-  #avro-sub-{{ section.id }} .step-card p { font-weight: 400; font-size: clamp(14px,1.1vw,16px); line-height: 1.5; color: var(--warm-gray); }
-
-  /* ── CHOOSE YOUR FORMULA ──────────────────────────────────────────────── */
-  #avro-sub-{{ section.id }} .formula-sec { background: var(--base-light); }
-  #avro-sub-{{ section.id }} .formula-row { display: flex; flex-direction: column; gap: 40px; }
-  #avro-sub-{{ section.id }} .formula-card { display: flex; flex-direction: column; gap: 20px; }
-  #avro-sub-{{ section.id }} .formula-thumb { border-radius: 20px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #E5E5E5; }
-  #avro-sub-{{ section.id }} .formula-thumb img { width: 100%; height: 100%; object-fit: cover; }
-  #avro-sub-{{ section.id }} .formula-card h3 { font-weight: 700; font-size: clamp(22px,2vw,32px); color: var(--ink); }
-  #avro-sub-{{ section.id }} .formula-card p.support { font-weight: 400; font-size: clamp(16px,1.3vw,20px); line-height: 1.45; color: var(--warm-gray); min-height: 2.9em; }
-  #avro-sub-{{ section.id }} .formula-meta { border-top: 1px solid rgba(0,0,0,0.08); padding-top: 16px; display: flex; flex-direction: column; gap: 12px; }
-  #avro-sub-{{ section.id }} .formula-meta .lbl { font-weight: 700; font-size: clamp(14px,1.1vw,17px); color: var(--ink); }
-  #avro-sub-{{ section.id }} .formula-meta p { font-weight: 400; font-size: clamp(14px,1.05vw,16px); line-height: 1.5; color: var(--warm-gray); margin: 4px 0 0; }
-  #avro-sub-{{ section.id }} .formula-meta .caf { font-weight: 700; font-size: clamp(14px,1.05vw,16px); color: var(--ink); }
-  #avro-sub-{{ section.id }} .formula-card .sub-btn { width: 100%; margin-top: auto; }
+  /* ── 4. CHOOSE YOUR FORMULA ───────────────────────────────────────────── */
+  #avro-sub-{{ section.id }} .formula-band { background-color: var(--base-light); width: 100%; padding: clamp(32px,6vw,88px) clamp(16px,5vw,64px); }
+  #avro-sub-{{ section.id }} .formula-wrap { max-width: 1080px; margin: 0 auto; }
+  #avro-sub-{{ section.id }} .formula-wrap > h2 { font-weight: 700; font-size: clamp(24px,3.2vw,48px); line-height: 1.0; color: var(--ink); margin-bottom: 10px; }
+  #avro-sub-{{ section.id }} .formula-wrap > p.intro { font-weight: 500; font-size: clamp(16px,1.3vw,20px); line-height: 1.45; color: rgba(0,0,0,0.6); margin-bottom: 28px; }
+  #avro-sub-{{ section.id }} .formula-row { display: flex; flex-direction: column; gap: 32px; }
   @media (min-width: 640px) {
-    #avro-sub-{{ section.id }} .formula-row { flex-direction: row; gap: 32px; }
+    #avro-sub-{{ section.id }} .formula-row { flex-direction: row; gap: 24px; }
     #avro-sub-{{ section.id }} .formula-card { flex: 1 1 0; }
   }
+  #avro-sub-{{ section.id }} .formula-card { display: flex; flex-direction: column; gap: 16px; }
+  #avro-sub-{{ section.id }} .formula-thumb { border-radius: 20px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #E5E5E5; }
+  #avro-sub-{{ section.id }} .formula-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  #avro-sub-{{ section.id }} .formula-card h3 { font-weight: 700; font-size: clamp(22px,2vw,32px); color: var(--ink); }
+  #avro-sub-{{ section.id }} .formula-card p.support { font-weight: 400; font-size: clamp(16px,1.3vw,20px); line-height: 1.45; color: rgba(0,0,0,0.6); min-height: 2.9em; }
+  #avro-sub-{{ section.id }} .formula-meta { border-top: 1px solid rgba(0,0,0,0.08); padding-top: 16px; display: flex; flex-direction: column; gap: 12px; }
+  #avro-sub-{{ section.id }} .formula-meta .lbl { font-weight: 700; font-size: clamp(14px,1.1vw,17px); color: var(--ink); }
+  #avro-sub-{{ section.id }} .formula-meta p { font-weight: 400; font-size: clamp(14px,1.05vw,16px); line-height: 1.5; color: rgba(0,0,0,0.6); margin: 4px 0 0; }
+  #avro-sub-{{ section.id }} .formula-meta .caf { font-weight: 700; font-size: clamp(14px,1.05vw,16px); line-height: 1.5; color: var(--ink); }
+  #avro-sub-{{ section.id }} .formula-card .pill { width: 100%; margin-top: auto; }
 
-  /* ── BOTTOM CTA BAND ──────────────────────────────────────────────────── */
-  #avro-sub-{{ section.id }} .cta-band { background: var(--avro-blue); padding: clamp(64px,9vw,128px) clamp(20px,5vw,64px); }
-  #avro-sub-{{ section.id }} .cta-inner { max-width: 1250px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
-  #avro-sub-{{ section.id }} .cta-eyebrow { font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(21,21,21,0.7); }
-  #avro-sub-{{ section.id }} .cta-band h2 { font-weight: 700; font-size: clamp(30px,4vw,56px); line-height: 1.02; letter-spacing: -0.02em; color: var(--charcoal); margin-top: 8px; }
-  #avro-sub-{{ section.id }} .cta-band p { font-weight: 500; font-size: clamp(15px,1.3vw,18px); line-height: 1.5; color: rgba(21,21,21,0.72); max-width: 560px; margin-top: 12px; }
-  #avro-sub-{{ section.id }} .cta-btns { display: flex; flex-direction: column; gap: 8px; max-width: 400px; }
-  #avro-sub-{{ section.id }} .cta-btns .sub-btn { width: 100%; background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); }
-  #avro-sub-{{ section.id }} .cta-btns .sub-btn:hover { background: transparent; color: var(--charcoal); }
-  @media (min-width: 860px) {
-    #avro-sub-{{ section.id }} .cta-inner { flex-direction: row; align-items: center; justify-content: space-between; gap: 40px; }
-    #avro-sub-{{ section.id }} .cta-left { flex: 1 1 0; max-width: 620px; }
-    #avro-sub-{{ section.id }} .cta-btns { flex: 0 0 340px; }
-  }
+  /* ── 5. WHITE SPACER BAND (compact social-proof) ─────────────────────── */
+  #avro-sub-{{ section.id }} .proof-gap { width: 100%; background-color: var(--base); padding: clamp(64px,8vw,112px) 0 clamp(72px,9vw,120px); }
+
+  /* ── 6. FINAL CTA BAND ────────────────────────────────────────────────── */
+  #avro-sub-{{ section.id }} .cta-band { background-color: var(--avro-blue); width: 100%; padding: clamp(56px,8vw,104px) clamp(16px,4vw,64px); }
+  #avro-sub-{{ section.id }} .cta-inner { max-width: 1250px; margin: 0 auto; display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px; }
+  #avro-sub-{{ section.id }} .cta-left { flex: 1 1 320px; min-width: 0; max-width: 520px; }
+  #avro-sub-{{ section.id }} .cta-eyebrow { display: inline-block; margin-bottom: 12px; font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--charcoal); opacity: 0.85; }
+  #avro-sub-{{ section.id }} .cta-band h2 { font-weight: 700; font-size: clamp(26px,4vw,60px); line-height: 1.02; letter-spacing: -0.02em; color: var(--charcoal); margin-bottom: 10px; }
+  #avro-sub-{{ section.id }} .cta-band .cta-copy { font-weight: 500; font-size: clamp(15px,1.3vw,19px); line-height: 1.5; color: rgba(21,21,21,0.7); }
+  #avro-sub-{{ section.id }} .cta-btns { flex: 1 1 280px; display: flex; flex-direction: column; gap: 8px; min-width: 240px; max-width: 400px; }
+  #avro-sub-{{ section.id }} .cta-btns .pill { width: 100%; }
 {% endstyle %}
-
-{%- capture arrow_svg -%}<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>{%- endcapture -%}
 
 <div id="avro-sub-{{ section.id }}">
 
-  {%- comment -%} ============ HERO ============ {%- endcomment -%}
-  {%- assign has_hero_bg = false -%}
-  {%- if section.settings.hero_image != blank or section.settings.hero_image_fallback != blank -%}{%- assign has_hero_bg = true -%}{%- endif -%}
-  <section class="sub-hero{% if has_hero_bg %} has-bg{% endif %}">
-    {%- if section.settings.hero_image != blank -%}
-      <img class="sub-hero-bg" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="" loading="eager">
-    {%- elsif section.settings.hero_image_fallback != blank -%}
-      <img class="sub-hero-bg" src="{{ section.settings.hero_image_fallback }}" alt="" loading="eager">
-    {%- endif -%}
-    <div class="sub-hero-inner">
-      <h1>{{ section.settings.hero_heading | default: 'Subscribe + Save.' }}</h1>
-      <p class="lede">{{ section.settings.hero_body | default: 'Subscribe & save 15% every order of 2 or more tubes. Select your own delivery schedule, get free shipping on orders of 2 or more tubes, and skip, change or cancel anytime.' }}</p>
-      <div class="sub-hero-btns">
-        <a href="{{ section.settings.hero_btn1_link | default: '/collections/all' }}" class="sub-btn sub-btn-dark">{{ section.settings.hero_btn1_label | default: 'Start Your Subscription' }}</a>
-        <a href="{{ section.settings.hero_btn2_link | default: '/collections/all' }}" class="sub-btn sub-btn-outline">{{ section.settings.hero_btn2_label | default: 'Shop All Products' }}</a>
+  {%- comment -%} ============ 1. FLAT HERO ============ {%- endcomment -%}
+  <section class="hero-card">
+    <div class="hero-inner">
+      {%- assign hero_heading = section.settings.hero_heading | default: 'Subscribe + save.' -%}
+      <h1>
+        {%- assign hero_words = hero_heading | split: ' ' -%}
+        {%- for word in hero_words -%}
+          {%- assign d = forloop.index0 | times: 0.09 | plus: 0.1 -%}
+          <span class="ph-word" style="animation-delay: {{ d }}s;">{{ word }}{% unless forloop.last %}&nbsp;{% endunless %}</span>
+        {%- endfor -%}
+      </h1>
+      <p class="lede ph-fade ph-lede">{{ section.settings.hero_body | default: 'Subscribe & save 15% every order of 2 or more tubes. Select your own delivery schedule, get free shipping on orders of 2 or more tubes, and skip, change or cancel anytime.' }}</p>
+      <div class="hero-btns ph-fade ph-cta">
+        <a href="{{ section.settings.hero_btn1_link | default: '/collections/all' }}" class="pill pill-outline">{{ section.settings.hero_btn1_label | default: 'Start Your Subscription' }}</a>
+        <a href="{{ section.settings.hero_btn2_link | default: '/collections/all' }}" class="pill pill-outline">{{ section.settings.hero_btn2_label | default: 'Shop All Products' }}</a>
       </div>
     </div>
   </section>
 
-  {%- comment -%} ============ WHY SUBSCRIBE ============ {%- endcomment -%}
+  {%- comment -%} ============ 2. WHY SUBSCRIBE ============ {%- endcomment -%}
   {%- assign benefits = section.blocks | where: "type", "benefit" -%}
   {%- if benefits.size > 0 -%}
-  <section class="sub-sec why-sec">
-    <div class="sub-wrap">
-      <div class="why-shell">
-        <h2 style="margin-bottom:0;">{{ section.settings.why_heading | default: 'Why Subscribe.' }}</h2>
-        <div class="info-grid">
-          {%- for b in benefits -%}
-          <article class="info-card" {{ b.shopify_attributes }}>
-            <span class="info-icon">
-              {%- if b.settings.icon != blank -%}
-                {%- assign icon_url = b.settings.icon | image_url: width: 120 -%}
-              {%- else -%}
-                {%- assign icon_url = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/consistency-and-quality.png' -%}
-              {%- endif -%}
-              <span style="background-color: {{ b.settings.icon_color | default: '#E8A23D' }}; -webkit-mask-image: url({{ icon_url }}); mask-image: url({{ icon_url }});"></span>
-            </span>
-            <h3>{{ b.settings.title }}</h3>
-            <p>{{ b.settings.copy }}</p>
-          </article>
-          {%- endfor -%}
-        </div>
-      </div>
-    </div>
-  </section>
-  {%- endif -%}
-
-  {%- comment -%} ============ HOW IT WORKS ============ {%- endcomment -%}
-  {%- assign steps = section.blocks | where: "type", "step" -%}
-  {%- if steps.size > 0 -%}
-  <section class="sub-sec">
-    <div class="sub-wrap">
-      <h2 style="margin-bottom:48px;">{{ section.settings.how_heading | default: 'How It Works.' }}</h2>
-      <div class="step-grid">
-        {%- for b in steps -%}
-        <article class="step-card" {{ b.shopify_attributes }}>
-          <span class="step-icon">
+  <section class="carded">
+    <div class="panel panel-light">
+      <div class="sec-heading"><h2>{{ section.settings.why_heading | default: 'Why subscribe.' }}</h2></div>
+      <div class="info-grid">
+        {%- for b in benefits -%}
+        <article class="info-card" {{ b.shopify_attributes }}>
+          <div class="icard-icon">
             {%- if b.settings.icon != blank -%}
-              {%- assign icon_url = b.settings.icon | image_url: width: 120 -%}
-            {%- else -%}
-              {%- assign icon_url = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/calm-first-foundation.png' -%}
+              <img src="{{ b.settings.icon | image_url: width: 192 }}" alt="" loading="lazy">
+            {%- elsif b.settings.icon_url != blank -%}
+              <img src="{{ b.settings.icon_url }}" alt="" loading="lazy">
             {%- endif -%}
-            <span style="background-color: {{ b.settings.icon_color | default: '#5AAEBC' }}; -webkit-mask-image: url({{ icon_url }}); mask-image: url({{ icon_url }});"></span>
-          </span>
+          </div>
           <h3>{{ b.settings.title }}</h3>
           <p>{{ b.settings.copy }}</p>
         </article>
@@ -233,21 +205,46 @@
   </section>
   {%- endif -%}
 
-  {%- comment -%} ============ CHOOSE YOUR FORMULA ============ {%- endcomment -%}
+  {%- comment -%} ============ 3. HOW IT WORKS ============ {%- endcomment -%}
+  {%- assign steps = section.blocks | where: "type", "step" -%}
+  {%- if steps.size > 0 -%}
+  <section class="carded">
+    <div class="panel panel-white">
+      <div class="sec-heading"><h2>{{ section.settings.how_heading | default: 'How it works.' }}</h2></div>
+      <div class="info-grid">
+        {%- for b in steps -%}
+        <article class="info-card" {{ b.shopify_attributes }}>
+          <div class="icard-icon">
+            {%- if b.settings.icon != blank -%}
+              <img src="{{ b.settings.icon | image_url: width: 192 }}" alt="" loading="lazy">
+            {%- elsif b.settings.icon_url != blank -%}
+              <img src="{{ b.settings.icon_url }}" alt="" loading="lazy">
+            {%- endif -%}
+          </div>
+          <h3>{{ b.settings.title }}</h3>
+          <p>{{ b.settings.copy }}</p>
+        </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ============ 4. CHOOSE YOUR FORMULA ============ {%- endcomment -%}
   {%- assign formulas = section.blocks | where: "type", "formula" -%}
   {%- if formulas.size > 0 -%}
-  <section class="sub-sec formula-sec">
-    <div class="sub-wrap">
-      <h2>{{ section.settings.formula_heading | default: 'Choose Your Formula.' }}</h2>
+  <section class="formula-band">
+    <div class="formula-wrap">
+      <h2>{{ section.settings.formula_heading | default: 'Choose your formula.' }}</h2>
       <p class="intro">{{ section.settings.formula_intro | default: 'Every AVRO formula starts with the same calm-first base, then supports the moment in a different way.' }}</p>
       <div class="formula-row">
         {%- for b in formulas -%}
         <article class="formula-card" {{ b.shopify_attributes }}>
           <div class="formula-thumb">
             {%- if b.settings.image != blank -%}
-              <img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">
-            {%- else -%}
-              <img src="{{ b.settings.image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png' }}" alt="{{ b.settings.name | escape }}">
+              <img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}" loading="lazy">
+            {%- elsif b.settings.image_url != blank -%}
+              <img src="{{ b.settings.image_url }}" alt="{{ b.settings.name | escape }}" loading="lazy">
             {%- endif -%}
           </div>
           <h3>{{ b.settings.name }}</h3>
@@ -259,7 +256,7 @@
             </div>
             <span class="caf">{{ b.settings.caffeine }}</span>
           </div>
-          <a href="{{ b.settings.link | default: '/collections/all' }}" class="sub-btn sub-btn-outline">{{ b.settings.button_label | default: 'Shop' }}</a>
+          <a href="{{ b.settings.link | default: '/collections/all' }}" class="pill pill-outline">{{ b.settings.button_label | default: 'Shop' }}</a>
         </article>
         {%- endfor -%}
       </div>
@@ -267,18 +264,23 @@
   </section>
   {%- endif -%}
 
-  {%- comment -%} ============ BOTTOM CTA BAND ============ {%- endcomment -%}
+  {%- comment -%} ============ 5. WHITE SPACER BAND ============ {%- endcomment -%}
+  {%- if section.settings.show_proof_gap -%}
+    <div class="proof-gap" aria-hidden="true"></div>
+  {%- endif -%}
+
+  {%- comment -%} ============ 6. FINAL CTA BAND ============ {%- endcomment -%}
   <section class="cta-band">
     <div class="cta-inner">
       <div class="cta-left">
-        <span class="cta-eyebrow">{{ section.settings.cta_eyebrow | default: 'Subscribe & Save 15%' }}</span>
-        <h2>{{ section.settings.cta_heading | default: 'Calm-First Support, On Your Schedule.' }}</h2>
-        <p>{{ section.settings.cta_body | default: 'Subscribe & save 15% every order of 2 or more tubes, with free shipping on orders of 2 or more tubes. Skip, change or cancel anytime.' }}</p>
+        <span class="cta-eyebrow">{{ section.settings.cta_eyebrow | default: 'Subscribe & save 15%' }}</span>
+        <h2>{{ section.settings.cta_heading | default: 'Calm-first support, on your schedule.' }}</h2>
+        <p class="cta-copy">{{ section.settings.cta_body | default: 'Subscribe & save 15% every order of 2 or more tubes, with free shipping on orders of 2 or more tubes. Skip, change or cancel anytime.' }}</p>
       </div>
       <div class="cta-btns">
-        <a href="{{ section.settings.cta_btn1_link | default: '/collections/calm' }}" class="sub-btn">{{ section.settings.cta_btn1_label | default: 'Shop Calm' }}</a>
-        <a href="{{ section.settings.cta_btn2_link | default: '/collections/focus' }}" class="sub-btn">{{ section.settings.cta_btn2_label | default: 'Shop Focus' }}</a>
-        <a href="{{ section.settings.cta_btn3_link | default: '/collections/energy' }}" class="sub-btn">{{ section.settings.cta_btn3_label | default: 'Shop Energy' }}</a>
+        <a href="{{ section.settings.cta_btn1_link | default: '/collections/calm' }}" class="pill pill-fill">{{ section.settings.cta_btn1_label | default: 'Shop Calm' }}</a>
+        <a href="{{ section.settings.cta_btn2_link | default: '/collections/focus' }}" class="pill pill-fill">{{ section.settings.cta_btn2_label | default: 'Shop Focus' }}</a>
+        <a href="{{ section.settings.cta_btn3_link | default: '/collections/energy' }}" class="pill pill-fill">{{ section.settings.cta_btn3_label | default: 'Shop Energy' }}</a>
       </div>
     </div>
   </section>
@@ -292,28 +294,29 @@
   "class": "avro-subscribe-section",
   "settings": [
     { "type": "header", "content": "Hero" },
-    { "type": "text", "id": "hero_heading", "label": "Heading", "default": "Subscribe + Save." },
+    { "type": "text", "id": "hero_heading", "label": "Heading", "default": "Subscribe + save." },
     { "type": "textarea", "id": "hero_body", "label": "Body", "default": "Subscribe & save 15% every order of 2 or more tubes. Select your own delivery schedule, get free shipping on orders of 2 or more tubes, and skip, change or cancel anytime." },
-    { "type": "image_picker", "id": "hero_image", "label": "Background image (optional)" },
-    { "type": "text", "id": "hero_image_fallback", "label": "Background image URL (optional)", "info": "Leave blank for a plain light background." },
     { "type": "text", "id": "hero_btn1_label", "label": "Button 1 label", "default": "Start Your Subscription" },
     { "type": "url", "id": "hero_btn1_link", "label": "Button 1 link" },
     { "type": "text", "id": "hero_btn2_label", "label": "Button 2 label", "default": "Shop All Products" },
     { "type": "url", "id": "hero_btn2_link", "label": "Button 2 link" },
 
-    { "type": "header", "content": "Why Subscribe" },
-    { "type": "text", "id": "why_heading", "label": "Heading", "default": "Why Subscribe." },
+    { "type": "header", "content": "Why subscribe" },
+    { "type": "text", "id": "why_heading", "label": "Heading", "default": "Why subscribe." },
 
-    { "type": "header", "content": "How It Works" },
-    { "type": "text", "id": "how_heading", "label": "Heading", "default": "How It Works." },
+    { "type": "header", "content": "How it works" },
+    { "type": "text", "id": "how_heading", "label": "Heading", "default": "How it works." },
 
-    { "type": "header", "content": "Choose Your Formula" },
-    { "type": "text", "id": "formula_heading", "label": "Heading", "default": "Choose Your Formula." },
-    { "type": "richtext", "id": "formula_intro", "label": "Intro" },
+    { "type": "header", "content": "Choose your formula" },
+    { "type": "text", "id": "formula_heading", "label": "Heading", "default": "Choose your formula." },
+    { "type": "textarea", "id": "formula_intro", "label": "Intro", "default": "Every AVRO formula starts with the same calm-first base, then supports the moment in a different way." },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "checkbox", "id": "show_proof_gap", "label": "Show white spacer above the CTA band", "info": "Matches the site's compact social-proof band.", "default": true },
 
     { "type": "header", "content": "Bottom CTA band" },
-    { "type": "text", "id": "cta_eyebrow", "label": "Eyebrow", "default": "Subscribe & Save 15%" },
-    { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Calm-First Support, On Your Schedule." },
+    { "type": "text", "id": "cta_eyebrow", "label": "Eyebrow", "default": "Subscribe & save 15%" },
+    { "type": "text", "id": "cta_heading", "label": "Heading", "default": "Calm-first support, on your schedule." },
     { "type": "textarea", "id": "cta_body", "label": "Body", "default": "Subscribe & save 15% every order of 2 or more tubes, with free shipping on orders of 2 or more tubes. Skip, change or cancel anytime." },
     { "type": "text", "id": "cta_btn1_label", "label": "Button 1 label", "default": "Shop Calm" },
     { "type": "url", "id": "cta_btn1_link", "label": "Button 1 link" },
@@ -325,35 +328,33 @@
   "blocks": [
     {
       "type": "benefit",
-      "name": "Why Subscribe item",
+      "name": "Why-subscribe card",
       "settings": [
-        { "type": "image_picker", "id": "icon", "label": "Icon (PNG, masked to color)" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/consistency-and-quality.png" },
-        { "type": "color", "id": "icon_color", "label": "Icon color", "default": "#E8A23D" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Save On Every Order" },
-        { "type": "textarea", "id": "copy", "label": "Copy" }
+        { "type": "image_picker", "id": "icon", "label": "Icon (optional)" },
+        { "type": "text", "id": "icon_url", "label": "Icon URL fallback", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/quality-standards.png" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Save on every order" },
+        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Subscribers get 15% off every order — the best price on AVRO, automatically." }
       ]
     },
     {
       "type": "step",
-      "name": "How It Works step",
+      "name": "How-it-works card",
       "settings": [
-        { "type": "image_picker", "id": "icon", "label": "Icon (PNG, masked to color)" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/calm-first-foundation.png" },
-        { "type": "color", "id": "icon_color", "label": "Icon color", "default": "#5AAEBC" },
-        { "type": "text", "id": "title", "label": "Title", "default": "1. Choose Your Formula" },
-        { "type": "textarea", "id": "copy", "label": "Copy" }
+        { "type": "image_picker", "id": "icon", "label": "Icon (optional)" },
+        { "type": "text", "id": "icon_url", "label": "Icon URL fallback", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png" },
+        { "type": "text", "id": "title", "label": "Title", "default": "1. Choose your formula" },
+        { "type": "textarea", "id": "copy", "label": "Copy", "default": "Select the AVRO formula that fits your needs — Calm, Focus, or Energy." }
       ]
     },
     {
       "type": "formula",
       "name": "Formula card",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Product image" },
-        { "type": "text", "id": "image_fallback", "label": "Image URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" },
+        { "type": "image_picker", "id": "image", "label": "Image (optional)" },
+        { "type": "text", "id": "image_url", "label": "Image URL fallback", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" },
         { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
-        { "type": "textarea", "id": "support", "label": "Support line" },
-        { "type": "textarea", "id": "best_for", "label": "Best for" },
+        { "type": "textarea", "id": "support", "label": "Support line", "default": "Calm support without stimulation.*" },
+        { "type": "textarea", "id": "best_for", "label": "Best for", "default": "Golf, competition, travel, social situations, and pressure-filled moments.*" },
         { "type": "text", "id": "caffeine", "label": "Caffeine line", "default": "No Caffeine" },
         { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
         { "type": "url", "id": "link", "label": "Button link" }
@@ -364,15 +365,87 @@
     {
       "name": "AVRO — Subscribe",
       "blocks": [
-        { "type": "benefit", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/consistency-and-quality.png", "icon_color": "#E8A23D", "title": "Save On Every Order", "copy": "Subscribers get 15% off every order — the best price on AVRO, automatically." } },
-        { "type": "benefit", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/control-under-pressure.png", "icon_color": "#E8A23D", "title": "Total Flexibility", "copy": "Select your own delivery schedule, skip a shipment, or change and cancel anytime. No commitments, no hassle." } },
-        { "type": "benefit", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/ingredient-disclosure.png", "icon_color": "#5AAEBC", "title": "Never Run Out", "copy": "Your formula arrives on a schedule that fits your routine, so calm-first support is always on hand." } },
-        { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/calm-first-foundation.png", "icon_color": "#5AAEBC", "title": "1. Choose Your Formula", "copy": "Select the AVRO formula that fits your needs — Calm, Focus, or Energy." } },
-        { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/step-pour.png", "icon_color": "#5AAEBC", "title": "2. Set Your Schedule", "copy": "Select your own delivery schedule — every 30, 45, or 60 days." } },
-        { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/third-party-tested.png", "icon_color": "#5AAEBC", "title": "3. Save 15% Every Time", "copy": "Orders of 2 or more tubes ship automatically with 15% off and free shipping." } },
-        { "type": "formula", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "name": "AVRO Calm", "support": "Calm support without stimulation.*", "best_for": "Golf, competition, travel, social situations, and pressure-filled moments.*", "caffeine": "No Caffeine", "button_label": "Shop Calm", "link": "/collections/calm" } },
-        { "type": "formula", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "name": "AVRO Focus", "support": "Clarity and focus support without caffeine.*", "best_for": "Deep work, studying, gaming, creative work, and longer attention blocks.*", "caffeine": "No Caffeine", "button_label": "Shop Focus", "link": "/collections/focus" } },
-        { "type": "formula", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "name": "AVRO Energy", "support": "Natural caffeine with a calm-first foundation.*", "best_for": "Early starts, long workdays, training, competition, and steady energy.*", "caffeine": "120mg Natural Caffeine", "button_label": "Shop Energy", "link": "/collections/energy" } }
+        {
+          "type": "benefit",
+          "settings": {
+            "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/quality-standards.png",
+            "title": "Save on every order",
+            "copy": "Subscribers get 15% off every order — the best price on AVRO, automatically."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png",
+            "title": "Total flexibility",
+            "copy": "Select your own delivery schedule, skip a shipment, or change and cancel anytime. No commitments, no hassle."
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/consistency-quality.png",
+            "title": "Never run out",
+            "copy": "Your formula arrives on a schedule that fits your routine, so calm-first support is always on hand."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png",
+            "title": "1. Choose your formula",
+            "copy": "Select the AVRO formula that fits your needs — Calm, Focus, or Energy."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-drink.png",
+            "title": "2. Set your schedule",
+            "copy": "Select your own delivery schedule — every 30, 45, or 60 days."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/transparent-standards.png",
+            "title": "3. Save 15% every time",
+            "copy": "Orders of 2 or more tubes ship automatically with 15% off and free shipping."
+          }
+        },
+        {
+          "type": "formula",
+          "settings": {
+            "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png",
+            "name": "AVRO Calm",
+            "support": "Calm support without stimulation.*",
+            "best_for": "Golf, competition, travel, social situations, and pressure-filled moments.*",
+            "caffeine": "No Caffeine",
+            "button_label": "Shop Calm"
+          }
+        },
+        {
+          "type": "formula",
+          "settings": {
+            "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png",
+            "name": "AVRO Focus",
+            "support": "Clarity and focus support without caffeine.*",
+            "best_for": "Deep work, studying, gaming, creative work, and longer attention blocks.*",
+            "caffeine": "No Caffeine",
+            "button_label": "Shop Focus"
+          }
+        },
+        {
+          "type": "formula",
+          "settings": {
+            "image_url": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png",
+            "name": "AVRO Energy",
+            "support": "Natural caffeine with a calm-first foundation.*",
+            "best_for": "Early starts, long workdays, training, competition, and steady energy.*",
+            "caffeine": "120mg Natural Caffeine",
+            "button_label": "Shop Energy"
+          }
+        }
       ]
     }
   ]
