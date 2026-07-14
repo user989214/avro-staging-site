@@ -122,7 +122,7 @@
     #avro-home-{{ section.id }} .proof-stat:first-child { border-left: none; }
   }
 
-  /* ── BENEFIT ROW ─────────────────────────────────────���──────────────────���── */
+  /* ── BENEFIT ROW ─────────────────────────────────────���──────────────────�����── */
   #avro-home-{{ section.id }} .benefit-sec { padding: 0 clamp(20px,5vw,64px) clamp(48px,6vw,72px); }
   #avro-home-{{ section.id }} .benefit-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
   #avro-home-{{ section.id }} .benefit-card { position: relative; overflow: hidden; background: var(--base-light); border-radius: 20px; min-height: clamp(160px,18vw,240px); }
@@ -460,7 +460,7 @@
                   {%- if b.settings.icon != blank -%}
                     {%- assign icon_url = b.settings.icon | image_url: width: 120 -%}
                   {%- else -%}
-                    {%- assign icon_url = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/control-under-pressure.png' -%}
+                    {%- assign icon_url = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png' -%}
                   {%- endif -%}
                   <span style="background-color: {{ b.settings.icon_color | default: '#E8A23D' }}; -webkit-mask-image: url({{ icon_url }}); mask-image: url({{ icon_url }});"></span>
                 </span>
@@ -472,7 +472,7 @@
             {%- else -%}
             <div class="accord is-open" data-accordion>
               <button class="accord-btn" type="button" aria-expanded="true">
-                <span class="accord-icon"><span style="background-color: #E8A23D; -webkit-mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/control-under-pressure.png); mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/control-under-pressure.png);"></span></span>
+                <span class="accord-icon"><span style="background-color: #E8A23D; -webkit-mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png); mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png);"></span></span>
                 <span class="accord-title">More energy is not always the answer.</span>
                 {{ chevron }}
               </button>
@@ -480,7 +480,7 @@
             </div>
             <div class="accord" data-accordion>
               <button class="accord-btn" type="button" aria-expanded="false">
-                <span class="accord-icon"><span style="background-color: #C13584; -webkit-mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/supports-focus-without-overload.png); mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/supports-focus-without-overload.png);"></span></span>
+                <span class="accord-icon"><span style="background-color: #C13584; -webkit-mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-focus-without-overload.png); mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-focus-without-overload.png);"></span></span>
                 <span class="accord-title">Performance starts with state.</span>
                 {{ chevron }}
               </button>
@@ -488,7 +488,7 @@
             </div>
             <div class="accord" data-accordion>
               <button class="accord-btn" type="button" aria-expanded="false">
-                <span class="accord-icon"><span style="background-color: #4b4d9a; -webkit-mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/calm-first-foundation.png); mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/calm-first-foundation.png);"></span></span>
+                <span class="accord-icon"><span style="background-color: #4b4d9a; -webkit-mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png); mask-image: url(https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png);"></span></span>
                 <span class="accord-title">Calm first, then clarity.</span>
                 {{ chevron }}
               </button>
@@ -630,17 +630,17 @@
                   {%- if b.settings.icon != blank -%}
                     <img src="{{ b.settings.icon | image_url: width: 120 }}" alt="">
                   {%- else -%}
-                    <img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/naturally-fermented-pharmagaba.png' }}" alt="">
+                    <img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png' }}" alt="">
                   {%- endif -%}
                   <span>{{ b.settings.label }}</span>
                 </div>
                 {%- unless forloop.last -%}<span class="sci-arrow">&rarr;</span>{%- endunless -%}
               {%- else -%}
-                <div class="sci-chip"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/naturally-fermented-pharmagaba.png" alt=""><span>Naturally Fermented PharmaGABA®</span></div>
+                <div class="sci-chip"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png" alt=""><span>Naturally Fermented PharmaGABA®</span></div>
                 <span class="sci-arrow">&rarr;</span>
-                <div class="sci-chip"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/calm-first-foundation.png" alt=""><span>Calm-First Foundation</span></div>
+                <div class="sci-chip"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png" alt=""><span>Calm-First Foundation</span></div>
                 <span class="sci-arrow">&rarr;</span>
-                <div class="sci-chip"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/supports-focus-without-overload.png" alt=""><span>Clarity &amp; Composure</span></div>
+                <div class="sci-chip"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-focus-without-overload.png" alt=""><span>Clarity &amp; Composure</span></div>
               {%- endfor -%}
             </div>
             <a href="{{ section.settings.gaba_link | default: '/pages/science' }}" class="hp-btn hp-btn-md hp-btn-outline">{{ section.settings.gaba_button | default: 'Learn the Science of AVRO' }}{{ arrow_svg }}</a>
@@ -700,7 +700,7 @@
             {%- if b.settings.icon != blank -%}
               <img src="{{ b.settings.icon | image_url: width: 160 }}" alt="">
             {%- else -%}
-              <img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/third-party-tested.png' }}" alt="">
+              <img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/third-party-tested.png' }}" alt="">
             {%- endif -%}
             <div>
               <strong>{{ b.settings.label }}</strong>
@@ -708,12 +708,12 @@
             </div>
           </div>
           {%- else -%}
-          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/third-party-tested.png" alt=""><div><strong>Third-Party Tested</strong><span class="sub">Verified for purity</span></div></div>
-          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/gluten-free.png" alt=""><div><strong>Gluten Free</strong><span class="sub">No gluten</span></div></div>
-          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/free-vegan.png" alt=""><div><strong>Vegan</strong><span class="sub">Plant based</span></div></div>
-          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/gmp-certified-facility.png" alt=""><div><strong>GMP Certified</strong><span class="sub">Quality facility</span></div></div>
-          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/ingredient-disclosure.png" alt=""><div><strong>Full Disclosure</strong><span class="sub">Every ingredient</span></div></div>
-          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/naturally-fermented-pharmagaba.png" alt=""><div><strong>PharmaGABA®</strong><span class="sub">Naturally fermented</span></div></div>
+          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/third-party-tested.png" alt=""><div><strong>Third-Party Tested</strong><span class="sub">Verified for purity</span></div></div>
+          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gluten-free.png" alt=""><div><strong>Gluten Free</strong><span class="sub">No gluten</span></div></div>
+          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-vegan.png" alt=""><div><strong>Vegan</strong><span class="sub">Plant based</span></div></div>
+          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gmp-certified-facility.png" alt=""><div><strong>GMP Certified</strong><span class="sub">Quality facility</span></div></div>
+          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/ingredient-disclosure.png" alt=""><div><strong>Full Disclosure</strong><span class="sub">Every ingredient</span></div></div>
+          <div class="quality-badge"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png" alt=""><div><strong>PharmaGABA®</strong><span class="sub">Naturally fermented</span></div></div>
           {%- endfor -%}
         </div>
       </div>
@@ -766,7 +766,7 @@
                 {%- if b.settings.icon != blank -%}
                   <img src="{{ b.settings.icon | image_url: width: 80 }}" alt="">
                 {%- else -%}
-                  <img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/step-pour.png' }}" alt="">
+                  <img src="{{ b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png' }}" alt="">
                 {%- endif -%}
               </span>
               <span class="title">{{ b.settings.title }}</span>
@@ -777,7 +777,7 @@
           {%- else -%}
           <div class="ritual-item is-open" data-accordion>
             <button class="ritual-btn" type="button" aria-expanded="true">
-              <span class="ritual-num"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/step-pour.png" alt=""></span>
+              <span class="ritual-num"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png" alt=""></span>
               <span class="title">Pour</span>
               {{ chevron }}
             </button>
@@ -785,7 +785,7 @@
           </div>
           <div class="ritual-item" data-accordion>
             <button class="ritual-btn" type="button" aria-expanded="false">
-              <span class="ritual-num"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/step-stir.png" alt=""></span>
+              <span class="ritual-num"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-stir.png" alt=""></span>
               <span class="title">Stir</span>
               {{ chevron }}
             </button>
@@ -793,7 +793,7 @@
           </div>
           <div class="ritual-item" data-accordion>
             <button class="ritual-btn" type="button" aria-expanded="false">
-              <span class="ritual-num"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/step-drink.png" alt=""></span>
+              <span class="ritual-num"><img src="https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-drink.png" alt=""></span>
               <span class="title">Drink</span>
               {{ chevron }}
             </button>
@@ -1086,7 +1086,7 @@
         { "type": "text", "id": "title", "label": "Title", "default": "More energy is not always the answer." },
         { "type": "textarea", "id": "content", "label": "Content" },
         { "type": "image_picker", "id": "icon", "label": "Icon (PNG, masked to color)" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/control-under-pressure.png" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png" },
         { "type": "color", "id": "icon_color", "label": "Icon color", "default": "#E8A23D" }
       ]
     },
@@ -1122,7 +1122,7 @@
       "name": "GABA chip",
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "Icon" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/naturally-fermented-pharmagaba.png" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png" },
         { "type": "text", "id": "label", "label": "Label", "default": "Naturally Fermented" }
       ]
     },
@@ -1140,7 +1140,7 @@
       "name": "Quality badge",
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "Icon" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/third-party-tested.png" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/third-party-tested.png" },
         { "type": "text", "id": "label", "label": "Label", "default": "Third-Party" },
         { "type": "text", "id": "sub", "label": "Sub-label", "default": "Tested" }
       ]
@@ -1150,7 +1150,7 @@
       "name": "Ritual step",
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "Icon" },
-        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/step-pour.png" },
+        { "type": "text", "id": "icon_fallback", "label": "Icon asset filename", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png" },
         { "type": "text", "id": "title", "label": "Title", "default": "Pour one stick into water" },
         { "type": "textarea", "id": "detail", "label": "Detail" }
       ]
@@ -1192,9 +1192,9 @@
         { "type": "benefit", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/benefit-golf.png", "focal": "center 30%" } },
         { "type": "benefit", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/benefit-bar.png", "focal": "center 40%" } },
         { "type": "benefit", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/benefit-community.png", "focal": "center 35%" } },
-        { "type": "approach_item", "settings": { "title": "More energy is not always the answer.", "content": "Most products push stimulation. AVRO starts with calm, because calm helps create the conditions for clarity, composure, and readiness.", "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/control-under-pressure.png", "icon_color": "#E8A23D" } },
-        { "type": "approach_item", "settings": { "title": "Performance starts with state.", "content": "AVRO is built to support the state before the moment. Calm creates the foundation for clarity and readiness when it counts.", "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/supports-focus-without-overload.png", "icon_color": "#C13584" } },
-        { "type": "approach_item", "settings": { "title": "Calm first, then clarity.", "content": "Every AVRO formula starts with naturally fermented PharmaGABA®. It's the calm-first foundation that makes everything else work better.**", "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/calm-first-foundation.png", "icon_color": "#4b4d9a" } },
+        { "type": "approach_item", "settings": { "title": "More energy is not always the answer.", "content": "Most products push stimulation. AVRO starts with calm, because calm helps create the conditions for clarity, composure, and readiness.", "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png", "icon_color": "#E8A23D" } },
+        { "type": "approach_item", "settings": { "title": "Performance starts with state.", "content": "AVRO is built to support the state before the moment. Calm creates the foundation for clarity and readiness when it counts.", "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-focus-without-overload.png", "icon_color": "#C13584" } },
+        { "type": "approach_item", "settings": { "title": "Calm first, then clarity.", "content": "Every AVRO formula starts with naturally fermented PharmaGABA®. It's the calm-first foundation that makes everything else work better.**", "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png", "icon_color": "#4b4d9a" } },
         { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/card-calm.jpg", "foundation_value": "PharmaGABA® + Magnesium Bisglycinate", "name": "Calm", "tagline": "Bright berry. Clean finish.", "button_label": "Explore AVRO Calm", "link": "/collections/calm" } },
         { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/card-focus.jpg", "foundation_value": "PharmaGABA® + Cognigrape®", "name": "Focus", "tagline": "Tart. Bright. Clean.", "button_label": "Explore AVRO Focus", "link": "/collections/focus" } },
         { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/card-energy.jpg", "foundation_value": "PharmaGABA® + Natural Caffeine", "name": "Energy", "tagline": "Bright citrus. Sunny lift.", "button_label": "Explore AVRO Energy", "link": "/collections/energy" } },
@@ -1202,21 +1202,21 @@
         { "type": "moment", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/tile-work.jpg", "alt": "Navy notebook and pen on a desk", "title": "Work", "copy": "Before the meeting. Before deep work.", "cta": "Explore Work", "link": "/pages/work" } },
         { "type": "moment", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/tile-social.png", "alt": "Two ceramic cups leaning together", "title": "Social", "copy": "Show up present without alcohol.", "cta": "Explore Social", "link": "/pages/social" } },
         { "type": "moment", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/home/tile-gaming.jpg", "alt": "Arcade-style button with a green ring", "title": "Gaming", "copy": "Before the session. Before the decision.", "cta": "Explore Gaming", "link": "/pages/gaming" } },
-        { "type": "gaba_chip", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/naturally-fermented-pharmagaba.png", "label": "Naturally Fermented" } },
-        { "type": "gaba_chip", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/calm-first-foundation.png", "label": "Calm First" } },
-        { "type": "gaba_chip", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/ingredient-disclosure.png", "label": "In Every Formula" } },
+        { "type": "gaba_chip", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png", "label": "Naturally Fermented" } },
+        { "type": "gaba_chip", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png", "label": "Calm First" } },
+        { "type": "gaba_chip", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/ingredient-disclosure.png", "label": "In Every Formula" } },
         { "type": "formula_bar", "settings": { "name": "Calm", "addition": "Magnesium", "color": "#4b4d9a" } },
         { "type": "formula_bar", "settings": { "name": "Focus", "addition": "Cognigrape®", "color": "#C13584" } },
         { "type": "formula_bar", "settings": { "name": "Energy", "addition": "Caffeine", "color": "#E8A23D" } },
-        { "type": "quality_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/naturally-fermented-pharmagaba.png", "label": "Naturally Fermented", "sub": "PharmaGABA®" } },
-        { "type": "quality_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/calm-first-foundation.png", "label": "Calm First", "sub": "Foundation" } },
-        { "type": "quality_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/third-party-tested.png", "label": "Third-Party", "sub": "Tested" } },
-        { "type": "quality_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/free-vegan.png", "label": "Vegan", "sub": "Plant-based" } },
-        { "type": "quality_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/gluten-free.png", "label": "Gluten Free", "sub": "Always" } },
-        { "type": "quality_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/gmp-certified-facility.png", "label": "GMP Certified", "sub": "Facility" } },
-        { "type": "ritual_step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/step-pour.png", "title": "Pour one stick into water", "detail": "Add one AVRO stick to 8–12 oz of cold water. Use more water for a lighter taste, less for a stronger flavor." } },
-        { "type": "ritual_step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/step-stir.png", "title": "Mix until fully dissolved", "detail": "Stir or shake until the powder is completely dissolved. AVRO mixes easily without clumping." } },
-        { "type": "ritual_step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/icons/golden/step-drink.png", "title": "Drink before your moment", "detail": "Drink about 30 minutes before the moment that matters. Give it time to settle in so you're ready when it counts." } },
+        { "type": "quality_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/naturally-fermented-pharmagaba.png", "label": "Naturally Fermented", "sub": "PharmaGABA®" } },
+        { "type": "quality_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/calm-first-foundation.png", "label": "Calm First", "sub": "Foundation" } },
+        { "type": "quality_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/third-party-tested.png", "label": "Third-Party", "sub": "Tested" } },
+        { "type": "quality_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-vegan.png", "label": "Vegan", "sub": "Plant-based" } },
+        { "type": "quality_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gluten-free.png", "label": "Gluten Free", "sub": "Always" } },
+        { "type": "quality_badge", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gmp-certified-facility.png", "label": "GMP Certified", "sub": "Facility" } },
+        { "type": "ritual_step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png", "title": "Pour one stick into water", "detail": "Add one AVRO stick to 8–12 oz of cold water. Use more water for a lighter taste, less for a stronger flavor." } },
+        { "type": "ritual_step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-stir.png", "title": "Mix until fully dissolved", "detail": "Stir or shake until the powder is completely dissolved. AVRO mixes easily without clumping." } },
+        { "type": "ritual_step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-drink.png", "title": "Drink before your moment", "detail": "Drink about 30 minutes before the moment that matters. Give it time to settle in so you're ready when it counts." } },
         { "type": "formula_card", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "name": "AVRO Calm", "support": "Calm support without stimulation.*", "best_for": "Golf, competition, travel, social situations, and pressure-filled moments.*", "caffeine": "No Caffeine", "button_label": "Shop Calm", "link": "/collections/calm" } },
         { "type": "formula_card", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "name": "AVRO Focus", "support": "Clarity and focus support without caffeine.*", "best_for": "Deep work, studying, gaming, creative work, and longer attention blocks.*", "caffeine": "No Caffeine", "button_label": "Shop Focus", "link": "/collections/focus" } },
         { "type": "formula_card", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "name": "AVRO Energy", "support": "Natural caffeine with a calm-first foundation.*", "best_for": "Early starts, long workdays, training, competition, and steady energy.*", "caffeine": "120mg Natural Caffeine", "button_label": "Shop Energy", "link": "/collections/energy" } },
