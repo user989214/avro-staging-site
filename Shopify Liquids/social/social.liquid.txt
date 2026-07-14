@@ -182,8 +182,9 @@
     <div class="head"><h2>{{ section.settings.why_title | default: 'Why AVRO Supports Social Settings' }}</h2></div>
     <div class="cards c3">
       {%- for b in reasons -%}
-      {%- assign fb = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-zero-percent-alcohol.png' -%}
+      {%- assign fb = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/zp-zero-percent-alcohol.png' -%}
       {%- if fb contains '/images/' -%}{%- assign fbp = fb | split: '/images/' -%}{%- assign fb = base | append: '/images/' | append: fbp[1] -%}{%- endif -%}
+      {%- unless fb contains '/icons/gold/' -%}{%- assign fb = fb | replace: '/images/icons/', '/images/icons/gold/' -%}{%- endunless -%}
       <div class="icard" {{ b.shopify_attributes }}>
         <div class="ic"><img src="{% if b.settings.icon != blank %}{{ b.settings.icon | image_url: width: 160 }}{% else %}{{ fb }}{% endif %}" alt="" loading="lazy"></div>
         <h3>{{ b.settings.title }}</h3>
@@ -199,8 +200,9 @@
     <div class="head"><h2>{{ section.settings.how_title | default: 'How to use before social settings' }}</h2></div>
     <div class="steps">
       {%- for b in steps -%}
-      {%- assign fb = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png' -%}
+      {%- assign fb = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/step-pour.png' -%}
       {%- if fb contains '/images/' -%}{%- assign fbp = fb | split: '/images/' -%}{%- assign fb = base | append: '/images/' | append: fbp[1] -%}{%- endif -%}
+      {%- unless fb contains '/icons/gold/' -%}{%- assign fb = fb | replace: '/images/icons/', '/images/icons/gold/' -%}{%- endunless -%}
       <article class="step" {{ b.shopify_attributes }}>
         <span class="num">{{ forloop.index }}</span>
         <div class="ic"><img src="{% if b.settings.icon != blank %}{{ b.settings.icon | image_url: width: 200 }}{% else %}{{ fb }}{% endif %}" alt="" loading="lazy"></div>
@@ -230,8 +232,9 @@
     <div class="head"><h2>{{ section.settings.use_title | default: 'Social use moments' }}</h2></div>
     <div class="cards c4">
       {%- for b in moments -%}
-      {%- assign fb = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-calm-first-cocktails.png' -%}
+      {%- assign fb = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/zp-calm-first-cocktails.png' -%}
       {%- if fb contains '/images/' -%}{%- assign fbp = fb | split: '/images/' -%}{%- assign fb = base | append: '/images/' | append: fbp[1] -%}{%- endif -%}
+      {%- unless fb contains '/icons/gold/' -%}{%- assign fb = fb | replace: '/images/icons/', '/images/icons/gold/' -%}{%- endunless -%}
       <div class="icard" {{ b.shopify_attributes }}>
         <div class="ic"><img src="{% if b.settings.icon != blank %}{{ b.settings.icon | image_url: width: 160 }}{% else %}{{ fb }}{% endif %}" alt="" loading="lazy"></div>
         <h3>{{ b.settings.title }}</h3>
@@ -377,13 +380,13 @@
   "blocks": [
     { "type": "reason", "name": "Reason card", "settings": [
       { "type": "image_picker", "id": "icon", "label": "Icon (gold PNG)" },
-      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-zero-percent-alcohol.png" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/zp-zero-percent-alcohol.png" },
       { "type": "text", "id": "title", "label": "Title", "default": "Alcohol Free Ritual" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
     { "type": "step", "name": "How-to step", "settings": [
       { "type": "image_picker", "id": "icon", "label": "Icon (gold PNG)" },
-      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/step-pour.png" },
       { "type": "text", "id": "title", "label": "Title", "default": "Mix" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
@@ -394,7 +397,7 @@
     ]},
     { "type": "moment", "name": "Use moment", "settings": [
       { "type": "image_picker", "id": "icon", "label": "Icon (gold PNG)" },
-      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-calm-first-cocktails.png" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/zp-calm-first-cocktails.png" },
       { "type": "text", "id": "title", "label": "Title", "default": "Dinner / Hosting" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
@@ -418,19 +421,19 @@
   ],
   "presets": [
     { "name": "AVRO — Social", "blocks": [
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-zero-percent-alcohol.png", "title": "Alcohol Free Ritual", "copy": "A functional ritual for nights when alcohol is not the move." } },
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-social-lift.png", "title": "Calm and Clear Presence", "copy": "Supports calm, clarity, and composed presence before social moments." } },
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-function-forward.png", "title": "Adult Alternative", "copy": "A more intentional option than stimulant-heavy or sugar-heavy drinks." } },
-      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png", "title": "Mix", "copy": "Mix one stick with water." } },
-      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-stir.png", "title": "Time it", "copy": "Drink about 30 minutes before your social moment." } },
-      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-drink.png", "title": "Show up", "copy": "Step in with a calmer, clearer routine." } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/zp-zero-percent-alcohol.png", "title": "Alcohol Free Ritual", "copy": "A functional ritual for nights when alcohol is not the move." } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/zp-social-lift.png", "title": "Calm and Clear Presence", "copy": "Supports calm, clarity, and composed presence before social moments." } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/zp-function-forward.png", "title": "Adult Alternative", "copy": "A more intentional option than stimulant-heavy or sugar-heavy drinks." } },
+      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/step-pour.png", "title": "Mix", "copy": "Mix one stick with water." } },
+      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/step-stir.png", "title": "Time it", "copy": "Drink about 30 minutes before your social moment." } },
+      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/step-drink.png", "title": "Show up", "copy": "Step in with a calmer, clearer routine." } },
       { "type": "formula_bar", "settings": { "name": "Calm", "addition": "Magnesium", "color": "#8C7430" } },
       { "type": "formula_bar", "settings": { "name": "Focus", "addition": "Cognigrape®", "color": "#A8893A" } },
       { "type": "formula_bar", "settings": { "name": "Energy", "addition": "Caffeine", "color": "#CAA84B" } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-calm-first-cocktails.png", "title": "Dinner / Hosting", "copy": "A calm-first ritual for meals, hosting, and gatherings." } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-zero-percent-alcohol.png", "title": "Alcohol Free Nights", "copy": "For evenings where you want something intentional without alcohol." } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/zp-social-lift.png", "title": "Events / Networking", "copy": "For long social settings where calm, clarity, and presence matter." } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/relaxation-reduced-tension.png", "title": "Evening Wind Down", "copy": "For a gentler close to the day on your own terms." } },
+      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/zp-calm-first-cocktails.png", "title": "Dinner / Hosting", "copy": "A calm-first ritual for meals, hosting, and gatherings." } },
+      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/zp-zero-percent-alcohol.png", "title": "Alcohol Free Nights", "copy": "For evenings where you want something intentional without alcohol." } },
+      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/zp-social-lift.png", "title": "Events / Networking", "copy": "For long social settings where calm, clarity, and presence matter." } },
+      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gold/relaxation-reduced-tension.png", "title": "Evening Wind Down", "copy": "For a gentler close to the day on your own terms." } },
       { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "name": "AVRO Calm", "copy": "Caffeine-free composure for evening social settings.*", "button_label": "Shop Calm", "link": "/collections/calm" } },
       { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "name": "AVRO Focus", "copy": "Caffeine-free clarity for when you want to stay present and sharp.*", "button_label": "Shop Focus", "link": "/collections/focus" } },
       { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "name": "AVRO Energy", "copy": "Natural caffeine for daytime events and longer evenings.*", "button_label": "Shop Energy", "link": "/collections/energy" } },
