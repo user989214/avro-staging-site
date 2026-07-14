@@ -180,6 +180,7 @@
         { "type": "link", "settings": { "label": "Bundle + Save", "url": "/collections/all" } },
         { "type": "column", "settings": { "heading": "Learn" } },
         { "type": "link", "settings": { "label": "Our Story", "url": "/pages/our-story" } },
+        { "type": "link", "settings": { "label": "The Team", "url": "/pages/our-story" } },
         { "type": "link", "settings": { "label": "Why AVRO", "url": "/pages/why-avro" } },
         { "type": "link", "settings": { "label": "Science of AVRO", "url": "/pages/science" } },
         { "type": "link", "settings": { "label": "Ingredients", "url": "/pages/ingredients" } },
