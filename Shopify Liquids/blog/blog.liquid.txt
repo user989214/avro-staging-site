@@ -1,0 +1,251 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — NEWS & MEDIA / BLOG  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-blog.liquid and paste this entire file in.
+  2. Add it to a page via the theme editor, or render it from a page template.
+  3. Editable: hero (title + lede), the category filter pills, the featured
+     post, every post card, and the bottom banner (image + button).
+     - Category pills: comma-separated list in the section settings.
+     - Posts are BLOCKS (category, date, title, excerpt, read time, link).
+       The "category" must match one of the pill names for filtering to work.
+  4. Upload this folder's banner image (science-banner.png) to your theme
+     Assets, or pick your own in the editor.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-blog-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --divider: #E2E2E2;
+    --avro-blue: #94C6D4;
+    font-family: "DM Sans", system-ui, sans-serif;
+    background-color: var(--base); color: var(--ink); display: block;
+  }
+  #avro-blog-{{ section.id }} * { box-sizing: border-box; }
+  #avro-blog-{{ section.id }} .bl-hero { padding: clamp(48px,7vw,88px) clamp(20px,5vw,64px) clamp(20px,3vw,32px); }
+  #avro-blog-{{ section.id }} .bl-wrap { max-width: 1250px; margin: 0 auto; }
+  #avro-blog-{{ section.id }} .bl-hero h1 { font-weight: 800; font-size: clamp(34px,5vw,62px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
+  #avro-blog-{{ section.id }} .bl-hero p { font-weight: 400; font-size: clamp(16px,1.4vw,19px); line-height: 1.55; color: var(--warm-gray); margin: 16px 0 0; max-width: 620px; }
+  #avro-blog-{{ section.id }} .bl-pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  #avro-blog-{{ section.id }} .bl-pill { min-height: 44px; padding: 0 22px; border-radius: 999px; border: 2px solid var(--charcoal); background: transparent; color: var(--charcoal); font-weight: 700; font-size: 15px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+  #avro-blog-{{ section.id }} .bl-pill.is-active, #avro-blog-{{ section.id }} .bl-pill:hover { background: var(--charcoal); color: var(--bone); }
+  #avro-blog-{{ section.id }} .bl-sec { padding: clamp(28px,4vw,56px) clamp(20px,5vw,64px); }
+  #avro-blog-{{ section.id }} .bl-sectitle { font-weight: 800; font-size: clamp(20px,2.4vw,30px); color: var(--ink); margin: 0 0 24px; }
+  /* featured */
+  #avro-blog-{{ section.id }} .bl-feat { display: block; background: var(--charcoal); border-radius: 24px; padding: clamp(32px,5vw,64px) clamp(24px,4vw,72px); text-decoration: none; transition: background-color .18s ease; }
+  #avro-blog-{{ section.id }} .bl-feat:hover { background: var(--ink); }
+  #avro-blog-{{ section.id }} .bl-feat-inner { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 32px; }
+  #avro-blog-{{ section.id }} .bl-feat-text { flex: 1 1 300px; min-width: 0; }
+  #avro-blog-{{ section.id }} .bl-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  #avro-blog-{{ section.id }} .bl-meta .cat { font-weight: 700; font-size: 15px; color: var(--avro-blue); }
+  #avro-blog-{{ section.id }} .bl-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  #avro-blog-{{ section.id }} .bl-meta .mut { font-size: 15px; color: rgba(255,255,255,0.55); }
+  #avro-blog-{{ section.id }} .bl-feat h2 { font-weight: 800; font-size: clamp(26px,3.8vw,50px); line-height: 1.02; color: var(--bone); margin: 0 0 18px; }
+  #avro-blog-{{ section.id }} .bl-feat .excerpt { font-size: clamp(16px,1.5vw,20px); line-height: 1.5; color: rgba(255,255,255,0.78); max-width: 560px; margin: 0; }
+  #avro-blog-{{ section.id }} .bl-feat-btn { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 999px; background: var(--bone); color: var(--charcoal); font-weight: 700; font-size: 15px; flex-shrink: 0; }
+  /* grid */
+  #avro-blog-{{ section.id }} .bl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px,100%),1fr)); gap: 16px; }
+  #avro-blog-{{ section.id }} .bl-card { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; background: var(--base-light); border-radius: 20px; padding: 28px 28px 24px; text-decoration: none; transition: background-color .18s ease; }
+  #avro-blog-{{ section.id }} .bl-card:hover { background: var(--charcoal); }
+  #avro-blog-{{ section.id }} .bl-card .c-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  #avro-blog-{{ section.id }} .bl-card .c-cat { font-weight: 700; font-size: 14px; color: var(--ink); }
+  #avro-blog-{{ section.id }} .bl-card:hover .c-cat { color: var(--avro-blue); }
+  #avro-blog-{{ section.id }} .bl-card .c-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--divider); }
+  #avro-blog-{{ section.id }} .bl-card .c-date, #avro-blog-{{ section.id }} .bl-card .c-read { font-size: 14px; color: var(--warm-gray); }
+  #avro-blog-{{ section.id }} .bl-card:hover .c-date, #avro-blog-{{ section.id }} .bl-card:hover .c-read { color: rgba(255,255,255,0.45); }
+  #avro-blog-{{ section.id }} .bl-card h3 { font-weight: 800; font-size: clamp(20px,2vw,26px); line-height: 1.05; color: var(--ink); margin: 0 0 12px; }
+  #avro-blog-{{ section.id }} .bl-card:hover h3 { color: var(--bone); }
+  #avro-blog-{{ section.id }} .bl-card p { font-size: 15px; line-height: 1.5; color: var(--warm-gray); margin: 0; }
+  #avro-blog-{{ section.id }} .bl-card:hover p { color: rgba(255,255,255,0.65); }
+  #avro-blog-{{ section.id }} .bl-card .c-foot { display: flex; align-items: center; justify-content: space-between; }
+  #avro-blog-{{ section.id }} .bl-card .c-arrow { width: 38px; height: 38px; border-radius: 999px; background: var(--charcoal); color: var(--bone); display: inline-flex; align-items: center; justify-content: center; }
+  #avro-blog-{{ section.id }} .bl-card:hover .c-arrow { background: var(--bone); color: var(--charcoal); }
+  #avro-blog-{{ section.id }} .bl-empty { font-size: 16px; color: var(--warm-gray); }
+  /* banner */
+  #avro-blog-{{ section.id }} .bl-banner { position: relative; width: 100%; overflow: hidden; }
+  #avro-blog-{{ section.id }} .bl-banner img { width: 100%; height: auto; display: block; }
+  #avro-blog-{{ section.id }} .bl-banner-btn { position: absolute; left: clamp(16px,4vw,64px); bottom: clamp(16px,4vw,56px); min-width: 220px; min-height: 48px; padding: 0 28px; display: inline-flex; align-items: center; justify-content: center; background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); border-radius: 999px; font-weight: 700; font-size: 16px; text-decoration: none; }
+  #avro-blog-{{ section.id }} .bl-banner-btn:hover { background: transparent; color: var(--charcoal); }
+  @media (max-width: 640px) {
+    #avro-blog-{{ section.id }} .bl-feat-inner { flex-direction: column; gap: 20px; }
+    #avro-blog-{{ section.id }} .bl-banner { display: flex; flex-direction: column; padding-bottom: 24px; }
+    #avro-blog-{{ section.id }} .bl-banner-btn { position: static; width: calc(100% - 32px); margin: 20px auto 0; }
+  }
+{% endstyle %}
+
+{%- capture arrow -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>{%- endcapture -%}
+{%- assign cats = section.settings.categories | default: 'All, Science, Formula Guides, Lifestyle, Research' | split: ',' -%}
+
+<div id="avro-blog-{{ section.id }}">
+  <section class="bl-hero">
+    <div class="bl-wrap">
+      <h1>{{ section.settings.title | default: 'News & Media' }}</h1>
+      {%- if section.settings.lede != blank -%}<p>{{ section.settings.lede }}</p>{%- endif -%}
+      <div class="bl-pills" role="tablist">
+        {%- for c in cats -%}
+          {%- assign cname = c | strip -%}
+          <button class="bl-pill{% if forloop.first %} is-active{% endif %}" data-cat="{{ cname | downcase }}" type="button">{{ cname }}</button>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} FEATURED {%- endcomment -%}
+  {%- if section.settings.feat_title != blank -%}
+  <section class="bl-sec" data-feat data-cat="{{ section.settings.feat_category | default: 'Science' | downcase }}">
+    <div class="bl-wrap">
+      <h2 class="bl-sectitle">Featured</h2>
+      <a class="bl-feat" href="{{ section.settings.feat_link | default: '#' }}">
+        <div class="bl-feat-inner">
+          <div class="bl-feat-text">
+            <div class="bl-meta">
+              <span class="cat">{{ section.settings.feat_category | default: 'Science' }}</span>
+              <span class="dot"></span><span class="mut">{{ section.settings.feat_date }}</span>
+              <span class="dot"></span><span class="mut">{{ section.settings.feat_read }}</span>
+            </div>
+            <h2>{{ section.settings.feat_title }}</h2>
+            <p class="excerpt">{{ section.settings.feat_excerpt }}</p>
+          </div>
+          <span class="bl-feat-btn">Read Article {{ arrow }}</span>
+        </div>
+      </a>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} POST GRID {%- endcomment -%}
+  <section class="bl-sec">
+    <div class="bl-wrap">
+      <h2 class="bl-sectitle" data-grid-title>Latest Articles</h2>
+      <div class="bl-grid">
+        {%- for block in section.blocks -%}
+          <a class="bl-card" href="{{ block.settings.link | default: '#' }}" data-post data-cat="{{ block.settings.category | downcase }}" {{ block.shopify_attributes }}>
+            <div>
+              <div class="c-meta">
+                <span class="c-cat">{{ block.settings.category }}</span>
+                <span class="c-sep"></span>
+                <span class="c-date">{{ block.settings.date }}</span>
+              </div>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.excerpt }}</p>
+            </div>
+            <div class="c-foot">
+              <span class="c-read">{{ block.settings.read }}</span>
+              <span class="c-arrow">{{ arrow }}</span>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+      <p class="bl-empty" data-empty style="display:none;">No articles in this category yet — check back soon.</p>
+    </div>
+  </section>
+
+  {%- comment -%} BANNER {%- endcomment -%}
+  <section class="bl-sec" style="padding-top:0;">
+    <div class="bl-wrap">
+      <div class="bl-banner">
+        {%- if section.settings.banner_image != blank -%}
+          <img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">
+        {%- else -%}
+          <img src="{{ 'science-banner.png' | asset_url }}" alt="">
+        {%- endif -%}
+        <a class="bl-banner-btn" href="{{ section.settings.banner_link | default: '/collections/all' }}">{{ section.settings.banner_label | default: 'Shop' }}</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById("avro-blog-{{ section.id }}");
+    if (!root) return;
+    var pills = root.querySelectorAll(".bl-pill");
+    var posts = root.querySelectorAll("[data-post]");
+    var feat = root.querySelector("[data-feat]");
+    var title = root.querySelector("[data-grid-title]");
+    var empty = root.querySelector("[data-empty]");
+
+    function apply(cat) {
+      var visible = 0;
+      posts.forEach(function (p) {
+        var show = cat === "all" || p.getAttribute("data-cat") === cat;
+        p.style.display = show ? "" : "none";
+        if (show) visible++;
+      });
+      if (feat) {
+        feat.style.display = (cat === "all" || feat.getAttribute("data-cat") === cat) ? "" : "none";
+      }
+      if (title) title.textContent = cat === "all" ? "Latest Articles" : null;
+      if (title && cat !== "all") {
+        var label = cat;
+        pills.forEach(function (b) { if (b.getAttribute("data-cat") === cat) label = b.textContent; });
+        title.textContent = label;
+      }
+      if (empty) empty.style.display = visible === 0 ? "" : "none";
+    }
+
+    pills.forEach(function (b) {
+      b.addEventListener("click", function () {
+        pills.forEach(function (x) { x.classList.remove("is-active"); });
+        b.classList.add("is-active");
+        apply(b.getAttribute("data-cat"));
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AVRO — News & Media",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "title", "label": "Title", "default": "News & Media" },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Science, lifestyle, and formula guidance for people who perform better when they are calm." },
+    { "type": "text", "id": "categories", "label": "Filter categories (comma-separated)", "default": "All, Science, Formula Guides, Lifestyle, Research", "info": "The first should usually be 'All'. Post 'category' values must match these names to filter." },
+    { "type": "header", "content": "Featured post" },
+    { "type": "text", "id": "feat_category", "label": "Category", "default": "Science" },
+    { "type": "text", "id": "feat_date", "label": "Date", "default": "May 2026" },
+    { "type": "text", "id": "feat_read", "label": "Read time", "default": "6 min read" },
+    { "type": "text", "id": "feat_title", "label": "Title", "default": "Why PharmaGABA® Is Not the Same as Synthetic GABA" },
+    { "type": "textarea", "id": "feat_excerpt", "label": "Excerpt", "default": "Most GABA supplements use a synthetic form that does not cross the blood-brain barrier effectively. PharmaGABA® is fermentation-derived and clinically shown to behave differently — here is what that means for your formula." },
+    { "type": "url", "id": "feat_link", "label": "Link" },
+    { "type": "header", "content": "Bottom banner" },
+    { "type": "image_picker", "id": "banner_image", "label": "Banner image" },
+    { "type": "text", "id": "banner_label", "label": "Button label", "default": "Shop" },
+    { "type": "url", "id": "banner_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "post",
+      "name": "Post card",
+      "settings": [
+        { "type": "text", "id": "category", "label": "Category", "default": "Science" },
+        { "type": "text", "id": "date", "label": "Date", "default": "May 2026" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Article title" },
+        { "type": "textarea", "id": "excerpt", "label": "Excerpt" },
+        { "type": "text", "id": "read", "label": "Read time", "default": "4 min read" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — News & Media",
+      "blocks": [
+        { "type": "post", "settings": { "category": "Formula Guides", "date": "May 2026", "title": "AVRO Calm vs. Focus vs. Energy: How to Choose", "excerpt": "Each formula is built around the same calm-first philosophy. The difference is in what you are preparing for.", "read": "4 min read" } },
+        { "type": "post", "settings": { "category": "Lifestyle", "date": "Apr 2026", "title": "A Calm-First Morning Routine Before Deep Work", "excerpt": "What you do in the first 30 minutes shapes the next four hours. Here is how to set the tone without stimulants.", "read": "3 min read" } },
+        { "type": "post", "settings": { "category": "Science", "date": "Apr 2026", "title": "What Is GABA and Why Does It Matter?", "excerpt": "GABA is your brain's primary inhibitory neurotransmitter. Understanding it is the first step to understanding calm performance.", "read": "5 min read" } },
+        { "type": "post", "settings": { "category": "Research", "date": "Mar 2026", "title": "Fermentation-Derived Ingredients: Why Process Matters", "excerpt": "The source and method of extraction change how your body uses a compound. AVRO uses fermentation-derived GABA for a reason.", "read": "5 min read" } },
+        { "type": "post", "settings": { "category": "Lifestyle", "date": "Mar 2026", "title": "Golf, Precision, and the Case Against Pre-Round Caffeine", "excerpt": "Shakiness, over-arousal, and reactive decision-making are the enemy of a clean round. Calm performance starts before you tee off.", "read": "4 min read" } },
+        { "type": "post", "settings": { "category": "Formula Guides", "date": "Feb 2026", "title": "Why AVRO Focus Is Caffeine Free", "excerpt": "Focus without stimulation is possible. In fact, for sustained cognitive work, it is often better.", "read": "3 min read" } },
+        { "type": "post", "settings": { "category": "Research", "date": "Feb 2026", "title": "Calm-First vs. Stimulant-First: What the Research Shows", "excerpt": "Decades of research on arousal and performance point in one direction. High stimulation is not always high performance.", "read": "6 min read" } },
+        { "type": "post", "settings": { "category": "Lifestyle", "date": "Jan 2026", "title": "Gaming Sessions, Focus, and What the Body Actually Needs", "excerpt": "Long sessions do not always demand more stimulation. Here is what the best performers are actually doing differently.", "read": "4 min read" } },
+        { "type": "post", "settings": { "category": "Science", "date": "Jan 2026", "title": "Stress, Cortisol, and the Calm Performance Window", "excerpt": "There is a zone of optimal stress that enables peak output. AVRO is designed to help you find and stay in it.", "read": "5 min read" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

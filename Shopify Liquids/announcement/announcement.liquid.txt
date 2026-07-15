@@ -1,0 +1,125 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — ANNOUNCEMENT BAR  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-announcement.liquid and paste this entire file in.
+  2. Add it to your header group (sections/header-group.json) ABOVE the
+     avro-header section, or render it in layout/theme.liquid above the header.
+  3. Editable in the theme editor:
+       - Each scrolling message is an add / remove / reorder BLOCK (with
+         default AVRO messages pre-filled so it always shows something).
+       - The "Shop" pill label + link.
+       - Scroll speed (seconds per loop).
+       - Color mode: "Dark-mode paths" switches the bar to the deep-black +
+         gold Zero-Proof palette on matching pages (default: the Social page),
+         matching the header. Leave blank to keep it light everywhere.
+  This bar scrolls WITH the page (it is not sticky); only the nav sticks.
+  No images / assets required.
+  ============================================================================
+{%- endcomment -%}
+
+{%- comment -%} Color mode — mirrors the header's dark-mode logic {%- endcomment -%}
+{%- assign is_dark = false -%}
+{%- assign dark_paths = section.settings.dark_paths | default: '/pages/social' | split: ',' -%}
+{%- for p in dark_paths -%}
+  {%- assign pp = p | strip -%}
+  {%- if pp != blank and request.path contains pp -%}{%- assign is_dark = true -%}{%- endif -%}
+{%- endfor -%}
+{%- if is_dark -%}
+  {%- capture palette -%}--ann-bg:#CAA84B;--ann-text:#0D0D0D;--ann-btn-bg:#0D0D0D;--ann-btn-text:#CAA84B;--ann-border:rgba(202,168,75,0.15);{%- endcapture -%}
+{%- else -%}
+  {%- capture palette -%}--ann-bg:#94C6D4;--ann-text:#151515;--ann-btn-bg:#151515;--ann-btn-text:#F5F0E8;--ann-border:rgba(21,21,21,0.08);{%- endcapture -%}
+{%- endif -%}
+
+{%- assign ann_speed = section.settings.speed | default: 42 -%}
+
+{%- comment -%} Fallback messages: used when this section runs inside a header
+  section group (where presets do not create blocks). If the merchant has added
+  message blocks, those are used instead. {%- endcomment -%}
+{%- assign fallback_msgs = 'Calm First Performance~Subscribe & save 15% every order of 2 or more tubes~Free shipping on orders of 2 or more tubes~Naturally fermented PharmaGABA~Calm, focused energy — without the crash~New: AVRO Focus and AVRO Energy now shipping' | split: '~' -%}
+
+{% style %}
+  #avro-ann-{{ section.id }} { display: block; }
+  #avro-ann-{{ section.id }} .ann-bar { position: relative; overflow: hidden; padding: 11px 0; background: var(--ann-bg); color: var(--ann-text); border-bottom: 1px solid var(--ann-border); }
+  #avro-ann-{{ section.id }} .ann-track { display: flex; width: max-content; will-change: transform; animation: ann-marquee-{{ section.id }} {{ ann_speed }}s linear infinite; }
+  #avro-ann-{{ section.id }} .ann-bar:hover .ann-track { animation-play-state: paused; }
+  #avro-ann-{{ section.id }} .ann-copy { display: flex; align-items: center; flex-shrink: 0; }
+  #avro-ann-{{ section.id }} .ann-item { display: flex; align-items: center; flex-shrink: 0; }
+  #avro-ann-{{ section.id }} .ann-msg { font-family: "DM Sans", system-ui, sans-serif; font-weight: 900; font-size: 17px; letter-spacing: -0.005em; white-space: nowrap; padding: 0 28px; }
+  #avro-ann-{{ section.id }} .ann-plus { font-size: 14px; line-height: 1; opacity: 0.55; font-weight: 700; display: inline-block; }
+  #avro-ann-{{ section.id }} .ann-shop-btn { display: inline-flex; align-items: center; justify-content: center; margin: 0 28px; padding: 0 28px; min-height: 48px; border-radius: 999px; border: 2px solid var(--ann-btn-bg); background: var(--ann-btn-bg); color: var(--ann-btn-text); font-family: "DM Sans", system-ui, sans-serif; font-weight: 700; font-size: 16px; letter-spacing: -0.005em; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background-color .15s ease, color .15s ease; }
+  #avro-ann-{{ section.id }} .ann-shop-btn:hover { background: transparent; color: var(--ann-btn-bg); }
+  @keyframes ann-marquee-{{ section.id }} { 0% { transform: translateX(0); } 100% { transform: translateX(-25%); } }
+  @media (prefers-reduced-motion: reduce) { #avro-ann-{{ section.id }} .ann-track { animation: none; } }
+{% endstyle %}
+
+<div id="avro-ann-{{ section.id }}" style="{{ palette }}">
+  <div class="ann-bar" aria-label="Site announcements">
+    <div class="ann-track">
+      {%- comment -%} 4 copies create a seamless loop with the -25% keyframe {%- endcomment -%}
+      {%- for i in (1..4) -%}
+        <div class="ann-copy" {% if forloop.first == false %}aria-hidden="true"{% endif %}>
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              <span class="ann-item" {{ block.shopify_attributes }}>
+                <span class="ann-msg">{{ block.settings.message }}</span>
+                <span class="ann-plus" aria-hidden="true">+</span>
+              </span>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for msg in fallback_msgs -%}
+              <span class="ann-item">
+                <span class="ann-msg">{{ msg }}</span>
+                <span class="ann-plus" aria-hidden="true">+</span>
+              </span>
+            {%- endfor -%}
+          {%- endif -%}
+          {%- if section.settings.shop_label != blank -%}
+            <a class="ann-shop-btn" href="{{ section.settings.shop_link | default: '/collections/all' }}"{% if forloop.first == false %} tabindex="-1" aria-hidden="true"{% endif %}>{{ section.settings.shop_label }}</a>
+            <span class="ann-plus" aria-hidden="true">+</span>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AVRO — Announcement",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Scroll" },
+    { "type": "range", "id": "speed", "min": 15, "max": 90, "step": 1, "unit": "s", "label": "Seconds per loop", "default": 42 },
+    { "type": "header", "content": "Shop button" },
+    { "type": "text", "id": "shop_label", "label": "Button label", "default": "Shop AVRO" },
+    { "type": "url", "id": "shop_link", "label": "Button link" },
+    { "type": "header", "content": "Color mode" },
+    { "type": "paragraph", "content": "The bar uses the dark Zero-Proof palette (gold + deep-black) on any page whose URL path contains one of these entries. Comma-separated. Keep this matching the header's setting. Leave blank to stay light everywhere." },
+    { "type": "text", "id": "dark_paths", "label": "Dark-mode paths", "default": "/pages/social" }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "message", "label": "Message", "default": "Calm First Performance" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Announcement",
+      "blocks": [
+        { "type": "message", "settings": { "message": "Calm First Performance" } },
+        { "type": "message", "settings": { "message": "Subscribe & save 15% every order of 2 or more tubes" } },
+        { "type": "message", "settings": { "message": "Free shipping on orders of 2 or more tubes" } },
+        { "type": "message", "settings": { "message": "Naturally fermented PharmaGABA" } },
+        { "type": "message", "settings": { "message": "Calm, focused energy — without the crash" } },
+        { "type": "message", "settings": { "message": "New: AVRO Focus and AVRO Energy now shipping" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

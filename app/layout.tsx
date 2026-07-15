@@ -8,6 +8,7 @@ import { CartProvider } from "@/lib/cart-context"
 import { CartDrawer } from "@/components/cart-drawer"
 import { PageTransition } from "@/components/page-transition"
 import { ThemeProvider } from "@/lib/theme-context"
+import { AccessibilityWidget } from "@/components/accessibility-widget"
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default function RootLayout({
             <PageTransition>{children}</PageTransition>
             <Footer />
             <CartDrawer />
+            <AccessibilityWidget statementHref="/accessibility" />
           </CartProvider>
         </ThemeProvider>
         {process.env.NODE_ENV === "production" && <Analytics />}

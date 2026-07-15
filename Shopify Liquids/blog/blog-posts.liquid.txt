@@ -1,0 +1,292 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — BLOG TEMPLATE  (Shopify Online Store 2.0 blog template section)
+  ----------------------------------------------------------------------------
+  This is the REAL blog template — it renders your actual Shopify articles
+  (blog.articles), but styled exactly like the AVRO site (matches avro-blog:
+  DM Sans, charcoal hover cards, pills, featured post, banner).
+
+  HOW TO USE
+  1. Create sections/avro-blog-template.liquid and paste this whole file in.
+  2. In the theme editor, open a Blog page and add/assign this section as the
+     blog's main section (or set it in the blog template JSON).
+  3. Everything auto-wires from your real posts:
+       - Title, date, image, excerpt, and link come from each article.
+       - "Category" comes from the article's FIRST TAG (tag your posts to make
+         the filter pills work, e.g. tag a post "Science").
+       - Read time is estimated from the article word count (or set an article
+         metafield custom.read_time to override, e.g. "6 min read").
+       - Featured post = the newest article (toggle off in settings).
+  4. Editable in the theme editor: hero title + lede, the filter pill list, and
+     the bottom banner (image + button). No manual post entry needed.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-blog-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --divider: #E2E2E2;
+    --avro-blue: #94C6D4;
+    font-family: "DM Sans", system-ui, sans-serif;
+    background-color: var(--base); color: var(--ink); display: block;
+  }
+  #avro-blog-{{ section.id }} * { box-sizing: border-box; }
+  #avro-blog-{{ section.id }} .bl-hero { padding: clamp(48px,7vw,88px) clamp(20px,5vw,64px) clamp(20px,3vw,32px); }
+  #avro-blog-{{ section.id }} .bl-wrap { max-width: 1250px; margin: 0 auto; }
+  #avro-blog-{{ section.id }} .bl-hero h1 { font-weight: 800; font-size: clamp(34px,5vw,62px); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
+  #avro-blog-{{ section.id }} .bl-hero p { font-weight: 400; font-size: clamp(16px,1.4vw,19px); line-height: 1.55; color: var(--warm-gray); margin: 16px 0 0; max-width: 620px; }
+  #avro-blog-{{ section.id }} .bl-pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+  #avro-blog-{{ section.id }} .bl-pill { min-height: 44px; padding: 0 22px; border-radius: 999px; border: 2px solid var(--charcoal); background: transparent; color: var(--charcoal); font-weight: 700; font-size: 15px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+  #avro-blog-{{ section.id }} .bl-pill.is-active, #avro-blog-{{ section.id }} .bl-pill:hover { background: var(--charcoal); color: var(--bone); }
+  #avro-blog-{{ section.id }} .bl-sec { padding: clamp(28px,4vw,56px) clamp(20px,5vw,64px); }
+  #avro-blog-{{ section.id }} .bl-sectitle { font-weight: 800; font-size: clamp(20px,2.4vw,30px); color: var(--ink); margin: 0 0 24px; }
+  /* featured */
+  #avro-blog-{{ section.id }} .bl-feat { display: block; background: var(--charcoal); border-radius: 24px; overflow: hidden; text-decoration: none; transition: background-color .18s ease; }
+  #avro-blog-{{ section.id }} .bl-feat:hover { background: var(--ink); }
+  #avro-blog-{{ section.id }} .bl-feat-inner { display: flex; flex-wrap: wrap; }
+  #avro-blog-{{ section.id }} .bl-feat-media { flex: 1 1 340px; min-width: 0; min-height: 260px; background: #E5E5E5; }
+  #avro-blog-{{ section.id }} .bl-feat-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #avro-blog-{{ section.id }} .bl-feat-body { flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 18px; padding: clamp(28px,4vw,56px) clamp(24px,4vw,56px); }
+  #avro-blog-{{ section.id }} .bl-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  #avro-blog-{{ section.id }} .bl-meta .cat { font-weight: 700; font-size: 15px; color: var(--avro-blue); }
+  #avro-blog-{{ section.id }} .bl-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  #avro-blog-{{ section.id }} .bl-meta .mut { font-size: 15px; color: rgba(255,255,255,0.55); }
+  #avro-blog-{{ section.id }} .bl-feat h2 { font-weight: 800; font-size: clamp(24px,3.4vw,44px); line-height: 1.03; color: var(--bone); margin: 0; }
+  #avro-blog-{{ section.id }} .bl-feat .excerpt { font-size: clamp(15px,1.4vw,19px); line-height: 1.5; color: rgba(255,255,255,0.78); max-width: 560px; margin: 0; }
+  #avro-blog-{{ section.id }} .bl-feat-btn { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 999px; background: var(--bone); color: var(--charcoal); font-weight: 700; font-size: 15px; align-self: flex-start; }
+  /* grid */
+  #avro-blog-{{ section.id }} .bl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px,100%),1fr)); gap: 16px; }
+  #avro-blog-{{ section.id }} .bl-card { display: flex; flex-direction: column; background: var(--base-light); border-radius: 20px; overflow: hidden; text-decoration: none; transition: background-color .18s ease; }
+  #avro-blog-{{ section.id }} .bl-card:hover { background: var(--charcoal); }
+  #avro-blog-{{ section.id }} .bl-card-media { width: 100%; aspect-ratio: 16/10; background: #E5E5E5; overflow: hidden; }
+  #avro-blog-{{ section.id }} .bl-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #avro-blog-{{ section.id }} .bl-card-body { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; flex: 1; padding: 24px 28px 24px; }
+  #avro-blog-{{ section.id }} .bl-card .c-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  #avro-blog-{{ section.id }} .bl-card .c-cat { font-weight: 700; font-size: 14px; color: var(--ink); }
+  #avro-blog-{{ section.id }} .bl-card:hover .c-cat { color: var(--avro-blue); }
+  #avro-blog-{{ section.id }} .bl-card .c-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--divider); }
+  #avro-blog-{{ section.id }} .bl-card .c-date, #avro-blog-{{ section.id }} .bl-card .c-read { font-size: 14px; color: var(--warm-gray); }
+  #avro-blog-{{ section.id }} .bl-card:hover .c-date, #avro-blog-{{ section.id }} .bl-card:hover .c-read { color: rgba(255,255,255,0.45); }
+  #avro-blog-{{ section.id }} .bl-card h3 { font-weight: 800; font-size: clamp(20px,2vw,26px); line-height: 1.05; color: var(--ink); margin: 0 0 12px; }
+  #avro-blog-{{ section.id }} .bl-card:hover h3 { color: var(--bone); }
+  #avro-blog-{{ section.id }} .bl-card p { font-size: 15px; line-height: 1.5; color: var(--warm-gray); margin: 0; }
+  #avro-blog-{{ section.id }} .bl-card:hover p { color: rgba(255,255,255,0.65); }
+  #avro-blog-{{ section.id }} .bl-card .c-foot { display: flex; align-items: center; justify-content: space-between; }
+  #avro-blog-{{ section.id }} .bl-card .c-arrow { width: 38px; height: 38px; border-radius: 999px; background: var(--charcoal); color: var(--bone); display: inline-flex; align-items: center; justify-content: center; }
+  #avro-blog-{{ section.id }} .bl-card:hover .c-arrow { background: var(--bone); color: var(--charcoal); }
+  #avro-blog-{{ section.id }} .bl-empty { font-size: 16px; color: var(--warm-gray); }
+  /* pagination */
+  #avro-blog-{{ section.id }} .bl-pager { display: flex; justify-content: center; gap: 8px; margin-top: 32px; }
+  #avro-blog-{{ section.id }} .bl-pager a, #avro-blog-{{ section.id }} .bl-pager span { min-width: 44px; min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; }
+  #avro-blog-{{ section.id }} .bl-pager a { color: var(--charcoal); border: 2px solid var(--divider); }
+  #avro-blog-{{ section.id }} .bl-pager a:hover { border-color: var(--charcoal); }
+  #avro-blog-{{ section.id }} .bl-pager span.current { background: var(--charcoal); color: var(--bone); }
+  /* banner */
+  #avro-blog-{{ section.id }} .bl-banner { position: relative; width: 100%; overflow: hidden; }
+  #avro-blog-{{ section.id }} .bl-banner img { width: 100%; height: auto; display: block; }
+  #avro-blog-{{ section.id }} .bl-banner-btn { position: absolute; left: clamp(16px,4vw,64px); bottom: clamp(16px,4vw,56px); min-width: 220px; min-height: 48px; padding: 0 28px; display: inline-flex; align-items: center; justify-content: center; background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); border-radius: 999px; font-weight: 700; font-size: 16px; text-decoration: none; }
+  #avro-blog-{{ section.id }} .bl-banner-btn:hover { background: transparent; color: var(--charcoal); }
+  @media (max-width: 640px) {
+    #avro-blog-{{ section.id }} .bl-banner { display: flex; flex-direction: column; padding-bottom: 24px; }
+    #avro-blog-{{ section.id }} .bl-banner-btn { position: static; width: calc(100% - 32px); margin: 20px auto 0; }
+  }
+{% endstyle %}
+
+{%- capture arrow -%}<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>{%- endcapture -%}
+{%- assign cats = section.settings.categories | default: 'All, Science, Formula Guides, Lifestyle, Research' | split: ',' -%}
+{%- assign feat_article = blog.articles.first -%}
+
+<div id="avro-blog-{{ section.id }}">
+  <section class="bl-hero">
+    <div class="bl-wrap">
+      <h1>{{ section.settings.title | default: blog.title | default: 'News & Media' }}</h1>
+      {%- if section.settings.lede != blank -%}<p>{{ section.settings.lede }}</p>{%- endif -%}
+      {%- if section.settings.show_filters -%}
+      <div class="bl-pills" role="tablist">
+        {%- for c in cats -%}
+          {%- assign cname = c | strip -%}
+          <button class="bl-pill{% if forloop.first %} is-active{% endif %}" data-cat="{{ cname | downcase }}" type="button">{{ cname }}</button>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} FEATURED — newest article {%- endcomment -%}
+  {%- if section.settings.show_featured and feat_article != blank -%}
+    {%- assign f_words = feat_article.content | strip_html | split: ' ' | size -%}
+    {%- assign f_mins = f_words | divided_by: 200 | plus: 1 -%}
+    {%- assign f_cat = feat_article.tags.first -%}
+    {%- assign f_tags = feat_article.tags | join: ' ' | downcase -%}
+  <section class="bl-sec" data-feat data-cat="{{ f_tags }}">
+    <div class="bl-wrap">
+      <h2 class="bl-sectitle">Featured</h2>
+      <a class="bl-feat" href="{{ feat_article.url }}">
+        <div class="bl-feat-inner">
+          {%- if feat_article.image != blank -%}
+          <div class="bl-feat-media">
+            <img src="{{ feat_article.image | image_url: width: 1200 }}" alt="{{ feat_article.image.alt | default: feat_article.title | escape }}" loading="lazy">
+          </div>
+          {%- endif -%}
+          <div class="bl-feat-body">
+            <div class="bl-meta">
+              {%- if f_cat != blank -%}<span class="cat">{{ f_cat }}</span><span class="dot"></span>{%- endif -%}
+              <span class="mut">{{ feat_article.published_at | date: "%b %Y" }}</span>
+              <span class="dot"></span>
+              <span class="mut">{% if feat_article.metafields.custom.read_time != blank %}{{ feat_article.metafields.custom.read_time }}{% else %}{{ f_mins }} min read{% endif %}</span>
+            </div>
+            <h2>{{ feat_article.title }}</h2>
+            <p class="excerpt">{{ feat_article.excerpt_or_content | strip_html | truncatewords: 40 }}</p>
+            <span class="bl-feat-btn">Read Article {{ arrow }}</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} POST GRID — real articles {%- endcomment -%}
+  <section class="bl-sec">
+    <div class="bl-wrap">
+      <h2 class="bl-sectitle" data-grid-title>Latest Articles</h2>
+      {%- if blog.articles.size > 0 -%}
+      <div class="bl-grid">
+        {%- for article in blog.articles -%}
+          {%- if section.settings.show_featured and forloop.first -%}{%- continue -%}{%- endif -%}
+          {%- assign a_words = article.content | strip_html | split: ' ' | size -%}
+          {%- assign a_mins = a_words | divided_by: 200 | plus: 1 -%}
+          {%- assign a_cat = article.tags.first -%}
+          {%- assign a_tags = article.tags | join: ' ' | downcase -%}
+          <a class="bl-card" href="{{ article.url }}" data-post data-cat="{{ a_tags }}">
+            {%- if article.image != blank -%}
+            <div class="bl-card-media">
+              <img src="{{ article.image | image_url: width: 700 }}" alt="{{ article.image.alt | default: article.title | escape }}" loading="lazy">
+            </div>
+            {%- endif -%}
+            <div class="bl-card-body">
+              <div>
+                <div class="c-meta">
+                  {%- if a_cat != blank -%}<span class="c-cat">{{ a_cat }}</span><span class="c-sep"></span>{%- endif -%}
+                  <span class="c-date">{{ article.published_at | date: "%b %Y" }}</span>
+                </div>
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.excerpt_or_content | strip_html | truncatewords: 24 }}</p>
+              </div>
+              <div class="c-foot">
+                <span class="c-read">{% if article.metafields.custom.read_time != blank %}{{ article.metafields.custom.read_time }}{% else %}{{ a_mins }} min read{% endif %}</span>
+                <span class="c-arrow">{{ arrow }}</span>
+              </div>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+      <p class="bl-empty" data-empty style="display:none;">No articles in this category yet — check back soon.</p>
+      {%- else -%}
+      <p class="bl-empty">{{ section.settings.empty_text | default: 'New articles are on the way — check back soon for field notes on calm-first performance.' }}</p>
+      {%- endif -%}
+
+      {%- comment -%} Pagination (real Shopify paginate) {%- endcomment -%}
+      {%- if paginate.pages > 1 -%}
+      <nav class="bl-pager" role="navigation" aria-label="Pagination">
+        {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" aria-label="Previous page">&larr;</a>{%- endif -%}
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}<a href="{{ part.url }}">{{ part.title }}</a>
+          {%- else -%}<span class="current">{{ part.title }}</span>{%- endif -%}
+        {%- endfor -%}
+        {%- if paginate.next -%}<a href="{{ paginate.next.url }}" aria-label="Next page">&rarr;</a>{%- endif -%}
+      </nav>
+      {%- endif -%}
+    </div>
+  </section>
+
+  {%- comment -%} BANNER {%- endcomment -%}
+  {%- if section.settings.show_banner -%}
+  <section class="bl-sec" style="padding-top:0;">
+    <div class="bl-wrap">
+      <div class="bl-banner">
+        {%- if section.settings.banner_image != blank -%}
+          <img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">
+        {%- else -%}
+          <img src="{{ 'science-banner.png' | asset_url }}" alt="">
+        {%- endif -%}
+        <a class="bl-banner-btn" href="{{ section.settings.banner_link | default: '/collections/all' }}">{{ section.settings.banner_label | default: 'Shop' }}</a>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById("avro-blog-{{ section.id }}");
+    if (!root) return;
+    var pills = root.querySelectorAll(".bl-pill");
+    var posts = root.querySelectorAll("[data-post]");
+    var feat = root.querySelector("[data-feat]");
+    var title = root.querySelector("[data-grid-title]");
+    var empty = root.querySelector("[data-empty]");
+
+    function hasCat(el, cat) {
+      var tags = (el.getAttribute("data-cat") || "").split(" ");
+      return tags.indexOf(cat) !== -1;
+    }
+
+    function apply(cat) {
+      var visible = 0;
+      posts.forEach(function (p) {
+        var show = cat === "all" || hasCat(p, cat);
+        p.style.display = show ? "" : "none";
+        if (show) visible++;
+      });
+      if (feat) {
+        feat.style.display = (cat === "all" || hasCat(feat, cat)) ? "" : "none";
+      }
+      if (title) {
+        if (cat === "all") {
+          title.textContent = "Latest Articles";
+        } else {
+          var label = cat;
+          pills.forEach(function (b) { if (b.getAttribute("data-cat") === cat) label = b.textContent; });
+          title.textContent = label;
+        }
+      }
+      if (empty) empty.style.display = visible === 0 ? "" : "none";
+    }
+
+    pills.forEach(function (b) {
+      b.addEventListener("click", function () {
+        pills.forEach(function (x) { x.classList.remove("is-active"); });
+        b.classList.add("is-active");
+        apply(b.getAttribute("data-cat"));
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AVRO — Blog Template",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "This is the real blog template — it renders your actual Shopify articles. Category pills filter by each article's TAGS (tag your posts to match the pill names). Read time is auto-estimated, or set an article metafield custom.read_time to override." },
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "title", "label": "Title", "info": "Leave blank to use the blog's own title.", "default": "News & Media" },
+    { "type": "textarea", "id": "lede", "label": "Lede", "default": "Science, lifestyle, and formula guidance for people who perform better when they are calm." },
+    { "type": "header", "content": "Category filter" },
+    { "type": "checkbox", "id": "show_filters", "label": "Show category filter pills", "default": true },
+    { "type": "text", "id": "categories", "label": "Filter categories (comma-separated)", "default": "All, Science, Formula Guides, Lifestyle, Research", "info": "First should usually be 'All'. Pills match each article's tags (case-insensitive)." },
+    { "type": "header", "content": "Featured post" },
+    { "type": "checkbox", "id": "show_featured", "label": "Feature the newest article", "default": true },
+    { "type": "header", "content": "Empty state" },
+    { "type": "textarea", "id": "empty_text", "label": "Empty text", "default": "New articles are on the way — check back soon for field notes on calm-first performance." },
+    { "type": "header", "content": "Bottom banner" },
+    { "type": "checkbox", "id": "show_banner", "label": "Show bottom banner", "default": true },
+    { "type": "image_picker", "id": "banner_image", "label": "Banner image" },
+    { "type": "text", "id": "banner_label", "label": "Button label", "default": "Shop" },
+    { "type": "url", "id": "banner_link", "label": "Button link" }
+  ],
+  "presets": [
+    { "name": "AVRO — Blog Template" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,252 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — PRIVACY POLICY  (Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  HOW TO USE
+  1. Create sections/avro-privacy.liquid and paste this entire file in.
+  2. Add it to a page (e.g. a "Privacy Policy" page) via the theme editor.
+  3. FULLY CUSTOMIZABLE in the theme editor:
+     • Hero: title, lede, headline animation toggle, hero card background.
+     • Meta: show/hide the "last updated" date + the date text.
+     • Table of contents: optional auto-built list of every Policy section.
+     • Layout: reading-column width.
+     • Content blocks (add / remove / reorder, up to 50):
+         - Policy section  → eyebrow + heading + subheading + rich body
+         - Subsection      → smaller sub-heading + rich body (nests under a section)
+         - Rich text       → free body text, no heading
+         - Callout         → highlighted note box
+         - Divider         → thin rule between sections
+  Matches the live AVRO site: rounded base-light hero card with a soft
+  radial gradient and a weight-900 animated headline, then a constrained
+  reading column. No images required.
+  ============================================================================
+{%- endcomment -%}
+
+{% style %}
+  #avro-legal-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --divider: #E2E2E2;
+    font-family: "DM Sans", system-ui, sans-serif;
+    background-color: var(--base); color: var(--ink); display: block;
+  }
+  #avro-legal-{{ section.id }} * { box-sizing: border-box; }
+
+  /* ── Hero card (matches site FlatHero: compact + centered) ── */
+  #avro-legal-{{ section.id }} .legal-hero { width: 100%; background-color: var(--base); padding: 0; }
+  #avro-legal-{{ section.id }} .legal-hero-card { position: relative; width: calc(100% - 32px); margin: 0 auto 16px; border-radius: 20px; overflow: hidden; background-color: {{ section.settings.hero_bg | default: '#F2F2F2' }}; }
+  #avro-legal-{{ section.id }} .legal-hero-card::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 80% at 80% 50%, rgba(222,218,208,0.55) 0%, rgba(222,218,208,0) 60%),
+      radial-gradient(ellipse 80% 70% at 15% 100%, rgba(222,218,208,0.35) 0%, rgba(222,218,208,0) 65%); }
+  #avro-legal-{{ section.id }} .legal-hero-inner { position: relative; padding: clamp(56px,8vw,100px) clamp(20px,5vw,64px) clamp(48px,6vw,80px); display: flex; flex-direction: column; align-items: center; text-align: center; }
+  #avro-legal-{{ section.id }} .legal-hero-inner h1 { font-weight: 900; font-size: clamp(32px,4.5vw,52px); line-height: 1; letter-spacing: -0.025em; color: var(--ink); margin: 0 0 16px; max-width: 820px; }
+  #avro-legal-{{ section.id }} .legal-hero-inner p { font-weight: 500; font-size: clamp(18px,1.7vw,21px); line-height: 1.5; color: var(--ink); max-width: 660px; margin: 0; }
+  @media (max-width: 768px) {
+    #avro-legal-{{ section.id }} .legal-hero-card { width: calc(100% - 24px); }
+    #avro-legal-{{ section.id }} .legal-hero-inner { padding: clamp(48px,10vw,72px) clamp(16px,5vw,28px) clamp(40px,8vw,60px); }
+  }
+
+  /* ── Headline rise + lede fade (matches site hero motion) ── */
+  @keyframes lg-rise-{{ section.id }} { 0% { opacity: 0; transform: translateY(24px); } 100% { opacity: 1; transform: translateY(0); } }
+  @keyframes lg-fade-{{ section.id }} { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+  #avro-legal-{{ section.id }} .lg-word { display: inline-block; opacity: 0; transform: translateY(24px); animation: lg-rise-{{ section.id }} .95s cubic-bezier(0.34,1.4,0.4,1) forwards; will-change: transform, opacity; }
+  #avro-legal-{{ section.id }} .lg-fade { opacity: 0; animation: lg-fade-{{ section.id }} .7s cubic-bezier(0.22,1,0.36,1) forwards; animation-delay: .85s; }
+  @media (prefers-reduced-motion: reduce) {
+    #avro-legal-{{ section.id }} .lg-word, #avro-legal-{{ section.id }} .lg-fade { animation: none !important; opacity: 1 !important; transform: none !important; }
+  }
+
+  /* ── Body reading column ── */
+  #avro-legal-{{ section.id }} .legal-body { padding: clamp(40px,5vw,72px) clamp(20px,5vw,64px); }
+  #avro-legal-{{ section.id }} .legal-wrap { margin: 0 auto; width: 100%; max-width: {{ section.settings.max_width | default: 760 }}px; }
+  #avro-legal-{{ section.id }} .legal-updated { font-size: 13px; color: var(--warm-gray); margin: 0 0 32px; }
+
+  /* ── Table of contents ── */
+  #avro-legal-{{ section.id }} .legal-toc { background: var(--base-light); border-radius: 14px; padding: 20px 24px; margin: 0 0 40px; }
+  #avro-legal-{{ section.id }} .legal-toc-h { font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--warm-gray); margin: 0 0 12px; }
+  #avro-legal-{{ section.id }} .legal-toc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  #avro-legal-{{ section.id }} .legal-toc a { color: var(--ink); text-decoration: none; font-size: 15px; font-weight: 600; }
+  #avro-legal-{{ section.id }} .legal-toc a:hover { text-decoration: underline; }
+
+  /* ── Content blocks ── */
+  #avro-legal-{{ section.id }} .legal-list { display: flex; flex-direction: column; gap: 36px; }
+  #avro-legal-{{ section.id }} .legal-item { display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 100px; }
+  #avro-legal-{{ section.id }} .legal-eyebrow { text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700; font-size: 12px; color: var(--warm-gray); }
+  #avro-legal-{{ section.id }} .legal-item h2 { font-weight: 800; font-size: clamp(20px,2.4vw,26px); line-height: 1.2; color: var(--ink); margin: 0; }
+  #avro-legal-{{ section.id }} .legal-subheading { font-weight: 600; font-size: 16px; line-height: 1.4; color: var(--ink); margin: 0; }
+  #avro-legal-{{ section.id }} .legal-sub { display: flex; flex-direction: column; gap: 10px; margin-top: -16px; }
+  #avro-legal-{{ section.id }} .legal-sub h3 { font-weight: 700; font-size: clamp(16px,1.8vw,20px); line-height: 1.25; color: var(--ink); margin: 0; }
+  #avro-legal-{{ section.id }} .legal-callout { background: var(--base-light); border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; }
+  #avro-legal-{{ section.id }} .legal-callout-h { font-weight: 800; font-size: 16px; color: var(--ink); margin: 0; }
+  #avro-legal-{{ section.id }} .legal-divider { border: 0; border-top: 1px solid var(--divider); margin: 0; }
+  #avro-legal-{{ section.id }} .rte,
+  #avro-legal-{{ section.id }} .rte p { font-size: 15px; line-height: 1.65; color: var(--warm-gray); margin: 0 0 12px; }
+  #avro-legal-{{ section.id }} .rte p:last-child { margin-bottom: 0; }
+  #avro-legal-{{ section.id }} .rte a { color: var(--ink); text-decoration: underline; }
+  #avro-legal-{{ section.id }} .rte ul, #avro-legal-{{ section.id }} .rte ol { margin: 0 0 12px; padding-left: 22px; }
+  #avro-legal-{{ section.id }} .rte li { font-size: 15px; line-height: 1.65; color: var(--warm-gray); margin: 0 0 6px; }
+{% endstyle %}
+
+<div id="avro-legal-{{ section.id }}">
+  <section class="legal-hero">
+    <div class="legal-hero-card">
+      <div class="legal-hero-inner">
+        <h1>
+          {%- if section.settings.animate -%}
+            {%- assign legal_words = section.settings.title | default: 'Privacy Policy' | split: ' ' -%}
+            {%- for w in legal_words -%}
+              <span class="lg-word" style="animation-delay: {{ forloop.index0 | times: 0.09 | plus: 0.1 }}s">{{ w }}{% unless forloop.last %}&nbsp;{% endunless %}</span>
+            {%- endfor -%}
+          {%- else -%}
+            {{ section.settings.title | default: 'Privacy Policy' }}
+          {%- endif -%}
+        </h1>
+        {%- if section.settings.lede != blank -%}<p class="{% if section.settings.animate %}lg-fade{% endif %}">{{ section.settings.lede }}</p>{%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="legal-body">
+    <div class="legal-wrap">
+      {%- if section.settings.show_updated and section.settings.updated != blank -%}
+        <p class="legal-updated">Last updated: {{ section.settings.updated }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.show_toc -%}
+        {%- assign has_toc = false -%}
+        {%- for block in section.blocks -%}{%- if block.type == 'policy_section' and block.settings.heading != blank -%}{%- assign has_toc = true -%}{%- endif -%}{%- endfor -%}
+        {%- if has_toc -%}
+          <nav class="legal-toc" aria-label="{{ section.settings.toc_heading | default: 'On this page' }}">
+            <p class="legal-toc-h">{{ section.settings.toc_heading | default: 'On this page' }}</p>
+            <ul>
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'policy_section' and block.settings.heading != blank -%}
+                  <li><a href="#sec-{{ section.id }}-{{ block.id }}">{{ block.settings.heading }}</a></li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </nav>
+        {%- endif -%}
+      {%- endif -%}
+
+      <div class="legal-list">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'policy_section' -%}
+              <div class="legal-item" id="sec-{{ section.id }}-{{ block.id }}" {{ block.shopify_attributes }}>
+                {%- if block.settings.eyebrow != blank -%}<span class="legal-eyebrow">{{ block.settings.eyebrow }}</span>{%- endif -%}
+                {%- if block.settings.heading != blank -%}<h2>{{ block.settings.heading }}</h2>{%- endif -%}
+                {%- if block.settings.subheading != blank -%}<p class="legal-subheading">{{ block.settings.subheading }}</p>{%- endif -%}
+                {%- if block.settings.body != blank -%}<div class="rte">{{ block.settings.body }}</div>{%- endif -%}
+              </div>
+            {%- when 'subsection' -%}
+              <div class="legal-sub" {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}<h3>{{ block.settings.heading }}</h3>{%- endif -%}
+                {%- if block.settings.body != blank -%}<div class="rte">{{ block.settings.body }}</div>{%- endif -%}
+              </div>
+            {%- when 'rich_text' -%}
+              <div class="rte" {{ block.shopify_attributes }}>{{ block.settings.body }}</div>
+            {%- when 'callout' -%}
+              <div class="legal-callout" {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}<p class="legal-callout-h">{{ block.settings.heading }}</p>{%- endif -%}
+                {%- if block.settings.body != blank -%}<div class="rte">{{ block.settings.body }}</div>{%- endif -%}
+              </div>
+            {%- when 'divider' -%}
+              <hr class="legal-divider" {{ block.shopify_attributes }}>
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "AVRO — Privacy",
+  "tag": "section",
+  "max_blocks": 50,
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "title", "label": "Page title", "default": "Privacy Policy" },
+    { "type": "textarea", "id": "lede", "label": "Lede / subline", "default": "We respect your privacy. This policy explains what information we collect, how we use it, and the choices you have." },
+    { "type": "checkbox", "id": "animate", "label": "Animate headline", "default": true },
+    { "type": "color", "id": "hero_bg", "label": "Hero card background", "default": "#F2F2F2" },
+    { "type": "header", "content": "Meta" },
+    { "type": "checkbox", "id": "show_updated", "label": "Show \"last updated\" date", "default": true },
+    { "type": "text", "id": "updated", "label": "Last updated", "default": "July 8, 2026" },
+    { "type": "header", "content": "Table of contents" },
+    { "type": "checkbox", "id": "show_toc", "label": "Show table of contents", "info": "Auto-built from every Policy section heading.", "default": false },
+    { "type": "text", "id": "toc_heading", "label": "Table of contents heading", "default": "On this page" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "max_width", "min": 640, "max": 1000, "step": 20, "unit": "px", "label": "Reading column width", "default": 760 }
+  ],
+  "blocks": [
+    {
+      "type": "policy_section",
+      "name": "Policy section",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow (optional)" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Information we collect" },
+        { "type": "text", "id": "subheading", "label": "Subheading (optional)" },
+        { "type": "richtext", "id": "body", "label": "Body" }
+      ]
+    },
+    {
+      "type": "subsection",
+      "name": "Subsection",
+      "settings": [
+        { "type": "paragraph", "content": "A smaller sub-heading + text. Place it under a Policy section for nested detail." },
+        { "type": "text", "id": "heading", "label": "Sub-heading", "default": "Sub-heading" },
+        { "type": "richtext", "id": "body", "label": "Body" }
+      ]
+    },
+    {
+      "type": "rich_text",
+      "name": "Rich text",
+      "settings": [
+        { "type": "paragraph", "content": "Free-form body text with no heading." },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Add supporting text here.</p>" }
+      ]
+    },
+    {
+      "type": "callout",
+      "name": "Callout",
+      "settings": [
+        { "type": "paragraph", "content": "A highlighted note box." },
+        { "type": "text", "id": "heading", "label": "Heading (optional)", "default": "Please note" },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Important information worth highlighting.</p>" }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Divider",
+      "settings": [
+        { "type": "paragraph", "content": "A thin horizontal rule. No settings." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Privacy",
+      "blocks": [
+        { "type": "policy_section", "settings": { "heading": "Overview", "body": "<p>This Privacy Policy describes how AVRO (the &ldquo;Site&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) collects, uses, and discloses your personal information when you visit, use our services, or make a purchase from avrolife.com or otherwise communicate with us regarding the Site (collectively, the &ldquo;Services&rdquo;).</p><p>Please read this Privacy Policy carefully. By using and accessing any of the Services, you agree to the collection, use, and disclosure of your information as described here. If you do not agree, please do not use or access any of the Services.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "Changes to this Privacy Policy", "body": "<p>We may update this Privacy Policy from time to time, including to reflect changes to our practices or for other operational, legal, or regulatory reasons. We will post the revised Privacy Policy on the Site, update the &ldquo;Last updated&rdquo; date, and take any other steps required by applicable law.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "How we collect and use your personal information", "body": "<p>To provide the Services, we collect personal information about you from a variety of sources. The information we collect and use varies depending on how you interact with us. We may also use information we collect to communicate with you, provide and improve the Services, comply with applicable legal obligations, enforce any applicable terms of service, and protect the Services and the rights of our users and others.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "What personal information we collect", "subheading": "Information we collect directly from you", "body": "<p>Information you directly submit to us may include:</p><ul><li>Contact details including your name, address, phone number, and email.</li><li>Order information including your billing and shipping address, payment confirmation, email address, and phone number.</li><li>Account information including your username, password, security questions, and other information used for account security.</li><li>Shopping information including items you view, add to your cart, or purchase, and loyalty points, reviews, referrals, or gift cards saved to your account.</li><li>Customer support information including anything you choose to include in communications with us.</li></ul>" } },
+        { "type": "subsection", "settings": { "heading": "Information we collect about your usage", "body": "<p>We may automatically collect certain information about your interaction with the Services (&ldquo;Usage Data&rdquo;) using cookies, pixels, and similar technologies. Usage Data may include device information, browser information, information about your network connection, your IP address, and other information regarding your interaction with the Services.</p>" } },
+        { "type": "subsection", "settings": { "heading": "Information we obtain from third parties", "body": "<p>We may obtain information about you from third parties, including vendors and service providers who collect information on our behalf, such as companies that support our Site and Services (like Shopify) and our payment processors. Any information we obtain from third parties will be treated in accordance with this Privacy Policy.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "How we use your personal information", "body": "<ul><li><strong>Providing products and services</strong> — to process payments, fulfill orders, manage your account, arrange shipping, and facilitate returns and exchanges.</li><li><strong>Marketing and advertising</strong> — to send marketing and promotional communications and to show you relevant advertisements.</li><li><strong>Security and fraud prevention</strong> — to detect, investigate, and act on possible fraudulent, illegal, or malicious activity.</li><li><strong>Communicating with you and service improvement</strong> — to provide customer support and improve our Services.</li></ul>" } },
+        { "type": "policy_section", "settings": { "heading": "Cookies", "body": "<p>Like many websites, we use Cookies to power and improve our Site and Services, to run analytics, and to better understand user interaction. For information about the Cookies used to power our store with Shopify, see shopify.com/legal/cookies.</p><p>Most browsers automatically accept Cookies by default, but you can set your browser to remove or reject Cookies. Removing or blocking Cookies can negatively impact your experience. Our website also recognizes the Global Privacy Control (GPC) signal as a valid request to opt out of sharing / targeted advertising for the associated browser or device.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "How we disclose personal information", "body": "<p>We may disclose your personal information to vendors and service providers who perform services on our behalf (such as IT management, payment processing, data analytics, customer support, cloud storage, fulfillment, and shipping); to business and marketing partners; with your direction or consent; with our affiliates; and in connection with a business transaction or to comply with legal obligations.</p><p>We have &ldquo;sold&rdquo; and &ldquo;shared&rdquo; (as those terms are defined in applicable law) identifiers, commercial information, and Usage Data with business and marketing partners for advertising and marketing purposes. We do not use or disclose sensitive personal information without your consent.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "User generated content", "body": "<p>The Services may enable you to post product reviews and other user-generated content. If you choose to submit content to any public area of the Services, this content will be public and accessible by anyone. We cannot ensure that parties who access such information will respect your privacy or keep it secure.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "Third party websites and links", "body": "<p>Our Site may provide links to websites or online platforms operated by third parties. We are not responsible for the privacy or security of such sites. Our inclusion of such links does not imply endorsement of their content.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "Children&rsquo;s data", "body": "<p>The Services are not intended to be used by children, and we do not knowingly collect any personal information about children. If you are the parent or guardian of a child who has provided us with their personal information, you may contact us to request that it be deleted.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "Security and retention of your information", "body": "<p>No security measures are perfect or impenetrable, and we cannot guarantee &ldquo;perfect security.&rdquo; We recommend that you do not use insecure channels to communicate sensitive or confidential information to us. How long we retain your personal information depends on factors such as whether we need it to provide the Services, comply with legal obligations, or resolve disputes.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "Your rights", "body": "<p>Depending on where you live, you may have some or all of the following rights: access/know, delete, correct, portability, restriction of processing, withdrawal of consent, appeal, and managing communication preferences. These rights are not absolute and may apply only in certain circumstances. We will not discriminate against you for exercising any of these rights.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "Complaints", "body": "<p>If you have complaints about how we process your personal information, please contact us using the details below. If you are not satisfied with our response, you may have the right to appeal or to lodge a complaint with your local data protection authority.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "International users", "body": "<p>We may transfer, store, and process your personal information outside the country you live in. If we transfer your personal information out of Europe, we will rely on recognized transfer mechanisms such as the European Commission&rsquo;s Standard Contractual Clauses.</p>" } },
+        { "type": "policy_section", "settings": { "heading": "Contact", "body": "<p>Should you have any questions about our privacy practices or this Privacy Policy, or to exercise your rights, please email us at <a href=\"mailto:hello@avrolife.com\">hello@avrolife.com</a> or contact us at 11801 Domain Blvd, Austin, TX 78758, United States.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

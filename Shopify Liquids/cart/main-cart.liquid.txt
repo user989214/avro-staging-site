@@ -1,0 +1,410 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — MAIN CART (cart page)
+  Drop-in replacement for the theme's main cart section, styled to match the
+  AVRO site cart drawer (Your Cart + count pill, rounded thumbs, pill
+  steppers, charcoal checkout button).
+  • Quantity +/- and Remove use the Shopify AJAX Cart API (/cart/change.js)
+    and re-render this section via the Section Rendering API — no page reload.
+  • Checkout submits the native /cart form (works with selling plans,
+    discounts, and Shop Pay).
+  HOW TO USE
+  1. Replace the contents of sections/main-cart.liquid with this file
+     (or create sections/avro-cart.liquid and swap it into templates/cart.json).
+  ============================================================================
+{%- endcomment -%}
+
+{%- case section.settings.corner_style -%}
+  {%- when 'square' -%}{%- assign btn_radius = 12 -%}{%- assign card_radius = 10 -%}
+  {%- when 'soft' -%}{%- assign btn_radius = 22 -%}{%- assign card_radius = 16 -%}
+  {%- else -%}{%- assign btn_radius = 9999 -%}{%- assign card_radius = 18 -%}
+{%- endcase -%}
+
+<div id="avro-cart-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="ac-wrap">
+
+    {%- if cart.item_count == 0 -%}
+      {%- comment -%} ---------- EMPTY STATE ---------- {%- endcomment -%}
+      <div class="ac-empty">
+        <div class="ac-empty-badge" aria-hidden="true"><span>+</span></div>
+        <h1 class="ac-empty-h">{{ section.settings.empty_heading | default: 'Your cart is empty' }}</h1>
+        <p class="ac-empty-p">{{ section.settings.empty_copy | default: 'Start with a formula built for your moment — Calm, Focus, or Energy.' }}</p>
+        <a href="{{ section.settings.empty_link | default: routes.all_products_collection_url }}" class="ac-btn">{{ section.settings.empty_btn_label | default: 'Browse Formulas' }}</a>
+      </div>
+
+    {%- else -%}
+      {%- comment -%} ---------- HEADER ---------- {%- endcomment -%}
+      <header class="ac-head">
+        <h1 class="ac-title">{{ section.settings.heading | default: 'Your Cart' }}</h1>
+        <span class="ac-count" aria-label="{{ cart.item_count }} items">{{ cart.item_count }}</span>
+      </header>
+
+      <form action="{{ routes.cart_url }}" method="post" id="ac-form-{{ section.id }}" class="ac-grid">
+
+        {%- comment -%} ---------- ITEMS ---------- {%- endcomment -%}
+        <ul class="ac-items" role="list">
+          {%- for item in cart.items -%}
+            <li class="ac-item" data-line="{{ forloop.index }}">
+              <a href="{{ item.url }}" class="ac-thumb" aria-label="{{ item.product.title | escape }}">
+                {%- if item.image -%}
+                  <img src="{{ item.image | image_url: width: 300 }}" alt="{{ item.image.alt | default: item.product.title | escape }}" loading="lazy" width="150" height="150">
+                {%- endif -%}
+              </a>
+              <div class="ac-item-body">
+                <div class="ac-item-top">
+                  <div class="ac-item-meta">
+                    <a href="{{ item.url }}" class="ac-item-name">{{ item.product.title }}</a>
+                    {%- unless item.product.has_only_default_variant -%}
+                      <span class="ac-item-variant">{{ item.variant.title }}</span>
+                    {%- endunless -%}
+                    {%- if item.selling_plan_allocation -%}
+                      <span class="ac-item-variant">{{ item.selling_plan_allocation.selling_plan.name }}</span>
+                    {%- endif -%}
+                    {%- for discount in item.line_level_discount_allocations -%}
+                      <span class="ac-item-discount">{{ discount.discount_application.title }}</span>
+                    {%- endfor -%}
+                  </div>
+                  <div class="ac-item-price">
+                    {%- if item.original_line_price != item.final_line_price -%}
+                      <s class="ac-price-was">{{ item.original_line_price | money }}</s>
+                    {%- endif -%}
+                    <span>{{ item.final_line_price | money }}</span>
+                  </div>
+                </div>
+                <div class="ac-item-actions">
+                  <div class="ac-stepper" role="group" aria-label="Quantity for {{ item.product.title | escape }}">
+                    <button type="button" data-qty-change="-1" data-line="{{ forloop.index }}" aria-label="Decrease quantity" {% if item.quantity <= 1 %}disabled{% endif %}>&minus;</button>
+                    <span class="ac-q">{{ item.quantity }}</span>
+                    <button type="button" data-qty-change="1" data-line="{{ forloop.index }}" aria-label="Increase quantity">+</button>
+                  </div>
+                  <button type="button" class="ac-remove" data-remove data-line="{{ forloop.index }}">{{ section.settings.remove_label | default: 'Remove' }}</button>
+                </div>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- comment -%} ---------- SUMMARY ---------- {%- endcomment -%}
+        <aside class="ac-summary">
+          <div class="ac-summary-card">
+            {%- if cart.cart_level_discount_applications.size > 0 -%}
+              {%- for discount in cart.cart_level_discount_applications -%}
+                <div class="ac-sumrow ac-sumrow-discount">
+                  <span>{{ discount.title }}</span>
+                  <span>-{{ discount.total_allocated_amount | money }}</span>
+                </div>
+              {%- endfor -%}
+            {%- endif -%}
+            <div class="ac-sumrow">
+              <span class="ac-sumlbl">{{ section.settings.subtotal_label | default: 'Subtotal' }}</span>
+              <span class="ac-sumtotal">{{ cart.total_price | money }}</span>
+            </div>
+            <p class="ac-sumnote">{{ section.settings.summary_note | default: 'Shipping and taxes calculated at checkout.' }}</p>
+
+            {%- if section.settings.show_note -%}
+              <details class="ac-note" {% if cart.note != blank %}open{% endif %}>
+                <summary>{{ section.settings.note_label | default: 'Add an order note' }}</summary>
+                <textarea name="note" form="ac-form-{{ section.id }}" placeholder="{{ section.settings.note_placeholder | default: 'How can we help?' | escape }}">{{ cart.note }}</textarea>
+              </details>
+            {%- endif -%}
+
+            <button type="submit" name="checkout" form="ac-form-{{ section.id }}" class="ac-btn ac-btn-full">{{ section.settings.checkout_label | default: 'Checkout' }}</button>
+            <a href="{{ section.settings.continue_link | default: routes.all_products_collection_url }}" class="ac-continue">{{ section.settings.continue_label | default: 'Continue Shopping' }}</a>
+          </div>
+        </aside>
+
+      </form>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% style %}
+  #avro-cart-{{ section.id }} {
+    --base: #FFFFFF; --base-light: #F2F2F2; --bone: #FFFFFF;
+    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --gray: #E2E2E2;
+    --avro-blue: {{ section.settings.accent | default: '#94C6D4' }};
+    --btn-radius: {{ btn_radius }}px;
+    --card-radius: {{ card_radius }}px;
+    font-family: "DM Sans", system-ui, sans-serif; color: var(--ink); display: block;
+    background: var(--base);
+  }
+  #avro-cart-{{ section.id }} * { box-sizing: border-box; }
+  #avro-cart-{{ section.id }} .ac-wrap { max-width: 1180px; margin: 0 auto; padding: clamp(36px,5vw,72px) clamp(20px,4vw,40px); }
+  #avro-cart-{{ section.id }}.is-loading { opacity: 0.55; pointer-events: none; transition: opacity .15s ease; }
+
+  /* header */
+  #avro-cart-{{ section.id }} .ac-head { display: flex; align-items: center; gap: 14px; margin: 0 0 clamp(22px,3vw,36px); }
+  #avro-cart-{{ section.id }} .ac-title { font-weight: 900; font-size: clamp(30px,4vw,46px); line-height: 1.0; letter-spacing: -0.01em; margin: 0; color: var(--ink); }
+  #avro-cart-{{ section.id }} .ac-count { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; height: 32px; padding: 0 10px; border-radius: 999px; background: var(--avro-blue); color: var(--charcoal); font-weight: 900; font-size: 16px; line-height: 1; }
+
+  /* layout */
+  #avro-cart-{{ section.id }} .ac-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; margin: 0; }
+  @media (min-width: 900px) {
+    #avro-cart-{{ section.id }} .ac-grid { grid-template-columns: minmax(0,1.5fr) minmax(320px,1fr); gap: 56px; }
+    #avro-cart-{{ section.id }} .ac-summary { position: sticky; top: 24px; }
+  }
+
+  /* items */
+  #avro-cart-{{ section.id }} .ac-items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px; }
+  #avro-cart-{{ section.id }} .ac-item { display: flex; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid rgba(21,21,21,0.08); }
+  #avro-cart-{{ section.id }} .ac-thumb { width: 88px; height: 88px; border-radius: var(--card-radius); overflow: hidden; background: var(--base-light); flex-shrink: 0; display: block; }
+  #avro-cart-{{ section.id }} .ac-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #avro-cart-{{ section.id }} .ac-item-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  #avro-cart-{{ section.id }} .ac-item-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  #avro-cart-{{ section.id }} .ac-item-meta { min-width: 0; display: flex; flex-direction: column; }
+  #avro-cart-{{ section.id }} .ac-item-name { font-weight: 900; font-size: clamp(17px,1.5vw,19px); line-height: 1.1; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #avro-cart-{{ section.id }} .ac-item-name:hover { text-decoration: underline; }
+  #avro-cart-{{ section.id }} .ac-item-variant { font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(21,21,21,0.55); margin-top: 4px; }
+  #avro-cart-{{ section.id }} .ac-item-discount { font-weight: 700; font-size: 12px; color: var(--charcoal); background: var(--avro-blue); border-radius: 999px; padding: 2px 10px; margin-top: 6px; align-self: flex-start; }
+  #avro-cart-{{ section.id }} .ac-item-price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; font-weight: 900; font-size: 18px; line-height: 1.1; color: var(--ink); }
+  #avro-cart-{{ section.id }} .ac-price-was { font-weight: 500; font-size: 13px; color: rgba(21,21,21,0.45); }
+  #avro-cart-{{ section.id }} .ac-item-actions { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 12px; }
+  #avro-cart-{{ section.id }} .ac-stepper { display: inline-flex; align-items: center; border: 1.5px solid var(--ink); border-radius: 999px; }
+  #avro-cart-{{ section.id }} .ac-stepper button { width: 32px; height: 32px; display: grid; place-items: center; border: 0; border-radius: 999px; background: transparent; color: var(--ink); font-size: 16px; font-weight: 700; line-height: 1; cursor: pointer; }
+  #avro-cart-{{ section.id }} .ac-stepper button:hover { background: rgba(21,21,21,0.06); }
+  #avro-cart-{{ section.id }} .ac-stepper button:disabled { opacity: 0.35; cursor: not-allowed; }
+  #avro-cart-{{ section.id }} .ac-q { min-width: 28px; text-align: center; font-weight: 900; font-size: 15px; color: var(--ink); }
+  #avro-cart-{{ section.id }} .ac-remove { margin-left: auto; background: none; border: 0; padding: 0; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(21,21,21,0.5); transition: color .15s ease; }
+  #avro-cart-{{ section.id }} .ac-remove:hover { color: var(--ink); }
+
+  /* summary */
+  #avro-cart-{{ section.id }} .ac-summary-card { background: var(--base-light); border-radius: calc(var(--card-radius) + 6px); padding: clamp(20px,2.5vw,28px); }
+  #avro-cart-{{ section.id }} .ac-sumrow { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+  #avro-cart-{{ section.id }} .ac-sumrow-discount { font-weight: 700; font-size: 14px; color: var(--warm-gray); margin-bottom: 8px; }
+  #avro-cart-{{ section.id }} .ac-sumlbl { font-weight: 700; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(21,21,21,0.6); }
+  #avro-cart-{{ section.id }} .ac-sumtotal { font-weight: 900; font-size: clamp(24px,2.2vw,28px); line-height: 1.05; letter-spacing: -0.01em; color: var(--ink); }
+  #avro-cart-{{ section.id }} .ac-sumnote { font-size: 12px; color: rgba(21,21,21,0.55); margin: 0 0 20px; }
+  #avro-cart-{{ section.id }} .ac-note { margin: 0 0 20px; }
+  #avro-cart-{{ section.id }} .ac-note summary { cursor: pointer; list-style: none; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(21,21,21,0.6); }
+  #avro-cart-{{ section.id }} .ac-note summary::-webkit-details-marker { display: none; }
+  #avro-cart-{{ section.id }} .ac-note summary::after { content: ' +'; }
+  #avro-cart-{{ section.id }} .ac-note[open] summary::after { content: ' \2212'; }
+  #avro-cart-{{ section.id }} .ac-note textarea { width: 100%; min-height: 72px; margin-top: 10px; padding: 12px 14px; border: 1.5px solid var(--gray); border-radius: 12px; background: var(--bone); font-family: inherit; font-size: 14px; color: var(--ink); resize: vertical; }
+  #avro-cart-{{ section.id }} .ac-note textarea:focus { outline: none; border-color: var(--charcoal); }
+
+  /* buttons */
+  #avro-cart-{{ section.id }} .ac-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 28px; border-radius: var(--btn-radius); background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); font-family: inherit; font-weight: 700; font-size: 17px; text-decoration: none; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+  #avro-cart-{{ section.id }} .ac-btn:hover { background: transparent; color: var(--charcoal); }
+  #avro-cart-{{ section.id }} .ac-btn-full { width: 100%; }
+  #avro-cart-{{ section.id }} .ac-continue { display: block; width: 100%; margin-top: 14px; text-align: center; font-weight: 700; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(21,21,21,0.55); text-decoration: none; transition: color .15s ease; }
+  #avro-cart-{{ section.id }} .ac-continue:hover { color: var(--ink); }
+
+  /* empty state */
+  #avro-cart-{{ section.id }} .ac-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: clamp(40px,8vw,96px) 16px; }
+  #avro-cart-{{ section.id }} .ac-empty-badge { width: 80px; height: 80px; border-radius: 999px; background: var(--avro-blue); display: grid; place-items: center; margin-bottom: 24px; }
+  #avro-cart-{{ section.id }} .ac-empty-badge span { font-weight: 900; font-size: 26px; line-height: 1; color: var(--charcoal); }
+  #avro-cart-{{ section.id }} .ac-empty-h { font-weight: 900; font-size: clamp(26px,3.4vw,34px); line-height: 1.05; letter-spacing: -0.01em; margin: 0 0 8px; color: var(--ink); }
+  #avro-cart-{{ section.id }} .ac-empty-p { font-size: 14px; line-height: 1.5; color: rgba(21,21,21,0.6); max-width: 300px; margin: 0 0 28px; }
+{% endstyle %}
+
+<script>
+  (function () {
+    var root = document.getElementById("avro-cart-{{ section.id }}");
+    if (!root) return;
+    var sectionId = root.dataset.sectionId;
+    var busy = false;
+
+    function rerender(html) {
+      var parsed = new DOMParser().parseFromString(html, "text/html");
+      var fresh = parsed.getElementById("avro-cart-" + sectionId);
+      if (fresh) {
+        root.innerHTML = fresh.innerHTML;
+        bind();
+      } else {
+        window.location.reload();
+      }
+    }
+
+    function changeLine(line, quantity) {
+      if (busy) return;
+      busy = true;
+      root.classList.add("is-loading");
+      fetch((window.Shopify && Shopify.routes && Shopify.routes.root ? Shopify.routes.root : "/") + "cart/change.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ line: line, quantity: quantity, sections: sectionId })
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data && data.sections && data.sections[sectionId]) {
+            rerender(data.sections[sectionId]);
+          } else {
+            window.location.reload();
+          }
+        })
+        .catch(function () { window.location.reload(); })
+        .finally(function () {
+          busy = false;
+          root.classList.remove("is-loading");
+          document.dispatchEvent(new CustomEvent("cart:updated"));
+        });
+    }
+
+    function bind() {
+      root.querySelectorAll("[data-qty-change]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var line = parseInt(btn.dataset.line, 10);
+          var delta = parseInt(btn.dataset.qtyChange, 10);
+          var qEl = btn.parentElement.querySelector(".ac-q");
+          var current = parseInt(qEl ? qEl.textContent : "1", 10) || 1;
+          changeLine(line, Math.max(0, current + delta));
+        });
+      });
+      root.querySelectorAll("[data-remove]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          changeLine(parseInt(btn.dataset.line, 10), 0);
+        });
+      });
+    }
+
+    bind();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "AVRO Cart",
+  "tag": "section",
+  "enabled_on": {
+    "templates": ["cart"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Cart"
+    },
+    {
+      "type": "header",
+      "content": "Summary"
+    },
+    {
+      "type": "text",
+      "id": "subtotal_label",
+      "label": "Subtotal label",
+      "default": "Subtotal"
+    },
+    {
+      "type": "text",
+      "id": "summary_note",
+      "label": "Note under subtotal",
+      "default": "Shipping and taxes calculated at checkout."
+    },
+    {
+      "type": "text",
+      "id": "checkout_label",
+      "label": "Checkout button label",
+      "default": "Checkout"
+    },
+    {
+      "type": "text",
+      "id": "continue_label",
+      "label": "Continue shopping label",
+      "default": "Continue Shopping"
+    },
+    {
+      "type": "url",
+      "id": "continue_link",
+      "label": "Continue shopping link",
+      "info": "Defaults to the All Products collection."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_note",
+      "label": "Show order note field",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "note_label",
+      "label": "Order note label",
+      "default": "Add an order note"
+    },
+    {
+      "type": "text",
+      "id": "note_placeholder",
+      "label": "Order note placeholder",
+      "default": "How can we help?"
+    },
+    {
+      "type": "header",
+      "content": "Items"
+    },
+    {
+      "type": "text",
+      "id": "remove_label",
+      "label": "Remove label",
+      "default": "Remove"
+    },
+    {
+      "type": "header",
+      "content": "Empty cart"
+    },
+    {
+      "type": "text",
+      "id": "empty_heading",
+      "label": "Heading",
+      "default": "Your cart is empty"
+    },
+    {
+      "type": "textarea",
+      "id": "empty_copy",
+      "label": "Copy",
+      "default": "Start with a formula built for your moment — Calm, Focus, or Energy."
+    },
+    {
+      "type": "text",
+      "id": "empty_btn_label",
+      "label": "Button label",
+      "default": "Browse Formulas"
+    },
+    {
+      "type": "url",
+      "id": "empty_link",
+      "label": "Button link",
+      "info": "Defaults to the All Products collection."
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Accent color",
+      "default": "#94C6D4"
+    },
+    {
+      "type": "select",
+      "id": "corner_style",
+      "label": "Corner style",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "soft",
+          "label": "Soft"
+        },
+        {
+          "value": "pill",
+          "label": "Pill"
+        }
+      ],
+      "default": "pill"
+    }
+  ],
+  "presets": [
+    {
+      "name": "AVRO Cart"
+    }
+  ]
+}
+{% endschema %}
