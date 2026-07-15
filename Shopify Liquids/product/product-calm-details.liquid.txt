@@ -18,11 +18,16 @@
           <div class="am-pane is-active" data-pane="desc">
             {{ section.settings.tabs_desc }}
             {%- if section.settings.show_dietary_badges -%}
-              {%- assign diet_dairy = section.settings.dairy_icon | image_url: width: 160 | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-dairy.png' -%}
-              {%- assign diet_gmo = section.settings.gmo_icon | image_url: width: 160 | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-gmo.png' -%}
-              {%- assign diet_vegan = section.settings.vegan_icon | image_url: width: 160 | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-vegan.png' -%}
-              {%- assign diet_gluten = section.settings.gluten_icon | image_url: width: 160 | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gluten-free.png' -%}
-              {%- assign diet_sugar = section.settings.sugar_icon | image_url: width: 160 | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-sugar.png' -%}
+              {%- assign diet_dairy = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-dairy.png' -%}
+              {%- assign diet_gmo = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-gmo.png' -%}
+              {%- assign diet_vegan = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-vegan.png' -%}
+              {%- assign diet_gluten = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gluten-free.png' -%}
+              {%- assign diet_sugar = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-sugar.png' -%}
+              {%- if section.settings.dairy_icon != blank -%}{%- assign diet_dairy = section.settings.dairy_icon | image_url: width: 160 -%}{%- endif -%}
+              {%- if section.settings.gmo_icon != blank -%}{%- assign diet_gmo = section.settings.gmo_icon | image_url: width: 160 -%}{%- endif -%}
+              {%- if section.settings.vegan_icon != blank -%}{%- assign diet_vegan = section.settings.vegan_icon | image_url: width: 160 -%}{%- endif -%}
+              {%- if section.settings.gluten_icon != blank -%}{%- assign diet_gluten = section.settings.gluten_icon | image_url: width: 160 -%}{%- endif -%}
+              {%- if section.settings.sugar_icon != blank -%}{%- assign diet_sugar = section.settings.sugar_icon | image_url: width: 160 -%}{%- endif -%}
               <div class="am-diet-row" aria-label="Dietary attributes" style="--diet-spot: {{ section.settings.spot_color | default: '#5AAEBC' }};">
                 <div class="am-diet-item"><span class="am-diet-icon" role="img" aria-label="{{ section.settings.dairy_label | default: 'Dairy Free' }}" style="-webkit-mask-image:url('{{ diet_dairy }}');mask-image:url('{{ diet_dairy }}');"></span><span>{{ section.settings.dairy_label | default: 'Dairy Free' }}</span></div>
                 <div class="am-diet-item"><span class="am-diet-icon" role="img" aria-label="{{ section.settings.gmo_label | default: 'Non-GMO' }}" style="-webkit-mask-image:url('{{ diet_gmo }}');mask-image:url('{{ diet_gmo }}');"></span><span>{{ section.settings.gmo_label | default: 'Non-GMO' }}</span></div>
