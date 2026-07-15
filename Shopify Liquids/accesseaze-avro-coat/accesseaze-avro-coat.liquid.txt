@@ -1,0 +1,114 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — accessEaze re-skin (paste into a "Custom Liquid" section/block)
+  ----------------------------------------------------------------------------
+  Coats the existing accessEaze accessibility app in AVRO's brand:
+    - charcoal (#1C1B14) replaces accessEaze blue (#0056B3)
+    - warm bone panel, cream (#F5F1E8) text/icons on dark
+    - rounded corners, soft shadow, filled charcoal launcher button
+  Does NOT change accessEaze behaviour — visual only. Runs alongside the app.
+  Scoped to accessEaze's own elements so nothing else on the store is affected.
+  ============================================================================
+{%- endcomment -%}
+
+<style>
+  :root {
+    --avro-ink: #1C1B14;      /* primary brand charcoal */
+    --avro-ink-hover: #33322A;
+    --avro-cream: #F5F1E8;    /* text/icon on dark */
+    --avro-bone: #F4F2EC;     /* panel background */
+    --avro-sand: #ECEAE1;     /* active tile background */
+    --avro-divider: #E2E0D8;
+  }
+
+  /* ---- Launcher button ---------------------------------------------------- */
+  .accessease-widget-main #accessease-icon {
+    background: var(--avro-ink) !important;
+    border-radius: 999px !important;
+    width: 52px !important;
+    height: 52px !important;
+    padding: 11px !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 6px 20px rgba(0,0,0,.28) !important;
+    transition: transform .2s ease, box-shadow .2s ease !important;
+  }
+  .accessease-widget-main #accessease-icon:hover {
+    transform: translateY(-2px) scale(1.04) !important;
+    box-shadow: 0 10px 26px rgba(0,0,0,.34) !important;
+  }
+  .accessease-widget-main #accessease-icon svg,
+  .accessease-widget-main #accessease-icon path {
+    fill: var(--avro-cream) !important;
+    color: var(--avro-cream) !important;
+  }
+
+  /* ---- Panel shell -------------------------------------------------------- */
+  #accessease-widget {
+    background: var(--avro-bone) !important;
+    border-radius: 0 22px 22px 0 !important;
+    overflow: hidden !important;
+    box-shadow: 0 24px 60px rgba(21,21,21,.22) !important;
+    font-family: "DM Sans", system-ui, sans-serif !important;
+  }
+
+  /* ---- Header ------------------------------------------------------------- */
+  #accessease-widget .accessease-widget-header,
+  #accessease-widget .accessease-widget-header * {
+    background-color: transparent !important;
+    color: var(--avro-cream) !important;
+  }
+  #accessease-widget .accessease-widget-header {
+    background: var(--avro-ink) !important;
+  }
+  #accessease-widget .accessease-widget-close-button,
+  #accessease-widget .accessease-widget-close-button svg,
+  #accessease-widget .accessease-widget-close-button path {
+    color: var(--avro-cream) !important;
+    fill: var(--avro-cream) !important;
+  }
+
+  /* ---- Language badge + active language ----------------------------------- */
+  #accessease-widget .aewidget-language-code-icon {
+    background: var(--avro-ink) !important;
+    color: var(--avro-cream) !important;
+    border-radius: 6px !important;
+  }
+  #accessease-widget .aewidget-language-button.accessease-active {
+    background: var(--avro-ink) !important;
+    color: var(--avro-cream) !important;
+    border-radius: 12px !important;
+  }
+
+  /* ---- Reset button ------------------------------------------------------- */
+  #accessease-widget .accessease-feature-container-reset-button {
+    background: var(--avro-ink) !important;
+    color: var(--avro-cream) !important;
+    border-radius: 12px !important;
+  }
+  #accessease-widget .accessease-feature-container-reset-button:hover {
+    background: var(--avro-ink-hover) !important;
+  }
+
+  /* ---- Profile + feature tiles ------------------------------------------- */
+  #accessease-widget .aewidget-profile-button,
+  #accessease-widget .accessease-button {
+    border-radius: 12px !important;
+    border: 1px solid var(--avro-divider) !important;
+    transition: border-color .15s ease, background-color .15s ease !important;
+  }
+  #accessease-widget .aewidget-profile-button:hover,
+  #accessease-widget .accessease-button:hover {
+    border-color: var(--avro-ink) !important;
+  }
+  #accessease-widget .aewidget-profile-button.accessease-active,
+  #accessease-widget .accessease-button.accessease-active {
+    border-color: var(--avro-ink) !important;
+    background: var(--avro-sand) !important;
+  }
+
+  /* ---- Any remaining accent that used accessEaze blue --------------------- */
+  #accessease-widget .accessease-active-check {
+    background: var(--avro-ink) !important;
+    color: var(--avro-cream) !important;
+  }
+</style>
