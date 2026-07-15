@@ -5,9 +5,17 @@
   HOW TO USE
   1. Create sections/avro-terms.liquid and paste this entire file in.
   2. Add it to a page (e.g. a "Terms of Service" page) via the theme editor.
-  3. The title, lede, "last updated" date, and every policy section
-     (heading + body) are editable. Policy sections are repeatable BLOCKS —
-     add / remove / reorder them in the theme editor.
+  3. FULLY CUSTOMIZABLE in the theme editor:
+     • Hero: title, lede, headline animation toggle, hero card background.
+     • Meta: show/hide the "last updated" date + the date text.
+     • Table of contents: optional auto-built list of every Policy section.
+     • Layout: reading-column width.
+     • Content blocks (add / remove / reorder, up to 50):
+         - Policy section  → eyebrow + heading + subheading + rich body
+         - Subsection      → smaller sub-heading + rich body (nests under a section)
+         - Rich text       → free body text, no heading
+         - Callout         → highlighted note box
+         - Divider         → thin rule between sections
   Matches the live AVRO site: rounded base-light hero card with a soft
   radial gradient and a weight-900 animated headline, then a constrained
   reading column. No images required.
@@ -25,7 +33,7 @@
 
   /* ── Hero card (matches site FlatHero: compact + centered) ── */
   #avro-legal-{{ section.id }} .legal-hero { width: 100%; background-color: var(--base); padding: 0; }
-  #avro-legal-{{ section.id }} .legal-hero-card { position: relative; width: calc(100% - 32px); margin: 0 auto 16px; border-radius: 20px; overflow: hidden; background-color: var(--base-light); }
+  #avro-legal-{{ section.id }} .legal-hero-card { position: relative; width: calc(100% - 32px); margin: 0 auto 16px; border-radius: 20px; overflow: hidden; background-color: {{ section.settings.hero_bg | default: '#F2F2F2' }}; }
   #avro-legal-{{ section.id }} .legal-hero-card::before { content: ""; position: absolute; inset: 0; pointer-events: none;
     background:
       radial-gradient(ellipse 70% 80% at 80% 50%, rgba(222,218,208,0.55) 0%, rgba(222,218,208,0) 60%),
@@ -49,15 +57,33 @@
 
   /* ── Body reading column ── */
   #avro-legal-{{ section.id }} .legal-body { padding: clamp(40px,5vw,72px) clamp(20px,5vw,64px); }
-  #avro-legal-{{ section.id }} .legal-wrap { margin: 0 auto; width: 100%; max-width: 760px; }
+  #avro-legal-{{ section.id }} .legal-wrap { margin: 0 auto; width: 100%; max-width: {{ section.settings.max_width | default: 760 }}px; }
   #avro-legal-{{ section.id }} .legal-updated { font-size: 13px; color: var(--warm-gray); margin: 0 0 32px; }
+
+  /* ── Table of contents ── */
+  #avro-legal-{{ section.id }} .legal-toc { background: var(--base-light); border-radius: 14px; padding: 20px 24px; margin: 0 0 40px; }
+  #avro-legal-{{ section.id }} .legal-toc-h { font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--warm-gray); margin: 0 0 12px; }
+  #avro-legal-{{ section.id }} .legal-toc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  #avro-legal-{{ section.id }} .legal-toc a { color: var(--ink); text-decoration: none; font-size: 15px; font-weight: 600; }
+  #avro-legal-{{ section.id }} .legal-toc a:hover { text-decoration: underline; }
+
+  /* ── Content blocks ── */
   #avro-legal-{{ section.id }} .legal-list { display: flex; flex-direction: column; gap: 36px; }
-  #avro-legal-{{ section.id }} .legal-item { display: flex; flex-direction: column; gap: 12px; }
+  #avro-legal-{{ section.id }} .legal-item { display: flex; flex-direction: column; gap: 12px; scroll-margin-top: 100px; }
+  #avro-legal-{{ section.id }} .legal-eyebrow { text-transform: uppercase; letter-spacing: 0.14em; font-weight: 700; font-size: 12px; color: var(--warm-gray); }
   #avro-legal-{{ section.id }} .legal-item h2 { font-weight: 800; font-size: clamp(20px,2.4vw,26px); line-height: 1.2; color: var(--ink); margin: 0; }
-  #avro-legal-{{ section.id }} .legal-item .rte,
-  #avro-legal-{{ section.id }} .legal-item .rte p { font-size: 15px; line-height: 1.65; color: var(--warm-gray); margin: 0 0 12px; }
-  #avro-legal-{{ section.id }} .legal-item .rte p:last-child { margin-bottom: 0; }
-  #avro-legal-{{ section.id }} .legal-item .rte a { color: var(--ink); text-decoration: underline; }
+  #avro-legal-{{ section.id }} .legal-subheading { font-weight: 600; font-size: 16px; line-height: 1.4; color: var(--ink); margin: 0; }
+  #avro-legal-{{ section.id }} .legal-sub { display: flex; flex-direction: column; gap: 10px; margin-top: -16px; }
+  #avro-legal-{{ section.id }} .legal-sub h3 { font-weight: 700; font-size: clamp(16px,1.8vw,20px); line-height: 1.25; color: var(--ink); margin: 0; }
+  #avro-legal-{{ section.id }} .legal-callout { background: var(--base-light); border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; }
+  #avro-legal-{{ section.id }} .legal-callout-h { font-weight: 800; font-size: 16px; color: var(--ink); margin: 0; }
+  #avro-legal-{{ section.id }} .legal-divider { border: 0; border-top: 1px solid var(--divider); margin: 0; }
+  #avro-legal-{{ section.id }} .rte,
+  #avro-legal-{{ section.id }} .rte p { font-size: 15px; line-height: 1.65; color: var(--warm-gray); margin: 0 0 12px; }
+  #avro-legal-{{ section.id }} .rte p:last-child { margin-bottom: 0; }
+  #avro-legal-{{ section.id }} .rte a { color: var(--ink); text-decoration: underline; }
+  #avro-legal-{{ section.id }} .rte ul, #avro-legal-{{ section.id }} .rte ol { margin: 0 0 12px; padding-left: 22px; }
+  #avro-legal-{{ section.id }} .rte li { font-size: 15px; line-height: 1.65; color: var(--warm-gray); margin: 0 0 6px; }
 {% endstyle %}
 
 <div id="avro-legal-{{ section.id }}">
@@ -65,27 +91,68 @@
     <div class="legal-hero-card">
       <div class="legal-hero-inner">
         <h1>
-          {%- assign legal_words = section.settings.title | default: 'Terms of Service' | split: ' ' -%}
-          {%- for w in legal_words -%}
-            <span class="lg-word" style="animation-delay: {{ forloop.index0 | times: 0.09 | plus: 0.1 }}s">{{ w }}{% unless forloop.last %}&nbsp;{% endunless %}</span>
-          {%- endfor -%}
+          {%- if section.settings.animate -%}
+            {%- assign legal_words = section.settings.title | default: 'Terms of Service' | split: ' ' -%}
+            {%- for w in legal_words -%}
+              <span class="lg-word" style="animation-delay: {{ forloop.index0 | times: 0.09 | plus: 0.1 }}s">{{ w }}{% unless forloop.last %}&nbsp;{% endunless %}</span>
+            {%- endfor -%}
+          {%- else -%}
+            {{ section.settings.title | default: 'Terms of Service' }}
+          {%- endif -%}
         </h1>
-        {%- if section.settings.lede != blank -%}<p class="lg-fade">{{ section.settings.lede }}</p>{%- endif -%}
+        {%- if section.settings.lede != blank -%}<p class="{% if section.settings.animate %}lg-fade{% endif %}">{{ section.settings.lede }}</p>{%- endif -%}
       </div>
     </div>
   </section>
 
   <section class="legal-body">
     <div class="legal-wrap">
-      {%- if section.settings.updated != blank -%}
+      {%- if section.settings.show_updated and section.settings.updated != blank -%}
         <p class="legal-updated">Last updated: {{ section.settings.updated }}</p>
       {%- endif -%}
+
+      {%- if section.settings.show_toc -%}
+        {%- assign has_toc = false -%}
+        {%- for block in section.blocks -%}{%- if block.type == 'policy_section' and block.settings.heading != blank -%}{%- assign has_toc = true -%}{%- endif -%}{%- endfor -%}
+        {%- if has_toc -%}
+          <nav class="legal-toc" aria-label="{{ section.settings.toc_heading | default: 'On this page' }}">
+            <p class="legal-toc-h">{{ section.settings.toc_heading | default: 'On this page' }}</p>
+            <ul>
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'policy_section' and block.settings.heading != blank -%}
+                  <li><a href="#sec-{{ section.id }}-{{ block.id }}">{{ block.settings.heading }}</a></li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </nav>
+        {%- endif -%}
+      {%- endif -%}
+
       <div class="legal-list">
         {%- for block in section.blocks -%}
-          <div class="legal-item" {{ block.shopify_attributes }}>
-            <h2>{{ block.settings.heading }}</h2>
-            <div class="rte">{{ block.settings.body }}</div>
-          </div>
+          {%- case block.type -%}
+            {%- when 'policy_section' -%}
+              <div class="legal-item" id="sec-{{ section.id }}-{{ block.id }}" {{ block.shopify_attributes }}>
+                {%- if block.settings.eyebrow != blank -%}<span class="legal-eyebrow">{{ block.settings.eyebrow }}</span>{%- endif -%}
+                {%- if block.settings.heading != blank -%}<h2>{{ block.settings.heading }}</h2>{%- endif -%}
+                {%- if block.settings.subheading != blank -%}<p class="legal-subheading">{{ block.settings.subheading }}</p>{%- endif -%}
+                {%- if block.settings.body != blank -%}<div class="rte">{{ block.settings.body }}</div>{%- endif -%}
+              </div>
+            {%- when 'subsection' -%}
+              <div class="legal-sub" {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}<h3>{{ block.settings.heading }}</h3>{%- endif -%}
+                {%- if block.settings.body != blank -%}<div class="rte">{{ block.settings.body }}</div>{%- endif -%}
+              </div>
+            {%- when 'rich_text' -%}
+              <div class="rte" {{ block.shopify_attributes }}>{{ block.settings.body }}</div>
+            {%- when 'callout' -%}
+              <div class="legal-callout" {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}<p class="legal-callout-h">{{ block.settings.heading }}</p>{%- endif -%}
+                {%- if block.settings.body != blank -%}<div class="rte">{{ block.settings.body }}</div>{%- endif -%}
+              </div>
+            {%- when 'divider' -%}
+              <hr class="legal-divider" {{ block.shopify_attributes }}>
+          {%- endcase -%}
         {%- endfor -%}
       </div>
     </div>
@@ -96,18 +163,64 @@
 {
   "name": "AVRO — Terms",
   "tag": "section",
+  "max_blocks": 50,
   "settings": [
+    { "type": "header", "content": "Hero" },
     { "type": "text", "id": "title", "label": "Page title", "default": "Terms of Service" },
-    { "type": "textarea", "id": "lede", "label": "Lede", "default": "These terms govern your use of the AVRO website and your purchase of our products. By using our site, you agree to them." },
-    { "type": "text", "id": "updated", "label": "Last updated", "default": "June 2026" }
+    { "type": "textarea", "id": "lede", "label": "Lede / subline", "default": "These terms govern your use of the AVRO website and your purchase of our products. By using our site, you agree to them." },
+    { "type": "checkbox", "id": "animate", "label": "Animate headline", "default": true },
+    { "type": "color", "id": "hero_bg", "label": "Hero card background", "default": "#F2F2F2" },
+    { "type": "header", "content": "Meta" },
+    { "type": "checkbox", "id": "show_updated", "label": "Show \"last updated\" date", "default": true },
+    { "type": "text", "id": "updated", "label": "Last updated", "default": "June 2026" },
+    { "type": "header", "content": "Table of contents" },
+    { "type": "checkbox", "id": "show_toc", "label": "Show table of contents", "info": "Auto-built from every Policy section heading.", "default": false },
+    { "type": "text", "id": "toc_heading", "label": "Table of contents heading", "default": "On this page" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "max_width", "min": 640, "max": 1000, "step": 20, "unit": "px", "label": "Reading column width", "default": 760 }
   ],
   "blocks": [
     {
       "type": "policy_section",
       "name": "Policy section",
       "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow (optional)" },
         { "type": "text", "id": "heading", "label": "Heading", "default": "Use of our site" },
+        { "type": "text", "id": "subheading", "label": "Subheading (optional)" },
         { "type": "richtext", "id": "body", "label": "Body" }
+      ]
+    },
+    {
+      "type": "subsection",
+      "name": "Subsection",
+      "settings": [
+        { "type": "paragraph", "content": "A smaller sub-heading + text. Place it under a Policy section for nested detail." },
+        { "type": "text", "id": "heading", "label": "Sub-heading", "default": "Sub-heading" },
+        { "type": "richtext", "id": "body", "label": "Body" }
+      ]
+    },
+    {
+      "type": "rich_text",
+      "name": "Rich text",
+      "settings": [
+        { "type": "paragraph", "content": "Free-form body text with no heading." },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Add supporting text here.</p>" }
+      ]
+    },
+    {
+      "type": "callout",
+      "name": "Callout",
+      "settings": [
+        { "type": "paragraph", "content": "A highlighted note box." },
+        { "type": "text", "id": "heading", "label": "Heading (optional)", "default": "Please note" },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Important information worth highlighting.</p>" }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Divider",
+      "settings": [
+        { "type": "paragraph", "content": "A thin horizontal rule. No settings." }
       ]
     }
   ],
