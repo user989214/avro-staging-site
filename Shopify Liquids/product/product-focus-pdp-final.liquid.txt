@@ -119,8 +119,8 @@
   #avro-pdp-{{ section.id }} .stepper button:hover { background: rgba(0,0,0,0.05); }
   #avro-pdp-{{ section.id }} .stepper button:disabled { opacity: 0.35; cursor: not-allowed; }
   #avro-pdp-{{ section.id }} .stepper .q { min-width: 28px; text-align: center; font-weight: 800; font-size: 16px; color: var(--charcoal); }
-  #avro-pdp-{{ section.id }} .add-btn { flex: 1 1 auto; min-height: var(--btn-height); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); background: var(--charcoal); color: var(--bone); font-family: inherit; font-weight: 700; font-size: 17px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
-  #avro-pdp-{{ section.id }} .add-btn:hover { background: transparent; color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .add-btn { flex: 1 1 auto; min-height: var(--btn-height); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); background: transparent; color: var(--charcoal); font-family: inherit; font-weight: 700; font-size: 17px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+  #avro-pdp-{{ section.id }} .add-btn:hover { background: var(--charcoal); color: var(--bone); }
   #avro-pdp-{{ section.id }} .add-btn:disabled { background: var(--gray); border-color: var(--gray); color: var(--warm-gray); cursor: not-allowed; }
   #avro-pdp-{{ section.id }} .price-only { font-weight: 800; font-size: clamp(22px,2vw,30px); }
   #avro-pdp-{{ section.id }} .dietary-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; padding: 16px 0; border-top: 1px solid var(--gray); border-bottom: 1px solid var(--gray); }
