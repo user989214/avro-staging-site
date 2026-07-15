@@ -233,12 +233,12 @@
   #avro-more-{{ section.id }} p { margin: 0; }
 
   /* buttons */
-  #avro-more-{{ section.id }} .am-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 26px; border-radius: var(--am-radius); background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); font-family: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease; }
-  #avro-more-{{ section.id }} .am-btn:hover { background: transparent; color: var(--charcoal); }
+  #avro-more-{{ section.id }} .am-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 26px; border-radius: var(--am-radius); background: transparent; color: var(--charcoal); border: 2px solid var(--charcoal); font-family: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease; }
+  #avro-more-{{ section.id }} .am-btn:hover { background: var(--charcoal); color: var(--bone); }
   #avro-more-{{ section.id }} .am-btn-sm { min-height: 40px; padding: 0 14px; font-size: 13px; width: 100%; }
   #avro-more-{{ section.id }} .am-btn-full { width: 100%; }
-  #avro-more-{{ section.id }} .am-btn-light { background: var(--bone); color: var(--charcoal); border-color: var(--bone); }
-  #avro-more-{{ section.id }} .am-btn-light:hover { background: transparent; color: var(--bone); }
+  #avro-more-{{ section.id }} .am-btn-light { background: transparent; color: var(--bone); border-color: var(--bone); }
+  #avro-more-{{ section.id }} .am-btn-light:hover { background: var(--bone); color: var(--charcoal); }
 
   /* A) tabs + related */
   #avro-more-{{ section.id }} .am-tabs-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
