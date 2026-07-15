@@ -123,6 +123,20 @@
   #avro-pdp-{{ section.id }} .add-btn:hover { background: transparent; color: var(--charcoal); }
   #avro-pdp-{{ section.id }} .add-btn:disabled { background: var(--gray); border-color: var(--gray); color: var(--warm-gray); cursor: not-allowed; }
   #avro-pdp-{{ section.id }} .price-only { font-weight: 800; font-size: clamp(22px,2vw,30px); }
+  #avro-pdp-{{ section.id }} .dietary-row { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; padding: 16px 0; border-top: 1px solid var(--gray); border-bottom: 1px solid var(--gray); }
+  #avro-pdp-{{ section.id }} .dietary-item { display: flex; flex-direction: column; align-items: center; gap: 7px; min-width: 0; text-align: center; }
+  #avro-pdp-{{ section.id }} .dietary-item img { width: 42px; height: 42px; object-fit: contain; display: block; }
+  #avro-pdp-{{ section.id }} .dietary-item span { color: var(--ink); font-size: 10px; font-weight: 700; line-height: 1.25; text-transform: uppercase; letter-spacing: .035em; }
+  #avro-pdp-{{ section.id }} .integration-slot { width: 100%; min-width: 0; }
+  #avro-pdp-{{ section.id }} .integration-slot:empty { display: none; }
+  #avro-pdp-{{ section.id }} .integration-slot--subscription { margin-top: calc(var(--pdp-gap) * -0.35); }
+  #avro-pdp-{{ section.id }} .integration-slot--after { margin-top: calc(var(--pdp-gap) * -0.35); }
+  #avro-pdp-{{ section.id }} .app-blocks { display: flex; flex-direction: column; gap: 16px; width: 100%; min-width: 0; overflow: visible; }
+  @media (max-width: 560px) {
+    #avro-pdp-{{ section.id }} .dietary-row { display: flex; gap: 14px; margin-inline: calc(var(--pdp-pad-x) * -1); padding-inline: var(--pdp-pad-x); overflow-x: auto; scrollbar-width: none; }
+    #avro-pdp-{{ section.id }} .dietary-row::-webkit-scrollbar { display: none; }
+    #avro-pdp-{{ section.id }} .dietary-item { flex: 0 0 72px; }
+  }
 {% endstyle %}
 
 <div id="avro-pdp-{{ section.id }}" data-flavor-index="{{ flavor_opt_index }}">
@@ -175,6 +189,19 @@
           {%- if support_text != blank -%}<p class="support">{{ support_text }}</p>{%- endif -%}
           {%- if section.settings.per_box_line != blank -%}<p class="per-box">{{ section.settings.per_box_line }}</p>{%- endif -%}
         </header>
+
+        {%- if section.settings.show_dietary_badges -%}
+          <div class="dietary-row" aria-label="Product dietary attributes">
+            <div class="dietary-item"><img src="{% if section.settings.dairy_icon != blank %}{{ section.settings.dairy_icon | image_url: width: 120 }}{% else %}https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-dairy.png{% endif %}" alt="" loading="lazy" width="42" height="42"><span>{{ section.settings.dairy_label | default: 'Dairy Free' }}</span></div>
+            <div class="dietary-item"><img src="{% if section.settings.gmo_icon != blank %}{{ section.settings.gmo_icon | image_url: width: 120 }}{% else %}https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-gmo.png{% endif %}" alt="" loading="lazy" width="42" height="42"><span>{{ section.settings.gmo_label | default: 'Non-GMO' }}</span></div>
+            <div class="dietary-item"><img src="{% if section.settings.vegan_icon != blank %}{{ section.settings.vegan_icon | image_url: width: 120 }}{% else %}https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-vegan.png{% endif %}" alt="" loading="lazy" width="42" height="42"><span>{{ section.settings.vegan_label | default: 'Vegan' }}</span></div>
+            <div class="dietary-item"><img src="{% if section.settings.gluten_icon != blank %}{{ section.settings.gluten_icon | image_url: width: 120 }}{% else %}https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gluten-free.png{% endif %}" alt="" loading="lazy" width="42" height="42"><span>{{ section.settings.gluten_label | default: 'Gluten Free' }}</span></div>
+            <div class="dietary-item"><img src="{% if section.settings.sugar_icon != blank %}{{ section.settings.sugar_icon | image_url: width: 120 }}{% else %}https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-sugar.png{% endif %}" alt="" loading="lazy" width="42" height="42"><span>{{ section.settings.sugar_label | default: 'No Added Sugar' }}</span></div>
+          </div>
+        {%- endif -%}
+
+        {%- for block in section.blocks -%}{%- if block.type == 'custom_liquid' and block.settings.placement == 'before_purchase' -%}<div class="integration-slot integration-slot--before" {{ block.shopify_attributes }}>{{ block.settings.liquid }}</div>{%- endif -%}{%- endfor -%}
+        {%- for block in section.blocks -%}{%- if block.type == 'custom_liquid' and block.settings.placement == 'subscription' -%}<div class="integration-slot integration-slot--subscription" {{ block.shopify_attributes }}>{{ block.settings.liquid }}</div>{%- endif -%}{%- endfor -%}
 
         <form method="post" action="{{ routes.cart_add_url }}" id="pdp-form-{{ section.id }}" accept-charset="UTF-8" enctype="multipart/form-data">
           <input type="hidden" name="form_type" value="product">
@@ -238,6 +265,14 @@
             <button type="submit" class="add-btn" id="pdp-add-{{ section.id }}">{{ section.settings.add_label | default: 'Add to Cart' }}</button>
           </div>
         </form>
+
+        {%- for block in section.blocks -%}{%- if block.type == 'custom_liquid' and block.settings.placement == 'after_cart' -%}<div class="integration-slot integration-slot--after" {{ block.shopify_attributes }}>{{ block.settings.liquid }}</div>{%- endif -%}{%- endfor -%}
+        {%- assign app_blocks = section.blocks | where: 'type', '@app' -%}
+        {%- if app_blocks.size > 0 -%}
+          <div class="app-blocks" aria-label="Product integrations">
+            {%- for block in app_blocks -%}<div class="integration-slot" {{ block.shopify_attributes }}>{% render block %}</div>{%- endfor -%}
+          </div>
+        {%- endif -%}
       </div>
 
     </div>
@@ -476,10 +511,30 @@
       "label": "Rating value",
       "default": "4.8"
     },
-    {
-      "type": "header",
-      "content": "Purchase options"
-    },
+{
+  "type": "header",
+  "content": "Dietary badges"
+  },
+  {
+  "type": "checkbox",
+  "id": "show_dietary_badges",
+  "label": "Show dietary badges",
+  "default": true
+  },
+  { "type": "image_picker", "id": "dairy_icon", "label": "Dairy Free icon" },
+  { "type": "text", "id": "dairy_label", "label": "Dairy Free label", "default": "Dairy Free" },
+  { "type": "image_picker", "id": "gmo_icon", "label": "Non-GMO icon" },
+  { "type": "text", "id": "gmo_label", "label": "Non-GMO label", "default": "Non-GMO" },
+  { "type": "image_picker", "id": "vegan_icon", "label": "Vegan icon" },
+  { "type": "text", "id": "vegan_label", "label": "Vegan label", "default": "Vegan" },
+  { "type": "image_picker", "id": "gluten_icon", "label": "Gluten Free icon" },
+  { "type": "text", "id": "gluten_label", "label": "Gluten Free label", "default": "Gluten Free" },
+  { "type": "image_picker", "id": "sugar_icon", "label": "No Added Sugar icon" },
+  { "type": "text", "id": "sugar_label", "label": "No Added Sugar label", "default": "No Added Sugar" },
+  {
+  "type": "header",
+  "content": "Purchase options"
+  },
     {
       "type": "checkbox",
       "id": "show_subscribe",
@@ -562,8 +617,35 @@
     }
   ],
   "blocks": [
-    {
-      "type": "benefit",
+  { "type": "@app" },
+  {
+  "type": "custom_liquid",
+  "name": "Custom Liquid / embed",
+  "settings": [
+  {
+  "type": "paragraph",
+  "content": "Use this for PDP-visible Klaviyo, subscription, reviews, or other custom code. Global app embeds belong in Theme settings → App embeds."
+  },
+  {
+  "type": "select",
+  "id": "placement",
+  "label": "Placement",
+  "options": [
+  { "value": "before_purchase", "label": "Before purchase options" },
+  { "value": "subscription", "label": "Subscription area" },
+  { "value": "after_cart", "label": "After Add to Cart" }
+  ],
+  "default": "after_cart"
+  },
+  {
+  "type": "liquid",
+  "id": "liquid",
+  "label": "Liquid or embed code"
+  }
+  ]
+  },
+  {
+  "type": "benefit",
       "name": "Subscribe benefit",
       "settings": [
         {
