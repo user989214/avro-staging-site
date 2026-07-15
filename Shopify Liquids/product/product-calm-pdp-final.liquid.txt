@@ -131,7 +131,6 @@
   #avro-pdp-{{ section.id }} .integration-slot:empty { display: none; }
   #avro-pdp-{{ section.id }} .integration-slot--subscription { margin-top: calc(var(--pdp-gap) * -0.35); }
   #avro-pdp-{{ section.id }} .integration-slot--after { margin-top: calc(var(--pdp-gap) * -0.35); }
-  #avro-pdp-{{ section.id }} .app-blocks { display: flex; flex-direction: column; gap: 16px; width: 100%; min-width: 0; overflow: visible; }
   @media (max-width: 560px) {
     #avro-pdp-{{ section.id }} .dietary-row { display: flex; gap: 14px; margin-inline: calc(var(--pdp-pad-x) * -1); padding-inline: var(--pdp-pad-x); overflow-x: auto; scrollbar-width: none; }
     #avro-pdp-{{ section.id }} .dietary-row::-webkit-scrollbar { display: none; }
@@ -267,12 +266,6 @@
         </form>
 
         {%- for block in section.blocks -%}{%- if block.type == 'custom_liquid' and block.settings.placement == 'after_cart' -%}<div class="integration-slot integration-slot--after" {{ block.shopify_attributes }}>{{ block.settings.liquid }}</div>{%- endif -%}{%- endfor -%}
-        {%- assign app_blocks = section.blocks | where: 'type', '@app' -%}
-        {%- if app_blocks.size > 0 -%}
-          <div class="app-blocks" aria-label="Product integrations">
-            {%- for block in app_blocks -%}<div class="integration-slot" {{ block.shopify_attributes }}>{% render block %}</div>{%- endfor -%}
-          </div>
-        {%- endif -%}
       </div>
 
     </div>
@@ -617,7 +610,6 @@
     }
   ],
   "blocks": [
-  { "type": "@app" },
   {
   "type": "custom_liquid",
   "name": "Custom Liquid / embed",
