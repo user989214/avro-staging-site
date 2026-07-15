@@ -18,12 +18,17 @@
           <div class="am-pane is-active" data-pane="desc">
             {{ section.settings.tabs_desc }}
             {%- if section.settings.show_dietary_badges -%}
-              <div class="am-diet-row" aria-label="Dietary attributes">
-                <div class="am-diet-item"><img src="{% if section.settings.dairy_icon != blank %}{{ section.settings.dairy_icon | image_url: width: 160 }}{% else %}https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-dairy.png{% endif %}" alt="" loading="lazy" width="80" height="80"><span>{{ section.settings.dairy_label | default: 'Dairy Free' }}</span></div>
-                <div class="am-diet-item"><img src="{% if section.settings.gmo_icon != blank %}{{ section.settings.gmo_icon | image_url: width: 160 }}{% else %}https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-gmo.png{% endif %}" alt="" loading="lazy" width="80" height="80"><span>{{ section.settings.gmo_label | default: 'Non-GMO' }}</span></div>
-                <div class="am-diet-item"><img src="{% if section.settings.vegan_icon != blank %}{{ section.settings.vegan_icon | image_url: width: 160 }}{% else %}https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-vegan.png{% endif %}" alt="" loading="lazy" width="80" height="80"><span>{{ section.settings.vegan_label | default: 'Vegan' }}</span></div>
-                <div class="am-diet-item"><img src="{% if section.settings.gluten_icon != blank %}{{ section.settings.gluten_icon | image_url: width: 160 }}{% else %}https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gluten-free.png{% endif %}" alt="" loading="lazy" width="80" height="80"><span>{{ section.settings.gluten_label | default: 'Gluten Free' }}</span></div>
-                <div class="am-diet-item"><img src="{% if section.settings.sugar_icon != blank %}{{ section.settings.sugar_icon | image_url: width: 160 }}{% else %}https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-sugar.png{% endif %}" alt="" loading="lazy" width="80" height="80"><span>{{ section.settings.sugar_label | default: 'No Added Sugar' }}</span></div>
+              {%- assign diet_dairy = section.settings.dairy_icon | image_url: width: 160 | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-dairy.png' -%}
+              {%- assign diet_gmo = section.settings.gmo_icon | image_url: width: 160 | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-gmo.png' -%}
+              {%- assign diet_vegan = section.settings.vegan_icon | image_url: width: 160 | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-vegan.png' -%}
+              {%- assign diet_gluten = section.settings.gluten_icon | image_url: width: 160 | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/gluten-free.png' -%}
+              {%- assign diet_sugar = section.settings.sugar_icon | image_url: width: 160 | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/free-sugar.png' -%}
+              <div class="am-diet-row" aria-label="Dietary attributes" style="--diet-spot: {{ section.settings.spot_color | default: '#5AAEBC' }};">
+                <div class="am-diet-item"><span class="am-diet-icon" role="img" aria-label="{{ section.settings.dairy_label | default: 'Dairy Free' }}" style="-webkit-mask-image:url('{{ diet_dairy }}');mask-image:url('{{ diet_dairy }}');"></span><span>{{ section.settings.dairy_label | default: 'Dairy Free' }}</span></div>
+                <div class="am-diet-item"><span class="am-diet-icon" role="img" aria-label="{{ section.settings.gmo_label | default: 'Non-GMO' }}" style="-webkit-mask-image:url('{{ diet_gmo }}');mask-image:url('{{ diet_gmo }}');"></span><span>{{ section.settings.gmo_label | default: 'Non-GMO' }}</span></div>
+                <div class="am-diet-item"><span class="am-diet-icon" role="img" aria-label="{{ section.settings.vegan_label | default: 'Vegan' }}" style="-webkit-mask-image:url('{{ diet_vegan }}');mask-image:url('{{ diet_vegan }}');"></span><span>{{ section.settings.vegan_label | default: 'Vegan' }}</span></div>
+                <div class="am-diet-item"><span class="am-diet-icon" role="img" aria-label="{{ section.settings.gluten_label | default: 'Gluten Free' }}" style="-webkit-mask-image:url('{{ diet_gluten }}');mask-image:url('{{ diet_gluten }}');"></span><span>{{ section.settings.gluten_label | default: 'Gluten Free' }}</span></div>
+                <div class="am-diet-item"><span class="am-diet-icon" role="img" aria-label="{{ section.settings.sugar_label | default: 'No Added Sugar' }}" style="-webkit-mask-image:url('{{ diet_sugar }}');mask-image:url('{{ diet_sugar }}');"></span><span>{{ section.settings.sugar_label | default: 'No Added Sugar' }}</span></div>
               </div>
             {%- endif -%}
           </div>
@@ -254,10 +259,10 @@
   #avro-more-{{ section.id }} .am-pane li, #avro-more-{{ section.id }} .am-pane p { font-weight: 500; font-size: clamp(13px,1.1vw,16px); line-height: 1.5; color: rgba(0,0,0,0.7); }
   #avro-more-{{ section.id }} .am-diet-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; width: 100%; margin-top: clamp(24px,3vw,32px); padding-top: clamp(20px,2.5vw,24px); border-top: 1px solid rgba(0,0,0,0.12); }
   #avro-more-{{ section.id }} .am-diet-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; flex: 1; min-width: 0; }
-  #avro-more-{{ section.id }} .am-diet-item img { width: 48px; height: 48px; object-fit: contain; opacity: 0.85; }
-  @media (min-width: 768px) { #avro-more-{{ section.id }} .am-diet-item img { width: 64px; height: 64px; } }
-  @media (min-width: 1000px) { #avro-more-{{ section.id }} .am-diet-item img { width: 80px; height: 80px; } }
-  #avro-more-{{ section.id }} .am-diet-item span { font-weight: 700; font-size: clamp(10px,0.95vw,13px); line-height: 1.2; color: var(--ink); }
+  #avro-more-{{ section.id }} .am-diet-icon { display: block; width: 48px; height: 48px; background-color: var(--diet-spot, #5AAEBC); opacity: 0.85; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; }
+  @media (min-width: 768px) { #avro-more-{{ section.id }} .am-diet-icon { width: 64px; height: 64px; } }
+  @media (min-width: 1000px) { #avro-more-{{ section.id }} .am-diet-icon { width: 80px; height: 80px; } }
+  #avro-more-{{ section.id }} .am-diet-item > span:not(.am-diet-icon) { font-weight: 700; font-size: clamp(10px,0.95vw,13px); line-height: 1.2; color: var(--ink); }
   #avro-more-{{ section.id }} .am-ing-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
   #avro-more-{{ section.id }} .am-ing-name { font-weight: 700; font-size: clamp(13px,1.2vw,17px); color: var(--ink); }
   #avro-more-{{ section.id }} .am-ing-amt { font-weight: 500; font-size: clamp(13px,1.2vw,17px); color: rgba(0,0,0,0.6); }
@@ -416,6 +421,7 @@
     { "type": "richtext", "id": "tabs_how", "label": "How-to-use tab content", "default": "<p><strong>1. Pour</strong> — Empty one stick into 8-12 oz of cold water.</p><p><strong>2. Mix</strong> — Stir or shake until fully dissolved.</p><p><strong>3. Drink</strong> — Enjoy 20-30 minutes before your moment.</p>" },
     { "type": "header", "content": "Dietary badges (Description tab)" },
     { "type": "checkbox", "id": "show_dietary_badges", "label": "Show dietary badges", "default": true },
+    { "type": "color", "id": "spot_color", "label": "Badge icon color", "default": "#5AAEBC" },
     { "type": "image_picker", "id": "dairy_icon", "label": "Dairy Free icon" },
     { "type": "text", "id": "dairy_label", "label": "Dairy Free label", "default": "Dairy Free" },
     { "type": "image_picker", "id": "gmo_icon", "label": "Non-GMO icon" },
