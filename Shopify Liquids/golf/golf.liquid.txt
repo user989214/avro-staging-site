@@ -100,6 +100,9 @@
   #avro-golf-{{ section.id }} .pc-thumb img { width:100%; height:100%; object-fit:cover; }
   #avro-golf-{{ section.id }} .pc h3 { font-weight:900; font-size:clamp(22px,2vw,30px); color:var(--ink); }
   #avro-golf-{{ section.id }} .pc p { font-weight:400; font-size:14px; line-height:1.45; color:var(--warm-gray); margin:0; flex:1; }
+  #avro-golf-{{ section.id }} .pc .pc-tag { font-family:"Gotham Golf",sans-serif; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#8ca22a; }
+  #avro-golf-{{ section.id }} .pc .pc-best { font-size:13px; line-height:1.45; color:var(--warm-gray); margin:0; flex:none; }
+  #avro-golf-{{ section.id }} .pc .pc-best b { color:var(--ink); }
   #avro-golf-{{ section.id }} .pc .btn { width:100%; }
   @media (min-width:640px){ #avro-golf-{{ section.id }} .pc-row { flex-direction:row; } #avro-golf-{{ section.id }} .pc { flex:1 1 0; } }
 
@@ -184,7 +187,7 @@
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="hero-content">
         <h1>{{ section.settings.hero_title | default: 'Golf Performance Begins Before the First Swing.' }}</h1>
-        <p>{{ section.settings.hero_copy | default: 'AVRO supports calm, clarity, and composure before golf moments where state matters, from the first tee to the final stretch.*' }}</p>
+        <p>{{ section.settings.hero_copy | default: 'AVRO supports the calm, clear and composed headspace golfers seek before lessons, practice and competition—so they can step into the moment ready.' }}</p>
         <div class="hero-btns">
           <a href="{{ section.settings.hero_btn1_link | default: '/collections/all' }}" class="btn btn-outline">{{ section.settings.hero_btn1_label | default: 'Choose Your Formula' }}</a>
           <a href="{{ section.settings.hero_btn2_link | default: '/collections/all' }}" class="btn btn-accent">{{ section.settings.hero_btn2_label | default: 'Shop AVRO' }}</a>
@@ -196,7 +199,7 @@
   {%- comment -%} MOMENT HEADING {%- endcomment -%}
   <section class="sec"><div class="wrap"><div class="head">
     <h2>{{ section.settings.moment_title | default: 'Golf can get loud in your head fast.' }}</h2>
-    <p>{{ section.settings.moment_copy }}</p>
+    <p>{{ section.settings.moment_copy | default: 'The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.' }}</p>
   </div></div></section>
 
   {%- comment -%} WHY (reasons) {%- endcomment -%}
@@ -236,7 +239,7 @@
   {%- if bars.size > 0 -%}
   <section class="sec" style="padding-top:0;"><div class="wrap"><div class="graph">
     <h2>{{ section.settings.graph_title | default: 'Science + Formula Logic' }}</h2>
-    <p class="sub">{{ section.settings.graph_sub | default: 'Same calm-first base. Different active addition.' }}</p>
+    <p class="sub">{{ section.settings.graph_sub | default: 'Calm first. Then support the moment.' }}</p>
     {%- for b in bars -%}
     <div class="grow" {{ b.shopify_attributes }}>
       <div class="top"><span class="nm" style="color:{{ b.settings.color | default: '#4b4d9a' }};">{{ b.settings.name }}</span><span class="lg">PharmaGABA&reg; + {{ b.settings.addition }}</span></div>
@@ -261,7 +264,7 @@
   {%- comment -%} USE MOMENTS {%- endcomment -%}
   {%- if moments.size > 0 -%}
   <section class="sec"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.use_title | default: 'Golf use moments' }}</h2></div>
+    <div class="head"><h2>{{ section.settings.use_title | default: 'Golf Use Moments' }}</h2><p>{{ section.settings.use_copy | default: 'One calm-first foundation, ready for the moments that shape the golf experience.' }}</p></div>
     <div class="cards c4">
       {%- for b in moments -%}
       <div class="icard" {{ b.shopify_attributes }}>
@@ -277,13 +280,15 @@
   {%- comment -%} PRODUCTS {%- endcomment -%}
   {%- if products.size > 0 -%}
   <section class="sec" style="padding-top:0;"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.shop_title | default: 'Shop AVRO for golf' }}</h2></div>
+    <div class="head"><h2>{{ section.settings.shop_title | default: 'Shop AVRO for Golf' }}</h2><p>{{ section.settings.shop_copy | default: 'Same calm-first base. Three ways to meet the moment.' }}</p></div>
     <div class="pc-row">
       {%- for b in products -%}
       <article class="pc" {{ b.shopify_attributes }}>
         <div class="pc-thumb">{%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">{%- else -%}<img src="{{ b.settings.image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png' }}" alt="{{ b.settings.name | escape }}">{%- endif -%}</div>
+        {%- if b.settings.caffeine != blank -%}<small class="pc-tag">{{ b.settings.caffeine }}</small>{%- endif -%}
         <h3>{{ b.settings.name }}</h3>
         <p>{{ b.settings.copy }}</p>
+        {%- if b.settings.best_for != blank -%}<p class="pc-best"><b>BEST FOR:</b> {{ b.settings.best_for }}</p>{%- endif -%}
         <a href="{{ b.settings.link | default: '/collections/all' }}" class="btn btn-outline">{{ b.settings.button_label | default: 'Shop' }}</a>
       </article>
       {%- endfor -%}
@@ -325,7 +330,7 @@
   <section class="cta"><div class="cta-in">
     <div class="cta-l">
       <h2>{{ section.settings.final_title | default: 'Choose the formula that fits your golf.' }}</h2>
-      <p>{{ section.settings.final_copy | default: 'Start calm. Stay clear. Choose the AVRO formula that matches your moment on the course.' }}</p>
+      <p>{{ section.settings.final_copy | default: 'Start with calm. Choose Calm, Focus or Energy for the moment ahead.' }}</p>
     </div>
     <div class="cta-btns">
       <a href="{{ section.settings.final_btn1_link | default: '/collections/calm' }}" class="btn">{{ section.settings.final_btn1_label | default: 'Shop Calm' }}</a>
@@ -399,10 +404,12 @@
     { "type": "textarea", "id": "chart_source", "label": "Source / disclaimer" },
 
     { "type": "header", "content": "Use moments" },
-    { "type": "text", "id": "use_title", "label": "Title", "default": "Golf use moments" },
+    { "type": "text", "id": "use_title", "label": "Title", "default": "Golf Use Moments" },
+    { "type": "textarea", "id": "use_copy", "label": "Supporting line", "default": "One calm-first foundation, ready for the moments that shape the golf experience." },
 
     { "type": "header", "content": "Shop" },
-    { "type": "text", "id": "shop_title", "label": "Title", "default": "Shop AVRO for golf" },
+    { "type": "text", "id": "shop_title", "label": "Title", "default": "Shop AVRO for Golf" },
+    { "type": "textarea", "id": "shop_copy", "label": "Supporting line", "default": "Same calm-first base. Three ways to meet the moment." },
 
     { "type": "header", "content": "FAQ" },
     { "type": "text", "id": "faq_title", "label": "Title", "default": "Golf FAQ" },
@@ -449,10 +456,12 @@
     { "type": "product", "name": "Product card", "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
       { "type": "text", "id": "image_fallback", "label": "Image URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" },
-      { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
-      { "type": "textarea", "id": "copy", "label": "Copy" },
-      { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
-      { "type": "url", "id": "link", "label": "Link" }
+  { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
+  { "type": "text", "id": "caffeine", "label": "Caffeine label", "default": "CAFFEINE FREE" },
+  { "type": "textarea", "id": "copy", "label": "Copy" },
+  { "type": "textarea", "id": "best_for", "label": "Best for" },
+  { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
+  { "type": "url", "id": "link", "label": "Link" }
     ]},
     { "type": "testimonial", "name": "Testimonial", "settings": [
       { "type": "textarea", "id": "quote", "label": "Quote" },
@@ -475,13 +484,13 @@
       { "type": "formula_bar", "settings": { "name": "Calm", "addition": "Magnesium", "color": "#4b4d9a" } },
       { "type": "formula_bar", "settings": { "name": "Focus", "addition": "Cognigrape®", "color": "#C13584" } },
       { "type": "formula_bar", "settings": { "name": "Energy", "addition": "Caffeine", "color": "#E8A23D" } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-golf.png", "title": "First Tee", "copy": "For a pre-round routine before the opening shot." } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png", "title": "Tournament Day", "copy": "For pressure-sensitive rounds where composure matters." } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-focus-without-overload.png", "title": "Practice Sessions", "copy": "For focused range work, lessons, or structured practice." } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/social-composure.png", "title": "Clubhouse + Social", "copy": "For alcohol-free social moments, travel days, and post-round wind down." } },
-      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "name": "AVRO Calm", "copy": "Caffeine-free composure for the moments that matter.*", "button_label": "Shop Calm", "link": "/collections/calm" } },
-      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "name": "AVRO Focus", "copy": "Caffeine-free clarity for focused range work and rounds.*", "button_label": "Shop Focus", "link": "/collections/focus" } },
-      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "name": "AVRO Energy", "copy": "Natural caffeine with a calm-first foundation.*", "button_label": "Shop Energy", "link": "/collections/energy" } },
+      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-golf.png", "title": "First Tee", "copy": "A simple pre-round ritual before the opening shot." } },
+      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png", "title": "Tournament Day", "copy": "Preparation for pressure-sensitive rounds when composure matters from the start." } },
+      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-focus-without-overload.png", "title": "Practice Session", "copy": "For range work, coaching sessions and structured practice." } },
+      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/social-composure.png", "title": "Clubhouse + Social", "copy": "An alcohol-free option for post-round conversations, travel days and social golf moments." } },
+      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "name": "AVRO Calm", "caffeine": "CAFFEINE FREE", "copy": "Calm support for pressure-sensitive golf moments.", "best_for": "First tees, tournament rounds, lessons and moments when composure matters.", "button_label": "Shop Calm", "link": "/collections/calm" } },
+      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "name": "AVRO Focus", "caffeine": "CAFFEINE FREE", "copy": "Calm-first preparation with added support for clear, attentive focus.", "best_for": "Coaching sessions, club fitting, range work and structured practice.", "button_label": "Shop Focus", "link": "/collections/focus" } },
+      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "name": "AVRO Energy", "caffeine": "WITH NATURAL CAFFEINE", "copy": "Calm-first preparation with natural caffeine for demanding golf days.", "best_for": "Early tee times, longer rounds, travel days and competition.", "button_label": "Shop Energy", "link": "/collections/energy" } },
       { "type": "testimonial", "settings": { "quote": "Locked in on the first tee without the jitters. This is part of my pre-round routine now.", "name": "Verified Buyer", "role": "AVRO Calm" } },
       { "type": "testimonial", "settings": { "quote": "Clear and composed through the back nine. Exactly what I wanted.", "name": "Verified Buyer", "role": "AVRO Focus" } },
       { "type": "testimonial", "settings": { "quote": "Steady energy for an early tee time with no crash later. Love it.", "name": "Verified Buyer", "role": "AVRO Energy" } },
