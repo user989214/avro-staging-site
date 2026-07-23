@@ -1,11 +1,10 @@
-import { cohortData } from "@/lib/data"
-import { CohortPage } from "@/components/cohort-page"
+import { GolfPage as GolfExperience } from "@/components/golf-page"
 
 export const metadata = {
-  title: "Golf | AVRO",
-  description: "AVRO supports calm, clarity, and composure before golf moments where state matters.",
+  title: "Calm Performance for Golf | AVRO",
+  description: "Prepare for lessons, practice and competition with AVRO’s calm-first formulas for golf.",
 }
 
 export default function GolfPage() {
-  return <CohortPage data={cohortData.golf} />
+  return <GolfExperience />
 }

@@ -17,14 +17,17 @@
 {%- endcomment -%}
 
 {% style %}
+  @font-face { font-family:"Gotham Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gotham-Bold-LAXKAYCVkw0bMCVe5ufvnj7iBMQpDj.otf") format("opentype"); font-weight:700; font-display:swap; }
+  @font-face { font-family:"Gotham Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gotham-Black-ECCJ09tZI68ZEKAZ3KWlzTegkXrA3z.otf") format("opentype"); font-weight:900; font-display:swap; }
+  @font-face { font-family:"Work Sans Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WorkSans-Regular-6zzrMeSw8tuNIAsKiWT2YQMQzhBMHN.ttf") format("truetype"); font-weight:400; font-display:swap; }
   #avro-golf-{{ section.id }} {
     --base: #FFFFFF; --base-light: #F2F2F2; --base-deep: #EDEDED; --bone: #FFFFFF;
     --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --divider: #E2E2E2;
     --avro-blue: #94C6D4; --accent: #BDD637; --accent-deep: #8CA22A;
-    font-family: "DM Sans", system-ui, sans-serif; background: var(--base); color: var(--ink); display:block;
+    font-family:"Work Sans Golf",sans-serif; background:var(--base); color:var(--ink); display:block;
   }
   #avro-golf-{{ section.id }} * { box-sizing: border-box; }
-  #avro-golf-{{ section.id }} h1,#avro-golf-{{ section.id }} h2,#avro-golf-{{ section.id }} h3 { margin:0; }
+  #avro-golf-{{ section.id }} h1,#avro-golf-{{ section.id }} h2,#avro-golf-{{ section.id }} h3,#avro-golf-{{ section.id }} .btn { margin:0; font-family:"Gotham Golf",sans-serif; }
   #avro-golf-{{ section.id }} img { max-width:100%; }
   #avro-golf-{{ section.id }} a { text-decoration:none; }
 
@@ -180,7 +183,7 @@
       </div>
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="hero-content">
-        <h1>{{ section.settings.hero_title | default: 'Built for the State Before the Round.' }}</h1>
+        <h1>{{ section.settings.hero_title | default: 'Golf Performance Begins Before the First Swing.' }}</h1>
         <p>{{ section.settings.hero_copy | default: 'AVRO supports calm, clarity, and composure before golf moments where state matters, from the first tee to the final stretch.*' }}</p>
         <div class="hero-btns">
           <a href="{{ section.settings.hero_btn1_link | default: '/collections/all' }}" class="btn btn-outline">{{ section.settings.hero_btn1_label | default: 'Choose Your Formula' }}</a>
@@ -192,14 +195,14 @@
 
   {%- comment -%} MOMENT HEADING {%- endcomment -%}
   <section class="sec"><div class="wrap"><div class="head">
-    <h2>{{ section.settings.moment_title | default: 'Golf is a game of state.' }}</h2>
+    <h2>{{ section.settings.moment_title | default: 'Golf can get loud in your head fast.' }}</h2>
     <p>{{ section.settings.moment_copy }}</p>
   </div></div></section>
 
   {%- comment -%} WHY (reasons) {%- endcomment -%}
   {%- if reasons.size > 0 -%}
   <section class="sec" style="padding-top:0;"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.why_title | default: 'Why AVRO fits golf' }}</h2></div>
+    <div class="head"><h2>{{ section.settings.why_title | default: 'Why AVRO Matters in Golf' }}</h2></div>
     <div class="cards c3">
       {%- for b in reasons -%}
       <div class="icard" {{ b.shopify_attributes }}>
@@ -215,7 +218,7 @@
   {%- comment -%} HOW TO USE {%- endcomment -%}
   {%- if steps.size > 0 -%}
   <section class="sec"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.how_title | default: 'How to use before golf' }}</h2></div>
+    <div class="head"><h2>{{ section.settings.how_title | default: 'How to Use AVRO Before Golf' }}</h2></div>
     <div class="steps">
       {%- for b in steps -%}
       <article class="step" {{ b.shopify_attributes }}>
@@ -232,7 +235,7 @@
   {%- comment -%} FORMULA LOGIC GRAPH {%- endcomment -%}
   {%- if bars.size > 0 -%}
   <section class="sec" style="padding-top:0;"><div class="wrap"><div class="graph">
-    <h2>{{ section.settings.graph_title | default: 'Every formula starts calm first.' }}</h2>
+    <h2>{{ section.settings.graph_title | default: 'Science + Formula Logic' }}</h2>
     <p class="sub">{{ section.settings.graph_sub | default: 'Same calm-first base. Different active addition.' }}</p>
     {%- for b in bars -%}
     <div class="grow" {{ b.shopify_attributes }}>
@@ -321,7 +324,7 @@
   {%- comment -%} FINAL CTA {%- endcomment -%}
   <section class="cta"><div class="cta-in">
     <div class="cta-l">
-      <h2>{{ section.settings.final_title | default: 'Choose the formula that fits your round.' }}</h2>
+      <h2>{{ section.settings.final_title | default: 'Choose the formula that fits your golf.' }}</h2>
       <p>{{ section.settings.final_copy | default: 'Start calm. Stay clear. Choose the AVRO formula that matches your moment on the course.' }}</p>
     </div>
     <div class="cta-btns">
@@ -363,7 +366,7 @@
   "tag": "section",
   "settings": [
     { "type": "header", "content": "Hero" },
-    { "type": "text", "id": "hero_title", "label": "Title", "default": "Built for the State Before the Round." },
+    { "type": "text", "id": "hero_title", "label": "Title", "default": "Golf Performance Begins Before the First Swing." },
     { "type": "textarea", "id": "hero_copy", "label": "Copy" },
     { "type": "text", "id": "hero_alt", "label": "Hero image alt" },
     { "type": "image_picker", "id": "hero_images", "label": "Hero image (override slide 1)", "info": "Leave empty to use the 3 bundled golf hero images. Picking one shows a single static image." },
@@ -373,17 +376,17 @@
     { "type": "url", "id": "hero_btn2_link", "label": "Button 2 link" },
 
     { "type": "header", "content": "Moment heading" },
-    { "type": "text", "id": "moment_title", "label": "Title", "default": "Golf is a game of state." },
+    { "type": "text", "id": "moment_title", "label": "Title", "default": "Golf can get loud in your head fast." },
     { "type": "textarea", "id": "moment_copy", "label": "Copy" },
 
     { "type": "header", "content": "Why AVRO fits" },
-    { "type": "text", "id": "why_title", "label": "Title", "default": "Why AVRO fits golf" },
+    { "type": "text", "id": "why_title", "label": "Title", "default": "Why AVRO Matters in Golf" },
 
     { "type": "header", "content": "How to use" },
-    { "type": "text", "id": "how_title", "label": "Title", "default": "How to use before golf" },
+    { "type": "text", "id": "how_title", "label": "Title", "default": "How to Use AVRO Before Golf" },
 
     { "type": "header", "content": "Formula graph" },
-    { "type": "text", "id": "graph_title", "label": "Title", "default": "Every formula starts calm first." },
+    { "type": "text", "id": "graph_title", "label": "Title", "default": "Science + Formula Logic" },
     { "type": "text", "id": "graph_sub", "label": "Subheading", "default": "Same calm-first base. Different active addition." },
 
     { "type": "header", "content": "Research graphic" },
@@ -405,7 +408,7 @@
     { "type": "text", "id": "faq_title", "label": "Title", "default": "Golf FAQ" },
 
     { "type": "header", "content": "Final CTA" },
-    { "type": "text", "id": "final_title", "label": "Title", "default": "Choose the formula that fits your round." },
+    { "type": "text", "id": "final_title", "label": "Title", "default": "Choose the formula that fits your golf." },
     { "type": "textarea", "id": "final_copy", "label": "Copy" },
     { "type": "text", "id": "final_btn1_label", "label": "Button 1 label", "default": "Shop Calm" },
     { "type": "url", "id": "final_btn1_link", "label": "Button 1 link" },
@@ -463,12 +466,12 @@
   ],
   "presets": [
     { "name": "AVRO — Golf", "blocks": [
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png", "title": "Calm Before Pressure", "copy": "Supports a calmer state before pressure-sensitive golf moments." } },
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-clear-thinking.png", "title": "Clarity Without the Edge", "copy": "Supports clear focus without turning your pre-round routine into stimulant overload." } },
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-golf.png", "title": "Built for Ritual", "copy": "A simple pre-round ritual designed for golfers who know state matters." } },
-      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png", "title": "Mix", "copy": "Mix one stick with water." } },
-      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-stir.png", "title": "Time it", "copy": "Drink about 30 minutes before your round, practice session, or golf moment." } },
-      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-drink.png", "title": "Show up", "copy": "Step in with a calmer, clearer routine." } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png", "title": "For Golfers", "copy": "A simple way to prepare for the moments when calm, clarity and composure matter." } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-clear-thinking.png", "title": "For Coaches", "copy": "Supports a golfer’s readiness to receive, process and apply feedback." } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-golf.png", "title": "For Golf Businesses", "copy": "Adds a differentiated golfer experience designed to strengthen engagement and loyalty." } },
+      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-drink.png", "title": "Choose", "copy": "Select Calm, Focus or Energy based on the moment ahead." } },
+      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png", "title": "Mix", "copy": "Mix one stick with 250–300 mL of water." } },
+      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-stir.png", "title": "Time It", "copy": "Drink approximately 30 minutes before your lesson, practice session or tee time." } },
       { "type": "formula_bar", "settings": { "name": "Calm", "addition": "Magnesium", "color": "#4b4d9a" } },
       { "type": "formula_bar", "settings": { "name": "Focus", "addition": "Cognigrape®", "color": "#C13584" } },
       { "type": "formula_bar", "settings": { "name": "Energy", "addition": "Caffeine", "color": "#E8A23D" } },
@@ -482,9 +485,9 @@
       { "type": "testimonial", "settings": { "quote": "Locked in on the first tee without the jitters. This is part of my pre-round routine now.", "name": "Verified Buyer", "role": "AVRO Calm" } },
       { "type": "testimonial", "settings": { "quote": "Clear and composed through the back nine. Exactly what I wanted.", "name": "Verified Buyer", "role": "AVRO Focus" } },
       { "type": "testimonial", "settings": { "quote": "Steady energy for an early tee time with no crash later. Love it.", "name": "Verified Buyer", "role": "AVRO Energy" } },
-      { "type": "faq", "settings": { "q": "Which AVRO formula is best for golf?", "a": "The right AVRO formula depends on your tee time, caffeine preference, and the type of support you want.\nCalm is caffeine-free and designed for moments when composure matters.\nFocus is caffeine-free and supports clarity and concentration.\nEnergy provides 120 mg of natural caffeine with AVRO's calm-first foundation.*" } },
-      { "type": "faq", "settings": { "q": "When should I take AVRO before a round?", "a": "Many golfers choose to take one stick about 30 minutes before a round, lesson, practice session, or competition. Mix with water and use as directed on the package." } },
-      { "type": "faq", "settings": { "q": "Is AVRO a sports-performance supplement?", "a": "AVRO is a calm-first performance drink mix designed to support clarity, composure, and the right headspace before pressure-filled moments.*" } }
+      { "type": "faq", "settings": { "q": "Which AVRO formula is best for golf?", "a": "Choose based on the moment ahead. Calm is caffeine-free and designed for composure. Focus is caffeine-free and adds support for clear, attentive focus. Energy combines AVRO’s calm-first foundation with natural caffeine for longer or more demanding golf days." } },
+      { "type": "faq", "settings": { "q": "When should I take AVRO before a round?", "a": "Mix one stick with 250–300 mL of water and drink it approximately 30 minutes before a lesson, practice session, tee time or competition. Follow the directions on the package." } },
+      { "type": "faq", "settings": { "q": "What role does AVRO play in golf performance?", "a": "AVRO supports the calm, clear and composed headspace golfers seek. It complements coaching, practice, fitting and technology—it does not replace them or claim to improve the swing or score." } }
     ]}
   ]
 }
