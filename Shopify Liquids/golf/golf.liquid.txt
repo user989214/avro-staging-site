@@ -1,18 +1,17 @@
 {%- comment -%}
   ============================================================================
-  AVRO — GOLF use-case page  (Shopify Online Store 2.0 section, standalone)
+  AVRO — GOLF landing page  (Shopify Online Store 2.0 section, standalone)
   ----------------------------------------------------------------------------
-  THEME: light / green accent (Fuji Apple #BDD637)
+  Mirrors the Figma / React /golf design: full-bleed hero + pre-golf ritual bar,
+  cream editorial background, dark "how to use" + "shop" sections, lime-tile
+  science grid, photo use-moment cards, white product cards and a black closing
+  CTA. Photos load from permanent blob URLs; icons from the site deployment.
   HOW TO USE
   1. Create sections/avro-golf.liquid and paste this ENTIRE file in.
-  2. Images render from hardcoded live-site URLs by default — no asset upload
-     needed (including the research graphic iframe). Pick an image in the
-     editor to override any of them.
-  3. Add to a page: create a page using a template that renders this section,
-     or drop "AVRO — Golf" onto any page in the theme editor.
-  4. Headings, body copy, button labels/links and images are editable. The
-     reason cards, how-to steps, use-moment cards, formula bars, product cards,
-     testimonials and FAQ rows are add/remove/reorder BLOCKS.
+  2. Images render from hardcoded URLs by default — pick an image in the editor
+     to override any of them.
+  3. Headings, body copy, buttons and images are editable. Reason cards, steps,
+     science cards, use-moments, product cards and FAQ rows are BLOCKS.
   ============================================================================
 {%- endcomment -%}
 
@@ -20,291 +19,300 @@
   @font-face { font-family:"Gotham Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gotham-Bold-LAXKAYCVkw0bMCVe5ufvnj7iBMQpDj.otf") format("opentype"); font-weight:700; font-display:swap; }
   @font-face { font-family:"Gotham Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gotham-Black-ECCJ09tZI68ZEKAZ3KWlzTegkXrA3z.otf") format("opentype"); font-weight:900; font-display:swap; }
   @font-face { font-family:"Work Sans Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WorkSans-Regular-6zzrMeSw8tuNIAsKiWT2YQMQzhBMHN.ttf") format("truetype"); font-weight:400; font-display:swap; }
+  @font-face { font-family:"Work Sans Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WorkSans-Regular-6zzrMeSw8tuNIAsKiWT2YQMQzhBMHN.ttf") format("truetype"); font-weight:600; font-display:swap; }
+
   #avro-golf-{{ section.id }} {
-    --base: #FFFFFF; --base-light: #F2F2F2; --base-deep: #EDEDED; --bone: #FFFFFF;
-    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --divider: #E2E2E2;
-    --avro-blue: #94C6D4; --accent: #BDD637; --accent-deep: #8CA22A;
-    font-family:"Work Sans Golf",sans-serif; background:var(--base); color:var(--ink); display:block;
+    --cream:#F3F0E8; --card:#FAFAF7; --line:#DEDAD0; --ink:#161616; --white:#FFFFFF;
+    --muted:#6C6957; --accent:#BDD637; --olive:#9DB12E; --blue:#94C6D4;
+    font-family:"Work Sans Golf",sans-serif; background:var(--cream); color:var(--ink); display:block;
   }
-  #avro-golf-{{ section.id }} * { box-sizing: border-box; }
-  #avro-golf-{{ section.id }} h1,#avro-golf-{{ section.id }} h2,#avro-golf-{{ section.id }} h3,#avro-golf-{{ section.id }} .btn { margin:0; font-family:"Gotham Golf",sans-serif; }
+  #avro-golf-{{ section.id }} * { box-sizing:border-box; }
+  #avro-golf-{{ section.id }} h1,#avro-golf-{{ section.id }} h2,#avro-golf-{{ section.id }} h3 { margin:0; font-family:"Gotham Golf",sans-serif; }
+  #avro-golf-{{ section.id }} p { margin:0; }
   #avro-golf-{{ section.id }} img { max-width:100%; }
   #avro-golf-{{ section.id }} a { text-decoration:none; }
+  #avro-golf-{{ section.id }} h1 { font-size:clamp(38px,4.6vw,54px); line-height:1.02; letter-spacing:-.02em; }
+  #avro-golf-{{ section.id }} h2 { font-size:clamp(26px,3vw,31px); line-height:1.22; letter-spacing:-.01em; }
+  #avro-golf-{{ section.id }} h3 { font-size:clamp(17px,1.4vw,19px); line-height:1.2; }
+  #avro-golf-{{ section.id }} .body { font-size:14px; line-height:1.6; }
 
-  #avro-golf-{{ section.id }} .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:700; border-radius:999px; cursor:pointer; min-height:48px; padding:0 28px; font-size:16px; transition:background-color .2s, color .2s, border-color .2s; }
-  #avro-golf-{{ section.id }} .btn-solid { background:var(--charcoal); color:var(--bone); border:2px solid var(--charcoal); }
-  #avro-golf-{{ section.id }} .btn-solid:hover { background:transparent; color:var(--charcoal); }
-  #avro-golf-{{ section.id }} .btn-outline { background:transparent; color:var(--charcoal); border:2px solid var(--charcoal); }
-  #avro-golf-{{ section.id }} .btn-outline:hover { background:var(--charcoal); color:var(--bone); }
-  #avro-golf-{{ section.id }} .btn-accent { background:var(--accent); color:var(--charcoal); border:2px solid var(--accent); }
-  #avro-golf-{{ section.id }} .btn-accent:hover { background:transparent; color:var(--accent-deep); }
+  /* Eyebrow */
+  #avro-golf-{{ section.id }} .kicker { font-size:12px; font-weight:600; line-height:1.2; letter-spacing:.14em; text-transform:uppercase; color:var(--olive); }
+  #avro-golf-{{ section.id }} .head .kicker::before { content:"— "; }
+  #avro-golf-{{ section.id }} .dark .kicker { color:var(--accent); }
+
+  /* Buttons */
+  #avro-golf-{{ section.id }} .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:"Work Sans Golf",sans-serif; font-weight:600; font-size:14px; border-radius:999px; cursor:pointer; min-height:44px; padding:0 26px; border:1px solid currentColor; transition:background-color .2s,color .2s,border-color .2s; }
+  #avro-golf-{{ section.id }} .btn-accent { background:var(--accent); color:#000; border-color:var(--accent); }
+  #avro-golf-{{ section.id }} .btn-accent:hover { background:var(--white); color:#000; border-color:var(--white); }
+  #avro-golf-{{ section.id }} .btn-ghost { background:transparent; color:var(--white); border-color:rgba(255,255,255,.7); }
+  #avro-golf-{{ section.id }} .btn-ghost:hover { background:var(--white); color:#000; border-color:var(--white); }
+  #avro-golf-{{ section.id }} .btn-dark { background:#000; color:var(--white); border-color:#000; }
+  #avro-golf-{{ section.id }} .btn-dark:hover { background:var(--accent); color:#000; border-color:var(--accent); }
 
   /* Hero */
-  #avro-golf-{{ section.id }} .hero { width:100%; }
-  #avro-golf-{{ section.id }} .hero-card { position:relative; width:calc(100% - 32px); margin:0 auto 16px; aspect-ratio:16/9; overflow:hidden; border-radius:20px; background:var(--bone); }
+  #avro-golf-{{ section.id }} .hero { position:relative; overflow:hidden; min-height:min(760px,90vh); color:var(--white); display:flex; align-items:center; }
   #avro-golf-{{ section.id }} .hero-imgs { position:absolute; inset:0; }
   #avro-golf-{{ section.id }} .hero-imgs img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .8s ease-in-out; }
   #avro-golf-{{ section.id }} .hero-imgs img.on { opacity:1; }
-  #avro-golf-{{ section.id }} .hero-imgs .m { display:none; }
-  #avro-golf-{{ section.id }} .hero-scrim { position:absolute; inset:0; pointer-events:none; background:linear-gradient(100deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.62) 32%, rgba(255,255,255,.28) 58%, rgba(255,255,255,0) 78%); }
-  #avro-golf-{{ section.id }} .hero-content { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:clamp(24px,5vw,80px) clamp(20px,5vw,64px); }
-  #avro-golf-{{ section.id }} .hero-content h1 { font-weight:900; font-size:clamp(36px,5.5vw,72px); line-height:.98; letter-spacing:-.025em; color:var(--ink); margin-bottom:16px; max-width:560px; }
-  #avro-golf-{{ section.id }} .hero-content p { font-weight:400; font-size:clamp(17px,2vw,20px); line-height:1.55; color:var(--ink); max-width:480px; margin-bottom:28px; }
-  #avro-golf-{{ section.id }} .hero-btns { display:flex; gap:10px; flex-wrap:wrap; }
+  #avro-golf-{{ section.id }} .hero-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(15,20,15,.72),rgba(15,20,15,.1) 66%); }
+  #avro-golf-{{ section.id }} .hero-copy { position:relative; z-index:1; width:min(1440px,100%); margin:0 auto; padding:clamp(64px,9vw,128px) clamp(24px,5vw,72px) 160px; display:flex; flex-direction:column; align-items:flex-start; gap:22px; }
+  #avro-golf-{{ section.id }} .hero-copy h1 { max-width:640px; color:var(--white); }
+  #avro-golf-{{ section.id }} .hero-copy .body { max-width:560px; }
+  #avro-golf-{{ section.id }} .hero-copy .kicker { color:var(--accent); padding:9px 17px; border:1px solid var(--accent); border-radius:999px; }
+  #avro-golf-{{ section.id }} .hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
+
+  /* Ritual bar */
+  #avro-golf-{{ section.id }} .ritual { position:absolute; z-index:2; inset:auto 0 0; min-height:80px; display:grid; grid-template-columns:1.1fr repeat(3,1fr); background:#000; }
+  #avro-golf-{{ section.id }} .ritual > p,#avro-golf-{{ section.id }} .ritual > div { padding:20px clamp(16px,2vw,24px); display:flex; flex-direction:column; justify-content:center; }
+  #avro-golf-{{ section.id }} .ritual > div { gap:2px; }
+  #avro-golf-{{ section.id }} .ritual > div + div,#avro-golf-{{ section.id }} .ritual > p + div { border-left:1px solid rgba(255,255,255,.18); }
+  #avro-golf-{{ section.id }} .ritual .rlabel { color:var(--accent); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
+  #avro-golf-{{ section.id }} .ritual b { font-family:"Gotham Golf"; font-size:14px; color:var(--white); }
+  #avro-golf-{{ section.id }} .ritual span { font-size:12px; color:rgba(255,255,255,.6); }
+
+  /* Pressure tile */
+  #avro-golf-{{ section.id }} .pressure { min-height:620px; display:grid; grid-template-columns:1fr 1fr; }
+  #avro-golf-{{ section.id }} .pressure-copy { padding:clamp(56px,7vw,112px) clamp(24px,5vw,72px); display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:22px; }
+  #avro-golf-{{ section.id }} .pressure-img { position:relative; min-height:480px; }
+  #avro-golf-{{ section.id }} .pressure-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  #avro-golf-{{ section.id }} .callout { display:flex; align-items:center; gap:16px; margin-top:8px; padding-top:24px; border-top:1px solid var(--line); font-family:"Gotham Golf"; font-size:14px; }
+  #avro-golf-{{ section.id }} .callout .ic { width:52px; height:52px; flex-shrink:0; }
+  #avro-golf-{{ section.id }} .callout .ic span { display:block; width:52px; height:52px; background:var(--olive); -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; -webkit-mask-size:contain; mask-size:contain; }
 
   /* Generic section */
-  #avro-golf-{{ section.id }} .sec { width:100%; padding:clamp(56px,8vw,120px) clamp(20px,5vw,64px); }
-  #avro-golf-{{ section.id }} .wrap { max-width:1320px; margin:0 auto; }
-  #avro-golf-{{ section.id }} .head { max-width:760px; margin:0 auto 56px; text-align:center; }
-  #avro-golf-{{ section.id }} .head.left { margin-left:0; text-align:left; }
-  #avro-golf-{{ section.id }} .head h2 { font-weight:900; font-size:clamp(32px,4.5vw,52px); line-height:1.02; letter-spacing:-.02em; color:var(--ink); margin-bottom:14px; }
-  #avro-golf-{{ section.id }} .head p { font-weight:400; font-size:clamp(16px,1.4vw,20px); line-height:1.55; color:var(--warm-gray); }
+  #avro-golf-{{ section.id }} .sec { padding:clamp(64px,7vw,112px) clamp(24px,5vw,72px); }
+  #avro-golf-{{ section.id }} .wrap { max-width:1440px; margin:0 auto; }
+  #avro-golf-{{ section.id }} .head { max-width:640px; margin-bottom:40px; display:flex; flex-direction:column; gap:16px; }
+  #avro-golf-{{ section.id }} .head .sub { color:var(--muted); }
+  #avro-golf-{{ section.id }} .dark { background:#000; color:var(--white); }
+  #avro-golf-{{ section.id }} .dark h2,#avro-golf-{{ section.id }} .dark h3 { color:var(--white); }
+  #avro-golf-{{ section.id }} .dark .head .sub { color:rgba(255,255,255,.7); }
 
-  /* Info cards grid */
-  #avro-golf-{{ section.id }} .cards { display:grid; gap:24px; }
-  #avro-golf-{{ section.id }} .cards.c3 { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
-  #avro-golf-{{ section.id }} .cards.c4 { grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
-  #avro-golf-{{ section.id }} .icard { background:var(--base-light); border-radius:20px; padding:clamp(28px,3vw,44px); }
-  #avro-golf-{{ section.id }} .icard .ic { width:56px; height:56px; margin-bottom:16px; }
-  #avro-golf-{{ section.id }} .icard .ic span { display:block; width:56px; height:56px; background:var(--accent-deep); -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; -webkit-mask-size:contain; mask-size:contain; }
-  #avro-golf-{{ section.id }} .icard h3 { font-weight:700; font-size:clamp(18px,1.6vw,22px); line-height:1.1; color:var(--ink); margin-bottom:10px; }
-  #avro-golf-{{ section.id }} .icard p { font-weight:400; font-size:clamp(14px,1.1vw,16px); line-height:1.5; color:var(--warm-gray); margin:0; }
+  /* Grids */
+  #avro-golf-{{ section.id }} .g3,#avro-golf-{{ section.id }} .g4 { display:grid; gap:24px; }
+  #avro-golf-{{ section.id }} .g3 { grid-template-columns:repeat(3,1fr); }
+  #avro-golf-{{ section.id }} .g4 { grid-template-columns:repeat(4,1fr); }
 
-  /* Steps */
-  #avro-golf-{{ section.id }} .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
-  #avro-golf-{{ section.id }} .step { position:relative; padding:28px; background:var(--base-light); border-radius:20px; }
-  #avro-golf-{{ section.id }} .step .num { display:grid; place-items:center; width:30px; height:30px; margin-bottom:18px; border-radius:999px; font-weight:700; font-size:14px; background:var(--charcoal); color:var(--bone); }
-  #avro-golf-{{ section.id }} .step .ic { width:72px; height:72px; margin-bottom:12px; }
-  #avro-golf-{{ section.id }} .step .ic span { display:block; width:72px; height:72px; background:var(--accent-deep); -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; -webkit-mask-size:contain; mask-size:contain; }
-  #avro-golf-{{ section.id }} .step h3 { font-weight:700; font-size:18px; color:var(--ink); margin-bottom:8px; }
-  #avro-golf-{{ section.id }} .step p { font-weight:400; font-size:15px; line-height:1.5; color:var(--warm-gray); margin:0; }
+  /* Reason cards */
+  #avro-golf-{{ section.id }} .reason { position:relative; padding:29px 25px; background:var(--card); border:1px solid var(--line); border-radius:16px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
+  #avro-golf-{{ section.id }} .reason .num { position:absolute; top:29px; right:25px; color:var(--olive); font-size:12px; font-weight:600; letter-spacing:.08em; }
+  #avro-golf-{{ section.id }} .reason .ic { width:64px; height:64px; }
+  #avro-golf-{{ section.id }} .reason .ic span { display:block; width:64px; height:64px; background:var(--olive); -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; -webkit-mask-size:contain; mask-size:contain; }
+  #avro-golf-{{ section.id }} .reason h3 { margin-top:14px; }
+  #avro-golf-{{ section.id }} .reason p { color:var(--muted); }
 
-  /* Formula logic graph */
-  #avro-golf-{{ section.id }} .graph { background:var(--base-light); border-radius:20px; padding:clamp(24px,3vw,40px); }
-  #avro-golf-{{ section.id }} .graph h2 { font-weight:900; font-size:clamp(22px,2.6vw,36px); line-height:1.05; color:var(--ink); margin-bottom:6px; }
-  #avro-golf-{{ section.id }} .graph .sub { font-weight:400; font-size:14px; color:var(--warm-gray); margin-bottom:24px; }
-  #avro-golf-{{ section.id }} .grow { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
-  #avro-golf-{{ section.id }} .grow .top { display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
-  #avro-golf-{{ section.id }} .grow .nm { font-weight:700; font-size:16px; }
-  #avro-golf-{{ section.id }} .grow .lg { font-weight:500; font-size:11px; color:var(--warm-gray); text-transform:uppercase; letter-spacing:.06em; }
-  #avro-golf-{{ section.id }} .gbar { display:flex; gap:4px; height:14px; }
-  #avro-golf-{{ section.id }} .gbar span { border-radius:999px; }
+  /* Steps (dark) */
+  #avro-golf-{{ section.id }} .steps { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid rgba(255,255,255,.18); }
+  #avro-golf-{{ section.id }} .step { padding:40px; display:flex; flex-direction:column; align-items:flex-start; gap:9px; }
+  #avro-golf-{{ section.id }} .step + .step { border-left:1px solid rgba(255,255,255,.18); }
+  #avro-golf-{{ section.id }} .step .top { width:100%; display:flex; align-items:flex-start; justify-content:space-between; }
+  #avro-golf-{{ section.id }} .step .num { font-family:"Gotham Golf"; font-weight:900; font-size:42px; line-height:1; color:var(--accent); }
+  #avro-golf-{{ section.id }} .step .ic { width:70px; height:70px; }
+  #avro-golf-{{ section.id }} .step .ic span { display:block; width:70px; height:70px; background:var(--accent); -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; -webkit-mask-size:contain; mask-size:contain; }
+  #avro-golf-{{ section.id }} .step h3 { font-size:16px; }
+  #avro-golf-{{ section.id }} .step p { color:rgba(255,255,255,.7); }
 
-  /* Embedded graphic */
-  #avro-golf-{{ section.id }} .graphic-frame { width:100%; border:0; display:block; color-scheme:light; border-radius:20px; }
+  /* Science cards */
+  #avro-golf-{{ section.id }} .sci { padding:25px 21px; background:var(--card); border:1px solid var(--line); border-radius:16px; display:flex; flex-direction:column; align-items:flex-start; gap:7px; }
+  #avro-golf-{{ section.id }} .sci .ic { width:52px; height:52px; padding:10px; background:var(--accent); border-radius:14px; display:grid; place-items:center; }
+  #avro-golf-{{ section.id }} .sci .ic span { display:block; width:32px; height:32px; background:#000; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; -webkit-mask-size:contain; mask-size:contain; }
+  #avro-golf-{{ section.id }} .sci small { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--olive); }
+  #avro-golf-{{ section.id }} .sci h3 { margin-top:11px; }
+  #avro-golf-{{ section.id }} .sci p { margin-top:4px; color:var(--muted); }
+  #avro-golf-{{ section.id }} .foundation { margin-top:32px; padding-top:32px; border-top:1px solid var(--line); color:var(--muted); }
+
+  /* Use moments */
+  #avro-golf-{{ section.id }} .moment { overflow:hidden; background:var(--card); border:1px solid var(--line); border-radius:16px; display:flex; flex-direction:column; gap:10px; padding-bottom:24px; }
+  #avro-golf-{{ section.id }} .moment .ph { position:relative; aspect-ratio:4/5; overflow:hidden; }
+  #avro-golf-{{ section.id }} .moment .ph img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  #avro-golf-{{ section.id }} .moment h3 { font-size:16px; padding:0 20px; }
+  #avro-golf-{{ section.id }} .moment p { padding:0 20px; color:var(--muted); }
 
   /* Products */
-  #avro-golf-{{ section.id }} .pc-row { display:flex; flex-direction:column; gap:24px; }
-  #avro-golf-{{ section.id }} .pc { display:flex; flex-direction:column; gap:14px; background:var(--base-light); border-radius:20px; padding:clamp(14px,1.8vw,20px); }
-  #avro-golf-{{ section.id }} .pc-thumb { border-radius:16px; aspect-ratio:1/1; overflow:hidden; background:#E5E5E5; }
-  #avro-golf-{{ section.id }} .pc-thumb img { width:100%; height:100%; object-fit:cover; }
-  #avro-golf-{{ section.id }} .pc h3 { font-weight:900; font-size:clamp(22px,2vw,30px); color:var(--ink); }
-  #avro-golf-{{ section.id }} .pc p { font-weight:400; font-size:14px; line-height:1.45; color:var(--warm-gray); margin:0; flex:1; }
-  #avro-golf-{{ section.id }} .pc .pc-tag { font-family:"Gotham Golf",sans-serif; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#8ca22a; }
-  #avro-golf-{{ section.id }} .pc .pc-best { font-size:13px; line-height:1.45; color:var(--warm-gray); margin:0; flex:none; }
-  #avro-golf-{{ section.id }} .pc .pc-best b { color:var(--ink); }
-  #avro-golf-{{ section.id }} .pc .btn { width:100%; }
-  @media (min-width:640px){ #avro-golf-{{ section.id }} .pc-row { flex-direction:row; } #avro-golf-{{ section.id }} .pc { flex:1 1 0; } }
-
-  /* Testimonials */
-  #avro-golf-{{ section.id }} .tg { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; }
-  #avro-golf-{{ section.id }} .tc { background:var(--base-light); border-radius:24px; padding:clamp(24px,3vw,36px); }
-  #avro-golf-{{ section.id }} .tc .stars { display:flex; gap:2px; margin-bottom:12px; }
-  #avro-golf-{{ section.id }} .tc .stars svg { fill:var(--accent-deep); }
-  #avro-golf-{{ section.id }} .tc p { font-weight:400; font-size:clamp(17px,1.5vw,20px); line-height:1.4; color:rgba(0,0,0,.75); margin-bottom:16px; }
-  #avro-golf-{{ section.id }} .tc strong { font-weight:700; font-size:17px; color:var(--ink); display:block; }
-  #avro-golf-{{ section.id }} .tc .role { font-weight:500; font-size:14px; color:rgba(0,0,0,.55); }
+  #avro-golf-{{ section.id }} .prods { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  #avro-golf-{{ section.id }} .pc { padding:20px 24px 24px; background:var(--white); color:#000; border-radius:24px; display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+  #avro-golf-{{ section.id }} .pc .tag { align-self:flex-start; padding:6px 12px; background:#EDEDEA; color:#000; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; border-radius:999px; }
+  #avro-golf-{{ section.id }} .pc .thumb { width:265px; max-width:100%; margin:14px auto 10px; position:relative; aspect-ratio:1/1; }
+  #avro-golf-{{ section.id }} .pc .thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+  #avro-golf-{{ section.id }} .pc h3 { font-family:"Gotham Golf"; }
+  #avro-golf-{{ section.id }} .pc .desc { font-weight:600; }
+  #avro-golf-{{ section.id }} .pc .best { font-size:14px; line-height:1.6; color:#000; min-height:4rem; }
+  #avro-golf-{{ section.id }} .pc .best b { display:block; margin-bottom:2px; color:var(--olive); font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; }
+  #avro-golf-{{ section.id }} .pc .btn { width:100%; margin-top:auto; }
 
   /* FAQ */
-  #avro-golf-{{ section.id }} .faq-sec { background:var(--base-deep); }
-  #avro-golf-{{ section.id }} .faq { max-width:860px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
-  #avro-golf-{{ section.id }} .fitem { background:var(--bone); border-radius:16px; overflow:hidden; }
-  #avro-golf-{{ section.id }} .fbtn { width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px; background:transparent; border:none; cursor:pointer; text-align:left; font-weight:700; font-size:clamp(16px,1.4vw,19px); color:var(--ink); }
-  #avro-golf-{{ section.id }} .fchev { transition:transform .25s ease; flex-shrink:0; }
-  #avro-golf-{{ section.id }} .fitem.open .fchev { transform:rotate(180deg); }
+  #avro-golf-{{ section.id }} .faq { display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(40px,6vw,96px); }
+  #avro-golf-{{ section.id }} .faq-intro { display:flex; flex-direction:column; gap:16px; }
+  #avro-golf-{{ section.id }} .faq-intro .sub { color:var(--muted); }
+  #avro-golf-{{ section.id }} .faq-list { display:flex; flex-direction:column; }
+  #avro-golf-{{ section.id }} .fitem { border-top:1px solid var(--line); }
+  #avro-golf-{{ section.id }} .fitem:last-child { border-bottom:1px solid var(--line); }
+  #avro-golf-{{ section.id }} .fbtn { width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:24px 0; background:transparent; border:none; cursor:pointer; text-align:left; font-family:"Gotham Golf"; font-size:clamp(16px,1.4vw,18px); color:var(--ink); }
+  #avro-golf-{{ section.id }} .fsign { flex-shrink:0; font-size:22px; line-height:1; transition:transform .25s ease; }
+  #avro-golf-{{ section.id }} .fitem.open .fsign { transform:rotate(45deg); }
   #avro-golf-{{ section.id }} .fbody { max-height:0; overflow:hidden; transition:max-height .3s ease; }
   #avro-golf-{{ section.id }} .fitem.open .fbody { max-height:520px; }
-  #avro-golf-{{ section.id }} .fbody p { padding:0 24px 22px; font-weight:400; font-size:16px; line-height:1.6; color:var(--warm-gray); margin:0; white-space:pre-line; }
+  #avro-golf-{{ section.id }} .fbody p { padding:0 48px 24px 0; font-size:14px; line-height:1.6; color:var(--muted); white-space:pre-line; }
 
-  /* Final CTA band */
-  #avro-golf-{{ section.id }} .cta { background:var(--accent); padding:clamp(56px,8vw,104px) clamp(20px,4vw,64px); }
-  #avro-golf-{{ section.id }} .cta-in { max-width:1320px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:28px; color:var(--charcoal); }
-  #avro-golf-{{ section.id }} .cta-l { flex:1 1 320px; max-width:560px; }
-  #avro-golf-{{ section.id }} .cta-l h2 { font-weight:900; font-size:clamp(26px,4vw,56px); line-height:1.02; letter-spacing:-.02em; margin-bottom:10px; }
-  #avro-golf-{{ section.id }} .cta-l p { font-weight:500; font-size:clamp(15px,1.3vw,19px); line-height:1.5; color:rgba(21,21,21,.7); }
-  #avro-golf-{{ section.id }} .cta-btns { flex:1 1 280px; display:flex; flex-direction:column; gap:8px; max-width:400px; }
-  #avro-golf-{{ section.id }} .cta-btns .btn { width:100%; background:var(--charcoal); color:var(--bone); border-color:var(--charcoal); }
-  #avro-golf-{{ section.id }} .cta-btns .btn:hover { background:transparent; color:var(--charcoal); }
-
-  /* Footer banner */
-  #avro-golf-{{ section.id }} .banner { position:relative; width:100%; overflow:hidden; }
-  #avro-golf-{{ section.id }} .banner img { width:100%; height:auto; display:block; }
-  #avro-golf-{{ section.id }} .banner .btn { position:absolute; left:clamp(16px,4vw,64px); bottom:clamp(16px,4vw,56px); min-width:220px; background:var(--charcoal); color:var(--bone); border-color:var(--charcoal); }
-  #avro-golf-{{ section.id }} .banner .btn:hover { background:transparent; color:var(--charcoal); }
+  /* Final CTA */
+  #avro-golf-{{ section.id }} .final { position:relative; overflow:hidden; min-height:403px; padding:clamp(64px,9vw,112px) clamp(24px,5vw,72px); background:#000; color:var(--white); display:flex; align-items:center; justify-content:center; text-align:center; }
+  #avro-golf-{{ section.id }} .final::after { content:"CALM"; position:absolute; right:-.02em; top:-.18em; font-family:"Gotham Golf"; font-weight:900; font-size:clamp(128px,24vw,400px); color:rgba(189,214,55,.1); pointer-events:none; }
+  #avro-golf-{{ section.id }} .final-in { position:relative; z-index:1; max-width:720px; display:flex; flex-direction:column; align-items:center; gap:22px; }
+  #avro-golf-{{ section.id }} .final h2 { color:var(--white); }
+  #avro-golf-{{ section.id }} .final .body { color:rgba(255,255,255,.75); }
+  #avro-golf-{{ section.id }} .final-btns { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
+  #avro-golf-{{ section.id }} .final .btn-ghost { background:#2B2B2B; border-color:#4A4A4A; }
 
   @media (max-width:768px){
-    #avro-golf-{{ section.id }} .hero-card { aspect-ratio:unset; overflow:visible; display:flex; flex-direction:column; }
-    #avro-golf-{{ section.id }} .hero-imgs { position:relative; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:3/4; border-radius:20px; overflow:hidden; flex-shrink:0; }
-    #avro-golf-{{ section.id }} .hero-imgs img { display:none; }
-    #avro-golf-{{ section.id }} .hero-imgs img.m { display:block; }
-    #avro-golf-{{ section.id }} .hero-imgs img.m.on { opacity:1; }
-    #avro-golf-{{ section.id }} .hero-scrim { display:none; }
-    #avro-golf-{{ section.id }} .hero-content { position:static; padding:24px 20px 32px; }
-    #avro-golf-{{ section.id }} .banner .btn { position:static; width:calc(100% - 32px); margin:20px auto 24px; }
+    #avro-golf-{{ section.id }} .hero { min-height:820px; align-items:flex-end; }
+    #avro-golf-{{ section.id }} .hero-shade { background:linear-gradient(0deg,rgba(15,20,15,.9),rgba(15,20,15,.05) 80%); }
+    #avro-golf-{{ section.id }} .hero-copy { padding:112px 24px 128px; }
+    #avro-golf-{{ section.id }} .ritual { grid-template-columns:1fr 1fr 1fr; }
+    #avro-golf-{{ section.id }} .ritual > p { display:none; }
+    #avro-golf-{{ section.id }} .pressure,#avro-golf-{{ section.id }} .faq { grid-template-columns:1fr; }
+    #avro-golf-{{ section.id }} .pressure-img { order:-1; min-height:420px; }
+    #avro-golf-{{ section.id }} .g3,#avro-golf-{{ section.id }} .g4,#avro-golf-{{ section.id }} .prods { grid-template-columns:1fr; }
+    #avro-golf-{{ section.id }} .steps { grid-template-columns:1fr; }
+    #avro-golf-{{ section.id }} .step + .step { border-left:none; border-top:1px solid rgba(255,255,255,.18); }
   }
-  @media (prefers-reduced-motion:reduce){ #avro-golf-{{ section.id }} * { animation:none !important; } }
+  @media (prefers-reduced-motion:reduce){ #avro-golf-{{ section.id }} * { animation:none !important; transition:none !important; } }
 {% endstyle %}
 
-{%- capture star -%}<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>{%- endcapture -%}
-{%- capture chev -%}<svg class="fchev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>{%- endcapture -%}
-
 {%- assign base = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app' -%}
+{%- assign blob = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com' -%}
 {%- assign reasons = section.blocks | where: "type", "reason" -%}
 {%- assign steps = section.blocks | where: "type", "step" -%}
-{%- assign bars = section.blocks | where: "type", "formula_bar" -%}
+{%- assign sciences = section.blocks | where: "type", "science" -%}
 {%- assign moments = section.blocks | where: "type", "moment" -%}
 {%- assign products = section.blocks | where: "type", "product" -%}
-{%- assign reviews = section.blocks | where: "type", "testimonial" -%}
 {%- assign faqs = section.blocks | where: "type", "faq" -%}
 
 <div id="avro-golf-{{ section.id }}">
 
   {%- comment -%} HERO {%- endcomment -%}
   <section class="hero">
-    <div class="hero-card">
-      <div class="hero-imgs">
-        {%- for img in section.settings.hero_images -%}
-          <img class="d{% if forloop.first %} on{% endif %}" src="{{ img | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}" loading="lazy">
-        {%- else -%}
-          <img class="d on" src="{{ base }}/images/lifestyle/golf-hero-01.png" alt="{{ section.settings.hero_alt | escape }}">
-          <img class="d" src="{{ base }}/images/lifestyle/golf-hero-02.png" alt="">
-          <img class="d" src="{{ base }}/images/lifestyle/golf-hero-03.png" alt="">
-        {%- endfor -%}
-        <img class="m on" src="{{ base }}/images/lifestyle/golf-hero-01-mobile.png" alt="{{ section.settings.hero_alt | escape }}">
-        <img class="m" src="{{ base }}/images/lifestyle/golf-hero-02-mobile.png" alt="">
-        <img class="m" src="{{ base }}/images/lifestyle/golf-hero-03-mobile.png" alt="">
+    <div class="hero-imgs">
+      {%- if section.settings.hero_image != blank -%}
+        <img class="on" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}">
+      {%- else -%}
+        <img class="on" src="{{ blob }}/01_Hero_Coastal_Seated-SKTOyBDEENCkSP6x6cnw6TbqevaYYM.png" alt="{{ section.settings.hero_alt | escape }}">
+      {%- endif -%}
+    </div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="kicker">{{ section.settings.hero_kicker | default: 'CALM PERFORMANCE FOR GOLF' }}</p>
+      <h1>{{ section.settings.hero_title | default: 'Golf Performance Begins Before the First Swing.' }}</h1>
+      <p class="body">{{ section.settings.hero_copy | default: 'AVRO supports the calm, clear and composed headspace golfers seek before lessons, practice and competition—so they can step into the moment ready.' }}</p>
+      <div class="hero-btns">
+        <a href="{{ section.settings.hero_btn1_link | default: '#avro-golf-shop-{{ section.id }}' }}" class="btn btn-accent">{{ section.settings.hero_btn1_label | default: 'Choose Your Formula' }}</a>
+        <a href="{{ section.settings.hero_btn2_link | default: '/collections/all' }}" class="btn btn-ghost">{{ section.settings.hero_btn2_label | default: 'Shop AVRO' }}</a>
       </div>
-      <div class="hero-scrim" aria-hidden="true"></div>
-      <div class="hero-content">
-        <h1>{{ section.settings.hero_title | default: 'Golf Performance Begins Before the First Swing.' }}</h1>
-        <p>{{ section.settings.hero_copy | default: 'AVRO supports the calm, clear and composed headspace golfers seek before lessons, practice and competition—so they can step into the moment ready.' }}</p>
-        <div class="hero-btns">
-          <a href="{{ section.settings.hero_btn1_link | default: '/collections/all' }}" class="btn btn-outline">{{ section.settings.hero_btn1_label | default: 'Choose Your Formula' }}</a>
-          <a href="{{ section.settings.hero_btn2_link | default: '/collections/all' }}" class="btn btn-accent">{{ section.settings.hero_btn2_label | default: 'Shop AVRO' }}</a>
-        </div>
-      </div>
+    </div>
+    <div class="ritual">
+      <p class="rlabel">{{ section.settings.ritual_label | default: 'THE PRE-GOLF MINDSET' }}</p>
+      <div><b>01 — {{ section.settings.ritual_1_title | default: 'PREPARE' }}</b><span>{{ section.settings.ritual_1_copy | default: 'Before lessons, practice or play.' }}</span></div>
+      <div><b>02 — {{ section.settings.ritual_2_title | default: 'CHOOSE' }}</b><span>{{ section.settings.ritual_2_copy | default: 'Calm, Focus or Energy.' }}</span></div>
+      <div><b>03 — {{ section.settings.ritual_3_title | default: 'STEP IN READY' }}</b><span>{{ section.settings.ritual_3_copy | default: 'Calm. Clear. Composed.' }}</span></div>
     </div>
   </section>
 
-  {%- comment -%} MOMENT HEADING {%- endcomment -%}
-  <section class="sec"><div class="wrap"><div class="head">
-    <h2>{{ section.settings.moment_title | default: 'Golf can get loud in your head fast.' }}</h2>
-    <p>{{ section.settings.moment_copy | default: 'The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.' }}</p>
-  </div></div></section>
+  {%- comment -%} PRESSURE {%- endcomment -%}
+  <section class="pressure">
+    <div class="pressure-copy">
+      <p class="kicker">{{ section.settings.pressure_kicker | default: 'WHEN THE MOMENT GETS BIGGER' }}</p>
+      <h2>{{ section.settings.pressure_title | default: 'Golf can get loud in your head fast.' }}</h2>
+      <p class="body">{{ section.settings.pressure_copy | default: 'The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.' }}</p>
+      <div class="callout"><span class="ic"><span style="-webkit-mask-image:url({{ base }}/golf/icons/pressure.svg);mask-image:url({{ base }}/golf/icons/pressure.svg);"></span></span><span>{{ section.settings.pressure_note | default: 'Approximately 30 minutes before golf.' }}</span></div>
+    </div>
+    <div class="pressure-img">
+      {%- if section.settings.pressure_image != blank -%}<img src="{{ section.settings.pressure_image | image_url: width: 1600 }}" alt="{{ section.settings.pressure_alt | escape }}">{%- else -%}<img src="{{ blob }}/02_Golfer_Address_Coastal-QuYnv1biTTOWojA8ONA5TjE867VaaX.png" alt="{{ section.settings.pressure_alt | escape }}">{%- endif -%}
+    </div>
+  </section>
 
   {%- comment -%} WHY (reasons) {%- endcomment -%}
   {%- if reasons.size > 0 -%}
-  <section class="sec" style="padding-top:0;"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.why_title | default: 'Why AVRO Matters in Golf' }}</h2></div>
-    <div class="cards c3">
+  <section class="sec"><div class="wrap">
+    <div class="head"><p class="kicker">{{ section.settings.why_kicker | default: 'CALM-FIRST PERFORMANCE' }}</p><h2>{{ section.settings.why_title | default: 'Why AVRO Matters in Golf' }}</h2><p class="sub body">{{ section.settings.why_copy | default: 'A calm-first platform with a clear role across the modern golf experience.' }}</p></div>
+    <div class="g3">
       {%- for b in reasons -%}
-      <div class="icard" {{ b.shopify_attributes }}>
-        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign iu = b.settings.icon | image_url: width: 120 -%}{%- else -%}{%- assign iu = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png' -%}{%- endif -%}<span style="-webkit-mask-image:url({{ iu }});mask-image:url({{ iu }});"></span></div>
+      {%- assign iu = b.settings.icon_fallback -%}{%- if b.settings.icon != blank -%}{%- assign iu = b.settings.icon | image_url: width: 128 -%}{%- endif -%}
+      <div class="reason" {{ b.shopify_attributes }}>
+        <span class="num">0{{ forloop.index }}</span>
+        <div class="ic"><span style="-webkit-mask-image:url({{ iu }});mask-image:url({{ iu }});"></span></div>
         <h3>{{ b.settings.title }}</h3>
-        <p>{{ b.settings.copy }}</p>
+        <p class="body">{{ b.settings.copy }}</p>
       </div>
       {%- endfor -%}
     </div>
   </div></section>
   {%- endif -%}
 
-  {%- comment -%} HOW TO USE {%- endcomment -%}
+  {%- comment -%} HOW TO USE (dark) {%- endcomment -%}
   {%- if steps.size > 0 -%}
-  <section class="sec"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.how_title | default: 'How to Use AVRO Before Golf' }}</h2></div>
+  <section class="sec dark"><div class="wrap">
+    <div class="head"><p class="kicker">{{ section.settings.how_kicker | default: 'HOW TO USE AVRO BEFORE GOLF' }}</p><h2>{{ section.settings.how_title | default: 'A simple ritual. Three steps.' }}</h2><p class="sub body">{{ section.settings.how_copy | default: 'Choose. Mix. Time it.' }}</p></div>
     <div class="steps">
       {%- for b in steps -%}
+      {%- assign su = b.settings.icon_fallback -%}{%- if b.settings.icon != blank -%}{%- assign su = b.settings.icon | image_url: width: 160 -%}{%- endif -%}
       <article class="step" {{ b.shopify_attributes }}>
-        <span class="num">{{ forloop.index }}</span>
-        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign su = b.settings.icon | image_url: width: 160 -%}{%- else -%}{%- assign su = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png' -%}{%- endif -%}<span style="-webkit-mask-image:url({{ su }});mask-image:url({{ su }});"></span></div>
+        <div class="top"><span class="num">0{{ forloop.index }}</span><span class="ic"><span style="-webkit-mask-image:url({{ su }});mask-image:url({{ su }});"></span></span></div>
         <h3>{{ b.settings.title }}</h3>
-        <p>{{ b.settings.copy }}</p>
+        <p class="body">{{ b.settings.copy }}</p>
       </article>
       {%- endfor -%}
     </div>
   </div></section>
   {%- endif -%}
 
-  {%- comment -%} FORMULA LOGIC GRAPH {%- endcomment -%}
-  {%- if bars.size > 0 -%}
-  <section class="sec" style="padding-top:0;"><div class="wrap"><div class="graph">
-    <h2>{{ section.settings.graph_title | default: 'Science + Formula Logic' }}</h2>
-    <p class="sub">{{ section.settings.graph_sub | default: 'Calm first. Then support the moment.' }}</p>
-    {%- for b in bars -%}
-    <div class="grow" {{ b.shopify_attributes }}>
-      <div class="top"><span class="nm" style="color:{{ b.settings.color | default: '#4b4d9a' }};">{{ b.settings.name }}</span><span class="lg">PharmaGABA&reg; + {{ b.settings.addition }}</span></div>
-      <div class="gbar"><span style="flex:60 0 0;background:#94C6D4;"></span><span style="flex:40 0 0;background:{{ b.settings.color | default: '#4b4d9a' }};"></span></div>
-    </div>
-    {%- endfor -%}
-  </div></div></section>
-  {%- endif -%}
-
-  {%- comment -%} EMBEDDED GRAPHIC {%- endcomment -%}
-  {%- if section.settings.show_graphic -%}
+  {%- comment -%} SCIENCE {%- endcomment -%}
+  {%- if sciences.size > 0 -%}
   <section class="sec"><div class="wrap">
-    {%- if section.settings.graphic_title != blank -%}
-    <div class="head left" style="max-width:760px;"><h2>{{ section.settings.graphic_title }}</h2>{%- if section.settings.graphic_copy != blank -%}<p>{{ section.settings.graphic_copy }}</p>{%- endif -%}</div>
-    {%- endif -%}
-    {%- if section.settings.graphic_asset != blank -%}{%- assign graphic_src = section.settings.graphic_asset -%}{%- else -%}{%- assign graphic_src = base | append: '/graphics/golf.html' -%}{%- endif -%}
-    <iframe class="graphic-frame" style="aspect-ratio:{{ section.settings.graphic_ratio | default: '1200 / 788' }};" src="{{ graphic_src }}" title="{{ section.settings.graphic_a11y | default: 'AVRO for golf research graphic' | escape }}" loading="lazy" scrolling="no"></iframe>
-    {%- if section.settings.chart_source != blank -%}<p style="font-size:12px;line-height:1.5;color:var(--warm-gray);margin-top:16px;white-space:pre-line;">{{ section.settings.chart_source }}</p>{%- endif -%}
+    <div class="head"><p class="kicker">{{ section.settings.sci_kicker | default: 'THE FORMULA' }}</p><h2>{{ section.settings.sci_title | default: 'Science + Formula Logic' }}</h2><p class="sub body">{{ section.settings.sci_copy | default: 'Calm first. Then support the moment.' }}</p></div>
+    <div class="g4">
+      {%- for b in sciences -%}
+      {%- assign cu = b.settings.icon_fallback -%}{%- if b.settings.icon != blank -%}{%- assign cu = b.settings.icon | image_url: width: 96 -%}{%- endif -%}
+      <article class="sci" {{ b.shopify_attributes }}>
+        <div class="ic"><span style="-webkit-mask-image:url({{ cu }});mask-image:url({{ cu }});"></span></div>
+        <small>{{ b.settings.label }}</small>
+        <h3>{{ b.settings.title }}</h3>
+        <p class="body">{{ b.settings.copy }}</p>
+      </article>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.foundation != blank -%}<p class="foundation body">{{ section.settings.foundation }}</p>{%- endif -%}
   </div></section>
   {%- endif -%}
 
   {%- comment -%} USE MOMENTS {%- endcomment -%}
   {%- if moments.size > 0 -%}
   <section class="sec"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.use_title | default: 'Golf Use Moments' }}</h2><p>{{ section.settings.use_copy | default: 'One calm-first foundation, ready for the moments that shape the golf experience.' }}</p></div>
-    <div class="cards c4">
+    <div class="head"><p class="kicker">{{ section.settings.use_kicker | default: 'FROM FIRST TEE TO CLUBHOUSE' }}</p><h2>{{ section.settings.use_title | default: 'Golf Use Moments' }}</h2><p class="sub body">{{ section.settings.use_copy | default: 'One calm-first foundation, ready for the moments that shape the golf experience.' }}</p></div>
+    <div class="g4">
       {%- for b in moments -%}
-      <div class="icard" {{ b.shopify_attributes }}>
-        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign mu = b.settings.icon | image_url: width: 120 -%}{%- else -%}{%- assign mu = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-golf.png' -%}{%- endif -%}<span style="-webkit-mask-image:url({{ mu }});mask-image:url({{ mu }});"></span></div>
+      <article class="moment" {{ b.shopify_attributes }}>
+        <div class="ph">{%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.title | escape }} golf moment">{%- else -%}<img src="{{ b.settings.image_fallback }}" alt="{{ b.settings.title | escape }} golf moment">{%- endif -%}</div>
         <h3>{{ b.settings.title }}</h3>
-        <p>{{ b.settings.copy }}</p>
-      </div>
-      {%- endfor -%}
-    </div>
-  </div></section>
-  {%- endif -%}
-
-  {%- comment -%} PRODUCTS {%- endcomment -%}
-  {%- if products.size > 0 -%}
-  <section class="sec" style="padding-top:0;"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.shop_title | default: 'Shop AVRO for Golf' }}</h2><p>{{ section.settings.shop_copy | default: 'Same calm-first base. Three ways to meet the moment.' }}</p></div>
-    <div class="pc-row">
-      {%- for b in products -%}
-      <article class="pc" {{ b.shopify_attributes }}>
-        <div class="pc-thumb">{%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">{%- else -%}<img src="{{ b.settings.image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png' }}" alt="{{ b.settings.name | escape }}">{%- endif -%}</div>
-        {%- if b.settings.caffeine != blank -%}<small class="pc-tag">{{ b.settings.caffeine }}</small>{%- endif -%}
-        <h3>{{ b.settings.name }}</h3>
-        <p>{{ b.settings.copy }}</p>
-        {%- if b.settings.best_for != blank -%}<p class="pc-best"><b>BEST FOR:</b> {{ b.settings.best_for }}</p>{%- endif -%}
-        <a href="{{ b.settings.link | default: '/collections/all' }}" class="btn btn-outline">{{ b.settings.button_label | default: 'Shop' }}</a>
+        <p class="body">{{ b.settings.copy }}</p>
       </article>
       {%- endfor -%}
     </div>
   </div></section>
   {%- endif -%}
 
-  {%- comment -%} TESTIMONIALS {%- endcomment -%}
-  {%- if reviews.size > 0 -%}
-  <section class="sec" style="padding-top:0;"><div class="wrap">
-    <div class="tg">
-      {%- for b in reviews -%}
-      <article class="tc" {{ b.shopify_attributes }}>
-        <div class="stars">{{ star }}{{ star }}{{ star }}{{ star }}{{ star }}</div>
-        <p>&ldquo;{{ b.settings.quote }}&rdquo;</p>
-        <strong>{{ b.settings.name }}</strong><span class="role">{{ b.settings.role }}</span>
+  {%- comment -%} SHOP (dark) {%- endcomment -%}
+  {%- if products.size > 0 -%}
+  <section id="avro-golf-shop-{{ section.id }}" class="sec dark"><div class="wrap">
+    <div class="head"><p class="kicker">{{ section.settings.shop_kicker | default: 'CHOOSE YOUR FORMULA' }}</p><h2>{{ section.settings.shop_title | default: 'Shop AVRO for Golf' }}</h2><p class="sub body">{{ section.settings.shop_copy | default: 'Same calm-first base. Three ways to meet the moment.' }}</p></div>
+    <div class="prods">
+      {%- for b in products -%}
+      <article class="pc" {{ b.shopify_attributes }}>
+        {%- if b.settings.caffeine != blank -%}<span class="tag">{{ b.settings.caffeine }}</span>{%- endif -%}
+        <div class="thumb">{%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">{%- else -%}<img src="{{ b.settings.image_fallback }}" alt="{{ b.settings.name | escape }}">{%- endif -%}</div>
+        <h3>{{ b.settings.name }}</h3>
+        <p class="desc body">{{ b.settings.copy }}</p>
+        {%- if b.settings.best_for != blank -%}<p class="best"><b>BEST FOR</b>{{ b.settings.best_for }}</p>{%- endif -%}
+        <a href="{{ b.settings.link | default: '/collections/all' }}" class="btn btn-dark">{{ b.settings.button_label | default: 'Shop' }} →</a>
       </article>
       {%- endfor -%}
     </div>
@@ -313,12 +321,12 @@
 
   {%- comment -%} FAQ {%- endcomment -%}
   {%- if faqs.size > 0 -%}
-  <section class="sec faq-sec"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.faq_title | default: 'Golf FAQ' }}</h2></div>
-    <div class="faq">
+  <section class="sec"><div class="wrap faq">
+    <div class="faq-intro"><p class="kicker">{{ section.settings.faq_kicker | default: 'GOLF FAQ' }}</p><h2>{{ section.settings.faq_title | default: 'Questions Before the First Tee.' }}</h2><p class="sub body">{{ section.settings.faq_copy | default: 'Straight answers about choosing and using AVRO for golf.' }}</p></div>
+    <div class="faq-list">
       {%- for b in faqs -%}
       <div class="fitem{% if forloop.first %} open{% endif %}" data-faq {{ b.shopify_attributes }}>
-        <button class="fbtn" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">{{ b.settings.q }}{{ chev }}</button>
+        <button class="fbtn" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">{{ b.settings.q }}<span class="fsign">+</span></button>
         <div class="fbody"><p>{{ b.settings.a }}</p></div>
       </div>
       {%- endfor -%}
@@ -327,22 +335,17 @@
   {%- endif -%}
 
   {%- comment -%} FINAL CTA {%- endcomment -%}
-  <section class="cta"><div class="cta-in">
-    <div class="cta-l">
+  <section class="final">
+    <div class="final-in">
+      <p class="kicker">{{ section.settings.final_kicker | default: 'CALM FIRST. PLAY YOUR GAME.' }}</p>
       <h2>{{ section.settings.final_title | default: 'Choose the formula that fits your golf.' }}</h2>
-      <p>{{ section.settings.final_copy | default: 'Start with calm. Choose Calm, Focus or Energy for the moment ahead.' }}</p>
+      <p class="body">{{ section.settings.final_copy | default: 'Start with calm. Choose Calm, Focus or Energy for the moment ahead.' }}</p>
+      <div class="final-btns">
+        <a href="{{ section.settings.final_btn1_link | default: '/collections/calm' }}" class="btn btn-accent">{{ section.settings.final_btn1_label | default: 'Shop Calm' }}</a>
+        <a href="{{ section.settings.final_btn2_link | default: '/collections/focus' }}" class="btn btn-ghost">{{ section.settings.final_btn2_label | default: 'Shop Focus' }}</a>
+        <a href="{{ section.settings.final_btn3_link | default: '/collections/energy' }}" class="btn btn-ghost">{{ section.settings.final_btn3_label | default: 'Shop Energy' }}</a>
+      </div>
     </div>
-    <div class="cta-btns">
-      <a href="{{ section.settings.final_btn1_link | default: '/collections/calm' }}" class="btn">{{ section.settings.final_btn1_label | default: 'Shop Calm' }}</a>
-      <a href="{{ section.settings.final_btn2_link | default: '/collections/focus' }}" class="btn">{{ section.settings.final_btn2_label | default: 'Shop Focus' }}</a>
-      <a href="{{ section.settings.final_btn3_link | default: '/collections/energy' }}" class="btn">{{ section.settings.final_btn3_label | default: 'Shop Energy' }}</a>
-    </div>
-  </div></section>
-
-  {%- comment -%} FOOTER BANNER {%- endcomment -%}
-  <section class="banner">
-    {%- if section.settings.banner_image != blank -%}<img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">{%- else -%}<img src="{{ base }}/images/banners/golf-banner.png" alt="">{%- endif -%}
-    <a href="{{ section.settings.banner_link | default: '/collections/all' }}" class="btn">{{ section.settings.banner_label | default: 'Shop' }}</a>
   </section>
 
 </div>
@@ -351,10 +354,6 @@
   (function(){
     var root=document.getElementById("avro-golf-{{ section.id }}");
     if(!root) return;
-    /* Hero rotator */
-    var ds=root.querySelectorAll(".hero-imgs img.d"), ms=root.querySelectorAll(".hero-imgs img.m"), i=0;
-    if(ds.length>1){ setInterval(function(){ i=(i+1)%ds.length; ds.forEach(function(im,n){im.classList.toggle("on",n===i);}); ms.forEach(function(im,n){im.classList.toggle("on",n===i);}); },5000); }
-    /* FAQ */
     root.querySelectorAll("[data-faq]").forEach(function(it){
       var b=it.querySelector("button"); if(!b) return;
       b.addEventListener("click",function(){
@@ -371,50 +370,66 @@
   "tag": "section",
   "settings": [
     { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_kicker", "label": "Eyebrow", "default": "CALM PERFORMANCE FOR GOLF" },
     { "type": "text", "id": "hero_title", "label": "Title", "default": "Golf Performance Begins Before the First Swing." },
     { "type": "textarea", "id": "hero_copy", "label": "Copy" },
-    { "type": "text", "id": "hero_alt", "label": "Hero image alt" },
-    { "type": "image_picker", "id": "hero_images", "label": "Hero image (override slide 1)", "info": "Leave empty to use the 3 bundled golf hero images. Picking one shows a single static image." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_alt", "label": "Hero image alt", "default": "Golfer seated on a coastal course beside AVRO drink mix" },
     { "type": "text", "id": "hero_btn1_label", "label": "Button 1 label", "default": "Choose Your Formula" },
     { "type": "url", "id": "hero_btn1_link", "label": "Button 1 link" },
     { "type": "text", "id": "hero_btn2_label", "label": "Button 2 label", "default": "Shop AVRO" },
     { "type": "url", "id": "hero_btn2_link", "label": "Button 2 link" },
 
-    { "type": "header", "content": "Moment heading" },
-    { "type": "text", "id": "moment_title", "label": "Title", "default": "Golf can get loud in your head fast." },
-    { "type": "textarea", "id": "moment_copy", "label": "Copy" },
+    { "type": "header", "content": "Pre-golf ritual bar" },
+    { "type": "text", "id": "ritual_label", "label": "Label", "default": "THE PRE-GOLF MINDSET" },
+    { "type": "text", "id": "ritual_1_title", "label": "Step 1 title", "default": "PREPARE" },
+    { "type": "text", "id": "ritual_1_copy", "label": "Step 1 copy", "default": "Before lessons, practice or play." },
+    { "type": "text", "id": "ritual_2_title", "label": "Step 2 title", "default": "CHOOSE" },
+    { "type": "text", "id": "ritual_2_copy", "label": "Step 2 copy", "default": "Calm, Focus or Energy." },
+    { "type": "text", "id": "ritual_3_title", "label": "Step 3 title", "default": "STEP IN READY" },
+    { "type": "text", "id": "ritual_3_copy", "label": "Step 3 copy", "default": "Calm. Clear. Composed." },
 
-    { "type": "header", "content": "Why AVRO fits" },
+    { "type": "header", "content": "Pressure tile" },
+    { "type": "text", "id": "pressure_kicker", "label": "Eyebrow", "default": "WHEN THE MOMENT GETS BIGGER" },
+    { "type": "text", "id": "pressure_title", "label": "Title", "default": "Golf can get loud in your head fast." },
+    { "type": "textarea", "id": "pressure_copy", "label": "Copy" },
+    { "type": "text", "id": "pressure_note", "label": "Callout note", "default": "Approximately 30 minutes before golf." },
+    { "type": "image_picker", "id": "pressure_image", "label": "Image" },
+    { "type": "text", "id": "pressure_alt", "label": "Image alt", "default": "Golfer preparing to address the ball on a coastal course" },
+
+    { "type": "header", "content": "Why AVRO" },
+    { "type": "text", "id": "why_kicker", "label": "Eyebrow", "default": "CALM-FIRST PERFORMANCE" },
     { "type": "text", "id": "why_title", "label": "Title", "default": "Why AVRO Matters in Golf" },
+    { "type": "textarea", "id": "why_copy", "label": "Supporting line", "default": "A calm-first platform with a clear role across the modern golf experience." },
 
     { "type": "header", "content": "How to use" },
-    { "type": "text", "id": "how_title", "label": "Title", "default": "How to Use AVRO Before Golf" },
+    { "type": "text", "id": "how_kicker", "label": "Eyebrow", "default": "HOW TO USE AVRO BEFORE GOLF" },
+    { "type": "text", "id": "how_title", "label": "Title", "default": "A simple ritual. Three steps." },
+    { "type": "textarea", "id": "how_copy", "label": "Supporting line", "default": "Choose. Mix. Time it." },
 
-    { "type": "header", "content": "Formula graph" },
-    { "type": "text", "id": "graph_title", "label": "Title", "default": "Science + Formula Logic" },
-    { "type": "text", "id": "graph_sub", "label": "Subheading", "default": "Same calm-first base. Different active addition." },
-
-    { "type": "header", "content": "Research graphic" },
-    { "type": "checkbox", "id": "show_graphic", "label": "Show research graphic", "default": true },
-    { "type": "text", "id": "graphic_title", "label": "Heading (optional)" },
-    { "type": "textarea", "id": "graphic_copy", "label": "Body (optional)" },
-    { "type": "text", "id": "graphic_asset", "label": "Graphic URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/graphics/golf.html" },
-    { "type": "text", "id": "graphic_ratio", "label": "Aspect ratio", "default": "1200 / 788" },
-    { "type": "text", "id": "graphic_a11y", "label": "Graphic title (a11y)", "default": "AVRO for golf research graphic" },
-    { "type": "textarea", "id": "chart_source", "label": "Source / disclaimer" },
+    { "type": "header", "content": "Science" },
+    { "type": "text", "id": "sci_kicker", "label": "Eyebrow", "default": "THE FORMULA" },
+    { "type": "text", "id": "sci_title", "label": "Title", "default": "Science + Formula Logic" },
+    { "type": "textarea", "id": "sci_copy", "label": "Supporting line", "default": "Calm first. Then support the moment." },
+    { "type": "textarea", "id": "foundation", "label": "Foundation line", "default": "Every AVRO formula begins with naturally fermented PharmaGABA®, a clinically studied form of GABA." },
 
     { "type": "header", "content": "Use moments" },
+    { "type": "text", "id": "use_kicker", "label": "Eyebrow", "default": "FROM FIRST TEE TO CLUBHOUSE" },
     { "type": "text", "id": "use_title", "label": "Title", "default": "Golf Use Moments" },
     { "type": "textarea", "id": "use_copy", "label": "Supporting line", "default": "One calm-first foundation, ready for the moments that shape the golf experience." },
 
     { "type": "header", "content": "Shop" },
+    { "type": "text", "id": "shop_kicker", "label": "Eyebrow", "default": "CHOOSE YOUR FORMULA" },
     { "type": "text", "id": "shop_title", "label": "Title", "default": "Shop AVRO for Golf" },
     { "type": "textarea", "id": "shop_copy", "label": "Supporting line", "default": "Same calm-first base. Three ways to meet the moment." },
 
     { "type": "header", "content": "FAQ" },
-    { "type": "text", "id": "faq_title", "label": "Title", "default": "Golf FAQ" },
+    { "type": "text", "id": "faq_kicker", "label": "Eyebrow", "default": "GOLF FAQ" },
+    { "type": "text", "id": "faq_title", "label": "Title", "default": "Questions Before the First Tee." },
+    { "type": "textarea", "id": "faq_copy", "label": "Supporting line", "default": "Straight answers about choosing and using AVRO for golf." },
 
     { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "final_kicker", "label": "Eyebrow", "default": "CALM FIRST. PLAY YOUR GAME." },
     { "type": "text", "id": "final_title", "label": "Title", "default": "Choose the formula that fits your golf." },
     { "type": "textarea", "id": "final_copy", "label": "Copy" },
     { "type": "text", "id": "final_btn1_label", "label": "Button 1 label", "default": "Shop Calm" },
@@ -422,51 +437,43 @@
     { "type": "text", "id": "final_btn2_label", "label": "Button 2 label", "default": "Shop Focus" },
     { "type": "url", "id": "final_btn2_link", "label": "Button 2 link" },
     { "type": "text", "id": "final_btn3_label", "label": "Button 3 label", "default": "Shop Energy" },
-    { "type": "url", "id": "final_btn3_link", "label": "Button 3 link" },
-
-    { "type": "header", "content": "Footer banner" },
-    { "type": "image_picker", "id": "banner_image", "label": "Banner image" },
-    { "type": "text", "id": "banner_label", "label": "Button label", "default": "Shop" },
-    { "type": "url", "id": "banner_link", "label": "Button link" }
+    { "type": "url", "id": "final_btn3_link", "label": "Button 3 link" }
   ],
   "blocks": [
     { "type": "reason", "name": "Reason card", "settings": [
       { "type": "image_picker", "id": "icon", "label": "Icon" },
-      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png" },
-      { "type": "text", "id": "title", "label": "Title", "default": "Calm Before Pressure" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/built-for-ritual.svg" },
+      { "type": "text", "id": "title", "label": "Title", "default": "For Golfers" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
     { "type": "step", "name": "How-to step", "settings": [
       { "type": "image_picker", "id": "icon", "label": "Icon" },
-      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png" },
-      { "type": "text", "id": "title", "label": "Title", "default": "Mix" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/step-choose.svg" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Choose" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
-    { "type": "formula_bar", "name": "Formula bar", "settings": [
-      { "type": "text", "id": "name", "label": "Name", "default": "Calm" },
-      { "type": "text", "id": "addition", "label": "Active addition", "default": "Magnesium" },
-      { "type": "color", "id": "color", "label": "Accent color", "default": "#4b4d9a" }
+    { "type": "science", "name": "Science card", "settings": [
+      { "type": "image_picker", "id": "icon", "label": "Icon" },
+      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/pharmagaba.svg" },
+      { "type": "text", "id": "label", "label": "Label", "default": "PharmaGABA® Foundation" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Calm Starts Here" },
+      { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
     { "type": "moment", "name": "Use moment", "settings": [
-      { "type": "image_picker", "id": "icon", "label": "Icon" },
-      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-golf.png" },
+      { "type": "image_picker", "id": "image", "label": "Photo" },
+      { "type": "text", "id": "image_fallback", "label": "Photo URL", "default": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/03_Moment_First_Tee-7A1KXwzEr31RFzHGUS3runTTJ215Dr.png" },
       { "type": "text", "id": "title", "label": "Title", "default": "First Tee" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
     { "type": "product", "name": "Product card", "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
-      { "type": "text", "id": "image_fallback", "label": "Image URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" },
-  { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
-  { "type": "text", "id": "caffeine", "label": "Caffeine label", "default": "CAFFEINE FREE" },
-  { "type": "textarea", "id": "copy", "label": "Copy" },
-  { "type": "textarea", "id": "best_for", "label": "Best for" },
-  { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
-  { "type": "url", "id": "link", "label": "Link" }
-    ]},
-    { "type": "testimonial", "name": "Testimonial", "settings": [
-      { "type": "textarea", "id": "quote", "label": "Quote" },
-      { "type": "text", "id": "name", "label": "Name", "default": "Verified Buyer" },
-      { "type": "text", "id": "role", "label": "Role / product", "default": "AVRO Calm" }
+      { "type": "text", "id": "image_fallback", "label": "Image URL", "default": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/07_Product_Calm-YBOX7lOtZIu3pAmGuxiDgqtAv8Ohy2.png" },
+      { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
+      { "type": "text", "id": "caffeine", "label": "Caffeine label", "default": "CAFFEINE FREE" },
+      { "type": "textarea", "id": "copy", "label": "Copy" },
+      { "type": "textarea", "id": "best_for", "label": "Best for" },
+      { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
+      { "type": "url", "id": "link", "label": "Link" }
     ]},
     { "type": "faq", "name": "FAQ item", "settings": [
       { "type": "text", "id": "q", "label": "Question" },
@@ -475,25 +482,23 @@
   ],
   "presets": [
     { "name": "AVRO — Golf", "blocks": [
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png", "title": "For Golfers", "copy": "A simple way to prepare for the moments when calm, clarity and composure matter." } },
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-clear-thinking.png", "title": "For Coaches", "copy": "Supports a golfer’s readiness to receive, process and apply feedback." } },
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-golf.png", "title": "For Golf Businesses", "copy": "Adds a differentiated golfer experience designed to strengthen engagement and loyalty." } },
-      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-drink.png", "title": "Choose", "copy": "Select Calm, Focus or Energy based on the moment ahead." } },
-      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png", "title": "Mix", "copy": "Mix one stick with 250–300 mL of water." } },
-      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-stir.png", "title": "Time It", "copy": "Drink approximately 30 minutes before your lesson, practice session or tee time." } },
-      { "type": "formula_bar", "settings": { "name": "Calm", "addition": "Magnesium", "color": "#4b4d9a" } },
-      { "type": "formula_bar", "settings": { "name": "Focus", "addition": "Cognigrape®", "color": "#C13584" } },
-      { "type": "formula_bar", "settings": { "name": "Energy", "addition": "Caffeine", "color": "#E8A23D" } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-golf.png", "title": "First Tee", "copy": "A simple pre-round ritual before the opening shot." } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png", "title": "Tournament Day", "copy": "Preparation for pressure-sensitive rounds when composure matters from the start." } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-focus-without-overload.png", "title": "Practice Session", "copy": "For range work, coaching sessions and structured practice." } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/social-composure.png", "title": "Clubhouse + Social", "copy": "An alcohol-free option for post-round conversations, travel days and social golf moments." } },
-      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "name": "AVRO Calm", "caffeine": "CAFFEINE FREE", "copy": "Calm support for pressure-sensitive golf moments.", "best_for": "First tees, tournament rounds, lessons and moments when composure matters.", "button_label": "Shop Calm", "link": "/collections/calm" } },
-      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "name": "AVRO Focus", "caffeine": "CAFFEINE FREE", "copy": "Calm-first preparation with added support for clear, attentive focus.", "best_for": "Coaching sessions, club fitting, range work and structured practice.", "button_label": "Shop Focus", "link": "/collections/focus" } },
-      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "name": "AVRO Energy", "caffeine": "WITH NATURAL CAFFEINE", "copy": "Calm-first preparation with natural caffeine for demanding golf days.", "best_for": "Early tee times, longer rounds, travel days and competition.", "button_label": "Shop Energy", "link": "/collections/energy" } },
-      { "type": "testimonial", "settings": { "quote": "Locked in on the first tee without the jitters. This is part of my pre-round routine now.", "name": "Verified Buyer", "role": "AVRO Calm" } },
-      { "type": "testimonial", "settings": { "quote": "Clear and composed through the back nine. Exactly what I wanted.", "name": "Verified Buyer", "role": "AVRO Focus" } },
-      { "type": "testimonial", "settings": { "quote": "Steady energy for an early tee time with no crash later. Love it.", "name": "Verified Buyer", "role": "AVRO Energy" } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/built-for-ritual.svg", "title": "For Golfers", "copy": "A simple way to prepare for the moments when calm, clarity and composure matter." } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/clarity.svg", "title": "For Coaches", "copy": "Supports a golfer’s readiness to receive, process and apply feedback." } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/standards.svg", "title": "For Golf Businesses", "copy": "Adds a differentiated golfer experience designed to strengthen engagement and loyalty." } },
+      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/step-choose.svg", "title": "Choose", "copy": "Select Calm, Focus or Energy based on the moment ahead." } },
+      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/step-mix.svg", "title": "Mix", "copy": "Mix one stick with 250–300 mL of water." } },
+      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/step-time.svg", "title": "Time It", "copy": "Drink approximately 30 minutes before your lesson, practice session or tee time." } },
+      { "type": "science", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/pharmagaba.svg", "label": "PharmaGABA® Foundation", "title": "Calm Starts Here", "copy": "Naturally fermented PharmaGABA® is the clinically studied form of GABA at the center of every AVRO formula." } },
+      { "type": "science", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/calm-foundation.svg", "label": "AVRO Calm", "title": "Composure When It Matters", "copy": "PharmaGABA® plus magnesium for golfers who want a calmer, more composed way to prepare for pressure-sensitive moments." } },
+      { "type": "science", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/clarity.svg", "label": "AVRO Focus", "title": "Clearer Attention for Learning", "copy": "PharmaGABA® plus Cognigrape® for lessons, fittings and practice sessions that call for calm, attentive focus." } },
+      { "type": "science", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/mind-body.svg", "label": "AVRO Energy", "title": "Steady Energy for Demanding Golf Days", "copy": "PharmaGABA® plus natural caffeine for early tee times, longer rounds and competition days that require more energy." } },
+      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/03_Moment_First_Tee-7A1KXwzEr31RFzHGUS3runTTJ215Dr.png", "title": "First Tee", "copy": "A simple pre-round ritual before the opening shot." } },
+      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/04_Moment_Tournament_Day-vRzxoOjJAOWVSwijTckyWVV9jugwR4.png", "title": "Tournament Day", "copy": "Preparation for pressure-sensitive rounds when composure matters from the start." } },
+      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/05_Moment_Practice_Session.png-7cnKcg67wTvHmGt0bNtvcJtadUSZyt.jpeg", "title": "Practice Session", "copy": "For range work, coaching sessions and structured practice." } },
+      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/06_Moment_Clubhouse_Social-HUVojuCnjcfagm9yamUhNeiNoKfTaH.png", "title": "Clubhouse + Social", "copy": "An alcohol-free option for post-round conversations, travel days and social golf moments." } },
+      { "type": "product", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/07_Product_Calm-YBOX7lOtZIu3pAmGuxiDgqtAv8Ohy2.png", "name": "AVRO Calm", "caffeine": "CAFFEINE FREE", "copy": "Calm support for pressure-sensitive golf moments.", "best_for": "First tees, tournament rounds, lessons and moments when composure matters.", "button_label": "Shop Calm", "link": "/collections/calm" } },
+      { "type": "product", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/08_Product_Focus-5vTOr8Xek2c8H537NevHtY30U6US0F.png", "name": "AVRO Focus", "caffeine": "CAFFEINE FREE", "copy": "Calm-first preparation with added support for clear, attentive focus.", "best_for": "Coaching sessions, club fitting, range work and structured practice.", "button_label": "Shop Focus", "link": "/collections/focus" } },
+      { "type": "product", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/09_Product_Energy-24lGi052MiPEovUiE1VAxshccrgQCW.png", "name": "AVRO Energy", "caffeine": "WITH NATURAL CAFFEINE", "copy": "Calm-first preparation with natural caffeine for demanding golf days.", "best_for": "Early tee times, longer rounds, travel days and competition.", "button_label": "Shop Energy", "link": "/collections/energy" } },
       { "type": "faq", "settings": { "q": "Which AVRO formula is best for golf?", "a": "Choose based on the moment ahead. Calm is caffeine-free and designed for composure. Focus is caffeine-free and adds support for clear, attentive focus. Energy combines AVRO’s calm-first foundation with natural caffeine for longer or more demanding golf days." } },
       { "type": "faq", "settings": { "q": "When should I take AVRO before a round?", "a": "Mix one stick with 250–300 mL of water and drink it approximately 30 minutes before a lesson, practice session, tee time or competition. Follow the directions on the package." } },
       { "type": "faq", "settings": { "q": "What role does AVRO play in golf performance?", "a": "AVRO supports the calm, clear and composed headspace golfers seek. It complements coaching, practice, fitting and technology—it does not replace them or claim to improve the swing or score." } }
