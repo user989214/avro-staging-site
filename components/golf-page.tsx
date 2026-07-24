@@ -84,7 +84,7 @@ export function GolfPage() {
 
   return <main className="golf-page">
     <section className="golf-hero golf-tile">
-      <Image src="/golf/hero-coastal.png" alt="Golfer seated on a coastal course beside AVRO drink mix" fill priority sizes="100vw" className="golf-cover" />
+      <Image src="/golf/hero-female-putting.png" alt="Golfer lining up a putt on a coastal course wearing an AVRO Golf visor" fill priority sizes="100vw" className="golf-cover golf-hero-img" />
       <div className="golf-hero-shade" />
       <div className="golf-hero-copy">
         <p className="golf-kicker" data-reveal style={ri(0)}>CALM PERFORMANCE FOR GOLF</p>
@@ -183,7 +183,7 @@ function GolfFooter() {
           </div>
         </div>
       </div>
-      <div className="golf-footer-watermark" aria-hidden="true">AVRO GOLF</div>
+      <div className="golf-footer-watermark" aria-hidden="true"><Image src="/golf/avro-golf-wordmark.png" alt="" width={1600} height={512} className="golf-footer-watermark-img" /></div>
     </footer>
   )
 }

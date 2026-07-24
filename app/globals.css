@@ -588,6 +588,7 @@ button[role="button"] {
 .golf-section>.golf-heading .golf-kicker::before { content:"— "; }
 .golf-dark .golf-kicker { color:var(--g-lime); }
 .golf-hero { min-height:min(760px,90vh); color:var(--g-white); display:flex; align-items:center; }
+.golf-hero-img { object-position:72% center; }
 .golf-hero h1,.golf-dark h2,.golf-dark h3,.golf-final h2 { color:var(--g-white); }
 .golf-hero .golf-kicker { color:var(--g-lime); padding:9px 17px; border:1px solid var(--g-lime); border-radius:999px; }
 .golf-hero-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(15,20,15,.72),rgba(15,20,15,.1) 66%); }
@@ -692,8 +693,8 @@ button[role="button"] {
 /* Golf footer — mirrors the site footer format with the AVRO Golf wordmark. */
 .golf-footer { position:relative; overflow:hidden; background:#000; color:var(--g-white); }
 .golf-footer-inner { position:relative; z-index:1; max-width:var(--g-max); margin:0 auto; padding:clamp(3.5rem,7vw,5rem) var(--g-edge) 0; }
-.golf-footer-news h3 { font-family:"Gotham Golf"; font-weight:900; font-size:clamp(1.8rem,4vw,2.25rem); line-height:1.05; margin:.5rem 0 .5rem; }
-.golf-footer-news>p { color:rgba(255,255,255,.6); font-size:.95rem; max-width:34rem; }
+.golf-footer-news h3 { font-family:"Gotham Golf"; font-weight:900; font-size:clamp(1.8rem,4vw,2.25rem); line-height:1.05; margin:.5rem 0 .5rem; color:var(--g-white); }
+.golf-footer-news>p { color:rgba(255,255,255,.85); font-size:.95rem; max-width:34rem; }
 .golf-footer-sub { display:flex; align-items:stretch; gap:.5rem; max-width:640px; margin-top:1.5rem; margin-left:auto; }
 .golf-footer-news { display:grid; grid-template-columns:1fr auto; align-items:center; column-gap:2rem; }
 .golf-footer-news .golf-kicker { grid-column:1; }
@@ -722,12 +723,14 @@ button[role="button"] {
 .golf-footer-legal-links { display:flex; gap:1.5rem; }
 .golf-footer-legal-links a { color:rgba(255,255,255,.6); font-size:.75rem; text-decoration:none; transition:color .2s; }
 .golf-footer-legal-links a:hover { color:var(--g-white); }
-.golf-footer-watermark { font-family:"Gotham Golf"; font-weight:900; font-size:clamp(4rem,17vw,15rem); line-height:.8; letter-spacing:-.02em; color:rgba(255,255,255,.06); white-space:nowrap; text-align:center; padding:0 var(--g-edge); margin-top:1rem; user-select:none; }
+.golf-footer-watermark { display:flex; justify-content:center; align-items:flex-end; padding:2rem var(--g-edge) 2.5rem; margin-top:1rem; user-select:none; }
+.golf-footer-watermark-img { width:min(760px,80%); height:auto; opacity:.9; }
 
 @media (max-width: 768px) {
-  .golf-hero { min-height:820px; align-items:flex-end; }
-  .golf-hero-shade { background:linear-gradient(0deg,rgba(15,20,15,.9),rgba(15,20,15,.05) 80%); }
-  .golf-hero-copy { padding:7rem 1.5rem 12rem; }
+  .golf-hero { min-height:min(760px,88vh); align-items:flex-end; }
+  .golf-hero-img { object-position:68% top; }
+  .golf-hero-shade { background:linear-gradient(0deg,rgba(15,20,15,.94),rgba(15,20,15,.35) 45%,rgba(15,20,15,.1) 78%); }
+  .golf-hero-copy { padding:5rem 1.5rem 11rem; }
   .golf-ritual { grid-template-columns:1fr 1fr 1fr; }
   .golf-ritual>p { display:none; }
   .golf-ritual>div { padding:1rem .7rem; }
@@ -746,4 +749,5 @@ button[role="button"] {
   .golf-footer-mid { grid-template-columns:1fr; }
   .golf-footer-cols { grid-template-columns:1fr 1fr; gap:2rem; }
   .golf-footer-legal { flex-direction:column; align-items:flex-start; }
+  .golf-footer-watermark-img { width:88%; }
 }
