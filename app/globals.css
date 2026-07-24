@@ -727,11 +727,15 @@ button[role="button"] {
 .golf-footer-watermark { font-family:"Gotham Golf"; font-weight:900; font-size:clamp(2.5rem,12.5vw,9.5rem); line-height:.85; letter-spacing:.01em; text-align:center; color:rgba(255,255,255,.07); white-space:nowrap; overflow:hidden; padding:1.25rem var(--g-edge) 1.75rem; margin-top:.5rem; user-select:none; }
 
 @media (max-width: 768px) {
-  .golf-hero { min-height:unset; flex-direction:column; align-items:stretch; background:#0f140f; }
+  .golf-hero { min-height:unset; flex-direction:column; align-items:stretch; background:var(--g-white); color:var(--g-ink); }
   .golf-hero-img-wrap { position:relative; inset:auto; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:4/5; border-radius:20px; overflow:hidden; flex-shrink:0; }
   .golf-hero-img { object-position:64% center; }
   .golf-hero-shade { display:none; }
+  .golf-hero h1 { color:var(--g-ink); }
   .golf-hero-copy { position:static; padding:1.75rem 1.5rem 1.5rem; }
+  .golf-hero-copy>p:not(.golf-kicker) { color:var(--g-muted); }
+  .golf-hero .golf-kicker { color:var(--g-olive); border-color:var(--g-olive); }
+  .golf-hero .golf-btn-ghost { color:var(--g-ink); border-color:rgba(0,0,0,.28); }
   .golf-ritual { position:static; grid-template-columns:1fr 1fr 1fr; }
   .golf-ritual>p { display:none; }
   .golf-ritual>div { padding:1rem .7rem; }

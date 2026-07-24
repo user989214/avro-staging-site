@@ -210,11 +210,15 @@
   #avro-golf-{{ section.id }} .gfooter-watermark { font-family:"Gotham Golf",var(--head); font-weight:900; font-size:clamp(40px,12.5vw,152px); line-height:.85; letter-spacing:.01em; text-align:center; color:rgba(255,255,255,.07); white-space:nowrap; overflow:hidden; padding:20px clamp(24px,5vw,72px) 28px; margin-top:8px; user-select:none; }
 
   @media (max-width:768px){
-    #avro-golf-{{ section.id }} .hero { min-height:unset; flex-direction:column; align-items:stretch; background:#0f140f; }
+    #avro-golf-{{ section.id }} .hero { min-height:unset; flex-direction:column; align-items:stretch; background:var(--white); color:var(--ink); }
     #avro-golf-{{ section.id }} .hero-imgs { position:relative; inset:auto; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:4/5; border-radius:20px; overflow:hidden; flex-shrink:0; }
     #avro-golf-{{ section.id }} .hero-imgs img { object-position:64% center; }
     #avro-golf-{{ section.id }} .hero-shade { display:none; }
+    #avro-golf-{{ section.id }} .hero-copy h1 { color:var(--ink); }
     #avro-golf-{{ section.id }} .hero-copy { position:static; padding:28px 24px 24px; }
+    #avro-golf-{{ section.id }} .hero-copy .body { color:var(--muted); }
+    #avro-golf-{{ section.id }} .hero-copy .kicker { color:var(--olive); border-color:var(--olive); }
+    #avro-golf-{{ section.id }} .hero .btn-ghost { color:var(--ink); border-color:rgba(0,0,0,.28); }
     #avro-golf-{{ section.id }} .ritual { position:static; grid-template-columns:1fr 1fr 1fr; }
     #avro-golf-{{ section.id }} .ritual > p { display:none; }
     #avro-golf-{{ section.id }} .pressure,#avro-golf-{{ section.id }} .faq { grid-template-columns:1fr; }
