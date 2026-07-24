@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const reasons = [
   ["FOR GOLFERS", "A simple way to prepare for the moments when calm, clarity and composure matter."],
@@ -56,6 +56,96 @@ function Words({ text }: { text: string }) {
   ))}</>
 }
 
+/** Hero slideshow slides, in order: woman → man sitting → man golfing → (loop). */
+const heroSlides = [
+  { src: "/golf/hero-slide-1-female-putting.png", alt: "Golfer lining up a putt on a coastal course wearing an AVRO Golf visor", pos: "72% center" },
+  { src: "/golf/hero-slide-2-male-sitting.png", alt: "Golfer in an AVRO Golf cap sitting above a coastal links course", pos: "60% center" },
+  { src: "/golf/hero-slide-3-male-address.png", alt: "Golfer addressing the ball with a driver on a clifftop tee", pos: "center center" },
+]
+/** Seconds each hero slide holds before crossfading — matches the homepage hero. */
+const HERO_INTERVAL = 6000
+/** Show the lime dotted ticker under the hero copy. */
+const HERO_SHOW_TICKER = true
+
+/**
+ * Crossfading hero with a lime dotted ticker. The current slide stays fully
+ * opaque underneath while the incoming slide fades in on top (no cream flash),
+ * mirroring the homepage carousel timing. Holds on frame 1 for reduced motion.
+ */
+function GolfHero() {
+  const [base, setBase] = useState(0)
+  const [top, setTop] = useState<number | null>(null)
+  const [topVisible, setTopVisible] = useState(false)
+  const fadeMs = 900
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([])
+  const currentRef = useRef(0)
+  const current = top !== null ? top : base
+  useEffect(() => { currentRef.current = current }, [current])
+
+  const goTo = (next: number) => {
+    setBase((cur) => {
+      if (next === cur) return cur
+      setTop(next)
+      setTopVisible(false)
+      timers.current.push(setTimeout(() => setTopVisible(true), 20))
+      timers.current.push(setTimeout(() => { setBase(next); setTop(null); setTopVisible(false) }, fadeMs + 40))
+      return cur
+    })
+  }
+
+  useEffect(() => {
+    if (heroSlides.length <= 1) return
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    if (reduce) return
+    const id = setInterval(() => goTo((currentRef.current + 1) % heroSlides.length), HERO_INTERVAL)
+    const t = timers.current
+    return () => { clearInterval(id); t.forEach(clearTimeout); t.length = 0 }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const layer = (idx: number, visible: boolean): React.CSSProperties => ({
+    position: "absolute", inset: 0, width: "100%", height: "100%",
+    objectFit: "cover", objectPosition: heroSlides[idx].pos,
+    opacity: visible ? 1 : 0, transition: `opacity ${fadeMs}ms ease-in-out`,
+  })
+
+  return (
+    <section className="golf-hero golf-tile">
+      <div className="golf-hero-img-wrap">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={heroSlides[base].src || "/placeholder.svg"} alt={heroSlides[base].alt} className="golf-cover golf-hero-img" style={layer(base, true)} />
+        {top !== null && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={heroSlides[top].src || "/placeholder.svg"} alt="" className="golf-cover golf-hero-img" style={layer(top, topVisible)} />
+        )}
+        <div className="golf-hero-shade" />
+      </div>
+      <div className="golf-hero-copy">
+        <p className="golf-kicker" data-reveal style={ri(0)}>CALM PERFORMANCE FOR GOLF</p>
+        <h1><Words text="Golf Performance Begins Before the First Swing." /></h1>
+        <p data-reveal style={ri(2)}>AVRO supports the calm, clear and composed headspace golfers seek before lessons, practice and competition—so they can step into the moment ready.</p>
+        <div className="golf-actions" data-reveal style={ri(3)}><Link href="#shop" className="golf-btn golf-btn-light">Choose Your Formula</Link><Link href="/shop" className="golf-btn golf-btn-ghost">Shop AVRO</Link></div>
+        {HERO_SHOW_TICKER && heroSlides.length > 1 && (
+          <div className="golf-hero-dots" role="tablist" aria-label="Hero slides" data-reveal style={ri(4)}>
+            {heroSlides.map((s, idx) => (
+              <button
+                key={s.src}
+                type="button"
+                role="tab"
+                aria-selected={current === idx}
+                aria-label={`Show slide ${idx + 1}`}
+                className={current === idx ? "is-active" : undefined}
+                onClick={() => goTo(idx)}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+      <div className="golf-ritual"><p>THE PRE-GOLF MINDSET</p>{[["01", "PREPARE", "Before lessons, practice or play."],["02", "CHOOSE", "Calm, Focus or Energy."],["03", "STEP IN READY", "Calm. Clear. Composed."]].map(x=><div key={x[0]}><b>{x[0]} — {x[1]}</b><span>{x[2]}</span></div>)}</div>
+    </section>
+  )
+}
+
 export function GolfPage() {
   // Scroll-reveal — fade/rise elements into view (matches the site's page-hero
   // motion language). Content stays visible if JS never runs: the hidden state
@@ -86,19 +176,7 @@ export function GolfPage() {
   }, [])
 
   return <main className="golf-page">
-    <section className="golf-hero golf-tile">
-      <div className="golf-hero-img-wrap">
-        <Image src="/golf/hero-female-putting.png" alt="Golfer lining up a putt on a coastal course wearing an AVRO Golf visor" fill priority sizes="100vw" className="golf-cover golf-hero-img" />
-        <div className="golf-hero-shade" />
-      </div>
-      <div className="golf-hero-copy">
-        <p className="golf-kicker" data-reveal style={ri(0)}>CALM PERFORMANCE FOR GOLF</p>
-        <h1><Words text="Golf Performance Begins Before the First Swing." /></h1>
-        <p data-reveal style={ri(2)}>AVRO supports the calm, clear and composed headspace golfers seek before lessons, practice and competition—so they can step into the moment ready.</p>
-        <div className="golf-actions" data-reveal style={ri(3)}><Link href="#shop" className="golf-btn golf-btn-light">Choose Your Formula</Link><Link href="/shop" className="golf-btn golf-btn-ghost">Shop AVRO</Link></div>
-      </div>
-      <div className="golf-ritual"><p>THE PRE-GOLF MINDSET</p>{[["01", "PREPARE", "Before lessons, practice or play."],["02", "CHOOSE", "Calm, Focus or Energy."],["03", "STEP IN READY", "Calm. Clear. Composed."]].map(x=><div key={x[0]}><b>{x[0]} — {x[1]}</b><span>{x[2]}</span></div>)}</div>
-    </section>
+    <GolfHero />
 
     <section className="golf-pressure golf-tile">
       <div className="golf-copy"><p className="golf-kicker" data-reveal style={ri(0)}>WHEN THE MOMENT GETS BIGGER</p><h2 data-reveal style={ri(1)}>Golf can get <mark className="golf-mark">loud in your head</mark> fast.</h2><p data-reveal style={ri(2)}>The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.</p></div>
