@@ -147,7 +147,7 @@
   #avro-golf-{{ section.id }} .pc { padding:20px 24px 24px; background:var(--white); color:#000; border-radius:24px; display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
   #avro-golf-{{ section.id }} .pc .tag { align-self:flex-start; padding:6px 12px; background:#EDEDEA; color:#000; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; border-radius:999px; }
   #avro-golf-{{ section.id }} .pc .thumb { width:100%; margin:10px 0 14px; position:relative; aspect-ratio:1/1; background:var(--cream); border-radius:20px; overflow:hidden; }
-  #avro-golf-{{ section.id }} .pc .thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; padding:26px; }
+  #avro-golf-{{ section.id }} .pc .thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
   #avro-golf-{{ section.id }} .pc h3 { font-family:"Gotham Golf"; font-weight:700; }
   #avro-golf-{{ section.id }} .pc .desc { font-weight:600; }
   #avro-golf-{{ section.id }} .pc .best { font-size:14px; line-height:1.6; color:#000; min-height:4rem; }
@@ -172,7 +172,7 @@
   #avro-golf-{{ section.id }} .final { position:relative; overflow:hidden; min-height:520px; padding:clamp(80px,10vw,128px) clamp(24px,5vw,72px); background:#000; color:var(--white); display:flex; align-items:center; justify-content:center; text-align:center; }
   #avro-golf-{{ section.id }} .final-bg { position:absolute; inset:0; z-index:0; }
   #avro-golf-{{ section.id }} .final-bg img { width:100%; height:100%; object-fit:cover; object-position:center 30%; }
-  #avro-golf-{{ section.id }} .final-bg::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.62)); }
+  #avro-golf-{{ section.id }} .final-bg::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.6),rgba(0,0,0,.4)); }
   #avro-golf-{{ section.id }} .final-in { position:relative; z-index:1; max-width:720px; display:flex; flex-direction:column; align-items:center; gap:22px; }
   #avro-golf-{{ section.id }} .final h2 { color:var(--white); }
   #avro-golf-{{ section.id }} .final .body { color:rgba(255,255,255,.75); }
@@ -192,13 +192,16 @@
   #avro-golf-{{ section.id }} .gfooter-sub button { flex:0 0 auto; border:none; cursor:pointer; border-radius:999px; padding:0 26px; font-family:"Gotham Golf",var(--head); font-weight:700; font-size:14px; background:var(--accent); color:var(--ink); }
   #avro-golf-{{ section.id }} .gfooter-rule { border:none; border-top:1px solid rgba(255,255,255,.14); margin:40px 0; }
   #avro-golf-{{ section.id }} .gfooter-mid { display:grid; grid-template-columns:1fr auto; gap:clamp(32px,6vw,80px); align-items:start; }
-  #avro-golf-{{ section.id }} .gfooter-logo { height:auto; width:clamp(150px,16vw,200px); opacity:.55; display:block; }
+  #avro-golf-{{ section.id }} .gfooter-logo { height:auto; width:clamp(230px,24vw,320px); display:block; }
   #avro-golf-{{ section.id }} .gfooter-brand > p { margin-top:16px; color:rgba(255,255,255,.55); font-size:14px; line-height:1.5; max-width:20rem; }
   #avro-golf-{{ section.id }} .gfooter-cols { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(32px,5vw,64px); }
   #avro-golf-{{ section.id }} .gfooter-cols h4 { font-family:"Gotham Golf",var(--head); font-weight:700; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.4); margin:0 0 16px; }
   #avro-golf-{{ section.id }} .gfooter-cols ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; }
   #avro-golf-{{ section.id }} .gfooter-cols a { color:#fff; font-size:14px; text-decoration:none; }
   #avro-golf-{{ section.id }} .gfooter-cols a:hover { color:var(--accent); }
+  #avro-golf-{{ section.id }} .gfooter-disclaimer { max-width:760px; display:flex; flex-direction:column; gap:8px; margin-bottom:24px; }
+  #avro-golf-{{ section.id }} .gfooter-disclaimer small { font-size:11px; line-height:1.6; color:rgba(255,255,255,.6); }
+  #avro-golf-{{ section.id }} .gfooter-disclaimer .gfooter-source { font-weight:700; }
   #avro-golf-{{ section.id }} .gfooter-legal { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; padding-bottom:16px; }
   #avro-golf-{{ section.id }} .gfooter-legal > span { color:rgba(255,255,255,.45); font-size:12px; }
   #avro-golf-{{ section.id }} .gfooter-legal-links { display:flex; gap:24px; }
@@ -433,7 +436,7 @@
 
       <div class="gfooter-mid">
         <div class="gfooter-brand">
-          {%- if section.settings.footer_logo != blank -%}<img class="gfooter-logo" src="{{ section.settings.footer_logo | image_url: width: 400 }}" alt="AVRO Golf" width="200" height="64">{%- else -%}<img class="gfooter-logo" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avro_Golf_wordmark_FINAL-0526_On%20Black-VWzF3eWi1BxudhZDRI5hnlI8HmpIV3.png" alt="AVRO Golf" width="200" height="64">{%- endif -%}
+          {%- if section.settings.footer_logo != blank -%}<img class="gfooter-logo" src="{{ section.settings.footer_logo | image_url: width: 640 }}" alt="AVRO Golf" width="360" height="115">{%- else -%}<img class="gfooter-logo" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avro_Golf_wordmark_FINAL-0526_On%20Black-VWzF3eWi1BxudhZDRI5hnlI8HmpIV3.png" alt="AVRO Golf" width="360" height="115">{%- endif -%}
           <p>{{ section.settings.footer_tagline | default: 'Calm-first performance drink mix. Built to support state before stimulation.*' }}</p>
         </div>
         <div class="gfooter-cols">
@@ -445,9 +448,14 @@
 
       <hr class="gfooter-rule">
 
+      <div class="gfooter-disclaimer">
+        <small>* These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</small>
+        <small class="gfooter-source">** Source: www.pharmagaba.com</small>
+      </div>
+
       <div class="gfooter-legal">
-        <span>© {{ 'now' | date: '%Y' }} AVRO Life ● These statements have not been evaluated by the FDA.</span>
-        <div class="gfooter-legal-links"><a href="/pages/privacy">Privacy</a><a href="/pages/terms">Terms</a><a href="/pages/accessibility">Accessibility</a></div>
+        <span>© {{ 'now' | date: '%Y' }} AVRO Life</span>
+        <div class="gfooter-legal-links"><a href="/pages/privacy">Privacy</a><a href="/pages/terms">Terms</a><a href="/pages/accessibility">Accessibility</a><a href="/pages/returns">Returns</a></div>
       </div>
     </div>
     <div class="gfooter-watermark" aria-hidden="true">AVRO GOLF</div>

@@ -108,7 +108,7 @@ export function GolfPage() {
 
     <section className="golf-section golf-tile"><div className="golf-heading golf-heading-split" data-reveal><h2>Golf Use Moments</h2><p>One calm-first foundation, ready for the moments that shape the golf experience.</p></div><div className="golf-moments">{moments.map((x,i)=><article data-reveal style={ri(i)} key={x[0]}><div><Image src={x[2]} alt={`${x[0].toLowerCase()} golf moment`} fill sizes="(max-width: 768px) 100vw, 25vw" className="golf-cover"/><span className="golf-moment-pill">{x[3]}</span></div><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div></section>
 
-    <section id="shop" className="golf-section golf-dark golf-tile"><div className="golf-heading" data-reveal><p className="golf-kicker">CHOOSE YOUR FORMULA</p><h2>Shop AVRO for Golf</h2><p>Same calm-first base. Three ways to meet the moment.</p></div><div className="golf-products">{products.map((x,i)=><article data-reveal style={ri(i)} key={x[0]}><small>{x[1]}</small><div className="golf-product-image"><Image src={x[5]} alt={`${x[0]} drink mix`} fill sizes="(max-width: 768px) 100vw, 33vw" className="golf-contain"/></div><h3>{x[0]}</h3><p>{x[2]}</p><p><b>BEST FOR</b>{x[3]}</p><Link href={x[6]} className="golf-btn golf-btn-light">{x[4]} →</Link></article>)}</div></section>
+    <section id="shop" className="golf-section golf-dark golf-tile"><div className="golf-heading" data-reveal><p className="golf-kicker">CHOOSE YOUR FORMULA</p><h2>Shop AVRO for Golf</h2><p>Same calm-first base. Three ways to meet the moment.</p></div><div className="golf-products">{products.map((x,i)=><article data-reveal style={ri(i)} key={x[0]}><small>{x[1]}</small><div className="golf-product-image"><Image src={x[5]} alt={`${x[0]} drink mix`} fill sizes="(max-width: 768px) 100vw, 33vw" className="golf-cover"/></div><h3>{x[0]}</h3><p>{x[2]}</p><p><b>BEST FOR</b>{x[3]}</p><Link href={x[6]} className="golf-btn golf-btn-light">{x[4]} →</Link></article>)}</div></section>
 
     <section className="golf-faq golf-tile"><div data-reveal><p className="golf-kicker">GOLF FAQ</p><h2>Questions Before the First Tee.</h2><p>Straight answers about choosing and using AVRO for golf.</p></div><div data-reveal style={ri(1)}>{faqs.map((x)=><details key={x[0]}><summary>{x[0]}<span>+</span></summary><p>{x[1]}</p></details>)}</div></section>
 
@@ -153,7 +153,7 @@ function GolfFooter() {
 
         <div className="golf-footer-mid">
           <div className="golf-footer-brand">
-            <Image src="/golf/avro-golf-wordmark.png" alt="AVRO Golf" width={200} height={64} className="golf-footer-logo" />
+            <Image src="/golf/avro-golf-wordmark.png" alt="AVRO Golf" width={360} height={115} className="golf-footer-logo" />
             <p>Calm-first performance drink mix. Built to support state before stimulation.*</p>
           </div>
           <div className="golf-footer-cols">
@@ -168,12 +168,18 @@ function GolfFooter() {
 
         <hr className="golf-footer-rule" />
 
+        <div className="golf-footer-disclaimer">
+          <small>* These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</small>
+          <small className="golf-footer-source">** Source: www.pharmagaba.com</small>
+        </div>
+
         <div className="golf-footer-legal">
-          <span>© 2026 AVRO Life ● These statements have not been evaluated by the FDA.</span>
+          <span>© 2026 AVRO Life</span>
           <div className="golf-footer-legal-links">
             <Link href="/privacy">Privacy</Link>
             <Link href="/terms">Terms</Link>
             <Link href="/accessibility">Accessibility</Link>
+            <Link href="/returns">Returns</Link>
           </div>
         </div>
       </div>
