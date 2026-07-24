@@ -21,8 +21,17 @@
 {%- endcomment -%}
 
 {% style %}
+  /* ---- Embedded fonts (self-loading so the footer renders correctly even if
+     the theme doesn't ship these families) ---- */
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+  @font-face { font-family:"Gotham Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gotham-Bold-LAXKAYCVkw0bMCVe5ufvnj7iBMQpDj.otf") format("opentype"); font-weight:700; font-display:swap; }
+  @font-face { font-family:"Gotham Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gotham-Black-ECCJ09tZI68ZEKAZ3KWlzTegkXrA3z.otf") format("opentype"); font-weight:900; font-display:swap; }
+  @font-face { font-family:"Work Sans Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WorkSans-Regular-6zzrMeSw8tuNIAsKiWT2YQMQzhBMHN.ttf") format("truetype"); font-weight:400; font-display:swap; }
+  @font-face { font-family:"Work Sans Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WorkSans-Regular-6zzrMeSw8tuNIAsKiWT2YQMQzhBMHN.ttf") format("truetype"); font-weight:600; font-display:swap; }
+
   #avro-footer-{{ section.id }} {
     --charcoal: #151515; --bone: #F5F0E8; --avro-blue: #94C6D4;
+    --g-black: #000000; --g-white: #FFFFFF; --g-lime: #BDD637; --g-ink: #161616;
     font-family: "DM Sans", system-ui, sans-serif; display: block;
     position: relative; overflow: hidden; background: var(--charcoal); color: var(--bone);
   }
@@ -53,9 +62,36 @@
     #avro-footer-{{ section.id }} .ft-left { width: 400px; }
     #avro-footer-{{ section.id }} .ft-cols { grid-template-columns: repeat(4,1fr); padding-left: 16px; }
   }
+
+  /* Text watermark (used by the Golf style; hidden otherwise) */
+  #avro-footer-{{ section.id }} .ft-watermark-word { display: none; font-family: "Gotham Golf", sans-serif; font-weight: 900; font-size: clamp(2.5rem,12.5vw,9.5rem); line-height: .85; letter-spacing: .01em; text-align: center; color: rgba(255,255,255,0.07); white-space: nowrap; overflow: hidden; padding: 20px 24px 28px; user-select: none; }
+
+  /* ============================================================
+     GOLF STYLE  —  set "Footer style" to "Golf" in the editor.
+     Restyles the footer to match the /golf page footer: black bg,
+     Gotham/Work Sans fonts, lime accents and an AVRO GOLF watermark.
+     ============================================================ */
+  #avro-footer-{{ section.id }}.is-golf { background: var(--g-black); color: var(--g-white); font-family: "Work Sans Golf", system-ui, sans-serif; }
+  #avro-footer-{{ section.id }}.is-golf .ft-eyebrow,
+  #avro-footer-{{ section.id }}.is-golf .ft-col h4 { color: var(--g-lime); font-family: "Gotham Golf", sans-serif; }
+  #avro-footer-{{ section.id }}.is-golf .ft-left h3 { font-family: "Gotham Golf", sans-serif; font-weight: 900; color: var(--g-white); }
+  #avro-footer-{{ section.id }}.is-golf .ft-left p.sub { color: rgba(255,255,255,0.55); }
+  #avro-footer-{{ section.id }}.is-golf .ft-form { border: none; background: var(--g-white); }
+  #avro-footer-{{ section.id }}.is-golf .ft-form input { color: var(--g-ink); }
+  #avro-footer-{{ section.id }}.is-golf .ft-form input::placeholder { color: #8a8a8a; opacity: 1; }
+  #avro-footer-{{ section.id }}.is-golf .ft-form button { background: var(--g-lime); color: var(--g-ink); font-family: "Gotham Golf", sans-serif; }
+  #avro-footer-{{ section.id }}.is-golf .ft-col a { color: var(--g-white); }
+  #avro-footer-{{ section.id }}.is-golf .ft-col a:hover { color: var(--g-lime); }
+  #avro-footer-{{ section.id }}.is-golf .ft-legal small { color: rgba(255,255,255,0.6); }
+  #avro-footer-{{ section.id }}.is-golf .ft-bottom .copy { color: rgba(255,255,255,0.45); }
+  #avro-footer-{{ section.id }}.is-golf .ft-bottom a { color: rgba(255,255,255,0.6); }
+  #avro-footer-{{ section.id }}.is-golf .ft-bottom a:hover { color: var(--g-white); }
+  #avro-footer-{{ section.id }}.is-golf .ft-watermark { display: none; }
+  #avro-footer-{{ section.id }}.is-golf .ft-watermark-word { display: block; }
 {% endstyle %}
 
-<div id="avro-footer-{{ section.id }}">
+  <div id="avro-footer-{{ section.id }}"{% if section.settings.style == 'golf' %} class="is-golf"{% endif %}>
+
   <footer>
     <div class="ft-inner">
       <div class="ft-left">
@@ -121,6 +157,8 @@
         <img src="{{ 'avro-logo-footer.svg' | asset_url }}" alt="">
       {%- endif -%}
     </div>
+
+    <div class="ft-watermark-word" aria-hidden="true">{{ section.settings.watermark_word | default: 'AVRO GOLF' }}</div>
   </footer>
 </div>
 
@@ -128,6 +166,8 @@
 {
   "name": "AVRO — Footer",
   "settings": [
+    { "type": "header", "content": "Appearance" },
+    { "type": "select", "id": "style", "label": "Footer style", "info": "Use \"Golf\" on the Golf page to match its dark, lime-accented footer.", "options": [ { "value": "default", "label": "Default (charcoal)" }, { "value": "golf", "label": "Golf (black + lime)" } ], "default": "default" },
     { "type": "header", "content": "Newsletter" },
     { "type": "text", "id": "news_eyebrow", "label": "Eyebrow", "default": "Newsletter" },
     { "type": "text", "id": "news_heading", "label": "Heading", "default": "Join Our Community" },
@@ -142,7 +182,8 @@
     { "type": "url", "id": "accessibility_link", "label": "Accessibility link" },
     { "type": "url", "id": "returns_link", "label": "Returns link" },
     { "type": "header", "content": "Watermark" },
-    { "type": "image_picker", "id": "watermark", "label": "Watermark logo (falls back to avro-logo-footer.svg)" }
+    { "type": "image_picker", "id": "watermark", "label": "Watermark logo (falls back to avro-logo-footer.svg)", "info": "Used by the Default style." },
+    { "type": "text", "id": "watermark_word", "label": "Watermark word (Golf style)", "default": "AVRO GOLF" }
   ],
   "max_blocks": 50,
   "blocks": [
