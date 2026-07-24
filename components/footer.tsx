@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 import { useThemeMode } from "@/lib/theme-context"
 
 const footerLinks = {
@@ -43,6 +44,10 @@ export function Footer() {
   const [submitted, setSubmitted] = useState(false)
   const themeMode = useThemeMode()
   const isZeroProof = themeMode === "zero-proof"
+  const pathname = usePathname()
+
+  // The Golf page ships its own themed footer (see components/golf-page.tsx).
+  if (pathname === "/golf") return null
 
   // Theme colors — Zero Proof uses deep-black + gold only (no bone)
   const c = isZeroProof

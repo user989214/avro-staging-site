@@ -678,8 +678,10 @@ button[role="button"] {
 .golf-faq>div:first-child { display:flex; flex-direction:column; gap:1rem; }
 .golf-faq details { border-top:1px solid var(--g-line); padding:1.5rem 0; }
 .golf-faq details:last-child { border-bottom:1px solid var(--g-line); }
-.golf-faq summary { cursor:pointer; list-style:none; display:flex; justify-content:space-between; gap:1rem; font-family:"Gotham Golf"; font-weight:700; font-size:1.05rem; }
+.golf-faq summary { cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; gap:1rem; font-family:"Gotham Golf"; font-weight:700; font-size:1.05rem; }
 .golf-faq summary::-webkit-details-marker { display:none; }
+.golf-faq summary span { flex:0 0 auto; width:34px; height:34px; display:grid; place-items:center; background:var(--g-lime); color:var(--g-ink); border-radius:999px; font-size:20px; font-weight:500; line-height:0; transition:transform .3s cubic-bezier(.22,1,.36,1); }
+.golf-faq details[open] summary span { transform:rotate(45deg); }
 .golf-faq details p { padding:1rem 3rem 0 0; color:var(--g-muted); }
 .golf-final { min-height:520px; padding:clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,4.5rem); background:#000; color:var(--g-white); display:flex; align-items:center; justify-content:center; text-align:center; }
 .golf-final-bg { position:absolute; inset:0; z-index:0; }
