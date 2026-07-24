@@ -436,52 +436,6 @@
     </div>
   </section>
 
-  {%- comment -%} FOOTER {%- endcomment -%}
-  <footer class="gfooter">
-    <div class="gfooter-inner">
-      <div class="gfooter-news">
-        <p class="kicker">{{ section.settings.footer_news_kicker | default: 'NEWSLETTER' }}</p>
-        <h3>{{ section.settings.footer_news_title | default: 'Join our community.' }}</h3>
-        <p class="gfooter-sub-copy">{{ section.settings.footer_news_copy | default: 'Updates, perks, and calm-first insights — straight to your inbox.' }}</p>
-        {%- form 'customer' -%}
-          <input type="hidden" name="contact[tags]" value="newsletter,golf">
-          <div class="gfooter-sub">
-            <label class="visually-hidden" for="gfooter-email-{{ section.id }}">Email address</label>
-            <input id="gfooter-email-{{ section.id }}" type="email" name="contact[email]" placeholder="Email address" required>
-            <button type="submit">Subscribe</button>
-          </div>
-        {%- endform -%}
-      </div>
-
-      <hr class="gfooter-rule">
-
-      <div class="gfooter-mid">
-        <div class="gfooter-brand">
-          {%- if section.settings.footer_logo != blank -%}<img class="gfooter-logo" src="{{ section.settings.footer_logo | image_url: width: 640 }}" alt="AVRO Golf" width="520" height="165">{%- else -%}<img class="gfooter-logo" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avro_Golf_wordmark_FINAL-0526_On%20Black-VRHgaFLcxe4pjNhB6vgil2zbeVlvdx.png" alt="AVRO Golf" width="520" height="165">{%- endif -%}
-          <p>{{ section.settings.footer_tagline | default: 'Calm-first performance drink mix. Built to support state before stimulation.*' }}</p>
-        </div>
-        <div class="gfooter-cols">
-          <div><h4>Shop</h4><ul><li><a href="/collections/calm">Calm</a></li><li><a href="/collections/focus">Focus</a></li><li><a href="/collections/energy">Energy</a></li><li><a href="/collections/all">Bundle + Save</a></li></ul></div>
-          <div><h4>Learn</h4><ul><li><a href="/pages/why-avro">Why AVRO</a></li><li><a href="/pages/science">The Science</a></li><li><a href="/pages/ingredients">Ingredients</a></li><li><a href="/pages/golf">Golf</a></li></ul></div>
-          <div><h4>Company</h4><ul><li><a href="/pages/contact">Contact</a></li><li><a href="/pages/faq">FAQ</a></li><li><a href="https://www.instagram.com/avrohydrate">Instagram</a></li><li><a href="https://www.linkedin.com/company/avrohydrate">LinkedIn</a></li></ul></div>
-        </div>
-      </div>
-
-      <hr class="gfooter-rule">
-
-      <div class="gfooter-disclaimer">
-        <small>* These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</small>
-        <small class="gfooter-source">** Source: www.pharmagaba.com</small>
-      </div>
-
-      <div class="gfooter-legal">
-        <span>© {{ 'now' | date: '%Y' }} AVRO Life</span>
-        <div class="gfooter-legal-links"><a href="/pages/privacy">Privacy</a><a href="/pages/terms">Terms</a><a href="/pages/accessibility">Accessibility</a><a href="/pages/returns">Returns</a></div>
-      </div>
-    </div>
-    <div class="gfooter-watermark" aria-hidden="true">AVRO GOLF</div>
-  </footer>
-
 </div>
 
 <script>
