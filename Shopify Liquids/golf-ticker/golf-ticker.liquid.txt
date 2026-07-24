@@ -16,6 +16,31 @@
   ============================================================================
 {%- endcomment -%}
 
+{%- comment -%}
+  GOLF-PAGE GUARD. This section renders ONLY on the golf page, even if it gets
+  added to another template. We match the golf page from its handle, its page
+  template suffix, or the URL path (/golf). Set the handle(s) in "Golf page
+  handle(s)" if your golf page uses a different handle. Turn the guard off only
+  if you deliberately want the ticker on every page it's placed on.
+{%- endcomment -%}
+{%- assign gt_render = false -%}
+{%- if section.settings.golf_only == false -%}
+  {%- assign gt_render = true -%}
+{%- else -%}
+  {%- assign gt_handles = section.settings.golf_handles | default: 'golf' | downcase | replace: ' ', '' -%}
+  {%- assign gt_list = gt_handles | split: ',' -%}
+  {%- for h in gt_list -%}
+    {%- if h != blank -%}
+      {%- if page.handle == h -%}{%- assign gt_render = true -%}{%- endif -%}
+      {%- if template.suffix == h -%}{%- assign gt_render = true -%}{%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- unless gt_render -%}
+    {%- if request.path contains '/golf' -%}{%- assign gt_render = true -%}{%- endif -%}
+  {%- endunless -%}
+{%- endif -%}
+
+{%- if gt_render -%}
 {% style %}
   #avro-golf-ticker-{{ section.id }} {
     --tick-bg: {{ section.settings.bg_color | default: '#000000' }};
@@ -57,6 +82,7 @@
     </div>
   </div>
 {%- endif -%}
+{%- endif -%}
 
 {% schema %}
 {
@@ -65,6 +91,10 @@
   "class": "avro-golf-ticker-section",
   "settings": [
     { "type": "paragraph", "content": "Scrolling announcement bar for the golf page. Add \"Message\" blocks below to set the phrases (drag to reorder). With none added it shows the default AVRO Golf phrases." },
+    { "type": "header", "content": "Where it shows" },
+    { "type": "paragraph", "content": "This bar only renders on the golf page — even if the section is added to another template it stays hidden everywhere else." },
+    { "type": "checkbox", "id": "golf_only", "label": "Golf page only", "default": true, "info": "Leave on so the ticker can never appear on other pages. Turn off only to show it wherever the section is placed." },
+    { "type": "text", "id": "golf_handles", "label": "Golf page handle(s)", "default": "golf", "info": "Comma-separated page handles (or page template suffixes) that count as the golf page. Default: golf" },
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "bg_color", "label": "Background", "default": "#000000" },
     { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
