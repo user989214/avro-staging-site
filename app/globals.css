@@ -639,11 +639,13 @@ button[role="button"] {
 .golf-reason { position:relative; padding:29px 25px; background:var(--g-card); border:1px solid var(--g-line); border-radius:16px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
 .golf-reason>span { position:absolute; top:29px; right:25px; color:var(--g-olive); font-size:12px; font-weight:600; letter-spacing:.08em; }
 .golf-reason h3 { margin-top:14px; }
-.golf-step { padding:40px; display:flex; flex-direction:column; align-items:flex-start; gap:9px; }
-.golf-dark .golf-three { border:1px solid rgba(255,255,255,.18); gap:0; }
-.golf-step+.golf-step { border-left:1px solid rgba(255,255,255,.18); }
-.golf-step>div { width:100%; display:flex; align-items:flex-start; justify-content:space-between; }
-.golf-step strong { color:var(--g-lime); font-family:"Gotham Golf"; font-weight:900; font-size:42px; line-height:1; }
+.golf-dark .golf-three { border:none; border-top:1px solid rgba(255,255,255,.2); gap:0; }
+.golf-step { padding:44px 44px 52px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
+.golf-step:first-child { padding-left:0; }
+.golf-step:last-child { padding-right:0; }
+.golf-step+.golf-step { border-left:1px solid rgba(255,255,255,.2); }
+.golf-step>div { width:100%; display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:10px; }
+.golf-step strong { color:var(--g-lime); font-family:"Gotham Golf"; font-weight:900; font-size:52px; line-height:1; }
 .golf-step h3 { font-size:16px; }
 .golf-step p { color:rgba(255,255,255,.7); }
 .golf-step img { filter:brightness(0) saturate(100%) invert(85%) sepia(35%) saturate(986%) hue-rotate(24deg) brightness(94%); }
@@ -678,7 +680,8 @@ button[role="button"] {
 .golf-final { min-height:403px; padding:clamp(4rem,9vw,7rem) clamp(1.5rem,5vw,4.5rem); background:#000; color:var(--g-white); display:flex; align-items:center; justify-content:center; text-align:center; }
 .golf-final:after { content:"CALM"; position:absolute; right:-.02em; top:-.18em; font-family:"Gotham Golf"; font-weight:900; font-size:clamp(8rem,24vw,25rem); color:rgba(189,214,55,.1); pointer-events:none; }
 .golf-final-bg { position:absolute; inset:0; z-index:0; }
-.golf-final-bg::after { content:""; position:absolute; inset:0; background:rgba(0,0,0,var(--g-final-overlay,.72)); }
+.golf-final-bg img { object-position:center 30%; }
+.golf-final-bg::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,var(--g-final-overlay,.62))); }
 .golf-final>div { position:relative; z-index:1; max-width:720px; display:flex; flex-direction:column; align-items:center; gap:1.35rem; }
 .golf-final .golf-btn-ghost { color:var(--g-white); background:#2b2b2b; border-color:#4a4a4a; }
 @media (max-width: 768px) {

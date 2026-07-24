@@ -110,11 +110,13 @@
   #avro-golf-{{ section.id }} .reason p { color:var(--muted); }
 
   /* Steps (dark) */
-  #avro-golf-{{ section.id }} .steps { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid rgba(255,255,255,.18); }
-  #avro-golf-{{ section.id }} .step { padding:40px; display:flex; flex-direction:column; align-items:flex-start; gap:9px; }
-  #avro-golf-{{ section.id }} .step + .step { border-left:1px solid rgba(255,255,255,.18); }
-  #avro-golf-{{ section.id }} .step .top { width:100%; display:flex; align-items:flex-start; justify-content:space-between; }
-  #avro-golf-{{ section.id }} .step .num { font-family:"Gotham Golf"; font-weight:900; font-size:42px; line-height:1; color:var(--accent); }
+  #avro-golf-{{ section.id }} .steps { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(255,255,255,.2); }
+  #avro-golf-{{ section.id }} .step { padding:44px 44px 52px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
+  #avro-golf-{{ section.id }} .step:first-child { padding-left:0; }
+  #avro-golf-{{ section.id }} .step:last-child { padding-right:0; }
+  #avro-golf-{{ section.id }} .step + .step { border-left:1px solid rgba(255,255,255,.2); }
+  #avro-golf-{{ section.id }} .step .top { width:100%; display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:10px; }
+  #avro-golf-{{ section.id }} .step .num { font-family:"Gotham Golf"; font-weight:900; font-size:52px; line-height:1; color:var(--accent); }
   #avro-golf-{{ section.id }} .step .ic { width:70px; height:70px; color:var(--accent); }
   #avro-golf-{{ section.id }} .step .ic svg,#avro-golf-{{ section.id }} .step .ic img { display:block; width:70px; height:70px; object-fit:contain; }
   #avro-golf-{{ section.id }} .step h3 { font-size:16px; }
@@ -165,6 +167,9 @@
   /* Final CTA */
   #avro-golf-{{ section.id }} .final { position:relative; overflow:hidden; min-height:403px; padding:clamp(64px,9vw,112px) clamp(24px,5vw,72px); background:#000; color:var(--white); display:flex; align-items:center; justify-content:center; text-align:center; }
   #avro-golf-{{ section.id }} .final::after { content:"CALM"; position:absolute; right:-.02em; top:-.18em; font-family:"Gotham Golf"; font-weight:900; font-size:clamp(128px,24vw,400px); color:rgba(189,214,55,.1); pointer-events:none; }
+  #avro-golf-{{ section.id }} .final-bg { position:absolute; inset:0; z-index:0; }
+  #avro-golf-{{ section.id }} .final-bg img { width:100%; height:100%; object-fit:cover; object-position:center 30%; }
+  #avro-golf-{{ section.id }} .final-bg::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.62)); }
   #avro-golf-{{ section.id }} .final-in { position:relative; z-index:1; max-width:720px; display:flex; flex-direction:column; align-items:center; gap:22px; }
   #avro-golf-{{ section.id }} .final h2 { color:var(--white); }
   #avro-golf-{{ section.id }} .final .body { color:rgba(255,255,255,.75); }
@@ -356,8 +361,9 @@
   {%- endif -%}
 
   {%- comment -%} FINAL CTA {%- endcomment -%}
-  <section class="final">
-    <div class="final-in">
+      <section class="final">
+        <div class="final-bg" aria-hidden="true">{%- if section.settings.final_bg != blank -%}<img src="{{ section.settings.final_bg | image_url: width: 2400 }}" alt="" loading="lazy">{%- else -%}<img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avro_Golf_Female_Putting_Stacked_Logo_Visor-WVNoSyv7hVYallFMrRyTzv8DW4ZG54.png" alt="" loading="lazy">{%- endif -%}</div>
+        <div class="final-in">
       <p class="kicker">{{ section.settings.final_kicker | default: 'CALM FIRST. PLAY YOUR GAME.' }}</p>
       <h2>{{ section.settings.final_title | default: 'Choose the formula that fits your golf.' }}</h2>
       <p class="body">{{ section.settings.final_copy | default: 'Start with calm. Choose Calm, Focus or Energy for the moment ahead.' }}</p>
@@ -452,6 +458,7 @@
     { "type": "textarea", "id": "faq_copy", "label": "Supporting line", "default": "Straight answers about choosing and using AVRO for golf." },
 
     { "type": "header", "content": "Final CTA" },
+    { "type": "image_picker", "id": "final_bg", "label": "Background image", "info": "Sits behind a dark overlay. Defaults to the AVRO Golf coastal photo." },
     { "type": "text", "id": "final_kicker", "label": "Eyebrow", "default": "CALM FIRST. PLAY YOUR GAME." },
     { "type": "text", "id": "final_title", "label": "Title", "default": "Choose the formula that fits your golf." },
     { "type": "textarea", "id": "final_copy", "label": "Copy" },

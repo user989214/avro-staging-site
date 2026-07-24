@@ -38,7 +38,7 @@ const faqs = [
 ]
 
 /** Background image for the closing "fits your golf" CTA (behind the dark overlay). */
-const FINAL_BG = "/golf/hero-coastal.png"
+const FINAL_BG = "/golf/female-putting-coastal.png"
 
 /** Inline style helper for the stagger index custom property. */
 const ri = (i: number) => ({ ["--ri"]: i }) as React.CSSProperties
