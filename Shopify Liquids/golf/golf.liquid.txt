@@ -62,6 +62,9 @@
   #avro-golf-{{ section.id }} .hero-copy h1 .hw { display:inline-block; opacity:0; transform:translateY(24px); animation:avro-golf-rise-{{ section.id }} .95s cubic-bezier(.34,1.4,.4,1) forwards; will-change:transform,opacity; }
   @media (prefers-reduced-motion: reduce) { #avro-golf-{{ section.id }} .hero-copy h1 .hw { animation:none!important; opacity:1!important; transform:none!important; } }
   #avro-golf-{{ section.id }} .hero-copy .body { max-width:560px; }
+  #avro-golf-{{ section.id }} .hero-dots { display:flex; gap:8px; margin-top:22px; }
+  #avro-golf-{{ section.id }} .hero-dots button { width:8px; height:8px; padding:0; border:none; border-radius:4px; cursor:pointer; background:rgba(255,255,255,.35); transition:width .3s ease, background-color .3s ease; }
+  #avro-golf-{{ section.id }} .hero-dots button.is-active { width:24px; background:var(--accent); }
   #avro-golf-{{ section.id }} .hero-copy .kicker { color:var(--accent); padding:9px 17px; border:1px solid var(--accent); border-radius:999px; }
   #avro-golf-{{ section.id }} .hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
 
@@ -189,6 +192,9 @@
     #avro-golf-{{ section.id }} .hero-copy { position:static; padding:24px 20px 32px; gap:20px; }
     #avro-golf-{{ section.id }} .hero-copy .body { color:var(--muted); font-size:clamp(17px,4.5vw,20px); line-height:1.55; }
     #avro-golf-{{ section.id }} .hero-copy .kicker { color:var(--olive); border-color:var(--olive); }
+    #avro-golf-{{ section.id }} .hero-dots { margin-top:4px; }
+    #avro-golf-{{ section.id }} .hero-dots button { background:rgba(0,0,0,.2); }
+    #avro-golf-{{ section.id }} .hero-dots button.is-active { background:var(--olive); }
     #avro-golf-{{ section.id }} .hero .hero-btns { gap:12px; }
     #avro-golf-{{ section.id }} .hero .btn { min-height:48px; padding:0 28px; font-size:16px; font-weight:700; border-width:2px; color:var(--ink); background:transparent; border-color:var(--ink); }
     #avro-golf-{{ section.id }} .hero .btn:hover { color:var(--white); background:var(--ink); border-color:var(--ink); }
@@ -237,13 +243,32 @@
 
 <div id="avro-golf-{{ section.id }}">
 
-  {%- comment -%} HERO {%- endcomment -%}
-  <section class="hero">
+  {%- comment -%}
+    HERO SLIDESHOW
+    Slides come from "Hero slide" blocks (image + alt, reorderable in the editor).
+    If none are added, we fall back to the three default AVRO Golf editorial shots
+    in order: woman putting -> man sitting -> man addressing the ball -> (loop).
+    Autoplay interval + the lime dotted ticker are controlled in the "Hero" settings.
+  {%- endcomment -%}
+  {%- assign hero_blocks = section.blocks | where: 'type', 'hero_slide' -%}
+  {%- assign hero_count = 0 -%}
+  {%- for b in hero_blocks -%}{%- if b.settings.image != blank -%}{%- assign hero_count = hero_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+  {%- assign hero_interval = section.settings.hero_interval | default: 6 | times: 1000 -%}
+  <section class="hero" data-hero data-interval="{{ hero_interval }}">
     <div class="hero-imgs">
-      {%- if section.settings.hero_image != blank -%}
-        <img class="on" src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}">
+      {%- if hero_count > 0 -%}
+        {%- assign shown = 0 -%}
+        {%- for b in hero_blocks -%}
+          {%- if b.settings.image != blank -%}
+            {%- assign shown = shown | plus: 1 -%}
+            <img class="hero-slide{% if shown == 1 %} on{% endif %}" src="{{ b.settings.image | image_url: width: 2400 }}" alt="{{ b.settings.alt | escape }}"{% if shown > 1 %} loading="lazy"{% endif %} {{ b.shopify_attributes }}>
+          {%- endif -%}
+        {%- endfor -%}
       {%- else -%}
-        <img class="on" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avro_Golf_Female_Putting_Stacked_Logo_Visor-nQ4po9nMQMLgHJRBhcCcIgwrsaHb8I.png" alt="{{ section.settings.hero_alt | escape }}">
+        {%- assign hero_count = 3 -%}
+        <img class="hero-slide on" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avro_Golf_Female_Putting_Stacked_Logo_Visor-ppVVuwpVurloN1Z0Elbrgdf8KqFrsd.png" alt="Golfer lining up a putt on a coastal course wearing an AVRO Golf visor">
+        <img class="hero-slide" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avro_Golf_Editorial_Cap_Logo_Embroidery-U4MiHgNjNKoeP46uaDT9CMKJOFsbEj.png" alt="Golfer in an AVRO Golf cap sitting above a coastal links course" loading="lazy">
+        <img class="hero-slide" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avro_Golf_Editorial_Coastal_Address_Single_Male-mlnuS7QiCaPtSAnpmZKaRSebY8gT1l.png" alt="Golfer addressing the ball with a driver on a clifftop tee" loading="lazy">
       {%- endif -%}
     </div>
     <div class="hero-shade" aria-hidden="true"></div>
@@ -256,6 +281,13 @@
         <a href="{{ section.settings.hero_btn1_link | default: shop_anchor }}" class="btn btn-accent">{{ section.settings.hero_btn1_label | default: 'Choose Your Formula' }}</a>
         <a href="{{ section.settings.hero_btn2_link | default: '/collections/all' }}" class="btn btn-ghost">{{ section.settings.hero_btn2_label | default: 'Shop AVRO' }}</a>
       </div>
+      {%- if section.settings.hero_show_ticker and hero_count > 1 -%}
+        <div class="hero-dots" data-hero-dots role="tablist" aria-label="Hero slides">
+          {%- for i in (1..hero_count) -%}
+            <button type="button" role="tab" class="{% if forloop.first %}is-active{% endif %}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Show slide {{ forloop.index }}"></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     </div>
     <div class="ritual">
       <p class="rlabel">{{ section.settings.ritual_label | default: 'THE PRE-GOLF MINDSET' }}</p>
@@ -406,6 +438,24 @@
   (function(){
     var root=document.getElementById("avro-golf-{{ section.id }}");
     if(!root) return;
+    var hero=root.querySelector("[data-hero]");
+    if(hero){
+      var slides=hero.querySelectorAll(".hero-slide");
+      var dots=hero.querySelectorAll("[data-hero-dots] button");
+      var interval=parseInt(hero.getAttribute("data-interval"),10)||6000;
+      var idx=0, timer=null;
+      var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function show(n){
+        if(!slides.length) return;
+        idx=(n+slides.length)%slides.length;
+        slides.forEach(function(s,i){ s.classList.toggle("on",i===idx); });
+        dots.forEach(function(d,i){ d.classList.toggle("is-active",i===idx); d.setAttribute("aria-selected",i===idx?"true":"false"); });
+      }
+      function start(){ if(reduce||slides.length<2) return; stop(); timer=setInterval(function(){ show(idx+1); },interval); }
+      function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+      dots.forEach(function(d,i){ d.addEventListener("click",function(){ show(i); start(); }); });
+      show(0); start();
+    }
     root.querySelectorAll("[data-faq]").forEach(function(it){
       var b=it.querySelector("button"); if(!b) return;
       b.addEventListener("click",function(){
@@ -425,8 +475,9 @@
     { "type": "text", "id": "hero_kicker", "label": "Eyebrow", "default": "CALM PERFORMANCE FOR GOLF" },
     { "type": "text", "id": "hero_title", "label": "Title", "default": "Golf Performance Begins Before the First Swing." },
     { "type": "textarea", "id": "hero_copy", "label": "Copy" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
-    { "type": "text", "id": "hero_alt", "label": "Hero image alt", "default": "Golfer lining up a putt on a coastal course wearing an AVRO Golf visor" },
+    { "type": "paragraph", "content": "Add \"Hero slide\" blocks below to build the slideshow (drag to reorder). With no slides added it shows the three default AVRO Golf shots: woman putting, man sitting, man addressing the ball." },
+    { "type": "checkbox", "id": "hero_show_ticker", "label": "Show dotted slide ticker", "default": true },
+    { "type": "range", "id": "hero_interval", "label": "Seconds per slide", "min": 2, "max": 12, "step": 1, "unit": "s", "default": 6 },
     { "type": "text", "id": "hero_btn1_label", "label": "Button 1 label", "default": "Choose Your Formula" },
     { "type": "url", "id": "hero_btn1_link", "label": "Button 1 link" },
     { "type": "text", "id": "hero_btn2_label", "label": "Button 2 label", "default": "Shop AVRO" },
@@ -499,6 +550,10 @@
     { "type": "url", "id": "final_btn3_link", "label": "Button 3 link" }
   ],
   "blocks": [
+    { "type": "hero_slide", "name": "Hero slide", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Slide image" },
+      { "type": "text", "id": "alt", "label": "Image alt text", "default": "AVRO Golf" }
+    ] },
     { "type": "reason", "name": "Reason card", "settings": [
       { "type": "image_picker", "id": "icon", "label": "Custom icon (optional)" },
       { "type": "select", "id": "icon_key", "label": "Embedded icon", "info": "Choose a built-in icon, or upload a Custom icon above to override.", "options": [ { "value": "calm-before-pressure", "label": "Gauge — Calm Before Pressure" }, { "value": "clarity", "label": "Soundwave — Clarity" }, { "value": "built-for-ritual", "label": "Golf Flag — Built for Ritual" }, { "value": "step-choose", "label": "Pour — Choose" }, { "value": "step-mix", "label": "Stir — Mix" }, { "value": "step-time", "label": "Drink — Time It" }, { "value": "pharmagaba", "label": "Sprout — PharmaGABA" }, { "value": "calm-foundation", "label": "Lotus — Calm Foundation" }, { "value": "mind-body", "label": "Mind–Body Diagram" }, { "value": "standards", "label": "Shield — Standards" }, { "value": "pressure", "label": "Clock — ~30 min" }, { "value": "drink", "label": "Cup — Drink (Show Up)" } ], "default": "calm-before-pressure" },
