@@ -219,7 +219,7 @@
     #avro-golf-{{ section.id }} .hero-copy .body { color:var(--muted); font-size:clamp(17px,4.5vw,20px); line-height:1.55; }
     #avro-golf-{{ section.id }} .hero-copy .kicker { color:var(--olive); border-color:var(--olive); }
     #avro-golf-{{ section.id }} .hero .hero-btns { gap:12px; }
-    #avro-golf-{{ section.id }} .hero .btn { min-height:48px; padding:0 28px; font-size:16px; color:var(--ink); background:transparent; border-color:rgba(0,0,0,.4); }
+    #avro-golf-{{ section.id }} .hero .btn { min-height:48px; padding:0 28px; font-size:16px; font-weight:700; border-width:2px; color:var(--ink); background:transparent; border-color:var(--ink); }
     #avro-golf-{{ section.id }} .hero .btn:hover { color:var(--white); background:var(--ink); border-color:var(--ink); }
     #avro-golf-{{ section.id }} .ritual { position:static; grid-template-columns:1fr 1fr 1fr; }
     #avro-golf-{{ section.id }} .ritual > p { display:none; }
@@ -227,7 +227,11 @@
     #avro-golf-{{ section.id }} .pressure-img { order:-1; aspect-ratio:4/3; }
     #avro-golf-{{ section.id }} .g3,#avro-golf-{{ section.id }} .g4,#avro-golf-{{ section.id }} .prods { grid-template-columns:1fr; }
     #avro-golf-{{ section.id }} .steps { grid-template-columns:1fr; }
+    #avro-golf-{{ section.id }} .step { padding:32px 0; }
+    #avro-golf-{{ section.id }} .step:first-child { padding-top:0; }
     #avro-golf-{{ section.id }} .step + .step { border-left:none; border-top:1px solid rgba(255,255,255,.18); }
+    #avro-golf-{{ section.id }} .moment .ph { aspect-ratio:4/3; }
+    #avro-golf-{{ section.id }} .moment .ph img { object-position:center 70%; }
     #avro-golf-{{ section.id }} .head-split { flex-direction:column; gap:16px; }
     #avro-golf-{{ section.id }} .head-split h2 { max-width:none; }
     #avro-golf-{{ section.id }} .head-split .sub { max-width:none; margin-top:0; text-align:left; }

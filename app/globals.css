@@ -736,7 +736,7 @@ button[role="button"] {
   .golf-hero-copy>p:not(.golf-kicker) { color:var(--g-muted); font-size:clamp(1.0625rem,4.5vw,1.25rem); line-height:1.55; }
   .golf-hero .golf-kicker { color:var(--g-olive); border-color:var(--g-olive); }
   .golf-hero .golf-actions { gap:.75rem; }
-  .golf-hero .golf-btn { min-height:48px; padding:0 28px; font-size:16px; color:var(--g-ink); background:transparent; border-color:rgba(0,0,0,.4); }
+  .golf-hero .golf-btn { min-height:48px; padding:0 28px; font-size:16px; font-weight:700; border-width:2px; color:var(--g-ink); background:transparent; border-color:var(--g-ink); }
   .golf-hero .golf-btn:hover { color:var(--g-white); background:var(--g-ink); border-color:var(--g-ink); }
   .golf-ritual { position:static; grid-template-columns:1fr 1fr 1fr; }
   .golf-ritual>p { display:none; }
@@ -745,8 +745,11 @@ button[role="button"] {
   .golf-pressure-image { order:-1; aspect-ratio:4/3; }
   .golf-three,.golf-products,.golf-science,.golf-moments { grid-template-columns:1fr; }
   .golf-dark .golf-three { gap:0; }
+  .golf-step { padding:32px 0; }
+  .golf-step:first-child { padding-top:0; }
   .golf-step+.golf-step { border-left:none; border-top:1px solid rgba(255,255,255,.18); }
   .golf-moments article>div { aspect-ratio:4/3; }
+  .golf-moments article>div img { object-position:center 70%; }
   .golf-heading-split { flex-direction:column; }
   .golf-heading-split h2 { max-width:none; }
   .golf-heading-split>p:last-child { max-width:none; margin-top:0; text-align:left; }
