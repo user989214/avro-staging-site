@@ -84,8 +84,10 @@ export function GolfPage() {
 
   return <main className="golf-page">
     <section className="golf-hero golf-tile">
-      <Image src="/golf/hero-female-putting.png" alt="Golfer lining up a putt on a coastal course wearing an AVRO Golf visor" fill priority sizes="100vw" className="golf-cover golf-hero-img" />
-      <div className="golf-hero-shade" />
+      <div className="golf-hero-img-wrap">
+        <Image src="/golf/hero-female-putting.png" alt="Golfer lining up a putt on a coastal course wearing an AVRO Golf visor" fill priority sizes="100vw" className="golf-cover golf-hero-img" />
+        <div className="golf-hero-shade" />
+      </div>
       <div className="golf-hero-copy">
         <p className="golf-kicker" data-reveal style={ri(0)}>CALM PERFORMANCE FOR GOLF</p>
         <h1><Words text="Golf Performance Begins Before the First Swing." /></h1>
@@ -153,7 +155,7 @@ function GolfFooter() {
 
         <div className="golf-footer-mid">
           <div className="golf-footer-brand">
-            <Image src="/golf/avro-golf-wordmark.png" alt="AVRO Golf" width={360} height={115} className="golf-footer-logo" />
+            <Image src="/golf/avro-golf-wordmark-wide.png" alt="AVRO Golf" width={520} height={165} className="golf-footer-logo" />
             <p>Calm-first performance drink mix. Built to support state before stimulation.*</p>
           </div>
           <div className="golf-footer-cols">
@@ -183,7 +185,7 @@ function GolfFooter() {
           </div>
         </div>
       </div>
-      <div className="golf-footer-watermark" aria-hidden="true"><Image src="/golf/avro-golf-wordmark.png" alt="" width={1600} height={512} className="golf-footer-watermark-img" /></div>
+      <div className="golf-footer-watermark" aria-hidden="true">AVRO GOLF</div>
     </footer>
   )
 }

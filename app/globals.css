@@ -588,6 +588,7 @@ button[role="button"] {
 .golf-section>.golf-heading .golf-kicker::before { content:"— "; }
 .golf-dark .golf-kicker { color:var(--g-lime); }
 .golf-hero { min-height:min(760px,90vh); color:var(--g-white); display:flex; align-items:center; }
+.golf-hero-img-wrap { position:absolute; inset:0; }
 .golf-hero-img { object-position:72% center; }
 .golf-hero h1,.golf-dark h2,.golf-dark h3,.golf-final h2 { color:var(--g-white); }
 .golf-hero .golf-kicker { color:var(--g-lime); padding:9px 17px; border:1px solid var(--g-lime); border-radius:999px; }
@@ -692,7 +693,7 @@ button[role="button"] {
 
 /* Golf footer — mirrors the site footer format with the AVRO Golf wordmark. */
 .golf-footer { position:relative; overflow:hidden; background:#000; color:var(--g-white); }
-.golf-footer-inner { position:relative; z-index:1; max-width:var(--g-max); margin:0 auto; padding:clamp(3.5rem,7vw,5rem) var(--g-edge) 0; }
+.golf-footer-inner { position:relative; z-index:1; max-width:var(--g-max); margin:0 auto; padding:clamp(2.5rem,5vw,3.5rem) var(--g-edge) 0; }
 .golf-footer-news h3 { font-family:"Gotham Golf"; font-weight:900; font-size:clamp(1.8rem,4vw,2.25rem); line-height:1.05; margin:.5rem 0 .5rem; color:var(--g-white); }
 .golf-footer-news>p { color:rgba(255,255,255,.85); font-size:.95rem; max-width:34rem; }
 .golf-footer-sub { display:flex; align-items:stretch; gap:.5rem; max-width:640px; margin-top:1.5rem; margin-left:auto; }
@@ -706,9 +707,9 @@ button[role="button"] {
 .golf-footer-sub button { flex:0 0 auto; border:none; cursor:pointer; border-radius:999px; padding:0 1.6rem; font-family:"Gotham Golf"; font-weight:700; font-size:.9rem; background:var(--g-lime); color:var(--g-ink); transition:opacity .2s; }
 .golf-footer-sub button:hover { opacity:.9; }
 .golf-footer-thanks { grid-column:2; grid-row:1 / span 3; align-self:center; color:var(--g-lime); font-weight:600; }
-.golf-footer-rule { border:none; border-top:1px solid rgba(255,255,255,.14); margin:2.5rem 0; }
+.golf-footer-rule { border:none; border-top:1px solid rgba(255,255,255,.14); margin:1.75rem 0; }
 .golf-footer-mid { display:grid; grid-template-columns:1fr auto; gap:clamp(2rem,6vw,5rem); align-items:start; }
-.golf-footer-logo { height:auto; width:clamp(230px,24vw,320px); }
+.golf-footer-logo { height:auto; width:clamp(180px,20vw,240px); }
 .golf-footer-brand>p { margin-top:1rem; color:rgba(255,255,255,.55); font-size:.9rem; line-height:1.5; max-width:20rem; }
 .golf-footer-cols { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(2rem,5vw,4rem); }
 .golf-footer-cols h4 { font-family:"Gotham Golf"; font-weight:700; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:1rem; }
@@ -723,15 +724,15 @@ button[role="button"] {
 .golf-footer-legal-links { display:flex; gap:1.5rem; }
 .golf-footer-legal-links a { color:rgba(255,255,255,.6); font-size:.75rem; text-decoration:none; transition:color .2s; }
 .golf-footer-legal-links a:hover { color:var(--g-white); }
-.golf-footer-watermark { display:flex; justify-content:center; align-items:flex-end; padding:2rem var(--g-edge) 2.5rem; margin-top:1rem; user-select:none; }
-.golf-footer-watermark-img { width:min(760px,80%); height:auto; opacity:.9; }
+.golf-footer-watermark { font-family:"Gotham Golf"; font-weight:900; font-size:clamp(2.5rem,12.5vw,9.5rem); line-height:.85; letter-spacing:.01em; text-align:center; color:rgba(255,255,255,.07); white-space:nowrap; overflow:hidden; padding:1.25rem var(--g-edge) 1.75rem; margin-top:.5rem; user-select:none; }
 
 @media (max-width: 768px) {
-  .golf-hero { min-height:min(760px,88vh); align-items:flex-end; }
-  .golf-hero-img { object-position:68% top; }
-  .golf-hero-shade { background:linear-gradient(0deg,rgba(15,20,15,.94),rgba(15,20,15,.35) 45%,rgba(15,20,15,.1) 78%); }
-  .golf-hero-copy { padding:5rem 1.5rem 11rem; }
-  .golf-ritual { grid-template-columns:1fr 1fr 1fr; }
+  .golf-hero { min-height:unset; flex-direction:column; align-items:stretch; background:#0f140f; }
+  .golf-hero-img-wrap { position:relative; inset:auto; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:4/5; border-radius:20px; overflow:hidden; flex-shrink:0; }
+  .golf-hero-img { object-position:64% center; }
+  .golf-hero-shade { display:none; }
+  .golf-hero-copy { position:static; padding:1.75rem 1.5rem 1.5rem; }
+  .golf-ritual { position:static; grid-template-columns:1fr 1fr 1fr; }
   .golf-ritual>p { display:none; }
   .golf-ritual>div { padding:1rem .7rem; }
   .golf-pressure,.golf-faq { grid-template-columns:1fr; }
