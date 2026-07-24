@@ -74,7 +74,7 @@
   /* Pressure tile */
   #avro-golf-{{ section.id }} .pressure { min-height:620px; display:grid; grid-template-columns:1fr 1fr; }
   #avro-golf-{{ section.id }} .pressure-copy { padding:clamp(56px,7vw,112px) clamp(24px,5vw,72px); display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:22px; }
-  #avro-golf-{{ section.id }} .pressure-img { position:relative; min-height:480px; }
+  #avro-golf-{{ section.id }} .pressure-img { position:relative; min-height:480px; overflow:hidden; border-radius:24px; }
   #avro-golf-{{ section.id }} .pressure-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
   #avro-golf-{{ section.id }} .pressure-pill { position:absolute; left:20px; bottom:20px; display:flex; flex-direction:column; gap:2px; padding:11px 18px; background:var(--white); color:var(--muted); border-radius:16px; font-family:"Gotham Golf"; font-weight:600; font-size:12px; letter-spacing:.03em; box-shadow:0 10px 28px rgba(0,0,0,.22); }
   #avro-golf-{{ section.id }} .pressure-pill b { color:var(--ink); font-weight:900; font-size:26px; line-height:1; }
