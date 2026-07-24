@@ -17,9 +17,6 @@
 {%- endcomment -%}
 
 {% style %}
-  @font-face { font-family:"Gotham Golf"; src:url("https://blob.v0.app/N0tbW.otf") format("opentype"); font-weight:700; font-display:swap; }
-  @font-face { font-family:"Gotham Golf"; src:url("https://blob.v0.app/4yZHI.otf") format("opentype"); font-weight:900; font-display:swap; }
-
   #avro-golf-ticker-{{ section.id }} {
     --tick-bg: {{ section.settings.bg_color | default: '#000000' }};
     --tick-fg: {{ section.settings.text_color | default: '#FFFFFF' }};
@@ -35,7 +32,7 @@
   #avro-golf-ticker-{{ section.id }}:hover .gt-track { animation-play-state:paused; }
   #avro-golf-ticker-{{ section.id }} .gt-group { display:flex; align-items:center; flex-shrink:0; }
   #avro-golf-ticker-{{ section.id }} .gt-item { display:inline-flex; align-items:center; flex-shrink:0; }
-  #avro-golf-ticker-{{ section.id }} .gt-text { font-family:"Gotham Golf", "Work Sans", system-ui, sans-serif; font-weight:700; font-size:{{ section.settings.font_size | default: 13 }}px; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; color:var(--tick-fg); padding:0 {{ section.settings.gap | default: 22 }}px; }
+  #avro-golf-ticker-{{ section.id }} .gt-text { font-family:"Gotham Golf", "Work Sans", "Helvetica Neue", Arial, system-ui, sans-serif; font-weight:700; font-size:{{ section.settings.font_size | default: 13 }}px; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; color:var(--tick-fg); padding:0 {{ section.settings.gap | default: 22 }}px; }
   #avro-golf-ticker-{{ section.id }} .gt-dot { flex:0 0 auto; width:6px; height:6px; border-radius:50%; background:var(--tick-dot); }
   @keyframes avro-gt-{{ section.id }} { 0% { transform:translateX(0); } 100% { transform:translateX(-25%); } }
   @media (prefers-reduced-motion: reduce) { #avro-golf-ticker-{{ section.id }} .gt-track { animation:none; } }
