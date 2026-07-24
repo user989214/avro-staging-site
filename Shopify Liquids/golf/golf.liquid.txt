@@ -186,10 +186,10 @@
   #avro-golf-{{ section.id }} .gfooter-news h3 { grid-column:1; font-family:"Gotham Golf",var(--head); font-weight:900; font-size:clamp(29px,4vw,36px); line-height:1.05; margin:8px 0; color:#fff; }
   #avro-golf-{{ section.id }} .gfooter-sub-copy { grid-column:1; color:rgba(255,255,255,.85); font-size:15px; max-width:34rem; }
   #avro-golf-{{ section.id }} .gfooter-news form { grid-column:2; grid-row:1 / span 3; }
-  #avro-golf-{{ section.id }} .gfooter-sub { display:flex; align-items:stretch; gap:8px; width:min(440px,42vw); }
-  #avro-golf-{{ section.id }} .gfooter-sub input { flex:1; min-width:0; border:none; border-radius:999px; padding:14px 22px; font-size:15px; background:#fff; color:var(--ink); }
+  #avro-golf-{{ section.id }} .gfooter-sub { display:flex; align-items:stretch; overflow:hidden; border-radius:999px; background:#fff; width:min(440px,42vw); }
+  #avro-golf-{{ section.id }} .gfooter-sub input { flex:1; min-width:0; border:none; outline:none; border-radius:0; padding:14px 22px; font-size:15px; background:transparent; color:var(--ink); }
   #avro-golf-{{ section.id }} .gfooter-sub input::placeholder { color:#8a8a8a; }
-  #avro-golf-{{ section.id }} .gfooter-sub button { flex:0 0 auto; border:none; cursor:pointer; border-radius:999px; padding:0 26px; font-family:"Gotham Golf",var(--head); font-weight:700; font-size:14px; background:var(--accent); color:var(--ink); }
+  #avro-golf-{{ section.id }} .gfooter-sub button { flex:0 0 auto; border:none; cursor:pointer; margin:5px; border-radius:999px; padding:0 22px; white-space:nowrap; font-family:"Gotham Golf",var(--head); font-weight:700; font-size:14px; background:var(--accent); color:var(--ink); }
   #avro-golf-{{ section.id }} .gfooter-rule { border:none; border-top:1px solid rgba(255,255,255,.14); margin:28px 0; }
   #avro-golf-{{ section.id }} .gfooter-mid { display:grid; grid-template-columns:1fr auto; gap:clamp(32px,6vw,80px); align-items:start; }
   #avro-golf-{{ section.id }} .gfooter-logo { height:auto; width:clamp(180px,20vw,240px); display:block; }
@@ -218,7 +218,8 @@
     #avro-golf-{{ section.id }} .hero-copy { position:static; padding:28px 24px 24px; }
     #avro-golf-{{ section.id }} .hero-copy .body { color:var(--muted); }
     #avro-golf-{{ section.id }} .hero-copy .kicker { color:var(--olive); border-color:var(--olive); }
-    #avro-golf-{{ section.id }} .hero .btn-ghost { color:var(--ink); border-color:rgba(0,0,0,.28); }
+    #avro-golf-{{ section.id }} .hero .btn { color:var(--ink); background:transparent; border-color:rgba(0,0,0,.4); }
+    #avro-golf-{{ section.id }} .hero .btn:hover { color:var(--white); background:var(--ink); border-color:var(--ink); }
     #avro-golf-{{ section.id }} .ritual { position:static; grid-template-columns:1fr 1fr 1fr; }
     #avro-golf-{{ section.id }} .ritual > p { display:none; }
     #avro-golf-{{ section.id }} .pressure,#avro-golf-{{ section.id }} .faq { grid-template-columns:1fr; }
@@ -229,9 +230,9 @@
     #avro-golf-{{ section.id }} .head-split { flex-direction:column; gap:16px; }
     #avro-golf-{{ section.id }} .head-split h2 { max-width:none; }
     #avro-golf-{{ section.id }} .head-split .sub { max-width:none; margin-top:0; text-align:left; }
-    #avro-golf-{{ section.id }} .gfooter-news { grid-template-columns:1fr; }
-    #avro-golf-{{ section.id }} .gfooter-news form { grid-column:1; grid-row:auto; margin-top:24px; }
-    #avro-golf-{{ section.id }} .gfooter-sub { width:100%; }
+    #avro-golf-{{ section.id }} .gfooter-news { grid-template-columns:minmax(0,1fr); }
+    #avro-golf-{{ section.id }} .gfooter-news form { grid-column:1; grid-row:auto; margin-top:24px; min-width:0; }
+    #avro-golf-{{ section.id }} .gfooter-sub { width:100%; min-width:0; }
     #avro-golf-{{ section.id }} .gfooter-mid { grid-template-columns:1fr; }
     #avro-golf-{{ section.id }} .gfooter-cols { grid-template-columns:1fr 1fr; gap:32px; }
     #avro-golf-{{ section.id }} .gfooter-legal { flex-direction:column; align-items:flex-start; }

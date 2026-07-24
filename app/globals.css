@@ -696,15 +696,15 @@ button[role="button"] {
 .golf-footer-inner { position:relative; z-index:1; max-width:var(--g-max); margin:0 auto; padding:clamp(2.5rem,5vw,3.5rem) var(--g-edge) 0; }
 .golf-footer-news h3 { font-family:"Gotham Golf"; font-weight:900; font-size:clamp(1.8rem,4vw,2.25rem); line-height:1.05; margin:.5rem 0 .5rem; color:var(--g-white); }
 .golf-footer-news>p { color:rgba(255,255,255,.85); font-size:.95rem; max-width:34rem; }
-.golf-footer-sub { display:flex; align-items:stretch; gap:.5rem; max-width:640px; margin-top:1.5rem; margin-left:auto; }
+.golf-footer-sub { display:flex; align-items:stretch; overflow:hidden; border-radius:999px; background:var(--g-white); max-width:640px; margin-top:1.5rem; margin-left:auto; }
 .golf-footer-news { display:grid; grid-template-columns:1fr auto; align-items:center; column-gap:2rem; }
 .golf-footer-news .golf-kicker { grid-column:1; }
 .golf-footer-news h3 { grid-column:1; }
 .golf-footer-news>p { grid-column:1; }
 .golf-footer-sub { grid-column:2; grid-row:1 / span 3; margin-top:0; width:min(440px,42vw); }
-.golf-footer-sub input { flex:1; min-width:0; border:none; border-radius:999px; padding:.9rem 1.4rem; font-size:.95rem; background:var(--g-white); color:var(--g-ink); }
+.golf-footer-sub input { flex:1; min-width:0; border:none; outline:none; border-radius:0; padding:.9rem 1.4rem; font-size:.95rem; background:transparent; color:var(--g-ink); }
 .golf-footer-sub input::placeholder { color:#8a8a8a; }
-.golf-footer-sub button { flex:0 0 auto; border:none; cursor:pointer; border-radius:999px; padding:0 1.6rem; font-family:"Gotham Golf"; font-weight:700; font-size:.9rem; background:var(--g-lime); color:var(--g-ink); transition:opacity .2s; }
+.golf-footer-sub button { flex:0 0 auto; border:none; cursor:pointer; margin:5px; border-radius:999px; padding:0 1.4rem; white-space:nowrap; font-family:"Gotham Golf"; font-weight:700; font-size:.9rem; background:var(--g-lime); color:var(--g-ink); transition:opacity .2s; }
 .golf-footer-sub button:hover { opacity:.9; }
 .golf-footer-thanks { grid-column:2; grid-row:1 / span 3; align-self:center; color:var(--g-lime); font-weight:600; }
 .golf-footer-rule { border:none; border-top:1px solid rgba(255,255,255,.14); margin:1.75rem 0; }
@@ -735,7 +735,8 @@ button[role="button"] {
   .golf-hero-copy { position:static; padding:1.75rem 1.5rem 1.5rem; }
   .golf-hero-copy>p:not(.golf-kicker) { color:var(--g-muted); }
   .golf-hero .golf-kicker { color:var(--g-olive); border-color:var(--g-olive); }
-  .golf-hero .golf-btn-ghost { color:var(--g-ink); border-color:rgba(0,0,0,.28); }
+  .golf-hero .golf-btn { color:var(--g-ink); background:transparent; border-color:rgba(0,0,0,.4); }
+  .golf-hero .golf-btn:hover { color:var(--g-white); background:var(--g-ink); border-color:var(--g-ink); }
   .golf-ritual { position:static; grid-template-columns:1fr 1fr 1fr; }
   .golf-ritual>p { display:none; }
   .golf-ritual>div { padding:1rem .7rem; }
@@ -748,11 +749,10 @@ button[role="button"] {
   .golf-heading-split { flex-direction:column; }
   .golf-heading-split h2 { max-width:none; }
   .golf-heading-split>p:last-child { max-width:none; margin-top:0; text-align:left; }
-  .golf-footer-news { grid-template-columns:1fr; }
-  .golf-footer-sub { grid-column:1; grid-row:auto; width:100%; max-width:none; margin-top:1.5rem; }
+  .golf-footer-news { grid-template-columns:minmax(0,1fr); }
+  .golf-footer-sub { grid-column:1; grid-row:auto; width:100%; min-width:0; max-width:none; margin-top:1.5rem; margin-left:0; }
   .golf-footer-thanks { grid-column:1; grid-row:auto; margin-top:1.5rem; }
   .golf-footer-mid { grid-template-columns:1fr; }
   .golf-footer-cols { grid-template-columns:1fr 1fr; gap:2rem; }
   .golf-footer-legal { flex-direction:column; align-items:flex-start; }
-  .golf-footer-watermark-img { width:88%; }
 }
