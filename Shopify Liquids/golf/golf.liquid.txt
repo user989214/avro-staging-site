@@ -221,17 +221,19 @@
     #avro-golf-{{ section.id }} .hero .hero-btns { gap:12px; }
     #avro-golf-{{ section.id }} .hero .btn { min-height:48px; padding:0 28px; font-size:16px; font-weight:700; border-width:2px; color:var(--ink); background:transparent; border-color:var(--ink); }
     #avro-golf-{{ section.id }} .hero .btn:hover { color:var(--white); background:var(--ink); border-color:var(--ink); }
-    #avro-golf-{{ section.id }} .ritual { position:static; grid-template-columns:1fr 1fr 1fr; }
+    #avro-golf-{{ section.id }} .ritual { position:static; grid-template-columns:1fr; }
     #avro-golf-{{ section.id }} .ritual > p { display:none; }
+    #avro-golf-{{ section.id }} .ritual > div { flex-direction:row; align-items:baseline; justify-content:space-between; gap:16px; padding:18px 20px; }
+    #avro-golf-{{ section.id }} .ritual > div + div { border-left:none; border-top:1px solid rgba(255,255,255,.18); }
+    #avro-golf-{{ section.id }} .ritual b { font-size:15px; flex:0 0 auto; }
+    #avro-golf-{{ section.id }} .ritual span { font-size:13px; text-align:right; }
     #avro-golf-{{ section.id }} .pressure,#avro-golf-{{ section.id }} .faq { grid-template-columns:1fr; }
     #avro-golf-{{ section.id }} .pressure-img { order:-1; aspect-ratio:4/3; }
     #avro-golf-{{ section.id }} .g3,#avro-golf-{{ section.id }} .g4,#avro-golf-{{ section.id }} .prods { grid-template-columns:1fr; }
     #avro-golf-{{ section.id }} .steps { grid-template-columns:1fr; }
-    #avro-golf-{{ section.id }} .step { padding:32px 0; }
-    #avro-golf-{{ section.id }} .step:first-child { padding-top:0; }
+    #avro-golf-{{ section.id }} .step { padding:40px 0; }
     #avro-golf-{{ section.id }} .step + .step { border-left:none; border-top:1px solid rgba(255,255,255,.18); }
     #avro-golf-{{ section.id }} .moment .ph { aspect-ratio:4/3; }
-    #avro-golf-{{ section.id }} .moment .ph img { object-position:center 70%; }
     #avro-golf-{{ section.id }} .head-split { flex-direction:column; gap:16px; }
     #avro-golf-{{ section.id }} .head-split h2 { max-width:none; }
     #avro-golf-{{ section.id }} .head-split .sub { max-width:none; margin-top:0; text-align:left; }
@@ -369,7 +371,7 @@
     <div class="g4">
       {%- for b in moments -%}
       <article class="moment" {{ b.shopify_attributes }}>
-        <div class="ph">{%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.title | escape }} golf moment">{%- else -%}<img src="{{ b.settings.image_fallback }}" alt="{{ b.settings.title | escape }} golf moment">{%- endif -%}{%- if b.settings.pill != blank -%}<span class="pill">{{ b.settings.pill }}</span>{%- endif -%}</div>
+        <div class="ph">{%- assign op = b.settings.object_pos | default: 'center 40%' -%}{%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.title | escape }} golf moment" style="object-position:{{ op }}">{%- else -%}<img src="{{ b.settings.image_fallback }}" alt="{{ b.settings.title | escape }} golf moment" style="object-position:{{ op }}">{%- endif -%}{%- if b.settings.pill != blank -%}<span class="pill">{{ b.settings.pill }}</span>{%- endif -%}</div>
         <h3>{{ b.settings.title }}</h3>
         <p class="body">{{ b.settings.copy }}</p>
       </article>
@@ -596,6 +598,7 @@
     { "type": "moment", "name": "Use moment", "settings": [
       { "type": "image_picker", "id": "image", "label": "Photo" },
       { "type": "text", "id": "image_fallback", "label": "Photo URL", "default": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/03_Moment_First_Tee-7A1KXwzEr31RFzHGUS3runTTJ215Dr.png" },
+      { "type": "text", "id": "object_pos", "label": "Image focus (object-position)", "default": "center 40%" },
       { "type": "text", "id": "pill", "label": "Category pill", "default": "PRE-ROUND" },
       { "type": "text", "id": "title", "label": "Title", "default": "First Tee" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
@@ -627,10 +630,10 @@
       { "type": "science", "settings": { "icon_key": "calm-foundation", "label": "AVRO Calm", "title": "Composure When It Matters", "copy": "PharmaGABA® plus magnesium for golfers who want a calmer, more composed way to prepare for pressure-sensitive moments." } },
       { "type": "science", "settings": { "icon_key": "mind-body", "label": "AVRO Focus", "title": "Clearer Attention for Learning", "copy": "PharmaGABA® plus Cognigrape® for lessons, fittings and practice sessions that call for calm, attentive focus." } },
       { "type": "science", "settings": { "icon_key": "standards", "label": "AVRO Energy", "title": "Steady Energy for Demanding Golf Days", "copy": "PharmaGABA® plus natural caffeine for early tee times, longer rounds and competition days that require more energy." } },
-      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/03_Moment_First_Tee-7A1KXwzEr31RFzHGUS3runTTJ215Dr.png", "pill": "PRE-ROUND", "title": "First Tee", "copy": "A simple pre-round ritual before the opening shot." } },
-      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/04_Moment_Tournament_Day-vRzxoOjJAOWVSwijTckyWVV9jugwR4.png", "pill": "PRESSURE", "title": "Tournament Day", "copy": "Preparation for pressure-sensitive rounds when composure matters from the start." } },
-      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/05_Moment_Practice_Session.png-7cnKcg67wTvHmGt0bNtvcJtadUSZyt.jpeg", "pill": "RANGE WORK", "title": "Practice Session", "copy": "For range work, coaching sessions and structured practice." } },
-      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/06_Moment_Clubhouse_Social-HUVojuCnjcfagm9yamUhNeiNoKfTaH.png", "pill": "ZERO PROOF", "title": "Clubhouse + Social", "copy": "An alcohol-free option for post-round conversations, travel days and social golf moments." } },
+      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/03_Moment_First_Tee-7A1KXwzEr31RFzHGUS3runTTJ215Dr.png", "object_pos": "center 28%", "pill": "PRE-ROUND", "title": "First Tee", "copy": "A simple pre-round ritual before the opening shot." } },
+      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/04_Moment_Tournament_Day-vRzxoOjJAOWVSwijTckyWVV9jugwR4.png", "object_pos": "center 40%", "pill": "PRESSURE", "title": "Tournament Day", "copy": "Preparation for pressure-sensitive rounds when composure matters from the start." } },
+      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/05_Moment_Practice_Session.png-7cnKcg67wTvHmGt0bNtvcJtadUSZyt.jpeg", "object_pos": "center 45%", "pill": "RANGE WORK", "title": "Practice Session", "copy": "For range work, coaching sessions and structured practice." } },
+      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/06_Moment_Clubhouse_Social-HUVojuCnjcfagm9yamUhNeiNoKfTaH.png", "object_pos": "center 40%", "pill": "ZERO PROOF", "title": "Clubhouse + Social", "copy": "An alcohol-free option for post-round conversations, travel days and social golf moments." } },
       { "type": "product", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/07_Product_Calm-YBOX7lOtZIu3pAmGuxiDgqtAv8Ohy2.png", "name": "AVRO Calm", "caffeine": "CAFFEINE FREE", "copy": "Calm support for pressure-sensitive golf moments.", "best_for": "First tees, tournament rounds, lessons and moments when composure matters.", "button_label": "Shop Calm", "link": "/collections/calm" } },
       { "type": "product", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/08_Product_Focus-5vTOr8Xek2c8H537NevHtY30U6US0F.png", "name": "AVRO Focus", "caffeine": "CAFFEINE FREE", "copy": "Calm-first preparation with added support for clear, attentive focus.", "best_for": "Coaching sessions, club fitting, range work and structured practice.", "button_label": "Shop Focus", "link": "/collections/focus" } },
       { "type": "product", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/09_Product_Energy-24lGi052MiPEovUiE1VAxshccrgQCW.png", "name": "AVRO Energy", "caffeine": "WITH NATURAL CAFFEINE", "copy": "Calm-first preparation with natural caffeine for demanding golf days.", "best_for": "Early tee times, longer rounds, travel days and competition.", "button_label": "Shop Energy", "link": "/collections/energy" } },

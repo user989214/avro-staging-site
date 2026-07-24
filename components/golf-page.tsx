@@ -21,10 +21,10 @@ const science = [
   ["AVRO Energy", "Steady Energy for Demanding Golf Days", "PharmaGABA® plus natural caffeine for early tee times, longer rounds and competition days that require more energy.", "/golf/icons/standards.svg"],
 ]
 const moments = [
-  ["FIRST TEE", "A simple pre-round ritual before the opening shot.", "/golf/first-tee.png", "PRE-ROUND"],
-  ["TOURNAMENT DAY", "Preparation for pressure-sensitive rounds when composure matters from the start.", "/golf/tournament-day.png", "PRESSURE"],
-  ["PRACTICE SESSION", "For range work, coaching sessions and structured practice.", "/golf/practice-session.jpeg", "RANGE WORK"],
-  ["CLUBHOUSE + SOCIAL", "An alcohol-free option for post-round conversations, travel days and social golf moments.", "/golf/clubhouse-social.png", "ZERO PROOF"],
+  ["FIRST TEE", "A simple pre-round ritual before the opening shot.", "/golf/first-tee.png", "PRE-ROUND", "center 28%"],
+  ["TOURNAMENT DAY", "Preparation for pressure-sensitive rounds when composure matters from the start.", "/golf/tournament-day.png", "PRESSURE", "center 40%"],
+  ["PRACTICE SESSION", "For range work, coaching sessions and structured practice.", "/golf/practice-session.jpeg", "RANGE WORK", "center 45%"],
+  ["CLUBHOUSE + SOCIAL", "An alcohol-free option for post-round conversations, travel days and social golf moments.", "/golf/clubhouse-social.png", "ZERO PROOF", "center 40%"],
 ]
 const products = [
   ["AVRO CALM", "CAFFEINE FREE", "Calm support for pressure-sensitive golf moments.", "First tees, tournament rounds, lessons and moments when composure matters.", "Shop Calm", "/golf/product-calm.png", "/products/calm"],
@@ -108,7 +108,7 @@ export function GolfPage() {
 
     <section className="golf-section golf-tile"><div className="golf-heading" data-reveal><p className="golf-kicker">SCIENCE + FORMULA LOGIC</p><h2>Calm first. Then support the moment.</h2><p>Every AVRO formula begins with naturally fermented PharmaGABA®, a clinically studied form of GABA.</p></div><div className="golf-science">{science.map((x,i)=><article data-reveal style={ri(i)} key={x[0]}><Image src={x[3]} alt="" width={60} height={60}/><h3>{x[0]}</h3><p><b>{x[1]}.</b> {x[2]}</p></article>)}</div></section>
 
-    <section className="golf-section golf-tile"><div className="golf-heading golf-heading-split" data-reveal><h2>Golf Use Moments</h2><p>One calm-first foundation, ready for the moments that shape the golf experience.</p></div><div className="golf-moments">{moments.map((x,i)=><article data-reveal style={ri(i)} key={x[0]}><div><Image src={x[2]} alt={`${x[0].toLowerCase()} golf moment`} fill sizes="(max-width: 768px) 100vw, 25vw" className="golf-cover"/><span className="golf-moment-pill">{x[3]}</span></div><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div></section>
+    <section className="golf-section golf-tile"><div className="golf-heading golf-heading-split" data-reveal><h2>Golf Use Moments</h2><p>One calm-first foundation, ready for the moments that shape the golf experience.</p></div><div className="golf-moments">{moments.map((x,i)=><article data-reveal style={ri(i)} key={x[0]}><div><Image src={x[2]} alt={`${x[0].toLowerCase()} golf moment`} fill sizes="(max-width: 768px) 100vw, 25vw" className="golf-cover" style={{objectPosition:x[4]}}/><span className="golf-moment-pill">{x[3]}</span></div><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div></section>
 
     <section id="shop" className="golf-section golf-dark golf-tile"><div className="golf-heading" data-reveal><p className="golf-kicker">CHOOSE YOUR FORMULA</p><h2>Shop AVRO for Golf</h2><p>Same calm-first base. Three ways to meet the moment.</p></div><div className="golf-products">{products.map((x,i)=><article data-reveal style={ri(i)} key={x[0]}><small>{x[1]}</small><div className="golf-product-image"><Image src={x[5]} alt={`${x[0]} drink mix`} fill sizes="(max-width: 768px) 100vw, 33vw" className="golf-cover"/></div><h3>{x[0]}</h3><p>{x[2]}</p><p><b>BEST FOR</b>{x[3]}</p><Link href={x[6]} className="golf-btn golf-btn-light">{x[4]} →</Link></article>)}</div></section>
 
