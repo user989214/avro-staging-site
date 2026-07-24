@@ -120,8 +120,9 @@
   #avro-golf-{{ section.id }} .step + .step { border-left:1px solid rgba(255,255,255,.2); }
   #avro-golf-{{ section.id }} .step .top { width:100%; display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:10px; }
   #avro-golf-{{ section.id }} .step .num { font-family:"Gotham Golf"; font-weight:900; font-size:52px; line-height:1; color:var(--accent); }
-  #avro-golf-{{ section.id }} .step .ic { width:70px; height:70px; color:var(--accent); }
-  #avro-golf-{{ section.id }} .step .ic svg,#avro-golf-{{ section.id }} .step .ic img { display:block; width:70px; height:70px; object-fit:contain; }
+  #avro-golf-{{ section.id }} .step .ic { width:84px; height:84px; color:#fff; }
+  #avro-golf-{{ section.id }} .step .ic svg,#avro-golf-{{ section.id }} .step .ic img { display:block; width:84px; height:84px; object-fit:contain; }
+  #avro-golf-{{ section.id }} .step .ic img { filter:brightness(0) invert(1); }
   #avro-golf-{{ section.id }} .step h3 { font-size:16px; }
   #avro-golf-{{ section.id }} .step p { color:rgba(255,255,255,.7); }
 
