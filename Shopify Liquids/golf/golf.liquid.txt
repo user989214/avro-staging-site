@@ -181,6 +181,7 @@
 
 {%- assign base = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app' -%}
 {%- assign blob = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com' -%}
+{%- assign shop_anchor = '#avro-golf-shop-' | append: section.id -%}
 {%- assign reasons = section.blocks | where: "type", "reason" -%}
 {%- assign steps = section.blocks | where: "type", "step" -%}
 {%- assign sciences = section.blocks | where: "type", "science" -%}
@@ -205,7 +206,7 @@
       <h1>{{ section.settings.hero_title | default: 'Golf Performance Begins Before the First Swing.' }}</h1>
       <p class="body">{{ section.settings.hero_copy | default: 'AVRO supports the calm, clear and composed headspace golfers seek before lessons, practice and competition—so they can step into the moment ready.' }}</p>
       <div class="hero-btns">
-        <a href="{{ section.settings.hero_btn1_link | default: '#avro-golf-shop-{{ section.id }}' }}" class="btn btn-accent">{{ section.settings.hero_btn1_label | default: 'Choose Your Formula' }}</a>
+        <a href="{{ section.settings.hero_btn1_link | default: shop_anchor }}" class="btn btn-accent">{{ section.settings.hero_btn1_label | default: 'Choose Your Formula' }}</a>
         <a href="{{ section.settings.hero_btn2_link | default: '/collections/all' }}" class="btn btn-ghost">{{ section.settings.hero_btn2_label | default: 'Shop AVRO' }}</a>
       </div>
     </div>
