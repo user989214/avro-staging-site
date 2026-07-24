@@ -146,6 +146,35 @@ function GolfHero() {
   )
 }
 
+/** Golf announcement ticker — black band, white uppercase copy, lime dots between
+ *  phrases. Mirrors the site header marquee (42s linear loop, 4 copies, pauses on
+ *  hover, honors reduced-motion) but golf-styled. */
+const tickerMessages = [
+  "Calm First Performance",
+  "Subscribe & Save 15%",
+  "Free Shipping on 2+ Tubes",
+  "Naturally Fermented PharmaGABA",
+  "Calm, Focused Energy — Without the Crash",
+]
+function GolfTicker() {
+  return (
+    <div className="golf-ticker" aria-label="Announcements">
+      <div className="golf-ticker-track">
+        {Array.from({ length: 4 }).map((_, copyIdx) => (
+          <div className="golf-ticker-group" key={copyIdx} aria-hidden={copyIdx > 0}>
+            {tickerMessages.map((msg, i) => (
+              <span className="golf-ticker-item" key={`${copyIdx}-${i}`}>
+                <span className="golf-ticker-text">{msg}</span>
+                <span className="golf-ticker-dot" aria-hidden="true" />
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function GolfPage() {
   // Scroll-reveal — fade/rise elements into view (matches the site's page-hero
   // motion language). Content stays visible if JS never runs: the hidden state
@@ -177,6 +206,7 @@ export function GolfPage() {
 
   return <main className="golf-page">
     <GolfHero />
+    <GolfTicker />
 
     <section className="golf-pressure golf-tile">
       <div className="golf-copy"><p className="golf-kicker" data-reveal style={ri(0)}>WHEN THE MOMENT GETS BIGGER</p><h2 data-reveal style={ri(1)}>Golf can get <mark className="golf-mark">loud in your head</mark> fast.</h2><p data-reveal style={ri(2)}>The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.</p></div>
