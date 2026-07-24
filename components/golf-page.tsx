@@ -14,8 +14,8 @@ const steps = [
 const science = [
   ["PharmaGABA® Foundation", "Calm Starts Here", "Naturally fermented PharmaGABA® is the clinically studied form of GABA at the center of every AVRO formula.", "/golf/icons/pharmagaba.svg"],
   ["AVRO Calm", "Composure When It Matters", "PharmaGABA® plus magnesium for golfers who want a calmer, more composed way to prepare for pressure-sensitive moments.", "/golf/icons/calm-foundation.svg"],
-  ["AVRO Focus", "Clearer Attention for Learning", "PharmaGABA® plus Cognigrape® for lessons, fittings and practice sessions that call for calm, attentive focus.", "/golf/icons/clarity.svg"],
-  ["AVRO Energy", "Steady Energy for Demanding Golf Days", "PharmaGABA® plus natural caffeine for early tee times, longer rounds and competition days that require more energy.", "/golf/icons/mind-body.svg"],
+  ["AVRO Focus", "Clearer Attention for Learning", "PharmaGABA® plus Cognigrape® for lessons, fittings and practice sessions that call for calm, attentive focus.", "/golf/icons/mind-body.svg"],
+  ["AVRO Energy", "Steady Energy for Demanding Golf Days", "PharmaGABA® plus natural caffeine for early tee times, longer rounds and competition days that require more energy.", "/golf/icons/standards.svg"],
 ]
 const moments = [
   ["FIRST TEE", "A simple pre-round ritual before the opening shot.", "/golf/first-tee.png"],
@@ -53,7 +53,7 @@ export function GolfPage() {
       <div className="golf-pressure-image"><Image src="/golf/golfer-address.png" alt="Golfer preparing to address the ball on a coastal course" fill sizes="(max-width: 768px) 100vw, 50vw" className="golf-cover" /></div>
     </section>
 
-    <section className="golf-section golf-tile"><div className="golf-heading"><p className="golf-kicker">CALM-FIRST PERFORMANCE</p><h2>Why AVRO Matters in Golf</h2><p>A calm-first platform with a clear role across the modern golf experience.</p></div><div className="golf-three">{reasons.map((x,i)=><article className="golf-reason" key={x[0]}><span>0{i+1}</span><Image src={["/golf/icons/built-for-ritual.svg","/golf/icons/clarity.svg","/golf/icons/standards.svg"][i]} alt="" width={64} height={64}/><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div></section>
+    <section className="golf-section golf-tile"><div className="golf-heading"><p className="golf-kicker">CALM-FIRST PERFORMANCE</p><h2>Why AVRO Matters in Golf</h2><p>A calm-first platform with a clear role across the modern golf experience.</p></div><div className="golf-three">{reasons.map((x,i)=><article className="golf-reason" key={x[0]}><span>0{i+1}</span><Image src={["/golf/icons/calm-before-pressure.svg","/golf/icons/clarity.svg","/golf/icons/built-for-ritual.svg"][i]} alt="" width={64} height={64}/><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div></section>
 
     <section className="golf-section golf-dark golf-tile"><div className="golf-heading"><p className="golf-kicker">HOW TO USE AVRO BEFORE GOLF</p><h2>A simple ritual. Three steps.</h2><p>Choose. Mix. Time it.</p></div><div className="golf-three">{steps.map(x=><article className="golf-step" key={x[0]}><div><strong>{x[0]}</strong><Image src={x[3]} alt="" width={70} height={70}/></div><h3>{x[1]}</h3><p>{x[2]}</p></article>)}</div></section>
 

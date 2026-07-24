@@ -98,7 +98,7 @@
   #avro-golf-{{ section.id }} .reason { position:relative; padding:29px 25px; background:var(--card); border:1px solid var(--line); border-radius:16px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
   #avro-golf-{{ section.id }} .reason .num { position:absolute; top:29px; right:25px; color:var(--olive); font-size:12px; font-weight:600; letter-spacing:.08em; }
   #avro-golf-{{ section.id }} .reason .ic { width:64px; height:64px; }
-  #avro-golf-{{ section.id }} .reason .ic span { display:block; width:64px; height:64px; background:var(--olive); -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; -webkit-mask-size:contain; mask-size:contain; }
+  #avro-golf-{{ section.id }} .reason .ic img { width:64px; height:64px; object-fit:contain; }
   #avro-golf-{{ section.id }} .reason h3 { margin-top:14px; }
   #avro-golf-{{ section.id }} .reason p { color:var(--muted); }
 
@@ -116,7 +116,7 @@
   /* Science cards */
   #avro-golf-{{ section.id }} .sci { padding:25px 21px; background:var(--card); border:1px solid var(--line); border-radius:16px; display:flex; flex-direction:column; align-items:flex-start; gap:7px; }
   #avro-golf-{{ section.id }} .sci .ic { width:52px; height:52px; padding:10px; background:var(--accent); border-radius:14px; display:grid; place-items:center; }
-  #avro-golf-{{ section.id }} .sci .ic span { display:block; width:32px; height:32px; background:#000; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; -webkit-mask-size:contain; mask-size:contain; }
+  #avro-golf-{{ section.id }} .sci .ic img { width:32px; height:32px; object-fit:contain; }
   #avro-golf-{{ section.id }} .sci small { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--olive); }
   #avro-golf-{{ section.id }} .sci h3 { margin-top:11px; }
   #avro-golf-{{ section.id }} .sci p { margin-top:4px; color:var(--muted); }
@@ -239,7 +239,7 @@
       {%- assign iu = b.settings.icon_fallback -%}{%- if b.settings.icon != blank -%}{%- assign iu = b.settings.icon | image_url: width: 128 -%}{%- endif -%}
       <div class="reason" {{ b.shopify_attributes }}>
         <span class="num">0{{ forloop.index }}</span>
-        <div class="ic"><span style="-webkit-mask-image:url({{ iu }});mask-image:url({{ iu }});"></span></div>
+        <div class="ic"><img src="{{ iu }}" alt="" loading="lazy" width="64" height="64"></div>
         <h3>{{ b.settings.title }}</h3>
         <p class="body">{{ b.settings.copy }}</p>
       </div>
@@ -273,7 +273,7 @@
       {%- for b in sciences -%}
       {%- assign cu = b.settings.icon_fallback -%}{%- if b.settings.icon != blank -%}{%- assign cu = b.settings.icon | image_url: width: 96 -%}{%- endif -%}
       <article class="sci" {{ b.shopify_attributes }}>
-        <div class="ic"><span style="-webkit-mask-image:url({{ cu }});mask-image:url({{ cu }});"></span></div>
+        <div class="ic"><img src="{{ cu }}" alt="" loading="lazy" width="52" height="52"></div>
         <small>{{ b.settings.label }}</small>
         <h3>{{ b.settings.title }}</h3>
         <p class="body">{{ b.settings.copy }}</p>
@@ -482,16 +482,16 @@
   ],
   "presets": [
     { "name": "AVRO — Golf", "blocks": [
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/built-for-ritual.svg", "title": "For Golfers", "copy": "A simple way to prepare for the moments when calm, clarity and composure matter." } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/calm-before-pressure.svg", "title": "For Golfers", "copy": "A simple way to prepare for the moments when calm, clarity and composure matter." } },
       { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/clarity.svg", "title": "For Coaches", "copy": "Supports a golfer’s readiness to receive, process and apply feedback." } },
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/standards.svg", "title": "For Golf Businesses", "copy": "Adds a differentiated golfer experience designed to strengthen engagement and loyalty." } },
+      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/built-for-ritual.svg", "title": "For Golf Businesses", "copy": "Adds a differentiated golfer experience designed to strengthen engagement and loyalty." } },
       { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/step-choose.svg", "title": "Choose", "copy": "Select Calm, Focus or Energy based on the moment ahead." } },
       { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/step-mix.svg", "title": "Mix", "copy": "Mix one stick with 250–300 mL of water." } },
       { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/step-time.svg", "title": "Time It", "copy": "Drink approximately 30 minutes before your lesson, practice session or tee time." } },
       { "type": "science", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/pharmagaba.svg", "label": "PharmaGABA® Foundation", "title": "Calm Starts Here", "copy": "Naturally fermented PharmaGABA® is the clinically studied form of GABA at the center of every AVRO formula." } },
       { "type": "science", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/calm-foundation.svg", "label": "AVRO Calm", "title": "Composure When It Matters", "copy": "PharmaGABA® plus magnesium for golfers who want a calmer, more composed way to prepare for pressure-sensitive moments." } },
-      { "type": "science", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/clarity.svg", "label": "AVRO Focus", "title": "Clearer Attention for Learning", "copy": "PharmaGABA® plus Cognigrape® for lessons, fittings and practice sessions that call for calm, attentive focus." } },
-      { "type": "science", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/mind-body.svg", "label": "AVRO Energy", "title": "Steady Energy for Demanding Golf Days", "copy": "PharmaGABA® plus natural caffeine for early tee times, longer rounds and competition days that require more energy." } },
+      { "type": "science", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/mind-body.svg", "label": "AVRO Focus", "title": "Clearer Attention for Learning", "copy": "PharmaGABA® plus Cognigrape® for lessons, fittings and practice sessions that call for calm, attentive focus." } },
+      { "type": "science", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/golf/icons/standards.svg", "label": "AVRO Energy", "title": "Steady Energy for Demanding Golf Days", "copy": "PharmaGABA® plus natural caffeine for early tee times, longer rounds and competition days that require more energy." } },
       { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/03_Moment_First_Tee-7A1KXwzEr31RFzHGUS3runTTJ215Dr.png", "title": "First Tee", "copy": "A simple pre-round ritual before the opening shot." } },
       { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/04_Moment_Tournament_Day-vRzxoOjJAOWVSwijTckyWVV9jugwR4.png", "title": "Tournament Day", "copy": "Preparation for pressure-sensitive rounds when composure matters from the start." } },
       { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/05_Moment_Practice_Session.png-7cnKcg67wTvHmGt0bNtvcJtadUSZyt.jpeg", "title": "Practice Session", "copy": "For range work, coaching sessions and structured practice." } },
