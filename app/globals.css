@@ -623,6 +623,10 @@ button[role="button"] {
 .golf-section>.golf-heading .golf-kicker-pill::before { content:"• "!important; }
 .golf-accent { color:var(--g-lime); }
 .golf-mark { background-image:linear-gradient(var(--g-lime),var(--g-lime)); background-repeat:no-repeat; background-position:left center; background-size:100% 100%; color:var(--g-ink); padding:.02em .14em; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
+/* Hero headline — word-by-word rise, matching the site's page-hero motion. */
+@keyframes golf-rise { 0%{ opacity:0; transform:translateY(24px); } 100%{ opacity:1; transform:translateY(0); } }
+.golf-word { display:inline-block; opacity:0; transform:translateY(24px); animation:golf-rise .95s cubic-bezier(.34,1.4,.4,1) forwards; will-change:transform,opacity; }
+@media (prefers-reduced-motion: reduce) { .golf-word { animation:none!important; opacity:1!important; transform:none!important; } }
 /* Scroll-reveal — matches the site's fade-up motion language (page-hero / cohort). */
 .golf-page[data-ready] [data-reveal] { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); transition-delay:calc(var(--ri,0)*90ms); will-change:opacity,transform; }
 .golf-page[data-ready] [data-reveal].is-in { opacity:1; transform:none; }
@@ -677,8 +681,7 @@ button[role="button"] {
 .golf-faq summary { cursor:pointer; list-style:none; display:flex; justify-content:space-between; gap:1rem; font-family:"Gotham Golf"; font-weight:700; font-size:1.05rem; }
 .golf-faq summary::-webkit-details-marker { display:none; }
 .golf-faq details p { padding:1rem 3rem 0 0; color:var(--g-muted); }
-.golf-final { min-height:403px; padding:clamp(4rem,9vw,7rem) clamp(1.5rem,5vw,4.5rem); background:#000; color:var(--g-white); display:flex; align-items:center; justify-content:center; text-align:center; }
-.golf-final:after { content:"CALM"; position:absolute; right:-.02em; top:-.18em; font-family:"Gotham Golf"; font-weight:900; font-size:clamp(8rem,24vw,25rem); color:rgba(189,214,55,.1); pointer-events:none; }
+.golf-final { min-height:520px; padding:clamp(5rem,10vw,8rem) clamp(1.5rem,5vw,4.5rem); background:#000; color:var(--g-white); display:flex; align-items:center; justify-content:center; text-align:center; }
 .golf-final-bg { position:absolute; inset:0; z-index:0; }
 .golf-final-bg img { object-position:center 30%; }
 .golf-final-bg::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,var(--g-final-overlay,.62))); }

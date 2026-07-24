@@ -43,6 +43,16 @@ const FINAL_BG = "/golf/female-putting-coastal.png"
 /** Inline style helper for the stagger index custom property. */
 const ri = (i: number) => ({ ["--ri"]: i }) as React.CSSProperties
 
+/** Word-by-word rising headline — matches the site's page-hero hero motion. */
+function Words({ text }: { text: string }) {
+  const words = text.split(" ")
+  return <>{words.map((w, i) => (
+    <span key={i} className="golf-word" style={{ animationDelay: `${(0.1 + i * 0.09).toFixed(2)}s` }}>
+      {w}{i < words.length - 1 ? "\u00A0" : ""}
+    </span>
+  ))}</>
+}
+
 export function GolfPage() {
   // Scroll-reveal — fade/rise elements into view (matches the site's page-hero
   // motion language). Content stays visible if JS never runs: the hidden state
@@ -78,7 +88,7 @@ export function GolfPage() {
       <div className="golf-hero-shade" />
       <div className="golf-hero-copy">
         <p className="golf-kicker" data-reveal style={ri(0)}>CALM PERFORMANCE FOR GOLF</p>
-        <h1 data-reveal style={ri(1)}>Golf Performance Begins Before the First Swing.</h1>
+        <h1><Words text="Golf Performance Begins Before the First Swing." /></h1>
         <p data-reveal style={ri(2)}>AVRO supports the calm, clear and composed headspace golfers seek before lessons, practice and competition—so they can step into the moment ready.</p>
         <div className="golf-actions" data-reveal style={ri(3)}><Link href="#shop" className="golf-btn golf-btn-light">Choose Your Formula</Link><Link href="/shop" className="golf-btn golf-btn-ghost">Shop AVRO</Link></div>
       </div>

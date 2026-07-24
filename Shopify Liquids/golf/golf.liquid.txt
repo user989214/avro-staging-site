@@ -58,6 +58,9 @@
   #avro-golf-{{ section.id }} .hero-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(15,20,15,.72),rgba(15,20,15,.1) 66%); }
   #avro-golf-{{ section.id }} .hero-copy { position:relative; z-index:1; width:min(var(--max),100%); margin:0 auto; padding:clamp(64px,9vw,128px) clamp(24px,5vw,72px) 160px; display:flex; flex-direction:column; align-items:flex-start; gap:22px; }
   #avro-golf-{{ section.id }} .hero-copy h1 { max-width:640px; color:var(--white); }
+  @keyframes avro-golf-rise-{{ section.id }} { 0%{ opacity:0; transform:translateY(24px); } 100%{ opacity:1; transform:translateY(0); } }
+  #avro-golf-{{ section.id }} .hero-copy h1 .hw { display:inline-block; opacity:0; transform:translateY(24px); animation:avro-golf-rise-{{ section.id }} .95s cubic-bezier(.34,1.4,.4,1) forwards; will-change:transform,opacity; }
+  @media (prefers-reduced-motion: reduce) { #avro-golf-{{ section.id }} .hero-copy h1 .hw { animation:none!important; opacity:1!important; transform:none!important; } }
   #avro-golf-{{ section.id }} .hero-copy .body { max-width:560px; }
   #avro-golf-{{ section.id }} .hero-copy .kicker { color:var(--accent); padding:9px 17px; border:1px solid var(--accent); border-radius:999px; }
   #avro-golf-{{ section.id }} .hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
@@ -165,8 +168,7 @@
   #avro-golf-{{ section.id }} .fbody p { padding:0 48px 24px 0; font-size:14px; line-height:1.6; color:var(--muted); white-space:pre-line; }
 
   /* Final CTA */
-  #avro-golf-{{ section.id }} .final { position:relative; overflow:hidden; min-height:403px; padding:clamp(64px,9vw,112px) clamp(24px,5vw,72px); background:#000; color:var(--white); display:flex; align-items:center; justify-content:center; text-align:center; }
-  #avro-golf-{{ section.id }} .final::after { content:"CALM"; position:absolute; right:-.02em; top:-.18em; font-family:"Gotham Golf"; font-weight:900; font-size:clamp(128px,24vw,400px); color:rgba(189,214,55,.1); pointer-events:none; }
+  #avro-golf-{{ section.id }} .final { position:relative; overflow:hidden; min-height:520px; padding:clamp(80px,10vw,128px) clamp(24px,5vw,72px); background:#000; color:var(--white); display:flex; align-items:center; justify-content:center; text-align:center; }
   #avro-golf-{{ section.id }} .final-bg { position:absolute; inset:0; z-index:0; }
   #avro-golf-{{ section.id }} .final-bg img { width:100%; height:100%; object-fit:cover; object-position:center 30%; }
   #avro-golf-{{ section.id }} .final-bg::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.62)); }
@@ -230,7 +232,8 @@
     <div class="hero-shade" aria-hidden="true"></div>
     <div class="hero-copy">
       <p class="kicker">{{ section.settings.hero_kicker | default: 'CALM PERFORMANCE FOR GOLF' }}</p>
-      <h1>{{ section.settings.hero_title | default: 'Golf Performance Begins Before the First Swing.' }}</h1>
+      {%- assign hero_words = section.settings.hero_title | default: 'Golf Performance Begins Before the First Swing.' | split: ' ' -%}
+      <h1>{%- for w in hero_words -%}<span class="hw" style="animation-delay:{{ forloop.index0 | times: 0.09 | plus: 0.1 }}s">{{ w }}{%- unless forloop.last %}&nbsp;{% endunless -%}</span>{%- endfor -%}</h1>
       <p class="body">{{ section.settings.hero_copy | default: 'AVRO supports the calm, clear and composed headspace golfers seek before lessons, practice and competition—so they can step into the moment ready.' }}</p>
       <div class="hero-btns">
         <a href="{{ section.settings.hero_btn1_link | default: shop_anchor }}" class="btn btn-accent">{{ section.settings.hero_btn1_label | default: 'Choose Your Formula' }}</a>
