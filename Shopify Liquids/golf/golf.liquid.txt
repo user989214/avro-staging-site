@@ -173,7 +173,7 @@
   #avro-golf-{{ section.id }} .final-bg { position:absolute; inset:0; z-index:0; }
   #avro-golf-{{ section.id }} .final-bg img { width:100%; height:100%; object-fit:cover; object-position:center 30%; }
   #avro-golf-{{ section.id }} .final-bg.has-img::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.6),rgba(0,0,0,.4)); }
-  #avro-golf-{{ section.id }} .final-word { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:"Gotham Golf",sans-serif; font-weight:900; font-size:min(48vw,80vh); line-height:.8; letter-spacing:-.03em; color:rgba(255,255,255,.028); white-space:nowrap; user-select:none; pointer-events:none; }
+  #avro-golf-{{ section.id }} .final-word { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:"Gotham Golf",sans-serif; font-weight:900; font-size:min(48vw,80vh); line-height:.8; letter-spacing:-.03em; color:#fff; opacity:.03; white-space:nowrap; user-select:none; pointer-events:none; }
   #avro-golf-{{ section.id }} .final-in { position:relative; z-index:1; max-width:720px; display:flex; flex-direction:column; align-items:center; gap:22px; }
   #avro-golf-{{ section.id }} .final h2 { color:var(--white); }
   #avro-golf-{{ section.id }} .final .body { color:rgba(255,255,255,.75); }
@@ -324,7 +324,7 @@
       {%- for b in reasons -%}
       <div class="reason" {{ b.shopify_attributes }}>
         <span class="num">0{{ forloop.index }}</span>
-        <div class="ic">{%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 128 }}" alt="" loading="lazy" width="64" height="64">{%- else -%}{%- case b.settings.icon_key -%}{%- when 'calm-before-pressure' -%}{{ icon_calm_before_pressure }}{%- when 'clarity' -%}{{ icon_clarity }}{%- when 'built-for-ritual' -%}{{ icon_built_for_ritual }}{%- when 'step-choose' -%}{{ icon_step_choose }}{%- when 'step-mix' -%}{{ icon_step_mix }}{%- when 'step-time' -%}{{ icon_step_time }}{%- when 'pharmagaba' -%}{{ icon_pharmagaba }}{%- when 'calm-foundation' -%}{{ icon_calm_foundation }}{%- when 'mind-body' -%}{{ icon_mind_body }}{%- when 'standards' -%}{{ icon_standards }}{%- when 'pressure' -%}{{ icon_pressure }}{%- else -%}{{ icon_calm_before_pressure }}{%- endcase -%}{%- endif -%}</div>
+        <div class="ic"{% if b.settings.icon_color != blank %} style="color:{{ b.settings.icon_color }}"{% endif %}>{%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 128 }}" alt="" loading="lazy" width="64" height="64">{%- else -%}{%- case b.settings.icon_key -%}{%- when 'calm-before-pressure' -%}{{ icon_calm_before_pressure }}{%- when 'clarity' -%}{{ icon_clarity }}{%- when 'built-for-ritual' -%}{{ icon_built_for_ritual }}{%- when 'step-choose' -%}{{ icon_step_choose }}{%- when 'step-mix' -%}{{ icon_step_mix }}{%- when 'step-time' -%}{{ icon_step_time }}{%- when 'pharmagaba' -%}{{ icon_pharmagaba }}{%- when 'calm-foundation' -%}{{ icon_calm_foundation }}{%- when 'mind-body' -%}{{ icon_mind_body }}{%- when 'standards' -%}{{ icon_standards }}{%- when 'pressure' -%}{{ icon_pressure }}{%- else -%}{{ icon_calm_before_pressure }}{%- endcase -%}{%- endif -%}</div>
         <h3>{{ b.settings.title }}</h3>
         <p class="body">{{ b.settings.copy }}</p>
       </div>
@@ -340,7 +340,7 @@
     <div class="steps">
       {%- for b in steps -%}
       <article class="step" {{ b.shopify_attributes }}>
-        <div class="top"><span class="num">0{{ forloop.index }}</span><span class="ic">{%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 160 }}" alt="" loading="lazy">{%- else -%}{%- case b.settings.icon_key -%}{%- when 'calm-before-pressure' -%}{{ icon_calm_before_pressure }}{%- when 'clarity' -%}{{ icon_clarity }}{%- when 'built-for-ritual' -%}{{ icon_built_for_ritual }}{%- when 'step-choose' -%}{{ icon_step_choose }}{%- when 'step-mix' -%}{{ icon_step_mix }}{%- when 'step-time' -%}{{ icon_step_time }}{%- when 'pharmagaba' -%}{{ icon_pharmagaba }}{%- when 'calm-foundation' -%}{{ icon_calm_foundation }}{%- when 'mind-body' -%}{{ icon_mind_body }}{%- when 'standards' -%}{{ icon_standards }}{%- when 'pressure' -%}{{ icon_pressure }}{%- else -%}{{ icon_step_choose }}{%- endcase -%}{%- endif -%}</span></div>
+        <div class="top"><span class="num">0{{ forloop.index }}</span><span class="ic"{% if b.settings.icon_color != blank %} style="color:{{ b.settings.icon_color }}"{% endif %}>{%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 160 }}" alt="" loading="lazy">{%- else -%}{%- case b.settings.icon_key -%}{%- when 'calm-before-pressure' -%}{{ icon_calm_before_pressure }}{%- when 'clarity' -%}{{ icon_clarity }}{%- when 'built-for-ritual' -%}{{ icon_built_for_ritual }}{%- when 'step-choose' -%}{{ icon_step_choose }}{%- when 'step-mix' -%}{{ icon_step_mix }}{%- when 'step-time' -%}{{ icon_step_time }}{%- when 'pharmagaba' -%}{{ icon_pharmagaba }}{%- when 'calm-foundation' -%}{{ icon_calm_foundation }}{%- when 'mind-body' -%}{{ icon_mind_body }}{%- when 'standards' -%}{{ icon_standards }}{%- when 'pressure' -%}{{ icon_pressure }}{%- else -%}{{ icon_step_choose }}{%- endcase -%}{%- endif -%}</span></div>
         <h3>{{ b.settings.title }}</h3>
         <p class="body">{{ b.settings.copy }}</p>
       </article>
@@ -356,7 +356,7 @@
     <div class="g4">
       {%- for b in sciences -%}
       <article class="sci" {{ b.shopify_attributes }}>
-        <div class="ic">{%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 96 }}" alt="" loading="lazy">{%- else -%}{%- case b.settings.icon_key -%}{%- when 'calm-before-pressure' -%}{{ icon_calm_before_pressure }}{%- when 'clarity' -%}{{ icon_clarity }}{%- when 'built-for-ritual' -%}{{ icon_built_for_ritual }}{%- when 'step-choose' -%}{{ icon_step_choose }}{%- when 'step-mix' -%}{{ icon_step_mix }}{%- when 'step-time' -%}{{ icon_step_time }}{%- when 'pharmagaba' -%}{{ icon_pharmagaba }}{%- when 'calm-foundation' -%}{{ icon_calm_foundation }}{%- when 'mind-body' -%}{{ icon_mind_body }}{%- when 'standards' -%}{{ icon_standards }}{%- when 'pressure' -%}{{ icon_pressure }}{%- else -%}{{ icon_pharmagaba }}{%- endcase -%}{%- endif -%}</div>
+        <div class="ic"{% if b.settings.icon_bg != blank or b.settings.icon_color != blank %} style="{% if b.settings.icon_bg != blank %}background:{{ b.settings.icon_bg }};{% endif %}{% if b.settings.icon_color != blank %}color:{{ b.settings.icon_color }};{% endif %}"{% endif %}>{%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 96 }}" alt="" loading="lazy">{%- else -%}{%- case b.settings.icon_key -%}{%- when 'calm-before-pressure' -%}{{ icon_calm_before_pressure }}{%- when 'clarity' -%}{{ icon_clarity }}{%- when 'built-for-ritual' -%}{{ icon_built_for_ritual }}{%- when 'step-choose' -%}{{ icon_step_choose }}{%- when 'step-mix' -%}{{ icon_step_mix }}{%- when 'step-time' -%}{{ icon_step_time }}{%- when 'pharmagaba' -%}{{ icon_pharmagaba }}{%- when 'calm-foundation' -%}{{ icon_calm_foundation }}{%- when 'mind-body' -%}{{ icon_mind_body }}{%- when 'standards' -%}{{ icon_standards }}{%- when 'pressure' -%}{{ icon_pressure }}{%- else -%}{{ icon_pharmagaba }}{%- endcase -%}{%- endif -%}</div>
         <h3>{{ b.settings.label }}</h3>
         <p class="body"><b>{{ b.settings.title }}.</b> {{ b.settings.copy }}</p>
       </article>
@@ -417,7 +417,12 @@
 
   {%- comment -%} FINAL CTA {%- endcomment -%}
       <section class="final">
-        <div class="final-bg{% if section.settings.final_bg != blank %} has-img{% endif %}" aria-hidden="true">{%- if section.settings.final_bg != blank -%}<img src="{{ section.settings.final_bg | image_url: width: 2400 }}" alt="" loading="lazy">{%- else -%}<span class="final-word">{{ section.settings.final_word | default: 'CALM' }}</span>{%- endif -%}</div>
+        {%- assign fstyle = section.settings.final_bg_style | default: 'word' -%}
+        {%- if fstyle == 'image' and section.settings.final_bg != blank -%}
+        <div class="final-bg has-img" aria-hidden="true"><img src="{{ section.settings.final_bg | image_url: width: 2400 }}" alt="" loading="lazy"></div>
+        {%- else -%}
+        <div class="final-bg" aria-hidden="true"><span class="final-word" style="color:{{ section.settings.final_word_color | default: '#ffffff' }};opacity:{{ section.settings.final_word_opacity | default: 3 | divided_by: 100.0 }}">{{ section.settings.final_word | default: 'CALM' }}</span></div>
+        {%- endif -%}
         <div class="final-in">
       <p class="kicker">{{ section.settings.final_kicker | default: 'CALM FIRST. PLAY YOUR GAME.' }}</p>
       <h2>{{ section.settings.final_title | default: 'Choose the formula that fits your golf.' }}</h2>
@@ -559,10 +564,13 @@
     { "type": "textarea", "id": "faq_copy", "label": "Supporting line", "default": "Straight answers about choosing and using AVRO for golf." },
 
     { "type": "header", "content": "Final CTA" },
-      { "type": "image_picker", "id": "final_bg", "label": "Background image", "info": "Optional. Sits behind a dark overlay. If left empty, a faded background word is shown instead." },
+      { "type": "select", "id": "final_bg_style", "label": "Background style", "options": [ { "value": "word", "label": "Faded word" }, { "value": "image", "label": "Image" } ], "default": "word" },
+      { "type": "image_picker", "id": "final_bg", "label": "Background image", "info": "Used when Background style is set to Image." },
+      { "type": "text", "id": "final_word", "label": "Faded background word", "info": "Used when Background style is set to Faded word.", "default": "CALM" },
+      { "type": "color", "id": "final_word_color", "label": "Faded word color", "default": "#ffffff" },
+      { "type": "range", "id": "final_word_opacity", "label": "Faded word opacity", "min": 1, "max": 15, "step": 1, "unit": "%", "default": 3 },
     { "type": "text", "id": "final_kicker", "label": "Eyebrow", "default": "CALM FIRST. PLAY YOUR GAME." },
       { "type": "text", "id": "final_title", "label": "Title", "default": "Choose the formula that fits your golf." },
-      { "type": "text", "id": "final_word", "label": "Faded background word (when no image)", "default": "CALM" },
     { "type": "textarea", "id": "final_copy", "label": "Copy" },
     { "type": "text", "id": "final_btn1_label", "label": "Button 1 label", "default": "Shop Calm" },
     { "type": "url", "id": "final_btn1_link", "label": "Button 1 link" },
@@ -581,18 +589,22 @@
     { "type": "reason", "name": "Reason card", "settings": [
       { "type": "image_picker", "id": "icon", "label": "Custom icon (optional)" },
       { "type": "select", "id": "icon_key", "label": "Embedded icon", "info": "Choose a built-in icon, or upload a Custom icon above to override.", "options": [ { "value": "calm-before-pressure", "label": "Gauge — Calm Before Pressure" }, { "value": "clarity", "label": "Soundwave — Clarity" }, { "value": "built-for-ritual", "label": "Golf Flag — Built for Ritual" }, { "value": "step-choose", "label": "Pour — Choose" }, { "value": "step-mix", "label": "Stir — Mix" }, { "value": "step-time", "label": "Drink — Time It" }, { "value": "pharmagaba", "label": "Sprout — PharmaGABA" }, { "value": "calm-foundation", "label": "Lotus — Calm Foundation" }, { "value": "mind-body", "label": "Mind–Body Diagram" }, { "value": "standards", "label": "Shield — Standards" }, { "value": "pressure", "label": "Clock — ~30 min" } ], "default": "calm-before-pressure" },
+      { "type": "color", "id": "icon_color", "label": "Icon color", "info": "Applies to built-in icons. Leave empty for default." },
       { "type": "text", "id": "title", "label": "Title", "default": "For Golfers" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
     { "type": "step", "name": "How-to step", "settings": [
       { "type": "image_picker", "id": "icon", "label": "Custom icon (optional)" },
       { "type": "select", "id": "icon_key", "label": "Embedded icon", "info": "Choose a built-in icon, or upload a Custom icon above to override.", "options": [ { "value": "calm-before-pressure", "label": "Gauge — Calm Before Pressure" }, { "value": "clarity", "label": "Soundwave — Clarity" }, { "value": "built-for-ritual", "label": "Golf Flag — Built for Ritual" }, { "value": "step-choose", "label": "Pour — Choose" }, { "value": "step-mix", "label": "Stir — Mix" }, { "value": "step-time", "label": "Drink — Time It" }, { "value": "pharmagaba", "label": "Sprout — PharmaGABA" }, { "value": "calm-foundation", "label": "Lotus — Calm Foundation" }, { "value": "mind-body", "label": "Mind–Body Diagram" }, { "value": "standards", "label": "Shield — Standards" }, { "value": "pressure", "label": "Clock — ~30 min" } ], "default": "step-choose" },
+      { "type": "color", "id": "icon_color", "label": "Icon color", "info": "Applies to built-in icons. Leave empty for default (white)." },
       { "type": "text", "id": "title", "label": "Title", "default": "Choose" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
     { "type": "science", "name": "Science card", "settings": [
       { "type": "image_picker", "id": "icon", "label": "Custom icon (optional)" },
       { "type": "select", "id": "icon_key", "label": "Embedded icon", "info": "Choose a built-in icon, or upload a Custom icon above to override.", "options": [ { "value": "calm-before-pressure", "label": "Gauge — Calm Before Pressure" }, { "value": "clarity", "label": "Soundwave — Clarity" }, { "value": "built-for-ritual", "label": "Golf Flag — Built for Ritual" }, { "value": "step-choose", "label": "Pour — Choose" }, { "value": "step-mix", "label": "Stir — Mix" }, { "value": "step-time", "label": "Drink — Time It" }, { "value": "pharmagaba", "label": "Sprout — PharmaGABA" }, { "value": "calm-foundation", "label": "Lotus — Calm Foundation" }, { "value": "mind-body", "label": "Mind–Body Diagram" }, { "value": "standards", "label": "Shield — Standards" }, { "value": "pressure", "label": "Clock — ~30 min" } ], "default": "pharmagaba" },
+      { "type": "color", "id": "icon_bg", "label": "Icon tile color", "info": "Leave empty for default (lime)." },
+      { "type": "color", "id": "icon_color", "label": "Icon color", "info": "Applies to built-in icons. Leave empty for default (black)." },
       { "type": "text", "id": "label", "label": "Label", "default": "PharmaGABA® Foundation" },
       { "type": "text", "id": "title", "label": "Title", "default": "Calm Starts Here" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
