@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 const reasons = [
   ["FOR GOLFERS", "A simple way to prepare for the moments when calm, clarity and composure matter."],
@@ -116,5 +116,68 @@ export function GolfPage() {
       <div className="golf-final-bg" aria-hidden="true">{FINAL_BG && <Image src={FINAL_BG} alt="" fill sizes="100vw" priority className="golf-cover" />}</div>
       <div data-reveal><p className="golf-kicker">CALM FIRST. PLAY YOUR GAME.</p><h2>Choose the formula that fits your golf.</h2><p>Start with calm. Choose Calm, Focus or Energy for the moment ahead.</p><div className="golf-actions"><Link href="/products/calm" className="golf-btn golf-btn-light">Shop Calm</Link><Link href="/products/focus" className="golf-btn golf-btn-ghost">Shop Focus</Link><Link href="/products/energy" className="golf-btn golf-btn-ghost">Shop Energy</Link></div></div>
     </section>
+
+    <GolfFooter />
   </main>
+}
+
+const footerCols: [string, [string, string][]][] = [
+  ["Shop", [["Calm", "/calm"], ["Focus", "/focus"], ["Energy", "/energy"], ["Bundle + Save", "/shop"]]],
+  ["Learn", [["Why AVRO", "/why-avro"], ["The Science", "/science"], ["Ingredients", "/ingredients"], ["Golf", "/golf"]]],
+  ["Company", [["Contact", "/contact"], ["FAQ", "/faq"], ["Instagram", "https://www.instagram.com/avrohydrate"], ["LinkedIn", "https://www.linkedin.com/company/avrohydrate"]]],
+]
+
+/** Golf-only footer — mirrors the site footer's format with the AVRO Golf wordmark. */
+function GolfFooter() {
+  const [email, setEmail] = useState("")
+  const [submitted, setSubmitted] = useState(false)
+  return (
+    <footer className="golf-footer">
+      <div className="golf-footer-inner">
+        <div className="golf-footer-news">
+          <p className="golf-kicker">NEWSLETTER</p>
+          <h3>Join our community.</h3>
+          <p>Updates, perks, and calm-first insights — straight to your inbox.</p>
+          {submitted ? (
+            <p className="golf-footer-thanks">Thanks for subscribing.</p>
+          ) : (
+            <form className="golf-footer-sub" onSubmit={(e) => { e.preventDefault(); setSubmitted(true) }}>
+              <label className="sr-only" htmlFor="golf-footer-email">Email address</label>
+              <input id="golf-footer-email" type="email" required placeholder="Email address" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <button type="submit">Subscribe</button>
+            </form>
+          )}
+        </div>
+
+        <hr className="golf-footer-rule" />
+
+        <div className="golf-footer-mid">
+          <div className="golf-footer-brand">
+            <Image src="/golf/avro-golf-wordmark.png" alt="AVRO Golf" width={200} height={64} className="golf-footer-logo" />
+            <p>Calm-first performance drink mix. Built to support state before stimulation.*</p>
+          </div>
+          <div className="golf-footer-cols">
+            {footerCols.map(([title, links]) => (
+              <div key={title}>
+                <h4>{title}</h4>
+                <ul>{links.map(([label, href]) => <li key={label}><Link href={href}>{label}</Link></li>)}</ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <hr className="golf-footer-rule" />
+
+        <div className="golf-footer-legal">
+          <span>© 2026 AVRO Life ● These statements have not been evaluated by the FDA.</span>
+          <div className="golf-footer-legal-links">
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/terms">Terms</Link>
+            <Link href="/accessibility">Accessibility</Link>
+          </div>
+        </div>
+      </div>
+      <div className="golf-footer-watermark" aria-hidden="true">AVRO GOLF</div>
+    </footer>
+  )
 }
