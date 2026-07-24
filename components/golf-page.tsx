@@ -49,8 +49,8 @@ export function GolfPage() {
     </section>
 
     <section className="golf-pressure golf-tile">
-      <div className="golf-copy"><p className="golf-kicker">WHEN THE MOMENT GETS BIGGER</p><h2>Golf can get loud in your head fast.</h2><p>The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.</p><div className="golf-callout"><Image src="/golf/icons/pressure.svg" alt="" width={52} height={52}/><span>Approximately 30 minutes before golf.</span></div></div>
-      <div className="golf-pressure-image"><Image src="/golf/golfer-address.png" alt="Golfer preparing to address the ball on a coastal course" fill sizes="(max-width: 768px) 100vw, 50vw" className="golf-cover" /></div>
+      <div className="golf-copy"><p className="golf-kicker">WHEN THE MOMENT GETS BIGGER</p><h2>Golf can get loud in your head fast.</h2><p>The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.</p></div>
+      <div className="golf-pressure-image"><Image src="/golf/golfer-address.png" alt="Golfer preparing to address the ball on a coastal course" fill sizes="(max-width: 768px) 100vw, 50vw" className="golf-cover" /><span className="golf-pressure-pill"><b>~30<i>min</i></b>before your round</span></div>
     </section>
 
     <section className="golf-section golf-tile"><div className="golf-heading"><p className="golf-kicker">CALM-FIRST PERFORMANCE</p><h2>Why AVRO Matters in Golf</h2><p>A calm-first platform with a clear role across the modern golf experience.</p></div><div className="golf-three">{reasons.map((x,i)=><article className="golf-reason" key={x[0]}><span>0{i+1}</span><Image src={["/golf/icons/calm-before-pressure.svg","/golf/icons/clarity.svg","/golf/icons/built-for-ritual.svg"][i]} alt="" width={64} height={64}/><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div></section>

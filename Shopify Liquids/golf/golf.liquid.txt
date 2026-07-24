@@ -76,9 +76,8 @@
   #avro-golf-{{ section.id }} .pressure-copy { padding:clamp(56px,7vw,112px) clamp(24px,5vw,72px); display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:22px; }
   #avro-golf-{{ section.id }} .pressure-img { position:relative; min-height:480px; }
   #avro-golf-{{ section.id }} .pressure-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-  #avro-golf-{{ section.id }} .callout { display:flex; align-items:center; gap:16px; margin-top:8px; padding-top:24px; border-top:1px solid var(--line); font-family:"Gotham Golf"; font-weight:700; font-size:14px; }
-  #avro-golf-{{ section.id }} .callout .ic { width:52px; height:52px; flex-shrink:0; color:var(--olive); }
-  #avro-golf-{{ section.id }} .callout .ic svg,#avro-golf-{{ section.id }} .callout .ic img { display:block; width:52px; height:52px; object-fit:contain; }
+  #avro-golf-{{ section.id }} .pressure-pill { position:absolute; left:20px; bottom:20px; display:flex; flex-direction:column; gap:2px; padding:11px 18px; background:var(--white); color:var(--muted); border-radius:16px; font-family:"Gotham Golf"; font-weight:600; font-size:12px; letter-spacing:.03em; box-shadow:0 10px 28px rgba(0,0,0,.22); }
+  #avro-golf-{{ section.id }} .pressure-pill b { color:var(--ink); font-weight:900; font-size:26px; line-height:1; }
 
   /* Generic section */
   #avro-golf-{{ section.id }} .sec { padding:clamp(64px,7vw,112px) clamp(24px,5vw,72px); }
@@ -236,10 +235,10 @@
       <p class="kicker">{{ section.settings.pressure_kicker | default: 'WHEN THE MOMENT GETS BIGGER' }}</p>
       <h2>{{ section.settings.pressure_title | default: 'Golf can get loud in your head fast.' }}</h2>
       <p class="body">{{ section.settings.pressure_copy | default: 'The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.' }}</p>
-      <div class="callout"><span class="ic">{%- if section.settings.pressure_icon != blank -%}<img src="{{ section.settings.pressure_icon | image_url: width: 104 }}" alt="" loading="lazy" width="52" height="52">{%- else -%}{%- case section.settings.pressure_icon_key -%}{%- when 'calm-before-pressure' -%}{{ icon_calm_before_pressure }}{%- when 'clarity' -%}{{ icon_clarity }}{%- when 'built-for-ritual' -%}{{ icon_built_for_ritual }}{%- when 'step-choose' -%}{{ icon_step_choose }}{%- when 'step-mix' -%}{{ icon_step_mix }}{%- when 'step-time' -%}{{ icon_step_time }}{%- when 'pharmagaba' -%}{{ icon_pharmagaba }}{%- when 'calm-foundation' -%}{{ icon_calm_foundation }}{%- when 'mind-body' -%}{{ icon_mind_body }}{%- when 'standards' -%}{{ icon_standards }}{%- when 'pressure' -%}{{ icon_pressure }}{%- else -%}{{ icon_pressure }}{%- endcase -%}{%- endif -%}</span><span>{{ section.settings.pressure_note | default: 'Approximately 30 minutes before golf.' }}</span></div>
     </div>
     <div class="pressure-img">
       {%- if section.settings.pressure_image != blank -%}<img src="{{ section.settings.pressure_image | image_url: width: 1600 }}" alt="{{ section.settings.pressure_alt | escape }}">{%- else -%}<img src="{{ blob }}/02_Golfer_Address_Coastal-QuYnv1biTTOWojA8ONA5TjE867VaaX.png" alt="{{ section.settings.pressure_alt | escape }}">{%- endif -%}
+      <span class="pressure-pill"><b>{{ section.settings.pressure_pill_big | default: '~30min' }}</b>{{ section.settings.pressure_pill_small | default: 'before your round' }}</span>
     </div>
   </section>
 
@@ -403,9 +402,8 @@
     { "type": "text", "id": "pressure_kicker", "label": "Eyebrow", "default": "WHEN THE MOMENT GETS BIGGER" },
     { "type": "text", "id": "pressure_title", "label": "Title", "default": "Golf can get loud in your head fast." },
     { "type": "textarea", "id": "pressure_copy", "label": "Copy" },
-    { "type": "text", "id": "pressure_note", "label": "Callout note", "default": "Approximately 30 minutes before golf." },
-    { "type": "image_picker", "id": "pressure_icon", "label": "Callout icon — custom (optional)" },
-    { "type": "select", "id": "pressure_icon_key", "label": "Callout icon — embedded", "info": "Choose a built-in icon, or upload a custom icon above to override.", "options": [ { "value": "calm-before-pressure", "label": "Gauge — Calm Before Pressure" }, { "value": "clarity", "label": "Soundwave — Clarity" }, { "value": "built-for-ritual", "label": "Golf Flag — Built for Ritual" }, { "value": "step-choose", "label": "Pour — Choose" }, { "value": "step-mix", "label": "Stir — Mix" }, { "value": "step-time", "label": "Drink — Time It" }, { "value": "pharmagaba", "label": "Sprout — PharmaGABA" }, { "value": "calm-foundation", "label": "Lotus — Calm Foundation" }, { "value": "mind-body", "label": "Mind–Body Diagram" }, { "value": "standards", "label": "Shield — Standards" }, { "value": "pressure", "label": "Clock — ~30 min" } ], "default": "pressure" },
+    { "type": "text", "id": "pressure_pill_big", "label": "Photo pill — value", "default": "~30min" },
+    { "type": "text", "id": "pressure_pill_small", "label": "Photo pill — caption", "default": "before your round" },
     { "type": "image_picker", "id": "pressure_image", "label": "Image" },
     { "type": "text", "id": "pressure_alt", "label": "Image alt", "default": "Golfer preparing to address the ball on a coastal course" },
 

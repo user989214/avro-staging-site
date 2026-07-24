@@ -608,7 +608,9 @@ button[role="button"] {
 .golf-pressure { min-height:620px; display:grid; grid-template-columns:1fr 1fr; }
 .golf-copy { padding:clamp(3.5rem,7vw,7rem) clamp(1.5rem,5vw,4.5rem); display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:1.35rem; }
 .golf-pressure-image { position:relative; min-height:480px; }
-.golf-callout { display:flex; align-items:center; gap:1rem; margin-top:1rem; padding-top:1.5rem; border-top:1px solid var(--g-line); font-family:"Gotham Golf"; font-weight:700; font-size:.85rem; }
+.golf-pressure-pill { position:absolute; left:1.25rem; bottom:1.25rem; display:flex; flex-direction:column; gap:.15rem; padding:.7rem 1.1rem; background:var(--g-white); color:var(--g-muted); border-radius:1rem; font-family:"Gotham Golf"; font-weight:600; font-size:.72rem; letter-spacing:.03em; box-shadow:0 10px 28px rgba(0,0,0,.22); }
+.golf-pressure-pill b { color:var(--g-ink); font-weight:900; font-size:1.6rem; line-height:1; }
+.golf-pressure-pill b i { font-style:normal; font-size:.62rem; font-weight:700; vertical-align:super; margin-left:2px; }
 .golf-section { padding:clamp(4rem,7vw,7rem) clamp(1.5rem,5vw,4.5rem); }
 .golf-heading { max-width:640px; display:flex; flex-direction:column; gap:1rem; margin-bottom:2.5rem; }
 .golf-heading>p:last-child { color:var(--g-muted); }
@@ -626,7 +628,7 @@ button[role="button"] {
 .golf-step strong { color:var(--g-lime); font-family:"Gotham Golf"; font-weight:900; font-size:42px; line-height:1; }
 .golf-step h3 { font-size:16px; }
 .golf-step p { color:rgba(255,255,255,.7); }
-.golf-step img,.golf-dark .golf-callout img { filter:brightness(0) saturate(100%) invert(85%) sepia(35%) saturate(986%) hue-rotate(24deg) brightness(94%); }
+.golf-step img { filter:brightness(0) saturate(100%) invert(85%) sepia(35%) saturate(986%) hue-rotate(24deg) brightness(94%); }
 .golf-science { grid-template-columns:repeat(4,1fr); }
 .golf-science article { padding:25px 21px; background:var(--g-card); border:1px solid var(--g-line); border-radius:16px; display:flex; flex-direction:column; align-items:flex-start; gap:7px; }
 .golf-science article img { width:52px; height:52px; padding:10px; background:var(--g-lime); border-radius:14px; }
