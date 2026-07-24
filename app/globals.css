@@ -576,10 +576,11 @@ button[role="button"] {
 .golf-page { --g-ink:#161616; --g-cream:#f3f0e8; --g-card:#fafaf7; --g-line:#dedad0; --g-lime:#bdd637; --g-olive:#9db12e; --g-blue:#94c6d4; --g-white:#ffffff; --g-muted:#6c6957; background:var(--g-cream); color:var(--g-ink); font-family:"Work Sans Golf",sans-serif; }
 .golf-page h1,.golf-page h2,.golf-page h3,.golf-page b,.golf-page strong { font-family:"Gotham Golf",sans-serif; }
 .golf-page h1,.golf-page h2,.golf-page h3,.golf-page p { margin:0; }
-.golf-page h1 { max-width:640px; font-size:clamp(2.4rem,4.6vw,3.4rem); line-height:1.02; letter-spacing:-.02em; text-wrap:balance; }
-.golf-page h2 { font-size:clamp(1.6rem,3vw,1.95rem); line-height:1.22; letter-spacing:-.01em; text-wrap:balance; }
-.golf-page h3 { font-size:clamp(1.05rem,1.4vw,1.19rem); line-height:1.2; }
-.golf-page p { font-size:14px; line-height:1.6; }
+.golf-page h1 { max-width:640px; font-weight:900; font-size:clamp(2.4rem,4.6vw,3.4rem); line-height:1.02; letter-spacing:-.02em; text-wrap:balance; }
+.golf-page h2 { font-weight:900; font-size:clamp(1.6rem,3vw,1.95rem); line-height:1.22; letter-spacing:-.01em; text-wrap:balance; }
+.golf-page h3 { font-weight:700; font-size:clamp(1.05rem,1.4vw,1.19rem); line-height:1.2; }
+.golf-page b,.golf-page strong { font-weight:700; }
+.golf-page p { font-family:"Work Sans Golf",sans-serif; font-size:14px; line-height:1.6; }
 .golf-tile { position:relative; overflow:hidden; }
 .golf-cover { object-fit:cover; }
 .golf-contain { object-fit:contain; }
@@ -602,12 +603,12 @@ button[role="button"] {
 .golf-ritual>div { gap:2px; }
 .golf-ritual>div+div,.golf-ritual>p+div { border-left:1px solid rgba(255,255,255,.18); }
 .golf-ritual>p { color:var(--g-lime); font-family:"Work Sans Golf",sans-serif; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
-.golf-ritual b { font-family:"Gotham Golf"; font-size:14px; color:var(--g-white); }
+.golf-ritual b { font-family:"Gotham Golf"; font-weight:700; font-size:14px; color:var(--g-white); }
 .golf-ritual span { font-size:12px; color:rgba(255,255,255,.6); }
 .golf-pressure { min-height:620px; display:grid; grid-template-columns:1fr 1fr; }
 .golf-copy { padding:clamp(3.5rem,7vw,7rem) clamp(1.5rem,5vw,4.5rem); display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:1.35rem; }
 .golf-pressure-image { position:relative; min-height:480px; }
-.golf-callout { display:flex; align-items:center; gap:1rem; margin-top:1rem; padding-top:1.5rem; border-top:1px solid var(--g-line); font-family:"Gotham Golf"; font-size:.85rem; }
+.golf-callout { display:flex; align-items:center; gap:1rem; margin-top:1rem; padding-top:1.5rem; border-top:1px solid var(--g-line); font-family:"Gotham Golf"; font-weight:700; font-size:.85rem; }
 .golf-section { padding:clamp(4rem,7vw,7rem) clamp(1.5rem,5vw,4.5rem); }
 .golf-heading { max-width:640px; display:flex; flex-direction:column; gap:1rem; margin-bottom:2.5rem; }
 .golf-heading>p:last-child { color:var(--g-muted); }
@@ -651,7 +652,7 @@ button[role="button"] {
 .golf-faq>div:first-child { display:flex; flex-direction:column; gap:1rem; }
 .golf-faq details { border-top:1px solid var(--g-line); padding:1.5rem 0; }
 .golf-faq details:last-child { border-bottom:1px solid var(--g-line); }
-.golf-faq summary { cursor:pointer; list-style:none; display:flex; justify-content:space-between; gap:1rem; font-family:"Gotham Golf"; font-size:1.05rem; }
+.golf-faq summary { cursor:pointer; list-style:none; display:flex; justify-content:space-between; gap:1rem; font-family:"Gotham Golf"; font-weight:700; font-size:1.05rem; }
 .golf-faq summary::-webkit-details-marker { display:none; }
 .golf-faq details p { padding:1rem 3rem 0 0; color:var(--g-muted); }
 .golf-final { min-height:403px; padding:clamp(4rem,9vw,7rem) clamp(1.5rem,5vw,4.5rem); background:#000; color:var(--g-white); display:flex; align-items:center; justify-content:center; text-align:center; }
