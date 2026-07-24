@@ -49,7 +49,7 @@ export function GolfPage() {
     </section>
 
     <section className="golf-pressure golf-tile">
-      <div className="golf-copy"><p className="golf-kicker">WHEN THE MOMENT GETS BIGGER</p><h2>Golf can get loud in your head fast.</h2><p>The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.</p></div>
+      <div className="golf-copy"><p className="golf-kicker">WHEN THE MOMENT GETS BIGGER</p><h2>Golf can get <mark className="golf-mark">loud in your head</mark> fast.</h2><p>The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.</p></div>
       <div className="golf-pressure-image"><Image src="/golf/golfer-address.png" alt="Golfer preparing to address the ball on a coastal course" fill sizes="(max-width: 768px) 100vw, 50vw" className="golf-cover" /><span className="golf-pressure-pill"><b>~30<i>min</i></b>before your round</span></div>
     </section>
 

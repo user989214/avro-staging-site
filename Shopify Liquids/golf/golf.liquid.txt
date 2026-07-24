@@ -91,6 +91,7 @@
   #avro-golf-{{ section.id }} .head .kicker-pill::before { content:"• "; }
   #avro-golf-{{ section.id }} .dark .kicker-pill { border-color:var(--accent); }
   #avro-golf-{{ section.id }} .accent { color:var(--accent); }
+  #avro-golf-{{ section.id }} .mark { background:var(--accent); color:var(--ink); padding:.02em .14em; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
   #avro-golf-{{ section.id }} .dark { background:#000; color:var(--white); }
   #avro-golf-{{ section.id }} .dark h2,#avro-golf-{{ section.id }} .dark h3 { color:var(--white); }
   #avro-golf-{{ section.id }} .dark .head .sub { color:rgba(255,255,255,.7); }
@@ -243,7 +244,10 @@
   <section class="pressure">
     <div class="pressure-copy">
       <p class="kicker">{{ section.settings.pressure_kicker | default: 'WHEN THE MOMENT GETS BIGGER' }}</p>
-      <h2>{{ section.settings.pressure_title | default: 'Golf can get loud in your head fast.' }}</h2>
+      {%- assign p_title = section.settings.pressure_title | default: 'Golf can get loud in your head fast.' -%}
+      {%- assign p_hl = section.settings.pressure_highlight | default: 'loud in your head' -%}
+      {%- capture p_wrapped -%}<mark class="mark">{{ p_hl }}</mark>{%- endcapture -%}
+      <h2>{%- if p_hl != blank and p_title contains p_hl -%}{{ p_title | replace: p_hl, p_wrapped }}{%- else -%}{{ p_title }}{%- endif -%}</h2>
       <p class="body">{{ section.settings.pressure_copy | default: 'The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.' }}</p>
     </div>
     <div class="pressure-img">
@@ -409,6 +413,7 @@
     { "type": "header", "content": "Pressure tile" },
     { "type": "text", "id": "pressure_kicker", "label": "Eyebrow", "default": "WHEN THE MOMENT GETS BIGGER" },
     { "type": "text", "id": "pressure_title", "label": "Title", "default": "Golf can get loud in your head fast." },
+    { "type": "text", "id": "pressure_highlight", "label": "Title — highlighted phrase", "info": "This exact phrase within the title gets the lime highlight. Must match the title text.", "default": "loud in your head" },
     { "type": "textarea", "id": "pressure_copy", "label": "Copy" },
     { "type": "text", "id": "pressure_pill_big", "label": "Photo pill — value", "default": "~30min" },
     { "type": "text", "id": "pressure_pill_small", "label": "Photo pill — caption", "default": "before your round" },
