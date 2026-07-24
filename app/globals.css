@@ -728,14 +728,15 @@ button[role="button"] {
 
 @media (max-width: 768px) {
   .golf-hero { min-height:unset; flex-direction:column; align-items:stretch; background:var(--g-white); color:var(--g-ink); }
-  .golf-hero-img-wrap { position:relative; inset:auto; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:4/5; border-radius:20px; overflow:hidden; flex-shrink:0; }
+  .golf-hero-img-wrap { position:relative; inset:auto; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:3/4; border-radius:20px; overflow:hidden; flex-shrink:0; }
   .golf-hero-img { object-position:64% center; }
   .golf-hero-shade { display:none; }
-  .golf-hero h1 { color:var(--g-ink); }
-  .golf-hero-copy { position:static; padding:1.75rem 1.5rem 1.5rem; }
-  .golf-hero-copy>p:not(.golf-kicker) { color:var(--g-muted); }
+  .golf-hero h1 { color:var(--g-ink); font-size:clamp(2.25rem,9vw,2.5rem); line-height:1; letter-spacing:-.025em; }
+  .golf-hero-copy { position:static; padding:1.5rem 1.25rem 2rem; gap:1.25rem; }
+  .golf-hero-copy>p:not(.golf-kicker) { color:var(--g-muted); font-size:clamp(1.0625rem,4.5vw,1.25rem); line-height:1.55; }
   .golf-hero .golf-kicker { color:var(--g-olive); border-color:var(--g-olive); }
-  .golf-hero .golf-btn { color:var(--g-ink); background:transparent; border-color:rgba(0,0,0,.4); }
+  .golf-hero .golf-actions { gap:.75rem; }
+  .golf-hero .golf-btn { min-height:48px; padding:0 28px; font-size:16px; color:var(--g-ink); background:transparent; border-color:rgba(0,0,0,.4); }
   .golf-hero .golf-btn:hover { color:var(--g-white); background:var(--g-ink); border-color:var(--g-ink); }
   .golf-ritual { position:static; grid-template-columns:1fr 1fr 1fr; }
   .golf-ritual>p { display:none; }
