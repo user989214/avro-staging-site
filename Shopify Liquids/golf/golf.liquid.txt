@@ -23,7 +23,7 @@
 
   #avro-golf-{{ section.id }} {
     --cream:#F3F0E8; --card:#FAFAF7; --line:#DEDAD0; --ink:#161616; --white:#FFFFFF;
-    --muted:#6C6957; --accent:#BDD637; --olive:#9DB12E; --blue:#94C6D4;
+    --muted:#6C6957; --accent:#BDD637; --olive:#9DB12E; --blue:#94C6D4; --max:1250px;
     font-family:"Work Sans Golf",sans-serif; background:var(--cream); color:var(--ink); display:block;
   }
   #avro-golf-{{ section.id }} * { box-sizing:border-box; }
@@ -56,7 +56,7 @@
   #avro-golf-{{ section.id }} .hero-imgs img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .8s ease-in-out; }
   #avro-golf-{{ section.id }} .hero-imgs img.on { opacity:1; }
   #avro-golf-{{ section.id }} .hero-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(15,20,15,.72),rgba(15,20,15,.1) 66%); }
-  #avro-golf-{{ section.id }} .hero-copy { position:relative; z-index:1; width:min(1440px,100%); margin:0 auto; padding:clamp(64px,9vw,128px) clamp(24px,5vw,72px) 160px; display:flex; flex-direction:column; align-items:flex-start; gap:22px; }
+  #avro-golf-{{ section.id }} .hero-copy { position:relative; z-index:1; width:min(var(--max),100%); margin:0 auto; padding:clamp(64px,9vw,128px) clamp(24px,5vw,72px) 160px; display:flex; flex-direction:column; align-items:flex-start; gap:22px; }
   #avro-golf-{{ section.id }} .hero-copy h1 { max-width:640px; color:var(--white); }
   #avro-golf-{{ section.id }} .hero-copy .body { max-width:560px; }
   #avro-golf-{{ section.id }} .hero-copy .kicker { color:var(--accent); padding:9px 17px; border:1px solid var(--accent); border-radius:999px; }
@@ -72,7 +72,7 @@
   #avro-golf-{{ section.id }} .ritual span { font-size:12px; color:rgba(255,255,255,.6); }
 
   /* Pressure tile */
-  #avro-golf-{{ section.id }} .pressure { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,72px); align-items:center; padding:clamp(64px,7vw,112px) clamp(24px,5vw,72px); }
+  #avro-golf-{{ section.id }} .pressure { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,72px); align-items:center; padding:clamp(64px,7vw,112px) max(clamp(24px,5vw,72px),calc((100% - var(--max))/2)); }
   #avro-golf-{{ section.id }} .pressure-copy { display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:22px; }
   #avro-golf-{{ section.id }} .pressure-img { position:relative; aspect-ratio:4/3; overflow:hidden; border-radius:24px; }
   #avro-golf-{{ section.id }} .pressure-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
@@ -81,7 +81,7 @@
 
   /* Generic section */
   #avro-golf-{{ section.id }} .sec { padding:clamp(64px,7vw,112px) clamp(24px,5vw,72px); }
-  #avro-golf-{{ section.id }} .wrap { max-width:1440px; margin:0 auto; }
+  #avro-golf-{{ section.id }} .wrap { max-width:var(--max); margin:0 auto; }
   #avro-golf-{{ section.id }} .head { max-width:640px; margin-bottom:40px; display:flex; flex-direction:column; gap:16px; }
   #avro-golf-{{ section.id }} .head .sub { color:var(--muted); }
   #avro-golf-{{ section.id }} .head-split { max-width:none; flex-direction:row; align-items:flex-start; justify-content:space-between; gap:32px; }
@@ -140,8 +140,8 @@
   #avro-golf-{{ section.id }} .prods { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
   #avro-golf-{{ section.id }} .pc { padding:20px 24px 24px; background:var(--white); color:#000; border-radius:24px; display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
   #avro-golf-{{ section.id }} .pc .tag { align-self:flex-start; padding:6px 12px; background:#EDEDEA; color:#000; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; border-radius:999px; }
-  #avro-golf-{{ section.id }} .pc .thumb { width:265px; max-width:100%; margin:14px auto 10px; position:relative; aspect-ratio:1/1; }
-  #avro-golf-{{ section.id }} .pc .thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+  #avro-golf-{{ section.id }} .pc .thumb { width:100%; margin:10px 0 14px; position:relative; aspect-ratio:1/1; background:var(--cream); border-radius:20px; overflow:hidden; }
+  #avro-golf-{{ section.id }} .pc .thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; padding:26px; }
   #avro-golf-{{ section.id }} .pc h3 { font-family:"Gotham Golf"; font-weight:700; }
   #avro-golf-{{ section.id }} .pc .desc { font-weight:600; }
   #avro-golf-{{ section.id }} .pc .best { font-size:14px; line-height:1.6; color:#000; min-height:4rem; }
@@ -346,7 +346,7 @@
     <div class="faq-intro"><p class="kicker">{{ section.settings.faq_kicker | default: 'GOLF FAQ' }}</p><h2>{{ section.settings.faq_title | default: 'Questions Before the First Tee.' }}</h2><p class="sub body">{{ section.settings.faq_copy | default: 'Straight answers about choosing and using AVRO for golf.' }}</p></div>
     <div class="faq-list">
       {%- for b in faqs -%}
-      <div class="fitem{% if forloop.first %} open{% endif %}" data-faq {{ b.shopify_attributes }}>
+      <div class="fitem" data-faq {{ b.shopify_attributes }}>
         <button class="fbtn" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">{{ b.settings.q }}<span class="fsign">+</span></button>
         <div class="fbody"><p>{{ b.settings.a }}</p></div>
       </div>
