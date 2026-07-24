@@ -65,15 +65,6 @@
   #avro-golf-{{ section.id }} .hero-dots { display:flex; gap:8px; margin-top:22px; }
   #avro-golf-{{ section.id }} .hero-dots button { width:8px; height:8px; padding:0; border:none; border-radius:4px; cursor:pointer; background:rgba(255,255,255,.35); transition:width .3s ease, background-color .3s ease; }
   #avro-golf-{{ section.id }} .hero-dots button.is-active { width:24px; background:var(--accent); }
-  #avro-golf-{{ section.id }} .tick { background:#000; overflow:hidden; position:relative; padding:12px 0; }
-  #avro-golf-{{ section.id }} .tick-track { display:flex; width:max-content; will-change:transform; animation:avro-tick-{{ section.id }} var(--tick-speed,42s) linear infinite; }
-  #avro-golf-{{ section.id }} .tick:hover .tick-track { animation-play-state:paused; }
-  #avro-golf-{{ section.id }} .tick-group { display:flex; align-items:center; flex-shrink:0; }
-  #avro-golf-{{ section.id }} .tick-item { display:inline-flex; align-items:center; flex-shrink:0; }
-  #avro-golf-{{ section.id }} .tick-text { font-family:"Gotham Golf",sans-serif; font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; color:#fff; padding:0 22px; }
-  #avro-golf-{{ section.id }} .tick-dot { flex:0 0 auto; width:6px; height:6px; border-radius:50%; background:var(--accent); }
-  @keyframes avro-tick-{{ section.id }} { 0% { transform:translateX(0); } 100% { transform:translateX(-25%); } }
-  @media (prefers-reduced-motion: reduce) { #avro-golf-{{ section.id }} .tick-track { animation:none; } }
   #avro-golf-{{ section.id }} .hero-copy .kicker { color:var(--accent); padding:9px 17px; border:1px solid var(--accent); border-radius:999px; }
   #avro-golf-{{ section.id }} .hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
 
@@ -306,32 +297,6 @@
     </div>
   </section>
 
-  {%- comment -%}
-    ANNOUNCEMENT TICKER
-    Black band, white uppercase copy, lime dots between phrases (mirrors the site
-    header marquee but golf-styled). Phrases come from "Ticker message" blocks;
-    with none added it falls back to the default golf phrases. Toggle + speed live
-    in the "Ticker" settings.
-  {%- endcomment -%}
-  {%- assign ticker_blocks = section.blocks | where: 'type', 'ticker' -%}
-  {%- if section.settings.ticker_show -%}
-    {%- capture ticker_items -%}
-      {%- if ticker_blocks.size > 0 -%}
-        {%- for b in ticker_blocks -%}{%- if b.settings.text != blank -%}<span class="tick-item"><span class="tick-text">{{ b.settings.text | escape }}</span><span class="tick-dot" aria-hidden="true"></span></span>{%- endif -%}{%- endfor -%}
-      {%- else -%}
-        {%- assign ticker_defaults = 'Calm First Performance|Subscribe & Save 15%|Free Shipping on 2+ Tubes|Naturally Fermented PharmaGABA|Calm, Focused Energy — Without the Crash' | split: '|' -%}
-        {%- for t in ticker_defaults -%}<span class="tick-item"><span class="tick-text">{{ t }}</span><span class="tick-dot" aria-hidden="true"></span></span>{%- endfor -%}
-      {%- endif -%}
-    {%- endcapture -%}
-    {%- if ticker_items != blank -%}
-      <div class="tick" aria-label="Announcements" style="--tick-speed:{{ section.settings.ticker_speed | default: 42 }}s;">
-        <div class="tick-track">
-          {%- for i in (1..4) -%}<div class="tick-group"{% if forloop.first == false %} aria-hidden="true"{% endif %}>{{ ticker_items }}</div>{%- endfor -%}
-        </div>
-      </div>
-    {%- endif -%}
-  {%- endif -%}
-
   {%- comment -%} PRESSURE {%- endcomment -%}
   <section class="pressure">
     <div class="pressure-copy">
@@ -518,11 +483,6 @@
     { "type": "text", "id": "hero_btn2_label", "label": "Button 2 label", "default": "Shop AVRO" },
   { "type": "url", "id": "hero_btn2_link", "label": "Button 2 link" },
 
-  { "type": "header", "content": "Ticker" },
-  { "type": "paragraph", "content": "Scrolling black band under the hero. Add \"Ticker message\" blocks to set the phrases (drag to reorder); with none added it shows the default golf phrases. Lime dots separate each phrase." },
-  { "type": "checkbox", "id": "ticker_show", "label": "Show ticker", "default": true },
-  { "type": "range", "id": "ticker_speed", "label": "Scroll duration", "min": 20, "max": 80, "step": 2, "unit": "s", "default": 42, "info": "Higher = slower scroll." },
-
   { "type": "header", "content": "Pre-golf ritual bar" },
     { "type": "text", "id": "ritual_label", "label": "Label", "default": "THE PRE-GOLF MINDSET" },
     { "type": "text", "id": "ritual_1_title", "label": "Step 1 title", "default": "PREPARE" },
@@ -594,12 +554,9 @@
       { "type": "image_picker", "id": "image", "label": "Slide image" },
       { "type": "text", "id": "alt", "label": "Image alt text", "default": "AVRO Golf" }
     ] },
-    { "type": "ticker", "name": "Ticker message", "settings": [
-      { "type": "text", "id": "text", "label": "Message", "default": "Calm First Performance" }
-    ] },
     { "type": "reason", "name": "Reason card", "settings": [
       { "type": "image_picker", "id": "icon", "label": "Custom icon (optional)" },
-      { "type": "select", "id": "icon_key", "label": "Embedded icon", "info": "Choose a built-in icon, or upload a Custom icon above to override.", "options": [ { "value": "calm-before-pressure", "label": "Gauge — Calm Before Pressure" }, { "value": "clarity", "label": "Soundwave — Clarity" }, { "value": "built-for-ritual", "label": "Golf Flag — Built for Ritual" }, { "value": "step-choose", "label": "Pour — Choose" }, { "value": "step-mix", "label": "Stir — Mix" }, { "value": "step-time", "label": "Drink — Time It" }, { "value": "pharmagaba", "label": "Sprout — PharmaGABA" }, { "value": "calm-foundation", "label": "Lotus — Calm Foundation" }, { "value": "mind-body", "label": "Mind–Body Diagram" }, { "value": "standards", "label": "Shield — Standards" }, { "value": "pressure", "label": "Clock — ~30 min" }, { "value": "drink", "label": "Cup — Drink (Show Up)" } ], "default": "calm-before-pressure" },
+      { "type": "select", "id": "icon_key", "label": "Embedded icon", "info": "Choose a built-in icon, or upload a Custom icon above to override.", "options": [ { "value": "calm-before-pressure", "label": "Gauge — Calm Before Pressure" }, { "value": "clarity", "label": "Soundwave — Clarity" }, { "value": "built-for-ritual", "label": "Golf Flag — Built for Ritual" }, { "value": "step-choose", "label": "Pour — Choose" }, { "value": "step-mix", "label": "Stir — Mix" }, { "value": "step-time", "label": "Drink — Time It" }, { "value": "pharmagaba", "label": "Sprout ��� PharmaGABA" }, { "value": "calm-foundation", "label": "Lotus — Calm Foundation" }, { "value": "mind-body", "label": "Mind–Body Diagram" }, { "value": "standards", "label": "Shield — Standards" }, { "value": "pressure", "label": "Clock — ~30 min" }, { "value": "drink", "label": "Cup — Drink (Show Up)" } ], "default": "calm-before-pressure" },
       { "type": "color", "id": "icon_color", "label": "Icon color", "info": "Applies to built-in icons. Leave empty for default." },
       { "type": "text", "id": "title", "label": "Title", "default": "For Golfers" },
       { "type": "textarea", "id": "copy", "label": "Copy" }

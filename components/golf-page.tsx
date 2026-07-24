@@ -205,8 +205,8 @@ export function GolfPage() {
   }, [])
 
   return <main className="golf-page">
-    <GolfHero />
     <GolfTicker />
+    <GolfHero />
 
     <section className="golf-pressure golf-tile">
       <div className="golf-copy"><p className="golf-kicker" data-reveal style={ri(0)}>WHEN THE MOMENT GETS BIGGER</p><h2 data-reveal style={ri(1)}>Golf can get <mark className="golf-mark">loud in your head</mark> fast.</h2><p data-reveal style={ri(2)}>The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.</p></div>
