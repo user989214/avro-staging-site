@@ -113,7 +113,7 @@ export function GolfPage() {
     <section className="golf-faq golf-tile"><div data-reveal><p className="golf-kicker">GOLF FAQ</p><h2>Questions Before the First Tee.</h2><p>Straight answers about choosing and using AVRO for golf.</p></div><div data-reveal style={ri(1)}>{faqs.map((x)=><details key={x[0]}><summary>{x[0]}<span>+</span></summary><p>{x[1]}</p></details>)}</div></section>
 
     <section className="golf-final golf-tile">
-      <div className="golf-final-bg golf-tile" aria-hidden="true">{FINAL_BG && <Image src={FINAL_BG} alt="" fill sizes="100vw" className="golf-cover" />}</div>
+      <div className="golf-final-bg" aria-hidden="true">{FINAL_BG && <Image src={FINAL_BG} alt="" fill sizes="100vw" priority className="golf-cover" />}</div>
       <div data-reveal><p className="golf-kicker">CALM FIRST. PLAY YOUR GAME.</p><h2>Choose the formula that fits your golf.</h2><p>Start with calm. Choose Calm, Focus or Energy for the moment ahead.</p><div className="golf-actions"><Link href="/products/calm" className="golf-btn golf-btn-light">Shop Calm</Link><Link href="/products/focus" className="golf-btn golf-btn-ghost">Shop Focus</Link><Link href="/products/energy" className="golf-btn golf-btn-ghost">Shop Energy</Link></div></div>
     </section>
   </main>
