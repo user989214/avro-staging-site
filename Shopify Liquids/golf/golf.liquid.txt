@@ -236,7 +236,7 @@
       <p class="kicker">{{ section.settings.pressure_kicker | default: 'WHEN THE MOMENT GETS BIGGER' }}</p>
       <h2>{{ section.settings.pressure_title | default: 'Golf can get loud in your head fast.' }}</h2>
       <p class="body">{{ section.settings.pressure_copy | default: 'The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.' }}</p>
-      <div class="callout"><span class="ic">{{ icon_pressure }}</span><span>{{ section.settings.pressure_note | default: 'Approximately 30 minutes before golf.' }}</span></div>
+      <div class="callout"><span class="ic">{%- if section.settings.pressure_icon != blank -%}<img src="{{ section.settings.pressure_icon | image_url: width: 104 }}" alt="" loading="lazy" width="52" height="52">{%- else -%}{%- case section.settings.pressure_icon_key -%}{%- when 'calm-before-pressure' -%}{{ icon_calm_before_pressure }}{%- when 'clarity' -%}{{ icon_clarity }}{%- when 'built-for-ritual' -%}{{ icon_built_for_ritual }}{%- when 'step-choose' -%}{{ icon_step_choose }}{%- when 'step-mix' -%}{{ icon_step_mix }}{%- when 'step-time' -%}{{ icon_step_time }}{%- when 'pharmagaba' -%}{{ icon_pharmagaba }}{%- when 'calm-foundation' -%}{{ icon_calm_foundation }}{%- when 'mind-body' -%}{{ icon_mind_body }}{%- when 'standards' -%}{{ icon_standards }}{%- when 'pressure' -%}{{ icon_pressure }}{%- else -%}{{ icon_pressure }}{%- endcase -%}{%- endif -%}</span><span>{{ section.settings.pressure_note | default: 'Approximately 30 minutes before golf.' }}</span></div>
     </div>
     <div class="pressure-img">
       {%- if section.settings.pressure_image != blank -%}<img src="{{ section.settings.pressure_image | image_url: width: 1600 }}" alt="{{ section.settings.pressure_alt | escape }}">{%- else -%}<img src="{{ blob }}/02_Golfer_Address_Coastal-QuYnv1biTTOWojA8ONA5TjE867VaaX.png" alt="{{ section.settings.pressure_alt | escape }}">{%- endif -%}
@@ -404,6 +404,8 @@
     { "type": "text", "id": "pressure_title", "label": "Title", "default": "Golf can get loud in your head fast." },
     { "type": "textarea", "id": "pressure_copy", "label": "Copy" },
     { "type": "text", "id": "pressure_note", "label": "Callout note", "default": "Approximately 30 minutes before golf." },
+    { "type": "image_picker", "id": "pressure_icon", "label": "Callout icon — custom (optional)" },
+    { "type": "select", "id": "pressure_icon_key", "label": "Callout icon — embedded", "info": "Choose a built-in icon, or upload a custom icon above to override.", "options": [ { "value": "calm-before-pressure", "label": "Gauge — Calm Before Pressure" }, { "value": "clarity", "label": "Soundwave — Clarity" }, { "value": "built-for-ritual", "label": "Golf Flag — Built for Ritual" }, { "value": "step-choose", "label": "Pour — Choose" }, { "value": "step-mix", "label": "Stir — Mix" }, { "value": "step-time", "label": "Drink — Time It" }, { "value": "pharmagaba", "label": "Sprout — PharmaGABA" }, { "value": "calm-foundation", "label": "Lotus — Calm Foundation" }, { "value": "mind-body", "label": "Mind–Body Diagram" }, { "value": "standards", "label": "Shield — Standards" }, { "value": "pressure", "label": "Clock — ~30 min" } ], "default": "pressure" },
     { "type": "image_picker", "id": "pressure_image", "label": "Image" },
     { "type": "text", "id": "pressure_alt", "label": "Image alt", "default": "Golfer preparing to address the ball on a coastal course" },
 
