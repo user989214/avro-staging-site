@@ -90,7 +90,30 @@
   #avro-footer-{{ section.id }}.is-golf .ft-watermark-word { display: block; }
 {% endstyle %}
 
-  <div id="avro-footer-{{ section.id }}"{% if section.settings.style == 'golf' %} class="is-golf"{% endif %}>
+  {%- comment -%}
+    Footer style resolution. This section is shared across the whole site, so a
+    hard "golf" choice would flip every page. Default is "auto": the footer only
+    turns golf on the golf page itself (matched from the page handle, the page
+    template suffix, or the URL path). "default" and "golf" force one look everywhere.
+  {%- endcomment -%}
+  {%- assign ft_style = section.settings.style | default: 'auto' -%}
+  {%- assign is_golf = false -%}
+  {%- if ft_style == 'golf' -%}
+    {%- assign is_golf = true -%}
+  {%- elsif ft_style == 'auto' -%}
+    {%- assign golf_handles = section.settings.golf_handles | default: 'golf' | downcase | replace: ' ', '' -%}
+    {%- assign golf_list = golf_handles | split: ',' -%}
+    {%- for h in golf_list -%}
+      {%- if h != blank -%}
+        {%- if page.handle == h -%}{%- assign is_golf = true -%}{%- endif -%}
+        {%- if template.suffix == h -%}{%- assign is_golf = true -%}{%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- unless is_golf -%}
+      {%- if request.path contains '/golf' -%}{%- assign is_golf = true -%}{%- endif -%}
+    {%- endunless -%}
+  {%- endif -%}
+  <div id="avro-footer-{{ section.id }}"{% if is_golf %} class="is-golf"{% endif %}>
 
   <footer>
     <div class="ft-inner">
@@ -167,7 +190,8 @@
   "name": "AVRO — Footer",
   "settings": [
     { "type": "header", "content": "Appearance" },
-    { "type": "select", "id": "style", "label": "Footer style", "info": "Use \"Golf\" on the Golf page to match its dark, lime-accented footer.", "options": [ { "value": "default", "label": "Default (charcoal)" }, { "value": "golf", "label": "Golf (black + lime)" } ], "default": "default" },
+    { "type": "select", "id": "style", "label": "Footer style", "info": "Automatic keeps the charcoal footer everywhere but switches to the golf look only on the golf page. Force one look with the other options.", "options": [ { "value": "auto", "label": "Automatic (golf page only)" }, { "value": "default", "label": "Always default (charcoal)" }, { "value": "golf", "label": "Always golf (black + lime)" } ], "default": "auto" },
+    { "type": "text", "id": "golf_handles", "label": "Golf page handle(s)", "info": "Comma-separated page handles (or page template suffixes) that should get the golf footer in Automatic mode. Default: golf", "default": "golf" },
     { "type": "header", "content": "Newsletter" },
     { "type": "text", "id": "news_eyebrow", "label": "Eyebrow", "default": "Newsletter" },
     { "type": "text", "id": "news_heading", "label": "Heading", "default": "Join Our Community" },
