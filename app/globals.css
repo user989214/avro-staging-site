@@ -587,13 +587,14 @@ button[role="button"] {
 .golf-kicker { font-family:"Work Sans Golf",sans-serif!important; color:var(--g-olive); font-size:12px!important; font-weight:600; line-height:1.2!important; letter-spacing:.14em; text-transform:uppercase; }
 .golf-section>.golf-heading .golf-kicker::before { content:"— "; }
 .golf-dark .golf-kicker { color:var(--g-lime); }
-.golf-hero { min-height:min(760px,90vh); color:var(--g-white); display:flex; align-items:center; }
+/* Hero — rounded inset card, matching the site-wide cohort page hero language
+   (/work, /social): calc(100% - 32px) wide, 16/9, 20px radius, content overlaid. */
+.golf-hero { position:relative; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:16/9; min-height:min(680px,82vh); border-radius:20px; overflow:hidden; color:var(--g-white); display:flex; align-items:center; }
 .golf-hero-img-wrap { position:absolute; inset:0; }
 .golf-hero-img { object-position:72% center; }
 .golf-hero h1,.golf-dark h2,.golf-dark h3,.golf-final h2 { color:var(--g-white); }
-.golf-hero .golf-kicker { color:var(--g-lime); padding:9px 17px; border:1px solid var(--g-lime); border-radius:999px; }
 .golf-hero-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(15,20,15,.72),rgba(15,20,15,.1) 66%); }
-.golf-hero-copy { position:relative; z-index:1; width:100%; padding:clamp(4rem,9vw,8rem) max(var(--g-edge),calc((100% - var(--g-max))/2)) 10rem; display:flex; flex-direction:column; align-items:flex-start; gap:1.35rem; }
+.golf-hero-copy { position:relative; z-index:1; width:100%; padding:clamp(2rem,5vw,4.5rem) clamp(1.5rem,5vw,4rem) 8rem; display:flex; flex-direction:column; align-items:flex-start; gap:1.35rem; }
 .golf-hero-copy>p:not(.golf-kicker) { max-width:560px; }
 .golf-hero-dots { display:flex; gap:8px; margin-top:.25rem; }
 .golf-hero-dots button { width:8px; height:8px; padding:0; border:none; border-radius:4px; cursor:pointer; background:rgba(255,255,255,.35); transition:width .3s ease, background-color .3s ease; }
@@ -612,13 +613,24 @@ button[role="button"] {
 .golf-btn-light { color:#000; background:var(--g-lime); border-color:var(--g-lime); }
 .golf-btn-ghost { color:var(--g-white); background:transparent; border-color:rgba(255,255,255,.7); }
 .golf-btn:hover { color:#000; background:var(--g-white); border-color:var(--g-white); }
-.golf-ritual { position:absolute; z-index:2; inset:auto 0 0; min-height:80px; display:grid; grid-template-columns:1.1fr repeat(3,1fr); background:#000; }
+/* Site-wide outline pill language (2px transparent outline that fills on hover),
+   used by the Shop Calm / Focus / Energy buttons. Calm gets the lime outline. */
+.golf-btn-outline { min-height:48px; padding:0 28px; font-size:16px; font-weight:700; border-width:2px; color:var(--g-white); background:transparent; border-color:var(--g-white); }
+.golf-btn-outline:hover { color:#000; background:var(--g-white); border-color:var(--g-white); }
+.golf-btn-outline-lime { color:var(--g-lime); border-color:var(--g-lime); }
+.golf-btn-outline-lime:hover { color:#000; background:var(--g-lime); border-color:var(--g-lime); }
+/* Pre-golf ritual bar — sits flush inside the rounded hero card. Each step
+   sweeps in on a curve as it scrolls into view (see .golf-ritual [data-reveal]). */
+.golf-ritual { position:absolute; z-index:2; inset:auto 0 0; min-height:80px; display:grid; grid-template-columns:1.1fr repeat(3,1fr); background:rgba(0,0,0,.82); backdrop-filter:blur(6px); overflow:hidden; }
 .golf-ritual>p,.golf-ritual>div { padding:1.2rem clamp(1rem,2vw,1.5rem); display:flex; flex-direction:column; justify-content:center; }
-.golf-ritual>div { gap:2px; }
-.golf-ritual>div+div,.golf-ritual>p+div { border-left:1px solid rgba(255,255,255,.18); }
+.golf-ritual>div { gap:2px; position:relative; }
 .golf-ritual>p { color:var(--g-lime); font-family:"Work Sans Golf",sans-serif; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
 .golf-ritual b { font-family:"Gotham Golf"; font-weight:700; font-size:14px; color:var(--g-white); }
 .golf-ritual span { font-size:12px; color:rgba(255,255,255,.6); }
+/* Lime index number + a curved lime sweep that draws under each step on reveal */
+.golf-ritual>div>b i.golf-ritual-n { font-style:normal; color:var(--g-lime); }
+.golf-ritual>div::after { content:""; position:absolute; left:clamp(1rem,2vw,1.5rem); right:clamp(1rem,2vw,1.5rem); bottom:.85rem; height:2px; border-radius:999px; background:linear-gradient(90deg,var(--g-lime),rgba(189,214,55,0)); transform:scaleX(0); transform-origin:left center; transition:transform .9s cubic-bezier(.22,1,.36,1); }
+.golf-page[data-ready] .golf-ritual>div.is-in::after { transform:scaleX(1); }
   .golf-pressure { display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,4.5rem); align-items:center; padding:clamp(4rem,7vw,7rem) max(var(--g-edge),calc((100% - var(--g-max))/2)); }
   .golf-copy { display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:1.35rem; }
   .golf-pressure-image { position:relative; aspect-ratio:4/3; overflow:hidden; border-radius:24px; }
@@ -644,6 +656,14 @@ button[role="button"] {
 /* Scroll-reveal — matches the site's fade-up motion language (page-hero / cohort). */
 .golf-page[data-ready] [data-reveal] { opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); transition-delay:calc(var(--ri,0)*90ms); will-change:opacity,transform; }
 .golf-page[data-ready] [data-reveal].is-in { opacity:1; transform:none; }
+/* Ritual steps get a wider, curved sweep-in: they arc up from the right with a
+   slight rotation + blur, settling on an overshoot curve as you scroll in. */
+.golf-page[data-ready] .golf-ritual>div[data-reveal] { opacity:0; transform:translate3d(clamp(28px,6vw,70px),18px,0) rotate(1.6deg) scale(.97); filter:blur(5px); transform-origin:left bottom; transition:opacity .95s cubic-bezier(.22,1,.36,1), transform 1.05s cubic-bezier(.34,1.32,.36,1), filter .8s ease; transition-delay:calc(var(--ri,0)*130ms); }
+.golf-page[data-ready] .golf-ritual>div[data-reveal].is-in { opacity:1; transform:none; filter:blur(0); }
+@media (prefers-reduced-motion: reduce) {
+  .golf-page[data-ready] .golf-ritual>div[data-reveal] { opacity:1!important; transform:none!important; filter:none!important; transition:none!important; }
+  .golf-page[data-ready] .golf-ritual>div::after { transition:none!important; transform:scaleX(1)!important; }
+}
 .golf-page[data-ready] [data-reveal] .golf-mark { background-size:0% 100%; transition:background-size .85s cubic-bezier(.22,1,.36,1) .3s; }
 .golf-page[data-ready] [data-reveal].is-in .golf-mark { background-size:100% 100%; }
 @media (prefers-reduced-motion: reduce) {
@@ -654,27 +674,39 @@ button[role="button"] {
 .golf-dark { background:#000; color:var(--g-white); }
 .golf-three,.golf-products,.golf-science,.golf-moments { display:grid; gap:24px; }
 .golf-three,.golf-products { grid-template-columns:repeat(3,1fr); }
-.golf-reason { position:relative; padding:29px 25px; background:var(--g-card); border:1px solid var(--g-line); border-radius:16px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
+.golf-reason { position:relative; padding:29px 25px; background:var(--g-card); border-radius:16px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
 .golf-reason>span { position:absolute; top:29px; right:25px; color:var(--g-olive); font-size:12px; font-weight:600; letter-spacing:.08em; }
 .golf-reason h3 { margin-top:14px; }
-.golf-dark .golf-three { border:none; border-top:1px solid rgba(255,255,255,.2); gap:0; }
-.golf-step { padding:44px 44px 52px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
-.golf-step:first-child { padding-left:0; }
-.golf-step:last-child { padding-right:0; }
-.golf-step+.golf-step { border-left:1px solid rgba(255,255,255,.2); }
+/* ── Three-step ritual: no outlines. Each step is a soft curved panel with a
+   big lime numeral and an arc that sweeps in behind it as you scroll. ── */
+.golf-dark .golf-three { border:none; gap:clamp(16px,2vw,28px); }
+.golf-step { position:relative; overflow:hidden; padding:clamp(32px,3.2vw,48px) clamp(26px,2.6vw,38px) clamp(40px,4vw,56px); border-radius:clamp(20px,2.4vw,32px); background:rgba(255,255,255,.045); display:flex; flex-direction:column; align-items:flex-start; gap:14px; isolation:isolate; }
+/* Wide curved arc that sweeps in from the bottom-right of each step */
+.golf-step::before { content:""; position:absolute; z-index:-1; right:-38%; bottom:-64%; width:150%; aspect-ratio:1; border-radius:50%; border:1px solid rgba(189,214,55,.32); background:radial-gradient(circle at 30% 30%, rgba(189,214,55,.13), rgba(189,214,55,0) 62%); transform:scale(.55) translateY(28%); opacity:0; transition:transform 1.25s cubic-bezier(.22,1,.36,1), opacity 1s ease; transition-delay:calc(var(--ri,0)*140ms + 120ms); }
+.golf-page[data-ready] .golf-step.is-in::before { transform:scale(1) translateY(0); opacity:1; }
+/* Thin lime rule that draws left-to-right across the top of each step */
+.golf-step::after { content:""; position:absolute; left:0; top:0; width:100%; height:2px; background:linear-gradient(90deg,var(--g-lime),rgba(189,214,55,0)); transform:scaleX(0); transform-origin:left center; transition:transform 1s cubic-bezier(.22,1,.36,1); transition-delay:calc(var(--ri,0)*140ms); }
+.golf-page[data-ready] .golf-step.is-in::after { transform:scaleX(1); }
+/* Steps arc up into place with a slight rotation as they enter the viewport */
+.golf-page[data-ready] .golf-step[data-reveal] { opacity:0; transform:translate3d(0,42px,0) rotate(-1.2deg) scale(.975); transform-origin:left bottom; transition:opacity .95s cubic-bezier(.22,1,.36,1), transform 1.1s cubic-bezier(.34,1.28,.36,1); transition-delay:calc(var(--ri,0)*140ms); }
+.golf-page[data-ready] .golf-step[data-reveal].is-in { opacity:1; transform:none; }
+@media (prefers-reduced-motion: reduce) {
+  .golf-page[data-ready] .golf-step[data-reveal] { opacity:1!important; transform:none!important; transition:none!important; }
+  .golf-page[data-ready] .golf-step::before,.golf-page[data-ready] .golf-step::after { transition:none!important; opacity:1; transform:none; }
+}
 .golf-step>div { width:100%; display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:10px; }
 .golf-step strong { color:var(--g-lime); font-family:"Gotham Golf"; font-weight:900; font-size:52px; line-height:1; }
 .golf-step h3 { font-size:16px; }
 .golf-step p { color:rgba(255,255,255,.7); }
 .golf-step img { width:84px; height:84px; filter:brightness(0) invert(1); }
 .golf-science { grid-template-columns:repeat(4,1fr); }
-.golf-science article { padding:25px 21px; background:var(--g-card); border:1px solid var(--g-line); border-radius:16px; display:flex; flex-direction:column; align-items:flex-start; gap:7px; }
+.golf-science article { padding:25px 21px; background:var(--g-card); border-radius:16px; display:flex; flex-direction:column; align-items:flex-start; gap:7px; }
 .golf-science article img { width:52px; height:52px; padding:10px; background:var(--g-lime); border-radius:14px; }
 .golf-science article h3 { margin-top:11px; }
 .golf-science article p { margin-top:4px; }
 .golf-science article p b { color:var(--g-ink); font-weight:700; }
 .golf-moments { grid-template-columns:repeat(4,1fr); }
-.golf-moments article { overflow:hidden; background:var(--g-card); border:1px solid var(--g-line); border-radius:16px; display:flex; flex-direction:column; gap:.65rem; padding-bottom:1.5rem; }
+.golf-moments article { overflow:hidden; background:var(--g-card); border-radius:16px; display:flex; flex-direction:column; gap:.65rem; padding-bottom:1.5rem; }
 .golf-moments article>div { position:relative; aspect-ratio:4/5; overflow:hidden; }
 .golf-moments article h3 { font-size:16px; }
 .golf-moments article h3,.golf-moments article p { padding-inline:1.25rem; }
@@ -685,8 +717,12 @@ button[role="button"] {
 .golf-products article>p:first-of-type { font-weight:600; }
 .golf-products article>p b { display:block; margin-bottom:2px; color:var(--g-olive); font-family:"Work Sans Golf",sans-serif; font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; }
 .golf-products article>p:last-of-type { min-height:4rem; color:#000; }
-.golf-products .golf-btn { width:100%; margin-top:auto; color:var(--g-white); background:#000; border-color:#000; }
-.golf-products .golf-btn:hover { color:#000; background:var(--g-lime); border-color:var(--g-lime); }
+/* Shop buttons use the site-wide outline pill language (2px transparent outline
+   that fills on hover). The first card (Calm) carries the lime outline. */
+.golf-products .golf-btn { width:100%; margin-top:auto; min-height:48px; padding:0 28px; font-size:16px; font-weight:700; border-width:2px; color:#000; background:transparent; border-color:#000; }
+.golf-products .golf-btn:hover { color:var(--g-white); background:#000; border-color:#000; }
+.golf-products article:first-child .golf-btn { color:#000; border-color:var(--g-lime); }
+.golf-products article:first-child .golf-btn:hover { color:#000; background:var(--g-lime); border-color:var(--g-lime); }
 .golf-faq { padding:clamp(4rem,7vw,7rem) max(var(--g-edge),calc((100% - var(--g-max))/2)); display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(2.5rem,6vw,6rem); }
 .golf-faq>div:first-child { display:flex; flex-direction:column; gap:1rem; }
 .golf-faq details { border-top:1px solid var(--g-line); padding:1.5rem 0; }
@@ -740,7 +776,8 @@ button[role="button"] {
 .golf-footer-watermark { font-family:"Gotham Golf"; font-weight:900; font-size:clamp(2.5rem,12.5vw,9.5rem); line-height:.85; letter-spacing:.01em; text-align:center; color:rgba(255,255,255,.07); white-space:nowrap; overflow:hidden; padding:1.25rem var(--g-edge) 1.75rem; margin-top:.5rem; user-select:none; }
 
 @media (max-width: 768px) {
-  .golf-hero { min-height:unset; flex-direction:column; align-items:stretch; background:var(--g-white); color:var(--g-ink); }
+  /* Mobile: hero unwraps to full width and stacks — rounded 3/4 image, text below */
+  .golf-hero { width:100%; margin:0; aspect-ratio:unset; min-height:unset; border-radius:0; overflow:visible; flex-direction:column; align-items:stretch; background:var(--g-white); color:var(--g-ink); }
   .golf-hero-img-wrap { position:relative; inset:auto; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:3/4; border-radius:20px; overflow:hidden; flex-shrink:0; }
   .golf-hero-img { object-position:64% center; }
   .golf-hero-shade { display:none; }
@@ -763,8 +800,8 @@ button[role="button"] {
   .golf-pressure-image { order:-1; aspect-ratio:4/3; }
   .golf-three,.golf-products,.golf-science,.golf-moments { grid-template-columns:1fr; }
   .golf-dark .golf-three { gap:0; }
-  .golf-step { padding:40px 0; }
-  .golf-step+.golf-step { border-left:none; border-top:1px solid rgba(255,255,255,.18); }
+  .golf-step { padding:32px 24px 40px; border-radius:20px; }
+  .golf-step+.golf-step { border-left:none; }
   .golf-moments article>div { aspect-ratio:4/3; }
   .golf-heading-split { flex-direction:column; }
   .golf-heading-split h2 { max-width:none; }

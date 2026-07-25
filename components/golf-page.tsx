@@ -121,7 +121,6 @@ function GolfHero() {
         <div className="golf-hero-shade" />
       </div>
       <div className="golf-hero-copy">
-        <p className="golf-kicker" data-reveal style={ri(0)}>CALM PERFORMANCE FOR GOLF</p>
         <h1><Words text="Golf Performance Begins Before the First Swing." /></h1>
         <p data-reveal style={ri(2)}>AVRO supports the calm, clear and composed headspace golfers seek before lessons, practice and competition—so they can step into the moment ready.</p>
         <div className="golf-actions" data-reveal style={ri(3)}><Link href="#shop" className="golf-btn golf-btn-light">Choose Your Formula</Link><Link href="/shop" className="golf-btn golf-btn-ghost">Shop AVRO</Link></div>
@@ -141,7 +140,17 @@ function GolfHero() {
           </div>
         )}
       </div>
-      <div className="golf-ritual"><p>THE PRE-GOLF MINDSET</p>{[["01", "PREPARE", "Before lessons, practice or play."],["02", "CHOOSE", "Calm, Focus or Energy."],["03", "STEP IN READY", "Calm. Clear. Composed."]].map(x=><div key={x[0]}><b>{x[0]} — {x[1]}</b><span>{x[2]}</span></div>)}</div>
+      {/* Pre-golf ritual bar. The label carries the "calm performance for golf"
+          positioning that used to live in the hero eyebrow. Each step sweeps in
+          on a curve as it scrolls into view. */}
+      <div className="golf-ritual">
+        <p>CALM PERFORMANCE FOR GOLF — THE PRE-GOLF MINDSET</p>
+        {[["01", "PREPARE", "Before lessons, practice or play."],["02", "CHOOSE", "Calm, Focus or Energy."],["03", "STEP IN READY", "Calm. Clear. Composed."]].map((x,i)=>(
+          <div key={x[0]} data-reveal style={ri(i)}>
+            <b><i className="golf-ritual-n">{x[0]}</i> — {x[1]}</b><span>{x[2]}</span>
+          </div>
+        ))}
+      </div>
     </section>
   )
 }
@@ -209,25 +218,26 @@ export function GolfPage() {
     <GolfHero />
 
     <section className="golf-pressure golf-tile">
-      <div className="golf-copy"><p className="golf-kicker" data-reveal style={ri(0)}>WHEN THE MOMENT GETS BIGGER</p><h2 data-reveal style={ri(1)}>Golf can get <mark className="golf-mark">loud in your head</mark> fast.</h2><p data-reveal style={ri(2)}>The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.</p></div>
+      <div className="golf-copy"><h2 data-reveal style={ri(1)}>When the moment gets bigger, golf can get <mark className="golf-mark">loud in your head</mark> fast.</h2><p data-reveal style={ri(2)}>The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.</p></div>
       <div className="golf-pressure-image" data-reveal style={ri(1)}><Image src="/golf/golfer-address.png" alt="Golfer preparing to address the ball on a coastal course" fill sizes="(max-width: 768px) 100vw, 50vw" className="golf-cover" /><span className="golf-pressure-pill"><b>~30<i>min</i></b>before your round</span></div>
     </section>
 
     <section className="golf-section golf-tile"><div className="golf-heading golf-heading-split" data-reveal><h2>Why AVRO Matters in Golf</h2><p>A calm-first platform with a clear role across the modern golf experience.</p></div><div className="golf-three">{reasons.map((x,i)=><article className="golf-reason" data-reveal style={ri(i)} key={x[0]}><span>0{i+1}</span><Image src={["/golf/icons/calm-before-pressure.svg","/golf/icons/clarity.svg","/golf/icons/built-for-ritual.svg"][i]} alt="" width={64} height={64}/><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div></section>
 
-    <section className="golf-section golf-dark golf-tile"><div className="golf-heading" data-reveal><p className="golf-kicker golf-kicker-pill">HOW TO USE AVRO BEFORE GOLF</p><h2>A simple ritual. Three steps. <span className="golf-accent">Choose. Mix. Time it.</span></h2></div><div className="golf-three">{steps.map((x,i)=><article className="golf-step" data-reveal style={ri(i)} key={x[0]}><div><strong>{x[0]}</strong><Image src={x[3]} alt="" width={70} height={70}/></div><h3>{x[1]}</h3><p>{x[2]}</p></article>)}</div></section>
+    <section className="golf-section golf-dark golf-tile"><div className="golf-heading" data-reveal><h2>How to use AVRO before golf. A simple ritual, three steps. <span className="golf-accent">Choose. Mix. Time it.</span></h2></div><div className="golf-three">{steps.map((x,i)=><article className="golf-step" data-reveal style={ri(i)} key={x[0]}><div><strong>{x[0]}</strong><Image src={x[3]} alt="" width={70} height={70}/></div><h3>{x[1]}</h3><p>{x[2]}</p></article>)}</div></section>
 
-    <section className="golf-section golf-tile"><div className="golf-heading" data-reveal><p className="golf-kicker">SCIENCE + FORMULA LOGIC</p><h2>Calm first. Then support the moment.</h2><p>Every AVRO formula begins with naturally fermented PharmaGABA®, a clinically studied form of GABA.</p></div><div className="golf-science">{science.map((x,i)=><article data-reveal style={ri(i)} key={x[0]}><Image src={x[3]} alt="" width={60} height={60}/><h3>{x[0]}</h3><p><b>{x[1]}.</b> {x[2]}</p></article>)}</div></section>
+    <section className="golf-section golf-tile"><div className="golf-heading" data-reveal><h2>Calm first. Then support the moment.</h2><p>The science and formula logic: every AVRO formula begins with naturally fermented PharmaGABA®, a clinically studied form of GABA.</p></div><div className="golf-science">{science.map((x,i)=><article data-reveal style={ri(i)} key={x[0]}><Image src={x[3]} alt="" width={60} height={60}/><h3>{x[0]}</h3><p><b>{x[1]}.</b> {x[2]}</p></article>)}</div></section>
 
     <section className="golf-section golf-tile"><div className="golf-heading golf-heading-split" data-reveal><h2>Golf Use Moments</h2><p>One calm-first foundation, ready for the moments that shape the golf experience.</p></div><div className="golf-moments">{moments.map((x,i)=><article data-reveal style={ri(i)} key={x[0]}><div><Image src={x[2]} alt={`${x[0].toLowerCase()} golf moment`} fill sizes="(max-width: 768px) 100vw, 25vw" className="golf-cover" style={{objectPosition:x[4]}}/><span className="golf-moment-pill">{x[3]}</span></div><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div></section>
 
-    <section id="shop" className="golf-section golf-dark golf-tile"><div className="golf-heading" data-reveal><p className="golf-kicker">CHOOSE YOUR FORMULA</p><h2>Shop AVRO for Golf</h2><p>Same calm-first base. Three ways to meet the moment.</p></div><div className="golf-products">{products.map((x,i)=><article data-reveal style={ri(i)} key={x[0]}><small>{x[1]}</small><div className="golf-product-image"><Image src={x[5]} alt={`${x[0]} drink mix`} fill sizes="(max-width: 768px) 100vw, 33vw" className="golf-cover"/></div><h3>{x[0]}</h3><p>{x[2]}</p><p><b>BEST FOR</b>{x[3]}</p><Link href={x[6]} className="golf-btn golf-btn-light">{x[4]} →</Link></article>)}</div></section>
+    <section id="shop" className="golf-section golf-dark golf-tile"><div className="golf-heading" data-reveal><h2>Choose your formula. Shop AVRO for Golf.</h2><p>Same calm-first base. Three ways to meet the moment.</p></div><div className="golf-products">{products.map((x,i)=><article data-reveal style={ri(i)} key={x[0]}><small>{x[1]}</small><div className="golf-product-image"><Image src={x[5]} alt={`${x[0]} drink mix`} fill sizes="(max-width: 768px) 100vw, 33vw" className="golf-cover"/></div><h3>{x[0]}</h3><p>{x[2]}</p><p><b>BEST FOR</b>{x[3]}</p><Link href={x[6]} className="golf-btn golf-btn-light">{x[4]} →</Link></article>)}</div></section>
 
-    <section className="golf-faq golf-tile"><div data-reveal><p className="golf-kicker">GOLF FAQ</p><h2>Questions Before the First Tee.</h2><p>Straight answers about choosing and using AVRO for golf.</p></div><div data-reveal style={ri(1)}>{faqs.map((x)=><details key={x[0]}><summary>{x[0]}<span>+</span></summary><p>{x[1]}</p></details>)}</div></section>
+    <section className="golf-faq golf-tile"><div data-reveal><h2>Golf FAQ: Questions Before the First Tee.</h2><p>Straight answers about choosing and using AVRO for golf.</p></div><div data-reveal style={ri(1)}>{faqs.map((x)=><details key={x[0]}><summary>{x[0]}<span>+</span></summary><p>{x[1]}</p></details>)}</div></section>
 
     <section className="golf-final golf-tile">
       <div className={`golf-final-bg${FINAL_BG ? " has-img" : ""}`} aria-hidden="true">{FINAL_BG ? <Image src={FINAL_BG} alt="" fill sizes="100vw" priority className="golf-cover" /> : <span className="golf-final-word">{FINAL_WORD}</span>}</div>
-      <div data-reveal><p className="golf-kicker">CALM FIRST. PLAY YOUR GAME.</p><h2>Choose the formula that fits your golf.</h2><p>Start with calm. Choose Calm, Focus or Energy for the moment ahead.</p><div className="golf-actions"><Link href="/products/calm" className="golf-btn golf-btn-light">Shop Calm</Link><Link href="/products/focus" className="golf-btn golf-btn-ghost">Shop Focus</Link><Link href="/products/energy" className="golf-btn golf-btn-ghost">Shop Energy</Link></div></div>
+      {/* Shop buttons use the site's outline pill language; Calm carries the lime outline. */}
+      <div data-reveal><h2>Calm first. Play your game. Choose the formula that fits your golf.</h2><p>Start with calm. Choose Calm, Focus or Energy for the moment ahead.</p><div className="golf-actions"><Link href="/products/calm" className="golf-btn golf-btn-outline golf-btn-outline-lime">Shop Calm</Link><Link href="/products/focus" className="golf-btn golf-btn-outline">Shop Focus</Link><Link href="/products/energy" className="golf-btn golf-btn-outline">Shop Energy</Link></div></div>
     </section>
 
     <GolfFooter />
