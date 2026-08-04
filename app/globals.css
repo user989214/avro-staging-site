@@ -589,7 +589,7 @@ button[role="button"] {
 .golf-dark .golf-kicker { color:var(--g-lime); }
 /* Hero — full-bleed cocktail background with bottom-left copy, matching the
    AVRO homepage hero composition (image 1). */
-.golf-hero { position:relative; width:100%; margin:0; min-height:min(880px,92vh); overflow:hidden; color:var(--g-white); display:flex; align-items:flex-end; }
+.golf-hero { position:relative; width:100%; margin:calc(-1 * var(--nav-h,88px)) 0 0; padding-top:var(--nav-h,88px); min-height:min(880px,92vh); overflow:hidden; color:var(--g-white); display:flex; align-items:flex-end; }
 .golf-hero-img-wrap { position:absolute; inset:0; }
 .golf-hero-img { object-position:center center; }
 .golf-hero h1,.golf-dark h2,.golf-dark h3,.golf-final h2 { color:var(--g-white); }

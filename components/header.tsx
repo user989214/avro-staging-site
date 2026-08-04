@@ -56,6 +56,10 @@ export function Header() {
   const isZeroProof = themeMode === "zero-proof"
   const pathname = usePathname()
   const isGolf = pathname === "/golf" || pathname?.startsWith("/golf/")
+  // Pages whose hero is a full-bleed dark photograph: the nav floats over it with
+  // no background and white type, then flips to the normal solid bar on scroll.
+  const hasPhotoHero = pathname === "/" || isGolf
+  const overHero = hasPhotoHero && !scrolled
 
   // Theme colors — Zero Proof uses deep-black + gold only
   const colors = isZeroProof
@@ -100,6 +104,8 @@ export function Header() {
     if (!navRef.current) return
     const rect = navRef.current.getBoundingClientRect()
     setNavBottom(rect.bottom)
+    // Expose the nav height so full-bleed heroes can pull up underneath it.
+    document.documentElement.style.setProperty("--nav-h", `${Math.round(rect.height)}px`)
   }
 
   const openDropdown = () => {
@@ -177,6 +183,30 @@ export function Header() {
           background-color: transparent;
           color: var(--charcoal);
         }
+        /* ── Nav floating over a dark photo hero: white type, no background.
+           The dropdown panel keeps its own light styling, so it is excluded. ── */
+        .hdr-over-hero :is(a, button):not(.hdr-dropdown a):not(.hdr-dropdown button) {
+          color: #fff !important;
+        }
+        .hdr-over-hero .hdr-cart-btn {
+          border-color: #fff !important;
+          color: #fff !important;
+          background-color: transparent !important;
+        }
+        .hdr-over-hero .hdr-cart-btn:hover {
+          background-color: #fff !important;
+          color: var(--charcoal) !important;
+        }
+        .hdr-over-hero .hdr-cart-count {
+          background-color: #fff !important;
+          color: var(--charcoal) !important;
+        }
+        .hdr-over-hero .hdr-cart-btn:hover .hdr-cart-count {
+          background-color: var(--charcoal) !important;
+          color: #fff !important;
+        }
+        /* Render the wordmark white while it sits on the photograph */
+        .hdr-over-hero .hdr-logo { filter: brightness(0) invert(1); }
       `}</style>
       <header style={{ display: "contents" }}>
       {/* Announcement ticker — continuous marquee. This bar scrolls with the page (it
@@ -281,8 +311,11 @@ export function Header() {
         ref={navRef}
         className={`sticky top-0 z-50 grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-0 px-4 md:px-14 py-4 md:py-5 transition-shadow ${
           scrolled ? "shadow-[0_1px_16px_rgba(21,21,21,0.06)]" : ""
-        }`}
-        style={{ backgroundColor: colors.navBg }}
+        } ${overHero ? "hdr-over-hero" : ""}`}
+        style={{
+          backgroundColor: overHero ? "transparent" : colors.navBg,
+          transition: "background-color .3s ease, box-shadow .3s ease",
+        }}
         aria-label="Primary navigation"
       >
         {/* Mobile menu button */}
@@ -312,7 +345,7 @@ export function Header() {
 
             {/* Full-width dropdown panel */}
             <div
-              className="fixed left-0 right-0 z-50"
+              className="hdr-dropdown fixed left-0 right-0 z-50"
               style={{
                 top: navBottom,
                 pointerEvents: dropdownOpen ? "auto" : "none",
@@ -439,7 +472,7 @@ export function Header() {
             alt={isGolf ? "AVRO Golf" : isZeroProof ? "AVRO Zero Proof" : "AVRO"}
             width={isGolf ? 460 : isZeroProof ? 632 : 178}
             height={isGolf ? 138 : isZeroProof ? 182 : 58}
-            className="w-full h-auto"
+            className="hdr-logo w-full h-auto"
             priority
           />
         </Link>

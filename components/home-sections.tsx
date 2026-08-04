@@ -219,7 +219,9 @@ export function HomeRefHero() {
   .hp-hero-container {
     position: relative;
     width: 100%;
-    margin: 0;
+    /* Slide up beneath the sticky nav so the transparent nav floats on the photo */
+    margin: calc(-1 * var(--nav-h, 88px)) 0 0;
+    padding-top: var(--nav-h, 88px);
     min-height: min(880px, 92vh);
     overflow: hidden;
     background-color: #0a0608;
@@ -254,13 +256,18 @@ export function HomeRefHero() {
     .hp-hero-grid { padding: 24px 20px 36px !important; }
   }
         /* Hero pills stay outlined (not solid) on the dark photograph, filling
-           white on hover. */
+           white on hover. Sized like the reference: wide, equal-width pills. */
         .hp-pill-primary, .hp-pill-secondary {
           background-color: transparent;
           color: #fff;
           border: 2px solid #fff;
           border-radius: 999px;
+          min-width: 208px;
+          min-height: 56px !important;
           transition: background-color .2s ease, color .2s ease;
+        }
+        @media (max-width: 480px) {
+          .hp-pill-primary, .hp-pill-secondary { min-width: 0; flex: 1 1 100%; }
         }
         .hp-pill-primary:hover, .hp-pill-secondary:hover {
           background-color: #fff;
@@ -420,7 +427,7 @@ export function HomeRefHero() {
               Shop AVRO
             </a>
             <a
-              href="/shop"
+              href="/why-avro"
               className="hp-pill-secondary"
               style={{
                 display: "inline-flex",
