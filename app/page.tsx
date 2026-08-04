@@ -43,18 +43,19 @@ export default function HomePage() {
           font-weight: 700 !important;
         }
 
-        /* ── Hero CTA buttons → BLACK OUTLINE, black fill + white text on hover ── */
+        /* ── Hero CTA buttons → WHITE OUTLINE + white text on the dark photo hero,
+              filling white with dark text on hover ── */
         .home-theme .hp-pill-primary,
         .home-theme .hp-pill-secondary {
           background-color: transparent !important;
-          color: #000000 !important;
-          border-color: #000000 !important;
+          color: #FFFFFF !important;
+          border-color: #FFFFFF !important;
         }
         .home-theme .hp-pill-primary:hover,
         .home-theme .hp-pill-secondary:hover {
-          background-color: #000000 !important;
-          border-color: #000000 !important;
-          color: #FFFFFF !important;
+          background-color: #FFFFFF !important;
+          border-color: #FFFFFF !important;
+          color: #151515 !important;
         }
 
       `}</style>

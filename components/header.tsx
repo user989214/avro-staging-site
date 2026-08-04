@@ -188,12 +188,11 @@ export function Header() {
         .hdr-over-hero :is(a, button, h3, p, span) {
           color: #fff !important;
         }
-        /* Dropdown panel: frosted translucent dark so the hero shows through */
+        /* Dropdown panel: no background over the hero — the photo shows straight
+           through and the white type sits directly on it. */
         .hdr-over-hero .hdr-dropdown-panel {
-          background-color: rgba(10, 6, 8, 0.55) !important;
-          backdrop-filter: blur(20px) saturate(140%);
-          -webkit-backdrop-filter: blur(20px) saturate(140%);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+          background-color: transparent !important;
+          border-bottom: none;
         }
         /* Section divider + muted headings read against the translucent panel */
         .hdr-over-hero .hdr-dropdown [style*="border-left"] {
@@ -204,10 +203,10 @@ export function Header() {
         .hdr-over-hero .hdr-dropdown-link:hover {
           background-color: rgba(255, 255, 255, 0.16) !important;
         }
-        /* Feature cards become translucent glass instead of solid fills */
+        /* Feature cards: no fill either — just a hairline white outline */
         .hdr-over-hero .hdr-dropdown-card {
-          background-color: rgba(255, 255, 255, 0.1) !important;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          background-color: transparent !important;
+          border: 1px solid rgba(255, 255, 255, 0.45);
         }
         /* Card CTAs: white text on a white outline, filling white on hover */
         .hdr-over-hero .hdr-card-btn {
