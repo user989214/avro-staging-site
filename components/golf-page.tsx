@@ -58,9 +58,7 @@ function Words({ text }: { text: string }) {
 
 /** Hero slideshow slides, in order: woman → man sitting → man golfing → (loop). */
 const heroSlides = [
-  { src: "/golf/hero-slide-1-female-putting.png", alt: "Golfer lining up a putt on a coastal course wearing an AVRO Golf visor", pos: "72% center" },
-  { src: "/golf/hero-slide-2-male-sitting.png", alt: "Golfer in an AVRO Golf cap sitting above a coastal links course", pos: "60% center" },
-  { src: "/golf/hero-slide-3-male-address.png", alt: "Golfer addressing the ball with a driver on a clifftop tee", pos: "center center" },
+  { src: "/golf/golf-hero-cocktail.jpg", alt: "AVRO cocktail with raspberries, lime and thyme in warm sunset light", pos: "center center" },
 ]
 /** Seconds each hero slide holds before crossfading — matches the homepage hero. */
 const HERO_INTERVAL = 6000
@@ -123,7 +121,8 @@ function GolfHero() {
       <div className="golf-hero-copy">
         <h1><Words text="Golf Performance Begins Before the First Swing." /></h1>
         <p data-reveal style={ri(2)}>AVRO supports the calm, clear and composed headspace golfers seek before lessons, practice and competition—so they can step into the moment ready.</p>
-        <div className="golf-actions" data-reveal style={ri(3)}><Link href="#shop" className="golf-btn golf-btn-light">Choose Your Formula</Link><Link href="/shop" className="golf-btn golf-btn-ghost">Shop AVRO</Link></div>
+        {/* Pill buttons kept as outlines (not solid) per request */}
+        <div className="golf-actions" data-reveal style={ri(3)}><Link href="/shop" className="golf-btn golf-btn-outline">Shop AVRO</Link><Link href="#shop" className="golf-btn golf-btn-outline">Find Your Formula</Link></div>
         {HERO_SHOW_TICKER && heroSlides.length > 1 && (
           <div className="golf-hero-dots" role="tablist" aria-label="Hero slides" data-reveal style={ri(4)}>
             {heroSlides.map((s, idx) => (

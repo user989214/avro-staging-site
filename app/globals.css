@@ -587,19 +587,18 @@ button[role="button"] {
 .golf-kicker { font-family:"Work Sans Golf",sans-serif!important; color:var(--g-olive); font-size:12px!important; font-weight:600; line-height:1.2!important; letter-spacing:.14em; text-transform:uppercase; }
 .golf-section>.golf-heading .golf-kicker::before { content:"— "; }
 .golf-dark .golf-kicker { color:var(--g-lime); }
-/* Hero — rounded inset card, matching the site-wide cohort page hero language
-   (/work, /social): calc(100% - 32px) wide, 16/9, 20px radius, content overlaid. */
-.golf-hero { position:relative; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:16/9; min-height:min(680px,82vh); border-radius:20px; overflow:hidden; color:var(--g-white); display:flex; align-items:center; }
+/* Hero — full-bleed cocktail background with bottom-left copy, matching the
+   AVRO homepage hero composition (image 1). */
+.golf-hero { position:relative; width:100%; margin:0; min-height:min(880px,92vh); overflow:hidden; color:var(--g-white); display:flex; align-items:flex-end; }
 .golf-hero-img-wrap { position:absolute; inset:0; }
-.golf-hero-img { object-position:72% center; }
+.golf-hero-img { object-position:center center; }
 .golf-hero h1,.golf-dark h2,.golf-dark h3,.golf-final h2 { color:var(--g-white); }
-.golf-hero-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(15,20,15,.72),rgba(15,20,15,.1) 66%); }
-/* Hero copy matches the cohort hero text scale + position exactly:
-   h1 clamp(36px,5.5vw,72px)/.98 max-w 560, lede clamp(17px,2vw,20px) max-w 480,
-   padding clamp(24px,5vw,80px) clamp(20px,5vw,64px), vertically centered. */
-.golf-hero-copy { position:relative; z-index:1; width:100%; padding:clamp(24px,5vw,80px) clamp(20px,5vw,64px); display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:0; }
-.golf-hero-copy h1 { font-weight:900; font-size:clamp(36px,5.5vw,72px); line-height:.98; letter-spacing:-.025em; max-width:560px; margin:0 0 16px; }
-.golf-hero-copy>p { font-size:clamp(17px,2vw,20px); line-height:1.55; max-width:480px; margin:0 0 28px; color:rgba(255,255,255,.85); }
+/* Darken bottom + left for legibility, keeping the sunlit center of the shot. */
+.golf-hero-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(10,6,8,.72),rgba(10,6,8,.15) 52%,rgba(10,6,8,0) 78%),linear-gradient(0deg,rgba(10,6,8,.78),rgba(10,6,8,.1) 46%,rgba(10,6,8,0) 72%); }
+/* Hero copy sits bottom-left; h1 scaled like the homepage hero. */
+.golf-hero-copy { position:relative; z-index:1; width:100%; max-width:var(--g-max); margin:0 auto; padding:clamp(28px,6vw,72px) max(var(--g-edge),calc((100% - var(--g-max))/2)) clamp(44px,6vw,88px); display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end; gap:0; }
+.golf-hero-copy h1 { font-weight:900; font-size:clamp(44px,7vw,92px); line-height:.94; letter-spacing:-.03em; max-width:14ch; margin:0 0 20px; }
+.golf-hero-copy>p { font-size:clamp(17px,2vw,21px); line-height:1.5; max-width:44ch; margin:0 0 32px; color:rgba(255,255,255,.86); }
 .golf-hero-dots { display:flex; gap:8px; margin-top:1.5rem; }
 .golf-hero-dots button { width:8px; height:8px; padding:0; border:none; border-radius:4px; cursor:pointer; background:rgba(255,255,255,.35); transition:width .3s ease, background-color .3s ease; }
 .golf-hero-dots button.is-active { width:24px; background:var(--g-lime); }
@@ -767,20 +766,14 @@ button[role="button"] {
 .golf-footer-watermark { font-family:"Gotham Golf"; font-weight:900; font-size:clamp(2.5rem,12.5vw,9.5rem); line-height:.85; letter-spacing:.01em; text-align:center; color:rgba(255,255,255,.07); white-space:nowrap; overflow:hidden; padding:1.25rem var(--g-edge) 1.75rem; margin-top:.5rem; user-select:none; }
 
 @media (max-width: 768px) {
-  /* Mobile: hero unwraps to full width and stacks — rounded 3/4 image, text below */
-  .golf-hero { width:100%; margin:0; aspect-ratio:unset; min-height:unset; border-radius:0; overflow:visible; flex-direction:column; align-items:stretch; background:var(--g-white); color:var(--g-ink); }
-  .golf-hero-img-wrap { position:relative; inset:auto; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:3/4; border-radius:20px; overflow:hidden; flex-shrink:0; }
-  .golf-hero-img { object-position:64% center; }
-  .golf-hero-shade { display:none; }
-  .golf-hero h1 { color:var(--g-ink); font-size:clamp(2.25rem,9vw,2.5rem); line-height:1; letter-spacing:-.025em; }
-  .golf-hero-copy { position:static; padding:1.5rem 1.25rem 2rem; gap:0; }
-  .golf-hero-copy h1 { font-size:clamp(2.25rem,9vw,2.5rem); max-width:none; margin-bottom:12px; }
-  .golf-hero-copy>p { color:var(--g-muted); font-size:clamp(1.0625rem,4.5vw,1.25rem); line-height:1.55; max-width:none; margin-bottom:20px; }
-  .golf-hero-dots button { background:rgba(0,0,0,.2); }
-  .golf-hero-dots button.is-active { background:var(--g-olive); }
+  /* Mobile: hero stays full-bleed with the cocktail background + bottom-left
+     white copy, matching the homepage hero on small screens. */
+  .golf-hero { width:100%; margin:0; min-height:min(640px,88vh); overflow:hidden; align-items:flex-end; background:none; color:var(--g-white); }
+  .golf-hero-img { object-position:60% center; }
+  .golf-hero-copy { padding:1.5rem 1.25rem 2.25rem; }
+  .golf-hero-copy h1 { font-size:clamp(2.5rem,11vw,3.25rem); max-width:none; margin-bottom:14px; }
+  .golf-hero-copy>p { color:rgba(255,255,255,.86); font-size:clamp(1.0625rem,4.5vw,1.25rem); line-height:1.5; max-width:none; margin-bottom:24px; }
   .golf-hero .golf-actions { gap:.75rem; }
-  .golf-hero .golf-btn { min-height:48px; padding:0 28px; font-size:16px; font-weight:700; border-width:2px; color:var(--g-ink); background:transparent; border-color:var(--g-ink); }
-  .golf-hero .golf-btn:hover { color:var(--g-white); background:var(--g-ink); border-color:var(--g-ink); }
   .golf-pressure,.golf-faq { grid-template-columns:1fr; }
   .golf-pressure-image { order:-1; aspect-ratio:4/3; }
   .golf-three,.golf-products,.golf-science,.golf-moments { grid-template-columns:1fr; }
