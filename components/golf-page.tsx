@@ -56,7 +56,7 @@ function Words({ text }: { text: string }) {
   ))}</>
 }
 
-/** Hero slideshow slides, in order: woman → man sitting → man golfing → (loop). */
+/** Hero background — single full-bleed cocktail shot, matching the AVRO homepage hero. */
 const heroSlides = [
   { src: "/golf/golf-hero-cocktail.jpg", alt: "AVRO cocktail with raspberries, lime and thyme in warm sunset light", pos: "center center" },
 ]
