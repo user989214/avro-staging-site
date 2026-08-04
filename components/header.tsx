@@ -184,9 +184,40 @@ export function Header() {
           color: var(--charcoal);
         }
         /* ── Nav floating over a dark photo hero: white type, no background.
-           The dropdown panel keeps its own light styling, so it is excluded. ── */
-        .hdr-over-hero :is(a, button):not(.hdr-dropdown a):not(.hdr-dropdown button) {
+           The dropdown inherits the same treatment (translucent + white). ── */
+        .hdr-over-hero :is(a, button, h3, p, span) {
           color: #fff !important;
+        }
+        /* Dropdown panel: frosted translucent dark so the hero shows through */
+        .hdr-over-hero .hdr-dropdown-panel {
+          background-color: rgba(10, 6, 8, 0.55) !important;
+          backdrop-filter: blur(20px) saturate(140%);
+          -webkit-backdrop-filter: blur(20px) saturate(140%);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+        }
+        /* Section divider + muted headings read against the translucent panel */
+        .hdr-over-hero .hdr-dropdown [style*="border-left"] {
+          border-left-color: rgba(255, 255, 255, 0.24) !important;
+        }
+        .hdr-over-hero .hdr-dropdown-muted { color: rgba(255, 255, 255, 0.7) !important; }
+        /* Link hover pill: translucent white instead of the solid brand blue */
+        .hdr-over-hero .hdr-dropdown-link:hover {
+          background-color: rgba(255, 255, 255, 0.16) !important;
+        }
+        /* Feature cards become translucent glass instead of solid fills */
+        .hdr-over-hero .hdr-dropdown-card {
+          background-color: rgba(255, 255, 255, 0.1) !important;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        /* Card CTAs: white text on a white outline, filling white on hover */
+        .hdr-over-hero .hdr-card-btn {
+          background-color: transparent !important;
+          color: #fff !important;
+          border-color: #fff !important;
+        }
+        .hdr-over-hero .hdr-card-btn:hover {
+          background-color: #fff !important;
+          color: var(--charcoal) !important;
         }
         .hdr-over-hero .hdr-cart-btn {
           border-color: #fff !important;
@@ -353,7 +384,7 @@ export function Header() {
               aria-hidden={!dropdownOpen}
             >
               <div
-                className="w-full"
+                className="hdr-dropdown-panel w-full"
                 style={{
                   backgroundColor: colors.navBg,
                   opacity: dropdownOpen ? 1 : 0,
@@ -376,7 +407,7 @@ export function Header() {
                           style={sIdx > 0 ? { borderLeft: `1px solid ${colors.navText}` } : undefined}
                         >
                           <p
-                            className="text-[12px] font-bold pb-3"
+                            className="hdr-dropdown-muted text-[12px] font-bold pb-3"
                             style={{ color: colors.navTextMuted }}
                           >
                             {section.heading}
@@ -387,7 +418,7 @@ export function Header() {
                                 key={item.href}
                                 href={item.href}
                                 onClick={() => setDropdownOpen(false)}
-                                className="inline-block px-4 py-1.5 font-serif font-black text-[26px] leading-[1.15] rounded-full transition-colors"
+                                className="hdr-dropdown-link inline-block px-4 py-1.5 font-serif font-black text-[26px] leading-[1.15] rounded-full transition-colors"
                                 style={{ color: colors.navText }}
                                 onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = isZeroProof ? "var(--dark-surface)" : "var(--avro-blue)" }}
                                 onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent" }}
@@ -405,7 +436,7 @@ export function Header() {
                       <Link
                         href="/blog"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex flex-col justify-between rounded-[24px] p-7 min-h-[230px]"
+                        className="hdr-dropdown-card flex flex-col justify-between rounded-[24px] p-7 min-h-[230px]"
                         style={{ backgroundColor: colors.cardDarkBg }}
                       >
                         <div>
@@ -427,7 +458,7 @@ export function Header() {
                       <Link
                         href="/#footer-newsletter"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex flex-col justify-between rounded-[24px] p-7 min-h-[230px]"
+                        className="hdr-dropdown-card flex flex-col justify-between rounded-[24px] p-7 min-h-[230px]"
                         style={{ backgroundColor: colors.cardLightBg }}
                       >
                         <div>
