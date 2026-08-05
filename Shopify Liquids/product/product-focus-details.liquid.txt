@@ -15,7 +15,18 @@
           <button type="button" class="am-tab" data-tab="how" role="tab">{{ section.settings.tab4_label | default: 'How to use' }}</button>
         </div>
         <div class="am-panes">
-          <div class="am-pane is-active" data-pane="desc">{{ section.settings.tabs_desc }}</div>
+          <div class="am-pane is-active" data-pane="desc">
+            {{ section.settings.tabs_desc }}
+            {%- if section.settings.show_dietary_badges -%}
+              <div class="am-diet-row" aria-label="Dietary attributes">
+                <div class="am-diet-item"><img class="am-diet-icon" src="https://raw.githubusercontent.com/user989214/avro-staging-site/v0/joe-6434-d4217cee/public/images/icons/spot-blue/free-dairy.png" alt="" loading="lazy" width="80" height="80"><span>{{ section.settings.dairy_label | default: 'Dairy Free' }}</span></div>
+                <div class="am-diet-item"><img class="am-diet-icon" src="https://raw.githubusercontent.com/user989214/avro-staging-site/v0/joe-6434-d4217cee/public/images/icons/spot-blue/free-gmo.png" alt="" loading="lazy" width="80" height="80"><span>{{ section.settings.gmo_label | default: 'Non-GMO' }}</span></div>
+                <div class="am-diet-item"><img class="am-diet-icon" src="https://raw.githubusercontent.com/user989214/avro-staging-site/v0/joe-6434-d4217cee/public/images/icons/spot-blue/free-vegan.png" alt="" loading="lazy" width="80" height="80"><span>{{ section.settings.vegan_label | default: 'Vegan' }}</span></div>
+                <div class="am-diet-item"><img class="am-diet-icon" src="https://raw.githubusercontent.com/user989214/avro-staging-site/v0/joe-6434-d4217cee/public/images/icons/spot-blue/gluten-free.png" alt="" loading="lazy" width="80" height="80"><span>{{ section.settings.gluten_label | default: 'Gluten Free' }}</span></div>
+                <div class="am-diet-item"><img class="am-diet-icon" src="https://raw.githubusercontent.com/user989214/avro-staging-site/v0/joe-6434-d4217cee/public/images/icons/spot-blue/free-sugar.png" alt="" loading="lazy" width="80" height="80"><span>{{ section.settings.sugar_label | default: 'No Added Sugar' }}</span></div>
+              </div>
+            {%- endif -%}
+          </div>
           <div class="am-pane" data-pane="ing">
             <h3 class="am-pane-h">Active ingredients</h3>
             {%- for block in section.blocks -%}{%- if block.type == 'ingredient' -%}
@@ -222,12 +233,12 @@
   #avro-more-{{ section.id }} p { margin: 0; }
 
   /* buttons */
-  #avro-more-{{ section.id }} .am-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 26px; border-radius: var(--am-radius); background: var(--charcoal); color: var(--bone); border: 2px solid var(--charcoal); font-family: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease; }
-  #avro-more-{{ section.id }} .am-btn:hover { background: transparent; color: var(--charcoal); }
+  #avro-more-{{ section.id }} .am-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 26px; border-radius: var(--am-radius); background: transparent; color: var(--charcoal); border: 2px solid var(--charcoal); font-family: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; transition: background-color .18s ease, color .18s ease; }
+  #avro-more-{{ section.id }} .am-btn:hover { background: var(--charcoal); color: var(--bone); }
   #avro-more-{{ section.id }} .am-btn-sm { min-height: 40px; padding: 0 14px; font-size: 13px; width: 100%; }
   #avro-more-{{ section.id }} .am-btn-full { width: 100%; }
-  #avro-more-{{ section.id }} .am-btn-light { background: var(--bone); color: var(--charcoal); border-color: var(--bone); }
-  #avro-more-{{ section.id }} .am-btn-light:hover { background: transparent; color: var(--bone); }
+  #avro-more-{{ section.id }} .am-btn-light { background: transparent; color: var(--bone); border-color: var(--bone); }
+  #avro-more-{{ section.id }} .am-btn-light:hover { background: var(--bone); color: var(--charcoal); }
 
   /* A) tabs + related */
   #avro-more-{{ section.id }} .am-tabs-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
@@ -241,6 +252,12 @@
   #avro-more-{{ section.id }} .am-pane-h { font-weight: 700; font-size: clamp(22px,3vw,42px); line-height: 1; margin: 0 0 20px; color: var(--ink); }
   #avro-more-{{ section.id }} .am-pane ul, #avro-more-{{ section.id }} .am-pane ol { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 10px; }
   #avro-more-{{ section.id }} .am-pane li, #avro-more-{{ section.id }} .am-pane p { font-weight: 500; font-size: clamp(13px,1.1vw,16px); line-height: 1.5; color: rgba(0,0,0,0.7); }
+  #avro-more-{{ section.id }} .am-diet-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; width: 100%; margin-top: clamp(24px,3vw,32px); padding-top: clamp(20px,2.5vw,24px); border-top: 1px solid rgba(0,0,0,0.12); }
+  #avro-more-{{ section.id }} .am-diet-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; flex: 1; min-width: 0; }
+  #avro-more-{{ section.id }} .am-diet-icon { display: block; width: 48px; height: 48px; object-fit: contain; opacity: 0.85; }
+  @media (min-width: 768px) { #avro-more-{{ section.id }} .am-diet-icon { width: 64px; height: 64px; } }
+  @media (min-width: 1000px) { #avro-more-{{ section.id }} .am-diet-icon { width: 80px; height: 80px; } }
+  #avro-more-{{ section.id }} .am-diet-item > span:not(.am-diet-icon) { font-weight: 700; font-size: clamp(10px,0.95vw,13px); line-height: 1.2; color: var(--ink); }
   #avro-more-{{ section.id }} .am-ing-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
   #avro-more-{{ section.id }} .am-ing-name { font-weight: 700; font-size: clamp(13px,1.2vw,17px); color: var(--ink); }
   #avro-more-{{ section.id }} .am-ing-amt { font-weight: 500; font-size: clamp(13px,1.2vw,17px); color: rgba(0,0,0,0.6); }
@@ -397,6 +414,19 @@
     { "type": "textarea", "id": "other_ingredients", "label": "Ingredients tab — \"Other ingredients\" line", "default": "Soluble Guar Fiber, Citric Acid, Modified Corn Starch, Contains 2% or less of Acacia Fiber, Stevia Leaf Extract, Natural Flavor, Vegetable Juice Color, Spirulina Color, Silica." },
     { "type": "richtext", "id": "tabs_when", "label": "When-to-take tab content", "default": "<p><strong>Deep work blocks</strong> — Before focused, heads-down sessions.*</p><p><strong>Before high-stakes tasks</strong> — Meetings, presentations, study, or gaming.</p><p><strong>Afternoon reset</strong> — Sharpen attention through the midday slump without caffeine.*</p>" },
     { "type": "richtext", "id": "tabs_how", "label": "How-to-use tab content", "default": "<p><strong>1. Pour</strong> — Empty one stick into 8-12 oz of cold water.</p><p><strong>2. Mix</strong> — Stir or shake until fully dissolved.</p><p><strong>3. Drink</strong> — Enjoy 20-30 minutes before your moment.</p>" },
+    { "type": "header", "content": "Dietary badges (Description tab)" },
+    { "type": "checkbox", "id": "show_dietary_badges", "label": "Show dietary badges", "default": true },
+    { "type": "color", "id": "spot_color", "label": "Badge icon color", "default": "#5AAEBC" },
+    { "type": "image_picker", "id": "dairy_icon", "label": "Dairy Free icon" },
+    { "type": "text", "id": "dairy_label", "label": "Dairy Free label", "default": "Dairy Free" },
+    { "type": "image_picker", "id": "gmo_icon", "label": "Non-GMO icon" },
+    { "type": "text", "id": "gmo_label", "label": "Non-GMO label", "default": "Non-GMO" },
+    { "type": "image_picker", "id": "vegan_icon", "label": "Vegan icon" },
+    { "type": "text", "id": "vegan_label", "label": "Vegan label", "default": "Vegan" },
+    { "type": "image_picker", "id": "gluten_icon", "label": "Gluten Free icon" },
+    { "type": "text", "id": "gluten_label", "label": "Gluten Free label", "default": "Gluten Free" },
+    { "type": "image_picker", "id": "sugar_icon", "label": "No Added Sugar icon" },
+    { "type": "text", "id": "sugar_label", "label": "No Added Sugar label", "default": "No Added Sugar" },
     { "type": "text", "id": "related_heading", "label": "\"You might also like\" heading", "default": "You might also like" },
     { "type": "header", "content": "Ingredients grid" },
     { "type": "text", "id": "ing_eyebrow", "label": "Eyebrow", "default": "What's inside" },

@@ -109,38 +109,16 @@ export function HomeRefHero() {
   const [progress, setProgress] = useState(0) // 0 = full-bleed, 1 = docked
   const [currentSlide, setCurrentSlide] = useState(0)
 
-  // Carousel slide data from Peter's outline
+  // Single full-bleed hero: the cocktail macro shot with white copy bottom-left.
   const slides = [
-    {
-      headline: "Performance Starts with Being Calm.",
-      lede: "AVRO helps you steady first, with calm-first formulas built to support composure, clarity and controlled readiness when pressure rises.*",
-      image: "/images/home/hero-01.jpg",
-      mobileImage: "/images/home/hero-01-mobile.png",
-      alt: "Pouring an AVRO Calm Blackberry Jasmine stick into a glass of water",
-    },
-    {
-      headline: "Calm Comes First.",
-      lede: "AVRO is built for people who know pressure changes everything. Support composure, clarity and readiness before the moment matters.*",
-      image: "/images/home/hero-03.jpg",
-      mobileImage: "/images/home/hero-03-mobile.png",
-      alt: "Hand holding an AVRO Focus Pomegranate Raspberry tube",
-    },
     {
       headline: "Start Calm. Stay Ready.",
       lede: "AVRO supports calm-first performance with formulas designed for pressure-sensitive moments in work, play, competition and social life.*",
-      image: "/images/home/hero-02.jpg",
-      mobileImage: "/images/home/hero-02-mobile.png",
-      alt: "Hand holding an AVRO Energy Fuji Apple tube",
+      image: "/images/home/hero-cocktail.jpg",
+      mobileImage: "/images/home/hero-cocktail.jpg",
+      alt: "AVRO cocktail with raspberries, lime and thyme lit by a warm sunset",
     },
   ]
-
-  // Auto-advance carousel every 6 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 6000)
-    return () => clearInterval(interval)
-  }, [slides.length])
 
   useEffect(() => {
     let raf = 0
@@ -236,77 +214,64 @@ export function HomeRefHero() {
           .hp-pill-row { flex-direction: column; align-items: stretch; max-width: 320px !important; }
           .hp-pill-primary, .hp-pill-secondary { width: 100%; flex: 0 0 auto; }
         }
-  /* ── Desktop: 16:9 image with content overlaid ── */
+  /* ── Full-bleed hero: edge-to-edge image, copy overlaid bottom-left ── */
   .hp-hero-img-mobile { display: none; }
   .hp-hero-container {
     position: relative;
-    width: calc(100% - 32px);
-    margin: 0 auto 16px;
-    aspect-ratio: 16/9;
+    width: 100%;
+    /* Slide up beneath the sticky nav so the transparent nav floats on the photo */
+    margin: calc(-1 * var(--nav-h, 88px)) 0 0;
+    padding-top: var(--nav-h, 88px);
+    min-height: min(880px, 92vh);
     overflow: hidden;
-    background-color: var(--bone);
-    border-radius: 20px;
+    background-color: #0a0608;
+    border-radius: 0;
+    display: flex;
+    align-items: flex-end;
   }
-  .hp-hero-grid {
+  .hp-hero-img-wrap { position: absolute; inset: 0; }
+  /* Darken the left + bottom edges so the white copy stays legible while the
+     sunlit center of the photograph shows through. */
+  .hp-hero-shade {
     position: absolute;
     inset: 0;
+    background:
+      linear-gradient(90deg, rgba(10,6,8,0.72), rgba(10,6,8,0.15) 52%, rgba(10,6,8,0) 78%),
+      linear-gradient(0deg, rgba(10,6,8,0.78), rgba(10,6,8,0.10) 46%, rgba(10,6,8,0) 72%);
+  }
+  .hp-hero-grid {
+    position: relative;
+    z-index: 1;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: clamp(24px,4vw,64px) clamp(28px,5vw,64px);
+    justify-content: flex-end;
+    padding: clamp(28px,6vw,72px) clamp(24px,5vw,72px) clamp(44px,6vw,88px);
   }
-  /* ── Mobile: stacked — rounded image on top, text below ── */
+  /* ── Mobile: stays full-bleed, copy sits at the bottom ── */
   @media (max-width: 768px) {
-    .hp-hero-container {
-      aspect-ratio: unset !important;
-      overflow: visible !important;
-      display: flex;
-      flex-direction: column;
-    }
-    .hp-hero-img-wrap {
-      position: relative;
-      width: calc(100% - 32px);
-      margin: 16px auto 0;
-            aspect-ratio: 3/4;
-      border-radius: 20px;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
+    .hp-hero-container { min-height: min(640px, 88vh); }
     .hp-hero-img { display: none !important; }
     .hp-hero-img-mobile { display: block !important; }
-    .hp-hero-grid {
-      position: static !important;
-      padding: 24px 20px 32px !important;
-    }
+    .hp-hero-grid { padding: 24px 20px 36px !important; }
   }
-  @media (min-width: 769px) {
-    .hp-hero-img-wrap {
-      position: absolute;
-      inset: 0;
-      border-radius: 0;
-    }
-  }
-        .hp-pill-primary {
+        /* Hero pills stay outlined (not solid) on the dark photograph, filling
+           white on hover. Sized like the reference: wide, equal-width pills. */
+        .hp-pill-primary, .hp-pill-secondary {
           background-color: transparent;
-          color: var(--charcoal);
-          border: 2px solid var(--charcoal);
+          color: #fff;
+          border: 2px solid #fff;
           border-radius: 999px;
+          min-width: 208px;
+          min-height: 56px !important;
           transition: background-color .2s ease, color .2s ease;
         }
-        .hp-pill-primary:hover {
-          background-color: var(--charcoal);
-          color: var(--bone);
+        @media (max-width: 480px) {
+          .hp-pill-primary, .hp-pill-secondary { min-width: 0; flex: 1 1 100%; }
         }
-        .hp-pill-secondary {
-          background-color: transparent;
+        .hp-pill-primary:hover, .hp-pill-secondary:hover {
+          background-color: #fff;
           color: var(--charcoal);
-          border: 2px solid var(--charcoal);
-          border-radius: 999px;
-          transition: background-color .2s ease, color .2s ease;
-        }
-        .hp-pill-secondary:hover {
-          background-color: var(--charcoal);
-          color: var(--bone);
         }
         .hp-btn-black {
           transition: background-color .2s ease, color .2s ease;
@@ -382,13 +347,15 @@ export function HomeRefHero() {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                objectPosition: "center top",
+                objectPosition: "60% center",
                 opacity: currentSlide === idx ? 1 : 0,
                 transition: "opacity 0.8s ease-in-out",
               }}
             />
           ))}
         </div>{/* /hp-hero-img-wrap */}
+
+        <div className="hp-hero-shade" aria-hidden="true" />
 
 
 
@@ -401,12 +368,12 @@ export function HomeRefHero() {
             key={currentSlide}
             style={{
               fontFamily: GC,
-              fontSize: "clamp(40px,5vw,68px)",
-              lineHeight: 1.02,
+              fontSize: "clamp(44px,7vw,92px)",
+              lineHeight: 0.94,
               letterSpacing: "-0.03em",
-              color: "var(--ink)",
-              marginBottom: 24,
-              maxWidth: 600,
+              color: "#fff",
+              marginBottom: 20,
+              maxWidth: "14ch",
               fontWeight: 700,
             }}
           >
@@ -428,11 +395,11 @@ export function HomeRefHero() {
             style={{
               fontFamily: GC,
               fontWeight: 400,
-              fontSize: "clamp(16px,1.4vw,18px)",
-              lineHeight: 1.55,
-              color: "var(--ink)",
-              maxWidth: 520,
-              marginBottom: 28,
+              fontSize: "clamp(17px,1.5vw,21px)",
+              lineHeight: 1.5,
+              color: "rgba(255,255,255,0.86)",
+              maxWidth: "44ch",
+              marginBottom: 32,
               opacity: 1,
               animation: "hp-fade 0.6s ease-out 0.1s forwards",
             }}
@@ -460,7 +427,7 @@ export function HomeRefHero() {
               Shop AVRO
             </a>
             <a
-              href="/shop"
+              href="/why-avro"
               className="hp-pill-secondary"
               style={{
                 display: "inline-flex",
@@ -479,25 +446,6 @@ export function HomeRefHero() {
             </a>
           </div>
 
-          {/* Carousel dots */}
-          <div style={{ display: "flex", gap: 8, marginTop: 24 }}>
-            {slides.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentSlide(idx)}
-                aria-label={`Go to slide ${idx + 1}`}
-                style={{
-                  width: currentSlide === idx ? 24 : 8,
-                  height: 8,
-                  borderRadius: 4,
-                  backgroundColor: currentSlide === idx ? "var(--avro-blue)" : "rgba(0,0,0,0.2)",
-                  border: "none",
-                  cursor: "pointer",
-                  transition: "width 0.3s ease, background-color 0.3s ease",
-                }}
-              />
-            ))}
-          </div>
         </div>
 
           {/* Right column intentionally empty — image is the container background */}
@@ -1073,7 +1021,7 @@ export function HomeQualityRow() {
   )
 }
 
-// ── STORY STRIP ─────────────����───────��─────���──────��──────��─����───����──────────������─��
+// ── STORY STRIP ─────��───────����───────��─────���──────��──────��─����───����──────────������─��
 export function HomeStoryStrip() {
   return (
     <section style={{ backgroundColor: "var(--base)", width: "100%", padding: "clamp(40px,6vw,72px) clamp(20px,5vw,64px)" }}>

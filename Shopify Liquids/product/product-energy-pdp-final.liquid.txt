@@ -119,10 +119,14 @@
   #avro-pdp-{{ section.id }} .stepper button:hover { background: rgba(0,0,0,0.05); }
   #avro-pdp-{{ section.id }} .stepper button:disabled { opacity: 0.35; cursor: not-allowed; }
   #avro-pdp-{{ section.id }} .stepper .q { min-width: 28px; text-align: center; font-weight: 800; font-size: 16px; color: var(--charcoal); }
-  #avro-pdp-{{ section.id }} .add-btn { flex: 1 1 auto; min-height: var(--btn-height); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); background: var(--charcoal); color: var(--bone); font-family: inherit; font-weight: 700; font-size: 17px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
-  #avro-pdp-{{ section.id }} .add-btn:hover { background: transparent; color: var(--charcoal); }
+  #avro-pdp-{{ section.id }} .add-btn { flex: 1 1 auto; min-height: var(--btn-height); border-radius: var(--btn-radius); border: 2px solid var(--charcoal); background: transparent; color: var(--charcoal); font-family: inherit; font-weight: 700; font-size: 17px; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+  #avro-pdp-{{ section.id }} .add-btn:hover { background: var(--charcoal); color: var(--bone); }
   #avro-pdp-{{ section.id }} .add-btn:disabled { background: var(--gray); border-color: var(--gray); color: var(--warm-gray); cursor: not-allowed; }
   #avro-pdp-{{ section.id }} .price-only { font-weight: 800; font-size: clamp(22px,2vw,30px); }
+  #avro-pdp-{{ section.id }} .integration-slot { width: 100%; min-width: 0; }
+  #avro-pdp-{{ section.id }} .integration-slot:empty { display: none; }
+  #avro-pdp-{{ section.id }} .integration-slot--subscription { margin-top: calc(var(--pdp-gap) * -0.35); }
+  #avro-pdp-{{ section.id }} .integration-slot--after { margin-top: calc(var(--pdp-gap) * -0.35); }
 {% endstyle %}
 
 <div id="avro-pdp-{{ section.id }}" data-flavor-index="{{ flavor_opt_index }}">
@@ -175,6 +179,9 @@
           {%- if support_text != blank -%}<p class="support">{{ support_text }}</p>{%- endif -%}
           {%- if section.settings.per_box_line != blank -%}<p class="per-box">{{ section.settings.per_box_line }}</p>{%- endif -%}
         </header>
+
+        {%- for block in section.blocks -%}{%- if block.type == 'custom_liquid' and block.settings.placement == 'before_purchase' -%}<div class="integration-slot integration-slot--before" {{ block.shopify_attributes }}>{{ block.settings.liquid }}</div>{%- endif -%}{%- endfor -%}
+        {%- for block in section.blocks -%}{%- if block.type == 'custom_liquid' and block.settings.placement == 'subscription' -%}<div class="integration-slot integration-slot--subscription" {{ block.shopify_attributes }}>{{ block.settings.liquid }}</div>{%- endif -%}{%- endfor -%}
 
         <form method="post" action="{{ routes.cart_add_url }}" id="pdp-form-{{ section.id }}" accept-charset="UTF-8" enctype="multipart/form-data">
           <input type="hidden" name="form_type" value="product">
@@ -238,6 +245,8 @@
             <button type="submit" class="add-btn" id="pdp-add-{{ section.id }}">{{ section.settings.add_label | default: 'Add to Cart' }}</button>
           </div>
         </form>
+
+        {%- for block in section.blocks -%}{%- if block.type == 'custom_liquid' and block.settings.placement == 'after_cart' -%}<div class="integration-slot integration-slot--after" {{ block.shopify_attributes }}>{{ block.settings.liquid }}</div>{%- endif -%}{%- endfor -%}
       </div>
 
     </div>
@@ -484,10 +493,10 @@
       "label": "Rating value",
       "default": "4.8"
     },
-    {
-      "type": "header",
-      "content": "Purchase options"
-    },
+{
+  "type": "header",
+  "content": "Purchase options"
+  },
     {
       "type": "checkbox",
       "id": "show_subscribe",
@@ -570,8 +579,34 @@
     }
   ],
   "blocks": [
-    {
-      "type": "benefit",
+  {
+  "type": "custom_liquid",
+  "name": "Custom Liquid / embed",
+  "settings": [
+  {
+  "type": "paragraph",
+  "content": "Use this for PDP-visible Klaviyo, subscription, reviews, or other custom code. Global app embeds belong in Theme settings → App embeds."
+  },
+  {
+  "type": "select",
+  "id": "placement",
+  "label": "Placement",
+  "options": [
+  { "value": "before_purchase", "label": "Before purchase options" },
+  { "value": "subscription", "label": "Subscription area" },
+  { "value": "after_cart", "label": "After Add to Cart" }
+  ],
+  "default": "after_cart"
+  },
+  {
+  "type": "liquid",
+  "id": "liquid",
+  "label": "Liquid or embed code"
+  }
+  ]
+  },
+  {
+  "type": "benefit",
       "name": "Subscribe benefit",
       "settings": [
         {

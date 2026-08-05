@@ -1,0 +1,133 @@
+{%- comment -%}
+  ============================================================================
+  AVRO — GOLF TICKER  (standalone Shopify Online Store 2.0 section)
+  ----------------------------------------------------------------------------
+  A simple scrolling announcement bar for the GOLF PAGE ONLY. Black band,
+  white uppercase copy, lime/green dots between phrases. Looping marquee that
+  pauses on hover and honors reduced-motion.
+
+  HOW TO USE
+  1. Create sections/avro-golf-ticker.liquid and paste this entire file in.
+  2. On the golf page template, add this section to the TOP of the page
+     (drag it above the golf section in the theme editor).
+  3. Phrases come from "Message" blocks — add / remove / reorder them, or edit
+     the text. With no blocks added it shows the default AVRO Golf phrases.
+     Background, text color, dot color and scroll speed are all editable.
+  ============================================================================
+{%- endcomment -%}
+
+{%- comment -%}
+  GOLF-PAGE GUARD. This section renders ONLY on the golf page, even if it gets
+  added to another template. We match the golf page from its handle, its page
+  template suffix, or the URL path (/golf). Set the handle(s) in "Golf page
+  handle(s)" if your golf page uses a different handle. Turn the guard off only
+  if you deliberately want the ticker on every page it's placed on.
+{%- endcomment -%}
+{%- assign gt_render = false -%}
+{%- if section.settings.golf_only == false -%}
+  {%- assign gt_render = true -%}
+{%- else -%}
+  {%- assign gt_handles = section.settings.golf_handles | default: 'golf' | downcase | replace: ' ', '' -%}
+  {%- assign gt_list = gt_handles | split: ',' -%}
+  {%- for h in gt_list -%}
+    {%- if h != blank -%}
+      {%- if page.handle == h -%}{%- assign gt_render = true -%}{%- endif -%}
+      {%- if template.suffix == h -%}{%- assign gt_render = true -%}{%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- unless gt_render -%}
+    {%- if request.path contains '/golf' -%}{%- assign gt_render = true -%}{%- endif -%}
+  {%- endunless -%}
+{%- endif -%}
+
+{%- if gt_render -%}
+{% style %}
+  #avro-golf-ticker-{{ section.id }} {
+    --tick-bg: {{ section.settings.bg_color | default: '#000000' }};
+    --tick-fg: {{ section.settings.text_color | default: '#FFFFFF' }};
+    --tick-dot: {{ section.settings.dot_color | default: '#BDD637' }};
+    --tick-speed: {{ section.settings.speed | default: 42 }}s;
+    background: var(--tick-bg); overflow: hidden; position: relative;
+    padding: {{ section.settings.padding_y | default: 12 }}px 0;
+    border-top: {{ section.settings.border_top | default: 0 }}px solid rgba(255,255,255,.12);
+    border-bottom: {{ section.settings.border_bottom | default: 0 }}px solid rgba(255,255,255,.12);
+  }
+  #avro-golf-ticker-{{ section.id }} * { box-sizing: border-box; }
+  #avro-golf-ticker-{{ section.id }} .gt-track { display:flex; width:max-content; will-change:transform; animation:avro-gt-{{ section.id }} var(--tick-speed) linear infinite; }
+  #avro-golf-ticker-{{ section.id }}:hover .gt-track { animation-play-state:paused; }
+  #avro-golf-ticker-{{ section.id }} .gt-group { display:flex; align-items:center; flex-shrink:0; }
+  #avro-golf-ticker-{{ section.id }} .gt-item { display:inline-flex; align-items:center; flex-shrink:0; }
+  #avro-golf-ticker-{{ section.id }} .gt-text { font-family:"Gotham Golf", "Work Sans", "Helvetica Neue", Arial, system-ui, sans-serif; font-weight:700; font-size:{{ section.settings.font_size | default: 13 }}px; letter-spacing:.08em; text-transform:uppercase; white-space:nowrap; color:var(--tick-fg); padding:0 {{ section.settings.gap | default: 22 }}px; }
+  #avro-golf-ticker-{{ section.id }} .gt-dot { flex:0 0 auto; width:6px; height:6px; border-radius:50%; background:var(--tick-dot); }
+  @keyframes avro-gt-{{ section.id }} { 0% { transform:translateX(0); } 100% { transform:translateX(-25%); } }
+  @media (prefers-reduced-motion: reduce) { #avro-golf-ticker-{{ section.id }} .gt-track { animation:none; } }
+  @media (max-width:768px) { #avro-golf-ticker-{{ section.id }} .gt-text { font-size:{{ section.settings.font_size_mobile | default: 12 }}px; padding:0 16px; } }
+{% endstyle %}
+
+{%- comment -%} Build the repeating phrase set once, then print it 4 times for a seamless -25% loop. {%- endcomment -%}
+{%- assign msgs = section.blocks | where: 'type', 'message' -%}
+{%- capture items -%}
+  {%- if msgs.size > 0 -%}
+    {%- for b in msgs -%}{%- if b.settings.text != blank -%}<span class="gt-item"><span class="gt-text">{{ b.settings.text | escape }}</span><span class="gt-dot" aria-hidden="true"></span></span>{%- endif -%}{%- endfor -%}
+  {%- else -%}
+    {%- assign defaults = 'Calm First Performance|Subscribe & Save 15%|Free Shipping on 2+ Tubes|Naturally Fermented PharmaGABA|Calm, Focused Energy — Without the Crash' | split: '|' -%}
+    {%- for t in defaults -%}<span class="gt-item"><span class="gt-text">{{ t }}</span><span class="gt-dot" aria-hidden="true"></span></span>{%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if items != blank -%}
+  <div id="avro-golf-ticker-{{ section.id }}" aria-label="{{ section.settings.aria_label | default: 'Announcements' | escape }}">
+    <div class="gt-track">
+      {%- for i in (1..4) -%}<div class="gt-group"{% if forloop.first == false %} aria-hidden="true"{% endif %}>{{ items }}</div>{%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "AVRO — Golf Ticker",
+  "tag": "section",
+  "class": "avro-golf-ticker-section",
+  "settings": [
+    { "type": "paragraph", "content": "Scrolling announcement bar for the golf page. Add \"Message\" blocks below to set the phrases (drag to reorder). With none added it shows the default AVRO Golf phrases." },
+    { "type": "header", "content": "Where it shows" },
+    { "type": "paragraph", "content": "This bar only renders on the golf page — even if the section is added to another template it stays hidden everywhere else." },
+    { "type": "checkbox", "id": "golf_only", "label": "Golf page only", "default": true, "info": "Leave on so the ticker can never appear on other pages. Turn off only to show it wherever the section is placed." },
+    { "type": "text", "id": "golf_handles", "label": "Golf page handle(s)", "default": "golf", "info": "Comma-separated page handles (or page template suffixes) that count as the golf page. Default: golf" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#000000" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "color", "id": "dot_color", "label": "Dot", "default": "#BDD637" },
+    { "type": "header", "content": "Motion" },
+    { "type": "range", "id": "speed", "label": "Scroll duration", "min": 20, "max": 80, "step": 2, "unit": "s", "default": 42, "info": "Higher = slower scroll." },
+    { "type": "header", "content": "Type & spacing" },
+    { "type": "range", "id": "font_size", "label": "Font size (desktop)", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "font_size_mobile", "label": "Font size (mobile)", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "gap", "label": "Space around each phrase", "min": 10, "max": 48, "step": 2, "unit": "px", "default": 22 },
+    { "type": "range", "id": "padding_y", "label": "Bar height (vertical padding)", "min": 6, "max": 28, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "border_top", "label": "Top border", "min": 0, "max": 3, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "border_bottom", "label": "Bottom border", "min": 0, "max": 3, "step": 1, "unit": "px", "default": 0 },
+    { "type": "header", "content": "Accessibility" },
+    { "type": "text", "id": "aria_label", "label": "Screen-reader label", "default": "Announcements" }
+  ],
+  "max_blocks": 20,
+  "blocks": [
+    { "type": "message", "name": "Message", "settings": [
+      { "type": "text", "id": "text", "label": "Message", "default": "Calm First Performance" }
+    ] }
+  ],
+  "presets": [
+    {
+      "name": "AVRO — Golf Ticker",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Calm First Performance" } },
+        { "type": "message", "settings": { "text": "Subscribe & Save 15%" } },
+        { "type": "message", "settings": { "text": "Free Shipping on 2+ Tubes" } },
+        { "type": "message", "settings": { "text": "Naturally Fermented PharmaGABA" } },
+        { "type": "message", "settings": { "text": "Calm, Focused Energy — Without the Crash" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

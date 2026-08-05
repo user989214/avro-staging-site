@@ -56,6 +56,10 @@ export function Header() {
   const isZeroProof = themeMode === "zero-proof"
   const pathname = usePathname()
   const isGolf = pathname === "/golf" || pathname?.startsWith("/golf/")
+  // Pages whose hero is a full-bleed dark photograph: the nav floats over it with
+  // no background and white type, then flips to the normal solid bar on scroll.
+  const hasPhotoHero = pathname === "/" || isGolf
+  const overHero = hasPhotoHero && !scrolled
 
   // Theme colors — Zero Proof uses deep-black + gold only
   const colors = isZeroProof
@@ -100,6 +104,8 @@ export function Header() {
     if (!navRef.current) return
     const rect = navRef.current.getBoundingClientRect()
     setNavBottom(rect.bottom)
+    // Expose the nav height so full-bleed heroes can pull up underneath it.
+    document.documentElement.style.setProperty("--nav-h", `${Math.round(rect.height)}px`)
   }
 
   const openDropdown = () => {
@@ -177,6 +183,60 @@ export function Header() {
           background-color: transparent;
           color: var(--charcoal);
         }
+        /* ── Nav floating over a dark photo hero: white type, no background.
+           The dropdown inherits the same treatment (translucent + white). ── */
+        .hdr-over-hero :is(a, button, h3, p, span) {
+          color: #fff !important;
+        }
+        /* Dropdown panel: no background over the hero — the photo shows straight
+           through and the white type sits directly on it. */
+        .hdr-over-hero .hdr-dropdown-panel {
+          background-color: transparent !important;
+          border-bottom: none;
+        }
+        /* Section divider + muted headings read against the translucent panel */
+        .hdr-over-hero .hdr-dropdown [style*="border-left"] {
+          border-left-color: rgba(255, 255, 255, 0.24) !important;
+        }
+        .hdr-over-hero .hdr-dropdown-muted { color: rgba(255, 255, 255, 0.7) !important; }
+        /* Link hover pill: translucent white instead of the solid brand blue */
+        .hdr-over-hero .hdr-dropdown-link:hover {
+          background-color: rgba(255, 255, 255, 0.16) !important;
+        }
+        /* Feature cards: no fill either — just a hairline white outline */
+        .hdr-over-hero .hdr-dropdown-card {
+          background-color: transparent !important;
+          border: 1px solid rgba(255, 255, 255, 0.45);
+        }
+        /* Card CTAs: white text on a white outline, filling white on hover */
+        .hdr-over-hero .hdr-card-btn {
+          background-color: transparent !important;
+          color: #fff !important;
+          border-color: #fff !important;
+        }
+        .hdr-over-hero .hdr-card-btn:hover {
+          background-color: #fff !important;
+          color: var(--charcoal) !important;
+        }
+        .hdr-over-hero .hdr-cart-btn {
+          border-color: #fff !important;
+          color: #fff !important;
+          background-color: transparent !important;
+        }
+        .hdr-over-hero .hdr-cart-btn:hover {
+          background-color: #fff !important;
+          color: var(--charcoal) !important;
+        }
+        .hdr-over-hero .hdr-cart-count {
+          background-color: #fff !important;
+          color: var(--charcoal) !important;
+        }
+        .hdr-over-hero .hdr-cart-btn:hover .hdr-cart-count {
+          background-color: var(--charcoal) !important;
+          color: #fff !important;
+        }
+        /* Render the wordmark white while it sits on the photograph */
+        .hdr-over-hero .hdr-logo { filter: brightness(0) invert(1); }
       `}</style>
       <header style={{ display: "contents" }}>
       {/* Announcement ticker — continuous marquee. This bar scrolls with the page (it
@@ -281,8 +341,11 @@ export function Header() {
         ref={navRef}
         className={`sticky top-0 z-50 grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-0 px-4 md:px-14 py-4 md:py-5 transition-shadow ${
           scrolled ? "shadow-[0_1px_16px_rgba(21,21,21,0.06)]" : ""
-        }`}
-        style={{ backgroundColor: colors.navBg }}
+        } ${overHero ? "hdr-over-hero" : ""}`}
+        style={{
+          backgroundColor: overHero ? "transparent" : colors.navBg,
+          transition: "background-color .3s ease, box-shadow .3s ease",
+        }}
         aria-label="Primary navigation"
       >
         {/* Mobile menu button */}
@@ -312,7 +375,7 @@ export function Header() {
 
             {/* Full-width dropdown panel */}
             <div
-              className="fixed left-0 right-0 z-50"
+              className="hdr-dropdown fixed left-0 right-0 z-50"
               style={{
                 top: navBottom,
                 pointerEvents: dropdownOpen ? "auto" : "none",
@@ -320,7 +383,7 @@ export function Header() {
               aria-hidden={!dropdownOpen}
             >
               <div
-                className="w-full"
+                className="hdr-dropdown-panel w-full"
                 style={{
                   backgroundColor: colors.navBg,
                   opacity: dropdownOpen ? 1 : 0,
@@ -343,7 +406,7 @@ export function Header() {
                           style={sIdx > 0 ? { borderLeft: `1px solid ${colors.navText}` } : undefined}
                         >
                           <p
-                            className="text-[12px] font-bold pb-3"
+                            className="hdr-dropdown-muted text-[12px] font-bold pb-3"
                             style={{ color: colors.navTextMuted }}
                           >
                             {section.heading}
@@ -354,7 +417,7 @@ export function Header() {
                                 key={item.href}
                                 href={item.href}
                                 onClick={() => setDropdownOpen(false)}
-                                className="inline-block px-4 py-1.5 font-serif font-black text-[26px] leading-[1.15] rounded-full transition-colors"
+                                className="hdr-dropdown-link inline-block px-4 py-1.5 font-serif font-black text-[26px] leading-[1.15] rounded-full transition-colors"
                                 style={{ color: colors.navText }}
                                 onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = isZeroProof ? "var(--dark-surface)" : "var(--avro-blue)" }}
                                 onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent" }}
@@ -372,7 +435,7 @@ export function Header() {
                       <Link
                         href="/blog"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex flex-col justify-between rounded-[24px] p-7 min-h-[230px]"
+                        className="hdr-dropdown-card flex flex-col justify-between rounded-[24px] p-7 min-h-[230px]"
                         style={{ backgroundColor: colors.cardDarkBg }}
                       >
                         <div>
@@ -394,7 +457,7 @@ export function Header() {
                       <Link
                         href="/#footer-newsletter"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex flex-col justify-between rounded-[24px] p-7 min-h-[230px]"
+                        className="hdr-dropdown-card flex flex-col justify-between rounded-[24px] p-7 min-h-[230px]"
                         style={{ backgroundColor: colors.cardLightBg }}
                       >
                         <div>
@@ -439,7 +502,7 @@ export function Header() {
             alt={isGolf ? "AVRO Golf" : isZeroProof ? "AVRO Zero Proof" : "AVRO"}
             width={isGolf ? 460 : isZeroProof ? 632 : 178}
             height={isGolf ? 138 : isZeroProof ? 182 : 58}
-            className="w-full h-auto"
+            className="hdr-logo w-full h-auto"
             priority
           />
         </Link>

@@ -1,302 +1,396 @@
 {%- comment -%}
   ============================================================================
-  AVRO — GOLF use-case page  (Shopify Online Store 2.0 section, standalone)
+  AVRO — GOLF landing page  (Shopify Online Store 2.0 section, standalone)
   ----------------------------------------------------------------------------
-  THEME: light / green accent (Fuji Apple #BDD637)
+  Mirrors the Figma / React /golf design: full-bleed hero + pre-golf ritual bar,
+  cream editorial background, dark "how to use" + "shop" sections, lime-tile
+  science grid, photo use-moment cards, white product cards and a black closing
+  CTA. Photos load from permanent blob URLs; all icons are embedded inline as SVG.
   HOW TO USE
   1. Create sections/avro-golf.liquid and paste this ENTIRE file in.
-  2. Images render from hardcoded live-site URLs by default — no asset upload
-     needed (including the research graphic iframe). Pick an image in the
-     editor to override any of them.
-  3. Add to a page: create a page using a template that renders this section,
-     or drop "AVRO — Golf" onto any page in the theme editor.
-  4. Headings, body copy, button labels/links and images are editable. The
-     reason cards, how-to steps, use-moment cards, formula bars, product cards,
-     testimonials and FAQ rows are add/remove/reorder BLOCKS.
+  2. Images render from hardcoded URLs by default — pick an image in the editor
+     to override any of them.
+  3. Headings, body copy, buttons and images are editable. Reason cards, steps,
+     science cards, use-moments, product cards and FAQ rows are BLOCKS.
   ============================================================================
 {%- endcomment -%}
 
 {% style %}
+  @font-face { font-family:"Gotham Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gotham-Bold-LAXKAYCVkw0bMCVe5ufvnj7iBMQpDj.otf") format("opentype"); font-weight:700; font-display:swap; }
+  @font-face { font-family:"Gotham Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gotham-Black-ECCJ09tZI68ZEKAZ3KWlzTegkXrA3z.otf") format("opentype"); font-weight:900; font-display:swap; }
+  @font-face { font-family:"Work Sans Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WorkSans-Regular-6zzrMeSw8tuNIAsKiWT2YQMQzhBMHN.ttf") format("truetype"); font-weight:400; font-display:swap; }
+  @font-face { font-family:"Work Sans Golf"; src:url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WorkSans-Regular-6zzrMeSw8tuNIAsKiWT2YQMQzhBMHN.ttf") format("truetype"); font-weight:600; font-display:swap; }
+
   #avro-golf-{{ section.id }} {
-    --base: #FFFFFF; --base-light: #F2F2F2; --base-deep: #EDEDED; --bone: #FFFFFF;
-    --charcoal: #151515; --ink: #1C1B14; --warm-gray: #6B6857; --divider: #E2E2E2;
-    --avro-blue: #94C6D4; --accent: #BDD637; --accent-deep: #8CA22A;
-    font-family: "DM Sans", system-ui, sans-serif; background: var(--base); color: var(--ink); display:block;
+    --cream:#F3F0E8; --card:#FAFAF7; --line:#DEDAD0; --ink:#161616; --white:#FFFFFF;
+    --muted:#6C6957; --accent:#BDD637; --olive:#9DB12E; --blue:#94C6D4; --max:1250px;
+    font-family:"Work Sans Golf",sans-serif; background:var(--cream); color:var(--ink); display:block;
   }
-  #avro-golf-{{ section.id }} * { box-sizing: border-box; }
-  #avro-golf-{{ section.id }} h1,#avro-golf-{{ section.id }} h2,#avro-golf-{{ section.id }} h3 { margin:0; }
+  #avro-golf-{{ section.id }} * { box-sizing:border-box; }
+  #avro-golf-{{ section.id }} h1,#avro-golf-{{ section.id }} h2,#avro-golf-{{ section.id }} h3 { margin:0; font-family:"Gotham Golf",sans-serif; }
+  #avro-golf-{{ section.id }} p { margin:0; }
   #avro-golf-{{ section.id }} img { max-width:100%; }
   #avro-golf-{{ section.id }} a { text-decoration:none; }
+  #avro-golf-{{ section.id }} h1 { font-weight:900; font-size:clamp(38px,4.6vw,54px); line-height:1.02; letter-spacing:-.02em; }
+  #avro-golf-{{ section.id }} h2 { font-weight:900; font-size:clamp(26px,3vw,31px); line-height:1.22; letter-spacing:-.01em; }
+  #avro-golf-{{ section.id }} h3 { font-weight:700; font-size:clamp(17px,1.4vw,19px); line-height:1.2; }
+  #avro-golf-{{ section.id }} .body { font-size:14px; line-height:1.6; }
 
-  #avro-golf-{{ section.id }} .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:700; border-radius:999px; cursor:pointer; min-height:48px; padding:0 28px; font-size:16px; transition:background-color .2s, color .2s, border-color .2s; }
-  #avro-golf-{{ section.id }} .btn-solid { background:var(--charcoal); color:var(--bone); border:2px solid var(--charcoal); }
-  #avro-golf-{{ section.id }} .btn-solid:hover { background:transparent; color:var(--charcoal); }
-  #avro-golf-{{ section.id }} .btn-outline { background:transparent; color:var(--charcoal); border:2px solid var(--charcoal); }
-  #avro-golf-{{ section.id }} .btn-outline:hover { background:var(--charcoal); color:var(--bone); }
-  #avro-golf-{{ section.id }} .btn-accent { background:var(--accent); color:var(--charcoal); border:2px solid var(--accent); }
-  #avro-golf-{{ section.id }} .btn-accent:hover { background:transparent; color:var(--accent-deep); }
+  /* Eyebrow */
+  #avro-golf-{{ section.id }} .kicker { font-size:12px; font-weight:600; line-height:1.2; letter-spacing:.14em; text-transform:uppercase; color:var(--olive); }
+  #avro-golf-{{ section.id }} .head .kicker::before { content:"— "; }
+  #avro-golf-{{ section.id }} .dark .kicker { color:var(--accent); }
+
+  /* Buttons */
+  #avro-golf-{{ section.id }} .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:"Work Sans Golf",sans-serif; font-weight:600; font-size:14px; border-radius:999px; cursor:pointer; min-height:44px; padding:0 26px; border:1px solid currentColor; transition:background-color .2s,color .2s,border-color .2s; }
+  #avro-golf-{{ section.id }} .btn-accent { background:var(--accent); color:#000; border-color:var(--accent); }
+  #avro-golf-{{ section.id }} .btn-accent:hover { background:var(--white); color:#000; border-color:var(--white); }
+  #avro-golf-{{ section.id }} .btn-ghost { background:transparent; color:var(--white); border-color:rgba(255,255,255,.7); }
+  #avro-golf-{{ section.id }} .btn-ghost:hover { background:var(--white); color:#000; border-color:var(--white); }
+  #avro-golf-{{ section.id }} .btn-dark { background:#000; color:var(--white); border-color:#000; }
+  #avro-golf-{{ section.id }} .btn-dark:hover { background:var(--accent); color:#000; border-color:var(--accent); }
 
   /* Hero */
-  #avro-golf-{{ section.id }} .hero { width:100%; }
-  #avro-golf-{{ section.id }} .hero-card { position:relative; width:calc(100% - 32px); margin:0 auto 16px; aspect-ratio:16/9; overflow:hidden; border-radius:20px; background:var(--bone); }
+  #avro-golf-{{ section.id }} .hero { position:relative; overflow:hidden; min-height:min(760px,90vh); color:var(--white); display:flex; align-items:center; }
   #avro-golf-{{ section.id }} .hero-imgs { position:absolute; inset:0; }
-  #avro-golf-{{ section.id }} .hero-imgs img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .8s ease-in-out; }
+  #avro-golf-{{ section.id }} .hero-imgs img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:72% center; opacity:0; transition:opacity .8s ease-in-out; }
   #avro-golf-{{ section.id }} .hero-imgs img.on { opacity:1; }
-  #avro-golf-{{ section.id }} .hero-imgs .m { display:none; }
-  #avro-golf-{{ section.id }} .hero-scrim { position:absolute; inset:0; pointer-events:none; background:linear-gradient(100deg, rgba(255,255,255,.78) 0%, rgba(255,255,255,.62) 32%, rgba(255,255,255,.28) 58%, rgba(255,255,255,0) 78%); }
-  #avro-golf-{{ section.id }} .hero-content { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:clamp(24px,5vw,80px) clamp(20px,5vw,64px); }
-  #avro-golf-{{ section.id }} .hero-content h1 { font-weight:900; font-size:clamp(36px,5.5vw,72px); line-height:.98; letter-spacing:-.025em; color:var(--ink); margin-bottom:16px; max-width:560px; }
-  #avro-golf-{{ section.id }} .hero-content p { font-weight:400; font-size:clamp(17px,2vw,20px); line-height:1.55; color:var(--ink); max-width:480px; margin-bottom:28px; }
-  #avro-golf-{{ section.id }} .hero-btns { display:flex; gap:10px; flex-wrap:wrap; }
+  #avro-golf-{{ section.id }} .hero-shade { position:absolute; inset:0; background:linear-gradient(90deg,rgba(15,20,15,.72),rgba(15,20,15,.1) 66%); }
+  #avro-golf-{{ section.id }} .hero-copy { position:relative; z-index:1; width:min(var(--max),100%); margin:0 auto; padding:clamp(64px,9vw,128px) clamp(24px,5vw,72px) 160px; display:flex; flex-direction:column; align-items:flex-start; gap:22px; }
+  #avro-golf-{{ section.id }} .hero-copy h1 { max-width:640px; color:var(--white); }
+  @keyframes avro-golf-rise-{{ section.id }} { 0%{ opacity:0; transform:translateY(24px); } 100%{ opacity:1; transform:translateY(0); } }
+  #avro-golf-{{ section.id }} .hero-copy h1 .hw { display:inline-block; opacity:0; transform:translateY(24px); animation:avro-golf-rise-{{ section.id }} .95s cubic-bezier(.34,1.4,.4,1) forwards; will-change:transform,opacity; }
+  @media (prefers-reduced-motion: reduce) { #avro-golf-{{ section.id }} .hero-copy h1 .hw { animation:none!important; opacity:1!important; transform:none!important; } }
+  #avro-golf-{{ section.id }} .hero-copy .body { max-width:560px; }
+  #avro-golf-{{ section.id }} .hero-dots { display:flex; gap:8px; margin-top:22px; }
+  #avro-golf-{{ section.id }} .hero-dots button { width:8px; height:8px; padding:0; border:none; border-radius:4px; cursor:pointer; background:rgba(255,255,255,.35); transition:width .3s ease, background-color .3s ease; }
+  #avro-golf-{{ section.id }} .hero-dots button.is-active { width:24px; background:var(--accent); }
+  #avro-golf-{{ section.id }} .hero-copy .kicker { color:var(--accent); padding:9px 17px; border:1px solid var(--accent); border-radius:999px; }
+  #avro-golf-{{ section.id }} .hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
+
+  /* Ritual bar */
+  #avro-golf-{{ section.id }} .ritual { position:absolute; z-index:2; inset:auto 0 0; min-height:80px; display:grid; grid-template-columns:1.1fr repeat(3,1fr); background:#000; }
+  #avro-golf-{{ section.id }} .ritual > p,#avro-golf-{{ section.id }} .ritual > div { padding:20px clamp(16px,2vw,24px); display:flex; flex-direction:column; justify-content:center; }
+  #avro-golf-{{ section.id }} .ritual > div { gap:2px; }
+  #avro-golf-{{ section.id }} .ritual > div + div,#avro-golf-{{ section.id }} .ritual > p + div { border-left:1px solid rgba(255,255,255,.18); }
+  #avro-golf-{{ section.id }} .ritual .rlabel { color:var(--accent); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
+  #avro-golf-{{ section.id }} .ritual b { font-family:"Gotham Golf"; font-weight:700; font-size:14px; color:var(--white); }
+  #avro-golf-{{ section.id }} .ritual span { font-size:12px; color:rgba(255,255,255,.6); }
+
+  /* Pressure tile */
+  #avro-golf-{{ section.id }} .pressure { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,72px); align-items:center; padding:clamp(64px,7vw,112px) max(clamp(24px,5vw,72px),calc((100% - var(--max))/2)); }
+  #avro-golf-{{ section.id }} .pressure-copy { display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:22px; }
+  #avro-golf-{{ section.id }} .pressure-img { position:relative; aspect-ratio:4/3; overflow:hidden; border-radius:24px; }
+  #avro-golf-{{ section.id }} .pressure-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  #avro-golf-{{ section.id }} .pressure-pill { position:absolute; left:20px; bottom:20px; display:flex; flex-direction:column; gap:2px; padding:11px 18px; background:var(--white); color:var(--muted); border-radius:16px; font-family:"Gotham Golf"; font-weight:600; font-size:12px; letter-spacing:.03em; box-shadow:0 10px 28px rgba(0,0,0,.22); }
+  #avro-golf-{{ section.id }} .pressure-pill b { color:var(--ink); font-weight:900; font-size:26px; line-height:1; }
 
   /* Generic section */
-  #avro-golf-{{ section.id }} .sec { width:100%; padding:clamp(56px,8vw,120px) clamp(20px,5vw,64px); }
-  #avro-golf-{{ section.id }} .wrap { max-width:1320px; margin:0 auto; }
-  #avro-golf-{{ section.id }} .head { max-width:760px; margin:0 auto 56px; text-align:center; }
-  #avro-golf-{{ section.id }} .head.left { margin-left:0; text-align:left; }
-  #avro-golf-{{ section.id }} .head h2 { font-weight:900; font-size:clamp(32px,4.5vw,52px); line-height:1.02; letter-spacing:-.02em; color:var(--ink); margin-bottom:14px; }
-  #avro-golf-{{ section.id }} .head p { font-weight:400; font-size:clamp(16px,1.4vw,20px); line-height:1.55; color:var(--warm-gray); }
+  #avro-golf-{{ section.id }} .sec { padding:clamp(64px,7vw,112px) clamp(24px,5vw,72px); }
+  #avro-golf-{{ section.id }} .wrap { max-width:var(--max); margin:0 auto; }
+  #avro-golf-{{ section.id }} .head { max-width:640px; margin-bottom:40px; display:flex; flex-direction:column; gap:16px; }
+  #avro-golf-{{ section.id }} .head .sub { color:var(--muted); }
+  #avro-golf-{{ section.id }} .head-split { max-width:none; flex-direction:row; align-items:flex-start; justify-content:space-between; gap:32px; }
+  #avro-golf-{{ section.id }} .head-split h2 { max-width:60%; }
+  #avro-golf-{{ section.id }} .head-split .sub { max-width:380px; margin-top:6px; text-align:right; }
+  #avro-golf-{{ section.id }} .kicker-pill { align-self:flex-start; padding:8px 16px; border:1px solid var(--olive); border-radius:999px; }
+  #avro-golf-{{ section.id }} .head .kicker-pill::before { content:"• "; }
+  #avro-golf-{{ section.id }} .dark .kicker-pill { border-color:var(--accent); }
+  #avro-golf-{{ section.id }} .accent { color:var(--accent); }
+  #avro-golf-{{ section.id }} .mark { background:var(--accent); color:var(--ink); padding:.02em .14em; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
+  #avro-golf-{{ section.id }} .dark { background:#000; color:var(--white); }
+  #avro-golf-{{ section.id }} .dark h2,#avro-golf-{{ section.id }} .dark h3 { color:var(--white); }
+  #avro-golf-{{ section.id }} .dark .head .sub { color:rgba(255,255,255,.7); }
 
-  /* Info cards grid */
-  #avro-golf-{{ section.id }} .cards { display:grid; gap:24px; }
-  #avro-golf-{{ section.id }} .cards.c3 { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
-  #avro-golf-{{ section.id }} .cards.c4 { grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
-  #avro-golf-{{ section.id }} .icard { background:var(--base-light); border-radius:20px; padding:clamp(28px,3vw,44px); }
-  #avro-golf-{{ section.id }} .icard .ic { width:56px; height:56px; margin-bottom:16px; }
-  #avro-golf-{{ section.id }} .icard .ic span { display:block; width:56px; height:56px; background:var(--accent-deep); -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; -webkit-mask-size:contain; mask-size:contain; }
-  #avro-golf-{{ section.id }} .icard h3 { font-weight:700; font-size:clamp(18px,1.6vw,22px); line-height:1.1; color:var(--ink); margin-bottom:10px; }
-  #avro-golf-{{ section.id }} .icard p { font-weight:400; font-size:clamp(14px,1.1vw,16px); line-height:1.5; color:var(--warm-gray); margin:0; }
+  /* Grids */
+  #avro-golf-{{ section.id }} .g3,#avro-golf-{{ section.id }} .g4 { display:grid; gap:24px; }
+  #avro-golf-{{ section.id }} .g3 { grid-template-columns:repeat(3,1fr); }
+  #avro-golf-{{ section.id }} .g4 { grid-template-columns:repeat(4,1fr); }
 
-  /* Steps */
-  #avro-golf-{{ section.id }} .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
-  #avro-golf-{{ section.id }} .step { position:relative; padding:28px; background:var(--base-light); border-radius:20px; }
-  #avro-golf-{{ section.id }} .step .num { display:grid; place-items:center; width:30px; height:30px; margin-bottom:18px; border-radius:999px; font-weight:700; font-size:14px; background:var(--charcoal); color:var(--bone); }
-  #avro-golf-{{ section.id }} .step .ic { width:72px; height:72px; margin-bottom:12px; }
-  #avro-golf-{{ section.id }} .step .ic span { display:block; width:72px; height:72px; background:var(--accent-deep); -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; -webkit-mask-size:contain; mask-size:contain; }
-  #avro-golf-{{ section.id }} .step h3 { font-weight:700; font-size:18px; color:var(--ink); margin-bottom:8px; }
-  #avro-golf-{{ section.id }} .step p { font-weight:400; font-size:15px; line-height:1.5; color:var(--warm-gray); margin:0; }
+  /* Reason cards */
+  #avro-golf-{{ section.id }} .reason { position:relative; padding:29px 25px; background:var(--card); border:1px solid var(--line); border-radius:16px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
+  #avro-golf-{{ section.id }} .reason .num { position:absolute; top:29px; right:25px; color:var(--olive); font-size:12px; font-weight:600; letter-spacing:.08em; }
+  #avro-golf-{{ section.id }} .reason .ic { width:64px; height:64px; color:var(--ink); }
+  #avro-golf-{{ section.id }} .reason .ic svg,#avro-golf-{{ section.id }} .reason .ic img { width:64px; height:64px; object-fit:contain; display:block; }
+  #avro-golf-{{ section.id }} .reason h3 { margin-top:14px; }
+  #avro-golf-{{ section.id }} .reason p { color:var(--muted); }
 
-  /* Formula logic graph */
-  #avro-golf-{{ section.id }} .graph { background:var(--base-light); border-radius:20px; padding:clamp(24px,3vw,40px); }
-  #avro-golf-{{ section.id }} .graph h2 { font-weight:900; font-size:clamp(22px,2.6vw,36px); line-height:1.05; color:var(--ink); margin-bottom:6px; }
-  #avro-golf-{{ section.id }} .graph .sub { font-weight:400; font-size:14px; color:var(--warm-gray); margin-bottom:24px; }
-  #avro-golf-{{ section.id }} .grow { display:flex; flex-direction:column; gap:8px; margin-bottom:18px; }
-  #avro-golf-{{ section.id }} .grow .top { display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
-  #avro-golf-{{ section.id }} .grow .nm { font-weight:700; font-size:16px; }
-  #avro-golf-{{ section.id }} .grow .lg { font-weight:500; font-size:11px; color:var(--warm-gray); text-transform:uppercase; letter-spacing:.06em; }
-  #avro-golf-{{ section.id }} .gbar { display:flex; gap:4px; height:14px; }
-  #avro-golf-{{ section.id }} .gbar span { border-radius:999px; }
+  /* Steps (dark) */
+  #avro-golf-{{ section.id }} .steps { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid rgba(255,255,255,.2); }
+  #avro-golf-{{ section.id }} .step { padding:44px 44px 52px; display:flex; flex-direction:column; align-items:flex-start; gap:14px; }
+  #avro-golf-{{ section.id }} .step:first-child { padding-left:0; }
+  #avro-golf-{{ section.id }} .step:last-child { padding-right:0; }
+  #avro-golf-{{ section.id }} .step + .step { border-left:1px solid rgba(255,255,255,.2); }
+  #avro-golf-{{ section.id }} .step .top { width:100%; display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:10px; }
+  #avro-golf-{{ section.id }} .step .num { font-family:"Gotham Golf"; font-weight:900; font-size:52px; line-height:1; color:var(--accent); }
+  #avro-golf-{{ section.id }} .step .ic { width:84px; height:84px; color:#fff; }
+  #avro-golf-{{ section.id }} .step .ic svg,#avro-golf-{{ section.id }} .step .ic img { display:block; width:84px; height:84px; object-fit:contain; }
+  #avro-golf-{{ section.id }} .step .ic img { filter:brightness(0) invert(1); }
+  #avro-golf-{{ section.id }} .step h3 { font-size:16px; }
+  #avro-golf-{{ section.id }} .step p { color:rgba(255,255,255,.7); }
 
-  /* Embedded graphic */
-  #avro-golf-{{ section.id }} .graphic-frame { width:100%; border:0; display:block; color-scheme:light; border-radius:20px; }
+  /* Science cards */
+  #avro-golf-{{ section.id }} .sci { padding:25px 21px; background:var(--card); border:1px solid var(--line); border-radius:16px; display:flex; flex-direction:column; align-items:flex-start; gap:7px; }
+  #avro-golf-{{ section.id }} .sci .ic { width:52px; height:52px; padding:10px; background:var(--accent); border-radius:14px; display:grid; place-items:center; color:#000; }
+  #avro-golf-{{ section.id }} .sci .ic svg,#avro-golf-{{ section.id }} .sci .ic img { width:32px; height:32px; object-fit:contain; display:block; }
+  #avro-golf-{{ section.id }} .sci h3 { margin-top:11px; }
+  #avro-golf-{{ section.id }} .sci p { margin-top:4px; color:var(--muted); }
+  #avro-golf-{{ section.id }} .sci p b { color:var(--ink); font-weight:700; }
+
+  /* Use moments */
+  #avro-golf-{{ section.id }} .moment { overflow:hidden; background:var(--card); border:1px solid var(--line); border-radius:16px; display:flex; flex-direction:column; gap:10px; padding-bottom:24px; }
+  #avro-golf-{{ section.id }} .moment .ph { position:relative; aspect-ratio:4/5; overflow:hidden; }
+  #avro-golf-{{ section.id }} .moment .ph img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  #avro-golf-{{ section.id }} .moment .ph .pill { position:absolute; top:14px; left:14px; z-index:1; padding:6px 12px; background:var(--accent); color:#000; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; border-radius:999px; }
+  #avro-golf-{{ section.id }} .moment h3 { font-size:16px; padding:0 20px; }
+  #avro-golf-{{ section.id }} .moment p { padding:0 20px; color:var(--muted); }
 
   /* Products */
-  #avro-golf-{{ section.id }} .pc-row { display:flex; flex-direction:column; gap:24px; }
-  #avro-golf-{{ section.id }} .pc { display:flex; flex-direction:column; gap:14px; background:var(--base-light); border-radius:20px; padding:clamp(14px,1.8vw,20px); }
-  #avro-golf-{{ section.id }} .pc-thumb { border-radius:16px; aspect-ratio:1/1; overflow:hidden; background:#E5E5E5; }
-  #avro-golf-{{ section.id }} .pc-thumb img { width:100%; height:100%; object-fit:cover; }
-  #avro-golf-{{ section.id }} .pc h3 { font-weight:900; font-size:clamp(22px,2vw,30px); color:var(--ink); }
-  #avro-golf-{{ section.id }} .pc p { font-weight:400; font-size:14px; line-height:1.45; color:var(--warm-gray); margin:0; flex:1; }
-  #avro-golf-{{ section.id }} .pc .btn { width:100%; }
-  @media (min-width:640px){ #avro-golf-{{ section.id }} .pc-row { flex-direction:row; } #avro-golf-{{ section.id }} .pc { flex:1 1 0; } }
-
-  /* Testimonials */
-  #avro-golf-{{ section.id }} .tg { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; }
-  #avro-golf-{{ section.id }} .tc { background:var(--base-light); border-radius:24px; padding:clamp(24px,3vw,36px); }
-  #avro-golf-{{ section.id }} .tc .stars { display:flex; gap:2px; margin-bottom:12px; }
-  #avro-golf-{{ section.id }} .tc .stars svg { fill:var(--accent-deep); }
-  #avro-golf-{{ section.id }} .tc p { font-weight:400; font-size:clamp(17px,1.5vw,20px); line-height:1.4; color:rgba(0,0,0,.75); margin-bottom:16px; }
-  #avro-golf-{{ section.id }} .tc strong { font-weight:700; font-size:17px; color:var(--ink); display:block; }
-  #avro-golf-{{ section.id }} .tc .role { font-weight:500; font-size:14px; color:rgba(0,0,0,.55); }
+  #avro-golf-{{ section.id }} .prods { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  #avro-golf-{{ section.id }} .pc { padding:20px 24px 24px; background:var(--white); color:#000; border-radius:24px; display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+  #avro-golf-{{ section.id }} .pc .tag { align-self:flex-start; padding:6px 12px; background:#EDEDEA; color:#000; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; border-radius:999px; }
+  #avro-golf-{{ section.id }} .pc .thumb { width:100%; margin:10px 0 14px; position:relative; aspect-ratio:1/1; background:var(--cream); border-radius:20px; overflow:hidden; }
+  #avro-golf-{{ section.id }} .pc .thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  #avro-golf-{{ section.id }} .pc h3 { font-family:"Gotham Golf"; font-weight:700; }
+  #avro-golf-{{ section.id }} .pc .desc { font-weight:600; }
+  #avro-golf-{{ section.id }} .pc .best { font-size:14px; line-height:1.6; color:#000; min-height:4rem; }
+  #avro-golf-{{ section.id }} .pc .best b { display:block; margin-bottom:2px; color:var(--olive); font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; }
+  #avro-golf-{{ section.id }} .pc .btn { width:100%; margin-top:auto; }
 
   /* FAQ */
-  #avro-golf-{{ section.id }} .faq-sec { background:var(--base-deep); }
-  #avro-golf-{{ section.id }} .faq { max-width:860px; margin:0 auto; display:flex; flex-direction:column; gap:12px; }
-  #avro-golf-{{ section.id }} .fitem { background:var(--bone); border-radius:16px; overflow:hidden; }
-  #avro-golf-{{ section.id }} .fbtn { width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:22px 24px; background:transparent; border:none; cursor:pointer; text-align:left; font-weight:700; font-size:clamp(16px,1.4vw,19px); color:var(--ink); }
-  #avro-golf-{{ section.id }} .fchev { transition:transform .25s ease; flex-shrink:0; }
-  #avro-golf-{{ section.id }} .fitem.open .fchev { transform:rotate(180deg); }
+  #avro-golf-{{ section.id }} .faq { display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(40px,6vw,96px); }
+  #avro-golf-{{ section.id }} .faq-intro { display:flex; flex-direction:column; gap:16px; }
+  #avro-golf-{{ section.id }} .faq-intro .sub { color:var(--muted); }
+  #avro-golf-{{ section.id }} .faq-list { display:flex; flex-direction:column; }
+  #avro-golf-{{ section.id }} .fitem { border-top:1px solid var(--line); }
+  #avro-golf-{{ section.id }} .fitem:last-child { border-bottom:1px solid var(--line); }
+  #avro-golf-{{ section.id }} .fbtn { width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:24px 0; background:transparent; border:none; cursor:pointer; text-align:left; font-family:"Gotham Golf"; font-weight:700; font-size:clamp(16px,1.4vw,18px); color:var(--ink); }
+  #avro-golf-{{ section.id }} .fsign { flex:0 0 auto; width:34px; height:34px; display:grid; place-items:center; background:var(--accent); color:var(--ink); border-radius:999px; font-size:20px; font-weight:500; line-height:0; transition:transform .3s cubic-bezier(.22,1,.36,1); }
+  #avro-golf-{{ section.id }} .fitem.open .fsign { transform:rotate(45deg); }
   #avro-golf-{{ section.id }} .fbody { max-height:0; overflow:hidden; transition:max-height .3s ease; }
   #avro-golf-{{ section.id }} .fitem.open .fbody { max-height:520px; }
-  #avro-golf-{{ section.id }} .fbody p { padding:0 24px 22px; font-weight:400; font-size:16px; line-height:1.6; color:var(--warm-gray); margin:0; white-space:pre-line; }
+  #avro-golf-{{ section.id }} .fbody p { padding:0 48px 24px 0; font-size:14px; line-height:1.6; color:var(--muted); white-space:pre-line; }
 
-  /* Final CTA band */
-  #avro-golf-{{ section.id }} .cta { background:var(--accent); padding:clamp(56px,8vw,104px) clamp(20px,4vw,64px); }
-  #avro-golf-{{ section.id }} .cta-in { max-width:1320px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:28px; color:var(--charcoal); }
-  #avro-golf-{{ section.id }} .cta-l { flex:1 1 320px; max-width:560px; }
-  #avro-golf-{{ section.id }} .cta-l h2 { font-weight:900; font-size:clamp(26px,4vw,56px); line-height:1.02; letter-spacing:-.02em; margin-bottom:10px; }
-  #avro-golf-{{ section.id }} .cta-l p { font-weight:500; font-size:clamp(15px,1.3vw,19px); line-height:1.5; color:rgba(21,21,21,.7); }
-  #avro-golf-{{ section.id }} .cta-btns { flex:1 1 280px; display:flex; flex-direction:column; gap:8px; max-width:400px; }
-  #avro-golf-{{ section.id }} .cta-btns .btn { width:100%; background:var(--charcoal); color:var(--bone); border-color:var(--charcoal); }
-  #avro-golf-{{ section.id }} .cta-btns .btn:hover { background:transparent; color:var(--charcoal); }
-
-  /* Footer banner */
-  #avro-golf-{{ section.id }} .banner { position:relative; width:100%; overflow:hidden; }
-  #avro-golf-{{ section.id }} .banner img { width:100%; height:auto; display:block; }
-  #avro-golf-{{ section.id }} .banner .btn { position:absolute; left:clamp(16px,4vw,64px); bottom:clamp(16px,4vw,56px); min-width:220px; background:var(--charcoal); color:var(--bone); border-color:var(--charcoal); }
-  #avro-golf-{{ section.id }} .banner .btn:hover { background:transparent; color:var(--charcoal); }
+  /* Final CTA */
+  #avro-golf-{{ section.id }} .final { position:relative; overflow:hidden; min-height:520px; padding:clamp(80px,10vw,128px) clamp(24px,5vw,72px); background:#000; color:var(--white); display:flex; align-items:center; justify-content:center; text-align:center; }
+  #avro-golf-{{ section.id }} .final-bg { position:absolute; inset:0; z-index:0; }
+  #avro-golf-{{ section.id }} .final-bg img { width:100%; height:100%; object-fit:cover; object-position:center 30%; }
+  #avro-golf-{{ section.id }} .final-bg.has-img::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(0,0,0,.6),rgba(0,0,0,.4)); }
+  #avro-golf-{{ section.id }} .final-word { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:"Gotham Golf",sans-serif; font-weight:900; font-size:min(48vw,80vh); line-height:.8; letter-spacing:-.03em; color:#fff; opacity:.03; white-space:nowrap; user-select:none; pointer-events:none; }
+  #avro-golf-{{ section.id }} .final-in { position:relative; z-index:1; max-width:720px; display:flex; flex-direction:column; align-items:center; gap:22px; }
+  #avro-golf-{{ section.id }} .final h2 { color:var(--white); }
+  #avro-golf-{{ section.id }} .final .body { color:rgba(255,255,255,.75); }
+  #avro-golf-{{ section.id }} .final-btns { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
+  #avro-golf-{{ section.id }} .final .btn-ghost { background:#2B2B2B; border-color:#4A4A4A; }
 
   @media (max-width:768px){
-    #avro-golf-{{ section.id }} .hero-card { aspect-ratio:unset; overflow:visible; display:flex; flex-direction:column; }
-    #avro-golf-{{ section.id }} .hero-imgs { position:relative; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:3/4; border-radius:20px; overflow:hidden; flex-shrink:0; }
-    #avro-golf-{{ section.id }} .hero-imgs img { display:none; }
-    #avro-golf-{{ section.id }} .hero-imgs img.m { display:block; }
-    #avro-golf-{{ section.id }} .hero-imgs img.m.on { opacity:1; }
-    #avro-golf-{{ section.id }} .hero-scrim { display:none; }
-    #avro-golf-{{ section.id }} .hero-content { position:static; padding:24px 20px 32px; }
-    #avro-golf-{{ section.id }} .banner .btn { position:static; width:calc(100% - 32px); margin:20px auto 24px; }
+    #avro-golf-{{ section.id }} .hero { min-height:unset; flex-direction:column; align-items:stretch; background:var(--white); color:var(--ink); }
+    #avro-golf-{{ section.id }} .hero-imgs { position:relative; inset:auto; width:calc(100% - 32px); margin:16px auto 0; aspect-ratio:3/4; border-radius:20px; overflow:hidden; flex-shrink:0; }
+    #avro-golf-{{ section.id }} .hero-imgs img { object-position:64% center; }
+    #avro-golf-{{ section.id }} .hero-shade { display:none; }
+    #avro-golf-{{ section.id }} .hero-copy h1 { color:var(--ink); font-size:clamp(36px,9vw,40px); line-height:1; letter-spacing:-.025em; }
+    #avro-golf-{{ section.id }} .hero-copy { position:static; padding:24px 20px 32px; gap:20px; }
+    #avro-golf-{{ section.id }} .hero-copy .body { color:var(--muted); font-size:clamp(17px,4.5vw,20px); line-height:1.55; }
+    #avro-golf-{{ section.id }} .hero-copy .kicker { color:var(--olive); border-color:var(--olive); }
+    #avro-golf-{{ section.id }} .hero-dots { margin-top:4px; }
+    #avro-golf-{{ section.id }} .hero-dots button { background:rgba(0,0,0,.2); }
+    #avro-golf-{{ section.id }} .hero-dots button.is-active { background:var(--olive); }
+    #avro-golf-{{ section.id }} .hero .hero-btns { gap:12px; }
+    #avro-golf-{{ section.id }} .hero .btn { min-height:48px; padding:0 28px; font-size:16px; font-weight:700; border-width:2px; color:var(--ink); background:transparent; border-color:var(--ink); }
+    #avro-golf-{{ section.id }} .hero .btn:hover { color:var(--white); background:var(--ink); border-color:var(--ink); }
+    #avro-golf-{{ section.id }} .ritual { position:static; grid-template-columns:1fr; }
+    #avro-golf-{{ section.id }} .ritual > p { display:none; }
+    #avro-golf-{{ section.id }} .ritual > div { flex-direction:row; align-items:baseline; justify-content:space-between; gap:16px; padding:18px 20px; }
+    #avro-golf-{{ section.id }} .ritual > div + div { border-left:none; border-top:1px solid rgba(255,255,255,.18); }
+    #avro-golf-{{ section.id }} .ritual b { font-size:15px; flex:0 0 auto; }
+    #avro-golf-{{ section.id }} .ritual span { font-size:13px; text-align:right; }
+    #avro-golf-{{ section.id }} .pressure,#avro-golf-{{ section.id }} .faq { grid-template-columns:1fr; }
+    #avro-golf-{{ section.id }} .pressure-img { order:-1; aspect-ratio:4/3; }
+    #avro-golf-{{ section.id }} .g3,#avro-golf-{{ section.id }} .g4,#avro-golf-{{ section.id }} .prods { grid-template-columns:1fr; }
+    #avro-golf-{{ section.id }} .steps { grid-template-columns:1fr; }
+    #avro-golf-{{ section.id }} .step { padding:40px 0; }
+    #avro-golf-{{ section.id }} .step + .step { border-left:none; border-top:1px solid rgba(255,255,255,.18); }
+    #avro-golf-{{ section.id }} .moment .ph { aspect-ratio:4/3; }
+    #avro-golf-{{ section.id }} .head-split { flex-direction:column; gap:16px; }
+    #avro-golf-{{ section.id }} .head-split h2 { max-width:none; }
+    #avro-golf-{{ section.id }} .head-split .sub { max-width:none; margin-top:0; text-align:left; }
   }
-  @media (prefers-reduced-motion:reduce){ #avro-golf-{{ section.id }} * { animation:none !important; } }
+  @media (prefers-reduced-motion:reduce){ #avro-golf-{{ section.id }} * { animation:none !important; transition:none !important; } }
 {% endstyle %}
 
-{%- capture star -%}<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>{%- endcapture -%}
-{%- capture chev -%}<svg class="fchev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>{%- endcapture -%}
-
 {%- assign base = 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app' -%}
+{%- assign blob = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com' -%}
+{%- assign shop_anchor = '#avro-golf-shop-' | append: section.id -%}
 {%- assign reasons = section.blocks | where: "type", "reason" -%}
 {%- assign steps = section.blocks | where: "type", "step" -%}
-{%- assign bars = section.blocks | where: "type", "formula_bar" -%}
+{%- assign sciences = section.blocks | where: "type", "science" -%}
 {%- assign moments = section.blocks | where: "type", "moment" -%}
 {%- assign products = section.blocks | where: "type", "product" -%}
-{%- assign reviews = section.blocks | where: "type", "testimonial" -%}
 {%- assign faqs = section.blocks | where: "type", "faq" -%}
+
+{%- capture icon_calm_before_pressure -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432"><path fill="currentColor" d="M386.7 222c-1 31.8-11 62.6-28.8 89.1l-.8 1.1H75l-.8-1A170 170 0 0 1 45.3 222l-.1-2.6h40a3.3 3.3 0 0 0 0-6.7h-40v-2.6c1.5-41 17.7-80.3 45.9-110.4l1.7-1.9 28.4 28.3a3.3 3.3 0 0 0 5.5-2.3q0-1.3-1-2.3L97.5 93.2l2-1.8a171 171 0 0 1 110.4-46l2.6-.1v40a3.3 3.3 0 0 0 6.6 0v-40h2.6a170 170 0 0 1 110.8 45.9l2 1.7-28.7 28.6a3.3 3.3 0 0 0 0 4.7q1 1 2.4 1t2.3-1l28.7-28.5 1.7 1.8a171 171 0 0 1 46 110.7v2.6h-40.4a3.3 3.3 0 0 0 0 6.7h40.4Zm-37.5 100.8a170 170 0 0 1-133.2 64 170 170 0 0 1-133.2-64l-3.3-4h273ZM216 38.5A177.7 177.7 0 0 0 38.5 216c0 97.9 79.6 177.5 177.5 177.5S393.5 313.9 393.5 216 313.9 38.5 216 38.5"/><path fill="currentColor" d="M230.8 230.6a23 23 0 1 1-32.6-32.2 23 23 0 0 1 32.6 32.2m57-83.2q0-1.4-1-2.3a3.3 3.3 0 0 0-4.7 0l-47.5 47.6-1.8-1.4a29.6 29.6 0 0 0-46.8 15.4 29.6 29.6 0 0 0 56.7 16.7 30 30 0 0 0-2.8-24.1l-1-1.7 47.9-47.9q1-1 1-2.3m-24.6 204.3c0 1.8-1.5 3.3-3.3 3.3h-88a3.3 3.3 0 0 1 0-6.7h88c1.8 0 3.3 1.5 3.3 3.4"/></svg>{%- endcapture -%}
+{%- capture icon_clarity -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432"><path fill="currentColor" d="m393 217-6-.1c-1.8 0-3.5-4.1-5-8-2.3-5.4-5-12-10-15a11 11 0 0 0-12.9 1.8 48 48 0 0 0-9.3 18l-2.7 7.7a35 35 0 0 1-6 12.3 4 4 0 0 1-5.4.4c-3.2-2.4-5.1-8-6.2-11l-4.9-13.7a55 55 0 0 0-4.6-10q-1.4-2.3-3.4-4.2a10 10 0 0 0-12.4-1.1 15 15 0 0 0-4.4 4.5q-2.6 3.9-4 7.9L291 220l-.6 1.5a35 35 0 0 1-6 12.1 4 4 0 0 1-5.6.3c-3-2.7-4.7-7.8-6.1-11.9l-.9-2.6q-2-6.4-4.5-12.7a29 29 0 0 0-8-12.3 10 10 0 0 0-12.3.1q-2.4 1.9-4.2 4.8a43 43 0 0 0-3.7 7.1l-4.3 11c-1.4 3.5-3.7 9.3-6 11.4q-.7.8-1.7.6-.8 0-1.4-.8a28 28 0 0 1-3.5-6.5c-1.5-3.5-3-7-6.1-6.7-2.3.1-3.5 2.3-4.5 4-.4.7-1 1.8-1.4 2q-.4-.3-.9-1.6l-3.1-9.2c-.4-1.2-1.8-1.8-2.8-1.8s-2.3.8-2.7 2l-2.4 9.1-4.3-22.8q-.5-2.4-2.7-2.5-2.2.1-2.8 2.5l-4 23-5.3-32.8a3 3 0 0 0-2.8-2.4c-1.2 0-2.6.9-2.8 2.3l-1.2 10-3.5 28.1-7.5-42.3a3 3 0 0 0-3.3-2.5q-2.3.2-2.6 2.9l-2.4 29.5-.7-4.2a3 3 0 0 0-2.8-2.2c-1 0-2.4.9-2.6 2.2l-.4 2.6-1-10.9-3.2-33.8a3 3 0 0 0-3-2.4c-1.3 0-2.7 1-2.8 2.5l-2 32-1.7 34.4-6.2-41.7c-.2-1.5-1.8-2.4-3-2.2a3 3 0 0 0-2.6 2.8l-3.7 52.2-.8 12.7-1.3-19.5-4.4-73.7-1.7-29a3 3 0 0 0-3-2.9c-1.5 0-3 1-3.1 2.6L99.4 185l-4.2 62-.1 1.9-3-38.6-3.7-44.9q-.4-2.5-2.7-2.9c-1.4-.1-3 .8-3.2 2.5l-4 31.3-1.5-8.1q-.7-2.5-3.2-2.5a3 3 0 0 0-2.6 2.7l-4.7 52-5.7-29.6q-.5-2.2-2.7-2.4-1.8 0-2.8 1.8l-4.3 8.3-.1-.3a3 3 0 0 0-2.6-1.4H39q-1.4 0-2.2 1T36 220q.4 2.4 3.1 2.5H47l1.8 3a3 3 0 0 0 2.7 1.5 3 3 0 0 0 2.4-1.7l3-6 8 41c.3 1.5 1.9 2.3 3.2 2.1q2.1-.3 2.4-2.8l2.7-29.4 2-22.2 1.4 7.5c.3 1.4 1.7 2.2 3 2.1 1 0 2.3-.9 2.5-2.3l2.9-24.2 1.3 17.3 3.4 43 3 32.7c0 1.8 1.3 3 3 2.8q2.3-.2 2.7-2.8l2.2-32.4 2.6-37.6 1.8-25 1-12.3 4.2 67.6 3.6 52.8a3 3 0 0 0 2.9 2.8 3 3 0 0 0 2.9-2.7l5-76.2.4-4.6 6.5 45a3 3 0 0 0 2.8 2.6c1.3 0 2.7-1 2.8-2.6l1.4-28.5 1.7-31.5 3.1 33.9a2.7 2.7 0 0 0 3 2.4q2-.1 2.5-2.5l1.2-8.6 1.4 8a3 3 0 0 0 2.7 2.5c1.3 0 2.7-1 2.8-2.5l1.7-20.4 1-11.1 3 17.8 4.1 23.6q.2 1 1.1 1.6 1.1.6 2.1.4c.8-.1 2-.7 2.3-2.6l3-24.7 1.7-12.7 5 31a3 3 0 0 0 2.8 2.4q2-.2 2.6-2.4l4.2-24.6 3.7 19.2c.4 2.1 1.8 2.6 2.5 2.7q2.4 0 3-2.3l3.3-12.1.6 1.8c.8 2.3 2.9 4.7 5.6 4.7 3.4 0 5.1-3 6.2-4.8l2.7 6q1.3 3 3.3 4.8a7 7 0 0 0 8.8 1q2.1-1.5 3.6-3.7 2-3.4 3.4-6.6l4.2-10.6a40 40 0 0 1 7.4-13.6c2.2-2 5-2 7 0q2 1.8 3.4 4.8c1.5 3 2.8 6 4.1 9.8l4.5 13c1 3 3.4 8.7 7.2 11.5 3.7 3 8.9 2.5 12.2-1 3.3-3.3 5.5-8.7 7.3-14l3.8-11q1.6-4.7 3.7-8.9 1.5-2.9 3.6-4.5c2-1.7 4.8-1.6 6.6.3 3 3 5.4 9 7.3 14.3l4.3 12.1q3.4 9.9 8.3 13c3.8 2.6 8.6 2 12-1.4 3.5-3.7 5.5-9.6 7.3-14.8l.8-2.2 3.3-9.3q1.4-3.9 3.6-7.9 1.5-2.5 3.2-4a5.3 5.3 0 0 1 7.3.2c2.8 2.7 4.6 7 6.3 11.1 2.4 6.1 4.8 11.8 10.3 11.8h6.3q1 0 1.8-.8a3 3 0 0 0 .8-2.2q-.3-2.5-3-2.6"/></svg>{%- endcapture -%}
+{%- capture icon_built_for_ritual -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432"><path fill="currentColor" d="M247.6 396.7h-55.8v-6h55.8ZM265 128.3q-1-.1-2 .6t-1 1.9a3 3 0 0 0 2.5 3c48.2 5 81.8 18.2 81.8 32.3 0 8-12.4 16.7-33.2 23-23.1 7.2-54.5 11.2-88.3 11.2s-65.2-4-88.3-11.1c-20.8-6.4-33.2-15-33.2-23.1 0-8 12.4-16.7 33.2-23a311 311 0 0 1 88.3-11.2 2.8 2.8 0 0 0 0-5.6c-33.5 0-65 3.9-88.7 11-24.8 7.3-38.5 17.6-38.5 28.8s13.7 21.5 38.5 28.8c23.7 7.1 55.2 11 88.7 11s65-3.9 88.7-11c24.8-7.3 38.4-17.6 38.4-28.8 0-17.7-34-32.5-86.8-37.8"/><path fill="currentColor" d="M245.8 35.3a3 3 0 0 0-2.8 2.8v125.3l.1.4.2.3.8 1 .2.2.1.1.2.1h.2l.7.3h.8l.3-.1.4-.2.4-.2h.1l.2-.2v-.1l.5-.6.3-.5v-.1l.1-.8V38c0-1.5-1.2-2.8-2.8-2.8m46.6 16.1-35.2 7.3V44Zm20.4-1.5h-.1L254 37.6l-.8-.2q-1.5.2-1.7 1.7v24.4A1.7 1.7 0 0 0 254 65l58.7-12.2h.2q.8-.7.8-1.5 0-1-.8-1.5"/><path fill="currentColor" d="M264.5 163c0 4-8.4 7.1-18.7 7.1s-18.6-3.2-18.6-7.1c0-3.7 7.2-6.8 16.5-7.2v7.5l.1.3v.2l.1.1.6.7.2.2h.1l.3.2h1.3l.3-.1.3-.2.2-.1.1-.1.4-.5.1-.3v-.1l2.8-7.6c8 .8 13.9 3.6 13.9 7m-64.2-.4a7.6 7.6 0 1 1-15.1 0 7.6 7.6 0 0 1 15 0M102 108.8l-3.8-.1a2.1 2.1 0 1 1 0-4.3l4 .2a2.1 2.1 0 0 1-.1 4.2m15.8 3.1-.7-.1q-3.7-1.3-7.5-2a2.1 2.1 0 1 1 .8-4.2q4 .9 8 2.2a2.1 2.1 0 0 1-.6 4m14.4 7.2q-.6 0-1.1-.4a59 59 0 0 0-6.8-3.9c-1-.5-1.5-1.7-1-2.8q1-1.6 2.9-1 3.8 2 7.2 4.2a2.1 2.1 0 0 1-1.2 3.9m12.1 10.6q-.9 0-1.6-.7-2.5-3-5.5-5.5a2.1 2.1 0 0 1 2.8-3.2q3 2.7 6 6a2.1 2.1 0 0 1-1.7 3.4m9 13.4q-1.2 0-2-1.2a59 59 0 0 0-3.8-6.7 2.1 2.1 0 0 1 3.5-2.4q2.3 3.5 4.2 7.2a2.1 2.1 0 0 1-2 3m5.2 15.3q-1.6 0-2-1.7l-.2-.7a59 59 0 0 0-1.8-6.8 2.1 2.1 0 1 1 4-1.3q1.2 3.5 2 7.2l.1.8a2 2 0 0 1-2 2.5m5 11.9h-6v-2l-.1-3.8a2.1 2.1 0 0 1 4.2-.3v2h1.9a2.1 2.1 0 0 1 0 4.1m10 0h-5a2.1 2.1 0 0 1 0-4.2h5a2.1 2.1 0 0 1 0 4.2m8.9 0h-3.9a2.1 2.1 0 0 1 0-4.2h3.9a2.1 2.1 0 0 1 0 4.2"/><path fill="currentColor" d="M357 188.2q-1.7-13.1-5.3-24.7l-1.4.3q.3 1.2.2 2.2 0 3.7-2.1 7.2l-.2.3v.3a179 179 0 0 1-2.3 88.6l-.2.5c-3 9-7.3 18.2-11.7 27.8l-1.2 2.3-2.1 4q-6 10.6-9.7 26-3.7 12.8-3.7 23v.4h-.3c-26 .8-47-6-58.5-18.6a45 45 0 0 1-10.5-37.4c1.7-8.1 5.8-14.4 11.1-16.9 18.6-8.9 37.2-20.8 34.4-42-3.8-22-16.8-22.6-31.9-23.1-7.6-.3-16.1-.7-24-4.1v-.1h-.2l-8.2.2H227l1.8 1.2c8.7 6 20.3 9.2 33.7 9h.2c12.4.6 22.2 1 25 18 2 19-17.1 28.6-31.1 35.6a31 31 0 0 0-15.2 24.9 50 50 0 0 0 15.2 41c13.2 12.5 34 18.9 59.9 18.2h.4v.3c-1.2 17.5-.3 32.3 0 37.8l.1.4H181v-35h34c1.3 0 2-.8 2.4-1.3q.8-1.7 0-3.4c-.3-.5-1-1.3-2.5-1.3H178q-7.7-.2-15.8 0c-16.9.6-36 1-46.2-9.1q-7.9-7.9-7.5-23.5c-.1-1.2-1.3-2.6-2.4-3.8-1-1.3-2.1-2.5-1.9-3.6v-.1c0-1 1-2.2 2-3.6 1.3-1.6 2.6-3.4 2.3-4.7q-.3-1.1-2.4-2-2.4-.8-3.4-2.6c-1.2-2.6.2-6.2 1.5-9.4l1-2.8 1.2-3.2c1.3-3.4 2.8-7.2 1.6-9.5q-.7-1.2-2.5-1.7h-.2c-8 .3-21.8-.1-25.2-6.7q-2.5-5 3.8-13.3c5.6-7.4 14-18.6 17-60l1.4-15v-.3l-.1-.2a15 15 0 0 1-3-10.3l-1.4-.3-.1.5-1.3 12.1-1.4 13c-2.8 39.7-10.7 50-15.8 57q-8.7 11.5-4.5 19.6c3.6 6.7 13.8 10.4 26.8 9.7h.5l-.1.5q-.9 3-2.3 6.2c-3 7.5-6.3 16 .7 20.6l.3.2-.2.3c-3.3 5-2.7 9.4 2.1 14.6h.1v.2q.1 17.6 9.4 26.5c11.8 11.6 33.6 11.2 52.9 10.8h1.4l8.4-.2h.3v38a3 3 0 0 0 3 3h142.7a3 3 0 0 0 2.6-2.5v-.8c0-.2-2.2-20.2-.3-44l.1-1a177 177 0 0 1 4-25.1q1.3-6 3.3-11.2l.2-.6.3-1a74 74 0 0 1 5-10.5 165 165 0 0 0 21.7-66.5 211 211 0 0 0-.5-45.3"/></svg>{%- endcapture -%}
+{%- capture icon_step_choose -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432"><path fill="currentColor" d="M273.4 156v3l-.7 3q-7.4-1.7-14.9-3-10.6-1.7-21.3-2.6l.5-6a260 260 0 0 1 36.4 5.6m-57.4-6.4v6a255 255 0 0 0-56.7 6.4l-.7-3v-3q28.3-6.3 57.4-6.4"/><path fill="currentColor" d="M273.4 156q-7.8 1.8-15.6 3a256 256 0 0 1-99.2-3v231.7c0 4.6 3.7 8.3 8.3 8.3H265c4.6 0 8.3-3.7 8.3-8.3zm-6 7.4v224.3q-.2 2.1-2.3 2.3H167q-2.1-.2-2.3-2.3V163.4a264 264 0 0 0 102.8 0"/><path fill="currentColor" d="M271 226.2c-10.2 0-15.5-4.2-20.2-7.8-4.4-3.6-8.3-6.6-16.4-6.6s-11.9 3-16.3 6.6c-4.7 3.6-10 7.8-20.2 7.8a29 29 0 0 1-20-7.8c-4.5-3.6-8.4-6.6-16.4-6.6v-6c10.1 0 15.4 4.2 20 7.8s8.4 6.6 16.4 6.6c8.1 0 12-3 16.4-6.6 4.7-3.6 10-7.8 20.1-7.8s15.5 4.2 20.1 7.8c4.5 3.6 8.3 6.6 16.4 6.6ZM220.2 108l15.5 15.5 64.1-64.2L284.4 44Zm15.5 24-24-24 72.7-72.6 23.9 24Zm0 0"/><path fill="currentColor" fill-rule="evenodd" d="M229.2 129.5a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m-3.7 4.5a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0m3.7 4.5a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m-3.7 4.5a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0m3.7 4.6a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m0 24.8a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m-3.7 4.6a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0m3.7-20.2a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m-3.7 4.5a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0m0-9.1a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0m3.7 29.2a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m-3.7 4.6a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0m3.7 4.6a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m-3.7 4.4a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0m3.7 4.5a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m-3.7 4.5a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0m3.7 4.7a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0"/></svg>{%- endcapture -%}
+{%- capture icon_step_mix -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432"><path fill="currentColor" d="M273.4 156v3l-.7 3q-7.4-1.7-14.9-3-9-1.4-18.3-2.3a3 3 0 1 1 .5-6 260 260 0 0 1 33.4 5.3m-57.4-3.4a3 3 0 0 1-3 3 255 255 0 0 0-53.7 6.4l-.7-3v-3q26.8-6 54.4-6.4a3 3 0 0 1 3 3"/><path fill="currentColor" d="M273.4 156q-7.8 1.8-15.6 3a256 256 0 0 1-99.2-3v231.7c0 4.6 3.7 8.3 8.3 8.3H265c4.6 0 8.3-3.7 8.3-8.3zm-6 7.4v224.3q-.2 2.1-2.3 2.3H167q-2.1-.2-2.3-2.3V163.4a264 264 0 0 0 102.8 0"/><path fill="currentColor" d="M271 226.2c-10.2 0-15.5-4.2-20.2-7.8-4.4-3.6-8.3-6.6-16.4-6.6s-11.9 3-16.3 6.6c-4.7 3.6-10 7.8-20.2 7.8a29 29 0 0 1-20-7.8c-4.5-3.6-8.4-6.6-16.4-6.6v-6c10.1 0 15.4 4.2 20 7.8s8.4 6.6 16.4 6.6c8.1 0 12-3 16.4-6.6 4.7-3.6 10-7.8 20.1-7.8s15.5 4.2 20.1 7.8c4.5 3.6 8.3 6.6 16.4 6.6Zm0 0"/><path fill="currentColor" fill-rule="evenodd" d="M229.2 208.7a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0"/><path fill="currentColor" d="M216.4 276.4c-13 0-24.1 13.5-25.3 31-1.2 17.9 8.8 33.1 22.2 34h1.3c12.9 0 24-13.5 25.2-30.9 1.2-18-8.8-33.2-22.2-34zm0 7.6h.7c9 .6 16 12.5 15.1 26-.9 13.1-8.8 23.8-17.6 23.8h-.8c-5.4-.4-9-4.7-10.7-7.2a32 32 0 0 1-4.4-18.8c.9-13.1 8.8-23.8 17.7-23.8"/><path fill="currentColor" d="M217.3 282.9h-.3c-2-.2-3.7-2-3.5-4.1L229 57.2a3.8 3.8 0 1 1 7.6.5L221 279.3c-.2 2-1.8 3.6-3.8 3.6M180 133.8h-.3c-33-3.8-68.1-14-68.1-31.5 0-9.7 11-18 31.8-24.3 19.5-5.9 45.2-9 72.6-9a3 3 0 1 1 0 6c-26.8 0-52 3-70.8 8.7-17.3 5.2-27.6 12.2-27.6 18.6 0 5 5.9 10.2 16.5 14.8 11.5 4.9 27.5 8.6 46.3 10.7a3 3 0 0 1-.4 6"/><path fill="currentColor" d="m177.6 118.5 19.6 13.8-21.7 10Zm77.4 14.9a3 3 0 0 1-.4-6q9.6-1 18.2-3c25.3-5.1 41.6-13.8 41.6-22 0-10.6-24.7-19.5-49.2-23.6a3 3 0 1 1 1-6c34.4 5.9 54.2 16.6 54.2 29.5 0 16.7-32.4 25.2-46.4 28q-8.8 2-18.6 3.1z"/><path fill="currentColor" d="m267.4 88.3-18.8-14.8 22.2-8.9Zm0 0"/><path fill="currentColor" fill-rule="evenodd" d="M250.8 241.1a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m-49.8 5.1a1.8 1.8 0 0 1-3.7 0 1.8 1.8 0 1 1 3.6 0M258 279a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m-81.4-41.9a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m83.2 100.2a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0M234.6 367a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m11.5-56.5a1.8 1.8 0 1 1-1.8-3.2 1.8 1.8 0 0 1 1.8 3.2m-51.3 70.9a1.8 1.8 0 1 1-1.8-3.2 1.8 1.8 0 0 1 1.8 3.2M172 314.1a1.8 1.8 0 1 1-1.8-3.1 1.8 1.8 0 0 1 1.8 3.1m67.9-51.1a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m-58.9 9.5a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.6 0m8.2 74.5a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0"/></svg>{%- endcapture -%}
+{%- capture icon_step_time -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432"><path fill="currentColor" d="M267.4 387.7q-.2 2.1-2.3 2.3H167q-2.1-.2-2.3-2.3V163.4a264 264 0 0 0 102.8 0Zm6-231.7q-7.8 1.8-15.6 3a256 256 0 0 1-99.2-3v231.7c0 4.6 3.7 8.3 8.3 8.3H265c4.6 0 8.3-3.7 8.3-8.3z"/><path fill="currentColor" d="M267.4 226v161.7q-.2 2.1-2.3 2.3H167q-2.1-.2-2.3-2.3V212c6 .6 9.4 3.3 13.3 6.4 4.6 3.6 9.9 7.8 20 7.8s15.5-4.2 20.2-7.8c4.4-3.6 8.3-6.6 16.3-6.6s12 3 16.4 6.6c4.1 3.2 8.7 6.8 16.6 7.6"/><path fill="currentColor" d="M271 220.2v6q-2 0-3.6-.2c-8-.8-12.5-4.4-16.6-7.6-4.4-3.6-8.3-6.6-16.4-6.6s-11.9 3-16.3 6.6c-4.7 3.6-10 7.8-20.2 7.8s-15.4-4.2-20-7.8c-3.9-3-7.3-5.8-13.3-6.4l-3.1-.2v-6l3 .1c8.3.8 13 4.5 17 7.7 4.5 3.6 8.4 6.6 16.4 6.6 8.1 0 12-3 16.4-6.6 4.7-3.6 10-7.8 20.1-7.8s15.5 4.2 20.1 7.8a24 24 0 0 0 16.4 6.6"/><path fill="currentColor" fill-rule="evenodd" d="M229.2 208.7a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0"/><path fill="currentColor" d="M273.4 156v3l-.7 3v.1a267 267 0 0 0-58.7-6.6q-5.4 0-10.7.4h-.6a255 255 0 0 0-43.4 6.1l-.7-3v-3q21.6-4.9 43.8-6h.3a216 216 0 0 1 44.9 1.5l1.2.2a253 253 0 0 1 24.6 4.3m-30.4 1 2.2.3zm-40.9 127 6.5-3.6V307l-6.5-6Zm0-25.4 6.5-6v25.9l-6.5-3.6Zm-16.2 24-5.9-3.2 5.9-3.1h15l5.8 3.1-6 3.2Zm21.3 25.6h-29.1l6.7-6.4h15.7Zm-6.7-50.4h-15.7l-6.7-6.4h29.1ZM244 284l6.5-3.6V307l-6.5-6Zm0-25.4 6.5-6v25.9l-6.5-3.6Zm5 49.6h-29l6.6-6.4h15.8Zm-6.6-50.4h-15.8l-6.6-6.4h29Zm-17.3 43.1-6.5 6v-26.5l6.5 3.6Zm0-26-6.5 3.6v-25.8l6.5 6ZM212 341.7l3.7-2.1v15.9l-3.7-3.4Zm0-14.6 3.7-3.4v14.8l-3.7-2Zm-14.8 26.6v-12.3l1.9-1.8 1.8 1.8v12.3l-1.8 1.8Zm0-27 1.9-1.8 1.8 1.7v10.1l-1.8 1.8-1.9-1.8Zm-14-3.7H215l-3.8 3.6h-8.5l-3.5-3.3-3.5 3.3H187Zm3 29-3.7 3.5v-15.9l3.7 2Zm-3.7-28.3 3.7 3.4v9.3l-3.7 2.1Zm39.1 18 3.7-2.1v15.9l-3.7-3.4Zm0-15.4 3.7-3.3v15.5l-3.7-2Zm24.2 15.4 3.7-2.1v15.9l-3.7-3.4Zm0-14.6 3.7-3.4v14.8l-3.7-2Zm-1-.5h-9L232 323h16.7Zm-9.8 25.5-3.8 3.4v-15.9l3.8 2Zm0-15.7-3.8 2.1v-14.8l3.8 3.4ZM176 75.3l20-8.3h3.2v4l-21.1 8.7-3.8-.9Zm-1.6-21.7 3.8-1 21.1 8.8v4h-3.2L176 57.2ZM205 75.3l20.3-8.3h3.2v4l-21.1 8.7-3.9-.9Zm-1.5-21.7 3.9-1 21 8.8v4h-3.1l-20.2-8.3Zm30.7 21.7 20.3-8.3h3.1v4l-21 8.7-4-.9Zm-1.5-21.7 3.8-1 21.1 8.8v4h-3.1l-20.3-8.3ZM176 113.3l20-8.3h3.2v4l-21.1 8.7-3.8-.9Zm-1.6-21.7 3.8-1 21.1 8.8v4h-3.2L176 95.2Zm30.6 21.7 20.3-8.3h3.2v4l-21.1 8.7-3.9-.9Zm-1.5-21.7 3.9-1 21 8.8v4h-3.1l-20.2-8.3Zm30.7 21.7 20.3-8.3h3.1v4l-21 8.7-4-.9Zm-1.5-21.7 3.8-1 21.1 8.8v4h-3.1l-20.3-8.3Zm0 0"/></svg>{%- endcapture -%}
+{%- capture icon_pharmagaba -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432"><path fill="currentColor" d="M319.7 70.4a346 346 0 0 0-23.6 7.2A27 27 0 0 0 286 87.9c-2 2.8-3.8 5.5-6.2 7.3a32 32 0 0 1-15.2 5.7 55 55 0 0 0-35.1 18.5l-8.2 9 4-11.5v-.4l.2-.7A36 36 0 0 1 253 89.6l.5-.1c4.7-1.3 9.5-2.7 13.7-5.8 4-3 6.8-7 9.4-10.8 3-4.4 5.8-8.5 10-10.5q2.8-1.3 6.9-1.3 4.6.1 8.7 1l17.4 3.4 10.6 2Zm-.4 11.3-.4.6-.6.8a139 139 0 0 0-8 14.4l-.7 1.4q-3.3 6.6-7 12.5c-3.2 4.7-11.7 15.5-23.4 15.7a30 30 0 0 1-9.6-1.5l-1.2-.3q-4.5-1.3-9.5-2a40 40 0 0 0-23.3 6l-12.7 7.4 9.5-11.2a50 50 0 0 1 32.8-18.3c6.8-.8 13.2-3.2 18.3-7 3.2-2.3 5.5-5.7 7.6-8.7 2.5-3.6 4.6-6.7 7.7-8.2 2.3-1 10.6-3.5 17.7-5.5l7-2ZM247 167.8V190h-62v-22.2Zm-5.6 196.5a25.4 25.4 0 0 1-24.3 25.3H216c-14 0-25.4-11.3-25.4-25.3v-168h50.7v122.8Zm-33.9-261.6A104 104 0 0 0 160.3 62c-1.6-.7-3.5 0-4.2 1.6q-.6 1.2-.1 2.4a3 3 0 0 0 1.6 1.8 97 97 0 0 1 47.3 42.7l5 9.7-8.8-6.5-3-2a43 43 0 0 0-21.8-7h-.5l-2.9.1q-5 .6-9.5 1.9l-.9.2a35 35 0 0 1-10 1.6c-11.7-.2-20.2-11-23.3-15.6-3-4.3-5.3-9-7.8-13.8V79c-2.5-4.7-5-9.7-8-14.2a45 45 0 0 0-4.3-5.4l-4.6-5 6.8.8q12.7 1.6 24 4.6a3.2 3.2 0 0 0 3.6-4.6 3 3 0 0 0-2-1.5q-5.5-1.5-12.2-2.8l-11.5-2.2 12.3-3 4.3-.9q24.1-4.3 48.2-1c6 .8 13 2.1 18.4 5.7a34 34 0 0 1 13 20.9q2 8.6 2.8 30.8l.4 9.8Zm140.3-38.1-2-.4-42.5-8.3c-6.2-1.2-13.3-2.1-19.5.8-5.7 2.7-9.3 8-12.5 12.6-2.5 3.6-4.8 7-8 9.3s-7.3 3.5-11.6 4.8l-.8-2.5.7 2.5q-4.2 1.1-8.5 2.8a43 43 0 0 0-19.7 18.8l-4.4 8-.3-9.1a233 233 0 0 0-3.1-35 39 39 0 0 0-15.7-24.7 50 50 0 0 0-21-6.7 160 160 0 0 0-66.4 5 96 96 0 0 1-27.6 5 3.3 3.3 0 0 0-3.3 3 3 3 0 0 0 3.1 3.3c8.8.2 17.3 5.5 23.4 14.5q4.3 6.5 7.6 13.7 3.6 7.3 8.2 14.5c7.8 11.5 18.2 18.2 28.6 18.3 4.3 0 8.6-1 12.4-2h.1q4.4-1.2 8.5-1.7a35 35 0 0 1 21.2 6 166 166 0 0 1 17.3 14l.8.7v29.7h-25.3c-5 0-8.9 4-8.9 8.9v17q.1 5 4.5 7.7l1.2.8v168.4a31.7 31.7 0 0 0 63.4 0V196l1.2-.8a9 9 0 0 0 4.5-7.6v-17.1c0-5-4-8.9-8.9-8.9h-25.3V149l.8-.8c5.4-4.9 11.4-8.9 17.2-12.5 5-3.1 12.8-6.8 21.2-6q4.1.6 8.5 1.7c3.7 1 8 2 12.5 2 10.3 0 20.7-6.8 28.4-18.4q4.6-7.2 8.1-14.6 3.6-7.4 7.7-13.8c4.9-7.4 13.7-15.5 23.7-15.7 1.6 0 2.9-1.3 3-2.9s-1-3-2.5-3.4"/><path fill="currentColor" d="M216 265.3c-9 0-13.6-3.7-17.7-7-3.8-3.1-7.1-5.8-14-5.8v-6c9 0 13.6 3.8 17.7 7 3.8 3.2 7.1 5.8 14 5.8s10.2-2.6 14-5.7c4-3.3 8.7-7 17.7-7v6c-6.9 0-10.2 2.6-14 5.7-4 3.3-8.7 7-17.7 7"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="6" d="M216 192.9v142.2"/><path fill="currentColor" fill-rule="evenodd" d="M228.4 271.4a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m10.7 14.7a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0m-8.1 22.7a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0m-7 18.9a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.6 0m17.5 21a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m-22.8 0a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0m9.3 17.7a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m-21.9-32a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.6 0M198 314a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.6 0m9.9-16a1.8 1.8 0 0 1-3.7 0 1.8 1.8 0 1 1 3.7 0m-10.5-19.7a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m-.3 86.3a1.8 1.8 0 1 1-3.7 0 1.8 1.8 0 0 1 3.7 0m12.6 18.4a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0"/><path fill="currentColor" d="M150.6 60.6a3.1 3.1 0 1 1-6.2 0 3.1 3.1 0 0 1 6.2 0"/></svg>{%- endcapture -%}
+{%- capture icon_calm_foundation -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432"><path fill="currentColor" d="M375.2 263.4c-17.1 29.7-36.3 43.2-49.5 49.4q-9.2 4.2-20 6.5-10.7 2.1-22.8 2.1a172 172 0 0 1-47.2-7.2l-8.8-2.6 8.6-3.2c21.7-8 61-26.6 80.2-61.6q5.3-9.7 8.6-21l.6-2.2h2.4a174 174 0 0 1 57.7 12l2.9 1.2-1.2 2.8c-2.2 5.7-6 14.4-11.5 23.8m-142.6 82 3 5-5.7-.3a354 354 0 0 0-27.6 0l-5.8.2 3.1-4.9q7.5-11.8 13.8-23.8l2.7-5.2 2.7 5.2q6.3 12 13.8 23.8m-36.4-31.2a171 171 0 0 1-47.1 7.2q-24.2 0-42.8-8.6c-14.5-6.8-41.8-25.3-61-73.2l-1.2-2.8 2.9-1.2a172 172 0 0 1 57.7-12h2.4l.6 2.2q3.3 11.3 8.6 21c19.3 35 58.5 53.6 80.1 61.6l8.7 3.2Zm-85-145.7q0-1.8.4-3.4 1.5-12.5 4.7-24.8l.7-3 3 .8c8.3 2.3 21 6.3 34.5 12.6l2.5 1.2-1 2.6q-4 11.9-5.7 23.5v.5a103 103 0 0 0-.6 21.5v1.1q1.2 11 4.4 22.1a145 145 0 0 0 8.1 21.4 184 184 0 0 0 20.4 33l1.9 2.4a201 201 0 0 0 11.7 14l9 10-12.4-5a202 202 0 0 1-28.7-14.6l-.3-.2-4.3-2.8-.4-.3-.5-.3-3.8-2.7-.2-.2-1.7-1.2-.3-.2-4.6-3.7q-16.2-13.6-25-29.6a92 92 0 0 1-10.2-28 133 133 0 0 1-2.6-23v-1.7q-.2-10.8 1-22m53-8.6a123 123 0 0 1 5-13.2c12.4-27.5 33-50 44.2-60.9l2.3-2.2 2.1 2.3c5 5.5 12.6 14.3 20.2 25.2a182 182 0 0 1 22.9 45.1q1.2 3.5 2 7 4 14.8 4 28.9 0 31-18.6 64.4A200 200 0 0 1 236 276v.3l-.7.7a233 233 0 0 1-14.2 17.7l-2.7 3-.6.7-2.1 2.1-2.2-2.1-2.5-2.6-9.8-10.4a200 200 0 0 1-29.4-42.7q-13-26.2-13-50.6 0-15.7 5.4-32.2m106 70 .8-2.6a124 124 0 0 0 5.3-37.7q-.3-16.1-5.3-32.8l-.7-2.4 2.2-1.2c15-7.7 29.8-12.4 39.6-15l3-.9.7 3c1.7 6.4 3.9 16.5 5.1 28.2q1.6 15 .7 28.9v.8l-.5 5-.2 1.5v1l-1.6 9.4-.5 2.4h-.1a92 92 0 0 1-24.1 45.5 151 151 0 0 1-42.3 30.1q-7 3.5-14.7 6.5h-.3l-.9.4-11 4.1 7.6-9 1.8-2.1.2-.2q9-11.1 16.3-22.7v-.4l.6-.7q.6-.7 1.7-2.7l.7-1.3a194 194 0 0 0 16-35m59.9-12.8-3.6-.1.6-3.5c6.8-37.6-3.8-75.3-7-85.2a214 214 0 0 0-49.4 17.2l-3 1.5-1.2-3c-15-37.7-43-66.1-50.5-73.4a230 230 0 0 0-54.9 71.4l-1.3 2.8-2.8-1.3c-20-9.4-38.6-13.8-45.2-15.2-3.1 9.9-13.8 47.6-7 85.2l.7 3.5-3.6.1c-30.2 1-57.8 12.4-65.9 16 4 12.2 24.2 65.2 67.5 85.4a107 107 0 0 0 45.6 9.3c19.2 0 36.8-4 48.3-7.3l7.1-2-3.6 6.4q-10.5 19-23.5 36.4a343 343 0 0 1 77.4 0 341 341 0 0 1-21.3-32.4l-2.1-4-3.6-6.4 7 2a174 174 0 0 0 48 7.3q25.8 0 45.7-9.3c43.3-20.2 63.4-73.2 67.5-85.4-8-3.6-35.7-15-66-16"/></svg>{%- endcapture -%}
+{%- capture icon_mind_body -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 864 864"><path fill="currentColor" d="M696.6 742.4q0 27-8 53.5-.7 2.7-2 3.6c-.3.3-1.5 0-1.8-.2-.5-.4-.8-1.6-.5-2.4 4.4-13.4 7-27.7 7.9-43.8 1-18.5-1.7-43-6.6-61l-9.8-35c-.5-1.9-1.8-2.2-3-2.4l-.5-.1a11 11 0 0 1-8.3-9.5c-.6-4.6 2-9.1 6.3-11.3.4-.2 1-.9 1-.9l.4-.3v-.5c-1-8.5-1.3-18-1-29.6l.5-29.3a105 105 0 0 0-3-25 96 96 0 0 0-52.9-68.5q-1-.7-2-.3-.7.4-1.2 1a11.4 11.4 0 0 1-13.5 2.2c-4.5-2.2-7-7-6.4-12.2l.1-.7-.6-.3a83 83 0 0 0-8.5-3.7c-11.8-4.2-23.8-7.2-35.5-10.2a529 529 0 0 1-26.4-7.1c-30.4-9.4-50.8-21-66-37.5a87 87 0 0 1-19-33l-.3-.7c-.1-.4-.4-1.3-1.3-1.3l-.8.1-.1 1-.2 1.6v71.8l.6.2c4.4 1.5 6.3 5.7 7.8 10v.3l.4.2c9 6.1 15.6 11.3 21.6 16.8l18.8 17.4c13 12 35.6 26.9 53.8 32l.8.3.3-.8c2.8-5.4 8.7-8 14.3-6.5 5.6 1.6 9.2 7.2 8.6 13.2v.2c-.1 1-.3 2.2.6 2.7l1.5 1a85 85 0 0 1 27.4 28.4 101 101 0 0 1 14 44c0 .9-1 1.8-1.7 1.9a2 2 0 0 1-1.4-.5q-.5-.3-.7-1.2a96 96 0 0 0-13-40 85 85 0 0 0-27.4-28.6c-.6-.4-2.1-.8-3 0a12 12 0 0 1-13 2 13 13 0 0 1-7.4-10l-.1-.5-.6-.2a141 141 0 0 1-46-25c-6.9-5.6-13-11.3-19.4-17.3L455 476a83 83 0 0 0-13-9.6l-.7-.5-.6.8a13 13 0 0 1-6.4 5.7l-.7.2v73.5c0 1.3 1 2 2.1 2.7 1.9 1.1 4.7 2.9 6 8.4l.1.4.5.2c5.5 2.8 11.3 6 16.3 10.8q6 5.9 12 12.7c12.7 14.3 21.7 23.2 39.7 28 23.4 6 33.7 13.8 45.5 34.7l.3.5h.5c4.8.2 8.6 2.1 10.5 5.3a11 11 0 0 1-.6 12.8c-2 1.3-.9 4 0 6.3a120 120 0 0 1 10.3 48.9l-.3.2q-.8.8-1.5.6-1-.4-1.1-.7l-.1-.2-.3-.6-.9-11.3-.7-5.4q-2.7-16-9.6-32l-.2-.5s-.6-1.1-1.5-1.1h-4l-1.1-.2h-.3l-2.3-.9-.4-.2-1.6-1-.4-.3-.2-.2-.5-.6-.3-.3v-.1h-.1l-1.3-2-.4-1-.5-1.4-.1-.4-.1-1v-.6l-.1-1v-.5l.2-1.7.1-.6 1.3-3 .4-.3.4-.6.3-.3.6-.6.4-.5.8-1.3-.3-.5a57 57 0 0 0-31.9-28.3q-6-2-12.1-3.6l-.6-.2c-18.6-5.1-28.2-15.9-40.3-29.5l-1.6-1.7a72 72 0 0 0-22.6-19l-.9-.4-.4.8q-2.4 4.4-6.4 5.8l-.7.3v85.5l.6.2c4.2 1.2 7 5.1 7.8 10.6v.5l.5.2q8.2 4 16.2 10.1a256 256 0 0 1 17.8 16.5 124 124 0 0 0 26 20 123 123 0 0 1 17.4 12 65 65 0 0 1 19.5 28.9l.2.6h.6c4.7.5 8.6 3.3 10 7.4 1.6 4.2.4 8.8-3.1 12.6l-.4.4.1.5c2.3 11.8 4 22.7 1.1 36.2q-.5 1.7-2 1.8a2 2 0 0 1-1.3-.8q-.4-.4-.3-1.4A84 84 0 0 0 543 778l-.3-.9-.8.1a11 11 0 0 1-11.9-7c-1.8-4.9 0-10.2 4.4-13.3l.6-.4-.2-.7c-6.6-19.1-22.4-30.2-35.4-37.6a119 119 0 0 1-25.5-19.8l-1.2-1.1c-9-9.2-19.4-19.7-31-25l-.8-.3-.5.7a15 15 0 0 1-6.2 5l-.6.3v109.2l.7.3q4.6 1.7 6.5 6 1.7 4.2 0 8.4a10.6 10.6 0 0 1-15.1 5.4 11 11 0 0 1-5.6-10.3c.2-4 2.8-7.5 6.8-9.5l.6-.2V677.7l-.5-.3a17 17 0 0 1-5.3-4.2l-.5-.6-.7.4q-9.2 5-16.5 12.4l-14.7 15a116 116 0 0 1-23.2 18.5c-16.5 9.9-29.6 18.8-36.3 37.1l-.3.8.7.4c4.4 2.7 6.2 7.7 4.6 12.7-1.5 4.9-6 7.9-11.3 7.5h-.8l-.2.7a83 83 0 0 0-1.3 33.6c.1 1-.9 2-1.4 2-1 .2-2.2-.4-2.4-1.6a82 82 0 0 1 1.4-35.7l.2-.6-.5-.4a11 11 0 0 1-4-12 11 11 0 0 1 9.8-7.6h.7l.2-.7q4.6-14.9 17.3-26.2c6-5.4 11.5-8.8 17.3-12.4a139 139 0 0 0 26.5-20.4l14.4-14.4q8.7-8.5 18.8-13.9l.6-.3v-.6c-.3-4.7 2.2-8.8 6.8-11.2l.6-.3V605l-.2-35-.6-.3q-4.4-1.7-6.4-6.5l-.4-.8-.9.2a63 63 0 0 0-24.8 18.8l-14 15.3a62 62 0 0 1-17.2 13.4c-5.3 2.8-10.3 4.2-15.2 5.6a61 61 0 0 0-41.5 33.1l-.4.7.6.5a11 11 0 0 1 2.6 13.3c-2 4.3-6.9 6.7-11.8 5.8l-.8-.2-.3.8a125 125 0 0 0-11 48l-.3.4q-1 .6-1.6.4a2 2 0 0 1-1.6-2c0-15.4 3.5-31 11.1-48.8l.3-.6-.5-.5a10.8 10.8 0 0 1 8.7-18.8h.7l.3-.5c7-13.2 16.8-27.5 35.7-34q5.8-2 10.6-3.3c17.5-4.8 26.3-14.6 37.3-26.9l3-3.3c8.7-9.6 17-18 30-22.4l.4-.1.2-.5q2.3-6.8 7-8.4l.5-.3.2-.7.1-1.4v-72c0-1.3-.9-1.8-1.7-2.2-1-.6-2.6-1.4-4.6-4.3l-.1-.2q-.4-.7-1-.8-.7.1-1.2.5-7.9 4.9-14.4 11.1l-20.6 20a181 181 0 0 1-29.5 23.2 124 124 0 0 1-27.5 12.6l-.5.2-.2.5c-1 5-4 8.8-7.7 10.1-4.9 1.7-9.7.6-13.2-3l-.6-.5-.7.4a85 85 0 0 0-38.7 68.7q0 .6-.5 1-.6.6-1.6.5-1.7-.4-1.7-2.4c.4-6.8 1.5-13.4 3.4-21a84 84 0 0 1 37.2-51.2l.6-.4-.2-.7a12 12 0 0 1 7.2-13.7c5.2-2.4 11.7-.2 14.8 5 .3.5 1.4 1.1 2.2.9a138 138 0 0 0 50.2-30.3l24.9-23.4a107 107 0 0 1 17.4-13.2l.4-.2.1-.5c.4-2.4 1.6-6.8 5.4-8.8l.7-.3c1.7-1 1.7-3 1.7-4.6v-.3l1.2-70.1v-.2c-.1-.6-.3-1.5-1.2-1.5-1 0-1.2.9-1.3 1.4l-1.4 4.6c-5 16.9-8.6 29-36.4 47.7-18 12-38.1 17.1-59.4 22.5l-34.7 8.8c-7.7 2-15.1 5-20.7 7.4l-.6.3v.6q0 7-3.5 10.2a12 12 0 0 1-8.6 3.2q-4.7-.4-7.7-3.7c-.4-.5-1.5-1.7-3-1-30.2 13-51.2 42.7-56.2 79.2a167 167 0 0 0-1 31.8c.5 12.5 1 27.4-.6 43l-.1.8.7.3a11 11 0 0 1 6.9 11.9 11 11 0 0 1-10 9.5h-.6l-4.4 17.1c-2.3 8.8-4.4 17-6.3 26-7.4 36-6.4 70.9 2.9 100.9q.1.5-.2 1-.6.8-1 1c-.8.2-2.1-.2-2.5-1.3-8.6-25.7-10.5-59-5.3-91.4 2.3-14.5 5.9-28.3 9-40.2l3.3-12.1c.3-1.3-.7-2.2-1.9-3a11 11 0 0 1-4.6-7.9c-.6-5.5 3.2-10.6 9.1-12l.7-.2v-.7a255 255 0 0 0 .8-38.5 269 269 0 0 1-.3-26.4c2.2-43 25.5-78.9 60.9-93.6l.7-.2v-.8c-.5-5.2 2.2-9.9 6.8-11.8 5-2.2 10.2-.8 13.7 3.5l.5.6.6-.3c17-6.7 33.5-10.6 51-14.8l2.3-.5c14.4-3.4 26.2-6.9 37.1-10.8q53-19.1 61.7-63.6l.1-.4-.3-.4q-3.7-4.5-2.6-9.4 1.1-4.6 5.8-7l.6-.3v-140l1.8.7q2 .8 4.6 1.4v135.6c0 1.9 1.1 2.5 2.1 3a10 10 0 0 1 5 6.3c.7 3 0 6.5-1.8 9.5l-.2.3v.3a61 61 0 0 0 8 20.4q16.3 28.7 57.7 44.8a332 332 0 0 0 41.8 12.5c15 3.7 32 7.9 46.4 14 1.4.7 2.3 0 3-.7 3.5-3.5 8.9-4.4 13.4-2.3 4.2 2 6.7 6.8 6.2 11.9v.6l.6.4a96 96 0 0 1 48 46.5c8.6 18 12.5 38 11.9 61.1l-.8 31q-.1 7.7.7 15.3l.3 2.5c0 1 1.3 2.1 2.1 2.3 4 1 7 4.3 7.7 8.5.8 4.6-1 8.9-4.7 11.5q-1.5 1-1 2.8l9 32a207 207 0 0 1 7.6 54.3"/><path fill="currentColor" d="M745.4 826.2c-1 1.3-2.8 1.6-4.4 1.3q-3-.8-3.5-3.8l-7.7-40.5c-3.9-20-5-40-6.6-60.4l-3-38.4a277 277 0 0 0-6-37.2 241 241 0 0 1-5-52l.3-38q0-14.8-3.3-29.3a127 127 0 0 0-24.5-53.3q-10.7-13.3-25.2-22.2a189 189 0 0 0-53.3-20.7 440 440 0 0 1-35.7-10.8c-17.3-6.2-33-14-45.7-27.3-17-17.6-18.5-36.5-19-59.7a104 104 0 0 1 9.6-46.1c4.5-9.7 9.9-18.5 15.6-27.5 12.8-20.2 22.4-39 26.2-62.9 4.7-29.5 1.2-61.4-12.5-88.2q-11.6-22.7-32-38.1-19.7-14.8-43.8-21.3c-55-14.7-120.7 1-152.9 51-13.7 21.3-22.3 50.3-16.6 75.6 3 13.4-2.8 26.3-9.4 37.8q-5.7 9.7-12.4 18.7a64 64 0 0 0-6.4 9.9 6 6 0 0 0 2.6 8.3c5.2 2.9 16.6 4.3 23 5.2 1.9.2 3.5 1.8 3.6 4 1 15-7.7 20-2.9 24.4 2.5 2.4 6 2.4 6.7 5 2 6.5-8.4 6.3-4.8 11.5q5.3 7.5 5.1 16.8l-.4 12.9a10.4 10.4 0 0 0 9.5 10.9q8.4 1.2 17.3.6l30-1.5a6 6 0 0 1 6.4 4.8q3.5 15 1.8 30.2-1.7 13.2-11.7 21.5a76 76 0 0 1-17.2 10.7 314 314 0 0 1-57.3 18.5l-32.8 8.2a149 149 0 0 0-24.3 8.6A109 109 0 0 0 166 502c-12.4 30.4-13 60.2-11.7 92.6a206 206 0 0 1-4.5 51.4 518 518 0 0 0-9.2 81.3 411 411 0 0 1-7.1 60l-7.6 37.6c-.4 2.3-3 3-5 2.7a4.4 4.4 0 0 1-3.2-5l8.7-44.7c2.3-12 3.7-23.7 4.5-35.9l2.6-38.2c1.4-19.9 3.9-39 7.8-58.6 8.4-41.5 3-48 4.5-85.8 1.2-31.5 9.2-64.3 29-89.3q17.5-22 43-33.7c8.8-4 17.5-7.3 27-9.6l37.9-9.5c19-4.7 59.5-15.2 71.3-31 6.9-9.5 4.6-26.4 2.9-37.4q-20.8 2.1-41.2 1.5c-10-.3-19.3-3.7-22-14.3-2-8.5 1.2-15.6-1-24.2-1.7-6-9.5-11.8-2.2-19.8v-.7a12.4 12.4 0 0 1-4.1-16.2q2.7-5.3 2.8-11.4l-12.5-2.4q-5.7-1-10.6-3.8c-8.2-5-8.3-14.9-3.3-22l7.7-10.8a99 99 0 0 0 18-35.2q1.3-5.6-.1-11.2c-2-8.8-2.7-17.2-1.9-26.2 3.4-34.7 21-66.2 48.8-87.3a138 138 0 0 1 45.4-22.5c47.8-13.8 104-5.6 142 28.2a119 119 0 0 1 32 47.1 156 156 0 0 1-10.6 131.5L530 272.6c-3.8 6.3-7.3 12.3-10.3 19q-7.7 16.1-8.4 34c-.3 9.8 0 19 1 28.6 2.4 22.1 16.4 38 35.1 48.4 26.7 15 55.7 18.8 83.8 28.6 28.8 10 51.7 25.6 67.3 52.4 16.6 28.6 20.3 56.8 19.7 89.5l-.4 24.6c-.6 30.7 5.9 46.8 9.8 75.8q2.9 22.9 4.1 45.8a525 525 0 0 0 8.7 73l5.9 30a5 5 0 0 1-.9 4"/><path fill="currentColor" d="M241.8 693.7a700 700 0 0 1-11 57.4l-8.1 35.3a206 206 0 0 0-4.5 38c-.1 2.2-2.5 3.4-4.1 3.4-2 0-4.2-1.4-4.2-3.7a272 272 0 0 1 10-64.6c4.7-19.3 9-38.3 11.5-58.1q4.3-31.9 2.6-64.1l-1.8-33.6c-.1-2.8 1.1-5 4-5.4a5 5 0 0 1 5.3 4c2.7 20.5 4.4 40.8 6 61.5q2 26.9 7.6 53.1l8.7 40.4c5 23.5 8 43 8 67.1 0 2.2-2.3 3.5-4 3.5-1.6 0-4.3-.9-4.4-3.2q-1-33.2-8.4-65.8l-6-27.7c-2.7-12.5-5-24.6-7.2-37.5m384.4 46.6a389 389 0 0 1-8.4-46c-2.2 14.8-5 29-8.1 43.6l-7.7 35a269 269 0 0 0-6 51.5c-.1 2.6-2.6 3.7-4.5 3.6-2.5-.2-4-2.2-4-4.8a224 224 0 0 1 4.7-45.5l8-36.8c3-14.6 5.8-28.9 8-43.7 1.6-11.2 2.3-22 3.4-33.2l6-61.7c.2-1.6 1.9-3 2.9-3.6a4 4 0 0 1 4.5.5q2.2 2.3 1.9 5.9a439 439 0 0 0 1.9 102.7c2.6 16 6 31.3 10.2 47 3.3 12.4 6.2 24.4 8.6 37q2.8 15.3 3.3 30.9c0 2.8-1.4 5-4 5.1-3 .2-4.6-2-4.7-4.9-.7-15.3-2.8-30-6.6-45Zm-200.9-500-.2-.2h-.1"/><path fill="currentColor" fill-rule="evenodd" d="M529 217.3a8.7 8.7 0 1 1 0 17.4 8.7 8.7 0 0 1 0-17.4m14-33a5.2 5.2 0 1 1 0 10.5 5.2 5.2 0 0 1 0-10.5m-92.1 57.4a8.7 8.7 0 1 1 0 17.5 8.7 8.7 0 0 1 0-17.5m-30-8.7a5.2 5.2 0 1 1 0 10.5 5.2 5.2 0 0 1 0-10.5m-32.5-90a9 9 0 0 1-4.4-6c-6.5.6-8.9 4.7-11.2 8.7-4.3 7.3-8.4 14.3-25.6 8.3a15 15 0 0 1-8.3-7.1 24 24 0 0 1-2.7-11.7 2.7 2.7 0 0 1 5.4.1q0 4.8 2 9 1.9 3.3 5.3 4.6c13 4.6 16-.6 19.2-6 3-5.1 6.2-10.4 14.3-11.3a33 33 0 0 1-6.9-38.6q-5-1.8-9.4.8a25 25 0 0 0-7.7 8 8.7 8.7 0 0 1-.3 12 30 30 0 0 1-1.4 22.6 2.7 2.7 0 0 1-4.9-2.3 24 24 0 0 0 1.4-17.8l-1.3.1a9 9 0 0 1-8-5.2q-5.4 1.5-9.9 4.6a29.6 29.6 0 0 0-5.5 43.3 8.7 8.7 0 0 1 13 9.2A41 41 0 0 0 354 172a28 28 0 0 0 28.2-14q4-6.2 6.2-15m11.7-3.4a9 9 0 0 1-6.4 4.3q-2.3 9.9-7 17a34 34 0 0 1-33.4 16.4q-7-.8-14.5-4.2-1 .8-2.3 1.5a31 31 0 0 0 36.6 22v-.3a8.7 8.7 0 0 1 15.5-5.5c10.6-5 17-12.6 20.1-20.6q2.6-6.9 2-13.5-.5-6.5-3.8-11.3a17 17 0 0 0-6.8-5.8m.5-7.5q.5 1 .6 2 6.3 2.7 10.1 8.2 4.1 6.1 4.8 14a36 36 0 0 1-2.4 15.9c-3.5 9.2-11 18-23.2 23.6v.5q0 2.6-1.4 4.7l2.5 2a26 26 0 0 0 24.5 2.6l-.2-2c0-4.1 2.7-7.5 6.5-8.5q2-9 11.8-13.1 12.7-5.4 38.8-1.2a2.7 2.7 0 1 1-.8 5.3q-24.6-3.9-36 .8-6.3 2.7-8.3 8.6a8.7 8.7 0 0 1 1.6 15.2q4.2 5.7 16.6 8.8 13.6 3 22.2 9a29 29 0 0 1 11.8 15.3v.1q2 8.4 4.7 11.2 2 2 5.9 1l.4-.2q3.4-1.6 3.8-5.3.6-4.5-2.4-11.9l-2-4.5a2.7 2.7 0 1 1 4.8-2.3q1.3 2.5 2.2 4.8a30 30 0 0 1 2.8 14.6 12 12 0 0 1-7.7 9.9l-.5.1q-6.8 2-11.1-2.4-3.8-3.8-6.1-13.7a23 23 0 0 0-9.7-12.2 56 56 0 0 0-20.2-8.2h-.2q-16-4.2-20.9-12.6a9 9 0 0 1-5-2 31 31 0 0 1-34-5.8 9 9 0 0 1-10-2.7 36 36 0 0 1-43.8-26.5 8.7 8.7 0 0 1-6.3-12 35 35 0 0 1 6-51.8h.1q5.6-4 12.5-5.5a8.7 8.7 0 0 1 10.3-6.8q4.6-7 9.7-10 6.8-3.9 14-1.2a27 27 0 0 1 19-18 43 43 0 0 1 20.7-.7 59 59 0 0 1 20.1 8.2 36.2 36.2 0 0 1 61.8 14c3.4.6 6.2 3 7.1 6.4q11.2 1.5 18 8.8 8.5 9.2 9.1 27.4v2.3a2.7 2.7 0 0 1-5.3 0v-2.1q-.7-16.2-7.8-24a23 23 0 0 0-14.2-7 8.7 8.7 0 0 1-15 2.3 175 175 0 0 0-48.4 25.7q-15.7 13.3-11.1 26.1v.3a7 7 0 0 0 3.8 4 21 21 0 0 0 12.4 1.5q7.9-1 15.7-5 7.3-4 12.1-10.7a9 9 0 0 1-2.4-8.1 21 21 0 0 0-20.3 8.8 2.7 2.7 0 1 1-4.4-3.1 26 26 0 0 1 27.7-10.6 9 9 0 0 1 5.9-2 28 28 0 0 1 16-15.5q4.8-1.5 9.4-.4 4.6 1 8 4.7c4.5 4.6 7 12.3 5.5 22.7q9.1.5 14 4.7c4.2 3.7 6 9 5.5 14.6a24 24 0 0 1-7.7 15q-3.4 3-8 5 3.5 10.2 2 17.6-2 9.4-10 14.2a39 39 0 0 1-19.2 5l-6.9-.2a8.7 8.7 0 0 1-16.6-3q-13-3.5-26.7-11a2.7 2.7 0 1 1 2.6-4.7q13 7.2 25.3 10.5a8.7 8.7 0 0 1 16.1 2.8l6 .2q10.2-.3 16.6-4.2 6-3.7 7.5-10.6 1.3-6-1.8-14.8c-7 1.6-15.4 1.3-25.3-2.3a2.7 2.7 0 1 1 1.8-5 38 38 0 0 0 24.8 1.3 23 23 0 0 0 8.1-4.8c3.6-3.3 5.6-7.5 6-11.5.4-3.8-.8-7.5-3.7-10-4.4-3.8-12.6-5-25.2-1a2.7 2.7 0 1 1-1.7-5.2q6-1.8 11-2.4c1.5-9-.4-15.5-3.9-19.2a11 11 0 0 0-11.9-2.9c-4.6 1.5-9.2 5.5-12.6 12.3a8.7 8.7 0 0 1-2.7 15.1q1 5.8 5.2 8.4 7.3 4.5 24.1 1.2a2.7 2.7 0 1 1 1 5.2q-19 3.9-28-1.8-5.9-3.7-7.4-11a42 42 0 0 1-13.2 11.3 49 49 0 0 1-17.7 5.8q-9.2 1-15.5-2-4.8-2.4-6.4-7.4-6-16.4 12.7-32l.2-.3q-2.1-11-11.4-9.7-10 1.5-27.2 15m-8.1-5.6q2.7 0 4.8 1.4 18.4-14.4 29.7-16.1 13.2-2.1 17 11.4a204 204 0 0 1 45-22.7v-.4q0-1.5.4-2.8a43 43 0 0 0-7.9-4.2q-6-2.3-10.9-1.2-4.7 1.2-8.5 5.8a40 40 0 0 0-6 11 2.7 2.7 0 0 1-5-2 45 45 0 0 1 6.9-12.4q4.9-6 11.4-7.6t14 1.4q4.4 1.7 9.3 4.9l1-.6A31 31 0 0 0 440.2 82a34.1 34.1 0 0 1-60.8 15 28 28 0 0 0 7.5 31.4q2.3-1.9 5.5-2M382 91.2a28.7 28.7 0 0 0 51.3-4.4 49 49 0 0 1-12.2 4.8 40 40 0 0 1-18.5.3 2.7 2.7 0 1 1 1.2-5.3 35 35 0 0 0 16-.2q6.5-1.6 12.9-5.5a53 53 0 0 0-16.7-6.5 38 38 0 0 0-18.2.5 23 23 0 0 0-12.5 8.8 22 22 0 0 0-3.3 7.5"/></svg>{%- endcapture -%}
+{%- capture icon_standards -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432"><path fill="currentColor" d="m343.2 101.7-.1 125c0 14-4 28-6.9 37.2a182 182 0 0 1-38 63.6 297 297 0 0 1-55.2 46.7l-23.2 14.7q-3.7 2.4-7.6-.1L195.3 378a299 299 0 0 1-58.2-47.1 194 194 0 0 1-26.2-34.5 148 148 0 0 1-22-67.6v-127c0-2.2 1.8-3.6 3.5-4 37.8-3.5 67.7-13.5 94.3-31.4q15.3-10.4 27.7-24 .6-.7 1.3-.7 1.2 0 2.2 1.2 8.7 10 20.4 18.7a183 183 0 0 0 81 33.6q8.9 1.4 17.9 2.4l2.7.3c1.8.2 3.4 2 3.3 3.8m5.6-.4c0-5.5-4.7-8.9-9.2-9.3q-20.4-2-37.6-6.4-35.2-9.1-62.5-30.1-9.8-7.6-17.5-16.5-2.6-3-6.1-3a8 8 0 0 0-6.1 3 156 156 0 0 1-60.2 40.2A206 206 0 0 1 92.4 92a10 10 0 0 0-9.3 9.9V229q1.9 27.2 13.3 52.2a197 197 0 0 0 29.2 45.3 287 287 0 0 0 35.7 34.2l.3.3c7.6 6.1 14.8 12 23 17.1l24.2 15.4a14 14 0 0 0 7.6 2.4 12 12 0 0 0 6.5-2l26-16.6c16.6-10.6 31.3-24 42.3-34.5a214 214 0 0 0 29.8-35.5 157 157 0 0 0 27.9-80Zm0 0"/><path fill="currentColor" d="M159 211.8h-55.6v-29.5h55.5Zm0 36.7h-52q-4.2-14.9-3.6-31H159Zm0-71.8h-55.6v-42h55.5Zm-55.6-62c0-1.2 1-1.8 2-2Q133 110 158.8 100v29h-55.5ZM159 297.5h-28.7a162 162 0 0 1-21.7-43.4H159Zm0 5.6v27l-9.2-8.8a183 183 0 0 1-15.6-18.2Zm102.6-78.7a48 48 0 0 0-19.2-48 45 45 0 0 0-23.6-8.4v-33.4H267v42h-14.8c-1.6 0-3 1.1-3 2.7q0 1.1.8 2 .8 1 2 1h15v29.3l-1.5.1a3 3 0 0 0-2.8 2.7q0 1 .7 2a3 3 0 0 0 2 1h1.6v31h-15a3 3 0 0 0-2.8 2.8q.2 2.6 2.8 2.9h15v43.4h-48.3v-35.3q10.6-.6 20-6a47 47 0 0 0 22.8-31.8M218.7 129V65.9q6.5 5.8 13.8 11.4a167 167 0 0 0 34 20q.4.3.5.8V129Zm-54 125.2h15.1a3 3 0 0 0 2.5-2.6 3 3 0 0 0-.7-2.2q-.8-.9-2-.9h-14.9v-31h.4c1 0 3.4 0 3.6-2.6q.2-1.3-.6-2.1-.9-1-2.4-1h-1v-29.5h14.6a3 3 0 0 0 3-2.2 3 3 0 0 0-.5-2.3q-.6-1-1.8-1l-15.3-.2v-42H213v33.5c-8.4.6-16.4 3.3-23.2 8a48 48 0 0 0-16.7 58.4 47 47 0 0 0 39.9 27.8v35.3h-48.3Zm51-80.1a41.2 41.2 0 1 1 0 82.4 41.2 41.2 0 0 1 0-82.4m-51-76q.2-.6.6-.7c17.4-7.7 33-18 47.7-31.5v63l-48.2.1ZM213 303.2v63.9a210 210 0 0 1-48.3-31.7v-32.2Zm54 32.4a209 209 0 0 1-48.3 31.6v-64H267Zm30.7-32.3a195 195 0 0 1-25 27.4v-27.5Zm25.3-49.1a150 150 0 0 1-21.3 43.4h-29v-43.4Zm5.1-42.4h-55.4v-29.5H328Zm-55.4-77.1H328v42h-55.4Zm0-5.7v-29q19.6 7.6 40.1 11l13.3 1.8h.1q.8 0 1.4.5t.5 1.3V129Zm51.8 119.5h-51.8v-31H328q.5 14.7-3.6 31m2.2-141.4a183 183 0 0 1-79.1-26.3q-15-9.4-26.1-20.1c-3.2-3.1-7.8-3.3-11-.3a170 170 0 0 1-68.8 39.4A202 202 0 0 1 105 107c-4.6.5-7.4 3.7-7.4 8.4v109.1a107 107 0 0 0 4.4 28.3 171 171 0 0 0 38.2 66.9 254 254 0 0 0 32.9 29.9 219 219 0 0 0 36.5 22.3q3 1.8 6.1 1.8t6.1-1.6a223 223 0 0 0 85.6-72.8 172 172 0 0 0 17.9-34.6 133 133 0 0 0 8.4-46.3V115.2c0-4.4-2.8-7.7-7.1-8.1"/><path fill="currentColor" d="M192.6 217.5a2 2 0 0 1 1.2-.5h.3l11.6 11.5a3 3 0 0 0 2 1q.7 0 1.6-.8l27.9-28.2c1-1 1.3-.8 1.5-.7q.3.2.5 1l-.2.6-30.4 31.6-.7.3q-.7 0-1.4-.7l-13.3-13.4c-.5-.5-1-1.2-.6-1.8m10.9 19.7a6.4 6.4 0 0 0 8.9-.2l30.7-32c1.8-2 1.8-5.1.7-7.2q-1.3-2.7-4-3.4-3.6-.7-5.6 1.3l-26.6 27-9.7-9.6c-2.5-2.4-6.6-1.8-8.9.3a7 7 0 0 0-2 4.8q-.1 2.4 1.4 3.9Zm0 0"/></svg>{%- endcapture -%}
+{%- capture icon_pressure -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432"><path fill="currentColor" d="M386.7 222c-1 31.8-11 62.6-28.8 89.1l-.8 1.1H75l-.8-1A170 170 0 0 1 45.3 222l-.1-2.6h40a3.3 3.3 0 0 0 0-6.7h-40v-2.6c1.5-41 17.7-80.3 45.9-110.4l1.7-1.9 28.4 28.3a3.3 3.3 0 0 0 5.5-2.3q0-1.3-1-2.3L97.5 93.2l2-1.8a171 171 0 0 1 110.4-46l2.6-.1v40a3.3 3.3 0 0 0 6.6 0v-40h2.6a170 170 0 0 1 110.8 45.9l2 1.7-28.7 28.6a3.3 3.3 0 0 0 0 4.7q1 1 2.4 1t2.3-1l28.7-28.5 1.7 1.8a171 171 0 0 1 46 110.7v2.6h-40.4a3.3 3.3 0 0 0 0 6.7h40.4Zm-37.5 100.8a170 170 0 0 1-133.2 64 170 170 0 0 1-133.2-64l-3.3-4h273ZM216 38.5A177.7 177.7 0 0 0 38.5 216c0 97.9 79.6 177.5 177.5 177.5S393.5 313.9 393.5 216 313.9 38.5 216 38.5"/><path fill="currentColor" d="M230.8 230.6a23 23 0 1 1-32.6-32.2 23 23 0 0 1 32.6 32.2m57-83.2q0-1.4-1-2.3a3.3 3.3 0 0 0-4.7 0l-47.5 47.6-1.8-1.4a29.6 29.6 0 0 0-46.8 15.4 29.6 29.6 0 0 0 56.7 16.7 30 30 0 0 0-2.8-24.1l-1-1.7 47.9-47.9q1-1 1-2.3m-24.6 204.3c0 1.8-1.5 3.3-3.3 3.3h-88a3.3 3.3 0 0 1 0-6.7h88c1.8 0 3.3 1.5 3.3 3.4"/></svg>{%- endcapture -%}
+{%- capture icon_step_drink -%}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432"><path fill="currentColor" d="M 267.410156 387.71875 C 267.410156 388.980469 266.390625 390 265.128906 390 L 166.871094 390 C 165.609375 390 164.589844 388.980469 164.589844 387.71875 L 164.589844 163.421875 C 181.5 166.789062 198.761719 168.488281 216 168.488281 C 233.238281 168.488281 250.5 166.789062 267.410156 163.421875 Z M 273.359375 156.011719 C 268.199219 157.191406 263.011719 158.210938 257.800781 159.058594 L 257.789062 159.058594 C 243.949219 161.351562 229.980469 162.488281 216 162.488281 C 202.019531 162.488281 188.039062 161.351562 174.199219 159.058594 C 168.988281 158.210938 163.800781 157.191406 158.640625 156.011719 C 158.621094 156.011719 158.609375 156 158.589844 156 L 158.589844 387.71875 C 158.589844 392.289062 162.300781 396 166.871094 396 L 265.128906 396 C 269.699219 396 273.410156 392.289062 273.410156 387.71875 L 273.410156 156 C 273.390625 156 273.378906 156.011719 273.359375 156.011719 "/><path fill="currentColor" d="M 270.921875 220.199219 L 270.921875 226.199219 C 269.679688 226.199219 268.511719 226.140625 267.410156 226.019531 C 259.480469 225.191406 254.910156 221.578125 250.820312 218.351562 C 246.371094 214.839844 242.519531 211.800781 234.441406 211.800781 C 226.359375 211.800781 222.511719 214.839844 218.050781 218.351562 C 213.390625 222.03125 208.109375 226.199219 197.949219 226.199219 C 187.789062 226.199219 182.511719 222.03125 177.851562 218.351562 C 174.011719 215.328125 170.621094 212.648438 164.589844 211.96875 C 163.621094 211.859375 162.589844 211.800781 161.46875 211.800781 L 161.46875 205.800781 C 162.570312 205.800781 163.609375 205.851562 164.589844 205.949219 C 172.761719 206.691406 177.410156 210.371094 181.570312 213.648438 C 186.019531 217.160156 189.871094 220.199219 197.949219 220.199219 C 206.03125 220.199219 209.878906 217.160156 214.328125 213.648438 C 218.988281 209.96875 224.269531 205.800781 234.441406 205.800781 C 244.601562 205.800781 249.878906 209.96875 254.539062 213.648438 C 258.289062 216.609375 261.621094 219.238281 267.410156 219.988281 C 268.488281 220.128906 269.648438 220.199219 270.921875 220.199219 "/><path fill="currentColor" fill-rule="evenodd" d="M 229.195312 208.679688 C 229.195312 209.6875 228.378906 210.507812 227.371094 210.507812 C 226.363281 210.507812 225.542969 209.6875 225.542969 208.679688 C 225.542969 207.671875 226.363281 206.855469 227.371094 206.855469 C 228.378906 206.855469 229.195312 207.671875 229.195312 208.679688 "/><path fill="currentColor" d="M 273.410156 156.019531 L 273.410156 159 L 272.671875 161.988281 L 272.640625 162.109375 C 272.46875 162.058594 260.921875 159.269531 245.191406 157.308594 C 247.558594 157.578125 249.921875 157.878906 252.289062 158.210938 C 249.21875 157.761719 246.148438 157.378906 243.070312 157.050781 C 241.730469 156.890625 240.371094 156.738281 238.980469 156.601562 C 232.089844 155.898438 224.648438 155.429688 217.160156 155.429688 C 216.089844 155.429688 215.03125 155.441406 213.960938 155.460938 C 210.378906 155.519531 206.800781 155.679688 203.28125 155.921875 C 203.101562 155.929688 202.910156 155.941406 202.71875 155.949219 C 193.171875 156.449219 183.640625 157.488281 174.199219 159.058594 C 169.191406 159.890625 164.210938 160.878906 159.261719 162.011719 L 158.589844 159.089844 L 158.589844 156.019531 C 158.609375 156.011719 158.621094 156.011719 158.640625 156.011719 C 173.011719 152.75 187.671875 150.730469 202.378906 149.960938 C 202.488281 149.949219 202.589844 149.949219 202.699219 149.941406 C 207.460938 149.621094 212.328125 149.429688 217.160156 149.429688 C 227.46875 149.429688 237.578125 150.28125 246.351562 151.378906 C 246.761719 151.429688 247.171875 151.480469 247.589844 151.53125 C 248 151.578125 248.410156 151.640625 248.820312 151.691406 C 257.070312 152.730469 265.28125 154.171875 273.359375 156.011719 C 273.378906 156.011719 273.390625 156.011719 273.410156 156.019531 "/><path fill="currentColor" d="M 202.128906 283.988281 L 208.601562 280.410156 L 208.601562 306.921875 L 202.128906 300.929688 Z M 202.128906 258.648438 L 208.601562 252.65625 L 208.601562 278.480469 L 202.128906 274.898438 Z M 185.945312 282.613281 L 180.023438 279.445312 L 185.875 276.277344 L 200.820312 276.277344 L 206.671875 279.445312 L 200.75 282.613281 Z M 207.222656 308.160156 L 178.09375 308.160156 L 184.773438 301.824219 L 200.542969 301.824219 Z M 200.542969 257.753906 L 184.773438 257.753906 L 178.09375 251.417969 L 207.222656 251.417969 Z M 200.542969 257.753906 "/><path fill="currentColor" d="M 243.992188 283.988281 L 250.46875 280.410156 L 250.46875 306.921875 L 243.992188 300.929688 Z M 243.992188 258.648438 L 250.46875 252.65625 L 250.46875 278.480469 L 243.992188 274.898438 Z M 249.089844 308.160156 L 219.960938 308.160156 L 226.640625 301.824219 L 242.410156 301.824219 Z M 242.410156 257.753906 L 226.640625 257.753906 L 219.960938 251.417969 L 249.089844 251.417969 Z M 225.054688 300.929688 L 218.582031 306.921875 L 218.582031 280.410156 L 225.054688 283.988281 Z M 225.054688 274.898438 L 218.582031 278.480469 L 218.582031 252.65625 L 225.054688 258.648438 Z M 225.054688 274.898438 "/><path fill="currentColor" d="M 211.996094 341.652344 L 215.703125 339.601562 L 215.703125 355.496094 L 211.996094 352.066406 Z M 211.996094 327.136719 L 215.703125 323.707031 L 215.703125 338.496094 L 211.996094 336.445312 Z M 197.242188 353.722656 L 197.242188 341.375 L 199.097656 339.601562 L 200.949219 341.375 L 200.949219 353.722656 L 199.097656 355.496094 Z M 197.242188 326.625 L 199.097656 324.886719 L 200.949219 326.625 L 200.949219 336.722656 L 199.097656 338.496094 L 197.242188 336.722656 Z M 183.28125 322.996094 L 214.914062 322.996094 L 211.085938 326.625 L 202.605469 326.625 L 199.097656 323.269531 L 195.585938 326.625 L 187.105469 326.625 Z M 186.199219 352.066406 L 182.492188 355.496094 L 182.492188 339.601562 L 186.199219 341.652344 Z M 182.492188 323.707031 L 186.199219 327.136719 L 186.199219 336.445312 L 182.492188 338.496094 Z M 182.492188 323.707031 "/><path fill="currentColor" d="M 221.621094 341.652344 L 225.328125 339.601562 L 225.328125 355.496094 L 221.621094 352.066406 Z M 221.621094 326.347656 L 225.328125 322.996094 L 225.328125 338.496094 L 221.621094 336.445312 Z M 221.621094 326.347656 "/><path fill="currentColor" d="M 245.800781 341.652344 L 249.507812 339.601562 L 249.507812 355.496094 L 245.800781 352.066406 Z M 245.800781 327.136719 L 249.507812 323.707031 L 249.507812 338.496094 L 245.800781 336.445312 Z M 244.894531 326.625 L 235.863281 326.625 L 232.035156 322.996094 L 248.71875 322.996094 Z M 234.953125 352.066406 L 231.246094 355.496094 L 231.246094 339.601562 L 234.953125 341.652344 Z M 234.953125 336.445312 L 231.246094 338.496094 L 231.246094 323.707031 L 234.953125 327.136719 Z M 234.953125 336.445312 "/><path fill="currentColor" d="M 175.921875 75.292969 L 196.140625 66.953125 L 199.320312 66.953125 L 199.320312 70.972656 L 178.199219 79.730469 L 174.359375 78.832031 Z M 174.359375 53.570312 L 178.199219 52.671875 L 199.320312 61.433594 L 199.320312 65.453125 L 196.140625 65.453125 L 175.921875 57.113281 Z M 174.359375 53.570312 "/><path fill="currentColor" d="M 205.082031 75.292969 L 225.300781 66.953125 L 228.480469 66.953125 L 228.480469 70.972656 L 207.359375 79.730469 L 203.519531 78.832031 Z M 203.519531 53.570312 L 207.359375 52.671875 L 228.480469 61.433594 L 228.480469 65.453125 L 225.300781 65.453125 L 205.082031 57.113281 Z M 203.519531 53.570312 "/><path fill="currentColor" d="M 234.238281 75.292969 L 254.460938 66.953125 L 257.636719 66.953125 L 257.636719 70.972656 L 236.519531 79.730469 L 232.679688 78.832031 Z M 232.679688 53.570312 L 236.519531 52.671875 L 257.636719 61.433594 L 257.636719 65.453125 L 254.460938 65.453125 L 234.238281 57.113281 Z M 232.679688 53.570312 "/><path fill="currentColor" d="M 175.921875 113.292969 L 196.140625 104.953125 L 199.320312 104.953125 L 199.320312 108.972656 L 178.199219 117.730469 L 174.359375 116.832031 Z M 174.359375 91.570312 L 178.199219 90.671875 L 199.320312 99.433594 L 199.320312 103.453125 L 196.140625 103.453125 L 175.921875 95.113281 Z M 174.359375 91.570312 "/><path fill="currentColor" d="M 205.082031 113.292969 L 225.300781 104.953125 L 228.480469 104.953125 L 228.480469 108.972656 L 207.359375 117.730469 L 203.519531 116.832031 Z M 203.519531 91.570312 L 207.359375 90.671875 L 228.480469 99.433594 L 228.480469 103.453125 L 225.300781 103.453125 L 205.082031 95.113281 Z M 203.519531 91.570312 "/><path fill="currentColor" d="M 234.238281 113.292969 L 254.460938 104.953125 L 257.636719 104.953125 L 257.636719 108.972656 L 236.519531 117.730469 L 232.679688 116.832031 Z M 232.679688 91.570312 L 236.519531 90.671875 L 257.636719 99.433594 L 257.636719 103.453125 L 254.460938 103.453125 L 234.238281 95.113281 Z M 232.679688 91.570312 "/></svg>{%- endcapture -%}
 
 <div id="avro-golf-{{ section.id }}">
 
-  {%- comment -%} HERO {%- endcomment -%}
-  <section class="hero">
-    <div class="hero-card">
-      <div class="hero-imgs">
-        {%- for img in section.settings.hero_images -%}
-          <img class="d{% if forloop.first %} on{% endif %}" src="{{ img | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}" loading="lazy">
-        {%- else -%}
-          <img class="d on" src="{{ base }}/images/lifestyle/golf-hero-01.png" alt="{{ section.settings.hero_alt | escape }}">
-          <img class="d" src="{{ base }}/images/lifestyle/golf-hero-02.png" alt="">
-          <img class="d" src="{{ base }}/images/lifestyle/golf-hero-03.png" alt="">
+  {%- comment -%}
+    HERO SLIDESHOW
+    Slides come from "Hero slide" blocks (image + alt, reorderable in the editor).
+    If none are added, we fall back to the three default AVRO Golf editorial shots
+    in order: woman putting -> man sitting -> man addressing the ball -> (loop).
+    Autoplay interval + the lime dotted ticker are controlled in the "Hero" settings.
+  {%- endcomment -%}
+  {%- assign hero_blocks = section.blocks | where: 'type', 'hero_slide' -%}
+  {%- assign hero_count = 0 -%}
+  {%- for b in hero_blocks -%}{%- if b.settings.image != blank -%}{%- assign hero_count = hero_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+  {%- assign hero_interval = section.settings.hero_interval | default: 6 | times: 1000 -%}
+  <section class="hero" data-hero data-interval="{{ hero_interval }}">
+    <div class="hero-imgs">
+      {%- if hero_count > 0 -%}
+        {%- assign shown = 0 -%}
+        {%- for b in hero_blocks -%}
+          {%- if b.settings.image != blank -%}
+            {%- assign shown = shown | plus: 1 -%}
+            <img class="hero-slide{% if shown == 1 %} on{% endif %}" src="{{ b.settings.image | image_url: width: 2400 }}" alt="{{ b.settings.alt | escape }}"{% if shown > 1 %} loading="lazy"{% endif %} {{ b.shopify_attributes }}>
+          {%- endif -%}
         {%- endfor -%}
-        <img class="m on" src="{{ base }}/images/lifestyle/golf-hero-01-mobile.png" alt="{{ section.settings.hero_alt | escape }}">
-        <img class="m" src="{{ base }}/images/lifestyle/golf-hero-02-mobile.png" alt="">
-        <img class="m" src="{{ base }}/images/lifestyle/golf-hero-03-mobile.png" alt="">
+      {%- else -%}
+        {%- assign hero_count = 3 -%}
+        <img class="hero-slide on" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avro_Golf_Female_Putting_Stacked_Logo_Visor-ppVVuwpVurloN1Z0Elbrgdf8KqFrsd.png" alt="Golfer lining up a putt on a coastal course wearing an AVRO Golf visor">
+        <img class="hero-slide" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avro_Golf_Editorial_Cap_Logo_Embroidery-U4MiHgNjNKoeP46uaDT9CMKJOFsbEj.png" alt="Golfer in an AVRO Golf cap sitting above a coastal links course" loading="lazy">
+        <img class="hero-slide" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avro_Golf_Editorial_Coastal_Address_Single_Male-mlnuS7QiCaPtSAnpmZKaRSebY8gT1l.png" alt="Golfer addressing the ball with a driver on a clifftop tee" loading="lazy">
+      {%- endif -%}
+    </div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <p class="kicker">{{ section.settings.hero_kicker | default: 'CALM PERFORMANCE FOR GOLF' }}</p>
+      {%- assign hero_words = section.settings.hero_title | default: 'Golf Performance Begins Before the First Swing.' | split: ' ' -%}
+      <h1>{%- for w in hero_words -%}<span class="hw" style="animation-delay:{{ forloop.index0 | times: 0.09 | plus: 0.1 }}s">{{ w }}{%- unless forloop.last %}&nbsp;{% endunless -%}</span>{%- endfor -%}</h1>
+      <p class="body">{{ section.settings.hero_copy | default: 'AVRO supports the calm, clear and composed headspace golfers seek before lessons, practice and competition—so they can step into the moment ready.' }}</p>
+      <div class="hero-btns">
+        <a href="{{ section.settings.hero_btn1_link | default: shop_anchor }}" class="btn btn-accent">{{ section.settings.hero_btn1_label | default: 'Choose Your Formula' }}</a>
+        <a href="{{ section.settings.hero_btn2_link | default: '/collections/all' }}" class="btn btn-ghost">{{ section.settings.hero_btn2_label | default: 'Shop AVRO' }}</a>
       </div>
-      <div class="hero-scrim" aria-hidden="true"></div>
-      <div class="hero-content">
-        <h1>{{ section.settings.hero_title | default: 'Built for the State Before the Round.' }}</h1>
-        <p>{{ section.settings.hero_copy | default: 'AVRO supports calm, clarity, and composure before golf moments where state matters, from the first tee to the final stretch.*' }}</p>
-        <div class="hero-btns">
-          <a href="{{ section.settings.hero_btn1_link | default: '/collections/all' }}" class="btn btn-outline">{{ section.settings.hero_btn1_label | default: 'Choose Your Formula' }}</a>
-          <a href="{{ section.settings.hero_btn2_link | default: '/collections/all' }}" class="btn btn-accent">{{ section.settings.hero_btn2_label | default: 'Shop AVRO' }}</a>
+      {%- if section.settings.hero_show_ticker and hero_count > 1 -%}
+        <div class="hero-dots" data-hero-dots role="tablist" aria-label="Hero slides">
+          {%- for i in (1..hero_count) -%}
+            <button type="button" role="tab" class="{% if forloop.first %}is-active{% endif %}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Show slide {{ forloop.index }}"></button>
+          {%- endfor -%}
         </div>
-      </div>
+      {%- endif -%}
+    </div>
+    <div class="ritual">
+      <p class="rlabel">{{ section.settings.ritual_label | default: 'THE PRE-GOLF MINDSET' }}</p>
+      <div><b>01 — {{ section.settings.ritual_1_title | default: 'PREPARE' }}</b><span>{{ section.settings.ritual_1_copy | default: 'Before lessons, practice or play.' }}</span></div>
+      <div><b>02 — {{ section.settings.ritual_2_title | default: 'CHOOSE' }}</b><span>{{ section.settings.ritual_2_copy | default: 'Calm, Focus or Energy.' }}</span></div>
+      <div><b>03 — {{ section.settings.ritual_3_title | default: 'STEP IN READY' }}</b><span>{{ section.settings.ritual_3_copy | default: 'Calm. Clear. Composed.' }}</span></div>
     </div>
   </section>
 
-  {%- comment -%} MOMENT HEADING {%- endcomment -%}
-  <section class="sec"><div class="wrap"><div class="head">
-    <h2>{{ section.settings.moment_title | default: 'Golf is a game of state.' }}</h2>
-    <p>{{ section.settings.moment_copy }}</p>
-  </div></div></section>
+  {%- comment -%} PRESSURE {%- endcomment -%}
+  <section class="pressure">
+    <div class="pressure-copy">
+      <p class="kicker">{{ section.settings.pressure_kicker | default: 'WHEN THE MOMENT GETS BIGGER' }}</p>
+      {%- assign p_title = section.settings.pressure_title | default: 'Golf can get loud in your head fast.' -%}
+      {%- assign p_hl = section.settings.pressure_highlight | default: 'loud in your head' -%}
+      {%- capture p_wrapped -%}<mark class="mark">{{ p_hl }}</mark>{%- endcapture -%}
+      <h2>{%- if p_hl != blank and p_title contains p_hl -%}{{ p_title | replace: p_hl, p_wrapped }}{%- else -%}{{ p_title }}{%- endif -%}</h2>
+      <p class="body">{{ section.settings.pressure_copy | default: 'The first tee. A difficult approach. A lesson where every detail matters. When pressure rises, golfers need more than physical preparation—they need a better way to step into the moment.' }}</p>
+    </div>
+    <div class="pressure-img">
+      {%- if section.settings.pressure_image != blank -%}<img src="{{ section.settings.pressure_image | image_url: width: 1600 }}" alt="{{ section.settings.pressure_alt | escape }}">{%- else -%}<img src="{{ blob }}/02_Golfer_Address_Coastal-QuYnv1biTTOWojA8ONA5TjE867VaaX.png" alt="{{ section.settings.pressure_alt | escape }}">{%- endif -%}
+      <span class="pressure-pill"><b>{{ section.settings.pressure_pill_big | default: '~30min' }}</b>{{ section.settings.pressure_pill_small | default: 'before your round' }}</span>
+    </div>
+  </section>
 
   {%- comment -%} WHY (reasons) {%- endcomment -%}
   {%- if reasons.size > 0 -%}
-  <section class="sec" style="padding-top:0;"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.why_title | default: 'Why AVRO fits golf' }}</h2></div>
-    <div class="cards c3">
+  <section class="sec"><div class="wrap">
+    <div class="head head-split"><h2>{{ section.settings.why_title | default: 'Why AVRO Matters in Golf' }}</h2><p class="sub body">{{ section.settings.why_copy | default: 'A calm-first platform with a clear role across the modern golf experience.' }}</p></div>
+    <div class="g3">
       {%- for b in reasons -%}
-      <div class="icard" {{ b.shopify_attributes }}>
-        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign iu = b.settings.icon | image_url: width: 120 -%}{%- else -%}{%- assign iu = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png' -%}{%- endif -%}<span style="-webkit-mask-image:url({{ iu }});mask-image:url({{ iu }});"></span></div>
+      <div class="reason" {{ b.shopify_attributes }}>
+        <span class="num">0{{ forloop.index }}</span>
+        <div class="ic"{% if b.settings.icon_color != blank %} style="color:{{ b.settings.icon_color }}"{% endif %}>{%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 128 }}" alt="" loading="lazy" width="64" height="64">{%- else -%}{%- case b.settings.icon_key -%}{%- when 'calm-before-pressure' -%}{{ icon_calm_before_pressure }}{%- when 'clarity' -%}{{ icon_clarity }}{%- when 'built-for-ritual' -%}{{ icon_built_for_ritual }}{%- when 'step-choose' -%}{{ icon_step_choose }}{%- when 'step-mix' -%}{{ icon_step_mix }}{%- when 'step-time' -%}{{ icon_step_drink }}{%- when 'drink' -%}{{ icon_step_drink }}{%- when 'pharmagaba' -%}{{ icon_pharmagaba }}{%- when 'calm-foundation' -%}{{ icon_calm_foundation }}{%- when 'mind-body' -%}{{ icon_mind_body }}{%- when 'standards' -%}{{ icon_standards }}{%- when 'pressure' -%}{{ icon_pressure }}{%- else -%}{{ icon_calm_before_pressure }}{%- endcase -%}{%- endif -%}</div>
         <h3>{{ b.settings.title }}</h3>
-        <p>{{ b.settings.copy }}</p>
+        <p class="body">{{ b.settings.copy }}</p>
       </div>
       {%- endfor -%}
     </div>
   </div></section>
   {%- endif -%}
 
-  {%- comment -%} HOW TO USE {%- endcomment -%}
+  {%- comment -%} HOW TO USE (dark) {%- endcomment -%}
   {%- if steps.size > 0 -%}
-  <section class="sec"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.how_title | default: 'How to use before golf' }}</h2></div>
+  <section class="sec dark"><div class="wrap">
+    <div class="head"><p class="kicker kicker-pill">{{ section.settings.how_kicker | default: 'HOW TO USE AVRO BEFORE GOLF' }}</p><h2>{{ section.settings.how_title | default: 'A simple ritual. Three steps.' }} <span class="accent">{{ section.settings.how_copy | default: 'Choose. Mix. Time it.' }}</span></h2></div>
     <div class="steps">
       {%- for b in steps -%}
       <article class="step" {{ b.shopify_attributes }}>
-        <span class="num">{{ forloop.index }}</span>
-        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign su = b.settings.icon | image_url: width: 160 -%}{%- else -%}{%- assign su = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png' -%}{%- endif -%}<span style="-webkit-mask-image:url({{ su }});mask-image:url({{ su }});"></span></div>
+        <div class="top"><span class="num">0{{ forloop.index }}</span><span class="ic"{% if b.settings.icon_color != blank %} style="color:{{ b.settings.icon_color }}"{% endif %}>{%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 160 }}" alt="" loading="lazy">{%- else -%}{%- case b.settings.icon_key -%}{%- when 'calm-before-pressure' -%}{{ icon_calm_before_pressure }}{%- when 'clarity' -%}{{ icon_clarity }}{%- when 'built-for-ritual' -%}{{ icon_built_for_ritual }}{%- when 'step-choose' -%}{{ icon_step_choose }}{%- when 'step-mix' -%}{{ icon_step_mix }}{%- when 'step-time' -%}{{ icon_step_drink }}{%- when 'drink' -%}{{ icon_step_drink }}{%- when 'pharmagaba' -%}{{ icon_pharmagaba }}{%- when 'calm-foundation' -%}{{ icon_calm_foundation }}{%- when 'mind-body' -%}{{ icon_mind_body }}{%- when 'standards' -%}{{ icon_standards }}{%- when 'pressure' -%}{{ icon_pressure }}{%- else -%}{{ icon_step_choose }}{%- endcase -%}{%- endif -%}</span></div>
         <h3>{{ b.settings.title }}</h3>
-        <p>{{ b.settings.copy }}</p>
+        <p class="body">{{ b.settings.copy }}</p>
       </article>
       {%- endfor -%}
     </div>
   </div></section>
   {%- endif -%}
 
-  {%- comment -%} FORMULA LOGIC GRAPH {%- endcomment -%}
-  {%- if bars.size > 0 -%}
-  <section class="sec" style="padding-top:0;"><div class="wrap"><div class="graph">
-    <h2>{{ section.settings.graph_title | default: 'Every formula starts calm first.' }}</h2>
-    <p class="sub">{{ section.settings.graph_sub | default: 'Same calm-first base. Different active addition.' }}</p>
-    {%- for b in bars -%}
-    <div class="grow" {{ b.shopify_attributes }}>
-      <div class="top"><span class="nm" style="color:{{ b.settings.color | default: '#4b4d9a' }};">{{ b.settings.name }}</span><span class="lg">PharmaGABA&reg; + {{ b.settings.addition }}</span></div>
-      <div class="gbar"><span style="flex:60 0 0;background:#94C6D4;"></span><span style="flex:40 0 0;background:{{ b.settings.color | default: '#4b4d9a' }};"></span></div>
-    </div>
-    {%- endfor -%}
-  </div></div></section>
-  {%- endif -%}
-
-  {%- comment -%} EMBEDDED GRAPHIC {%- endcomment -%}
-  {%- if section.settings.show_graphic -%}
+  {%- comment -%} SCIENCE {%- endcomment -%}
+  {%- if sciences.size > 0 -%}
   <section class="sec"><div class="wrap">
-    {%- if section.settings.graphic_title != blank -%}
-    <div class="head left" style="max-width:760px;"><h2>{{ section.settings.graphic_title }}</h2>{%- if section.settings.graphic_copy != blank -%}<p>{{ section.settings.graphic_copy }}</p>{%- endif -%}</div>
-    {%- endif -%}
-    {%- if section.settings.graphic_asset != blank -%}{%- assign graphic_src = section.settings.graphic_asset -%}{%- else -%}{%- assign graphic_src = base | append: '/graphics/golf.html' -%}{%- endif -%}
-    <iframe class="graphic-frame" style="aspect-ratio:{{ section.settings.graphic_ratio | default: '1200 / 788' }};" src="{{ graphic_src }}" title="{{ section.settings.graphic_a11y | default: 'AVRO for golf research graphic' | escape }}" loading="lazy" scrolling="no"></iframe>
-    {%- if section.settings.chart_source != blank -%}<p style="font-size:12px;line-height:1.5;color:var(--warm-gray);margin-top:16px;white-space:pre-line;">{{ section.settings.chart_source }}</p>{%- endif -%}
+    <div class="head"><p class="kicker">{{ section.settings.sci_kicker | default: 'SCIENCE + FORMULA LOGIC' }}</p><h2>{{ section.settings.sci_title | default: 'Calm first. Then support the moment.' }}</h2><p class="sub body">{{ section.settings.foundation | default: 'Every AVRO formula begins with naturally fermented PharmaGABA®, a clinically studied form of GABA.' }}</p></div>
+    <div class="g4">
+      {%- for b in sciences -%}
+      <article class="sci" {{ b.shopify_attributes }}>
+        <div class="ic"{% if b.settings.icon_bg != blank or b.settings.icon_color != blank %} style="{% if b.settings.icon_bg != blank %}background:{{ b.settings.icon_bg }};{% endif %}{% if b.settings.icon_color != blank %}color:{{ b.settings.icon_color }};{% endif %}"{% endif %}>{%- if b.settings.icon != blank -%}<img src="{{ b.settings.icon | image_url: width: 96 }}" alt="" loading="lazy">{%- else -%}{%- case b.settings.icon_key -%}{%- when 'calm-before-pressure' -%}{{ icon_calm_before_pressure }}{%- when 'clarity' -%}{{ icon_clarity }}{%- when 'built-for-ritual' -%}{{ icon_built_for_ritual }}{%- when 'step-choose' -%}{{ icon_step_choose }}{%- when 'step-mix' -%}{{ icon_step_mix }}{%- when 'step-time' -%}{{ icon_step_drink }}{%- when 'drink' -%}{{ icon_step_drink }}{%- when 'pharmagaba' -%}{{ icon_pharmagaba }}{%- when 'calm-foundation' -%}{{ icon_calm_foundation }}{%- when 'mind-body' -%}{{ icon_mind_body }}{%- when 'standards' -%}{{ icon_standards }}{%- when 'pressure' -%}{{ icon_pressure }}{%- else -%}{{ icon_pharmagaba }}{%- endcase -%}{%- endif -%}</div>
+        <h3>{{ b.settings.label }}</h3>
+        <p class="body"><b>{{ b.settings.title }}.</b> {{ b.settings.copy }}</p>
+      </article>
+      {%- endfor -%}
+    </div>
   </div></section>
   {%- endif -%}
 
   {%- comment -%} USE MOMENTS {%- endcomment -%}
   {%- if moments.size > 0 -%}
   <section class="sec"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.use_title | default: 'Golf use moments' }}</h2></div>
-    <div class="cards c4">
+    <div class="head head-split"><h2>{{ section.settings.use_title | default: 'Golf Use Moments' }}</h2><p class="sub body">{{ section.settings.use_copy | default: 'One calm-first foundation, ready for the moments that shape the golf experience.' }}</p></div>
+    <div class="g4">
       {%- for b in moments -%}
-      <div class="icard" {{ b.shopify_attributes }}>
-        <div class="ic">{%- if b.settings.icon != blank -%}{%- assign mu = b.settings.icon | image_url: width: 120 -%}{%- else -%}{%- assign mu = b.settings.icon_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-golf.png' -%}{%- endif -%}<span style="-webkit-mask-image:url({{ mu }});mask-image:url({{ mu }});"></span></div>
+      <article class="moment" {{ b.shopify_attributes }}>
+        <div class="ph">{%- assign op = b.settings.object_pos | default: 'center 40%' -%}{%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.title | escape }} golf moment" style="object-position:{{ op }}">{%- else -%}<img src="{{ b.settings.image_fallback }}" alt="{{ b.settings.title | escape }} golf moment" style="object-position:{{ op }}">{%- endif -%}{%- if b.settings.pill != blank -%}<span class="pill">{{ b.settings.pill }}</span>{%- endif -%}</div>
         <h3>{{ b.settings.title }}</h3>
-        <p>{{ b.settings.copy }}</p>
-      </div>
-      {%- endfor -%}
-    </div>
-  </div></section>
-  {%- endif -%}
-
-  {%- comment -%} PRODUCTS {%- endcomment -%}
-  {%- if products.size > 0 -%}
-  <section class="sec" style="padding-top:0;"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.shop_title | default: 'Shop AVRO for golf' }}</h2></div>
-    <div class="pc-row">
-      {%- for b in products -%}
-      <article class="pc" {{ b.shopify_attributes }}>
-        <div class="pc-thumb">{%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">{%- else -%}<img src="{{ b.settings.image_fallback | default: 'https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png' }}" alt="{{ b.settings.name | escape }}">{%- endif -%}</div>
-        <h3>{{ b.settings.name }}</h3>
-        <p>{{ b.settings.copy }}</p>
-        <a href="{{ b.settings.link | default: '/collections/all' }}" class="btn btn-outline">{{ b.settings.button_label | default: 'Shop' }}</a>
+        <p class="body">{{ b.settings.copy }}</p>
       </article>
       {%- endfor -%}
     </div>
   </div></section>
   {%- endif -%}
 
-  {%- comment -%} TESTIMONIALS {%- endcomment -%}
-  {%- if reviews.size > 0 -%}
-  <section class="sec" style="padding-top:0;"><div class="wrap">
-    <div class="tg">
-      {%- for b in reviews -%}
-      <article class="tc" {{ b.shopify_attributes }}>
-        <div class="stars">{{ star }}{{ star }}{{ star }}{{ star }}{{ star }}</div>
-        <p>&ldquo;{{ b.settings.quote }}&rdquo;</p>
-        <strong>{{ b.settings.name }}</strong><span class="role">{{ b.settings.role }}</span>
+  {%- comment -%} SHOP (dark) {%- endcomment -%}
+  {%- if products.size > 0 -%}
+  <section id="avro-golf-shop-{{ section.id }}" class="sec dark"><div class="wrap">
+    <div class="head"><p class="kicker">{{ section.settings.shop_kicker | default: 'CHOOSE YOUR FORMULA' }}</p><h2>{{ section.settings.shop_title | default: 'Shop AVRO for Golf' }}</h2><p class="sub body">{{ section.settings.shop_copy | default: 'Same calm-first base. Three ways to meet the moment.' }}</p></div>
+    <div class="prods">
+      {%- for b in products -%}
+      <article class="pc" {{ b.shopify_attributes }}>
+        {%- if b.settings.caffeine != blank -%}<span class="tag">{{ b.settings.caffeine }}</span>{%- endif -%}
+        <div class="thumb">{%- if b.settings.image != blank -%}<img src="{{ b.settings.image | image_url: width: 800 }}" alt="{{ b.settings.name | escape }}">{%- else -%}<img src="{{ b.settings.image_fallback }}" alt="{{ b.settings.name | escape }}">{%- endif -%}</div>
+        <h3>{{ b.settings.name }}</h3>
+        <p class="desc body">{{ b.settings.copy }}</p>
+        {%- if b.settings.best_for != blank -%}<p class="best"><b>BEST FOR</b>{{ b.settings.best_for }}</p>{%- endif -%}
+        <a href="{{ b.settings.link | default: '/collections/all' }}" class="btn btn-dark">{{ b.settings.button_label | default: 'Shop' }} →</a>
       </article>
       {%- endfor -%}
     </div>
@@ -305,12 +399,12 @@
 
   {%- comment -%} FAQ {%- endcomment -%}
   {%- if faqs.size > 0 -%}
-  <section class="sec faq-sec"><div class="wrap">
-    <div class="head"><h2>{{ section.settings.faq_title | default: 'Golf FAQ' }}</h2></div>
-    <div class="faq">
+  <section class="sec"><div class="wrap faq">
+    <div class="faq-intro"><p class="kicker">{{ section.settings.faq_kicker | default: 'GOLF FAQ' }}</p><h2>{{ section.settings.faq_title | default: 'Questions Before the First Tee.' }}</h2><p class="sub body">{{ section.settings.faq_copy | default: 'Straight answers about choosing and using AVRO for golf.' }}</p></div>
+    <div class="faq-list">
       {%- for b in faqs -%}
-      <div class="fitem{% if forloop.first %} open{% endif %}" data-faq {{ b.shopify_attributes }}>
-        <button class="fbtn" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">{{ b.settings.q }}{{ chev }}</button>
+      <div class="fitem" data-faq {{ b.shopify_attributes }}>
+        <button class="fbtn" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">{{ b.settings.q }}<span class="fsign">+</span></button>
         <div class="fbody"><p>{{ b.settings.a }}</p></div>
       </div>
       {%- endfor -%}
@@ -319,22 +413,23 @@
   {%- endif -%}
 
   {%- comment -%} FINAL CTA {%- endcomment -%}
-  <section class="cta"><div class="cta-in">
-    <div class="cta-l">
-      <h2>{{ section.settings.final_title | default: 'Choose the formula that fits your round.' }}</h2>
-      <p>{{ section.settings.final_copy | default: 'Start calm. Stay clear. Choose the AVRO formula that matches your moment on the course.' }}</p>
+      <section class="final">
+        {%- assign fstyle = section.settings.final_bg_style | default: 'word' -%}
+        {%- if fstyle == 'image' and section.settings.final_bg != blank -%}
+        <div class="final-bg has-img" aria-hidden="true"><img src="{{ section.settings.final_bg | image_url: width: 2400 }}" alt="" loading="lazy"></div>
+        {%- else -%}
+        <div class="final-bg" aria-hidden="true"><span class="final-word" style="color:{{ section.settings.final_word_color | default: '#ffffff' }};opacity:{{ section.settings.final_word_opacity | default: 3 | divided_by: 100.0 }}">{{ section.settings.final_word | default: 'CALM' }}</span></div>
+        {%- endif -%}
+        <div class="final-in">
+      <p class="kicker">{{ section.settings.final_kicker | default: 'CALM FIRST. PLAY YOUR GAME.' }}</p>
+      <h2>{{ section.settings.final_title | default: 'Choose the formula that fits your golf.' }}</h2>
+      <p class="body">{{ section.settings.final_copy | default: 'Start with calm. Choose Calm, Focus or Energy for the moment ahead.' }}</p>
+      <div class="final-btns">
+        <a href="{{ section.settings.final_btn1_link | default: '/collections/calm' }}" class="btn btn-accent">{{ section.settings.final_btn1_label | default: 'Shop Calm' }}</a>
+        <a href="{{ section.settings.final_btn2_link | default: '/collections/focus' }}" class="btn btn-ghost">{{ section.settings.final_btn2_label | default: 'Shop Focus' }}</a>
+        <a href="{{ section.settings.final_btn3_link | default: '/collections/energy' }}" class="btn btn-ghost">{{ section.settings.final_btn3_label | default: 'Shop Energy' }}</a>
+      </div>
     </div>
-    <div class="cta-btns">
-      <a href="{{ section.settings.final_btn1_link | default: '/collections/calm' }}" class="btn">{{ section.settings.final_btn1_label | default: 'Shop Calm' }}</a>
-      <a href="{{ section.settings.final_btn2_link | default: '/collections/focus' }}" class="btn">{{ section.settings.final_btn2_label | default: 'Shop Focus' }}</a>
-      <a href="{{ section.settings.final_btn3_link | default: '/collections/energy' }}" class="btn">{{ section.settings.final_btn3_label | default: 'Shop Energy' }}</a>
-    </div>
-  </div></section>
-
-  {%- comment -%} FOOTER BANNER {%- endcomment -%}
-  <section class="banner">
-    {%- if section.settings.banner_image != blank -%}<img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="">{%- else -%}<img src="{{ base }}/images/banners/golf-banner.png" alt="">{%- endif -%}
-    <a href="{{ section.settings.banner_link | default: '/collections/all' }}" class="btn">{{ section.settings.banner_label | default: 'Shop' }}</a>
   </section>
 
 </div>
@@ -343,10 +438,24 @@
   (function(){
     var root=document.getElementById("avro-golf-{{ section.id }}");
     if(!root) return;
-    /* Hero rotator */
-    var ds=root.querySelectorAll(".hero-imgs img.d"), ms=root.querySelectorAll(".hero-imgs img.m"), i=0;
-    if(ds.length>1){ setInterval(function(){ i=(i+1)%ds.length; ds.forEach(function(im,n){im.classList.toggle("on",n===i);}); ms.forEach(function(im,n){im.classList.toggle("on",n===i);}); },5000); }
-    /* FAQ */
+    var hero=root.querySelector("[data-hero]");
+    if(hero){
+      var slides=hero.querySelectorAll(".hero-slide");
+      var dots=hero.querySelectorAll("[data-hero-dots] button");
+      var interval=parseInt(hero.getAttribute("data-interval"),10)||6000;
+      var idx=0, timer=null;
+      var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function show(n){
+        if(!slides.length) return;
+        idx=(n+slides.length)%slides.length;
+        slides.forEach(function(s,i){ s.classList.toggle("on",i===idx); });
+        dots.forEach(function(d,i){ d.classList.toggle("is-active",i===idx); d.setAttribute("aria-selected",i===idx?"true":"false"); });
+      }
+      function start(){ if(reduce||slides.length<2) return; stop(); timer=setInterval(function(){ show(idx+1); },interval); }
+      function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+      dots.forEach(function(d,i){ d.addEventListener("click",function(){ show(i); start(); }); });
+      show(0); start();
+    }
     root.querySelectorAll("[data-faq]").forEach(function(it){
       var b=it.querySelector("button"); if(!b) return;
       b.addEventListener("click",function(){
@@ -363,98 +472,128 @@
   "tag": "section",
   "settings": [
     { "type": "header", "content": "Hero" },
-    { "type": "text", "id": "hero_title", "label": "Title", "default": "Built for the State Before the Round." },
+    { "type": "text", "id": "hero_kicker", "label": "Eyebrow", "default": "CALM PERFORMANCE FOR GOLF" },
+    { "type": "text", "id": "hero_title", "label": "Title", "default": "Golf Performance Begins Before the First Swing." },
     { "type": "textarea", "id": "hero_copy", "label": "Copy" },
-    { "type": "text", "id": "hero_alt", "label": "Hero image alt" },
-    { "type": "image_picker", "id": "hero_images", "label": "Hero image (override slide 1)", "info": "Leave empty to use the 3 bundled golf hero images. Picking one shows a single static image." },
+    { "type": "paragraph", "content": "Add \"Hero slide\" blocks below to build the slideshow (drag to reorder). With no slides added it shows the three default AVRO Golf shots: woman putting, man sitting, man addressing the ball." },
+    { "type": "checkbox", "id": "hero_show_ticker", "label": "Show dotted slide ticker", "default": true },
+    { "type": "range", "id": "hero_interval", "label": "Seconds per slide", "min": 2, "max": 12, "step": 1, "unit": "s", "default": 6 },
     { "type": "text", "id": "hero_btn1_label", "label": "Button 1 label", "default": "Choose Your Formula" },
     { "type": "url", "id": "hero_btn1_link", "label": "Button 1 link" },
     { "type": "text", "id": "hero_btn2_label", "label": "Button 2 label", "default": "Shop AVRO" },
-    { "type": "url", "id": "hero_btn2_link", "label": "Button 2 link" },
+  { "type": "url", "id": "hero_btn2_link", "label": "Button 2 link" },
 
-    { "type": "header", "content": "Moment heading" },
-    { "type": "text", "id": "moment_title", "label": "Title", "default": "Golf is a game of state." },
-    { "type": "textarea", "id": "moment_copy", "label": "Copy" },
+  { "type": "header", "content": "Pre-golf ritual bar" },
+    { "type": "text", "id": "ritual_label", "label": "Label", "default": "THE PRE-GOLF MINDSET" },
+    { "type": "text", "id": "ritual_1_title", "label": "Step 1 title", "default": "PREPARE" },
+    { "type": "text", "id": "ritual_1_copy", "label": "Step 1 copy", "default": "Before lessons, practice or play." },
+    { "type": "text", "id": "ritual_2_title", "label": "Step 2 title", "default": "CHOOSE" },
+    { "type": "text", "id": "ritual_2_copy", "label": "Step 2 copy", "default": "Calm, Focus or Energy." },
+    { "type": "text", "id": "ritual_3_title", "label": "Step 3 title", "default": "STEP IN READY" },
+    { "type": "text", "id": "ritual_3_copy", "label": "Step 3 copy", "default": "Calm. Clear. Composed." },
 
-    { "type": "header", "content": "Why AVRO fits" },
-    { "type": "text", "id": "why_title", "label": "Title", "default": "Why AVRO fits golf" },
+    { "type": "header", "content": "Pressure tile" },
+    { "type": "text", "id": "pressure_kicker", "label": "Eyebrow", "default": "WHEN THE MOMENT GETS BIGGER" },
+    { "type": "text", "id": "pressure_title", "label": "Title", "default": "Golf can get loud in your head fast." },
+    { "type": "text", "id": "pressure_highlight", "label": "Title — highlighted phrase", "info": "This exact phrase within the title gets the lime highlight. Must match the title text.", "default": "loud in your head" },
+    { "type": "textarea", "id": "pressure_copy", "label": "Copy" },
+    { "type": "text", "id": "pressure_pill_big", "label": "Photo pill — value", "default": "~30min" },
+    { "type": "text", "id": "pressure_pill_small", "label": "Photo pill — caption", "default": "before your round" },
+    { "type": "image_picker", "id": "pressure_image", "label": "Image" },
+    { "type": "text", "id": "pressure_alt", "label": "Image alt", "default": "Golfer preparing to address the ball on a coastal course" },
+
+    { "type": "header", "content": "Why AVRO" },
+    { "type": "text", "id": "why_kicker", "label": "Eyebrow", "default": "CALM-FIRST PERFORMANCE" },
+    { "type": "text", "id": "why_title", "label": "Title", "default": "Why AVRO Matters in Golf" },
+    { "type": "textarea", "id": "why_copy", "label": "Supporting line", "default": "A calm-first platform with a clear role across the modern golf experience." },
 
     { "type": "header", "content": "How to use" },
-    { "type": "text", "id": "how_title", "label": "Title", "default": "How to use before golf" },
+    { "type": "text", "id": "how_kicker", "label": "Eyebrow", "default": "HOW TO USE AVRO BEFORE GOLF" },
+    { "type": "text", "id": "how_title", "label": "Title", "default": "A simple ritual. Three steps." },
+    { "type": "textarea", "id": "how_copy", "label": "Supporting line", "default": "Choose. Mix. Time it." },
 
-    { "type": "header", "content": "Formula graph" },
-    { "type": "text", "id": "graph_title", "label": "Title", "default": "Every formula starts calm first." },
-    { "type": "text", "id": "graph_sub", "label": "Subheading", "default": "Same calm-first base. Different active addition." },
-
-    { "type": "header", "content": "Research graphic" },
-    { "type": "checkbox", "id": "show_graphic", "label": "Show research graphic", "default": true },
-    { "type": "text", "id": "graphic_title", "label": "Heading (optional)" },
-    { "type": "textarea", "id": "graphic_copy", "label": "Body (optional)" },
-    { "type": "text", "id": "graphic_asset", "label": "Graphic URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/graphics/golf.html" },
-    { "type": "text", "id": "graphic_ratio", "label": "Aspect ratio", "default": "1200 / 788" },
-    { "type": "text", "id": "graphic_a11y", "label": "Graphic title (a11y)", "default": "AVRO for golf research graphic" },
-    { "type": "textarea", "id": "chart_source", "label": "Source / disclaimer" },
+    { "type": "header", "content": "Science" },
+    { "type": "text", "id": "sci_kicker", "label": "Eyebrow", "default": "THE FORMULA" },
+    { "type": "text", "id": "sci_title", "label": "Title", "default": "Science + Formula Logic" },
+    { "type": "textarea", "id": "sci_copy", "label": "Supporting line", "default": "Calm first. Then support the moment." },
+    { "type": "textarea", "id": "foundation", "label": "Foundation line", "default": "Every AVRO formula begins with naturally fermented PharmaGABA®, a clinically studied form of GABA." },
 
     { "type": "header", "content": "Use moments" },
-    { "type": "text", "id": "use_title", "label": "Title", "default": "Golf use moments" },
+    { "type": "text", "id": "use_kicker", "label": "Eyebrow", "default": "FROM FIRST TEE TO CLUBHOUSE" },
+    { "type": "text", "id": "use_title", "label": "Title", "default": "Golf Use Moments" },
+    { "type": "textarea", "id": "use_copy", "label": "Supporting line", "default": "One calm-first foundation, ready for the moments that shape the golf experience." },
 
     { "type": "header", "content": "Shop" },
-    { "type": "text", "id": "shop_title", "label": "Title", "default": "Shop AVRO for golf" },
+    { "type": "text", "id": "shop_kicker", "label": "Eyebrow", "default": "CHOOSE YOUR FORMULA" },
+    { "type": "text", "id": "shop_title", "label": "Title", "default": "Shop AVRO for Golf" },
+    { "type": "textarea", "id": "shop_copy", "label": "Supporting line", "default": "Same calm-first base. Three ways to meet the moment." },
 
     { "type": "header", "content": "FAQ" },
-    { "type": "text", "id": "faq_title", "label": "Title", "default": "Golf FAQ" },
+    { "type": "text", "id": "faq_kicker", "label": "Eyebrow", "default": "GOLF FAQ" },
+    { "type": "text", "id": "faq_title", "label": "Title", "default": "Questions Before the First Tee." },
+    { "type": "textarea", "id": "faq_copy", "label": "Supporting line", "default": "Straight answers about choosing and using AVRO for golf." },
 
     { "type": "header", "content": "Final CTA" },
-    { "type": "text", "id": "final_title", "label": "Title", "default": "Choose the formula that fits your round." },
+      { "type": "select", "id": "final_bg_style", "label": "Background style", "options": [ { "value": "word", "label": "Faded word" }, { "value": "image", "label": "Image" } ], "default": "word" },
+      { "type": "image_picker", "id": "final_bg", "label": "Background image", "info": "Used when Background style is set to Image." },
+      { "type": "text", "id": "final_word", "label": "Faded background word", "info": "Used when Background style is set to Faded word.", "default": "CALM" },
+      { "type": "color", "id": "final_word_color", "label": "Faded word color", "default": "#ffffff" },
+      { "type": "range", "id": "final_word_opacity", "label": "Faded word opacity", "min": 1, "max": 15, "step": 1, "unit": "%", "default": 3 },
+    { "type": "text", "id": "final_kicker", "label": "Eyebrow", "default": "CALM FIRST. PLAY YOUR GAME." },
+      { "type": "text", "id": "final_title", "label": "Title", "default": "Choose the formula that fits your golf." },
     { "type": "textarea", "id": "final_copy", "label": "Copy" },
     { "type": "text", "id": "final_btn1_label", "label": "Button 1 label", "default": "Shop Calm" },
     { "type": "url", "id": "final_btn1_link", "label": "Button 1 link" },
     { "type": "text", "id": "final_btn2_label", "label": "Button 2 label", "default": "Shop Focus" },
     { "type": "url", "id": "final_btn2_link", "label": "Button 2 link" },
     { "type": "text", "id": "final_btn3_label", "label": "Button 3 label", "default": "Shop Energy" },
-    { "type": "url", "id": "final_btn3_link", "label": "Button 3 link" },
-
-    { "type": "header", "content": "Footer banner" },
-    { "type": "image_picker", "id": "banner_image", "label": "Banner image" },
-    { "type": "text", "id": "banner_label", "label": "Button label", "default": "Shop" },
-    { "type": "url", "id": "banner_link", "label": "Button link" }
+    { "type": "url", "id": "final_btn3_link", "label": "Button 3 link" }
   ],
   "blocks": [
+    { "type": "hero_slide", "name": "Hero slide", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Slide image" },
+      { "type": "text", "id": "alt", "label": "Image alt text", "default": "AVRO Golf" }
+    ] },
     { "type": "reason", "name": "Reason card", "settings": [
-      { "type": "image_picker", "id": "icon", "label": "Icon" },
-      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png" },
-      { "type": "text", "id": "title", "label": "Title", "default": "Calm Before Pressure" },
+      { "type": "image_picker", "id": "icon", "label": "Custom icon (optional)" },
+      { "type": "select", "id": "icon_key", "label": "Embedded icon", "info": "Choose a built-in icon, or upload a Custom icon above to override.", "options": [ { "value": "calm-before-pressure", "label": "Gauge — Calm Before Pressure" }, { "value": "clarity", "label": "Soundwave — Clarity" }, { "value": "built-for-ritual", "label": "Golf Flag — Built for Ritual" }, { "value": "step-choose", "label": "Pour — Choose" }, { "value": "step-mix", "label": "Stir — Mix" }, { "value": "step-time", "label": "Drink — Time It" }, { "value": "pharmagaba", "label": "Sprout ��� PharmaGABA" }, { "value": "calm-foundation", "label": "Lotus — Calm Foundation" }, { "value": "mind-body", "label": "Mind–Body Diagram" }, { "value": "standards", "label": "Shield — Standards" }, { "value": "pressure", "label": "Clock — ~30 min" }, { "value": "drink", "label": "Cup — Drink (Show Up)" } ], "default": "calm-before-pressure" },
+      { "type": "color", "id": "icon_color", "label": "Icon color", "info": "Applies to built-in icons. Leave empty for default." },
+      { "type": "text", "id": "title", "label": "Title", "default": "For Golfers" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
     { "type": "step", "name": "How-to step", "settings": [
-      { "type": "image_picker", "id": "icon", "label": "Icon" },
-      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png" },
-      { "type": "text", "id": "title", "label": "Title", "default": "Mix" },
+      { "type": "image_picker", "id": "icon", "label": "Custom icon (optional)" },
+      { "type": "select", "id": "icon_key", "label": "Embedded icon", "info": "Choose a built-in icon, or upload a Custom icon above to override.", "options": [ { "value": "calm-before-pressure", "label": "Gauge — Calm Before Pressure" }, { "value": "clarity", "label": "Soundwave — Clarity" }, { "value": "built-for-ritual", "label": "Golf Flag — Built for Ritual" }, { "value": "step-choose", "label": "Pour — Choose" }, { "value": "step-mix", "label": "Stir — Mix" }, { "value": "step-time", "label": "Drink — Time It" }, { "value": "pharmagaba", "label": "Sprout — PharmaGABA" }, { "value": "calm-foundation", "label": "Lotus — Calm Foundation" }, { "value": "mind-body", "label": "Mind–Body Diagram" }, { "value": "standards", "label": "Shield — Standards" }, { "value": "pressure", "label": "Clock — ~30 min" }, { "value": "drink", "label": "Cup — Drink (Show Up)" } ], "default": "step-choose" },
+      { "type": "color", "id": "icon_color", "label": "Icon color", "info": "Applies to built-in icons. Leave empty for default (white)." },
+      { "type": "text", "id": "title", "label": "Title", "default": "Choose" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
-    { "type": "formula_bar", "name": "Formula bar", "settings": [
-      { "type": "text", "id": "name", "label": "Name", "default": "Calm" },
-      { "type": "text", "id": "addition", "label": "Active addition", "default": "Magnesium" },
-      { "type": "color", "id": "color", "label": "Accent color", "default": "#4b4d9a" }
+    { "type": "science", "name": "Science card", "settings": [
+      { "type": "image_picker", "id": "icon", "label": "Custom icon (optional)" },
+      { "type": "select", "id": "icon_key", "label": "Embedded icon", "info": "Choose a built-in icon, or upload a Custom icon above to override.", "options": [ { "value": "calm-before-pressure", "label": "Gauge — Calm Before Pressure" }, { "value": "clarity", "label": "Soundwave — Clarity" }, { "value": "built-for-ritual", "label": "Golf Flag — Built for Ritual" }, { "value": "step-choose", "label": "Pour — Choose" }, { "value": "step-mix", "label": "Stir — Mix" }, { "value": "step-time", "label": "Drink — Time It" }, { "value": "pharmagaba", "label": "Sprout — PharmaGABA" }, { "value": "calm-foundation", "label": "Lotus — Calm Foundation" }, { "value": "mind-body", "label": "Mind–Body Diagram" }, { "value": "standards", "label": "Shield — Standards" }, { "value": "pressure", "label": "Clock — ~30 min" }, { "value": "drink", "label": "Cup — Drink (Show Up)" } ], "default": "pharmagaba" },
+      { "type": "color", "id": "icon_bg", "label": "Icon tile color", "info": "Leave empty for default (lime)." },
+      { "type": "color", "id": "icon_color", "label": "Icon color", "info": "Applies to built-in icons. Leave empty for default (black)." },
+      { "type": "text", "id": "label", "label": "Label", "default": "PharmaGABA® Foundation" },
+      { "type": "text", "id": "title", "label": "Title", "default": "Calm Starts Here" },
+      { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
     { "type": "moment", "name": "Use moment", "settings": [
-      { "type": "image_picker", "id": "icon", "label": "Icon" },
-      { "type": "text", "id": "icon_fallback", "label": "Icon URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-golf.png" },
+      { "type": "image_picker", "id": "image", "label": "Photo" },
+      { "type": "text", "id": "image_fallback", "label": "Photo URL", "default": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/03_Moment_First_Tee-7A1KXwzEr31RFzHGUS3runTTJ215Dr.png" },
+      { "type": "text", "id": "object_pos", "label": "Image focus (object-position)", "default": "center 40%" },
+      { "type": "text", "id": "pill", "label": "Category pill", "default": "PRE-ROUND" },
       { "type": "text", "id": "title", "label": "Title", "default": "First Tee" },
       { "type": "textarea", "id": "copy", "label": "Copy" }
     ]},
     { "type": "product", "name": "Product card", "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
-      { "type": "text", "id": "image_fallback", "label": "Image URL", "default": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png" },
+      { "type": "text", "id": "image_fallback", "label": "Image URL", "default": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/07_Product_Calm-YBOX7lOtZIu3pAmGuxiDgqtAv8Ohy2.png" },
       { "type": "text", "id": "name", "label": "Name", "default": "AVRO Calm" },
+      { "type": "text", "id": "caffeine", "label": "Caffeine label", "default": "CAFFEINE FREE" },
       { "type": "textarea", "id": "copy", "label": "Copy" },
+      { "type": "textarea", "id": "best_for", "label": "Best for" },
       { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Calm" },
       { "type": "url", "id": "link", "label": "Link" }
-    ]},
-    { "type": "testimonial", "name": "Testimonial", "settings": [
-      { "type": "textarea", "id": "quote", "label": "Quote" },
-      { "type": "text", "id": "name", "label": "Name", "default": "Verified Buyer" },
-      { "type": "text", "id": "role", "label": "Role / product", "default": "AVRO Calm" }
     ]},
     { "type": "faq", "name": "FAQ item", "settings": [
       { "type": "text", "id": "q", "label": "Question" },
@@ -463,28 +602,26 @@
   ],
   "presets": [
     { "name": "AVRO — Golf", "blocks": [
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png", "title": "Calm Before Pressure", "copy": "Supports a calmer state before pressure-sensitive golf moments." } },
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-clear-thinking.png", "title": "Clarity Without the Edge", "copy": "Supports clear focus without turning your pre-round routine into stimulant overload." } },
-      { "type": "reason", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-golf.png", "title": "Built for Ritual", "copy": "A simple pre-round ritual designed for golfers who know state matters." } },
-      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-pour.png", "title": "Mix", "copy": "Mix one stick with water." } },
-      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-stir.png", "title": "Time it", "copy": "Drink about 30 minutes before your round, practice session, or golf moment." } },
-      { "type": "step", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/step-drink.png", "title": "Show up", "copy": "Step in with a calmer, clearer routine." } },
-      { "type": "formula_bar", "settings": { "name": "Calm", "addition": "Magnesium", "color": "#4b4d9a" } },
-      { "type": "formula_bar", "settings": { "name": "Focus", "addition": "Cognigrape®", "color": "#C13584" } },
-      { "type": "formula_bar", "settings": { "name": "Energy", "addition": "Caffeine", "color": "#E8A23D" } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/cohort-golf.png", "title": "First Tee", "copy": "For a pre-round routine before the opening shot." } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/control-under-pressure.png", "title": "Tournament Day", "copy": "For pressure-sensitive rounds where composure matters." } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/supports-focus-without-overload.png", "title": "Practice Sessions", "copy": "For focused range work, lessons, or structured practice." } },
-      { "type": "moment", "settings": { "icon_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/icons/social-composure.png", "title": "Clubhouse + Social", "copy": "For alcohol-free social moments, travel days, and post-round wind down." } },
-      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/calm-blueberry-acai.png", "name": "AVRO Calm", "copy": "Caffeine-free composure for the moments that matter.*", "button_label": "Shop Calm", "link": "/collections/calm" } },
-      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/focus-pomegranate-raspberry.png", "name": "AVRO Focus", "copy": "Caffeine-free clarity for focused range work and rounds.*", "button_label": "Shop Focus", "link": "/collections/focus" } },
-      { "type": "product", "settings": { "image_fallback": "https://v0-build-request-git-v0-joe-6434-a0cfbf5f-joe-6434s-projects.vercel.app/images/tubes/studio/energy-fuji-apple.png", "name": "AVRO Energy", "copy": "Natural caffeine with a calm-first foundation.*", "button_label": "Shop Energy", "link": "/collections/energy" } },
-      { "type": "testimonial", "settings": { "quote": "Locked in on the first tee without the jitters. This is part of my pre-round routine now.", "name": "Verified Buyer", "role": "AVRO Calm" } },
-      { "type": "testimonial", "settings": { "quote": "Clear and composed through the back nine. Exactly what I wanted.", "name": "Verified Buyer", "role": "AVRO Focus" } },
-      { "type": "testimonial", "settings": { "quote": "Steady energy for an early tee time with no crash later. Love it.", "name": "Verified Buyer", "role": "AVRO Energy" } },
-      { "type": "faq", "settings": { "q": "Which AVRO formula is best for golf?", "a": "The right AVRO formula depends on your tee time, caffeine preference, and the type of support you want.\nCalm is caffeine-free and designed for moments when composure matters.\nFocus is caffeine-free and supports clarity and concentration.\nEnergy provides 120 mg of natural caffeine with AVRO's calm-first foundation.*" } },
-      { "type": "faq", "settings": { "q": "When should I take AVRO before a round?", "a": "Many golfers choose to take one stick about 30 minutes before a round, lesson, practice session, or competition. Mix with water and use as directed on the package." } },
-      { "type": "faq", "settings": { "q": "Is AVRO a sports-performance supplement?", "a": "AVRO is a calm-first performance drink mix designed to support clarity, composure, and the right headspace before pressure-filled moments.*" } }
+      { "type": "reason", "settings": { "icon_key": "calm-before-pressure", "title": "For Golfers", "copy": "A simple way to prepare for the moments when calm, clarity and composure matter." } },
+      { "type": "reason", "settings": { "icon_key": "clarity", "title": "For Coaches", "copy": "Supports a golfer’s readiness to receive, process and apply feedback." } },
+      { "type": "reason", "settings": { "icon_key": "built-for-ritual", "title": "For Golf Businesses", "copy": "Adds a differentiated golfer experience designed to strengthen engagement and loyalty." } },
+      { "type": "step", "settings": { "icon_key": "step-choose", "title": "Choose", "copy": "Select Calm, Focus or Energy based on the moment ahead." } },
+      { "type": "step", "settings": { "icon_key": "step-mix", "title": "Mix", "copy": "Mix one stick with 250–300 mL of water." } },
+      { "type": "step", "settings": { "icon_key": "step-time", "title": "Time It", "copy": "Drink approximately 30 minutes before your lesson, practice session or tee time." } },
+      { "type": "science", "settings": { "icon_key": "pharmagaba", "label": "PharmaGABA® Foundation", "title": "Calm Starts Here", "copy": "Naturally fermented PharmaGABA® is the clinically studied form of GABA at the center of every AVRO formula." } },
+      { "type": "science", "settings": { "icon_key": "calm-foundation", "label": "AVRO Calm", "title": "Composure When It Matters", "copy": "PharmaGABA® plus magnesium for golfers who want a calmer, more composed way to prepare for pressure-sensitive moments." } },
+      { "type": "science", "settings": { "icon_key": "mind-body", "label": "AVRO Focus", "title": "Clearer Attention for Learning", "copy": "PharmaGABA® plus Cognigrape® for lessons, fittings and practice sessions that call for calm, attentive focus." } },
+      { "type": "science", "settings": { "icon_key": "standards", "label": "AVRO Energy", "title": "Steady Energy for Demanding Golf Days", "copy": "PharmaGABA® plus natural caffeine for early tee times, longer rounds and competition days that require more energy." } },
+      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/03_Moment_First_Tee-7A1KXwzEr31RFzHGUS3runTTJ215Dr.png", "object_pos": "center 28%", "pill": "PRE-ROUND", "title": "First Tee", "copy": "A simple pre-round ritual before the opening shot." } },
+      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/04_Moment_Tournament_Day-vRzxoOjJAOWVSwijTckyWVV9jugwR4.png", "object_pos": "center 40%", "pill": "PRESSURE", "title": "Tournament Day", "copy": "Preparation for pressure-sensitive rounds when composure matters from the start." } },
+      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/05_Moment_Practice_Session.png-7cnKcg67wTvHmGt0bNtvcJtadUSZyt.jpeg", "object_pos": "center 45%", "pill": "RANGE WORK", "title": "Practice Session", "copy": "For range work, coaching sessions and structured practice." } },
+      { "type": "moment", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/06_Moment_Clubhouse_Social-HUVojuCnjcfagm9yamUhNeiNoKfTaH.png", "object_pos": "center 40%", "pill": "ZERO PROOF", "title": "Clubhouse + Social", "copy": "An alcohol-free option for post-round conversations, travel days and social golf moments." } },
+      { "type": "product", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/07_Product_Calm-YBOX7lOtZIu3pAmGuxiDgqtAv8Ohy2.png", "name": "AVRO Calm", "caffeine": "CAFFEINE FREE", "copy": "Calm support for pressure-sensitive golf moments.", "best_for": "First tees, tournament rounds, lessons and moments when composure matters.", "button_label": "Shop Calm", "link": "/collections/calm" } },
+      { "type": "product", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/08_Product_Focus-5vTOr8Xek2c8H537NevHtY30U6US0F.png", "name": "AVRO Focus", "caffeine": "CAFFEINE FREE", "copy": "Calm-first preparation with added support for clear, attentive focus.", "best_for": "Coaching sessions, club fitting, range work and structured practice.", "button_label": "Shop Focus", "link": "/collections/focus" } },
+      { "type": "product", "settings": { "image_fallback": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/09_Product_Energy-24lGi052MiPEovUiE1VAxshccrgQCW.png", "name": "AVRO Energy", "caffeine": "WITH NATURAL CAFFEINE", "copy": "Calm-first preparation with natural caffeine for demanding golf days.", "best_for": "Early tee times, longer rounds, travel days and competition.", "button_label": "Shop Energy", "link": "/collections/energy" } },
+      { "type": "faq", "settings": { "q": "Which AVRO formula is best for golf?", "a": "Choose based on the moment ahead. Calm is caffeine-free and designed for composure. Focus is caffeine-free and adds support for clear, attentive focus. Energy combines AVRO’s calm-first foundation with natural caffeine for longer or more demanding golf days." } },
+      { "type": "faq", "settings": { "q": "When should I take AVRO before a round?", "a": "Mix one stick with 250–300 mL of water and drink it approximately 30 minutes before a lesson, practice session, tee time or competition. Follow the directions on the package." } },
+      { "type": "faq", "settings": { "q": "What role does AVRO play in golf performance?", "a": "AVRO supports the calm, clear and composed headspace golfers seek. It complements coaching, practice, fitting and technology—it does not replace them or claim to improve the swing or score." } }
     ]}
   ]
 }
